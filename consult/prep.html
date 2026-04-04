@@ -195,6 +195,10 @@
     var gN=function(n,d){var v=gP(n,'');return v?Number(v):d;};
     var PMT=function(p,ar,m){if(ar===0)return p/m;var r=ar/12/100,pw=Math.pow(1+r,m);return p*r*pw/(pw-1);};
 
+    // 크로스헤어 플러그인 (호버 시 세로 점선)
+    var crosshairPlugin={id:'crosshair',afterDraw:function(chart){if(chart.tooltip&&chart.tooltip._active&&chart.tooltip._active.length){var x=chart.tooltip._active[0].element.x;var yA=chart.chartArea;var ctx=chart.ctx;ctx.save();ctx.beginPath();ctx.setLineDash([4,4]);ctx.strokeStyle='#94A3B8';ctx.lineWidth=1;ctx.moveTo(x,yA.top);ctx.lineTo(x,yA.bottom);ctx.stroke();ctx.restore();}}};
+    Chart.register(crosshairPlugin);
+
     var nm=gP('name','');if(nm)$('hT').textContent=nm+'님 재무 계산기';
     var D={c:gN('cash',18000),i:gN('income',7700),s:gN('saving',2400),t:gN('target',60000),ma:gN('my_apt',50000),ga:gN('goal_apt',130000)};
 
@@ -336,7 +340,7 @@
         CAst=new Chart($('cAst'),{type:'line',data:{labels:lb,datasets:[
             {label:'내 단지',data:mD,borderColor:'#0077C8',fill:false,tension:.3,borderWidth:2,pointRadius:2},
             {label:'목표 단지',data:gD,borderColor:'#F59E0B',fill:false,tension:.3,borderWidth:2,pointRadius:2},
-            {label:'필요 자기자본 (30%)',data:needD,borderColor:'#F59E0B',borderDash:[6,3],fill:false,tension:.3,borderWidth:1.5,pointRadius:0},
+            {label:'필요 자기자본 (LTV 70%)',data:needD,borderColor:'#F59E0B',borderDash:[6,3],fill:false,tension:.3,borderWidth:1.5,pointRadius:0},
             {label:'순자산(+대출)',data:nD,borderColor:'#94A3B8',backgroundColor:'rgba(148,163,184,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#94A3B8'}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
             legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
