@@ -88,8 +88,7 @@
     <div class="tabs">
         <button class="tab active" data-tab="buy">매수 계산</button>
         <button class="tab" data-tab="repay">월 부담</button>
-        <button class="tab" data-tab="saving">저축 시뮬</button>
-        <button class="tab" data-tab="upgrade">갈아타기</button>
+        <button class="tab" data-tab="asset">자산 시뮬</button>
     </div>
 
     <!-- TAB 1: 매수 계산 -->
@@ -152,37 +151,33 @@
         <div class="card"><div class="card-t">월 상환액 비교</div><div class="cw"><canvas id="cRep"></canvas></div></div>
     </div>
 
-    <!-- TAB 3: 저축 시뮬 -->
-    <div class="tc" id="tab-saving">
-        <div class="verdict" id="savV"></div>
-        <div class="card"><div class="card-t">저축 조건</div>
-            <div class="ig">
-                <div><div class="il">현재 모은 돈</div><div class="iw"><input class="if" id="s_cur" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="s_ann" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">투자 수익률</div><div class="iw"><input class="if" id="s_ret" inputmode="decimal"><span class="is">%</span></div></div>
-                <div><div class="il">목표 금액</div><div class="iw"><input class="if" id="s_goal" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">기간</div><div class="iw"><input class="if" id="s_yr" inputmode="decimal"><span class="is">년</span></div></div>
+    <!-- TAB 3: 자산 시뮬 -->
+    <div class="tc" id="tab-asset">
+        <div class="verdict" id="astV"></div>
+        <div class="cmp">
+            <div class="cmp-card"><span class="cmp-badge ba">내 단지</span>
+                <div class="ig ig1">
+                    <div><div class="il">현재가</div><div class="iw"><input class="if" id="a_my" inputmode="decimal"><span class="is">만원</span></div></div>
+                    <div><div class="il">연 상승률</div><div class="iw"><input class="if" id="a_mr" inputmode="decimal"><span class="is">%</span></div></div>
+                </div>
+            </div>
+            <div class="cmp-card"><span class="cmp-badge bb">목표 단지</span>
+                <div class="ig ig1">
+                    <div><div class="il">현재가</div><div class="iw"><input class="if" id="a_gl" inputmode="decimal"><span class="is">만원</span></div></div>
+                    <div><div class="il">연 상승률</div><div class="iw"><input class="if" id="a_gr" inputmode="decimal"><span class="is">%</span></div></div>
+                </div>
             </div>
         </div>
-        <div class="card"><div class="card-t">누적 자산 추이</div><div class="cw"><canvas id="cSav"></canvas></div></div>
-    </div>
-
-    <!-- TAB 4: 갈아타기 -->
-    <div class="tc" id="tab-upgrade">
-        <div class="verdict" id="upgV"></div>
-        <div class="card"><div class="card-t">갈아타기 조건</div>
+        <div class="card" style="margin-top:14px;">
+            <div class="card-t">저축 · 기간</div>
             <div class="ig">
-                <div><div class="il">내 단지 현재가</div><div class="iw"><input class="if" id="u_my" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">내 단지 상승률</div><div class="iw"><input class="if" id="u_mr" inputmode="decimal"><span class="is">%</span></div></div>
-                <div><div class="il">목표 단지 현재가</div><div class="iw"><input class="if" id="u_gl" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">목표 단지 상승률</div><div class="iw"><input class="if" id="u_gr" inputmode="decimal"><span class="is">%</span></div></div>
-                <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="u_sv" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">투자 수익률</div><div class="iw"><input class="if" id="u_rt" inputmode="decimal"><span class="is">%</span></div></div>
-                <div><div class="il">대출 가능액</div><div class="iw"><input class="if" id="u_ln" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">기간</div><div class="iw"><input class="if" id="u_yr" inputmode="decimal"><span class="is">년</span></div></div>
+                <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="a_sv" inputmode="decimal"><span class="is">만원</span></div></div>
+                <div><div class="il">투자 수익률</div><div class="iw"><input class="if" id="a_rt" inputmode="decimal"><span class="is">%</span></div></div>
+                <div><div class="il">대출 가능액</div><div class="iw"><input class="if" id="a_ln" inputmode="decimal"><span class="is">만원</span></div></div>
+                <div><div class="il">기간</div><div class="iw"><input class="if" id="a_yr" inputmode="decimal"><span class="is">년</span></div></div>
             </div>
         </div>
-        <div class="card"><div class="card-t">갈아타기 시뮬레이션</div><div class="cw"><canvas id="cUpg"></canvas></div></div>
+        <div class="card"><div class="card-t">갈아타기 시뮬레이션</div><div class="cw"><canvas id="cAst"></canvas></div></div>
         <div class="card"><div class="card-t">레버리지 수익률 곡선</div>
             <div class="note" style="margin-top:0;margin-bottom:8px;">자기자본 대비 수익률. 시간이 지나면 레버리지 효과가 줄어들어 갈아타기 적기를 보여줍니다.</div>
             <div class="cw"><canvas id="cLev"></canvas></div>
@@ -211,8 +206,7 @@
     sV('ra_amt',50000);$('ra_mo').value='360';$('ra_r').value='4.3';
     sV('rb_amt',45000);$('rb_mo').value='360';$('rb_r').value='4.5';
     $('rep_income').value=Math.round(D.i/12).toLocaleString();
-    sV('s_cur',D.c);sV('s_ann',D.s);$('s_ret').value='5';sV('s_goal',30000);$('s_yr').value='10';
-    sV('u_my',D.ma);$('u_mr').value='3';sV('u_gl',D.ga);$('u_gr').value='5';sV('u_sv',D.s);$('u_rt').value='5';sV('u_ln',40000);$('u_yr').value='10';
+    sV('a_my',D.ma);$('a_mr').value='3';sV('a_gl',D.ga);$('a_gr').value='5';sV('a_sv',D.s);$('a_rt').value='5';sV('a_ln',40000);$('a_yr').value='10';
 
     document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){
         document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
@@ -220,7 +214,7 @@
         t.classList.add('active');$('tab-'+t.dataset.tab).classList.add('active');
     });});
 
-    var CBuy=null,CRep=null,CSav=null,CUpg=null,CLev=null;
+    var CBuy=null,CRep=null,CAst=null,CLev=null;
 
     // === TAB 1: 매수 계산 ===
     function rBuy(){
@@ -309,30 +303,9 @@
         $('cRep').parentElement.style.height='260px';
     }
 
-    // === TAB 3: 저축 시뮬 ===
-    function rSav(){
-        var cur=V('s_cur'),ann=V('s_ann'),ret=V('s_ret')/100,gl=V('s_goal'),yr=V('s_yr');
-        var lb=[],dt=[],ry=null;
-        for(var y=0;y<=yr;y++){lb.push(y===0?'현재':y+'년');var a=cur*Math.pow(1+ret,y);for(var j=0;j<y;j++)a+=ann*Math.pow(1+ret,y-1-j);dt.push(Math.round(a));if(ry===null&&a>=gl&&gl>0)ry=y;}
-
-        var vd=$('savV');
-        if(ry!==null){vd.className='verdict';vd.innerHTML='<div class="v-text">'+ry+'년 후 목표 달성</div><div class="v-sub">목표 '+fmt(gl)+' · 수익률 '+(ret*100)+'% 복리</div>';}
-        else{vd.className='verdict warn';vd.innerHTML='<div class="v-text">'+yr+'년 내 미달성</div><div class="v-sub">'+yr+'년 후 '+fmt(dt[dt.length-1])+' / 목표 '+fmt(gl)+'</div>';}
-
-        if(CSav)CSav.destroy();
-        CSav=new Chart($('cSav'),{type:'line',data:{labels:lb,datasets:[
-            {label:'누적 자산',data:dt,borderColor:'#0077C8',backgroundColor:'rgba(0,119,200,.05)',fill:true,tension:.3,pointRadius:3,pointBackgroundColor:'#0077C8',borderWidth:2},
-            {label:'목표 '+fmt(gl),data:Array(yr+1).fill(gl),borderColor:'#F59E0B',borderDash:[6,3],borderWidth:2,pointRadius:0,fill:false}
-        ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
-            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
-            tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fmt(ctx.parsed.y);}}}
-        },scales:{y:{beginAtZero:true,ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}});
-        $('cSav').parentElement.style.height='280px';
-    }
-
-    // === TAB 4: 갈아타기 ===
-    function rUpg(){
-        var my=V('u_my'),mr=V('u_mr')/100,gl=V('u_gl'),gr=V('u_gr')/100,sv=V('u_sv'),rt=V('u_rt')/100,ln=V('u_ln'),yr=V('u_yr');
+    // === TAB 3: 자산 시뮬 ===
+    function rAst(){
+        var my=V('a_my'),mr=V('a_mr')/100,gl=V('a_gl'),gr=V('a_gr')/100,sv=V('a_sv'),rt=V('a_rt')/100,ln=V('a_ln'),yr=V('a_yr');
         var lb=[],mD=[],gD=[],nD=[],levD=[],cy=null,ty=new Date().getFullYear();
         var selfCapital=my;
 
@@ -343,7 +316,6 @@
             var nw=mv+savings+ln;
             mD.push(Math.round(mv));gD.push(Math.round(gv));nD.push(Math.round(nw));
 
-            // 레버리지 수익률: (자산가치 상승분) / 자기자본 * 100
             if(y>0&&selfCapital>0){
                 var gain=mv-my;
                 var levReturn=gain/selfCapital*100/y;
@@ -353,22 +325,22 @@
             if(cy===null&&nw>=gv&&y>0)cy=y;
         }
 
-        var vd=$('upgV');
+        var vd=$('astV');
         if(cy!==null){vd.className='verdict';vd.innerHTML='<div class="v-text">'+(ty+cy)+'년 ('+cy+'년 후) 갈아타기 가능</div><div class="v-sub">순자산이 목표 단지 도달</div>';}
         else{vd.className='verdict warn';vd.innerHTML='<div class="v-text">'+yr+'년 내 미도달</div><div class="v-sub">'+yr+'년 후 순자산 '+fmt(nD[nD.length-1])+' / 목표 '+fmt(gD[gD.length-1])+'</div>';}
 
-        if(CUpg)CUpg.destroy();
-        var an={};if(cy!==null){an.cp={type:'point',xValue:String(ty+cy),yValue:gD[cy],backgroundColor:'#0077C8',borderColor:'#fff',borderWidth:3,radius:7};an.cl={type:'label',xValue:String(ty+cy),yValue:gD[cy],content:['갈아타기 가능'],font:{size:11,weight:'bold'},backgroundColor:'rgba(0,119,200,.9)',color:'#fff',padding:5,borderRadius:4,yAdjust:-22};}
-        CUpg=new Chart($('cUpg'),{type:'line',data:{labels:lb,datasets:[
-            {label:'내 단지',data:mD,borderColor:'#94A3B8',fill:false,tension:.3,borderWidth:2,pointRadius:2},
+        if(CAst)CAst.destroy();
+        var an={};if(cy!==null){an.cp={type:'point',xValue:String(ty+cy),yValue:gD[cy],backgroundColor:'#0077C8',borderColor:'#fff',borderWidth:3,radius:7};an.cl={type:'label',xValue:String(ty+cy),yValue:gD[cy],content:['갈아타기 가능'],font:{size:13,weight:'bold'},backgroundColor:'rgba(0,119,200,.9)',color:'#fff',padding:5,borderRadius:4,yAdjust:-22};}
+        CAst=new Chart($('cAst'),{type:'line',data:{labels:lb,datasets:[
+            {label:'내 단지',data:mD,borderColor:'#0077C8',fill:false,tension:.3,borderWidth:2,pointRadius:2},
             {label:'목표 단지',data:gD,borderColor:'#F59E0B',fill:false,tension:.3,borderWidth:2,pointRadius:2},
-            {label:'순자산',data:nD,borderColor:'#0077C8',backgroundColor:'rgba(0,119,200,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#0077C8'}
+            {label:'순자산',data:nD,borderColor:'#94A3B8',backgroundColor:'rgba(148,163,184,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#94A3B8'}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
             legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fmt(ctx.parsed.y);}}},
             annotation:{annotations:an}
-        },scales:{y:{ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
-        $('cUpg').parentElement.style.height='320px';
+        },scales:{y:{ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false},ticks:{font:{size:13}}}}}});
+        $('cAst').parentElement.style.height='320px';
 
         // 레버리지 수익률 곡선
         if(CLev)CLev.destroy();
@@ -377,13 +349,13 @@
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
             legend:{display:false},
             tooltip:{callbacks:{label:function(ctx){return '연평균 '+ctx.parsed.y+'%';}}}
-        },scales:{y:{ticks:{callback:function(v){return v+'%';}},grid:{color:'#F1F5F9'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
+        },scales:{y:{ticks:{callback:function(v){return v+'%';}},grid:{color:'#F1F5F9'}},x:{grid:{display:false},ticks:{font:{size:13}}}}}});
         $('cLev').parentElement.style.height='220px';
     }
 
     function bind(pf,fn){document.querySelectorAll('[id^="'+pf+'"]').forEach(function(el){el.addEventListener('input',function(){cF(el);fn();});});}
-    bind('b_',rBuy);bind('ra_',rRep);bind('rb_',rRep);bind('rep_',rRep);bind('s_',rSav);bind('u_',rUpg);
-    rBuy();rRep();rSav();rUpg();
+    bind('b_',rBuy);bind('ra_',rRep);bind('rb_',rRep);bind('rep_',rRep);bind('a_',rAst);
+    rBuy();rRep();rAst();
 })();
 </script>
 <script src="../nav.js"></script>
