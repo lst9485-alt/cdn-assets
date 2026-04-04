@@ -166,17 +166,7 @@
   });
 
   let slides = document.querySelectorAll('#stage > .slide');
-  let currentSlide = (function(){
-    var h = location.hash.replace('#','');
-    if (!h) return 0;
-    var t = document.getElementById(h);
-    if (!t) return 0;
-    var all = document.querySelectorAll('#stage > .slide');
-    for (var i = 0; i < all.length; i++) {
-      if (all[i] === t) { all[0].classList.remove('active'); t.classList.add('active'); return i; }
-    }
-    return 0;
-  })();
+  let currentSlide = 0;
   let currentStep = 0;
   let currentOrder = 0;
   let animating = false;
