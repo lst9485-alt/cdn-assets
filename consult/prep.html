@@ -247,10 +247,10 @@
         if(CBuy)CBuy.destroy();
         var buyPower=c+actual;
         var xMax=Math.max(tg,buyPower,mxLTV,mxDSR+c)*1.15;
-        CBuy=new Chart($('cBuyChart'),{type:'bar',data:{labels:['내 예산','희망가'],datasets:[
-            {label:'현금 '+fmt(c),data:[c,0],backgroundColor:'#0077C8',barPercentage:.5},
-            {label:'대출 '+fmt(actual),data:[actual,0],backgroundColor:'#94A3B8',barPercentage:.5},
-            {label:'매매가',data:[0,tg],backgroundColor:short>0?'#F59E0B':'#0077C8',barPercentage:.5}
+        CBuy=new Chart($('cBuyChart'),{type:'bar',data:{labels:['희망가','내 예산'],datasets:[
+            {label:'매매가',data:[tg,0],backgroundColor:short>0?'#F59E0B':'#0077C8',barPercentage:.5},
+            {label:'현금 '+fmt(c),data:[0,c],backgroundColor:'#0077C8',barPercentage:.5},
+            {label:'대출 '+fmt(actual),data:[0,actual],backgroundColor:'#94A3B8',barPercentage:.5}
         ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{
             legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:13},filter:function(item){return item.text!=='매매가';}}},
             tooltip:{callbacks:{label:function(ctx){if(ctx.parsed.x===0)return '';return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
