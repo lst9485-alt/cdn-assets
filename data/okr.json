@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-04T14:57:22.652491+09:00",
+  "updated": "2026-04-04T15:41:13.347804+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -26,7 +26,7 @@
     "overdue": 6
   },
   "routines": {
-    "total": 7,
+    "total": 4,
     "done_today": 2,
     "items": [
       {
@@ -44,19 +44,25 @@
       {
         "name": "P3 완료",
         "done": true
-      },
-      {
-        "name": "🍺",
-        "done": false
-      },
-      {
-        "name": "💪",
-        "done": false
-      },
-      {
-        "name": "📖",
-        "done": false
       }
-    ]
+    ],
+    "priorities": [
+      {
+        "label": "원씽",
+        "title": "업로드",
+        "done": false
+      },
+      {
+        "label": "P2",
+        "title": "슬라이드 템플릿 추가수정",
+        "done": false
+      },
+      {
+        "label": "P3",
+        "title": "독서",
+        "done": true
+      }
+    ],
+    "identity": "나는 일의 균형을 잘잡는 1인사업가다"
   }
 }

@@ -187,19 +187,62 @@
         var pending = (t.total||0) - (t.done||0);
         var html = '';
 
+        // 나는 누구인가
+        if (r.identity) {
+            html += '<div style="background:#F0F4FF;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px;font-weight:600;color:#334155;text-align:center">' + esc(r.identity) + '</div>';
+        }
+
+        // 원씽/P2/P3 태스크
+        var priorities = r.priorities || [];
+        if (priorities.length > 0) {
+            html += '<div style="margin-bottom:12px">';
+            priorities.forEach(function(p) {
+                var labelColor = p.label === '원씽' ? '#DC2626' : '#64748B';
+                var cls = p.done ? 'todo-item done' : 'todo-item';
+                html += '<div class="' + cls + '" style="padding:4px 0"><input type="checkbox"' + (p.done ? ' checked' : '') + '>';
+                html += '<span style="font-size:11px;font-weight:700;color:' + labelColor + ';background:' + (p.label === '원씽' ? '#FEF2F2' : '#F1F5F9') + ';padding:1px 5px;border-radius:4px;margin-right:4px">' + esc(p.label) + '</span>';
+                html += '<span>' + esc(p.title) + '</span></div>';
+            });
+            html += '</div>';
+        }
+
         // 미완료 태스크
         html += '<div class="okr-stat" style="margin-bottom:12px;text-align:left"><div class="okr-stat-label">미완료 태스크 <strong>' + pending + '개</strong>';
         if (t.overdue > 0) html += ' · <span class="okr-stat-warn">지연 ' + t.overdue + '</span>';
         html += '</div></div>';
 
-        // 오늘 루틴 체크리스트
-        html += '<div style="margin-bottom:16px">';
+        // 오늘 루틴 + 오늘 스케줄 (2열)
+        html += '<div style="display:flex;gap:12px;margin-bottom:16px">';
+
+        // 왼쪽: 오늘 루틴
+        html += '<div style="flex:1">';
         html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:6px">오늘 루틴</div>';
         var items = r.items || [];
         items.forEach(function(item) {
             var cls = item.done ? 'todo-item done' : 'todo-item';
             html += '<div class="' + cls + '"><input type="checkbox"' + (item.done ? ' checked' : '') + '><span>' + esc(item.name) + '</span></div>';
         });
+        html += '</div>';
+
+        // 오른쪽: 오늘 스케줄 (Google Calendar 연동 후 활성화)
+        html += '<div style="flex:1">';
+        html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:6px">오늘 스케줄</div>';
+        var schedule = data.schedule || [];
+        if (schedule.length > 0) {
+            schedule.forEach(function(ev) {
+                html += '<div style="font-size:12px;color:#475569;padding:2px 0">';
+                if (ev.allDay) {
+                    html += '<span style="font-size:11px;color:#94A3B8;margin-right:4px">종일</span>';
+                } else if (ev.time) {
+                    html += '<span style="font-size:11px;color:#94A3B8;margin-right:4px">' + esc(ev.time) + '</span>';
+                }
+                html += esc(ev.title) + '</div>';
+            });
+        } else {
+            html += '<div style="font-size:12px;color:#94A3B8">캘린더 연동 예정</div>';
+        }
+        html += '</div>';
+
         html += '</div>';
 
         // OKR Key Results — 별도 박스
