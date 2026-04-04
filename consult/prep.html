@@ -29,28 +29,28 @@
         .verdict.warn { border-color:var(--orange); background:var(--orange-light); }
         .verdict .v-text { font-size:22px; font-weight:800; color:var(--blue); }
         .verdict.warn .v-text { color:var(--orange); }
-        .verdict .v-sub { font-size:13px; color:var(--gray); margin-top:4px; }
+        .verdict .v-sub { font-size:14px; color:var(--gray); margin-top:4px; }
 
         .ig { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
         .ig1 { grid-template-columns:1fr; }
         .iw { display:flex; align-items:center; }
-        .il { font-size:12px; font-weight:600; color:var(--gray); margin-bottom:3px; }
+        .il { font-size:13px; font-weight:600; color:var(--gray); margin-bottom:3px; }
         .if { border:1px solid var(--border); border-radius:6px 0 0 6px; padding:8px 10px; font-size:15px; font-weight:600; color:var(--navy); font-family:inherit; outline:none; flex:1; min-width:0; text-align:right; background:#fff; border-right:none; }
         .if:focus { border-color:var(--blue); }
-        .is { padding:8px 8px; font-size:12px; font-weight:600; color:var(--gray); background:var(--bg); border:1px solid var(--border); border-radius:0 6px 6px 0; border-left:none; white-space:nowrap; }
+        .is { padding:8px 8px; font-size:13px; font-weight:600; color:var(--gray); background:var(--bg); border:1px solid var(--border); border-radius:0 6px 6px 0; border-left:none; white-space:nowrap; }
 
         .rbox { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin-bottom:16px; }
         .rb { border:1px solid var(--border); border-radius:8px; padding:14px; text-align:center; background:#fff; }
         .rb.accent { border-color:var(--blue); background:var(--blue-light); }
         .rb.warn { border-color:var(--orange); background:var(--orange-light); }
-        .rb-label { font-size:11px; font-weight:700; color:var(--gray); letter-spacing:.5px; margin-bottom:4px; }
-        .rb-val { font-size:26px; font-weight:800; color:var(--navy); }
+        .rb-label { font-size:12px; font-weight:700; color:var(--gray); letter-spacing:.5px; margin-bottom:4px; }
+        .rb-val { font-size:28px; font-weight:800; color:var(--navy); }
         .rb-val.blue { color:var(--blue); } .rb-val.orange { color:var(--orange); }
-        .rb-sub { font-size:11px; color:var(--light-gray); margin-top:2px; }
+        .rb-sub { font-size:12px; color:var(--light-gray); margin-top:2px; }
 
         .cw { position:relative; margin-top:8px; } .cw canvas { max-height:320px; }
 
-        .note { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:10px 12px; font-size:12px; color:var(--gray); line-height:1.7; margin-top:10px; }
+        .note { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:10px 12px; font-size:13px; color:var(--gray); line-height:1.7; margin-top:10px; }
         .note b { color:var(--navy); }
         .note-warn { background:var(--orange-light); border-color:#FDE68A; color:#92400E; }
 
@@ -62,10 +62,10 @@
 
         .cmp { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
         .cmp-card { background:#fff; border:1px solid var(--border); border-radius:8px; padding:14px; }
-        .cmp-badge { display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-bottom:8px; }
+        .cmp-badge { display:inline-block; font-size:12px; font-weight:700; padding:2px 8px; border-radius:4px; margin-bottom:8px; }
         .ba { background:var(--blue-light); color:var(--blue); } .bb { background:var(--orange-light); color:var(--orange); }
 
-        .ft { text-align:center; font-size:11px; color:var(--light-gray); padding:16px; }
+        .ft { text-align:center; font-size:12px; color:var(--light-gray); padding:16px; }
 
         @media (max-width:768px) {
             .wrap { padding:10px; } .hdr { padding:16px 18px; }
@@ -107,8 +107,7 @@
             </div>
         </div>
         <div class="rbox" id="buyR"></div>
-        <div class="card"><div class="card-t">예산</div><div class="cw"><canvas id="cBuyBudget"></canvas></div></div>
-        <div class="card"><div class="card-t">희망 아파트 가격</div><div class="cw"><canvas id="cBuyTarget"></canvas></div></div>
+        <div class="card"><div class="card-t">매수 가능 분석</div><div class="cw"><canvas id="cBuyChart"></canvas></div></div>
         <div class="note" id="buyN"></div>
     </div>
 
@@ -220,7 +219,7 @@
         t.classList.add('active');$('tab-'+t.dataset.tab).classList.add('active');
     });});
 
-    var CBuy=null,CBuyT=null,CRep=null,CSav=null,CUpg=null,CLev=null;
+    var CBuy=null,CRep=null,CSav=null,CUpg=null,CLev=null;
 
     // === TAB 1: 매수 계산 ===
     function rBuy(){
@@ -246,34 +245,24 @@
             +'<div class="rb '+(short>0?'warn':'accent')+'"><div class="rb-label">'+(short>0?'부족분':'여유분')+'</div><div class="rb-val '+(short>0?'orange':'blue')+'">'+fmt(Math.abs(short))+'</div><div class="rb-sub">'+(short>0?'현금 추가 필요':'현금 여유')+'</div></div>';
 
         // 차트 1: 예산 (내 상황 — 현금+대출 가능액)
+        // 차트: 내 예산 vs 희망가 (가로 바 2줄 + DSR/LTV 점선)
         if(CBuy)CBuy.destroy();
         var buyPower=c+actual;
-        CBuy=new Chart($('cBuyBudget'),{type:'bar',data:{labels:['내 예산'],datasets:[
-            {label:'현금 '+fmt(c),data:[c],backgroundColor:'#0077C8',barPercentage:.5},
-            {label:'대출 '+fmt(actual),data:[actual],backgroundColor:'#94A3B8',barPercentage:.5}
+        var xMax=Math.max(tg+acqTax,buyPower,mxLTV,mxDSR+c)*1.15;
+        CBuy=new Chart($('cBuyChart'),{type:'bar',data:{labels:['내 예산','희망가'],datasets:[
+            {label:'현금 '+fmt(c),data:[c,0],backgroundColor:'#0077C8',barPercentage:.5},
+            {label:'대출 '+fmt(actual),data:[actual,0],backgroundColor:'#94A3B8',barPercentage:.5},
+            {label:'매매가',data:[0,tg],backgroundColor:short>0?'#F59E0B':'#0077C8',barPercentage:.5},
+            {label:'취득세 '+fmt(acqTax),data:[0,acqTax],backgroundColor:'#64748B',barPercentage:.5}
         ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{
-            legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:12}}},
-            tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
+            legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:12},filter:function(item){return item.text!=='매매가';}}},
+            tooltip:{callbacks:{label:function(ctx){if(ctx.parsed.x===0)return '';return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
             annotation:{annotations:{
-                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR한도 '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:11},padding:4,position:'start'}},
-                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV한도 '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:11},padding:4,position:'end'}}
+                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:12},padding:4,position:'start'}},
+                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:12},padding:4,position:'end'}}
             }}
-        },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:11}},grid:{color:'#F1F5F9'},max:Math.max(buyPower,mxLTV,mxDSR+c)*1.1},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
-        $('cBuyBudget').parentElement.style.height='90px';
-
-        // 차트 2: 희망 아파트 가격
-        if(CBuyT)CBuyT.destroy();
-        CBuyT=new Chart($('cBuyTarget'),{type:'bar',data:{labels:['희망가'],datasets:[
-            {label:'매매가 '+fmt(tg),data:[tg],backgroundColor:short>0?'#F59E0B':'#0077C8',barPercentage:.5},
-            {label:'취득세 '+fmt(acqTax),data:[acqTax],backgroundColor:'#64748B',barPercentage:.5}
-        ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{
-            legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:12}}},
-            tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
-            annotation:{annotations:{
-                budget:{type:'line',xMin:buyPower,xMax:buyPower,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'내 예산 '+fmt(buyPower),backgroundColor:'#0077C8',font:{size:11},padding:4,position:'start'}}
-            }}
-        },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:11}},grid:{color:'#F1F5F9'},max:Math.max(tg+acqTax,buyPower)*1.1},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
-        $('cBuyTarget').parentElement.style.height='90px';
+        },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:12}},grid:{color:'#F1F5F9'},max:xMax},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
+        $('cBuyChart').parentElement.style.height='140px';
 
         $('buyN').innerHTML='DSR 40%, 금리 '+rt+'%, '+yr+'년, LTV 70% 기준<br>실제 대출: '+fmt(actual)+' (DSR '+fmt(mxDSR)+' / LTV '+fmt(mxLTV)+' 중 작은 값)<br>정책대출: 디딤돌(소득6천↓), 보금자리론(7천↓), 신생아특례(맞벌이2억↓)';
     }
@@ -316,7 +305,7 @@
             {label:'A: '+fmt(aA)+' / '+aR+'%',data:[am,aI,aT],backgroundColor:'#0077C8',borderRadius:4,barPercentage:.4},
             {label:'B: '+fmt(bA)+' / '+bR+'%',data:[bm,bI,bT],backgroundColor:'#F59E0B',borderRadius:4,barPercentage:.4}
         ]},options:{responsive:true,maintainAspectRatio:false,plugins:{
-            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:11}}},
+            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:12}}},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fF(ctx.parsed.y);}}}
         },scales:{y:{ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}});
         $('cRep').parentElement.style.height='260px';
@@ -337,7 +326,7 @@
             {label:'누적 자산',data:dt,borderColor:'#0077C8',backgroundColor:'rgba(0,119,200,.05)',fill:true,tension:.3,pointRadius:3,pointBackgroundColor:'#0077C8',borderWidth:2},
             {label:'목표 '+fmt(gl),data:Array(yr+1).fill(gl),borderColor:'#F59E0B',borderDash:[6,3],borderWidth:2,pointRadius:0,fill:false}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
-            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:11}}},
+            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:12}}},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fmt(ctx.parsed.y);}}}
         },scales:{y:{beginAtZero:true,ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}});
         $('cSav').parentElement.style.height='280px';
@@ -377,7 +366,7 @@
             {label:'목표 단지',data:gD,borderColor:'#F59E0B',fill:false,tension:.3,borderWidth:2,pointRadius:2},
             {label:'순자산',data:nD,borderColor:'#0077C8',backgroundColor:'rgba(0,119,200,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#0077C8'}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
-            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:11}}},
+            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:12}}},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fmt(ctx.parsed.y);}}},
             annotation:{annotations:an}
         },scales:{y:{ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
