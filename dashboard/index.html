@@ -44,6 +44,22 @@
         .proj-count { font-size: 13px; color: #64748B; margin-bottom: 12px; }
         .proj-error { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 12px; padding: 24px; text-align: center; color: #DC2626; font-size: 14px; }
         .proj-updated { font-size: 11px; color: #94A3B8; text-align: right; margin-top: 8px; }
+        .okr-error { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 12px; padding: 24px; text-align: center; color: #DC2626; font-size: 14px; }
+        .okr-updated { font-size: 11px; color: #94A3B8; text-align: right; margin-top: 8px; }
+        .okr-cards { display: flex; gap: 10px; margin-bottom: 12px; }
+        .okr-stat-card { flex: 1; background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; text-align: center; }
+        .okr-stat-label { font-size: 12px; color: #64748B; margin-bottom: 4px; }
+        .okr-stat-value { font-size: 22px; font-weight: 800; color: #1E293B; }
+        .okr-stat-sub { font-size: 11px; color: #94A3B8; margin-top: 2px; }
+        .okr-stat-card.overdue .okr-stat-value { color: #DC2626; }
+        .okr-kr { background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+        .okr-kr-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .okr-kr-title { font-size: 14px; font-weight: 600; color: #1E293B; }
+        .okr-kr-rate { font-size: 13px; font-weight: 700; color: #0077C8; }
+        .okr-kr-bar { height: 8px; background: #E2E8F0; border-radius: 4px; overflow: hidden; }
+        .okr-kr-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+        .okr-kr-detail { font-size: 12px; color: #94A3B8; margin-top: 6px; }
+        .okr-subtitle { font-size: 13px; font-weight: 700; color: #475569; margin: 16px 0 8px; }
     </style>
 </head>
 <body>
@@ -70,10 +86,11 @@
         </div>
 
         <div id="okr" class="section">
-            <div class="section-title"><span>🎯</span> OKR · 루틴 · 태스크 <span class="badge-soon">Notion 연동 예정</span></div>
-            <div class="placeholder">
-                <div class="placeholder-title">Notion 데이터 실시간 표시</div>
-                <div class="placeholder-desc">OKR 달성률, 루틴 통계, 프로젝트 진행률을 Notion API로 가져와서 표시합니다</div>
+            <div class="section-title"><span>🎯</span> OKR · 루틴 · 태스크 <span class="badge-live">LIVE</span></div>
+            <div id="okr-content">
+                <div class="placeholder">
+                    <div class="placeholder-desc">로딩 중...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -177,6 +194,82 @@
 
         var d = new Date(data.updated);
         html += '<div class="proj-updated">업데이트: ' + d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'}) + '</div>';
+
+        container.innerHTML = html;
+    }
+
+    function esc(s) {
+        var el = document.createElement('span');
+        el.textContent = s;
+        return el.innerHTML;
+    }
+})();
+</script>
+<script>
+(function() {
+    var container = document.getElementById('okr-content');
+
+    fetch('../data/okr.json')
+        .then(function(res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+        })
+        .then(function(data) { renderOkr(data); })
+        .catch(function() {
+            container.innerHTML = '<div class="okr-error">데이터 로드 실패 — 크론잡 실행 후 다시 확인</div>';
+        });
+
+    function renderOkr(data) {
+        var html = '';
+
+        // 태스크 + 루틴 카드
+        var t = data.tasks || {};
+        var r = data.routines || {};
+        html += '<div class="okr-cards">';
+
+        // 태스크 카드
+        html += '<div class="okr-stat-card' + (t.overdue > 0 ? ' overdue' : '') + '">';
+        html += '<div class="okr-stat-label">태스크</div>';
+        html += '<div class="okr-stat-value">' + (t.done || 0) + '/' + (t.total || 0) + '</div>';
+        if (t.overdue > 0) html += '<div class="okr-stat-sub">지연 ' + t.overdue + '건</div>';
+        html += '</div>';
+
+        // 루틴 카드
+        html += '<div class="okr-stat-card">';
+        html += '<div class="okr-stat-label">오늘 루틴</div>';
+        html += '<div class="okr-stat-value">' + (r.done_today || 0) + '/' + (r.total || 0) + '</div>';
+        html += '</div>';
+
+        html += '</div>';
+
+        // OKR Key Results
+        var okr = data.okr || [];
+        if (okr.length > 0) {
+            html += '<div class="okr-subtitle">Key Results (' + okr.length + ')</div>';
+            okr.forEach(function(kr) {
+                var pct = 0;
+                if (kr.rate) {
+                    var m = kr.rate.match(/([\d.]+)/);
+                    if (m) pct = parseFloat(m[1]);
+                }
+                var color = pct >= 70 ? '#16A34A' : pct >= 40 ? '#D97706' : '#DC2626';
+
+                html += '<div class="okr-kr">';
+                html += '<div class="okr-kr-header">';
+                html += '<span class="okr-kr-title">' + esc(kr.title) + '</span>';
+                html += '<span class="okr-kr-rate">' + esc(kr.rate || '0%') + '</span>';
+                html += '</div>';
+                html += '<div class="okr-kr-bar"><div class="okr-kr-fill" style="width:' + Math.min(pct, 100) + '%;background:' + color + '"></div></div>';
+                if (kr.target != null && kr.current != null) {
+                    html += '<div class="okr-kr-detail">현재 ' + kr.current + ' / 목표 ' + kr.target + '</div>';
+                }
+                html += '</div>';
+            });
+        }
+
+        // 업데이트 시간
+        var d = new Date(data.updated);
+        html += '<div class="okr-updated">업데이트: ' + d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'}) + '</div>';
 
         container.innerHTML = html;
     }
