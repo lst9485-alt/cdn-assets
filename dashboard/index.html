@@ -309,7 +309,7 @@
             html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:8px">OKR Key Results</div>';
             okr.forEach(function(kr) {
                 var pct = 0;
-                if (kr.rate) { var m = kr.rate.match(/([\d.]+)/); if (m) pct = parseFloat(m[1]); }
+                if (kr.rate) { var m = String(kr.rate).match(/([\d.]+)/); if (m) pct = Math.max(0, Math.min(parseFloat(m[1]), 100)); }
                 html += '<div class="okr-kr"><div class="okr-kr-header"><span class="okr-kr-title">' + esc(kr.title) + '</span><span class="okr-kr-rate">' + esc(kr.rate||'0%') + '</span></div>';
                 html += '<div class="okr-kr-bar"><div class="okr-kr-fill" style="width:' + Math.min(pct,100) + '%"></div></div>';
                 if (kr.target != null && kr.current != null) html += '<div class="okr-kr-detail">현재 ' + kr.current + ' / 목표 ' + kr.target + '</div>';
