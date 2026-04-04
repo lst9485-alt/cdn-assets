@@ -54,6 +54,12 @@
 | search.png | 돋보기 | 🔎 deco, ICON:search |
 | streetview.png | 거리뷰 (사람+건물) | 🏘️ deco, ICON:streetview |
 | target.png | 목표/표적 | 🎯 deco, ICON:target |
+| school.png | 학교 건물 (깃발) | ICON:school |
+| ktx.png | 고속열차 (KTX) | ICON:ktx |
+| newtown.png | 도시 스카이라인+크레인 | ICON:newtown |
+| house-key.png | 집+열쇠 (내집마련) | ICON:house-key |
+| caution-house.png | 집+경고삼각형 (위험부동산) | ICON:caution-house |
+| chart-up.png | 상승 차트+화살표 | ICON:chart-up |
 
 ## 사운드 (`sounds/`)
 

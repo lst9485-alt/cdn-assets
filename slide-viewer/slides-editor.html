@@ -27,15 +27,9 @@
         <input type="checkbox" disabled="">
         <span class="anim-toggle-slider"></span>
       </label></div><div class="anim-sort-label"><span class="anim-sort-icon">☰</span> 클릭하여 정렬</div></div>
-  <div id="layer-list"><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">✅
-        결과
-  </span><span class="layer-badge">플로우박스</span><span class="layer-step-badge">클릭7회</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">→</span><span class="layer-badge">화살표</span><span class="layer-step-badge">클릭6회</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">⚙️
-        3단계
-</span><span class="layer-badge">플로우박스</span><span class="layer-step-badge">클릭5회</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">→</span><span class="layer-badge">화살표</span><span class="layer-step-badge">클릭4회</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">📁
-        2단계
-</span><span class="layer-badge">플로우박스</span><span class="layer-step-badge">클릭3회</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">→</span><span class="layer-badge">화살표</span><span class="layer-step-badge">클릭2회</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">💬
+  <div id="layer-list"><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">[FD3] 그룹</span><span class="layer-step-badge">클릭3회</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">[FD2] 그룹</span><span class="layer-step-badge">클릭2회</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">🔍
         1단계
-</span><span class="layer-badge">플로우박스</span><span class="layer-step-badge">클릭1회</span></div><div class="anim-step0-divider">── 항상 보임 ──</div><div class="layer-item" style="opacity: 0.55;"><span class="layer-handle">⠿</span><span class="layer-label">챕터 제목</span><span class="layer-badge">HL</span></div><div class="anim-overlay-btn">+ 오버레이 추가</div></div>
+</span><span class="layer-badge">플로우</span><span class="layer-step-badge">클릭1회</span></div><div class="anim-step0-divider">── 항상 보임 ──</div><div class="layer-item" style="opacity: 0.55;"><span class="layer-handle">⠿</span><span class="layer-label">작업 흐름</span><span class="layer-badge">HL</span></div><div class="layer-item" style="opacity: 0.55;"><span class="layer-handle">⠿</span><span class="layer-label">설명 텍스트를 입력하세요</span><span class="layer-badge">설명</span></div><div class="anim-overlay-btn">+ 오버레이 추가</div></div>
 </div>
 <div id="guide-toolbar">
   <div class="guide-btn" data-target="title" style="border-color:rgba(255,200,0,0.7); color:rgba(255,200,0,0.9);">T</div>
@@ -68,18 +62,7 @@
 <div id="select-box" style="left: 821px; top: 591px; width: 0px; height: 0px; display: none;"></div>
 
 
-  <div class="slide active" id="slide1" data-steps="1" data-type="메인텍스트" style="">
-    <div class="step-layer" data-step="0">
-      
-    <div class="text-area" style="position: absolute; left: 100px; top: 340px; width: 1720px; z-index: 1;">
-        <div class="hl-wrap">
-          <div><span class="hl" style="font-size: 108px;">제목을 입력하세요</span></div>
-          <div><span class="hl">두 번째 줄</span></div>
-        </div>
-      </div></div>
-  </div>
-
-  <div class="slide" id="slide2" data-steps="1" data-type="말풍선+텍스트" style="">
+  <div class="slide active" id="slide2" data-steps="1" data-type="말풍선+텍스트" style="">
     <div class="step-layer" data-step="0">
       
     <div class="bubble" style="position: absolute; top: 80px; left: 1120px; width: 680px;">질문을 입력하세요</div></div>
@@ -398,19 +381,20 @@
     </div>
   </div>
 
-  <div class="slide" id="slide21" data-steps="2" data-type="태그칩" style="">
+  <div class="slide" id="slide21" data-steps="1" data-type="태그칩" style="">
     <div class="step-layer" data-step="0">
       <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
-        <div class="hl-wrap" style="align-items:center;">
-          <div><span class="hl">제목</span></div>
-        </div>
+        <div class="hl-wrap" style="align-items:center;"><div><span class="hl">핵심 키워드</span></div></div>
       </div>
-    </div>
-    <div class="step-layer" data-step="1">
+
       <div class="slide-el tag-group" data-type="태그그룹" style="position:absolute; left:280px; top:380px; width:1360px;">
         <div class="tag-chip white" style="transition-delay: 0s;">태그 1</div>
         <div class="tag-chip white" style="transition-delay: 0.1s;">태그 2</div>
         <div class="tag-chip white" style="transition-delay: 0.2s;">태그 3</div>
+      </div>
+      <div class="slide-el tag-group" data-type="태그그룹" style="position:absolute; left:280px; top:520px; width:1360px;">
+        <div class="tag-chip red" style="transition-delay: 0s;">태그 4</div>
+        <div class="tag-chip red" style="transition-delay: 0.1s;">태그 5</div>
       </div>
     </div>
   </div>
@@ -546,14 +530,14 @@
         </div>
       </div>
     </div>
-    <div class="step-layer" data-step="1" data-no-dim>
+    <div class="step-layer" data-step="1" data-no-dim="">
       <div class="slide-el chapter-flow-box" data-type="플로우박스" style="position:absolute; left:100px; top:530px; width:340px;">
         <div class="chapter-flow-icon">💬</div>
         <div class="chapter-flow-title">1단계</div>
         <div class="chapter-flow-desc">설명 텍스트</div>
       </div>
     </div>
-    <div class="step-layer" data-step="2" data-no-dim>
+    <div class="step-layer" data-step="2" data-no-dim="">
       <div class="slide-el chapter-flow-arrow" data-type="화살표" data-group="f2" style="position:absolute; left:460px; top:610px;">→</div>
       <div class="slide-el chapter-flow-box" data-type="플로우박스" data-group="f2" style="position:absolute; left:520px; top:530px; width:340px;">
         <div class="chapter-flow-icon">📁</div>
@@ -561,7 +545,7 @@
         <div class="chapter-flow-desc">설명 텍스트</div>
       </div>
     </div>
-    <div class="step-layer" data-step="3" data-no-dim>
+    <div class="step-layer" data-step="3" data-no-dim="">
       <div class="slide-el chapter-flow-arrow" data-type="화살표" data-group="f3" style="position:absolute; left:880px; top:610px;">→</div>
       <div class="slide-el chapter-flow-box" data-type="플로우박스" data-group="f3" style="position:absolute; left:940px; top:530px; width:340px;">
         <div class="chapter-flow-icon">⚙️</div>
@@ -569,7 +553,7 @@
         <div class="chapter-flow-desc">설명 텍스트</div>
       </div>
     </div>
-    <div class="step-layer" data-step="4" data-no-dim>
+    <div class="step-layer" data-step="4" data-no-dim="">
       <div class="slide-el chapter-flow-arrow" data-type="화살표" data-group="f4" style="position:absolute; left:1300px; top:610px;">→</div>
       <div class="slide-el chapter-flow-box chapter-flow-accent" data-type="플로우박스" data-group="f4" style="position:absolute; left:1360px; top:530px; width:340px;">
         <div class="chapter-flow-icon">✅</div>
@@ -619,7 +603,7 @@
   </div>
 
   <!-- ── T27 분기플로우 (세션4 신규) ── -->
-  <div class="slide" id="slide31" data-steps="2" data-type="분기플로우" style="">
+  <div class="slide" id="slide31" data-steps="3" data-type="분기플로우" style="">
     <div class="step-layer" data-step="0">
       <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
         <div class="section-badge" style="margin-bottom:16px;">DECISION</div>
@@ -656,7 +640,7 @@
   </div>
 
   <!-- ── T28 분할레이아웃 (세션4 신규) ── -->
-  <div class="slide" id="slide32" data-steps="2" data-type="분할레이아웃" style="">
+  <div class="slide" id="slide32" data-steps="3" data-type="분할레이아웃" style="">
     <div class="step-layer" data-step="0">
       <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
         <div class="section-badge" style="margin-bottom:16px;">OVERVIEW</div>
@@ -726,7 +710,7 @@
         <div class="eq-desc">설명 텍스트</div>
       </div>
     </div>
-    <div class="step-layer" data-step="2" data-no-dim>
+    <div class="step-layer" data-step="2" data-no-dim="">
       <div class="slide-el eq-op" data-type="연산자" data-group="eq2" style="position:absolute; left:720px; top:460px; width:60px;">+</div>
       <div class="slide-el eq-box" data-type="등식" data-group="eq2" style="position:absolute; left:800px; top:400px; width:260px;">
         <div class="eq-icon">📦</div>
@@ -734,7 +718,7 @@
         <div class="eq-desc">설명 텍스트</div>
       </div>
     </div>
-    <div class="step-layer" data-step="3" data-no-dim>
+    <div class="step-layer" data-step="3" data-no-dim="">
       <div class="slide-el eq-op" data-type="연산자" data-group="eq3" style="position:absolute; left:1080px; top:460px; width:60px;">=</div>
       <div class="slide-el eq-box eq-result" data-type="등식" data-group="eq3" style="position:absolute; left:1160px; top:400px; width:280px;">
         <div class="eq-icon">🚀</div>
@@ -781,28 +765,27 @@
           <div><span class="hl">작업 흐름</span></div>
         </div>
       </div>
-      <div class="slide-el" data-type="설명" style="position:absolute; left:200px; top:260px; width:1520px; font-size:28px; font-weight:700; color:#666; text-align:center;">설명 텍스트를 입력하세요</div>
     </div>
     <div class="step-layer" data-step="1">
-      <div class="slide-el flow-detail" data-type="플로우" style="position:absolute; left:120px; top:380px; width:420px;">
+      <div class="slide-el flow-detail" data-type="플로우" style="position:absolute; left:250px; top:380px; width:420px;">
         <div class="flow-detail-icon">🔍</div>
         <div class="flow-detail-title">1단계</div>
         <div class="flow-detail-sub">부제목</div>
         <div class="flow-detail-list">세부 설명 1<br>세부 설명 2</div>
       </div>
     </div>
-    <div class="step-layer" data-step="2" data-no-dim>
-      <div class="slide-el flow-arrow" data-type="화살표" data-group="fd2" style="position:absolute; left:556px; top:480px; width:48px;">→</div>
-      <div class="slide-el flow-detail" data-type="플로우" data-group="fd2" style="position:absolute; left:620px; top:380px; width:420px;">
+    <div class="step-layer" data-step="2" data-no-dim="">
+      <div class="slide-el flow-arrow" data-type="화살표" data-group="fd2" style="position:absolute; left:686px; top:480px; width:48px;">→</div>
+      <div class="slide-el flow-detail" data-type="플로우" data-group="fd2" style="position:absolute; left:750px; top:380px; width:420px;">
         <div class="flow-detail-icon">📋</div>
         <div class="flow-detail-title">2단계</div>
         <div class="flow-detail-sub">부제목</div>
         <div class="flow-detail-list">세부 설명 1<br>세부 설명 2</div>
       </div>
     </div>
-    <div class="step-layer" data-step="3" data-no-dim>
-      <div class="slide-el flow-arrow" data-type="화살표" data-group="fd3" style="position:absolute; left:1056px; top:480px; width:48px;">→</div>
-      <div class="slide-el flow-detail flow-detail-accent" data-type="플로우" data-group="fd3" style="position:absolute; left:1120px; top:380px; width:420px;">
+    <div class="step-layer" data-step="3" data-no-dim="">
+      <div class="slide-el flow-arrow" data-type="화살표" data-group="fd3" style="position:absolute; left:1186px; top:480px; width:48px;">→</div>
+      <div class="slide-el flow-detail flow-detail-accent" data-type="플로우" data-group="fd3" style="position:absolute; left:1250px; top:380px; width:420px;">
         <div class="flow-detail-icon">⚡</div>
         <div class="flow-detail-title">3단계</div>
         <div class="flow-detail-sub">부제목</div>
@@ -996,7 +979,7 @@
   <button id="gt-ungroup">그룹 해제</button>
   <button id="gt-delete" title="삭제">🗑</button>
 </div>
-<div id="slideNum">37 / 37</div>
+<div id="slideNum">34 / 36</div>
 <div id="edit-badge"></div>
 <div id="top-toolbar">
   <span class="tb-label">편집 모드</span>

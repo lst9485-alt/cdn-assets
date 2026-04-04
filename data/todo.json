@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-04T15:24:22.402848+09:00",
+  "updated": "2026-04-05T06:00:01.449131+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -38,6 +38,10 @@
             {
               "text": "콘텐츠관리시트 퍼널 대시보드 — generate-dashboard.py 스크립트화 + 8~12주 추이 차트 + 누적 JSON + content-sheet E-5 연동 ※ nightwatch AARRR 주간 리포트로 일부 통합 예정 (nightwatch/.context.md 참조)",
               "done": false
+            },
+            {
+              "text": "콘텐츠관리시트 링크클릭률에서 상담용 단축 URL(c_ 접두사) 클릭수 제외 — Short.io에 상담용 c_번호 링크 추가 예정, 유튜브 yt_ 클릭만 집계되도록 필터 필요 ✅ 2026-04-05",
+              "done": true
             }
           ]
         },
@@ -69,31 +73,11 @@
         },
         {
           "id": 10,
-          "title": "홈페이지 PG 승인 + 강의 준비 (4/2~)",
+          "title": "홈페이지 PG 승인 + 강의 준비",
           "ref": "아임웹 결제·회원 시스템",
           "items": [
             {
-              "text": "에스크로 가입 (기업은행 4/15 방문)",
-              "done": false
-            },
-            {
-              "text": "홈택스 업종 추가 (교육서비스업)",
-              "done": false
-            },
-            {
-              "text": "통신판매업 신고 (정부24)",
-              "done": false
-            },
-            {
-              "text": "강의 틀 잡기 (제목/커리큘럼/가격)",
-              "done": false
-            },
-            {
-              "text": "아임웹에 교육 상품 등록",
-              "done": false
-            },
-            {
-              "text": "PG 재신청 (토스페이 or 이니시스)",
+              "text": "PG 승인 로드맵 (순서대로 진행, 전체 상세는 프로젝트 노트 참조)",
               "done": false
             }
           ]
@@ -111,28 +95,83 @@
         },
         {
           "id": 12,
-          "title": "운영 대시보드",
-          "ref": "운영 대시보드",
+          "title": "yt-slide 테스트 도입 (4/4~)",
+          "ref": null,
           "items": [
             {
-              "text": "대시보드 실데이터 연동 (크론잡 → JSON → 투두/프로젝트/OKR) ✅ 2026-04-04",
+              "text": "conftest.py + pytest.ini 생성 (4/4)",
               "done": true
             },
             {
-              "text": "UI 개선: 투두 넘버링 정렬 + 프로젝트 수정일순 + 모든 페이지 수정일 표시",
-              "done": false
+              "text": "test_type_registry.py — 20개 통과 (4/4)",
+              "done": true
             },
             {
-              "text": "매출 대시보드 데이터 연동 (콘텐츠관리시트 → JSON → 차트)",
-              "done": false
+              "text": "test_replace_placeholders.py + test_parse_header.py — 23개 통과 (4/4)",
+              "done": true
             },
             {
-              "text": "n8n 워크플로우 전체 조사 + 연결도 완성",
-              "done": false
+              "text": "타입별 샘플 slide.md 작성 + test_generate_slide.py ✅ 2026-04-04",
+              "done": true
             },
             {
-              "text": "상담 준비 자료 HTML 템플릿",
-              "done": false
+              "text": "test_build_helpers.py + test_pipeline.py — 26개 통과 (총 83개) ✅ 2026-04-05",
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "title": "co-monthly-check 테스트 도입 (4/4~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "test_normalize.py + test_parse_amount.py + test_match_names.py — 54개 통과 + hook 등록 ✅ 2026-04-05",
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "title": "co-telegramocr hook 등록 (4/4~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "PostToolUse hook 등록 (기존 테스트 4파일 자동 실행) ✅ 2026-04-05",
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "title": "yt-autocut 테스트 도입 (4/4~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "test_srt_parsing.py + test_cuts.py — 20개 통과 + hook 등록 ✅ 2026-04-05",
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "title": "co-daily-createlink 테스트 도입 (4/5~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "test_parsing.py + test_format.py — 22개 통과 + hook 등록 ✅ 2026-04-05",
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "title": "yt-youtube-production 테스트 도입 (4/5~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "test_speech_segments.py + test_cut_points.py — 24개 통과 + hook 등록 ✅ 2026-04-05",
+              "done": true
             }
           ]
         }
