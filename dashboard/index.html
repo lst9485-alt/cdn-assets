@@ -38,6 +38,7 @@
         .fold summary .fold-count { font-size: 12px; color: #94A3B8; margin-left: auto; }
 
         /* ── 투두 ── */
+        .todo-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: #0077C8; color: white; border-radius: 4px; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-right: 4px; }
         .todo-item { display: flex; align-items: flex-start; gap: 6px; padding: 3px 0; font-size: 14px; color: #475569; }
         .todo-item input { margin-top: 4px; pointer-events: none; accent-color: #0077C8; }
         .todo-item.done { color: #B0B8C4; text-decoration: line-through; }
@@ -113,7 +114,7 @@
         data.sections.forEach(function(s) { s.categories.forEach(function(cat) {
             var catDone = cat.items.filter(function(i){return i.done;}).length;
             var catPending = cat.items.length - catDone;
-            html += '<details class="fold"><summary>' + esc(cat.title) + '<span class="fold-count">' + catPending + '개</span></summary><div class="fold-body">';
+            html += '<details class="fold"><summary><span class="todo-num">' + cat.id + '</span>' + esc(cat.title) + '<span class="fold-count">' + catPending + '개</span></summary><div class="fold-body">';
             cat.items.forEach(function(item) {
                 html += '<div class="todo-item' + (item.done ? ' done' : '') + '"><input type="checkbox"' + (item.done ? ' checked' : '') + '><span>' + esc(item.text) + '</span></div>';
             });
@@ -140,7 +141,9 @@
         countEl.textContent = p.length + '개 진행 중';
         var html = '';
         p.forEach(function(proj) {
-            var icon = proj.type === 'folder' ? '📂' : '📄';
+            var folderSvg = '<svg width="16" height="16" viewBox="0 0 16 16" style="vertical-align:-2px"><path d="M1 3.5A1.5 1.5 0 012.5 2h3.172a1.5 1.5 0 011.06.44L7.94 3.644a.5.5 0 00.354.147H13.5A1.5 1.5 0 0115 5.29V12.5A1.5 1.5 0 0113.5 14h-11A1.5 1.5 0 011 12.5z" fill="#F59E0B"/></svg>';
+            var fileSvg = '<svg width="16" height="16" viewBox="0 0 16 16" style="vertical-align:-2px"><rect x="3" y="1" width="10" height="14" rx="1.5" fill="#E2E8F0"/><rect x="5" y="4" width="6" height="1" rx=".5" fill="#94A3B8"/><rect x="5" y="6.5" width="6" height="1" rx=".5" fill="#94A3B8"/><rect x="5" y="9" width="4" height="1" rx=".5" fill="#94A3B8"/></svg>';
+            var icon = proj.type === 'folder' ? folderSvg : fileSvg;
             var hasDetail = proj.status || proj.next;
             if (hasDetail) {
                 html += '<details class="fold"><summary><span class="proj-icon">' + icon + '</span> ' + esc(proj.name);
@@ -176,10 +179,11 @@
         countEl.textContent = 'KR ' + okr.length + '개';
 
         var html = '<div class="okr-stats">';
-        html += '<div class="okr-stat"><div class="okr-stat-label">태스크</div><div class="okr-stat-value">' + (t.done||0) + '<span style="font-size:14px;color:#94A3B8">/' + (t.total||0) + '</span></div>';
+        html += '<div class="okr-stat"><div class="okr-stat-label">Notion 태스크</div><div class="okr-stat-value">' + (t.done||0) + '<span style="font-size:14px;color:#94A3B8">/' + (t.total||0) + '</span></div>';
         if (t.overdue > 0) html += '<div class="okr-stat-sub okr-stat-warn">지연 ' + t.overdue + '건</div>';
-        html += '</div>';
-        html += '<div class="okr-stat"><div class="okr-stat-label">오늘 루틴</div><div class="okr-stat-value">' + (r.done_today||0) + '<span style="font-size:14px;color:#94A3B8">/' + (r.total||0) + '</span></div></div>';
+        html += '<div class="okr-stat-sub">완료/전체 (마감 지난 것 = 지연)</div></div>';
+        html += '<div class="okr-stat"><div class="okr-stat-label">오늘 루틴</div><div class="okr-stat-value">' + (r.done_today||0) + '<span style="font-size:14px;color:#94A3B8">/' + (r.total||0) + '</span></div>';
+        html += '<div class="okr-stat-sub">체크된 항목 / 전체</div></div>';
         html += '</div>';
 
         okr.forEach(function(kr) {
