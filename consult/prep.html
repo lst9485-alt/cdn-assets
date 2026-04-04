@@ -60,11 +60,6 @@
         .gauge-fill { height:100%; border-radius:12px; transition:width .3s; }
         .gauge-label { font-size:20px; font-weight:800; min-width:70px; text-align:right; }
 
-        /* 비대칭 바 */
-        .asym { display:flex; align-items:stretch; gap:0; height:60px; margin:14px 0; border-radius:8px; overflow:hidden; }
-        .asym-bar { display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:15px; flex-direction:column; line-height:1.3; }
-        .asym-bar small { font-size:11px; font-weight:500; opacity:.8; }
-
         .cmp { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
         .cmp-card { background:#fff; border:1px solid var(--border); border-radius:8px; padding:14px; }
         .cmp-badge { display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:4px; margin-bottom:8px; }
@@ -112,11 +107,8 @@
             </div>
         </div>
         <div class="rbox" id="buyR"></div>
-        <div class="card"><div class="card-t">매수 자금 워터폴</div><div class="cw"><canvas id="cBuy"></canvas></div></div>
-        <div class="card"><div class="card-t">리스크 비대칭</div>
-            <div class="asym" id="buyAsym"></div>
-            <div class="note" id="buyAsymNote"></div>
-        </div>
+        <div class="card"><div class="card-t">예산</div><div class="cw"><canvas id="cBuyBudget"></canvas></div></div>
+        <div class="card"><div class="card-t">희망 아파트 가격</div><div class="cw"><canvas id="cBuyTarget"></canvas></div></div>
         <div class="note" id="buyN"></div>
     </div>
 
@@ -228,7 +220,7 @@
         t.classList.add('active');$('tab-'+t.dataset.tab).classList.add('active');
     });});
 
-    var CBuy=null,CRep=null,CSav=null,CUpg=null,CLev=null;
+    var CBuy=null,CBuyT=null,CRep=null,CSav=null,CUpg=null,CLev=null;
 
     // === TAB 1: 매수 계산 ===
     function rBuy(){
@@ -253,31 +245,35 @@
             +'<div class="rb"><div class="rb-label">취득세</div><div class="rb-val">'+fmt(acqTax)+'</div><div class="rb-sub">1.1% 추정</div></div>'
             +'<div class="rb '+(short>0?'warn':'accent')+'"><div class="rb-label">'+(short>0?'부족분':'여유분')+'</div><div class="rb-val '+(short>0?'orange':'blue')+'">'+fmt(Math.abs(short))+'</div><div class="rb-sub">'+(short>0?'현금 추가 필요':'현금 여유')+'</div></div>';
 
-        // 워터폴 차트 (가로 스택: 매매가 = 대출+현금+취득세+부족)
-        var cashUsed=Math.min(c,selfNeed);
-        var shortAmt=short>0?short:0;
-        var surplusAmt=short<0?Math.abs(short):0;
+        // 차트 1: 예산 (내 상황 — 현금+대출 가능액)
         if(CBuy)CBuy.destroy();
-        CBuy=new Chart($('cBuy'),{type:'bar',data:{labels:['필요 자금','보유 자금'],datasets:[
-            {label:'대출 '+fmt(actual),data:[actual,0],backgroundColor:'#0077C8',barPercentage:.6},
-            {label:'현금 '+fmt(cashUsed),data:[cashUsed,c],backgroundColor:'#64748B',barPercentage:.6},
-            {label:'취득세 '+fmt(acqTax),data:[acqTax,0],backgroundColor:'#94A3B8',barPercentage:.6},
-            {label:short>0?'부족 '+fmt(shortAmt):'여유 '+fmt(surplusAmt),data:[shortAmt,surplusAmt],backgroundColor:short>0?'#F59E0B':'#10B981',barPercentage:.6}
+        var buyPower=c+actual;
+        CBuy=new Chart($('cBuyBudget'),{type:'bar',data:{labels:['내 예산'],datasets:[
+            {label:'현금 '+fmt(c),data:[c],backgroundColor:'#0077C8',barPercentage:.5},
+            {label:'대출 '+fmt(actual),data:[actual],backgroundColor:'#94A3B8',barPercentage:.5}
         ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{
             legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:12}}},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
-            annotation:{annotations:{target:{type:'line',xMin:tg,xMax:tg,borderColor:'#F59E0B',borderWidth:2,borderDash:[4,3],label:{display:true,content:'매매가 '+fmt(tg),backgroundColor:'#F59E0B',font:{size:11},padding:4,position:'start'}}}}
-        },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:11}},grid:{color:'#F1F5F9'}},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
-        $('cBuy').parentElement.style.height='120px';
+            annotation:{annotations:{
+                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR한도 '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:11},padding:4,position:'start'}},
+                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV한도 '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:11},padding:4,position:'end'}}
+            }}
+        },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:11}},grid:{color:'#F1F5F9'},max:Math.max(buyPower,mxLTV,mxDSR+c)*1.1},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
+        $('cBuyBudget').parentElement.style.height='90px';
 
-        // 리스크 비대칭 바
-        var downPct=5,upPct=30;
-        var downAmt=Math.round(tg*downPct/100),upAmt=Math.round(tg*upPct/100);
-        var total=downPct+upPct;
-        $('buyAsym').innerHTML=''
-            +'<div class="asym-bar" style="width:'+(downPct/total*100)+'%;background:var(--blue)"><small>하락 시</small>-'+fmt(downAmt)+'</div>'
-            +'<div class="asym-bar" style="width:'+(upPct/total*100)+'%;background:var(--orange)"><small>상승 시</small>+'+fmt(upAmt)+'</div>';
-        $('buyAsymNote').innerHTML='하락해봐야 '+fmt(downAmt)+' 손실 vs 상승하면 '+fmt(upAmt)+' 수익<br><b>리스크와 보상이 비대칭</b> — 현재 가격이 인플레이션에도 못 미치는 원가 수준이라면 더 유리';
+        // 차트 2: 희망 아파트 가격
+        if(CBuyT)CBuyT.destroy();
+        CBuyT=new Chart($('cBuyTarget'),{type:'bar',data:{labels:['희망가'],datasets:[
+            {label:'매매가 '+fmt(tg),data:[tg],backgroundColor:short>0?'#F59E0B':'#0077C8',barPercentage:.5},
+            {label:'취득세 '+fmt(acqTax),data:[acqTax],backgroundColor:'#64748B',barPercentage:.5}
+        ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{
+            legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:12}}},
+            tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
+            annotation:{annotations:{
+                budget:{type:'line',xMin:buyPower,xMax:buyPower,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'내 예산 '+fmt(buyPower),backgroundColor:'#0077C8',font:{size:11},padding:4,position:'start'}}
+            }}
+        },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:11}},grid:{color:'#F1F5F9'},max:Math.max(tg+acqTax,buyPower)*1.1},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
+        $('cBuyTarget').parentElement.style.height='90px';
 
         $('buyN').innerHTML='DSR 40%, 금리 '+rt+'%, '+yr+'년, LTV 70% 기준<br>실제 대출: '+fmt(actual)+' (DSR '+fmt(mxDSR)+' / LTV '+fmt(mxLTV)+' 중 작은 값)<br>정책대출: 디딤돌(소득6천↓), 보금자리론(7천↓), 신생아특례(맞벌이2억↓)';
     }
