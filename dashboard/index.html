@@ -240,13 +240,14 @@
         });
         html += '</div>';
 
-        // 오른쪽: 오늘 스케줄 (Google Calendar 연동 후 활성화)
+        // 오른쪽: 오늘 스케줄 (Notion 태스크 DB 기반)
         html += '<div style="flex:1">';
         html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:6px">오늘 스케줄</div>';
-        var schedule = data.schedule || [];
+        var schedule = (t.schedule) || [];
         if (schedule.length > 0) {
             schedule.forEach(function(ev) {
-                html += '<div style="font-size:12px;color:#475569;padding:2px 0">';
+                var cls = ev.done ? ' style="text-decoration:line-through;color:#B0B8C4"' : '';
+                html += '<div style="font-size:12px;color:#475569;padding:2px 0"' + cls + '>';
                 if (ev.allDay) {
                     html += '<span style="font-size:11px;color:#94A3B8;margin-right:4px">종일</span>';
                 } else if (ev.time) {
@@ -255,7 +256,7 @@
                 html += esc(ev.title) + '</div>';
             });
         } else {
-            html += '<div style="font-size:12px;color:#94A3B8">캘린더 연동 예정</div>';
+            html += '<div style="font-size:12px;color:#94A3B8">오늘 일정 없음</div>';
         }
         html += '</div>';
 
