@@ -44,7 +44,7 @@
 
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-label" id="cur-label">이번 달 ���출</div>
+                <div class="stat-label" id="cur-label">이번 달 매출</div>
                 <div class="stat-value" id="cur-value" style="color:#94A3B8;">—</div>
                 <div class="stat-sub" id="cur-sub"></div>
             </div>
@@ -87,7 +87,7 @@
 <script>
 (function() {
     const fmt = n => {
-        if (n >= 10000) return Math.round(n / 10000) + '만��';
+        if (n >= 10000) return Math.round(n / 10000) + '\ub9cc\uc6d0';
         if (n >= 1000) return (n / 1000).toFixed(0) + '천원';
         return n + '원';
     };
