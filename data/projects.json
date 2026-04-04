@@ -1,61 +1,69 @@
 {
-  "updated": "2026-04-04T13:48:38.962810+09:00",
+  "updated": "2026-04-04T15:24:23.645021+09:00",
   "projects": [
-    {
-      "name": "2026-04-05",
-      "type": "folder",
-      "app": null,
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "capcut-autocut",
-      "type": "file",
-      "app": "youtube/yt-autocut",
-      "status": "프로토타입 완성 + 실전 테스트 통과. 스킬화 대기.",
-      "next": "스킬화 (SKILL.md 작성 + /manage-skills add)"
-    },
     {
       "name": "yt-slide 디자인 리뉴얼",
       "type": "file",
       "app": "youtube/yt-slide",
+      "modified": "2026-04-04",
       "status": null,
-      "next": null
-    },
-    {
-      "name": "구글 계정 분리",
-      "type": "file",
-      "app": null,
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "내집마련-시리즈",
-      "type": "folder",
-      "app": "youtube/yt-content-sheet",
-      "status": "스킬 구현 완성. 운영 중.",
       "next": null
     },
     {
       "name": "운영 대시보드",
       "type": "file",
       "app": "cdn-assets",
-      "status": "LIVE: 메인 허브, 상담 자료, 정산, 유튜브, CRM, 프로세스 목록, 홈페이지 제작, 콘텐츠 마케팅",
-      "next": "대시보드 실데이터 연동 (크론잡 → JSON → 투두/프로젝트/OKR) — big-task 추천"
+      "modified": "2026-04-04",
+      "status": "LIVE: 메인 허브(2열), 상담 자료, 정산, 유튜브, CRM, 프로세스 목록, 홈페이지 제작, 콘텐츠 마케팅, 대시보드(3열 투두/프로젝트/OKR)",
+      "next": "투두 넘버링 정렬 (parse-todo.py에서 id순 정렬)"
     },
     {
-      "name": "컨설팅",
+      "name": "capcut-autocut",
+      "type": "file",
+      "app": "youtube/yt-autocut",
+      "modified": "2026-04-04",
+      "status": "프로토타입 완성 + 실전 테스트 통과. 스킬화 대기.",
+      "next": "스킬화 (SKILL.md 작성 + /manage-skills add)"
+    },
+    {
+      "name": "2026-04-05",
       "type": "folder",
-      "app": "consulting-crm",
-      "status": "DAL(데이터 접근 계층) 도입 완료. DB 시트 읽기를 `02-1_데이터접근.gs` 한 곳으로 집중. clasp push 배포 완료.",
-      "next": "TALLY_LAST_ROW 롤백 (유보 — blind create 중복 위험, 별도 설계 필요)"
+      "app": null,
+      "modified": "2026-04-04",
+      "status": null,
+      "next": null
     },
     {
       "name": "홈페이지",
       "type": "folder",
       "app": "homepage",
+      "modified": "2026-04-03",
       "status": "v3.5 섹션 재배치 + UI/UX 개선. 서버 백엔드(Apps Script doPost) 배포 완료 (v24). 아임웹 삽입은 v3.4 기준 — v3.5 아직 미반영",
       "next": "플로팅 CTA 추가 — 가격표 섹션 도달 시 \"상담신청하기\" 버튼 플로팅 (PC: 오른쪽 하단, 모바일: 하단 고정 바). 클릭 → 커스텀 폼으로 스크롤. footer-code.html에 IntersectionObserver + position:fixed"
+    },
+    {
+      "name": "내집마련-시리즈",
+      "type": "folder",
+      "app": "youtube/yt-content-sheet",
+      "modified": "2026-03-31",
+      "status": "스킬 구현 완성. 운영 중.",
+      "next": null
+    },
+    {
+      "name": "구글 계정 분리",
+      "type": "file",
+      "app": null,
+      "modified": "2026-03-28",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "컨설팅",
+      "type": "folder",
+      "app": "consulting-crm",
+      "modified": "2026-03-28",
+      "status": "DAL(데이터 접근 계층) 도입 완료. DB 시트 읽기를 `02-1_데이터접근.gs` 한 곳으로 집중. clasp push 배포 완료.",
+      "next": "TALLY_LAST_ROW 롤백 (유보 — blind create 중복 위험, 별도 설계 필요)"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-04T13:48:38.845609+09:00",
+  "updated": "2026-04-04T15:24:22.402848+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -31,35 +31,27 @@
           ]
         },
         {
-          "id": 12,
-          "title": "운영 대시보드",
-          "ref": "운영 대시보드",
-          "items": [
-            {
-              "text": "대시보드 실데이터 연동 (크론잡 → JSON → 투두/프로젝트/OKR)",
-              "done": false
-            },
-            {
-              "text": "매출 대시보드 추가 (정산 시트 데이터)",
-              "done": false
-            },
-            {
-              "text": "n8n 워크플로우 전체 조사 + 연결도 완성",
-              "done": false
-            },
-            {
-              "text": "상담 준비 자료 HTML 템플릿",
-              "done": false
-            }
-          ]
-        },
-        {
           "id": 3,
           "title": "유튜브 도구",
           "ref": null,
           "items": [
             {
               "text": "콘텐츠관리시트 퍼널 대시보드 — generate-dashboard.py 스크립트화 + 8~12주 추이 차트 + 누적 JSON + content-sheet E-5 연동 ※ nightwatch AARRR 주간 리포트로 일부 통합 예정 (nightwatch/.context.md 참조)",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "title": "영상 자동화 (우선순위 낮음)",
+          "ref": null,
+          "items": [
+            {
+              "text": "Remotion 알아보기 — React 기반 MP4 자동 생성 라이브러리. TTS 양산 서브 영상용 도입 검토",
+              "done": false
+            },
+            {
+              "text": "yt-assemble 스킬 신규 제작 — 원고 + ElevenLabs TTS → 슬라이드 + 음성 동기화 → MP4 출력",
               "done": false
             }
           ]
@@ -118,16 +110,28 @@
           ]
         },
         {
-          "id": 7,
-          "title": "영상 자동화 (우선순위 낮음)",
-          "ref": null,
+          "id": 12,
+          "title": "운영 대시보드",
+          "ref": "운영 대시보드",
           "items": [
             {
-              "text": "Remotion 알아보기 — React 기반 MP4 자동 생성 라이브러리. TTS 양산 서브 영상용 도입 검토",
+              "text": "대시보드 실데이터 연동 (크론잡 → JSON → 투두/프로젝트/OKR) ✅ 2026-04-04",
+              "done": true
+            },
+            {
+              "text": "UI 개선: 투두 넘버링 정렬 + 프로젝트 수정일순 + 모든 페이지 수정일 표시",
               "done": false
             },
             {
-              "text": "yt-assemble 스킬 신규 제작 — 원고 + ElevenLabs TTS → 슬라이드 + 음성 동기화 → MP4 출력",
+              "text": "매출 대시보드 데이터 연동 (콘텐츠관리시트 → JSON → 차트)",
+              "done": false
+            },
+            {
+              "text": "n8n 워크플로우 전체 조사 + 연결도 완성",
+              "done": false
+            },
+            {
+              "text": "상담 준비 자료 HTML 템플릿",
               "done": false
             }
           ]
