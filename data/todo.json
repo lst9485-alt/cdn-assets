@@ -1,0 +1,138 @@
+{
+  "updated": "2026-04-04T13:16:24.794690+09:00",
+  "sections": [
+    {
+      "name": "Common (어디서든 가능)",
+      "categories": [
+        {
+          "id": 1,
+          "title": "컨설팅 시스템 개선",
+          "ref": "컨설팅",
+          "items": [
+            {
+              "text": "consult 스킬 v2 (시각자료 자동삽입)",
+              "done": false
+            },
+            {
+              "text": "상담 30분 전 자동 알림 (상담 링크 + 텔레그램 발송) ✅ 2026-03-31",
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "슬라이드 템플릿 (에디터 HTML 수정)",
+          "ref": null,
+          "items": [
+            {
+              "text": "이미지 생성 대폭 늘리기",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "title": "운영 대시보드",
+          "ref": "운영 대시보드",
+          "items": [
+            {
+              "text": "대시보드 실데이터 연동 (크론잡 → JSON → 투두/프로젝트/OKR)",
+              "done": false
+            },
+            {
+              "text": "매출 대시보드 추가 (정산 시트 데이터)",
+              "done": false
+            },
+            {
+              "text": "n8n 워크플로우 전체 조사 + 연결도 완성",
+              "done": false
+            },
+            {
+              "text": "상담 준비 자료 HTML 템플릿",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "유튜브 도구",
+          "ref": null,
+          "items": [
+            {
+              "text": "콘텐츠관리시트 퍼널 대시보드 — generate-dashboard.py 스크립트화 + 8~12주 추이 차트 + 누적 JSON + content-sheet E-5 연동 ※ nightwatch AARRR 주간 리포트로 일부 통합 예정 (nightwatch/.context.md 참조)",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "title": "구글 계정 분리 (Workspace ↔ Gmail)",
+          "ref": "구글 계정 분리",
+          "items": [
+            {
+              "text": "Workspace Drive 파일 확인 + 이메일 포워딩 + MCP 재인증 + 설정 업데이트",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "title": "홈페이지 PG 승인 + 강의 준비 (4/2~)",
+          "ref": "아임웹 결제·회원 시스템",
+          "items": [
+            {
+              "text": "에스크로 가입 (기업은행 4/15 방문)",
+              "done": false
+            },
+            {
+              "text": "홈택스 업종 추가 (교육서비스업)",
+              "done": false
+            },
+            {
+              "text": "통신판매업 신고 (정부24)",
+              "done": false
+            },
+            {
+              "text": "강의 틀 잡기 (제목/커리큘럼/가격)",
+              "done": false
+            },
+            {
+              "text": "아임웹에 교육 상품 등록",
+              "done": false
+            },
+            {
+              "text": "PG 재신청 (토스페이 or 이니시스)",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "title": "CapCut 리플 편집 복구 (4/5~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "CapCut 타임라인 도구 모음에서 리플 편집 토글 찾아서 켜기 (예전에는 됐었음, JSON config.maintrack_adsorb는 정상)",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "title": "영상 자동화 (우선순위 낮음)",
+          "ref": null,
+          "items": [
+            {
+              "text": "Remotion 알아보기 — React 기반 MP4 자동 생성 라이브러리. TTS 양산 서브 영상용 도입 검토",
+              "done": false
+            },
+            {
+              "text": "yt-assemble 스킬 신규 제작 — 원고 + ElevenLabs TTS → 슬라이드 + 음성 동기화 → MP4 출력",
+              "done": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
