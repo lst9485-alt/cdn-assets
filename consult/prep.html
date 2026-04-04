@@ -100,7 +100,7 @@
                 <div><div class="il">부동산 자산</div><div class="iw"><input class="if" id="b_estate" inputmode="decimal"><span class="is">만원</span></div></div>
                 <div><div class="il">기타 자산</div><div class="iw"><input class="if" id="b_other" inputmode="decimal"><span class="is">만원</span></div></div>
                 <div><div class="il">기존 대출</div><div class="iw"><input class="if" id="b_debt" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">연소득 (세후)</div><div class="iw"><input class="if" id="b_income" inputmode="decimal"><span class="is">만원</span></div></div>
+                <div><div class="il">연소득 (세전)</div><div class="iw"><input class="if" id="b_income" inputmode="decimal"><span class="is">만원</span></div></div>
                 <div><div class="il">희망 아파트 가격</div><div class="iw"><input class="if" id="b_target" inputmode="decimal"><span class="is">만원</span></div></div>
                 <div><div class="il">대출 금리</div><div class="iw"><input class="if" id="b_rate" inputmode="decimal"><span class="is">%</span></div></div>
                 <div><div class="il">대출 기간</div><div class="iw"><input class="if" id="b_years" inputmode="decimal"><span class="is">년</span></div></div>
@@ -230,31 +230,28 @@
         var mxDSR=Math.round(PMT(1,stressRt,mo)>0?mr/PMT(1,stressRt,mo):0);
         var mxLTV=Math.round(tg*0.7);
         var actual=Math.min(mxDSR,mxLTV);
-        var acqTax=Math.round(tg*0.011);
-        var selfNeed=tg-actual+acqTax;
+        var selfNeed=tg-actual;
         var short=selfNeed-c;
 
         // 결론 카드
         var vd=$('buyV');
-        if(short>0){vd.className='verdict warn';vd.innerHTML='<div class="v-text">현금 '+fmt(short)+' 부족</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본 '+fmt(selfNeed)+' (취득세 포함)</div>';}
-        else{vd.className='verdict';vd.innerHTML='<div class="v-text">매수 가능 (여유 '+fmt(Math.abs(short))+')</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본 '+fmt(selfNeed)+' (취득세 포함)</div>';}
+        if(short>0){vd.className='verdict warn';vd.innerHTML='<div class="v-text">현금 '+fmt(short)+' 부족</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본 '+fmt(selfNeed)+'</div>';}
+        else{vd.className='verdict';vd.innerHTML='<div class="v-text">매수 가능 (여유 '+fmt(Math.abs(short))+')</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본 '+fmt(selfNeed)+'</div>';}
 
         $('buyR').innerHTML=''
             +'<div class="rb accent"><div class="rb-label">DSR 최대 대출</div><div class="rb-val blue">'+fmt(mxDSR)+'</div><div class="rb-sub">스트레스 '+stressRt+'%</div></div>'
             +'<div class="rb accent"><div class="rb-label">LTV 대출 한도</div><div class="rb-val blue">'+fmt(mxLTV)+'</div><div class="rb-sub">'+fmt(tg)+' x 70%</div></div>'
-            +'<div class="rb"><div class="rb-label">취득세</div><div class="rb-val">'+fmt(acqTax)+'</div><div class="rb-sub">1.1% 추정</div></div>'
             +'<div class="rb '+(short>0?'warn':'accent')+'"><div class="rb-label">'+(short>0?'부족분':'여유분')+'</div><div class="rb-val '+(short>0?'orange':'blue')+'">'+fmt(Math.abs(short))+'</div><div class="rb-sub">'+(short>0?'현금 추가 필요':'현금 여유')+'</div></div>';
 
         // 차트 1: 예산 (내 상황 — 현금+대출 가능액)
         // 차트: 내 예산 vs 희망가 (가로 바 2줄 + DSR/LTV 점선)
         if(CBuy)CBuy.destroy();
         var buyPower=c+actual;
-        var xMax=Math.max(tg+acqTax,buyPower,mxLTV,mxDSR+c)*1.15;
+        var xMax=Math.max(tg,buyPower,mxLTV,mxDSR+c)*1.15;
         CBuy=new Chart($('cBuyChart'),{type:'bar',data:{labels:['내 예산','희망가'],datasets:[
             {label:'현금 '+fmt(c),data:[c,0],backgroundColor:'#0077C8',barPercentage:.5},
             {label:'대출 '+fmt(actual),data:[actual,0],backgroundColor:'#94A3B8',barPercentage:.5},
-            {label:'매매가',data:[0,tg],backgroundColor:short>0?'#F59E0B':'#0077C8',barPercentage:.5},
-            {label:'취득세 '+fmt(acqTax),data:[0,acqTax],backgroundColor:'#64748B',barPercentage:.5}
+            {label:'매매가',data:[0,tg],backgroundColor:short>0?'#F59E0B':'#0077C8',barPercentage:.5}
         ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{
             legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:12},filter:function(item){return item.text!=='매매가';}}},
             tooltip:{callbacks:{label:function(ctx){if(ctx.parsed.x===0)return '';return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
