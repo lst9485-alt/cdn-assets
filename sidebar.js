@@ -26,8 +26,11 @@
     + link(root + 'process/crm.html', '🤝', 'CRM', 'crm')
     + link(root + 'process/n8n.html', '⚙️', 'n8n', 'n8n')
     + link(root + 'process/settlement.html', '💰', '정산', 'settlement')
+    + '<a class="sb-sub sb-disabled">🌐 홈페이지 제작</a>'
+    + '<a class="sb-sub sb-disabled">📢 콘텐츠 마케팅</a>'
     + '<div class="sb-cat">상담·템플릿</div>'
-    + link(root + 'consult/', '📋', '상담자료', 'consult');
+    + link(root + 'consult/', '📋', '회원 맞춤 페이지', 'consult')
+    + '<a class="sb-sub sb-disabled">상담 준비 자료</a>';
 
   var style = document.createElement('style');
   style.textContent = ''
@@ -38,6 +41,7 @@
     + '.sb-link.sb-active { color: #0077C8; background: #E8F3FF; font-weight: 700; }'
     + '.sb-sub { display: block; padding: 3px 10px 3px 28px; font-size: 12px; font-weight: 500; color: #94A3B8; text-decoration: none; border-radius: 4px; transition: all 0.15s; }'
     + '.sb-sub:hover { color: #0077C8; background: #F1F5F9; }'
+    + '.sb-disabled { opacity: 0.4; pointer-events: none; cursor: default; }'
     + '@media (max-width: 1200px) { #sidebar { display: none; } }';
 
   document.head.appendChild(style);
