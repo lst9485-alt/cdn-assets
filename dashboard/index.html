@@ -18,6 +18,32 @@
         .placeholder-title { font-size: 15px; font-weight: 700; color: #475569; margin-bottom: 6px; }
         .placeholder-desc { font-size: 13px; color: #94A3B8; }
         .badge-soon { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #FEF3C7; color: #D97706; margin-left: 8px; }
+        .badge-live { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #DCFCE7; color: #16A34A; margin-left: 8px; }
+        .todo-error { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 12px; padding: 24px; text-align: center; color: #DC2626; font-size: 14px; }
+        .todo-section-name { font-size: 14px; font-weight: 700; color: #334155; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #E2E8F0; }
+        .todo-category { background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+        .todo-cat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .todo-cat-id { font-size: 12px; font-weight: 700; color: white; background: #64748B; border-radius: 4px; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .todo-cat-title { font-size: 14px; font-weight: 600; color: #1E293B; }
+        .todo-cat-ref { font-size: 12px; color: #94A3B8; margin-left: auto; }
+        .todo-item { display: flex; align-items: flex-start; gap: 8px; padding: 4px 0; font-size: 13px; color: #475569; }
+        .todo-item input[type="checkbox"] { margin-top: 3px; pointer-events: none; }
+        .todo-item.done { color: #94A3B8; text-decoration: line-through; }
+        .todo-progress { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 13px; color: #64748B; }
+        .todo-progress-bar { flex: 1; height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden; }
+        .todo-progress-fill { height: 100%; background: #16A34A; border-radius: 3px; transition: width 0.3s; }
+        .todo-updated { font-size: 11px; color: #94A3B8; text-align: right; margin-top: 8px; }
+        .proj-card { background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+        .proj-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+        .proj-icon { font-size: 16px; flex-shrink: 0; }
+        .proj-name { font-size: 14px; font-weight: 600; color: #1E293B; }
+        .proj-app { font-size: 12px; color: #64748B; background: #F1F5F9; border-radius: 4px; padding: 1px 6px; margin-left: auto; flex-shrink: 0; }
+        .proj-status { font-size: 13px; color: #475569; margin-bottom: 4px; }
+        .proj-next { font-size: 12px; color: #0077C8; display: flex; align-items: flex-start; gap: 4px; }
+        .proj-next::before { content: "→"; flex-shrink: 0; }
+        .proj-count { font-size: 13px; color: #64748B; margin-bottom: 12px; }
+        .proj-error { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 12px; padding: 24px; text-align: center; color: #DC2626; font-size: 14px; }
+        .proj-updated { font-size: 11px; color: #94A3B8; text-align: right; margin-top: 8px; }
     </style>
 </head>
 <body>
@@ -26,18 +52,20 @@
         <h1>📊 대시보드</h1>
 
         <div id="todo" class="section">
-            <div class="section-title"><span>✅</span> 투두리스트 <span class="badge-soon">크론잡 연동 예정</span></div>
-            <div class="placeholder">
-                <div class="placeholder-title">todo-list.md 실시간 표시</div>
-                <div class="placeholder-desc">크론잡으로 Obsidian 투두리스트를 자동으로 가져와서 표시합니다</div>
+            <div class="section-title"><span>✅</span> 투두리스트 <span class="badge-live">LIVE</span></div>
+            <div id="todo-content">
+                <div class="placeholder">
+                    <div class="placeholder-desc">로딩 중...</div>
+                </div>
             </div>
         </div>
 
         <div id="projects" class="section">
-            <div class="section-title"><span>📁</span> 프로젝트 리스트 <span class="badge-soon">자동 갱신 예정</span></div>
-            <div class="placeholder">
-                <div class="placeholder-title">진행 중 프로젝트 + apps 연결</div>
-                <div class="placeholder-desc">1. Project/ 폴더 기반으로 프로젝트 현황과 Workspace/apps/ 연결 관계를 표시합니다</div>
+            <div class="section-title"><span>📁</span> 프로젝트 리스트 <span class="badge-live">LIVE</span></div>
+            <div id="projects-content">
+                <div class="placeholder">
+                    <div class="placeholder-desc">로딩 중...</div>
+                </div>
             </div>
         </div>
 
@@ -49,6 +77,117 @@
             </div>
         </div>
     </div>
+<script>
+(function() {
+    var container = document.getElementById('todo-content');
+
+    fetch('../data/todo.json')
+        .then(function(res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+        })
+        .then(function(data) { renderTodo(data); })
+        .catch(function() {
+            container.innerHTML = '<div class="todo-error">데이터 로드 실패 — 크론잡 실행 후 다시 확인</div>';
+        });
+
+    function renderTodo(data) {
+        var totalItems = 0, totalDone = 0;
+        data.sections.forEach(function(s) {
+            s.categories.forEach(function(c) {
+                totalItems += c.items.length;
+                c.items.forEach(function(i) { if (i.done) totalDone++; });
+            });
+        });
+
+        var pct = totalItems > 0 ? Math.round(totalDone / totalItems * 100) : 0;
+        var html = '';
+
+        // 진행률 바
+        html += '<div class="todo-progress">';
+        html += '<div class="todo-progress-bar"><div class="todo-progress-fill" style="width:' + pct + '%"></div></div>';
+        html += '<span>' + totalDone + '/' + totalItems + ' (' + pct + '%)</span>';
+        html += '</div>';
+
+        data.sections.forEach(function(section) {
+            html += '<div class="todo-section-name">' + esc(section.name) + '</div>';
+            section.categories.forEach(function(cat) {
+                html += '<div class="todo-category">';
+                html += '<div class="todo-cat-header">';
+                html += '<span class="todo-cat-id">' + cat.id + '</span>';
+                html += '<span class="todo-cat-title">' + esc(cat.title) + '</span>';
+                if (cat.ref) html += '<span class="todo-cat-ref">📎 ' + esc(cat.ref) + '</span>';
+                html += '</div>';
+                cat.items.forEach(function(item) {
+                    var cls = item.done ? 'todo-item done' : 'todo-item';
+                    html += '<div class="' + cls + '">';
+                    html += '<input type="checkbox"' + (item.done ? ' checked' : '') + '>';
+                    html += '<span>' + esc(item.text) + '</span>';
+                    html += '</div>';
+                });
+                html += '</div>';
+            });
+        });
+
+        // 업데이트 시간
+        var d = new Date(data.updated);
+        html += '<div class="todo-updated">업데이트: ' + d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'}) + '</div>';
+
+        container.innerHTML = html;
+    }
+
+    function esc(s) {
+        var el = document.createElement('span');
+        el.textContent = s;
+        return el.innerHTML;
+    }
+})();
+</script>
+<script>
+(function() {
+    var container = document.getElementById('projects-content');
+
+    fetch('../data/projects.json')
+        .then(function(res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+        })
+        .then(function(data) { renderProjects(data); })
+        .catch(function() {
+            container.innerHTML = '<div class="proj-error">데이터 로드 실패 — 크론잡 실행 후 다시 확인</div>';
+        });
+
+    function renderProjects(data) {
+        var projects = data.projects;
+        var html = '';
+
+        html += '<div class="proj-count">진행 중 ' + projects.length + '개</div>';
+
+        projects.forEach(function(p) {
+            html += '<div class="proj-card">';
+            html += '<div class="proj-header">';
+            html += '<span class="proj-icon">' + (p.type === 'folder' ? '📂' : '📄') + '</span>';
+            html += '<span class="proj-name">' + esc(p.name) + '</span>';
+            if (p.app) html += '<span class="proj-app">' + esc(p.app) + '</span>';
+            html += '</div>';
+            if (p.status) html += '<div class="proj-status">' + esc(p.status) + '</div>';
+            if (p.next) html += '<div class="proj-next">' + esc(p.next) + '</div>';
+            html += '</div>';
+        });
+
+        var d = new Date(data.updated);
+        html += '<div class="proj-updated">업데이트: ' + d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'}) + '</div>';
+
+        container.innerHTML = html;
+    }
+
+    function esc(s) {
+        var el = document.createElement('span');
+        el.textContent = s;
+        return el.innerHTML;
+    }
+})();
+</script>
 <script src="../nav.js"></script>
 <script src="../sidebar.js"></script>
 </body>
