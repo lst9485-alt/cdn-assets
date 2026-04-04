@@ -31,16 +31,16 @@
     + '<div class="nav-inner">'
     + '<a href="' + root + '" class="nav-brand">운영 대시보드</a>'
     + '<div class="nav-links">'
-    + '<a href="' + root + 'consult/" class="nav-link' + (isActive('/consult') ? ' active' : '') + '">상담</a>'
+    + '<a href="' + root + 'dashboard/" class="nav-link' + (isActive('/dashboard') ? ' active' : '') + '">대시보드</a>'
     + '<div class="nav-dropdown">'
     + '<a class="nav-link' + (isActive('/process') ? ' active' : '') + '">프로세스 ▾</a>'
     + '<div class="nav-dropdown-menu">'
-    + '<a href="' + root + 'process/settlement.html">정산</a>'
     + '<a href="' + root + 'process/youtube.html">유튜브 제작</a>'
     + '<a href="' + root + 'process/crm.html">CRM 상담</a>'
     + '<a href="' + root + 'process/n8n.html">n8n</a>'
+    + '<a href="' + root + 'process/settlement.html">정산</a>'
     + '</div></div>'
-    + '<a href="' + root + 'dashboard/" class="nav-link' + (isActive('/dashboard') ? ' active' : '') + '">대시보드</a>'
+    + '<a href="' + root + 'consult/" class="nav-link' + (isActive('/consult') ? ' active' : '') + '">상담</a>'
     + '</div></div>';
 
   var style = document.createElement('style');

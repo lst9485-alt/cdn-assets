@@ -17,14 +17,13 @@
   var sidebar = document.createElement('aside');
   sidebar.id = 'sidebar';
   sidebar.innerHTML = ''
-    + link(root, '🏠', '메인', 'index')
+    + link(root + 'dashboard/', '📊', '대시보드', 'dashboard')
     + '<div class="sb-cat">프로세스</div>'
-    + link(root + 'process/settlement.html', '💰', '정산', 'settlement')
     + link(root + 'process/youtube.html', '🎬', '유튜브', 'youtube')
     + link(root + 'process/crm.html', '🤝', 'CRM', 'crm')
     + link(root + 'process/n8n.html', '⚙️', 'n8n', 'n8n')
-    + '<div class="sb-cat">도구</div>'
-    + link(root + 'dashboard/', '📊', '대시보드', 'dashboard')
+    + link(root + 'process/settlement.html', '💰', '정산', 'settlement')
+    + '<div class="sb-cat">상담</div>'
     + link(root + 'consult/', '📋', '상담자료', 'consult');
 
   var style = document.createElement('style');
