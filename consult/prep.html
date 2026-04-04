@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <title>상담 준비 자료 - 재무 시각화</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <style>
+        :root {
+            --primary-navy: #051C2C;
+            --primary-blue: #0077C8;
+            --primary-dark-blue: #005a9e;
+            --primary-light: #E8F3FF;
+            --success-green: #22C55E;
+            --warning-yellow: #F59E0B;
+            --danger-red: #EF4444;
+            --purple: #8B5CF6;
+            --text-primary: #1A1A1A;
+            --text-secondary: #555555;
+            --text-tertiary: #888888;
+            --bg-gray: #F8FAFC;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 24px rgba(0,0,0,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: linear-gradient(135deg, #F8FAFC 0%, #E8EEF2 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            word-break: keep-all;
+            -webkit-font-smoothing: antialiased;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 32px auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #0A2F47 100%);
+            color: white;
+            padding: 28px 40px;
+            position: relative;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -20%; right: -5%;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+            border-radius: 50%;
+        }
+        .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; position: relative; z-index: 1; }
+        .header-sub { font-size: 14px; opacity: 0.85; margin-top: 4px; position: relative; z-index: 1; }
+
+        .content { padding: 36px 40px; }
+
+        /* --- 요약 카드 --- */
+        .summary-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        .summary-card {
+            background: var(--bg-gray);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .summary-label { font-size: 12px; color: var(--text-tertiary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .summary-value { font-size: 22px; font-weight: 800; color: var(--primary-navy); }
+        .summary-value.blue { color: var(--primary-blue); }
+        .summary-value.green { color: var(--success-green); }
+        .summary-value.red { color: var(--danger-red); }
+
+        /* --- 차트 그리드 --- */
+        .chart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+        .chart-box {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .chart-box.full { grid-column: 1 / -1; }
+        .chart-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chart-title::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 16px;
+            background: var(--primary-blue);
+            border-radius: 2px;
+        }
+        .chart-desc { font-size: 13px; color: var(--text-tertiary); margin-bottom: 16px; }
+        .chart-canvas-wrap { position: relative; max-height: 280px; }
+        .chart-canvas-wrap canvas { max-height: 280px; }
+
+        /* --- 도넛 차트 커스텀 범례 --- */
+        .doughnut-wrap { display: flex; align-items: center; gap: 24px; }
+        .doughnut-canvas { flex: 0 0 200px; max-height: 200px; }
+        .doughnut-legend { flex: 1; }
+        .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 14px; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+        .legend-value { margin-left: auto; font-weight: 700; }
+
+        /* --- 비교 막대 --- */
+        .compare-bar-wrap { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+        .compare-item { display: flex; align-items: center; gap: 12px; }
+        .compare-label { font-size: 13px; color: var(--text-secondary); width: 100px; text-align: right; flex-shrink: 0; }
+        .compare-track { flex: 1; height: 32px; background: #F1F5F9; border-radius: 6px; position: relative; overflow: hidden; }
+        .compare-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-size: 13px; font-weight: 700; color: white; transition: width 0.6s ease; min-width: 60px; }
+        .compare-fill.blue { background: linear-gradient(90deg, var(--primary-blue), #38BDF8); }
+        .compare-fill.green { background: linear-gradient(90deg, #059669, var(--success-green)); }
+        .compare-fill.red { background: linear-gradient(90deg, #DC2626, #F87171); }
+        .compare-fill.yellow { background: linear-gradient(90deg, #D97706, var(--warning-yellow)); }
+
+        /* --- 참고 박스 --- */
+        .note-box {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 13px;
+            color: #92400E;
+            margin-top: 16px;
+            line-height: 1.7;
+        }
+        .note-box strong { color: #78350F; }
+
+        /* --- 푸터 --- */
+        .page-footer {
+            background: var(--bg-gray);
+            padding: 20px 40px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        @media (max-width: 768px) {
+            .container { margin: 0; border-radius: 0; box-shadow: none; }
+            .header { padding: 20px; }
+            .content { padding: 24px 16px; }
+            .summary-row { grid-template-columns: repeat(2, 1fr); }
+            .chart-row { grid-template-columns: 1fr; }
+            .doughnut-wrap { flex-direction: column; }
+            .doughnut-canvas { flex: none; max-height: 180px; }
+            .compare-label { width: 80px; font-size: 12px; }
+            .page-footer { padding: 16px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <div class="header">
+            <h1 id="headerTitle">상담 준비 자료</h1>
+            <div class="header-sub" id="headerSub">재무 현황 시각화</div>
+        </div>
+
+        <div class="content">
+            <!-- 요약 카드 -->
+            <div class="summary-row">
+                <div class="summary-card">
+                    <div class="summary-label">총 자산</div>
+                    <div class="summary-value" id="sumAsset">-</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">총 부채</div>
+                    <div class="summary-value red" id="sumDebt">-</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">순자산</div>
+                    <div class="summary-value green" id="sumNet">-</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">총 매수력</div>
+                    <div class="summary-value blue" id="sumPower">-</div>
+                </div>
+            </div>
+
+            <!-- 차트 1열: 자산구성 + DSR/LTV -->
+            <div class="chart-row">
+                <!-- 자산 구성도 -->
+                <div class="chart-box">
+                    <div class="chart-title">자산/부채 구성</div>
+                    <div class="chart-desc">현재 보유 자산과 부채 현황</div>
+                    <div class="doughnut-wrap">
+                        <div class="doughnut-canvas">
+                            <canvas id="chartAsset"></canvas>
+                        </div>
+                        <div class="doughnut-legend" id="assetLegend"></div>
+                    </div>
+                </div>
+
+                <!-- DSR/LTV 시뮬레이션 -->
+                <div class="chart-box">
+                    <div class="chart-title">매수 가능 분석</div>
+                    <div class="chart-desc">DSR 40% · LTV 70% · 금리 4.5% · 30년 기준</div>
+                    <div class="compare-bar-wrap" id="compareWrap"></div>
+                    <div class="note-box" id="loanNote"></div>
+                </div>
+            </div>
+
+            <!-- 차트 2열: 저축 시뮬레이션 -->
+            <div class="chart-row">
+                <div class="chart-box full">
+                    <div class="chart-title">저축 시뮬레이션</div>
+                    <div class="chart-desc">현재 저축 속도로 목표 자기자본 도달까지</div>
+                    <div class="chart-canvas-wrap">
+                        <canvas id="chartSaving"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            상담 준비용 내부 자료 &middot; 우리동네재테크
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        // ─── URL 파라미터 파싱 ───
+        function getP(name, def) {
+            const r = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const m = r.exec(location.search);
+            return m ? decodeURIComponent(m[1]) : def;
+        }
+        function getN(name, def) { const v = getP(name, ''); return v ? Number(v) : def; }
+
+        // 샘플 데이터 (파라미터 없을 때)
+        const name    = getP('name', '홍길동');
+        const cash    = getN('cash', 18000);    // 만원
+        const estate  = getN('estate', 0);
+        const other   = getN('other', 0);
+        const debt    = getN('debt', 0);
+        const income  = getN('income', 7700);
+        const saving  = getN('saving', 2400);
+        const target  = getN('target', 60000);
+        const loanW   = getN('loan_want', 47000);
+
+        // ─── 계산 ───
+        const totalAsset = cash + estate + other;
+        const netWorth = totalAsset - debt;
+
+        // DSR 계산: 연소득 × 40% = 연간 상환 가능 → 월 상환액 → PMT 역산으로 최대 대출
+        const dsrRatio = 0.4;
+        const rate = 0.045;       // 연 4.5%
+        const years = 30;
+        const monthlyRate = rate / 12;
+        const nPayments = years * 12;
+        const annualRepay = income * dsrRatio;
+        const monthlyRepay = annualRepay / 12;
+        // 최대 대출 = monthlyRepay × [(1+r)^n - 1] / [r × (1+r)^n]
+        const pow = Math.pow(1 + monthlyRate, nPayments);
+        const maxLoan = Math.round(monthlyRepay * (pow - 1) / (monthlyRate * pow));
+
+        // LTV 70% 기준 최대 아파트 가격
+        const ltvRatio = 0.7;
+        const maxAptByLTV = Math.round(maxLoan / ltvRatio);
+
+        // 실제 매수력 = 보유현금 + 최대대출
+        const buyingPower = cash + maxLoan;
+        // 자기자본 + 희망대출로 가능한 가격
+        const maxAptByBuyer = cash + loanW;
+
+        // ─── 포맷 유틸 ───
+        function fmt(v) {
+            if (v >= 10000) return (v / 10000).toFixed(1).replace(/\.0$/, '') + '억';
+            if (v >= 1000) return (v / 1000).toFixed(0) + '천만';
+            return v.toLocaleString() + '만';
+        }
+
+        // ─── 헤더 ───
+        document.getElementById('headerTitle').textContent = name + '님 상담 준비 자료';
+        document.getElementById('headerSub').textContent = '재무 현황 시각화';
+
+        // ─── 요약 카드 ───
+        document.getElementById('sumAsset').textContent = fmt(totalAsset);
+        document.getElementById('sumDebt').textContent = debt > 0 ? fmt(debt) : '-';
+        document.getElementById('sumNet').textContent = fmt(netWorth);
+        document.getElementById('sumPower').textContent = fmt(buyingPower);
+
+        // ─── 차트 1: 자산 구성 도넛 ───
+        const assetData = [];
+        const assetLabels = [];
+        const assetColors = [];
+
+        if (cash > 0)   { assetData.push(cash);   assetLabels.push('보유 현금'); assetColors.push('#0077C8'); }
+        if (estate > 0) { assetData.push(estate); assetLabels.push('부동산');    assetColors.push('#059669'); }
+        if (other > 0)  { assetData.push(other);  assetLabels.push('기타 자산'); assetColors.push('#F59E0B'); }
+        if (debt > 0)   { assetData.push(debt);   assetLabels.push('부채');      assetColors.push('#EF4444'); }
+
+        if (assetData.length === 0) { assetData.push(1); assetLabels.push('데이터 없음'); assetColors.push('#E2E8F0'); }
+
+        new Chart(document.getElementById('chartAsset'), {
+            type: 'doughnut',
+            data: {
+                labels: assetLabels,
+                datasets: [{ data: assetData, backgroundColor: assetColors, borderWidth: 2, borderColor: '#fff' }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '62%',
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // 커스텀 범례
+        const legendEl = document.getElementById('assetLegend');
+        assetLabels.forEach((label, i) => {
+            legendEl.innerHTML += '<div class="legend-item">'
+                + '<span class="legend-dot" style="background:' + assetColors[i] + '"></span>'
+                + '<span>' + label + '</span>'
+                + '<span class="legend-value">' + fmt(assetData[i]) + '</span>'
+                + '</div>';
+        });
+
+        // ─── 차트 2: 매수 가능 비교 막대 ───
+        const maxVal = Math.max(maxAptByLTV, target, buyingPower, maxAptByBuyer) * 1.1;
+        const comparisons = [
+            { label: 'DSR 최대 매수', value: maxAptByLTV, cls: 'blue' },
+            { label: '현금+최대대출', value: buyingPower, cls: 'green' },
+            { label: '희망 가격', value: target, cls: 'yellow' },
+            { label: '현금+희망대출', value: maxAptByBuyer, cls: target <= maxAptByBuyer ? 'green' : 'red' },
+        ];
+
+        const cWrap = document.getElementById('compareWrap');
+        comparisons.forEach(c => {
+            const pct = Math.max((c.value / maxVal) * 100, 8);
+            cWrap.innerHTML += '<div class="compare-item">'
+                + '<div class="compare-label">' + c.label + '</div>'
+                + '<div class="compare-track">'
+                + '<div class="compare-fill ' + c.cls + '" style="width:' + pct + '%">' + fmt(c.value) + '</div>'
+                + '</div></div>';
+        });
+
+        // 대출 참고 노트
+        const noteEl = document.getElementById('loanNote');
+        const gap = target - buyingPower;
+        let noteHtml = '<strong>계산 기준:</strong> DSR 40%, 금리 4.5%, 30년 원리금균등<br>'
+            + '<strong>최대 대출 가능:</strong> ' + fmt(maxLoan) + ' (월 상환 ' + fmt(Math.round(monthlyRepay)) + ')<br>';
+        if (gap > 0) {
+            noteHtml += '<strong style="color:#DC2626">부족액:</strong> 희망 가격 대비 ' + fmt(gap) + ' 부족';
+        } else {
+            noteHtml += '<strong style="color:#059669">여유:</strong> 희망 가격 대비 ' + fmt(Math.abs(gap)) + ' 여유';
+        }
+        noteHtml += '<br><br><strong>정책대출 참고:</strong> 디딤돌(소득 6천↓), 보금자리론(소득 7천↓), 신생아특례(2년내 출산, 맞벌이 2억↓)';
+        noteEl.innerHTML = noteHtml;
+
+        // ─── 차트 3: 저축 시뮬레이션 ───
+        const needEquity = Math.max(target - maxLoan, 0);
+        const savingYears = 10;
+        const labels = [];
+        const accumulated = [];
+        let reachYear = null;
+
+        for (let y = 0; y <= savingYears; y++) {
+            labels.push(y === 0 ? '현재' : y + '년후');
+            const val = cash + saving * y;
+            accumulated.push(val);
+            if (reachYear === null && val >= needEquity && needEquity > 0) {
+                reachYear = y;
+            }
+        }
+
+        const savingCtx = document.getElementById('chartSaving');
+        new Chart(savingCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: '누적 자산',
+                        data: accumulated,
+                        borderColor: '#0077C8',
+                        backgroundColor: 'rgba(0, 119, 200, 0.08)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#0077C8',
+                        borderWidth: 2.5,
+                    },
+                    {
+                        label: '필요 자기자본 (' + fmt(needEquity) + ')',
+                        data: Array(savingYears + 1).fill(needEquity),
+                        borderColor: '#EF4444',
+                        borderDash: [8, 4],
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: false,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { intersect: false, mode: 'index' },
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, font: { size: 13 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) { return ctx.dataset.label + ': ' + fmt(ctx.parsed.y); }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: function(v) { return fmt(v); } },
+                        grid: { color: '#F1F5F9' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+    })();
+    </script>
+<script src="../nav.js"></script>
+<script src="../footer.js"></script>
+<script src="../sidebar.js"></script>
+</body>
+</html>
