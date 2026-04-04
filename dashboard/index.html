@@ -178,12 +178,14 @@
         var t = data.tasks || {}, r = data.routines || {}, okr = data.okr || [];
         countEl.textContent = 'KR ' + okr.length + '개';
 
+        var pending = (t.total||0) - (t.done||0);
+        var routinePending = (r.total||0) - (r.done_today||0);
         var html = '<div class="okr-stats">';
-        html += '<div class="okr-stat"><div class="okr-stat-label">Notion 태스크</div><div class="okr-stat-value">' + (t.done||0) + '<span style="font-size:14px;color:#94A3B8">/' + (t.total||0) + '</span></div>';
+        html += '<div class="okr-stat"><div class="okr-stat-label">미완료 태스크</div><div class="okr-stat-value">' + pending + '개</div>';
         if (t.overdue > 0) html += '<div class="okr-stat-sub okr-stat-warn">지연 ' + t.overdue + '건</div>';
-        html += '<div class="okr-stat-sub">완료/전체 (마감 지난 것 = 지연)</div></div>';
-        html += '<div class="okr-stat"><div class="okr-stat-label">오늘 루틴</div><div class="okr-stat-value">' + (r.done_today||0) + '<span style="font-size:14px;color:#94A3B8">/' + (r.total||0) + '</span></div>';
-        html += '<div class="okr-stat-sub">체크된 항목 / 전체</div></div>';
+        html += '</div>';
+        html += '<div class="okr-stat"><div class="okr-stat-label">남은 루틴</div><div class="okr-stat-value">' + routinePending + '개</div>';
+        html += '<div class="okr-stat-sub">' + (r.total||0) + '개 중 ' + (r.done_today||0) + '개 완료</div></div>';
         html += '</div>';
 
         okr.forEach(function(kr) {
