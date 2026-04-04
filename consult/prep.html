@@ -13,8 +13,9 @@
         body { font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif; background:var(--bg); color:var(--dark); line-height:1.6; -webkit-font-smoothing:antialiased; }
         .wrap { max-width:880px; margin:0 auto; padding:20px 20px 16px; }
 
-        .hdr { background:var(--orange); color:#fff; padding:20px 28px; border-radius:12px; margin-bottom:16px; }
-        .hdr h1 { font-size:22px; font-weight:700; } .hdr .sub { font-size:14px; opacity:.7; margin-top:2px; }
+        .hdr { background:#fff; color:var(--navy); padding:20px 28px; border-radius:12px; margin-bottom:16px; border:2px solid var(--navy); display:flex; justify-content:space-between; align-items:center; }
+        .hdr h1 { font-size:22px; font-weight:700; } .hdr .sub { font-size:14px; color:var(--gray); margin-top:2px; }
+        .hdr-logo { width:48px; height:48px; border-radius:50%; object-fit:cover; }
 
         .tabs { display:flex; gap:2px; border-bottom:2px solid var(--border); margin-bottom:20px; }
         .tab { padding:10px 16px; font-size:15px; font-weight:600; color:var(--light-gray); cursor:pointer; border:none; background:none; border-bottom:2px solid transparent; margin-bottom:-2px; transition:all .15s; }
@@ -83,8 +84,11 @@
 <body>
 <div class="wrap">
     <div class="hdr">
-        <h1 id="hT">우리동네재테크 재무 계산기</h1>
-        <div class="sub" id="hS">내집마련 코칭 · 상담 자료</div>
+        <div>
+            <h1 id="hT">우리동네재테크 재무 계산기</h1>
+            <div class="sub" id="hS">내집마련 코칭 · 상담 자료</div>
+        </div>
+        <img class="hdr-logo" src="../slide-viewer/assets/images/channel-logo.png" alt="우리동네재테크">
     </div>
     <div class="tabs">
         <button class="tab active" data-tab="buy">매수 계산</button>
