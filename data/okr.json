@@ -1,0 +1,32 @@
+{
+  "updated": "2026-04-04T13:48:41.120295+09:00",
+  "okr": [
+    {
+      "title": "전환율 3% 달성(랜딩 업글)",
+      "target": 10,
+      "current": 7,
+      "rate": "🟢 70%"
+    },
+    {
+      "title": "구독자3만(3월30일 17,736명)",
+      "target": 12264,
+      "current": 0,
+      "rate": "🔴 0%"
+    },
+    {
+      "title": "홈페이지 가입 100명",
+      "target": 100,
+      "current": 0,
+      "rate": "🔴 0%"
+    }
+  ],
+  "tasks": {
+    "total": 100,
+    "done": 89,
+    "overdue": 6
+  },
+  "routines": {
+    "total": 7,
+    "done_today": 2
+  }
+}
