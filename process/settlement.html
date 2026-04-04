@@ -41,7 +41,8 @@
         details[open] summary::before { transform: rotate(90deg); }
         details[open] summary { border-color: #0077C8; background: #E8F3FF; margin-bottom: 12px; }
         details summary:hover { border-color: #0077C8; }
-        .step-compact { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: white; border-left: 3px solid #E2E8F0; margin-left: 8px; font-size: 14px; }
+        .step-compact { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: white; border-left: 3px solid #E2E8F0; margin-left: 8px; font-size: 14px; }
+        .arrow-compact { text-align: center; color: #CBD5E1; font-size: 16px; line-height: 20px; margin-left: 8px; }
         .step-compact:hover { border-left-color: #0077C8; }
         .step-compact .step-num { width: 22px; height: 22px; font-size: 11px; flex-shrink: 0; }
 
@@ -98,18 +99,28 @@
             <details open>
                 <summary>1차 — 매출정산 (5단계)</summary>
                 <div class="step-compact"><span class="step-num">1</span> HTML 파일 준비 — 텔레그램 입금방 HTML 다운로드</div>
+                <div class="arrow-compact">↓</div>
                 <div class="step-compact"><span class="step-num">2</span> 정산 대조 실행 — 정산대조.py (자동 매칭)</div>
+                <div class="arrow-compact">↓</div>
                 <div class="step-compact"><span class="step-num">3</span> 결과 확인 + 특이사항 — 금액불일치/이름유사/퍼지매칭</div>
+                <div class="arrow-compact">↓</div>
                 <div class="step-compact"><span class="step-num">4</span> 인센티브 적용 — 매출/환불/프로모션/달성여부 F/G/I/J열</div>
+                <div class="arrow-compact">↓</div>
                 <div class="step-compact"><span class="step-num">5</span> 대표 보고 — 매출순위 + 이메일/프린트 안내</div>
             </details>
+
+            <div class="phase-divider"><span class="phase-label">2차 마케팅정산</span></div>
 
             <details>
                 <summary>2차 — 마케팅정산 (5단계)</summary>
                 <div class="step-compact"><span class="step-num">6</span> 카페24 유료 입장 데이터 — 월정산 Q9~ 붙여넣기</div>
+                <div class="arrow-compact">↓</div>
                 <div class="step-compact"><span class="step-num">7</span> DB루트 추적 — I열 숫자 확인</div>
+                <div class="arrow-compact">↓</div>
                 <div class="step-compact"><span class="step-num">8</span> 로우데이터 입력 — 올라이트 B/N/F/O/I열 매핑</div>
+                <div class="arrow-compact">↓</div>
                 <div class="step-compact"><span class="step-num">9</span> DB효율분석 — 초대기록 분배수량 + DB별 카운트</div>
+                <div class="arrow-compact">↓</div>
                 <div class="step-compact"><span class="step-num">10</span> 대표 보고 — 차트 변경 + 운영 안내</div>
             </details>
         </div>

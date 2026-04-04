@@ -23,6 +23,14 @@
         .wf-name { font-size: 15px; font-weight: 700; color: #051C2C; margin-bottom: 4px; }
         .wf-desc { font-size: 13px; color: #64748B; }
         .wf-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 8px; background: #E8F3FF; color: #0077C8; margin-top: 6px; }
+        details.wf-cat { margin-bottom: 12px; }
+        details.wf-cat summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: #F8FAFC; border: 2px solid #E2E8F0; border-radius: 10px; font-size: 13px; font-weight: 700; color: #051C2C; transition: all 0.2s; }
+        details.wf-cat summary::-webkit-details-marker { display: none; }
+        details.wf-cat summary::before { content: "▸"; font-size: 12px; color: #94A3B8; transition: transform 0.2s; }
+        details.wf-cat[open] summary::before { transform: rotate(90deg); }
+        details.wf-cat[open] summary { border-color: #0077C8; background: #E8F3FF; margin-bottom: 8px; }
+        details.wf-cat summary:hover { border-color: #0077C8; }
+        .wf-cat-count { font-size: 11px; font-weight: 600; color: #94A3B8; margin-left: auto; }
     </style>
 </head>
 <body>
@@ -54,7 +62,10 @@
         catOrder.forEach(function(cat) {
             var items = cats[cat];
             if (!items) return;
-            html += '<div style="font-size:12px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:1px;margin:20px 0 8px">' + esc(cat) + '</div>';
+            var activeCount = items.filter(function(w) { return w.active; }).length;
+            html += '<details class="wf-cat">';
+            html += '<summary>' + esc(cat) + '<span class="wf-cat-count">' + activeCount + '/' + items.length + ' active</span></summary>';
+            html += '<div style="display:flex;flex-direction:column;gap:8px">';
             items.forEach(function(w) {
                 html += '<div class="wf-card">';
                 html += '<div class="wf-name">' + (w.active ? '<span style="color:#16A34A">●</span> ' : '<span style="color:#94A3B8">○</span> ') + esc(w.name) + '</div>';
@@ -72,6 +83,7 @@
                 });
                 html += '</div></div>';
             });
+            html += '</div></details>';
         });
         html += '<div style="font-size:11px;color:#94A3B8;margin-top:12px">' + fmtDate(data.updated) + ' · ' + wfs.length + '개 워크플로우</div>';
         container.innerHTML = html;
