@@ -8,23 +8,24 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background: #0F172A; color: #E2E8F0; min-height: 100vh;
+            background: #F8FAFC; color: #1A1A1A; min-height: 100vh;
             display: flex; align-items: center; justify-content: center;
         }
-        .hub { max-width: 600px; width: 100%; padding: 40px 20px; text-align: center; }
-        h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
-        .subtitle { color: #94A3B8; font-size: 15px; margin-bottom: 48px; }
+        .hub { max-width: 640px; width: 100%; padding: 48px 20px; text-align: center; }
+        h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; color: #051C2C; }
+        .subtitle { color: #64748B; font-size: 15px; margin-bottom: 48px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .card {
-            background: #1E293B; border: 1px solid #334155; border-radius: 12px;
-            padding: 28px 20px; text-decoration: none; color: #E2E8F0;
+            background: white; border: 2px solid #E2E8F0; border-radius: 14px;
+            padding: 28px 20px; text-decoration: none; color: #1A1A1A;
             transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
-        .card:hover { background: #334155; border-color: #60A5FA; transform: translateY(-2px); }
+        .card:hover { border-color: #0077C8; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,119,200,0.12); }
         .card-icon { font-size: 32px; }
-        .card-title { font-size: 16px; font-weight: 700; }
+        .card-title { font-size: 16px; font-weight: 700; color: #051C2C; }
         .card-desc { font-size: 13px; color: #94A3B8; }
-        .card.disabled { opacity: 0.4; pointer-events: none; }
+        .card.disabled { opacity: 0.35; pointer-events: none; }
         @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
