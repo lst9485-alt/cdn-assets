@@ -48,27 +48,20 @@
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary-navy) 0%, #0A2F47 100%);
-            color: white;
-            padding: 32px 40px;
+            background: #fff;
+            color: var(--primary-navy);
+            padding: 24px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            border: 2px solid var(--primary-navy);
+            border-radius: 12px;
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -20%; right: -5%;
-            width: 200px; height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
-            border-radius: 50%;
-        }
-
-        .header-branding { position: relative; z-index: 1; }
-        .header-branding h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
-        .header-subtitle { font-size: 14px; opacity: 0.9; font-weight: 400; }
+        .header-branding { }
+        .header-branding h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+        .header-subtitle { font-size: 14px; color: var(--text-secondary); font-weight: 400; }
+        .header-logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; }
 
         .content { padding: 48px 40px; }
 
@@ -205,6 +198,7 @@
                 <h1 id="headerTitle">내집마련 코칭</h1>
                 <div class="header-subtitle" id="headerSubtitle">회원님 전용 맞춤 자료 페이지</div>
             </div>
+            <img class="header-logo" src="../slide-viewer/assets/images/channel-logo.png" alt="우리동네재테크">
         </div>
 
         <div class="content">
