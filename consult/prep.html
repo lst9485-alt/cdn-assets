@@ -57,6 +57,8 @@
         /* 게이지 */
         .gauge-wrap { display:flex; align-items:center; gap:16px; padding:10px 0; }
         .gauge-bar { flex:1; height:24px; background:#E2E8F0; border-radius:12px; overflow:hidden; position:relative; }
+        .gauge-mark { position:absolute; top:-4px; bottom:-4px; width:0; border-left:2px dashed; opacity:.5; }
+        .gauge-mark span { position:absolute; top:-16px; font-size:10px; font-weight:600; transform:translateX(-50%); }
         .gauge-fill { height:100%; border-radius:12px; transition:width .3s; }
         .gauge-label { font-size:20px; font-weight:800; min-width:70px; text-align:right; }
 
@@ -135,12 +137,12 @@
                 </div>
                 <div class="gauge-wrap">
                     <div style="font-size:14px;font-weight:700;color:var(--blue);min-width:24px;">A</div>
-                    <div class="gauge-bar"><div class="gauge-fill" id="gaugeA" style="width:0;background:var(--blue)"></div></div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="gaugeA" style="width:0;background:var(--blue)"></div><div class="gauge-mark" style="left:30%;border-color:var(--green);"><span style="color:var(--green)">30%</span></div><div class="gauge-mark" style="left:40%;border-color:var(--red);"><span style="color:var(--red)">40%</span></div></div>
                     <div class="gauge-label" id="gaugeLabelA" style="color:var(--blue)">0%</div>
                 </div>
                 <div class="gauge-wrap">
                     <div style="font-size:14px;font-weight:700;color:var(--orange);min-width:24px;">B</div>
-                    <div class="gauge-bar"><div class="gauge-fill" id="gaugeB" style="width:0;background:var(--orange)"></div></div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="gaugeB" style="width:0;background:var(--orange)"></div><div class="gauge-mark" style="left:30%;border-color:var(--green);"></div><div class="gauge-mark" style="left:40%;border-color:var(--red);"></div></div>
                     <div class="gauge-label" id="gaugeLabelB" style="color:var(--orange)">0%</div>
                 </div>
                 <div class="note">30% 이하 안전 · 40% 이하 주의 · 40% 초과 위험</div>
@@ -255,8 +257,8 @@
             legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:13},filter:function(item){return item.text!=='매매가';}}},
             tooltip:{callbacks:{label:function(ctx){if(ctx.parsed.x===0)return '';return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
             annotation:{annotations:{
-                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:13},padding:4,position:'start',yAdjust:-30}},
-                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:13},padding:4,position:'start',yAdjust:-30}}
+                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:13},padding:4,position:'start',yAdjust:-20}},
+                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:13},padding:4,position:'start',yAdjust:-20}}
             }}
         },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:13}},grid:{color:'#F1F5F9'},max:xMax},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
         $('cBuyChart').parentElement.style.height='160px';
@@ -294,13 +296,12 @@
 
         $('repR').innerHTML=''
             +'<div class="rb accent"><div class="rb-label">A 월 상환</div><div class="rb-val blue">'+fF(am)+'</div><div class="rb-sub">총이자 '+fmt(aI)+'</div></div>'
-            +'<div class="rb" style="border-color:var(--orange)"><div class="rb-label">B 월 상환</div><div class="rb-val orange">'+fF(bm)+'</div><div class="rb-sub">총이자 '+fmt(bI)+'</div></div>'
-            +'<div class="rb"><div class="rb-label">차이</div><div class="rb-val">'+fF(Math.abs(df))+'</div><div class="rb-sub">'+(df>0?'A가 더 많음':'B가 더 많음')+'</div></div>';
+            +'<div class="rb" style="border-color:var(--orange)"><div class="rb-label">B 월 상환</div><div class="rb-val orange">'+fF(bm)+'</div><div class="rb-sub">총이자 '+fmt(bI)+'</div></div>';
 
         if(CRep)CRep.destroy();
-        CRep=new Chart($('cRep'),{type:'bar',data:{labels:['월 상환','총 이자','총 상환'],datasets:[
-            {label:'A: '+fmt(aA)+' / '+aR+'%',data:[am,aI,aT],backgroundColor:'#0077C8',borderRadius:4,barPercentage:.4},
-            {label:'B: '+fmt(bA)+' / '+bR+'%',data:[bm,bI,bT],backgroundColor:'#F59E0B',borderRadius:4,barPercentage:.4}
+        CRep=new Chart($('cRep'),{type:'bar',data:{labels:['총 이자','총 상환'],datasets:[
+            {label:'A: '+fmt(aA)+' / '+aR+'%',data:[aI,aT],backgroundColor:'#0077C8',borderRadius:4,barPercentage:.4},
+            {label:'B: '+fmt(bA)+' / '+bR+'%',data:[bI,bT],backgroundColor:'#F59E0B',borderRadius:4,barPercentage:.4}
         ]},options:{responsive:true,maintainAspectRatio:false,plugins:{
             legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fF(ctx.parsed.y);}}}
