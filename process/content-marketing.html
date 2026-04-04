@@ -7,21 +7,21 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
-        .page { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+        .page { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
         .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
         .back:hover { color: #0077C8; }
         h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
-        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 32px; }
-        .flow { display: flex; flex-direction: column; gap: 0; }
-        .step { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 20px; position: relative; }
+        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 28px; }
+        .flow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .step { background: white; border: 2px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; }
         .step:hover { border-color: #0077C8; }
-        .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: #0077C8; color: white; border-radius: 50%; font-size: 13px; font-weight: 700; flex-shrink: 0; }
-        .step-title { font-size: 16px; font-weight: 700; color: #051C2C; }
-        .step-desc { font-size: 13px; color: #64748B; padding-left: 40px; }
-        .arrow-down { text-align: center; color: #CBD5E1; font-size: 20px; line-height: 28px; }
-        .phase-divider { text-align: center; margin: 28px 0 16px; }
-        .phase-label { display: inline-block; background: #F1F5F9; color: #475569; font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 12px; }
+        .step-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #0077C8; color: white; border-radius: 50%; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+        .step-title { font-size: 14px; font-weight: 700; color: #051C2C; }
+        .step-desc { font-size: 12px; color: #64748B; padding-left: 34px; }
+        .phase-divider { text-align: left; margin: 24px 0 10px; }
+        .phase-label { display: inline-block; background: #F1F5F9; color: #475569; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 10px; }
+        @media (max-width: 600px) { .flow { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -33,14 +33,11 @@
         <div class="phase-divider"><span class="phase-label">기획</span></div>
         <div class="flow">
             <div class="step">
-                <div class="step-header"><span class="step-num">1</span></div>
-                <div class="step-title">키워드 리서치</div>
+                <div class="step-header"><span class="step-num">1</span><span class="step-title">키워드 리서치</span></div>
                 <div class="step-desc">검색량 분석, 경쟁 키워드 조사, 타겟 키워드 선정</div>
             </div>
-            <div class="arrow-down">↓</div>
             <div class="step">
-                <div class="step-header"><span class="step-num">2</span></div>
-                <div class="step-title">콘텐츠 기획</div>
+                <div class="step-header"><span class="step-num">2</span><span class="step-title">콘텐츠 기획</span></div>
                 <div class="step-desc">주제 확정, 콘텐츠 유형 결정, 구성안 작성</div>
             </div>
         </div>
@@ -48,14 +45,11 @@
         <div class="phase-divider"><span class="phase-label">실행</span></div>
         <div class="flow">
             <div class="step">
-                <div class="step-header"><span class="step-num">3</span></div>
-                <div class="step-title">제작</div>
+                <div class="step-header"><span class="step-num">3</span><span class="step-title">제작</span></div>
                 <div class="step-desc">원고 작성, 이미지·영상 제작, SEO 최적화</div>
             </div>
-            <div class="arrow-down">↓</div>
             <div class="step">
-                <div class="step-header"><span class="step-num">4</span></div>
-                <div class="step-title">배포</div>
+                <div class="step-header"><span class="step-num">4</span><span class="step-title">배포</span></div>
                 <div class="step-desc">채널별 발행 (블로그·SNS·유튜브), 초기 노출 확보</div>
             </div>
         </div>
@@ -63,8 +57,7 @@
         <div class="phase-divider"><span class="phase-label">분석</span></div>
         <div class="flow">
             <div class="step">
-                <div class="step-header"><span class="step-num">5</span></div>
-                <div class="step-title">성과 분석</div>
+                <div class="step-header"><span class="step-num">5</span><span class="step-title">성과 분석</span></div>
                 <div class="step-desc">유입·전환 데이터 확인, 개선점 도출, 다음 콘텐츠 반영</div>
             </div>
         </div>

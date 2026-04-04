@@ -7,22 +7,24 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
-        .page { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+        .page { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
         .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
         .back:hover { color: #0077C8; }
         h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
-        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 32px; }
-        .flow { display: flex; flex-direction: column; gap: 0; }
-        .step { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 20px; position: relative; }
+        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 28px; }
+        .flow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .step { background: white; border: 2px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; }
         .step:hover { border-color: #0077C8; }
-        .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: #0077C8; color: white; border-radius: 50%; font-size: 13px; font-weight: 700; flex-shrink: 0; }
-        .step-skill { font-size: 12px; font-weight: 700; color: #0077C8; background: #E8F3FF; padding: 2px 8px; border-radius: 6px; }
-        .step-title { font-size: 16px; font-weight: 700; color: #051C2C; }
-        .step-desc { font-size: 13px; color: #64748B; padding-left: 40px; }
-        .arrow-down { text-align: center; color: #CBD5E1; font-size: 20px; line-height: 28px; }
-        .phase-divider { text-align: center; margin: 28px 0 16px; }
-        .phase-label { display: inline-block; background: #F1F5F9; color: #475569; font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 12px; }
+        .step-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #0077C8; color: white; border-radius: 50%; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+        .step-skill { font-size: 11px; font-weight: 700; color: #0077C8; background: #E8F3FF; padding: 1px 6px; border-radius: 4px; }
+        .step-title { font-size: 14px; font-weight: 700; color: #051C2C; }
+        .step-desc { font-size: 12px; color: #64748B; padding-left: 32px; }
+        .phase-divider { text-align: left; margin: 24px 0 10px; }
+        .phase-label { display: inline-block; background: #F1F5F9; color: #475569; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 10px; }
+        .step-manual { border-left: 3px solid #94A3B8; }
+        .step-manual .step-num { background: #94A3B8; }
+        @media (max-width: 600px) { .flow { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -36,19 +38,17 @@
             <div class="step">
                 <div class="step-header"><span class="step-num">1</span><span class="step-skill">yt01</span></div>
                 <div class="step-title">주제 선정</div>
-                <div class="step-desc">키워드 입력 → 주제 후보 3~5개 + 추천 주제 1개</div>
+                <div class="step-desc">키워드 입력 → 주제 후보 3~5개 + 추천 1개</div>
             </div>
-            <div class="arrow-down">↓</div>
             <div class="step">
                 <div class="step-header"><span class="step-num">2</span><span class="step-skill">yt02</span></div>
                 <div class="step-title">썸네일 + 제목</div>
-                <div class="step-desc">심리 기반 CTR 극대화 카피 3세트 생성</div>
+                <div class="step-desc">심리 기반 CTR 극대화 카피 3세트</div>
             </div>
-            <div class="arrow-down">↓</div>
             <div class="step">
                 <div class="step-header"><span class="step-num">3</span><span class="step-skill">yt03</span></div>
-                <div class="step-title">자료 수집 (리서치)</div>
-                <div class="step-desc">댓글 + NotebookLM + 내 영상 + 외부 리서치 + 경쟁채널 분석</div>
+                <div class="step-title">자료 수집</div>
+                <div class="step-desc">댓글 + NotebookLM + 외부 리서치 + 경쟁채널</div>
             </div>
         </div>
 
@@ -57,19 +57,17 @@
             <div class="step">
                 <div class="step-header"><span class="step-num">4</span><span class="step-skill">yt04</span></div>
                 <div class="step-title">도입부 (후킹)</div>
-                <div class="step-desc">관련 영상 리서치 → 인지 심리학 기반 초강력 후킹</div>
+                <div class="step-desc">관련 영상 리서치 → 인지 심리학 기반 후킹</div>
             </div>
-            <div class="arrow-down">↓</div>
             <div class="step">
                 <div class="step-header"><span class="step-num">5</span><span class="step-skill">yt05</span></div>
                 <div class="step-title">원고 작성</div>
-                <div class="step-desc">도입(후킹) → 본문(3~5챕터) → 마무리(가치전달)</div>
+                <div class="step-desc">도입 → 본문(3~5챕터) → 마무리</div>
             </div>
-            <div class="arrow-down">↓</div>
             <div class="step">
                 <div class="step-header"><span class="step-num">6</span><span class="step-skill">yt06</span></div>
                 <div class="step-title">원고 수정</div>
-                <div class="step-desc">점검 모드(분석) 또는 수정 모드(기대/결말, 몰입, 표현)</div>
+                <div class="step-desc">점검(분석) 또는 수정(기대/결말·몰입·표현)</div>
             </div>
         </div>
 
@@ -78,15 +76,13 @@
             <div class="step">
                 <div class="step-header"><span class="step-num">7</span><span class="step-skill">yt07</span></div>
                 <div class="step-title">슬라이드 생성</div>
-                <div class="step-desc">원고 → 슬라이드 구성 계획 → HTML 파일 생성</div>
+                <div class="step-desc">원고 → 슬라이드 구성 → HTML 파일 생성</div>
             </div>
-            <div class="arrow-down">↓</div>
-            <div class="step" style="border-left: 3px solid #94A3B8;">
-                <div class="step-header"><span class="step-num" style="background:#94A3B8;">📷</span></div>
+            <div class="step step-manual">
+                <div class="step-header"><span class="step-num">📷</span></div>
                 <div class="step-title">촬영 + 편집</div>
                 <div class="step-desc">CapCut에서 수동 편집</div>
             </div>
-            <div class="arrow-down">↓</div>
             <div class="step">
                 <div class="step-header"><span class="step-num">8</span><span class="step-skill">yt08</span></div>
                 <div class="step-title">자막 교정</div>
@@ -99,7 +95,7 @@
             <div class="step">
                 <div class="step-header"><span class="step-num">9</span><span class="step-skill">yt09</span></div>
                 <div class="step-title">업로드</div>
-                <div class="step-desc">설명글/챕터/해시태그 SEO → YouTube Studio → 고정댓글/백업</div>
+                <div class="step-desc">설명글/챕터/해시태그 SEO → YouTube Studio → 백업</div>
             </div>
         </div>
     </div>
