@@ -62,19 +62,15 @@
 
         <!-- 매일정산 -->
         <div id="daily" class="tab-content active">
-            <div class="section-label">매일정산 (6단계)</div>
+            <div class="section-label">매일정산 (4단계)</div>
             <div class="flow">
                 <div class="step"><span class="step-num">1</span><span class="step-title">텔레그램 인원수 확인</span><div class="step-desc">입장 인원수 확인 후 시트에 기입</div></div>
                 <div class="arrow-down">↓</div>
-                <div class="step"><span class="step-num">2</span><span class="step-title">OCR 프로그램 실행</span><div class="step-desc">SSH로 회사PC에서 OCR/Prep 자동 실행</div></div>
+                <div class="step"><span class="step-num">2</span><span class="step-title">OCR + 미매칭 해결</span><div class="step-desc">SSH OCR 자동 실행 → 미매칭 자동 해결 (예외만 수동)</div></div>
                 <div class="arrow-down">↓</div>
-                <div class="step"><span class="step-num">3</span><span class="step-title">미매칭 해결</span><div class="step-desc">미매칭 목록 파악 및 수동 매칭</div></div>
+                <div class="step"><span class="step-num">3</span><span class="step-title">시트 + 누적DB</span><div class="step-desc">P/S열 교정 → 수량 검증 → 중복 확인 → 복사</div></div>
                 <div class="arrow-down">↓</div>
-                <div class="step"><span class="step-num">4</span><span class="step-title">시트 업데이트</span><div class="step-desc">P열 교정 + S열 회원번호 기록</div></div>
-                <div class="arrow-down">↓</div>
-                <div class="step"><span class="step-num">5</span><span class="step-title">누적DB 복사</span><div class="step-desc">수량 검증 → 중복 확인 → 복사</div></div>
-                <div class="arrow-down">↓</div>
-                <div class="step"><span class="step-num">6</span><span class="step-title">Notion 완료</span><div class="step-desc">태스크 완료 처리</div></div>
+                <div class="step"><span class="step-num">4</span><span class="step-title">Notion 완료</span><div class="step-desc">태스크 완료 처리</div></div>
             </div>
         </div>
 

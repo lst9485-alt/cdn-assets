@@ -18,17 +18,18 @@
         .step:hover { border-color: #0077C8; }
         .step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #0077C8; color: white; border-radius: 50%; font-size: 11px; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
         .step-title { font-size: 14px; font-weight: 700; color: #051C2C; }
-        .step-desc { font-size: 12px; color: #64748B; margin-top: 4px; padding-left: 32px; }
+        .step-action { font-size: 13px; color: #051C2C; font-weight: 600; margin-top: 6px; padding-left: 32px; }
+        .step-auto { font-size: 12px; color: #94A3B8; margin-top: 2px; padding-left: 32px; }
         .phase-divider { text-align: left; margin: 24px 0 10px; }
         .phase-label { display: inline-block; background: #F1F5F9; color: #475569; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 10px; }
 
-        /* 후처리 섹션 — 주황 계열로 구분 */
+        /* 후처리 섹션 — 주황 계열 */
         .phase-post .phase-label { background: #FFF7ED; color: #C2410C; }
         .phase-post .step { border-color: #FED7AA; }
         .phase-post .step:hover { border-color: #EA580C; }
         .phase-post .step-num { background: #EA580C; }
 
-        details { margin-top: 28px; }
+        details { margin-top: 8px; }
         details summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: #FFF7ED; border: 2px solid #FED7AA; border-radius: 10px; font-size: 14px; font-weight: 700; color: #C2410C; transition: all 0.2s; }
         details summary::-webkit-details-marker { display: none; }
         details summary::before { content: "▸"; font-size: 12px; color: #EA580C; transition: transform 0.2s; }
@@ -36,37 +37,89 @@
         details[open] summary { border-color: #EA580C; background: #FFEDD5; margin-bottom: 12px; }
         details summary:hover { border-color: #EA580C; }
 
-        @media (max-width: 600px) { .flow { grid-template-columns: 1fr; } }
+        .timeline { display: flex; gap: 0; align-items: center; padding: 12px 16px 8px 32px; flex-wrap: wrap; }
+        .tl-item { text-align: center; font-size: 11px; color: #64748B; }
+        .tl-dot { width: 10px; height: 10px; background: #EA580C; border-radius: 50%; margin: 0 auto 4px; }
+        .tl-line { width: 40px; height: 2px; background: #FED7AA; margin-bottom: 14px; }
+
+        @media (max-width: 600px) { .flow { grid-template-columns: 1fr; } .timeline { gap: 4px; } .tl-line { width: 20px; } }
     </style>
 </head>
 <body>
     <div class="page">
         <a href="./" class="back">&larr; 프로세스 목록</a>
         <h1>🤝 CRM (상담) 프로세스</h1>
-        <p class="subtitle">상담 준비 → 상담 → 후처리</p>
+        <p class="subtitle">신청 접수 → 상담 준비 → 상담 → 후처리 → 후속 관리</p>
 
-        <div class="phase-divider"><span class="phase-label">상담 준비 (8단계)</span></div>
+        <div class="phase-divider"><span class="phase-label">상담 전 — 접수~예약 (6단계)</span></div>
         <div class="flow">
-            <div class="step"><span class="step-num">1</span><span class="step-title">고객 확인</span><div class="step-desc">이름/전화번호 필터 또는 오늘/내일 자동 조회</div></div>
-            <div class="step"><span class="step-num">2</span><span class="step-title">사전질문지 읽기</span><div class="step-desc">CRM 스프레드시트에서 고객 응답 확인</div></div>
-            <div class="step"><span class="step-num">3</span><span class="step-title">세그먼트 판별</span><div class="step-desc">A/B/C/D 고객 타입 분류</div></div>
-            <div class="step"><span class="step-num">4</span><span class="step-title">레퍼런스 참고</span><div class="step-desc">상담목적별 패턴 읽기 (과거 유사 케이스)</div></div>
-            <div class="step"><span class="step-num">5</span><span class="step-title">팩트 조사</span><div class="step-desc">정책대출 자격 / 세금 / LTV / 대출조건</div></div>
-            <div class="step"><span class="step-num">6</span><span class="step-title">맞춤 답변 생성</span><div class="step-desc">신청계기/기본정보/재무상황 기반 답변</div></div>
-            <div class="step"><span class="step-num">7</span><span class="step-title">Notion DB 반영</span><div class="step-desc">상담 DB에 준비 데이터 입력</div></div>
-            <div class="step"><span class="step-num">8</span><span class="step-title">준비 완료</span><div class="step-desc">상담 대기 상태</div></div>
+            <div class="step">
+                <span class="step-num">1</span><span class="step-title">상담 신청 접수</span>
+                <div class="step-auto">자동: 입금+폼 제출 → 텔레그램 알림 → Notion 등록</div>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span><span class="step-title">첫 연락</span>
+                <div class="step-action">→ 문자 보내기</div>
+                <div class="step-auto">회원이 카톡으로 응답</div>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span><span class="step-title">사전질문지</span>
+                <div class="step-action">→ 카톡으로 폼 링크 발송</div>
+                <div class="step-auto">자동: 제출 시 텔레그램 알림</div>
+            </div>
+            <div class="step">
+                <span class="step-num">4</span><span class="step-title">일정 조율</span>
+                <div class="step-action">→ 구글캘린더 링크 발송</div>
+                <div class="step-auto">자동: 예약 시 텔레그램 알림</div>
+            </div>
+            <div class="step">
+                <span class="step-num">5</span><span class="step-title">전날 리마인드</span>
+                <div class="step-action">→ 카톡 보내기</div>
+                <div class="step-auto">자동: 오전 8시 텔레그램 알림 (카톡 문구 포함)</div>
+            </div>
+            <div class="step">
+                <span class="step-num">6</span><span class="step-title">당일 리마인드</span>
+                <div class="step-action">→ 카톡 보내기</div>
+                <div class="step-auto">자동: 30분 전 텔레그램 알림</div>
+            </div>
         </div>
 
-        <details class="phase-post">
-            <summary>상담 후처리 (5단계)</summary>
-            <div class="flow">
-                <div class="step"><span class="step-num">1</span><span class="step-title">고객 확인</span><div class="step-desc">Notion DB에서 오늘 상담 자동 조회</div></div>
-                <div class="step"><span class="step-num">2</span><span class="step-title">회의록 읽기</span><div class="step-desc">Google Docs 상담 기록 확인</div></div>
-                <div class="step"><span class="step-num">3</span><span class="step-title">핵심 요약 생성</span><div class="step-desc">핵심사항 / 추진방향 요약</div></div>
-                <div class="step"><span class="step-num">4</span><span class="step-title">Google Docs 반영</span><div class="step-desc">요약본 Docs에 추가</div></div>
-                <div class="step"><span class="step-num">5</span><span class="step-title">피드백 + 보고</span><div class="step-desc">사용자 확인 및 최종 정리</div></div>
+        <div class="phase-divider"><span class="phase-label">상담 (2단계)</span></div>
+        <div class="flow">
+            <div class="step">
+                <span class="step-num">7</span><span class="step-title">상담 준비</span>
+                <div class="step-action">→ /consult 실행 → 내용 확인</div>
+                <div class="step-auto">자동: 사전질문지+팩트조사+맞춤답변 생성 → Notion 반영</div>
             </div>
-        </details>
+            <div class="step">
+                <span class="step-num">8</span><span class="step-title">상담 진행</span>
+                <div class="step-action">→ 직접 상담</div>
+            </div>
+        </div>
+
+        <div class="phase-post">
+            <div class="phase-divider"><span class="phase-label">상담 후 (2단계)</span></div>
+            <div class="flow">
+                <div class="step">
+                    <span class="step-num">9</span><span class="step-title">후처리</span>
+                    <div class="step-action">→ /consult 후처리 → 내용 확인</div>
+                    <div class="step-auto">자동: 회의록 읽기 → 핵심 요약 → Google Docs 반영</div>
+                </div>
+                <div class="step">
+                    <span class="step-num">10</span><span class="step-title">후속 관리</span>
+                    <div class="step-auto">자동: 문자 발송 + 텔레그램 알림</div>
+                    <div class="timeline">
+                        <div class="tl-item"><div class="tl-dot"></div>3일</div>
+                        <div class="tl-line"></div>
+                        <div class="tl-item"><div class="tl-dot"></div>30일</div>
+                        <div class="tl-line"></div>
+                        <div class="tl-item"><div class="tl-dot"></div>90일</div>
+                        <div class="tl-line"></div>
+                        <div class="tl-item"><div class="tl-dot"></div>180일</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 <script src="../nav.js"></script>
 <script src="../footer.js"></script>
