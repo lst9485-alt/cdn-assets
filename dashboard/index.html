@@ -267,8 +267,8 @@
         if (sales) {
             html += '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px">';
             html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
-            html += '<div style="font-size:13px;font-weight:700;color:#475569">' + esc(sales.month_label) + ' \uB9E4\uCD9C</div>';
-            html += '<div style="font-size:20px;font-weight:800;color:#051C2C">' + sales.total_amount + '\uB9CC\uC6D0</div>';
+            html += '<div style="font-size:13px;font-weight:700;color:#475569">' + esc(sales.month_label) + ' 매출</div>';
+            html += '<div style="font-size:20px;font-weight:800;color:#051C2C">' + sales.total_amount + '만원</div>';
             html += '</div>';
             // 주간별 테이블
             if (sales.weekly && sales.weekly.length > 0) {
@@ -276,8 +276,8 @@
                 sales.weekly.forEach(function(w) {
                     html += '<div style="flex:1;background:white;border:1px solid #E2E8F0;border-radius:6px;padding:8px;text-align:center">';
                     html += '<div style="font-size:11px;color:#94A3B8">' + esc(w.week) + '</div>';
-                    html += '<div style="font-size:15px;font-weight:700;color:#051C2C">' + w.amount + '\uB9CC</div>';
-                    html += '<div style="font-size:11px;color:#64748B">' + w.count + '\uBA85</div>';
+                    html += '<div style="font-size:15px;font-weight:700;color:#051C2C">' + w.amount + '만</div>';
+                    html += '<div style="font-size:11px;color:#64748B">' + w.count + '명</div>';
                     html += '</div>';
                 });
                 html += '</div>';
