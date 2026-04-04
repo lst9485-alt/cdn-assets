@@ -57,10 +57,8 @@
         /* 게이지 */
         .gauge-wrap { display:flex; align-items:center; gap:16px; padding:10px 0; }
         .gauge-bar { flex:1; height:28px; border-radius:14px; overflow:hidden; position:relative; background:#E2E8F0; }
-        .gauge-bar::before,.gauge-bar::after { content:''; position:absolute; top:0; bottom:0; width:0; border-left:2px dashed var(--light-gray); z-index:1; }
-        .gauge-bar::before { left:30%; }
-        .gauge-bar::after { left:40%; }
-        .gauge-tag { font-size:13px; font-weight:600; min-width:100px; }
+        .gauge-bar::after { content:'40% 초과 위험'; position:absolute; left:40%; top:0; bottom:0; border-left:2px dashed var(--light-gray); z-index:1; font-size:10px; color:var(--light-gray); padding-left:4px; padding-top:32px; white-space:nowrap; }
+        .gauge-tag { font-size:15px; font-weight:700; min-width:110px; }
         .gauge-fill { height:100%; border-radius:12px; transition:width .3s; }
         .gauge-label { font-size:20px; font-weight:800; min-width:70px; text-align:right; }
 
@@ -146,7 +144,6 @@
                     <div class="gauge-bar"><div class="gauge-fill" id="gaugeB" style="width:0;background:var(--orange)"></div></div>
                     <div class="gauge-label" id="gaugeLabelB" style="color:var(--orange)">0%</div>
                 </div>
-                <div style="font-size:12px;color:var(--gray);margin-top:4px;">30% 이하 안전 · 40% 초과 위험</div>
             </div>
         </div>
         <div class="rbox" id="repR" style="margin-top:14px;"></div>
