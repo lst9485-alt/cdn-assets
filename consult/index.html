@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내집마련 코칭 - 회원님을 위한 맞춤 자료</title>
+    <style>
+        :root {
+            --primary-navy: #051C2C;
+            --primary-blue: #0077C8;
+            --primary-dark-blue: #005a9e;
+            --primary-light: #E8F3FF;
+            --success-green: #22C55E;
+            --warning-yellow: #F59E0B;
+            --youtube-red: #C4302B;
+            --youtube-dark-red: #992220;
+            --text-primary: #1A1A1A;
+            --text-secondary: #555555;
+            --text-tertiary: #888888;
+            --bg-gray: #F8FAFC;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 24px rgba(0,0,0,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: linear-gradient(135deg, #F8FAFC 0%, #E8EEF2 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            word-break: keep-all;
+            -webkit-font-smoothing: antialiased;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 32px auto;
+            background: white;
+            min-height: calc(100vh - 64px);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #0A2F47 100%);
+            color: white;
+            padding: 32px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -20%; right: -5%;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+            border-radius: 50%;
+        }
+
+        .header-branding { position: relative; z-index: 1; }
+        .header-branding h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
+        .header-subtitle { font-size: 14px; opacity: 0.9; font-weight: 400; }
+
+        .content { padding: 48px 40px; }
+
+        .intro-section { margin-bottom: 40px; text-align: center; }
+        .intro-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 14px; background: var(--primary-light);
+            color: var(--primary-blue); border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-bottom: 16px;
+        }
+        .intro-badge-dot { width: 6px; height: 6px; background: var(--success-green); border-radius: 50%; }
+        .intro-text { font-size: 26px; font-weight: 700; line-height: 1.4; letter-spacing: -0.3px; margin-bottom: 10px; }
+        .intro-text .highlight { color: var(--primary-blue); }
+        .intro-subtext { font-size: 16px; color: var(--text-secondary); }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+        .info-card {
+            background: white; border: 2px solid var(--border-color);
+            border-radius: 12px; padding: 22px; transition: all 0.2s ease;
+        }
+        .info-card:hover { border-color: var(--primary-blue); box-shadow: var(--shadow-sm); }
+        .info-label { font-size: 13px; color: var(--text-tertiary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .info-input {
+            width: 100%; border: none; background: transparent;
+            font-size: 18px; font-weight: 600; color: var(--primary-navy);
+            font-family: "Pretendard", sans-serif; outline: none;
+        }
+        .info-input:focus { color: var(--primary-blue); }
+        .info-input::placeholder { color: #C5C9CE; }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border: 3px solid #0EA5E9; border-radius: 16px; padding: 32px;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 32px; box-shadow: 0 6px 20px rgba(14, 165, 233, 0.15);
+        }
+        .benefit-info h4 { font-size: 15px; color: #0369A1; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .benefit-highlight { font-size: 38px; font-weight: 800; color: var(--primary-blue); letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
+        .benefit-desc { font-size: 15px; color: #64748B; }
+        .btn-benefit {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 18px 30px; background: linear-gradient(135deg, var(--primary-blue) 0%, #0EA5E9 100%);
+            color: white; text-decoration: none; font-size: 18px; font-weight: 700;
+            border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 119, 200, 0.3);
+            transition: all 0.3s ease; white-space: nowrap;
+        }
+        .btn-benefit:hover { background: linear-gradient(135deg, var(--primary-dark-blue) 0%, #0284C7 100%); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 119, 200, 0.4); }
+        .btn-benefit span { font-size: 22px; }
+
+        .notice-banner {
+            background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+            border: 1px solid var(--warning-yellow); border-radius: 10px;
+            padding: 16px 20px; font-size: 14px; color: #92400E;
+            margin-bottom: 36px; display: flex; align-items: flex-start; gap: 12px;
+        }
+        .notice-icon {
+            width: 20px; height: 20px; background: var(--warning-yellow);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; font-size: 12px; font-weight: 700; color: white;
+        }
+
+        .section-header {
+            font-size: 20px; font-weight: 700; color: var(--primary-navy);
+            margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
+        }
+        .section-header::before {
+            content: ''; display: block; width: 5px; height: 22px;
+            background: linear-gradient(to bottom, var(--primary-blue), #38BDF8); border-radius: 3px;
+        }
+
+        .resource-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 40px; }
+        .resource-card {
+            background: white; border: 2px solid var(--border-color); border-radius: 12px;
+            padding: 26px; text-decoration: none; display: flex; flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;
+        }
+        .resource-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), #38BDF8);
+            transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
+        }
+        .resource-card:hover::before { transform: scaleX(1); }
+        .resource-card:hover { border-color: var(--primary-blue); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+        .resource-card.youtube-card { border: 3px solid var(--youtube-red); }
+        .resource-card.youtube-card::before { background: var(--youtube-red); }
+        .resource-card.youtube-card:hover { background: var(--youtube-red); border-color: var(--youtube-red); box-shadow: 0 8px 24px rgba(196, 48, 43, 0.3); }
+        .resource-card.youtube-card .resource-icon-box { background: #FFF1F1; }
+        .resource-card.youtube-card .resource-icon-box svg { fill: var(--youtube-red); }
+        .resource-card.youtube-card:hover .resource-icon-box { background: white; transform: scale(1.1); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .resource-card.youtube-card:hover .resource-icon-box svg { fill: var(--youtube-red); }
+        .resource-card.youtube-card:hover .resource-title { color: white; }
+        .resource-card.youtube-card:hover .resource-desc { color: rgba(255,255,255,0.95); }
+        .resource-card.youtube-card .resource-action { color: var(--youtube-red); }
+        .resource-card.youtube-card:hover .resource-action { color: white; }
+
+        .resource-icon-box {
+            width: 52px; height: 52px; background: var(--primary-light);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 18px; transition: all 0.3s ease;
+        }
+        .resource-card:hover .resource-icon-box { background: var(--primary-blue); transform: scale(1.05); }
+        .resource-icon-box svg { width: 26px; height: 26px; fill: var(--primary-blue); transition: fill 0.3s ease; }
+        .resource-card:hover .resource-icon-box svg { fill: white; }
+
+        .resource-title { font-size: 19px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.2px; }
+        .resource-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 20px; flex-grow: 1; }
+        .resource-action { font-size: 15px; font-weight: 600; color: var(--primary-blue); display: flex; align-items: center; justify-content: flex-end; transition: all 0.3s ease; }
+        .resource-action::after { content: "\2192"; margin-left: 6px; transition: all 0.3s ease; }
+        .resource-card:hover .resource-action::after { margin-left: 10px; }
+
+        .footer { background: #F8FAFC; padding: 24px 30px; text-align: center; border-top: 1px solid var(--border-color); }
+        .footer p { font-size: 13px; color: var(--text-tertiary); margin-bottom: 4px; }
+        .footer p:first-child { font-weight: 500; color: var(--text-secondary); }
+
+        @media (max-width: 768px) {
+            .container { margin: 0; border-radius: 0; box-shadow: none; }
+            .header { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+            .header-branding h1 { font-size: 21px; }
+            .content { padding: 32px 20px; }
+            .intro-text { font-size: 23px; }
+            .info-grid { grid-template-columns: 1fr; }
+            .benefit-card { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px 20px; }
+            .btn-benefit { width: 100%; justify-content: center; }
+            .resource-grid { grid-template-columns: 1fr; }
+            .section-header { font-size: 19px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-branding">
+                <h1 id="headerTitle">내집마련 코칭</h1>
+                <div class="header-subtitle" id="headerSubtitle">회원님 전용 맞춤 자료 페이지</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="intro-section">
+                <div class="intro-badge">
+                    <span class="intro-badge-dot"></span>
+                    <span>우리동네 재테크</span>
+                </div>
+                <h2 class="intro-text">내집마련 코칭 <span class="highlight" id="introName">리포트</span></h2>
+                <p class="intro-subtext">회원님을 위한 맞춤형 내집마련 플랜</p>
+            </div>
+
+            <div style="background: #F8FAFC; border-radius: 12px; padding: 20px; margin-bottom: 32px;">
+                <h3 style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">상담 내용을 바탕으로 정리된 핵심 자료들을 확인해 주세요.</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-label">회원명</div>
+                        <input type="text" class="info-input" id="clientName" placeholder="회원명을 입력하세요">
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">상담 일자</div>
+                        <input type="date" class="info-input" id="consultDate" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-info">
+                    <h4>질의응답(Q&A) 지원 기간</h4>
+                    <div class="benefit-highlight">3개월</div>
+                    <div class="benefit-desc">기본 제공</div>
+                </div>
+                <a href="https://docs.google.com/forms/d/17iXvUhFQbogWpumqN3cmDZCTPz0Af1pKU9sv3j5rfjM/viewform?edit_requested=true" class="btn-benefit">
+                    <span>✍️</span> 후기 작성하고 6개월로 연장하기
+                </a>
+            </div>
+
+            <div class="notice-banner">
+                <div class="notice-icon">!</div>
+                <div>
+                    <strong>안내:</strong> 개인정보 보호를 위해 이 페이지는 1개월 후 만료됩니다. 필요한 자료는 미리 다운로드해 주세요.
+                </div>
+            </div>
+
+            <h3 class="section-header">제공 자료</h3>
+
+            <div class="resource-grid">
+                <a href="https://docs.google.com/spreadsheets/d/1B419dWEt3iooHRjZE9e8a7nh0iJaFLfGwqMFM3PsOsA/edit?gid=1463860195#gid=1463860195" class="resource-card">
+                    <div class="resource-icon-box">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.3-1.54-4.5 6h17L13.96 6.29z"/></svg>
+                    </div>
+                    <h4 class="resource-title">자산 관리 로드맵</h4>
+                    <p class="resource-desc">목표 달성을 위한 시뮬레이션과 및 자산증식 현황을 체계적으로 관리하는 구글 시트입니다.</p>
+                    <div class="resource-action">자료 열기</div>
+                </a>
+
+                <a class="resource-card" id="pptBtn" href="#">
+                    <div class="resource-icon-box">
+                        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </div>
+                    <h4 class="resource-title">상담 리포트</h4>
+                    <p class="resource-desc">개인상황을 바탕으로 상담 시 사용했던 PPT입니다.</p>
+                    <div class="resource-action">자료 열기</div>
+                </a>
+
+                <a class="resource-card" id="docBtn" href="#">
+                    <div class="resource-icon-box">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-8-6z"/></svg>
+                    </div>
+                    <h4 class="resource-title">솔루션 실행 요약본</h4>
+                    <p class="resource-desc">상담 전체 스크립트 및 핵심 인사이트와 실천 과제를 한 장에 압축한 요약 문서입니다.</p>
+                    <div class="resource-action">자료 열기</div>
+                </a>
+
+                <a href="https://www.youtube.com/@%EC%9A%B0%EB%A6%AC%EB%8F%99%EB%84%A4%EC%9E%AC%ED%85%8C%ED%81%AC" class="resource-card youtube-card">
+                    <div class="resource-icon-box">
+                        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </div>
+                    <h4 class="resource-title">유튜브 채널 구독하기</h4>
+                    <p class="resource-desc">내집마련과 재테크 관련 최신 정보와 팁을 '우리동네재테크' 채널에서 확인하세요.</p>
+                    <div class="resource-action">채널 바로가기</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>본 자료의 저작권은 우리동네재테크에 있습니다.</p>
+            <p>&copy; 2026 Home Buying Coaching. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function getUrlParameter(name) {
+            const regex = new RegExp('[\\?&]' + name.replace(/[\[\]]/g, '\\$&') + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        function updateIntroName(name) {
+            const introName = document.getElementById('introName');
+            const headerSubtitle = document.getElementById('headerSubtitle');
+            if (name && name.trim()) {
+                introName.textContent = name + '님';
+                introName.style.color = 'var(--primary-blue)';
+                headerSubtitle.textContent = name + '님 전용 맞춤 자료 페이지';
+            } else {
+                introName.textContent = '회원님';
+                introName.style.color = 'inherit';
+                headerSubtitle.textContent = '회원님 전용 맞춤 자료 페이지';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            const clientNameInput = document.getElementById('clientName');
+            const urlName = getUrlParameter('name');
+            const urlDate = getUrlParameter('date');
+
+            if (urlName) { clientNameInput.value = urlName; updateIntroName(urlName); }
+
+            if (urlDate) {
+                document.getElementById('consultDate').value = urlDate;
+            } else {
+                const t = new Date();
+                document.getElementById('consultDate').value = t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
+            }
+
+            const pptUrl = getUrlParameter('ppt');
+            const docUrl = getUrlParameter('doc');
+            if (pptUrl) document.getElementById('pptBtn').href = pptUrl;
+            if (docUrl) document.getElementById('docBtn').href = docUrl;
+
+            clientNameInput.addEventListener('input', function(e) { updateIntroName(e.target.value); });
+        });
+    </script>
+</body>
+</html>
