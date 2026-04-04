@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매출 대시보드 - 운영 대시보드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
+        .page { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
+        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 32px; }
+        .section { margin-bottom: 32px; }
+        .section-title { font-size: 16px; font-weight: 700; color: #051C2C; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .section-title span { font-size: 20px; }
+        .placeholder { background: white; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 40px 24px; text-align: center; }
+        .placeholder-title { font-size: 15px; font-weight: 700; color: #475569; margin-bottom: 6px; }
+        .placeholder-desc { font-size: 13px; color: #94A3B8; }
+        .badge-soon { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #FEF3C7; color: #D97706; margin-left: 8px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .stat-card { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 20px; text-align: center; }
+        .stat-label { font-size: 12px; color: #94A3B8; font-weight: 600; margin-bottom: 4px; }
+        .stat-value { font-size: 24px; font-weight: 800; color: #051C2C; }
+        .stat-sub { font-size: 11px; color: #64748B; margin-top: 2px; }
+        @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="./" class="back">&larr; 대시보드</a>
+        <h1>💰 매출 대시보드</h1>
+        <p class="subtitle">콘텐츠관리시트 기반 매출 현황</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">이번 달 매출</div>
+                <div class="stat-value" style="color: #94A3B8;">—</div>
+                <div class="stat-sub">데이터 연동 예정</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">지난 달 매출</div>
+                <div class="stat-value" style="color: #94A3B8;">—</div>
+                <div class="stat-sub">데이터 연동 예정</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">전월 대비</div>
+                <div class="stat-value" style="color: #94A3B8;">—</div>
+                <div class="stat-sub">증감률</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title"><span>📈</span> 월별 매출 추이 <span class="badge-soon">연동 예정</span></div>
+            <div class="placeholder">
+                <div class="placeholder-title">월별 매출 차트</div>
+                <div class="placeholder-desc">콘텐츠관리시트에서 월별 매출 데이터를 가져와 차트로 표시합니다</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title"><span>🎬</span> 영상별 매출 <span class="badge-soon">연동 예정</span></div>
+            <div class="placeholder">
+                <div class="placeholder-title">영상별 매출 테이블</div>
+                <div class="placeholder-desc">각 영상의 조회수, 클릭률, 상담 전환, 매출 기여도를 테이블로 표시합니다</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title"><span>📊</span> 상품별 매출 <span class="badge-soon">연동 예정</span></div>
+            <div class="placeholder">
+                <div class="placeholder-title">상품·서비스별 매출 비중</div>
+                <div class="placeholder-desc">상담 패키지, 개별 서비스 등 상품별 매출 비중을 표시합니다</div>
+            </div>
+        </div>
+    </div>
+<script src="../nav.js"></script>
+<script src="../sidebar.js"></script>
+</body>
+</html>

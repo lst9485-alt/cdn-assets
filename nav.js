@@ -39,6 +39,8 @@
     + '<a href="' + root + 'process/crm.html">CRM 상담</a>'
     + '<a href="' + root + 'process/n8n.html">n8n</a>'
     + '<a href="' + root + 'process/settlement.html">정산</a>'
+    + '<a href="' + root + 'process/homepage.html">홈페이지 제작</a>'
+    + '<a href="' + root + 'process/content-marketing.html">콘텐츠 마케팅</a>'
     + '</div></div>'
     + '<a href="' + root + 'consult/" class="nav-link' + (isActive('/consult') ? ' active' : '') + '">상담·템플릿</a>'
     + '</div></div>';

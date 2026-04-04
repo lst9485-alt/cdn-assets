@@ -21,13 +21,14 @@
     + '<a href="' + root + 'dashboard/#todo" class="sb-sub">투두리스트</a>'
     + '<a href="' + root + 'dashboard/#projects" class="sb-sub">프로젝트</a>'
     + '<a href="' + root + 'dashboard/#okr" class="sb-sub">OKR·루틴</a>'
+    + '<a href="' + root + 'dashboard/sales.html" class="sb-sub">💰 매출</a>'
     + '<div class="sb-cat">프로세스</div>'
     + link(root + 'process/youtube.html', '🎬', '유튜브', 'youtube')
     + link(root + 'process/crm.html', '🤝', 'CRM', 'crm')
     + link(root + 'process/n8n.html', '⚙️', 'n8n', 'n8n')
     + link(root + 'process/settlement.html', '💰', '정산', 'settlement')
-    + '<a class="sb-sub sb-disabled">🌐 홈페이지 제작</a>'
-    + '<a class="sb-sub sb-disabled">📢 콘텐츠 마케팅</a>'
+    + link(root + 'process/homepage.html', '🌐', '홈페이지', 'homepage')
+    + link(root + 'process/content-marketing.html', '📢', '콘텐츠 마케팅', 'content-marketing')
     + '<div class="sb-cat">상담·템플릿</div>'
     + link(root + 'consult/', '📋', '회원 맞춤 페이지', 'consult')
     + '<a class="sb-sub sb-disabled">상담 준비 자료</a>';

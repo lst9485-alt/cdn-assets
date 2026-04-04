@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈페이지 제작 프로세스 - 운영 대시보드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
+        .page { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
+        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 32px; }
+        .flow { display: flex; flex-direction: column; gap: 0; }
+        .step { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 20px; position: relative; }
+        .step:hover { border-color: #0077C8; }
+        .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: #0077C8; color: white; border-radius: 50%; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+        .step-title { font-size: 16px; font-weight: 700; color: #051C2C; }
+        .step-desc { font-size: 13px; color: #64748B; padding-left: 40px; }
+        .arrow-down { text-align: center; color: #CBD5E1; font-size: 20px; line-height: 28px; }
+        .phase-divider { text-align: center; margin: 28px 0 16px; }
+        .phase-label { display: inline-block; background: #F1F5F9; color: #475569; font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 12px; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="./" class="back">&larr; 프로세스 목록</a>
+        <h1>🌐 홈페이지 제작 프로세스</h1>
+        <p class="subtitle">기획부터 런칭까지 6단계</p>
+
+        <div class="phase-divider"><span class="phase-label">기획 · 디자인</span></div>
+        <div class="flow">
+            <div class="step">
+                <div class="step-header"><span class="step-num">1</span></div>
+                <div class="step-title">기획</div>
+                <div class="step-desc">요구사항 정리, 사이트맵 설계, 페이지 구성 확정</div>
+            </div>
+            <div class="arrow-down">↓</div>
+            <div class="step">
+                <div class="step-header"><span class="step-num">2</span></div>
+                <div class="step-title">디자인</div>
+                <div class="step-desc">레퍼런스 수집, 시안 제작, 브랜드 컬러·폰트 적용</div>
+            </div>
+        </div>
+
+        <div class="phase-divider"><span class="phase-label">개발</span></div>
+        <div class="flow">
+            <div class="step">
+                <div class="step-header"><span class="step-num">3</span></div>
+                <div class="step-title">코딩</div>
+                <div class="step-desc">아임웹 HTML 위젯 코딩, 반응형 대응, 섹션별 구현</div>
+            </div>
+            <div class="arrow-down">↓</div>
+            <div class="step">
+                <div class="step-header"><span class="step-num">4</span></div>
+                <div class="step-title">PG 연동</div>
+                <div class="step-desc">결제 시스템 연결, 테스트 결제, 환불 프로세스 확인</div>
+            </div>
+        </div>
+
+        <div class="phase-divider"><span class="phase-label">오픈</span></div>
+        <div class="flow">
+            <div class="step">
+                <div class="step-header"><span class="step-num">5</span></div>
+                <div class="step-title">상품 등록</div>
+                <div class="step-desc">상품 정보 입력, 가격 설정, 옵션 구성, 상세페이지 작성</div>
+            </div>
+            <div class="arrow-down">↓</div>
+            <div class="step">
+                <div class="step-header"><span class="step-num">6</span></div>
+                <div class="step-title">런칭</div>
+                <div class="step-desc">최종 점검, 도메인 연결, 검색엔진 등록, 오픈 안내</div>
+            </div>
+        </div>
+    </div>
+<script src="../nav.js"></script>
+<script src="../sidebar.js"></script>
+</body>
+</html>
