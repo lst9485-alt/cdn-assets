@@ -57,6 +57,9 @@
         /* 게이지 */
         .gauge-wrap { display:flex; align-items:center; gap:16px; padding:10px 0; }
         .gauge-bar { flex:1; height:28px; border-radius:14px; overflow:hidden; position:relative; background:#E2E8F0; }
+        .gauge-bar::before,.gauge-bar::after { content:''; position:absolute; top:0; bottom:0; width:0; border-left:2px dashed var(--light-gray); z-index:1; }
+        .gauge-bar::before { left:30%; }
+        .gauge-bar::after { left:40%; }
         .gauge-tag { font-size:13px; font-weight:600; min-width:100px; }
         .gauge-fill { height:100%; border-radius:12px; transition:width .3s; }
         .gauge-label { font-size:20px; font-weight:800; min-width:70px; text-align:right; }
@@ -143,6 +146,7 @@
                     <div class="gauge-bar"><div class="gauge-fill" id="gaugeB" style="width:0;background:var(--orange)"></div></div>
                     <div class="gauge-label" id="gaugeLabelB" style="color:var(--orange)">0%</div>
                 </div>
+                <div style="font-size:12px;color:var(--gray);margin-top:4px;">30% 이하 안전 · 40% 초과 위험</div>
             </div>
         </div>
         <div class="rbox" id="repR" style="margin-top:14px;"></div>
@@ -276,12 +280,12 @@
             var pctA=Math.round(am/inc*100),pctB=Math.round(bm/inc*100);
             $('gaugeA').style.width=Math.min(pctA,100)+'%';
             $('gaugeA').style.background=pctA>40?'var(--red)':pctA>30?'var(--orange)':'var(--blue)';
-            $('gaugeTagA').textContent='A '+fF(am);
+            $('gaugeTagA').textContent='A 대출 '+fmt(aA);
             $('gaugeLabelA').textContent=pctA+'%';
             $('gaugeLabelA').style.color=pctA>40?'var(--red)':pctA>30?'var(--orange)':'var(--blue)';
             $('gaugeB').style.width=Math.min(pctB,100)+'%';
             $('gaugeB').style.background=pctB>40?'var(--red)':pctB>30?'var(--orange)':'var(--orange)';
-            $('gaugeTagB').textContent='B '+fF(bm);
+            $('gaugeTagB').textContent='B 대출 '+fmt(bA);
             $('gaugeLabelB').textContent=pctB+'%';
             $('gaugeLabelB').style.color=pctB>40?'var(--red)':pctB>30?'var(--orange)':'var(--orange)';
         }
@@ -331,7 +335,7 @@
         CAst=new Chart($('cAst'),{type:'line',data:{labels:lb,datasets:[
             {label:'내 단지',data:mD,borderColor:'#0077C8',fill:false,tension:.3,borderWidth:2,pointRadius:2},
             {label:'목표 단지',data:gD,borderColor:'#F59E0B',fill:false,tension:.3,borderWidth:2,pointRadius:2},
-            {label:'순자산',data:nD,borderColor:'#94A3B8',backgroundColor:'rgba(148,163,184,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#94A3B8'}
+            {label:'순자산(+대출)',data:nD,borderColor:'#94A3B8',backgroundColor:'rgba(148,163,184,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#94A3B8'}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
             legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fmt(ctx.parsed.y);}}},
