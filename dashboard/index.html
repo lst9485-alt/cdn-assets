@@ -273,7 +273,8 @@
                 var h = Math.max(4, Math.round(pct * 36 / 100));
                 var color = pct === 100 ? '#0077C8' : pct >= 50 ? '#94A3B8' : '#E2E8F0';
                 var d = new Date(day.date);
-                var label = (d.getMonth()+1) + '/' + d.getDate();
+                var dayNames = ['일','월','화','수','목','금','토'];
+                var label = dayNames[d.getDay()];
                 html += '<div style="flex:1;text-align:center"><div style="background:' + color + ';height:' + h + 'px;border-radius:2px;margin:0 auto;width:100%"></div><div style="font-size:9px;color:#94A3B8;margin-top:2px">' + label + '</div></div>';
             });
             html += '</div></div>';
