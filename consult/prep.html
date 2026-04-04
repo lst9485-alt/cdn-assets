@@ -52,7 +52,7 @@
         .input-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
         .input-group { display:flex; flex-direction:column; gap:4px; }
         .input-label { font-size:12px; font-weight:600; color:var(--text3); }
-        .input-field { border:1px solid var(--border); border-radius:8px; padding:10px 12px; font-size:15px; font-weight:600; color:var(--navy); font-family:inherit; outline:none; width:100%; transition:border-color .15s; }
+        .input-field { border:1px solid var(--border); border-radius:8px; padding:10px 12px; font-size:15px; font-weight:600; color:var(--navy); font-family:inherit; outline:none; width:100%; transition:border-color .15s; text-align:right; }
         .input-field:focus { border-color:var(--blue); }
         .input-unit { font-size:11px; color:var(--text3); margin-top:2px; }
 
@@ -98,7 +98,7 @@
 <div class="wrap">
     <div class="page-header">
         <h1 id="headerTitle">재무 계산기</h1>
-        <div class="sub" id="headerSub">내집마련 코칭 · 상담 준비 자료</div>
+        <div class="sub" id="headerSub">내집마련 코칭 · 상담 자료</div>
     </div>
 
     <div class="tabs">
@@ -115,42 +115,42 @@
             <div class="input-grid">
                 <div class="input-group">
                     <label class="input-label">보유 현금</label>
-                    <input class="input-field" type="number" id="l_cash" value="18000">
+                    <input class="input-field" type="text" inputmode="decimal" id="l_cash" value="18000">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">부동산 자산</label>
-                    <input class="input-field" type="number" id="l_estate" value="0">
+                    <input class="input-field" type="text" inputmode="decimal" id="l_estate" value="0">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">기타 자산</label>
-                    <input class="input-field" type="number" id="l_other" value="0">
+                    <input class="input-field" type="text" inputmode="decimal" id="l_other" value="0">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">기존 대출</label>
-                    <input class="input-field" type="number" id="l_debt" value="0">
+                    <input class="input-field" type="text" inputmode="decimal" id="l_debt" value="0">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">연소득 (세후)</label>
-                    <input class="input-field" type="number" id="l_income" value="7700">
+                    <input class="input-field" type="text" inputmode="decimal" id="l_income" value="7700">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">희망 아파트 가격</label>
-                    <input class="input-field" type="number" id="l_target" value="60000">
+                    <input class="input-field" type="text" inputmode="decimal" id="l_target" value="60000">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">대출 금리</label>
-                    <input class="input-field" type="number" id="l_rate" value="4.5" step="0.1">
+                    <input class="input-field" type="text" inputmode="decimal" id="l_rate" value="4.5" step="0.1">
                     <span class="input-unit">%</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">대출 기간</label>
-                    <input class="input-field" type="number" id="l_years" value="30">
+                    <input class="input-field" type="text" inputmode="decimal" id="l_years" value="30">
                     <span class="input-unit">년</span>
                 </div>
             </div>
@@ -172,17 +172,17 @@
             <div class="input-grid">
                 <div class="input-group">
                     <label class="input-label">대출 금액</label>
-                    <input class="input-field" type="number" id="r_amount" value="40000">
+                    <input class="input-field" type="text" inputmode="decimal" id="r_amount" value="40000">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">대출 기간</label>
-                    <input class="input-field" type="number" id="r_months" value="360">
+                    <input class="input-field" type="text" inputmode="decimal" id="r_months" value="360">
                     <span class="input-unit">개월</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">금리</label>
-                    <input class="input-field" type="number" id="r_rate" value="4.3" step="0.1">
+                    <input class="input-field" type="text" inputmode="decimal" id="r_rate" value="4.3" step="0.1">
                     <span class="input-unit">%</span>
                 </div>
             </div>
@@ -203,27 +203,27 @@
             <div class="input-grid">
                 <div class="input-group">
                     <label class="input-label">현재 모은 돈</label>
-                    <input class="input-field" type="number" id="s_current" value="18000">
+                    <input class="input-field" type="text" inputmode="decimal" id="s_current" value="18000">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">연 저축액</label>
-                    <input class="input-field" type="number" id="s_annual" value="2400">
+                    <input class="input-field" type="text" inputmode="decimal" id="s_annual" value="2400">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">투자 수익률</label>
-                    <input class="input-field" type="number" id="s_return" value="5" step="0.5">
+                    <input class="input-field" type="text" inputmode="decimal" id="s_return" value="5" step="0.5">
                     <span class="input-unit">%</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">목표 금액</label>
-                    <input class="input-field" type="number" id="s_goal" value="30000">
+                    <input class="input-field" type="text" inputmode="decimal" id="s_goal" value="30000">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">시뮬레이션 기간</label>
-                    <input class="input-field" type="number" id="s_years" value="10">
+                    <input class="input-field" type="text" inputmode="decimal" id="s_years" value="10">
                     <span class="input-unit">년</span>
                 </div>
             </div>
@@ -244,42 +244,42 @@
             <div class="input-grid">
                 <div class="input-group">
                     <label class="input-label">내 단지 현재가</label>
-                    <input class="input-field" type="number" id="u_my" value="50000">
+                    <input class="input-field" type="text" inputmode="decimal" id="u_my" value="50000">
                     <span class="input-unit">만원 (이번에 살 단지)</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">내 단지 연 상승률</label>
-                    <input class="input-field" type="number" id="u_myRate" value="3" step="0.5">
+                    <input class="input-field" type="text" inputmode="decimal" id="u_myRate" value="3" step="0.5">
                     <span class="input-unit">%</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">목표 단지 현재가</label>
-                    <input class="input-field" type="number" id="u_goal" value="130000">
+                    <input class="input-field" type="text" inputmode="decimal" id="u_goal" value="130000">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">목표 단지 연 상승률</label>
-                    <input class="input-field" type="number" id="u_goalRate" value="5" step="0.5">
+                    <input class="input-field" type="text" inputmode="decimal" id="u_goalRate" value="5" step="0.5">
                     <span class="input-unit">%</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">연 저축액</label>
-                    <input class="input-field" type="number" id="u_saving" value="2400">
+                    <input class="input-field" type="text" inputmode="decimal" id="u_saving" value="2400">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">투자 수익률</label>
-                    <input class="input-field" type="number" id="u_return" value="5" step="0.5">
+                    <input class="input-field" type="text" inputmode="decimal" id="u_return" value="5" step="0.5">
                     <span class="input-unit">%</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">대출 가능액</label>
-                    <input class="input-field" type="number" id="u_loan" value="40000">
+                    <input class="input-field" type="text" inputmode="decimal" id="u_loan" value="40000">
                     <span class="input-unit">만원</span>
                 </div>
                 <div class="input-group">
                     <label class="input-label">시뮬레이션 기간</label>
-                    <input class="input-field" type="number" id="u_years" value="10">
+                    <input class="input-field" type="text" inputmode="decimal" id="u_years" value="10">
                     <span class="input-unit">년</span>
                 </div>
             </div>
@@ -294,19 +294,36 @@
     </div>
 </div>
 
-<div class="page-footer">상담 준비용 내부 자료 · 우리동네재테크</div>
+<div class="page-footer">상담 자료 · 우리동네재테크</div>
 
 <script>
 (function(){
     // ─── 유틸 ───
     function $(id){ return document.getElementById(id); }
-    function val(id){ return Number($(id).value)||0; }
+    function val(id){ return Number($(id).value.toString().replace(/,/g,''))||0; }
     function fmt(v){
         if(v>=10000) return (v/10000).toFixed(1).replace(/\.0$/,'')+'억';
         if(v>=1000) return Math.round(v/1000)+'천만';
-        return v.toLocaleString()+'만';
+        return Math.round(v).toLocaleString()+'만';
     }
     function fmtFull(v){ return Math.round(v).toLocaleString()+'만원'; }
+    // 입력 필드 콤마 포맷
+    function commaFormat(el){
+        var pos=el.selectionStart;
+        var raw=el.value.replace(/,/g,'');
+        if(raw===''||raw==='-') return;
+        // 소수점 있는 필드(금리, 수익률)는 콤마 안 넣음
+        if(raw.indexOf('.')!==-1) return;
+        var num=parseInt(raw,10);
+        if(isNaN(num)) return;
+        var formatted=num.toLocaleString();
+        var addedCommas=formatted.length-raw.length;
+        el.value=formatted;
+        // 커서 위치 보정
+        var newPos=pos+addedCommas;
+        if(newPos<0) newPos=0;
+        el.setSelectionRange(newPos,newPos);
+    }
     function getP(n,d){ var r=new RegExp('[?&]'+n+'=([^&#]*)'); var m=r.exec(location.search); return m?decodeURIComponent(m[1]):d; }
     function getN(n,d){ var v=getP(n,''); return v?Number(v):d; }
 
@@ -328,12 +345,16 @@
         target:getN('target',60000), loan_want:getN('loan_want',47000),
         my_apt:getN('my_apt',50000), goal_apt:getN('goal_apt',130000)
     };
-    $('l_cash').value=defaults.cash; $('l_estate').value=defaults.estate;
-    $('l_other').value=defaults.other; $('l_debt').value=defaults.debt;
-    $('l_income').value=defaults.income; $('l_target').value=defaults.target;
-    $('s_current').value=defaults.cash; $('s_annual').value=defaults.saving;
-    $('u_my').value=defaults.my_apt; $('u_goal').value=defaults.goal_apt;
-    $('u_saving').value=defaults.saving;
+    // 값 세팅 + 콤마 포맷 (소수점 필드 제외)
+    function setVal(id, v){ var el=$(id); el.value=v; commaFormat(el); }
+    setVal('l_cash',defaults.cash); setVal('l_estate',defaults.estate);
+    setVal('l_other',defaults.other); setVal('l_debt',defaults.debt);
+    setVal('l_income',defaults.income); setVal('l_target',defaults.target);
+    setVal('s_current',defaults.cash); setVal('s_annual',defaults.saving);
+    setVal('s_goal',30000);
+    setVal('u_my',defaults.my_apt); setVal('u_goal',defaults.goal_apt);
+    setVal('u_saving',defaults.saving); setVal('u_loan',40000);
+    setVal('r_amount',40000);
 
     // ─── 탭 전환 ───
     document.querySelectorAll('.tab').forEach(function(t){
@@ -372,7 +393,7 @@
         $('loanResults').innerHTML=''
             +'<div class="result-card"><div class="result-label">순자산</div><div class="result-value green">'+fmt(netWorth)+'</div></div>'
             +'<div class="result-card"><div class="result-label">DSR 최대 대출</div><div class="result-value blue">'+fmt(maxLoan)+'</div><div class="result-sub">월 상환 '+fmtFull(Math.round(monthlyRepay))+'</div></div>'
-            +'<div class="result-card"><div class="result-label">LTV 최대 매수가</div><div class="result-value blue">'+fmt(maxAptLTV)+'</div><div class="result-sub">LTV 70% 기준</div></div>'
+            +'<div class="result-card"><div class="result-label">대출한도 기준 매수가</div><div class="result-value blue">'+fmt(maxAptLTV)+'</div><div class="result-sub">대출 '+fmt(maxLoan)+' = 매수가의 70%</div></div>'
             +'<div class="result-card"><div class="result-label">총 매수력</div><div class="result-value '+(gap>0?'red':'green')+'">'+fmt(buyingPower)+'</div><div class="result-sub">현금+최대대출</div></div>';
 
         // 차트
@@ -599,7 +620,7 @@
     // ─── 이벤트 바인딩 ───
     function bindInputs(prefix, fn){
         document.querySelectorAll('[id^="'+prefix+'"]').forEach(function(el){
-            el.addEventListener('input',fn);
+            el.addEventListener('input',function(){ commaFormat(el); fn(); });
         });
     }
     bindInputs('l_',renderLoan);
