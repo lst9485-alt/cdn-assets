@@ -255,11 +255,11 @@
             legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:13},filter:function(item){return item.text!=='매매가';}}},
             tooltip:{callbacks:{label:function(ctx){if(ctx.parsed.x===0)return '';return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
             annotation:{annotations:{
-                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:13},padding:4,position:'start'}},
-                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:13},padding:4,position:'end'}}
+                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:13},padding:4,position:'start',yAdjust:-30}},
+                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:13},padding:4,position:'start',yAdjust:-30}}
             }}
         },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:13}},grid:{color:'#F1F5F9'},max:xMax},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
-        $('cBuyChart').parentElement.style.height='140px';
+        $('cBuyChart').parentElement.style.height='160px';
 
         $('buyN').innerHTML='DSR 40%, 스트레스 금리 '+stressRt+'% (입력 '+rt+'% + 1.5%p), '+yr+'년, LTV 70% 기준<br>실제 대출: '+fmt(actual)+' (DSR '+fmt(mxDSR)+' / LTV '+fmt(mxLTV)+' 중 작은 값)<br>정책대출: 디딤돌(소득6천↓), 보금자리론(7천↓), 신생아특례(맞벌이2억↓)';
     }
