@@ -179,23 +179,37 @@
         countEl.textContent = 'KR ' + okr.length + '개';
 
         var pending = (t.total||0) - (t.done||0);
-        var routinePending = (r.total||0) - (r.done_today||0);
-        var html = '<div class="okr-stats">';
-        html += '<div class="okr-stat"><div class="okr-stat-label">미완료 태스크</div><div class="okr-stat-value">' + pending + '개</div>';
-        if (t.overdue > 0) html += '<div class="okr-stat-sub okr-stat-warn">지연 ' + t.overdue + '건</div>';
-        html += '</div>';
-        html += '<div class="okr-stat"><div class="okr-stat-label">남은 루틴</div><div class="okr-stat-value">' + routinePending + '개</div>';
-        html += '<div class="okr-stat-sub">' + (r.total||0) + '개 중 ' + (r.done_today||0) + '개 완료</div></div>';
+        var html = '';
+
+        // 미완료 태스크
+        html += '<div class="okr-stat" style="margin-bottom:12px;text-align:left"><div class="okr-stat-label">미완료 태스크 <strong>' + pending + '개</strong>';
+        if (t.overdue > 0) html += ' · <span class="okr-stat-warn">지연 ' + t.overdue + '</span>';
+        html += '</div></div>';
+
+        // 오늘 루틴 체크리스트
+        html += '<div style="margin-bottom:16px">';
+        html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:6px">오늘 루틴</div>';
+        var items = r.items || [];
+        items.forEach(function(item) {
+            var cls = item.done ? 'todo-item done' : 'todo-item';
+            html += '<div class="' + cls + '"><input type="checkbox"' + (item.done ? ' checked' : '') + '><span>' + esc(item.name) + '</span></div>';
+        });
         html += '</div>';
 
-        okr.forEach(function(kr) {
-            var pct = 0;
-            if (kr.rate) { var m = kr.rate.match(/([\d.]+)/); if (m) pct = parseFloat(m[1]); }
-            html += '<div class="okr-kr"><div class="okr-kr-header"><span class="okr-kr-title">' + esc(kr.title) + '</span><span class="okr-kr-rate">' + esc(kr.rate||'0%') + '</span></div>';
-            html += '<div class="okr-kr-bar"><div class="okr-kr-fill" style="width:' + Math.min(pct,100) + '%"></div></div>';
-            if (kr.target != null && kr.current != null) html += '<div class="okr-kr-detail">현재 ' + kr.current + ' / 목표 ' + kr.target + '</div>';
+        // OKR Key Results — 별도 박스
+        if (okr.length > 0) {
+            html += '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px">';
+            html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:8px">OKR Key Results</div>';
+            okr.forEach(function(kr) {
+                var pct = 0;
+                if (kr.rate) { var m = kr.rate.match(/([\d.]+)/); if (m) pct = parseFloat(m[1]); }
+                html += '<div class="okr-kr"><div class="okr-kr-header"><span class="okr-kr-title">' + esc(kr.title) + '</span><span class="okr-kr-rate">' + esc(kr.rate||'0%') + '</span></div>';
+                html += '<div class="okr-kr-bar"><div class="okr-kr-fill" style="width:' + Math.min(pct,100) + '%"></div></div>';
+                if (kr.target != null && kr.current != null) html += '<div class="okr-kr-detail">현재 ' + kr.current + ' / 목표 ' + kr.target + '</div>';
+                html += '</div>';
+            });
             html += '</div>';
-        });
+        }
         html += '<div class="updated">' + fmtDate(data.updated) + '</div>';
         container.innerHTML = html;
     }
