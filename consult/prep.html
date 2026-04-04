@@ -155,10 +155,14 @@
     <div class="tc" id="tab-asset">
         <div class="verdict" id="astV"></div>
         <div class="cmp">
-            <div class="cmp-card"><span class="cmp-badge ba">내 단지</span>
+            <div class="cmp-card"><span class="cmp-badge ba">내 상황</span>
                 <div class="ig ig1">
-                    <div><div class="il">현재가</div><div class="iw"><input class="if" id="a_my" inputmode="decimal"><span class="is">만원</span></div></div>
+                    <div><div class="il">내 단지 현재가</div><div class="iw"><input class="if" id="a_my" inputmode="decimal"><span class="is">만원</span></div></div>
                     <div><div class="il">연 상승률</div><div class="iw"><input class="if" id="a_mr" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="a_sv" inputmode="decimal"><span class="is">만원</span></div></div>
+                    <div><div class="il">투자 수익률</div><div class="iw"><input class="if" id="a_rt" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">대출 가능액</div><div class="iw"><input class="if" id="a_ln" inputmode="decimal"><span class="is">만원</span></div></div>
+                    <div><div class="il">기간</div><div class="iw"><input class="if" id="a_yr" inputmode="decimal"><span class="is">년</span></div></div>
                 </div>
             </div>
             <div class="cmp-card"><span class="cmp-badge bb">목표 단지</span>
@@ -166,15 +170,6 @@
                     <div><div class="il">현재가</div><div class="iw"><input class="if" id="a_gl" inputmode="decimal"><span class="is">만원</span></div></div>
                     <div><div class="il">연 상승률</div><div class="iw"><input class="if" id="a_gr" inputmode="decimal"><span class="is">%</span></div></div>
                 </div>
-            </div>
-        </div>
-        <div class="card" style="margin-top:14px;">
-            <div class="card-t">저축 · 기간</div>
-            <div class="ig">
-                <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="a_sv" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">투자 수익률</div><div class="iw"><input class="if" id="a_rt" inputmode="decimal"><span class="is">%</span></div></div>
-                <div><div class="il">대출 가능액</div><div class="iw"><input class="if" id="a_ln" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">기간</div><div class="iw"><input class="if" id="a_yr" inputmode="decimal"><span class="is">년</span></div></div>
             </div>
         </div>
         <div class="card"><div class="card-t">갈아타기 시뮬레이션</div><div class="cw"><canvas id="cAst"></canvas></div></div>
@@ -251,8 +246,8 @@
             legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:13},filter:function(item){return item.text!=='매매가';}}},
             tooltip:{callbacks:{label:function(ctx){if(ctx.parsed.x===0)return '';return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
             annotation:{annotations:{
-                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:13},padding:4,position:'start',yAdjust:-20}},
-                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:13},padding:4,position:'start',yAdjust:-20}}
+                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:13},padding:4,position:'start',yAdjust:-40}},
+                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:13},padding:4,position:'start',yAdjust:-40}}
             }}
         },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:13}},grid:{color:'#F1F5F9'},max:xMax},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
         $('cBuyChart').parentElement.style.height='160px';
