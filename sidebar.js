@@ -18,6 +18,9 @@
   sidebar.id = 'sidebar';
   sidebar.innerHTML = ''
     + link(root + 'dashboard/', '📊', '대시보드', 'dashboard')
+    + '<a href="' + root + 'dashboard/#todo" class="sb-sub">투두리스트</a>'
+    + '<a href="' + root + 'dashboard/#projects" class="sb-sub">프로젝트</a>'
+    + '<a href="' + root + 'dashboard/#okr" class="sb-sub">OKR·루틴</a>'
     + '<div class="sb-cat">프로세스</div>'
     + link(root + 'process/youtube.html', '🎬', '유튜브', 'youtube')
     + link(root + 'process/crm.html', '🤝', 'CRM', 'crm')
@@ -33,6 +36,8 @@
     + '.sb-link { display: block; padding: 6px 10px; font-size: 13px; font-weight: 600; color: #64748B; text-decoration: none; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }'
     + '.sb-link:hover { color: #0077C8; background: #F1F5F9; }'
     + '.sb-link.sb-active { color: #0077C8; background: #E8F3FF; font-weight: 700; }'
+    + '.sb-sub { display: block; padding: 3px 10px 3px 28px; font-size: 12px; font-weight: 500; color: #94A3B8; text-decoration: none; border-radius: 4px; transition: all 0.15s; }'
+    + '.sb-sub:hover { color: #0077C8; background: #F1F5F9; }'
     + '@media (max-width: 1200px) { #sidebar { display: none; } }';
 
   document.head.appendChild(style);
