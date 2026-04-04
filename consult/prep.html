@@ -302,7 +302,8 @@
     function rAst(){
         var my=V('a_my'),mr=V('a_mr')/100,gl=V('a_gl'),gr=V('a_gr')/100,sv=V('a_sv'),rt=V('a_rt')/100,ln=V('a_ln'),yr=V('a_yr');
         var lb=[],mD=[],gD=[],nD=[],levD=[],cy=null,ty=new Date().getFullYear();
-        var selfCapital=my;
+        var purchaseLoan=my*0.7;
+        var equity0=my-purchaseLoan;
 
         for(var y=0;y<=yr;y++){
             lb.push(String(ty+y));
@@ -311,9 +312,9 @@
             var nw=mv+savings+ln;
             mD.push(Math.round(mv));gD.push(Math.round(gv));nD.push(Math.round(nw));
 
-            if(y>0&&selfCapital>0){
-                var gain=mv-my;
-                var levReturn=gain/selfCapital*100/y;
+            var equityY=mv-purchaseLoan;
+            if(equityY>0){
+                var levReturn=mr*100*(mv/equityY);
                 levD.push(Math.round(levReturn*10)/10);
             }else{levD.push(0);}
 
