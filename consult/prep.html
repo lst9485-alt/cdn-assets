@@ -56,8 +56,9 @@
 
         /* 게이지 */
         .gauge-wrap { display:flex; align-items:center; gap:16px; padding:10px 0; }
-        .gauge-bar { flex:1; height:28px; border-radius:14px; overflow:hidden; position:relative; background:#E2E8F0; }
-        .gauge-bar::after { content:'40% 초과 위험'; position:absolute; left:40%; top:0; bottom:0; border-left:2px dashed var(--light-gray); z-index:1; font-size:10px; color:var(--light-gray); padding-left:4px; padding-top:32px; white-space:nowrap; }
+        .gauge-bar { flex:1; height:28px; border-radius:14px; position:relative; background:#E2E8F0; }
+        .gauge-fill { border-radius:14px; }
+        .gauge-bar::after { content:'40% 초과 위험'; position:absolute; left:40%; top:0; bottom:0; border-left:2px dashed var(--light-gray); z-index:2; font-size:10px; color:var(--light-gray); padding-left:4px; padding-top:32px; white-space:nowrap; }
         .gauge-tag { font-size:15px; font-weight:700; min-width:110px; }
         .gauge-fill { height:100%; border-radius:12px; transition:width .3s; }
         .gauge-label { font-size:20px; font-weight:800; min-width:70px; text-align:right; }
@@ -270,7 +271,7 @@
         var vd=$('repV');
         var bigger=am>bm?'A':'B',smaller=am>bm?'B':'A';
         vd.className='verdict';
-        vd.innerHTML='<div class="v-text">'+smaller+'가 월 '+fF(Math.abs(df))+' 적음</div><div class="v-sub">A: '+fF(am)+'/월 · B: '+fF(bm)+'/월</div>';
+        vd.innerHTML='<div class="v-text">'+smaller+'가 월 '+fF(Math.abs(df))+' ↓</div><div class="v-sub">A: '+fF(am)+'/월 · B: '+fF(bm)+'/월</div>';
 
         // 소득 대비 게이지
         if(inc>0){
@@ -324,14 +325,18 @@
         }
 
         var vd=$('astV');
-        if(cy!==null){vd.className='verdict';vd.innerHTML='<div class="v-text">'+(ty+cy)+'년 ('+cy+'년 후) 갈아타기 가능</div><div class="v-sub">순자산이 목표 단지 도달</div>';}
-        else{vd.className='verdict warn';vd.innerHTML='<div class="v-text">'+yr+'년 내 미도달</div><div class="v-sub">'+yr+'년 후 순자산 '+fmt(nD[nD.length-1])+' / 목표 '+fmt(gD[gD.length-1])+'</div>';}
+        // 목표 단지 자기자본 30% 데이터
+        var needD=[];for(var y2=0;y2<=yr;y2++)needD.push(Math.round(gD[y2]*0.3));
+
+        if(cy!==null){vd.className='verdict';vd.innerHTML='<div class="v-text">'+(ty+cy)+'년 ('+cy+'년 후) 갈아타기 가능</div><div class="v-sub">순자산 '+fmt(nD[cy])+' ≥ 필요 자기자본 '+fmt(needD[cy])+' (목표가의 30%)</div>';}
+        else{vd.className='verdict warn';vd.innerHTML='<div class="v-text">'+yr+'년 내 미도달</div><div class="v-sub">'+yr+'년 후 순자산 '+fmt(nD[nD.length-1])+' / 필요 '+fmt(needD[needD.length-1])+'</div>';}
 
         if(CAst)CAst.destroy();
-        var an={};if(cy!==null){an.cp={type:'point',xValue:String(ty+cy),yValue:gD[cy],backgroundColor:'#0077C8',borderColor:'#fff',borderWidth:3,radius:7};an.cl={type:'label',xValue:String(ty+cy),yValue:gD[cy],content:['갈아타기 가능'],font:{size:13,weight:'bold'},backgroundColor:'rgba(0,119,200,.9)',color:'#fff',padding:5,borderRadius:4,yAdjust:-22};}
+        var an={};if(cy!==null){an.cp={type:'point',xValue:String(ty+cy),yValue:nD[cy],backgroundColor:'#0077C8',borderColor:'#fff',borderWidth:3,radius:7};an.cl={type:'label',xValue:String(ty+cy),yValue:nD[cy],content:['갈아타기 가능'],font:{size:13,weight:'bold'},backgroundColor:'rgba(0,119,200,.9)',color:'#fff',padding:5,borderRadius:4,yAdjust:-22};}
         CAst=new Chart($('cAst'),{type:'line',data:{labels:lb,datasets:[
             {label:'내 단지',data:mD,borderColor:'#0077C8',fill:false,tension:.3,borderWidth:2,pointRadius:2},
             {label:'목표 단지',data:gD,borderColor:'#F59E0B',fill:false,tension:.3,borderWidth:2,pointRadius:2},
+            {label:'필요 자기자본 (30%)',data:needD,borderColor:'#F59E0B',borderDash:[6,3],fill:false,tension:.3,borderWidth:1.5,pointRadius:0},
             {label:'순자산(+대출)',data:nD,borderColor:'#94A3B8',backgroundColor:'rgba(148,163,184,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#94A3B8'}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
             legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
