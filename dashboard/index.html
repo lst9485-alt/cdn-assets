@@ -262,6 +262,23 @@
 
         html += '</div>';
 
+        // 이번달 매출 요약 (sales.json에서 로드)
+        html += '<div id="sales-summary"></div>';
+        fetch('../data/sales.json').then(function(r){return r.json()}).then(function(sd){
+            var s = sd.summary; if (!s || !s.current_month_label) return;
+            var mo = s.current_month_label.replace(/^\d{4}-0?/,'') + '\uc6d4';
+            var fmt = function(n){ return n >= 10000 ? Math.round(n/10000) + '\ub9cc\uc6d0' : n.toLocaleString() + '\uc6d0'; };
+            var arrow = s.change_pct.startsWith('+') ? '\u25b2' : s.change_pct.startsWith('-') ? '\u25bc' : '';
+            var color = s.change_pct.startsWith('+') ? '#059669' : s.change_pct.startsWith('-') ? '#DC2626' : '#64748B';
+            var el = document.getElementById('sales-summary');
+            el.innerHTML = '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between">'
+              + '<div><div style="font-size:13px;font-weight:700;color:#475569">' + mo + ' \ub9e4\ucd9c</div>'
+              + '<div style="font-size:20px;font-weight:800;color:#051C2C">' + fmt(s.current_month) + '</div>'
+              + '<div style="font-size:11px;color:#94A3B8">' + (s.total_customers||0) + '\uba85 \ub204\uc801</div></div>'
+              + '<div style="text-align:right"><div style="font-size:14px;font-weight:700;color:' + color + '">' + arrow + ' ' + s.change_pct + '</div>'
+              + '<div style="font-size:11px;color:#94A3B8">\uc804\uc6d4 \ub300\ube44</div></div></div>';
+        }).catch(function(){});
+
         // 이번주 루틴 통계
         var ws = r.weekly_stats;
         if (ws && ws.days && ws.days.length > 0) {
