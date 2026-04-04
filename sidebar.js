@@ -28,7 +28,7 @@
 
   var style = document.createElement('style');
   style.textContent = ''
-    + '#sidebar { position: fixed; top: 48px; left: calc(50% + 420px); width: 140px; height: calc(100vh - 48px); padding: 16px 0; z-index: 90; }'
+    + '#sidebar { position: fixed; top: 48px; right: max(16px, calc(50% - 560px)); width: 140px; height: calc(100vh - 48px); padding: 16px 0; z-index: 90; }'
     + '.sb-cat { font-size: 10px; font-weight: 800; color: #B0B8C4; letter-spacing: 1px; padding: 14px 10px 4px; text-transform: uppercase; }'
     + '.sb-link { display: block; padding: 6px 10px; font-size: 13px; font-weight: 600; color: #64748B; text-decoration: none; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }'
     + '.sb-link:hover { color: #0077C8; background: #F1F5F9; }'
