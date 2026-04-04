@@ -67,13 +67,6 @@
         .content { padding: 48px 40px; }
 
         .intro-section { margin-bottom: 40px; text-align: center; }
-        .intro-badge {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 8px 14px; background: var(--primary-light);
-            color: var(--primary-blue); border-radius: 20px;
-            font-size: 13px; font-weight: 600; margin-bottom: 16px;
-        }
-        .intro-badge-dot { width: 6px; height: 6px; background: var(--success-green); border-radius: 50%; }
         .intro-text { font-size: 26px; font-weight: 700; line-height: 1.4; letter-spacing: -0.3px; margin-bottom: 10px; }
         .intro-text .highlight { color: var(--primary-blue); }
         .intro-subtext { font-size: 16px; color: var(--text-secondary); }
@@ -180,7 +173,7 @@
 
         @media (max-width: 768px) {
             .container { margin: 0; border-radius: 0; box-shadow: none; }
-            .header { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+            .header { padding: 20px; }
             .header-branding h1 { font-size: 21px; }
             .content { padding: 32px 20px; }
             .intro-text { font-size: 23px; }
@@ -204,15 +197,11 @@
 
         <div class="content">
             <div class="intro-section">
-                <div class="intro-badge">
-                    <span class="intro-badge-dot"></span>
-                    <span>우리동네 재테크</span>
-                </div>
                 <h2 class="intro-text">내집마련 코칭 <span class="highlight" id="introName">리포트</span></h2>
                 <p class="intro-subtext">회원님을 위한 맞춤형 내집마련 플랜</p>
             </div>
 
-            <div style="background: #F8FAFC; border-radius: 12px; padding: 20px; margin-bottom: 32px;">
+            <div style="background: #F8FAFC; border: 2px solid #1A1A1A; border-radius: 12px; padding: 20px; margin-bottom: 32px;">
                 <h3 style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">상담 내용을 바탕으로 정리된 핵심 자료들을 확인해 주세요.</h3>
                 <div class="info-grid">
                     <div class="info-card">
