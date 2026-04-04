@@ -1,0 +1,270 @@
+{
+  "updated": "2026-04-04T16:39:00.307204+09:00",
+  "summary": {
+    "current_month": 840000,
+    "current_month_label": "2026-04",
+    "last_month": 3600000,
+    "last_month_label": "2026-03",
+    "change_pct": "-76.7%",
+    "total_customers": 116
+  },
+  "monthly": [
+    {
+      "month": "2025-05",
+      "revenue": 100000,
+      "customers": 2
+    },
+    {
+      "month": "2025-06",
+      "revenue": 400000,
+      "customers": 5
+    },
+    {
+      "month": "2025-07",
+      "revenue": 600000,
+      "customers": 6
+    },
+    {
+      "month": "2025-08",
+      "revenue": 650000,
+      "customers": 5
+    },
+    {
+      "month": "2025-09",
+      "revenue": 1800000,
+      "customers": 11
+    },
+    {
+      "month": "2025-10",
+      "revenue": 5500000,
+      "customers": 20
+    },
+    {
+      "month": "2025-11",
+      "revenue": 3450000,
+      "customers": 10
+    },
+    {
+      "month": "2025-12",
+      "revenue": 6400000,
+      "customers": 16
+    },
+    {
+      "month": "2026-01",
+      "revenue": 4800000,
+      "customers": 12
+    },
+    {
+      "month": "2026-02",
+      "revenue": 3800000,
+      "customers": 10
+    },
+    {
+      "month": "2026-03",
+      "revenue": 3600000,
+      "customers": 9
+    },
+    {
+      "month": "2026-04",
+      "revenue": 840000,
+      "customers": 2
+    }
+  ],
+  "weekly": [
+    {
+      "week_start": "2025-10-08",
+      "revenue": 2400000,
+      "customers": 9
+    },
+    {
+      "week_start": "2025-10-15",
+      "revenue": 1500000,
+      "customers": 5
+    },
+    {
+      "week_start": "2025-10-22",
+      "revenue": 900000,
+      "customers": 3
+    },
+    {
+      "week_start": "2025-10-29",
+      "revenue": 1550000,
+      "customers": 5
+    },
+    {
+      "week_start": "2025-11-05",
+      "revenue": 1050000,
+      "customers": 3
+    },
+    {
+      "week_start": "2025-11-12",
+      "revenue": 350000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-11-19",
+      "revenue": 400000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-11-26",
+      "revenue": 2000000,
+      "customers": 5
+    },
+    {
+      "week_start": "2025-12-03",
+      "revenue": 1600000,
+      "customers": 4
+    },
+    {
+      "week_start": "2025-12-10",
+      "revenue": 2800000,
+      "customers": 7
+    },
+    {
+      "week_start": "2025-12-17",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-12-24",
+      "revenue": 800000,
+      "customers": 2
+    },
+    {
+      "week_start": "2025-12-31",
+      "revenue": 1200000,
+      "customers": 3
+    },
+    {
+      "week_start": "2026-01-07",
+      "revenue": 1200000,
+      "customers": 3
+    },
+    {
+      "week_start": "2026-01-14",
+      "revenue": 1600000,
+      "customers": 4
+    },
+    {
+      "week_start": "2026-01-21",
+      "revenue": 1200000,
+      "customers": 3
+    },
+    {
+      "week_start": "2026-01-28",
+      "revenue": 1600000,
+      "customers": 4
+    },
+    {
+      "week_start": "2026-02-04",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-02-11",
+      "revenue": 400000,
+      "customers": 1
+    },
+    {
+      "week_start": "2026-02-18",
+      "revenue": 2000000,
+      "customers": 5
+    },
+    {
+      "week_start": "2026-02-25",
+      "revenue": 800000,
+      "customers": 2
+    },
+    {
+      "week_start": "2026-03-04",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-03-11",
+      "revenue": 400000,
+      "customers": 1
+    },
+    {
+      "week_start": "2026-03-16",
+      "revenue": 800000,
+      "customers": 2
+    },
+    {
+      "week_start": "2026-03-23",
+      "revenue": 800000,
+      "customers": 2
+    },
+    {
+      "week_start": "2026-03-30",
+      "revenue": 0,
+      "customers": 0
+    }
+  ],
+  "by_utm": [
+    {
+      "utm": "(직접)",
+      "count": 102,
+      "revenue": 28450000
+    },
+    {
+      "utm": "yt_home",
+      "count": 6,
+      "revenue": 2440000
+    },
+    {
+      "utm": "yt_045_key1",
+      "count": 3,
+      "revenue": 1200000
+    },
+    {
+      "utm": "yt_068_daejeon",
+      "count": 2,
+      "revenue": 800000
+    },
+    {
+      "utm": "yt_070",
+      "count": 1,
+      "revenue": 400000
+    },
+    {
+      "utm": "yt_069",
+      "count": 1,
+      "revenue": 400000
+    },
+    {
+      "utm": "yt_021_030",
+      "count": 1,
+      "revenue": 400000
+    }
+  ],
+  "by_purpose": [
+    {
+      "purpose": "내집마련",
+      "count": 100,
+      "revenue": 29940000,
+      "ratio": "54.8%"
+    },
+    {
+      "purpose": "투자",
+      "count": 69,
+      "revenue": 20500000,
+      "ratio": "37.6%"
+    },
+    {
+      "purpose": "기타",
+      "count": 18,
+      "revenue": 4150000,
+      "ratio": "7.6%"
+    }
+  ],
+  "expenses": [
+    {
+      "month": "2026-04",
+      "income": 0,
+      "expense": 500000,
+      "profit": -500000
+    }
+  ]
+}

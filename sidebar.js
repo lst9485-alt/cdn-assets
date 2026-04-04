@@ -42,7 +42,8 @@
     + link(root + 'process/content-marketing.html', ic.content, '콘텐츠 마케팅', 'content-marketing')
     + '<div class="sb-cat">상담·템플릿</div>'
     + link(root + 'consult/', ic.doc, '회원 맞춤 페이지', 'consult')
-    + '<a class="sb-sub sb-disabled">상담 준비 자료</a>';
+    + '<a class="sb-sub sb-disabled">상담 준비 자료</a>'
+;
 
   var style = document.createElement('style');
   style.textContent = ''

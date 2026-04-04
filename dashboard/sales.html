@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <title>매출 대시보드 - 운영 대시보드</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
@@ -16,16 +17,23 @@
         .section { margin-bottom: 32px; }
         .section-title { font-size: 16px; font-weight: 700; color: #051C2C; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
         .section-title span { font-size: 20px; }
-        .placeholder { background: white; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 40px 24px; text-align: center; }
-        .placeholder-title { font-size: 15px; font-weight: 700; color: #475569; margin-bottom: 6px; }
-        .placeholder-desc { font-size: 13px; color: #94A3B8; }
-        .badge-soon { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #FEF3C7; color: #D97706; margin-left: 8px; }
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
         .stat-card { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 20px; text-align: center; }
         .stat-label { font-size: 12px; color: #94A3B8; font-weight: 600; margin-bottom: 4px; }
         .stat-value { font-size: 24px; font-weight: 800; color: #051C2C; }
         .stat-sub { font-size: 11px; color: #64748B; margin-top: 2px; }
-        @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
+        .chart-box { background: white; border-radius: 12px; padding: 20px; border: 1px solid #E2E8F0; }
+        .chart-box canvas { max-height: 260px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; padding: 10px 8px; border-bottom: 2px solid #E2E8F0; color: #64748B; font-weight: 600; font-size: 12px; }
+        td { padding: 10px 8px; border-bottom: 1px solid #F1F5F9; }
+        tr:hover td { background: #F8FAFC; }
+        .text-right { text-align: right; }
+        .badge-up { color: #059669; font-weight: 700; }
+        .badge-down { color: #DC2626; font-weight: 700; }
+        .updated { text-align: right; font-size: 11px; color: #94A3B8; margin-top: 24px; }
+        .error-msg { text-align: center; padding: 40px; color: #94A3B8; }
+        @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } .stat-value { font-size: 20px; } }
     </style>
 </head>
 <body>
@@ -36,48 +44,176 @@
 
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-label">이번 달 매출</div>
-                <div class="stat-value" style="color: #94A3B8;">—</div>
-                <div class="stat-sub">데이터 연동 예정</div>
+                <div class="stat-label" id="cur-label">이번 달 ���출</div>
+                <div class="stat-value" id="cur-value" style="color:#94A3B8;">—</div>
+                <div class="stat-sub" id="cur-sub"></div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">지난 달 매출</div>
-                <div class="stat-value" style="color: #94A3B8;">—</div>
-                <div class="stat-sub">데이터 연동 예정</div>
+                <div class="stat-label" id="last-label">지난 달 매출</div>
+                <div class="stat-value" id="last-value" style="color:#94A3B8;">—</div>
+                <div class="stat-sub" id="last-sub"></div>
             </div>
             <div class="stat-card">
                 <div class="stat-label">전월 대비</div>
-                <div class="stat-value" style="color: #94A3B8;">—</div>
+                <div class="stat-value" id="change-value" style="color:#94A3B8;">—</div>
                 <div class="stat-sub">증감률</div>
             </div>
         </div>
 
         <div class="section">
-            <div class="section-title"><span>📈</span> 월별 매출 추이 <span class="badge-soon">연동 예정</span></div>
-            <div class="placeholder">
-                <div class="placeholder-title">월별 매출 차트</div>
-                <div class="placeholder-desc">콘텐츠관리시트에서 월별 매출 데이터를 가져와 차트로 표시합니다</div>
-            </div>
+            <div class="section-title"><span>📈</span> 월별 매출 추이</div>
+            <div class="chart-box"><canvas id="chart-monthly"></canvas></div>
         </div>
 
         <div class="section">
-            <div class="section-title"><span>🎬</span> 영상별 매출 <span class="badge-soon">연동 예정</span></div>
-            <div class="placeholder">
-                <div class="placeholder-title">영상별 매출 테이블</div>
-                <div class="placeholder-desc">각 영상의 조회수, 클릭률, 상담 전환, 매출 기여도를 테이블로 표시합니다</div>
-            </div>
+            <div class="section-title"><span>🎬</span> 유입 채널별 매출</div>
+            <div class="chart-box" id="utm-table-wrap"></div>
         </div>
 
         <div class="section">
-            <div class="section-title"><span>📊</span> 상품별 매출 <span class="badge-soon">연동 예정</span></div>
-            <div class="placeholder">
-                <div class="placeholder-title">상품·서비스별 매출 비중</div>
-                <div class="placeholder-desc">상담 패키지, 개별 서비스 등 상품별 매출 비중을 표시합니다</div>
+            <div class="section-title"><span>📊</span> 상담목적별 매출</div>
+            <div class="chart-box" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+                <div style="width:200px;height:200px;"><canvas id="chart-purpose"></canvas></div>
+                <div id="purpose-legend" style="font-size:13px;"></div>
             </div>
         </div>
+
+        <div class="updated" id="updated"></div>
     </div>
+
 <script src="../nav.js"></script>
 <script src="../footer.js"></script>
 <script src="../sidebar.js"></script>
+<script>
+(function() {
+    const fmt = n => {
+        if (n >= 10000) return Math.round(n / 10000) + '만��';
+        if (n >= 1000) return (n / 1000).toFixed(0) + '천원';
+        return n + '원';
+    };
+    const fmtFull = n => new Intl.NumberFormat('ko-KR').format(n) + '원';
+    const monthLabel = m => {
+        const [y, mo] = m.split('-');
+        return (y === new Date().getFullYear().toString() ? '' : y.slice(2) + '.') + parseInt(mo) + '월';
+    };
+
+    fetch('../data/sales.json')
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(render)
+        .catch(() => {
+            document.querySelector('.page').innerHTML += '<div class="error-msg">매출 데이터를 불러올 수 없습니다</div>';
+        });
+
+    function render(d) {
+        const s = d.summary;
+
+        // stat cards
+        const curEl = document.getElementById('cur-value');
+        curEl.textContent = fmt(s.current_month);
+        curEl.style.color = '#051C2C';
+        document.getElementById('cur-label').textContent = s.current_month_label.replace(/^\d{4}-0?/, '') + '월 매출';
+        document.getElementById('cur-sub').textContent = '누적 고객 ' + s.total_customers + '명';
+
+        const lastEl = document.getElementById('last-value');
+        lastEl.textContent = fmt(s.last_month);
+        lastEl.style.color = '#051C2C';
+        document.getElementById('last-label').textContent = s.last_month_label.replace(/^\d{4}-0?/, '') + '월 매출';
+
+        const changeEl = document.getElementById('change-value');
+        changeEl.textContent = s.change_pct;
+        if (s.change_pct.startsWith('+')) {
+            changeEl.style.color = '#059669';
+        } else if (s.change_pct.startsWith('-')) {
+            changeEl.style.color = '#DC2626';
+        } else {
+            changeEl.style.color = '#64748B';
+        }
+
+        // monthly chart
+        if (d.monthly.length) {
+            const ctx = document.getElementById('chart-monthly').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: d.monthly.map(m => monthLabel(m.month)),
+                    datasets: [{
+                        label: '매출',
+                        data: d.monthly.map(m => m.revenue),
+                        backgroundColor: '#0077C8',
+                        borderRadius: 6,
+                        barPercentage: 0.6,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => fmtFull(ctx.raw) + ' (' + d.monthly[ctx.dataIndex].customers + '명)'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { callback: v => fmt(v) },
+                            grid: { color: '#F1F5F9' }
+                        },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // UTM table
+        if (d.by_utm.length) {
+            let html = '<table><thead><tr><th>채널</th><th class="text-right">건수</th><th class="text-right">매출</th></tr></thead><tbody>';
+            d.by_utm.forEach(u => {
+                const label = u.utm === '(직접)' ? '직접 유입' : u.utm.replace('yt_', '영상 #');
+                html += `<tr><td>${label}</td><td class="text-right">${u.count}건</td><td class="text-right">${fmt(u.revenue)}</td></tr>`;
+            });
+            html += '</tbody></table>';
+            document.getElementById('utm-table-wrap').innerHTML = html;
+        }
+
+        // purpose chart
+        if (d.by_purpose.length) {
+            const colors = ['#0077C8', '#059669', '#F59E0B', '#8B5CF6'];
+            const ctx2 = document.getElementById('chart-purpose').getContext('2d');
+            new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: d.by_purpose.map(p => p.purpose),
+                    datasets: [{
+                        data: d.by_purpose.map(p => p.revenue),
+                        backgroundColor: colors.slice(0, d.by_purpose.length),
+                        borderWidth: 0,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: ctx => ctx.label + ': ' + fmtFull(ctx.raw) } }
+                    },
+                    cutout: '60%',
+                }
+            });
+            let legend = '';
+            d.by_purpose.forEach((p, i) => {
+                legend += `<div style="margin-bottom:6px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${colors[i]};margin-right:6px;"></span><strong>${p.purpose}</strong> ${p.ratio} (${fmt(p.revenue)})</div>`;
+            });
+            document.getElementById('purpose-legend').innerHTML = legend;
+        }
+
+        // updated
+        if (d.updated) {
+            const dt = new Date(d.updated);
+            document.getElementById('updated').textContent = '마지막 업데이트: ' + dt.toLocaleString('ko-KR');
+        }
+    }
+})();
+</script>
 </body>
 </html>
