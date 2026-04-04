@@ -89,7 +89,7 @@
 
             <!-- OKR -->
             <div class="column" id="col-okr">
-                <div class="col-header">🎯 OKR · 태스크 <span class="count" id="okr-count">—</span></div>
+                <div class="col-header">🎯 OKR · 태스크 <span class="count" id="okr-count"></span></div>
                 <div id="okr-content"><div class="error">로딩 중...</div></div>
             </div>
         </div>
@@ -182,7 +182,9 @@
 
     function render(data) {
         var t = data.tasks || {}, r = data.routines || {}, okr = data.okr || [];
-        countEl.textContent = 'KR ' + okr.length + '개';
+        var days = ['일','월','화','수','목','금','토'];
+        var now = new Date();
+        countEl.textContent = (now.getMonth()+1) + '/' + now.getDate() + '(' + days[now.getDay()] + ')';
 
         var pending = (t.total||0) - (t.done||0);
         var html = '';
@@ -206,10 +208,24 @@
             html += '</div>';
         }
 
-        // 미완료 태스크
-        html += '<div class="okr-stat" style="margin-bottom:12px;text-align:left"><div class="okr-stat-label">미완료 태스크 <strong>' + pending + '개</strong>';
+        // 미완료 태스크 (접기/펼치기)
+        html += '<details class="fold" style="margin-bottom:12px"><summary>미완료 태스크 <strong>' + pending + '개</strong>';
         if (t.overdue > 0) html += ' · <span class="okr-stat-warn">지연 ' + t.overdue + '</span>';
-        html += '</div></div>';
+        html += '</summary><div class="fold-body" style="font-size:13px;color:#64748B">';
+        var pendingItems = t.pending || [];
+        pendingItems.forEach(function(item) {
+            var dateLabel = '';
+            if (item.date) {
+                var d = new Date(item.date);
+                dateLabel = (d.getMonth()+1) + '/' + d.getDate();
+            }
+            html += '<div style="padding:2px 0;display:flex;gap:6px">';
+            if (item.overdue) html += '<span style="color:#DC2626;font-size:11px;flex-shrink:0">' + dateLabel + '</span>';
+            else html += '<span style="color:#94A3B8;font-size:11px;flex-shrink:0">' + dateLabel + '</span>';
+            html += '<span>' + esc(item.title) + '</span></div>';
+        });
+        if (pendingItems.length === 0) html += '<div style="color:#94A3B8">없음</div>';
+        html += '</div></details>';
 
         // 오늘 루틴 + 오늘 스케줄 (2열)
         html += '<div style="display:flex;gap:12px;margin-bottom:16px">';
