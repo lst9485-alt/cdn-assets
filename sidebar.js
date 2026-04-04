@@ -56,6 +56,9 @@
     + '.sb-disabled { opacity: 0.4; pointer-events: none; cursor: default; }'
     + '@media (max-width: 1200px) { #sidebar { display: none; } }';
 
+  // 대시보드 페이지에서는 사이드바 숨김 (3열 레이아웃과 겹침)
+  if (cur.indexOf('/dashboard') !== -1) return;
+
   document.head.appendChild(style);
   document.body.appendChild(sidebar);
 })();
