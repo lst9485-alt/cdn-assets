@@ -62,6 +62,9 @@
     + '.nav-dropdown-menu a:hover { background: #F1F5F9; color: #0077C8; }'
     + '@media (max-width: 480px) { .nav-brand { font-size: 13px; } .nav-link { font-size: 12px; padding: 6px 8px; } }';
 
+  // 대시보드 페이지에서는 네비게이션 숨김 (3열 레이아웃과 겹김)
+  if (currentPath.indexOf('/dashboard') !== -1) return;
+
   document.head.appendChild(style);
   document.body.insertBefore(nav, document.body.firstChild);
 })();

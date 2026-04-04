@@ -6,50 +6,29 @@
     <title>운영 대시보드 - 우리동네재테크</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background: #F8FAFC; color: #1A1A1A; min-height: 100vh;
-        }
-        .hub { max-width: 800px; margin: 0 auto; padding: 48px 20px; }
-        .header { text-align: center; margin-bottom: 48px; }
-        h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; color: #051C2C; margin-bottom: 6px; }
-        .subtitle { color: #64748B; font-size: 15px; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; min-height: 100vh; }
+        .hub { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+        .header { margin-bottom: 28px; }
+        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 4px; }
+        .subtitle { color: #64748B; font-size: 14px; }
 
-        .section { margin-bottom: 40px; }
-        .section-title {
-            font-size: 14px; font-weight: 700; color: #64748B; text-transform: uppercase;
-            letter-spacing: 1px; margin-bottom: 16px; padding-left: 4px;
-        }
+        .section { margin-bottom: 24px; }
+        .section-title { font-size: 13px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
 
-        .list { display: flex; flex-direction: column; gap: 12px; }
-        .item {
-            background: white; border: 2px solid #E2E8F0; border-radius: 12px;
-            padding: 20px 24px; text-decoration: none; color: #1A1A1A;
-            display: flex; align-items: center; gap: 16px;
-            transition: all 0.2s ease; box-shadow: 0 1px 4px rgba(0,0,0,0.03);
-        }
-        .item:hover { border-color: #0077C8; transform: translateX(4px); box-shadow: 0 4px 12px rgba(0,119,200,0.1); }
-        .item-icon { font-size: 28px; flex-shrink: 0; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .item { background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; text-decoration: none; color: #1A1A1A; display: flex; align-items: center; gap: 12px; transition: all 0.15s; }
+        .item:hover { border-color: #0077C8; }
+        .item-icon { font-size: 20px; flex-shrink: 0; }
         .item-body { flex: 1; min-width: 0; }
-        .item-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-        .item-title { font-size: 16px; font-weight: 700; color: #051C2C; }
-        .item-desc { font-size: 13px; color: #94A3B8; }
-        .item-updates { font-size: 12px; color: #0077C8; margin-top: 6px; }
+        .item-title { font-size: 14px; font-weight: 700; color: #051C2C; }
+        .item-desc { font-size: 12px; color: #94A3B8; margin-top: 2px; }
+        .badge { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 8px; flex-shrink: 0; }
+        .badge-live { background: #E8F3FF; color: #0077C8; }
+        .badge-soon { background: #F1F5F9; color: #94A3B8; }
+        .arrow { color: #CBD5E1; font-size: 16px; flex-shrink: 0; }
+        .item.dim { opacity: 0.5; cursor: default; }
 
-        .badge {
-            font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px;
-            flex-shrink: 0; letter-spacing: 0.3px;
-        }
-        .badge-live { background: #DCFCE7; color: #16A34A; }
-        .badge-soon { background: #FEF3C7; color: #D97706; }
-        .badge-plan { background: #F1F5F9; color: #94A3B8; }
-
-        .arrow { color: #CBD5E1; font-size: 18px; flex-shrink: 0; }
-
-        @media (max-width: 480px) {
-            .item { padding: 16px; gap: 12px; }
-            .item-title { font-size: 15px; }
-        }
+        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -62,52 +41,24 @@
         <!-- 대시보드 -->
         <div class="section">
             <div class="section-title">대시보드</div>
-            <div class="list">
-                <a href="./dashboard/" class="item" style="opacity:0.7;">
-                    <div class="item-icon">✅</div>
+            <div class="grid">
+                <a href="./dashboard/" class="item">
+                    <div class="item-icon">📊</div>
                     <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">투두리스트</span>
-                            <span class="badge badge-soon">틀만</span>
-                        </div>
-                        <div class="item-desc">todo-list.md 실시간 표시</div>
-                        <div class="item-updates">예정: 크론잡 자동 갱신, 카테고리별 정리</div>
+                        <span class="item-title">투두 · 프로젝트 · OKR</span>
+                        <div class="item-desc">크론잡 자동 갱신 (매일 06시)</div>
                     </div>
-                    <div class="arrow">›</div>
+                    <span class="badge badge-live">LIVE</span>
+                    <span class="arrow">›</span>
                 </a>
-                <a href="./dashboard/" class="item" style="opacity:0.7;">
-                    <div class="item-icon">📁</div>
-                    <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">프로젝트 리스트</span>
-                            <span class="badge badge-soon">틀만</span>
-                        </div>
-                        <div class="item-desc">진행 중 프로젝트 + apps 연결 관계</div>
-                        <div class="item-updates">예정: 1. Project/ 기반, .context.md 상태 요약, apps 매핑</div>
-                    </div>
-                </a>
-                <div class="item" style="opacity:0.5; cursor:default;">
-                    <div class="item-icon">🎯</div>
-                    <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">OKR · 루틴 · 태스크</span>
-                            <span class="badge badge-plan">계획</span>
-                        </div>
-                        <div class="item-desc">Notion 데이터 실시간 표시</div>
-                        <div class="item-updates">예정: OKR 달성률, 루틴 통계, 프로젝트 진행률</div>
-                    </div>
-                </div>
-                <a href="./dashboard/sales.html" class="item" style="opacity:0.7;">
+                <a href="./dashboard/sales.html" class="item">
                     <div class="item-icon">💰</div>
                     <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">매출 대시보드</span>
-                            <span class="badge badge-soon">틀만</span>
-                        </div>
-                        <div class="item-desc">콘텐츠관리시트 기반 매출 현황</div>
-                        <div class="item-updates">예정: 월별 추이, 영상별 매출, 상품별 비중</div>
+                        <span class="item-title">매출 대시보드</span>
+                        <div class="item-desc">콘텐츠관리시트 기반</div>
                     </div>
-                    <div class="arrow">›</div>
+                    <span class="badge badge-soon">틀만</span>
+                    <span class="arrow">›</span>
                 </a>
             </div>
         </div>
@@ -115,78 +66,60 @@
         <!-- 프로세스 도식화 -->
         <div class="section">
             <div class="section-title">프로세스 도식화</div>
-            <div class="list">
+            <div class="grid">
                 <a href="./process/youtube.html" class="item">
                     <div class="item-icon">🎬</div>
                     <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">유튜브 제작</span>
-                            <span class="badge badge-live">LIVE</span>
-                        </div>
-                        <div class="item-desc">yt01~yt09 단계별 플로우</div>
-                        <div class="item-updates">기획→원고→제작→배포 4개 페이즈, 9단계</div>
+                        <span class="item-title">유튜브 제작</span>
+                        <div class="item-desc">yt01~09 · 9단계</div>
                     </div>
-                    <div class="arrow">›</div>
+                    <span class="badge badge-live">LIVE</span>
+                    <span class="arrow">›</span>
                 </a>
                 <a href="./process/crm.html" class="item">
                     <div class="item-icon">🤝</div>
                     <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">CRM (상담)</span>
-                            <span class="badge badge-live">LIVE</span>
-                        </div>
-                        <div class="item-desc">상담 준비 → 상담 → 후처리 전체 과정</div>
-                        <div class="item-updates">준비 8단계 + 후처리 5단계</div>
+                        <span class="item-title">CRM (상담)</span>
+                        <div class="item-desc">준비 8 + 후처리 5단계</div>
                     </div>
-                    <div class="arrow">›</div>
-                </a>
-                <a href="./process/n8n.html" class="item" style="opacity:0.7;">
-                    <div class="item-icon">⚙️</div>
-                    <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">n8n 워크플로우 연결도</span>
-                            <span class="badge badge-soon">틀만</span>
-                        </div>
-                        <div class="item-desc">워크플로우 간 트리거 관계 전체 지도</div>
-                        <div class="item-updates">예정: 전체 워크플로우 조사 + 연결 관계 시각화</div>
-                    </div>
-                    <div class="arrow">›</div>
+                    <span class="badge badge-live">LIVE</span>
+                    <span class="arrow">›</span>
                 </a>
                 <a href="./process/settlement.html" class="item">
                     <div class="item-icon">💰</div>
                     <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">정산 (매일/주간/월)</span>
-                            <span class="badge badge-live">LIVE</span>
-                        </div>
-                        <div class="item-desc">탭으로 매일→주간→월정산 전환</div>
-                        <div class="item-updates">매일 6단계, 주간 5단계, 월정산 1차 5단계 + 2차 5단계</div>
+                        <span class="item-title">정산</span>
+                        <div class="item-desc">매일 · 주간 · 월정산</div>
                     </div>
-                    <div class="arrow">›</div>
+                    <span class="badge badge-live">LIVE</span>
+                    <span class="arrow">›</span>
                 </a>
                 <a href="./process/homepage.html" class="item">
                     <div class="item-icon">🌐</div>
                     <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">홈페이지 제작</span>
-                            <span class="badge badge-live">LIVE</span>
-                        </div>
-                        <div class="item-desc">기획→디자인→코딩→PG→상품등록→런칭</div>
-                        <div class="item-updates">기획·디자인 → 개발 → 오픈 3개 페이즈, 6단계</div>
+                        <span class="item-title">홈페이지 제작</span>
+                        <div class="item-desc">기획→런칭 6단계</div>
                     </div>
-                    <div class="arrow">›</div>
+                    <span class="badge badge-live">LIVE</span>
+                    <span class="arrow">›</span>
                 </a>
                 <a href="./process/content-marketing.html" class="item">
                     <div class="item-icon">📢</div>
                     <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">콘텐츠 마케팅</span>
-                            <span class="badge badge-live">LIVE</span>
-                        </div>
-                        <div class="item-desc">키워드→기획→제작→배포→성과 분석</div>
-                        <div class="item-updates">기획 → 실행 → 분석 3개 페이즈, 5단계</div>
+                        <span class="item-title">콘텐츠 마케팅</span>
+                        <div class="item-desc">키워드→분석 5단계</div>
                     </div>
-                    <div class="arrow">›</div>
+                    <span class="badge badge-live">LIVE</span>
+                    <span class="arrow">›</span>
+                </a>
+                <a href="./process/n8n.html" class="item">
+                    <div class="item-icon">⚙️</div>
+                    <div class="item-body">
+                        <span class="item-title">n8n 워크플로우</span>
+                        <div class="item-desc">자동화 연결도</div>
+                    </div>
+                    <span class="badge badge-soon">틀만</span>
+                    <span class="arrow">›</span>
                 </a>
             </div>
         </div>
@@ -194,29 +127,23 @@
         <!-- 상담/템플릿 -->
         <div class="section">
             <div class="section-title">상담 · 템플릿</div>
-            <div class="list">
+            <div class="grid">
                 <a href="./consult/" class="item">
                     <div class="item-icon">📋</div>
                     <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">회원 맞춤 페이지</span>
-                            <span class="badge badge-live">LIVE</span>
-                        </div>
-                        <div class="item-desc">URL 파라미터로 회원별 상담 자료 표시</div>
-                        <div class="item-updates">업데이트 예정: 양식 수정 기능, 만료일 자동 계산</div>
+                        <span class="item-title">회원 맞춤 페이지</span>
+                        <div class="item-desc">URL 파라미터로 회원별 자료</div>
                     </div>
-                    <div class="arrow">›</div>
+                    <span class="badge badge-live">LIVE</span>
+                    <span class="arrow">›</span>
                 </a>
-                <div class="item" style="opacity:0.5; cursor:default;">
+                <div class="item dim">
                     <div class="item-icon">📄</div>
                     <div class="item-body">
-                        <div class="item-top">
-                            <span class="item-title">상담 준비 자료</span>
-                            <span class="badge badge-soon">예정</span>
-                        </div>
-                        <div class="item-desc">consult 스킬 결과물을 HTML로 렌더링</div>
-                        <div class="item-updates">예정: 사전질문지 요약, 세그먼트별 맞춤 답변, 팩트 조사 결과</div>
+                        <span class="item-title">상담 준비 자료</span>
+                        <div class="item-desc">consult 스킬 결과물</div>
                     </div>
+                    <span class="badge badge-soon">예정</span>
                 </div>
             </div>
         </div>
