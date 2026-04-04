@@ -92,8 +92,8 @@
     </div>
     <div class="tabs">
         <button class="tab active" data-tab="buy">매수 계산</button>
-        <button class="tab" data-tab="repay">월 부담</button>
-        <button class="tab" data-tab="asset">자산 시뮬</button>
+        <button class="tab" data-tab="repay">월 상환</button>
+        <button class="tab" data-tab="asset">갈아타기</button>
     </div>
 
     <!-- TAB 1: 매수 계산 -->
@@ -114,7 +114,7 @@
         <div class="note" id="buyN"></div>
     </div>
 
-    <!-- TAB 2: 월 부담 -->
+    <!-- TAB 2: 월 상환 -->
     <div class="tc" id="tab-repay">
         <div class="verdict" id="repV"></div>
         <div class="cmp">
@@ -155,7 +155,7 @@
         <div class="card"><div class="card-t">월 상환액 비교</div><div class="cw"><canvas id="cRep"></canvas></div></div>
     </div>
 
-    <!-- TAB 3: 자산 시뮬 -->
+    <!-- TAB 3: 갈아타기 -->
     <div class="tc" id="tab-asset">
         <div class="verdict" id="astV"></div>
         <div class="cmp">
@@ -269,7 +269,7 @@
         $('buyN').innerHTML='DSR 40%, 스트레스 금리 '+stressRt+'% (입력 '+rt+'% + 1.5%p), '+yr+'년, LTV 70% 기준<br>실제 대출: '+fmt(actual)+' (DSR '+fmt(mxDSR)+' / LTV '+fmt(mxLTV)+' 중 작은 값)<br>정책대출: 디딤돌(소득6천↓), 보금자리론(7천↓), 신생아특례(맞벌이2억↓)';
     }
 
-    // === TAB 2: 월 부담 ===
+    // === TAB 2: 월 상환 ===
     function rRep(){
         var aA=V('ra_amt'),aM=V('ra_mo'),aR=V('ra_r');
         var bA=V('rb_amt'),bM=V('rb_mo'),bR=V('rb_r');
@@ -314,7 +314,7 @@
         $('cRep').parentElement.style.height='260px';
     }
 
-    // === TAB 3: 자산 시뮬 ===
+    // === TAB 3: 갈아타기 ===
     function rAst(){
         var my=V('a_my'),mr=V('a_mr')/100,gl=V('a_gl'),gr=V('a_gr')/100,sv=V('a_sv'),rt=V('a_rt')/100,ln=V('a_ln'),yr=V('a_yr');
         var lb=[],mD=[],gD=[],nD=[],levD=[],cy=null,ty=new Date().getFullYear();
