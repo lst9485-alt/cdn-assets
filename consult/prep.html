@@ -96,10 +96,7 @@
         <div class="card">
             <div class="card-t">자산 및 소득</div>
             <div class="ig">
-                <div><div class="il">보유 현금</div><div class="iw"><input class="if" id="b_cash" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">부동산 자산</div><div class="iw"><input class="if" id="b_estate" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">기타 자산</div><div class="iw"><input class="if" id="b_other" inputmode="decimal"><span class="is">만원</span></div></div>
-                <div><div class="il">기존 대출</div><div class="iw"><input class="if" id="b_debt" inputmode="decimal"><span class="is">만원</span></div></div>
+                <div><div class="il">보유 현금 (현금성 자산)</div><div class="iw"><input class="if" id="b_cash" inputmode="decimal"><span class="is">만원</span></div></div>
                 <div><div class="il">연소득 (세전)</div><div class="iw"><input class="if" id="b_income" inputmode="decimal"><span class="is">만원</span></div></div>
                 <div><div class="il">희망 아파트 가격</div><div class="iw"><input class="if" id="b_target" inputmode="decimal"><span class="is">만원</span></div></div>
                 <div><div class="il">대출 금리</div><div class="iw"><input class="if" id="b_rate" inputmode="decimal"><span class="is">%</span></div></div>
@@ -137,12 +134,14 @@
                     <div><div class="il">월 세후 소득</div><div class="iw"><input class="if" id="rep_income" inputmode="decimal"><span class="is">만원</span></div></div>
                 </div>
                 <div class="gauge-wrap">
+                    <div style="font-size:14px;font-weight:700;color:var(--blue);min-width:24px;">A</div>
                     <div class="gauge-bar"><div class="gauge-fill" id="gaugeA" style="width:0;background:var(--blue)"></div></div>
-                    <div class="gauge-label blue" id="gaugeLabelA">0%</div>
+                    <div class="gauge-label" id="gaugeLabelA" style="color:var(--blue)">0%</div>
                 </div>
                 <div class="gauge-wrap">
+                    <div style="font-size:14px;font-weight:700;color:var(--orange);min-width:24px;">B</div>
                     <div class="gauge-bar"><div class="gauge-fill" id="gaugeB" style="width:0;background:var(--orange)"></div></div>
-                    <div class="gauge-label orange" id="gaugeLabelB">0%</div>
+                    <div class="gauge-label" id="gaugeLabelB" style="color:var(--orange)">0%</div>
                 </div>
                 <div class="note">30% 이하 안전 · 40% 이하 주의 · 40% 초과 위험</div>
             </div>
@@ -202,10 +201,10 @@
     var PMT=function(p,ar,m){if(ar===0)return p/m;var r=ar/12/100,pw=Math.pow(1+r,m);return p*r*pw/(pw-1);};
 
     var nm=gP('name','');if(nm)$('hT').textContent=nm+'님 재무 계산기';
-    var D={c:gN('cash',18000),e:gN('estate',0),o:gN('other',0),d:gN('debt',0),i:gN('income',7700),s:gN('saving',2400),t:gN('target',60000),ma:gN('my_apt',50000),ga:gN('goal_apt',130000)};
+    var D={c:gN('cash',18000),i:gN('income',7700),s:gN('saving',2400),t:gN('target',60000),ma:gN('my_apt',50000),ga:gN('goal_apt',130000)};
 
     function sV(id,v){$(id).value=v.toLocaleString();}
-    sV('b_cash',D.c);sV('b_estate',D.e);sV('b_other',D.o);sV('b_debt',D.d);sV('b_income',D.i);sV('b_target',D.t);
+    sV('b_cash',D.c);sV('b_income',D.i);sV('b_target',D.t);
     $('b_rate').value='4.5';$('b_years').value='30';
     sV('ra_amt',50000);$('ra_mo').value='360';$('ra_r').value='4.3';
     sV('rb_amt',45000);$('rb_mo').value='360';$('rb_r').value='4.5';
@@ -223,7 +222,7 @@
 
     // === TAB 1: 매수 계산 ===
     function rBuy(){
-        var c=V('b_cash'),e=V('b_estate'),o=V('b_other'),d=V('b_debt'),i=V('b_income'),tg=V('b_target'),rt=V('b_rate'),yr=V('b_years');
+        var c=V('b_cash'),i=V('b_income'),tg=V('b_target'),rt=V('b_rate'),yr=V('b_years');
         var mo=yr*12;
         var ar=i*0.4,mr=ar/12;
         var stressRt=rt+1.5;
@@ -239,7 +238,7 @@
         else{vd.className='verdict';vd.innerHTML='<div class="v-text">매수 가능 (여유 '+fmt(Math.abs(short))+')</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본 '+fmt(selfNeed)+'</div>';}
 
         $('buyR').innerHTML=''
-            +'<div class="rb accent"><div class="rb-label">DSR 최대 대출</div><div class="rb-val blue">'+fmt(mxDSR)+'</div><div class="rb-sub">스트레스 '+stressRt+'%</div></div>'
+            +'<div class="rb accent"><div class="rb-label">DSR 최대 대출</div><div class="rb-val blue">'+fmt(mxDSR)+'</div><div class="rb-sub">금리 '+rt+'% + 가산 1.5%</div></div>'
             +'<div class="rb accent"><div class="rb-label">LTV 대출 한도</div><div class="rb-val blue">'+fmt(mxLTV)+'</div><div class="rb-sub">'+fmt(tg)+' x 70%</div></div>'
             +'<div class="rb '+(short>0?'warn':'accent')+'"><div class="rb-label">'+(short>0?'부족분':'여유분')+'</div><div class="rb-val '+(short>0?'orange':'blue')+'">'+fmt(Math.abs(short))+'</div><div class="rb-sub">'+(short>0?'현금 추가 필요':'현금 여유')+'</div></div>';
 
@@ -285,11 +284,11 @@
             var pctA=Math.round(am/inc*100),pctB=Math.round(bm/inc*100);
             $('gaugeA').style.width=Math.min(pctA,100)+'%';
             $('gaugeA').style.background=pctA>40?'var(--red)':pctA>30?'var(--orange)':'var(--blue)';
-            $('gaugeLabelA').textContent='A '+pctA+'%';
+            $('gaugeLabelA').textContent=pctA+'%';
             $('gaugeLabelA').style.color=pctA>40?'var(--red)':pctA>30?'var(--orange)':'var(--blue)';
             $('gaugeB').style.width=Math.min(pctB,100)+'%';
             $('gaugeB').style.background=pctB>40?'var(--red)':pctB>30?'var(--orange)':'var(--orange)';
-            $('gaugeLabelB').textContent='B '+pctB+'%';
+            $('gaugeLabelB').textContent=pctB+'%';
             $('gaugeLabelB').style.color=pctB>40?'var(--red)':pctB>30?'var(--orange)':'var(--orange)';
         }
 
