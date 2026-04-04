@@ -56,9 +56,8 @@
 
         /* 게이지 */
         .gauge-wrap { display:flex; align-items:center; gap:16px; padding:10px 0; }
-        .gauge-bar { flex:1; height:24px; background:#E2E8F0; border-radius:12px; overflow:hidden; position:relative; }
-        .gauge-mark { position:absolute; top:-4px; bottom:-4px; width:0; border-left:2px dashed; opacity:.5; }
-        .gauge-mark span { position:absolute; top:-16px; font-size:10px; font-weight:600; transform:translateX(-50%); }
+        .gauge-bar { flex:1; height:28px; border-radius:14px; overflow:hidden; position:relative; background:linear-gradient(to right, #D1FAE5 0%, #D1FAE5 30%, #FEF3C7 30%, #FEF3C7 40%, #FEE2E2 40%, #FEE2E2 100%); }
+        .gauge-tag { font-size:13px; font-weight:600; min-width:100px; }
         .gauge-fill { height:100%; border-radius:12px; transition:width .3s; }
         .gauge-label { font-size:20px; font-weight:800; min-width:70px; text-align:right; }
 
@@ -134,17 +133,17 @@
                 <div class="ig ig1" style="margin-bottom:12px;">
                     <div><div class="il">월 세후 소득</div><div class="iw"><input class="if" id="rep_income" inputmode="decimal"><span class="is">만원</span></div></div>
                 </div>
+                <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray);padding:0 0 4px;margin-left:124px;"><span>안전</span><span style="margin-left:auto;margin-right:22%;">30%</span><span style="margin-right:12%;">40%</span><span>위험</span></div>
                 <div class="gauge-wrap">
-                    <div style="font-size:14px;font-weight:700;color:var(--blue);min-width:24px;">A</div>
-                    <div class="gauge-bar"><div class="gauge-fill" id="gaugeA" style="width:0;background:var(--blue)"></div><div class="gauge-mark" style="left:30%;border-color:var(--green);"><span style="color:var(--green)">30%</span></div><div class="gauge-mark" style="left:40%;border-color:var(--red);"><span style="color:var(--red)">40%</span></div></div>
+                    <div class="gauge-tag" id="gaugeTagA" style="color:var(--blue)">A</div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="gaugeA" style="width:0;background:var(--blue)"></div></div>
                     <div class="gauge-label" id="gaugeLabelA" style="color:var(--blue)">0%</div>
                 </div>
                 <div class="gauge-wrap">
-                    <div style="font-size:14px;font-weight:700;color:var(--orange);min-width:24px;">B</div>
-                    <div class="gauge-bar"><div class="gauge-fill" id="gaugeB" style="width:0;background:var(--orange)"></div><div class="gauge-mark" style="left:30%;border-color:var(--green);"></div><div class="gauge-mark" style="left:40%;border-color:var(--red);"></div></div>
+                    <div class="gauge-tag" id="gaugeTagB" style="color:var(--orange)">B</div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="gaugeB" style="width:0;background:var(--orange)"></div></div>
                     <div class="gauge-label" id="gaugeLabelB" style="color:var(--orange)">0%</div>
                 </div>
-                <div class="note">30% 이하 안전 · 40% 이하 주의 · 40% 초과 위험</div>
             </div>
         </div>
         <div class="rbox" id="repR" style="margin-top:14px;"></div>
@@ -159,9 +158,9 @@
                 <div class="ig ig1">
                     <div><div class="il">내 단지 현재가</div><div class="iw"><input class="if" id="a_my" inputmode="decimal"><span class="is">만원</span></div></div>
                     <div><div class="il">연 상승률</div><div class="iw"><input class="if" id="a_mr" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">대출 금액</div><div class="iw"><input class="if" id="a_ln" inputmode="decimal"><span class="is">만원</span></div></div>
                     <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="a_sv" inputmode="decimal"><span class="is">만원</span></div></div>
                     <div><div class="il">투자 수익률</div><div class="iw"><input class="if" id="a_rt" inputmode="decimal"><span class="is">%</span></div></div>
-                    <div><div class="il">대출 금액</div><div class="iw"><input class="if" id="a_ln" inputmode="decimal"><span class="is">만원</span></div></div>
                     <div><div class="il">기간</div><div class="iw"><input class="if" id="a_yr" inputmode="decimal"><span class="is">년</span></div></div>
                 </div>
             </div>
@@ -275,10 +274,12 @@
             var pctA=Math.round(am/inc*100),pctB=Math.round(bm/inc*100);
             $('gaugeA').style.width=Math.min(pctA,100)+'%';
             $('gaugeA').style.background=pctA>40?'var(--red)':pctA>30?'var(--orange)':'var(--blue)';
+            $('gaugeTagA').textContent='A '+fF(am);
             $('gaugeLabelA').textContent=pctA+'%';
             $('gaugeLabelA').style.color=pctA>40?'var(--red)':pctA>30?'var(--orange)':'var(--blue)';
             $('gaugeB').style.width=Math.min(pctB,100)+'%';
             $('gaugeB').style.background=pctB>40?'var(--red)':pctB>30?'var(--orange)':'var(--orange)';
+            $('gaugeTagB').textContent='B '+fF(bm);
             $('gaugeLabelB').textContent=pctB+'%';
             $('gaugeLabelB').style.color=pctB>40?'var(--red)':pctB>30?'var(--orange)':'var(--orange)';
         }
