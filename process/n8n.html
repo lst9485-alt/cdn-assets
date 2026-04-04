@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n8n 워크플로우 - 운영 대시보드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
+        .page { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
+        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 32px; }
+        .placeholder { background: white; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 48px 24px; text-align: center; }
+        .placeholder-icon { font-size: 48px; margin-bottom: 16px; }
+        .placeholder-title { font-size: 18px; font-weight: 700; color: #475569; margin-bottom: 8px; }
+        .placeholder-desc { font-size: 14px; color: #94A3B8; }
+        .wf-list { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+        .wf-card { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 18px 20px; }
+        .wf-card:hover { border-color: #0077C8; }
+        .wf-name { font-size: 15px; font-weight: 700; color: #051C2C; margin-bottom: 4px; }
+        .wf-desc { font-size: 13px; color: #64748B; }
+        .wf-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 8px; background: #E8F3FF; color: #0077C8; margin-top: 6px; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="./" class="back">&larr; 프로세스 목록</a>
+        <h1>⚙️ n8n 워크플로우 연결도</h1>
+        <p class="subtitle">자동화 워크플로우 목록 + 연결 관계</p>
+
+        <div class="placeholder">
+            <div class="placeholder-icon">🔗</div>
+            <div class="placeholder-title">연결 관계도 추가 예정</div>
+            <div class="placeholder-desc">워크플로우 간 트리거 관계를 시각화할 예정입니다</div>
+        </div>
+
+        <div class="wf-list">
+            <div class="wf-card">
+                <div class="wf-name">01-1 반복태스크 생성</div>
+                <div class="wf-desc">매일/주간/월간 반복 태스크를 Notion에 자동 생성</div>
+                <div class="wf-badge">스케줄 트리거</div>
+            </div>
+            <div class="wf-card">
+                <div class="wf-name">워크플로우 추가 예정</div>
+                <div class="wf-desc">n8n에 등록된 전체 워크플로우를 여기에 정리합니다</div>
+                <div class="wf-badge">조사 필요</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

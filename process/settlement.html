@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정산 프로세스 - 운영 대시보드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
+        .page { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 24px; }
+
+        .tabs { display: flex; gap: 4px; margin-bottom: 32px; background: #E2E8F0; border-radius: 10px; padding: 4px; }
+        .tab { flex: 1; padding: 10px; text-align: center; font-size: 14px; font-weight: 700; border-radius: 8px; cursor: pointer; transition: all 0.2s; color: #64748B; }
+        .tab.active { background: white; color: #051C2C; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+        .tab:hover:not(.active) { color: #334155; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .section-label { font-size: 13px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+
+        .flow { display: flex; flex-direction: column; gap: 0; }
+        .step { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 18px 20px; position: relative; }
+        .step:hover { border-color: #0077C8; }
+        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #0077C8; color: white; border-radius: 50%; font-size: 12px; font-weight: 700; margin-right: 10px; }
+        .step-title { font-size: 15px; font-weight: 700; color: #051C2C; display: inline; }
+        .step-desc { font-size: 13px; color: #64748B; margin-top: 6px; padding-left: 34px; }
+        .arrow-down { text-align: center; color: #CBD5E1; font-size: 20px; line-height: 28px; }
+
+        .phase-divider { text-align: center; margin: 24px 0 16px; }
+        .phase-label { display: inline-block; background: #FEF3C7; color: #92400E; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 12px; }
+
+        @media (max-width: 480px) { .tabs { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="./" class="back">&larr; 프로세스 목록</a>
+        <h1>💰 정산 프로세스</h1>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('daily')">매일정산</div>
+            <div class="tab" onclick="showTab('weekly')">주간정산</div>
+            <div class="tab" onclick="showTab('monthly')">월정산</div>
+        </div>
+
+        <!-- 매일정산 -->
+        <div id="daily" class="tab-content active">
+            <div class="section-label">매일정산 (6단계)</div>
+            <div class="flow">
+                <div class="step"><span class="step-num">1</span><span class="step-title">텔레그램 인원수 확인</span><div class="step-desc">입장 인원수 확인 후 시트에 기입</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">2</span><span class="step-title">OCR 프로그램 실행</span><div class="step-desc">SSH로 회사PC에서 OCR/Prep 자동 실행</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">3</span><span class="step-title">미매칭 해결</span><div class="step-desc">미매칭 목록 파악 및 수동 매칭</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">4</span><span class="step-title">시트 업데이트</span><div class="step-desc">P열 교정 + S열 회원번호 기록</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">5</span><span class="step-title">누적DB 복사</span><div class="step-desc">수량 검증 → 중복 확인 → 복사</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">6</span><span class="step-title">Notion 완료</span><div class="step-desc">태스크 완료 처리</div></div>
+            </div>
+        </div>
+
+        <!-- 주간정산 -->
+        <div id="weekly" class="tab-content">
+            <div class="section-label">주간정산 (5단계)</div>
+            <div class="flow">
+                <div class="step"><span class="step-num">1</span><span class="step-title">누적DB 지난주 데이터 조회</span><div class="step-desc">지난주 범위 데이터 추출</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">2</span><span class="step-title">검증 + 의심 필터</span><div class="step-desc">F/J 중복 집계 + suspect.php 의심회원 필터</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">3</span><span class="step-title">사용자 확인</span><div class="step-desc">L열 정렬 후 의심 회원 걸러내기</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">4</span><span class="step-title">초대기록 업데이트</span><div class="step-desc">중복/의심/최종값 D/I/N/E/J/O/F/K/P열 기입</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">5</span><span class="step-title">집계 결과 보고</span><div class="step-desc">최종 집계 정리</div></div>
+            </div>
+        </div>
+
+        <!-- 월정산 -->
+        <div id="monthly" class="tab-content">
+            <div class="section-label">월정산 1차 — 매출정산 (5단계)</div>
+            <div class="flow">
+                <div class="step"><span class="step-num">1</span><span class="step-title">HTML 파일 준비</span><div class="step-desc">텔레그램 입금방 HTML 다운로드</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">2</span><span class="step-title">정산 대조 실행</span><div class="step-desc">정산대조.py 실행 (자동 매칭)</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">3</span><span class="step-title">결과 확인 + 특이사항</span><div class="step-desc">금액불일치 / 이름유사 / 퍼지매칭 처리</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">4</span><span class="step-title">인센티브 적용</span><div class="step-desc">매출/환불/프로모션/달성여부 F/G/I/J열 입력</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">5</span><span class="step-title">대표 보고</span><div class="step-desc">매출순위 정리 + 이메일/프린트 안내</div></div>
+            </div>
+
+            <div class="phase-divider"><span class="phase-label">2차 — 마케팅정산</span></div>
+
+            <div class="flow">
+                <div class="step"><span class="step-num">6</span><span class="step-title">카페24 유료 입장 데이터</span><div class="step-desc">월정산 Q9~ 붙여넣기</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">7</span><span class="step-title">DB루트 추적</span><div class="step-desc">I열 숫자 확인</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">8</span><span class="step-title">로우데이터 입력</span><div class="step-desc">올라이트 B/N/F/O/I열 매핑</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">9</span><span class="step-title">DB효율분석</span><div class="step-desc">초대기록 분배수량 + DB별 카운트 6개 영역</div></div>
+                <div class="arrow-down">↓</div>
+                <div class="step"><span class="step-num">10</span><span class="step-title">대표 보고</span><div class="step-desc">차트 변경 + 운영 안내</div></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

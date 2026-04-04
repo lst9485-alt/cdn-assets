@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로세스 - 운영 대시보드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
+        .page { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 32px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .card { background: white; border: 2px solid #E2E8F0; border-radius: 14px; padding: 28px 24px; text-decoration: none; color: #1A1A1A; transition: all 0.2s ease; box-shadow: 0 1px 4px rgba(0,0,0,0.03); }
+        .card:hover { border-color: #0077C8; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,119,200,0.1); }
+        .card-icon { font-size: 32px; margin-bottom: 12px; }
+        .card-title { font-size: 17px; font-weight: 700; color: #051C2C; margin-bottom: 6px; }
+        .card-desc { font-size: 13px; color: #94A3B8; }
+        .card-steps { font-size: 12px; color: #0077C8; font-weight: 600; margin-top: 8px; }
+        .card.placeholder { opacity: 0.4; pointer-events: none; }
+        @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../" class="back">&larr; 메인</a>
+        <h1>🔄 프로세스 도식화</h1>
+        <div class="grid">
+            <a href="./settlement.html" class="card">
+                <div class="card-icon">💰</div>
+                <div class="card-title">정산</div>
+                <div class="card-desc">매일 / 주간 / 월정산 통합</div>
+                <div class="card-steps">탭 전환 · 총 21단계</div>
+            </a>
+            <a href="./youtube.html" class="card">
+                <div class="card-icon">🎬</div>
+                <div class="card-title">유튜브 제작</div>
+                <div class="card-desc">yt01~yt09 기반 제작 플로우</div>
+                <div class="card-steps">9단계</div>
+            </a>
+            <a href="./crm.html" class="card">
+                <div class="card-icon">🤝</div>
+                <div class="card-title">CRM (상담)</div>
+                <div class="card-desc">상담 준비 + 후처리</div>
+                <div class="card-steps">13단계</div>
+            </a>
+            <a href="./n8n.html" class="card">
+                <div class="card-icon">⚙️</div>
+                <div class="card-title">n8n 워크플로우</div>
+                <div class="card-desc">자동화 연결도</div>
+                <div class="card-steps">틀만 완성</div>
+            </a>
+            <div class="card placeholder">
+                <div class="card-icon">🌐</div>
+                <div class="card-title">홈페이지 제작</div>
+                <div class="card-desc">기획→PG→런칭</div>
+                <div class="card-steps">예정</div>
+            </div>
+            <div class="card placeholder">
+                <div class="card-icon">📢</div>
+                <div class="card-title">콘텐츠 마케팅</div>
+                <div class="card-desc">키워드→제작→성과분석</div>
+                <div class="card-steps">예정</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

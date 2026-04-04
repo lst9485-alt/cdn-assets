@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM 프로세스 - 운영 대시보드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
+        .page { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
+        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 32px; }
+        .section-label { font-size: 13px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin: 32px 0 16px; }
+        .section-label:first-of-type { margin-top: 0; }
+        .flow { display: flex; flex-direction: column; gap: 0; }
+        .step { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 18px 20px; }
+        .step:hover { border-color: #0077C8; }
+        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #0077C8; color: white; border-radius: 50%; font-size: 12px; font-weight: 700; margin-right: 10px; }
+        .step-title { font-size: 15px; font-weight: 700; color: #051C2C; display: inline; }
+        .step-desc { font-size: 13px; color: #64748B; margin-top: 6px; padding-left: 34px; }
+        .arrow-down { text-align: center; color: #CBD5E1; font-size: 20px; line-height: 28px; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="./" class="back">&larr; 프로세스 목록</a>
+        <h1>🤝 CRM (상담) 프로세스</h1>
+        <p class="subtitle">상담 준비 → 상담 → 후처리</p>
+
+        <div class="section-label">상담 준비 (8단계)</div>
+        <div class="flow">
+            <div class="step"><span class="step-num">1</span><span class="step-title">고객 확인</span><div class="step-desc">이름/전화번호 필터 또는 오늘/내일 자동 조회</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">2</span><span class="step-title">사전질문지 읽기</span><div class="step-desc">CRM 스프레드시트에서 고객 응답 확인</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">3</span><span class="step-title">세그먼트 판별</span><div class="step-desc">A/B/C/D 고객 타입 분류</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">4</span><span class="step-title">레퍼런스 참고</span><div class="step-desc">상담목적별 패턴 읽기 (과거 유사 케이스)</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">5</span><span class="step-title">팩트 조사</span><div class="step-desc">정책대출 자격 / 세금 / LTV / 대출조건 조사</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">6</span><span class="step-title">맞춤 답변 생성</span><div class="step-desc">신청계기/기본정보/재무상황 기반 답변 작성</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">7</span><span class="step-title">Notion DB 반영</span><div class="step-desc">상담 DB에 준비 데이터 입력</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">8</span><span class="step-title">준비 완료</span><div class="step-desc">상담 대기 상태</div></div>
+        </div>
+
+        <div class="section-label">상담 후처리 (5단계)</div>
+        <div class="flow">
+            <div class="step"><span class="step-num">1</span><span class="step-title">고객 확인</span><div class="step-desc">Notion DB에서 오늘 상담 자동 조회</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">2</span><span class="step-title">회의록 읽기</span><div class="step-desc">Google Docs 상담 기록 확인</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">3</span><span class="step-title">핵심 요약 생성</span><div class="step-desc">핵심사항 / 추진방향 요약</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">4</span><span class="step-title">Google Docs 반영</span><div class="step-desc">요약본 Docs에 추가</div></div>
+            <div class="arrow-down">↓</div>
+            <div class="step"><span class="step-num">5</span><span class="step-title">피드백 + 보고</span><div class="step-desc">사용자 확인 및 최종 정리</div></div>
+        </div>
+    </div>
+</body>
+</html>

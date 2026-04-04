@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대시보드 - 운영 대시보드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
+        .page { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 32px; }
+        .section { margin-bottom: 32px; }
+        .section-title { font-size: 16px; font-weight: 700; color: #051C2C; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .section-title span { font-size: 20px; }
+        .placeholder { background: white; border: 2px dashed #CBD5E1; border-radius: 12px; padding: 40px 24px; text-align: center; }
+        .placeholder-title { font-size: 15px; font-weight: 700; color: #475569; margin-bottom: 6px; }
+        .placeholder-desc { font-size: 13px; color: #94A3B8; }
+        .badge-soon { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: #FEF3C7; color: #D97706; margin-left: 8px; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../" class="back">&larr; 메인</a>
+        <h1>📊 대시보드</h1>
+
+        <div class="section">
+            <div class="section-title"><span>✅</span> 투두리스트 <span class="badge-soon">크론잡 연동 예정</span></div>
+            <div class="placeholder">
+                <div class="placeholder-title">todo-list.md 실시간 표시</div>
+                <div class="placeholder-desc">크론잡으로 Obsidian 투두리스트를 자동으로 가져와서 표시합니다</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title"><span>📁</span> 프로젝트 리스트 <span class="badge-soon">자동 갱신 예정</span></div>
+            <div class="placeholder">
+                <div class="placeholder-title">진행 중 프로젝트 + apps 연결</div>
+                <div class="placeholder-desc">1. Project/ 폴더 기반으로 프로젝트 현황과 Workspace/apps/ 연결 관계를 표시합니다</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title"><span>🎯</span> OKR · 루틴 · 태스크 <span class="badge-soon">Notion 연동 예정</span></div>
+            <div class="placeholder">
+                <div class="placeholder-title">Notion 데이터 실시간 표시</div>
+                <div class="placeholder-desc">OKR 달성률, 루틴 통계, 프로젝트 진행률을 Notion API로 가져와서 표시합니다</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
