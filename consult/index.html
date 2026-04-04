@@ -54,7 +54,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--primary-navy);
+            border: 2px solid var(--primary-navy);
+            border-radius: 12px;
+            margin: 20px 20px 0;
         }
 
         .header-branding { }
@@ -344,8 +346,5 @@
             clientNameInput.addEventListener('input', function(e) { updateIntroName(e.target.value); });
         });
     </script>
-<script src="../nav.js"></script>
-<script src="../footer.js"></script>
-<script src="../sidebar.js"></script>
 </body>
 </html>
