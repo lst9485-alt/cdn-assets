@@ -31,24 +31,55 @@
         <h1>⚙️ n8n 워크플로우 연결도</h1>
         <p class="subtitle">자동화 워크플로우 목록 + 연결 관계</p>
 
-        <div class="placeholder">
-            <div class="placeholder-icon">🔗</div>
-            <div class="placeholder-title">연결 관계도 추가 예정</div>
-            <div class="placeholder-desc">워크플로우 간 트리거 관계를 시각화할 예정입니다</div>
-        </div>
+        <div class="wf-list" id="wf-content"><div style="text-align:center;color:#94A3B8;padding:32px">로딩 중...</div></div>
+    </div>
+<script>
+(function() {
+    var container = document.getElementById('wf-content');
+    fetch('../data/workflows.json')
+        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
+        .then(render)
+        .catch(function() { container.innerHTML = '<div style="text-align:center;color:#94A3B8;padding:32px">로드 실패</div>'; });
 
-        <div class="wf-list">
-            <div class="wf-card">
-                <div class="wf-name">01-1 반복태스크 생성</div>
-                <div class="wf-desc">매일/주간/월간 반복 태스크를 Notion에 자동 생성</div>
-                <div class="wf-badge">스케줄 트리거</div>
-            </div>
-            <div class="wf-card">
-                <div class="wf-name">워크플로우 추가 예정</div>
-                <div class="wf-desc">n8n에 등록된 전체 워크플로우를 여기에 정리합니다</div>
-                <div class="wf-badge">조사 필요</div>
-            </div>
-        </div>
+    function render(data) {
+        var wfs = data.workflows || [];
+        var cats = {};
+        wfs.forEach(function(w) {
+            var cat = w.category || '기타';
+            if (!cats[cat]) cats[cat] = [];
+            cats[cat].push(w);
+        });
+        var html = '';
+        var catOrder = ['Notion 태스크', '콘텐츠 동기화', '메모봇', 'CRM', '기타'];
+        catOrder.forEach(function(cat) {
+            var items = cats[cat];
+            if (!items) return;
+            html += '<div style="font-size:12px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:1px;margin:20px 0 8px">' + esc(cat) + '</div>';
+            items.forEach(function(w) {
+                html += '<div class="wf-card">';
+                html += '<div class="wf-name">' + (w.active ? '<span style="color:#16A34A">●</span> ' : '<span style="color:#94A3B8">○</span> ') + esc(w.name) + '</div>';
+                html += '<div class="wf-desc">';
+                if (w.triggers.length > 0) {
+                    w.triggers.forEach(function(t) {
+                        var label = t.replace('scheduleTrigger','스케줄').replace('telegramTrigger','텔레그램').replace('Trigger','');
+                        html += '<span class="wf-badge">' + esc(label) + '</span> ';
+                    });
+                } else {
+                    html += '<span class="wf-badge" style="background:#F1F5F9;color:#94A3B8">웹훅</span> ';
+                }
+                w.nodes.forEach(function(n) {
+                    html += '<span style="font-size:11px;color:#94A3B8;margin-left:4px">' + esc(n) + '</span> ';
+                });
+                html += '</div></div>';
+            });
+        });
+        html += '<div style="font-size:11px;color:#94A3B8;margin-top:12px">' + fmtDate(data.updated) + ' · ' + wfs.length + '개 워크플로우</div>';
+        container.innerHTML = html;
+    }
+    function esc(s) { var e = document.createElement('span'); e.textContent = s; return e.innerHTML; }
+    function fmtDate(iso) { var d = new Date(iso); return d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}); }
+})();
+</script>
     </div>
 <script src="../nav.js"></script>
 <script src="../footer.js"></script>

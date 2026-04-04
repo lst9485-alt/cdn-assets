@@ -262,6 +262,23 @@
 
         html += '</div>';
 
+        // 이번주 루틴 통계
+        var ws = r.weekly_stats;
+        if (ws && ws.days && ws.days.length > 0) {
+            html += '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px">';
+            html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:8px">이번주 루틴 <span style="font-weight:600;color:#0077C8">' + esc(ws.rate) + '</span></div>';
+            html += '<div style="display:flex;gap:4px;align-items:flex-end;height:40px">';
+            ws.days.forEach(function(day) {
+                var pct = day.total > 0 ? Math.round(day.done / day.total * 100) : 0;
+                var h = Math.max(4, Math.round(pct * 36 / 100));
+                var color = pct === 100 ? '#0077C8' : pct >= 50 ? '#94A3B8' : '#E2E8F0';
+                var d = new Date(day.date);
+                var label = (d.getMonth()+1) + '/' + d.getDate();
+                html += '<div style="flex:1;text-align:center"><div style="background:' + color + ';height:' + h + 'px;border-radius:2px;margin:0 auto;width:100%"></div><div style="font-size:9px;color:#94A3B8;margin-top:2px">' + label + '</div></div>';
+            });
+            html += '</div></div>';
+        }
+
         // OKR Key Results — 별도 박스
         if (okr.length > 0) {
             html += '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px">';
