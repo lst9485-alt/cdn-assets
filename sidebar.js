@@ -23,7 +23,7 @@
     + link(root + 'process/crm.html', '🤝', 'CRM', 'crm')
     + link(root + 'process/n8n.html', '⚙️', 'n8n', 'n8n')
     + link(root + 'process/settlement.html', '💰', '정산', 'settlement')
-    + '<div class="sb-cat">상담</div>'
+    + '<div class="sb-cat">상담·템플릿</div>'
     + link(root + 'consult/', '📋', '상담자료', 'consult');
 
   var style = document.createElement('style');

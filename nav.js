@@ -40,7 +40,7 @@
     + '<a href="' + root + 'process/n8n.html">n8n</a>'
     + '<a href="' + root + 'process/settlement.html">정산</a>'
     + '</div></div>'
-    + '<a href="' + root + 'consult/" class="nav-link' + (isActive('/consult') ? ' active' : '') + '">상담</a>'
+    + '<a href="' + root + 'consult/" class="nav-link' + (isActive('/consult') ? ' active' : '') + '">상담·템플릿</a>'
     + '</div></div>';
 
   var style = document.createElement('style');
