@@ -60,6 +60,8 @@
 | house-key.png | 집+열쇠 (내집마련) | ICON:house-key |
 | caution-house.png | 집+경고삼각형 (위험부동산) | ICON:caution-house |
 | chart-up.png | 상승 차트+화살표 | ICON:chart-up |
+| golden-time.png | 모래시계+별 (골든타임) | ICON:golden-time |
+| cheonan-map.png | 천안·아산 지역 지도 | ICON:cheonan-map |
 
 ## 사운드 (`sounds/`)
 

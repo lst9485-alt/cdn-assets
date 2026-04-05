@@ -1,14 +1,6 @@
 {
-  "updated": "2026-04-05T06:00:01.620406+09:00",
+  "updated": "2026-04-06T06:00:01.316172+09:00",
   "projects": [
-    {
-      "name": "2026-04-05",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-04-05",
-      "status": null,
-      "next": null
-    },
     {
       "name": "홈페이지",
       "type": "folder",
@@ -24,14 +16,6 @@
       "modified": "2026-04-04",
       "status": "상담 재무 계산기 v3: `consult/prep.html` LIVE (탭 3개: 매수 계산, 월 부담, 자산 시뮬). 입력 5개로 축소, 스트레스 DSR +1.5%p, 소득 대비 게이지(40% 점선), A/B 대출 비교, 갈아타기+레버리지 수익률 곡선, 크로스헤어, ",
       "next": "(없음)"
-    },
-    {
-      "name": "capcut-autocut",
-      "type": "file",
-      "app": "youtube/yt-autocut",
-      "modified": "2026-04-04",
-      "status": "프로토타입 완성 + 실전 테스트 통과. 스킬화 대기.",
-      "next": "스킬화 (SKILL.md 작성 + /manage-skills add)"
     },
     {
       "name": "내집마련-시리즈",

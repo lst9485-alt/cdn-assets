@@ -1515,8 +1515,43 @@
         overview.classList.remove('visible');
         goToSlide(slideIdx);
       });
+      item.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        showSlideContextMenu(e.clientX, e.clientY, slideIdx);
+      });
       ovGrid.appendChild(item);
     });
+  }
+
+  // ── 슬라이드 우클릭 메뉴 ──
+  let _ctxMenu = null;
+  function hideSlideContextMenu() { if (_ctxMenu) { _ctxMenu.remove(); _ctxMenu = null; } }
+  function showSlideContextMenu(x, y, idx) {
+    hideSlideContextMenu();
+    const menu = document.createElement('div');
+    menu.style.cssText = 'position:fixed;z-index:100000;background:#2a2a2a;border:1px solid #555;border-radius:6px;padding:4px 0;min-width:140px;box-shadow:0 4px 16px rgba(0,0,0,.5);font:14px/1 "Noto Sans KR",sans-serif;color:#eee;';
+    menu.style.left = x + 'px';
+    menu.style.top = y + 'px';
+    const delBtn = document.createElement('div');
+    delBtn.textContent = '슬라이드 삭제';
+    delBtn.style.cssText = 'padding:8px 16px;cursor:pointer;';
+    delBtn.addEventListener('mouseenter', () => delBtn.style.background = '#c0392b');
+    delBtn.addEventListener('mouseleave', () => delBtn.style.background = 'none');
+    delBtn.addEventListener('click', () => {
+      hideSlideContextMenu();
+      if (slides.length <= 1) return;
+      deleteSlide(idx);
+      buildOverview();
+    });
+    menu.appendChild(delBtn);
+    document.body.appendChild(menu);
+    _ctxMenu = menu;
+    // 메뉴 밖 클릭 시 닫기
+    setTimeout(() => {
+      const close = (e) => { if (!menu.contains(e.target)) { hideSlideContextMenu(); document.removeEventListener('mousedown', close); } };
+      document.addEventListener('mousedown', close);
+    }, 0);
   }
 
   function toggleOverview() {
@@ -3510,6 +3545,9 @@
       hls.forEach(h => {
         FC_CLASSES.forEach(c => h.classList.remove(c));
         if (sw.dataset.cls) h.classList.add(sw.dataset.cls);
+        // 인라인 color 스타일이 있으면 제거 (클래스보다 우선순위 높아서 색 변경 안 먹힘)
+        h.querySelectorAll('[style*="color:"]').forEach(child => child.style.removeProperty('color'));
+        h.style.removeProperty('color');
       });
       updateIndicators();
       closePalettes();

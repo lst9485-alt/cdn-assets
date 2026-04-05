@@ -1523,8 +1523,42 @@
         overview.classList.remove('visible');
         goToSlide(slideIdx);
       });
+      item.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        showSlideContextMenu(e.clientX, e.clientY, slideIdx);
+      });
       ovGrid.appendChild(item);
     });
+  }
+
+  // ── 슬라이드 우클릭 메뉴 ──
+  let _ctxMenu = null;
+  function hideSlideContextMenu() { if (_ctxMenu) { _ctxMenu.remove(); _ctxMenu = null; } }
+  function showSlideContextMenu(x, y, idx) {
+    hideSlideContextMenu();
+    const menu = document.createElement('div');
+    menu.style.cssText = 'position:fixed;z-index:100000;background:#2a2a2a;border:1px solid #555;border-radius:6px;padding:4px 0;min-width:140px;box-shadow:0 4px 16px rgba(0,0,0,.5);font:14px/1 "Noto Sans KR",sans-serif;color:#eee;';
+    menu.style.left = x + 'px';
+    menu.style.top = y + 'px';
+    const delBtn = document.createElement('div');
+    delBtn.textContent = '슬라이드 삭제';
+    delBtn.style.cssText = 'padding:8px 16px;cursor:pointer;';
+    delBtn.addEventListener('mouseenter', () => delBtn.style.background = '#c0392b');
+    delBtn.addEventListener('mouseleave', () => delBtn.style.background = 'none');
+    delBtn.addEventListener('click', () => {
+      hideSlideContextMenu();
+      if (slides.length <= 1) return;
+      deleteSlide(idx);
+      buildOverview();
+    });
+    menu.appendChild(delBtn);
+    document.body.appendChild(menu);
+    _ctxMenu = menu;
+    setTimeout(() => {
+      const close = (e) => { if (!menu.contains(e.target)) { hideSlideContextMenu(); document.removeEventListener('mousedown', close); } };
+      document.addEventListener('mousedown', close);
+    }, 0);
   }
 
   function toggleOverview() {
@@ -3953,11 +3987,7 @@
       currentHTML: slidePreviewHTML(slide, currentStep),
       nextHTML,
       nextSlideHTML,
-      notes: (() => {
-        const layer = slide.querySelector(`.step-layer[data-step="${currentStep}"]`);
-        const stepNote = layer ? layer.dataset.stepNotes : undefined;
-        return stepNote !== undefined ? stepNote : (slide.dataset.notes || '');
-      })()
+      notes: slide.dataset.notes || ''
     });
   }
 
@@ -4002,7 +4032,7 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
 .slide-clone-wrap * { transition: none !important; animation: none !important; }
 #pres-notes { padding: 10px 16px; background: #111; border-top: 1px solid #333; height: 160px; display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
 #pres-notes-label { font-size: 11px; color: #888; font-weight: 700; }
-#pres-notes-input { flex: 1; background: #222; border: 1px solid #444; border-radius: 6px; color: #fff; font-size: 13px; padding: 6px 10px; resize: none; font-family: inherit; }
+#pres-notes-input { flex: 1; background: #222; border: 1px solid #444; border-radius: 6px; color: #fff; font-size: 13px; padding: 6px 10px; font-family: inherit; overflow-y: auto; line-height: 1.8; }
 #pres-footer { display: flex; justify-content: space-between; padding: 8px 16px; background: #111; border-top: 1px solid #333; flex-shrink: 0; }
 #pres-footer button { background: #333; border: 1px solid #555; color: #fff; font-size: 14px; font-weight: 700; padding: 6px 20px; border-radius: 6px; cursor: pointer; }
 #pres-footer button:hover { background: #444; }
@@ -4033,7 +4063,7 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
   <\/div>
   <div id="pres-notes">
     <div id="pres-notes-label">참고 (원고)<\/div>
-    <textarea id="pres-notes-input" placeholder="발표 노트..."><\/textarea>
+    <div id="pres-notes-input" contenteditable="true" style="white-space:pre-wrap;overflow-y:auto;" placeholder="발표 노트..."><\/div>
   <\/div>
   <div id="pres-footer">
     <button id="pres-btn-prev">◀ 이전<\/button>
@@ -4078,14 +4108,16 @@ ch.onmessage = ev => {
     renderPreview(document.getElementById('pres-current'), d.currentHTML);
     renderPreview(document.getElementById('pres-next'), d.nextHTML);
     renderPreview(document.getElementById('pres-next-slide'), d.nextSlideHTML || '');
-    document.getElementById('pres-notes-input').value = d.notes || '';
+    const fullNotes = d.notes || '';
+    const el = document.getElementById('pres-notes-input');
+    el.textContent = fullNotes;
   }
 };
 document.getElementById('pres-btn-prev').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'prev' }));
 document.getElementById('pres-btn-next').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'next' }));
-document.getElementById('pres-notes-input').addEventListener('input', ev => ch.postMessage({ type: 'notes', slide: curSlideIdx, text: ev.target.value }));
+document.getElementById('pres-notes-input').addEventListener('input', ev => ch.postMessage({ type: 'notes', slide: curSlideIdx, text: ev.target.textContent }));
 document.addEventListener('keydown', ev => {
-  if (['ArrowRight', ' '].includes(ev.key)) { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'next' }); }
+  if (ev.key === 'ArrowRight') { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'next' }); }
   if (ev.key === 'ArrowLeft') { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'prev' }); }
 });
 ch.postMessage({ type: 'ready' });

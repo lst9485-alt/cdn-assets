@@ -582,7 +582,7 @@
 
   /* ── ambient: 추가 ── */
   .hl { animation: none; }
-  .bubble { animation: float-y 3s ease-in-out infinite; }
+  .bubble { animation: float-bubble 2.5s ease-in-out infinite; }
   .card { animation: float-y 4s ease-in-out infinite; }
   .icon-flow-icon { animation: float-y 3s ease-in-out infinite; }
   .bar-track { animation: none; }
@@ -617,7 +617,11 @@
   }
   @keyframes float-y {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes float-bubble {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
   @keyframes count-bounce {
     0% { transform: scale(1); }
