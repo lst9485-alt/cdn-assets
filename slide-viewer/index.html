@@ -35,16 +35,7 @@
         .pipe-arrow { color: #CBD5E1; font-size: 16px; padding: 0 6px; flex-shrink: 0; }
         .pipe-phase { font-size: 10px; font-weight: 700; color: #94A3B8; margin-bottom: 4px; letter-spacing: 0.5px; }
 
-        /* 파일 트리 */
-        .file-tree { font-size: 12px; font-weight: 600; color: #475569; line-height: 2; font-family: "SF Mono", "Fira Code", monospace; }
-        .file-tree .src { color: #0077C8; }
-        .file-tree .gen { color: #10B981; }
-        .file-tree .tool { color: #92400E; }
-        .file-tree .shared { color: #7C3AED; }
-
-        /* 빌드 명령어 */
-        .build-cmds { display: flex; gap: 8px; flex-wrap: wrap; }
-        .build-cmd { background: #1E293B; color: #E2E8F0; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-family: "SF Mono", "Fira Code", monospace; font-weight: 600; }
+        /* (파일 트리·빌드 명령어 — 미사용, 제거됨) */
 
         /* 카테고리 섹션 */
         .cat-section { margin-bottom: 20px; }
@@ -85,24 +76,21 @@
             <summary>시스템 구조</summary>
             <div class="diagram">
                 <div class="diagram-section">
-                    <div class="diagram-label">슬라이드 만드는 과정</div>
-                    <div class="pipe-phase">1단계: 기획</div>
-                    <div class="pipeline">
-                        <span class="pipe-box source">원고 분석 (5개 동시)</span>
+                    <div class="diagram-label">슬라이드 제작 흐름</div>
+                    <div class="pipeline" style="margin-bottom:10px;">
+                        <span class="pipe-box source">원고 입력</span>
                         <span class="pipe-arrow">→</span>
-                        <span class="pipe-box tool">기획 점검</span>
+                        <span class="pipe-box">5구간 동시 분석</span>
                         <span class="pipe-arrow">→</span>
-                        <span class="pipe-box tool">계획서 조립</span>
-                    </div>
-                    <div class="pipe-phase">2단계: 생성</div>
-                    <div class="pipeline">
-                        <span class="pipe-box">슬라이드 계획서</span>
-                        <span class="pipe-arrow">→</span>
-                        <span class="pipe-box tool">품질 점검</span>
-                        <span class="pipe-arrow">→</span>
-                        <span class="pipe-box tool">HTML 변환</span>
+                        <span class="pipe-box tool">자동 점검</span>
                         <span class="pipe-arrow">→</span>
                         <span class="pipe-box output">완성 슬라이드</span>
+                    </div>
+                    <div style="font-size:13px; color:#64748B; line-height:1.9; padding:4px 0 0;">
+                        <b>1.</b> 원고를 도입·챕터·마무리로 나눠서 5개가 동시에 슬라이드를 기획<br>
+                        <b>2.</b> 각 슬라이드마다 A·B·C 세 가지 타입 후보를 제안<br>
+                        <b>3.</b> 기획 결과를 자동 점검 (빠진 내용, 타입 중복, 글자수 초과 등)<br>
+                        <b>4.</b> 점검 통과하면 HTML 슬라이드로 변환
                     </div>
                 </div>
 
@@ -118,36 +106,6 @@
                         <span style="display:inline-block; background:#fff3e0; border-radius:4px; padding:2px 8px; margin:2px; font-size:13px;">[경고] 주의·위험</span>
                         <span style="display:inline-block; background:#fff3e0; border-radius:4px; padding:2px 8px; margin:2px; font-size:13px;">[질문] 반론·의문</span>
                         <br><span style="color:#999; font-size:12px;">신호 없는 문장 → 메인텍스트(T35) 또는 아이콘+텍스트(T02)만 사용</span>
-                    </div>
-                </div>
-
-                <div class="diagram-section">
-                    <div class="diagram-label">주요 파일</div>
-                    <div style="font-size:13px; line-height:2.2; color:#475569;">
-                        <b style="color:#0077C8;">에디터</b> — 기본 36장 + 베리언츠 95장<br>
-                        <b style="color:#7C3AED;">스타일</b> — 에디터와 완성 슬라이드 공용 CSS<br>
-                        <b style="color:#10B981;">자동 생성</b> — 타입 목록·필드 매핑 (에디터에서 자동 추출)<br>
-                        <b style="color:#92400E;">도구</b> — 계획서 조립기 + 카운트 동기화
-                    </div>
-                </div>
-
-                <div class="diagram-section">
-                    <div class="diagram-label">터미널 명령어</div>
-                    <div style="display:grid; grid-template-columns:auto 1fr; gap:6px 16px; font-size:12px; align-items:center;">
-                        <span class="build-cmd">pipeline.py build</span>
-                        <span style="color:#64748B;">에디터 JS 빌드</span>
-                        <span class="build-cmd">pipeline.py snippets</span>
-                        <span style="color:#64748B;">타입 목록 재생성</span>
-                        <span class="build-cmd">pipeline.py generate slide.md</span>
-                        <span style="color:#64748B;">슬라이드 HTML 생성</span>
-                        <span class="build-cmd">pipeline.py verify-plan</span>
-                        <span style="color:#64748B;">기획 단계 점검</span>
-                        <span class="build-cmd">pipeline.py verify-md</span>
-                        <span style="color:#64748B;">계획서 품질 점검</span>
-                        <span class="build-cmd">pipeline.py compile</span>
-                        <span style="color:#64748B;">분석 결과 → 계획서 조립</span>
-                        <span class="build-cmd">pipeline.py all slide.md</span>
-                        <span style="color:#64748B;">빌드+생성 한번에</span>
                     </div>
                 </div>
             </div>
