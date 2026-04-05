@@ -27,12 +27,13 @@
         .diagram-label { font-size: 11px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
 
         /* 파이프라인 플로우 */
-        .pipeline { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+        .pipeline { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin-bottom: 6px; }
         .pipe-box { background: #F1F5F9; border: 2px solid #E2E8F0; border-radius: 8px; padding: 8px 14px; font-size: 12px; font-weight: 700; color: #334155; white-space: nowrap; }
         .pipe-box.source { background: #E8F3FF; border-color: #0077C8; color: #0077C8; }
         .pipe-box.tool { background: #FFF7ED; border-color: #F59E0B; color: #92400E; }
         .pipe-box.output { background: #ECFDF5; border-color: #10B981; color: #065F46; }
         .pipe-arrow { color: #CBD5E1; font-size: 16px; padding: 0 6px; flex-shrink: 0; }
+        .pipe-phase { font-size: 10px; font-weight: 700; color: #94A3B8; margin-bottom: 4px; letter-spacing: 0.5px; }
 
         /* 파일 트리 */
         .file-tree { font-size: 12px; font-weight: 600; color: #475569; line-height: 2; font-family: "SF Mono", "Fira Code", monospace; }
@@ -59,6 +60,7 @@
         .t-desc { font-size: 12px; color: #64748B; margin-bottom: 2px; }
         .t-usage { font-size: 11px; color: #94A3B8; }
         .t-variants { background: #FFF7ED; color: #92400E; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 6px; margin-left: auto; flex-shrink: 0; }
+        .t-new { background: #ECFDF5; color: #065F46; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 6px; margin-left: auto; flex-shrink: 0; }
 
         /* 에디터 바로가기 */
         .editor-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; margin-bottom: 24px; }
@@ -84,12 +86,19 @@
             <div class="diagram">
                 <div class="diagram-section">
                     <div class="diagram-label">제작 파이프라인</div>
+                    <div class="pipe-phase">기획</div>
                     <div class="pipeline">
-                        <span class="pipe-box source">yt07 스킬</span>
+                        <span class="pipe-box source">yt07 스킬 (5 서브에이전트)</span>
                         <span class="pipe-arrow">→</span>
-                        <span class="pipe-box">slide.md (원고→슬라이드 계획)</span>
+                        <span class="pipe-box tool">verify-plan (스켈레톤 검증)</span>
                         <span class="pipe-arrow">→</span>
-                        <span class="pipe-box tool">verify-md (기획 검증)</span>
+                        <span class="pipe-box tool">compile (slide.md 조립)</span>
+                    </div>
+                    <div class="pipe-phase">생성</div>
+                    <div class="pipeline">
+                        <span class="pipe-box">slide.md</span>
+                        <span class="pipe-arrow">→</span>
+                        <span class="pipe-box tool">verify-md (품질 검증)</span>
                         <span class="pipe-arrow">→</span>
                         <span class="pipe-box tool">generate-slides.py</span>
                         <span class="pipe-arrow">→</span>
@@ -116,12 +125,15 @@
                     <div class="diagram-label">파일 의존 관계</div>
                     <div class="file-tree">
                         <span class="src">slides-editor.html</span> (정본 · 36장)<br>
-                        &nbsp;&nbsp;└→ <span class="tool">regenerate-snippets.py</span> → <span class="gen">snippets.md</span> + <span class="gen">type-registry.json</span><br>
+                        &nbsp;&nbsp;└→ <span class="tool">regenerate-snippets.py</span> → <span class="gen">snippets.md</span> + <span class="gen">type-registry.json</span> + <span class="gen">field-mapping.json</span><br>
                         <span class="src">slides-editor-variants.html</span> (95장)<br>
                         &nbsp;&nbsp;└→ <span class="gen">snippets-variants.md</span><br>
                         <span class="shared">slide-style.css</span> (에디터 + 생성 슬라이드 공용)<br>
                         <span class="src">slide-editor.js</span> (에디터 전용 · template/js/에서 빌드)<br>
-                        <span class="gen">slide-engine.js</span> (생성 슬라이드 전용)
+                        <span class="gen">slide-engine.js</span> (생성 슬라이드 전용)<br>
+                        <span class="tool">compile_slidemd.py</span> (서브에이전트 출력 → slide.md 조립)<br>
+                        &nbsp;&nbsp;└→ <span class="gen">type-compile-config.json</span><br>
+                        <span class="tool">sync-counts.py</span> (카운트 동기화)
                     </div>
                 </div>
 
@@ -131,6 +143,10 @@
                         <span class="build-cmd">pipeline.py build</span>
                         <span class="build-cmd">pipeline.py snippets</span>
                         <span class="build-cmd">pipeline.py generate slide.md</span>
+                        <span class="build-cmd">pipeline.py verify-plan</span>
+                        <span class="build-cmd">pipeline.py verify-md</span>
+                        <span class="build-cmd">pipeline.py compile</span>
+                        <span class="build-cmd">pipeline.py all slide.md</span>
                     </div>
                 </div>
             </div>
@@ -144,7 +160,7 @@
             <div class="type-grid">
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T01</span>
+                        <span class="t-code">T35</span>
                         <span class="t-name">메인텍스트</span>
                     </div>
                     <div class="t-desc">화면 중앙 큰 글자 1~2줄</div>
@@ -152,7 +168,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T02</span>
+                        <span class="t-code">T01</span>
                         <span class="t-name">말풍선+텍스트</span>
                     </div>
                     <div class="t-desc">우상단 말풍선 + 좌하단 답변</div>
@@ -160,7 +176,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T03</span>
+                        <span class="t-code">T02</span>
                         <span class="t-name">아이콘+텍스트</span>
                     </div>
                     <div class="t-desc">좌측 SVG 아이콘(원/삼각/전구) + 우측 텍스트</div>
@@ -168,7 +184,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T19</span>
+                        <span class="t-code">T18</span>
                         <span class="t-name">인용</span>
                     </div>
                     <div class="t-desc">좌측 이미지 + 우측 인용문+출처</div>
@@ -176,11 +192,20 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T20</span>
+                        <span class="t-code">T19</span>
                         <span class="t-name">경고배너</span>
                     </div>
                     <div class="t-desc">빨간 투명 배경 배너 + 아이콘 + 경고문</div>
                     <div class="t-usage">주의/경고</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T29</span>
+                        <span class="t-name">이미지+텍스트</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">이미지 영역 + 하단 텍스트</div>
+                    <div class="t-usage">이미지+설명 범용</div>
                 </a>
             </div>
         </div>
@@ -191,7 +216,7 @@
             <div class="type-grid">
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T04</span>
+                        <span class="t-code">T03</span>
                         <span class="t-name">카드</span>
                     </div>
                     <div class="t-desc">가로 나란히 번호카드(제목+설명)</div>
@@ -199,7 +224,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T05</span>
+                        <span class="t-code">T04</span>
                         <span class="t-name">그리드카드</span>
                     </div>
                     <div class="t-desc">아이콘+제목+설명 카드 그리드</div>
@@ -207,7 +232,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T06</span>
+                        <span class="t-code">T05</span>
                         <span class="t-name">번호항목</span>
                     </div>
                     <div class="t-desc">세로 리스트(번호뱃지+텍스트)</div>
@@ -215,7 +240,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T07</span>
+                        <span class="t-code">T06</span>
                         <span class="t-name">체크리스트</span>
                     </div>
                     <div class="t-desc">체크박스+텍스트 세로 리스트</div>
@@ -223,7 +248,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T08</span>
+                        <span class="t-code">T07</span>
                         <span class="t-name">아이콘행</span>
                     </div>
                     <div class="t-desc">가로 아이콘 원형+역할+설명</div>
@@ -231,7 +256,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T09</span>
+                        <span class="t-code">T08</span>
                         <span class="t-name">아이콘아이템</span>
                     </div>
                     <div class="t-desc">아이콘 원형+라벨 그리드</div>
@@ -239,7 +264,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T21</span>
+                        <span class="t-code">T20</span>
                         <span class="t-name">태그칩</span>
                     </div>
                     <div class="t-desc">태그 뱃지 여러 줄</div>
@@ -247,11 +272,20 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T23</span>
+                        <span class="t-code">T22</span>
                         <span class="t-name">버튼그리드</span>
                     </div>
                     <div class="t-desc">필 버튼 여러 개 시차 등장</div>
                     <div class="t-usage">선택지/키워드</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T26</span>
+                        <span class="t-name">그리드카드(아이콘좌측)</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">아이콘좌측 가로형 카드 그리드</div>
+                    <div class="t-usage">항목 나열</div>
                 </a>
             </div>
         </div>
@@ -262,7 +296,7 @@
             <div class="type-grid">
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T10</span>
+                        <span class="t-code">T09</span>
                         <span class="t-name">플로우</span>
                     </div>
                     <div class="t-desc">박스 → 화살표 → 박스 가로 연결</div>
@@ -270,7 +304,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T11</span>
+                        <span class="t-code">T10</span>
                         <span class="t-name">아이콘플로우</span>
                         <span class="t-variants">2 변형</span>
                     </div>
@@ -279,7 +313,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T16</span>
+                        <span class="t-code">T15</span>
                         <span class="t-name">다이어그램</span>
                     </div>
                     <div class="t-desc">트리: 루트 → 가지</div>
@@ -287,7 +321,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T17</span>
+                        <span class="t-code">T16</span>
                         <span class="t-name">타임라인</span>
                     </div>
                     <div class="t-desc">가로 원형+박스 SVG 타임라인</div>
@@ -296,6 +330,15 @@
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
                         <span class="t-code">T27</span>
+                        <span class="t-name">섹션배지(챕터플로우)</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">초록pill배지 + 순차등장 플로우박스</div>
+                    <div class="t-usage">챕터 구분+흐름</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T30</span>
                         <span class="t-name">분기플로우</span>
                     </div>
                     <div class="t-desc">질문 → 2~3분기 결과 의사결정 트리</div>
@@ -303,11 +346,29 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T30</span>
+                        <span class="t-code">T32</span>
                         <span class="t-name">등식플로우</span>
                     </div>
                     <div class="t-desc">A + B = C 등식 박스 + 인포박스 + 체인</div>
                     <div class="t-usage">등식/공식/관계 설명</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T33</span>
+                        <span class="t-name">아이콘플로우(스탯)</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">아이콘플로우 + 하단 스탯박스+강조바</div>
+                    <div class="t-usage">단계+수치 결합</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T34</span>
+                        <span class="t-name">플로우(상세)</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">3단 상세플로우(아이콘+제목+부제+불릿)+강조바</div>
+                    <div class="t-usage">상세 프로세스</div>
                 </a>
             </div>
         </div>
@@ -318,7 +379,7 @@
             <div class="type-grid">
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T12</span>
+                        <span class="t-code">T11</span>
                         <span class="t-name">바차트</span>
                     </div>
                     <div class="t-desc">세로/가로 막대그래프</div>
@@ -326,7 +387,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T13</span>
+                        <span class="t-code">T12</span>
                         <span class="t-name">라인차트</span>
                     </div>
                     <div class="t-desc">SVG 꺾은선 그래프</div>
@@ -334,7 +395,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T14</span>
+                        <span class="t-code">T13</span>
                         <span class="t-name">큰숫자(서클)</span>
                         <span class="t-variants">2 변형</span>
                     </div>
@@ -343,7 +404,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T15</span>
+                        <span class="t-code">T14</span>
                         <span class="t-name">숫자스탯</span>
                     </div>
                     <div class="t-desc">초대형 숫자 또는 나란히 숫자블록</div>
@@ -351,22 +412,30 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T25</span>
+                        <span class="t-code">T28</span>
                         <span class="t-name">비교테이블</span>
                     </div>
                     <div class="t-desc">행×열 비교 표 + 하단 요약</div>
                     <div class="t-usage">항목별 대비(2열)</div>
                 </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T31</span>
+                        <span class="t-name">분할레이아웃</span>
+                    </div>
+                    <div class="t-desc">좌 리스트 + 우 스탯카드 분할 구성</div>
+                    <div class="t-usage">리스트+수치 병렬 비교</div>
+                </a>
             </div>
         </div>
 
-        <!-- 비교/레이아웃 -->
+        <!-- 비교 -->
         <div class="cat-section">
-            <div class="cat-title">비교 / 레이아웃</div>
+            <div class="cat-title">비교</div>
             <div class="type-grid">
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T18</span>
+                        <span class="t-code">T17</span>
                         <span class="t-name">비교박스</span>
                     </div>
                     <div class="t-desc">좌측 좋은쪽 / 우측 나쁜쪽</div>
@@ -374,19 +443,30 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T26</span>
-                        <span class="t-name">이미지+텍스트</span>
+                        <span class="t-code">T24</span>
+                        <span class="t-name">비교박스(이모지VS)</span>
+                        <span class="t-new">NEW</span>
                     </div>
-                    <div class="t-desc">이미지 영역 + 하단 텍스트</div>
-                    <div class="t-usage">이미지+설명 범용</div>
+                    <div class="t-desc">큰 이모지+VS배지 좌우 대비</div>
+                    <div class="t-usage">A vs B</div>
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T28</span>
-                        <span class="t-name">분할레이아웃</span>
+                        <span class="t-code">T25</span>
+                        <span class="t-name">비교박스(불릿리스트)</span>
+                        <span class="t-new">NEW</span>
                     </div>
-                    <div class="t-desc">좌 리스트 + 우 스탯카드 분할 구성</div>
-                    <div class="t-usage">리스트+수치 병렬 비교</div>
+                    <div class="t-desc">이모지+텍스트 카드형 리스트+요약바</div>
+                    <div class="t-usage">항목별 비교</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T36</span>
+                        <span class="t-name">인용(대비)</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">2단어 대비(초록/빨강 ≠)+인용박스+요약</div>
+                    <div class="t-usage">대비 강조+인용</div>
                 </a>
             </div>
         </div>
@@ -397,7 +477,7 @@
             <div class="type-grid">
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T22</span>
+                        <span class="t-code">T21</span>
                         <span class="t-name">섹션배지+코너레이블</span>
                     </div>
                     <div class="t-desc">챕터명 뱃지 + 우상단 코너라벨</div>
@@ -405,7 +485,7 @@
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
-                        <span class="t-code">T24</span>
+                        <span class="t-code">T23</span>
                         <span class="t-name">CTA버튼</span>
                     </div>
                     <div class="t-desc">좋아요/구독 버튼 팝업</div>
