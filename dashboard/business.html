@@ -106,7 +106,6 @@
             .stat-value { font-size: 18px; }
             .funnel-stage-value { font-size: 26px; }
             .sales-stats { grid-template-columns: 1fr; }
-            div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 480px) {
             .stat-value { font-size: 16px; }
@@ -205,19 +204,22 @@
                 <div class="chart-box" id="utm-table-wrap"></div>
             </div>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-                <div class="section">
-                    <div class="section-title">상담목적별</div>
-                    <div class="chart-box" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-                        <div style="width:160px;height:160px;"><canvas id="chart-purpose"></canvas></div>
-                        <div id="purpose-legend" style="font-size:13px;"></div>
+            <div class="section">
+                <div class="section-title">상담 분석</div>
+                <div class="chart-box" style="display:flex;gap:32px;flex-wrap:wrap;">
+                    <div style="flex:1;min-width:200px;">
+                        <div style="font-size:13px;font-weight:700;color:#64748B;margin-bottom:12px;">상담목적별</div>
+                        <div style="display:flex;align-items:center;gap:16px;">
+                            <div style="width:120px;height:120px;flex-shrink:0;"><canvas id="chart-purpose"></canvas></div>
+                            <div id="purpose-legend" style="font-size:12px;"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="section">
-                    <div class="section-title">수도권 / 지방</div>
-                    <div class="chart-box" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-                        <div style="width:160px;height:160px;"><canvas id="chart-region"></canvas></div>
-                        <div id="region-legend" style="font-size:13px;"></div>
+                    <div style="flex:1;min-width:200px;">
+                        <div style="font-size:13px;font-weight:700;color:#64748B;margin-bottom:12px;">수도권 / 지방</div>
+                        <div style="display:flex;align-items:center;gap:16px;">
+                            <div style="width:120px;height:120px;flex-shrink:0;"><canvas id="chart-region"></canvas></div>
+                            <div id="region-legend" style="font-size:12px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -384,11 +386,13 @@
             html += '</div>';
             html += '<div class="funnel-stage-right">';
             html += '<div class="funnel-stage-target">' + s.targetLabel + '</div>';
-            html += '<div style="font-size:14px;font-weight:800;margin-top:4px;color:' + (pctAchieved >= 100 ? '#059669' : pctAchieved >= 80 ? '#D97706' : '#DC2626') + ';">' + pctAchieved + '%</div>';
             html += '</div>';
             html += '</div>';
-            // 진행률 바 (호버 툴팁)
-            html += '<div class="funnel-bar" title="' + barTitle + '"><div class="funnel-bar-fill ' + barColor + '" style="width:' + Math.round(ratio * 100) + '%"></div></div>';
+            // 진행률 바 + 달성률 (바 오른쪽에 % 표시)
+            html += '<div style="display:flex;align-items:center;gap:8px;margin-top:8px;">';
+            html += '<div class="funnel-bar" title="' + barTitle + '" style="flex:1;margin-top:0;"><div class="funnel-bar-fill ' + barColor + '" style="width:' + Math.round(ratio * 100) + '%"></div></div>';
+            html += '<span style="font-size:13px;font-weight:800;min-width:36px;text-align:right;color:' + (pctAchieved >= 100 ? '#059669' : pctAchieved >= 80 ? '#D97706' : '#DC2626') + ';">' + pctAchieved + '%</span>';
+            html += '</div>';
 
             // 전환율 커넥터 (마지막 단계 제외)
             if (i < connectors.length) {
@@ -470,13 +474,9 @@
                 { label: '링크클릭률', data: history.map(w => w.link_click_rate || 0), borderColor: '#F59E0B', borderWidth: 2, tension: 0.3, pointRadius: 3 },
                 { label: '전환율', data: history.map(w => w.convert_rate || 0), borderColor: '#DC2626', borderWidth: 2, tension: 0.3, pointRadius: 3 },
             ];
-            // 각 데이터셋 최대값 기반으로 Y축 상한 결정 (이상치 대응)
-            const allVals = datasets.flatMap(ds => ds.data);
-            const maxVal = Math.max(...allVals.filter(v => v > 0), 1);
-            // 적절한 상한: max를 5% 단위로 올림, 최소 5%, 최대 20%
-            const yMax = Math.min(20, Math.max(5, Math.ceil(maxVal / 5) * 5));
+            // Y축: 보이는 데이터 기준 자동 스케일, 최대 20% 캡
             scales = {
-                y: { max: yMax, ticks: { callback: v => v + '%' }, grid: { color: '#F1F5F9' } },
+                y: { afterDataLimits: scale => { scale.max = Math.min(scale.max * 1.2, 20); }, ticks: { callback: v => v + '%' }, grid: { color: '#F1F5F9' } },
                 x: { grid: { display: false } },
             };
         }
@@ -630,7 +630,7 @@
         statsHtml += '<div class="stat-card"><div class="stat-label">' + lastLabel + '</div><div class="stat-value">' + fmtWon(s.last_month || 0) + '</div></div>';
         const chgPct = s.change_pct || '—';
         const chgClass = chgPct.startsWith('+') ? 'up' : chgPct.startsWith('-') ? 'down' : 'flat';
-        statsHtml += '<div class="stat-card"><div class="stat-label">전월 대비</div><div class="stat-value stat-change ' + chgClass + '">' + chgPct + '</div></div>';
+        statsHtml += '<div class="stat-card"><div class="stat-label">전월 대비</div><div class="stat-value" style="color:' + (chgClass === 'up' ? '#059669' : chgClass === 'down' ? '#DC2626' : '#64748B') + ';font-size:24px;">' + chgPct + '</div></div>';
         document.getElementById('sales-stats').innerHTML = statsHtml;
 
         // 월별 매출 차트
