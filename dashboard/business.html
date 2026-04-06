@@ -664,7 +664,7 @@
                 options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.label + ': ' + fmtNum(ctx.raw) + '원' } } }, cutout: '60%' }
             });
             let legend = '';
-            d.by_purpose.forEach((p, i) => { legend += '<div style="margin-bottom:6px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + colors[i] + ';margin-right:6px;"></span><strong>' + p.purpose + '</strong> ' + p.ratio + ' (' + fmtWon(p.revenue) + ')</div>'; });
+            d.by_purpose.forEach((p, i) => { legend += '<div style="margin-bottom:6px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + colors[i % colors.length] + ';margin-right:6px;"></span><strong>' + p.purpose + '</strong> ' + p.ratio + ' (' + fmtWon(p.revenue) + ')</div>'; });
             document.getElementById('purpose-legend').innerHTML = legend;
         }
 
@@ -677,7 +677,7 @@
                 options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.raw + '명 (' + fmtWon(d.by_region[ctx.dataIndex].revenue) + ')' } } }, cutout: '60%' }
             });
             let rLegend = '';
-            d.by_region.forEach((r, i) => { rLegend += '<div style="margin-bottom:6px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + rColors[i] + ';margin-right:6px;"></span><strong>' + r.region + '</strong> ' + r.ratio + ' (' + r.count + '명)</div>'; });
+            d.by_region.forEach((r, i) => { rLegend += '<div style="margin-bottom:6px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + rColors[i % rColors.length] + ';margin-right:6px;"></span><strong>' + r.region + '</strong> ' + r.ratio + ' (' + r.count + '명)</div>'; });
             document.getElementById('region-legend').innerHTML = rLegend;
         }
     }
