@@ -98,6 +98,9 @@
         .error-msg { text-align: center; padding: 40px; color: #94A3B8; }
 
         /* ── 반응형 ── */
+        @media (max-width: 900px) {
+            #bottleneck-rank { flex: 1 0 100% !important; }
+        }
         @media (max-width: 640px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .stat-value { font-size: 18px; }
@@ -110,8 +113,7 @@
             .funnel-stage { padding: 12px 14px; }
         }
     </style>
-    <!-- business.html에서 sidebar 표시 (dashboard 경로 숨김 해제) -->
-    <style>#sidebar { display: block !important; }</style>
+    <!-- sidebar.js에서 business.html 예외 처리됨 -->
 </head>
 <body>
     <div class="page">
@@ -151,19 +153,32 @@
             </div>
 
             <div class="section">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-                    <div class="section-title" style="margin-bottom:0;">전환 퍼널</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+                    <div>
+                        <div class="section-title" style="margin-bottom:0;">전환 퍼널</div>
+                        <div id="funnel-period" style="font-size:13px;color:#64748B;"></div>
+                    </div>
                     <select class="week-select" id="week-select"></select>
                 </div>
-                <div class="funnel" id="funnel-wrap"></div>
+                <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                    <div style="flex:1;min-width:0;" id="funnel-wrap" class="funnel"></div>
+                    <div id="bottleneck-rank" style="flex:0 0 180px;background:white;border:1px solid #E2E8F0;border-radius:12px;padding:16px;"></div>
+                </div>
             </div>
 
             <div class="section">
                 <div class="section-title">주간 추이</div>
                 <div class="chart-box">
-                    <div class="chart-toggle" id="chart-toggle">
-                        <button class="active" data-mode="volume">조회수</button>
-                        <button data-mode="rates">전환율</button>
+                    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+                        <div class="chart-toggle" id="chart-toggle" style="margin-bottom:0;">
+                            <button class="active" data-mode="volume">조회수</button>
+                            <button data-mode="rates">전환율</button>
+                        </div>
+                        <select class="week-select" id="chart-range">
+                            <option value="12">최근 12주</option>
+                            <option value="26">최근 26주</option>
+                            <option value="0" selected>전체</option>
+                        </select>
                     </div>
                     <canvas id="chart-weekly"></canvas>
                 </div>
@@ -388,6 +403,29 @@
         }
 
         document.getElementById('funnel-wrap').innerHTML = html;
+
+        // 병목 순위 (오른쪽 패널)
+        const allItems = [
+            ...connectors.map(c => ({ label: c.label, rate: c.rate, target: c.target, ratio: c.target > 0 ? c.rate / c.target : 999 })),
+            ...stages.map(s => ({ label: s.label, rate: s.actual, target: s.target, ratio: s.target > 0 ? s.actual / s.target : 999 })),
+        ].filter(x => x.ratio < 1).sort((a, b) => a.ratio - b.ratio);
+
+        let rankHtml = '<div style="font-size:13px;font-weight:800;color:#051C2C;margin-bottom:10px;">병목 순위</div>';
+        if (allItems.length === 0) {
+            rankHtml += '<div style="font-size:12px;color:#94A3B8;">모든 지표 목표 달성!</div>';
+        } else {
+            allItems.forEach((item, idx) => {
+                const pct = Math.round(item.ratio * 100);
+                const isRate = typeof item.rate === 'number' && item.target <= 100;
+                const valStr = isRate ? item.rate.toFixed(1) + '%' : fmtNum(item.rate);
+                rankHtml += '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #F1F5F9;font-size:12px;">';
+                rankHtml += '<span style="font-weight:800;color:' + (idx === 0 ? '#DC2626' : '#64748B') + ';">' + (idx + 1) + '</span>';
+                rankHtml += '<span style="flex:1;font-weight:600;color:#051C2C;">' + item.label + '</span>';
+                rankHtml += '<span style="color:' + (pct < 80 ? '#DC2626' : '#D97706') + ';font-weight:700;">' + pct + '%</span>';
+                rankHtml += '</div>';
+            });
+        }
+        document.getElementById('bottleneck-rank').innerHTML = rankHtml;
     }
 
     // ── 주간 추이 ──
@@ -434,7 +472,7 @@
                 responsive: true,
                 interaction: { mode: 'index', intersect: false },
                 plugins: {
-                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16, font: { size: 11 } } },
+                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16, font: { size: 12, weight: '600' }, generateLabels: function(chart) { return Chart.defaults.plugins.legend.labels.generateLabels(chart).map(l => { if (chart.getDatasetMeta(l.datasetIndex).hidden) { l.fontColor = '#CBD5E1'; l.fillStyle = '#E2E8F0'; l.strokeStyle = '#E2E8F0'; } return l; }); } }, onClick: function(e, item, legend) { Chart.defaults.plugins.legend.onClick.call(this, e, item, legend); legend.chart.update(); } },
                     tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + (mode === 'rates' ? ctx.raw.toFixed(2) + '%' : fmtNum(ctx.raw)) } }
                 },
                 scales,
@@ -521,22 +559,43 @@
             renderFunnel(w, rates, targets);
         }
 
-        select.addEventListener('change', () => showWeek(parseInt(select.value)));
+        function updatePeriodLabel(w) {
+            const ws = w.week_start || '';
+            const we = w.week_end || '';
+            document.getElementById('funnel-period').textContent = ws + (we ? ' ~ ' + we : '');
+        }
+
+        select.addEventListener('change', () => {
+            const idx = parseInt(select.value);
+            showWeek(idx);
+            updatePeriodLabel(history[idx]);
+        });
 
         // 초기 렌더링 (이번주)
         renderStatCards(data.current_week, data.changes || {});
         renderFunnel(data.current_week, data.rates, targets);
         renderContentTable(data.current_week, data.avg_4w || {});
+        updatePeriodLabel(data.current_week);
+
+        // 차트 기간 선택 + 모드 토글
+        let currentMode = 'volume';
+        function updateChart() {
+            const rangeVal = parseInt(document.getElementById('chart-range').value);
+            const sliced = rangeVal > 0 ? history.slice(-rangeVal) : history;
+            renderWeeklyChart(sliced, currentMode);
+        }
 
         if (history.length > 1) {
-            renderWeeklyChart(history, 'volume');
+            updateChart();
             document.querySelectorAll('#chart-toggle button').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('#chart-toggle button').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    renderWeeklyChart(history, this.dataset.mode);
+                    currentMode = this.dataset.mode;
+                    updateChart();
                 });
             });
+            document.getElementById('chart-range').addEventListener('change', updateChart);
         }
     }
 
