@@ -573,6 +573,8 @@
                 renderStatCards(w, {});
             }
             renderFunnel(w, rates, targets);
+            // 콘텐츠 성과도 선택된 주 기준으로 갱신
+            renderContentTable(w, data.avg_4w || {});
         }
 
         function updatePeriodLabel(w) {
