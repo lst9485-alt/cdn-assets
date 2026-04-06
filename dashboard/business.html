@@ -40,11 +40,12 @@
         .funnel { background: white; border-radius: 12px; padding: 24px; border: 1px solid #E2E8F0; }
         .funnel-stage { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; }
         .funnel-stage-left {}
-        .funnel-stage-label { font-size: 13px; color: #64748B; font-weight: 600; margin-bottom: 2px; }
-        .funnel-stage-value { font-size: 26px; font-weight: 800; color: #051C2C; }
+        .funnel-stage-label { font-size: 14px; color: #64748B; font-weight: 600; margin-bottom: 2px; }
+        .funnel-stage-value { font-size: 32px; font-weight: 800; color: #051C2C; }
         .funnel-stage-right { text-align: right; }
         .funnel-stage-target { font-size: 12px; color: #94A3B8; }
-        .funnel-bar { height: 6px; border-radius: 3px; background: #E2E8F0; margin-top: 8px; overflow: hidden; }
+        .funnel-bar { height: 6px; border-radius: 3px; background: #E2E8F0; margin-top: 8px; overflow: hidden; position: relative; cursor: default; }
+        .funnel-bar[title]:hover::after { content: attr(title); position: absolute; top: -28px; left: 50%; transform: translateX(-50%); background: #1A1A1A; color: white; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; white-space: nowrap; z-index: 10; }
         .funnel-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
         .funnel-bar-fill.green { background: #059669; }
         .funnel-bar-fill.yellow { background: #F59E0B; }
@@ -52,13 +53,18 @@
 
         .funnel-connector { display: flex; align-items: center; justify-content: center; padding: 8px 0; gap: 10px; }
         .funnel-arrow { color: #CBD5E1; font-size: 20px; }
-        .funnel-rate-badge { font-size: 14px; font-weight: 800; padding: 5px 14px; border-radius: 20px; white-space: nowrap; }
+        .funnel-rate-badge { font-size: 16px; font-weight: 800; padding: 6px 16px; border-radius: 20px; white-space: nowrap; }
         .funnel-rate-badge.green { color: #059669; background: #ECFDF5; }
         .funnel-rate-badge.yellow { color: #D97706; background: #FFFBEB; }
         .funnel-rate-badge.red { color: #DC2626; background: #FEF2F2; }
         .funnel-rate-badge.bottleneck { animation: pulse-glow 2s infinite; }
         .funnel-rate-target { font-size: 11px; color: #94A3B8; margin-left: 6px; }
-        .bottleneck-label { font-size: 10px; font-weight: 800; color: #DC2626; background: #FEF2F2; padding: 1px 6px; border-radius: 4px; margin-left: 6px; }
+        .bottleneck-label { font-size: 12px; font-weight: 800; color: #DC2626; background: #FEF2F2; padding: 2px 8px; border-radius: 4px; margin-left: 6px; }
+        .bottleneck-label.worst { background: #DC2626; color: white; }
+
+        /* ── 주차 선택 ── */
+        .week-select { font-size: 13px; font-weight: 600; padding: 6px 12px; border: 1px solid #E2E8F0; border-radius: 8px; background: white; color: #051C2C; cursor: pointer; margin-bottom: 16px; }
+        .week-select:focus { outline: none; border-color: #0077C8; }
 
         @keyframes pulse-glow {
             0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); }
@@ -95,15 +101,17 @@
         @media (max-width: 640px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .stat-value { font-size: 18px; }
-            .funnel-stage-value { font-size: 22px; }
+            .funnel-stage-value { font-size: 26px; }
             .sales-stats { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) {
             .stat-value { font-size: 16px; }
-            .funnel-stage-value { font-size: 20px; }
+            .funnel-stage-value { font-size: 22px; }
             .funnel-stage { padding: 12px 14px; }
         }
     </style>
+    <!-- business.html에서 sidebar 표시 (dashboard 경로 숨김 해제) -->
+    <style>#sidebar { display: block !important; }</style>
 </head>
 <body>
     <div class="page">
@@ -143,7 +151,10 @@
             </div>
 
             <div class="section">
-                <div class="section-title">전환 퍼널</div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+                    <div class="section-title" style="margin-bottom:0;">전환 퍼널</div>
+                    <select class="week-select" id="week-select"></select>
+                </div>
                 <div class="funnel" id="funnel-wrap"></div>
             </div>
 
@@ -323,12 +334,12 @@
             { label: '연계율', rate: rates.interest_rate, target: targets.interest_rate || 20 },
         ];
 
-        // 병목 찾기
-        let bottleneckIdx = -1, worstRatio = Infinity;
+        // 병목 찾기: 목표 미달 전환율 모두 + 최악 찾기
+        let worstIdx = -1, worstRatio = Infinity;
         connectors.forEach((c, i) => {
             if (c.target > 0) {
                 const ratio = c.rate / c.target;
-                if (ratio < worstRatio) { worstRatio = ratio; bottleneckIdx = i; }
+                if (ratio < worstRatio) { worstRatio = ratio; worstIdx = i; }
             }
         });
 
@@ -336,35 +347,42 @@
         for (let i = 0; i < stages.length; i++) {
             const s = stages[i];
             const ratio = s.target > 0 ? Math.min(s.actual / s.target, 1) : 0;
+            const pctAchieved = s.target > 0 ? Math.round(s.actual / s.target * 100) : 0;
             const barColor = ratio >= 1 ? 'green' : ratio >= 0.8 ? 'yellow' : 'red';
+            const barTitle = '목표 대비 ' + pctAchieved + '% 달성';
 
             html += '<div class="funnel-stage">';
             html += '<div class="funnel-stage-left">';
             html += '<div class="funnel-stage-label">' + s.label + '</div>';
             html += '<div class="funnel-stage-value">' + s.value + '</div>';
-            if (s.sub) html += '<div style="font-size:13px;color:#64748B;font-weight:600;">' + s.sub + '</div>';
+            if (s.sub) html += '<div style="font-size:14px;color:#64748B;font-weight:600;">' + s.sub + '</div>';
             html += '</div>';
             html += '<div class="funnel-stage-right">';
             html += '<div class="funnel-stage-target">' + s.targetLabel + '</div>';
             html += '</div>';
             html += '</div>';
-            // 진행률 바
-            html += '<div class="funnel-bar"><div class="funnel-bar-fill ' + barColor + '" style="width:' + Math.round(ratio * 100) + '%"></div></div>';
+            // 진행률 바 (호버 툴팁)
+            html += '<div class="funnel-bar" title="' + barTitle + '"><div class="funnel-bar-fill ' + barColor + '" style="width:' + Math.round(ratio * 100) + '%"></div></div>';
 
             // 전환율 커넥터 (마지막 단계 제외)
             if (i < connectors.length) {
                 const c = connectors[i];
                 const cRatio = c.target > 0 ? c.rate / c.target : 1;
+                const isBelowTarget = cRatio < 1;
+                const isWorst = i === worstIdx;
                 const color = cRatio >= 1 ? 'green' : cRatio >= 0.8 ? 'yellow' : 'red';
-                const isBottleneck = i === bottleneckIdx;
 
                 html += '<div class="funnel-connector">';
                 html += '<div class="funnel-arrow">↓</div>';
-                html += '<div class="funnel-rate-badge ' + color + (isBottleneck ? ' bottleneck' : '') + '">';
+                html += '<div class="funnel-rate-badge ' + color + (isWorst ? ' bottleneck' : '') + '">';
                 html += c.label + ' ' + fmtPct(c.rate);
                 html += '</div>';
                 html += '<span class="funnel-rate-target">목표 ' + fmtPct(c.target) + '</span>';
-                if (isBottleneck) html += '<span class="bottleneck-label">병목</span>';
+                if (isWorst && isBelowTarget) {
+                    html += '<span class="bottleneck-label worst">최대 병목</span>';
+                } else if (isBelowTarget) {
+                    html += '<span class="bottleneck-label">병목</span>';
+                }
                 html += '</div>';
             }
         }
@@ -390,6 +408,7 @@
             datasets = [
                 { label: '풀링 조회수', data: history.map(w => w.pulling_views || 0), borderColor: '#0077C8', backgroundColor: 'rgba(0,119,200,0.1)', borderWidth: 2, tension: 0.3, fill: true },
                 { label: '키콘텐츠 조회수', data: history.map(w => w.key_views || 0), borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.1)', borderWidth: 2, tension: 0.3, fill: true, yAxisID: 'y1' },
+                { label: '합계 (풀링+키)', data: history.map(w => (w.pulling_views || 0) + (w.key_views || 0)), borderColor: '#8B5CF6', borderWidth: 2, tension: 0.3, borderDash: [5, 3], pointRadius: 0 },
             ];
             scales = {
                 y: { ticks: { callback: v => fmt(v) }, grid: { color: '#F1F5F9' }, position: 'left' },
@@ -403,7 +422,7 @@
                 { label: '전환율', data: history.map(w => w.convert_rate || 0), borderColor: '#DC2626', borderWidth: 2, tension: 0.3, pointRadius: 3 },
             ];
             scales = {
-                y: { ticks: { callback: v => v + '%' }, grid: { color: '#F1F5F9' } },
+                y: { max: 20, ticks: { callback: v => v + '%' }, grid: { color: '#F1F5F9' } },
                 x: { grid: { display: false } },
             };
         }
@@ -470,17 +489,52 @@
     }
 
     function renderFunnelTab(data) {
-        const cw = data.current_week;
-        renderStatCards(cw, data.changes || {});
-        renderFunnel(cw, data.rates, data.targets);
-        renderContentTable(cw, data.avg_4w || {});
-        if ((data.weekly_history || []).length > 1) {
-            renderWeeklyChart(data.weekly_history, 'volume');
+        const history = data.weekly_history || [];
+        const targets = data.targets;
+
+        // 주차 선택 드롭다운
+        const select = document.getElementById('week-select');
+        history.slice().reverse().forEach((w, ri) => {
+            const idx = history.length - 1 - ri;
+            const opt = document.createElement('option');
+            opt.value = idx;
+            const ws = w.week_start || '';
+            const we = w.week_end || '';
+            opt.textContent = (idx === history.length - 1 ? '이번주 ' : '') + ws + (we ? ' ~ ' + we : '');
+            select.appendChild(opt);
+        });
+
+        function showWeek(idx) {
+            const w = history[idx];
+            if (!w) return;
+            const rates = {
+                interest_rate: w.interest_rate || 0,
+                link_click_rate: w.link_click_rate || 0,
+                convert_rate: w.convert_rate || 0,
+            };
+            // 카드는 이번주만 (전주 대비 변동)
+            if (idx === history.length - 1) {
+                renderStatCards(data.current_week, data.changes || {});
+            } else {
+                renderStatCards(w, {});
+            }
+            renderFunnel(w, rates, targets);
+        }
+
+        select.addEventListener('change', () => showWeek(parseInt(select.value)));
+
+        // 초기 렌더링 (이번주)
+        renderStatCards(data.current_week, data.changes || {});
+        renderFunnel(data.current_week, data.rates, targets);
+        renderContentTable(data.current_week, data.avg_4w || {});
+
+        if (history.length > 1) {
+            renderWeeklyChart(history, 'volume');
             document.querySelectorAll('#chart-toggle button').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('#chart-toggle button').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    renderWeeklyChart(data.weekly_history, this.dataset.mode);
+                    renderWeeklyChart(history, this.dataset.mode);
                 });
             });
         }
