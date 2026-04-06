@@ -297,6 +297,7 @@
             pulling_views: { el: 'stat-pulling', fmt: n => fmtNum(n) + '회' },
         };
         let worstKey = null, worstPct = Infinity;
+        document.querySelectorAll('.stat-card.worst').forEach(c => c.classList.remove('worst'));
         for (const [key, cfg] of Object.entries(map)) {
             document.getElementById(cfg.el).textContent = cfg.fmt(cw[key] || 0);
             const chg = changes[key];
@@ -404,7 +405,7 @@
 
                 html += '<div class="funnel-connector">';
                 html += '<div class="funnel-arrow">↓</div>';
-                html += '<div class="funnel-rate-badge ' + color + (isWorst ? ' bottleneck' : '') + '">';
+                html += '<div class="funnel-rate-badge ' + color + (isWorst && isBelowTarget ? ' bottleneck' : '') + '">';
                 html += c.label + ' ' + fmtPct(c.rate);
                 html += '</div>';
                 html += '<span class="funnel-rate-target">목표 ' + fmtPct(c.target) + '</span>';
