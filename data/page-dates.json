@@ -1,9 +1,10 @@
 {
   "consult/index.html": "2026-04-05",
   "consult/prep.html": "2026-04-05",
+  "dashboard/business.html": "2026-04-06",
   "dashboard/index.html": "2026-04-04",
   "dashboard/sales.html": "2026-04-04",
-  "index.html": "2026-04-04",
+  "index.html": "2026-04-06",
   "process/content-marketing.html": "2026-04-04",
   "process/crm.html": "2026-04-04",
   "process/homepage.html": "2026-04-04",
@@ -11,7 +12,7 @@
   "process/n8n.html": "2026-04-04",
   "process/settlement.html": "2026-04-04",
   "process/youtube.html": "2026-04-04",
-  "slide-viewer/index.html": "2026-04-05",
-  "slide-viewer/slides-editor-variants.html": "2026-04-05",
+  "slide-viewer/index.html": "2026-04-06",
+  "slide-viewer/slides-editor-variants.html": "2026-04-06",
   "slide-viewer/slides-editor.html": "2026-04-05"
 }

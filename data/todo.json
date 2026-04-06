@@ -1,24 +1,9 @@
 {
-  "updated": "2026-04-06T06:00:01.140615+09:00",
+  "updated": "2026-04-07T06:00:01.591687+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
       "categories": [
-        {
-          "id": 1,
-          "title": "컨설팅 시스템 개선",
-          "ref": "컨설팅",
-          "items": [
-            {
-              "text": "consult 스킬 v2 (시각자료 자동삽입)",
-              "done": false
-            },
-            {
-              "text": "상담 30분 전 자동 알림 (상담 링크 + 텔레그램 발송) ✅ 2026-03-31",
-              "done": true
-            }
-          ]
-        },
         {
           "id": 2,
           "title": "슬라이드 템플릿 (에디터 HTML 수정)",
@@ -74,17 +59,6 @@
           "items": [
             {
               "text": "PG 승인 로드맵 (순서대로 진행, 전체 상세는 프로젝트 노트 참조)",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 11,
-          "title": "CapCut 리플 편집 복구 (4/5~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "CapCut 타임라인 도구 모음에서 리플 편집 토글 찾아서 켜기 (예전에는 됐었음, JSON config.maintrack_adsorb는 정상)",
               "done": false
             }
           ]
@@ -267,6 +241,32 @@
             },
             {
               "text": "type-selection-rules.md에 \"인용 타입은 이미지 필수\" 규칙 추가",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 34,
+          "title": "parse-funnel.py 파싱 실패 로깅 추가 (4/6~) — Codex 전용",
+          "ref": null,
+          "items": [
+            {
+              "text": "parse_num/parse_pct에서 파싱 실패 시 0 반환하면서 경고 로그 한 줄 출력 (현재는 무음)",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 35,
+          "title": "business.html 인라인 스타일 → CSS 클래스 추출 (4/6~) — Codex 전용",
+          "ref": null,
+          "items": [
+            {
+              "text": "반복 패턴(display:flex;align-items:center;gap 등) CSS 클래스로 추출",
+              "done": false
+            },
+            {
+              "text": "범례 스타일 .legend-item 클래스로 통합",
               "done": false
             }
           ]
