@@ -106,6 +106,7 @@
             .stat-value { font-size: 18px; }
             .funnel-stage-value { font-size: 26px; }
             .sales-stats { grid-template-columns: 1fr; }
+            div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 480px) {
             .stat-value { font-size: 16px; }
@@ -204,11 +205,20 @@
                 <div class="chart-box" id="utm-table-wrap"></div>
             </div>
 
-            <div class="section">
-                <div class="section-title">상담목적별 매출</div>
-                <div class="chart-box" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
-                    <div style="width:200px;height:200px;"><canvas id="chart-purpose"></canvas></div>
-                    <div id="purpose-legend" style="font-size:13px;"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div class="section">
+                    <div class="section-title">상담목적별</div>
+                    <div class="chart-box" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                        <div style="width:160px;height:160px;"><canvas id="chart-purpose"></canvas></div>
+                        <div id="purpose-legend" style="font-size:13px;"></div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">수도권 / 지방</div>
+                    <div class="chart-box" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                        <div style="width:160px;height:160px;"><canvas id="chart-region"></canvas></div>
+                        <div id="region-legend" style="font-size:13px;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -374,6 +384,7 @@
             html += '</div>';
             html += '<div class="funnel-stage-right">';
             html += '<div class="funnel-stage-target">' + s.targetLabel + '</div>';
+            html += '<div style="font-size:14px;font-weight:800;margin-top:4px;color:' + (pctAchieved >= 100 ? '#059669' : pctAchieved >= 80 ? '#D97706' : '#DC2626') + ';">' + pctAchieved + '%</div>';
             html += '</div>';
             html += '</div>';
             // 진행률 바 (호버 툴팁)
@@ -459,8 +470,13 @@
                 { label: '링크클릭률', data: history.map(w => w.link_click_rate || 0), borderColor: '#F59E0B', borderWidth: 2, tension: 0.3, pointRadius: 3 },
                 { label: '전환율', data: history.map(w => w.convert_rate || 0), borderColor: '#DC2626', borderWidth: 2, tension: 0.3, pointRadius: 3 },
             ];
+            // 각 데이터셋 최대값 기반으로 Y축 상한 결정 (이상치 대응)
+            const allVals = datasets.flatMap(ds => ds.data);
+            const maxVal = Math.max(...allVals.filter(v => v > 0), 1);
+            // 적절한 상한: max를 5% 단위로 올림, 최소 5%, 최대 20%
+            const yMax = Math.min(20, Math.max(5, Math.ceil(maxVal / 5) * 5));
             scales = {
-                y: { max: 20, ticks: { callback: v => v + '%' }, grid: { color: '#F1F5F9' } },
+                y: { max: yMax, ticks: { callback: v => v + '%' }, grid: { color: '#F1F5F9' } },
                 x: { grid: { display: false } },
             };
         }
@@ -648,6 +664,19 @@
             let legend = '';
             d.by_purpose.forEach((p, i) => { legend += '<div style="margin-bottom:6px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + colors[i] + ';margin-right:6px;"></span><strong>' + p.purpose + '</strong> ' + p.ratio + ' (' + fmtWon(p.revenue) + ')</div>'; });
             document.getElementById('purpose-legend').innerHTML = legend;
+        }
+
+        // 지역 doughnut
+        if (d.by_region && d.by_region.length) {
+            const rColors = ['#0077C8', '#F59E0B', '#94A3B8'];
+            new Chart(document.getElementById('chart-region').getContext('2d'), {
+                type: 'doughnut',
+                data: { labels: d.by_region.map(r => r.region), datasets: [{ data: d.by_region.map(r => r.count), backgroundColor: rColors.slice(0, d.by_region.length), borderWidth: 0 }] },
+                options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.raw + '명 (' + fmtWon(d.by_region[ctx.dataIndex].revenue) + ')' } } }, cutout: '60%' }
+            });
+            let rLegend = '';
+            d.by_region.forEach((r, i) => { rLegend += '<div style="margin-bottom:6px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + rColors[i] + ';margin-right:6px;"></span><strong>' + r.region + '</strong> ' + r.ratio + ' (' + r.count + '명)</div>'; });
+            document.getElementById('region-legend').innerHTML = rLegend;
         }
     }
 })();
