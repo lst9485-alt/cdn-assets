@@ -33,6 +33,7 @@
     + '<a href="' + root + 'dashboard/#projects" class="sb-sub">프로젝트</a>'
     + '<a href="' + root + 'dashboard/#okr" class="sb-sub">OKR·루틴</a>'
     + '<a href="' + root + 'dashboard/sales.html" class="sb-sub">' + ic.money + ' 매출</a>'
+    + '<a href="' + root + 'dashboard/business.html" class="sb-sub">' + ic.dash + ' 사업현황</a>'
     + '<div class="sb-cat">프로세스</div>'
     + link(root + 'process/youtube.html', ic.yt, '유튜브', 'youtube')
     + link(root + 'process/crm.html', ic.crm, 'CRM', 'crm')

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <title>사업현황 - 운영 대시보드</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
+        .page { max-width: 800px; margin: 0 auto; padding: 32px 20px 64px; }
+        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 4px; }
+        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 28px; }
+        .section { margin-bottom: 32px; }
+        .section-title { font-size: 16px; font-weight: 700; color: #051C2C; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .section-title span { font-size: 20px; }
+
+        /* ── 핵심 숫자 카드 ── */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+        .stat-card { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 16px; text-align: center; transition: border-color 0.3s; }
+        .stat-card.worst { border-color: #DC2626; }
+        .stat-label { font-size: 11px; color: #94A3B8; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-value { font-size: 22px; font-weight: 800; color: #051C2C; }
+        .stat-change { font-size: 12px; font-weight: 700; margin-top: 2px; }
+        .stat-change.up { color: #059669; }
+        .stat-change.down { color: #DC2626; }
+        .stat-change.flat { color: #94A3B8; }
+
+        /* ── 전환 퍼널 ── */
+        .funnel { background: white; border-radius: 12px; padding: 24px; border: 1px solid #E2E8F0; }
+        .funnel-row { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
+        .funnel-stage { text-align: center; flex: 0 0 auto; min-width: 80px; }
+        .funnel-stage-label { font-size: 11px; color: #94A3B8; font-weight: 600; margin-bottom: 2px; }
+        .funnel-stage-value { font-size: 20px; font-weight: 800; color: #051C2C; }
+        .funnel-stage-target { font-size: 10px; color: #94A3B8; margin-top: 1px; }
+        .funnel-connector { display: flex; flex-direction: column; align-items: center; padding: 0 8px; min-width: 90px; }
+        .funnel-arrow { color: #CBD5E1; font-size: 18px; margin-bottom: 2px; }
+        .funnel-rate { font-size: 13px; font-weight: 800; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+        .funnel-rate-target { font-size: 10px; color: #94A3B8; margin-top: 2px; }
+        .funnel-rate.green { color: #059669; background: #ECFDF5; }
+        .funnel-rate.yellow { color: #D97706; background: #FFFBEB; }
+        .funnel-rate.red { color: #DC2626; background: #FEF2F2; }
+        .funnel-rate.bottleneck {
+            animation: pulse-border 2s infinite;
+        }
+        @keyframes pulse-border {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); }
+            50% { box-shadow: 0 0 0 6px rgba(220,38,38,0); }
+        }
+
+        /* ── 차트 ── */
+        .chart-box { background: white; border-radius: 12px; padding: 20px; border: 1px solid #E2E8F0; }
+        .chart-box canvas { max-height: 260px; }
+        .chart-toggle { display: flex; gap: 6px; margin-bottom: 12px; }
+        .chart-toggle button { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; border: 1px solid #E2E8F0; background: white; color: #64748B; cursor: pointer; transition: all 0.15s; }
+        .chart-toggle button.active { background: #051C2C; color: white; border-color: #051C2C; }
+        .chart-toggle button:hover:not(.active) { border-color: #94A3B8; }
+
+        /* ── 테이블 ── */
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; padding: 10px 8px; border-bottom: 2px solid #E2E8F0; color: #64748B; font-weight: 600; font-size: 12px; }
+        td { padding: 10px 8px; border-bottom: 1px solid #F1F5F9; }
+        tr:hover td { background: #F8FAFC; }
+        .text-right { text-align: right; }
+        .badge-up { color: #059669; font-weight: 700; }
+        .badge-down { color: #DC2626; font-weight: 700; }
+
+        /* ── 기타 ── */
+        .updated { text-align: right; font-size: 11px; color: #94A3B8; margin-top: 24px; }
+        .error-msg { text-align: center; padding: 40px; color: #94A3B8; }
+
+        /* ── 반응형 ── */
+        @media (max-width: 640px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-value { font-size: 18px; }
+            .funnel-row { flex-direction: column; gap: 4px; }
+            .funnel-connector { flex-direction: row; padding: 4px 0; min-width: auto; }
+            .funnel-arrow { transform: rotate(90deg); margin-bottom: 0; margin-right: 8px; }
+        }
+        @media (max-width: 480px) {
+            .stat-value { font-size: 16px; }
+            .funnel-stage-value { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="./" class="back">&larr; 대시보드</a>
+        <h1>사업현황</h1>
+        <p class="subtitle" id="period">콘텐츠관리시트 기반 전환 퍼널 + 매출</p>
+
+        <!-- A. 핵심 숫자 카드 -->
+        <div class="stats-grid" id="stats-grid">
+            <div class="stat-card" data-key="revenue">
+                <div class="stat-label">이번주 매출</div>
+                <div class="stat-value" id="stat-revenue">—</div>
+                <div class="stat-change flat" id="change-revenue"></div>
+            </div>
+            <div class="stat-card" data-key="paid_customers">
+                <div class="stat-label">유료고객</div>
+                <div class="stat-value" id="stat-paid">—</div>
+                <div class="stat-change flat" id="change-paid"></div>
+            </div>
+            <div class="stat-card" data-key="landing_visits">
+                <div class="stat-label">랜딩접속</div>
+                <div class="stat-value" id="stat-landing">—</div>
+                <div class="stat-change flat" id="change-landing"></div>
+            </div>
+            <div class="stat-card" data-key="pulling_views">
+                <div class="stat-label">풀링조회수</div>
+                <div class="stat-value" id="stat-pulling">—</div>
+                <div class="stat-change flat" id="change-pulling"></div>
+            </div>
+        </div>
+
+        <!-- B. 전환 퍼널 -->
+        <div class="section">
+            <div class="section-title"><span>🔽</span> 전환 퍼널</div>
+            <div class="funnel">
+                <div class="funnel-row" id="funnel-row">
+                    <!-- JS로 렌더링 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- C. 주간 추이 -->
+        <div class="section">
+            <div class="section-title"><span>📈</span> 주간 추이</div>
+            <div class="chart-box">
+                <div class="chart-toggle" id="chart-toggle">
+                    <button class="active" data-mode="volume">조회수</button>
+                    <button data-mode="rates">전환율</button>
+                </div>
+                <canvas id="chart-weekly"></canvas>
+            </div>
+        </div>
+
+        <!-- D. 매출 요약 -->
+        <div class="section">
+            <div class="section-title"><span>💰</span> 월별 매출 추이</div>
+            <div class="chart-box"><canvas id="chart-monthly"></canvas></div>
+        </div>
+
+        <!-- E. 콘텐츠 성과 -->
+        <div class="section">
+            <div class="section-title"><span>📊</span> 콘텐츠 성과</div>
+            <div class="chart-box" id="content-table-wrap"></div>
+        </div>
+
+        <div class="updated" id="updated"></div>
+    </div>
+
+<script src="../nav.js"></script>
+<script src="../footer.js"></script>
+<script src="../sidebar.js"></script>
+<script>
+(function() {
+    const fmt = n => {
+        if (n >= 10000000) return (n / 10000000).toFixed(1).replace(/\.0$/, '') + '천만';
+        if (n >= 10000) return Math.round(n / 10000) + '만';
+        if (n >= 1000) return (n / 1000).toFixed(0) + '천';
+        return String(n);
+    };
+    const fmtWon = n => {
+        if (n >= 10000) return Math.round(n / 10000) + '만원';
+        return new Intl.NumberFormat('ko-KR').format(n) + '원';
+    };
+    const fmtNum = n => new Intl.NumberFormat('ko-KR').format(n);
+    const fmtPct = n => n.toFixed(1) + '%';
+    const monthLabel = m => {
+        const [y, mo] = m.split('-');
+        return (y === new Date().getFullYear().toString() ? '' : y.slice(2) + '.') + parseInt(mo) + '월';
+    };
+
+    // 데이터 로드
+    Promise.all([
+        fetch('../data/funnel.json').then(r => r.ok ? r.json() : null),
+        fetch('../data/sales.json').then(r => r.ok ? r.json() : null),
+    ]).then(([funnel, sales]) => {
+        if (funnel) renderFunnel(funnel);
+        if (sales) renderMonthlySales(sales);
+        if (funnel) {
+            const dt = new Date(funnel.updated);
+            document.getElementById('updated').textContent = '마지막 업데이트: ' + dt.toLocaleString('ko-KR');
+            if (funnel.current_week.week_start) {
+                document.getElementById('period').textContent =
+                    funnel.current_week.week_start + ' ~ ' + (funnel.current_week.week_end || '') + ' 기준';
+            }
+        }
+    }).catch(err => {
+        document.querySelector('.page').innerHTML += '<div class="error-msg">데이터를 불러올 수 없습니다</div>';
+    });
+
+    // ── A. 핵심 숫자 카드 ──
+    function renderStatCards(cw, changes) {
+        const map = {
+            revenue: { el: 'stat-revenue', fmt: fmtWon },
+            paid_customers: { el: 'stat-paid', fmt: n => n + '명' },
+            landing_visits: { el: 'stat-landing', fmt: n => n + '건' },
+            pulling_views: { el: 'stat-pulling', fmt: n => fmtNum(n) + '회' },
+        };
+
+        let worstKey = null, worstPct = Infinity;
+
+        for (const [key, cfg] of Object.entries(map)) {
+            const val = cw[key] || 0;
+            document.getElementById(cfg.el).textContent = cfg.fmt(val);
+
+            const chg = changes[key];
+            const chgEl = document.getElementById('change-' + key.split('_')[0]);
+            if (chg !== null && chg !== undefined) {
+                const sign = chg > 0 ? '▲' : chg < 0 ? '▼' : '';
+                chgEl.textContent = sign + Math.abs(chg) + '%';
+                chgEl.className = 'stat-change ' + (chg > 0 ? 'up' : chg < 0 ? 'down' : 'flat');
+                if (chg < worstPct) { worstPct = chg; worstKey = key; }
+            } else {
+                chgEl.textContent = '—';
+            }
+        }
+
+        // 가장 나쁜 지표에 빨간 보더
+        if (worstKey && worstPct < 0) {
+            const card = document.querySelector('.stat-card[data-key="' + worstKey + '"]');
+            if (card) card.classList.add('worst');
+        }
+    }
+
+    // ── B. 전환 퍼널 ──
+    function renderFunnelSteps(cw, rates, targets) {
+        const stages = [
+            { label: '풀링 조회수', value: fmtNum(cw.pulling_views || 0), target: '목표 ' + fmtNum(targets.pulling_views) },
+            { label: '키콘텐츠 조회', value: fmtNum(cw.key_views || 0), target: '목표 ' + fmtNum(targets.key_views) },
+            { label: '랜딩 접속', value: fmtNum(cw.landing_visits || 0) + '건', target: '목표 ' + targets.landing_visits + '건' },
+            { label: '유료고객', value: (cw.paid_customers || 0) + '명', target: '목표 ' + targets.paid_customers + '명' },
+            { label: '매출', value: fmtWon(cw.revenue || 0), target: '목표 ' + fmtWon(targets.revenue) },
+        ];
+
+        const connectors = [
+            { label: '연계율', rate: rates.interest_rate, target: targets.interest_rate, key: 'interest' },
+            { label: '링크클릭률', rate: rates.link_click_rate, target: targets.link_click_rate, key: 'click' },
+            { label: '전환율', rate: rates.convert_rate, target: targets.convert_rate, key: 'convert' },
+        ];
+
+        // 병목 찾기: 목표 대비 달성률이 가장 낮은 전환율
+        let bottleneckIdx = -1, worstRatio = Infinity;
+        connectors.forEach((c, i) => {
+            if (c.target > 0) {
+                const ratio = c.rate / c.target;
+                if (ratio < worstRatio) { worstRatio = ratio; bottleneckIdx = i; }
+            }
+        });
+
+        let html = '';
+        for (let i = 0; i < stages.length; i++) {
+            const s = stages[i];
+            html += '<div class="funnel-stage">';
+            html += '<div class="funnel-stage-label">' + s.label + '</div>';
+            html += '<div class="funnel-stage-value">' + s.value + '</div>';
+            html += '<div class="funnel-stage-target">' + s.target + '</div>';
+            html += '</div>';
+
+            if (i < connectors.length) {
+                const c = connectors[i];
+                const ratio = c.target > 0 ? c.rate / c.target : 1;
+                const color = ratio >= 1 ? 'green' : ratio >= 0.8 ? 'yellow' : 'red';
+                const isBottleneck = i === bottleneckIdx;
+
+                html += '<div class="funnel-connector">';
+                html += '<div class="funnel-arrow">→</div>';
+                html += '<div class="funnel-rate ' + color + (isBottleneck ? ' bottleneck' : '') + '">';
+                html += c.label + ' ' + fmtPct(c.rate);
+                html += '</div>';
+                html += '<div class="funnel-rate-target">목표 ' + fmtPct(c.target) + '</div>';
+                html += '</div>';
+            }
+        }
+
+        document.getElementById('funnel-row').innerHTML = html;
+    }
+
+    // ── C. 주간 추이 차트 ──
+    let weeklyChart = null;
+    function renderWeeklyChart(history, mode) {
+        const ctx = document.getElementById('chart-weekly').getContext('2d');
+        if (weeklyChart) weeklyChart.destroy();
+
+        const labels = history.map(w => {
+            const d = w.week_start || w.label || '';
+            if (!d) return '';
+            const parts = d.split('-');
+            return parseInt(parts[1]) + '/' + parseInt(parts[2]);
+        });
+
+        let datasets;
+        if (mode === 'volume') {
+            datasets = [
+                {
+                    label: '풀링 조회수',
+                    data: history.map(w => w.pulling_views || 0),
+                    borderColor: '#0077C8',
+                    backgroundColor: 'rgba(0,119,200,0.1)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    fill: true,
+                },
+                {
+                    label: '키콘텐츠 조회수',
+                    data: history.map(w => w.key_views || 0),
+                    borderColor: '#059669',
+                    backgroundColor: 'rgba(5,150,105,0.1)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    fill: true,
+                    yAxisID: 'y1',
+                },
+            ];
+        } else {
+            datasets = [
+                {
+                    label: '연계율',
+                    data: history.map(w => w.interest_rate || 0),
+                    borderColor: '#0077C8',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointRadius: 3,
+                },
+                {
+                    label: '링크클릭률',
+                    data: history.map(w => w.link_click_rate || 0),
+                    borderColor: '#F59E0B',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointRadius: 3,
+                },
+                {
+                    label: '전환율',
+                    data: history.map(w => w.convert_rate || 0),
+                    borderColor: '#DC2626',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointRadius: 3,
+                },
+            ];
+        }
+
+        const scales = mode === 'volume' ? {
+            y: { ticks: { callback: v => fmt(v) }, grid: { color: '#F1F5F9' }, position: 'left' },
+            y1: { ticks: { callback: v => fmt(v) }, grid: { display: false }, position: 'right' },
+            x: { grid: { display: false } },
+        } : {
+            y: { ticks: { callback: v => v + '%' }, grid: { color: '#F1F5F9' } },
+            x: { grid: { display: false } },
+        };
+
+        weeklyChart = new Chart(ctx, {
+            type: 'line',
+            data: { labels, datasets },
+            options: {
+                responsive: true,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16, font: { size: 11 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => {
+                                const v = ctx.raw;
+                                if (mode === 'rates') return ctx.dataset.label + ': ' + v.toFixed(2) + '%';
+                                return ctx.dataset.label + ': ' + fmtNum(v);
+                            }
+                        }
+                    }
+                },
+                scales,
+            },
+        });
+    }
+
+    // ── D. 매출 차트 (sales.json) ──
+    function renderMonthlySales(sales) {
+        if (!sales.monthly || !sales.monthly.length) return;
+        const ctx = document.getElementById('chart-monthly').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: sales.monthly.map(m => monthLabel(m.month)),
+                datasets: [{
+                    label: '매출',
+                    data: sales.monthly.map(m => m.revenue),
+                    backgroundColor: '#0077C8',
+                    borderRadius: 6,
+                    barPercentage: 0.6,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => fmtNum(ctx.raw) + '원 (' + sales.monthly[ctx.dataIndex].customers + '명)'
+                        }
+                    }
+                },
+                scales: {
+                    y: { ticks: { callback: v => fmt(v) }, grid: { color: '#F1F5F9' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    // ── E. 콘텐츠 성과 테이블 ──
+    function renderContentTable(cw, avg) {
+        const rows = [
+            { label: '키 시청지속시간', cur: cw.key_watch_time, avg: avg.key_watch_time || '—', isTime: true },
+            { label: '키 클릭률', cur: cw.key_ctr, avg: avg.key_ctr, isPct: true },
+            { label: '풀링 시청지속시간', cur: cw.pulling_watch_time, avg: avg.pulling_watch_time || '—', isTime: true },
+            { label: '풀링 클릭률', cur: cw.pulling_ctr, avg: avg.pulling_ctr, isPct: true },
+            { label: '검색유입', cur: cw.key_search_traffic, avg: avg.key_search_traffic },
+            { label: '페이지유입', cur: cw.key_page_traffic, avg: avg.key_page_traffic },
+            { label: '탐색유입', cur: cw.explore_traffic, avg: avg.explore_traffic },
+            { label: 'Shorts 조회수', cur: cw.shorts_views, avg: avg.shorts_views },
+            { label: '구독자 증가', cur: cw.subscriber_increase, avg: avg.subscriber_increase },
+        ];
+
+        let html = '<table><thead><tr><th>지표</th><th class="text-right">이번주</th><th class="text-right">4주평균</th><th class="text-right">변화</th></tr></thead><tbody>';
+
+        rows.forEach(r => {
+            let curStr, avgStr, change;
+
+            if (r.isTime) {
+                curStr = r.cur || '—';
+                avgStr = typeof r.avg === 'string' ? r.avg : '—';
+                // 시간 비교는 생략 (M:SS 파싱 필요)
+                change = null;
+            } else if (r.isPct) {
+                curStr = (r.cur || 0).toFixed(1) + '%';
+                avgStr = (r.avg || 0).toFixed(1) + '%';
+                change = r.avg > 0 ? ((r.cur - r.avg) / r.avg * 100) : null;
+            } else {
+                curStr = fmtNum(r.cur || 0);
+                avgStr = fmtNum(Math.round(r.avg || 0));
+                change = r.avg > 0 ? ((r.cur - r.avg) / r.avg * 100) : null;
+            }
+
+            let changeStr = '—';
+            if (change !== null && isFinite(change)) {
+                const sign = change > 0 ? '▲' : change < 0 ? '▼' : '';
+                const cls = change > 0 ? 'badge-up' : change < 0 ? 'badge-down' : '';
+                changeStr = '<span class="' + cls + '">' + sign + Math.abs(change).toFixed(1) + '%</span>';
+            }
+
+            html += '<tr><td>' + r.label + '</td><td class="text-right">' + curStr + '</td><td class="text-right">' + avgStr + '</td><td class="text-right">' + changeStr + '</td></tr>';
+        });
+
+        html += '</tbody></table>';
+        document.getElementById('content-table-wrap').innerHTML = html;
+    }
+
+    // ── 메인 렌더링 ──
+    function renderFunnel(data) {
+        const cw = data.current_week;
+        const rates = data.rates;
+        const targets = data.targets;
+        const changes = data.changes || {};
+        const avg = data.avg_4w || {};
+        const history = data.weekly_history || [];
+
+        renderStatCards(cw, changes);
+        renderFunnelSteps(cw, rates, targets);
+        renderContentTable(cw, avg);
+
+        if (history.length > 1) {
+            renderWeeklyChart(history, 'volume');
+
+            // 토글 이벤트
+            document.querySelectorAll('#chart-toggle button').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#chart-toggle button').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderWeeklyChart(history, this.dataset.mode);
+                });
+            });
+        }
+    }
+})();
+</script>
+</body>
+</html>
