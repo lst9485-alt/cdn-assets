@@ -12,108 +12,159 @@
         .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
         .back:hover { color: #0077C8; }
         h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
-        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 28px; }
-        .phase-divider { text-align: left; margin: 24px 0 10px; }
-        .phase-label { display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
-        .phase-task .phase-label { background: #E8F3FF; color: #0077C8; }
-        .phase-morning .phase-label { background: #ECFDF3; color: #15803D; }
-        .phase-system .phase-label { background: #FFF7ED; color: #C2410C; }
-        .flow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .step { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); }
-        .step:hover { border-color: #0077C8; }
-        .phase-task .step { border-color: #BFDBFE; }
-        .phase-morning .step { border-color: #BBF7D0; }
-        .phase-system .step { border-color: #FED7AA; }
-        .step-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; color: white; font-size: 11px; font-weight: 800; flex-shrink: 0; }
-        .phase-task .step-num { background: #0077C8; }
-        .phase-morning .step-num { background: #16A34A; }
-        .phase-system .step-num { background: #EA580C; }
-        .step-title { font-size: 15px; font-weight: 800; color: #051C2C; }
-        .step-action { font-size: 13px; color: #051C2C; font-weight: 600; margin-top: 6px; padding-left: 36px; }
-        .step-auto { font-size: 12px; color: #64748B; margin-top: 4px; padding-left: 36px; }
-        .step-source { font-size: 11px; color: #94A3B8; margin-top: 10px; padding-left: 36px; }
+        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 18px; }
+        .overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
+        .overview-card { background: white; border: 2px solid #E2E8F0; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); }
+        .overview-label { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .3px; margin-bottom: 6px; padding: 4px 10px; border-radius: 999px; }
+        .overview-count { font-size: 22px; font-weight: 800; color: #051C2C; line-height: 1; }
+        .overview-desc { font-size: 12px; color: #64748B; margin-top: 6px; }
+        .group { margin-top: 28px; }
+        .group-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+        .group-label { display: inline-block; font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 999px; margin-bottom: 6px; }
+        .group-title { font-size: 20px; font-weight: 800; color: #051C2C; }
+        .group-desc { font-size: 13px; color: #64748B; }
+        .group-meta { font-size: 12px; font-weight: 700; color: #94A3B8; }
+        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .card { background: white; border: 2px solid #E2E8F0; border-radius: 14px; padding: 18px 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); }
+        .card:hover { border-color: #0077C8; }
+        .group-daily .group-label, .group-daily .when-badge, .group-daily .overview-label { background: #E8F3FF; color: #0077C8; }
+        .group-daily .card, .overview-daily { border-color: #BFDBFE; }
+        .group-ondemand .group-label, .group-ondemand .when-badge, .group-ondemand .overview-label { background: #ECFDF3; color: #15803D; }
+        .group-ondemand .card, .overview-ondemand { border-color: #BBF7D0; }
+        .group-exception .group-label, .group-exception .when-badge, .group-exception .overview-label { background: #FFF7ED; color: #C2410C; }
+        .group-exception .card, .overview-exception { border-color: #FED7AA; }
+        .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+        .card-title { font-size: 16px; font-weight: 800; color: #051C2C; }
+        .when-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 5px 9px; border-radius: 999px; white-space: nowrap; }
+        .card-desc { font-size: 13px; color: #334155; margin-bottom: 8px; }
+        .card-detail { font-size: 12px; color: #64748B; margin-bottom: 10px; }
+        .card-source { font-size: 11px; color: #94A3B8; }
         .note-box { margin-top: 28px; background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 18px 20px; }
         .note-title { font-size: 14px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
         .note-line { font-size: 13px; color: #64748B; margin-top: 4px; }
-        @media (max-width: 600px) { .flow { grid-template-columns: 1fr; } }
+        @media (max-width: 720px) { .overview, .cards { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="page">
         <a href="./" class="back">&larr; 프로세스 목록</a>
         <h1>🔔 텔레그램 알림 프로세스</h1>
-        <p class="subtitle">리마인더 그룹에 실제로 들어오는 알림 기준으로 정리한 흐름</p>
+        <p class="subtitle">리마인더 그룹 알림을 매일 자동, 수시 처리, 예외 알림으로 나눠서 다시 정리했습니다.</p>
 
-        <div class="phase-task">
-            <div class="phase-divider"><span class="phase-label">태스크 관리 (3가지)</span></div>
-            <div class="flow">
-                <div class="step">
-                    <div class="step-head">
-                        <span class="step-num">1</span><span class="step-title">하루 4회 할 일 받기</span>
-                    </div>
-                    <div class="step-action">→ 08:00 / 14:00 / 19:00 / 22:00 리마인더 확인</div>
-                    <div class="step-auto">자동: 오늘 할 일, 지연 항목, 내일 할 일, 완료 버튼을 묶어서 발송</div>
-                    <div class="step-source">소스: 01-2 태스크 리마인더</div>
+        <div class="overview">
+            <div class="overview-card overview-daily group-daily">
+                <div class="overview-label">매일 자동</div>
+                <div class="overview-count">2가지</div>
+                <div class="overview-desc">정해진 시간에 자동으로 도착하는 알림</div>
+            </div>
+            <div class="overview-card overview-ondemand group-ondemand">
+                <div class="overview-label">수시 처리</div>
+                <div class="overview-count">2가지</div>
+                <div class="overview-desc">필요할 때 쓰거나 시간 맞춰 받는 알림</div>
+            </div>
+            <div class="overview-card overview-exception group-exception">
+                <div class="overview-label">예외 알림</div>
+                <div class="overview-count">2가지</div>
+                <div class="overview-desc">장애나 실패가 있을 때만 오는 알림</div>
+            </div>
+        </div>
+
+        <div class="group group-daily">
+            <div class="group-head">
+                <div>
+                    <div class="group-label">매일 자동</div>
+                    <div class="group-title">정해진 시간에 자동으로 받는 알림</div>
+                    <div class="group-desc">하루 시작과 진행 상황을 놓치지 않게 고정 시각에 도착합니다.</div>
                 </div>
-                <div class="step">
-                    <div class="step-head">
-                        <span class="step-num">2</span><span class="step-title">버튼이나 명령어로 바로 처리하기</span>
+                <div class="group-meta">2상황</div>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-top">
+                        <div class="card-title">하루 시작 전에 플랜 확인하기</div>
+                        <div class="when-badge">07:00</div>
                     </div>
-                    <div class="step-action">→ ✅ 버튼 또는 오늘 / 목록 / 추가 / 완료 / 변경 입력</div>
-                    <div class="step-auto">자동: Notion 태스크 완료, 조회, 생성, 일정 변경까지 반영</div>
-                    <div class="step-source">소스: 01-3 태스크 완료, 01-4 태스크 명령어</div>
+                    <div class="card-desc">원씽, P2, P3, 오늘 마감 태스크와 루틴 상태를 한 번에 확인합니다.</div>
+                    <div class="card-detail">어제 루틴 미기입, 연속일, 주간 평균까지 함께 묶어서 발송합니다.</div>
+                    <div class="card-source">소스: nightwatch morning-planner</div>
                 </div>
-                <div class="step">
-                    <div class="step-head">
-                        <span class="step-num">3</span><span class="step-title">시간 맞춰 개별 알림 받기</span>
+                <div class="card">
+                    <div class="card-top">
+                        <div class="card-title">하루 4회 할 일 받기</div>
+                        <div class="when-badge">08:00 · 14:00 · 19:00 · 22:00</div>
                     </div>
-                    <div class="step-action">→ 정해진 시각에 뜨는 단건 알림 보고 바로 처리</div>
-                    <div class="step-auto">자동: 시간 포함 태스크만 ±2분 범위로 잡아서 한 건씩 발송</div>
-                    <div class="step-source">소스: 01-5 시간별 리마인더</div>
+                    <div class="card-desc">오늘 할 일, 지연 항목, 내일 할 일과 완료 버튼을 묶어서 확인합니다.</div>
+                    <div class="card-detail">아침, 오후, 저녁, 하루 마감 정리까지 하루 4회 자동으로 발송됩니다.</div>
+                    <div class="card-source">소스: 01-2 태스크 리마인더</div>
                 </div>
             </div>
         </div>
 
-        <div class="phase-morning">
-            <div class="phase-divider"><span class="phase-label">아침 플래너 (1가지)</span></div>
-            <div class="flow">
-                <div class="step">
-                    <div class="step-head">
-                        <span class="step-num">4</span><span class="step-title">하루 시작 전에 플랜 확인하기</span>
+        <div class="group group-ondemand">
+            <div class="group-head">
+                <div>
+                    <div class="group-label">수시 처리</div>
+                    <div class="group-title">필요할 때 직접 처리하거나 시간 맞춰 받는 알림</div>
+                    <div class="group-desc">내가 누르거나, 태스크 시간이 되었을 때 바로 반응하는 알림입니다.</div>
+                </div>
+                <div class="group-meta">2상황</div>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-top">
+                        <div class="card-title">시간 맞춰 개별 알림 받기</div>
+                        <div class="when-badge">태스크 시간 ±2분</div>
                     </div>
-                    <div class="step-action">→ 원씽 / P2 / P3 / 오늘 마감 태스크를 한 번에 확인</div>
-                    <div class="step-auto">자동: 어제 루틴 미기입, 루틴 연속일, 주간 평균까지 함께 묶어서 발송</div>
-                    <div class="step-source">소스: nightwatch morning-planner</div>
+                    <div class="card-desc">시간이 잡힌 태스크만 한 건씩 받아서 바로 처리합니다.</div>
+                    <div class="card-detail">종일 태스크는 제외하고, 중복 발송은 막으면서 정시 근처에만 알립니다.</div>
+                    <div class="card-source">소스: 01-5 시간별 리마인더</div>
+                </div>
+                <div class="card">
+                    <div class="card-top">
+                        <div class="card-title">버튼이나 명령어로 바로 처리하기</div>
+                        <div class="when-badge">필요할 때</div>
+                    </div>
+                    <div class="card-desc">✅ 버튼이나 오늘, 목록, 추가, 완료, 변경으로 태스크를 바로 반영합니다.</div>
+                    <div class="card-detail">조회, 생성, 완료, 일정 변경을 같은 방에서 바로 처리할 수 있습니다.</div>
+                    <div class="card-source">소스: 01-3 태스크 완료, 01-4 태스크 명령어</div>
                 </div>
             </div>
         </div>
 
-        <div class="phase-system">
-            <div class="phase-divider"><span class="phase-label">시스템 · 예외 (2가지)</span></div>
-            <div class="flow">
-                <div class="step">
-                    <div class="step-head">
-                        <span class="step-num">5</span><span class="step-title">n8n 상태 이상 확인하기</span>
-                    </div>
-                    <div class="step-action">→ 중단 / 복구 알림이 오면 바로 상태 확인</div>
-                    <div class="step-auto">자동: 컨테이너 상태가 바뀐 순간에만 알림 보내기</div>
-                    <div class="step-source">소스: tools/scripts/n8n-monitor.sh</div>
+        <div class="group group-exception">
+            <div class="group-head">
+                <div>
+                    <div class="group-label">예외 알림</div>
+                    <div class="group-title">장애나 실패가 있을 때만 오는 알림</div>
+                    <div class="group-desc">평소에는 조용하고, 확인이 필요한 순간에만 도착합니다.</div>
                 </div>
-                <div class="step">
-                    <div class="step-head">
-                        <span class="step-num">6</span><span class="step-title">동기화 오류 확인하기</span>
+                <div class="group-meta">2상황</div>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-top">
+                        <div class="card-title">n8n 상태 이상 확인하기</div>
+                        <div class="when-badge">상태 변경 시</div>
                     </div>
-                    <div class="step-action">→ Notion → Obsidian 동기화 실패 알림 보고 수동 점검</div>
-                    <div class="step-auto">자동: 실패 시 즉시 발송. 같은 방으로 오지만 발신 credential은 우리동네봇인 예외</div>
-                    <div class="step-source">소스: 02 notion 콘텐츠캘린더→obsidian</div>
+                    <div class="card-desc">n8n 중단이나 복구 순간에만 상태 알림이 옵니다.</div>
+                    <div class="card-detail">정상일 때는 조용하고, 상태가 바뀐 순간에만 발송됩니다.</div>
+                    <div class="card-source">소스: tools/scripts/n8n-monitor.sh</div>
+                </div>
+                <div class="card">
+                    <div class="card-top">
+                        <div class="card-title">동기화 오류 확인하기</div>
+                        <div class="when-badge">실패 시 즉시</div>
+                    </div>
+                    <div class="card-desc">Notion → Obsidian 동기화 실패를 같은 방에서 바로 확인합니다.</div>
+                    <div class="card-detail">같은 방으로 오지만 발신 credential은 우리동네봇인 예외 알림입니다.</div>
+                    <div class="card-source">소스: 02 notion 콘텐츠캘린더→obsidian</div>
                 </div>
             </div>
         </div>
 
         <div class="note-box">
             <div class="note-title">현재 이 페이지에 포함한 범위</div>
-            <div class="note-line">리마인더 그룹 기준 알림만 정리했습니다.</div>
+            <div class="note-line">리마인더 그룹에서 실제로 보는 알림 6가지만 정리했습니다.</div>
             <div class="note-line">별도 프로세스: CRM 신청/예약/후속관리 알림, nightwatch 시스템봇 리포트, 메모봇</div>
         </div>
     </div>
