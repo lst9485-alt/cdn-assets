@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-07T23:57:23.810602+09:00",
+  "updated": "2026-04-08T06:00:05.930805+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,8 +21,8 @@
     }
   ],
   "tasks": {
-    "total": 227,
-    "done": 194,
+    "total": 226,
+    "done": 195,
     "overdue": 5,
     "pending": [
       {
@@ -51,38 +51,13 @@
         "overdue": true
       },
       {
-        "title": "컨셉",
-        "date": "2026-04-07T11:30:00.000+09:00",
+        "title": "신입교육",
+        "date": "2026-04-08T10:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "주제선정",
-        "date": "2026-04-07T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "썸네일&제목",
-        "date": "2026-04-07T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "카카오 비즈니스채널 확인",
-        "date": "2026-04-07T16:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "홈페이지수정",
-        "date": "2026-04-07T19:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-04-08T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "신입교육",
-        "date": "2026-04-08T10:00:00.000+09:00",
+        "date": "2026-04-08T11:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -101,13 +76,23 @@
         "overdue": false
       },
       {
-        "title": "홈페이지",
+        "title": "자료수집&도입부",
         "date": "2026-04-08T14:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "슬라이드 빅테스크",
-        "date": "2026-04-08T18:00:00.000+09:00",
+        "title": "썸네일&제목",
+        "date": "2026-04-08T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "카카오 비즈니스채널 확인",
+        "date": "2026-04-08T16:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "홈페이지",
+        "date": "2026-04-08T22:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -118,6 +103,11 @@
       {
         "title": "주간계획 수정",
         "date": "2026-04-09T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "슬라이드 빅테스크",
+        "date": "2026-04-09T09:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -193,37 +183,37 @@
     ],
     "schedule": [
       {
-        "title": "P1~P3/목실감",
-        "time": "08:30",
-        "allDay": false,
-        "done": true
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "time": "09:00",
-        "allDay": false,
-        "done": true
-      },
-      {
-        "title": "컨셉",
-        "time": "11:30",
+        "title": "신입교육",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "민방위 낙서장확인",
+        "title": "주제선정",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "세무사연락 업종추가",
         "time": "12:30",
         "allDay": false,
-        "done": true
+        "done": false
       },
       {
-        "title": "원씽복기",
-        "time": "14:00",
+        "title": "상담준비",
+        "time": "13:00",
         "allDay": false,
-        "done": true
+        "done": false
       },
       {
-        "title": "주제선정",
+        "title": "자료수집&도입부",
         "time": "14:00",
         "allDay": false,
         "done": false
@@ -241,8 +231,8 @@
         "done": false
       },
       {
-        "title": "홈페이지수정",
-        "time": "19:00",
+        "title": "홈페이지",
+        "time": "22:00",
         "allDay": false,
         "done": false
       }
@@ -250,7 +240,7 @@
   },
   "routines": {
     "total": 4,
-    "done_today": 1,
+    "done_today": 0,
     "items": [
       {
         "name": "원씽 완료",
@@ -258,7 +248,7 @@
       },
       {
         "name": "일일 계획",
-        "done": true
+        "done": false
       },
       {
         "name": "P2 완료",
@@ -272,12 +262,12 @@
     "priorities": [
       {
         "label": "원씽",
-        "title": "브랜딩",
+        "title": "상담",
         "done": false
       },
       {
         "label": "P2",
-        "title": "주제&썸제",
+        "title": "~도입부",
         "done": false
       },
       {
@@ -286,17 +276,12 @@
         "done": false
       }
     ],
-    "identity": "나는 내 할일을 하는 사람이다.",
+    "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 18,
-      "rate": "64%",
+      "done": 16,
+      "rate": "57%",
       "days": [
-        {
-          "date": "2026-04-01",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-04-02",
           "done": 3,
@@ -324,7 +309,12 @@
         },
         {
           "date": "2026-04-07",
-          "done": 1,
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-04-08",
+          "done": 0,
           "total": 4
         }
       ]
@@ -333,11 +323,16 @@
   "sales": {
     "month": "2026-04",
     "month_label": "4월",
-    "total_amount": 40,
-    "total_count": 1,
+    "total_amount": 80,
+    "total_count": 2,
     "weekly": [
       {
         "week": "1주차",
+        "count": 1,
+        "amount": 40
+      },
+      {
+        "week": "2주차",
         "count": 1,
         "amount": 40
       }
