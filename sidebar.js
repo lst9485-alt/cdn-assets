@@ -39,9 +39,9 @@
     + link(root + 'process/youtube.html', ic.yt, '유튜브', 'youtube')
     + link(root + 'process/crm.html', ic.crm, 'CRM', 'crm')
     + link(root + 'process/n8n.html', ic.n8n, 'n8n', 'n8n')
-    + link(root + 'process/telegram-alerts.html', ic.tg, '텔레그램 알림', 'telegram-alerts')
     + link(root + 'process/homepage.html', ic.web, '홈페이지', 'homepage')
     + link(root + 'process/content-marketing.html', ic.content, '콘텐츠 마케팅', 'content-marketing')
+    + link(root + 'process/telegram-alerts.html', ic.tg, '텔레그램 알림', 'telegram-alerts')
     + link(root + 'process/settlement.html', ic.money, '회사정산', 'settlement')
     + '<div class="sb-cat">상담·템플릿</div>'
     + link(root + 'consult/', ic.doc, '회원 맞춤 페이지', 'consult')
