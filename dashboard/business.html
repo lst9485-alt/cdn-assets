@@ -16,6 +16,9 @@
         .subtitle { color: #64748B; font-size: 14px; margin-bottom: 20px; }
         .section { margin-bottom: 32px; }
         .section-title { font-size: 16px; font-weight: 700; color: #051C2C; margin-bottom: 16px; }
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+        .section-title-tight { margin-bottom: 0; }
+        .section-subtitle { font-size: 13px; color: #64748B; }
 
         /* ── 탭 ── */
         .tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 2px solid #E2E8F0; }
@@ -38,18 +41,26 @@
 
         /* ── 세로 퍼널 ── */
         .funnel { background: white; border-radius: 12px; padding: 24px; border: 1px solid #E2E8F0; }
+        .funnel-layout { display: flex; gap: 16px; flex-wrap: wrap; }
+        .funnel-main { flex: 1; min-width: 0; }
+        .side-card { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 16px; }
+        .bottleneck-panel { flex: 0 0 180px; }
         .funnel-stage { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; }
         .funnel-stage-left {}
         .funnel-stage-label { font-size: 14px; color: #64748B; font-weight: 600; margin-bottom: 2px; }
         .funnel-stage-value { font-size: 32px; font-weight: 800; color: #051C2C; }
+        .funnel-stage-sub { font-size: 14px; color: #64748B; font-weight: 600; }
         .funnel-stage-right { text-align: right; }
         .funnel-stage-target { font-size: 12px; color: #94A3B8; }
+        .progress-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
         .funnel-bar { height: 6px; border-radius: 3px; background: #E2E8F0; margin-top: 8px; overflow: hidden; position: relative; cursor: default; }
+        .funnel-bar-progress { flex: 1; margin-top: 0; }
         .funnel-bar[title]:hover::after { content: attr(title); position: absolute; top: -28px; left: 50%; transform: translateX(-50%); background: #1A1A1A; color: white; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; white-space: nowrap; z-index: 10; }
         .funnel-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
         .funnel-bar-fill.green { background: #059669; }
         .funnel-bar-fill.yellow { background: #F59E0B; }
         .funnel-bar-fill.red { background: #DC2626; }
+        .progress-pct { font-size: 13px; font-weight: 800; min-width: 36px; text-align: right; }
 
         .funnel-connector { display: flex; align-items: center; justify-content: center; padding: 8px 0; gap: 10px; }
         .funnel-arrow { color: #CBD5E1; font-size: 20px; }
@@ -75,6 +86,7 @@
         .chart-box { background: white; border-radius: 12px; padding: 20px; border: 1px solid #E2E8F0; }
         .chart-box canvas { max-height: 280px; }
         .chart-toggle { display: flex; gap: 6px; margin-bottom: 12px; }
+        .chart-toggle-inline { margin-bottom: 0; }
         .chart-toggle button { font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; border: 1px solid #E2E8F0; background: white; color: #64748B; cursor: pointer; transition: all 0.15s; }
         .chart-toggle button.active { background: #051C2C; color: white; border-color: #051C2C; }
         .chart-toggle button:hover:not(.active) { border-color: #94A3B8; }
@@ -89,9 +101,24 @@
         .text-right { text-align: right; }
         .badge-up { color: #059669; font-weight: 700; }
         .badge-down { color: #DC2626; font-weight: 700; }
+        .rank-title { font-size: 13px; font-weight: 800; color: #051C2C; margin-bottom: 10px; }
+        .rank-empty { font-size: 12px; color: #94A3B8; }
+        .rank-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #F1F5F9; font-size: 12px; }
+        .rank-index { font-weight: 800; }
+        .rank-label { flex: 1; font-weight: 600; color: #051C2C; }
+        .rank-value { font-weight: 700; }
 
         /* ── 매출 탭 ── */
         .sales-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .stat-value-lg { font-size: 24px; }
+        .analysis-grid { display: flex; gap: 32px; flex-wrap: wrap; }
+        .analysis-panel { flex: 1; min-width: 200px; }
+        .analysis-label { font-size: 13px; font-weight: 700; color: #64748B; margin-bottom: 12px; }
+        .legend-layout { display: flex; align-items: center; gap: 16px; }
+        .legend-chart { width: 120px; height: 120px; flex-shrink: 0; }
+        .legend-text { font-size: 12px; }
+        .legend-item { margin-bottom: 6px; }
+        .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
 
         /* ── 기타 ── */
         .updated { text-align: right; font-size: 11px; color: #94A3B8; margin-top: 24px; }
@@ -99,7 +126,7 @@
 
         /* ── 반응형 ── */
         @media (max-width: 900px) {
-            #bottleneck-rank { flex: 1 0 100% !important; }
+            .bottleneck-panel { flex: 1 0 100%; }
         }
         @media (max-width: 640px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -153,24 +180,24 @@
             </div>
 
             <div class="section">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+                <div class="section-header">
                     <div>
-                        <div class="section-title" style="margin-bottom:0;">전환 퍼널</div>
-                        <div id="funnel-period" style="font-size:13px;color:#64748B;"></div>
+                        <div class="section-title section-title-tight">전환 퍼널</div>
+                        <div id="funnel-period" class="section-subtitle"></div>
                     </div>
                     <select class="week-select" id="week-select"></select>
                 </div>
-                <div style="display:flex;gap:16px;flex-wrap:wrap;">
-                    <div style="flex:1;min-width:0;" id="funnel-wrap" class="funnel"></div>
-                    <div id="bottleneck-rank" style="flex:0 0 180px;background:white;border:1px solid #E2E8F0;border-radius:12px;padding:16px;"></div>
+                <div class="funnel-layout">
+                    <div id="funnel-wrap" class="funnel funnel-main"></div>
+                    <div id="bottleneck-rank" class="side-card bottleneck-panel"></div>
                 </div>
             </div>
 
             <div class="section">
                 <div class="section-title">주간 추이</div>
                 <div class="chart-box">
-                    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
-                        <div class="chart-toggle" id="chart-toggle" style="margin-bottom:0;">
+                    <div class="section-header">
+                        <div class="chart-toggle chart-toggle-inline" id="chart-toggle">
                             <button class="active" data-mode="volume">조회수</button>
                             <button data-mode="rates">전환율</button>
                         </div>
@@ -206,19 +233,19 @@
 
             <div class="section">
                 <div class="section-title">상담 분석</div>
-                <div class="chart-box" style="display:flex;gap:32px;flex-wrap:wrap;">
-                    <div style="flex:1;min-width:200px;">
-                        <div style="font-size:13px;font-weight:700;color:#64748B;margin-bottom:12px;">상담목적별</div>
-                        <div style="display:flex;align-items:center;gap:16px;">
-                            <div style="width:120px;height:120px;flex-shrink:0;"><canvas id="chart-purpose"></canvas></div>
-                            <div id="purpose-legend" style="font-size:12px;"></div>
+                <div class="chart-box analysis-grid">
+                    <div class="analysis-panel">
+                        <div class="analysis-label">상담목적별</div>
+                        <div class="legend-layout">
+                            <div class="legend-chart"><canvas id="chart-purpose"></canvas></div>
+                            <div id="purpose-legend" class="legend-text"></div>
                         </div>
                     </div>
-                    <div style="flex:1;min-width:200px;">
-                        <div style="font-size:13px;font-weight:700;color:#64748B;margin-bottom:12px;">수도권 / 지방</div>
-                        <div style="display:flex;align-items:center;gap:16px;">
-                            <div style="width:120px;height:120px;flex-shrink:0;"><canvas id="chart-region"></canvas></div>
-                            <div id="region-legend" style="font-size:12px;"></div>
+                    <div class="analysis-panel">
+                        <div class="analysis-label">수도권 / 지방</div>
+                        <div class="legend-layout">
+                            <div class="legend-chart"><canvas id="chart-region"></canvas></div>
+                            <div id="region-legend" class="legend-text"></div>
                         </div>
                     </div>
                 </div>
@@ -383,16 +410,16 @@
             html += '<div class="funnel-stage-left">';
             html += '<div class="funnel-stage-label">' + s.label + '</div>';
             html += '<div class="funnel-stage-value">' + s.value + '</div>';
-            if (s.sub) html += '<div style="font-size:14px;color:#64748B;font-weight:600;">' + s.sub + '</div>';
+            if (s.sub) html += '<div class="funnel-stage-sub">' + s.sub + '</div>';
             html += '</div>';
             html += '<div class="funnel-stage-right">';
             html += '<div class="funnel-stage-target">' + s.targetLabel + '</div>';
             html += '</div>';
             html += '</div>';
             // 진행률 바 + 달성률 (바 오른쪽에 % 표시)
-            html += '<div style="display:flex;align-items:center;gap:8px;margin-top:8px;">';
-            html += '<div class="funnel-bar" title="' + barTitle + '" style="flex:1;margin-top:0;"><div class="funnel-bar-fill ' + barColor + '" style="width:' + Math.round(ratio * 100) + '%"></div></div>';
-            html += '<span style="font-size:13px;font-weight:800;min-width:36px;text-align:right;color:' + (pctAchieved >= 100 ? '#059669' : pctAchieved >= 80 ? '#D97706' : '#DC2626') + ';">' + pctAchieved + '%</span>';
+            html += '<div class="progress-row">';
+            html += '<div class="funnel-bar funnel-bar-progress" title="' + barTitle + '"><div class="funnel-bar-fill ' + barColor + '" style="width:' + Math.round(ratio * 100) + '%"></div></div>';
+            html += '<span class="progress-pct" style="color:' + (pctAchieved >= 100 ? '#059669' : pctAchieved >= 80 ? '#D97706' : '#DC2626') + ';">' + pctAchieved + '%</span>';
             html += '</div>';
 
             // 전환율 커넥터 (마지막 단계 제외)
@@ -426,18 +453,16 @@
             ...stages.map(s => ({ label: s.label, rate: s.actual, target: s.target, ratio: s.target > 0 ? s.actual / s.target : 999 })),
         ].filter(x => x.ratio < 1).sort((a, b) => a.ratio - b.ratio);
 
-        let rankHtml = '<div style="font-size:13px;font-weight:800;color:#051C2C;margin-bottom:10px;">병목 순위</div>';
+        let rankHtml = '<div class="rank-title">병목 순위</div>';
         if (allItems.length === 0) {
-            rankHtml += '<div style="font-size:12px;color:#94A3B8;">모든 지표 목표 달성!</div>';
+            rankHtml += '<div class="rank-empty">모든 지표 목표 달성!</div>';
         } else {
             allItems.forEach((item, idx) => {
                 const pct = Math.round(item.ratio * 100);
-                const isRate = typeof item.rate === 'number' && item.target <= 100;
-                const valStr = isRate ? item.rate.toFixed(1) + '%' : fmtNum(item.rate);
-                rankHtml += '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #F1F5F9;font-size:12px;">';
-                rankHtml += '<span style="font-weight:800;color:' + (idx === 0 ? '#DC2626' : '#64748B') + ';">' + (idx + 1) + '</span>';
-                rankHtml += '<span style="flex:1;font-weight:600;color:#051C2C;">' + item.label + '</span>';
-                rankHtml += '<span style="color:' + (pct < 80 ? '#DC2626' : '#D97706') + ';font-weight:700;">' + pct + '%</span>';
+                rankHtml += '<div class="rank-row">';
+                rankHtml += '<span class="rank-index" style="color:' + (idx === 0 ? '#DC2626' : '#64748B') + ';">' + (idx + 1) + '</span>';
+                rankHtml += '<span class="rank-label">' + item.label + '</span>';
+                rankHtml += '<span class="rank-value" style="color:' + (pct < 80 ? '#DC2626' : '#D97706') + ';">' + pct + '%</span>';
                 rankHtml += '</div>';
             });
         }
@@ -633,7 +658,7 @@
         statsHtml += '<div class="stat-card"><div class="stat-label">' + lastLabel + '</div><div class="stat-value">' + fmtWon(s.last_month || 0) + '</div></div>';
         const chgPct = s.change_pct || '—';
         const chgClass = chgPct.startsWith('+') ? 'up' : chgPct.startsWith('-') ? 'down' : 'flat';
-        statsHtml += '<div class="stat-card"><div class="stat-label">전월 대비</div><div class="stat-value" style="color:' + (chgClass === 'up' ? '#059669' : chgClass === 'down' ? '#DC2626' : '#64748B') + ';font-size:24px;">' + chgPct + '</div></div>';
+        statsHtml += '<div class="stat-card"><div class="stat-label">전월 대비</div><div class="stat-value stat-value-lg" style="color:' + (chgClass === 'up' ? '#059669' : chgClass === 'down' ? '#DC2626' : '#64748B') + ';">' + chgPct + '</div></div>';
         document.getElementById('sales-stats').innerHTML = statsHtml;
 
         // 월별 매출 차트
@@ -665,7 +690,7 @@
                 options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.label + ': ' + fmtNum(ctx.raw) + '원' } } }, cutout: '60%' }
             });
             let legend = '';
-            d.by_purpose.forEach((p, i) => { legend += '<div style="margin-bottom:6px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + colors[i % colors.length] + ';margin-right:6px;"></span><strong>' + p.purpose + '</strong> ' + p.ratio + ' (' + fmtWon(p.revenue) + ')</div>'; });
+            d.by_purpose.forEach((p, i) => { legend += '<div class="legend-item"><span class="legend-dot" style="background:' + colors[i % colors.length] + ';"></span><strong>' + p.purpose + '</strong> ' + p.ratio + ' (' + fmtWon(p.revenue) + ')</div>'; });
             document.getElementById('purpose-legend').innerHTML = legend;
         }
 
@@ -678,7 +703,7 @@
                 options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.raw + '명 (' + fmtWon(d.by_region[ctx.dataIndex].revenue) + ')' } } }, cutout: '60%' }
             });
             let rLegend = '';
-            d.by_region.forEach((r, i) => { rLegend += '<div style="margin-bottom:6px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + rColors[i % rColors.length] + ';margin-right:6px;"></span><strong>' + r.region + '</strong> ' + r.ratio + ' (' + r.count + '명)</div>'; });
+            d.by_region.forEach((r, i) => { rLegend += '<div class="legend-item"><span class="legend-dot" style="background:' + rColors[i % rColors.length] + ';"></span><strong>' + r.region + '</strong> ' + r.ratio + ' (' + r.count + '명)</div>'; });
             document.getElementById('region-legend').innerHTML = rLegend;
         }
     }
