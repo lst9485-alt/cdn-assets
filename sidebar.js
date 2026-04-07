@@ -60,7 +60,7 @@
     + '@media (max-width: 1200px) { #sidebar { display: none; } }';
 
   // 대시보드 페이지에서는 사이드바 숨김 (3열 레이아웃과 겹침) — business.html 제외
-  if (cur.indexOf('/dashboard') !== -1 && cur.indexOf('business.html') === -1) return;
+  if (cur.indexOf('/dashboard') !== -1 && cur.indexOf('business.html') === -1 && cur.indexOf('branding.html') === -1) return;
 
   document.head.appendChild(style);
   document.body.appendChild(sidebar);
