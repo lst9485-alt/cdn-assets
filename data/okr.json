@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-07T06:00:12.747054+09:00",
+  "updated": "2026-04-07T23:23:30.704706+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 225,
-    "done": 189,
-    "overdue": 7,
+    "total": 227,
+    "done": 194,
+    "overdue": 5,
     "pending": [
       {
         "title": "전자책 작성",
@@ -51,47 +51,22 @@
         "overdue": true
       },
       {
-        "title": "메모정리",
-        "date": "2026-04-06",
-        "overdue": true
-      },
-      {
-        "title": "홈페이지",
-        "date": "2026-04-06T19:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주제선정",
-        "date": "2026-04-07T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
+        "title": "컨셉",
         "date": "2026-04-07T11:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "세무사연락 업종추가",
-        "date": "2026-04-07T11:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "민방위 낙서장확인",
-        "date": "2026-04-07T12:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "신입교육",
+        "title": "주제선정",
         "date": "2026-04-07T14:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "카카오 비즈니스채널 확인",
+        "title": "썸네일&제목",
         "date": "2026-04-07T15:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "홈페이지",
+        "title": "카카오 비즈니스채널 확인",
         "date": "2026-04-07T16:00:00.000+09:00",
         "overdue": false
       },
@@ -107,12 +82,17 @@
       },
       {
         "title": "신입교육",
-        "date": "2026-04-08T10:30:00.000+09:00",
+        "date": "2026-04-08T10:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "콘텐츠 관리시트",
         "date": "2026-04-08T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "세무사연락 업종추가",
+        "date": "2026-04-08T12:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -196,6 +176,11 @@
         "overdue": false
       },
       {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-04-14",
+        "overdue": false
+      },
+      {
         "title": "기업은행 방문 (에스크로) → 에스크로 이용확인증 → 통신판매업 신고",
         "date": "2026-04-15T11:45:00.000+09:00",
         "overdue": false
@@ -208,20 +193,20 @@
     ],
     "schedule": [
       {
-        "title": "주제선정",
-        "time": "09:30",
+        "title": "P1~P3/목실감",
+        "time": "08:30",
         "allDay": false,
-        "done": false
+        "done": true
       },
       {
-        "title": "주제선정&썸네일&제목",
+        "title": "체크남&링크, db기입",
+        "time": "09:00",
+        "allDay": false,
+        "done": true
+      },
+      {
+        "title": "컨셉",
         "time": "11:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "세무사연락 업종추가",
-        "time": "11:45",
         "allDay": false,
         "done": false
       },
@@ -229,22 +214,28 @@
         "title": "민방위 낙서장확인",
         "time": "12:30",
         "allDay": false,
-        "done": false
+        "done": true
       },
       {
-        "title": "신입교육",
+        "title": "원씽복기",
+        "time": "14:00",
+        "allDay": false,
+        "done": true
+      },
+      {
+        "title": "주제선정",
         "time": "14:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "카카오 비즈니스채널 확인",
+        "title": "썸네일&제목",
         "time": "15:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "홈페이지",
+        "title": "카카오 비즈니스채널 확인",
         "time": "16:00",
         "allDay": false,
         "done": false
@@ -259,7 +250,7 @@
   },
   "routines": {
     "total": 4,
-    "done_today": 0,
+    "done_today": 1,
     "items": [
       {
         "name": "원씽 완료",
@@ -267,7 +258,7 @@
       },
       {
         "name": "일일 계획",
-        "done": false
+        "done": true
       },
       {
         "name": "P2 완료",
@@ -278,12 +269,28 @@
         "done": false
       }
     ],
-    "priorities": [],
-    "identity": null,
+    "priorities": [
+      {
+        "label": "원씽",
+        "title": "브랜딩",
+        "done": false
+      },
+      {
+        "label": "P2",
+        "title": "주제&썸제",
+        "done": false
+      },
+      {
+        "label": "P3",
+        "title": "홈페이지",
+        "done": false
+      }
+    ],
+    "identity": "나는 내 할일을 하는 사람이다.",
     "weekly_stats": {
       "total": 28,
-      "done": 17,
-      "rate": "61%",
+      "done": 18,
+      "rate": "64%",
       "days": [
         {
           "date": "2026-04-01",
@@ -317,7 +324,7 @@
         },
         {
           "date": "2026-04-07",
-          "done": 0,
+          "done": 1,
           "total": 4
         }
       ]

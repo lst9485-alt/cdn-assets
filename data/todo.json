@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-07T06:00:01.591687+09:00",
+  "updated": "2026-04-07T23:23:25.440720+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -247,26 +247,19 @@
         },
         {
           "id": 34,
-          "title": "parse-funnel.py 파싱 실패 로깅 추가 (4/6~) — Codex 전용",
+          "title": "generate-slides.py 다양성 집계 버그 (4/7~)",
           "ref": null,
           "items": [
             {
-              "text": "parse_num/parse_pct에서 파싱 실패 시 0 반환하면서 경고 로그 한 줄 출력 (현재는 무음)",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 35,
-          "title": "business.html 인라인 스타일 → CSS 클래스 추출 (4/6~) — Codex 전용",
-          "ref": null,
-          "items": [
-            {
-              "text": "반복 패턴(display:flex;align-items:center;gap 등) CSS 클래스로 추출",
+              "text": "TITLE 추출이 BADGE 필드를 검사함 (content.split('//')[0]이 TITLE이 아니라 BADGE)",
               "done": false
             },
             {
-              "text": "범례 스타일 .legend-item 클래스로 통합",
+              "text": "다양성 키가 type_str.split('(')[0]으로 서브타입을 합쳐서 과소집계",
+              "done": false
+            },
+            {
+              "text": "A변형만 보는 경고가 보고서(전체 기준)와 모순",
               "done": false
             }
           ]
