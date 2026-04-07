@@ -7,166 +7,96 @@
     <title>텔레그램 알림 - 운영 대시보드</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
-        .page { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.5; }
+        .page { max-width: 920px; margin: 0 auto; padding: 28px 20px 32px; }
         .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 24px; }
         .back:hover { color: #0077C8; }
-        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
-        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 18px; }
-        .overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
-        .overview-card { background: white; border: 2px solid #E2E8F0; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); }
-        .overview-label { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .3px; margin-bottom: 6px; padding: 4px 10px; border-radius: 999px; }
-        .overview-count { font-size: 22px; font-weight: 800; color: #051C2C; line-height: 1; }
-        .overview-desc { font-size: 12px; color: #64748B; margin-top: 6px; }
-        .group { margin-top: 28px; }
-        .group-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
-        .group-label { display: inline-block; font-size: 12px; font-weight: 800; padding: 5px 12px; border-radius: 999px; margin-bottom: 6px; }
-        .group-title { font-size: 20px; font-weight: 800; color: #051C2C; }
-        .group-desc { font-size: 13px; color: #64748B; }
-        .group-meta { font-size: 12px; font-weight: 700; color: #94A3B8; }
-        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .card { background: white; border: 2px solid #E2E8F0; border-radius: 14px; padding: 18px 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); }
-        .card:hover { border-color: #0077C8; }
-        .group-daily .group-label, .group-daily .when-badge, .group-daily .overview-label { background: #E8F3FF; color: #0077C8; }
-        .group-daily .card, .overview-daily { border-color: #BFDBFE; }
-        .group-ondemand .group-label, .group-ondemand .when-badge, .group-ondemand .overview-label { background: #ECFDF3; color: #15803D; }
-        .group-ondemand .card, .overview-ondemand { border-color: #BBF7D0; }
-        .group-exception .group-label, .group-exception .when-badge, .group-exception .overview-label { background: #FFF7ED; color: #C2410C; }
-        .group-exception .card, .overview-exception { border-color: #FED7AA; }
-        .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
-        .card-title { font-size: 16px; font-weight: 800; color: #051C2C; }
-        .when-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 5px 9px; border-radius: 999px; white-space: nowrap; }
-        .card-desc { font-size: 13px; color: #334155; margin-bottom: 8px; }
-        .card-detail { font-size: 12px; color: #64748B; margin-bottom: 10px; }
-        .card-source { font-size: 11px; color: #94A3B8; }
-        .note-box { margin-top: 28px; background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 18px 20px; }
-        .note-title { font-size: 14px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
-        .note-line { font-size: 13px; color: #64748B; margin-top: 4px; }
-        @media (max-width: 720px) { .overview, .cards { grid-template-columns: 1fr; } }
+        h1 { font-size: 30px; font-weight: 900; color: #051C2C; margin-bottom: 8px; letter-spacing: -0.4px; }
+        .subtitle { color: #64748B; font-size: 16px; margin-bottom: 22px; }
+        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .card { background: white; border: 2px solid #E2E8F0; border-radius: 18px; padding: 22px 22px 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); min-height: 220px; }
+        .card-time { display: inline-block; font-size: 24px; font-weight: 900; line-height: 1.1; padding: 8px 14px; border-radius: 999px; margin-bottom: 14px; }
+        .card-title { font-size: 26px; font-weight: 900; color: #051C2C; letter-spacing: -0.4px; margin-bottom: 10px; }
+        .card-desc { font-size: 16px; font-weight: 600; color: #334155; margin-bottom: 14px; }
+        .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip { display: inline-flex; align-items: center; font-size: 14px; font-weight: 700; padding: 7px 12px; border-radius: 999px; background: #F8FAFC; color: #475569; }
+        .card-morning { border-color: #BFDBFE; }
+        .card-morning .card-time { background: #E8F3FF; color: #0077C8; }
+        .card-reminder { border-color: #BFDBFE; }
+        .card-reminder .card-time { background: #DBEAFE; color: #1D4ED8; }
+        .card-direct { border-color: #BBF7D0; }
+        .card-direct .card-time { background: #ECFDF3; color: #15803D; }
+        .card-issue { border-color: #FED7AA; }
+        .card-issue .card-time { background: #FFF7ED; color: #C2410C; }
+        .footnote { margin-top: 18px; font-size: 13px; color: #94A3B8; }
+        @media (max-width: 720px) {
+            .cards { grid-template-columns: 1fr; }
+            h1 { font-size: 26px; }
+            .subtitle { font-size: 15px; }
+            .card { min-height: 0; padding: 20px 18px; }
+            .card-time { font-size: 22px; }
+            .card-title { font-size: 23px; }
+            .card-desc { font-size: 15px; }
+            .chip { font-size: 13px; }
+        }
     </style>
 </head>
 <body>
     <div class="page">
-        <a href="./" class="back">&larr; 프로세스 목록</a>
+        <a href="../" class="back">&larr; 메인</a>
         <h1>🔔 텔레그램 알림 프로세스</h1>
-        <p class="subtitle">리마인더 그룹 알림을 매일 자동, 수시 처리, 예외 알림으로 나눠서 다시 정리했습니다.</p>
+        <p class="subtitle">언제 어떤 알림이 오는지만 바로 보이게 4개로 줄였습니다.</p>
 
-        <div class="overview">
-            <div class="overview-card overview-daily group-daily">
-                <div class="overview-label">매일 자동</div>
-                <div class="overview-count">2가지</div>
-                <div class="overview-desc">정해진 시간에 자동으로 도착하는 알림</div>
+        <div class="cards">
+            <div class="card card-morning">
+                <div class="card-time">07:00</div>
+                <div class="card-title">아침 플랜</div>
+                <div class="card-desc">하루 시작 전에 오늘 해야 할 핵심만 한 번에 봅니다.</div>
+                <div class="chip-row">
+                    <span class="chip">원씽</span>
+                    <span class="chip">P2 · P3</span>
+                    <span class="chip">오늘 마감</span>
+                    <span class="chip">루틴 상태</span>
+                </div>
             </div>
-            <div class="overview-card overview-ondemand group-ondemand">
-                <div class="overview-label">수시 처리</div>
-                <div class="overview-count">2가지</div>
-                <div class="overview-desc">필요할 때 쓰거나 시간 맞춰 받는 알림</div>
-            </div>
-            <div class="overview-card overview-exception group-exception">
-                <div class="overview-label">예외 알림</div>
-                <div class="overview-count">2가지</div>
-                <div class="overview-desc">장애나 실패가 있을 때만 오는 알림</div>
-            </div>
-        </div>
 
-        <div class="group group-daily">
-            <div class="group-head">
-                <div>
-                    <div class="group-label">매일 자동</div>
-                    <div class="group-title">정해진 시간에 자동으로 받는 알림</div>
-                    <div class="group-desc">하루 시작과 진행 상황을 놓치지 않게 고정 시각에 도착합니다.</div>
-                </div>
-                <div class="group-meta">2상황</div>
-            </div>
-            <div class="cards">
-                <div class="card">
-                    <div class="card-top">
-                        <div class="card-title">하루 시작 전에 플랜 확인하기</div>
-                        <div class="when-badge">07:00</div>
-                    </div>
-                    <div class="card-desc">원씽, P2, P3, 오늘 마감 태스크와 루틴 상태를 한 번에 확인합니다.</div>
-                    <div class="card-detail">어제 루틴 미기입, 연속일, 주간 평균까지 함께 묶어서 발송합니다.</div>
-                    <div class="card-source">소스: nightwatch morning-planner</div>
-                </div>
-                <div class="card">
-                    <div class="card-top">
-                        <div class="card-title">하루 4회 할 일 받기</div>
-                        <div class="when-badge">08:00 · 14:00 · 19:00 · 22:00</div>
-                    </div>
-                    <div class="card-desc">오늘 할 일, 지연 항목, 내일 할 일과 완료 버튼을 묶어서 확인합니다.</div>
-                    <div class="card-detail">아침, 오후, 저녁, 하루 마감 정리까지 하루 4회 자동으로 발송됩니다.</div>
-                    <div class="card-source">소스: 01-2 태스크 리마인더</div>
+            <div class="card card-reminder">
+                <div class="card-time">08 · 14 · 19 · 22</div>
+                <div class="card-title">하루 4번 리마인더</div>
+                <div class="card-desc">하루 진행 상황을 4번 나눠서 확인합니다.</div>
+                <div class="chip-row">
+                    <span class="chip">오늘 할 일</span>
+                    <span class="chip">지연 항목</span>
+                    <span class="chip">내일 할 일</span>
+                    <span class="chip">완료 버튼</span>
                 </div>
             </div>
-        </div>
 
-        <div class="group group-ondemand">
-            <div class="group-head">
-                <div>
-                    <div class="group-label">수시 처리</div>
-                    <div class="group-title">필요할 때 직접 처리하거나 시간 맞춰 받는 알림</div>
-                    <div class="group-desc">내가 누르거나, 태스크 시간이 되었을 때 바로 반응하는 알림입니다.</div>
+            <div class="card card-direct">
+                <div class="card-time">지금 바로 처리</div>
+                <div class="card-title">직접 처리</div>
+                <div class="card-desc">누르거나 입력하면 바로 태스크에 반영됩니다.</div>
+                <div class="chip-row">
+                    <span class="chip">✅ 버튼</span>
+                    <span class="chip">오늘 · 목록</span>
+                    <span class="chip">추가 · 완료 · 변경</span>
+                    <span class="chip">태스크 시간 ±2분</span>
                 </div>
-                <div class="group-meta">2상황</div>
             </div>
-            <div class="cards">
-                <div class="card">
-                    <div class="card-top">
-                        <div class="card-title">시간 맞춰 개별 알림 받기</div>
-                        <div class="when-badge">태스크 시간 ±2분</div>
-                    </div>
-                    <div class="card-desc">시간이 잡힌 태스크만 한 건씩 받아서 바로 처리합니다.</div>
-                    <div class="card-detail">종일 태스크는 제외하고, 중복 발송은 막으면서 정시 근처에만 알립니다.</div>
-                    <div class="card-source">소스: 01-5 시간별 리마인더</div>
-                </div>
-                <div class="card">
-                    <div class="card-top">
-                        <div class="card-title">버튼이나 명령어로 바로 처리하기</div>
-                        <div class="when-badge">필요할 때</div>
-                    </div>
-                    <div class="card-desc">✅ 버튼이나 오늘, 목록, 추가, 완료, 변경으로 태스크를 바로 반영합니다.</div>
-                    <div class="card-detail">조회, 생성, 완료, 일정 변경을 같은 방에서 바로 처리할 수 있습니다.</div>
-                    <div class="card-source">소스: 01-3 태스크 완료, 01-4 태스크 명령어</div>
+
+            <div class="card card-issue">
+                <div class="card-time">문제 생길 때만</div>
+                <div class="card-title">문제 알림</div>
+                <div class="card-desc">평소엔 조용하고, 확인이 필요할 때만 옵니다.</div>
+                <div class="chip-row">
+                    <span class="chip">n8n 중단 · 복구</span>
+                    <span class="chip">동기화 실패</span>
+                    <span class="chip">즉시 확인</span>
                 </div>
             </div>
         </div>
 
-        <div class="group group-exception">
-            <div class="group-head">
-                <div>
-                    <div class="group-label">예외 알림</div>
-                    <div class="group-title">장애나 실패가 있을 때만 오는 알림</div>
-                    <div class="group-desc">평소에는 조용하고, 확인이 필요한 순간에만 도착합니다.</div>
-                </div>
-                <div class="group-meta">2상황</div>
-            </div>
-            <div class="cards">
-                <div class="card">
-                    <div class="card-top">
-                        <div class="card-title">n8n 상태 이상 확인하기</div>
-                        <div class="when-badge">상태 변경 시</div>
-                    </div>
-                    <div class="card-desc">n8n 중단이나 복구 순간에만 상태 알림이 옵니다.</div>
-                    <div class="card-detail">정상일 때는 조용하고, 상태가 바뀐 순간에만 발송됩니다.</div>
-                    <div class="card-source">소스: tools/scripts/n8n-monitor.sh</div>
-                </div>
-                <div class="card">
-                    <div class="card-top">
-                        <div class="card-title">동기화 오류 확인하기</div>
-                        <div class="when-badge">실패 시 즉시</div>
-                    </div>
-                    <div class="card-desc">Notion → Obsidian 동기화 실패를 같은 방에서 바로 확인합니다.</div>
-                    <div class="card-detail">같은 방으로 오지만 발신 credential은 우리동네봇인 예외 알림입니다.</div>
-                    <div class="card-source">소스: 02 notion 콘텐츠캘린더→obsidian</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="note-box">
-            <div class="note-title">현재 이 페이지에 포함한 범위</div>
-            <div class="note-line">리마인더 그룹에서 실제로 보는 알림 6가지만 정리했습니다.</div>
-            <div class="note-line">별도 프로세스: CRM 신청/예약/후속관리 알림, nightwatch 시스템봇 리포트, 메모봇</div>
-        </div>
+        <div class="footnote">리마인더 그룹 기준입니다. CRM, 시스템봇 리포트, 메모봇은 여기서 뺐습니다.</div>
     </div>
 <script src="../nav.js"></script>
 <script src="../footer.js"></script>
