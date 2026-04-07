@@ -33,6 +33,7 @@
     + '<a href="' + root + 'dashboard/#projects" class="sb-sub">프로젝트</a>'
     + '<a href="' + root + 'dashboard/#okr" class="sb-sub">OKR·루틴</a>'
     + '<a href="' + root + 'dashboard/business.html" class="sb-sub">' + ic.dash + ' 사업현황</a>'
+    + '<a href="' + root + 'dashboard/branding.html" class="sb-sub" style="color:' + (isActive('branding') ? '#0077C8;font-weight:700' : '#94A3B8') + '"><svg width="12" height="12" viewBox="0 0 16 16" style="vertical-align:-1px"><rect rx="3" width="16" height="16" fill="#FF6B00"/><path d="M4 4h8v2H4zM4 7.5h5v1.5H4zM4 10.5h7v1.5H4z" fill="#fff" opacity=".9"/></svg> 브랜딩</a>'
     + '<div class="sb-cat">프로세스</div>'
     + link(root + 'process/youtube.html', ic.yt, '유튜브', 'youtube')
     + link(root + 'process/crm.html', ic.crm, 'CRM', 'crm')
