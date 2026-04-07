@@ -17,6 +17,15 @@
         .placeholder-icon { font-size: 48px; margin-bottom: 16px; }
         .placeholder-title { font-size: 18px; font-weight: 700; color: #475569; margin-bottom: 8px; }
         .placeholder-desc { font-size: 14px; color: #94A3B8; }
+        .summary-card { background: white; border: 2px solid #FDE68A; border-radius: 14px; padding: 20px 22px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); }
+        .summary-eyebrow { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .4px; color: #B45309; background: #FEF3C7; border-radius: 999px; padding: 4px 10px; margin-bottom: 10px; }
+        .summary-title { font-size: 18px; font-weight: 800; color: #051C2C; margin-bottom: 6px; }
+        .summary-desc { font-size: 14px; color: #64748B; margin-bottom: 12px; }
+        .summary-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+        .summary-tag { font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 999px; background: #FFF7ED; color: #C2410C; }
+        .summary-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #0077C8; text-decoration: none; }
+        .summary-link:hover { color: #005C99; }
+        .summary-note { font-size: 12px; color: #94A3B8; margin-top: 10px; }
         .wf-list { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
         .wf-card { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 18px 20px; }
         .wf-card:hover { border-color: #0077C8; }
@@ -38,6 +47,20 @@
         <a href="./" class="back">&larr; 프로세스 목록</a>
         <h1>⚙️ n8n 워크플로우 연결도</h1>
         <p class="subtitle">자동화 워크플로우 목록 + 연결 관계</p>
+
+        <div class="summary-card">
+            <div class="summary-eyebrow">리마인더 그룹 요약</div>
+            <div class="summary-title">🔔 텔레그램 알림 흐름</div>
+            <div class="summary-desc">태스크 리마인더, 완료 버튼/명령어, 모닝 플래너, n8n 상태 이상, 동기화 오류를 한 페이지로 정리했습니다.</div>
+            <div class="summary-tags">
+                <span class="summary-tag">태스크 알림</span>
+                <span class="summary-tag">명령어 처리</span>
+                <span class="summary-tag">아침 플래너</span>
+                <span class="summary-tag">시스템 이상</span>
+            </div>
+            <a class="summary-link" href="./telegram-alerts.html">상세 프로세스 보기 <span aria-hidden="true">›</span></a>
+            <div class="summary-note">CRM 신청/예약 알림과 nightwatch 시스템봇 리포트는 별도 프로세스로 분리합니다.</div>
+        </div>
 
         <div class="wf-list" id="wf-content"><div style="text-align:center;color:#94A3B8;padding:32px">로딩 중...</div></div>
     </div>
@@ -92,7 +115,6 @@
     function fmtDate(iso) { var d = new Date(iso); return d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}); }
 })();
 </script>
-    </div>
 <script src="../nav.js"></script>
 <script src="../footer.js"></script>
 <script src="../sidebar.js"></script>

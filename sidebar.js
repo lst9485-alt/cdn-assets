@@ -14,6 +14,7 @@
     yt: '<svg width="14" height="14" viewBox="0 0 16 16" style="vertical-align:-2px"><rect rx="3" width="16" height="16" fill="#FF0000"/><path d="M6.5 4.5L11.5 8L6.5 11.5Z" fill="#fff"/></svg>',
     crm: '<svg width="14" height="14" viewBox="0 0 16 16" style="vertical-align:-2px"><circle cx="5" cy="5.5" r="2.5" fill="#64748B"/><circle cx="11" cy="5.5" r="2.5" fill="#64748B"/><path d="M0 14c0-3 1.5-4.5 5-4.5s5 1.5 5 4.5" fill="#64748B" opacity=".8"/><path d="M6 14c0-3 1.5-4.5 5-4.5s5 1.5 5 4.5" fill="#64748B" opacity=".8"/></svg>',
     n8n: '<svg width="14" height="14" viewBox="0 0 16 16" style="vertical-align:-2px"><rect rx="2" width="16" height="16" fill="#EA4B71"/><text x="8" y="11.5" text-anchor="middle" fill="#fff" font-size="8" font-weight="800" font-family="sans-serif">n8n</text></svg>',
+    tg: '<svg width="14" height="14" viewBox="0 0 16 16" style="vertical-align:-2px"><rect rx="3" width="16" height="16" fill="#F59E0B"/><path d="M8 3.2a2.7 2.7 0 0 0-2.7 2.7v1c0 .5-.2 1-.6 1.3l-.6.6c-.4.4-.1 1.2.5 1.2h6.8c.6 0 .9-.8.5-1.2l-.6-.6c-.4-.3-.6-.8-.6-1.3v-1A2.7 2.7 0 0 0 8 3.2Z" fill="#fff"/><circle cx="8" cy="12.2" r="1.2" fill="#fff"/></svg>',
     money: '<svg width="14" height="14" viewBox="0 0 16 16" style="vertical-align:-2px"><rect rx="2" width="16" height="16" fill="#1F2937"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" font-family="sans-serif">₩</text></svg>',
     web: '<svg width="14" height="14" viewBox="0 0 16 16" style="vertical-align:-2px"><rect rx="2" width="16" height="16" fill="#0077C8"/><circle cx="8" cy="8" r="5" fill="none" stroke="#fff" stroke-width="1.5"/><ellipse cx="8" cy="8" rx="2.5" ry="5" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="3" y1="8" x2="13" y2="8" stroke="#fff" stroke-width="1.2"/></svg>',
     content: '<svg width="14" height="14" viewBox="0 0 16 16" style="vertical-align:-2px"><rect rx="2" width="16" height="16" fill="#1F2937"/><path d="M4 10L8 4L9 7L12 6L8 12L7 9Z" fill="#fff"/></svg>',
@@ -38,6 +39,7 @@
     + link(root + 'process/youtube.html', ic.yt, '유튜브', 'youtube')
     + link(root + 'process/crm.html', ic.crm, 'CRM', 'crm')
     + link(root + 'process/n8n.html', ic.n8n, 'n8n', 'n8n')
+    + link(root + 'process/telegram-alerts.html', ic.tg, '텔레그램 알림', 'telegram-alerts')
     + link(root + 'process/homepage.html', ic.web, '홈페이지', 'homepage')
     + link(root + 'process/content-marketing.html', ic.content, '콘텐츠 마케팅', 'content-marketing')
     + link(root + 'process/settlement.html', ic.money, '회사정산', 'settlement')
