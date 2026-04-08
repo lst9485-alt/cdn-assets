@@ -13,8 +13,6 @@
         .back:hover { color: #0077C8; }
         h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 4px; }
         .page-subtitle { color: #64748B; font-size: 14px; margin-bottom: 28px; }
-
-        /* ── 요약 카드 ── */
         .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
         .card { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 18px 20px; }
         .card-label { font-size: 11px; color: #94A3B8; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
@@ -23,8 +21,6 @@
         .card-desc { font-size: 13px; color: #64748B; margin-top: 4px; }
         .card-wide { grid-column: 1 / -1; }
         .color-swatch { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 4px; border: 1px solid rgba(0,0,0,.1); }
-
-        /* ── 관계도 ── */
         .diagram-section { margin-bottom: 36px; }
         .section-title { font-size: 16px; font-weight: 700; color: #051C2C; margin-bottom: 16px; }
         .diagram { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 28px 24px; overflow-x: auto; }
@@ -45,8 +41,6 @@
         .d-desc { font-size: 12px; color: #64748B; line-height: 1.5; }
         .d-file { font-size: 12px; color: #64748B; padding: 2px 0; }
         .d-arrow { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 32px; font-size: 18px; color: #94A3B8; padding-top: 20px; }
-
-        /* ── 스킬 참조 매트릭스 ── */
         .matrix { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 16px; }
         .matrix th { background: #F1F5F9; padding: 8px 10px; text-align: center; font-weight: 700; color: #64748B; border-bottom: 2px solid #E2E8F0; }
         .matrix th:first-child { text-align: left; }
@@ -54,8 +48,6 @@
         .matrix td:first-child { text-align: left; font-weight: 600; color: #051C2C; }
         .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #0077C8; }
         .dot-light { background: #CBD5E1; }
-
-        /* ── 전문 (접기/펼치기) ── */
         .full-content { margin-top: 36px; }
         .content-section { margin-bottom: 12px; }
         .content-section details { background: white; border: 2px solid #E2E8F0; border-radius: 12px; overflow: hidden; }
@@ -69,7 +61,9 @@
         .content-body { padding: 0 20px 20px; font-size: 14px; color: #334155; }
         .content-body h3 { font-size: 14px; font-weight: 700; color: #051C2C; margin: 18px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #F1F5F9; }
         .content-body h3:first-child { margin-top: 4px; }
-        .content-body ul { padding-left: 18px; margin: 4px 0; }
+        .content-body h4 { font-size: 13px; font-weight: 700; color: #334155; margin: 14px 0 6px; }
+        .content-body p { margin: 8px 0; }
+        .content-body ul, .content-body ol { padding-left: 18px; margin: 4px 0; }
         .content-body li { margin: 3px 0; }
         .content-body strong { font-weight: 700; color: #051C2C; }
         .content-body blockquote { background: #F8FAFC; border-left: 3px solid #0077C8; padding: 10px 14px; margin: 8px 0; border-radius: 0 6px 6px 0; font-size: 13px; color: #475569; }
@@ -77,11 +71,9 @@
         .content-body th { background: #F1F5F9; padding: 6px 10px; text-align: left; font-weight: 700; color: #64748B; border-bottom: 2px solid #E2E8F0; }
         .content-body td { padding: 6px 10px; border-bottom: 1px solid #F1F5F9; }
         .content-body code { background: #F1F5F9; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
-        .content-body .funnel-text { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 16px; font-size: 13px; line-height: 1.8; margin: 8px 0; }
-
+        .code-block { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 16px; font-size: 13px; line-height: 1.8; margin: 8px 0; overflow-x: auto; white-space: pre-wrap; }
         .expand-all { font-size: 13px; color: #0077C8; font-weight: 600; cursor: pointer; background: none; border: none; padding: 4px 0; }
         .expand-all:hover { text-decoration: underline; }
-
         @media (max-width: 600px) {
             .summary { grid-template-columns: 1fr; }
             .card-wide { grid-column: 1; }
@@ -96,7 +88,6 @@
         <h1>00_브랜딩</h1>
         <p class="page-subtitle">채널 정체성 · 타겟 · 톤앤매너 · 상품 · 운영</p>
 
-        <!-- ═══ 브랜드 프레임워크 ═══ -->
         <div style="background:white; border:2px solid #E2E8F0; border-radius:12px; padding:24px 24px 20px; margin-bottom:24px;">
             <div style="font-size:11px; font-weight:700; color:#94A3B8; letter-spacing:0.5px; text-transform:uppercase; margin-bottom:16px;">브랜드 프레임워크</div>
             <div style="display:grid; gap:12px;">
@@ -115,55 +106,52 @@
             </div>
         </div>
 
-        <!-- ═══ 요약 카드 ═══ -->
         <div class="summary">
             <div class="card">
                 <div class="card-label">채널</div>
                 <div class="card-value">우리동네 재테크</div>
-                <div class="card-desc">운영자: 우재 (임승택) · 2024.10.27~</div>
+                <div class="card-desc">운영자: 우재 (임승택 / 우리동네재테크 줄임) · 2024-10-27~</div>
             </div>
             <div class="card">
                 <div class="card-label">USP</div>
-                <div class="card-value">ETF→집→ETF <small>순환 전략</small></div>
+                <div class="card-value">ETF→집→ETF 순환 전략</div>
                 <div class="card-desc">주식 OR 부동산이 아닌, 둘 다 순서대로</div>
             </div>
             <div class="card">
                 <div class="card-label">슬로건</div>
-                <div class="card-value" style="font-size:14px;">"내가 살 수 있는 가장 좋은 집을 사세요"</div>
+                <div class="card-value" style="font-size:14px;">&quot;내가 살 수 있는 가장 좋은 집을 사세요&quot;</div>
                 <div class="card-desc">직장인을 위한 내집마련 로드맵</div>
             </div>
             <div class="card">
                 <div class="card-label">핵심 타겟</div>
-                <div class="card-value" style="font-size:14px;">무주택 직장인 내집마련</div>
-                <div class="card-desc">20~40대 · 신혼 45% · 입문 20% · 갈아타기 20% · 특수 15%</div>
+                <div class="card-value" style="font-size:14px;">무주택 직장인 (20~40대)</div>
+                <div class="card-desc">20~40대 · 신혼 ~45% · 입문자 ~20% · 갈아타기 ~20% · 특수 상황 재편 ~15%</div>
             </div>
             <div class="card">
                 <div class="card-label">톤앤매너</div>
-                <div class="card-value" style="font-size:14px;">같이 보자는 동네 전문가</div>
-                <div class="card-desc">날카로운 팩트 → 따뜻한 공감 → 구체적 해결책</div>
+                <div class="card-value" style="font-size:14px;">&#x27;따뜻하지만 날카로운 동네 전문가&#x27; — 같은 동네 사람이 정리해주는 느낌</div>
+                <div class="card-desc">전략이 주인공 + 시청자가 주인공 (운영자 개인 스토리 최소화)</div>
             </div>
             <div class="card">
                 <div class="card-label">주력 상품</div>
                 <div class="card-value">1:1 상담 44만원</div>
-                <div class="card-desc">117건+ (만족도 99%) · 매출 비중 ~80%</div>
+                <div class="card-desc">상담 건수 117건+ (2026-03 기준)</div>
             </div>
             <div class="card card-wide">
                 <div class="card-label">디자인 시스템</div>
                 <div class="card-value" style="font-size: 13px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
                     <span><span class="color-swatch" style="background:#FF6B00;"></span>오렌지 #FF6B00</span>
-                    <span><span class="color-swatch" style="background:#1A1A1A;"></span>검정 (보조)</span>
-                    <span><span class="color-swatch" style="background:#4A90D9;"></span>파랑 #4A90D9 (슬라이드 서브)</span>
-                    <span><span class="color-swatch" style="background:#F5F0E8;"></span>베이지 #F5F0E8 (배경)</span>
+                    <span><span class="color-swatch" style="background:#1A1A1A;"></span>검정</span>
+                    <span><span class="color-swatch" style="background:#4A90D9;"></span>파랑 #4A90D9</span>
+                    <span><span class="color-swatch" style="background:#F5F0E8;"></span>베이지 #F5F0E8</span>
                     <span style="color:#64748B; font-weight:600;">폰트: 프리텐다드 / G마켓산스</span>
                 </div>
             </div>
         </div>
 
-        <!-- ═══ 관계도 ═══ -->
         <div class="diagram-section">
             <div class="section-title">파일 · 시스템 관계도</div>
             <div class="diagram">
-                <!-- 정본 → 노션 동기화 -->
                 <div class="diagram-row">
                     <div class="diagram-col">
                         <div class="d-box d-source">
@@ -191,8 +179,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 접근 스킬 + 초안 -->
                 <div class="diagram-row">
                     <div class="diagram-col">
                         <div class="d-box d-ref">
@@ -216,14 +202,11 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 수정 흐름 -->
                 <div style="background:#FFF7ED; border-radius:8px; padding:14px 16px; margin-top:8px; font-size:13px; color:#92400E;">
                     <strong>수정 흐름:</strong> brand-context 파일 직접 편집 → <code>/profile sync</code> 실행 → 노션 자동 반영 → 연관 스킬은 자동으로 최신 참조
                 </div>
             </div>
 
-            <!-- 스킬 참조 매트릭스 -->
             <div style="margin-top: 20px;">
                 <div class="section-title">스킬별 참조 파일</div>
                 <div class="diagram" style="padding: 16px 20px;">
@@ -239,6 +222,7 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             <tr><td>profile</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td></tr>
                             <tr><td>homepage</td><td><span class="dot"></span></td><td></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td></td></tr>
                             <tr><td>consult</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td></td></tr>
@@ -248,20 +232,19 @@
                             <tr><td>yt06-revision</td><td></td><td></td><td><span class="dot"></span></td><td></td><td></td></tr>
                             <tr><td>yt09-upload</td><td><span class="dot"></span></td><td><span class="dot"></span></td><td></td><td></td><td></td></tr>
                             <tr><td>content-sheet</td><td></td><td></td><td></td><td><span class="dot"></span></td><td></td></tr>
+    
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- ═══ 전문 (접기/펼치기) ═══ -->
         <div class="full-content">
             <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 16px;">
                 <div class="section-title" style="margin-bottom:0;">Brand-Context 전문</div>
                 <button class="expand-all" onclick="toggleAll()">모두 펼치기</button>
             </div>
 
-            <!-- 01 브랜드 -->
             <div class="content-section">
                 <details>
                     <summary>
@@ -271,114 +254,48 @@
                     </summary>
                     <div class="content-body">
                         <h3>기본 정보</h3>
-                        <ul>
-                            <li><strong>채널명:</strong> 우리동네 재테크</li>
-                            <li><strong>운영자:</strong> 우재 (임승택 / 우리동네재테크 줄임)</li>
-                            <li><strong>법인 대표:</strong> 홍윤지 (배우자, 임승택은 주주)</li>
-                            <li><strong>시작일:</strong> 2024-10-27</li>
-                            <li><strong>채널 URL:</strong> youtube.com/@우리동네재테크</li>
-                            <li><strong>홈페이지:</strong> ourdongne.com</li>
-                            <li><strong>총 영상 수:</strong> 72개+ (2026-03 기준)</li>
-                            <li><strong>기반 지역:</strong> 서울 영등포구</li>
-                        </ul>
-
-                        <h3>채널 소개 문구</h3>
-                        <ul>
-                            <li>1줄: <strong>직장인을 위한 내집마련 로드맵</strong></li>
-                            <li>2줄: <strong>ETF로 돈 모아 집 사는 법을 알려드립니다</strong></li>
-                        </ul>
-
-                        <h3>슬로건</h3>
-                        <ul>
-                            <li>"내가 살 수 있는 가장 좋은 집을 사세요"</li>
-                            <li>"무주택은 후진, 1주택이 중립"</li>
-                        </ul>
-
-                        <h3>끌림 문구 / 약속</h3>
-                        <ul>
-                            <li><strong>끌림:</strong> 직장인 내집마련, 현실적인 순서</li>
-                            <li><strong>약속:</strong> 잃지 않는 투자로 내집마련까지 알려드립니다</li>
-                        </ul>
-
-                        <h3>신뢰 근거</h3>
-                        <ul>
-                            <li>117건+ 상담 실전 데이터 기반 (만족도 99%: 매우만족 86% + 만족 13%)</li>
-                            <li>ETF·부동산 직접 경험</li>
-                        </ul>
-
-                        <h3>운영자 경력</h3>
-                        <ul>
-                            <li>증권업(주식 업계) 종사, 투자 업계 9년+</li>
-                            <li>부동산(아파트, 재건축) 투자로 10억 이상 시세 차익 (6년)</li>
-                            <li>책 1천 권 이상 독파, 강의·자기계발에 1억+ 투자</li>
-                        </ul>
-
-                        <h3>채널 시작 계기</h3>
-                        <blockquote>
-                            투자 업계에서 9년째 일하고 있으며, 주식·부동산·자산배분 분야에 관심을 두고 있습니다. 강의와 책, 부동산 임장 등 자기계발을 위해 5천만원 이상을 투자했습니다. 많은 실수와 비효율적인 경험도 있었지만, 그 덕분에 성장할 수 있었습니다. 여러분이 제가 겪은 실수를 반복하지 않도록 배운 모든 것을 아낌없이 공유하겠습니다.
-                        </blockquote>
-
-                        <h3>USP (고유 가치 제안)</h3>
-                        <ul>
-                            <li><strong>ETF→집→ETF 순환 전략</strong></li>
-                            <li>주식 OR 부동산이 아닌, 둘 다 순서대로</li>
-                            <li>ETF로 돈 모으기 → 집 사기 → 다시 ETF 모아서 갈아타기</li>
-                        </ul>
-
-                        <h3>3축 전략</h3>
-                        <ul>
-                            <li><strong>타겟:</strong> 무주택 직장인</li>
-                            <li><strong>전략:</strong> ETF→집→ETF (순환 로드맵)</li>
-                            <li><strong>기준:</strong> 잃지 않는 투자</li>
-                        </ul>
-
-                        <h3>투자 철학</h3>
-                        <ul>
-                            <li><strong>핵심 원칙:</strong> 잃지 않는 투자 — 데이터에 기반한 이성적 판단</li>
-                            <li><strong>자산 전략:</strong> ETF→집→ETF 순환 — 부동산 + 자산 배분(ETF) 통합</li>
-                            <li><strong>리스크 관리:</strong> 코인은 비트코인만 (실패 경험 기반)</li>
-                            <li>실거주 겸 투자: 살면서도 가치가 오르는 자산 우선</li>
-                            <li>장기 보유 > 단기 매매</li>
-                        </ul>
-
-                        <h3>경쟁 포지션</h3>
-                        <ul>
-                            <li>경쟁 채널과의 결정적 차이: 주식/부동산 양자택일이 아닌 순환 전략</li>
-                            <li>특별한 재능·시드 없이도 따라할 수 있는 경로 제시</li>
-                        </ul>
-
-                        <h3>고객 검증 (만족도설문 76건)</h3>
-                        <ul>
-                            <li>맞춤형 방향 제시 (57%) — "두루뭉실하지 않고 명확한 답"</li>
-                            <li>시야 확장 (41%) — "생각지 못한 대안을 보여줌"</li>
-                            <li>진심·열정 (37%) — "50분인데 2시간이나"</li>
-                        </ul>
-
-                        <h3>디자인</h3>
-                        <ul>
-                            <li><strong>썸네일:</strong> 큰 볼드 텍스트 + 형광 강조(초록·노랑·빨강). 흰색 기본.</li>
-                            <li><strong>메인 색상:</strong> 오렌지 #FF6B00</li>
-                            <li><strong>보조 색상:</strong> 검정</li>
-                            <li><strong>슬라이드 서브 색상:</strong> 파랑 #4A90D9</li>
-                            <li><strong>배경:</strong> 베이지 #F5F0E8</li>
-                            <li><strong>1순위 폰트:</strong> 프리텐다드</li>
-                            <li><strong>2순위 폰트:</strong> G마켓산스</li>
-                        </ul>
-
-                        <h3>콘텐츠 전략</h3>
-                        <ul>
-                            <li><strong>채널 결:</strong> 직장인을 위한 내집마련 로드맵 / ETF→집→ETF</li>
-                            <li><strong>풀링 콘텐츠(4):</strong> 지역분석, 대출, 내집마련 타이밍, 시세 (에버그린+데일리)</li>
-                            <li><strong>키 콘텐츠(1):</strong> ETF로 돈 모아 집 사는 법, 로드맵 설명, 상담 사례 (에버그린)</li>
-                            <li><strong>안 만드는 것:</strong> 단타, 코인, 개별종목 / 상가·경매·재건축 투기 / 일반 동기부여</li>
-                            <li><strong>전환 구조:</strong> 풀링콘텐츠 → 키콘텐츠 → 랜딩페이지 → 구매</li>
-                            <li><strong>재생목록:</strong> 우리동네 아파트 / 내집마련&부동산 핵심 / 자산배분&마인드 / 우리동네 상담소</li>
-                        </ul>
+<ul><li><strong>채널명</strong>: 우리동네 재테크</li><li><strong>운영자</strong>: 우재 (임승택 / 우리동네재테크 줄임)</li><li><strong>법인 대표</strong>: 홍윤지 (배우자, 임승택은 주주)</li><li><strong>시작일</strong>: 2024-10-27</li><li><strong>채널 URL</strong>: https://youtube.com/@우리동네재테크</li><li><strong>홈페이지</strong>: https://ourdongne.com/</li><li><strong>총 영상 수</strong>: 72개+ (2026-03 기준)</li><li><strong>기반 지역</strong>: 서울 영등포구</li></ul>
+<h3>채널 소개 문구</h3>
+<ul><li>1줄: <strong>직장인을 위한 내집마련 로드맵</strong></li><li>2줄: <strong>ETF로 돈 모아 집 사는 법을 알려드립니다</strong></li></ul>
+<h3>슬로건</h3>
+<ul><li>&quot;내가 살 수 있는 가장 좋은 집을 사세요&quot;</li><li>&quot;무주택은 후진, 1주택이 중립&quot;</li></ul>
+<h3>끌림 문구</h3>
+<ul><li>직장인 내집마련, 현실적인 순서</li></ul>
+<h3>약속</h3>
+<ul><li>잃지 않는 투자로 내집마련까지 알려드립니다</li></ul>
+<h3>신뢰 근거</h3>
+<ul><li>117건+ 상담 실전 데이터 기반 (만족도 99%: 매우만족 86% + 만족 13%)</li><li>ETF·부동산 직접 경험</li></ul>
+<h3>운영자 경력</h3>
+<ul><li>증권업(주식 업계) 종사, 투자 업계 9년+</li><li>부동산(아파트, 재건축) 투자로 10억 이상 시세 차익 (6년)</li><li>책 1천 권 이상 독파, 강의·자기계발에 1억+ 투자</li></ul>
+<h3>채널 시작 계기</h3>
+<blockquote>투자 업계에서 9년째 일하고 있으며, 주식·부동산·자산배분 분야에 관심을 두고 있습니다. 강의와 책, 부동산 임장 등 자기계발을 위해 5천만원 이상을 투자했습니다. 많은 실수와 비효율적인 경험도 있었지만, 그 덕분에 성장할 수 있었습니다. 여러분이 제가 겪은 실수를 반복하지 않도록 배운 모든 것을 아낌없이 공유하겠습니다.</blockquote>
+<h3>USP (고유 가치 제안)</h3>
+<p>ETF→집→ETF 순환 전략</p>
+<ul><li>주식 OR 부동산이 아닌, <strong>둘 다 순서대로</strong></li><li>ETF로 돈 모으기 → 집 사기 → 다시 ETF 모아서 갈아타기</li></ul>
+<h3>3축 전략</h3>
+<ul><li><strong>타겟</strong>: 무주택 직장인</li><li><strong>전략</strong>: ETF→집→ETF (순환 로드맵)</li><li><strong>기준</strong>: 잃지 않는 투자</li></ul>
+<h3>투자 철학</h3>
+<ul><li><strong>핵심 원칙</strong>: 잃지 않는 투자 — 데이터에 기반한 이성적 판단</li><li><strong>자산 전략</strong>: ETF→집→ETF 순환 — 부동산 + 자산 배분(ETF) 통합</li><li><strong>리스크 관리</strong>: 코인은 비트코인만 (실패 경험 기반)</li><li>실거주 겸 투자: 살면서도 가치가 오르는 자산 우선</li><li>장기 보유 &gt; 단기 매매</li></ul>
+<h3>경쟁 포지션</h3>
+<ul><li>경쟁 채널과의 결정적 차이: 주식/부동산 양자택일이 아닌 순환 전략</li><li>특별한 재능·시드 없이도 따라할 수 있는 경로 제시</li></ul>
+<h3>브랜드 프레임워크</h3>
+<ul><li><strong>왜 존재해?</strong> 잃지 않는 투자와 금융지식으로 삶을 바꿀 희망을 심어주는 것</li><li><strong>뭘 해?</strong> ETF→집→ETF 순환 전략으로 내집마련 로드맵 제공</li><li><strong>왜 하필 여기?</strong> 돈 얘기가 편한 곳. 편한데, 듣고 나면 정리가 돼 있다.</li><li><strong>비전</strong>: 경제적 자유를 꿈꾸는 사람들에게, 잃지 않는 투자로 현실적인 방법을 제시하는 브랜드</li><li><strong>핵심가치</strong>: 잃지 않는 투자</li></ul>
+<h3>고객 검증 (만족도설문 76건)</h3>
+<ul><li>맞춤형 방향 제시 (57%) — &quot;두루뭉실하지 않고 명확한 답&quot;</li><li>시야 확장 (41%) — &quot;생각지 못한 대안을 보여줌&quot;</li><li>진심·열정 (37%) — &quot;50분인데 2시간이나&quot;</li></ul>
+<h3>디자인</h3>
+<h4>색상·폰트</h4>
+<ul><li><strong>메인 색상</strong>: 오렌지 #FF6B00</li><li><strong>보조 색상</strong>: 검정</li><li><strong>슬라이드 서브 색상</strong>: 파랑 #4A90D9</li><li><strong>슬라이드 배경</strong>: 베이지 #F5F0E8</li><li><strong>1순위 폰트</strong>: 프리텐다드</li><li><strong>2순위 폰트</strong>: G마켓산스</li></ul>
+<h4>썸네일 스타일</h4>
+<ul><li><strong>레이아웃</strong>: 상단 60% 비주얼 + 하단 40% 텍스트 2줄</li><li><strong>줄1 (상)</strong>: 흰색, 굵은 볼드, 테두리/그림자로 가독성 확보</li><li><strong>줄2 (하)</strong>: 초록~노랑 계열, 굵은 볼드 (주황 전환은 어색 — 기존 유지)</li><li><strong>차별화 요소</strong>: 주황(#FF6B00) 테두리, 코너 마크, 줄 사이 구분선, 하단 그라데이션 중 시도 예정</li><li><strong>배경</strong>: 주제 관련 실사 이미지 (아파트, 지도, 문서, 계산기 등). 추상적 배경 안 씀</li><li><strong>시각 장치</strong>: O/X, 화살표, 물음표, 동그라미, 빨간 박스 등 단순 마커. 3D 아이콘 가끔 사용</li><li><strong>출연자 없음</strong>: 사람 얼굴/표정 사용 안 함</li><li><strong>잘 되는 패턴</strong>: 배경 자체가 내용 힌트 (지도=지역분석, 계약서=협상, 아파트 비교=O/X)</li><li><strong>시리즈 일관성</strong>: 지역분석 등 시리즈는 같은 레이아웃 유지, 지역명만 교체</li><li><strong>채널 마크</strong>: 미정 (소형 아이콘 or 문패 느낌 시도 예정)</li></ul>
+<h4>시각 아이덴티티</h4>
+<ul><li><strong>기본 방향</strong>: 깔끔한 슬라이드 + &quot;생활 정보판&quot; 감성</li><li><strong>활용 요소</strong>: 포스트잇, 형광펜 밑줄, 메모 스티커, 동그라미 체크, 손글씨 한 줄(강조 포인트에만)</li><li><strong>아이디어(시간 두고 시도)</strong>: 문패(&quot;우리동네 재테크 / 오늘의 안건&quot;), 나무 간판, 핀 꽂기</li><li><strong>안 하는 것</strong>: 픽셀아트, 레고, 상시 움직이는 애니메이션 (핵심 구간에서만 움직임)</li><li><strong>비주얼 상징</strong>: 골목에 불 켜진 가게</li></ul>
+<h3>콘텐츠 전략</h3>
+<ul><li><strong>채널 결</strong>: 직장인을 위한 내집마련 로드맵 / ETF→집→ETF</li><li><strong>풀링 콘텐츠(4)</strong>: 지역분석, 대출, 내집마련 타이밍, 시세 (에버그린+데일리)</li><li><strong>키 콘텐츠(1)</strong>: ETF로 돈 모아 집 사는 법, 로드맵 설명, 상담 사례 (에버그린)</li><li><strong>안 만드는 것</strong>: 단타, 코인, 개별종목 / 상가·경매·재건축 투기 / 일반 동기부여</li><li><strong>전환 구조</strong>: 풀링콘텐츠 → 키콘텐츠 → 랜딩페이지 → 구매</li><li><strong>재생목록</strong>: 우리동네 아파트 / 내집마련&amp;부동산 핵심 / 자산배분&amp;마인드 / 우리동네 상담소</li></ul>
                     </div>
                 </details>
             </div>
+            
 
-            <!-- 02 타겟 -->
             <div class="content-section">
                 <details>
                     <summary>
@@ -388,68 +305,37 @@
                     </summary>
                     <div class="content-body">
                         <h3>핵심 타겟</h3>
-                        <ul>
-                            <li>무주택 직장인 (20~40대)</li>
-                            <li>내집마련을 고민하는 사람</li>
-                            <li>주식 vs 부동산 사이에서 헤매는 사람</li>
-                            <li>처음부터 끝까지 로드맵이 필요한 사람</li>
-                            <li><strong>고객 페르소나:</strong> 내집마련 준비 신혼부부 또는 1억 모아놓고 투자처 고민 중인 30~40대 직장인</li>
-                        </ul>
-
-                        <h3>페인포인트</h3>
-                        <ul>
-                            <li>정보 과잉으로 시작점 불명</li>
-                            <li>전문가 상담 두려움</li>
-                            <li>실수요자 관점 조언 부족</li>
-                        </ul>
-
-                        <h3>고객 세그먼트 (유저리서치 117건 기반)</h3>
-                        <table>
-                            <thead><tr><th>세그먼트</th><th>비율</th><th>연령</th><th>핵심 동기</th><th>상담 핵심</th></tr></thead>
-                            <tbody>
-                                <tr><td><strong>A. 생애 첫 집 신혼</strong></td><td>~45%</td><td>28~35</td><td>안정+상승</td><td>단지 추천+대출</td></tr>
-                                <tr><td><strong>B. 자산 증식 입문자</strong></td><td>~20%</td><td>25~32</td><td>FOMO</td><td>사도 되나+전략</td></tr>
-                                <tr><td><strong>C. 갈아타기·투자 확장</strong></td><td>~20%</td><td>32~45</td><td>점프</td><td>매도+갈아타기</td></tr>
-                                <tr><td><strong>D. 특수 상황 재편</strong></td><td>~15%</td><td>35~61</td><td>재기</td><td>상황 정리+방향</td></tr>
-                            </tbody>
-                        </table>
-
-                        <h3>세그먼트별 핵심 불안</h3>
-                        <ul>
-                            <li><strong>A:</strong> "고점에 사는 것 아닌가" / "대출 이자 감당" / "이 단지가 최선인지"</li>
-                            <li><strong>B:</strong> "시드가 너무 적은데" / "혼자 결정 두렵다" / "결혼 전에 사면 손해?"</li>
-                            <li><strong>C:</strong> "이미 산 집이 안 오르면" / "다주택 세금" / "재개발 시간 비용"</li>
-                            <li><strong>D:</strong> "또 실수하면 회복 불가" / "나이 대출?" / "특수 상황 감출까"</li>
-                        </ul>
-
-                        <h3>마케팅 타이밍</h3>
-                        <ul>
-                            <li>결혼 시즌 (3~5월, 9~11월) — 상담 계기 "생애 이벤트" 48.7%</li>
-                            <li>규제 발표 직후 1~2주 — "가격 상승·규제 불안" 26.1%</li>
-                            <li>유튜브 → 상담 전환 24.3% — CTA 일관화 필요</li>
-                        </ul>
-
-                        <h3>타겟 표현 키워드</h3>
-                        <ul><li>3040, 실수요자, 2030~40대, 직장인, 신혼부부, 내집마련</li></ul>
-
-                        <h3>SEO 키워드 &amp; 해시태그</h3>
-                        <ul>
-                            <li><strong>핵심:</strong> 부동산, ETF, 재테크, 내집마련, 아파트, 배당, 직장인, 30~40대, 실수요자, 자산형성</li>
-                            <li><strong>해시태그:</strong> #내집마련 #부동산투자 #ETF투자 #재테크 #아파트 #직장인재테크 #자산형성 #부동산 #투자 #우리동네재테크</li>
-                        </ul>
-
-                        <h3>카테고리별 키워드</h3>
-                        <ul>
-                            <li><strong>부동산:</strong> 아파트 매매, 전세 vs 매매, 청약, 재건축, 임장, 분양, 갈아타기</li>
-                            <li><strong>ETF·투자:</strong> ETF 추천, 배당 ETF, S&amp;P500, 나스닥100, 적립식 투자, 자산배분</li>
-                            <li><strong>내집마련:</strong> 내집마련 순서, 대출 한도, LTV DTI DSR, 종잣돈 모으기, 생애최초</li>
-                            <li><strong>지역 분석:</strong> 서울, 수도권, 지방 광역시, 대전, 대구, 부산</li>
-                        </ul>
+<ul><li>무주택 직장인 (20~40대)</li><li>내집마련을 고민하는 사람</li><li>주식 vs 부동산 사이에서 헤매는 사람</li><li>처음부터 끝까지 로드맵이 필요한 사람</li><li><strong>고객 페르소나</strong>: 내집마련 준비 신혼부부 또는 1억 모아놓고 투자처 고민 중인 30~40대 직장인</li></ul>
+<h3>페인포인트</h3>
+<ul><li>정보 과잉으로 시작점 불명</li><li>전문가 상담 두려움</li><li>실수요자 관점 조언 부족</li></ul>
+<h3>고객 세그먼트 (유저리서치 117건 기반)</h3>
+<table><thead><tr><th>세그먼트</th><th>비율</th><th>연령</th><th>핵심 동기</th><th>상담 핵심</th></tr></thead><tbody><tr><td>A. 생애 첫 집 신혼</td><td>~45%</td><td>28~35</td><td>안정+상승</td><td>단지 추천+대출</td></tr><tr><td>B. 자산 증식 입문자</td><td>~20%</td><td>25~32</td><td>FOMO</td><td>사도 되나+전략</td></tr><tr><td>C. 갈아타기·투자 확장</td><td>~20%</td><td>32~45</td><td>점프</td><td>매도+갈아타기</td></tr><tr><td>D. 특수 상황 재편</td><td>~15%</td><td>35~61</td><td>재기</td><td>상황 정리+방향</td></tr></tbody></table>
+<h4>세그먼트별 핵심 불안</h4>
+<ul><li>A: &quot;고점에 사는 것 아닌가&quot; / &quot;대출 이자 감당&quot; / &quot;이 단지가 최선인지&quot;</li><li>B: &quot;시드가 너무 적은데&quot; / &quot;혼자 결정 두렵다&quot; / &quot;결혼 전에 사면 손해?&quot;</li><li>C: &quot;이미 산 집이 안 오르면&quot; / &quot;다주택 세금&quot; / &quot;재개발 시간 비용&quot;</li><li>D: &quot;또 실수하면 회복 불가&quot; / &quot;나이 대출?&quot; / &quot;특수 상황 감출까&quot;</li></ul>
+<blockquote>상세: consult <code>references/segments.md</code>, <code>references/icp-profiles.md</code></blockquote>
+<h3>마케팅 타이밍</h3>
+<ul><li>결혼 시즌 (3~5월, 9~11월) — 상담 계기 &quot;생애 이벤트&quot; 48.7%</li><li>규제 발표 직후 1~2주 — &quot;가격 상승·규제 불안&quot; 26.1%</li><li>유튜브 → 상담 전환 24.3% — CTA 일관화 필요</li></ul>
+<h3>타겟 표현 키워드</h3>
+<ul><li>3040, 실수요자, 2030~40대, 직장인, 신혼부부, 내집마련</li></ul>
+<h3>SEO 키워드 &amp; 해시태그</h3>
+<h4>핵심 키워드</h4>
+<p>부동산, ETF, 재테크, 내집마련, 아파트, 배당, 직장인, 30~40대, 실수요자, 자산형성</p>
+<h4>해시태그 세트 (영상 업로드용)</h4>
+<ul><li>#내집마련 #부동산투자 #ETF투자 #재테크 #아파트</li><li>#직장인재테크 #자산형성 #부동산 #투자 #우리동네재테크</li></ul>
+<h4>카테고리별 키워드</h4>
+<h4>부동산</h4>
+<p>아파트 매매, 전세 vs 매매, 청약, 재건축, 임장, 분양, 갈아타기</p>
+<h4>ETF·투자</h4>
+<p>ETF 추천, 배당 ETF, S&amp;P500, 나스닥100, 적립식 투자, 자산배분</p>
+<h4>내집마련</h4>
+<p>내집마련 순서, 대출 한도, LTV DTI DSR, 종잣돈 모으기, 생애최초</p>
+<h4>지역 분석</h4>
+<p>서울, 수도권, 지방 광역시, 대전, 대구, 부산</p>
                     </div>
                 </details>
             </div>
+            
 
-            <!-- 03 메시지 -->
             <div class="content-section">
                 <details>
                     <summary>
@@ -458,67 +344,41 @@
                         <span class="badge-file">03-message.md</span>
                     </summary>
                     <div class="content-body">
-                        <h3>화자 페르소나</h3>
-                        <p>'따뜻하지만 날카로운 동네 전문가' — 옆자리 선배가 알려주는 느낌</p>
-
-                        <h3>톤앤매너</h3>
-                        <ul>
-                            <li>전문가 티 안 냄, 과장 없음</li>
-                            <li>전략이 주인공 + 시청자가 주인공 (운영자 개인 스토리 최소화)</li>
-                            <li>데이터 설명 시 → 냉정하고 논리적 / 조언 시 → 공감과 응원</li>
-                            <li>병행 순서: 날카로운 팩트 → 따뜻한 공감 → 구체적 해결책</li>
-                        </ul>
-
-                        <h3>날카로움 표현</h3>
-                        <ul>
-                            <li>"냉정하게 말씀드리면"</li>
-                            <li>"솔직히 말씀드리면"</li>
-                            <li>"듣기 좋은 얘기만 하면 저도 편하지만"</li>
-                            <li>"장담하는데"</li>
-                        </ul>
-
-                        <h3>따뜻함 표현</h3>
-                        <ul>
-                            <li>"저도 처음 집살 때 그 떨리는 마음 잘 알고 있습니다"</li>
-                            <li>"부디 용기를 내셨으면 좋겠습니다"</li>
-                            <li>"여러분은 이런 실수 하지 마세요"</li>
-                            <li>"저도 제 자리에서 최대한 돕겠습니다"</li>
-                        </ul>
-
-                        <h3>금기어·금지 표현</h3>
-                        <ul>
-                            <li>서면체 반론 처리: "이런 의문이 드실 수 있습니다", "반론을 제기하실 수 있습니다"</li>
-                            <li>교과서적 어미: "~입니다만", "~라 할 수 있겠습니다", "~에 해당합니다"</li>
-                            <li>인사말</li>
-                            <li>볼드체 사용 (원고 내)</li>
-                            <li>'#' 기호 (원고 내)</li>
-                            <li>'그리고' 3회 이상 연속</li>
-                        </ul>
-
-                        <h3>내부 가치관 (밖에 안 씀)</h3>
-                        <ul><li>"보통사람을 위한 재테크"</li></ul>
-
-                        <h3>고객이 쓰는 표현 (카피 소스)</h3>
-                        <ul>
-                            <li>"현명한 선택을 하고 싶습니다"</li>
-                            <li>"발등에 불 떨어진 느낌"</li>
-                            <li>"영원히 무주택자가 될 것 같은 불안감"</li>
-                            <li>"패닉바잉으로 잘못된 선택"</li>
-                        </ul>
-
-                        <h3>CTA 문구</h3>
-                        <ul>
-                            <li>"지금 여기 사도 될까요? ↓ 돈버는 내집마련 1:1 코칭 ↓"</li>
-                            <li>"내집마련이 처음이라면?"</li>
-                        </ul>
-
-                        <h3>화법 상세</h3>
-                        <p style="color:#64748B; font-size:13px;">화법 패턴, 브릿지, 단락 태그 등 상세: <code>_yt-references/writing-guide.md</code></p>
+                        <h3>브랜드 정체성</h3>
+<p>돈 얘기가 편한 곳. 편한데, 듣고 나면 정리가 돼 있다.</p>
+<h3>화자 페르소나</h3>
+<p>&#x27;따뜻하지만 날카로운 동네 전문가&#x27; — 같은 동네 사람이 정리해주는 느낌</p>
+<h3>톤앤매너</h3>
+<ul><li>핵심 톤: &quot;같이 보자&quot; — 선생님/수강생이 아니라 같은 동네 사람</li><li>&quot;제가 알려드릴&quot; 대신 &quot;오늘 우리가 볼 건&quot;</li><li>전문가 티 안 냄, 과장 없음</li><li>전략이 주인공 + 시청자가 주인공 (운영자 개인 스토리 최소화)</li><li>데이터 설명 시 → 냉정하고 논리적 / 조언 시 → 공감과 응원</li><li>병행 순서: 날카로운 팩트 → 따뜻한 공감 → 구체적 해결책</li></ul>
+<h3>적(enemy) 프레이밍</h3>
+<p>적은 사람이 아니라 &quot;판단을 흐리게 만드는 힘&quot;. 시청자 탓이 아니라 환경 탓으로 프레이밍.</p>
+<ul><li>조급함 (&quot;지금 안 사면 못 산다&quot;)</li><li>흑백 강요 (&quot;집이냐 주식이냐&quot;)</li><li>뜬구름 (내 상황 무시한 일반론)</li><li>겁주기 (불안 조장)</li><li>혼내기 (&quot;이것도 모르세요?&quot;)</li><li>넘치는 정보 (판단을 흐리게 하는 정보 과잉)</li><li>적은 직접 말하지 않고 프레이밍에 녹이기: &quot;다들 ~라고 하죠. 근데 정말 그럴까요?&quot;</li></ul>
+<h3>위트</h3>
+<p>웃기는 것이 아니라 무겁지 않은 것. 시청자의 민망함을 대신 말해주는 장치.</p>
+<ul><li>자기합리화 번역: &quot;이럴 때 마음이 이렇죠. &#x27;조금 무리해도 오르겠지.&#x27;&quot; (1영상 2~4회)</li><li>동네 사람식 한마디: &quot;급한 마음이 제일 비싼 중개수수료입니다.&quot; (1영상 3~5회)</li><li>상황 공감형 자막: &quot;뉴스는 강한데 통장은 조용한 상황&quot; (20~40초마다)</li><li>규칙: 사람 놀리지 않기, 불안 희화화 금지, &quot;나도 그랬었다&quot; OK, 결론은 반드시 정리</li></ul>
+<h3>후킹 전략</h3>
+<ul><li>썸네일/제목은 자극적으로, 본론은 편하게 — 역할 분담</li><li>예: 제목 &quot;집 사면 안 되는 사람 특징 3가지&quot; (자극) → 내용 &quot;같이 판단해보자&quot; (편한 톤)</li></ul>
+<h3>영상 시그니처</h3>
+<ul><li>인트로: 짧은 시그니처 한마디 (&quot;같이 보시죠&quot; 등)</li><li>마무리: &quot;오늘의 정리&quot; 슬라이드 고정 — 핵심 3줄 + 마지막 한 줄</li></ul>
+<h3>날카로움 표현</h3>
+<ul><li>&quot;냉정하게 말씀드리면&quot;</li><li>&quot;솔직히 말씀드리면&quot;</li><li>&quot;듣기 좋은 얘기만 하면 저도 편하지만&quot;</li><li>&quot;장담하는데&quot;</li></ul>
+<h3>따뜻함 표현</h3>
+<ul><li>&quot;저도 처음 집살 때 그 떨리는 마음 잘 알고 있습니다&quot;</li><li>&quot;부디 용기를 내셨으면 좋겠습니다&quot;</li><li>&quot;여러분은 이런 실수 하지 마세요&quot;</li><li>&quot;저도 제 자리에서 최대한 돕겠습니다&quot;</li></ul>
+<h3>금기어·금지 표현</h3>
+<ul><li>서면체 반론 처리: &quot;이런 의문이 드실 수 있습니다&quot;, &quot;반론을 제기하실 수 있습니다&quot;</li><li>교과서적 어미: &quot;~입니다만&quot;, &quot;~라 할 수 있겠습니다&quot;, &quot;~에 해당합니다&quot;</li><li>인사말</li><li>볼드체 사용 (원고 내)</li><li>&#x27;#&#x27; 기호 (원고 내)</li><li>&#x27;그리고&#x27; 3회 이상 연속</li></ul>
+<h3>내부 가치관 (밖에 안 씀)</h3>
+<ul><li>&quot;보통사람을 위한 재테크&quot;</li></ul>
+<h3>고객이 쓰는 표현 (카피 소스)</h3>
+<ul><li>&quot;현명한 선택을 하고 싶습니다&quot;</li><li>&quot;발등에 불 떨어진 느낌&quot;</li><li>&quot;영원히 무주택자가 될 것 같은 불안감&quot;</li><li>&quot;패닉바잉으로 잘못된 선택&quot;</li></ul>
+<h3>CTA 문구</h3>
+<ul><li>&quot;지금 여기 사도 될까요? ↓ 돈버는 내집마련 1:1 코칭 ↓&quot;</li><li>&quot;내집마련이 처음이라면?&quot;</li></ul>
+<h3>화법 상세</h3>
+<blockquote>화법 패턴, 브릿지, 단락 태그 등 상세는 <code>_yt-references/writing-guide.md</code> 참조</blockquote>
                     </div>
                 </details>
             </div>
+            
 
-            <!-- 04 상품 -->
             <div class="content-section">
                 <details>
                     <summary>
@@ -528,69 +388,30 @@
                     </summary>
                     <div class="content-body">
                         <h3>4단계 구조</h3>
-                        <table>
-                            <thead><tr><th>단계</th><th>상품</th><th>가격</th><th>목적</th></tr></thead>
-                            <tbody>
-                                <tr><td><strong>무료</strong></td><td>전자책, 템플릿(자산관리시트 등)</td><td>0원</td><td>인지 + 신뢰 구축</td></tr>
-                                <tr><td><strong>할인</strong></td><td>독서모임, 임장 특강</td><td>저가</td><td>접근 장벽 낮춤</td></tr>
-                                <tr><td><strong>정가</strong></td><td>내집마련 상담, 이메일 상담, 강의안</td><td>~50만원</td><td>전환 (핵심 수익)</td></tr>
-                                <tr><td><strong>프리미엄</strong></td><td>올인원 패키지, 마스터 클래스</td><td>50~200만원</td><td>고가 수익</td></tr>
-                            </tbody>
-                        </table>
-
-                        <h3>수익 모델</h3>
-                        <ul>
-                            <li>부동산·ETF 코칭·상담 (~80%) — 1:1 상담, 상담료 40만원</li>
-                            <li>유튜브 광고 (~20%) — AdSense</li>
-                            <li>전자책 — 준비중 (시그니처 전략 기획 중)</li>
-                            <li>강의·클래스 — 보류 (전자책 안착 후)</li>
-                        </ul>
-
-                        <h3>현재 주력</h3>
-                        <ul>
-                            <li>1:1 상담 40만원 (매출 비중 ~80%)</li>
-                            <li>상담 건수 117건+ (2026-03 기준)</li>
-                        </ul>
-
-                        <h3>전환 퍼널</h3>
-                        <div class="funnel-text">
-                            유입(YouTube) → 구독(신뢰) → 팔로우(카카오채널) → 키콘텐츠(납득) → 랜딩(신청) → 전환(계약)
-                        </div>
-                        <div class="funnel-text" style="margin-top:8px;">
-                            <strong>상품 관점:</strong><br>
-                            유튜브 / 전자책 (인지 + 신뢰)<br>
-                            &nbsp;&nbsp;↓<br>
-                            이메일 상담 or 그룹 강의 (중간 상품)<br>
-                            &nbsp;&nbsp;↓<br>
-                            1:1 프리미엄 상담 (고가 상품)
-                        </div>
-
-                        <h3>세그먼트별 주력 상품</h3>
-                        <table>
-                            <thead><tr><th>세그먼트</th><th>진입</th><th>전환</th></tr></thead>
-                            <tbody>
-                                <tr><td><strong>A. 신혼</strong></td><td>유튜브 교육 → 전자책</td><td>1:1 상담</td></tr>
-                                <tr><td><strong>B. 입문자</strong></td><td>유튜브 → 이메일 상담</td><td>1:1 상담 or 그룹 강의</td></tr>
-                                <tr><td><strong>C. 갈아타기</strong></td><td>유튜브(갈아타기편)</td><td>1:1 상담 (고가)</td></tr>
-                                <tr><td><strong>D. 특수</strong></td><td>직접 유입</td><td>1:1 상담만</td></tr>
-                            </tbody>
-                        </table>
-
-                        <h3>단기 목표</h3>
-                        <ul>
-                            <li><strong>1순위:</strong> 전자책 완성·출시 — 시그니처 전략(ETF→집→ETF), 유튜브 CTA 연결</li>
-                            <li><strong>2순위:</strong> 이메일 상담 설계 — 40만원 → 15만원(비동기)으로 접근 장벽 낮춤</li>
-                            <li><strong>3순위:</strong> 유튜브 재편 — ETF→집→ETF 시리즈, 조회수보다 전환 우선</li>
-                            <li><em>보류: 강의 제작(전자책 안착 후) / 인스타·블로그(유튜브 먼저) / 새 상품(있는 것 먼저)</em></li>
-                        </ul>
-
-                        <h3>커뮤니티·소통</h3>
-                        <ul><li>현재 보류 — 상품 라인업 안착이 우선</li></ul>
+<table><thead><tr><th>단계</th><th>상품</th><th>가격</th><th>목적</th></tr></thead><tbody><tr><td>무료</td><td>전자책, 템플릿(자산관리시트 등)</td><td>0원</td><td>인지 + 신뢰 구축</td></tr><tr><td>할인</td><td>독서모임, 임장 특강</td><td>저가</td><td>접근 장벽 낮춤</td></tr><tr><td>정가</td><td>내집마련 상담, 이메일 상담, 강의안</td><td>~50만원</td><td>전환 (핵심 수익)</td></tr><tr><td>프리미엄</td><td>올인원 패키지, 마스터 클래스</td><td>50~200만원</td><td>고가 수익</td></tr></tbody></table>
+<h3>수익 모델</h3>
+<ul><li>부동산·ETF 코칭·상담 (~80%) — 1:1 상담, 상담료 44만원</li><li>유튜브 광고 (~20%) — AdSense</li><li>전자책 — 준비중 (시그니처 전략 기획 중)</li><li>강의·클래스 — 보류 (전자책 안착 후)</li></ul>
+<h3>현재 주력</h3>
+<ul><li>1:1 상담 44만원 (매출 비중 ~80%)</li><li>상담 건수 117건+ (2026-03 기준)</li></ul>
+<h3>전환 퍼널</h3>
+<p>유입(YouTube) → 구독(신뢰) → 팔로우(카카오채널) → 키콘텐츠(납득) → 랜딩(신청) → 전환(계약)</p>
+<pre class="code-block"><code>상품 관점:
+유튜브 / 전자책 (인지 + 신뢰)
+    ↓
+이메일 상담 or 그룹 강의 (중간 상품)
+    ↓
+1:1 프리미엄 상담 (고가 상품)</code></pre>
+<h3>세그먼트별 주력 상품</h3>
+<table><thead><tr><th>세그먼트</th><th>진입</th><th>전환</th></tr></thead><tbody><tr><td>A. 신혼</td><td>유튜브 교육 → 전자책</td><td>1:1 상담</td></tr><tr><td>B. 입문자</td><td>유튜브 → 이메일 상담</td><td>1:1 상담 or 그룹 강의</td></tr><tr><td>C. 갈아타기</td><td>유튜브(갈아타기편)</td><td>1:1 상담 (고가)</td></tr><tr><td>D. 특수</td><td>직접 유입</td><td>1:1 상담만</td></tr></tbody></table>
+<h3>단기 목표</h3>
+<ul><li><strong>1순위</strong>: 전자책 완성·출시 — 시그니처 전략(ETF→집→ETF), 유튜브 CTA 연결</li><li><strong>2순위</strong>: 이메일 상담 설계 — 40만원 → 15만원(비동기)으로 접근 장벽 낮춤</li><li><strong>3순위</strong>: 유튜브 재편 — ETF→집→ETF 시리즈, 조회수보다 전환 우선</li><li><em>보류: 강의 제작(전자책 안착 후) / 인스타·블로그(유튜브 먼저) / 새 상품(있는 것 먼저)</em></li></ul>
+<h3>커뮤니티·소통</h3>
+<ul><li>현재 보류 — 상품 라인업 안착이 우선</li></ul>
                     </div>
                 </details>
             </div>
+            
 
-            <!-- 05 운영 -->
             <div class="content-section">
                 <details>
                     <summary>
@@ -600,55 +421,19 @@
                     </summary>
                     <div class="content-body">
                         <h3>법인 정보</h3>
-                        <ul>
-                            <li><strong>법인명:</strong> 주식회사 우리동네 사람들 (WOORIDONGNE CORP.)</li>
-                            <li><strong>사업자등록번호:</strong> 386-86-03832</li>
-                            <li><strong>법인등록번호:</strong> 110111-0951970</li>
-                            <li><strong>법인설립일:</strong> 2026-02-26</li>
-                            <li><strong>소재지:</strong> 서울특별시 영등포구 당산로 92, 301-이3호(당산동1가, 호서빌딩)</li>
-                            <li><strong>대표자:</strong> 사내이사 홍윤지</li>
-                            <li><strong>법인 계좌:</strong> 하나은행 125 910032 26304</li>
-                        </ul>
-
-                        <h3>플랫폼 목록</h3>
-                        <ul>
-                            <li>YouTube: @우리동네재테크</li>
-                            <li>홈페이지: ourdongne.com (아임웹)</li>
-                            <li>카카오톡 채널</li>
-                            <li>Tally 폼 (랜딩페이지)</li>
-                            <li>네이버 스마트스토어: ourdongne7</li>
-                        </ul>
-
-                        <h3>사업자등록증 업종</h3>
-                        <table>
-                            <thead><tr><th>업태</th><th>종목</th></tr></thead>
-                            <tbody>
-                                <tr><td>정보통신업</td><td>미디어콘텐츠창작업</td></tr>
-                                <tr><td>도매 및 소매업</td><td>전자상거래 소매업</td></tr>
-                                <tr><td>정보통신업</td><td>응용 소프트웨어 개발 및 공급업</td></tr>
-                                <tr><td>정보통신업</td><td>기타 정보서비스업</td></tr>
-                                <tr><td>전문, 과학 및 기술서비스업</td><td>경영 컨설팅업</td></tr>
-                            </tbody>
-                        </table>
-
-                        <h3>환불규정</h3>
-                        <ul>
-                            <li>결제 당일: 전액 환불</li>
-                            <li>코칭일 7일 전까지: 위약금(결제 금액의 50%) 공제 후 환불</li>
-                            <li>코칭일 6일 전~당일: 환불 없음</li>
-                            <li>코칭일 불참: 환불 없음</li>
-                            <li>위약금 사유: 상담장소 대관료, ZOOM 이용료, 검토·준비 비용, 참여인원 미확보</li>
-                        </ul>
-
-                        <h3>법인카드</h3>
-                        <ul>
-                            <li>하나은행 법인 체크카드 4장</li>
-                            <li>온라인 결제 등록 완료 (2026-03-26)</li>
-                            <li>하나Pay 앱 간편결제 사용자 등록 완료 (2026-03-26)</li>
-                        </ul>
+<ul><li><strong>법인명</strong>: 주식회사 우리동네 사람들 (WOORIDONGNE CORP.)</li><li><strong>사업자등록번호</strong>: 386-86-03832</li><li><strong>법인등록번호</strong>: 110111-0951970</li><li><strong>법인설립일</strong>: 2026-02-26</li><li><strong>소재지</strong>: 서울특별시 영등포구 당산로 92, 301-이3호(당산동1가, 호서빌딩)</li><li><strong>대표자</strong>: 사내이사 홍윤지</li><li><strong>법인 계좌</strong>: 하나은행 125 910032 26304</li></ul>
+<h3>플랫폼 목록</h3>
+<ul><li>YouTube: @우리동네재테크</li><li>홈페이지: ourdongne.com (아임웹)</li><li>카카오톡 채널</li><li>Tally 폼 (랜딩페이지)</li><li>네이버 스마트스토어: ourdongne7</li></ul>
+<h3>사업자등록증 업종</h3>
+<table><thead><tr><th>업태</th><th>종목</th></tr></thead><tbody><tr><td>정보통신업</td><td>미디어콘텐츠창작업</td></tr><tr><td>도매 및 소매업</td><td>전자상거래 소매업</td></tr><tr><td>정보통신업</td><td>응용 소프트웨어 개발 및 공급업</td></tr><tr><td>정보통신업</td><td>기타 정보서비스업</td></tr><tr><td>전문, 과학 및 기술서비스업</td><td>경영 컨설팅업</td></tr></tbody></table>
+<h3>환불규정 (홈페이지 FAQ 게시 중)</h3>
+<ul><li>결제 당일: 전액 환불</li><li>일정 확정 후 코칭일로부터 7일전까지는 한정기간 및 코칭신청이 가능한 특성상,아래와 같은 항목들을 위약금으로 차감합니다. (결제 금액의 50%)</li><li>코칭일 7일 전까지 : 위약금(결제 금액의 50%) 공제 후 환불</li><li>코칭일 6일 전~당일 : 환불금액 없음</li><li>코칭일 불참 : 환불금액 없음</li><li>위약금 사유: 프로그램 운영비용, 코칭 사항에 대한 검토·준비 비용, 코칭 참여인원 미확보</li></ul>
+<h3>법인카드</h3>
+<ul><li>하나은행 법인 체크카드 4장</li><li>온라인 결제 등록 완료 (2026-03-26)</li><li>하나Pay 앱 간편결제 사용자 등록 완료 (2026-03-26)</li></ul>
                     </div>
                 </details>
             </div>
+            
         </div>
     </div>
 
