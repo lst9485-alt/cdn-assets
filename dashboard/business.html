@@ -85,6 +85,7 @@
         /* ── 차트 ── */
         .chart-box { background: white; border-radius: 12px; padding: 20px; border: 1px solid #E2E8F0; }
         .chart-box canvas { max-height: 280px; }
+        .chart-meta { font-size: 12px; color: #64748B; margin-bottom: 12px; }
         .chart-toggle { display: flex; gap: 6px; margin-bottom: 12px; }
         .chart-toggle-inline { margin-bottom: 0; }
         .chart-toggle button { font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; border: 1px solid #E2E8F0; background: white; color: #64748B; cursor: pointer; transition: all 0.15s; }
@@ -202,11 +203,13 @@
                             <button data-mode="rates">전환율</button>
                         </div>
                         <select class="week-select" id="chart-range">
+                            <option value="8" selected>최근 8주</option>
                             <option value="12">최근 12주</option>
                             <option value="26">최근 26주</option>
-                            <option value="0" selected>전체</option>
+                            <option value="0">전체</option>
                         </select>
                     </div>
+                    <div class="chart-meta" id="chart-summary"></div>
                     <canvas id="chart-weekly"></canvas>
                 </div>
             </div>
@@ -297,8 +300,9 @@
     Promise.all([
         fetch('../data/funnel.json').then(r => r.ok ? r.json() : null),
         fetch('../data/sales.json').then(r => r.ok ? r.json() : null),
-    ]).then(([funnel, sales]) => {
-        if (funnel) renderFunnelTab(funnel);
+        fetch('../data/business-cumulative.json').then(r => r.ok ? r.json() : null),
+    ]).then(([funnel, sales, cumulative]) => {
+        if (funnel) renderFunnelTab(funnel, cumulative);
         if (sales) window._salesData = sales;
         if (funnel) {
             const dt = new Date(funnel.updated);
@@ -522,6 +526,50 @@
         });
     }
 
+    function summarizeRange(history, rangeVal) {
+        const items = rangeVal > 0 ? history.slice(-rangeVal) : history;
+        if (!items.length) return null;
+        return {
+            label: rangeVal > 0 ? '최근 ' + rangeVal + '주' : '전체',
+            weeks: items.length,
+            week_start: items[0].week_start || '',
+            week_end: items[items.length - 1].week_end || '',
+            totals: {
+                revenue: items.reduce((sum, week) => sum + (week.revenue || 0), 0),
+                paid_customers: items.reduce((sum, week) => sum + (week.paid_customers || 0), 0),
+                landing_visits: items.reduce((sum, week) => sum + (week.landing_visits || 0), 0),
+                total_views: items.reduce((sum, week) => sum + (week.key_views || 0) + (week.pulling_views || 0), 0),
+            },
+        };
+    }
+
+    function resolveRangeSummary(cumulative, history, rangeVal) {
+        if (cumulative && cumulative.windows) {
+            const key = rangeVal > 0 ? String(rangeVal) : 'all';
+            if (cumulative.windows[key]) return cumulative.windows[key];
+        }
+        return summarizeRange(history, rangeVal);
+    }
+
+    function renderChartSummary(summary, totalWeeks) {
+        const el = document.getElementById('chart-summary');
+        if (!summary || !summary.totals) {
+            el.textContent = '';
+            return;
+        }
+        const rangeLabel = summary.label || '';
+        const totalLabel = totalWeeks
+            ? (rangeLabel === '전체' ? '누적 ' + totalWeeks + '주' : '누적 ' + totalWeeks + '주 중 ' + rangeLabel)
+            : rangeLabel;
+        const period = summary.week_start + (summary.week_end ? ' ~ ' + summary.week_end : '');
+        el.textContent =
+            totalLabel + ' · ' + period +
+            ' · 총조회 ' + fmtNum(summary.totals.total_views || 0) +
+            ' · 랜딩 ' + fmtNum(summary.totals.landing_visits || 0) +
+            '건 · 유료 ' + fmtNum(summary.totals.paid_customers || 0) +
+            '명 · 매출 ' + fmtWon(summary.totals.revenue || 0);
+    }
+
     // ── 콘텐츠 성과 (키/풀링 분리) ──
     function renderContentTable(cw, avg) {
         function makeTable(rows) {
@@ -568,7 +616,7 @@
         document.getElementById('content-table-wrap').innerHTML = html;
     }
 
-    function renderFunnelTab(data) {
+    function renderFunnelTab(data, cumulative) {
         const history = data.weekly_history || [];
         const targets = data.targets;
 
@@ -627,6 +675,7 @@
             const rangeVal = parseInt(document.getElementById('chart-range').value);
             const sliced = rangeVal > 0 ? history.slice(-rangeVal) : history;
             renderWeeklyChart(sliced, currentMode);
+            renderChartSummary(resolveRangeSummary(cumulative, history, rangeVal), history.length);
         }
 
         if (history.length > 1) {
