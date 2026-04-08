@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-08T06:00:00.576996+09:00",
+  "updated": "2026-04-09T06:00:01.604984+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -11,17 +11,6 @@
           "items": [
             {
               "text": "이미지 생성 대폭 늘리기",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 3,
-          "title": "유튜브 도구",
-          "ref": null,
-          "items": [
-            {
-              "text": "콘텐츠관리시트 퍼널 대시보드 — generate-dashboard.py 스크립트화 + 8~12주 추이 차트 + 누적 JSON + content-sheet E-5 연동 ※ nightwatch AARRR 주간 리포트로 일부 통합 예정 (nightwatch/.context.md 참조)",
               "done": false
             }
           ]

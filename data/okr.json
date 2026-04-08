@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-08T06:00:05.930805+09:00",
+  "updated": "2026-04-09T06:00:10.115084+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 226,
-    "done": 195,
-    "overdue": 5,
+    "total": 236,
+    "done": 204,
+    "overdue": 9,
     "pending": [
       {
         "title": "전자책 작성",
@@ -51,49 +51,24 @@
         "overdue": true
       },
       {
-        "title": "신입교육",
-        "date": "2026-04-08T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정",
-        "date": "2026-04-08T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-04-08T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "세무사연락 업종추가",
-        "date": "2026-04-08T12:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-04-08T13:00:00.000+09:00",
-        "overdue": false
+        "title": "썸네일&제목",
+        "date": "2026-04-08T14:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "자료수집&도입부",
-        "date": "2026-04-08T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "썸네일&제목",
-        "date": "2026-04-08T15:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-04-08T15:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "카카오 비즈니스채널 확인",
-        "date": "2026-04-08T16:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-04-08T16:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "홈페이지",
         "date": "2026-04-08T22:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원고완성",
@@ -116,17 +91,22 @@
         "overdue": false
       },
       {
+        "title": "알리고확인",
+        "date": "2026-04-09T11:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "슬라이드템플릿 부족한타입 조사후 추가. 부족한걸추가해야함",
         "date": "2026-04-09T13:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "ppt",
+        "title": "찬규교육",
         "date": "2026-04-09T15:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "ppt완료",
+        "title": "ppt",
         "date": "2026-04-09T18:00:00.000+09:00",
         "overdue": false
       },
@@ -138,6 +118,21 @@
       {
         "title": "PPT완료",
         "date": "2026-04-10",
+        "overdue": false
+      },
+      {
+        "title": "찬규디비 분리해서 보고 + 기록",
+        "date": "2026-04-10T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ppt완료",
+        "date": "2026-04-10T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-04-10T15:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -171,8 +166,18 @@
         "overdue": false
       },
       {
+        "title": "자료수집&도입부",
+        "date": "2026-04-15",
+        "overdue": false
+      },
+      {
         "title": "기업은행 방문 (에스크로) → 에스크로 이용확인증 → 통신판매업 신고",
         "date": "2026-04-15T11:45:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-04-15T12:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -183,56 +188,50 @@
     ],
     "schedule": [
       {
-        "title": "신입교육",
-        "time": "10:00",
+        "title": "원고완성",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "주간계획 수정",
+        "time": "08:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "주제선정",
-        "time": "11:00",
+        "title": "슬라이드 빅테스크",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
+        "title": "원고",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "세무사연락 업종추가",
-        "time": "12:30",
+        "title": "알리고확인",
+        "time": "11:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "상담준비",
-        "time": "13:00",
+        "title": "슬라이드템플릿 부족한타입 조사후 추가. 부족한걸추가해야함",
+        "time": "13:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "자료수집&도입부",
-        "time": "14:00",
+        "title": "찬규교육",
+        "time": "15:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "썸네일&제목",
-        "time": "15:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "카카오 비즈니스채널 확인",
-        "time": "16:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "홈페이지",
-        "time": "22:00",
+        "title": "ppt",
+        "time": "18:00",
         "allDay": false,
         "done": false
       }
@@ -259,34 +258,13 @@
         "done": false
       }
     ],
-    "priorities": [
-      {
-        "label": "원씽",
-        "title": "상담",
-        "done": false
-      },
-      {
-        "label": "P2",
-        "title": "~도입부",
-        "done": false
-      },
-      {
-        "label": "P3",
-        "title": "홈페이지",
-        "done": false
-      }
-    ],
+    "priorities": [],
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 16,
-      "rate": "57%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-04-02",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-04-03",
           "done": 2,
@@ -314,6 +292,11 @@
         },
         {
           "date": "2026-04-08",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-04-09",
           "done": 0,
           "total": 4
         }
