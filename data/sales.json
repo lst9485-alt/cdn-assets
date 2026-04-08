@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-08T06:00:13.510670+09:00",
+  "updated": "2026-04-08T13:04:38.776139+09:00",
   "summary": {
     "current_month": 840000,
     "current_month_label": "2026-04",
@@ -198,8 +198,8 @@
     },
     {
       "week_start": "2026-03-30",
-      "revenue": 0,
-      "customers": 0
+      "revenue": 800000,
+      "customers": 2
     }
   ],
   "by_utm": [
