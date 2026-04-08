@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-08T13:04:38.776139+09:00",
+  "updated": "2026-04-09T00:51:17.021458+09:00",
   "summary": {
     "current_month": 840000,
     "current_month_label": "2026-04",
@@ -71,6 +71,383 @@
     }
   ],
   "weekly": [
+    {
+      "week_start": "2025-10-08",
+      "revenue": 2400000,
+      "customers": 9
+    },
+    {
+      "week_start": "2025-10-15",
+      "revenue": 1500000,
+      "customers": 5
+    },
+    {
+      "week_start": "2025-10-22",
+      "revenue": 900000,
+      "customers": 3
+    },
+    {
+      "week_start": "2025-10-29",
+      "revenue": 1550000,
+      "customers": 5
+    },
+    {
+      "week_start": "2025-11-05",
+      "revenue": 1050000,
+      "customers": 3
+    },
+    {
+      "week_start": "2025-11-12",
+      "revenue": 350000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-11-19",
+      "revenue": 400000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-11-26",
+      "revenue": 2000000,
+      "customers": 5
+    },
+    {
+      "week_start": "2025-12-03",
+      "revenue": 1600000,
+      "customers": 4
+    },
+    {
+      "week_start": "2025-12-10",
+      "revenue": 2800000,
+      "customers": 7
+    },
+    {
+      "week_start": "2025-12-17",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-12-24",
+      "revenue": 800000,
+      "customers": 2
+    },
+    {
+      "week_start": "2025-12-31",
+      "revenue": 1200000,
+      "customers": 3
+    },
+    {
+      "week_start": "2026-01-07",
+      "revenue": 1200000,
+      "customers": 3
+    },
+    {
+      "week_start": "2026-01-14",
+      "revenue": 1600000,
+      "customers": 4
+    },
+    {
+      "week_start": "2026-01-21",
+      "revenue": 1200000,
+      "customers": 3
+    },
+    {
+      "week_start": "2026-01-28",
+      "revenue": 1600000,
+      "customers": 4
+    },
+    {
+      "week_start": "2026-02-04",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-02-11",
+      "revenue": 400000,
+      "customers": 1
+    },
+    {
+      "week_start": "2026-02-18",
+      "revenue": 2000000,
+      "customers": 5
+    },
+    {
+      "week_start": "2026-02-25",
+      "revenue": 800000,
+      "customers": 2
+    },
+    {
+      "week_start": "2026-03-04",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-03-11",
+      "revenue": 400000,
+      "customers": 1
+    },
+    {
+      "week_start": "2026-03-16",
+      "revenue": 800000,
+      "customers": 2
+    },
+    {
+      "week_start": "2026-03-23",
+      "revenue": 800000,
+      "customers": 2
+    },
+    {
+      "week_start": "2026-03-30",
+      "revenue": 800000,
+      "customers": 2
+    }
+  ],
+  "weekly_history": [
+    {
+      "week_start": "2024-10-30",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2024-11-06",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2024-11-13",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2024-11-20",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2024-11-27",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2024-12-04",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2024-12-11",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2024-12-18",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2024-12-25",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-01-01",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-01-08",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-01-15",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-01-22",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-01-29",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-02-05",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-02-12",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-02-19",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-02-26",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-03-05",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-03-12",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-03-19",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-03-26",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-04-02",
+      "revenue": 50000,
+      "customers": 5
+    },
+    {
+      "week_start": "2025-04-09",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-04-16",
+      "revenue": 50000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-04-23",
+      "revenue": 100000,
+      "customers": 2
+    },
+    {
+      "week_start": "2025-04-30",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-05-07",
+      "revenue": 50000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-05-14",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-05-21",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-05-28",
+      "revenue": 50000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-06-04",
+      "revenue": 50000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-06-11",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-06-18",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-06-25",
+      "revenue": 300000,
+      "customers": 3
+    },
+    {
+      "week_start": "2025-07-02",
+      "revenue": 200000,
+      "customers": 2
+    },
+    {
+      "week_start": "2025-07-09",
+      "revenue": 200000,
+      "customers": 2
+    },
+    {
+      "week_start": "2025-07-16",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-07-23",
+      "revenue": 100000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-07-30",
+      "revenue": 100000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-08-06",
+      "revenue": 500000,
+      "customers": 4
+    },
+    {
+      "week_start": "2025-08-13",
+      "revenue": 150000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-08-20",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-08-27",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2025-09-03",
+      "revenue": 150000,
+      "customers": 1
+    },
+    {
+      "week_start": "2025-09-10",
+      "revenue": 300000,
+      "customers": 2
+    },
+    {
+      "week_start": "2025-09-17",
+      "revenue": 750000,
+      "customers": 5
+    },
+    {
+      "week_start": "2025-09-24",
+      "revenue": 600000,
+      "customers": 3
+    },
+    {
+      "week_start": "2025-10-01",
+      "revenue": 400000,
+      "customers": 2
+    },
     {
       "week_start": "2025-10-08",
       "revenue": 2400000,
