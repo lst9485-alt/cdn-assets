@@ -1,37 +1,37 @@
 {
-  "updated": "2026-04-08T06:00:00.756359+09:00",
+  "updated": "2026-04-08T14:01:46.673994+09:00",
   "projects": [
     {
-      "name": "브랜딩 — 왜 하필 여기",
-      "type": "file",
-      "app": null,
+      "name": "컨설팅",
+      "type": "folder",
+      "app": "consulting-crm",
       "modified": "2026-04-08",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "AGENTS",
-      "type": "file",
-      "app": null,
-      "modified": "2026-04-07",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "운영 대시보드",
-      "type": "file",
-      "app": "dashboard",
-      "modified": "2026-04-06",
-      "status": "사업현황 대시보드 v3: `dashboard/business.html` LIVE — 2탭(퍼널/매출). 퍼널탭: 세로 퍼널(매출→풀링, 병목순위+달성률%), 주차선택, 주간추이(조회수합계+전환율동적Y축+기간선택), 콘텐츠성과(키/풀링분리). 매출탭: 월별추이+UTM+목",
-      "next": "(없음)"
+      "status": "탈리폼 열 매핑 수정 + 신규 필드 동기화 완료. 탈리폼에 이메일·입금완료·현금영수증/세금계산서 등 10여개 필드 추가로 열이 밀렸던 문제 해결. TALLY_COLS 교정, DB/Notion에 신규 필드(현금영수증번호·상호명·세금계산서이메일) 추가, 임승택 데이터 복구",
+      "next": "TALLY_LAST_ROW 롤백 (유보 — blind create 중복 위험, 별도 설계 필요)"
     },
     {
       "name": "홈페이지",
       "type": "folder",
       "app": "homepage",
-      "modified": "2026-04-04",
+      "modified": "2026-04-08",
       "status": "v3.5 섹션 재배치 + UI/UX 개선. 서버 백엔드(Apps Script doPost) 배포 완료 (v24). 아임웹 삽입은 v3.4 기준 — v3.5 아직 미반영",
       "next": "플로팅 CTA 추가 — 가격표 섹션 도달 시 \"상담신청하기\" 버튼 플로팅 (PC: 오른쪽 하단, 모바일: 하단 고정 바). 클릭 → 커스텀 폼으로 스크롤. footer-code.html에 IntersectionObserver + position:fixed"
+    },
+    {
+      "name": "운영 대시보드",
+      "type": "file",
+      "app": "dashboard",
+      "modified": "2026-04-08",
+      "status": "사업현황 대시보드 v3: `dashboard/business.html` LIVE — 2탭(퍼널/매출). 퍼널탭: 세로 퍼널(매출→풀링, 병목순위+달성률%), 주차선택, 주간추이(조회수합계+전환율동적Y축+기간선택), 콘텐츠성과(키/풀링분리). 매출탭: 월별추이+UTM+목",
+      "next": null
+    },
+    {
+      "name": "브랜딩 — 왜 하필 여기",
+      "type": "file",
+      "app": "brand-context",
+      "modified": "2026-04-08",
+      "status": "2026-04-08 기준 브랜드 정체성 확정 완료.",
+      "next": "이번 주 영상 원고에 새 정체성과 적 프레이밍 반영"
     },
     {
       "name": "내집마련-시리즈",
@@ -48,14 +48,6 @@
       "modified": "2026-03-28",
       "status": null,
       "next": null
-    },
-    {
-      "name": "컨설팅",
-      "type": "folder",
-      "app": "consulting-crm",
-      "modified": "2026-03-28",
-      "status": "탈리폼 열 매핑 수정 + 신규 필드 동기화 완료. 탈리폼에 이메일·입금완료·현금영수증/세금계산서 등 10여개 필드 추가로 열이 밀렸던 문제 해결. TALLY_COLS 교정, DB/Notion에 신규 필드(현금영수증번호·상호명·세금계산서이메일) 추가, 임승택 데이터 복구",
-      "next": "TALLY_LAST_ROW 롤백 (유보 — blind create 중복 위험, 별도 설계 필요)"
     }
   ]
 }
