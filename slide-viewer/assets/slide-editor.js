@@ -1804,9 +1804,20 @@
   }
 
   function getCleanHTML() {
-    // GitHub 설정 아이콘 임시 제거 (저장 HTML에 포함 방지)
-    const ghSettingsBtn = document.getElementById('gh-settings');
-    if (ghSettingsBtn) ghSettingsBtn.remove();
+    // ── 동적/외부 요소 제거 (저장 HTML 오염 방지) ──
+    const _removedEls = [];
+    // 동적 생성 요소
+    ['gh-settings', 'toast-container', 'gh-token-dialog', 'edit-mode-badge'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { _removedEls.push({ el, parent: el.parentNode, next: el.nextSibling }); el.remove(); }
+    });
+    // 브라우저 확장 프로그램이 주입한 style 태그 제거 (edit-badge-style만 보존)
+    const _removedStyles = [];
+    document.querySelectorAll('head > style').forEach(s => {
+      if (s.id === 'edit-badge-style') return;
+      _removedStyles.push({ el: s, parent: s.parentNode, next: s.nextSibling });
+      s.remove();
+    });
 
     selectedEls.forEach(s => { s.classList.remove('edit-selected'); s.classList.remove('edit-group-selected'); });
     const backedUpChildSelected = [...document.querySelectorAll('.child-selected')];
@@ -1924,11 +1935,9 @@
     backedUpPushExit.forEach(el => el.classList.add('push-exit'));
     backedUpPushEnter.forEach(el => el.classList.add('push-enter'));
     backedUpDrillActive.forEach(el => el.classList.add('drill-active'));
-    // GitHub 설정 아이콘 복원
-    if (isGitHubPages && ghSettingsBtn) {
-      const saveBtn = document.getElementById('tb-save');
-      if (saveBtn) saveBtn.after(ghSettingsBtn);
-    }
+    // 제거했던 동적/외부 요소 복원
+    _removedStyles.forEach(r => r.parent.insertBefore(r.el, r.next));
+    _removedEls.forEach(r => r.parent.insertBefore(r.el, r.next));
     return html;
   }
 
@@ -1986,25 +1995,8 @@
   const GH_TOKEN_KEY = 'gh-save-token';
   const GH_AUTO_SAVE_INTERVAL = 30000;
 
-  // ── 저장 후 즉시 반영 (GitHub Pages CDN 캐시 우회) ──
-  // 저장한 HTML을 localStorage에 보관 → 페이지 로드 시 CDN 캐시 대신 사용
-  if (isGitHubPages) {
-    const _ghCacheKey = 'gh-html-' + (location.pathname.split('/').pop() || 'slides');
-    const _ghCached = localStorage.getItem(_ghCacheKey);
-    if (_ghCached) {
-      try {
-        const data = JSON.parse(_ghCached);
-        localStorage.removeItem(_ghCacheKey); // 루프 방지: 먼저 삭제
-        if (Date.now() - data.ts < 600000) { // 10분 이내
-          document.open();
-          document.write(data.html);
-          document.close();
-        }
-      } catch (e) {
-        localStorage.removeItem(_ghCacheKey);
-      }
-    }
-  }
+  // GitHub Pages CDN 캐시(10분) 때문에 저장 직후 새로고침 시 이전 버전이 보임
+  // document.write() 방식은 슬라이드 중복 위험 → 제거. 사용자에게 대기 안내.
 
   let _ghToken = null;
   let _ghFileSha = null;
@@ -2105,10 +2097,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        // CDN 캐시 우회: 저장한 HTML을 localStorage에 보관
-        const cacheKey = 'gh-html-' + (location.pathname.split('/').pop() || 'slides');
-        try { localStorage.setItem(cacheKey, JSON.stringify({ html: content, ts: Date.now() })); } catch(_) {}
-        showToast('GitHub에 저장 완료!', 3000);
+        showToast('GitHub에 저장 완료! (반영까지 1~2분)', 3000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
         await _ghHandleConflict(encoded, filePath);
@@ -2150,12 +2139,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        const cacheKey2 = 'gh-html-' + (location.pathname.split('/').pop() || 'slides');
-        try {
-          const rawHtml = decodeURIComponent(escape(atob(encoded)));
-          localStorage.setItem(cacheKey2, JSON.stringify({ html: rawHtml, ts: Date.now() }));
-        } catch(_) {}
-        showToast('GitHub에 저장 완료!', 3000);
+        showToast('GitHub에 저장 완료! (반영까지 1~2분)', 3000);
         try { showSaveStatus(); } catch(_) {}
       } else {
         showToast('재시도 실패 (' + res.status + ')', 4000);
