@@ -2044,15 +2044,29 @@
   }
 
   async function ghSaveToFile(force) {
-    if (_ghSaving) return;
+    if (_ghSaving) { if (force) showToast('저장 진행 중...', 2000); return; }
     if (!force && !_ghDirty) return;
     const token = ghGetToken();
-    if (!token) return;
+    if (!token) { showToast('GitHub 토큰이 없습니다. ⚙ 아이콘을 눌러 설정하세요.', 4000); return; }
     _ghSaving = true;
+    showToast('GitHub에 저장 중...', 2000);
     try {
-      const content = getCleanHTML();
+      let content;
+      try {
+        content = getCleanHTML();
+      } catch (htmlErr) {
+        showToast('HTML 직렬화 오류: ' + htmlErr.message, 5000);
+        return;
+      }
       const encoded = btoa(unescape(encodeURIComponent(content)));
       const filename = location.pathname.split('/').pop() || 'slides.html';
+      const filePath = _ghFilePath();
+
+      // SHA가 없으면 먼저 조회
+      if (!_ghFileSha) {
+        await ghFetchFileSha();
+      }
+
       const body = {
         message: `update: ${filename} via slide editor`,
         content: encoded,
@@ -2060,7 +2074,7 @@
       };
       if (_ghFileSha) body.sha = _ghFileSha;
 
-      const res = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${_ghFilePath()}`, {
+      const res = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${filePath}`, {
         method: 'PUT',
         headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -2077,13 +2091,20 @@
         ghHandleAuthError();
       } else if (res.status === 403) {
         showToast('GitHub API 한도 초과 — 잠시 후 다시 시도됩니다', 4000);
+      } else if (res.status === 422) {
+        // SHA 불일치 — 재조회 후 재시도
+        showToast('SHA 불일치 — 재시도 중...', 2000);
+        await ghFetchFileSha();
+        _ghSaving = false;
+        _ghDirty = true;
+        await ghSaveToFile(true);
+        return;
       } else {
-        showToast('저장 실패 (' + res.status + ')', 3000);
+        const errBody = await res.text().catch(() => '');
+        showToast('저장 실패 (' + res.status + '): ' + errBody.slice(0, 100), 5000);
       }
     } catch (e) {
-      showToast('네트워크 오류 — 3초 후 재시도', 3000);
-      setTimeout(() => { _ghSaving = false; ghSaveToFile(); }, 3000);
-      return;
+      showToast('저장 오류: ' + e.message, 5000);
     } finally {
       _ghSaving = false;
     }
