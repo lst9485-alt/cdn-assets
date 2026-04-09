@@ -1882,10 +1882,43 @@
       s.dataset.steps = String(maxStep + 1);
     });
 
+    // ── 확장 프로그램/동적 요소 제거 (직렬화 전) ──
+    const _removedPollution = [];
+    // <head> 내 원본이 아닌 <style> 제거 (원본은 #edit-badge-style 1개뿐)
+    document.head.querySelectorAll('style:not(#edit-badge-style)').forEach(el => {
+      _removedPollution.push({ el, parent: el.parentNode, next: el.nextSibling });
+      el.remove();
+    });
+    // 동적 생성 요소 + 확장 프로그램 컨테이너 제거
+    const _bodyWhitelist = new Set([
+      'layer-panel','guide-toolbar','dim-outer','stage','overview','help',
+      'align-menu','group-toolbar','slideNum','edit-badge','top-toolbar',
+      'palette-bg','palette-fc','coord-panel','font-panel',
+      'gs-crosshair-h','gs-crosshair-v','filmstrip'
+    ]);
+    Array.from(document.body.children).forEach(el => {
+      if (el.tagName === 'SCRIPT') return; // <script> 태그 유지
+      if (el.id && _bodyWhitelist.has(el.id)) return; // 원본 요소 유지
+      _removedPollution.push({ el, parent: el.parentNode, next: el.nextSibling });
+      el.remove();
+    });
+
     const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
 
+    // 제거한 오염 요소를 원래 위치에 복원
+    _removedPollution.reverse().forEach(r => {
+      try {
+        if (r.next && r.next.parentNode === r.parent) r.parent.insertBefore(r.el, r.next);
+        else r.parent.appendChild(r.el);
+      } catch(_) { try { r.parent.appendChild(r.el); } catch(_2) {} }
+    });
     // 제거한 레이어 복원
-    removedLayers.forEach(r => r.parent.insertBefore(r.layer, r.next));
+    removedLayers.forEach(r => {
+      try {
+        if (r.next && r.next.parentNode === r.parent) r.parent.insertBefore(r.layer, r.next);
+        else r.parent.appendChild(r.layer);
+      } catch(_) { r.parent.appendChild(r.layer); }
+    });
     origSteps.forEach(o => o.el.dataset.steps = o.steps);
 
     fsChildren.forEach(c => fsInner.appendChild(c));
@@ -2079,7 +2112,9 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        showToast('GitHub에 저장 완료! (반영까지 1~2분)', 3000);
+        // CDN 캐시 우회: 저장한 깨끗한 HTML을 sessionStorage에 캐시
+        try { sessionStorage.setItem('gh-cache-' + filePath, JSON.stringify({ html: content, ts: Date.now() })); } catch(_) {}
+        showToast('GitHub에 저장 완료!', 3000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
         await _ghHandleConflict(encoded, filePath);
@@ -2121,7 +2156,8 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        showToast('GitHub에 저장 완료! (반영까지 1~2분)', 3000);
+        try { sessionStorage.setItem('gh-cache-' + filePath, JSON.stringify({ html: decodeURIComponent(escape(atob(encoded))), ts: Date.now() })); } catch(_) {}
+        showToast('GitHub에 저장 완료!', 3000);
         try { showSaveStatus(); } catch(_) {}
       } else {
         showToast('재시도 실패 (' + res.status + ')', 4000);
@@ -2207,6 +2243,34 @@
     const dialog = document.getElementById('gh-token-dialog');
     if (dialog) dialog.remove();
     document.dispatchEvent(new Event(success ? 'gh-token-set' : 'gh-token-cancel'));
+  }
+
+  // ── GitHub Pages: CDN 캐시 우회 (저장 직후 새로고침 시 최신 버전 표시) ──
+  if (isGitHubPages) {
+    (function _ghApplyCachedVersion() {
+      // 무한루프 방지: 캐시에서 로드된 페이지면 스킵
+      if (sessionStorage.getItem('gh-cache-loaded')) {
+        sessionStorage.removeItem('gh-cache-loaded');
+        return;
+      }
+      const cacheKey = 'gh-cache-' + _ghFilePath();
+      const cached = sessionStorage.getItem(cacheKey);
+      if (!cached) return;
+      try {
+        const data = JSON.parse(cached);
+        if (Date.now() - data.ts > 600000) { // 10분 초과 → CDN도 갱신됨
+          sessionStorage.removeItem(cacheKey);
+          return;
+        }
+        sessionStorage.removeItem(cacheKey);
+        sessionStorage.setItem('gh-cache-loaded', '1');
+        document.open();
+        document.write(data.html);
+        document.close();
+      } catch(_) {
+        sessionStorage.removeItem(cacheKey);
+      }
+    })();
   }
 
   // ── GitHub Pages에서 설정 아이콘 추가 ──
