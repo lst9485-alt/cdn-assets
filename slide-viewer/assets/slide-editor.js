@@ -2085,20 +2085,12 @@
         _ghFileSha = data.content.sha;
         _ghDirty = false;
         showSaveStatus();
-      } else if (res.status === 409) {
-        await _ghHandleConflict();
+      } else if (res.status === 409 || res.status === 422) {
+        await _ghHandleConflict(encoded, filePath);
       } else if (res.status === 401) {
         ghHandleAuthError();
       } else if (res.status === 403) {
         showToast('GitHub API 한도 초과 — 잠시 후 다시 시도됩니다', 4000);
-      } else if (res.status === 422) {
-        // SHA 불일치 — 재조회 후 재시도
-        showToast('SHA 불일치 — 재시도 중...', 2000);
-        await ghFetchFileSha();
-        _ghSaving = false;
-        _ghDirty = true;
-        await ghSaveToFile(true);
-        return;
       } else {
         const errBody = await res.text().catch(() => '');
         showToast('저장 실패 (' + res.status + '): ' + errBody.slice(0, 100), 5000);
@@ -2110,14 +2102,36 @@
     }
   }
 
-  async function _ghHandleConflict() {
+  async function _ghHandleConflict(encoded, filePath) {
     // SHA 불일치 — 외부에서 수정됨
     const choice = confirm('⚠️ 파일이 외부에서 변경되었습니다.\n\n확인 = 내 편집 유지 (덮어쓰기)\n취소 = 외부 변경 로드 (새로고침)');
     if (!choice) { location.reload(); return; }
-    // 최신 SHA 가져와서 재시도
+    // 최신 SHA로 직접 재시도 (ghSaveToFile 재호출 시 _ghSaving 잠금 문제 회피)
     await ghFetchFileSha();
-    _ghDirty = true; // 다시 저장 시도하도록
-    await ghSaveToFile();
+    const token = ghGetToken();
+    const body = {
+      message: `update: ${filePath.split('/').pop()} via slide editor`,
+      content: encoded,
+      branch: 'main'
+    };
+    if (_ghFileSha) body.sha = _ghFileSha;
+    try {
+      const res = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${filePath}`, {
+        method: 'PUT',
+        headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      if (res.ok) {
+        const data = await res.json();
+        _ghFileSha = data.content.sha;
+        _ghDirty = false;
+        showSaveStatus();
+      } else {
+        showToast('재시도 실패 (' + res.status + ')', 4000);
+      }
+    } catch (e) {
+      showToast('재시도 오류: ' + e.message, 4000);
+    }
   }
 
   function ghHandleAuthError() {
