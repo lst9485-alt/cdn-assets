@@ -1,8 +1,10 @@
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
   :root {
     /* ── 슬라이드: 주황(메인) + 파랑(서브) + 검정 + 회색 ── */
-    --color-accent: #ff9434;
-    --color-accent-rgb: 255, 148, 52;
-    --color-accent-bg: rgba(255, 148, 52, 0.08);
+    --color-accent: #FF6B00;
+    --color-accent-rgb: 255, 107, 0;
+    --color-accent-bg: rgba(255, 107, 0, 0.08);
     --color-sub: #4A90D9;
     --color-sub-rgb: 74, 144, 217;
     --color-sub-bg: rgba(74, 144, 217, 0.08);
@@ -10,7 +12,7 @@
     --color-text-sub: #777;
     --color-text-muted: #999;
     --color-text-faint: #bbb;
-    --slide-bg: #F2F0ED;
+    --slide-bg: #F5F0E8;
 
     /* ── 에디터 UI (변경 없음) ── */
     --editor-accent: #FFE500;
@@ -22,7 +24,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     width: 100vw;
     height: 100vh;
     overflow: hidden;

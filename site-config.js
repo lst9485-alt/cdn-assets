@@ -234,7 +234,7 @@
           {
             id: 'slide-viewer',
             title: '슬라이드 템플릿',
-            description: '기본 30종 + 베리언츠 132장',
+            description: '기본 36종 + 베리언츠 95장',
             href: 'slide-viewer/',
             badgeText: 'LIVE',
             badgeTone: 'live',

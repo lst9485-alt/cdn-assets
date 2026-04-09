@@ -1866,7 +1866,7 @@
         badge = document.createElement('div');
         badge.id = 'edit-mode-badge';
         badge.textContent = '편집중 — 자동저장 10초';
-        badge.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:99999;background:#ff9434;color:#fff;padding:6px 18px;border-radius:8px;font-size:14px;font-weight:900;pointer-events:none;animation:editBadgeBlink 1.5s infinite;';
+        badge.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:99999;background:#FF6B00;color:#fff;padding:6px 18px;border-radius:8px;font-size:14px;font-weight:900;pointer-events:none;animation:editBadgeBlink 1.5s infinite;';
         document.body.appendChild(badge);
         if (!document.getElementById('edit-badge-style')) {
           const style = document.createElement('style');
@@ -2958,7 +2958,7 @@
     item.className = 'layer-item' + (selectedEls.includes(el) ? ' lyr-selected' : '');
     item._el = el;
     item._step = step;
-    const groupBadge = el.dataset.group ? `<span class="layer-badge" style="color:#ff9434;">[${escHTML(el.dataset.group.toUpperCase())}]</span>` : '';
+    const groupBadge = el.dataset.group ? `<span class="layer-badge" style="color:#FF6B00;">[${escHTML(el.dataset.group.toUpperCase())}]</span>` : '';
     item.innerHTML = `<span class="layer-handle">⠿</span><span class="layer-label">${escHTML(getElLabel(el))}</span>${groupBadge}<span class="layer-badge">${escHTML(getElType(el))}</span>`;
     item.addEventListener('click', (ev) => {
       if (layerDragItem) return;
@@ -3484,7 +3484,7 @@
     const BG_CLASSES = ['bg-blue','bg-red','bg-green','bg-white','bg-black','bg-gray'];
     const FC_CLASSES = ['fc-white','fc-red','fc-blue','fc-yellow','fc-black'];
     const BG_COLORS = {'':'transparent','bg-blue':'rgba(255,148,52,0.12)','bg-red':'rgba(0,0,0,0.06)','bg-green':'rgba(255,148,52,0.12)','bg-white':'#fff','bg-black':'#222','bg-accent':'rgba(255,148,52,0.15)','bg-gray':'#999'};
-    const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#ff9434','fc-blue':'#ff9434','fc-yellow':'#ff9434'};
+    const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#FF6B00','fc-blue':'#FF6B00','fc-yellow':'#FF6B00'};
 
     function closePalettes() {
       paletteBg.classList.remove('open');
@@ -3728,7 +3728,7 @@
 html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !important; display: block !important; flex-direction: unset !important; justify-content: unset !important; align-items: unset !important; }
 #presenter-root { display: flex; flex-direction: column; height: 100vh; font-family: 'Noto Sans KR', sans-serif; color: #fff; }
 #pres-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #111; border-bottom: 1px solid #333; font-size: 15px; font-weight: 700; flex-shrink: 0; }
-#pres-slide-info { color: #ff9434; }
+#pres-slide-info { color: #FF6B00; }
 #pres-timer { color: #aaa; font-family: monospace; font-size: 18px; }
 #pres-main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
 #pres-current-wrap { flex: 6; padding: 12px; display: flex; flex-direction: column; gap: 8px; }

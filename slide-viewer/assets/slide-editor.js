@@ -438,10 +438,10 @@
       ${labels.map((lb, i) => i < vals.length ? `<text class="chart-label" x="${pts[i].x}" y="${pad.top + chartH + 30}" text-anchor="middle">${lb}</text>` : '').join('')}
       <polygon class="chart-area" points="${areaPts}"/>
       <polyline class="chart-line lc-line" points="${polyPts}"/>
-      <circle cx="${lastPt.x}" cy="${lastPt.y}" r="6" fill="#ff9434"/>
+      <circle cx="${lastPt.x}" cy="${lastPt.y}" r="6" fill="#FF6B00"/>
       <text class="chart-val lc-end-val" x="${lastPt.x + 12}" y="${lastPt.y + 10}">${vals[vals.length-1]}${unit}</text>
       <defs><filter id="lcGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-      <circle class="lc-travel-dot" r="8" fill="#ff9434" filter="url(#lcGlow)"><animateMotion dur="4s" repeatCount="indefinite" path="${pathD}" begin="5.5s"/></circle>
+      <circle class="lc-travel-dot" r="8" fill="#FF6B00" filter="url(#lcGlow)"><animateMotion dur="4s" repeatCount="indefinite" path="${pathD}" begin="5.5s"/></circle>
     </svg>`;
     el.innerHTML = svgHTML;
     const line = el.querySelector('.lc-line');
@@ -865,6 +865,7 @@
     }
     // Ctrl+Z / Ctrl+Shift+Z: 실행 취소 / 다시 실행
     if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+      if (isEditing) return; // 텍스트 편집 중에는 element 핸들러가 처리
       e.preventDefault();
       if (isDragging || isResizing || pendingDrag) return; // EF6: 드래그/리사이즈/대기 중 Undo 무시
       e.shiftKey ? doRedo() : doUndo();
@@ -925,11 +926,14 @@
       const slide = slides[currentSlide];
       [...selectedEls].forEach(el => {
         const layer = el.closest('.step-layer');
-        if (!layer) return;
-        layer.removeChild(el);
-        if (parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-          layer.remove();
-          recalcSteps(slide);
+        if (layer) {
+          layer.removeChild(el);
+          if (parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
+            layer.remove();
+            recalcSteps(slide);
+          }
+        } else if (el.parentElement) {
+          el.parentElement.removeChild(el);
         }
       });
       selectedEl = null; selectedEls = [];
@@ -1497,12 +1501,15 @@
   const overview = document.getElementById('overview');
   const ovGrid = document.getElementById('overview-grid');
 
+  let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
+
   function buildOverview() {
     ovGrid.innerHTML = '';
     slides.forEach((slide, slideIdx) => {
       const isCurrent = slideIdx === currentSlide;
       const item = document.createElement('div');
       item.className = 'ov-item' + (isCurrent ? ' current' : '');
+      item._slideIdx = slideIdx;
 
       const thumb = document.createElement('div');
       thumb.className = 'ov-thumb';
@@ -1519,6 +1526,7 @@
       item.appendChild(thumb);
       item.appendChild(num);
       item.addEventListener('click', (e) => {
+        if (ovDragItem) return;
         e.stopPropagation();
         overview.classList.remove('visible');
         goToSlide(slideIdx);
@@ -1527,6 +1535,65 @@
         e.preventDefault();
         e.stopPropagation();
         showSlideContextMenu(e.clientX, e.clientY, slideIdx);
+      });
+      item.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return;
+        e.preventDefault();
+        ovDragFromIdx = slideIdx;
+        ovDragDropIdx = slideIdx;
+        const startX = e.clientX, startY = e.clientY;
+        let started = false;
+
+        const onMove = (ev) => {
+          const dx = ev.clientX - startX, dy = ev.clientY - startY;
+          if (!started && Math.abs(dx) + Math.abs(dy) < 8) return;
+          if (!started) {
+            started = true;
+            ovDragItem = item;
+            item.style.opacity = '0.4';
+            ovDragGhost = item.cloneNode(true);
+            ovDragGhost.style.cssText = 'position:fixed;z-index:100000;pointer-events:none;opacity:0.8;width:' + item.offsetWidth + 'px;';
+            document.body.appendChild(ovDragGhost);
+          }
+          ovDragGhost.style.left = (ev.clientX - item.offsetWidth / 2) + 'px';
+          ovDragGhost.style.top = (ev.clientY - 40) + 'px';
+          // drop 위치 계산
+          const items = [...ovGrid.querySelectorAll('.ov-item')];
+          let dropIdx = items.length;
+          for (let i = 0; i < items.length; i++) {
+            const r = items[i].getBoundingClientRect();
+            const midX = r.left + r.width / 2;
+            const midY = r.top + r.height / 2;
+            if (ev.clientY < r.bottom && ev.clientY > r.top && ev.clientX < midX) { dropIdx = i; break; }
+            if (ev.clientY < midY) { dropIdx = i; break; }
+          }
+          ovDragDropIdx = dropIdx;
+          // 드롭 인디케이터
+          items.forEach(it => it.classList.remove('ov-drop-before'));
+          if (dropIdx < items.length) items[dropIdx].classList.add('ov-drop-before');
+        };
+
+        const onUp = () => {
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+          if (ovDragGhost) { ovDragGhost.remove(); ovDragGhost = null; }
+          ovGrid.querySelectorAll('.ov-drop-before').forEach(it => it.classList.remove('ov-drop-before'));
+          if (ovDragItem) {
+            ovDragItem.style.opacity = '';
+            const from = ovDragFromIdx;
+            const to = ovDragDropIdx > from ? ovDragDropIdx - 1 : ovDragDropIdx;
+            if (from !== to) {
+              reorderSlide(from, to);
+              buildOverview();
+            }
+            ovDragItem = null;
+          }
+          ovDragFromIdx = -1;
+          ovDragDropIdx = -1;
+        };
+
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
       });
       ovGrid.appendChild(item);
     });
@@ -1538,7 +1605,7 @@
   function showSlideContextMenu(x, y, idx) {
     hideSlideContextMenu();
     const menu = document.createElement('div');
-    menu.style.cssText = 'position:fixed;z-index:100000;background:#2a2a2a;border:1px solid #555;border-radius:6px;padding:4px 0;min-width:140px;box-shadow:0 4px 16px rgba(0,0,0,.5);font:14px/1 "Noto Sans KR",sans-serif;color:#eee;';
+    menu.style.cssText = 'position:fixed;z-index:100000;background:#2a2a2a;border:1px solid #555;border-radius:6px;padding:4px 0;min-width:140px;box-shadow:0 4px 16px rgba(0,0,0,.5);font:14px/1 "Pretendard","Noto Sans KR",sans-serif;color:#eee;';
     menu.style.left = x + 'px';
     menu.style.top = y + 'px';
     const delBtn = document.createElement('div');
@@ -1890,7 +1957,7 @@
   }
 
   // ── 편집 모드 ──
-  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el, img, .emoji-icon, .section-badge, .corner-label, .step-dim';
+  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el, img, .emoji-icon, .section-badge, .corner-label, .step-dim, svg, [data-type]';
   let editMode = false;
   let isEditing = false;
   let clipboardEl = null;
@@ -2007,7 +2074,7 @@
         badge = document.createElement('div');
         badge.id = 'edit-mode-badge';
         badge.textContent = '편집중 — 자동저장 10초';
-        badge.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:99999;background:#ff9434;color:#fff;padding:6px 18px;border-radius:8px;font-size:14px;font-weight:900;pointer-events:none;animation:editBadgeBlink 1.5s infinite;';
+        badge.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:99999;background:#FF6B00;color:#fff;padding:6px 18px;border-radius:8px;font-size:14px;font-weight:900;pointer-events:none;animation:editBadgeBlink 1.5s infinite;';
         document.body.appendChild(badge);
         if (!document.getElementById('edit-badge-style')) {
           const style = document.createElement('style');
@@ -2316,6 +2383,7 @@
 
     const onKeydown = ev => {
       if (ev.key === 'Escape') { ev.preventDefault(); ev.stopPropagation(); el.blur(); }
+      if ((ev.ctrlKey || ev.metaKey) && ev.key === 'z') { ev.preventDefault(); ev.stopPropagation(); el.blur(); ev.shiftKey ? doRedo() : doUndo(); }
     };
     el.addEventListener('keydown', onKeydown);
     el.addEventListener('blur', () => {
@@ -2327,6 +2395,10 @@
 
   document.addEventListener('mousedown', e => {
     if (!editMode) return;
+    if (e.target.closest('.color-palette, .color-swatch, #palette-bg, #palette-fc')) {
+      if (isEditing) e.preventDefault(); // 텍스트 선택 유지
+      return;
+    }
     if (!e.target.closest('#stage') && !e.target.classList.contains('resize-handle')) return;
     if (e.target.closest('[contenteditable="true"]')) return;
     if (isEditing) {
@@ -3116,7 +3188,7 @@
     item.className = 'layer-item' + (selectedEls.includes(el) ? ' lyr-selected' : '');
     item._el = el;
     item._step = step;
-    const groupBadge = el.dataset.group ? `<span class="layer-badge" style="color:#ff9434;">[${escHTML(el.dataset.group.toUpperCase())}]</span>` : '';
+    const groupBadge = el.dataset.group ? `<span class="layer-badge" style="color:#FF6B00;">[${escHTML(el.dataset.group.toUpperCase())}]</span>` : '';
     item.innerHTML = `<span class="layer-handle">⠿</span><span class="layer-label">${escHTML(getElLabel(el))}</span>${groupBadge}<span class="layer-badge">${escHTML(getElType(el))}</span>`;
     item.addEventListener('click', (ev) => {
       if (layerDragItem) return;
@@ -3207,8 +3279,8 @@
     ];
     const animTypeRow = document.createElement('div');
     animTypeRow.className = 'anim-type-row';
-    const animTypeDisabled = !selectedEl || selectedEl.classList.contains('step-dim') || currentStep === 0;
-    const currentAnimCls = animTypeDisabled ? '' : (ANIM_TYPES.find(t => t.cls && selectedEl.classList.contains(t.cls)) || ANIM_TYPES[0]).cls;
+    const animTypeDisabled = !selectedEl || selectedEl.classList.contains('step-dim');
+    const currentAnimCls = (!selectedEl || selectedEl.classList.contains('step-dim') || currentStep === 0) ? '' : (ANIM_TYPES.find(t => t.cls && selectedEl.classList.contains(t.cls)) || ANIM_TYPES[0]).cls;
     let selectHTML = '<select class="anim-type-select"' + (animTypeDisabled ? ' disabled' : '') + '>';
     ANIM_TYPES.forEach(t => {
       selectHTML += `<option value="${t.cls}"${t.cls === currentAnimCls ? ' selected' : ''}>${escHTML(t.label)}</option>`;
@@ -3218,6 +3290,10 @@
     if (!animTypeDisabled) {
       animTypeRow.querySelector('select').addEventListener('change', function() {
         pushUndo();
+        // step-0에 있으면 자동으로 step-1로 이동
+        if (currentStep === 0) {
+          moveToStep(selectedEl, 1);
+        }
         ANIM_TYPES.forEach(t => { if (t.cls) selectedEl.classList.remove(t.cls); });
         if (this.value) selectedEl.classList.add(this.value);
         buildLayerPanel();
@@ -3228,7 +3304,7 @@
     // 밀어올리기 전환 토글 (레이어 단위)
     const pushupRow = document.createElement('div');
     pushupRow.className = 'anim-pushup-row';
-    const pushupDisabled = !selectedEl || currentStep === 0;
+    const pushupDisabled = !selectedEl;
     const pushupLayer = selectedEl ? selectedEl.closest('.step-layer') : null;
     const isPushup = pushupLayer ? pushupLayer.dataset.transition === 'pushup' : false;
     pushupRow.innerHTML = `<span class="anim-pushup-label">밀어올리기 전환</span>
@@ -3239,15 +3315,20 @@
     if (!pushupDisabled) {
       pushupRow.querySelector('input').addEventListener('change', function() {
         pushUndo();
+        // step-0에 있으면 자동으로 step-1로 이동
+        if (currentStep === 0) {
+          moveToStep(selectedEl, 1);
+        }
+        const layer = selectedEl.closest('.step-layer');
         if (this.checked) {
-          pushupLayer.dataset.transition = 'pushup';
-          pushupLayer.classList.add('anim-pushup-layer');
+          layer.dataset.transition = 'pushup';
+          layer.classList.add('anim-pushup-layer');
           // pushup 레이어에는 dim 불필요 — step-dim 숨김
-          const dim = pushupLayer.querySelector('.step-dim');
+          const dim = layer.querySelector('.step-dim');
           if (dim) dim.classList.remove('anim-shown');
         } else {
-          delete pushupLayer.dataset.transition;
-          pushupLayer.classList.remove('anim-pushup-layer', 'push-enter', 'push-exit');
+          delete layer.dataset.transition;
+          layer.classList.remove('anim-pushup-layer', 'push-enter', 'push-exit');
         }
         buildLayerPanel();
       });
@@ -3257,7 +3338,7 @@
     // 오버레이 없음 토글 (data-no-dim)
     const noDimRow = document.createElement('div');
     noDimRow.className = 'anim-pushup-row';
-    const noDimDisabled = !selectedEl || currentStep === 0 || isPushup;
+    const noDimDisabled = !selectedEl || isPushup;
     const isNoDim = pushupLayer ? pushupLayer.hasAttribute('data-no-dim') : false;
     noDimRow.innerHTML = `<span class="anim-pushup-label">오버레이 없음</span>
       <label class="anim-toggle${noDimDisabled ? ' disabled' : ''}">
@@ -3267,13 +3348,18 @@
     if (!noDimDisabled) {
       noDimRow.querySelector('input').addEventListener('change', function() {
         pushUndo();
+        // step-0에 있으면 자동으로 step-1로 이동
+        if (currentStep === 0) {
+          moveToStep(selectedEl, 1);
+        }
+        const layer = selectedEl.closest('.step-layer');
         if (this.checked) {
-          pushupLayer.setAttribute('data-no-dim', '');
-          const dim = pushupLayer.querySelector('.step-dim');
+          layer.setAttribute('data-no-dim', '');
+          const dim = layer.querySelector('.step-dim');
           if (dim) dim.classList.remove('anim-shown');
           syncDimOuter(slides[currentSlide]);
         } else {
-          pushupLayer.removeAttribute('data-no-dim');
+          layer.removeAttribute('data-no-dim');
         }
         buildLayerPanel();
       });
@@ -3739,11 +3825,14 @@
     const slide = slides[currentSlide];
     [...selectedEls].forEach(el => {
       const layer = el.closest('.step-layer');
-      if (!layer) return;
-      layer.removeChild(el);
-      if (parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-        layer.remove();
-        recalcSteps(slide);
+      if (layer) {
+        layer.removeChild(el);
+        if (parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
+          layer.remove();
+          recalcSteps(slide);
+        }
+      } else if (el.parentElement) {
+        el.parentElement.removeChild(el);
       }
     });
     selectedEl = null; selectedEls = [];
@@ -3775,7 +3864,7 @@
     const BG_CLASSES = ['bg-blue','bg-red','bg-green','bg-white','bg-black','bg-gray'];
     const FC_CLASSES = ['fc-white','fc-red','fc-blue','fc-yellow','fc-black'];
     const BG_COLORS = {'':'transparent','bg-blue':'rgba(255,148,52,0.12)','bg-red':'rgba(0,0,0,0.06)','bg-green':'rgba(255,148,52,0.12)','bg-white':'#fff','bg-black':'#222','bg-accent':'rgba(255,148,52,0.15)','bg-gray':'#999'};
-    const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#ff9434','fc-blue':'#ff9434','fc-yellow':'#ff9434'};
+    const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#FF6B00','fc-blue':'#FF6B00','fc-yellow':'#FF6B00'};
 
     function closePalettes() {
       paletteBg.classList.remove('open');
@@ -3832,6 +3921,16 @@
       const sw = e.target.closest('.color-swatch');
       if (!sw) return;
       pushUndo();
+      // 부분 글자색: 텍스트 편집 중 선택 범위가 있으면 해당 범위만 색상 적용
+      if (isEditing) {
+        const sel = window.getSelection();
+        if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
+          const color = FC_COLORS[sw.dataset.cls] || '#222';
+          document.execCommand('foreColor', false, color);
+          closePalettes();
+          return;
+        }
+      }
       const hls = getHlEls();
       hls.forEach(h => {
         FC_CLASSES.forEach(c => h.classList.remove(c));
@@ -4018,9 +4117,9 @@
 <link rel="stylesheet" href="${cssHref}">
 <style>
 html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !important; display: block !important; flex-direction: unset !important; justify-content: unset !important; align-items: unset !important; }
-#presenter-root { display: flex; flex-direction: column; height: 100vh; font-family: 'Noto Sans KR', sans-serif; color: #fff; }
+#presenter-root { display: flex; flex-direction: column; height: 100vh; font-family: 'Pretendard', 'Noto Sans KR', sans-serif; color: #fff; }
 #pres-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #111; border-bottom: 1px solid #333; font-size: 15px; font-weight: 700; flex-shrink: 0; }
-#pres-slide-info { color: #ff9434; }
+#pres-slide-info { color: #FF6B00; }
 #pres-timer { color: #aaa; font-family: monospace; font-size: 18px; }
 #pres-main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
 #pres-current-wrap { flex: 6; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
@@ -4117,6 +4216,7 @@ document.getElementById('pres-btn-prev').addEventListener('click', () => ch.post
 document.getElementById('pres-btn-next').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'next' }));
 document.getElementById('pres-notes-input').addEventListener('input', ev => ch.postMessage({ type: 'notes', slide: curSlideIdx, text: ev.target.textContent }));
 document.addEventListener('keydown', ev => {
+  if (document.activeElement && document.activeElement.id === 'pres-notes-input') return;
   if (ev.key === 'ArrowRight') { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'next' }); }
   if (ev.key === 'ArrowLeft') { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'prev' }); }
 });
@@ -4210,11 +4310,14 @@ ch.postMessage({ type: 'ready' });
     const slide = slides[currentSlide];
     [...selectedEls].forEach(el => {
       const layer = el.closest('.step-layer');
-      if (!layer) return;
-      layer.removeChild(el);
-      if (parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-        layer.remove();
-        recalcSteps(slide);
+      if (layer) {
+        layer.removeChild(el);
+        if (parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
+          layer.remove();
+          recalcSteps(slide);
+        }
+      } else if (el.parentElement) {
+        el.parentElement.removeChild(el);
       }
     });
     selectedEl = null; selectedEls = [];
