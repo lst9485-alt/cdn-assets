@@ -1576,6 +1576,7 @@
         const onUp = () => {
           document.removeEventListener('mousemove', onMove);
           document.removeEventListener('mouseup', onUp);
+          document.documentElement.removeEventListener('mouseleave', onUp);
           if (ovDragGhost) { ovDragGhost.remove(); ovDragGhost = null; }
           ovGrid.querySelectorAll('.ov-drop-before').forEach(it => it.classList.remove('ov-drop-before'));
           if (ovDragItem) {
@@ -1594,6 +1595,7 @@
 
         document.addEventListener('mousemove', onMove);
         document.addEventListener('mouseup', onUp);
+        document.documentElement.addEventListener('mouseleave', onUp);
       });
       ovGrid.appendChild(item);
     });
@@ -1636,6 +1638,9 @@
       overview.classList.add('visible');
     }
   }
+
+  // ── 환경 감지 ──
+  const isGitHubPages = location.hostname.endsWith('.github.io');
 
   // ── 토스트 알림 ──
   function showToast(msg, duration = 3000) {
@@ -1710,7 +1715,15 @@
   }
 
   _initTabLock();
-  window.addEventListener('beforeunload', () => { if (editMode) releaseTabLock(); });
+  window.addEventListener('beforeunload', (e) => {
+    if (editMode) {
+      releaseTabLock();
+      if (isGitHubPages && typeof ghIsDirty === 'function' && ghIsDirty()) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    }
+  });
 
   // ── IndexedDB 핸들 저장 ──
   function openDB() {
@@ -1748,6 +1761,7 @@
   let isSaving = false;
 
   async function ensureDirHandle() {
+    if (isGitHubPages) return true;
     if (dirHandle) return true;
     // 1. IndexedDB에서 저장된 핸들 복원 시도
     try {
@@ -1917,6 +1931,7 @@
   }
 
   async function saveToFile() {
+    if (isGitHubPages) { await ghSaveToFile(); return; }
     if (!dirHandle || isSaving) return;
     isSaving = true;
     // EF11: 저장 전 외부 변경 감지
@@ -1956,8 +1971,216 @@
     return false;
   }
 
+  // ── GitHub 저장 (Contents API) ──
+  const GH_REPO = 'lst9485-alt/cdn-assets';
+  const GH_TOKEN_KEY = 'gh-save-token';
+  const GH_AUTO_SAVE_INTERVAL = 30000;
+
+  let _ghToken = null;
+  let _ghFileSha = null;
+  let _ghDirty = false;
+  let _ghSaving = false;
+
+  function ghGetToken() {
+    if (_ghToken) return _ghToken;
+    _ghToken = localStorage.getItem(GH_TOKEN_KEY);
+    return _ghToken;
+  }
+
+  async function ghSetToken(token) {
+    try {
+      const res = await fetch(`https://api.github.com/repos/${GH_REPO}`, {
+        headers: { 'Authorization': `token ${token}` }
+      });
+      if (!res.ok) return { ok: false, error: res.status === 401 ? '토큰이 유효하지 않습니다' : '레포 접근 실패 (' + res.status + ')' };
+      _ghToken = token;
+      localStorage.setItem(GH_TOKEN_KEY, token);
+      return { ok: true };
+    } catch (e) {
+      return { ok: false, error: '네트워크 오류' };
+    }
+  }
+
+  function ghClearToken() {
+    _ghToken = null;
+    localStorage.removeItem(GH_TOKEN_KEY);
+  }
+
+  function _ghFilePath() {
+    const filename = location.pathname.split('/').pop() || 'slides.html';
+    // slide-viewer/ 하위 경로 추출
+    const parts = location.pathname.split('/');
+    const svIdx = parts.indexOf('slide-viewer');
+    if (svIdx >= 0) return parts.slice(svIdx).join('/');
+    return 'slide-viewer/' + filename;
+  }
+
+  async function ghFetchFileSha() {
+    const token = ghGetToken();
+    if (!token) return null;
+    try {
+      const res = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${_ghFilePath()}`, {
+        headers: { 'Authorization': `token ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        _ghFileSha = data.sha;
+        return data.sha;
+      }
+      if (res.status === 401) { ghHandleAuthError(); return null; }
+      return null; // 404 = 새 파일
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function ghSaveToFile() {
+    if (_ghSaving || !_ghDirty) return;
+    const token = ghGetToken();
+    if (!token) return;
+    _ghSaving = true;
+    try {
+      const content = getCleanHTML();
+      const encoded = btoa(unescape(encodeURIComponent(content)));
+      const filename = location.pathname.split('/').pop() || 'slides.html';
+      const body = {
+        message: `update: ${filename} via slide editor`,
+        content: encoded,
+        branch: 'main'
+      };
+      if (_ghFileSha) body.sha = _ghFileSha;
+
+      const res = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${_ghFilePath()}`, {
+        method: 'PUT',
+        headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        _ghFileSha = data.content.sha;
+        _ghDirty = false;
+        showSaveStatus();
+      } else if (res.status === 409) {
+        await _ghHandleConflict();
+      } else if (res.status === 401) {
+        ghHandleAuthError();
+      } else if (res.status === 403) {
+        showToast('GitHub API 한도 초과 — 잠시 후 다시 시도됩니다', 4000);
+      } else {
+        showToast('저장 실패 (' + res.status + ')', 3000);
+      }
+    } catch (e) {
+      showToast('네트워크 오류 — 3초 후 재시도', 3000);
+      setTimeout(() => { _ghSaving = false; ghSaveToFile(); }, 3000);
+      return;
+    } finally {
+      _ghSaving = false;
+    }
+  }
+
+  async function _ghHandleConflict() {
+    // SHA 불일치 — 외부에서 수정됨
+    const choice = confirm('⚠️ 파일이 외부에서 변경되었습니다.\n\n확인 = 내 편집 유지 (덮어쓰기)\n취소 = 외부 변경 로드 (새로고침)');
+    if (!choice) { location.reload(); return; }
+    // 최신 SHA 가져와서 재시도
+    await ghFetchFileSha();
+    _ghDirty = true; // 다시 저장 시도하도록
+    await ghSaveToFile();
+  }
+
+  function ghHandleAuthError() {
+    ghClearToken();
+    showToast('GitHub 토큰이 만료되었습니다. 설정 아이콘을 눌러 다시 입력해주세요.', 5000);
+  }
+
+  function ghMarkDirty() { _ghDirty = true; }
+  function ghIsDirty() { return _ghDirty; }
+
+  // ── 토큰 설정 다이얼로그 ──
+  function ghShowTokenDialog() {
+    // 기존 다이얼로그 제거
+    const old = document.getElementById('gh-token-dialog');
+    if (old) old.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'gh-token-dialog';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999999;display:flex;align-items:center;justify-content:center;';
+
+    const box = document.createElement('div');
+    box.style.cssText = 'background:#1a1a1a;color:#fff;padding:32px;border-radius:16px;max-width:480px;width:90%;font-family:sans-serif;';
+    box.innerHTML = `
+      <h2 style="margin:0 0 12px;font-size:20px;">GitHub 저장 설정</h2>
+      <p style="margin:0 0 16px;font-size:14px;color:#aaa;line-height:1.5;">
+        슬라이드를 GitHub에 저장하려면 Personal Access Token이 필요합니다.<br>
+        <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener"
+           style="color:#FF6B00;">토큰 만들기</a>
+        — lst9485-alt/cdn-assets 레포만 허용, Contents 읽기/쓰기 권한
+      </p>
+      <input id="gh-token-input" type="password" placeholder="ghp_xxxx 또는 github_pat_xxxx"
+        style="width:100%;padding:12px;border:1px solid #444;border-radius:8px;background:#222;color:#fff;font-size:15px;box-sizing:border-box;margin-bottom:8px;">
+      <div id="gh-token-error" style="color:#ff4444;font-size:13px;min-height:20px;margin-bottom:12px;"></div>
+      <div style="display:flex;gap:12px;justify-content:flex-end;">
+        <button id="gh-token-cancel" style="padding:10px 20px;border:1px solid #555;border-radius:8px;background:none;color:#aaa;cursor:pointer;font-size:14px;">취소</button>
+        <button id="gh-token-save" style="padding:10px 20px;border:none;border-radius:8px;background:#FF6B00;color:#fff;cursor:pointer;font-size:14px;font-weight:700;">설정 완료</button>
+      </div>
+    `;
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+
+    // 이벤트
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) _ghCloseDialog(false); });
+    document.getElementById('gh-token-cancel').addEventListener('click', () => _ghCloseDialog(false));
+    document.getElementById('gh-token-save').addEventListener('click', async () => {
+      const input = document.getElementById('gh-token-input');
+      const errEl = document.getElementById('gh-token-error');
+      const token = input.value.trim();
+      if (!token) { errEl.textContent = '토큰을 입력해주세요'; return; }
+      errEl.textContent = '확인 중...';
+      errEl.style.color = '#aaa';
+      const result = await ghSetToken(token);
+      if (result.ok) {
+        showToast('GitHub 토큰 설정 완료', 2000);
+        _ghCloseDialog(true);
+      } else {
+        errEl.style.color = '#ff4444';
+        errEl.textContent = result.error;
+      }
+    });
+    // Enter 키
+    document.getElementById('gh-token-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('gh-token-save').click();
+    });
+    document.getElementById('gh-token-input').focus();
+  }
+
+  function _ghCloseDialog(success) {
+    const dialog = document.getElementById('gh-token-dialog');
+    if (dialog) dialog.remove();
+    document.dispatchEvent(new Event(success ? 'gh-token-set' : 'gh-token-cancel'));
+  }
+
+  // ── GitHub Pages에서 설정 아이콘 추가 ──
+  if (isGitHubPages) {
+    // DOM 준비 후 설정 아이콘 삽입
+    const _ghAddSettingsIcon = () => {
+      const saveBtn = document.getElementById('tb-save');
+      if (!saveBtn) return;
+      const icon = document.createElement('button');
+      icon.className = 'tb-btn';
+      icon.id = 'gh-settings';
+      icon.title = 'GitHub 토큰 설정';
+      icon.textContent = '⚙';
+      icon.style.cssText = 'font-size:14px;min-width:28px;padding:0 4px;';
+      icon.addEventListener('click', () => ghShowTokenDialog());
+      saveBtn.after(icon);
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _ghAddSettingsIcon);
+    else _ghAddSettingsIcon();
+  }
+
   // ── 편집 모드 ──
-  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el, img, .emoji-icon, .section-badge, .corner-label, .step-dim, svg, [data-type]';
+  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el, img, .emoji-icon, .section-badge, .corner-label, .step-dim, [data-type]';
   let editMode = false;
   let isEditing = false;
   let clipboardEl = null;
@@ -2005,7 +2228,7 @@
 
   async function toggleEditMode() {
     // ── 진입 시 파일 변경 감지 ──
-    if (!editMode && dirHandle) {
+    if (!editMode && !isGitHubPages && dirHandle) {
       const changed = await checkFileChanged();
       if (changed) {
         const ok = confirm('⚠️ 파일이 외부에서 수정되었습니다.\n새로고침 후 다시 시도하세요.\n\n(확인 = 새로고침, 취소 = 무시하고 진입)');
@@ -2030,7 +2253,23 @@
       if (fs && fs.parentElement !== document.body) document.body.appendChild(fs);
       buildFilmstrip();
       buildLayerPanel();
-      if (!dirHandle) {
+      if (isGitHubPages) {
+        // GitHub Pages: 토큰 확인 → 없으면 설정 다이얼로그
+        if (!ghGetToken()) {
+          ghShowTokenDialog();
+          const tokenSet = await new Promise(resolve => {
+            document.addEventListener('gh-token-set', () => resolve(true), { once: true });
+            document.addEventListener('gh-token-cancel', () => resolve(false), { once: true });
+          });
+          if (!tokenSet) {
+            editMode = false;
+            document.body.classList.remove('edit-mode');
+            document.getElementById('layer-panel').classList.remove('visible');
+            return;
+          }
+        }
+        await ghFetchFileSha();
+      } else if (!dirHandle) {
         const ok = await ensureDirHandle();
         if (!ok) {
           editMode = false;
@@ -2040,7 +2279,7 @@
         }
       }
       if (autoSaveTimer) clearInterval(autoSaveTimer);
-      autoSaveTimer = setInterval(saveToFile, 10000);
+      autoSaveTimer = setInterval(saveToFile, isGitHubPages ? GH_AUTO_SAVE_INTERVAL : 10000);
       // ── 편집중 배지 표시 ──
       showEditBadge(true);
     } else {
@@ -2073,7 +2312,7 @@
       if (!badge) {
         badge = document.createElement('div');
         badge.id = 'edit-mode-badge';
-        badge.textContent = '편집중 — 자동저장 10초';
+        badge.textContent = isGitHubPages ? '편집중 — 자동저장 30초 (GitHub)' : '편집중 — 자동저장 10초';
         badge.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:99999;background:#FF6B00;color:#fff;padding:6px 18px;border-radius:8px;font-size:14px;font-weight:900;pointer-events:none;animation:editBadgeBlink 1.5s infinite;';
         document.body.appendChild(badge);
         if (!document.getElementById('edit-badge-style')) {
@@ -2302,6 +2541,7 @@
 
   // ── Undo / Redo ──
   function pushUndo() {
+    if (isGitHubPages) ghMarkDirty();
     undoStack.push(document.getElementById('stage').innerHTML);
     if (undoStack.length > 50) undoStack.shift();
     redoStack.length = 0;
@@ -3289,10 +3529,11 @@
     animTypeRow.innerHTML = `<span class="anim-type-label">애니메이션</span>${selectHTML}`;
     if (!animTypeDisabled) {
       animTypeRow.querySelector('select').addEventListener('change', function() {
-        pushUndo();
-        // step-0에 있으면 자동으로 step-1로 이동
+        // step-0에 있으면 자동으로 step-1로 이동 (moveToStep 내부에서 pushUndo)
         if (currentStep === 0) {
           moveToStep(selectedEl, 1);
+        } else {
+          pushUndo();
         }
         ANIM_TYPES.forEach(t => { if (t.cls) selectedEl.classList.remove(t.cls); });
         if (this.value) selectedEl.classList.add(this.value);
@@ -3314,10 +3555,11 @@
       </label>`;
     if (!pushupDisabled) {
       pushupRow.querySelector('input').addEventListener('change', function() {
-        pushUndo();
-        // step-0에 있으면 자동으로 step-1로 이동
+        // step-0에 있으면 자동으로 step-1로 이동 (moveToStep 내부에서 pushUndo)
         if (currentStep === 0) {
           moveToStep(selectedEl, 1);
+        } else {
+          pushUndo();
         }
         const layer = selectedEl.closest('.step-layer');
         if (this.checked) {
@@ -3347,10 +3589,11 @@
       </label>`;
     if (!noDimDisabled) {
       noDimRow.querySelector('input').addEventListener('change', function() {
-        pushUndo();
-        // step-0에 있으면 자동으로 step-1로 이동
+        // step-0에 있으면 자동으로 step-1로 이동 (moveToStep 내부에서 pushUndo)
         if (currentStep === 0) {
           moveToStep(selectedEl, 1);
+        } else {
+          pushUndo();
         }
         const layer = selectedEl.closest('.step-layer');
         if (this.checked) {
