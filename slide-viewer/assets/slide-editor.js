@@ -2115,8 +2115,8 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        // CDN 캐시 우회: 저장한 깨끗한 HTML을 sessionStorage에 캐시
-        try { sessionStorage.setItem('gh-cache-' + filePath, JSON.stringify({ html: content, ts: Date.now() })); } catch(_) {}
+        // 저장 성공 표시 (다음 로드 시 GitHub API에서 최신 버전 읽기용)
+        try { localStorage.setItem('gh-last-save', JSON.stringify({ path: filePath, ts: Date.now() })); } catch(_) {}
         showToast('GitHub에 저장 완료!', 3000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
@@ -2159,7 +2159,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        try { sessionStorage.setItem('gh-cache-' + filePath, JSON.stringify({ html: decodeURIComponent(escape(atob(encoded))), ts: Date.now() })); } catch(_) {}
+        try { localStorage.setItem('gh-last-save', JSON.stringify({ path: filePath, ts: Date.now() })); } catch(_) {}
         showToast('GitHub에 저장 완료!', 3000);
         try { showSaveStatus(); } catch(_) {}
       } else {
@@ -2248,31 +2248,41 @@
     document.dispatchEvent(new Event(success ? 'gh-token-set' : 'gh-token-cancel'));
   }
 
-  // ── GitHub Pages: CDN 캐시 우회 (저장 직후 새로고침 시 최신 버전 표시) ──
-  // 캐시를 10분간 유지 → 새로고침할 때마다 캐시에서 불러옴
+  // ── GitHub Pages: 저장 후 GitHub API에서 최신 버전 직접 읽기 ──
+  // CDN 캐시(10분)를 완전히 건너뛰고 GitHub API에서 최신 HTML을 가져옴
   if (isGitHubPages) {
-    (function _ghApplyCachedVersion() {
-      // 무한루프 방지: document.write 직후 재로드된 페이지면 3초간 스킵
-      const lastWrite = parseInt(sessionStorage.getItem('gh-cache-write-ts') || '0');
-      if (Date.now() - lastWrite < 3000) return;
+    (function _ghLoadLatestFromAPI() {
+      // 무한루프 방지: API에서 로드한 직후면 스킵
+      const lastLoad = parseInt(localStorage.getItem('gh-api-load-ts') || '0');
+      if (Date.now() - lastLoad < 5000) return;
 
-      const cacheKey = 'gh-cache-' + _ghFilePath();
-      const cached = sessionStorage.getItem(cacheKey);
-      if (!cached) return;
+      const saved = localStorage.getItem('gh-last-save');
+      if (!saved) return;
       try {
-        const data = JSON.parse(cached);
-        if (Date.now() - data.ts > 600000) { // 10분 초과 → CDN도 갱신됨, 캐시 삭제
-          sessionStorage.removeItem(cacheKey);
+        const data = JSON.parse(saved);
+        if (Date.now() - data.ts > 600000) { // 10분 초과 → CDN도 갱신됨
+          localStorage.removeItem('gh-last-save');
           return;
         }
-        // 캐시 유지 (삭제 안 함) → 다음 새로고침에도 사용
-        sessionStorage.setItem('gh-cache-write-ts', String(Date.now()));
+      } catch(_) { localStorage.removeItem('gh-last-save'); return; }
+
+      // 토큰 확인 (없으면 CDN 버전 그대로 사용)
+      const token = ghGetToken();
+      if (!token) return;
+
+      // GitHub API에서 최신 HTML 가져오기
+      const filePath = _ghFilePath();
+      fetch(`https://api.github.com/repos/${GH_REPO}/contents/${filePath}`, {
+        headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.raw+json' }
+      })
+      .then(res => { if (!res.ok) throw new Error(res.status); return res.text(); })
+      .then(html => {
+        localStorage.setItem('gh-api-load-ts', String(Date.now()));
         document.open();
-        document.write(data.html);
+        document.write(html);
         document.close();
-      } catch(_) {
-        sessionStorage.removeItem(cacheKey);
-      }
+      })
+      .catch(() => {}); // 실패하면 CDN 버전 그대로
     })();
   }
 
