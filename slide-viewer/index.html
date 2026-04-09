@@ -61,6 +61,15 @@
         .editor-card-desc { font-size: 13px; color: #64748B; }
         .editor-card-icon { font-size: 28px; margin-bottom: 8px; }
 
+        /* 영상별 슬라이드 (접기/펼치기) */
+        .video-slides-section { margin-bottom: 20px; background: white; border: 1px solid #E2E8F0; border-radius: 12px; }
+        .video-slides-section[open] { border-color: #0077C8; }
+        .video-slides-section summary { padding: 14px 16px; font-size: 13px; font-weight: 700; color: #64748B; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .video-slides-section summary::-webkit-details-marker { display: none; }
+        .video-slides-section summary::before { content: '▸'; font-size: 12px; color: #94A3B8; transition: transform 0.15s; }
+        .video-slides-section[open] summary::before { transform: rotate(90deg); }
+        .video-slides-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 16px 16px; }
+
         @media (max-width: 768px) { .type-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 500px) { .type-grid { grid-template-columns: 1fr; } .editor-links { grid-template-columns: 1fr; } .pipeline { gap: 4px; } }
     </style>
@@ -85,22 +94,17 @@
             </a>
         </div>
 
-        <!-- 영상별 슬라이드 -->
-        <div class="cat-section">
-            <div class="cat-title">영상별 슬라이드</div>
-            <div class="editor-links">
+        <!-- 영상별 슬라이드 (접기/펼치기) -->
+        <details class="video-slides-section" open>
+            <summary>영상별 슬라이드</summary>
+            <div class="video-slides-grid">
                 <a href="./260405-slides.html" class="editor-card">
                     <div class="editor-card-icon">🎬</div>
                     <div class="editor-card-title">260405 천안아산</div>
                     <div class="editor-card-desc">지역분석 슬라이드</div>
                 </a>
-                <a href="./260405-cheonan-asan-v3.html" class="editor-card">
-                    <div class="editor-card-icon">🎬</div>
-                    <div class="editor-card-title">260405 천안아산 v3</div>
-                    <div class="editor-card-desc">최종 버전</div>
-                </a>
             </div>
-        </div>
+        </details>
 
         <!-- 시스템 구조 다이어그램 -->
         <details>
