@@ -860,6 +860,7 @@
     // Ctrl+S: 저장 (텍스트 편집 중에도 허용)
     if ((e.ctrlKey || e.metaKey) && e.key === 's') {
       e.preventDefault();
+      if (isGitHubPages && !ghIsDirty()) { showToast('변경사항 없음', 2000); return; }
       saveToFile(true);
       return;
     }
@@ -2368,7 +2369,7 @@
       userZoom = 1; panX = 0; panY = 0;
       clearInterval(autoSaveTimer);
       autoSaveTimer = null;
-      saveToFile(true).then(() => releaseTabLock());
+      (isGitHubPages ? saveToFile() : saveToFile(true)).then(() => releaseTabLock());
       document.querySelectorAll('[data-group^="ag"]').forEach(el => delete el.dataset.group);
       // dim-handle 배지 제거
       document.querySelectorAll('.dim-handle').forEach(b => b.remove());
@@ -4166,7 +4167,10 @@
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
   });
   document.getElementById('tb-undo').addEventListener('click', () => doUndo());
-  document.getElementById('tb-save').addEventListener('click', () => saveToFile(true));
+  document.getElementById('tb-save').addEventListener('click', () => {
+    if (isGitHubPages && !ghIsDirty()) { showToast('변경사항 없음', 2000); return; }
+    saveToFile(true);
+  });
   document.getElementById('tb-anim').addEventListener('click', () => {
     layerActiveTab = 'animation';
     const panel = document.getElementById('layer-panel');
