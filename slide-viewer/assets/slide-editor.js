@@ -1804,21 +1804,6 @@
   }
 
   function getCleanHTML() {
-    // ── 동적/외부 요소 제거 (저장 HTML 오염 방지) ──
-    const _removedEls = [];
-    // 동적 생성 요소
-    ['gh-settings', 'toast-container', 'gh-token-dialog', 'edit-mode-badge'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { _removedEls.push({ el, parent: el.parentNode, next: el.nextSibling }); el.remove(); }
-    });
-    // 브라우저 확장 프로그램이 주입한 style 태그 제거 (edit-badge-style만 보존)
-    const _removedStyles = [];
-    document.querySelectorAll('head > style').forEach(s => {
-      if (s.id === 'edit-badge-style') return;
-      _removedStyles.push({ el: s, parent: s.parentNode, next: s.nextSibling });
-      s.remove();
-    });
-
     selectedEls.forEach(s => { s.classList.remove('edit-selected'); s.classList.remove('edit-group-selected'); });
     const backedUpChildSelected = [...document.querySelectorAll('.child-selected')];
     const backedUpGroupEntered = [...document.querySelectorAll('.group-entered-parent')];
@@ -1935,9 +1920,6 @@
     backedUpPushExit.forEach(el => el.classList.add('push-exit'));
     backedUpPushEnter.forEach(el => el.classList.add('push-enter'));
     backedUpDrillActive.forEach(el => el.classList.add('drill-active'));
-    // 제거했던 동적/외부 요소 복원
-    _removedStyles.forEach(r => r.parent.insertBefore(r.el, r.next));
-    _removedEls.forEach(r => r.parent.insertBefore(r.el, r.next));
     return html;
   }
 
