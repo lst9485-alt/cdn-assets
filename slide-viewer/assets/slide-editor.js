@@ -860,7 +860,7 @@
     // Ctrl+S: 저장 (텍스트 편집 중에도 허용)
     if ((e.ctrlKey || e.metaKey) && e.key === 's') {
       e.preventDefault();
-      saveToFile();
+      saveToFile(true);
       return;
     }
     // Ctrl+Z / Ctrl+Shift+Z: 실행 취소 / 다시 실행
@@ -1939,8 +1939,8 @@
     setTimeout(() => { el.textContent = ''; }, 2000);
   }
 
-  async function saveToFile() {
-    if (isGitHubPages) { await ghSaveToFile(); return; }
+  async function saveToFile(force) {
+    if (isGitHubPages) { await ghSaveToFile(force); return; }
     if (!dirHandle || isSaving) return;
     isSaving = true;
     // EF11: 저장 전 외부 변경 감지
@@ -2043,8 +2043,9 @@
     }
   }
 
-  async function ghSaveToFile() {
-    if (_ghSaving || !_ghDirty) return;
+  async function ghSaveToFile(force) {
+    if (_ghSaving) return;
+    if (!force && !_ghDirty) return;
     const token = ghGetToken();
     if (!token) return;
     _ghSaving = true;
@@ -2105,6 +2106,13 @@
 
   function ghMarkDirty() { _ghDirty = true; }
   function ghIsDirty() { return _ghDirty; }
+
+  // ── 텍스트 편집 시 dirty 감지 (contenteditable) ──
+  if (isGitHubPages) {
+    document.addEventListener('input', (e) => {
+      if (e.target.closest && e.target.closest('[contenteditable]')) ghMarkDirty();
+    });
+  }
 
   // ── 토큰 설정 다이얼로그 ──
   function ghShowTokenDialog() {
@@ -4093,7 +4101,7 @@
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
   });
   document.getElementById('tb-undo').addEventListener('click', () => doUndo());
-  document.getElementById('tb-save').addEventListener('click', () => saveToFile());
+  document.getElementById('tb-save').addEventListener('click', () => saveToFile(true));
   document.getElementById('tb-anim').addEventListener('click', () => {
     layerActiveTab = 'animation';
     const panel = document.getElementById('layer-panel');
