@@ -1882,36 +1882,39 @@
       s.dataset.steps = String(maxStep + 1);
     });
 
-    // ── 확장 프로그램/동적 요소 제거 (직렬화 전) ──
-    const _removedPollution = [];
-    // <head> 내 원본이 아닌 <style> 제거 (원본은 #edit-badge-style 1개뿐)
-    document.head.querySelectorAll('style:not(#edit-badge-style)').forEach(el => {
-      _removedPollution.push({ el, parent: el.parentNode, next: el.nextSibling });
-      el.remove();
-    });
-    // 동적 생성 요소 + 확장 프로그램 컨테이너 제거
-    const _bodyWhitelist = new Set([
-      'layer-panel','guide-toolbar','dim-outer','stage','overview','help',
-      'align-menu','group-toolbar','slideNum','edit-badge','top-toolbar',
-      'palette-bg','palette-fc','coord-panel','font-panel',
-      'gs-crosshair-h','gs-crosshair-v','filmstrip'
-    ]);
-    Array.from(document.body.children).forEach(el => {
-      if (el.tagName === 'SCRIPT') return; // <script> 태그 유지
-      if (el.id && _bodyWhitelist.has(el.id)) return; // 원본 요소 유지
-      _removedPollution.push({ el, parent: el.parentNode, next: el.nextSibling });
-      el.remove();
-    });
+    // ── HTML 조립 (확장 프로그램 오염 원천 차단) ──
+    // document.documentElement.outerHTML 대신 알려진 요소만 골라서 조립
+    const _headParts = [
+      '<meta charset="UTF-8">',
+      '<title>' + escHTML(document.title) + '</title>',
+      document.querySelector('head > script') ? document.querySelector('head > script').outerHTML : '',
+      document.querySelector('link[href*="fonts.googleapis"]') ? document.querySelector('link[href*="fonts.googleapis"]').outerHTML : '',
+      document.querySelector('link[href*="slide-style"]') ? document.querySelector('link[href*="slide-style"]').outerHTML : '',
+      document.getElementById('edit-badge-style') ? document.getElementById('edit-badge-style').outerHTML : ''
+    ].filter(Boolean);
 
-    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const _bodyIds = [
+      'layer-panel','guide-toolbar','dim-outer','stage',
+      'overview','help','align-menu','group-toolbar',
+      'slideNum','edit-badge','top-toolbar',
+      'palette-bg','palette-fc','coord-panel','font-panel'
+    ];
+    const _afterScriptIds = ['gs-crosshair-h','gs-crosshair-v','filmstrip'];
 
-    // 제거한 오염 요소를 원래 위치에 복원
-    _removedPollution.reverse().forEach(r => {
-      try {
-        if (r.next && r.next.parentNode === r.parent) r.parent.insertBefore(r.el, r.next);
-        else r.parent.appendChild(r.el);
-      } catch(_) { try { r.parent.appendChild(r.el); } catch(_2) {} }
-    });
+    const bodyBefore = _bodyIds.map(id => document.getElementById(id)).filter(Boolean).map(el => el.outerHTML).join('\n');
+    const scriptTag = document.querySelector('script[src*="slide-editor"]') ? document.querySelector('script[src*="slide-editor"]').outerHTML : '';
+    const bodyAfter = _afterScriptIds.map(id => document.getElementById(id)).filter(Boolean).map(el => el.outerHTML).join('');
+
+    const bodyClass = document.body.className.trim();
+    const bodyTag = bodyClass ? '<body class="' + escHTML(bodyClass) + '">' : '<body>';
+
+    const html = '<!DOCTYPE html>\n<html lang="ko">\n<head>\n'
+      + _headParts.join('\n') + '\n</head>\n'
+      + bodyTag + '\n'
+      + bodyBefore + '\n'
+      + scriptTag + '\n'
+      + bodyAfter + '\n'
+      + '</body>\n</html>';
     // 제거한 레이어 복원
     removedLayers.forEach(r => {
       try {
