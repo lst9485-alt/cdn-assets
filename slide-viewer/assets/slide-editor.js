@@ -1803,6 +1803,10 @@
   }
 
   function getCleanHTML() {
+    // GitHub 설정 아이콘 임시 제거 (저장 HTML에 포함 방지)
+    const ghSettingsBtn = document.getElementById('gh-settings');
+    if (ghSettingsBtn) ghSettingsBtn.remove();
+
     selectedEls.forEach(s => { s.classList.remove('edit-selected'); s.classList.remove('edit-group-selected'); });
     const backedUpChildSelected = [...document.querySelectorAll('.child-selected')];
     const backedUpGroupEntered = [...document.querySelectorAll('.group-entered-parent')];
@@ -1919,6 +1923,11 @@
     backedUpPushExit.forEach(el => el.classList.add('push-exit'));
     backedUpPushEnter.forEach(el => el.classList.add('push-enter'));
     backedUpDrillActive.forEach(el => el.classList.add('drill-active'));
+    // GitHub 설정 아이콘 복원
+    if (isGitHubPages && ghSettingsBtn) {
+      const saveBtn = document.getElementById('tb-save');
+      if (saveBtn) saveBtn.after(ghSettingsBtn);
+    }
     return html;
   }
 
