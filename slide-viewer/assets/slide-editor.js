@@ -1985,16 +1985,22 @@
   const GH_TOKEN_KEY = 'gh-save-token';
   const GH_AUTO_SAVE_INTERVAL = 30000;
 
-  // ── 저장 후 캐시 우회 (GitHub Pages max-age=600 대응) ──
+  // ── 저장 후 즉시 반영 (GitHub Pages CDN 캐시 우회) ──
+  // 저장한 HTML을 localStorage에 보관 → 페이지 로드 시 CDN 캐시 대신 사용
   if (isGitHubPages) {
-    const _ghSaveTs = localStorage.getItem('gh-save-ts');
-    if (_ghSaveTs) {
-      const elapsed = Date.now() - parseInt(_ghSaveTs);
-      if (elapsed < 600000 && !location.search.includes('_cb=')) {
-        localStorage.removeItem('gh-save-ts');
-        location.replace(location.pathname + '?_cb=' + _ghSaveTs + location.hash);
-      } else {
-        localStorage.removeItem('gh-save-ts');
+    const _ghCacheKey = 'gh-html-' + (location.pathname.split('/').pop() || 'slides');
+    const _ghCached = localStorage.getItem(_ghCacheKey);
+    if (_ghCached) {
+      try {
+        const data = JSON.parse(_ghCached);
+        localStorage.removeItem(_ghCacheKey); // 루프 방지: 먼저 삭제
+        if (Date.now() - data.ts < 600000) { // 10분 이내
+          document.open();
+          document.write(data.html);
+          document.close();
+        }
+      } catch (e) {
+        localStorage.removeItem(_ghCacheKey);
       }
     }
   }
@@ -2098,8 +2104,10 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        localStorage.setItem('gh-save-ts', Date.now().toString());
-        showToast('GitHub에 저장 완료! 새로고침하면 반영됩니다.', 3000);
+        // CDN 캐시 우회: 저장한 HTML을 localStorage에 보관
+        const cacheKey = 'gh-html-' + (location.pathname.split('/').pop() || 'slides');
+        try { localStorage.setItem(cacheKey, JSON.stringify({ html: content, ts: Date.now() })); } catch(_) {}
+        showToast('GitHub에 저장 완료!', 3000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
         await _ghHandleConflict(encoded, filePath);
@@ -2141,8 +2149,12 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        localStorage.setItem('gh-save-ts', Date.now().toString());
-        showToast('GitHub에 저장 완료! 새로고침하면 반영됩니다.', 3000);
+        const cacheKey2 = 'gh-html-' + (location.pathname.split('/').pop() || 'slides');
+        try {
+          const rawHtml = decodeURIComponent(escape(atob(encoded)));
+          localStorage.setItem(cacheKey2, JSON.stringify({ html: rawHtml, ts: Date.now() }));
+        } catch(_) {}
+        showToast('GitHub에 저장 완료!', 3000);
         try { showSaveStatus(); } catch(_) {}
       } else {
         showToast('재시도 실패 (' + res.status + ')', 4000);
