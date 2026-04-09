@@ -219,6 +219,19 @@
             hubVisible: true
           },
           {
+            id: 'landing-page',
+            title: '1:1 상담 랜딩페이지',
+            description: '상세페이지 v3.5 미리보기',
+            href: 'homepage/landing.html',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'web',
+            navVisible: true,
+            sidebarType: 'root',
+            activeMatch: ['landing.html'],
+            hubVisible: true
+          },
+          {
             id: 'slide-viewer',
             title: '슬라이드 템플릿',
             description: '기본 30종 + 베리언츠 132장',
