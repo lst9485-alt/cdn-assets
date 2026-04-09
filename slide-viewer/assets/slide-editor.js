@@ -1985,6 +1985,20 @@
   const GH_TOKEN_KEY = 'gh-save-token';
   const GH_AUTO_SAVE_INTERVAL = 30000;
 
+  // ── 저장 후 캐시 우회 (GitHub Pages max-age=600 대응) ──
+  if (isGitHubPages) {
+    const _ghSaveTs = localStorage.getItem('gh-save-ts');
+    if (_ghSaveTs) {
+      const elapsed = Date.now() - parseInt(_ghSaveTs);
+      if (elapsed < 600000 && !location.search.includes('_cb=')) {
+        localStorage.removeItem('gh-save-ts');
+        location.replace(location.pathname + '?_cb=' + _ghSaveTs + location.hash);
+      } else {
+        localStorage.removeItem('gh-save-ts');
+      }
+    }
+  }
+
   let _ghToken = null;
   let _ghFileSha = null;
   let _ghDirty = false;
@@ -2084,7 +2098,8 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        showToast('GitHub에 저장 완료', 3000);
+        localStorage.setItem('gh-save-ts', Date.now().toString());
+        showToast('GitHub에 저장 완료! 새로고침하면 반영됩니다.', 3000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
         await _ghHandleConflict(encoded, filePath);
@@ -2126,7 +2141,8 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        showToast('GitHub에 저장 완료', 3000);
+        localStorage.setItem('gh-save-ts', Date.now().toString());
+        showToast('GitHub에 저장 완료! 새로고침하면 반영됩니다.', 3000);
         try { showSaveStatus(); } catch(_) {}
       } else {
         showToast('재시도 실패 (' + res.status + ')', 4000);
