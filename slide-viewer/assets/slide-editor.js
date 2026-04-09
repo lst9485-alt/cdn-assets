@@ -2249,24 +2249,24 @@
   }
 
   // ── GitHub Pages: CDN 캐시 우회 (저장 직후 새로고침 시 최신 버전 표시) ──
+  // 캐시를 10분간 유지 → 새로고침할 때마다 캐시에서 불러옴
   if (isGitHubPages) {
     (function _ghApplyCachedVersion() {
-      // 무한루프 방지: 캐시에서 로드된 페이지면 스킵
-      if (sessionStorage.getItem('gh-cache-loaded')) {
-        sessionStorage.removeItem('gh-cache-loaded');
-        return;
-      }
+      // 무한루프 방지: document.write 직후 재로드된 페이지면 3초간 스킵
+      const lastWrite = parseInt(sessionStorage.getItem('gh-cache-write-ts') || '0');
+      if (Date.now() - lastWrite < 3000) return;
+
       const cacheKey = 'gh-cache-' + _ghFilePath();
       const cached = sessionStorage.getItem(cacheKey);
       if (!cached) return;
       try {
         const data = JSON.parse(cached);
-        if (Date.now() - data.ts > 600000) { // 10분 초과 → CDN도 갱신됨
+        if (Date.now() - data.ts > 600000) { // 10분 초과 → CDN도 갱신됨, 캐시 삭제
           sessionStorage.removeItem(cacheKey);
           return;
         }
-        sessionStorage.removeItem(cacheKey);
-        sessionStorage.setItem('gh-cache-loaded', '1');
+        // 캐시 유지 (삭제 안 함) → 다음 새로고침에도 사용
+        sessionStorage.setItem('gh-cache-write-ts', String(Date.now()));
         document.open();
         document.write(data.html);
         document.close();
