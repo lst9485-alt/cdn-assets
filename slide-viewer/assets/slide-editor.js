@@ -2084,7 +2084,8 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        showSaveStatus();
+        showToast('GitHub에 저장 완료', 3000);
+        try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
         await _ghHandleConflict(encoded, filePath);
       } else if (res.status === 401) {
@@ -2125,7 +2126,8 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        showSaveStatus();
+        showToast('GitHub에 저장 완료', 3000);
+        try { showSaveStatus(); } catch(_) {}
       } else {
         showToast('재시도 실패 (' + res.status + ')', 4000);
       }
