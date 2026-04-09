@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-09T06:00:10.115084+09:00",
+  "updated": "2026-04-10T06:00:13.788749+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 236,
-    "done": 204,
-    "overdue": 9,
+    "total": 240,
+    "done": 210,
+    "overdue": 11,
     "pending": [
       {
         "title": "전자책 작성",
@@ -72,43 +72,13 @@
       },
       {
         "title": "원고완성",
-        "date": "2026-04-09",
-        "overdue": false
+        "date": "2026-04-09T14:00:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "주간계획 수정",
-        "date": "2026-04-09T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "슬라이드 빅테스크",
-        "date": "2026-04-09T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
-        "date": "2026-04-09T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "알리고확인",
-        "date": "2026-04-09T11:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "슬라이드템플릿 부족한타입 조사후 추가. 부족한걸추가해야함",
-        "date": "2026-04-09T13:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "찬규교육",
-        "date": "2026-04-09T15:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "ppt",
-        "date": "2026-04-09T18:00:00.000+09:00",
-        "overdue": false
+        "title": "슬라이드템플릿 부족한타입 조사후 추가. 부족한걸추가해야함(메모스타일로변경+마지막 정리 페이지)",
+        "date": "2026-04-09T18:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "급여&자산체크",
@@ -117,22 +87,22 @@
       },
       {
         "title": "PPT완료",
-        "date": "2026-04-10",
-        "overdue": false
-      },
-      {
-        "title": "찬규디비 분리해서 보고 + 기록",
-        "date": "2026-04-10T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "ppt완료",
         "date": "2026-04-10T10:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "date": "2026-04-10T15:30:00.000+09:00",
+        "title": "홈페이지",
+        "date": "2026-04-10T14:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "date": "2026-04-10T17:45:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "촬영&편집",
+        "date": "2026-04-10T18:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -141,8 +111,8 @@
         "overdue": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "date": "2026-04-11",
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-04-11T11:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -161,6 +131,11 @@
         "overdue": false
       },
       {
+        "title": "찬규교육",
+        "date": "2026-04-13T15:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "주제선정&썸네일&제목",
         "date": "2026-04-14",
         "overdue": false
@@ -168,6 +143,11 @@
       {
         "title": "자료수집&도입부",
         "date": "2026-04-15",
+        "overdue": false
+      },
+      {
+        "title": "찬규디비 분리해서 보고 + 기록",
+        "date": "2026-04-15T09:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -181,6 +161,16 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-04-16",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-04-16T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "5시15분 나인마음의원",
         "date": "2026-04-20T17:00:00.000+09:00",
         "overdue": false
@@ -188,50 +178,32 @@
     ],
     "schedule": [
       {
-        "title": "원고완성",
+        "title": "급여&자산체크",
         "time": "",
         "allDay": true,
         "done": false
       },
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
+        "title": "PPT완료",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "슬라이드 빅테스크",
-        "time": "09:30",
+        "title": "홈페이지",
+        "time": "14:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고",
-        "time": "09:30",
+        "title": "촬영&편집&업로드",
+        "time": "17:45",
         "allDay": false,
         "done": false
       },
       {
-        "title": "알리고확인",
-        "time": "11:15",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "슬라이드템플릿 부족한타입 조사후 추가. 부족한걸추가해야함",
-        "time": "13:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "찬규교육",
-        "time": "15:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "ppt",
-        "time": "18:00",
+        "title": "촬영&편집",
+        "time": "18:30",
         "allDay": false,
         "done": false
       }
@@ -266,11 +238,6 @@
       "rate": "54%",
       "days": [
         {
-          "date": "2026-04-03",
-          "done": 2,
-          "total": 4
-        },
-        {
           "date": "2026-04-04",
           "done": 3,
           "total": 4
@@ -297,6 +264,11 @@
         },
         {
           "date": "2026-04-09",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-04-10",
           "done": 0,
           "total": 4
         }

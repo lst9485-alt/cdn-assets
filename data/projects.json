@@ -1,6 +1,14 @@
 {
-  "updated": "2026-04-09T06:00:01.800928+09:00",
+  "updated": "2026-04-10T06:00:00.748359+09:00",
   "projects": [
+    {
+      "name": "홈페이지",
+      "type": "folder",
+      "app": "homepage",
+      "modified": "2026-04-09",
+      "status": "v3.5 섹션 재배치 + UI/UX 개선. 서버 백엔드(Apps Script doPost) 배포 완료 (v24). 아임웹 삽입은 v3.4 기준 — v3.5 아직 미반영",
+      "next": "플로팅 CTA 추가 — 가격표 섹션 도달 시 \"상담신청하기\" 버튼 플로팅 (PC: 오른쪽 하단, 모바일: 하단 고정 바). 클릭 → 커스텀 폼으로 스크롤. footer-code.html에 IntersectionObserver + position:fixed"
+    },
     {
       "name": "운영 대시보드",
       "type": "file",
@@ -16,14 +24,6 @@
       "modified": "2026-04-09",
       "status": "2026-04-08 기준 브랜드 정체성 확정 완료.",
       "next": "이번 주 영상 원고에 새 정체성과 적 프레이밍 반영"
-    },
-    {
-      "name": "홈페이지",
-      "type": "folder",
-      "app": "homepage",
-      "modified": "2026-04-08",
-      "status": "v3.5 섹션 재배치 + UI/UX 개선. 서버 백엔드(Apps Script doPost) 배포 완료 (v24). 아임웹 삽입은 v3.4 기준 — v3.5 아직 미반영",
-      "next": "플로팅 CTA 추가 — 가격표 섹션 도달 시 \"상담신청하기\" 버튼 플로팅 (PC: 오른쪽 하단, 모바일: 하단 고정 바). 클릭 → 커스텀 폼으로 스크롤. footer-code.html에 IntersectionObserver + position:fixed"
     },
     {
       "name": "컨설팅",
