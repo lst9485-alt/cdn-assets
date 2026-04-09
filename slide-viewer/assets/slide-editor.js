@@ -2303,7 +2303,7 @@
       userZoom = 1; panX = 0; panY = 0;
       clearInterval(autoSaveTimer);
       autoSaveTimer = null;
-      saveToFile().then(() => releaseTabLock());
+      saveToFile(true).then(() => releaseTabLock());
       document.querySelectorAll('[data-group^="ag"]').forEach(el => delete el.dataset.group);
       // dim-handle 배지 제거
       document.querySelectorAll('.dim-handle').forEach(b => b.remove());
