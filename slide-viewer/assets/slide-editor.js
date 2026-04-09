@@ -2248,11 +2248,10 @@
     document.dispatchEvent(new Event(success ? 'gh-token-set' : 'gh-token-cancel'));
   }
 
-  // ── GitHub Pages: 저장 후 GitHub API에서 최신 버전 직접 읽기 ──
-  // CDN 캐시(10분)를 완전히 건너뛰고 GitHub API에서 최신 HTML을 가져옴
+  // ── GitHub Pages: 저장한 파일만 GitHub API에서 최신 버전 읽기 ──
   if (isGitHubPages) {
     (function _ghLoadLatestFromAPI() {
-      // 무한루프 방지: API에서 로드한 직후면 스킵
+      // 무한루프 방지
       const lastLoad = parseInt(localStorage.getItem('gh-api-load-ts') || '0');
       if (Date.now() - lastLoad < 5000) return;
 
@@ -2260,19 +2259,19 @@
       if (!saved) return;
       try {
         const data = JSON.parse(saved);
-        if (Date.now() - data.ts > 600000) { // 10분 초과 → CDN도 갱신됨
+        // 저장한 파일과 현재 페이지가 다르면 스킵
+        if (data.path !== _ghFilePath()) return;
+        if (Date.now() - data.ts > 600000) {
           localStorage.removeItem('gh-last-save');
           return;
         }
       } catch(_) { localStorage.removeItem('gh-last-save'); return; }
 
-      // 토큰 확인 (없으면 CDN 버전 그대로 사용)
       const token = ghGetToken();
       if (!token) return;
 
       // GitHub API에서 최신 HTML 가져오기
-      const filePath = _ghFilePath();
-      fetch(`https://api.github.com/repos/${GH_REPO}/contents/${filePath}`, {
+      fetch(`https://api.github.com/repos/${GH_REPO}/contents/${_ghFilePath()}`, {
         headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.raw+json' }
       })
       .then(res => { if (!res.ok) throw new Error(res.status); return res.text(); })
@@ -2282,7 +2281,7 @@
         document.write(html);
         document.close();
       })
-      .catch(() => {}); // 실패하면 CDN 버전 그대로
+      .catch(() => {});
     })();
   }
 
