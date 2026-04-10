@@ -235,7 +235,7 @@
             id: 'slide-viewer',
             title: '슬라이드 템플릿',
             description: '기본 36종 + 베리언츠 95장',
-            href: 'https://ubiquitous-fudge-4f55c9.netlify.app/slide-viewer/',
+            href: 'https://cdn-assets-three.vercel.app/slide-viewer/',
             badgeText: 'LIVE',
             badgeTone: 'live',
             iconKey: 'doc',

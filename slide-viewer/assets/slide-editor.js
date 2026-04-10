@@ -1641,7 +1641,7 @@
   }
 
   // ── 환경 감지 ──
-  const isGitHubPages = location.hostname.endsWith('.github.io') || location.hostname.endsWith('.netlify.app');
+  const isGitHubPages = location.hostname.endsWith('.github.io') || location.hostname.endsWith('.vercel.app');
 
   // ── 토스트 알림 ──
   function showToast(msg, duration = 3000) {
