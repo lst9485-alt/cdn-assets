@@ -983,14 +983,15 @@
             }
           }
         });
+        refreshAfterUngroup();
       } else {
         // 기존 그룹 해제 후 새 그룹 생성 (step 배치는 변경하지 않음)
         selectedEls.forEach(el => delete el.dataset.group);
         groupCounter++;
         const gid = 'g' + groupCounter;
         selectedEls.forEach(el => { el.dataset.group = gid; });
+        if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
       }
-      if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
       return;
     }
     // 텍스트 편집 중: 나머지 단축키 비활성화
@@ -1018,15 +1019,10 @@
           el.parentElement.removeChild(el);
         }
       });
-      selectedEl = null; selectedEls = [];
-      isDragging = false;
-      pendingDrag = false;
       isResizing = false;
       resizeCorner = null;
       resizeEdge = null;
-      document.getElementById('coord-panel').style.display = 'none';
-      document.getElementById('font-panel').classList.remove('visible');
-      document.querySelectorAll('.resize-handle').forEach(h => h.classList.remove('visible'));
+      clearSelection();
       if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
       return;
     }
@@ -2529,11 +2525,24 @@
     groupParent = null;
   }
 
+  // 그룹 해제 후 시각 상태 복구: 노란 박스 hide, edit-group-selected → edit-selected (다중 선택 상태로 전환)
+  function refreshAfterUngroup() {
+    selectedEls.forEach(s => {
+      s.classList.remove('edit-group-selected');
+      s.classList.add('edit-selected');
+    });
+    document.getElementById('group-box').style.display = 'none';
+    individualMode = false;
+    document.body.classList.remove('individual-mode');
+    updateGroupToolbar();
+    if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+  }
+
   function clearSelection() {
     exitGroup();
-    selectedEls.forEach(s => {
-      s.classList.remove('edit-selected');
-      s.classList.remove('edit-group-selected');
+    // 방어적: selectedEls 추적 누락된 stale 클래스도 함께 스크럽
+    document.querySelectorAll('.edit-selected, .edit-group-selected').forEach(el => {
+      el.classList.remove('edit-selected', 'edit-group-selected');
     });
     selectedEl = null;
     selectedEls = [];
@@ -4331,7 +4340,7 @@
       if (selectedEls.length) {
         pushUndo();
         selectedEls.forEach(el => { delete el.dataset.group; });
-        if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+        refreshAfterUngroup();
       }
     } else if (item.dataset.align) {
       alignToPage(item.dataset.align);
@@ -4366,7 +4375,7 @@
     if (!selectedEls.length) return;
     pushUndo();
     selectedEls.forEach(el => { delete el.dataset.group; });
-    if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+    refreshAfterUngroup();
   });
   document.getElementById('tb-delete').addEventListener('click', () => {
     if (!selectedEls.length || !editMode) return;
@@ -4384,9 +4393,7 @@
         el.parentElement.removeChild(el);
       }
     });
-    selectedEl = null; selectedEls = [];
-    document.getElementById('coord-panel').style.display = 'none';
-    document.querySelectorAll('.resize-handle').forEach(h => h.classList.remove('visible'));
+    clearSelection();
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
   });
   document.getElementById('tb-undo').addEventListener('click', () => doUndo());
