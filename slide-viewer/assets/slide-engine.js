@@ -3722,7 +3722,7 @@
 <html lang="ko"><head>
 <meta charset="UTF-8">
 <title>발표자 모드</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${cssHref}">
 <style>
 html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !important; display: block !important; flex-direction: unset !important; justify-content: unset !important; align-items: unset !important; }

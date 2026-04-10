@@ -14,6 +14,11 @@
     --color-text-faint: #bbb;
     --slide-bg: #F5F0E8;
 
+    /* ── 글자색 팔레트 (에디터 글자색 5번 버튼용, 브랜드 색상 체계) ── */
+    --fc-red: #FF6B00;     /* 메인 주황 (브랜드) */
+    --fc-blue: #4A90D9;    /* 서브 파랑 (브랜드) */
+    --fc-yellow: #E63946;  /* 강조 빨강 (경고/금지) */
+
     /* ── 에디터 UI (변경 없음) ── */
     --editor-accent: #FFE500;
     --editor-accent-rgb: 255, 229, 0;
@@ -185,10 +190,15 @@
   .hl.bg-accent { background: rgba(var(--color-accent-rgb), 0.15); color: var(--color-text); padding: 4px 24px; }
   .hl.bg-gray { background: #999; color: #fff; }
   .hl.fc-white { color: #fff; }
-  .hl.fc-red { color: var(--color-accent); }
-  .hl.fc-blue { color: var(--color-accent); }
-  .hl.fc-yellow { color: var(--color-accent); }
+  .hl.fc-red { color: var(--fc-red); }
+  .hl.fc-blue { color: var(--fc-blue); }
+  .hl.fc-yellow { color: var(--fc-yellow); }
   .hl.fc-black { color: var(--color-text); }
+
+  /* 글자색 팔레트 스와치 (suffix.html palette-fc) */
+  .color-swatch.swatch-fc-red    { background: var(--fc-red); }
+  .color-swatch.swatch-fc-blue   { background: var(--fc-blue); }
+  .color-swatch.swatch-fc-yellow { background: var(--fc-yellow); }
 
   /* ── 말풍선 ── */
   .bubble {
@@ -537,53 +547,131 @@
   .step-title { position: absolute; z-index: 1; }
   .icon-circle { animation: float-y 3s ease-in-out infinite; }
 
-  /* ── .hl 밑줄 애니메이션 (wavy) ── */
-  .hl { position: relative; }
+  /* ── .hl 형광펜 (자동 펼침/유지/페이드 사이클) ── */
+  .hl { position: relative; z-index: 1; }
   .hl::after {
     content: '';
     position: absolute;
-    left: 24px; bottom: 4px;
-    height: 8px;
+    left: 8px; bottom: 0;
+    height: 22px;
     width: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='8'%3E%3Cpath d='M0 4 Q5 0 10 4 Q15 8 20 4' fill='none' stroke='rgba(255,148,52,0.5)' stroke-width='2'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
+    background: rgba(245, 196, 23, 0.55);  /* 연노랑 형광펜 */
+    border-radius: 2px;
     pointer-events: none;
-  }
-  .hl::before {
-    content: '\2726';
-    position: absolute;
-    right: 16px; bottom: -2px;
-    font-size: 16px;
-    color: rgba(255,148,52,0.6);
-    opacity: 0;
-    transform: scale(0);
-    pointer-events: none;
-  }
-  .slide.active .hl::before {
-    animation: hl-star-loop 3.4s ease-out 1.4s infinite;
-  }
-  @keyframes hl-star-loop {
-    0% { opacity: 0; transform: scale(0) rotate(0deg); }
-    12% { opacity: 1; transform: scale(1.5) rotate(180deg); }
-    18% { opacity: 1; transform: scale(1) rotate(360deg); }
-    35% { opacity: 1; transform: scale(1) rotate(360deg); }
-    47% { opacity: 0; transform: scale(0) rotate(360deg); }
-    100% { opacity: 0; transform: scale(0) rotate(360deg); }
+    z-index: -1;
   }
   .slide.active .hl::after {
-    animation: hl-underline-loop 3.4s ease-out 0.8s infinite;
+    animation: hl-highlighter-loop 6s ease-out 0.8s infinite;
   }
-  @keyframes hl-underline-loop {
-    0% { width: 0; opacity: 1; }
-    18% { width: calc(100% - 48px); opacity: 1; }
-    41% { width: calc(100% - 48px); opacity: 1; }
-    47% { width: calc(100% - 48px); opacity: 0; }
-    48% { width: 0; opacity: 0; }
-    100% { width: 0; opacity: 0; }
+  @keyframes hl-highlighter-loop {
+    0%   { width: 0;                  opacity: 1; }
+    23%  { width: calc(100% - 16px);  opacity: 1; }   /* 좌→우 펼침 1.4초 */
+    75%  { width: calc(100% - 16px);  opacity: 1; }   /* 한참 유지 */
+    90%  { width: calc(100% - 16px);  opacity: 0; }   /* 페이드 */
+    100% { width: 0;                  opacity: 0; }
   }
 
   /* ── ambient: 추가 ── */
   .hl { animation: none; }
+
+  /* ── 손글씨 (Nanum Pen Script, T37 마지막정리/T38 챕터전환) ── */
+  .hand {
+    font-family: 'Nanum Pen Script', 'Pretendard', cursive;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--color-text);
+  }
+  .hand.lg { font-size: 96px; }
+  .hand.md { font-size: 64px; }
+  .hand.sm { font-size: 44px; }
+  .hand.accent { color: var(--color-accent); }
+
+  /* 한글자씩 타자기 등장 (animations.js에서 .ch span 분리) */
+  .hand-typing > .ch {
+    opacity: 0;
+    display: inline-block;
+    transition: opacity 0.05s ease;
+  }
+  .hand-typing.anim-shown > .ch { opacity: 1; }
+  /* 편집 모드에서는 항상 표시 */
+  body.edit-mode .hand-typing > .ch { opacity: 1 !important; }
+
+  /* ── 포스트잇 (T37 마지막정리) ── */
+  .postit {
+    background: #FFF59D;          /* 전통 포스트잇 노랑 */
+    border-radius: 4px;
+    padding: 36px 32px;
+    box-shadow: 6px 10px 20px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(0,0,0,0.04);
+    min-width: 320px;
+    min-height: 320px;
+    position: absolute;
+    z-index: 1;
+    animation: float-y 4s ease-in-out infinite;
+  }
+  .postit.tilt-l { transform: rotate(-2deg); }
+  .postit.tilt-r { transform: rotate(2deg); }
+  .postit.tilt-c { transform: rotate(-0.5deg); }
+  .postit-num {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 88px;
+    color: #222;
+    line-height: 1;
+    display: inline-block;
+    position: relative;
+  }
+
+  /* ── 손글씨 동그라미 체크 (SVG, 포스트잇 안 인라인) ── */
+  .hand-circle-svg {
+    position: absolute;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .hand-circle-svg path {
+    stroke: #E63946;
+    stroke-width: 4;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .step-layer.visible .hand-circle-svg path,
+  body.edit-mode .hand-circle-svg path {
+    animation: hand-circle-draw 1.4s ease-out forwards;
+  }
+  .hand-circle-svg path:nth-child(1) { animation-delay: 0.20s; }
+  .hand-circle-svg path:nth-child(2) { animation-delay: 0.55s; }
+  .hand-circle-svg path:nth-child(3) { animation-delay: 0.90s; }
+  @keyframes hand-circle-draw {
+    from {
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      opacity: 0;
+    }
+    20% { opacity: 1; }
+    to {
+      stroke-dasharray: 600;
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+  }
+
+  /* ── 메모지 (T38 챕터전환) ── */
+  .memo-paper {
+    background: #FFFEF7;
+    /* 가로 줄무늬 (메모지 느낌) */
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 79px,
+      #d4d0c4 79px,
+      #d4d0c4 80px
+    );
+    box-shadow: 0 18px 40px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06);
+    transform: rotate(-1deg);
+    padding: 80px;
+    position: absolute;
+    z-index: 0;
+  }
+
   .bubble { animation: float-bubble 2.5s ease-in-out infinite; }
   .card { animation: float-y 4s ease-in-out infinite; }
   .icon-flow-icon { animation: float-y 3s ease-in-out infinite; }

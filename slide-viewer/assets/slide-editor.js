@@ -211,6 +211,7 @@
     if (type === 'click') { playSndClick(); return; }
     if (type === 'ding') { playSndDing(); return; }
     if (type === 'timeline') { playSndTimeline(); return; }
+    if (type === 'write') { playSndWrite(); return; }
     if (type === 'transition') { sndTransition.currentTime = 0; sndTransition.play().catch(() => {}); return; }
     if (type === 'money') { sndMoney.currentTime = 0; sndMoney.play().catch(() => {}); return; }
     if (type === 'buzz') { sndBuzz.currentTime = 0; sndBuzz.play().catch(() => {}); return; }
@@ -275,6 +276,33 @@
       g2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
       o2.connect(g2); g2.connect(ctx.destination);
       o2.start(ctx.currentTime + 0.12); o2.stop(ctx.currentTime + 0.2);
+    } catch(e) {}
+  }
+
+  // write: 손글씨 슥슥 (짧은 화이트노이즈 + 로우패스 필터)
+  function playSndWrite() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const t = ctx.currentTime;
+      const dur = 0.09;
+      // 화이트노이즈 버퍼
+      const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * 0.5;
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      // 로우패스로 부드럽게
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 2400;
+      filter.Q.value = 0.7;
+      // envelope
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.04, t);
+      gain.gain.linearRampToValueAtTime(0.10, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+      src.start(t); src.stop(t + dur);
     } catch(e) {}
   }
 
@@ -464,6 +492,39 @@
       }));
     }
     animateCountValues(el, 5600);
+  }
+
+  // 손글씨 한글자씩 분리 (T37 마지막정리 / T38 챕터전환 .hand-typing 처리)
+  // 페이지 로드 시 1회 실행. 새로 추가된 .hand-typing은 dataset 체크로 중복 방지.
+  function splitHandTyping(root) {
+    if (!root || !root.querySelectorAll) return;
+    const els = root.querySelectorAll('.hand-typing');
+    els.forEach(el => {
+      if (el.dataset.handTypingInit === '1') return;
+      // 자식이 이미 .ch span인 경우 스킵 (재진입 방지)
+      if (el.querySelector(':scope > .ch')) { el.dataset.handTypingInit = '1'; return; }
+      const text = el.textContent || '';
+      el.textContent = '';
+      const frag = document.createDocumentFragment();
+      Array.from(text).forEach((ch, i) => {
+        const span = document.createElement('span');
+        span.className = 'ch';
+        span.textContent = ch === ' ' ? '\u00A0' : ch;
+        span.style.transitionDelay = (i * 0.08) + 's';
+        frag.appendChild(span);
+      });
+      el.appendChild(frag);
+      el.dataset.handTypingInit = '1';
+    });
+  }
+
+  // 페이지 로드 후 자동 실행 (DOM 안정 대기 100ms)
+  if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => setTimeout(() => splitHandTyping(document), 100));
+    } else {
+      setTimeout(() => splitHandTyping(document), 100);
+    }
   }
 
   function getSteps(slide) {
@@ -4198,7 +4259,7 @@
     const BG_CLASSES = ['bg-blue','bg-red','bg-green','bg-white','bg-black','bg-gray'];
     const FC_CLASSES = ['fc-white','fc-red','fc-blue','fc-yellow','fc-black'];
     const BG_COLORS = {'':'transparent','bg-blue':'rgba(255,148,52,0.12)','bg-red':'rgba(0,0,0,0.06)','bg-green':'rgba(255,148,52,0.12)','bg-white':'#fff','bg-black':'#222','bg-accent':'rgba(255,148,52,0.15)','bg-gray':'#999'};
-    const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#FF6B00','fc-blue':'#FF6B00','fc-yellow':'#FF6B00'};
+    const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#FF6B00','fc-blue':'#4A90D9','fc-yellow':'#E63946'};
 
     function closePalettes() {
       paletteBg.classList.remove('open');
@@ -4447,7 +4508,7 @@
 <html lang="ko"><head>
 <meta charset="UTF-8">
 <title>발표자 모드</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${cssHref}">
 <style>
 html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !important; display: block !important; flex-direction: unset !important; justify-content: unset !important; align-items: unset !important; }
