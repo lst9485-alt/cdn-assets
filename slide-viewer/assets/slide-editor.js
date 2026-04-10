@@ -2777,7 +2777,7 @@
       }
     }
     if (!editMode) return;
-    let el = e.target.closest('.hl, .bubble, .bg-label, .card-title, .card-desc, .num-text, .bar-label, .bar-value, .icon-label, .flow-box, .icon-flow-label, .flow-arrow, .check-text, .hbar-label, .hbar-val, .stat-num, .quote-text, .grid-title, .section-badge, .corner-label, .btn-pill, .tag-chip, .alert-text, .compare-header, .compare-item, .tl-box, .cta-btn, .stat-label');
+    let el = e.target.closest('.hl, .bubble, .bg-label, .card-title, .card-desc, .num-text, .bar-label, .bar-value, .icon-label, .flow-box, .icon-flow-label, .flow-arrow, .check-text, .hbar-label, .hbar-val, .stat-num, .quote-text, .grid-title, .section-badge, .corner-label, .btn-pill, .tag-chip, .alert-text, .compare-header, .compare-item, .tl-box, .cta-btn, .stat-label, .cork-label, .hand-title-mark, .hand-typing');
     if (!el) {
       const area = e.target.closest('.text-area');
       if (area) el = area.querySelector('.hl');
