@@ -63,20 +63,24 @@
     return html;
   }
 
+  function resolveHref(href) {
+    return href.indexOf('http') === 0 ? href : root + href;
+  }
+
   function renderRootItem(item) {
     var active = isActive(item.activeMatch) ? ' sb-active' : '';
-    return '<a href="' + root + item.href + '" class="sb-link' + active + '">' + iconFor(item.iconKey) + ' ' + escapeHtml(item.sidebarLabel || item.title) + '</a>';
+    return '<a href="' + resolveHref(item.href) + '" class="sb-link' + active + '">' + iconFor(item.iconKey) + ' ' + escapeHtml(item.sidebarLabel || item.title) + '</a>';
   }
 
   function renderSubItem(item) {
     var active = isActive(item.activeMatch) ? ' sb-active' : '';
     var icon = item.sidebarIconKey || item.iconKey;
     var iconHtml = icon ? '<span class="sb-sub-icon">' + iconFor(icon, true) + '</span>' : '';
-    return '<a href="' + root + item.href + '" class="sb-sub' + active + '">' + iconHtml + escapeHtml(item.sidebarLabel || item.title) + '</a>';
+    return '<a href="' + resolveHref(item.href) + '" class="sb-sub' + active + '">' + iconHtml + escapeHtml(item.sidebarLabel || item.title) + '</a>';
   }
 
   function renderAnchor(anchor) {
-    return '<a href="' + root + anchor.href + '" class="sb-sub">' + escapeHtml(anchor.label) + '</a>';
+    return '<a href="' + resolveHref(anchor.href) + '" class="sb-sub">' + escapeHtml(anchor.label) + '</a>';
   }
 
   function iconFor(key, small) {

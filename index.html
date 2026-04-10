@@ -64,7 +64,7 @@
         var icon = site.icons[item.iconKey] || '';
         var badgeClass = item.badgeTone === 'soon' ? 'badge-soon' : 'badge-live';
         return ''
-            + '<a href="./' + item.href + '" class="item">'
+            + '<a href="' + (item.href.indexOf('http') === 0 ? item.href : './' + item.href) + '" class="item">'
             + '<div class="item-icon">' + icon + '</div>'
             + '<div class="item-body">'
             + '<span class="item-title">' + esc(item.title) + '</span>'

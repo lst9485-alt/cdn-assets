@@ -57,12 +57,14 @@
         + '<a class="nav-link' + active + '">' + escapeHtml(navConfig.label) + ' ▾</a>'
         + '<div class="nav-dropdown-menu">'
         + items.map(function(item) {
-          return '<a href="' + root + item.href + '">' + escapeHtml(item.navLabel || item.title) + '</a>';
+          var h = item.href.indexOf('http') === 0 ? item.href : root + item.href;
+          return '<a href="' + h + '">' + escapeHtml(item.navLabel || item.title) + '</a>';
         }).join('')
         + '</div></div>';
     }
 
-    return '<a href="' + root + navConfig.href + '" class="nav-link' + active + '">' + escapeHtml(navConfig.label) + '</a>';
+    var navHref = navConfig.href.indexOf('http') === 0 ? navConfig.href : root + navConfig.href;
+    return '<a href="' + navHref + '" class="nav-link' + active + '">' + escapeHtml(navConfig.label) + '</a>';
   }
 
   function isActive(matchers) {
