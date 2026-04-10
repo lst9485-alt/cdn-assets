@@ -61,6 +61,7 @@
         .funnel-bar-fill.green { background: #059669; }
         .funnel-bar-fill.yellow { background: #F59E0B; }
         .funnel-bar-fill.red { background: #DC2626; }
+        .signal-dot { font-size: 12px; margin-right: 6px; line-height: 1; }
         .progress-pct { font-size: 13px; font-weight: 800; min-width: 36px; text-align: right; }
 
         .funnel-connector { display: flex; align-items: center; justify-content: center; padding: 8px 0; gap: 10px; }
@@ -371,6 +372,10 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
     }
 
     // ── 세로 퍼널 (매출 위 → 풀링 아래) ──
+    // 신호등 임계값: <50% 빨강 / 50~70% 노랑 / ≥70% 초록
+    function signalClass(pct) { return pct >= 70 ? 'green' : pct >= 50 ? 'yellow' : 'red'; }
+    function signalTextColor(pct) { return pct >= 70 ? '#059669' : pct >= 50 ? '#D97706' : '#DC2626'; }
+
     function renderFunnel(cw, rates, targets) {
         // 매출+유료고객 (맨 위), 랜딩, 키콘텐츠, 풀링 (맨 아래)
         const stages = [
@@ -426,7 +431,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             const s = stages[i];
             const ratio = s.target > 0 ? Math.min(s.actual / s.target, 1) : 0;
             const pctAchieved = s.target > 0 ? Math.round(s.actual / s.target * 100) : 0;
-            const barColor = ratio >= 1 ? 'green' : ratio >= 0.8 ? 'yellow' : 'red';
+            const barColor = signalClass(pctAchieved);
             const barTitle = '목표 대비 ' + pctAchieved + '% 달성';
 
             html += '<div class="funnel-stage">';
@@ -442,7 +447,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             // 진행률 바 + 달성률 (바 오른쪽에 % 표시)
             html += '<div class="progress-row">';
             html += '<div class="funnel-bar funnel-bar-progress" title="' + barTitle + '"><div class="funnel-bar-fill ' + barColor + '" style="width:' + Math.round(ratio * 100) + '%"></div></div>';
-            html += '<span class="progress-pct" style="color:' + (pctAchieved >= 100 ? '#059669' : pctAchieved >= 80 ? '#D97706' : '#DC2626') + ';">' + pctAchieved + '%</span>';
+            html += '<span class="progress-pct" style="color:' + signalTextColor(pctAchieved) + ';">' + pctAchieved + '%</span>';
             html += '</div>';
 
             // 전환율 커넥터 (마지막 단계 제외)
@@ -451,7 +456,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
                 const cRatio = c.target > 0 ? c.rate / c.target : 1;
                 const isBelowTarget = cRatio < 1;
                 const isWorst = i === worstIdx;
-                const color = cRatio >= 1 ? 'green' : cRatio >= 0.8 ? 'yellow' : 'red';
+                const color = signalClass(Math.round(cRatio * 100));
 
                 html += '<div class="funnel-connector">';
                 html += '<div class="funnel-arrow">↓</div>';
@@ -483,9 +488,10 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             allItems.forEach((item, idx) => {
                 const pct = Math.round(item.ratio * 100);
                 rankHtml += '<div class="rank-row">';
+                rankHtml += '<span class="signal-dot" style="color:' + signalTextColor(pct) + ';">\u25cf</span>';
                 rankHtml += '<span class="rank-index" style="color:' + (idx === 0 ? '#DC2626' : '#64748B') + ';">' + (idx + 1) + '</span>';
                 rankHtml += '<span class="rank-label">' + item.label + '</span>';
-                rankHtml += '<span class="rank-value" style="color:' + (pct < 80 ? '#DC2626' : '#D97706') + ';">' + pct + '%</span>';
+                rankHtml += '<span class="rank-value" style="color:' + signalTextColor(pct) + ';">' + pct + '%</span>';
                 rankHtml += '</div>';
             });
         }
