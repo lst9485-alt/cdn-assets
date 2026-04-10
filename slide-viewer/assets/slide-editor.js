@@ -204,6 +204,8 @@
     } catch(e) {}
   }
   function playSound(type) {
+    // 'write'는 손글씨 데모용 — 일반 모드에서도 재생 (풀스크린 체크 우회)
+    if (type === 'write') { playSndWrite(); return; }
     if (!document.fullscreenElement) return;
     if (type === 'chart') { playSndChart(); return; }
     if (type === 'draw') { playSndDraw(); return; }
@@ -211,7 +213,6 @@
     if (type === 'click') { playSndClick(); return; }
     if (type === 'ding') { playSndDing(); return; }
     if (type === 'timeline') { playSndTimeline(); return; }
-    if (type === 'write') { playSndWrite(); return; }
     if (type === 'transition') { sndTransition.currentTime = 0; sndTransition.play().catch(() => {}); return; }
     if (type === 'money') { sndMoney.currentTime = 0; sndMoney.play().catch(() => {}); return; }
     if (type === 'buzz') { sndBuzz.currentTime = 0; sndBuzz.play().catch(() => {}); return; }
@@ -279,27 +280,28 @@
     } catch(e) {}
   }
 
-  // write: 손글씨 슥슥 (짧은 화이트노이즈 + 로우패스 필터)
+  // write: 손글씨 슥슥 (화이트노이즈 + 로우패스 필터, 더 길고 또렷하게)
   function playSndWrite() {
     try {
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       const t = ctx.currentTime;
-      const dur = 0.09;
+      const dur = 0.35;  // 더 길게
       // 화이트노이즈 버퍼
       const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
       const data = buf.getChannelData(0);
-      for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * 0.5;
+      for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1);  // 0.5 → 1.0
       const src = ctx.createBufferSource();
       src.buffer = buf;
-      // 로우패스로 부드럽게
+      // 밴드패스로 "슥슥" 종이 마찰 느낌
       const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.value = 2400;
-      filter.Q.value = 0.7;
-      // envelope
+      filter.type = 'bandpass';
+      filter.frequency.value = 3200;
+      filter.Q.value = 0.9;
+      // envelope (더 크게)
       const gain = ctx.createGain();
-      gain.gain.setValueAtTime(0.04, t);
-      gain.gain.linearRampToValueAtTime(0.10, t + 0.02);
+      gain.gain.setValueAtTime(0.0, t);
+      gain.gain.linearRampToValueAtTime(0.55, t + 0.04);  // 0.10 → 0.55 (5배 키움)
+      gain.gain.linearRampToValueAtTime(0.35, t + 0.18);
       gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
       src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
       src.start(t); src.stop(t + dur);
@@ -4508,7 +4510,7 @@
 <html lang="ko"><head>
 <meta charset="UTF-8">
 <title>발표자 모드</title>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${cssHref}">
 <style>
 html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !important; display: block !important; flex-direction: unset !important; justify-content: unset !important; align-items: unset !important; }
