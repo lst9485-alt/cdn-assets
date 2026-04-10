@@ -748,23 +748,40 @@
     }
   }
 
-  /* ── 메모지 (T38 챕터전환) ── */
-  .memo-paper {
-    background: #FFFEF7;
-    /* 가로 줄무늬 (메모지 느낌) */
-    background-image: repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 79px,
-      #d4d0c4 79px,
-      #d4d0c4 80px
-    );
-    box-shadow: 0 18px 40px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06);
-    transform: rotate(-1deg);
-    padding: 80px;
+  /* ── 큰 포스트잇 + 핀 (T38 챕터전환) ── */
+  .postit-big {
+    background: #FFF59D;
+    box-shadow: 8px 16px 32px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(0,0,0,0.04);
+    padding: 80px 60px;
     position: absolute;
-    z-index: 0;
+    z-index: 1;
+    transform: rotate(-2deg);
+    transform-origin: top center;
   }
+  /* 핀: 빨간 동그라미 + 입체 그림자 */
+  .postit-pin {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    background: radial-gradient(circle at 35% 35%, #FF8A00 0%, #E63946 60%, #8B1A26 100%);
+    border-radius: 50%;
+    box-shadow: 3px 6px 12px rgba(0,0,0,0.5), inset -3px -3px 6px rgba(0,0,0,0.35), inset 3px 3px 6px rgba(255,255,255,0.3);
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+  /* 슬라이드 활성 시 — 포스트잇이 위쪽 모서리 기준으로 펼쳐짐 (종이 펴는 느낌) */
+  .slide.active .postit-big {
+    animation: postit-unfold 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  @keyframes postit-unfold {
+    0%   { transform: rotate(-2deg) rotateX(-92deg); opacity: 0; }
+    50%  { opacity: 1; }
+    80%  { transform: rotate(-2deg) rotateX(8deg); opacity: 1; }
+    100% { transform: rotate(-2deg) rotateX(0deg); opacity: 1; }
+  }
+  body.edit-mode .postit-big { transform: rotate(-2deg) rotateX(0); }
 
   .bubble { animation: float-bubble 2.5s ease-in-out infinite; }
   .card { animation: float-y 4s ease-in-out infinite; }
