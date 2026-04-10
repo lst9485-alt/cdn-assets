@@ -1641,7 +1641,7 @@
   }
 
   // ── 환경 감지 ──
-  const isGitHubPages = location.hostname.endsWith('.github.io');
+  const isGitHubPages = location.hostname.endsWith('.github.io') || location.hostname.endsWith('.netlify.app');
 
   // ── 토스트 알림 ──
   function showToast(msg, duration = 3000) {
@@ -2115,7 +2115,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        showToast('GitHub에 저장 완료! (반영까지 최대 10분)', 4000);
+        showToast('저장 완료!', 4000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
         await _ghHandleConflict(encoded, filePath);
@@ -2157,7 +2157,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        showToast('GitHub에 저장 완료! (반영까지 최대 10분)', 4000);
+        showToast('저장 완료!', 4000);
         try { showSaveStatus(); } catch(_) {}
       } else {
         showToast('재시도 실패 (' + res.status + ')', 4000);
