@@ -287,7 +287,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
     const fmtPct = n => n.toFixed(1) + '%';
     const monthLabel = m => {
         const [y, mo] = m.split('-');
-        return (y === new Date().getFullYear().toString() ? '' : y.slice(2) + '.') + parseInt(mo) + '월';
+        return y.slice(2) + '.' + parseInt(mo) + '월';
     };
 
     // ── 탭 전환 ──
