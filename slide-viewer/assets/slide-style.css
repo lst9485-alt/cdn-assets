@@ -547,20 +547,19 @@
   .step-title { position: absolute; z-index: 1; }
   .icon-circle { animation: float-y 3s ease-in-out infinite; }
 
-  /* ── .hl 손그림 밑줄 (꼬불꼬불 곡선 + 오른쪽 끝 // 마침 표시) ── */
-  /* SVG: 꼬불거리는 path + 우측 끝 // 두 빗금. preserveAspectRatio="none"으로 가로 확장 */
+  /* ── .hl 형광펜 (약간 꼬불거리는 두꺼운 노랑 stroke) ── */
   .hl { position: relative; z-index: 1; }
   .hl::after {
     content: '';
     position: absolute;
-    left: 0; bottom: -6px;
-    height: 22px;
+    left: 0; bottom: -2px;
+    height: 28px;
     width: 0;
-    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 22' preserveAspectRatio='none'%3E%3Cpath d='M 4 14 Q 30 8 60 13 T 120 12 T 180 14 T 240 11 T 300 13 T 360 12' fill='none' stroke='%23222' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='372' y1='4' x2='382' y2='20' stroke='%23222' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='384' y1='4' x2='394' y2='20' stroke='%23222' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 28' preserveAspectRatio='none'%3E%3Cpath d='M 8 16 Q 60 10 120 15 T 240 13 T 360 14 L 392 14' fill='none' stroke='%23F5C417' stroke-width='22' stroke-linecap='round' opacity='0.55'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
   }
   .slide.active .hl::after {
     animation: hl-underline-loop 6s ease-out 0.8s infinite;
@@ -596,9 +595,43 @@
     display: inline-block;
     transition: opacity 0.05s ease;
   }
-  .hand-typing.anim-shown > .ch { opacity: 1; }
+  /* 본인이 .anim-shown이거나, 선조 .slide-el이 .anim-shown일 때 등장 */
+  .hand-typing.anim-shown > .ch,
+  .slide-el.anim-shown .hand-typing > .ch {
+    opacity: 1;
+  }
   /* 편집 모드에서는 항상 표시 */
   body.edit-mode .hand-typing > .ch { opacity: 1 !important; }
+
+  /* ── 손글씨 제목 마크 (빨간 꼬불 밑줄 + 별표) ── */
+  /* T37 마지막정리 제목 등에 사용 */
+  .hand-title-mark {
+    position: relative;
+    display: inline-block;
+    padding-right: 56px;
+  }
+  .hand-title-mark::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 56px;
+    bottom: -22px;
+    height: 22px;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 22' preserveAspectRatio='none'%3E%3Cpath d='M 6 12 Q 50 4 100 13 T 200 11 T 300 14 T 392 12' fill='none' stroke='%23E63946' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    pointer-events: none;
+  }
+  .hand-title-mark::before {
+    content: '✦';
+    position: absolute;
+    right: 8px;
+    bottom: -34px;
+    font-size: 40px;
+    color: #E63946;
+    line-height: 1;
+    pointer-events: none;
+  }
 
   /* ── 포스트잇 (T37 마지막정리) ── */
   .postit {
@@ -618,7 +651,7 @@
   .postit-num {
     font-family: 'Gowun Batang', serif;
     font-weight: 700;
-    font-size: 96px;
+    font-size: 56px;
     color: #222;
     line-height: 1;
     display: inline-block;
