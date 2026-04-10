@@ -2115,9 +2115,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        // 저장 성공 표시 (다음 로드 시 GitHub API에서 최신 버전 읽기용)
-        try { localStorage.setItem('gh-last-save', JSON.stringify({ path: filePath, ts: Date.now() })); } catch(_) {}
-        showToast('GitHub에 저장 완료!', 3000);
+        showToast('GitHub에 저장 완료! (반영까지 최대 10분)', 4000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
         await _ghHandleConflict(encoded, filePath);
@@ -2159,8 +2157,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        try { localStorage.setItem('gh-last-save', JSON.stringify({ path: filePath, ts: Date.now() })); } catch(_) {}
-        showToast('GitHub에 저장 완료!', 3000);
+        showToast('GitHub에 저장 완료! (반영까지 최대 10분)', 4000);
         try { showSaveStatus(); } catch(_) {}
       } else {
         showToast('재시도 실패 (' + res.status + ')', 4000);
@@ -2248,42 +2245,8 @@
     document.dispatchEvent(new Event(success ? 'gh-token-set' : 'gh-token-cancel'));
   }
 
-  // ── GitHub Pages: 저장한 파일만 GitHub API에서 최신 버전 읽기 ──
-  if (isGitHubPages) {
-    (function _ghLoadLatestFromAPI() {
-      // 무한루프 방지
-      const lastLoad = parseInt(localStorage.getItem('gh-api-load-ts') || '0');
-      if (Date.now() - lastLoad < 5000) return;
-
-      const saved = localStorage.getItem('gh-last-save');
-      if (!saved) return;
-      try {
-        const data = JSON.parse(saved);
-        // 저장한 파일과 현재 페이지가 다르면 스킵
-        if (data.path !== _ghFilePath()) return;
-        if (Date.now() - data.ts > 600000) {
-          localStorage.removeItem('gh-last-save');
-          return;
-        }
-      } catch(_) { localStorage.removeItem('gh-last-save'); return; }
-
-      const token = ghGetToken();
-      if (!token) return;
-
-      // GitHub API에서 최신 HTML 가져오기
-      fetch(`https://api.github.com/repos/${GH_REPO}/contents/${_ghFilePath()}`, {
-        headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.raw+json' }
-      })
-      .then(res => { if (!res.ok) throw new Error(res.status); return res.text(); })
-      .then(html => {
-        localStorage.setItem('gh-api-load-ts', String(Date.now()));
-        document.open();
-        document.write(html);
-        document.close();
-      })
-      .catch(() => {});
-    })();
-  }
+  // CDN 캐시 우회는 Cloudflare Pages 이관으로 해결 예정
+  // document.write 방식은 텍스트 깨짐/슬라이드 중복 유발하여 제거됨
 
   // ── GitHub Pages에서 설정 아이콘 추가 ──
   if (isGitHubPages) {
