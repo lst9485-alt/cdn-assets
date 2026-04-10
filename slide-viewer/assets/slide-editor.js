@@ -2526,7 +2526,9 @@
   }
 
   // 그룹 해제 후 시각 상태 복구: 노란 박스 hide, edit-group-selected → edit-selected (다중 선택 상태로 전환)
+  // exitGroup() 먼저 호출 — 그룹 진입 상태(groupEntered/groupParent/child-selected)도 함께 정리 (코덱스 rv: stale state 잔존 방지)
   function refreshAfterUngroup() {
+    exitGroup();
     selectedEls.forEach(s => {
       s.classList.remove('edit-group-selected');
       s.classList.add('edit-selected');
