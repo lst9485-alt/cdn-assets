@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-10T12:15:28.793312+09:00",
+  "updated": "2026-04-10T12:27:32.314541+09:00",
   "summary": {
     "current_month": 400000,
     "current_month_label": "2026-04",
@@ -9,6 +9,11 @@
     "total_customers": 118
   },
   "monthly": [
+    {
+      "month": "2025-04",
+      "revenue": 1800000,
+      "customers": 8
+    },
     {
       "month": "2025-05",
       "revenue": 100000,

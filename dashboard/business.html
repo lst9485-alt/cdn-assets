@@ -6,6 +6,7 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <title>사업현황 - 운영 대시보드</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.6; }
@@ -225,7 +226,14 @@
             <div class="sales-stats" id="sales-stats"></div>
 
             <div class="section">
-                <div class="section-title">월별 매출 추이</div>
+                <div class="section-header" style="display:flex;justify-content:space-between;align-items:center;">
+                    <div class="section-title" style="margin-bottom:0;">월별 매출 추이</div>
+                    <select class="week-select" id="sales-range">
+                        <option value="6">최근 6개월</option>
+                        <option value="12" selected>최근 12개월</option>
+                        <option value="0">전체</option>
+                    </select>
+                </div>
                 <div class="chart-box"><canvas id="chart-monthly"></canvas></div>
             </div>
 
@@ -262,6 +270,8 @@
 <script src="../footer.js"></script>
 <script src="../sidebar.js"></script>
 <script>
+// datalabels 전역 등록 방지 — 매출 차트에만 수동 적용
+ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.datalabels.display = false);
 (function() {
     const fmt = n => {
         if (n >= 10000000) return (n / 10000000).toFixed(1).replace(/\.0$/, '') + '천만';
@@ -291,8 +301,9 @@
             document.getElementById('tab-' + this.dataset.tab).classList.add('active');
             // 탭별 기준 날짜 전환
             const periodEl = document.getElementById('period');
-            if (this.dataset.tab === 'sales') {
-                periodEl.textContent = '제출일 기준';
+            if (this.dataset.tab === 'sales' && window._salesData) {
+                const label = (window._salesData.summary.current_month_label || '').replace(/^\d{4}-0?/, '');
+                periodEl.textContent = label + '월 기준';
             } else {
                 periodEl.textContent = funnelPeriodText;
             }
@@ -718,12 +729,31 @@
         statsHtml += '<div class="stat-card"><div class="stat-label">전월 대비</div><div class="stat-value stat-value-lg" style="color:' + (chgClass === 'up' ? '#059669' : chgClass === 'down' ? '#DC2626' : '#64748B') + ';">' + chgPct + '</div></div>';
         document.getElementById('sales-stats').innerHTML = statsHtml;
 
-        // 월별 매출 차트
-        if (d.monthly && d.monthly.length) {
-            new Chart(document.getElementById('chart-monthly').getContext('2d'), {
+        // 월별 매출 차트 (기간 필터 + 바 위 숫자)
+        let monthlyChart = null;
+        function renderMonthlyChart(data, range) {
+            const sliced = range > 0 ? data.slice(-range) : data;
+            if (monthlyChart) monthlyChart.destroy();
+            monthlyChart = new Chart(document.getElementById('chart-monthly').getContext('2d'), {
                 type: 'bar',
-                data: { labels: d.monthly.map(m => monthLabel(m.month)), datasets: [{ label: '매출', data: d.monthly.map(m => m.revenue), backgroundColor: '#0077C8', borderRadius: 6, barPercentage: 0.6 }] },
-                options: { responsive: true, plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmtNum(ctx.raw) + '원 (' + d.monthly[ctx.dataIndex].customers + '명)' } } }, scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: '#F1F5F9' } }, x: { grid: { display: false } } } }
+                data: { labels: sliced.map(m => monthLabel(m.month)), datasets: [{ label: '매출', data: sliced.map(m => m.revenue), backgroundColor: '#0077C8', borderRadius: 6, barPercentage: 0.6 }] },
+                options: {
+                    responsive: true,
+                    layout: { padding: { top: 24 } },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: ctx => fmtNum(ctx.raw) + '원 (' + sliced[ctx.dataIndex].customers + '명)' } },
+                        datalabels: { anchor: 'end', align: 'top', color: '#64748B', font: { size: 11, weight: 500 }, formatter: v => Math.round(v / 10000) }
+                    },
+                    scales: { y: { ticks: { callback: v => fmt(v) }, grid: { color: '#F1F5F9' } }, x: { grid: { display: false } } }
+                },
+                plugins: [ChartDataLabels]
+            });
+        }
+        if (d.monthly && d.monthly.length) {
+            renderMonthlyChart(d.monthly, 12);
+            document.getElementById('sales-range').addEventListener('change', function() {
+                renderMonthlyChart(d.monthly, parseInt(this.value));
             });
         }
 
