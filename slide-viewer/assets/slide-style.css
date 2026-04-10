@@ -547,43 +547,47 @@
   .step-title { position: absolute; z-index: 1; }
   .icon-circle { animation: float-y 3s ease-in-out infinite; }
 
-  /* ── .hl 형광펜 (자동 펼침/유지/페이드 사이클) ── */
+  /* ── .hl 손그림 밑줄 (꼬불꼬불 곡선 + 오른쪽 끝 // 마침 표시) ── */
+  /* SVG: 꼬불거리는 path + 우측 끝 // 두 빗금. preserveAspectRatio="none"으로 가로 확장 */
   .hl { position: relative; z-index: 1; }
   .hl::after {
     content: '';
     position: absolute;
-    left: 8px; bottom: 0;
+    left: 0; bottom: -6px;
     height: 22px;
     width: 0;
-    background: rgba(245, 196, 23, 0.55);  /* 연노랑 형광펜 */
-    border-radius: 2px;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 22' preserveAspectRatio='none'%3E%3Cpath d='M 4 14 Q 30 8 60 13 T 120 12 T 180 14 T 240 11 T 300 13 T 360 12' fill='none' stroke='%23222' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='372' y1='4' x2='382' y2='20' stroke='%23222' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='384' y1='4' x2='394' y2='20' stroke='%23222' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
   .slide.active .hl::after {
-    animation: hl-highlighter-loop 6s ease-out 0.8s infinite;
+    animation: hl-underline-loop 6s ease-out 0.8s infinite;
   }
-  @keyframes hl-highlighter-loop {
-    0%   { width: 0;                  opacity: 1; }
-    23%  { width: calc(100% - 16px);  opacity: 1; }   /* 좌→우 펼침 1.4초 */
-    75%  { width: calc(100% - 16px);  opacity: 1; }   /* 한참 유지 */
-    90%  { width: calc(100% - 16px);  opacity: 0; }   /* 페이드 */
-    100% { width: 0;                  opacity: 0; }
+  @keyframes hl-underline-loop {
+    0%   { width: 0;    opacity: 1; }
+    23%  { width: 100%; opacity: 1; }   /* 좌→우 그어짐 1.4초 */
+    75%  { width: 100%; opacity: 1; }   /* 한참 유지 */
+    90%  { width: 100%; opacity: 0; }   /* 페이드 */
+    100% { width: 0;    opacity: 0; }
   }
 
   /* ── ambient: 추가 ── */
   .hl { animation: none; }
 
-  /* ── 손글씨 (Nanum Pen Script, T37 마지막정리/T38 챕터전환) ── */
+  /* ── 손글씨 (Gowun Batang 임서체, T37 마지막정리/T38 챕터전환) ── */
   .hand {
-    font-family: 'Nanum Pen Script', 'Pretendard', cursive;
+    font-family: 'Gowun Batang', 'Pretendard', serif;
     font-weight: 400;
-    line-height: 1.3;
+    line-height: 1.4;
     color: var(--color-text);
+    letter-spacing: -0.02em;
   }
-  .hand.lg { font-size: 96px; }
-  .hand.md { font-size: 64px; }
-  .hand.sm { font-size: 44px; }
+  .hand.lg { font-size: 88px; }
+  .hand.md { font-size: 56px; }
+  .hand.sm { font-size: 40px; }
+  .hand.bold { font-weight: 700; }
   .hand.accent { color: var(--color-accent); }
 
   /* 한글자씩 타자기 등장 (animations.js에서 .ch span 분리) */
@@ -612,15 +616,17 @@
   .postit.tilt-r { transform: rotate(2deg); }
   .postit.tilt-c { transform: rotate(-0.5deg); }
   .postit-num {
-    font-family: 'Nanum Pen Script', cursive;
-    font-size: 88px;
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: 96px;
     color: #222;
     line-height: 1;
     display: inline-block;
     position: relative;
   }
 
-  /* ── 손글씨 동그라미 체크 (SVG, 포스트잇 안 인라인) ── */
+  /* ── 손글씨 동그라미 체크 (SVG, 2겹 손그림 펜) ── */
+  /* 한 번에 빙 그린 후 살짝 다른 궤적으로 한 번 더 — 자연스러운 두 겹 손그림 */
   .hand-circle-svg {
     position: absolute;
     pointer-events: none;
@@ -628,27 +634,26 @@
   }
   .hand-circle-svg path {
     stroke: #E63946;
-    stroke-width: 4;
+    stroke-width: 5;
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
   .step-layer.visible .hand-circle-svg path,
   body.edit-mode .hand-circle-svg path {
-    animation: hand-circle-draw 1.4s ease-out forwards;
+    animation: hand-circle-draw 1.0s ease-out forwards;
   }
   .hand-circle-svg path:nth-child(1) { animation-delay: 0.20s; }
-  .hand-circle-svg path:nth-child(2) { animation-delay: 0.55s; }
-  .hand-circle-svg path:nth-child(3) { animation-delay: 0.90s; }
+  .hand-circle-svg path:nth-child(2) { animation-delay: 0.85s; }
   @keyframes hand-circle-draw {
     from {
-      stroke-dasharray: 600;
-      stroke-dashoffset: 600;
+      stroke-dasharray: 800;
+      stroke-dashoffset: 800;
       opacity: 0;
     }
-    20% { opacity: 1; }
+    15% { opacity: 1; }
     to {
-      stroke-dasharray: 600;
+      stroke-dasharray: 800;
       stroke-dashoffset: 0;
       opacity: 1;
     }
