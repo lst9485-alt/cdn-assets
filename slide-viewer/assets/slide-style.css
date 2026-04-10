@@ -748,40 +748,89 @@
     }
   }
 
-  /* ── 큰 포스트잇 + 핀 (T38 챕터전환) ── */
+  /* ── 코르크 게시판 (T38 챕터전환, 우리동네 생활 정보판 감성) ── */
+  .cork-board {
+    background: #C8A06B;
+    background-image:
+      radial-gradient(circle at 25% 30%, rgba(101, 64, 28, 0.35) 1.5px, transparent 2px),
+      radial-gradient(circle at 70% 60%, rgba(80, 50, 20, 0.30) 1px, transparent 2px),
+      radial-gradient(circle at 50% 85%, rgba(120, 80, 40, 0.25) 2px, transparent 3px),
+      radial-gradient(circle at 15% 75%, rgba(90, 55, 25, 0.30) 1px, transparent 2px);
+    background-size: 14px 14px, 22px 22px, 28px 28px, 18px 18px;
+    border: 14px solid #5C3A1A;
+    border-radius: 6px;
+    box-shadow:
+      0 16px 40px rgba(0, 0, 0, 0.4),
+      inset 0 0 80px rgba(60, 35, 10, 0.35),
+      inset 0 0 0 2px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    z-index: 0;
+  }
+
+  /* 큰 포스트잇 (T38 챕터전환) — 게시판에 박힌 한 장 */
   .postit-big {
-    background: #FFF59D;
-    box-shadow: 8px 16px 32px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(0,0,0,0.04);
+    background: #FFF176;
+    background-image: linear-gradient(180deg, #FFE56B 0%, #FFF176 8%, #FFF176 100%);
+    box-shadow:
+      6px 12px 24px rgba(0, 0, 0, 0.32),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.05);
     padding: 80px 60px;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     transform: rotate(-2deg);
     transform-origin: top center;
   }
-  /* 핀: 빨간 동그라미 + 입체 그림자 */
+
+  /* 핀: 입체 빨간 푸시핀 + 흰 빛점 */
   .postit-pin {
     position: absolute;
-    top: -22px;
-    left: 50%;
-    width: 44px;
-    height: 44px;
-    background: radial-gradient(circle at 35% 35%, #FF8A00 0%, #E63946 60%, #8B1A26 100%);
+    width: 56px;
+    height: 56px;
+    background: radial-gradient(circle at 32% 30%, #FFB3B3 0%, #FF4040 25%, #C81E2C 60%, #6B0E18 100%);
     border-radius: 50%;
-    box-shadow: 3px 6px 12px rgba(0,0,0,0.5), inset -3px -3px 6px rgba(0,0,0,0.35), inset 3px 3px 6px rgba(255,255,255,0.3);
-    transform: translateX(-50%);
-    z-index: 3;
+    box-shadow:
+      4px 8px 16px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(0, 0, 0, 0.2);
+    z-index: 5;
   }
-  /* 슬라이드 활성 시 — 포스트잇이 위쪽 모서리 기준으로 펼쳐짐 (종이 펴는 느낌) */
+  .postit-pin::after {
+    /* 빛 반사 흰 점 */
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    filter: blur(1.5px);
+  }
+
+  /* 애니메이션: 포스트잇이 위에서 떨어지면서 살짝 흔들 + 핀이 콱 박힘 */
   .slide.active .postit-big {
-    animation: postit-unfold 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: postit-drop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
-  @keyframes postit-unfold {
-    0%   { transform: rotate(-2deg) rotateX(-92deg); opacity: 0; }
-    50%  { opacity: 1; }
-    80%  { transform: rotate(-2deg) rotateX(8deg); opacity: 1; }
-    100% { transform: rotate(-2deg) rotateX(0deg); opacity: 1; }
+  .slide.active .postit-pin {
+    opacity: 0;
+    animation: pin-stab 0.35s ease-out 0.7s forwards;
   }
-  body.edit-mode .postit-big { transform: rotate(-2deg) rotateX(0); }
+  @keyframes postit-drop {
+    0%   { transform: rotate(-6deg) translate(-40px, -340px) scale(0.92); opacity: 0; }
+    60%  { transform: rotate(-1deg) translate(0, 12px) scale(1.02); opacity: 1; }
+    80%  { transform: rotate(-2deg) translate(0, -6px) scale(1); }
+    100% { transform: rotate(-2deg) translate(0, 0) scale(1); }
+  }
+  @keyframes pin-stab {
+    0%   { opacity: 0; transform: translateY(-180px) scale(2.2); }
+    70%  { opacity: 1; transform: translateY(6px) scale(1.05); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  body.edit-mode .postit-big,
+  body.edit-mode .postit-pin {
+    opacity: 1;
+    animation: none;
+  }
+  body.edit-mode .postit-big { transform: rotate(-2deg); }
 
   .bubble { animation: float-bubble 2.5s ease-in-out infinite; }
   .card { animation: float-y 4s ease-in-out infinite; }
