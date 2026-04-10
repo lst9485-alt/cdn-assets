@@ -95,8 +95,9 @@
         .chart-toggle button:hover:not(.active) { border-color: #94A3B8; }
 
         /* ── 테이블 ── */
-        .content-group-title { font-size: 15px; font-weight: 800; color: #051C2C; padding: 0 0 10px; }
-        .content-group-title:not(:first-child) { margin-top: 24px; padding-top: 24px; border-top: 2px solid #E2E8F0; }
+        .content-group { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; }
+        .content-group:last-child { margin-bottom: 0; }
+        .content-group-title { font-size: 14px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
         table { width: 100%; border-collapse: collapse; font-size: 13px; }
         th { text-align: left; padding: 8px; border-bottom: 2px solid #E2E8F0; color: #64748B; font-weight: 600; font-size: 12px; }
         td { padding: 8px; border-bottom: 1px solid #F1F5F9; }
@@ -275,9 +276,9 @@
 ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.datalabels.display = false);
 (function() {
     const fmt = n => {
-        if (n >= 10000000) return (n / 10000000).toFixed(1).replace(/\.0$/, '') + '천만';
-        if (n >= 10000) return Math.round(n / 10000) + '만';
-        if (n >= 1000) return (n / 1000).toFixed(0) + '천';
+        if (n >= 10000000) return (+(n / 10000000).toFixed(1)) + '천만';
+        if (n >= 10000) return (+(n / 10000).toFixed(1)) + '만';
+        if (n >= 1000) return (+(n / 1000).toFixed(1)) + '천';
         return String(n);
     };
     const fmtWon = n => {
@@ -500,7 +501,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
 
     // ── 주간 추이 ──
     let weeklyChart = null;
-    function renderWeeklyChart(history, mode) {
+    function renderWeeklyChart(history, mode, targets) {
         const ctx = document.getElementById('chart-weekly').getContext('2d');
         if (weeklyChart) weeklyChart.destroy();
 
@@ -511,13 +512,33 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             return parseInt(parts[1]) + '/' + parseInt(parts[2]);
         });
 
+        // 목표선 데이터셋 생성기 (연한 점선, 모든 x에 동일 값)
+        const targetLine = (label, value, color, category, yAxisID) => ({
+            label: label + ' 목표',
+            data: history.map(() => value),
+            borderColor: color,
+            borderWidth: 1.5,
+            borderDash: [4, 4],
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            fill: false,
+            tension: 0,
+            isTarget: true,
+            category,
+            ...(yAxisID ? { yAxisID } : {}),
+        });
+
+        const t = targets || {};
         let datasets, scales;
         if (mode === 'volume') {
             datasets = [
-                { label: '풀링 조회수', data: history.map(w => w.pulling_views || 0), borderColor: '#0077C8', backgroundColor: 'rgba(0,119,200,0.1)', borderWidth: 2, tension: 0.3, fill: true },
-                { label: '키콘텐츠 조회수', data: history.map(w => w.key_views || 0), borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.1)', borderWidth: 2, tension: 0.3, fill: true, yAxisID: 'y1' },
-                { label: '합계 (풀링+키)', data: history.map(w => (w.pulling_views || 0) + (w.key_views || 0)), borderColor: '#8B5CF6', borderWidth: 2, tension: 0.3, borderDash: [5, 3], pointRadius: 0 },
+                { label: '풀링 조회수', category: 'pulling_views', data: history.map(w => w.pulling_views || 0), borderColor: '#0077C8', backgroundColor: 'rgba(0,119,200,0.1)', borderWidth: 2, tension: 0.3, fill: true },
+                { label: '키콘텐츠 조회수', category: 'key_views', data: history.map(w => w.key_views || 0), borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.1)', borderWidth: 2, tension: 0.3, fill: true, yAxisID: 'y1' },
+                { label: '합계 (풀링+키)', category: 'sum', data: history.map(w => (w.pulling_views || 0) + (w.key_views || 0)), borderColor: '#8B5CF6', borderWidth: 2, tension: 0.3, borderDash: [5, 3], pointRadius: 0 },
             ];
+            const sumTarget = (t.pulling_views || 0) + (t.key_views || 0);
+            if (sumTarget > 0) datasets.push(targetLine('합계', sumTarget, 'rgba(139,92,246,0.5)', 'sum'));
+            if (t.key_views) datasets.push(targetLine('키콘텐츠 조회수', t.key_views, 'rgba(5,150,105,0.45)', 'key_views', 'y1'));
             scales = {
                 y: { ticks: { callback: v => fmt(v) }, grid: { color: '#F1F5F9' }, position: 'left' },
                 y1: { ticks: { callback: v => fmt(v) }, grid: { display: false }, position: 'right' },
@@ -525,10 +546,13 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             };
         } else {
             datasets = [
-                { label: '연계율', data: history.map(w => w.interest_rate || 0), borderColor: '#0077C8', borderWidth: 2, tension: 0.3, pointRadius: 3 },
-                { label: '링크클릭률', data: history.map(w => w.link_click_rate || 0), borderColor: '#F59E0B', borderWidth: 2, tension: 0.3, pointRadius: 3 },
-                { label: '전환율', data: history.map(w => w.convert_rate || 0), borderColor: '#DC2626', borderWidth: 2, tension: 0.3, pointRadius: 3 },
+                { label: '연계율', category: 'interest_rate', data: history.map(w => w.interest_rate || 0), borderColor: '#0077C8', borderWidth: 2, tension: 0.3, pointRadius: 3 },
+                { label: '링크클릭률', category: 'link_click_rate', data: history.map(w => w.link_click_rate || 0), borderColor: '#F59E0B', borderWidth: 2, tension: 0.3, pointRadius: 3 },
+                { label: '전환율', category: 'convert_rate', data: history.map(w => w.convert_rate || 0), borderColor: '#DC2626', borderWidth: 2, tension: 0.3, pointRadius: 3 },
             ];
+            if (t.interest_rate) datasets.push(targetLine('연계율', t.interest_rate, 'rgba(0,119,200,0.45)', 'interest_rate'));
+            if (t.link_click_rate) datasets.push(targetLine('링크클릭률', t.link_click_rate, 'rgba(245,158,11,0.5)', 'link_click_rate'));
+            if (t.convert_rate) datasets.push(targetLine('전환율', t.convert_rate, 'rgba(220,38,38,0.45)', 'convert_rate'));
             // Y축: 보이는 데이터 기준 자동 스케일, 최대 20% 캡
             scales = {
                 y: { afterDataLimits: scale => { scale.max = Math.min(scale.max * 1.2, 20); }, ticks: { callback: v => (+v.toFixed(1)) + '%' }, grid: { color: '#F1F5F9' } },
@@ -543,8 +567,8 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
                 responsive: true,
                 interaction: { mode: 'index', intersect: false },
                 plugins: {
-                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16, font: { size: 12, weight: '600' }, generateLabels: function(chart) { return Chart.defaults.plugins.legend.labels.generateLabels(chart).map(l => { if (chart.getDatasetMeta(l.datasetIndex).hidden) { l.fontColor = '#CBD5E1'; l.fillStyle = '#E2E8F0'; l.strokeStyle = '#E2E8F0'; } return l; }); } }, onClick: function(e, item, legend) { Chart.defaults.plugins.legend.onClick.call(this, e, item, legend); legend.chart.update(); } },
-                    tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + (mode === 'rates' ? ctx.raw.toFixed(2) + '%' : fmtNum(ctx.raw)) } }
+                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16, font: { size: 12, weight: '600' }, generateLabels: function(chart) { return Chart.defaults.plugins.legend.labels.generateLabels(chart).filter(l => !chart.data.datasets[l.datasetIndex].isTarget).map(l => { if (chart.getDatasetMeta(l.datasetIndex).hidden) { l.fontColor = '#CBD5E1'; l.fillStyle = '#E2E8F0'; l.strokeStyle = '#E2E8F0'; } return l; }); } }, onClick: function(e, item, legend) { Chart.defaults.plugins.legend.onClick.call(this, e, item, legend); const chart = legend.chart; const cat = chart.data.datasets[item.datasetIndex] && chart.data.datasets[item.datasetIndex].category; if (cat) { const visible = chart.isDatasetVisible(item.datasetIndex); chart.data.datasets.forEach((d, i) => { if (d.isTarget && d.category === cat) chart.setDatasetVisibility(i, visible); }); } chart.update(); } },
+                    tooltip: { filter: item => !item.dataset.isTarget, callbacks: { label: ctx => ctx.dataset.label + ': ' + (mode === 'rates' ? ctx.raw.toFixed(2) + '%' : fmtNum(ctx.raw)) } }
                 },
                 scales,
             },
@@ -636,8 +660,8 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             { label: '구독자 증가', cur: cw.subscriber_increase, avg: avg.subscriber_increase },
         ];
 
-        let html = '<div class="content-group-title">키콘텐츠</div>' + makeTable(keyRows);
-        html += '<div class="content-group-title">풀링콘텐츠</div>' + makeTable(pullRows);
+        let html = '<div class="content-group"><div class="content-group-title">키콘텐츠</div>' + makeTable(keyRows) + '</div>';
+        html += '<div class="content-group"><div class="content-group-title">풀링콘텐츠</div>' + makeTable(pullRows) + '</div>';
         document.getElementById('content-table-wrap').innerHTML = html;
     }
 
@@ -699,7 +723,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         function updateChart() {
             const rangeVal = parseInt(document.getElementById('chart-range').value);
             const sliced = rangeVal > 0 ? history.slice(-rangeVal) : history;
-            renderWeeklyChart(sliced, currentMode);
+            renderWeeklyChart(sliced, currentMode, targets);
             renderChartSummary(resolveRangeSummary(cumulative, history, rangeVal), history.length);
         }
 
