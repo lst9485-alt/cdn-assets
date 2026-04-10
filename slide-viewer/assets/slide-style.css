@@ -19,6 +19,13 @@
     --fc-blue: #4A90D9;    /* 서브 파랑 (브랜드) */
     --fc-yellow: #E63946;  /* 강조 빨강 (경고/금지) */
 
+    /* ── 포스트잇 / 코르크 게시판 (T37 마지막정리, T38 챕터전환) ── */
+    --postit-yellow: #FFF59D;          /* 전통 포스트잇 노랑 (T37 .postit) */
+    --postit-yellow-bright: #FFF176;   /* 밝은 포스트잇 노랑 (T38 .postit-mid) */
+    --postit-yellow-bright-top: #FFE56B; /* 포스트잇 상단 그라데이션 시작 */
+    --cork-brown: #C8A06B;             /* 코르크 게시판 베이스 */
+    --cork-brown-dark: #5C3A1A;        /* 코르크 게시판 테두리 */
+
     /* ── 에디터 UI (변경 없음) ── */
     --editor-accent: #FFE500;
     --editor-accent-rgb: 255, 229, 0;
@@ -696,7 +703,7 @@
 
   /* ── 포스트잇 (T37 마지막정리) ── */
   .postit {
-    background: #FFF59D;          /* 전통 포스트잇 노랑 */
+    background: var(--postit-yellow);   /* 전통 포스트잇 노랑 */
     border-radius: 4px;
     padding: 36px 32px;
     box-shadow: 6px 10px 20px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(0,0,0,0.04);
@@ -754,14 +761,14 @@
 
   /* ── 코르크 게시판 (T38 챕터전환, 우리동네 생활 정보판 감성) ── */
   .cork-board {
-    background: #C8A06B;
+    background: var(--cork-brown);
     background-image:
       radial-gradient(circle at 25% 30%, rgba(101, 64, 28, 0.35) 1.5px, transparent 2px),
       radial-gradient(circle at 70% 60%, rgba(80, 50, 20, 0.30) 1px, transparent 2px),
       radial-gradient(circle at 50% 85%, rgba(120, 80, 40, 0.25) 2px, transparent 3px),
       radial-gradient(circle at 15% 75%, rgba(90, 55, 25, 0.30) 1px, transparent 2px);
     background-size: 14px 14px, 22px 22px, 28px 28px, 18px 18px;
-    border: 14px solid #5C3A1A;
+    border: 14px solid var(--cork-brown-dark);
     border-radius: 6px;
     box-shadow:
       0 16px 40px rgba(0, 0, 0, 0.4),
@@ -785,23 +792,10 @@
     color: #1A0F00;
   }
 
-  /* 큰 포스트잇 (T38 챕터전환) — 게시판에 박힌 한 장 */
-  .postit-big {
-    background: #FFF176;
-    background-image: linear-gradient(180deg, #FFE56B 0%, #FFF176 8%, #FFF176 100%);
-    box-shadow:
-      6px 12px 24px rgba(0, 0, 0, 0.32),
-      inset 0 0 0 1px rgba(0, 0, 0, 0.05);
-    padding: 80px 60px;
-    position: absolute;
-    z-index: 2;
-    transform: rotate(-2deg);
-    transform-origin: top center;
-  }
   /* 중간 사이즈 포스트잇 (T38 챕터별 누적용 3개) */
   .postit-mid {
-    background: #FFF176;
-    background-image: linear-gradient(180deg, #FFE56B 0%, #FFF176 8%, #FFF176 100%);
+    background: var(--postit-yellow-bright);
+    background-image: linear-gradient(180deg, var(--postit-yellow-bright-top) 0%, var(--postit-yellow-bright) 8%, var(--postit-yellow-bright) 100%);
     box-shadow:
       5px 10px 20px rgba(0, 0, 0, 0.32),
       inset 0 0 0 1px rgba(0, 0, 0, 0.05);
@@ -872,11 +866,6 @@
   .step-layer.visible .slide-el.postit-mid.tilt-r {
     animation: postit-drop-r 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
-  /* postit-big (단일 큰 포스트잇, 사용 안 함) — 떨어지기만 */
-  .slide-el.postit-big.anim-shown,
-  .step-layer.visible .slide-el.postit-big {
-    animation: postit-drop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  }
   /* 핀: 박힌 후 정지 */
   .slide-el.postit-pin.anim-shown,
   .step-layer.visible .slide-el.postit-pin {
@@ -906,12 +895,14 @@
     0%   { transform: rotate(-10deg) translate(-30px, -360px) scale(0.92); opacity: 0; }
     50%  { opacity: 1; }
     65%  { transform: rotate(-2deg) translate(0, 14px) scale(1.03); opacity: 1; }
+    82%  { transform: rotate(-3deg) translate(0, -8px) scale(1); }
     100% { transform: rotate(-3deg) translate(0, 0) scale(1); opacity: 1; }
   }
   @keyframes postit-drop-r {
     0%   { transform: rotate(8deg) translate(30px, -360px) scale(0.92); opacity: 0; }
     50%  { opacity: 1; }
     65%  { transform: rotate(1deg) translate(0, 14px) scale(1.03); opacity: 1; }
+    82%  { transform: rotate(2deg) translate(0, -8px) scale(1); }
     100% { transform: rotate(2deg) translate(0, 0) scale(1); opacity: 1; }
   }
   @keyframes pin-stab {
@@ -919,12 +910,12 @@
     70%  { opacity: 1; transform: translateY(8px) scale(1.1); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
   }
-  body.edit-mode .postit-big,
+  body.edit-mode .postit,
+  body.edit-mode .postit-mid,
   body.edit-mode .postit-pin {
     opacity: 1;
     animation: none;
   }
-  body.edit-mode .postit-big { transform: rotate(-2deg); }
 
   .bubble { animation: float-bubble 2.5s ease-in-out infinite; }
   .card { animation: float-y 4s ease-in-out infinite; }

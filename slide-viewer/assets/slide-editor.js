@@ -185,9 +185,28 @@
   const sndTransition = new Audio('./assets/sounds/장면전환.mp3');
   const sndMoney      = new Audio('./assets/sounds/금액.mp3');
   const sndBuzz       = new Audio('./assets/sounds/삐삑.mp3');
+
+  // AudioContext lazy 싱글톤 (브라우저 동시 ctx 제한 회피 + 메모리 누수 방지)
+  let _sharedAudioCtx = null;
+  function getSharedAudioCtx() {
+    // closed 상태면 버리고 새로 만들기 (OS 슬립·탭 백그라운드 후 회복)
+    if (_sharedAudioCtx && _sharedAudioCtx.state === 'closed') {
+      _sharedAudioCtx = null;
+    }
+    if (!_sharedAudioCtx) {
+      try {
+        _sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      } catch(e) { return null; }
+    }
+    if (_sharedAudioCtx.state === 'suspended') {
+      _sharedAudioCtx.resume().catch(() => {});
+    }
+    return _sharedAudioCtx;
+  }
+
   function playSndChart() {
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const ctx = getSharedAudioCtx(); if (!ctx) return;
       const t = ctx.currentTime;
       const gain = ctx.createGain();
       gain.gain.setValueAtTime(0.2, t);
@@ -245,7 +264,7 @@
   // draw: 선 드로우용
   function playSndDraw() {
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const ctx = getSharedAudioCtx(); if (!ctx) return;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'sine';
@@ -263,7 +282,7 @@
   // timeline: 틱톡 2음 연속
   function playSndTimeline() {
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const ctx = getSharedAudioCtx(); if (!ctx) return;
       const o1 = ctx.createOscillator(); o1.type = 'sine'; o1.frequency.value = 1200;
       const g1 = ctx.createGain();
       g1.gain.setValueAtTime(0.3, ctx.currentTime);
@@ -282,7 +301,7 @@
   // write: 손글씨 슥슥 (화이트노이즈 + 로우패스 필터, 더 길고 또렷하게)
   function playSndWrite() {
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const ctx = getSharedAudioCtx(); if (!ctx) return;
       const t = ctx.currentTime;
       const dur = 0.35;  // 더 길게
       // 화이트노이즈 버퍼
@@ -310,7 +329,7 @@
   // pop: 배지/칩 팝인용
   function playSndPop() {
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const ctx = getSharedAudioCtx(); if (!ctx) return;
       const t = ctx.currentTime;
       const osc = ctx.createOscillator();
       osc.type = 'sine';
