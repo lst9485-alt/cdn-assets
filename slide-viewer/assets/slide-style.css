@@ -671,9 +671,14 @@
     transform-origin: center;
   }
   /* 등장 시 — 밑줄 좌→우 그어짐, 별표는 그 다음에 펑 */
+  /* 여러 트리거 OR (step 0 자동 등장 / .anim-shown 부여 / .slide.active) */
+  .slide.active .hand-title-mark::after,
+  .step-layer.visible .hand-title-mark::after,
   .slide-el.anim-shown .hand-title-mark::after {
     animation: hand-mark-line 1.2s ease-out 0.3s forwards;
   }
+  .slide.active .hand-title-mark::before,
+  .step-layer.visible .hand-title-mark::before,
   .slide-el.anim-shown .hand-title-mark::before {
     animation: hand-mark-star 0.6s ease-out 1.5s forwards;
   }
@@ -699,7 +704,6 @@
     min-height: 320px;
     position: absolute;
     z-index: 1;
-    animation: float-y 4s ease-in-out infinite;
   }
   .postit.tilt-l { transform: rotate(-2deg); }
   .postit.tilt-r { transform: rotate(2deg); }
@@ -823,16 +827,25 @@
   }
 
   /* 애니메이션: 포스트잇이 위에서 떨어지면서 살짝 흔들 + 핀이 콱 박힘 */
-  /* 트리거: .slide-el.anim-shown (navigation.js step 진입 시 자동 부여) */
-  .postit-big, .postit-mid { opacity: 0; }
+  /* opacity 0는 @keyframes 안에서 처리 (anim 없으면 보이게) */
   .slide-el.postit-big.anim-shown,
-  .slide-el.postit-mid.anim-shown {
+  .slide-el.postit-mid.anim-shown,
+  .slide-el.postit.anim-shown,
+  .step-layer.visible .slide-el.postit-big,
+  .step-layer.visible .slide-el.postit-mid,
+  .step-layer.visible .slide-el.postit {
     animation: postit-drop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
-  .slide-el.postit-mid.anim-shown.tilt-l { animation-name: postit-drop-l; }
-  .slide-el.postit-mid.anim-shown.tilt-r { animation-name: postit-drop-r; }
-  .postit-pin { opacity: 0; }
-  .slide-el.postit-pin.anim-shown {
+  .slide-el.postit-mid.anim-shown.tilt-l,
+  .slide-el.postit.anim-shown.tilt-l,
+  .step-layer.visible .slide-el.postit-mid.tilt-l,
+  .step-layer.visible .slide-el.postit.tilt-l { animation-name: postit-drop-l; }
+  .slide-el.postit-mid.anim-shown.tilt-r,
+  .slide-el.postit.anim-shown.tilt-r,
+  .step-layer.visible .slide-el.postit-mid.tilt-r,
+  .step-layer.visible .slide-el.postit.tilt-r { animation-name: postit-drop-r; }
+  .slide-el.postit-pin.anim-shown,
+  .step-layer.visible .slide-el.postit-pin {
     animation: pin-stab 0.45s ease-out 0.55s forwards;
   }
   @keyframes postit-drop {
