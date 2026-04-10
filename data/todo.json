@@ -1,20 +1,9 @@
 {
-  "updated": "2026-04-10T06:00:00.539236+09:00",
+  "updated": "2026-04-11T06:00:01.426174+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
       "categories": [
-        {
-          "id": 1,
-          "title": "슬라이드 템플릿 (에디터 HTML 수정)",
-          "ref": null,
-          "items": [
-            {
-              "text": "이미지 생성 대폭 늘리기",
-              "done": false
-            }
-          ]
-        },
         {
           "id": 2,
           "title": "구글 계정 분리 (Workspace ↔ Gmail)",
@@ -38,37 +27,22 @@
           ]
         },
         {
-          "id": 4,
-          "title": "~~cdn-assets 에디터 \"GitHub에 저장\" 기능~~ (4/9 완료)",
-          "ref": null,
-          "items": [
-            {
-              "text": "slides-editor.html에 \"GitHub에 저장\" 버튼 추가 (GitHub API로 커밋)",
-              "done": true
-            },
-            {
-              "text": "GitHub 토큰 localStorage 저장 + 최초 1회 설정 UI",
-              "done": true
-            },
-            {
-              "text": "저장 시 cdn-assets 레포에 자동 커밋 → GitHub Pages 반영",
-              "done": true
-            }
-          ]
-        },
-        {
           "id": 5,
           "title": "에디터 UX 전면 개선 — 캔바 스타일 (4/5~)",
           "ref": null,
           "items": [
             {
-              "text": "글자 크기 조절 등 편집 UX를 캔바(Canva) 수준으로 직관적으로 개선",
+              "text": "1차 (4/11): 재클릭 → 자식 개별 리사이즈 + 부분 글자 크기/색 + 툴바 selection 유지 + 배경 클릭 차단",
+              "done": true
+            },
+            {
+              "text": "2차: 인라인 서식 바(bold/italic/정렬), 드래그 리사이즈 UX 추가 개선, 툴바 정리",
               "done": false
             }
           ]
         },
         {
-          "id": 6,
+          "id": 7,
           "title": "영상 자동화 (우선순위 낮음)",
           "ref": null,
           "items": [
