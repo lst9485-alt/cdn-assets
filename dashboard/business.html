@@ -95,8 +95,8 @@
         .chart-toggle button:hover:not(.active) { border-color: #94A3B8; }
 
         /* ── 테이블 ── */
-        .content-group-title { font-size: 13px; font-weight: 800; color: #051C2C; padding: 12px 0 6px; border-bottom: none; }
-        .content-group-title:not(:first-child) { margin-top: 16px; }
+        .content-group-title { font-size: 15px; font-weight: 800; color: #051C2C; padding: 0 0 10px; }
+        .content-group-title:not(:first-child) { margin-top: 24px; padding-top: 24px; border-top: 2px solid #E2E8F0; }
         table { width: 100%; border-collapse: collapse; font-size: 13px; }
         th { text-align: left; padding: 8px; border-bottom: 2px solid #E2E8F0; color: #64748B; font-weight: 600; font-size: 12px; }
         td { padding: 8px; border-bottom: 1px solid #F1F5F9; }
@@ -531,7 +531,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             ];
             // Y축: 보이는 데이터 기준 자동 스케일, 최대 20% 캡
             scales = {
-                y: { afterDataLimits: scale => { scale.max = Math.min(scale.max * 1.2, 20); }, ticks: { callback: v => v + '%' }, grid: { color: '#F1F5F9' } },
+                y: { afterDataLimits: scale => { scale.max = Math.min(scale.max * 1.2, 20); }, ticks: { callback: v => (+v.toFixed(1)) + '%' }, grid: { color: '#F1F5F9' } },
                 x: { grid: { display: false } },
             };
         }
