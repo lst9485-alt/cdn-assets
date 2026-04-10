@@ -2349,7 +2349,8 @@
   }
 
   // ── 편집 모드 ──
-  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el, img, .emoji-icon, .section-badge, .corner-label, .step-dim, [data-type]';
+  // [data-type]:not(.slide) — .slide 자체는 슬라이드 배경(data-type="카드" 등이 붙음), 편집 대상 아님
+  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el, img, .emoji-icon, .section-badge, .corner-label, .step-dim, [data-type]:not(.slide)';
   let editMode = false;
   let isEditing = false;
   let clipboardEl = null;
