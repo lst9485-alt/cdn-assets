@@ -204,9 +204,8 @@
     } catch(e) {}
   }
   function playSound(type) {
-    // 'write'는 손글씨 데모용 — 일반 모드에서도 재생 (풀스크린 체크 우회)
-    if (type === 'write') { playSndWrite(); return; }
     if (!document.fullscreenElement) return;
+    if (type === 'write') { playSndWrite(); return; }
     if (type === 'chart') { playSndChart(); return; }
     if (type === 'draw') { playSndDraw(); return; }
     if (type === 'pop') { playSndPop(); return; }

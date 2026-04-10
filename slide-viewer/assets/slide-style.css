@@ -547,29 +547,53 @@
   .step-title { position: absolute; z-index: 1; }
   .icon-circle { animation: float-y 3s ease-in-out infinite; }
 
-  /* ── .hl 형광펜 (일자 + 우측 끝 // 빗금) ── */
+  /* ── .hl 형광펜 (본체 좌→우 펼침 + 우측 끝 // 표시 페이드인) ── */
   .hl { position: relative; z-index: 1; }
+  /* 본체: 노란 직사각형, 글자 너비 100%까지 좌→우 펼침 */
   .hl::after {
     content: '';
     position: absolute;
     left: 0; bottom: 0;
     height: 24px;
     width: 0;
-    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' preserveAspectRatio='none'%3E%3Crect x='0' y='4' width='364' height='18' fill='%23F5C417' opacity='0.55' rx='2'/%3E%3Cline x1='372' y1='2' x2='382' y2='22' stroke='%23F5C417' stroke-width='5' stroke-linecap='round' opacity='0.85'/%3E%3Cline x1='386' y1='2' x2='396' y2='22' stroke='%23F5C417' stroke-width='5' stroke-linecap='round' opacity='0.85'/%3E%3C/svg%3E");
+    background: rgba(245, 196, 23, 0.55);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: -1;
+  }
+  /* // 마침 표시: 우측 끝, 본체 펼쳐진 후 그 자리에서 페이드인 */
+  .hl::before {
+    content: '';
+    position: absolute;
+    right: -32px; bottom: 0;
+    width: 28px; height: 24px;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 24'%3E%3Cline x1='4' y1='3' x2='12' y2='21' stroke='%23F5C417' stroke-width='4' stroke-linecap='round' opacity='0.85'/%3E%3Cline x1='14' y1='3' x2='22' y2='21' stroke='%23F5C417' stroke-width='4' stroke-linecap='round' opacity='0.85'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: contain;
+    opacity: 0;
     pointer-events: none;
     z-index: -1;
   }
   .slide.active .hl::after {
-    animation: hl-underline-loop 6s ease-out 0.8s infinite;
+    animation: hl-highlighter-body 6s ease-out 0.8s infinite;
   }
-  @keyframes hl-underline-loop {
+  .slide.active .hl::before {
+    animation: hl-highlighter-mark 6s ease-out 0.8s infinite;
+  }
+  @keyframes hl-highlighter-body {
     0%   { width: 0;    opacity: 1; }
-    23%  { width: 100%; opacity: 1; }   /* 좌→우 그어짐 1.4초 */
+    23%  { width: 100%; opacity: 1; }   /* 좌→우 펼침 1.4초 (글자 끝까지) */
     75%  { width: 100%; opacity: 1; }   /* 한참 유지 */
     90%  { width: 100%; opacity: 0; }   /* 페이드 */
     100% { width: 0;    opacity: 0; }
+  }
+  @keyframes hl-highlighter-mark {
+    0%, 23% { opacity: 0; transform: scale(0.4); }   /* 본체 펼쳐지는 동안 숨김 */
+    33%     { opacity: 1; transform: scale(1.1); }   /* 본체 끝난 후 펑 등장 */
+    40%     { opacity: 1; transform: scale(1); }
+    75%     { opacity: 1; transform: scale(1); }
+    90%     { opacity: 0; transform: scale(1); }
+    100%    { opacity: 0; transform: scale(0.4); }
   }
 
   /* ── ambient: 추가 ── */
@@ -617,10 +641,17 @@
     position: absolute;
     left: 0;
     right: 64px;
-    bottom: -16px;
-    height: 6px;
-    background: #E63946;
-    border-radius: 3px;
+    bottom: -20px;
+    height: 14px;
+    background: linear-gradient(
+      to bottom,
+      #E63946 0,
+      #E63946 4px,
+      transparent 4px,
+      transparent 10px,
+      #E63946 10px,
+      #E63946 14px
+    );
     pointer-events: none;
   }
   .hand-title-mark::before {
