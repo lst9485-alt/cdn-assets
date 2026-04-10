@@ -826,34 +826,63 @@
     filter: blur(1.5px);
   }
 
-  /* 애니메이션: 포스트잇이 위에서 떨어지면서 살짝 흔들 + 핀이 콱 박힘 */
-  /* opacity 0는 @keyframes 안에서 처리 (anim 없으면 보이게) */
+  /* 애니메이션: 포스트잇이 떨어진 후 둥둥 떠다님 (multiple animation) */
+  /* tilt-c (기본) */
+  .slide-el.postit.anim-shown.tilt-c,
+  .slide-el.postit-mid.anim-shown.tilt-c,
+  .step-layer.visible .slide-el.postit.tilt-c,
+  .step-layer.visible .slide-el.postit-mid.tilt-c {
+    animation:
+      postit-drop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+      postit-float-c 4s ease-in-out 1.0s infinite;
+  }
+  /* tilt-l */
+  .slide-el.postit.anim-shown.tilt-l,
+  .slide-el.postit-mid.anim-shown.tilt-l,
+  .step-layer.visible .slide-el.postit.tilt-l,
+  .step-layer.visible .slide-el.postit-mid.tilt-l {
+    animation:
+      postit-drop-l 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+      postit-float-l 4s ease-in-out 1.0s infinite;
+  }
+  /* tilt-r */
+  .slide-el.postit.anim-shown.tilt-r,
+  .slide-el.postit-mid.anim-shown.tilt-r,
+  .step-layer.visible .slide-el.postit.tilt-r,
+  .step-layer.visible .slide-el.postit-mid.tilt-r {
+    animation:
+      postit-drop-r 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+      postit-float-r 4s ease-in-out 1.0s infinite;
+  }
+  /* postit-big (단일 큰 포스트잇, 사용 안 함) — 떨어지기만 */
   .slide-el.postit-big.anim-shown,
-  .slide-el.postit-mid.anim-shown,
-  .slide-el.postit.anim-shown,
-  .step-layer.visible .slide-el.postit-big,
-  .step-layer.visible .slide-el.postit-mid,
-  .step-layer.visible .slide-el.postit {
+  .step-layer.visible .slide-el.postit-big {
     animation: postit-drop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
-  .slide-el.postit-mid.anim-shown.tilt-l,
-  .slide-el.postit.anim-shown.tilt-l,
-  .step-layer.visible .slide-el.postit-mid.tilt-l,
-  .step-layer.visible .slide-el.postit.tilt-l { animation-name: postit-drop-l; }
-  .slide-el.postit-mid.anim-shown.tilt-r,
-  .slide-el.postit.anim-shown.tilt-r,
-  .step-layer.visible .slide-el.postit-mid.tilt-r,
-  .step-layer.visible .slide-el.postit.tilt-r { animation-name: postit-drop-r; }
+  /* 핀: 박힌 후 정지 */
   .slide-el.postit-pin.anim-shown,
   .step-layer.visible .slide-el.postit-pin {
     animation: pin-stab 0.45s ease-out 0.55s forwards;
   }
+  /* 떠다니는 keyframes (tilt별로 rotate 유지) */
+  @keyframes postit-float-c {
+    0%, 100% { transform: rotate(-1deg) translateY(0); }
+    50%      { transform: rotate(-1deg) translateY(-10px); }
+  }
+  @keyframes postit-float-l {
+    0%, 100% { transform: rotate(-3deg) translateY(0); }
+    50%      { transform: rotate(-3deg) translateY(-10px); }
+  }
+  @keyframes postit-float-r {
+    0%, 100% { transform: rotate(2deg) translateY(0); }
+    50%      { transform: rotate(2deg) translateY(-10px); }
+  }
   @keyframes postit-drop {
     0%   { transform: rotate(-8deg) translate(-30px, -360px) scale(0.92); opacity: 0; }
     50%  { opacity: 1; }
-    65%  { transform: rotate(-1deg) translate(0, 14px) scale(1.03); opacity: 1; }
-    82%  { transform: rotate(-2deg) translate(0, -8px) scale(1); }
-    100% { transform: rotate(-2deg) translate(0, 0) scale(1); opacity: 1; }
+    65%  { transform: rotate(0deg) translate(0, 14px) scale(1.03); opacity: 1; }
+    82%  { transform: rotate(-1deg) translate(0, -8px) scale(1); }
+    100% { transform: rotate(-1deg) translate(0, 0) scale(1); opacity: 1; }
   }
   @keyframes postit-drop-l {
     0%   { transform: rotate(-10deg) translate(-30px, -360px) scale(0.92); opacity: 0; }
