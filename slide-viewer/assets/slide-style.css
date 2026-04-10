@@ -670,12 +670,12 @@
     transform: scale(0) rotate(8deg);
     transform-origin: center;
   }
-  /* 슬라이드 활성 시 — 밑줄 좌→우 그어짐, 별표는 그 다음에 펑 */
-  .slide.active .hand-title-mark::after {
-    animation: hand-mark-line 1.2s ease-out 0.5s forwards;
+  /* 등장 시 — 밑줄 좌→우 그어짐, 별표는 그 다음에 펑 */
+  .slide-el.anim-shown .hand-title-mark::after {
+    animation: hand-mark-line 1.2s ease-out 0.3s forwards;
   }
-  .slide.active .hand-title-mark::before {
-    animation: hand-mark-star 0.6s ease-out 1.7s forwards;
+  .slide-el.anim-shown .hand-title-mark::before {
+    animation: hand-mark-star 0.6s ease-out 1.5s forwards;
   }
   /* 편집 모드에서는 항상 표시 */
   body.edit-mode .hand-title-mark::after { transform: scaleX(1); }
@@ -780,6 +780,22 @@
     transform: rotate(-2deg);
     transform-origin: top center;
   }
+  /* 중간 사이즈 포스트잇 (T38 챕터별 누적용 3개) */
+  .postit-mid {
+    background: #FFF176;
+    background-image: linear-gradient(180deg, #FFE56B 0%, #FFF176 8%, #FFF176 100%);
+    box-shadow:
+      5px 10px 20px rgba(0, 0, 0, 0.32),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    padding: 32px 28px;
+    position: absolute;
+    z-index: 2;
+    transform: rotate(-2deg);
+    transform-origin: top center;
+  }
+  .postit-mid.tilt-l { transform: rotate(-3deg); }
+  .postit-mid.tilt-r { transform: rotate(2deg); }
+  .postit-mid.tilt-c { transform: rotate(-1deg); }
 
   /* 핀: 입체 빨간 푸시핀 + 흰 빛점 */
   .postit-pin {
@@ -807,22 +823,40 @@
   }
 
   /* 애니메이션: 포스트잇이 위에서 떨어지면서 살짝 흔들 + 핀이 콱 박힘 */
-  .slide.active .postit-big {
-    animation: postit-drop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  /* 트리거: .slide-el.anim-shown (navigation.js step 진입 시 자동 부여) */
+  .postit-big, .postit-mid { opacity: 0; }
+  .slide-el.postit-big.anim-shown,
+  .slide-el.postit-mid.anim-shown {
+    animation: postit-drop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
-  .slide.active .postit-pin {
-    opacity: 0;
-    animation: pin-stab 0.35s ease-out 0.7s forwards;
+  .slide-el.postit-mid.anim-shown.tilt-l { animation-name: postit-drop-l; }
+  .slide-el.postit-mid.anim-shown.tilt-r { animation-name: postit-drop-r; }
+  .postit-pin { opacity: 0; }
+  .slide-el.postit-pin.anim-shown {
+    animation: pin-stab 0.45s ease-out 0.55s forwards;
   }
   @keyframes postit-drop {
-    0%   { transform: rotate(-6deg) translate(-40px, -340px) scale(0.92); opacity: 0; }
-    60%  { transform: rotate(-1deg) translate(0, 12px) scale(1.02); opacity: 1; }
-    80%  { transform: rotate(-2deg) translate(0, -6px) scale(1); }
-    100% { transform: rotate(-2deg) translate(0, 0) scale(1); }
+    0%   { transform: rotate(-8deg) translate(-30px, -360px) scale(0.92); opacity: 0; }
+    50%  { opacity: 1; }
+    65%  { transform: rotate(-1deg) translate(0, 14px) scale(1.03); opacity: 1; }
+    82%  { transform: rotate(-2deg) translate(0, -8px) scale(1); }
+    100% { transform: rotate(-2deg) translate(0, 0) scale(1); opacity: 1; }
+  }
+  @keyframes postit-drop-l {
+    0%   { transform: rotate(-10deg) translate(-30px, -360px) scale(0.92); opacity: 0; }
+    50%  { opacity: 1; }
+    65%  { transform: rotate(-2deg) translate(0, 14px) scale(1.03); opacity: 1; }
+    100% { transform: rotate(-3deg) translate(0, 0) scale(1); opacity: 1; }
+  }
+  @keyframes postit-drop-r {
+    0%   { transform: rotate(8deg) translate(30px, -360px) scale(0.92); opacity: 0; }
+    50%  { opacity: 1; }
+    65%  { transform: rotate(1deg) translate(0, 14px) scale(1.03); opacity: 1; }
+    100% { transform: rotate(2deg) translate(0, 0) scale(1); opacity: 1; }
   }
   @keyframes pin-stab {
-    0%   { opacity: 0; transform: translateY(-180px) scale(2.2); }
-    70%  { opacity: 1; transform: translateY(6px) scale(1.05); }
+    0%   { opacity: 0; transform: translateY(-200px) scale(2.4); }
+    70%  { opacity: 1; transform: translateY(8px) scale(1.1); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
   }
   body.edit-mode .postit-big,
