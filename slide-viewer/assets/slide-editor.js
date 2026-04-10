@@ -2597,8 +2597,17 @@
       panel.classList.remove('visible');
       return;
     }
-    const hl = (el.classList.contains('child-selected') ? el : null)
-      || el.querySelector('.hl') || el.querySelector('.check-text, .icon-flow-label') || el;
+    // hl 우선순위: child-selected → .hl → 타입 특화(.check-text/.icon-flow-label)
+    // → .slide-el 컨테이너면 첫 텍스트 자식(카드 등) → fallback el
+    let hl = (el.classList.contains('child-selected') ? el : null)
+      || el.querySelector('.hl')
+      || el.querySelector('.check-text, .icon-flow-label');
+    if (!hl && el.matches('.slide-el')) {
+      const textChildren = Array.from(el.querySelectorAll(CHILD_SEL + ', .section-badge, .corner-label'))
+        .filter(c => !c.matches(NON_TEXT_CHILD_SEL));
+      hl = textChildren[0] || null;
+    }
+    if (!hl) hl = el;
     const fs = Math.round(parseFloat(hl.style.fontSize) || parseFloat(getComputedStyle(hl).fontSize) || 108);
     document.getElementById('font-size-input').value = fs;
     const tbfs = document.getElementById('tb-font-size');
@@ -2935,6 +2944,7 @@
         elAnchor = { top: groupParent.offsetTop, left: groupParent.offsetLeft };
         elAnchors = [{ el: groupParent, top: groupParent.offsetTop, left: groupParent.offsetLeft }];
         updateCoordPanel(groupParent);
+        if (child) updateFontPanel(child); // 좌표는 부모, 폰트 패널은 자식 기준 (덮어쓰기 방지)
         return;
       }
       if (!groupParent.contains(e.target) && !e.target.closest('.resize-handle')) {
@@ -3108,14 +3118,20 @@
         updateGroupToolbar();
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
       } else if (gid && individualMode) {
-        // 개별 모드 재클릭 → 다른 멤버로 전환
-        selectedEls.forEach(s => {
-          s.classList.remove('edit-selected');
-          s.classList.add('edit-group-selected');
-        });
-        el.classList.remove('edit-group-selected');
-        el.classList.add('edit-selected');
-        selectedEl = el;
+        if (el === selectedEl) {
+          // individualMode + 같은 카드 재클릭 → 그룹 진입(자식 드릴다운). mouseup에서 드래그 여부 확인 후 확정
+          pendingGroupEntry = { el, target: e.target };
+          selectedEl = el;
+        } else {
+          // 다른 멤버로 전환
+          selectedEls.forEach(s => {
+            s.classList.remove('edit-selected');
+            s.classList.add('edit-group-selected');
+          });
+          el.classList.remove('edit-group-selected');
+          el.classList.add('edit-selected');
+          selectedEl = el;
+        }
       } else if (el.matches('.slide-el') && selectedEls.length === 1) {
         // 카드 블록 재클릭 → mouseup에서 드래그 여부 확인 후 그룹 진입
         pendingGroupEntry = { el, target: e.target };
@@ -3653,6 +3669,7 @@
       const child = target.closest(CHILD_SEL);
       if (child && el.contains(child)) { child.classList.add('child-selected'); updateFontPanel(child); }
       updateCoordPanel(el);
+      if (child && el.contains(child)) updateFontPanel(child); // 좌표 부모, 폰트 자식 (덮어쓰기 방지)
     } else {
       pendingGroupEntry = null;
     }

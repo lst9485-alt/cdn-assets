@@ -23,8 +23,8 @@
     --postit-yellow: #FFF59D;          /* 전통 포스트잇 노랑 (T37 .postit) */
     --postit-yellow-bright: #FFF176;   /* 밝은 포스트잇 노랑 (T38 .postit-mid) */
     --postit-yellow-bright-top: #FFE56B; /* 포스트잇 상단 그라데이션 시작 */
-    --cork-brown: #2d4a3e;             /* 칠판 초록 베이스 (기존 코르크 → 초록 칠판) */
-    --cork-brown-dark: #3a2416;        /* 칠판 나무 프레임 (어두운 갈색) */
+    --cork-brown: #D4A877;             /* 코르크 게시판 베이스 (밝고 따뜻한 베이지/탠) */
+    --cork-brown-dark: #6B4423;        /* 코르크 나무 프레임 (우드 톤) */
 
     /* ── 에디터 UI (변경 없음) ── */
     --editor-accent: #FFE500;
@@ -759,21 +759,15 @@
     }
   }
 
-  /* ── 초록 칠판 (T38 챕터전환, 나무 프레임 클래식 칠판) ── */
+  /* ── 코르크 게시판 (T38 챕터전환, 단색 매끈) ── */
   .cork-board {
     background: var(--cork-brown);
-    background-image:
-      radial-gradient(circle at 25% 30%, rgba(255, 255, 255, 0.08) 1.5px, transparent 2px),
-      radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.05) 1px, transparent 2px),
-      radial-gradient(circle at 50% 85%, rgba(255, 255, 255, 0.06) 2px, transparent 3px),
-      radial-gradient(circle at 15% 75%, rgba(255, 255, 255, 0.04) 1px, transparent 2px);
-    background-size: 14px 14px, 22px 22px, 28px 28px, 18px 18px;
     border: 14px solid var(--cork-brown-dark);
     border-radius: 6px;
     box-shadow:
-      0 16px 40px rgba(0, 0, 0, 0.4),
-      inset 0 0 80px rgba(0, 0, 0, 0.45),
-      inset 0 0 0 2px rgba(0, 0, 0, 0.2);
+      0 16px 40px rgba(0, 0, 0, 0.3),
+      inset 0 0 60px rgba(60, 35, 10, 0.20),
+      inset 0 0 0 2px rgba(0, 0, 0, 0.10);
     position: absolute;
     z-index: 0;
   }
