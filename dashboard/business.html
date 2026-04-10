@@ -282,12 +282,20 @@
 
     // ── 탭 전환 ──
     let salesRendered = false;
+    let funnelPeriodText = '';
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', function() {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             this.classList.add('active');
             document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+            // 탭별 기준 날짜 전환
+            const periodEl = document.getElementById('period');
+            if (this.dataset.tab === 'sales') {
+                periodEl.textContent = '제출일 기준';
+            } else {
+                periodEl.textContent = funnelPeriodText;
+            }
             // 매출 탭 최초 진입 시 차트 렌더링 (canvas 크기 문제 방지)
             if (this.dataset.tab === 'sales' && !salesRendered && window._salesData) {
                 renderSalesTab(window._salesData);
@@ -308,8 +316,8 @@
             const dt = new Date(funnel.updated);
             document.getElementById('updated').textContent = '마지막 업데이트: ' + dt.toLocaleString('ko-KR');
             if (funnel.current_week.week_start) {
-                document.getElementById('period').textContent =
-                    funnel.current_week.week_start + ' ~ ' + (funnel.current_week.week_end || '') + ' 기준';
+                funnelPeriodText = funnel.current_week.week_start + ' ~ ' + (funnel.current_week.week_end || '') + ' 기준';
+                document.getElementById('period').textContent = funnelPeriodText;
             }
         }
     }).catch(() => {
