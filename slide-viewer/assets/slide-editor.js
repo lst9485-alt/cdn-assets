@@ -2358,6 +2358,10 @@
   let elAnchors = [];
   let isDragging = false;
   const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .check-text, .check-box, .bar-label, .bar-value, .bar-fill, .hbar-label, .hbar-val, .stat-num, .stat-label, .stat-detail-item, .icon-label, .icon-circle, .icon-flow-label, .flow-box, .flow-arrow, .alert-text, .alert-icon, .compare-header, .compare-item, .quote-text, .quote-source, .tag-chip, .tl-box, .tl-circle, .btn-pill, .cta-btn';
+  // 비텍스트 자식 (fontSize 기반 리사이즈 대상 아님 — 이들은 기존 slide-el 박스 리사이즈로 처리)
+  const NON_TEXT_CHILD_SEL = '.bar-fill, .check-box, .icon-circle, .tl-circle';
+  // 툴바/팬널/팔레트 영역 — 편집 중 클릭 시 focus/selection 유지해야 하는 대상
+  const TOOLBAR_PROTECT_SEL = '#top-toolbar, #font-panel, .color-palette, .color-swatch';
   let groupEntered = false;
   let groupParent = null;
   let pendingDrag = false;
@@ -2613,6 +2617,64 @@
 
     // 경로 1: 개별 자식 선택 (그룹 진입 or 텍스트 편집 중)
     if (childSel || editing) {
+      // 경로 1-a: 편집 중 선택 범위가 있으면 해당 부분만 크기 변경 (span 래핑)
+      if (editing) {
+        const sel = window.getSelection();
+        if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
+          const range = sel.getRangeAt(0);
+          if (editing.contains(range.commonAncestorContainer)) {
+            // 이미 fontSize span 안에 완전히 포함되면 해당 span 크기만 업데이트
+            let existingSpan = null;
+            let node = range.commonAncestorContainer;
+            if (node.nodeType === 3) node = node.parentNode;
+            while (node && node !== editing) {
+              if (node.nodeType === 1 && node.tagName === 'SPAN' && node.style && node.style.fontSize) {
+                // 선택 범위가 이 span 안에 완전히 포함되는지 (선택 ⊆ span)
+                const spanRange = document.createRange();
+                spanRange.selectNodeContents(node);
+                if (range.compareBoundaryPoints(Range.START_TO_START, spanRange) >= 0
+                    && range.compareBoundaryPoints(Range.END_TO_END, spanRange) <= 0) {
+                  existingSpan = node;
+                }
+                break;
+              }
+              node = node.parentNode;
+            }
+            const refFs = existingSpan
+              ? (parseFloat(existingSpan.style.fontSize) || parseFloat(getComputedStyle(existingSpan).fontSize) || 108)
+              : (parseFloat(getComputedStyle(range.startContainer.nodeType === 1 ? range.startContainer : range.startContainer.parentNode).fontSize) || 108);
+            const newFs = delta !== 0
+              ? Math.max(10, Math.min(500, Math.round(refFs + delta)))
+              : Math.max(10, Math.min(500, parseInt(document.getElementById('font-size-input').value) || Math.round(refFs)));
+            if (existingSpan) {
+              pushUndo();
+              existingSpan.style.fontSize = newFs + 'px';
+            } else {
+              // 부분 노드 경계 가로지르면 surroundContents가 실패 → DOM 강제 분해는 위험하므로 중단
+              const span = document.createElement('span');
+              span.style.fontSize = newFs + 'px';
+              try {
+                pushUndo();
+                range.surroundContents(span);
+              } catch (err) {
+                // 되돌리기 (pushUndo는 했지만 surroundContents 실패로 DOM 변경 없음 → 그대로 두고 취소)
+                undoStack.pop();
+                console.warn('[applyFontSize] 부분 선택이 요소 경계를 가로지름 — 선택 범위를 단순 텍스트 안쪽으로 조정해주세요.', err);
+                return;
+              }
+              // 선택 범위 복원
+              const newRange = document.createRange();
+              newRange.selectNodeContents(span);
+              sel.removeAllRanges();
+              sel.addRange(newRange);
+            }
+            updateFontPanel(selectedEl);
+            return;
+          }
+        }
+      }
+
+      // 경로 1-b: 선택 범위 없거나 child-selected → 대상 요소 전체 크기 변경 (기존)
       const target = childSel || editing;
       const curFs = Math.round(parseFloat(target.style.fontSize) || parseFloat(getComputedStyle(target).fontSize) || 108);
       const fs = delta !== 0
@@ -2623,8 +2685,9 @@
 
     // 경로 2: slide-el 전체 선택 → 모든 텍스트 자식에 각각 적용
     } else if (selectedEl.matches('.slide-el')) {
-      const TEXT_CHILDREN = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .check-text, .bar-label, .bar-value, .tl-box, .btn-pill, .alert-text, .alert-icon, .compare-header, .compare-item, .quote-text, .quote-source, .tag-chip, .icon-label, .flow-box, .flow-arrow, .stat-num, .stat-label, .section-badge, .corner-label';
-      const children = selectedEl.querySelectorAll(TEXT_CHILDREN);
+      // .slide-el 아래 텍스트 자식들 (CHILD_SEL \ NON_TEXT_CHILD_SEL) + 직속 .section-badge/.corner-label
+      const children = Array.from(selectedEl.querySelectorAll(CHILD_SEL + ', .section-badge, .corner-label'))
+        .filter(c => !c.matches(NON_TEXT_CHILD_SEL));
       if (children.length === 0) return;
       pushUndo();
       children.forEach(child => {
@@ -2664,6 +2727,37 @@
     if (selectedEl.classList.contains('step-dim')) {
       handles.forEach(h => h.classList.remove('visible'));
       msBox.style.display = 'none';
+      return;
+    }
+    // 그룹 진입 + 텍스트 자식 선택: 자식 기준 corner handle만 표시 (edge 숨김)
+    // 블랙리스트 방식: 비텍스트 자식(.bar-fill 등)만 제외, 나머지는 모두 텍스트 취급
+    const _activeChildRaw = groupParent ? groupParent.querySelector('.child-selected') : null;
+    const activeChild = (_activeChildRaw && !_activeChildRaw.matches(NON_TEXT_CHILD_SEL)) ? _activeChildRaw : null;
+    if (activeChild) {
+      msBox.style.display = 'none';
+      // offsetLeft 체인으로 stage 기준 좌표 계산 (getBoundingClientRect는 transform 때문에 역변환 필요 → 체인 방식이 더 단순/정확)
+      const stageEl = document.getElementById('stage');
+      let l = 0, t = 0;
+      let cur = activeChild;
+      while (cur && cur !== stageEl && cur.offsetParent) {
+        l += cur.offsetLeft;
+        t += cur.offsetTop;
+        if (cur.offsetParent === stageEl) break;
+        cur = cur.offsetParent;
+      }
+      const w = activeChild.offsetWidth;
+      const hh = activeChild.offsetHeight;
+      const cornerPos = { tl: [l-6, t-6], tr: [l+w-6, t-6], bl: [l-6, t+hh-6], br: [l+w-6, t+hh-6] };
+      handles.forEach(h => {
+        if (h.dataset.corner) {
+          const c = h.dataset.corner;
+          h.style.left = cornerPos[c][0] + 'px';
+          h.style.top = cornerPos[c][1] + 'px';
+          h.classList.add('visible');
+        } else if (h.dataset.edge) {
+          h.classList.remove('visible');
+        }
+      });
       return;
     }
     // text-area / hl-wrap 등 텍스트 요소는 edge handle 숨김 (fontSize만 조절하므로)
@@ -2802,10 +2896,19 @@
     }, { once: true });
   });
 
+  // 편집 중 툴바/팬널/팔레트 버튼 클릭 시 focus/selection 유지 (capture phase 최우선 — 브라우저 selection clear 차단)
+  // input/textarea는 focus 필요하므로 예외 (타이핑 중 selection 일시적 손실은 감수)
+  document.addEventListener('mousedown', e => {
+    if (!isEditing) return;
+    if (e.target.closest(TOOLBAR_PROTECT_SEL) && !e.target.closest('input, textarea')) {
+      e.preventDefault();
+    }
+  }, true);
+
   document.addEventListener('mousedown', e => {
     if (!editMode) return;
-    if (e.target.closest('.color-palette, .color-swatch, #palette-bg, #palette-fc')) {
-      if (isEditing) e.preventDefault(); // 텍스트 선택 유지
+    if (e.target.closest(TOOLBAR_PROTECT_SEL)) {
+      if (isEditing && !e.target.closest('input, textarea')) e.preventDefault(); // 버블 단계 보험
       return;
     }
     if (!e.target.closest('#stage') && !e.target.classList.contains('resize-handle')) return;
@@ -2866,6 +2969,22 @@
         return;
       }
       if (resizeEdge) { resizeImgInitRect = null; resizeInitFontSizes = null; return; } // edge on text — skip
+      // 그룹 진입 + 텍스트 자식 선택: 해당 자식 fontSize만 리사이즈 (corner drag)
+      // 비텍스트 자식(.bar-fill 등)은 아래 기존 IMG/bubble 브랜치로 빠짐 (블랙리스트 방식)
+      const _activeChildRaw = groupParent ? groupParent.querySelector('.child-selected') : null;
+      const activeChild = (_activeChildRaw && !_activeChildRaw.matches(NON_TEXT_CHILD_SEL)) ? _activeChildRaw : null;
+      if (activeChild) {
+        resizeImgInit = null;
+        resizeImgInitRect = null;
+        const _stagePos = clientToStage(e.clientX, e.clientY);
+        resizeAnchorX = _stagePos.x;
+        resizeAnchorY = _stagePos.y;
+        resizeInitFontSizes = [{
+          el: activeChild,
+          fs: parseFloat(activeChild.style.fontSize) || parseFloat(getComputedStyle(activeChild).fontSize) || 108
+        }];
+        return;
+      }
       // IMG / emoji-icon / bubble 리사이즈 (4모서리, 비율 유지)
       if (selectedEl.tagName === 'IMG' || selectedEl.classList.contains('emoji-icon') || selectedEl.classList.contains('slide-el') || selectedEl.classList.contains('bubble')) {
         resizeInitFontSizes = null;
@@ -4308,6 +4427,12 @@
       paletteBg.querySelectorAll('.color-swatch').forEach(s => s.classList.toggle('active', s.dataset.cls === bgCls));
       paletteFc.querySelectorAll('.color-swatch').forEach(s => s.classList.toggle('active', s.dataset.cls === fcCls));
     }
+    btnBg.addEventListener('mousedown', (e) => {
+      if (isEditing) e.preventDefault(); // 편집 중 선택 범위 유지
+    });
+    btnFc.addEventListener('mousedown', (e) => {
+      if (isEditing) e.preventDefault(); // 편집 중 선택 범위 유지
+    });
     btnBg.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = paletteBg.classList.contains('open');
