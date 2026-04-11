@@ -636,6 +636,10 @@
   /* 편집 모드에서는 항상 표시 */
   body.edit-mode .hand-typing > .ch { opacity: 1 !important; }
 
+  /* T37/T38 손글씨 .slide-el은 형제인 .postit(z:1) / .postit-mid(z:2) 위에 그려져야 함
+     (텍스트가 .slide-el로 분리되면 부모 stacking context에서 빠져나오므로 명시 z-index 필요) */
+  .slide-el.hand-typing { z-index: 5; }
+
   /* ── 손글씨 제목 마크 (빨간 직선 밑줄 + 우측 별표 두 개) ── */
   /* T37 마지막정리 제목 등에 사용 */
   .hand-title-mark {

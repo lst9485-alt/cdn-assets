@@ -27,9 +27,7 @@
         <input type="checkbox" disabled="">
         <span class="anim-toggle-slider"></span>
       </label></div><div class="anim-sort-label"><span class="anim-sort-icon">☰</span> 클릭하여 정렬</div></div>
-  <div id="layer-list"><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">②
-      핵심&nbsp;정리&nbsp;두</span><span class="layer-badge">포스트잇</span><span class="layer-step-badge">클릭2회</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">①
-      핵심&nbsp;정리&nbsp;첫</span><span class="layer-badge">포스트잇</span><span class="layer-step-badge">클릭1회</span></div><div class="anim-step0-divider">── 항상 보임 ──</div><div class="layer-item" style="opacity: 0.55;"><span class="layer-handle">⠿</span><span class="layer-label">오늘 정리 핵심</span><span class="layer-badge">제목</span></div><div class="anim-overlay-btn">+ 오버레이 추가</div></div>
+  <div id="layer-list"></div>
 </div>
 <div id="guide-toolbar">
   <div class="guide-btn" data-target="title" style="border-color:rgba(255,200,0,0.7); color:rgba(255,200,0,0.9);">T</div>
@@ -42,24 +40,24 @@
 <div id="dim-outer" class=""></div>
 <div id="stage" style="">
 <div id="center-cross"></div>
-<div id="snap-x" style="display: none; left: 960px;" class=""></div>
-<div id="snap-y" style="display: none; top: 540px;" class=""></div>
+<div id="snap-x" style="display:none;" class=""></div>
+<div id="snap-y" style="display:none;" class=""></div>
 <div id="guide-snap-overlay"></div>
-<div id="multi-select-box" style="display: none; left: 120px; top: 82px; width: 1680px; height: 749px;"></div>
-<div id="group-box" style="display: none; left: 100px; top: 444px; width: 1376px; height: 247px;"></div>
-<div id="gap-left" class="gap-indicator" style="display: none; left: 960px; top: 550px; width: 17px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: -11px; top: -14px;">17px</div></div>
-<div id="gap-right" class="gap-indicator" style="display: none; left: 1797px; top: 550px; width: 123px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: 42px; top: -14px;">123px</div></div>
-<div id="gap-top" class="gap-indicator" style="display: none; left: 1386px; top: 0px; width: 0px; height: 332px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 156px; left: 6px;">332px</div></div>
-<div id="gap-bottom" class="gap-indicator" style="display: none; left: 1386px; top: 769px; width: 0px; height: 311px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 146px; left: 6px;">311px</div></div>
-<div class="resize-handle visible" data-corner="tl" style="left: 467px; top: 394px;"></div>
-<div class="resize-handle visible" data-corner="tr" style="left: 519px; top: 394px;"></div>
-<div class="resize-handle visible" data-corner="bl" style="left: 467px; top: 478px;"></div>
-<div class="resize-handle visible" data-corner="br" style="left: 519px; top: 478px;"></div>
-<div class="resize-handle edge" data-edge="t" style="left: 554px; top: 274px;"></div>
-<div class="resize-handle edge" data-edge="r" style="left: 794px; top: 504px;"></div>
-<div class="resize-handle edge" data-edge="b" style="left: 554px; top: 734px;"></div>
-<div class="resize-handle edge" data-edge="l" style="left: 314px; top: 504px;"></div>
-<div id="select-box" style="display: none; left: 255.501px; top: 345.274px; width: 0px; height: 0px;"></div>
+<div id="multi-select-box" style="display:none;"></div>
+<div id="group-box" style="display:none;"></div>
+<div id="gap-left" class="gap-indicator" style="display: none; left: 0px; top: 397px; width: 1089px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: 525px; top: -14px;">1089px</div></div>
+<div id="gap-right" class="gap-indicator" style="display: none; left: 1769px; top: 397px; width: 151px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: 56px; top: -14px;">151px</div></div>
+<div id="gap-top" class="gap-indicator" style="display: none; left: 1428px; top: 0px; width: 0px; height: 202px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 91px; left: 6px;">202px</div></div>
+<div id="gap-bottom" class="gap-indicator" style="display: none; left: 1428px; top: 594px; width: 0px; height: 486px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 233px; left: 6px;">486px</div></div>
+<div class="resize-handle" data-corner="tl" style="left: 1114px; top: 74px;"></div>
+<div class="resize-handle" data-corner="tr" style="left: 1794px; top: 74px;"></div>
+<div class="resize-handle" data-corner="bl" style="left: 1114px; top: 252px;"></div>
+<div class="resize-handle" data-corner="br" style="left: 1794px; top: 252px;"></div>
+<div class="resize-handle edge" data-edge="t" style="left: 1454px; top: 74px;"></div>
+<div class="resize-handle edge" data-edge="r" style="left: 1794px; top: 163px;"></div>
+<div class="resize-handle edge" data-edge="b" style="left: 1454px; top: 252px;"></div>
+<div class="resize-handle edge" data-edge="l" style="left: 1114px; top: 163px;"></div>
+<div id="select-box" style="display:none;"></div>
 
 
   <div class="slide" id="slide1" data-steps="3" data-type="카드" style="">
@@ -1483,49 +1481,49 @@
   </div>
   <div class="step-layer" data-step="1">
     <div class="slide-el step-timeline no-edit-select" data-type="타임라인" style="position:absolute; left:0; top:0; width:1920px; height:1080px;">
-      <div class="tl-circle blue" style="position: absolute; left: 372px; top: 436px; opacity: 1; transform: translateY(0px); transition: opacity 2.2s, transform 2.2s;">1</div>
-      <div class="tl-box" style="position: absolute; left: 280px; top: 524px; width: 240px; opacity: 1; transform: translateY(0px); transition: opacity 2.2s 0.8s, transform 2.2s 0.8s;">단계 1</div>
-      <div class="tl-desc" style="position: absolute; left: 280px; top: 629px; width: 240px; font-size: 32px; font-weight: 900; color: rgb(136, 136, 136); text-align: center;">설명 1</div>
+      <div class="tl-circle blue" style="position:absolute; left:200px; top:452px;">1</div>
+      <div class="tl-box" style="position:absolute; left:108px; top:540px; width:240px;">단계 1</div>
+      <div class="tl-desc" style="position:absolute; left:108px; top:645px; width:240px; font-size:32px; font-weight:900; color:#888; text-align:center;">설명 1</div>
     </div>
   </div>
   <div class="step-layer" data-step="2" data-no-dim>
     <div class="slide-el step-timeline no-edit-select" data-type="타임라인" data-group="tl2" style="position:absolute; left:0; top:0; width:1920px; height:1080px;">
-      <svg style="position: absolute; left: 177px; top: -16px; width: 100%; height: 100%;" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <svg style="position:absolute; left:0; top:0; width:100%; height:100%;" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
         <line x1="256" y1="480" x2="480" y2="480" style="stroke-dasharray:224; stroke-dashoffset:0;"></line>
       </svg>
-      <div class="tl-circle red" style="position: absolute; left: 652px; top: 436px;">2</div>
-      <div class="tl-box" style="position: absolute; left: 560px; top: 524px; width: 240px;">단계 2</div>
-      <div class="tl-desc" style="position: absolute; left: 560px; top: 629px; width: 240px; font-size: 32px; font-weight: 900; color: rgb(136, 136, 136); text-align: center;">설명 2</div>
+      <div class="tl-circle red" style="position:absolute; left:480px; top:452px;">2</div>
+      <div class="tl-box" style="position:absolute; left:388px; top:540px; width:240px;">단계 2</div>
+      <div class="tl-desc" style="position:absolute; left:388px; top:645px; width:240px; font-size:32px; font-weight:900; color:#888; text-align:center;">설명 2</div>
     </div>
   </div>
   <div class="step-layer" data-step="3" data-no-dim>
     <div class="slide-el step-timeline no-edit-select" data-type="타임라인" data-group="tl3" style="position:absolute; left:0; top:0; width:1920px; height:1080px;">
-      <svg style="position: absolute; left: 177px; top: -16px; width: 100%; height: 100%;" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <svg style="position:absolute; left:0; top:0; width:100%; height:100%;" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
         <line x1="536" y1="480" x2="760" y2="480" style="stroke-dasharray:224; stroke-dashoffset:0;"></line>
       </svg>
-      <div class="tl-circle green" style="position: absolute; left: 932px; top: 436px; width: 56px;">3</div>
-      <div class="tl-box" style="position: absolute; left: 840px; top: 524px; width: 240px;">단계 3</div>
-      <div class="tl-desc" style="position: absolute; left: 840px; top: 629px; width: 240px; font-size: 32px; font-weight: 900; color: rgb(136, 136, 136); text-align: center;">설명 3</div>
+      <div class="tl-circle green" style="position:absolute; left:760px; top:452px;">3</div>
+      <div class="tl-box" style="position:absolute; left:668px; top:540px; width:240px;">단계 3</div>
+      <div class="tl-desc" style="position:absolute; left:668px; top:645px; width:240px; font-size:32px; font-weight:900; color:#888; text-align:center;">설명 3</div>
     </div>
   </div>
   <div class="step-layer" data-step="4" data-no-dim>
     <div class="slide-el step-timeline no-edit-select" data-type="타임라인" data-group="tl4" style="position:absolute; left:0; top:0; width:1920px; height:1080px;">
-      <svg style="position: absolute; left: 177px; top: -16px; width: 100%; height: 100%;" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <svg style="position:absolute; left:0; top:0; width:100%; height:100%;" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
         <line x1="816" y1="480" x2="1040" y2="480" style="stroke-dasharray:224; stroke-dashoffset:0;"></line>
       </svg>
-      <div class="tl-circle blue" style="position: absolute; left: 1212px; top: 436px;">4</div>
-      <div class="tl-box" style="position: absolute; left: 1120px; top: 524px; width: 240px;">단계 4</div>
-      <div class="tl-desc" style="position: absolute; left: 1120px; top: 629px; width: 240px; font-size: 32px; font-weight: 900; color: rgb(136, 136, 136); text-align: center;">설명 4</div>
+      <div class="tl-circle blue" style="position:absolute; left:1040px; top:452px;">4</div>
+      <div class="tl-box" style="position:absolute; left:948px; top:540px; width:240px;">단계 4</div>
+      <div class="tl-desc" style="position:absolute; left:948px; top:645px; width:240px; font-size:32px; font-weight:900; color:#888; text-align:center;">설명 4</div>
     </div>
   </div>
   <div class="step-layer" data-step="5" data-no-dim>
     <div class="slide-el step-timeline no-edit-select" data-type="타임라인" data-group="tl5" style="position:absolute; left:0; top:0; width:1920px; height:1080px;">
-      <svg style="position: absolute; left: 177px; top: -16px; width: 100%; height: 100%;" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+      <svg style="position:absolute; left:0; top:0; width:100%; height:100%;" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
         <line x1="1096" y1="480" x2="1320" y2="480" style="stroke-dasharray:224; stroke-dashoffset:0;"></line>
       </svg>
-      <div class="tl-circle red" style="position: absolute; left: 1492px; top: 436px; width: 56px;">5</div>
-      <div class="tl-box" style="position: absolute; left: 1400px; top: 524px; width: 240px;">단계 5</div>
-      <div class="tl-desc" style="position: absolute; left: 1400px; top: 629px; width: 240px; font-size: 32px; font-weight: 900; color: rgb(136, 136, 136); text-align: center;">설명 5</div>
+      <div class="tl-circle red" style="position:absolute; left:1320px; top:452px;">5</div>
+      <div class="tl-box" style="position:absolute; left:1228px; top:540px; width:240px;">단계 5</div>
+      <div class="tl-desc" style="position:absolute; left:1228px; top:645px; width:240px; font-size:32px; font-weight:900; color:#888; text-align:center;">설명 5</div>
     </div>
   </div>
 </div>
@@ -2647,9 +2645,9 @@
 </div>
 
 <!-- T28 분할레이아웃 4항목 -->
-<div class="slide" id="slide87" data-steps="3" data-type="분할레이아웃" style="">
+<div class="slide" id="slide87" data-steps="2" data-type="분할레이아웃">
   <div class="step-layer" data-step="0">
-    <div class="text-area" style="position: absolute; left: 120px; top: 82px; width: 1680px;">
+    <div class="text-area" style="position:absolute; left:120px; top:120px; width:1680px;">
       <div class="section-badge" style="margin-bottom:16px;">OVERVIEW</div>
       <div class="hl-wrap" style="align-items:center;">
         <div><span class="hl">핵심 비교</span></div>
@@ -2657,7 +2655,7 @@
     </div>
   </div>
   <div class="step-layer" data-step="1">
-    <div class="slide-el split-list" data-type="리스트" style="position: absolute; left: 140px; top: 320px; width: 820px; height: 568px;">
+    <div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:380px; width:820px;">
       <div class="split-list-title">📌 목록 제목</div>
       <div class="split-list-item">
         <div class="split-list-num">1</div>
@@ -2673,10 +2671,10 @@
       </div>
       <div class="split-list-item">
         <div class="split-list-num">4</div>
-        <div class="split-list-text"><strong class="">항목 제목</strong><br>설명 텍스트</div>
+        <div class="split-list-text"><strong>항목 제목</strong><br>설명 텍스트</div>
       </div>
     </div>
-    <div class="slide-el split-stats" data-type="스탯" style="position: absolute; left: 977px; top: 332px; width: 820px;">
+    <div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:380px; width:820px;">
       <div class="split-stat-main">
         <div class="split-stat-label">핵심 수치</div>
         <div class="split-stat-value">90%</div>
@@ -3054,7 +3052,6 @@
   <div class="step-layer" data-step="1" data-no-dim="">
     <div class="slide-el postit tilt-l" data-type="포스트잇" style="left:320px; top:280px; width:480px; height:460px;">
       <div class="postit-num">①</div>
-      <div class="hand md bold hand-typing" style="margin-top:24px;" data-hand-typing-init="1"><span class="ch" style="transition-delay: 0s;">핵</span><span class="ch" style="transition-delay: 0.08s;">심</span><span class="ch" style="transition-delay: 0.16s;">&nbsp;</span><span class="ch" style="transition-delay: 0.24s; font-size: 60px;">정</span><span class="ch" style="transition-delay: 0.32s;">리</span><span class="ch" style="transition-delay: 0.4s;">&nbsp;</span><span class="ch" style="transition-delay: 0.48s;">첫</span><span class="ch" style="transition-delay: 0.56s;">번</span><span class="ch" style="transition-delay: 0.64s;">째</span></div>
     </div>
     <div class="slide-el hand md bold hand-typing" data-type="손글씨" data-sound="write" style="position:absolute; left:352px; top:410px; width:416px; text-align:center;">핵심 정리 첫번째</div>
   </div>
@@ -3327,7 +3324,7 @@
   <button id="gt-ungroup">그룹 해제</button>
   <button id="gt-delete" title="삭제">🗑</button>
 </div>
-<div id="slideNum">96 / 100</div>
+<div id="slideNum">34 / 36</div>
 <div id="edit-badge"></div>
 <div id="top-toolbar">
   <span class="tb-label">편집 모드</span>
@@ -3354,7 +3351,7 @@
   <button class="tb-btn" id="tb-anim">애니메이션</button>
   <span class="tb-sep"></span>
   <button class="tb-btn" id="tb-undo">↩ 실행취소</button>
-  <button class="tb-btn" id="tb-save">💾 저장</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button>
+  <button class="tb-btn" id="tb-save">💾 저장</button>
   <span id="save-status"></span>
   <span class="tb-sep"></span>
   <button class="tb-btn tb-color-btn" id="tb-bg-color" title="배경색" style="position:relative;">배경<span class="tb-color-indicator" id="tb-bg-indicator" style="background: rgb(255, 229, 0);"></span></button>
@@ -3378,12 +3375,12 @@
   <div class="color-swatch swatch-fc-yellow" data-cls="fc-yellow" title="빨강(강조)"></div>
 </div>
 <div id="coord-panel" style="display: none;">
-  <span id="coord-text">top: 280px;
-left: 320px;
-width: 480px;</span>
+  <span id="coord-text">top: 80px;
+left: 1120px;
+width: 680px;</span>
   <span class="copy-btn" onclick="copyCoords()">복사</span>
 </div>
-<div id="font-panel" class="" style="left: 4px; top: 317.074px;">
+<div id="font-panel" class="" style="left: 500px; top: 61.7264px;">
   <button id="font-dec">−</button>
   <input id="font-size-input" type="number" min="10" max="500">
   <span>px</span>
