@@ -11,7 +11,8 @@
       content: '<svg width="20" height="20" viewBox="0 0 16 16"><rect rx="2" width="16" height="16" fill="#1F2937"/><path d="M4 10L8 4L9 7L12 6L8 12L7 9Z" fill="#fff"/></svg>',
       tg: '<svg width="20" height="20" viewBox="0 0 16 16"><rect rx="3" width="16" height="16" fill="#F59E0B"/><path d="M8 3.2a2.7 2.7 0 0 0-2.7 2.7v1c0 .5-.2 1-.6 1.3l-.6.6c-.4.4-.1 1.2.5 1.2h6.8c.6 0 .9-.8.5-1.2l-.6-.6c-.4-.3-.6-.8-.6-1.3v-1A2.7 2.7 0 0 0 8 3.2Z" fill="#fff"/><circle cx="8" cy="12.2" r="1.2" fill="#fff"/></svg>',
       money: '<svg width="20" height="20" viewBox="0 0 16 16"><rect rx="2" width="16" height="16" fill="#1F2937"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" font-family="sans-serif">₩</text></svg>',
-      doc: '<svg width="20" height="20" viewBox="0 0 16 16"><rect rx="2" width="16" height="16" fill="#1F2937"/><rect x="4" y="3" width="8" height="10" rx="1" fill="#fff"/><rect x="5.5" y="5" width="5" height="1" rx=".5" fill="#1F2937"/><rect x="5.5" y="7.5" width="5" height="1" rx=".5" fill="#1F2937"/><rect x="5.5" y="10" width="3" height="1" rx=".5" fill="#1F2937"/></svg>'
+      doc: '<svg width="20" height="20" viewBox="0 0 16 16"><rect rx="2" width="16" height="16" fill="#1F2937"/><rect x="4" y="3" width="8" height="10" rx="1" fill="#fff"/><rect x="5.5" y="5" width="5" height="1" rx=".5" fill="#1F2937"/><rect x="5.5" y="7.5" width="5" height="1" rx=".5" fill="#1F2937"/><rect x="5.5" y="10" width="3" height="1" rx=".5" fill="#1F2937"/></svg>',
+      tool: '<svg width="20" height="20" viewBox="0 0 16 16"><rect rx="2" width="16" height="16" fill="#475569"/><path d="M10.8 4.2a2.5 2.5 0 0 0-3.1 3.1L4 11l1 1 3.7-3.7a2.5 2.5 0 0 0 3.1-3.1L10.4 6.6 9.4 5.6l1.4-1.4Z" fill="#fff"/></svg>'
     },
     sections: [
       {
@@ -241,6 +242,34 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['slide-viewer'],
+            hubVisible: true
+          }
+        ]
+      },
+      {
+        id: 'tools',
+        hubTitle: '도구 · 기타',
+        nav: {
+          type: 'single',
+          label: '도구·기타',
+          href: 'tools/',
+          activeMatch: ['/tools']
+        },
+        sidebar: {
+          title: '도구·기타'
+        },
+        items: [
+          {
+            id: 'yt-bulk-editor',
+            title: 'YT 일괄 편집기',
+            description: '영상 설명글 · 핀댓글 일괄 수정',
+            href: 'tools/yt-bulk-editor/',
+            badgeText: 'SOON',
+            badgeTone: 'soon',
+            iconKey: 'tool',
+            navVisible: true,
+            sidebarType: 'root',
+            activeMatch: ['yt-bulk-editor'],
             hubVisible: true
           }
         ]
