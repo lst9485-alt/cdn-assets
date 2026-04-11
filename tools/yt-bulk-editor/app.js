@@ -313,12 +313,19 @@
     return out;
   }
 
+  // 핀댓글 식별 한계: YouTube API v3는 핀고정 여부를 직접 알려주는 필드가 없다.
+  // relevance 정렬 상위 N개 중 채널 주인 댓글을 핀댓글로 간주하는 휴리스틱 사용.
+  // maxResults를 충분히 키워(30) 정확도를 높였지만, 채널 주인이 일반 댓글을
+  // 다수 단 영상에서는 일반 댓글이 잘못 매칭될 수 있다. 따라서 저장 전 사용자가
+  // 카드에서 텍스트를 직접 확인해야 한다 (UI상 핀댓글 섹션에 안내).
+  const PINNED_COMMENT_PROBE_LIMIT = 30;
+
   async function getPinnedComment(videoId, channelId) {
     const url = new URL(`${YT_API}/commentThreads`);
     url.searchParams.set('part', 'snippet');
     url.searchParams.set('videoId', videoId);
     url.searchParams.set('order', 'relevance');
-    url.searchParams.set('maxResults', '5');
+    url.searchParams.set('maxResults', String(PINNED_COMMENT_PROBE_LIMIT));
     try {
       const data = await ytFetch(url.toString());
       for (const thread of data.items || []) {
@@ -329,39 +336,58 @@
             id: thread.id,
             text: top.textOriginal || top.textDisplay || '',
             disabled: false,
+            error: null,
           };
         }
       }
-      return { id: null, text: '', disabled: false };
+      return { id: null, text: '', disabled: false, error: null };
     } catch (err) {
-      if (/commentsDisabled|403/.test(err.message)) {
-        return { id: null, text: '', disabled: true };
+      // commentsDisabled = 영상 자체가 댓글 비활성. 정상 처리.
+      if (/commentsDisabled/.test(err.message)) {
+        return { id: null, text: '', disabled: true, error: null };
       }
-      return { id: null, text: '', disabled: false };
+      // 그 외 에러(네트워크/인증/quota 등)는 명시적으로 노출.
+      // 호출자가 알 수 있도록 error 필드 채워서 반환 (throw하면 한 영상 실패로 전체 로드 중단됨).
+      return { id: null, text: '', disabled: false, error: err.message };
     }
   }
 
+  // YouTube Analytics API: 1회 호출당 maxResults 상한 200. 영상이 그보다 많으면
+  // startIndex로 페이지네이션. YouTube 채널 생성 가능 최초 시점(2005)부터 집계해서
+  // 누락 없도록 한다.
+  const ANALYTICS_PAGE_SIZE = 200;
+  const ANALYTICS_START_DATE = '2005-01-01';
+
   async function getVideoAnalytics(videoIds) {
     const today = new Date().toISOString().slice(0, 10);
-    const url = new URL(`${YTA_API}/reports`);
-    url.searchParams.set('ids', 'channel==MINE');
-    url.searchParams.set('startDate', '2015-01-01');
-    url.searchParams.set('endDate', today);
-    url.searchParams.set('metrics', 'views,averageViewDuration');
-    url.searchParams.set('dimensions', 'video');
-    url.searchParams.set('sort', '-views');
-    url.searchParams.set('maxResults', '200');
-    const data = await ytFetch(url.toString());
-    const headers = (data.columnHeaders || []).map((h) => h.name);
     const result = {};
     const idSet = new Set(videoIds);
-    for (const row of data.rows || []) {
-      const obj = Object.fromEntries(headers.map((h, i) => [h, row[i]]));
-      if (idSet.has(obj.video)) {
-        result[obj.video] = {
-          views: parseInt(obj.views || 0, 10),
-        };
+    let startIndex = 1;
+    while (true) {
+      const url = new URL(`${YTA_API}/reports`);
+      url.searchParams.set('ids', 'channel==MINE');
+      url.searchParams.set('startDate', ANALYTICS_START_DATE);
+      url.searchParams.set('endDate', today);
+      url.searchParams.set('metrics', 'views,averageViewDuration');
+      url.searchParams.set('dimensions', 'video');
+      url.searchParams.set('sort', '-views');
+      url.searchParams.set('maxResults', String(ANALYTICS_PAGE_SIZE));
+      url.searchParams.set('startIndex', String(startIndex));
+      const data = await ytFetch(url.toString());
+      const headers = (data.columnHeaders || []).map((h) => h.name);
+      const rows = data.rows || [];
+      for (const row of rows) {
+        const obj = Object.fromEntries(headers.map((h, i) => [h, row[i]]));
+        if (idSet.has(obj.video)) {
+          result[obj.video] = {
+            views: parseInt(obj.views || 0, 10),
+          };
+        }
       }
+      if (rows.length < ANALYTICS_PAGE_SIZE) break;
+      startIndex += ANALYTICS_PAGE_SIZE;
+      // 모든 비디오를 이미 채웠으면 중단 (API 호출 절약)
+      if (Object.keys(result).length >= videoIds.length) break;
     }
     return result;
   }
@@ -426,19 +452,30 @@
 
       setLoadProgress(65, '핀댓글 확인 중...');
       let pinnedDone = 0;
+      const pinnedErrors = [];
       for (const item of videos) {
         const pin = await getPinnedComment(item.videoId, channelId);
         item.pinnedCommentId = pin.id;
         item.pinnedCommentText = pin.text;
         item.originalPinnedComment = pin.text;
         item.commentsDisabled = pin.disabled;
+        if (pin.error) pinnedErrors.push({ title: item.title, error: pin.error });
         pinnedDone += 1;
         setLoadProgress(65 + (pinnedDone / videos.length) * 30, `핀댓글 ${pinnedDone}/${videos.length}`);
       }
 
       state.videos = videos;
       setLoadProgress(100, '완료');
-      toast(`영상 ${videos.length}개 로드 완료`, 'success');
+      if (pinnedErrors.length) {
+        toast(
+          `영상 ${videos.length}개 로드 (핀댓글 ${pinnedErrors.length}건 조회 실패 — 콘솔 확인)`,
+          'error',
+          6000,
+        );
+        console.error('핀댓글 조회 실패:', pinnedErrors);
+      } else {
+        toast(`영상 ${videos.length}개 로드 완료`, 'success');
+      }
       els.btnLoadAnalytics.disabled = false;
       els.btnExportExcel.disabled = false;
       buildDateFilters();
@@ -647,6 +684,8 @@
   }
 
   // ---------- 저장 ----------
+  // 필드 단위 원자성: 설명글 저장에 성공한 직후 originalDescription을 갱신해서,
+  // 핀댓글 저장이 실패해도 다음 재시도 때 설명글이 다시 호출되지 않도록 한다.
   async function saveChanges() {
     const changed = state.videos.filter(isChanged);
     if (!changed.length) return;
@@ -658,19 +697,35 @@
     const failed = [];
     for (let i = 0; i < changed.length; i += 1) {
       const item = changed[i];
-      try {
-        if (item.description !== item.originalDescription) {
+      const itemErrors = [];
+      // 설명글 저장 + 즉시 original 갱신
+      if (item.description !== item.originalDescription) {
+        try {
           await updateVideoDescription(item);
+          item.originalDescription = item.description;
+        } catch (err) {
+          console.error(err);
+          itemErrors.push(`설명글: ${err.message}`);
         }
-        if (item.pinnedCommentText !== item.originalPinnedComment && !item.commentsDisabled && item.pinnedCommentId) {
+      }
+      // 핀댓글 저장 + 즉시 original 갱신 (설명글 결과와 독립)
+      if (
+        item.pinnedCommentText !== item.originalPinnedComment &&
+        !item.commentsDisabled &&
+        item.pinnedCommentId
+      ) {
+        try {
           await updatePinnedComment(item);
+          item.originalPinnedComment = item.pinnedCommentText;
+        } catch (err) {
+          console.error(err);
+          itemErrors.push(`핀댓글: ${err.message}`);
         }
-        item.originalDescription = item.description;
-        item.originalPinnedComment = item.pinnedCommentText;
+      }
+      if (itemErrors.length) {
+        failed.push({ title: item.title, errors: itemErrors });
+      } else {
         success += 1;
-      } catch (err) {
-        console.error(err);
-        failed.push({ title: item.title, error: err.message });
       }
       setSaveProgress(((i + 1) / changed.length) * 100, `${i + 1}/${changed.length}`);
     }
