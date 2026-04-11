@@ -2351,13 +2351,15 @@
 
   // ── 편집 모드 ──
   // [data-type]:not(.slide) — .slide 자체는 슬라이드 배경(data-type="카드" 등이 붙음), 편집 대상 아님
-  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el:not(.no-edit-select), img, .emoji-icon, .section-badge, .corner-label, .step-dim, [data-type]:not(.slide):not(.no-edit-select), .tl-circle, .tl-box, .tl-desc, .step-timeline svg';
+  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el:not(.no-edit-select), img, .emoji-icon, .section-badge, .corner-label, .step-dim, [data-type]:not(.slide):not(.no-edit-select), .tl-circle, .tl-box, .tl-desc';
   let editMode = false;
   let isEditing = false;
   let clipboardEl = null;
   let selectedEl = null;
   let selectedEls = [];
   let elAnchors = [];
+  // SVG connector(.step-timeline > svg) 동반 이동: SVGElement는 offsetLeft 미지원이라 selection 안 넣고 별도 추적
+  let svgDragAnchors = [];
   let isDragging = false;
   const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .check-text, .check-box, .bar-label, .bar-value, .bar-fill, .hbar-label, .hbar-val, .stat-num, .stat-label, .stat-detail-item, .icon-label, .icon-circle, .icon-flow-label, .flow-box, .flow-arrow, .alert-text, .alert-icon, .compare-header, .compare-item, .quote-text, .quote-source, .tag-chip, .tl-box, .tl-circle, .btn-pill, .cta-btn';
   // 비텍스트 자식 (fontSize 기반 리사이즈 대상 아님 — 이들은 기존 slide-el 박스 리사이즈로 처리)
@@ -2882,6 +2884,22 @@
 
   // resize handle는 stage 이벤트 위임으로 처리 (innerHTML 복원 후에도 동작)
 
+  // selection 안 자식이 속한 .step-timeline 안 svg connector를 모아서 동반 이동 anchor로 만들기
+  // (SVGElement는 offsetLeft 표준 미지원이라 EDITABLE_SEL/일반 drag 흐름에 못 들어감)
+  function collectSvgDragAnchors(els) {
+    const svgs = new Set();
+    els.forEach(s => {
+      const tl = s.closest && s.closest('.step-timeline');
+      if (!tl) return;
+      tl.querySelectorAll(':scope > svg').forEach(svg => svgs.add(svg));
+    });
+    return Array.from(svgs).map(svg => ({
+      el: svg,
+      top: parseFloat(svg.style.top) || 0,
+      left: parseFloat(svg.style.left) || 0,
+    }));
+  }
+
   document.getElementById('stage').addEventListener('dragstart', e => {
     if (editMode) e.preventDefault();
   });
@@ -3074,6 +3092,7 @@
           mouseDownPos = { x: e.clientX, y: e.clientY };
           dragAnchor = pos;
           elAnchors = selectedEls.map(s => ({ el: s, top: s.offsetTop, left: s.offsetLeft }));
+          svgDragAnchors = collectSvgDragAnchors(selectedEls);
           return;
         }
       }
@@ -3210,6 +3229,7 @@
     } else {
       elAnchors = selectedEls.map(s => ({ el: s, top: s.offsetTop, left: s.offsetLeft }));
     }
+    svgDragAnchors = collectSvgDragAnchors(individualMode ? [selectedEl] : selectedEls);
 
     updateCoordPanel(el);
     updateGroupToolbar();
@@ -3383,6 +3403,11 @@
         el.style.left = Math.round(left + dxDrag) + 'px';
         el.style.top  = Math.round(top  + dyDrag) + 'px';
       });
+      // SVG connector(.step-timeline > svg) 동반 이동 — selection엔 없지만 부모 timeline 안 svg를 함께
+      svgDragAnchors.forEach(({ el, top, left }) => {
+        el.style.left = Math.round(left + dxDrag) + 'px';
+        el.style.top  = Math.round(top  + dyDrag) + 'px';
+      });
       // bounding box 중앙 기준 stage 중앙 스냅
       let minL=Infinity, minT=Infinity, maxR=-Infinity, maxB=-Infinity;
       elAnchors.forEach(({ el }) => {
@@ -3547,6 +3572,11 @@
 
     selectedEl.style.left = newLeft + 'px';
     selectedEl.style.top  = newTop + 'px';
+    // SVG connector 동반 이동(단일 selection drag)
+    svgDragAnchors.forEach(({ el, top, left }) => {
+      el.style.left = Math.round(left + dxDrag) + 'px';
+      el.style.top  = Math.round(top  + dyDrag) + 'px';
+    });
     updateCoordPanel(selectedEl);
     if (selectedEl.dataset.group) showGroupBox(selectedEl.dataset.group);
   });
@@ -3690,6 +3720,7 @@
     isDragging = false;
     pendingDrag = false;
     mouseDownPos = null;
+    svgDragAnchors = [];
     document.getElementById('snap-x').style.display = 'none';
     document.getElementById('snap-y').style.display = 'none';
     ['gap-left','gap-right','gap-top','gap-bottom'].forEach(id => { document.getElementById(id).style.display = 'none'; });
