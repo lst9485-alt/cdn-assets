@@ -553,7 +553,12 @@
 
   function getOrderedEls(layer) {
     if (parseInt(layer.dataset.step) === 0) return [];
-    return Array.from(layer.children).filter(el => el.matches(EDITABLE_SEL) && !el.classList.contains('step-title') && !el.classList.contains('step-dim'));
+    // EDITABLE_SEL과 독립 — anim-shown 흐름은 no-edit-select와 무관하게 모든 .slide-el 대상
+    return Array.from(layer.children).filter(el =>
+      el.classList.contains('slide-el') &&
+      !el.classList.contains('step-title') &&
+      !el.classList.contains('step-dim')
+    );
   }
 
   // 비연속 스텝 지원: 실제 존재하는 다음/이전 스텝 탐색
