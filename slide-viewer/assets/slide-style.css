@@ -1581,6 +1581,10 @@
   body.edit-mode .slide.active .step-layer[data-step] * {
     pointer-events: all !important;
   }
+  /* .no-edit-select 컨테이너(예: .step-timeline)는 클릭 통과 — 위 step-layer가 아래 step의 자식을 가리지 않게 */
+  body.edit-mode .slide.active .step-layer[data-step] .no-edit-select {
+    pointer-events: none !important;
+  }
   body.edit-mode .slide.active .step-layer[data-step] .step-dim { background: rgba(0,0,0,0.5) !important; pointer-events: auto !important; cursor: pointer; }
   body.edit-mode .slide.active .step-layer[data-step] .step-title { pointer-events: none !important; }
   body.edit-mode.hide-dims .slide.active .step-layer[data-step] .step-dim { opacity: 0 !important; }
