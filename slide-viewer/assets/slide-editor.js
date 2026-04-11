@@ -2351,7 +2351,7 @@
 
   // ── 편집 모드 ──
   // [data-type]:not(.slide) — .slide 자체는 슬라이드 배경(data-type="카드" 등이 붙음), 편집 대상 아님
-  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el:not(.no-edit-select), img, .emoji-icon, .section-badge, .corner-label, .step-dim, [data-type]:not(.slide):not(.no-edit-select), .tl-circle, .tl-box, .tl-desc';
+  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el:not(.no-edit-select), img, .emoji-icon, .section-badge, .corner-label, .step-dim, [data-type]:not(.slide):not(.no-edit-select), .tl-circle, .tl-box, .tl-desc, .step-timeline svg';
   let editMode = false;
   let isEditing = false;
   let clipboardEl = null;

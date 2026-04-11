@@ -1585,6 +1585,10 @@
   body.edit-mode .slide.active .step-layer[data-step] .no-edit-select {
     pointer-events: none !important;
   }
+  /* .no-edit-select 안 svg(타임라인 connector)도 클릭 통과 — 1920x1080 svg가 빈 영역 클릭 가로채지 않게. drag-box로는 selection 가능 */
+  body.edit-mode .slide.active .step-layer[data-step] .no-edit-select svg {
+    pointer-events: none !important;
+  }
   body.edit-mode .slide.active .step-layer[data-step] .step-dim { background: rgba(0,0,0,0.5) !important; pointer-events: auto !important; cursor: pointer; }
   body.edit-mode .slide.active .step-layer[data-step] .step-title { pointer-events: none !important; }
   body.edit-mode.hide-dims .slide.active .step-layer[data-step] .step-dim { opacity: 0 !important; }
