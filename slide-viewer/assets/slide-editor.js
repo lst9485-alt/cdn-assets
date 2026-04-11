@@ -3056,6 +3056,27 @@
     const el = e.target.closest(EDITABLE_SEL);
 
     if (!el) {
+      // 기존 다중 selection의 bounding box 안에 mousedown이면 selection 유지하고 multi-drag 시작
+      // (예: .step-timeline.no-edit-select 같은 통과 컨테이너 위 빈 영역에서 자식 selection 옮기기)
+      if (selectedEls.length > 1) {
+        const pos = clientToStage(e.clientX, e.clientY);
+        let minL = Infinity, minT = Infinity, maxR = -Infinity, maxB = -Infinity;
+        selectedEls.forEach(s => {
+          minL = Math.min(minL, s.offsetLeft);
+          minT = Math.min(minT, s.offsetTop);
+          maxR = Math.max(maxR, s.offsetLeft + s.offsetWidth);
+          maxB = Math.max(maxB, s.offsetTop + s.offsetHeight);
+        });
+        if (pos.x >= minL && pos.x <= maxR && pos.y >= minT && pos.y <= maxB) {
+          e.preventDefault();
+          e.stopPropagation();
+          pendingDrag = true;
+          mouseDownPos = { x: e.clientX, y: e.clientY };
+          dragAnchor = pos;
+          elAnchors = selectedEls.map(s => ({ el: s, top: s.offsetTop, left: s.offsetLeft }));
+          return;
+        }
+      }
       // 빈 영역 클릭 → 드래그 선택 박스 시작
       e.preventDefault();
       e.stopPropagation();
