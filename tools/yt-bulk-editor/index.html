@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <title>YT 일괄 편집기 - 운영 대시보드</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="app-title">
+        <a href="../../" class="back-link">← 허브</a>
+        <h1>YT 일괄 편집기</h1>
+      </div>
+      <div class="app-auth">
+        <span id="auth-status" class="auth-pill pending">미인증</span>
+        <button id="btn-login" class="btn btn-primary">Google 로그인</button>
+        <button id="btn-logout" class="btn btn-ghost" hidden>로그아웃</button>
+      </div>
+    </header>
+
+    <div id="toast-root" class="toast-root"></div>
+
+    <main class="app-main">
+      <aside class="sidebar">
+        <section class="panel">
+          <h2>변경사항</h2>
+          <div class="metric">
+            <span class="metric-label">변경 건수</span>
+            <span id="change-count" class="metric-value">0</span>
+          </div>
+          <button id="btn-save" class="btn btn-primary full" disabled>변경사항 저장</button>
+          <div id="save-progress" class="progress" hidden>
+            <div class="progress-bar"><div id="save-progress-fill" class="progress-fill"></div></div>
+            <div id="save-progress-text" class="progress-text"></div>
+          </div>
+          <p class="caption">
+            Quota 안내: videos.update는 50단위 소모. 대량 수정 시 일일 한도(10,000) 주의.
+          </p>
+        </section>
+
+        <section class="panel">
+          <h2>텍스트 일괄 교체</h2>
+          <label class="label">교체 전
+            <input id="replace-old" type="text" placeholder="https://old-link.com">
+          </label>
+          <label class="label">교체 후
+            <input id="replace-new" type="text" placeholder="https://new-link.com">
+          </label>
+          <div class="row">
+            <label class="checkbox"><input type="checkbox" id="replace-desc" checked> 설명글</label>
+            <label class="checkbox"><input type="checkbox" id="replace-comment" checked> 핀댓글</label>
+          </div>
+          <div class="row">
+            <button id="btn-preview-replace" class="btn" disabled>미리보기</button>
+            <button id="btn-apply-replace" class="btn btn-primary" disabled>교체 적용</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>데이터 로드</h2>
+          <button id="btn-load-videos" class="btn btn-primary full" disabled>영상 목록 로드</button>
+          <button id="btn-load-analytics" class="btn full" disabled>조회수 로드</button>
+          <div id="load-progress" class="progress" hidden>
+            <div class="progress-bar"><div id="load-progress-fill" class="progress-fill"></div></div>
+            <div id="load-progress-text" class="progress-text"></div>
+          </div>
+        </section>
+      </aside>
+
+      <section class="content">
+        <div class="content-header">
+          <div class="filters">
+            <input id="search-input" type="text" placeholder="제목으로 검색...">
+            <label class="checkbox"><input type="checkbox" id="filter-changed"> 변경된 영상만</label>
+            <label class="checkbox"><input type="checkbox" id="filter-shorts"> Shorts 포함</label>
+            <details class="date-filter">
+              <summary>날짜 필터</summary>
+              <div class="date-filter-body">
+                <div class="date-group"><span class="date-label">년도</span><div id="filter-years"></div></div>
+                <div class="date-group"><span class="date-label">월</span><div id="filter-months"></div></div>
+              </div>
+            </details>
+          </div>
+          <div class="content-actions">
+            <span id="video-count" class="caption">영상 0개</span>
+            <button id="btn-export-excel" class="btn" disabled>엑셀 다운로드</button>
+          </div>
+        </div>
+
+        <div id="video-list" class="video-list">
+          <div class="empty-state">
+            <p>Google 로그인 후 "영상 목록 로드"를 눌러 시작하세요.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
