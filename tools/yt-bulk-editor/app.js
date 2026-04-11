@@ -16,17 +16,20 @@
 
   // ---------- 설정 ----------
   const CLIENT_ID = '427635532362-bnh9aai0p196vnv4gin2dbmdngt7rfdj.apps.googleusercontent.com';
+  const REDIRECT_URI = 'https://cdn-assets-three.vercel.app/tools/yt-bulk-editor/';
   const SCOPES = [
     'https://www.googleapis.com/auth/youtube.force-ssl',
     'https://www.googleapis.com/auth/yt-analytics.readonly',
   ].join(' ');
   const YT_API = 'https://www.googleapis.com/youtube/v3';
   const YTA_API = 'https://youtubeanalytics.googleapis.com/v2';
+  const TOKEN_STORAGE_KEY = 'yt_bulk_editor_token';
+  const STATE_STORAGE_KEY = 'yt_bulk_editor_oauth_state';
 
   // ---------- 상태 ----------
   const state = {
     accessToken: null,
-    tokenClient: null,
+    tokenExpiresAt: 0,
     channelId: null,
     uploadsPlaylistId: null,
     videos: [], // VideoItem[]
@@ -110,26 +113,87 @@
     return res.json();
   }
 
-  // ---------- OAuth ----------
-  function initAuth() {
-    if (!window.google || !window.google.accounts || !window.google.accounts.oauth2) {
-      setTimeout(initAuth, 200);
-      return;
-    }
-    state.tokenClient = google.accounts.oauth2.initTokenClient({
+  // ---------- OAuth (수동 implicit 플로우) ----------
+  function generateState() {
+    const arr = new Uint8Array(16);
+    crypto.getRandomValues(arr);
+    return Array.from(arr, (b) => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function startLogin() {
+    const oauthState = generateState();
+    sessionStorage.setItem(STATE_STORAGE_KEY, oauthState);
+    const params = new URLSearchParams({
       client_id: CLIENT_ID,
+      redirect_uri: REDIRECT_URI,
+      response_type: 'token',
       scope: SCOPES,
-      callback: (resp) => {
-        if (resp.error) {
-          toast(`인증 실패: ${resp.error}`, 'error');
-          return;
-        }
-        state.accessToken = resp.access_token;
-        setAuthState(true);
-        toast('인증되었습니다.', 'success');
-      },
+      include_granted_scopes: 'true',
+      state: oauthState,
     });
-    els.btnLogin.disabled = false;
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
+  }
+
+  function handleOAuthReturn() {
+    // 리디렉트 후 URL 해시에 access_token이 포함됨
+    if (!location.hash || location.hash.length < 2) return false;
+    const hash = new URLSearchParams(location.hash.slice(1));
+    const token = hash.get('access_token');
+    if (!token) {
+      const err = hash.get('error');
+      if (err) {
+        toast(`OAuth 오류: ${err}`, 'error', 6000);
+        history.replaceState(null, '', location.pathname);
+      }
+      return false;
+    }
+    const returnedState = hash.get('state');
+    const storedState = sessionStorage.getItem(STATE_STORAGE_KEY);
+    if (!returnedState || returnedState !== storedState) {
+      toast('state 검증 실패 (CSRF 방지)', 'error', 5000);
+      history.replaceState(null, '', location.pathname);
+      return false;
+    }
+    sessionStorage.removeItem(STATE_STORAGE_KEY);
+    const expiresIn = parseInt(hash.get('expires_in') || '3600', 10);
+    const expiresAt = Date.now() + expiresIn * 1000;
+    state.accessToken = token;
+    state.tokenExpiresAt = expiresAt;
+    sessionStorage.setItem(
+      TOKEN_STORAGE_KEY,
+      JSON.stringify({ token, expiresAt }),
+    );
+    history.replaceState(null, '', location.pathname);
+    setAuthState(true);
+    toast('인증되었습니다.', 'success');
+    return true;
+  }
+
+  function restoreTokenFromStorage() {
+    try {
+      const raw = sessionStorage.getItem(TOKEN_STORAGE_KEY);
+      if (!raw) return false;
+      const { token, expiresAt } = JSON.parse(raw);
+      if (!token || !expiresAt || Date.now() >= expiresAt - 60000) {
+        sessionStorage.removeItem(TOKEN_STORAGE_KEY);
+        return false;
+      }
+      state.accessToken = token;
+      state.tokenExpiresAt = expiresAt;
+      setAuthState(true);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function initAuth() {
+    // 1. 리디렉트 복귀 확인
+    if (handleOAuthReturn()) return;
+    // 2. sessionStorage의 기존 토큰 복원
+    if (restoreTokenFromStorage()) return;
+    // 3. 미인증 초기 상태
+    setAuthState(false);
   }
 
   function setAuthState(authed) {
@@ -141,6 +205,8 @@
       els.btnLoadVideos.disabled = false;
     } else {
       state.accessToken = null;
+      state.tokenExpiresAt = 0;
+      sessionStorage.removeItem(TOKEN_STORAGE_KEY);
       els.authStatus.textContent = '미인증';
       els.authStatus.className = 'auth-pill pending';
       els.btnLogin.hidden = false;
@@ -150,9 +216,17 @@
     }
   }
 
-  function logout() {
-    if (state.accessToken && window.google && google.accounts.oauth2) {
-      google.accounts.oauth2.revoke(state.accessToken, () => {});
+  async function logout() {
+    if (state.accessToken) {
+      // 토큰 취소 (선택)
+      try {
+        await fetch(`https://oauth2.googleapis.com/revoke?token=${encodeURIComponent(state.accessToken)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        });
+      } catch (e) {
+        /* 무시 */
+      }
     }
     setAuthState(false);
     toast('로그아웃했습니다.', 'info');
@@ -694,13 +768,7 @@
 
   // ---------- 이벤트 바인딩 ----------
   function bindEvents() {
-    els.btnLogin.addEventListener('click', () => {
-      if (!state.tokenClient) {
-        toast('인증 라이브러리 로드 중입니다. 잠시 후 다시 시도하세요.', 'info');
-        return;
-      }
-      state.tokenClient.requestAccessToken();
-    });
+    els.btnLogin.addEventListener('click', startLogin);
     els.btnLogout.addEventListener('click', logout);
     els.btnLoadVideos.addEventListener('click', loadVideos);
     els.btnLoadAnalytics.addEventListener('click', loadAnalytics);
@@ -747,7 +815,6 @@
   // ---------- 초기화 ----------
   document.addEventListener('DOMContentLoaded', () => {
     bindEvents();
-    els.btnLogin.disabled = true; // GIS 로드 전까지 비활성
     initAuth();
   });
 })();
