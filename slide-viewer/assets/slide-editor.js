@@ -1775,9 +1775,14 @@
 
       // 새 page-group이면 새 .ov-group wrapper
       if (!isVariant) {
+        const variantCount = pg ? [...slides].filter(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0").length : 0;
         currentGroup = document.createElement('div');
-        currentGroup.className = 'ov-group';
+        currentGroup.className = 'ov-group' + (isExpanded && variantCount > 0 ? ' expanded' : '');
         if (pg) currentGroup.dataset.pageGroup = pg;
+        // 펼치면 base+variants가 들어갈 만큼 grid-column span
+        if (isExpanded && variantCount > 0) {
+          currentGroup.style.gridColumn = `span ${Math.min(1 + variantCount, 5)}`;
+        }
         currentPg = pg;
         ovGrid.appendChild(currentGroup);
       }

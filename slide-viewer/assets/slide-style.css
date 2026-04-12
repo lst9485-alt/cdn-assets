@@ -1342,8 +1342,8 @@
   #overview.visible { display: flex; }
 
   #overview-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 330px);
     gap: 20px;
     justify-content: center;
     overflow-y: auto;
@@ -1393,14 +1393,18 @@
   .ov-group {
     position: relative;
     display: flex;
-    flex-shrink: 0;
+    width: 330px;
   }
-  /* 접힌 상태: 종이 겹침 (base 뒤에 variants가 10px씩 빼꼼) */
-  .ov-item.ov-variant {
-    margin-left: -310px;
+  /* 접힌 상태: 전부 숨김 */
+  .ov-item.ov-variant:not(.show) {
+    margin-left: -320px;
     transition: margin-left 0.25s ease-out;
   }
-  /* 접힌 variants에 어두운 오버레이 — 겹쳐져 있다는 시각적 단서 */
+  /* 접힌 상태: 첫 번째 variant만 1장 빼꼼 (10px) */
+  .ov-group > .ov-item.ov-variant:not(.show):nth-child(2) {
+    margin-left: -310px;
+  }
+  /* 빼꼼 나온 1장에 어두운 오버레이 */
   .ov-item.ov-variant:not(.show) .ov-thumb::after {
     content: '';
     position: absolute;
@@ -1411,6 +1415,11 @@
   /* 펼친 상태: 정상 카드로 나열 */
   .ov-item.ov-variant.show {
     margin-left: 4px;
+    transition: margin-left 0.25s ease-out;
+  }
+  /* 펼치면 ov-group이 여러 열 차지 */
+  .ov-group.expanded {
+    width: auto;
   }
   /* +/- 토글 버튼 */
   .ov-toggle {
