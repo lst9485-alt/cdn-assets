@@ -5115,7 +5115,7 @@ ch.onmessage = ev => {
     renderPreview(document.getElementById('pres-current'), d.currentHTML);
     renderPreview(document.getElementById('pres-next'), d.nextHTML);
     renderPreview(document.getElementById('pres-next-slide'), d.nextSlideHTML || '');
-    const fullNotes = d.notes || '';
+    const fullNotes = (d.notes || '').replace(/🟡[\d]+(?:[-–][\d]+)?\s*/g, '🟡');
     const el = document.getElementById('pres-notes-input');
     el.textContent = fullNotes;
   }
