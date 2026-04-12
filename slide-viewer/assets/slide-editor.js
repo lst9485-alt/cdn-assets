@@ -2275,7 +2275,12 @@
     const bodyAfter = _afterScriptIds.map(id => document.getElementById(id)).filter(Boolean).map(el => el.outerHTML).join('');
 
     const bodyClass = document.body.className.trim();
-    const bodyTag = bodyClass ? '<body class="' + escHTML(bodyClass) + '">' : '<body>';
+    const bodyAttrs = [];
+    if (bodyClass) bodyAttrs.push('class="' + escHTML(bodyClass) + '"');
+    for (const [k, v] of Object.entries(document.body.dataset)) {
+      bodyAttrs.push('data-' + k.replace(/[A-Z]/g, m => '-' + m.toLowerCase()) + '="' + escHTML(v) + '"');
+    }
+    const bodyTag = '<body' + (bodyAttrs.length ? ' ' + bodyAttrs.join(' ') : '') + '>';
 
     const html = '<!DOCTYPE html>\n<html lang="ko">\n<head>\n'
       + _headParts.join('\n') + '\n</head>\n'
