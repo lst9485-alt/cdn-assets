@@ -1398,7 +1398,15 @@
   /* 접힌 상태: 종이 겹침 (base 뒤에 variants가 10px씩 빼꼼) */
   .ov-item.ov-variant {
     margin-left: -310px;
-    transition: margin-left 0.25s ease-out, opacity 0.25s ease-out;
+    transition: margin-left 0.25s ease-out;
+  }
+  /* 접힌 variants에 어두운 오버레이 — 겹쳐져 있다는 시각적 단서 */
+  .ov-item.ov-variant:not(.show) .ov-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    pointer-events: none;
   }
   /* 펼친 상태: 정상 카드로 나열 */
   .ov-item.ov-variant.show {
@@ -1410,19 +1418,20 @@
     top: 6px;
     right: 8px;
     z-index: 30;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
+    height: 26px;
+    padding: 0 8px;
+    border-radius: 13px;
     border: none;
     background: rgba(0,0,0,0.6);
     color: #fff;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 700;
-    line-height: 28px;
+    line-height: 26px;
     text-align: center;
     cursor: pointer;
     pointer-events: auto;
     transition: background 0.15s;
+    white-space: nowrap;
   }
   .ov-toggle:hover { background: rgba(0,0,0,0.85); }
 

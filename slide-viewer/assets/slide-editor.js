@@ -1891,11 +1891,11 @@
 
       // base 카드에 +/- 토글 버튼 (variants 있을 때만)
       if (!isVariant && pg) {
-        const hasVariants = [...slides].some(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0");
-        if (hasVariants) {
+        const variantCount = [...slides].filter(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0").length;
+        if (variantCount > 0) {
           const toggleBtn = document.createElement('button');
           toggleBtn.className = 'ov-toggle';
-          toggleBtn.textContent = isExpanded ? '−' : '+';
+          toggleBtn.textContent = isExpanded ? `−${variantCount}` : `+${variantCount}`;
           toggleBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             if (expandedOverviewGroups.has(String(pg))) {
