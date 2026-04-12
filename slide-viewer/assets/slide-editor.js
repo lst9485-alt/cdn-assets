@@ -1986,7 +1986,7 @@
         currentOrder = 0;
         buildFilmstrip();
         buildOverview();
-        if (editMode) ensureDirHandle().then(ok => { if (ok) saveToFile(); });
+        ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
       } catch (err) {
         if (typeof showToast === 'function') showToast('삭제 오류: ' + err.message + '\n' + (err.stack || ''), 8000);
       }
