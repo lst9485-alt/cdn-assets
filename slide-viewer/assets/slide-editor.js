@@ -131,6 +131,7 @@
 
   function buildFilmstrip() {
     const inner = document.getElementById('filmstrip-inner');
+    if (!inner) return;
     inner.innerHTML = '';
     slides.forEach((slide, idx) => {
       const pg = slide.dataset.pageGroup;
