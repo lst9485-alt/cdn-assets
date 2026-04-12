@@ -1943,14 +1943,36 @@
       try {
         hideSlideContextMenu();
         if (slides.length <= 1) return;
-        deleteSlide(idx, true);
-        setTimeout(() => {
-          buildOverview();
-          overview.classList.add('visible');
-        }, 700);
+        // overview 전용 삭제: goToSlide 없이 직접 처리 (overview 유지)
+        pushUndo();
+        const container = document.getElementById('stage');
+        const target = slides[idx];
+        const deletedPg = target ? target.dataset.pageGroup : null;
+        container.removeChild(target);
+        slides = [...container.querySelectorAll(':scope > .slide')];
+        rebuildSlidesByKey();
+        if (deletedPg && ![...slides].some(s => s.dataset.pageGroup === deletedPg)) {
+          expandedFilmGroups.delete(deletedPg);
+          expandedOverviewGroups.delete(deletedPg);
+        }
+        // transition class 정리 + active + showStep (Codex 권고: 빈 화면 방지)
+        currentSlide = Math.min(idx, slides.length - 1);
+        slides.forEach(s => {
+          s.classList.remove('active', 'leave-left', 'enter-from-left');
+          s.style.opacity = '';
+          s.style.transform = '';
+          s.style.transition = '';
+        });
+        if (slides[currentSlide]) {
+          slides[currentSlide].classList.add('active');
+          showStep(slides[currentSlide], 0);
+        }
+        currentStep = 0;
+        currentOrder = 0;
+        buildFilmstrip();
+        buildOverview();
       } catch (err) {
         if (typeof showToast === 'function') showToast('삭제 오류: ' + err.message, 5000);
-        console.error('overview delete error:', err);
       }
     });
     menu.appendChild(delBtn);
