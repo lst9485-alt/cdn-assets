@@ -1788,6 +1788,25 @@
   .fs-item[data-group-color="2"] { border-left: 3px solid #50C878; }
   .fs-item[data-group-color="3"] { border-left: 3px solid #FF6B6B; }
 
+  /* 인라인 확장 variants — base 클릭 시 같은 page-group의 variants가 우측으로 펼쳐짐.
+     기본 hidden(max-width:0)이고, .show 클래스 토글로 펼침/접힘 (CSS 트랜지션). */
+  .fs-item.fs-variant {
+    max-width: 0;
+    opacity: 0;
+    margin-right: 0;
+    overflow: hidden;
+    transition: max-width 0.2s ease-out, opacity 0.2s ease-out, margin 0.2s ease-out, border-width 0.2s ease-out;
+    border-width: 0;
+  }
+  .fs-item.fs-variant.show {
+    max-width: 136px;
+    opacity: 1;
+    margin-right: 0;
+    border-width: 2px;
+  }
+  /* 변형 슬라이드는 자체 좌측 컬러바를 약간 가늘게 (base와 시각적 구분) */
+  .fs-item.fs-variant.show[data-group-color] { border-left-width: 2px; }
+
   /* ══════════════════════════════════════════════════════════════
      세션 2 변형: 이모지VS / 불릿리스트 / 아이콘좌측 / 챕터플로우
      ══════════════════════════════════════════════════════════════ */
