@@ -1193,14 +1193,10 @@
       const slide = slides[currentSlide];
       [...selectedEls].forEach(el => {
         const layer = el.closest('.step-layer');
-        if (layer) {
-          layer.removeChild(el);
-          if (parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-            layer.remove();
-            recalcSteps(slide);
-          }
-        } else if (el.parentElement) {
-          el.parentElement.removeChild(el);
+        el.remove();
+        if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
+          layer.remove();
+          recalcSteps(slide);
         }
       });
       isResizing = false;
@@ -4734,14 +4730,10 @@
     const slide = slides[currentSlide];
     [...selectedEls].forEach(el => {
       const layer = el.closest('.step-layer');
-      if (layer) {
-        layer.removeChild(el);
-        if (parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-          layer.remove();
-          recalcSteps(slide);
-        }
-      } else if (el.parentElement) {
-        el.parentElement.removeChild(el);
+      el.remove();
+      if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
+        layer.remove();
+        recalcSteps(slide);
       }
     });
     clearSelection();
@@ -5226,14 +5218,10 @@ ch.postMessage({ type: 'ready' });
     const slide = slides[currentSlide];
     [...selectedEls].forEach(el => {
       const layer = el.closest('.step-layer');
-      if (layer) {
-        layer.removeChild(el);
-        if (parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-          layer.remove();
-          recalcSteps(slide);
-        }
-      } else if (el.parentElement) {
-        el.parentElement.removeChild(el);
+      el.remove();
+      if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
+        layer.remove();
+        recalcSteps(slide);
       }
     });
     selectedEl = null; selectedEls = [];
