@@ -1776,23 +1776,35 @@
     let currentGroup = null;
     let currentPg = null;
 
+    // base가 삭제된 page-group 감지: 첫 variant를 base 역할로 표시
+    const pgsWithBase = new Set();
+    const promotedFirst = new Set(); // pg → 이미 첫 variant를 base로 승격했는지
+    slides.forEach(s => {
+      if (!s.dataset.variant || s.dataset.variant === "0") pgsWithBase.add(s.dataset.pageGroup);
+    });
+
     slides.forEach((slide, slideIdx) => {
       const isCurrent = slideIdx === currentSlide;
       const pg = slide.dataset.pageGroup;
       const variant = slide.dataset.variant;
-      const isVariant = variant && variant !== "0";
+      const isVariantRaw = variant && variant !== "0";
+      // orphan variant(base 삭제됨)의 첫 번째 → base 역할 승격
+      const isOrphanFirst = isVariantRaw && pg && !pgsWithBase.has(pg) && !promotedFirst.has(pg);
+      if (isOrphanFirst) promotedFirst.add(pg);
+      const isVariant = isVariantRaw && !isOrphanFirst;
       const isExpanded = pg && expandedOverviewGroups.has(String(pg));
 
       // 새 page-group이면 새 .ov-group wrapper
       // base가 삭제된 orphan variant도 새 그룹 시작
       if (!isVariant || !currentGroup || (pg && pg !== currentPg)) {
         const variantCount = pg ? [...slides].filter(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0").length : 0;
+        const effectiveVariants = isOrphanFirst ? variantCount - 1 : variantCount;
         currentGroup = document.createElement('div');
-        currentGroup.className = 'ov-group' + (isExpanded && variantCount > 0 ? ' expanded' : '');
+        currentGroup.className = 'ov-group' + (isExpanded && effectiveVariants > 0 ? ' expanded' : '');
         if (pg) currentGroup.dataset.pageGroup = pg;
         // 펼치면 base+variants가 들어갈 만큼 grid-column span
-        if (isExpanded && variantCount > 0) {
-          currentGroup.style.gridColumn = `span ${Math.min(1 + variantCount, 5)}`;
+        if (isExpanded && effectiveVariants > 0) {
+          currentGroup.style.gridColumn = `span ${Math.min(1 + effectiveVariants, 5)}`;
         }
         currentPg = pg;
         ovGrid.appendChild(currentGroup);
@@ -1905,9 +1917,10 @@
 
       currentGroup.appendChild(item);
 
-      // base 카드에 +/- 토글 버튼 (variants 있을 때만)
+      // base(또는 승격된 orphan first) 카드에 +/- 토글 버튼 (variants 있을 때만)
       if (!isVariant && pg) {
-        const variantCount = [...slides].filter(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0").length;
+        let variantCount = [...slides].filter(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0").length;
+        if (isOrphanFirst) variantCount--; // 승격된 자신 제외
         if (variantCount > 0) {
           const toggleBtn = document.createElement('button');
           toggleBtn.className = 'ov-toggle';
@@ -2207,10 +2220,10 @@
 
     slides.forEach(s => s.classList.remove('active', 'leave-left', 'enter-from-left'));
     slides[0].classList.add('active');
-    document.querySelectorAll('.step-layer').forEach(l => l.classList.remove('visible'));
+    document.querySelectorAll('#stage .step-layer').forEach(l => l.classList.remove('visible'));
     dimOuter.classList.remove('on');
     document.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
-    const animShownEls = Array.from(document.querySelectorAll('.anim-shown'));
+    const animShownEls = Array.from(document.querySelectorAll('#stage .anim-shown'));
     animShownEls.forEach(el => el.classList.remove('anim-shown'));
 
     const ovGrid = document.getElementById('overview-grid');
