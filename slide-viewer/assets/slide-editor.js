@@ -1935,20 +1935,23 @@
     menu.style.left = x + 'px';
     menu.style.top = y + 'px';
     const delBtn = document.createElement('div');
-    delBtn.textContent = '슬라이드 삭제';
+    delBtn.textContent = '🗑 이 슬라이드 삭제';
     delBtn.style.cssText = 'padding:8px 16px;cursor:pointer;';
     delBtn.addEventListener('mouseenter', () => delBtn.style.background = '#c0392b');
     delBtn.addEventListener('mouseleave', () => delBtn.style.background = 'none');
     delBtn.addEventListener('click', () => {
-      hideSlideContextMenu();
-      if (slides.length <= 1) return;
-      // 기존 deleteSlide 사용 (goToSlide 포함 — 모든 상태 정상 초기화)
-      deleteSlide(idx, true);
-      // goToSlide 애니메이션(640ms) 완료 후 overview 재빌드 + 재표시
-      setTimeout(() => {
-        buildOverview();
-        overview.classList.add('visible');
-      }, 700);
+      try {
+        hideSlideContextMenu();
+        if (slides.length <= 1) return;
+        deleteSlide(idx, true);
+        setTimeout(() => {
+          buildOverview();
+          overview.classList.add('visible');
+        }, 700);
+      } catch (err) {
+        if (typeof showToast === 'function') showToast('삭제 오류: ' + err.message, 5000);
+        console.error('overview delete error:', err);
+      }
     });
     menu.appendChild(delBtn);
     document.body.appendChild(menu);
