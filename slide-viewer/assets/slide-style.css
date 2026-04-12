@@ -1487,6 +1487,8 @@
 
   :fullscreen #slideNum,
   :-webkit-full-screen #slideNum { display: none; }
+  :fullscreen .slide[data-display-label]::after,
+  :-webkit-full-screen .slide[data-display-label]::after { display: none; }
   body.edit-mode #slideNum { display: none; }
 
   /* ── 편집 모드 (E키) ── */
