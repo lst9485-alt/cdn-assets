@@ -1942,28 +1942,13 @@
     delBtn.addEventListener('click', () => {
       hideSlideContextMenu();
       if (slides.length <= 1) return;
-      // overview 전용 삭제: goToSlide 없이 DOM 직접 제거 + overview 재빌드
-      pushUndo();
-      const container = document.getElementById('stage');
-      const target = slides[idx];
-      const deletedPg = target ? target.dataset.pageGroup : null;
-      // active 상태 해제
-      target.classList.remove('active');
-      container.removeChild(target);
-      slides = [...container.querySelectorAll(':scope > .slide')];
-      rebuildSlidesByKey();
-      if (deletedPg && ![...slides].some(s => s.dataset.pageGroup === deletedPg)) {
-        expandedFilmGroups.delete(deletedPg);
-        expandedOverviewGroups.delete(deletedPg);
-      }
-      // 새 현재 슬라이드에 active 부여
-      currentSlide = Math.min(idx, slides.length - 1);
-      slides.forEach(s => s.classList.remove('active'));
-      if (slides[currentSlide]) slides[currentSlide].classList.add('active');
-      currentStep = 0;
-      currentOrder = 0;
-      buildFilmstrip();
-      buildOverview();
+      // 기존 deleteSlide 사용 (goToSlide 포함 — 모든 상태 정상 초기화)
+      deleteSlide(idx, true);
+      // goToSlide 애니메이션(640ms) 완료 후 overview 재빌드 + 재표시
+      setTimeout(() => {
+        buildOverview();
+        overview.classList.add('visible');
+      }, 700);
     });
     menu.appendChild(delBtn);
     document.body.appendChild(menu);
