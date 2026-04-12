@@ -1748,14 +1748,32 @@
   const ovGrid = document.getElementById('overview-grid');
 
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
+  let expandedOverviewGroups = new Set();  // 확장된 page-group(string) 집합 — overview 전용
 
   function buildOverview() {
     ovGrid.innerHTML = '';
+    // 삭제된 page-group sweep
+    for (const pg of [...expandedOverviewGroups]) {
+      if (![...slides].some(s => s.dataset.pageGroup === pg)) expandedOverviewGroups.delete(pg);
+    }
     slides.forEach((slide, slideIdx) => {
       const isCurrent = slideIdx === currentSlide;
+      const pg = slide.dataset.pageGroup;
+      const variant = slide.dataset.variant;
+      const isVariant = variant && variant !== "0";
+      const hasVariants = pg && [...slides].some(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0");
+
       const item = document.createElement('div');
-      item.className = 'ov-item' + (isCurrent ? ' current' : '');
+      let cls = 'ov-item';
+      if (isCurrent) cls += ' current';
+      if (isVariant) {
+        cls += ' ov-variant';
+        if (pg && expandedOverviewGroups.has(String(pg))) cls += ' show';
+      }
+      item.className = cls;
       item._slideIdx = slideIdx;
+      if (pg) item.dataset.pageGroup = pg;
+      if (variant != null) item.dataset.variant = variant;
 
       const thumb = document.createElement('div');
       thumb.className = 'ov-thumb';
@@ -1767,13 +1785,25 @@
 
       const num = document.createElement('div');
       num.className = 'ov-num';
-      num.textContent = `${slideIdx + 1}`;
+      if (pg) {
+        num.textContent = isVariant ? `${pg}-${variant}` : `${pg}`;
+      } else {
+        num.textContent = `${slideIdx + 1}`;
+      }
 
       item.appendChild(thumb);
       item.appendChild(num);
       item.addEventListener('click', (e) => {
         if (ovDragItem) return;
         e.stopPropagation();
+        const isExpanded = pg && expandedOverviewGroups.has(String(pg));
+        if (!isVariant && hasVariants && !isExpanded) {
+          // 1차 base 클릭: variants 펼치기만, 모달 유지
+          expandedOverviewGroups.add(String(pg));
+          buildOverview();
+          return;
+        }
+        // 2차 base 클릭(이미 펼쳐짐) / variant 클릭 / variants 없는 base → 이동 + 닫기
         overview.classList.remove('visible');
         goToSlide(slideIdx);
       });
@@ -1844,6 +1874,12 @@
         document.documentElement.addEventListener('mouseleave', onUp);
       });
       ovGrid.appendChild(item);
+      // variants 없는 base 옆에 빈 peek 자리(spacer) — 정렬 일관성
+      if (!isVariant && pg && !hasVariants) {
+        const spacer = document.createElement('div');
+        spacer.className = 'ov-spacer';
+        ovGrid.appendChild(spacer);
+      }
     });
   }
 

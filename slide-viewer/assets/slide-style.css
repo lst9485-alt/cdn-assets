@@ -1389,6 +1389,26 @@
   }
   .ov-item.current .ov-num { color: var(--editor-accent); }
 
+  /* 인라인 확장 variants — overview 전용. 평소 30px 얇은 띠로 peek,
+     .show 클래스 토글 시 320px 정상 카드로 확장. */
+  .ov-item.ov-variant {
+    width: 30px;
+    transition: width 0.2s ease-out;
+  }
+  .ov-item.ov-variant.show {
+    width: 320px;
+  }
+  .ov-item.ov-variant .ov-num { display: none; }
+  .ov-item.ov-variant.show .ov-num { display: block; }
+
+  /* variants 없는 base 옆 빈 peek 자리(정렬 일관성용) */
+  .ov-spacer {
+    width: 30px;
+    height: 180px;
+    flex-shrink: 0;
+    pointer-events: none;
+  }
+
   /* ── 단축키 도움말 ── */
   #help {
     display: none;
