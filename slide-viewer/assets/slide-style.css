@@ -1389,25 +1389,42 @@
   }
   .ov-item.current .ov-num { color: var(--editor-accent); }
 
-  /* 인라인 확장 variants — overview 전용. 평소 30px 얇은 띠로 peek,
-     .show 클래스 토글 시 320px 정상 카드로 확장. */
-  .ov-item.ov-variant {
-    width: 30px;
-    transition: width 0.2s ease-out;
-  }
-  .ov-item.ov-variant.show {
-    width: 320px;
-  }
-  .ov-item.ov-variant .ov-num { display: none; }
-  .ov-item.ov-variant.show .ov-num { display: block; }
-
-  /* variants 없는 base 옆 빈 peek 자리(정렬 일관성용) */
-  .ov-spacer {
-    width: 30px;
-    height: 180px;
+  /* ── Overview 인라인 확장: 종이 겹침 + 토글 ── */
+  .ov-group {
+    position: relative;
+    display: flex;
     flex-shrink: 0;
-    pointer-events: none;
   }
+  /* 접힌 상태: 종이 겹침 (base 뒤에 variants가 10px씩 빼꼼) */
+  .ov-item.ov-variant {
+    margin-left: -310px;
+    transition: margin-left 0.25s ease-out, opacity 0.25s ease-out;
+  }
+  /* 펼친 상태: 정상 카드로 나열 */
+  .ov-item.ov-variant.show {
+    margin-left: 4px;
+  }
+  /* +/- 토글 버튼 */
+  .ov-toggle {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    z-index: 30;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.15s;
+  }
+  .ov-toggle:hover { background: rgba(0,0,0,0.85); }
 
   /* ── 단축키 도움말 ── */
   #help {
@@ -1794,13 +1811,13 @@
   .slide.active .step-layer[data-step="0"] > :nth-child(10) { animation-delay:1.0s; }
 
   /* ── Variant badge (기본 표시, 프레젠테이션 모드에서만 숨김) ── */
-  .slide[data-variant]::after {
-    content: attr(data-page-group) "-" attr(data-variant);
+  .slide[data-display-label]::after {
+    content: attr(data-display-label);
     position: absolute; top: 40px; left: 16px; z-index: 100;
     background: rgba(0,0,0,0.7); color: #fff; font-size: 48px; font-weight: 700;
     padding: 10px 24px; border-radius: 12px; pointer-events: none;
   }
-  body.presentation .slide[data-variant]::after { display: none; }
+  body.presentation .slide[data-display-label]::after { display: none; }
 
   /* ── Filmstrip variant group colors ── */
   .fs-item[data-group-color="0"] { border-left: 3px solid var(--editor-accent); }

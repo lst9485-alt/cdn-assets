@@ -76,7 +76,13 @@
   // 같은 page-group의 base와 variants가 DOM에서 인접 배치되어 있다는 불변식에 의존
   function rebuildSlidesByKey() {
     slidesByKey = {};
-    slides.forEach(s => { if (s.dataset.slideId) slidesByKey[s.dataset.slideId] = s; });
+    slides.forEach(s => {
+      if (s.dataset.slideId) slidesByKey[s.dataset.slideId] = s;
+      // display label: 1-indexed (base: "3-1", variant1: "3-2", ...)
+      const pg = s.dataset.pageGroup;
+      const v = parseInt(s.dataset.variant || "0") + 1;
+      if (pg) s.dataset.displayLabel = `${pg}-${v}`;
+    });
   }
 
   function getPageGroupVariants(pg) {
@@ -152,9 +158,9 @@
 
       const num = document.createElement('div');
       num.className = 'fs-num';
-      // 번호 포맷: base = pg, variant = "pg-variant" (예: "3-1")
+      // 번호 포맷: base = pg, variant = "pg-(variant+1)" (1-indexed, 예: "3-2")
       if (pg) {
-        num.textContent = isVariant ? `${pg}-${variant}` : `${pg}`;
+        num.textContent = isVariant ? `${pg}-${parseInt(variant) + 1}` : `${pg}`;
         item.setAttribute('data-group-color', parseInt(pg) % 4);
       } else {
         num.textContent = idx + 1;
@@ -274,8 +280,8 @@
   let slides = document.querySelectorAll('#stage > .slide');
   let slidesByKey = {};       // data-slide-id → DOM 요소 (stable key)
   let expandedFilmGroups = new Set();  // 확장된 page-group(string) 집합
-  // 초기 slidesByKey 빌드 (NodeList → key map)
-  slides.forEach(s => { if (s.dataset.slideId) slidesByKey[s.dataset.slideId] = s; });
+  // 초기 slidesByKey + display-label 빌드
+  rebuildSlidesByKey();
   let currentSlide = 0;
   let currentStep = 0;
   let currentOrder = 0;
@@ -1756,24 +1762,39 @@
     for (const pg of [...expandedOverviewGroups]) {
       if (![...slides].some(s => s.dataset.pageGroup === pg)) expandedOverviewGroups.delete(pg);
     }
+
+    let currentGroup = null;
+    let currentPg = null;
+
     slides.forEach((slide, slideIdx) => {
       const isCurrent = slideIdx === currentSlide;
       const pg = slide.dataset.pageGroup;
       const variant = slide.dataset.variant;
       const isVariant = variant && variant !== "0";
-      const hasVariants = pg && [...slides].some(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0");
+      const isExpanded = pg && expandedOverviewGroups.has(String(pg));
+
+      // 새 page-group이면 새 .ov-group wrapper
+      if (!isVariant) {
+        currentGroup = document.createElement('div');
+        currentGroup.className = 'ov-group';
+        if (pg) currentGroup.dataset.pageGroup = pg;
+        currentPg = pg;
+        ovGrid.appendChild(currentGroup);
+      }
 
       const item = document.createElement('div');
       let cls = 'ov-item';
       if (isCurrent) cls += ' current';
       if (isVariant) {
         cls += ' ov-variant';
-        if (pg && expandedOverviewGroups.has(String(pg))) cls += ' show';
+        if (isExpanded) cls += ' show';
       }
       item.className = cls;
       item._slideIdx = slideIdx;
       if (pg) item.dataset.pageGroup = pg;
       if (variant != null) item.dataset.variant = variant;
+      // z-index: base 맨 위, variants 순서대로 뒤로
+      item.style.zIndex = isVariant ? String(10 - parseInt(variant)) : '20';
 
       const thumb = document.createElement('div');
       thumb.className = 'ov-thumb';
@@ -1786,24 +1807,18 @@
       const num = document.createElement('div');
       num.className = 'ov-num';
       if (pg) {
-        num.textContent = isVariant ? `${pg}-${variant}` : `${pg}`;
+        num.textContent = isVariant ? `${pg}-${parseInt(variant) + 1}` : `${pg}`;
       } else {
         num.textContent = `${slideIdx + 1}`;
       }
 
       item.appendChild(thumb);
       item.appendChild(num);
+
+      // 카드 클릭 = 무조건 이동 + 모달 닫기
       item.addEventListener('click', (e) => {
         if (ovDragItem) return;
         e.stopPropagation();
-        const isExpanded = pg && expandedOverviewGroups.has(String(pg));
-        if (!isVariant && hasVariants && !isExpanded) {
-          // 1차 base 클릭: variants 펼치기만, 모달 유지
-          expandedOverviewGroups.add(String(pg));
-          buildOverview();
-          return;
-        }
-        // 2차 base 클릭(이미 펼쳐짐) / variant 클릭 / variants 없는 base → 이동 + 닫기
         overview.classList.remove('visible');
         goToSlide(slideIdx);
       });
@@ -1833,7 +1848,6 @@
           }
           ovDragGhost.style.left = (ev.clientX - item.offsetWidth / 2) + 'px';
           ovDragGhost.style.top = (ev.clientY - 40) + 'px';
-          // drop 위치 계산
           const items = [...ovGrid.querySelectorAll('.ov-item')];
           let dropIdx = items.length;
           for (let i = 0; i < items.length; i++) {
@@ -1844,7 +1858,6 @@
             if (ev.clientY < midY) { dropIdx = i; break; }
           }
           ovDragDropIdx = dropIdx;
-          // 드롭 인디케이터
           items.forEach(it => it.classList.remove('ov-drop-before'));
           if (dropIdx < items.length) items[dropIdx].classList.add('ov-drop-before');
         };
@@ -1873,12 +1886,27 @@
         document.addEventListener('mouseup', onUp);
         document.documentElement.addEventListener('mouseleave', onUp);
       });
-      ovGrid.appendChild(item);
-      // variants 없는 base 옆에 빈 peek 자리(spacer) — 정렬 일관성
-      if (!isVariant && pg && !hasVariants) {
-        const spacer = document.createElement('div');
-        spacer.className = 'ov-spacer';
-        ovGrid.appendChild(spacer);
+
+      currentGroup.appendChild(item);
+
+      // base 카드에 +/- 토글 버튼 (variants 있을 때만)
+      if (!isVariant && pg) {
+        const hasVariants = [...slides].some(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0");
+        if (hasVariants) {
+          const toggleBtn = document.createElement('button');
+          toggleBtn.className = 'ov-toggle';
+          toggleBtn.textContent = isExpanded ? '−' : '+';
+          toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (expandedOverviewGroups.has(String(pg))) {
+              expandedOverviewGroups.delete(String(pg));
+            } else {
+              expandedOverviewGroups.add(String(pg));
+            }
+            buildOverview();
+          });
+          item.appendChild(toggleBtn);
+        }
       }
     });
   }
