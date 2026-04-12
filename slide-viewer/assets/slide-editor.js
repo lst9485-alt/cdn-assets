@@ -892,8 +892,9 @@
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
     // slideNum 표시:
     // - 편집 모드: canonical 기준 (1~138 of all)
-    // - presentation 모드: base만 카운트 (1~38). variant이면 같은 그룹의 base 인덱스 + 변형 표기
-    if (editMode) {
+    // - 생성 슬라이드: 전체 순차 번호 (1~295 of all)
+    // - 에디터 presentation 모드: base만 카운트 (1~38)
+    if (editMode || document.body.dataset.generated) {
       document.getElementById('slideNum').textContent = `${currentSlide + 1} / ${slides.length}`;
     } else {
       const baseTotal = getBaseSlidesCount();
@@ -1023,9 +1024,13 @@
       playSound('step');
       syncPresenter();
     } else {
-      // presentation 모드에서 호출되는 흐름 — variant 스킵하고 다음 base로
-      const nextBase = findNextBaseCanonical(currentSlide);
-      if (nextBase !== -1) goToSlide(nextBase);
+      // 생성 슬라이드: 모든 variant 순차 탐색 / 에디터: base만 순회
+      if (document.body.dataset.generated) {
+        if (currentSlide < slides.length - 1) goToSlide(currentSlide + 1);
+      } else {
+        const nextBase = findNextBaseCanonical(currentSlide);
+        if (nextBase !== -1) goToSlide(nextBase);
+      }
     }
   }
 
@@ -1080,9 +1085,13 @@
       playSound('step');
       syncPresenter();
     } else {
-      // presentation 모드에서 호출되는 흐름 — variant 스킵하고 이전 base로
-      const prevBase = findPrevBaseCanonical(currentSlide);
-      if (prevBase !== -1) goToSlide(prevBase);
+      // 생성 슬라이드: 모든 variant 순차 탐색 / 에디터: base만 순회
+      if (document.body.dataset.generated) {
+        if (currentSlide > 0) goToSlide(currentSlide - 1);
+      } else {
+        const prevBase = findPrevBaseCanonical(currentSlide);
+        if (prevBase !== -1) goToSlide(prevBase);
+      }
     }
   }
 
