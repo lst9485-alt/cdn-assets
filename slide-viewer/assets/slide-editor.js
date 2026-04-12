@@ -245,8 +245,9 @@
   function deleteSlide(idx) {
     if (slides.length <= 1) return;
     const target = slides[idx];
-    // base 슬라이드는 같은 page-group의 variants가 있을 때 삭제 불가 (인접성 + 매핑 보존)
-    if (target && target.dataset.variant === "0" && pageGroupHasVariants(target.dataset.pageGroup)) {
+    // 에디터에서만: base 슬라이드는 같은 page-group의 variants가 있을 때 삭제 불가 (인접성 + 매핑 보존)
+    // 생성 슬라이드에서는 변형 중 골라 쓰려고 삭제가 필요하므로 제한 없음
+    if (!document.body.dataset.generated && target && target.dataset.variant === "0" && pageGroupHasVariants(target.dataset.pageGroup)) {
       if (typeof showToast === 'function') showToast('베이스 슬라이드는 같은 그룹의 변형이 있을 때 삭제 불가');
       return;
     }
