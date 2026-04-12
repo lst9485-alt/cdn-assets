@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-12T06:00:07.478892+09:00",
+  "updated": "2026-04-13T06:00:12.016146+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 248,
-    "done": 220,
-    "overdue": 9,
+    "total": 250,
+    "done": 221,
+    "overdue": 12,
     "pending": [
       {
         "title": "전자책 작성",
@@ -71,14 +71,19 @@
         "overdue": true
       },
       {
-        "title": "촬영&편집&업로드",
-        "date": "2026-04-12T10:30:00.000+09:00",
-        "overdue": false
+        "title": "ppt",
+        "date": "2026-04-12T12:30:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "홈페이지",
-        "date": "2026-04-12T14:45:00.000+09:00",
-        "overdue": false
+        "title": "원씽복기",
+        "date": "2026-04-12T14:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "date": "2026-04-12T14:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "메모정리",
@@ -91,8 +96,8 @@
         "overdue": false
       },
       {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-04-13T10:00:00.000+09:00",
+        "title": "홈페이지",
+        "date": "2026-04-13T09:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -168,14 +173,38 @@
     ],
     "schedule": [
       {
-        "title": "촬영&편집&업로드",
-        "time": "10:30",
+        "title": "메모정리",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "홈페이지",
-        "time": "14:45",
+        "time": "09:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "로카취소",
+        "time": "10:45",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "찬규교육",
+        "time": "15:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "time": "20:30",
         "allDay": false,
         "done": false
       }
@@ -206,14 +235,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 12,
-      "rate": "43%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-04-06",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-04-07",
           "done": 2,
@@ -236,11 +260,16 @@
         },
         {
           "date": "2026-04-11",
-          "done": 0,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-04-12",
+          "done": 4,
+          "total": 4
+        },
+        {
+          "date": "2026-04-13",
           "done": 0,
           "total": 4
         }

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-12T06:00:00.762853+09:00",
+  "updated": "2026-04-13T06:00:00.538136+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -52,6 +52,122 @@
             },
             {
               "text": "yt-assemble 스킬 신규 제작 — 원고 + ElevenLabs TTS → 슬라이드 + 음성 동기화 → MP4 출력",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "yt-slide 이미지 배치 버그 + 배열 깨짐 (4/12~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "generate-slides.py NO_IMAGE_TYPES를 type-compile-config.json의 image_support 플래그 기준으로 동적 제외하도록 변경 (현재 2개만 하드코딩, 실제 26개 필요)",
+              "done": false
+            },
+            {
+              "text": "260412 슬라이드 배열 깨짐 검토 + 수정",
+              "done": false
+            },
+            {
+              "text": "수정 후 260412 HTML 재생성 + Vercel 재배포",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "title": "overview 슬라이드 복사 기능 (4/12~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "O키 overview 우클릭 메뉴에 \"복사\" 옵션 추가 (삭제 옆)",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 17,
+          "title": "편집모드 이미지 크기 조절 안 됨 (4/12~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "E 편집모드에서 이미지 선택 후 리사이즈 핸들 드래그 시 크기 변경 안 되는 문제 수정",
+              "done": false
+            },
+            {
+              "text": "이미지 클릭 시 img와 부모 slide-el 2개가 동시 선택되는 문제 수정",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "title": "템플릿 품질 + 에디터 기능 개선 (4/12~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "17번, 28번, 30번, 31번, 32번 깨짐 수정",
+              "done": false
+            },
+            {
+              "text": "36번 글자 수정 안 됨",
+              "done": false
+            },
+            {
+              "text": "16번 밑에 글자 수정 안 됨 (비슷한 타입 일괄 확인)",
+              "done": false
+            },
+            {
+              "text": "13번 사이즈 줄이기",
+              "done": false
+            },
+            {
+              "text": "2번 이미지 같은 거 반복 + 이미지 크기 약간 줄이기",
+              "done": false
+            },
+            {
+              "text": "38번(챕터) 고정 + 37번(오늘정리) 고정 및 효과음 변경",
+              "done": false
+            },
+            {
+              "text": "각종 애니메이션 및 효과음 변경/개선",
+              "done": false
+            },
+            {
+              "text": "11번 차트 애니메이션 필요",
+              "done": false
+            },
+            {
+              "text": "템플릿 일괄 점검 — 글자가 제대로 안 들어간 타입 찾아서 수정",
+              "done": false
+            },
+            {
+              "text": "3번 도형+숫자 같이 사이즈 조절 안 됨",
+              "done": false
+            },
+            {
+              "text": "19번 등 박스 색 변경 안 됨",
+              "done": false
+            },
+            {
+              "text": "30번 등 요소별로 분리 가능하도록 (그룹이 아니라 하나 지우면 다 지워짐)",
+              "done": false
+            },
+            {
+              "text": "요소 복사 안 되는 문제 (Ctrl+C/V 또는 복제)",
+              "done": false
+            },
+            {
+              "text": "글자 복사 붙여넣기 안 되는 문제",
+              "done": false
+            },
+            {
+              "text": "Alt+클릭 step 표시 수정 시 어두워져서 보기 불편 — dim 투명도 조절 또는 편집 시 비활성화",
+              "done": false
+            },
+            {
+              "text": "다른 그룹 간 드래그로 순서 변경 (overview에서)",
               "done": false
             }
           ]
