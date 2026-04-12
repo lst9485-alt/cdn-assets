@@ -1784,7 +1784,8 @@
       const isExpanded = pg && expandedOverviewGroups.has(String(pg));
 
       // 새 page-group이면 새 .ov-group wrapper
-      if (!isVariant) {
+      // base가 삭제된 orphan variant도 새 그룹 시작
+      if (!isVariant || !currentGroup || (pg && pg !== currentPg)) {
         const variantCount = pg ? [...slides].filter(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0").length : 0;
         currentGroup = document.createElement('div');
         currentGroup.className = 'ov-group' + (isExpanded && variantCount > 0 ? ' expanded' : '');
@@ -1973,7 +1974,7 @@
         buildFilmstrip();
         buildOverview();
       } catch (err) {
-        if (typeof showToast === 'function') showToast('삭제 오류: ' + err.message, 5000);
+        if (typeof showToast === 'function') showToast('삭제 오류: ' + err.message + '\n' + (err.stack || ''), 8000);
       }
     });
     menu.appendChild(delBtn);
