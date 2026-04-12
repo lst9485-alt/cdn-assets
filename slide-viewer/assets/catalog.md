@@ -62,6 +62,22 @@
 | chart-up.png | 상승 차트+화살표 | ICON:chart-up |
 | golden-time.png | 모래시계+별 (골든타임) | ICON:golden-time |
 | cheonan-map.png | 천안·아산 지역 지도 | ICON:cheonan-map |
+| seed-money.png | 돼지저금통+새싹 (종잣돈) | ICON:seed-money |
+| cashflow.png | 순환 화살표+코인 (현금흐름) | ICON:cashflow |
+| airbag.png | 방패+코인 (경제적 에어백) | ICON:airbag |
+| cheap-house.png | 집+하락화살표+체크 (저평가) | ICON:cheap-house |
+| crash.png | 하락 바차트+빨간화살표 (폭락) | ICON:crash |
+| mortgage.png | 집+% 기호 (대출) | ICON:mortgage |
+| panic.png | 달리는 사람+느낌표 (패닉바잉) | ICON:panic |
+| survive.png | 팔짱 낀 사람+균열 (버티기) | ICON:survive |
+| gap-invest.png | 집 2개 위아래 (갭투자) | ICON:gap-invest |
+| income-expense.png | 저울+코인 (수입지출) | ICON:income-expense |
+| timing.png | 집+시계 (매수 타이밍) | ICON:timing |
+| expert-wrong.png | 사람+X말풍선 (예측 실패) | ICON:expert-wrong |
+| confirm-3.png | 체크마크 3개 (기준 통과) | ICON:confirm-3 |
+| budget-limit.png | 게이지+안전구간 (적정예산) | ICON:budget-limit |
+| fluctuation.png | $+상승하락화살표 (등락) | ICON:fluctuation |
+| first-home.png | 손위의 집 (내집마련) | ICON:first-home |
 
 ## 사운드 (`sounds/`)
 
