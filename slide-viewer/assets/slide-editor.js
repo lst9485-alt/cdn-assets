@@ -1942,9 +1942,21 @@
     delBtn.addEventListener('click', () => {
       hideSlideContextMenu();
       if (slides.length <= 1) return;
-      deleteSlide(idx, true);
+      // overview 전용 삭제: goToSlide 없이 DOM 직접 제거 + overview 재빌드
+      pushUndo();
+      const container = document.getElementById('stage');
+      const target = slides[idx];
+      const deletedPg = target ? target.dataset.pageGroup : null;
+      container.removeChild(target);
+      slides = [...container.querySelectorAll(':scope > .slide')];
+      rebuildSlidesByKey();
+      if (deletedPg && ![...slides].some(s => s.dataset.pageGroup === deletedPg)) {
+        expandedFilmGroups.delete(deletedPg);
+        expandedOverviewGroups.delete(deletedPg);
+      }
+      currentSlide = Math.min(idx, slides.length - 1);
+      buildFilmstrip();
       buildOverview();
-      overview.classList.add('visible');
     });
     menu.appendChild(delBtn);
     document.body.appendChild(menu);
