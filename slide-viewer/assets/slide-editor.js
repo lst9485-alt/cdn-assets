@@ -1947,6 +1947,8 @@
       const container = document.getElementById('stage');
       const target = slides[idx];
       const deletedPg = target ? target.dataset.pageGroup : null;
+      // active 상태 해제
+      target.classList.remove('active');
       container.removeChild(target);
       slides = [...container.querySelectorAll(':scope > .slide')];
       rebuildSlidesByKey();
@@ -1954,7 +1956,12 @@
         expandedFilmGroups.delete(deletedPg);
         expandedOverviewGroups.delete(deletedPg);
       }
+      // 새 현재 슬라이드에 active 부여
       currentSlide = Math.min(idx, slides.length - 1);
+      slides.forEach(s => s.classList.remove('active'));
+      if (slides[currentSlide]) slides[currentSlide].classList.add('active');
+      currentStep = 0;
+      currentOrder = 0;
       buildFilmstrip();
       buildOverview();
     });
