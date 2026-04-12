@@ -242,12 +242,11 @@
     goToSlide(toIdx);
   }
 
-  function deleteSlide(idx) {
+  function deleteSlide(idx, force) {
     if (slides.length <= 1) return;
     const target = slides[idx];
-    // 에디터에서만: base 슬라이드는 같은 page-group의 variants가 있을 때 삭제 불가 (인접성 + 매핑 보존)
-    // 생성 슬라이드에서는 변형 중 골라 쓰려고 삭제가 필요하므로 제한 없음
-    if (!document.body.dataset.generated && target && target.dataset.variant === "0" && pageGroupHasVariants(target.dataset.pageGroup)) {
+    // base 삭제 가드: force=true면 무조건 허용, 생성 슬라이드(data-generated)도 허용
+    if (!force && !document.body.dataset.generated && target && target.dataset.variant === "0" && pageGroupHasVariants(target.dataset.pageGroup)) {
       if (typeof showToast === 'function') showToast('베이스 슬라이드는 같은 그룹의 변형이 있을 때 삭제 불가');
       return;
     }
@@ -1943,7 +1942,7 @@
     delBtn.addEventListener('click', () => {
       hideSlideContextMenu();
       if (slides.length <= 1) return;
-      deleteSlide(idx);
+      deleteSlide(idx, true);
       buildOverview();
       overview.classList.add('visible');
     });
