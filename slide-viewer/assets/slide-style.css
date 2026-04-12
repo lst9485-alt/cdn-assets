@@ -1343,7 +1343,7 @@
 
   #overview-grid {
     display: grid;
-    grid-template-columns: repeat(5, 330px);
+    grid-template-columns: repeat(5, 340px);
     gap: 20px;
     justify-content: center;
     overflow-y: auto;
@@ -1393,7 +1393,7 @@
   .ov-group {
     position: relative;
     display: flex;
-    width: 330px;
+    width: 340px;
   }
   /* 접힌 상태: 전부 숨김 */
   .ov-item.ov-variant:not(.show) {
@@ -1402,7 +1402,7 @@
   }
   /* 접힌 상태: 첫 번째 variant만 1장 빼꼼 (10px) */
   .ov-group > .ov-item.ov-variant:not(.show):nth-child(2) {
-    margin-left: -310px;
+    margin-left: -300px;
   }
   /* 빼꼼 나온 1장에 어두운 오버레이 */
   .ov-item.ov-variant:not(.show) .ov-thumb::after {
