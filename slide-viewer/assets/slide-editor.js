@@ -1945,6 +1945,7 @@
       if (slides.length <= 1) return;
       deleteSlide(idx);
       buildOverview();
+      overview.classList.add('visible');
     });
     menu.appendChild(delBtn);
     document.body.appendChild(menu);
