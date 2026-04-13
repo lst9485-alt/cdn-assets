@@ -2338,7 +2338,8 @@
       document.querySelector('head > script') ? document.querySelector('head > script').outerHTML : '',
       document.querySelector('link[href*="fonts.googleapis"]') ? document.querySelector('link[href*="fonts.googleapis"]').outerHTML : '',
       document.querySelector('link[href*="slide-style"]') ? document.querySelector('link[href*="slide-style"]').outerHTML : '',
-      document.getElementById('edit-badge-style') ? document.getElementById('edit-badge-style').outerHTML : ''
+      document.getElementById('edit-badge-style') ? document.getElementById('edit-badge-style').outerHTML : '',
+      document.querySelector('meta[name="gh-sha"]') ? document.querySelector('meta[name="gh-sha"]').outerHTML : ''
     ].filter(Boolean);
 
     const _bodyIds = [
@@ -2569,6 +2570,10 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
+        // SHA 마커 업데이트 (다음 열 때 최신 판별용)
+        let shaMeta = document.querySelector('meta[name="gh-sha"]');
+        if (!shaMeta) { shaMeta = document.createElement('meta'); shaMeta.name = 'gh-sha'; document.head.appendChild(shaMeta); }
+        shaMeta.content = _ghFileSha;
         showToast('저장 완료!', 4000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
@@ -2699,8 +2704,48 @@
     document.dispatchEvent(new Event(success ? 'gh-token-set' : 'gh-token-cancel'));
   }
 
-  // CDN 캐시 우회는 Cloudflare Pages 이관으로 해결 예정
-  // document.write 방식은 텍스트 깨짐/슬라이드 중복 유발하여 제거됨
+  // ── 페이지 열 때 GitHub 최신 HTML 자동 로드 ──
+  async function ghCheckAndLoadLatest() {
+    // sessionStorage 플래그로 무한 루프 방지: document.write() 후 재실행 시 스킵
+    const freshKey = 'gh-fresh-' + location.pathname;
+    if (sessionStorage.getItem(freshKey)) { sessionStorage.removeItem(freshKey); return; }
+
+    const token = ghGetToken();
+    if (!token) return;
+
+    try {
+      const filePath = _ghFilePath();
+      const res = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${filePath}`, {
+        headers: { 'Authorization': `token ${token}` }
+      });
+      if (!res.ok) return;
+
+      const data = await res.json();
+      const remoteSha = data.sha;
+      _ghFileSha = remoteSha;
+
+      // 현재 페이지의 SHA 마커와 비교
+      const localMeta = document.querySelector('meta[name="gh-sha"]');
+      if (localMeta && localMeta.content === remoteSha) return; // 이미 최신
+
+      // 최신 HTML 가져와서 페이지 교체
+      showToast('최신 버전 불러오는 중...', 10000);
+      const html = decodeURIComponent(escape(atob(data.content)));
+      sessionStorage.setItem(freshKey, '1');
+      document.open();
+      document.write(html);
+      document.close();
+    } catch (e) {
+      console.error('ghCheckAndLoadLatest:', e);
+    }
+  }
+
+  // 페이지 로드 시 자동 실행
+  if (isGitHubPages) {
+    const _ghRunCheck = () => ghCheckAndLoadLatest();
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _ghRunCheck);
+    else _ghRunCheck();
+  }
 
   // ── GitHub Pages에서 설정 아이콘 추가 ──
   if (isGitHubPages) {
