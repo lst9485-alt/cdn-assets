@@ -534,19 +534,27 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         };
         const html =
             '<div class="sim-title">시뮬레이터</div>' +
+            '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">키콘텐츠 조회수</span></div>' +
+            '<input class="sim-field-input" id="sim-key" type="text" inputmode="numeric" value="' + (cw.key_views || 0).toLocaleString('ko-KR') + '"></div>' +
+            '<div class="sim-arrow">↓</div>' +
+            fmtField('연계율 (%)', interestRate.toFixed(1) + '%', 'sim-interest', interestRate.toFixed(1), '0.1') +
+            '<div class="sim-computed" id="sim-out-pulling">→ 풀링 —</div>' +
+            '<div class="sim-arrow">↓</div>' +
+            fmtField('링크클릭률 (%)', linkClickRate.toFixed(1) + '%', 'sim-click', linkClickRate.toFixed(1), '0.1') +
+            '<div class="sim-computed" id="sim-out-landing">→ 랜딩 —건</div>' +
+            '<div class="sim-arrow">↓</div>' +
+            fmtField('유료고객 전환율 (%)', convertRate.toFixed(1) + '%', 'sim-convert', convertRate.toFixed(1), '0.1') +
+            '<div class="sim-computed" id="sim-out-customers">→ 유료고객 —명</div>' +
+            '<div class="sim-arrow">↓</div>' +
+            '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">객단가</span></div>' +
+            '<input class="sim-field-input" id="sim-price" type="text" value="' + unitPrice.toLocaleString('ko-KR') + '"></div>' +
+            '<div class="sim-arrow">↓</div>' +
             '<div class="sim-result">' +
             '<div class="sim-result-label">목표 매출</div>' +
             '<div class="sim-revenue-row"><input class="sim-revenue-input" id="sim-revenue" type="text" inputmode="numeric" placeholder="0"><span class="sim-revenue-unit">만원</span></div>' +
             '<div class="sim-sub-item" id="sim-sub-customers">유료고객 —명</div>' +
             '<div class="sim-sub-item" id="sim-sub-landing">랜딩 —건</div>' +
-            '</div>' +
-            '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">키콘텐츠 조회수</span></div>' +
-            '<input class="sim-field-input" id="sim-key" type="text" inputmode="numeric" value="' + (cw.key_views || 0).toLocaleString('ko-KR') + '"></div>' +
-            fmtField('연계율 (%)', interestRate.toFixed(1) + '%', 'sim-interest', interestRate.toFixed(1), '0.1') +
-            fmtField('링크클릭률 (%)', linkClickRate.toFixed(1) + '%', 'sim-click', linkClickRate.toFixed(1), '0.1') +
-            fmtField('유료고객 전환율 (%)', convertRate.toFixed(1) + '%', 'sim-convert', convertRate.toFixed(1), '0.1') +
-            '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">객단가</span></div>' +
-            '<input class="sim-field-input" id="sim-price" type="text" value="' + unitPrice.toLocaleString('ko-KR') + '"></div>';
+            '</div>';
         document.getElementById('simulator-panel').innerHTML = html;
         document.getElementById('sim-key').addEventListener('input', function() {
             var raw = this.value.replace(/,/g, '');
@@ -604,6 +612,9 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         revEl.value = Math.round(revenue / 10000).toLocaleString('ko-KR');
         document.getElementById('sim-sub-customers').textContent = '유료고객 ' + customers.toFixed(1) + '명';
         document.getElementById('sim-sub-landing').textContent = '랜딩 ' + fmtNum(Math.round(landing)) + '건';
+        document.getElementById('sim-out-pulling').textContent = '→ 풀링 ' + fmtNum(Math.round(pulling));
+        document.getElementById('sim-out-landing').textContent = '→ 랜딩 ' + fmtNum(Math.round(landing)) + '건';
+        document.getElementById('sim-out-customers').textContent = '→ 유료고객 ' + customers.toFixed(1) + '명';
     }
 
     // ── 주간 추이 ──
