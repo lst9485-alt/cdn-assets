@@ -3500,8 +3500,8 @@
         }];
         return;
       }
-      // IMG / emoji-icon / bubble 리사이즈 (4모서리, 비율 유지)
-      if (selectedEl.tagName === 'IMG' || selectedEl.classList.contains('emoji-icon') || selectedEl.classList.contains('slide-el') || selectedEl.classList.contains('bubble')) {
+      // IMG / emoji-icon / bubble / text-area 리사이즈 (4모서리, 비율 유지)
+      if (selectedEl.tagName === 'IMG' || selectedEl.classList.contains('emoji-icon') || selectedEl.classList.contains('slide-el') || selectedEl.classList.contains('bubble') || selectedEl.classList.contains('text-area') || selectedEl.classList.contains('hl-wrap')) {
         resizeInitFontSizes = null;
         resizeImgInit = null;
         const stagePos = clientToStage(e.clientX, e.clientY);
