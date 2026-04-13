@@ -309,6 +309,7 @@
   const sndTransition = new Audio('./assets/sounds/장면전환.mp3');
   const sndMoney      = new Audio('./assets/sounds/금액.mp3');
   const sndBuzz       = new Audio('./assets/sounds/삐삑.mp3');
+  const sndPenWrite   = new Audio('./assets/sounds/pen-write.mp3');
 
   // AudioContext lazy 싱글톤 (브라우저 동시 ctx 제한 회피 + 메모리 누수 방지)
   let _sharedAudioCtx = null;
@@ -422,43 +423,10 @@
     } catch(e) {}
   }
 
-  // write: 만년필 글씨 소리 (부드러운 사인파 + 약한 노이즈 혼합)
+  // write: 만년필 글씨 소리 (MP3 파일)
   function playSndWrite() {
-    try {
-      const ctx = getSharedAudioCtx(); if (!ctx) return;
-      const t = ctx.currentTime;
-      const dur = 0.4;
-      // 1) 부드러운 사인파 톤 (만년필 잉크 흐르는 느낌)
-      const osc = ctx.createOscillator();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(420, t);
-      osc.frequency.linearRampToValueAtTime(380, t + dur * 0.5);
-      osc.frequency.linearRampToValueAtTime(350, t + dur);
-      const oscGain = ctx.createGain();
-      oscGain.gain.setValueAtTime(0.0, t);
-      oscGain.gain.linearRampToValueAtTime(0.06, t + 0.03);
-      oscGain.gain.linearRampToValueAtTime(0.04, t + dur * 0.6);
-      oscGain.gain.exponentialRampToValueAtTime(0.001, t + dur);
-      osc.connect(oscGain); oscGain.connect(ctx.destination);
-      osc.start(t); osc.stop(t + dur);
-      // 2) 약한 노이즈 (종이 위 미끄러지는 질감)
-      const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate);
-      const data = buf.getChannelData(0);
-      for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1);
-      const src = ctx.createBufferSource();
-      src.buffer = buf;
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'bandpass';
-      filter.frequency.value = 2400;
-      filter.Q.value = 1.2;
-      const noiseGain = ctx.createGain();
-      noiseGain.gain.setValueAtTime(0.0, t);
-      noiseGain.gain.linearRampToValueAtTime(0.12, t + 0.05);
-      noiseGain.gain.linearRampToValueAtTime(0.08, t + dur * 0.5);
-      noiseGain.gain.exponentialRampToValueAtTime(0.001, t + dur);
-      src.connect(filter); filter.connect(noiseGain); noiseGain.connect(ctx.destination);
-      src.start(t); src.stop(t + dur);
-    } catch(e) {}
+    sndPenWrite.currentTime = 0;
+    sndPenWrite.play().catch(() => {});
   }
 
   // pop: 배지/칩 팝인용
@@ -2767,7 +2735,7 @@
   // SVG connector(.step-timeline > svg) 동반 이동: SVGElement는 offsetLeft 미지원이라 selection 안 넣고 별도 추적
   let svgDragAnchors = [];
   let isDragging = false;
-  const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .check-text, .check-box, .bar-label, .bar-value, .bar-fill, .hbar-label, .hbar-val, .stat-num, .stat-label, .stat-detail-item, .icon-label, .icon-circle, .icon-flow-label, .flow-box, .flow-arrow, .alert-text, .alert-icon, .compare-header, .compare-item, .quote-text, .quote-source, .tag-chip, .tl-box, .tl-circle, .btn-pill, .cta-btn, .contrast-word';
+  const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .check-text, .check-box, .bar-label, .bar-value, .bar-fill, .hbar-label, .hbar-val, .stat-num, .stat-label, .stat-detail-item, .icon-label, .icon-circle, .icon-flow-label, .flow-box, .flow-arrow, .alert-text, .alert-icon, .compare-header, .compare-item, .quote-text, .quote-source, .tag-chip, .tl-box, .tl-circle, .btn-pill, .cta-btn, .contrast-word, .contrast-sub';
   // 비텍스트 자식 (fontSize 기반 리사이즈 대상 아님 — 이들은 기존 slide-el 박스 리사이즈로 처리)
   const NON_TEXT_CHILD_SEL = '.bar-fill, .check-box, .icon-circle, .tl-circle';
   // 툴바/팬널/팔레트 영역 — 편집 중 클릭 시 focus/selection 유지해야 하는 대상
@@ -3344,7 +3312,7 @@
       }
     }
     if (!editMode) return;
-    let el = e.target.closest('.hl, .bubble, .bg-label, .card-title, .card-desc, .num-text, .bar-label, .bar-value, .icon-label, .flow-box, .icon-flow-label, .flow-arrow, .check-text, .hbar-label, .hbar-val, .stat-num, .quote-text, .grid-title, .section-badge, .corner-label, .btn-pill, .tag-chip, .alert-text, .compare-header, .compare-item, .tl-box, .cta-btn, .stat-label, .cork-label, .hand-title-mark, .hand-typing, .contrast-word, .contrast-quote, .contrast-bottom, .tl-desc');
+    let el = e.target.closest('.hl, .bubble, .bg-label, .card-title, .card-desc, .num-text, .bar-label, .bar-value, .icon-label, .flow-box, .icon-flow-label, .flow-arrow, .check-text, .hbar-label, .hbar-val, .stat-num, .quote-text, .grid-title, .section-badge, .corner-label, .btn-pill, .tag-chip, .alert-text, .compare-header, .compare-item, .tl-box, .cta-btn, .stat-label, .cork-label, .hand-title-mark, .hand-typing, .contrast-word, .contrast-sub, .contrast-quote, .contrast-bottom, .tl-desc');
     if (!el) {
       const area = e.target.closest('.text-area');
       if (area) el = area.querySelector('.hl');
