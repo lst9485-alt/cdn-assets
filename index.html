@@ -8,13 +8,13 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; min-height: 100vh; }
-        .hub { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+        .hub { max-width: 1200px; margin: 0 auto; padding: 32px 20px; }
         .header { margin-bottom: 28px; }
         h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 4px; }
         .subtitle { color: #64748B; font-size: 14px; }
         .section { margin-bottom: 24px; }
         .section-title { font-size: 13px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
         .item { background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; text-decoration: none; color: #1A1A1A; display: flex; align-items: center; gap: 12px; transition: all 0.15s; }
         .item:hover { border-color: #0077C8; }
         .item-icon { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
@@ -26,6 +26,7 @@
         .badge-soon { background: #F1F5F9; color: #94A3B8; }
         .arrow { color: #CBD5E1; font-size: 16px; flex-shrink: 0; }
 
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>

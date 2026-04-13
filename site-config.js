@@ -74,6 +74,57 @@
         ]
       },
       {
+        id: 'homepage-section',
+        hubTitle: '홈페이지',
+        nav: {
+          type: 'single',
+          label: '홈페이지',
+          href: 'homepage/',
+          activeMatch: ['/homepage']
+        },
+        sidebar: {
+          title: '홈페이지'
+        },
+        items: [
+          {
+            id: 'landing-page',
+            title: '1:1 상담 랜딩페이지',
+            description: '상세페이지 v3.5 미리보기',
+            href: 'homepage/landing.html',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['landing.html'],
+            hubVisible: true
+          },
+          {
+            id: 'lecture-allinone',
+            title: '올인원 강의 페이지',
+            description: '내집마련 올인원 VOD · 20만원',
+            href: 'homepage/lecture-allinone.html',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['lecture-allinone.html'],
+            hubVisible: true
+          },
+          {
+            id: 'lecture-bookclub',
+            title: '독서모임 페이지',
+            description: '내집마련 독서모임 · 월 1회',
+            href: 'homepage/lecture-bookclub.html',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['lecture-bookclub.html'],
+            hubVisible: true
+          }
+        ]
+      },
+      {
         id: 'process',
         hubTitle: '프로세스 도식화',
         nav: {
@@ -217,19 +268,6 @@
             iconKey: 'doc',
             sidebarType: 'sub',
             activeMatch: ['prep.html'],
-            hubVisible: true
-          },
-          {
-            id: 'landing-page',
-            title: '1:1 상담 랜딩페이지',
-            description: '상세페이지 v3.5 미리보기',
-            href: 'homepage/landing.html',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'web',
-            navVisible: true,
-            sidebarType: 'root',
-            activeMatch: ['landing.html'],
             hubVisible: true
           },
           {
