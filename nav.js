@@ -101,7 +101,8 @@
   }
 
   function getRootPath() {
-    var pathAfterAssets = location.pathname.split('cdn-assets/')[1] || '';
+    var split = location.pathname.split('cdn-assets/');
+    var pathAfterAssets = split.length > 1 ? split[1] : location.pathname.replace(/^\//, '');
     var segments = pathAfterAssets.split('/').filter(Boolean);
     if (segments.length > 0 && segments[segments.length - 1].includes('.html') && segments[segments.length - 1] !== 'index.html') {
       segments.pop();

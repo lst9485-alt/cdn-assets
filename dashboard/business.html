@@ -46,16 +46,19 @@
         .funnel-main { flex: 1; min-width: 0; }
         .side-card { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 16px; }
         .bottleneck-panel { flex: 0 0 180px; }
-        .simulator-panel { flex: 0 0 200px; }
-        .sim-title { font-size: 13px; font-weight: 700; color: #1E293B; margin-bottom: 12px; }
-        .sim-row { margin-bottom: 8px; }
-        .sim-label { font-size: 11px; color: #64748B; margin-bottom: 3px; }
-        .sim-input { width: 100%; padding: 4px 8px; border: 1px solid #E2E8F0; border-radius: 6px; font-size: 12px; box-sizing: border-box; outline: none; }
-        .sim-input:focus { border-color: #0077C8; }
-        .sim-result { margin-top: 12px; padding-top: 12px; border-top: 1px solid #E2E8F0; }
-        .sim-result-label { font-size: 11px; color: #64748B; margin-bottom: 2px; }
-        .sim-result-value { font-size: 20px; font-weight: 700; color: #1E293B; }
-        .sim-result-sub { font-size: 11px; color: #64748B; margin-top: 4px; }
+        .simulator-panel { flex: 0 0 190px; }
+        .sim-title { font-size: 12px; font-weight: 700; color: #94A3B8; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; }
+        .sim-revenue { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid #F1F5F9; }
+        .sim-revenue-value { font-size: 22px; font-weight: 800; color: #1E293B; line-height: 1.1; }
+        .sim-revenue-sub { font-size: 11px; color: #94A3B8; margin-top: 4px; }
+        .sim-field { margin-bottom: 10px; }
+        .sim-field-label { font-size: 11px; color: #64748B; margin-bottom: 3px; }
+        .sim-field-input { width: 100%; padding: 5px 8px; border: 1px solid #E2E8F0; border-radius: 6px; font-size: 13px; font-weight: 600; color: #1E293B; box-sizing: border-box; outline: none; background: #F8FAFC; }
+        .sim-field-input:focus { border-color: #0077C8; background: white; }
+        .sim-rates { margin-top: 4px; }
+        .sim-rate-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; border-bottom: 1px solid #F8FAFC; }
+        .sim-rate-name { font-size: 11px; color: #94A3B8; }
+        .sim-rate-val { font-size: 11px; font-weight: 600; color: #64748B; }
         .funnel-stage { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; }
         .funnel-stage-left {}
         .funnel-stage-label { font-size: 14px; color: #64748B; font-weight: 600; margin-bottom: 2px; }
@@ -516,25 +519,27 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
 
     function initSimulator(cw, targets) {
         const unitPrice = targets.unit_price || 440000;
+        const interestRate = cw.interest_rate || targets.interest_rate || 20;
+        const linkClickRate = cw.link_click_rate || targets.link_click_rate || 2.5;
+        const convertRate = cw.convert_rate || targets.convert_rate || 3;
         const html =
-            '<div class="sim-title">매출 시뮬레이터</div>' +
-            '<div class="sim-result" style="margin-top:0; padding-top:0; border-top:none; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid #E2E8F0;">' +
-            '<div class="sim-result-label">예상 매출</div>' +
-            '<div class="sim-result-value" id="sim-revenue"></div>' +
-            '<div class="sim-result-sub" id="sim-sub"></div>' +
+            '<div class="sim-title">시뮬레이터</div>' +
+            '<div class="sim-revenue">' +
+            '<div class="sim-revenue-value" id="sim-revenue"></div>' +
+            '<div class="sim-revenue-sub" id="sim-sub"></div>' +
             '</div>' +
-            '<div class="sim-row"><div class="sim-label">키콘텐츠 조회수</div>' +
-            '<input class="sim-input" id="sim-key" type="number" value="' + (cw.key_views || 0) + '"></div>' +
-            '<div class="sim-row"><div class="sim-label">연계율 (%)</div>' +
-            '<input class="sim-input" id="sim-interest" type="number" step="0.1" value="' + ((cw.interest_rate || 0).toFixed(1)) + '"></div>' +
-            '<div class="sim-row"><div class="sim-label">링크클릭률 (%)</div>' +
-            '<input class="sim-input" id="sim-click" type="number" step="0.1" value="' + ((cw.link_click_rate || 0).toFixed(1)) + '"></div>' +
-            '<div class="sim-row"><div class="sim-label">전환율 (%)</div>' +
-            '<input class="sim-input" id="sim-convert" type="number" step="0.1" value="' + ((cw.convert_rate || 0).toFixed(1)) + '"></div>' +
-            '<div class="sim-row"><div class="sim-label">객단가 (원)</div>' +
-            '<input class="sim-input" id="sim-price" type="number" value="' + unitPrice + '"></div>';
+            '<div class="sim-field"><div class="sim-field-label">키콘텐츠 조회수</div>' +
+            '<input class="sim-field-input" id="sim-key" type="number" value="' + (cw.key_views || 0) + '"></div>' +
+            '<div class="sim-rates">' +
+            '<div class="sim-rate-row"><span class="sim-rate-name">연계율</span><span class="sim-rate-val">' + interestRate.toFixed(1) + '%</span></div>' +
+            '<div class="sim-rate-row"><span class="sim-rate-name">링크클릭률</span><span class="sim-rate-val">' + linkClickRate.toFixed(1) + '%</span></div>' +
+            '<div class="sim-rate-row"><span class="sim-rate-name">유료고객 전환율</span><span class="sim-rate-val">' + convertRate.toFixed(1) + '%</span></div>' +
+            '</div>' +
+            '<div class="sim-field" style="margin-top:10px;"><div class="sim-field-label">객단가</div>' +
+            '<input class="sim-field-input" id="sim-price" type="number" value="' + unitPrice + '"></div>';
         document.getElementById('simulator-panel').innerHTML = html;
-        ['sim-key', 'sim-interest', 'sim-click', 'sim-convert', 'sim-price'].forEach(function(id) {
+        window._simRates = { interest: interestRate, click: linkClickRate, convert: convertRate };
+        ['sim-key', 'sim-price'].forEach(function(id) {
             document.getElementById(id).addEventListener('input', calcSimulator);
         });
         calcSimulator();
@@ -542,13 +547,11 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
 
     function calcSimulator() {
         const key = parseFloat(document.getElementById('sim-key').value) || 0;
-        const interest = (parseFloat(document.getElementById('sim-interest').value) || 0) / 100;
-        const click = (parseFloat(document.getElementById('sim-click').value) || 0) / 100;
-        const convert = (parseFloat(document.getElementById('sim-convert').value) || 0) / 100;
         const price = parseFloat(document.getElementById('sim-price').value) || 0;
-        const pulling = key * interest;
-        const landing = (key + pulling) * click;
-        const customers = landing * convert;
+        const r = window._simRates || { interest: 20, click: 2.5, convert: 3 };
+        const pulling = key * (r.interest / 100);
+        const landing = (key + pulling) * (r.click / 100);
+        const customers = landing * (r.convert / 100);
         const revenue = customers * price;
         document.getElementById('sim-revenue').textContent = fmtWon(Math.round(revenue));
         document.getElementById('sim-sub').textContent = '유료고객 ' + customers.toFixed(1) + '명 · 랜딩 ' + Math.round(landing) + '건';
