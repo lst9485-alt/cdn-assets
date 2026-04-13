@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>내집마련 올인원 강의 — 우리동네 재테크</title>
-<!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -22,12 +21,9 @@
     }
   }
 </script>
-<!-- Pretendard + GmarketSans -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
-<!-- Iconify -->
 <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
-<!-- 랜딩 스타일 -->
 <style>
   html { font-size: 16px !important; }
   body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; }
@@ -45,7 +41,6 @@
 </style>
 </head>
 <body class="bg-white">
-
 <!-- 내집마련 올인원 강의 — 아임웹 상품 설명용 -->
 <!-- head-code.html 공유 (Tailwind/Pretendard/G마켓산스/Iconify) -->
 
@@ -111,41 +106,45 @@
 <section class="max-w-4xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
   <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark text-center mb-12 word-keep">이런 분께 추천합니다</h2>
   <div class="grid sm:grid-cols-2 gap-4" data-stagger>
-    <div class="bg-gray-50 rounded-2xl p-6 flex items-start gap-4">
-      <div class="w-10 h-10 bg-brand-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
-        <span class="iconify text-brand-orange text-xl" data-icon="solar:home-angle-bold"></span>
+    <div class="bg-gray-50 rounded-2xl p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-brand-orange/20 text-3xl font-display font-black leading-none">01</span>
+        <div class="w-10 h-10 bg-brand-orange/10 rounded-xl flex items-center justify-center">
+          <span class="iconify text-brand-orange text-xl" data-icon="solar:home-angle-bold"></span>
+        </div>
       </div>
-      <div>
-        <p class="font-bold text-brand-dark mb-1 word-keep">내집마련을 처음 준비하는 분</p>
-        <p class="text-gray-500 text-sm word-keep">어디서부터 시작해야 할지 막막한 분</p>
-      </div>
+      <p class="font-bold text-brand-dark mb-1 word-keep">내집마련을 처음 준비하는 분</p>
+      <p class="text-gray-500 text-sm word-keep">어디서부터 시작해야 할지 막막한 분</p>
     </div>
-    <div class="bg-gray-50 rounded-2xl p-6 flex items-start gap-4">
-      <div class="w-10 h-10 bg-brand-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
-        <span class="iconify text-brand-orange text-xl" data-icon="solar:wallet-money-bold"></span>
+    <div class="bg-gray-50 rounded-2xl p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-brand-orange/20 text-3xl font-display font-black leading-none">02</span>
+        <div class="w-10 h-10 bg-brand-orange/10 rounded-xl flex items-center justify-center">
+          <span class="iconify text-brand-orange text-xl" data-icon="solar:wallet-money-bold"></span>
+        </div>
       </div>
-      <div>
-        <p class="font-bold text-brand-dark mb-1 word-keep">예산은 있는데 방법을 모르는 분</p>
-        <p class="text-gray-500 text-sm word-keep">대출, 세금, 계약 절차가 복잡한 분</p>
-      </div>
+      <p class="font-bold text-brand-dark mb-1 word-keep">예산은 있는데 방법을 모르는 분</p>
+      <p class="text-gray-500 text-sm word-keep">대출, 세금, 계약 절차가 복잡한 분</p>
     </div>
-    <div class="bg-gray-50 rounded-2xl p-6 flex items-start gap-4">
-      <div class="w-10 h-10 bg-[#0055FF]/10 rounded-xl flex items-center justify-center flex-shrink-0">
-        <span class="iconify text-[#0055FF] text-xl" data-icon="solar:transfer-horizontal-bold"></span>
+    <div class="bg-gray-50 rounded-2xl p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-[#0055FF]/20 text-3xl font-display font-black leading-none">03</span>
+        <div class="w-10 h-10 bg-[#0055FF]/10 rounded-xl flex items-center justify-center">
+          <span class="iconify text-[#0055FF] text-xl" data-icon="solar:transfer-horizontal-bold"></span>
+        </div>
       </div>
-      <div>
-        <p class="font-bold text-brand-dark mb-1 word-keep">갈아타기 타이밍을 고민하는 분</p>
-        <p class="text-gray-500 text-sm word-keep">1주택에서 더 좋은 집으로 옮기고 싶은 분</p>
-      </div>
+      <p class="font-bold text-brand-dark mb-1 word-keep">갈아타기 타이밍을 고민하는 분</p>
+      <p class="text-gray-500 text-sm word-keep">1주택에서 더 좋은 집으로 옮기고 싶은 분</p>
     </div>
-    <div class="bg-gray-50 rounded-2xl p-6 flex items-start gap-4">
-      <div class="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-        <span class="iconify text-emerald-600 text-xl" data-icon="solar:chart-square-bold"></span>
+    <div class="bg-gray-50 rounded-2xl p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-emerald-600/20 text-3xl font-display font-black leading-none">04</span>
+        <div class="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center">
+          <span class="iconify text-emerald-600 text-xl" data-icon="solar:chart-square-bold"></span>
+        </div>
       </div>
-      <div>
-        <p class="font-bold text-brand-dark mb-1 word-keep">자산배분 전략이 필요한 분</p>
-        <p class="text-gray-500 text-sm word-keep">부동산과 금융자산을 함께 설계하고 싶은 분</p>
-      </div>
+      <p class="font-bold text-brand-dark mb-1 word-keep">자산배분 전략이 필요한 분</p>
+      <p class="text-gray-500 text-sm word-keep">부동산과 금융자산을 함께 설계하고 싶은 분</p>
     </div>
   </div>
 </section>
@@ -251,6 +250,7 @@
     <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark word-keep">강사 소개</h2>
   </div>
   <div class="bg-gray-50 rounded-2xl p-8 sm:p-10" data-reveal>
+    <!-- 이름 + 직함 -->
     <div class="flex items-center gap-4 mb-6">
       <div class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center">
         <span class="iconify text-brand-orange text-3xl" data-icon="solar:user-bold"></span>
@@ -260,6 +260,7 @@
         <p class="text-brand-orange font-semibold">우리동네 재테크 대표</p>
       </div>
     </div>
+    <!-- 핵심 수치 -->
     <div class="grid grid-cols-3 gap-3 mb-6">
       <div class="bg-white rounded-xl p-4 text-center">
         <p class="text-2xl font-display font-black text-brand-dark">9년+</p>
@@ -274,6 +275,7 @@
         <p class="text-gray-500 text-xs mt-1">만족도 (5점 만점)</p>
       </div>
     </div>
+    <!-- 약력 -->
     <ul class="space-y-2 text-gray-700">
       <li class="flex items-start gap-2"><span class="text-brand-orange mt-0.5"><span class="iconify text-sm" data-icon="solar:check-circle-bold"></span></span><span class="word-keep">유튜브 "우리동네 재테크" 운영</span></li>
       <li class="flex items-start gap-2"><span class="text-brand-orange mt-0.5"><span class="iconify text-sm" data-icon="solar:check-circle-bold"></span></span><span class="word-keep">1,000권+ 독파, 강의 · 자기계발에 1억+ 투자</span></li>
