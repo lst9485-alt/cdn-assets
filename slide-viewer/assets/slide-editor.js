@@ -2271,6 +2271,9 @@
     const fontPanel = document.getElementById('font-panel');
     const hadFontVisible = fontPanel.classList.contains('visible');
     fontPanel.classList.remove('visible');
+    const layerPanel = document.getElementById('layer-panel');
+    const hadLayerVisible = layerPanel.classList.contains('visible');
+    layerPanel.classList.remove('visible');
     document.body.classList.remove('edit-mode');
     // show-guide 클래스 백업 & 제거
     const guideClasses = [...document.body.classList].filter(c => c.startsWith('show-guide'));
@@ -2391,6 +2394,7 @@
     animShownEls.forEach(el => el.classList.add('anim-shown'));
     coordPanel.style.display = hadCoordDisplay;
     if (hadFontVisible) fontPanel.classList.add('visible');
+    if (hadLayerVisible) layerPanel.classList.add('visible');
     if (editMode) document.body.classList.add('edit-mode');
     guideClasses.forEach(c => document.body.classList.add(c));
     guideBtnBackup.forEach(b => { if (b.hadActive) b.el.classList.add('active'); b.el.textContent = b.text; });
