@@ -25,13 +25,14 @@
       + '#sidebar { position: fixed; top: 48px; right: max(16px, calc(50% - 640px)); width: 150px; height: calc(100vh - 48px); padding: 16px 0; z-index: 90; }'
       + '.sb-cat { font-size: 10px; font-weight: 800; color: #B0B8C4; letter-spacing: 1px; padding: 14px 10px 4px; text-transform: uppercase; }'
       + '.sb-link { display: flex; align-items: center; gap: 6px; padding: 6px 10px; font-size: 13px; font-weight: 600; color: #64748B; text-decoration: none; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }'
-      + '.sb-link svg { flex-shrink: 0; width: 16px; height: 16px; }'
+      + '.sb-link svg { flex-shrink: 0; width: 16px; height: 16px; max-width: 16px; max-height: 16px; }'
       + '.sb-link:hover { color: #0077C8; background: #F1F5F9; }'
       + '.sb-link.sb-active { color: #0077C8; background: #E8F3FF; font-weight: 700; }'
-      + '.sb-sub { display: block; padding: 3px 10px 3px 28px; font-size: 12px; font-weight: 500; color: #94A3B8; text-decoration: none; border-radius: 4px; transition: all 0.15s; }'
+      + '.sb-sub { display: flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 13px; font-weight: 600; color: #64748B; text-decoration: none; border-radius: 6px; transition: all 0.15s; white-space: nowrap; }'
+      + '.sb-sub svg { flex-shrink: 0; width: 16px; height: 16px; max-width: 16px; max-height: 16px; }'
       + '.sb-sub:hover { color: #0077C8; background: #F1F5F9; }'
       + '.sb-sub.sb-active { color: #0077C8; background: #E8F3FF; font-weight: 700; }'
-      + '.sb-sub-icon { display: inline-flex; width: 12px; height: 12px; vertical-align: -1px; margin-right: 4px; }'
+      + '.sb-sub-icon { display: inline-flex; width: 16px; height: 16px; vertical-align: -1px; }'
       + '@media (max-width: 1200px) { #sidebar { display: none; } }';
 
     document.head.appendChild(style);
@@ -76,7 +77,7 @@
   function renderSubItem(item) {
     var active = isActive(item.activeMatch) ? ' sb-active' : '';
     var icon = item.sidebarIconKey || item.iconKey;
-    var iconHtml = icon ? '<span class="sb-sub-icon">' + iconFor(icon, true) + '</span>' : '';
+    var iconHtml = icon ? '<span class="sb-sub-icon">' + iconFor(icon) + '</span>' : '';
     return '<a href="' + resolveHref(item.href) + '" class="sb-sub' + active + '">' + iconHtml + escapeHtml(item.sidebarLabel || item.title) + '</a>';
   }
 
