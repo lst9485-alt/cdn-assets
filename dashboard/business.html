@@ -540,7 +540,6 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             '<div class="sim-revenue-row"><input class="sim-revenue-input" id="sim-revenue" type="text" inputmode="numeric" placeholder="0"><span class="sim-revenue-unit">만원</span></div>' +
             '<div class="sim-sub-item" id="sim-sub-customers">유료고객 —명</div>' +
             '<div class="sim-sub-item" id="sim-sub-customers">유료고객 —명</div>' +
-            '<div class="sim-sub-item" id="sim-sub-landing">랜딩접속 —건</div>' +
             '</div>' +
             '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">객단가</span></div>' +
             '<input class="sim-field-input" id="sim-price" type="text" value="' + unitPrice.toLocaleString('ko-KR') + '"></div>' +
@@ -564,19 +563,19 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             var oldLen = this.value.length;
             this.value = num > 0 ? num.toLocaleString('ko-KR') : '';
             this.selectionStart = this.selectionEnd = pos + (this.value.length - oldLen);
-            calcSimulator();
+            calcSimulator('forward');
         });
         ['sim-interest', 'sim-click', 'sim-convert'].forEach(function(id) {
-            document.getElementById(id).addEventListener('input', calcSimulator);
+            document.getElementById(id).addEventListener('input', function() { calcSimulator('reverse'); });
         });
         document.getElementById('sim-price').addEventListener('input', function() {
             var raw = this.value.replace(/,/g, '');
             var num = parseInt(raw) || 0;
             var pos = this.selectionStart;
             this.value = num.toLocaleString('ko-KR');
-            calcSimulator();
+            calcSimulator('reverse');
         });
-        // 매출 역산: 만원 단위 입력 → 유료고객수·랜딩접속수 역산
+        // 매출 직접 입력 → 키조회수 역산 + 중간결과 전부 갱신
         var revInput = document.getElementById('sim-revenue');
         revInput.addEventListener('input', function() {
             var raw = this.value.replace(/,/g, '');
@@ -585,34 +584,47 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             var oldLen = this.value.length;
             this.value = manwon > 0 ? manwon.toLocaleString('ko-KR') : '';
             this.selectionStart = this.selectionEnd = pos + (this.value.length - oldLen);
-            var rev = manwon * 10000;
-            var priceRaw = (document.getElementById('sim-price').value || '').replace(/,/g, '');
-            var price = parseFloat(priceRaw) || 0;
-            var convert = parseFloat(document.getElementById('sim-convert').value) || 0;
-            var customers = price > 0 ? rev / price : 0;
-            var landing = convert > 0 ? customers / (convert / 100) : 0;
-            document.getElementById('sim-sub-customers').textContent = '유료고객 ' + customers.toFixed(1) + '명';
-            document.getElementById('sim-sub-landing').textContent = '랜딩접속 ' + fmtNum(Math.round(landing)) + '건';
         });
-        calcSimulator();
+        revInput.addEventListener('blur', function() {
+            calcSimulator('reverse');
+        });
+        calcSimulator('forward');
     }
 
-    function calcSimulator() {
+    // mode: 'forward' = 키조회수→매출, 'reverse' = 목표매출 유지→키조회수 역산
+    function calcSimulator(mode) {
         var revEl = document.getElementById('sim-revenue');
-        if (revEl === document.activeElement) return; // 역산 중이면 순방향 계산 스킵
-        const key = parseFloat((document.getElementById('sim-key').value || '').replace(/,/g, '')) || 0;
+        var keyEl = document.getElementById('sim-key');
+        if (revEl === document.activeElement) return;
         const interest = parseFloat(document.getElementById('sim-interest').value) || 0;
         const click = parseFloat(document.getElementById('sim-click').value) || 0;
         const convert = parseFloat(document.getElementById('sim-convert').value) || 0;
         const priceRaw = (document.getElementById('sim-price').value || '').replace(/,/g, '');
         const price = parseFloat(priceRaw) || 0;
+
+        var key;
+        if (mode === 'reverse') {
+            // 목표매출 유지하면서 키조회수 역산
+            var targetRev = (parseInt((revEl.value || '').replace(/,/g, '')) || 0) * 10000;
+            var customers = price > 0 ? targetRev / price : 0;
+            var landing = convert > 0 ? customers / (convert / 100) : 0;
+            // landing = (key + pulling) * click/100 = (key + key/(interest/100)) * click/100
+            // landing = key * (1 + 100/interest) * click/100
+            var multiplier = interest > 0 && click > 0 ? (1 + 100 / interest) * (click / 100) : 0;
+            key = multiplier > 0 ? landing / multiplier : 0;
+            keyEl.value = Math.round(key).toLocaleString('ko-KR');
+        } else {
+            key = parseFloat((keyEl.value || '').replace(/,/g, '')) || 0;
+        }
+
         const pulling = interest > 0 ? key / (interest / 100) : 0;
         const landing = (key + pulling) * (click / 100);
         const customers = landing * (convert / 100);
         const revenue = customers * price;
-        revEl.value = Math.round(revenue / 10000).toLocaleString('ko-KR');
+        if (mode !== 'reverse') {
+            revEl.value = Math.round(revenue / 10000).toLocaleString('ko-KR');
+        }
         document.getElementById('sim-sub-customers').textContent = '유료고객 ' + customers.toFixed(1) + '명';
-        document.getElementById('sim-sub-landing').textContent = '랜딩접속 ' + fmtNum(Math.round(landing)) + '건';
         document.getElementById('sim-out-pulling').textContent = '→ 풀링 ' + fmtNum(Math.round(pulling));
         document.getElementById('sim-out-landing').textContent = '→ 랜딩접속 ' + fmtNum(Math.round(landing)) + '건';
         document.getElementById('sim-out-customers').textContent = '→ 유료고객 ' + customers.toFixed(1) + '명';
