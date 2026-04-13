@@ -309,7 +309,7 @@
   const sndTransition = new Audio('./assets/sounds/장면전환.mp3');
   const sndMoney      = new Audio('./assets/sounds/금액.mp3');
   const sndBuzz       = new Audio('./assets/sounds/삐삑.mp3');
-  const sndPenWrite   = new Audio('./assets/sounds/pen-write.mp3?v=2');
+  const sndPenWrite   = new Audio('./assets/sounds/pen-sketch.mp3');
 
   // AudioContext lazy 싱글톤 (브라우저 동시 ctx 제한 회피 + 메모리 누수 방지)
   let _sharedAudioCtx = null;
