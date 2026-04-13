@@ -23,13 +23,7 @@
           label: '대시보드',
           activeMatch: ['/dashboard']
         },
-        sidebar: {
-          anchors: [
-            { label: '투두리스트', href: 'dashboard/#todo' },
-            { label: '프로젝트', href: 'dashboard/#projects' },
-            { label: 'OKR·루틴', href: 'dashboard/#okr' }
-          ]
-        },
+        sidebar: {},
         items: [
           {
             id: 'dashboard-main',
