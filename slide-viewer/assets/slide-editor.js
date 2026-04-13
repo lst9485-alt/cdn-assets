@@ -4504,39 +4504,7 @@
     }
     header.appendChild(pushupRow);
 
-    // 오버레이 없음 토글 (data-no-dim)
-    const noDimRow = document.createElement('div');
-    noDimRow.className = 'anim-pushup-row';
-    const noDimDisabled = !selectedEl || isPushup;
-    const isNoDim = pushupLayer ? pushupLayer.hasAttribute('data-no-dim') : false;
-    noDimRow.innerHTML = `<span class="anim-pushup-label">배경 어둡게 안 함</span>
-      <label class="anim-toggle${noDimDisabled ? ' disabled' : ''}">
-        <input type="checkbox" ${isNoDim ? 'checked' : ''} ${noDimDisabled ? 'disabled' : ''}>
-        <span class="anim-toggle-slider"></span>
-      </label>`;
-    if (!noDimDisabled) {
-      noDimRow.querySelector('input').addEventListener('change', function() {
-        // step-0에 있으면 자동으로 step-1로 이동 (moveToStep 내부에서 pushUndo)
-        if (currentStep === 0) {
-          moveToStep(selectedEl, 1);
-        } else {
-          pushUndo();
-        }
-        const layer = selectedEl.closest('.step-layer');
-        if (this.checked) {
-          layer.setAttribute('data-no-dim', '');
-          const dim = layer.querySelector('.step-dim');
-          if (dim) dim.classList.remove('anim-shown');
-          syncDimOuter(slides[currentSlide]);
-        } else {
-          layer.removeAttribute('data-no-dim');
-        }
-        buildLayerPanel();
-      });
-    }
-    header.appendChild(noDimRow);
-
-    // "클릭하여 정렬" 라벨
+    // "등장 순서" 라벨
     const sortLabel = document.createElement('div');
     sortLabel.className = 'anim-sort-label';
     sortLabel.innerHTML = '<span class="anim-sort-icon">☰</span> 등장 순서 (드래그로 변경)';
@@ -4654,25 +4622,6 @@
       });
     }
 
-    // 오버레이 추가/삭제 버튼
-    const overlayBtn = document.createElement('div');
-    overlayBtn.className = 'anim-overlay-btn';
-    overlayBtn.textContent = '+ 오버레이 추가';
-    overlayBtn.addEventListener('click', () => {
-      pushUndo();
-      const sl = slides[currentSlide];
-      const maxStep = parseInt(sl.dataset.steps || '1');
-      // 새 step-layer 생성 + step-dim 포함 (기본: 오버레이 없음)
-      const newLayer = document.createElement('div');
-      newLayer.className = 'step-layer';
-      newLayer.dataset.step = String(maxStep);
-      newLayer.dataset.noDim = '';
-      newLayer.innerHTML = '<div class="step-dim"></div>';
-      sl.appendChild(newLayer);
-      sl.dataset.steps = String(maxStep + 1);
-      buildLayerPanel();
-    });
-    list.appendChild(overlayBtn);
   }
 
   function buildPositionTab(list) {
