@@ -19,9 +19,8 @@
         id: 'dashboard',
         hubTitle: '대시보드',
         nav: {
-          type: 'single',
+          type: 'dropdown',
           label: '대시보드',
-          href: 'dashboard/',
           activeMatch: ['/dashboard']
         },
         sidebar: {
@@ -41,6 +40,7 @@
             badgeTone: 'live',
             iconKey: 'dash',
             hubVisible: true,
+            navVisible: true,
             sidebarType: 'root',
             activeMatch: ['dashboard']
           },
@@ -55,6 +55,7 @@
             iconKey: 'business',
             sidebarIconKey: 'dash',
             hubVisible: true,
+            navVisible: true,
             sidebarType: 'sub',
             activeMatch: ['business.html']
           },
@@ -68,6 +69,7 @@
             badgeTone: 'live',
             iconKey: 'branding',
             hubVisible: true,
+            navVisible: true,
             sidebarType: 'sub',
             activeMatch: ['branding.html']
           }
