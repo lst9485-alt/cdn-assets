@@ -116,6 +116,18 @@
             sidebarType: 'root',
             activeMatch: ['lecture-bookclub.html'],
             hubVisible: true
+          },
+          {
+            id: 'refund-policy',
+            title: '환불규정 안내',
+            description: 'VOD 강의 · 독서모임 환불 규정',
+            href: 'homepage/refund-policy.html',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['refund-policy.html'],
+            hubVisible: true
           }
         ]
       },
