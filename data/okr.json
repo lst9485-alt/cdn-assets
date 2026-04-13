@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-13T22:36:26.624229+09:00",
+  "updated": "2026-04-14T06:00:10.092246+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -116,7 +116,7 @@
         "overdue": false
       },
       {
-        "title": "홈페이지",
+        "title": "메인페이지 수정(히어로섹션 부터)",
         "date": "2026-04-15T14:30:00.000+09:00",
         "overdue": false
       },
@@ -178,64 +178,58 @@
     ],
     "schedule": [
       {
-        "title": "메모정리",
-        "time": "",
-        "allDay": true,
-        "done": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "time": "08:30",
+        "title": "슬라이드수정확인",
+        "time": "09:30",
         "allDay": false,
-        "done": true
+        "done": false
       },
       {
-        "title": "체크남&링크, db기입",
-        "time": "09:00",
+        "title": "Kcp전화 + 아임웹 채팅상담",
+        "time": "09:30",
         "allDay": false,
-        "done": true
+        "done": false
       },
       {
-        "title": "마케팅업체 정산",
-        "time": "09:00",
+        "title": "카카오 비즈니스채널 확인",
+        "time": "10:30",
         "allDay": false,
-        "done": true
+        "done": false
       },
       {
-        "title": "홈페이지",
-        "time": "12:15",
+        "title": "주제선정&썸네일&제목",
+        "time": "12:00",
         "allDay": false,
-        "done": true
+        "done": false
       },
       {
-        "title": "슬라이드수정",
+        "title": "원격평생교육원 알아보기",
+        "time": "13:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "홈페이지 템플릿&커리큘럼",
         "time": "14:00",
         "allDay": false,
-        "done": true
+        "done": false
       },
       {
-        "title": "원씽복기",
-        "time": "14:00",
-        "allDay": false,
-        "done": true
-      },
-      {
-        "title": "찬규교육",
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
         "time": "15:30",
         "allDay": false,
-        "done": true
+        "done": false
       },
       {
-        "title": "홈페이지",
+        "title": "자료수집&도입부",
         "time": "18:00",
         "allDay": false,
-        "done": true
+        "done": false
       }
     ]
   },
   "routines": {
     "total": 4,
-    "done_today": 2,
+    "done_today": 0,
     "items": [
       {
         "name": "원씽 완료",
@@ -243,45 +237,24 @@
       },
       {
         "name": "일일 계획",
-        "done": true
+        "done": false
       },
       {
         "name": "P2 완료",
-        "done": true
+        "done": false
       },
       {
         "name": "P3 완료",
         "done": false
       }
     ],
-    "priorities": [
-      {
-        "label": "원씽",
-        "title": "홈페이지",
-        "done": false
-      },
-      {
-        "label": "P2",
-        "title": "정산",
-        "done": true
-      },
-      {
-        "label": "P3",
-        "title": "슬라이드수정",
-        "done": false
-      }
-    ],
-    "identity": "나는 매출을 내는 사업가다",
+    "priorities": [],
+    "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 17,
-      "rate": "61%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-04-07",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-04-08",
           "done": 2,
@@ -310,6 +283,11 @@
         {
           "date": "2026-04-13",
           "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-04-14",
+          "done": 0,
           "total": 4
         }
       ]
