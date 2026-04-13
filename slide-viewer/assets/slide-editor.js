@@ -1221,6 +1221,17 @@
     // Delete/Backspace: 선택 요소 삭제 (편집 모드)
     if ((e.code === 'Delete' || e.code === 'Backspace') && editMode) {
       if (!selectedEls.length) return;
+      // groupEntered 상태: .child-selected 자식만 삭제
+      if (groupEntered && groupParent) {
+        const child = groupParent.querySelector('.child-selected');
+        if (child) {
+          pushUndo();
+          child.remove();
+          groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
+          if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+          return;
+        }
+      }
       pushUndo();
       const slide = slides[currentSlide];
       const toDelete = individualMode ? [selectedEl] : [...selectedEls];
@@ -2882,11 +2893,18 @@
       if (ev.key === 'Escape') { ev.preventDefault(); ev.stopPropagation(); el.blur(); }
       if ((ev.ctrlKey || ev.metaKey) && ev.key === 'z') { ev.preventDefault(); ev.stopPropagation(); el.blur(); ev.shiftKey ? doRedo() : doUndo(); }
     };
+    const onPaste = ev => {
+      ev.preventDefault();
+      const text = (ev.clipboardData || window.clipboardData).getData('text/plain');
+      if (text) document.execCommand('insertText', false, text);
+    };
     el.addEventListener('keydown', onKeydown);
+    el.addEventListener('paste', onPaste);
     el.addEventListener('blur', () => {
       el.removeAttribute('contenteditable');
       isEditing = false;
       el.removeEventListener('keydown', onKeydown);
+      el.removeEventListener('paste', onPaste);
     }, { once: true });
   }
 
@@ -3296,11 +3314,18 @@
       if (ev.key === 'Escape') { ev.preventDefault(); ev.stopPropagation(); el.blur(); }
       if ((ev.ctrlKey || ev.metaKey) && ev.key === 'z') { ev.preventDefault(); ev.stopPropagation(); el.blur(); ev.shiftKey ? doRedo() : doUndo(); }
     };
+    const onPaste = ev => {
+      ev.preventDefault();
+      const text = (ev.clipboardData || window.clipboardData).getData('text/plain');
+      if (text) document.execCommand('insertText', false, text);
+    };
     el.addEventListener('keydown', onKeydown);
+    el.addEventListener('paste', onPaste);
     el.addEventListener('blur', () => {
       el.removeAttribute('contenteditable');
       isEditing = false;
       el.removeEventListener('keydown', onKeydown);
+      el.removeEventListener('paste', onPaste);
     }, { once: true });
   });
 
@@ -4830,6 +4855,17 @@
   });
   document.getElementById('tb-delete').addEventListener('click', () => {
     if (!selectedEls.length || !editMode) return;
+    // groupEntered 상태: .child-selected 자식만 삭제
+    if (groupEntered && groupParent) {
+      const child = groupParent.querySelector('.child-selected');
+      if (child) {
+        pushUndo();
+        child.remove();
+        groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
+        if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+        return;
+      }
+    }
     pushUndo();
     const slide = slides[currentSlide];
     const toDelete = individualMode ? [selectedEl] : [...selectedEls];
@@ -4883,11 +4919,15 @@
       palette.style.top = (r.bottom + 4) + 'px';
     }
     function getHlEls() {
+      // groupEntered 상태: .child-selected 우선
+      if (groupEntered && groupParent) {
+        const child = groupParent.querySelector('.child-selected');
+        if (child) return [child];
+      }
       return selectedEls.map(e => {
         if (e.matches('.hl')) return [e];
         const hls = e.querySelectorAll('.hl');
         if (hls.length) return Array.from(hls);
-        // .hl 없는 요소(카드, 박스 등): 요소 자체에 색 적용
         return [e];
       }).flat();
     }
@@ -4927,7 +4967,12 @@
       const hls = getHlEls();
       hls.forEach(h => {
         BG_CLASSES.forEach(c => h.classList.remove(c));
-        if (sw.dataset.cls) h.classList.add(sw.dataset.cls);
+        if (sw.dataset.cls) {
+          h.classList.add(sw.dataset.cls);
+          h.style.background = BG_COLORS[sw.dataset.cls];
+        } else {
+          h.style.removeProperty('background');
+        }
       });
       updateIndicators();
       closePalettes();
@@ -4949,7 +4994,12 @@
       const hls = getHlEls();
       hls.forEach(h => {
         FC_CLASSES.forEach(c => h.classList.remove(c));
-        if (sw.dataset.cls) h.classList.add(sw.dataset.cls);
+        if (sw.dataset.cls) {
+          h.classList.add(sw.dataset.cls);
+          h.style.color = FC_COLORS[sw.dataset.cls];
+        } else {
+          h.style.removeProperty('color');
+        }
       });
       updateIndicators();
       closePalettes();
@@ -5285,6 +5335,28 @@ ch.postMessage({ type: 'ready' });
   document.getElementById('gt-ungroup').addEventListener('click', (e) => {
     e.stopPropagation();
     if (!selectedEl || !editMode) return;
+    // groupEntered 상태: .child-selected 자식만 분리
+    if (groupEntered && groupParent) {
+      const child = groupParent.querySelector('.child-selected');
+      if (child) {
+        pushUndo();
+        const layer = groupParent.closest('.step-layer');
+        const stageRect = document.getElementById('stage').getBoundingClientRect();
+        const scale = stageRect.width / 1920;
+        const cr = child.getBoundingClientRect();
+        const newEl = child.cloneNode(true);
+        newEl.style.position = 'absolute';
+        newEl.style.left = Math.round((cr.left - stageRect.left) / scale) + 'px';
+        newEl.style.top = Math.round((cr.top - stageRect.top) / scale) + 'px';
+        layer.appendChild(newEl);
+        child.remove();
+        exitGroup();
+        clearSelection();
+        groupToolbar.classList.remove('visible');
+        if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+        return;
+      }
+    }
     pushUndo();
     const gid = selectedEl.dataset.group;
     if (gid) {
@@ -5326,6 +5398,18 @@ ch.postMessage({ type: 'ready' });
   document.getElementById('gt-delete').addEventListener('click', (e) => {
     e.stopPropagation();
     if (!selectedEls.length || !editMode) return;
+    // groupEntered 상태: .child-selected 자식만 삭제
+    if (groupEntered && groupParent) {
+      const child = groupParent.querySelector('.child-selected');
+      if (child) {
+        pushUndo();
+        child.remove();
+        groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
+        groupToolbar.classList.remove('visible');
+        if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+        return;
+      }
+    }
     pushUndo();
     const slide = slides[currentSlide];
     const toDelete = individualMode ? [selectedEl] : [...selectedEls];
