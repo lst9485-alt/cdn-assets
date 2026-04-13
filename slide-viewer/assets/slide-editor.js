@@ -4535,7 +4535,7 @@
     // "클릭하여 정렬" 라벨
     const sortLabel = document.createElement('div');
     sortLabel.className = 'anim-sort-label';
-    sortLabel.innerHTML = '<span class="anim-sort-icon">☰</span> 클릭하여 정렬';
+    sortLabel.innerHTML = '<span class="anim-sort-icon">☰</span> 등장 순서 (드래그로 변경)';
     header.appendChild(sortLabel);
 
     // step 1+ 요소를 행 단위로 수집 (같은 그룹 = 한 행)
@@ -4579,7 +4579,7 @@
     if (rows.length === 0) {
       const empty = document.createElement('div');
       empty.className = 'anim-order-empty';
-      empty.textContent = '애니메이션 요소 없음';
+      empty.textContent = '요소를 선택하고 "클릭 시 표시"를 켜면\n등장 순서에 추가됩니다';
       list.appendChild(empty);
     } else {
       rows.forEach(row => {
@@ -4597,7 +4597,7 @@
         const typeBadge = row.gid
           ? ''
           : `<span class="layer-badge">${escHTML(getElType(row.el))}</span>`;
-        const stepBadge = `<span class="layer-step-badge">클릭${row.clickNum}회</span>`;
+        const stepBadge = `<span class="layer-step-badge">${row.clickNum}번째</span>`;
         item.innerHTML = `<span class="layer-handle">⠿</span><span class="layer-label">${label}</span>${typeBadge}${stepBadge}`;
 
         item.addEventListener('click', () => {
@@ -4640,7 +4640,7 @@
     if (step0Els.length > 0) {
       const divider = document.createElement('div');
       divider.className = 'anim-step0-divider';
-      divider.textContent = '── 항상 보임 ──';
+      divider.textContent = '항상 보임 (클릭 없이 표시)';
       list.appendChild(divider);
       step0Els.forEach(el => {
         const item = makeLayerItem(el, 0);
