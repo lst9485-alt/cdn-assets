@@ -48,8 +48,9 @@
         .side-card { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; }
         .sim-title { font-size: 12px; font-weight: 700; color: #94A3B8; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; }
         .sim-revenue { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9; }
-        .sim-revenue-input { width: 100%; border: none; outline: none; font-size: 22px; font-weight: 800; color: #1E293B; background: transparent; padding: 0; box-sizing: border-box; }
-        .sim-revenue-input:focus { color: #0077C8; }
+        .sim-revenue-input { width: 100%; border: 1px solid #E2E8F0; border-radius: 8px; outline: none; font-size: 20px; font-weight: 800; color: #1E293B; background: #F8FAFC; padding: 8px 10px; box-sizing: border-box; cursor: text; }
+        .sim-revenue-input:hover { border-color: #CBD5E1; }
+        .sim-revenue-input:focus { color: #0077C8; border-color: #0077C8; background: white; }
         .sim-revenue-sub { font-size: 11px; color: #94A3B8; margin-top: 4px; }
         .sim-field { margin-bottom: 8px; }
         .sim-field-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
@@ -159,7 +160,7 @@
 </head>
 <body>
     <div class="page">
-        <a href="./" class="back">&larr; 대시보드</a>
+        <a href="../" class="back">&larr; 대시보드</a>
         <h1>사업현황</h1>
         <p class="subtitle" id="period"></p>
 
@@ -552,13 +553,27 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         });
         // 매출 역산: 매출 필드 직접 입력 시 유료고객수·랜딩접속수 역산
         var revInput = document.getElementById('sim-revenue');
-        var revFocused = false;
-        revInput.addEventListener('focus', function() { revFocused = true; });
-        revInput.addEventListener('blur', function() { revFocused = false; });
+        revInput.addEventListener('focus', function() {
+            // 포커스 시 원시 숫자+콤마로 전환 (편집 용이)
+            var raw = this.value.replace(/[^0-9]/g, '');
+            var num = parseInt(raw) || 0;
+            this.value = num > 0 ? num.toLocaleString('ko-KR') : '';
+            this.select();
+        });
+        revInput.addEventListener('blur', function() {
+            // 포커스 해제 시 fmtWon 포맷으로 복원
+            calcSimulator();
+        });
         revInput.addEventListener('input', function() {
             var raw = this.value.replace(/[^0-9]/g, '');
             var rev = parseInt(raw) || 0;
-            this.value = fmtWon(rev);
+            // 입력 중에는 콤마 포맷만 (만원 반올림 안 함)
+            var pos = this.selectionStart;
+            var oldLen = this.value.length;
+            this.value = rev > 0 ? rev.toLocaleString('ko-KR') : '';
+            var newLen = this.value.length;
+            this.selectionStart = this.selectionEnd = pos + (newLen - oldLen);
+            // 역산
             var priceRaw = (document.getElementById('sim-price').value || '').replace(/,/g, '');
             var price = parseFloat(priceRaw) || 0;
             var convert = parseFloat(document.getElementById('sim-convert').value) || 0;
