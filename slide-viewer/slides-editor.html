@@ -9,7 +9,7 @@
 <style id="edit-badge-style">@keyframes editBadgeBlink{0%,100%{opacity:1}50%{opacity:0.3}}</style>
 </head>
 <body>
-<div id="layer-panel" class="">
+<div id="layer-panel" class="visible">
   <div class="layer-tabs">
     <div class="layer-tab active" data-tab="animation">애니메이션</div>
     <div class="layer-tab" data-tab="position">위치</div>
@@ -27,7 +27,7 @@
         <input type="checkbox" disabled="">
         <span class="anim-toggle-slider"></span>
       </label></div><div class="anim-sort-label"><span class="anim-sort-icon">☰</span> 클릭하여 정렬</div></div>
-  <div id="layer-list"><div class="anim-order-empty">애니메이션 요소 없음</div><div class="anim-step0-divider">── 항상 보임 ──</div><div class="layer-item" style="opacity: 0.55;"><span class="layer-handle">⠿</span><span class="layer-label">인용문을 입력하세요</span><span class="layer-badge">인용</span></div><div class="anim-overlay-btn">+ 오버레이 추가</div></div>
+  <div id="layer-list"><div class="anim-order-empty">애니메이션 요소 없음</div><div class="anim-step0-divider">── 항상 보임 ──</div><div class="layer-item" style="opacity: 0.55;"><span class="layer-handle">⠿</span><span class="layer-label">질문을 입력하세요</span><span class="layer-badge">말풍선</span></div><div class="anim-overlay-btn">+ 오버레이 추가</div></div>
 </div>
 <div id="guide-toolbar">
   <div class="guide-btn" data-target="title" style="border-color:rgba(255,200,0,0.7); color:rgba(255,200,0,0.9);">T</div>
@@ -66,7 +66,8 @@
       
     <div class="bubble" style="position: absolute; top: 80px; left: 1120px; width: 680px;">질문을 입력하세요</div></div>
   </div>
-<div class="slide" id="T02_base" data-slide-id="T02_base" data-page-group="2" data-variant="0" data-steps="1" data-type="아이콘+텍스트" style="" data-display-label="2-1">
+
+<div class="slide" id="T02_base" data-slide-id="T02_base" data-page-group="40" data-variant="0" data-steps="1" data-type="아이콘+텍스트" style="" data-display-label="40-1">
     <div class="step-layer" data-step="0">
       <div class="emoji-icon" style="position:absolute; left:288px; top:240px; width:300px; height:300px;">
         <svg viewBox="0 0 200 200" style="width:100%;height:100%;">
@@ -81,8 +82,7 @@
         </div>
       </div>
     </div>
-  </div>
-<div class="slide" id="T03_base" data-slide-id="T03_base" data-page-group="3" data-variant="0" data-steps="2" data-type="카드" style="" data-display-label="3-1">
+  </div><div class="slide" id="T03_base" data-slide-id="T03_base" data-page-group="3" data-variant="0" data-steps="2" data-type="카드" style="" data-display-label="3-1">
     <div class="step-layer" data-step="0">
       <div class="text-area" style="position:absolute; left:120px; top:202px; width:1680px;">
         <div class="hl-wrap" style="align-items:center;">
@@ -182,7 +182,7 @@
     </div>
   </div>
 </div>
-<div class="slide" id="T03_v4" data-slide-id="T03_v4" data-page-group="3" data-variant="4" data-steps="6" data-type="카드" data-display-label="3-5">
+<div class="slide" id="T03_v4" data-slide-id="T03_v4" data-page-group="3" data-variant="4" data-steps="6" data-type="카드" data-display-label="3-5" style="">
   <div class="step-layer" data-step="0">
     <div class="text-area" style="position:absolute; left:120px; top:202px; width:1680px;">
       <div class="hl-wrap" style="align-items:center;"><div><span class="hl">카드 5개</span></div></div>
@@ -3963,7 +3963,7 @@
   <button id="gt-ungroup">그룹 해제</button>
   <button id="gt-delete" title="삭제">🗑</button>
 </div>
-<div id="slideNum">18 / 38</div>
+<div id="slideNum">1 / 138</div>
 <div id="edit-badge"></div>
 <div id="top-toolbar">
   <span class="tb-label">편집 모드</span>
