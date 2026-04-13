@@ -2896,7 +2896,17 @@
     const onPaste = ev => {
       ev.preventDefault();
       const text = (ev.clipboardData || window.clipboardData).getData('text/plain');
-      if (text) document.execCommand('insertText', false, text);
+      if (!text) return;
+      const sel = window.getSelection();
+      if (!sel.rangeCount) return;
+      const range = sel.getRangeAt(0);
+      range.deleteContents();
+      const textNode = document.createTextNode(text);
+      range.insertNode(textNode);
+      range.setStartAfter(textNode);
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
     };
     el.addEventListener('keydown', onKeydown);
     el.addEventListener('paste', onPaste);
@@ -3317,7 +3327,17 @@
     const onPaste = ev => {
       ev.preventDefault();
       const text = (ev.clipboardData || window.clipboardData).getData('text/plain');
-      if (text) document.execCommand('insertText', false, text);
+      if (!text) return;
+      const sel = window.getSelection();
+      if (!sel.rangeCount) return;
+      const range = sel.getRangeAt(0);
+      range.deleteContents();
+      const textNode = document.createTextNode(text);
+      range.insertNode(textNode);
+      range.setStartAfter(textNode);
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
     };
     el.addEventListener('keydown', onKeydown);
     el.addEventListener('paste', onPaste);
@@ -3359,15 +3379,20 @@
         const child = e.target.closest(CHILD_SEL) || e.target;
         child.classList.add('child-selected');
         updateFontPanel(child);
-        selectedEl = groupParent;
-        selectedEls = [groupParent];
+        // 자식 드래그 분리용 상태 저장
         pendingDrag = true;
         mouseDownPos = { x: e.clientX, y: e.clientY };
         dragAnchor = clientToStage(e.clientX, e.clientY);
+        // 드래그 시작 시 자식을 부모에서 추출 (pushUndo → clone → 독립 배치)
+        pendingGroupEntry = null;
+        selectedEl = groupParent;
+        selectedEls = [groupParent];
+        // _pendingChildExtract: 드래그 임계값 넘으면 자식 추출
+        selectedEl._pendingChildExtract = child;
         elAnchor = { top: groupParent.offsetTop, left: groupParent.offsetLeft };
         elAnchors = [{ el: groupParent, top: groupParent.offsetTop, left: groupParent.offsetLeft }];
         updateCoordPanel(groupParent);
-        if (child) updateFontPanel(child); // 좌표는 부모, 폰트 패널은 자식 기준 (덮어쓰기 방지)
+        if (child) updateFontPanel(child);
         return;
       }
       if (!groupParent.contains(e.target) && !e.target.closest('.resize-handle')) {
@@ -3802,6 +3827,33 @@
       const dist = Math.sqrt(dx*dx + dy*dy);
       if (dist > DRAG_THRESHOLD) {
         pushUndo();
+        // groupEntered 자식 드래그: 자식을 부모에서 추출하여 독립 요소로 전환
+        if (selectedEl && selectedEl._pendingChildExtract) {
+          const child = selectedEl._pendingChildExtract;
+          delete selectedEl._pendingChildExtract;
+          const layer = selectedEl.closest('.step-layer');
+          const stageRect = document.getElementById('stage').getBoundingClientRect();
+          const scale = stageRect.width / 1920;
+          const cr = child.getBoundingClientRect();
+          const newEl = child.cloneNode(true);
+          newEl.classList.remove('child-selected');
+          newEl.style.position = 'absolute';
+          newEl.style.left = Math.round((cr.left - stageRect.left) / scale) + 'px';
+          newEl.style.top = Math.round((cr.top - stageRect.top) / scale) + 'px';
+          layer.appendChild(newEl);
+          child.remove();
+          exitGroup();
+          selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
+          selectedEl = newEl;
+          selectedEls = [newEl];
+          newEl.classList.add('edit-selected');
+          dragAnchor = clientToStage(e.clientX, e.clientY);
+          elAnchor = { top: newEl.offsetTop, left: newEl.offsetLeft };
+          elAnchors = [{ el: newEl, top: newEl.offsetTop, left: newEl.offsetLeft }];
+          updateCoordPanel(newEl);
+        } else if (selectedEl && selectedEl._pendingChildExtract === undefined) {
+          // 일반 드래그 (추출 아님)
+        }
         isDragging = true;
         pendingDrag = false;
       }
@@ -4137,6 +4189,7 @@
     isDragging = false;
     pendingDrag = false;
     mouseDownPos = null;
+    if (selectedEl) delete selectedEl._pendingChildExtract;
     svgDragAnchors = [];
     document.getElementById('snap-x').style.display = 'none';
     document.getElementById('snap-y').style.display = 'none';
@@ -4904,10 +4957,10 @@
     const btnFc = document.getElementById('tb-fc-color');
     const indBg = document.getElementById('tb-bg-indicator');
     const indFc = document.getElementById('tb-fc-indicator');
-    const BG_CLASSES = ['bg-blue','bg-red','bg-green','bg-white','bg-black','bg-gray'];
+    const BG_CLASSES = ['bg-blue','bg-red','bg-green','bg-white','bg-black','bg-accent','bg-gray'];
     const FC_CLASSES = ['fc-white','fc-red','fc-blue','fc-yellow','fc-black'];
     const BG_COLORS = {'':'transparent','bg-blue':'rgba(255,148,52,0.12)','bg-red':'rgba(0,0,0,0.06)','bg-green':'rgba(255,148,52,0.12)','bg-white':'#fff','bg-black':'#222','bg-accent':'rgba(255,148,52,0.15)','bg-gray':'#999'};
-    const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#FF6B00','fc-blue':'#4A90D9','fc-yellow':'#E63946'};
+    const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#FF6B00','fc-blue':'#4A90D9','fc-yellow':'#E63946','fc-black':'#222'};
 
     function closePalettes() {
       paletteBg.classList.remove('open');

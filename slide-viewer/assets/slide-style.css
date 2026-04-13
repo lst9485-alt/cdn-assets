@@ -1589,17 +1589,17 @@
   #save-status { color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 700; margin-left: 4px; }
   .color-palette {
     display: none; position: fixed; z-index: 9100;
-    background: #1e1e1e; border: 1px solid rgba(255,255,255,0.2);
+    background: #f5f5f5; border: 1px solid #ccc;
     border-radius: 10px; padding: 10px; gap: 8px;
     flex-wrap: wrap; width: 160px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
   }
   .color-palette.open { display: flex; }
   .color-swatch {
-    width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2);
+    width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.15);
     cursor: pointer; flex-shrink: 0;
   }
-  .color-swatch:hover { transform: scale(1.2); border-color: #fff; }
+  .color-swatch:hover { transform: scale(1.2); border-color: #333; }
   .color-swatch.active { border: 3px solid var(--editor-accent); }
   .tb-color-indicator {
     width: 16px; height: 4px; border-radius: 2px;
