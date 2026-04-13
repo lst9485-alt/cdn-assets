@@ -4400,16 +4400,79 @@
     return item;
   }
 
+  let animSortView = false; // 메인 뷰 vs 등장 순서 뷰
+
   function buildAnimationTab(list, header) {
     const slide = slides[currentSlide];
 
-    // 프레젠테이션 설정 섹션 헤더
+    if (animSortView) {
+      // ── 등장 순서 서브뷰 (캔바 "클릭하여 정렬") ──
+      const backRow = document.createElement('div');
+      backRow.className = 'anim-sort-back';
+      backRow.innerHTML = '← &nbsp;클릭하여 정렬';
+      backRow.addEventListener('click', () => { animSortView = false; buildLayerPanel(); });
+      header.appendChild(backRow);
+
+      const rows = [];
+      const seenGroups = new Set();
+      slide.querySelectorAll('.step-layer').forEach(layer => {
+        const step = parseInt(layer.dataset.step);
+        if (step === 0) return;
+        getOrderedEls(layer).forEach(el => {
+          if (el.classList.contains('step-dim')) return;
+          const gid = el.dataset.group;
+          if (gid) {
+            const key = gid + '-' + step;
+            if (!seenGroups.has(key)) { seenGroups.add(key); rows.push({ step, el, gid, members: [...layer.querySelectorAll(`[data-group="${CSS.escape(gid)}"]`)] }); }
+          } else { rows.push({ step, el }); }
+        });
+      });
+      const sortedForClick = [...rows].sort((a, b) => a.step - b.step);
+      let clickNum = 0;
+      const groupClickMap = new Map();
+      sortedForClick.forEach(row => {
+        if (row.gid) { const key = row.gid + '-' + row.step; if (!groupClickMap.has(key)) groupClickMap.set(key, ++clickNum); row.clickNum = groupClickMap.get(key); }
+        else { row.clickNum = ++clickNum; }
+      });
+      rows.sort((a, b) => b.clickNum - a.clickNum);
+
+      if (rows.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'anim-order-empty';
+        empty.textContent = '등장 요소 없음';
+        list.appendChild(empty);
+      } else {
+        rows.forEach(row => {
+          const item = document.createElement('div');
+          item.className = 'layer-item' + (row.el && selectedEls.includes(row.el) ? ' lyr-selected' : '');
+          item._el = row.el; item._step = row.step; item._isAnimRow = true;
+          item._gid = row.gid || null; item._members = row.members || null;
+          const label = row.gid ? `[${escHTML(row.gid.toUpperCase())}] 그룹` : escHTML(getElLabel(row.el));
+          const typeBadge = row.gid ? '' : `<span class="layer-badge">${escHTML(getElType(row.el))}</span>`;
+          item.innerHTML = `<span class="layer-handle">⠿</span><span class="layer-label">${label}</span>${typeBadge}<span class="layer-step-badge">${row.clickNum}번째</span>`;
+          item.addEventListener('click', () => {
+            if (layerDragItem) return;
+            const el = row.gid ? row.members[0] : row.el;
+            selectedEls.forEach(s => { s.classList.remove('edit-selected'); s.classList.remove('edit-group-selected'); });
+            if (row.gid) { selectedEls = [...row.members]; selectedEl = el; selectedEls.forEach(s => s.classList.add('edit-group-selected')); showGroupBox(row.gid); }
+            else { selectedEl = el; selectedEls = [el]; el.style.left = el.offsetLeft + 'px'; el.style.top = el.offsetTop + 'px'; el.style.right = ''; el.style.bottom = ''; el.classList.add('edit-selected'); showGroupBox(null); }
+            if (selectedEl) updateCoordPanel(selectedEl);
+            updateGroupToolbar(); buildLayerPanel();
+          });
+          item.addEventListener('mousedown', ev => { ev.stopPropagation(); ev.preventDefault(); layerDragPending = item; layerDragStartY = ev.clientY; });
+          list.appendChild(item);
+        });
+      }
+      return;
+    }
+
+    // ── 메인 뷰 ──
     const sectionTitle = document.createElement('div');
     sectionTitle.className = 'anim-section-title';
     sectionTitle.textContent = '프레젠테이션 설정';
     header.appendChild(sectionTitle);
 
-    // "클릭 시 표시" 토글 (항상 표시, 요소 미선택 시 disabled)
+    // 클릭 시 표시 토글
     const srcLayer = selectedEl ? selectedEl.closest('.step-layer') : null;
     const currentStep = srcLayer ? parseInt(srcLayer.dataset.step) : 0;
     const isOnClick = currentStep > 0;
@@ -4430,7 +4493,7 @@
     }
     header.appendChild(row);
 
-    // 애니메이션 타입 선택 드롭다운
+    // 등장 효과 드롭다운
     const ANIM_TYPES = [
       { cls: '', label: '아래에서 올라옴' },
       { cls: 'anim-scale', label: '작게→크게' },
@@ -4449,19 +4512,12 @@
     const animTypeDisabled = !selectedEl || selectedEl.classList.contains('step-dim');
     const currentAnimCls = (!selectedEl || selectedEl.classList.contains('step-dim') || currentStep === 0) ? '' : (ANIM_TYPES.find(t => t.cls && selectedEl.classList.contains(t.cls)) || ANIM_TYPES[0]).cls;
     let selectHTML = '<select class="anim-type-select"' + (animTypeDisabled ? ' disabled' : '') + '>';
-    ANIM_TYPES.forEach(t => {
-      selectHTML += `<option value="${t.cls}"${t.cls === currentAnimCls ? ' selected' : ''}>${escHTML(t.label)}</option>`;
-    });
+    ANIM_TYPES.forEach(t => { selectHTML += `<option value="${t.cls}"${t.cls === currentAnimCls ? ' selected' : ''}>${escHTML(t.label)}</option>`; });
     selectHTML += '</select>';
     animTypeRow.innerHTML = `<span class="anim-type-label">등장 효과</span>${selectHTML}`;
     if (!animTypeDisabled) {
       animTypeRow.querySelector('select').addEventListener('change', function() {
-        // step-0에 있으면 자동으로 step-1로 이동 (moveToStep 내부에서 pushUndo)
-        if (currentStep === 0) {
-          moveToStep(selectedEl, 1);
-        } else {
-          pushUndo();
-        }
+        if (currentStep === 0) moveToStep(selectedEl, 1); else pushUndo();
         ANIM_TYPES.forEach(t => { if (t.cls) selectedEl.classList.remove(t.cls); });
         if (this.value) selectedEl.classList.add(this.value);
         buildLayerPanel();
@@ -4469,159 +4525,12 @@
     }
     header.appendChild(animTypeRow);
 
-    // 밀어올리기 전환 토글 (레이어 단위)
-    const pushupRow = document.createElement('div');
-    pushupRow.className = 'anim-pushup-row';
-    const pushupDisabled = !selectedEl;
-    const pushupLayer = selectedEl ? selectedEl.closest('.step-layer') : null;
-    const isPushup = pushupLayer ? pushupLayer.dataset.transition === 'pushup' : false;
-    pushupRow.innerHTML = `<span class="anim-pushup-label">이전 내용 밀어내기</span>
-      <label class="anim-toggle${pushupDisabled ? ' disabled' : ''}">
-        <input type="checkbox" ${isPushup ? 'checked' : ''} ${pushupDisabled ? 'disabled' : ''}>
-        <span class="anim-toggle-slider"></span>
-      </label>`;
-    if (!pushupDisabled) {
-      pushupRow.querySelector('input').addEventListener('change', function() {
-        // step-0에 있으면 자동으로 step-1로 이동 (moveToStep 내부에서 pushUndo)
-        if (currentStep === 0) {
-          moveToStep(selectedEl, 1);
-        } else {
-          pushUndo();
-        }
-        const layer = selectedEl.closest('.step-layer');
-        if (this.checked) {
-          layer.dataset.transition = 'pushup';
-          layer.classList.add('anim-pushup-layer');
-          // pushup 레이어에는 dim 불필요 — step-dim 숨김
-          const dim = layer.querySelector('.step-dim');
-          if (dim) dim.classList.remove('anim-shown');
-        } else {
-          delete layer.dataset.transition;
-          layer.classList.remove('anim-pushup-layer', 'push-enter', 'push-exit');
-        }
-        buildLayerPanel();
-      });
-    }
-    header.appendChild(pushupRow);
-
-    // "등장 순서" 라벨
-    const sortLabel = document.createElement('div');
-    sortLabel.className = 'anim-sort-label';
-    sortLabel.innerHTML = '<span class="anim-sort-icon">☰</span> 등장 순서 (드래그로 변경)';
-    header.appendChild(sortLabel);
-
-    // step 1+ 요소를 행 단위로 수집 (같은 그룹 = 한 행)
-    const rows = [];
-    const seenGroups = new Set();
-    slide.querySelectorAll('.step-layer').forEach(layer => {
-      const step = parseInt(layer.dataset.step);
-      if (step === 0) return;
-      getOrderedEls(layer).forEach(el => {
-        if (el.classList.contains('step-dim')) return;
-        const gid = el.dataset.group;
-        if (gid) {
-          const key = gid + '-' + step;
-          if (!seenGroups.has(key)) {
-            seenGroups.add(key);
-            const members = [...layer.querySelectorAll(`[data-group="${CSS.escape(gid)}"]`)];
-            rows.push({ step, el, gid, members });
-          }
-        } else {
-          rows.push({ step, el });
-        }
-      });
-    });
-    // 누적 클릭 번호 계산: step 오름차순 → 미그룹은 개별 번호, 그룹은 첫 등장 시 번호
-    const sortedForClick = [...rows].sort((a, b) => a.step - b.step);
-    let clickNum = 0;
-    const groupClickMap = new Map();
-    sortedForClick.forEach(row => {
-      if (row.gid) {
-        const key = row.gid + '-' + row.step;
-        if (!groupClickMap.has(key)) {
-          groupClickMap.set(key, ++clickNum);
-        }
-        row.clickNum = groupClickMap.get(key);
-      } else {
-        row.clickNum = ++clickNum;
-      }
-    });
-    rows.sort((a, b) => b.clickNum - a.clickNum);
-
-    if (rows.length === 0) {
-      const empty = document.createElement('div');
-      empty.className = 'anim-order-empty';
-      empty.textContent = '요소를 선택하고 "클릭 시 표시"를 켜면\n등장 순서에 추가됩니다';
-      list.appendChild(empty);
-    } else {
-      rows.forEach(row => {
-        const item = document.createElement('div');
-        item.className = 'layer-item' + (row.el && selectedEls.includes(row.el) ? ' lyr-selected' : '');
-        item._el = row.el;
-        item._step = row.step;
-        item._isAnimRow = true;
-        item._gid = row.gid || null;
-        item._members = row.members || null;
-
-        const label = row.gid
-          ? `[${escHTML(row.gid.toUpperCase())}] 그룹`
-          : escHTML(getElLabel(row.el));
-        const typeBadge = row.gid
-          ? ''
-          : `<span class="layer-badge">${escHTML(getElType(row.el))}</span>`;
-        const stepBadge = `<span class="layer-step-badge">${row.clickNum}번째</span>`;
-        item.innerHTML = `<span class="layer-handle">⠿</span><span class="layer-label">${label}</span>${typeBadge}${stepBadge}`;
-
-        item.addEventListener('click', () => {
-          if (layerDragItem) return;
-          const el = row.gid ? row.members[0] : row.el;
-          selectedEls.forEach(s => { s.classList.remove('edit-selected'); s.classList.remove('edit-group-selected'); });
-          if (row.gid) {
-            selectedEls = [...row.members];
-            selectedEl = el;
-            selectedEls.forEach(s => s.classList.add('edit-group-selected'));
-            showGroupBox(row.gid);
-          } else {
-            selectedEl = el; selectedEls = [el];
-            el.style.left = el.offsetLeft + 'px'; el.style.top = el.offsetTop + 'px';
-            el.style.right = ''; el.style.bottom = '';
-            el.classList.add('edit-selected');
-            showGroupBox(null);
-          }
-          if (selectedEl) updateCoordPanel(selectedEl);
-          updateGroupToolbar();
-          buildLayerPanel();
-        });
-        item.addEventListener('mousedown', ev => {
-          ev.stopPropagation(); ev.preventDefault();
-          layerDragPending = item;
-          layerDragStartY = ev.clientY;
-        });
-        list.appendChild(item);
-      });
-    }
-
-    // step 0 요소 섹션 (항상 보임)
-    const step0Els = [];
-    const step0Layer = slide.querySelector('.step-layer[data-step="0"]');
-    if (step0Layer) {
-      Array.from(step0Layer.children).forEach(el => {
-        if (el.matches(EDITABLE_SEL) && !el.classList.contains('step-dim')) step0Els.push(el);
-      });
-    }
-    if (step0Els.length > 0) {
-      const divider = document.createElement('div');
-      divider.className = 'anim-step0-divider';
-      divider.textContent = '항상 보임 (클릭 없이 표시)';
-      list.appendChild(divider);
-      step0Els.forEach(el => {
-        const item = makeLayerItem(el, 0);
-        item._isAnimRow = false;
-        item.style.opacity = '0.55';
-        list.appendChild(item);
-      });
-    }
-
+    // "클릭하여 정렬" 버튼 (캔바 스타일 — 누르면 서브뷰 진입)
+    const sortBtn = document.createElement('div');
+    sortBtn.className = 'anim-sort-btn';
+    sortBtn.innerHTML = '<span class="anim-sort-icon">☰</span> 클릭하여 정렬 <span class="anim-sort-arrow">›</span>';
+    sortBtn.addEventListener('click', () => { animSortView = true; buildLayerPanel(); });
+    header.appendChild(sortBtn);
   }
 
   function buildPositionTab(list) {
