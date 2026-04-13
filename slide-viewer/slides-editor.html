@@ -15,10 +15,10 @@
     <div class="layer-tab" data-tab="position">위치</div>
   </div>
   <div id="layer-tab-header"><div class="anim-section-title">프레젠테이션 설정</div><div class="anim-toggle-row"><span class="anim-toggle-label">클릭 시 표시</span>
-      <label class="anim-toggle">
-        <input type="checkbox" checked="">
+      <label class="anim-toggle disabled">
+        <input type="checkbox" checked="" disabled="">
         <span class="anim-toggle-slider"></span>
-      </label></div><div class="anim-type-row"><span class="anim-type-label">등장 효과</span><select class="anim-type-select"><option value="" selected="">아래에서 올라옴</option><option value="anim-scale">작게→크게</option><option value="anim-left">왼쪽에서 슬라이드</option><option value="anim-right">오른쪽에서 슬라이드</option><option value="anim-pop">톡 튀어나옴</option><option value="anim-fade">서서히 나타남</option><option value="anim-zoom">확대 등장</option><option value="anim-flip">뒤집기</option><option value="anim-split">갈라짐</option><option value="anim-center">가운데서 등장</option><option value="anim-underline">밑줄 긋기</option></select></div><div class="anim-pushup-row"><span class="anim-pushup-label">이전 내용 밀어내기</span>
+      </label></div><div class="anim-type-row"><span class="anim-type-label">등장 효과</span><select class="anim-type-select" disabled=""><option value="" selected="">아래에서 올라옴</option><option value="anim-scale">작게→크게</option><option value="anim-left">왼쪽에서 슬라이드</option><option value="anim-right">오른쪽에서 슬라이드</option><option value="anim-pop">톡 튀어나옴</option><option value="anim-fade">서서히 나타남</option><option value="anim-zoom">확대 등장</option><option value="anim-flip">뒤집기</option><option value="anim-split">갈라짐</option><option value="anim-center">가운데서 등장</option><option value="anim-underline">밑줄 긋기</option></select></div><div class="anim-pushup-row"><span class="anim-pushup-label">이전 내용 밀어내기</span>
       <label class="anim-toggle">
         <input type="checkbox">
         <span class="anim-toggle-slider"></span>
@@ -27,7 +27,8 @@
         <input type="checkbox">
         <span class="anim-toggle-slider"></span>
       </label></div><div class="anim-sort-label"><span class="anim-sort-icon">☰</span> 등장 순서 (드래그로 변경)</div></div>
-  <div id="layer-list"><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">항목 5</span><span class="layer-badge">카드</span><span class="layer-step-badge">5번째</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">항목 4</span><span class="layer-badge">카드</span><span class="layer-step-badge">4번째</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">항목 3</span><span class="layer-badge">카드</span><span class="layer-step-badge">3번째</span></div><div class="layer-item lyr-selected"><span class="layer-handle">⠿</span><span class="layer-label">항목 2</span><span class="layer-badge">카드</span><span class="layer-step-badge">2번째</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">항목 1</span><span class="layer-badge">카드</span><span class="layer-step-badge">1번째</span></div><div class="anim-step0-divider">항상 보임 (클릭 없이 표시)</div><div class="layer-item" style="opacity: 0.55;"><span class="layer-handle">⠿</span><span class="layer-label">카드 5개</span><span class="layer-badge">HL</span></div><div class="anim-overlay-btn">+ 오버레이 추가</div></div>
+  <div id="layer-list"><div class="anim-order-empty">요소를 선택하고 "클릭 시 표시"를 켜면
+등장 순서에 추가됩니다</div><div class="anim-step0-divider">항상 보임 (클릭 없이 표시)</div><div class="layer-item" style="opacity: 0.55;"><span class="layer-handle">⠿</span><span class="layer-label">?</span><span class="layer-badge"></span></div><div class="layer-item" style="opacity: 0.55;"><span class="layer-handle">⠿</span><span class="layer-label">설명을 입력하세요</span><span class="layer-badge">HL</span></div><div class="anim-overlay-btn">+ 오버레이 추가</div></div>
 </div>
 <div id="guide-toolbar">
   <div class="guide-btn" data-target="title" style="border-color:rgba(255,200,0,0.7); color:rgba(255,200,0,0.9);">T</div>
@@ -49,23 +50,23 @@
 <div id="gap-right" class="gap-indicator" style="display: none; left: 1769px; top: 397px; width: 151px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: 56px; top: -14px;">151px</div></div>
 <div id="gap-top" class="gap-indicator" style="display: none; left: 1428px; top: 0px; width: 0px; height: 202px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 91px; left: 6px;">202px</div></div>
 <div id="gap-bottom" class="gap-indicator" style="display: none; left: 1428px; top: 594px; width: 0px; height: 486px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 233px; left: 6px;">486px</div></div>
-<div class="resize-handle" data-corner="tl" style="left: 444px; top: 434px;"></div>
-<div class="resize-handle" data-corner="tr" style="left: 744px; top: 434px;"></div>
-<div class="resize-handle" data-corner="bl" style="left: 444px; top: 719px;"></div>
-<div class="resize-handle" data-corner="br" style="left: 744px; top: 719px;"></div>
-<div class="resize-handle edge" data-edge="t" style="left: 594px; top: 434px;"></div>
-<div class="resize-handle edge" data-edge="r" style="left: 744px; top: 576.5px;"></div>
-<div class="resize-handle edge" data-edge="b" style="left: 594px; top: 719px;"></div>
-<div class="resize-handle edge" data-edge="l" style="left: 444px; top: 576.5px;"></div>
+<div class="resize-handle" data-corner="tl" style="left: 774px; top: 334px;"></div>
+<div class="resize-handle" data-corner="tr" style="left: 1734px; top: 334px;"></div>
+<div class="resize-handle" data-corner="bl" style="left: 774px; top: 609px;"></div>
+<div class="resize-handle" data-corner="br" style="left: 1734px; top: 609px;"></div>
+<div class="resize-handle edge" data-edge="t" style="left: 1254px; top: 334px;"></div>
+<div class="resize-handle edge" data-edge="r" style="left: 1734px; top: 471.5px;"></div>
+<div class="resize-handle edge" data-edge="b" style="left: 1254px; top: 609px;"></div>
+<div class="resize-handle edge" data-edge="l" style="left: 774px; top: 471.5px;"></div>
 <div id="resize-dim-label" style="display: none;"></div>
-<div id="select-box" style="left: 427.538px; top: 359.086px; width: 0px; height: 0px; display: none;"></div>
+<div id="select-box" style="left: 821px; top: 591px; width: 0px; height: 0px; display: none;"></div>
 
 
-  <div class="slide active" id="T01_base" data-slide-id="T01_base" data-page-group="1" data-variant="0" data-steps="2" data-type="말풍선+텍스트" style="" data-display-label="1-1">
+  <div class="slide active" id="T01_base" data-slide-id="T01_base" data-page-group="1" data-variant="0" data-steps="1" data-type="말풍선+텍스트" style="" data-display-label="1-1">
     <div class="step-layer" data-step="0">
       
-    </div>
-  <div class="step-layer" data-step="1" data-no-dim=""><div class="step-dim"></div><div class="bubble" style="position: absolute; top: 80px; left: 1120px; width: 680px;">질문을 입력하세요</div></div></div>
+    <div class="bubble" style="position: absolute; top: 80px; left: 1120px; width: 680px;">질문을 입력하세요</div></div>
+  </div>
 <div class="slide" id="T02_base" data-slide-id="T02_base" data-page-group="2" data-variant="0" data-steps="1" data-type="아이콘+텍스트" style="" data-display-label="2-1">
     <div class="step-layer" data-step="0">
       <div class="emoji-icon" style="position:absolute; left:288px; top:240px; width:300px; height:300px;">
@@ -74,13 +75,13 @@
           <text x="100" y="148" text-anchor="middle" font-family="'Pretendard','Noto Sans KR',sans-serif" font-size="140" font-weight="900" fill="#fff">?</text>
         </svg>
       </div>
-      <div class="text-area" style="position:absolute; left:780px; top:340px; width:960px;">
+      
+    <div class="text-area" style="position:absolute; left:780px; top:340px; width:960px;">
         <div class="hl-wrap">
           <div><span class="hl">설명을 입력하세요</span></div>
           <div><span class="hl">두 번째 줄</span></div>
         </div>
-      </div>
-    </div>
+      </div></div>
   </div>
 <div class="slide" id="T03_base" data-slide-id="T03_base" data-page-group="3" data-variant="0" data-steps="2" data-type="카드" style="" data-display-label="3-1">
     <div class="step-layer" data-step="0">
@@ -182,7 +183,7 @@
     </div>
   </div>
 </div>
-<div class="slide" id="T03_v4" data-slide-id="T03_v4" data-page-group="3" data-variant="4" data-steps="6" data-type="카드" data-display-label="3-5" style="">
+<div class="slide" id="T03_v4" data-slide-id="T03_v4" data-page-group="3" data-variant="4" data-steps="6" data-type="카드" data-display-label="3-5">
   <div class="step-layer" data-step="0">
     <div class="text-area" style="position:absolute; left:120px; top:202px; width:1680px;">
       <div class="hl-wrap" style="align-items:center;"><div><span class="hl">카드 5개</span></div></div>
@@ -3963,7 +3964,7 @@
   <button id="gt-ungroup">그룹 해제</button>
   <button id="gt-delete" title="삭제">🗑</button>
 </div>
-<div id="slideNum">7 / 138</div>
+<div id="slideNum">2 / 38</div>
 <div id="edit-badge"></div>
 <div id="top-toolbar">
   <span class="tb-label">편집 모드</span>
@@ -4011,12 +4012,10 @@
   <div class="color-swatch swatch-fc-yellow" data-cls="fc-yellow" title="빨강(강조)"></div>
 <div class="color-swatch" data-cls="fc-green" title="초록" style="background: rgb(46, 204, 113);"></div><div class="color-swatch" data-cls="fc-brown" title="갈색" style="background: rgb(139, 69, 19);"></div><div class="color-swatch" data-cls="fc-gray" title="회색" style="background: rgb(153, 153, 153);"></div><div class="color-swatch" data-cls="fc-purple" title="보라" style="background: rgb(155, 89, 182);"></div></div>
 <div id="coord-panel" style="display: none;">
-  <span id="coord-text">top: 440px;
-left: 450px;
-width: 300px;</span>
+  <span id="coord-text"></span>
   <span class="copy-btn" onclick="copyCoords()">복사</span>
 </div>
-<div id="font-panel" class="" style="left: 4px; top: 294.037px;">
+<div id="font-panel" class="" style="left: 218.889px; top: 221.074px;">
   <button id="font-dec">−</button>
   <input id="font-size-input" type="number" min="10" max="500">
   <span>px</span>
