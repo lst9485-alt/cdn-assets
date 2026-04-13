@@ -50,7 +50,7 @@
         .sim-result { background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; padding: 16px 20px; margin-bottom: 14px; }
         .sim-result-label { font-size: 14px; color: #64748B; font-weight: 600; margin-bottom: 2px; }
         .sim-revenue-row { display: flex; align-items: baseline; gap: 4px; }
-        .sim-revenue-input { width: 80px; border: none; outline: none; font-size: 28px; font-weight: 800; color: #051C2C; background: transparent; padding: 0; box-sizing: border-box; cursor: text; border-bottom: 2px solid transparent; }
+        .sim-revenue-input { width: auto; max-width: 140px; border: none; outline: none; font-size: 28px; font-weight: 800; color: #051C2C; background: transparent; padding: 0; box-sizing: border-box; cursor: text; border-bottom: 2px solid transparent; }
         .sim-revenue-input:hover { border-bottom-color: #CBD5E1; }
         .sim-revenue-input:focus { color: #0077C8; border-bottom-color: #0077C8; }
         .sim-revenue-unit { font-size: 16px; font-weight: 700; color: #64748B; }
@@ -534,19 +534,28 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             '<div class="sim-title">시뮬레이터</div>' +
             '<div class="sim-result">' +
             '<div class="sim-result-label">목표 매출</div>' +
-            '<div class="sim-revenue-row"><input class="sim-revenue-input" id="sim-revenue" type="number" step="1" placeholder="0"><span class="sim-revenue-unit">만원</span></div>' +
+            '<div class="sim-revenue-row"><input class="sim-revenue-input" id="sim-revenue" type="text" inputmode="numeric" placeholder="0"><span class="sim-revenue-unit">만원</span></div>' +
             '<div class="sim-sub-item" id="sim-sub-customers">유료고객 —명</div>' +
             '<div class="sim-sub-item" id="sim-sub-landing">랜딩 —건</div>' +
             '</div>' +
             '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">키콘텐츠 조회수</span></div>' +
-            '<input class="sim-field-input" id="sim-key" type="number" value="' + (cw.key_views || 0) + '"></div>' +
+            '<input class="sim-field-input" id="sim-key" type="text" inputmode="numeric" value="' + (cw.key_views || 0).toLocaleString('ko-KR') + '"></div>' +
             fmtField('연계율 (%)', interestRate.toFixed(1) + '%', 'sim-interest', interestRate.toFixed(1), '0.1') +
             fmtField('링크클릭률 (%)', linkClickRate.toFixed(1) + '%', 'sim-click', linkClickRate.toFixed(1), '0.1') +
             fmtField('유료고객 전환율 (%)', convertRate.toFixed(1) + '%', 'sim-convert', convertRate.toFixed(1), '0.1') +
             '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">객단가</span></div>' +
             '<input class="sim-field-input" id="sim-price" type="text" value="' + unitPrice.toLocaleString('ko-KR') + '"></div>';
         document.getElementById('simulator-panel').innerHTML = html;
-        ['sim-key', 'sim-interest', 'sim-click', 'sim-convert'].forEach(function(id) {
+        document.getElementById('sim-key').addEventListener('input', function() {
+            var raw = this.value.replace(/,/g, '');
+            var num = parseInt(raw) || 0;
+            var pos = this.selectionStart;
+            var oldLen = this.value.length;
+            this.value = num > 0 ? num.toLocaleString('ko-KR') : '';
+            this.selectionStart = this.selectionEnd = pos + (this.value.length - oldLen);
+            calcSimulator();
+        });
+        ['sim-interest', 'sim-click', 'sim-convert'].forEach(function(id) {
             document.getElementById(id).addEventListener('input', calcSimulator);
         });
         document.getElementById('sim-price').addEventListener('input', function() {
@@ -559,7 +568,12 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         // 매출 역산: 만원 단위 입력 → 유료고객수·랜딩접속수 역산
         var revInput = document.getElementById('sim-revenue');
         revInput.addEventListener('input', function() {
-            var manwon = parseFloat(this.value) || 0;
+            var raw = this.value.replace(/,/g, '');
+            var manwon = parseInt(raw) || 0;
+            var pos = this.selectionStart;
+            var oldLen = this.value.length;
+            this.value = manwon > 0 ? manwon.toLocaleString('ko-KR') : '';
+            this.selectionStart = this.selectionEnd = pos + (this.value.length - oldLen);
             var rev = manwon * 10000;
             var priceRaw = (document.getElementById('sim-price').value || '').replace(/,/g, '');
             var price = parseFloat(priceRaw) || 0;
@@ -567,7 +581,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             var customers = price > 0 ? rev / price : 0;
             var landing = convert > 0 ? customers / (convert / 100) : 0;
             document.getElementById('sim-sub-customers').textContent = '유료고객 ' + customers.toFixed(1) + '명';
-            document.getElementById('sim-sub-landing').textContent = '랜딩 ' + Math.round(landing) + '건';
+            document.getElementById('sim-sub-landing').textContent = '랜딩 ' + fmtNum(Math.round(landing)) + '건';
         });
         calcSimulator();
     }
@@ -575,7 +589,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
     function calcSimulator() {
         var revEl = document.getElementById('sim-revenue');
         if (revEl === document.activeElement) return; // 역산 중이면 순방향 계산 스킵
-        const key = parseFloat(document.getElementById('sim-key').value) || 0;
+        const key = parseFloat((document.getElementById('sim-key').value || '').replace(/,/g, '')) || 0;
         const interest = parseFloat(document.getElementById('sim-interest').value) || 0;
         const click = parseFloat(document.getElementById('sim-click').value) || 0;
         const convert = parseFloat(document.getElementById('sim-convert').value) || 0;
@@ -585,9 +599,9 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         const landing = (key + pulling) * (click / 100);
         const customers = landing * (convert / 100);
         const revenue = customers * price;
-        revEl.value = Math.round(revenue / 10000);
+        revEl.value = Math.round(revenue / 10000).toLocaleString('ko-KR');
         document.getElementById('sim-sub-customers').textContent = '유료고객 ' + customers.toFixed(1) + '명';
-        document.getElementById('sim-sub-landing').textContent = '랜딩 ' + Math.round(landing) + '건';
+        document.getElementById('sim-sub-landing').textContent = '랜딩 ' + fmtNum(Math.round(landing)) + '건';
     }
 
     // ── 주간 추이 ──
