@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>우리동네 재테크 — 직장인을 위한 내집마련 로드맵</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    important: true,
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+          display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+        },
+        colors: {
+          brand: { orange: '#FF6B00', beige: '#F5F0E8', dark: '#0a0a0a', blue: '#0055FF' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+<style>
+  html { font-size: 16px !important; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; }
+  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+  [data-reveal] { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].revealed { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+  [data-stagger] > * { opacity: 0; transform: translateY(24px) scale(0.9); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  [data-stagger].revealed > *:nth-child(1) { transition-delay: 0s; }
+  [data-stagger].revealed > *:nth-child(2) { transition-delay: 0.12s; }
+  [data-stagger].revealed > *:nth-child(3) { transition-delay: 0.24s; }
+  [data-stagger].revealed > *:nth-child(4) { transition-delay: 0.36s; }
+  [data-stagger].revealed > * { opacity: 1; transform: translateY(0) scale(1); }
+  .card-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .card-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
+</style>
+</head>
+<body class="bg-white">
+<!-- 메인 페이지 — 아임웹 홈 페이지용 (HTML 위젯 삽입) -->
+<!-- head-code.html 공유 (Tailwind/Pretendard/G마켓산스/Iconify) -->
+
+<!-- ===== 히어로 ===== -->
+<div class="px-6 sm:px-8">
+  <section data-section="main-hero" class="max-w-4xl mx-auto relative overflow-hidden rounded-3xl" style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);">
+    <div class="relative z-10 text-center px-8 pt-16 sm:pt-24 pb-12 sm:pb-16">
+      <p class="text-brand-orange text-sm font-bold tracking-widest uppercase mb-4">우리동네 재테크</p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-tight mb-6 word-keep">직장인을 위한<br>내집마련 로드맵</h1>
+      <p class="text-xl sm:text-2xl text-gray-300 font-medium mb-10 word-keep">ETF로 종잣돈, 부동산으로 자산 — 데이터 기반 투자 전략</p>
+
+      <!-- 신뢰 지표 -->
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mb-10">
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-3 text-center">
+          <p class="text-2xl font-display font-black text-white">117건+</p>
+          <p class="text-gray-400 text-xs mt-0.5">1:1 상담 진행</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-3 text-center">
+          <p class="text-2xl font-display font-black text-brand-orange">99%</p>
+          <p class="text-gray-400 text-xs mt-0.5">만족도</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-3 text-center">
+          <p class="text-2xl font-display font-black text-white">10년+</p>
+          <p class="text-gray-400 text-xs mt-0.5">투자업계 경력</p>
+        </div>
+      </div>
+
+      <a href="/counsel/?idx=11" class="inline-flex items-center gap-2 bg-brand-orange text-white font-bold px-8 py-4 rounded-full text-lg hover:scale-[1.02] active:scale-[0.98]" style="transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+        무료 상담 신청하기
+        <iconify-icon icon="solar:arrow-right-bold" class="text-xl"></iconify-icon>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ===== 서비스 소개 ===== -->
+<section data-section="main-services" class="max-w-4xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
+  <div class="text-center mb-12" data-reveal>
+    <span class="inline-block bg-brand-orange/10 text-brand-orange text-xs font-bold px-3 py-1 rounded-full tracking-wide mb-4">SERVICES</span>
+    <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark word-keep">이런 서비스를 제공합니다</h2>
+  </div>
+
+  <div class="grid sm:grid-cols-3 gap-5" data-stagger>
+    <!-- 1:1 상담 -->
+    <a href="/counsel/?idx=11" class="block bg-white rounded-2xl p-6 shadow-lg border border-gray-100 card-lift text-center">
+      <div class="w-14 h-14 bg-brand-orange/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <iconify-icon icon="solar:chat-round-dots-bold" class="text-brand-orange text-2xl"></iconify-icon>
+      </div>
+      <span class="inline-block bg-brand-orange/10 text-brand-orange text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">진행 중</span>
+      <h3 class="font-bold text-brand-dark text-lg mb-2 word-keep">내집마련 1:1 상담</h3>
+      <p class="text-gray-500 text-sm word-keep">내 예산과 상황에 맞는 맞춤 내집마련 전략을 설계합니다.</p>
+      <p class="text-brand-orange font-display font-bold mt-3">400,000원</p>
+    </a>
+
+    <!-- 올인원 강의 -->
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center">
+      <div class="w-14 h-14 bg-brand-blue/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <iconify-icon icon="solar:play-circle-bold" class="text-brand-blue text-2xl"></iconify-icon>
+      </div>
+      <span class="inline-block bg-gray-100 text-gray-500 text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">6월 오픈 예정</span>
+      <h3 class="font-bold text-brand-dark text-lg mb-2 word-keep">내집마련 올인원 강의</h3>
+      <p class="text-gray-500 text-sm word-keep">예산 계산부터 계약까지, 한 번에 끝내는 VOD 강의입니다.</p>
+      <p class="text-brand-dark font-display font-bold mt-3">200,000원</p>
+    </div>
+
+    <!-- 독서모임 -->
+    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center">
+      <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <iconify-icon icon="solar:book-bookmark-bold" class="text-emerald-600 text-2xl"></iconify-icon>
+      </div>
+      <span class="inline-block bg-gray-100 text-gray-500 text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">6월 오픈 예정</span>
+      <h3 class="font-bold text-brand-dark text-lg mb-2 word-keep">독서모임</h3>
+      <p class="text-gray-500 text-sm word-keep">함께 읽고 함께 성장하는 재테크 독서모임입니다.</p>
+      <p class="text-brand-dark font-display font-bold mt-3">50,000원</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 무료 자료 ===== -->
+<div class="px-6 sm:px-8">
+  <section data-section="main-resources" class="max-w-4xl mx-auto py-16 sm:py-20 bg-brand-beige rounded-3xl px-6 sm:px-10">
+    <div class="text-center mb-12" data-reveal>
+      <span class="inline-block bg-white text-gray-500 text-xs font-bold px-3 py-1 rounded-full tracking-wide mb-4">FREE RESOURCES</span>
+      <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark word-keep">무료 자료</h2>
+      <p class="text-gray-500 mt-3 word-keep">재테크의 첫걸음을 도와드리는 무료 자료입니다.</p>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-5" data-stagger>
+      <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+        <iconify-icon icon="solar:document-text-bold" class="text-brand-orange text-3xl mb-3"></iconify-icon>
+        <p class="font-bold text-brand-dark mb-2 word-keep">자산관리리스트</p>
+        <p class="text-gray-500 text-sm word-keep">내 자산 현황을 한눈에 정리하는 체크리스트</p>
+        <span class="inline-block mt-3 text-brand-orange text-sm font-semibold">준비 중</span>
+      </div>
+      <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+        <iconify-icon icon="solar:home-angle-bold" class="text-brand-orange text-3xl mb-3"></iconify-icon>
+        <p class="font-bold text-brand-dark mb-2 word-keep">내집마련 가이드북</p>
+        <p class="text-gray-500 text-sm word-keep">처음 내집마련하는 분을 위한 기초 가이드</p>
+        <span class="inline-block mt-3 text-brand-orange text-sm font-semibold">준비 중</span>
+      </div>
+      <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+        <iconify-icon icon="solar:book-2-bold" class="text-brand-orange text-3xl mb-3"></iconify-icon>
+        <p class="font-bold text-brand-dark mb-2 word-keep">책 추천리스트</p>
+        <p class="text-gray-500 text-sm word-keep">재테크·투자 입문자를 위한 필독서 모음</p>
+        <span class="inline-block mt-3 text-brand-orange text-sm font-semibold">준비 중</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== 숫자로 보는 성과 ===== -->
+<section data-section="main-numbers" class="max-w-4xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
+  <div class="text-center mb-12" data-reveal>
+    <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark word-keep">숫자로 보는 성과</h2>
+  </div>
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" data-stagger>
+    <div class="bg-gray-50 rounded-2xl p-6 text-center">
+      <p class="text-3xl sm:text-4xl font-display font-black text-brand-dark">117+</p>
+      <p class="text-gray-500 text-sm mt-2">1:1 상담 진행</p>
+    </div>
+    <div class="bg-gray-50 rounded-2xl p-6 text-center">
+      <p class="text-3xl sm:text-4xl font-display font-black text-brand-orange">4.97</p>
+      <p class="text-gray-500 text-sm mt-2">만족도 /5점</p>
+    </div>
+    <div class="bg-gray-50 rounded-2xl p-6 text-center">
+      <p class="text-3xl sm:text-4xl font-display font-black text-brand-dark">+18.3억</p>
+      <p class="text-gray-500 text-sm mt-2">시세차익 실적</p>
+    </div>
+    <div class="bg-gray-50 rounded-2xl p-6 text-center">
+      <p class="text-3xl sm:text-4xl font-display font-black text-brand-dark">10년+</p>
+      <p class="text-gray-500 text-sm mt-2">투자업계 경력</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<div class="px-6 sm:px-8 pb-12">
+  <section data-section="main-cta" class="max-w-4xl mx-auto bg-brand-dark rounded-3xl py-12 sm:py-16 px-8 text-center" data-reveal>
+    <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
+    <h2 class="text-2xl sm:text-3xl font-display font-black text-white mb-3 word-keep">내집마련, 어디서부터 시작할지 모르겠다면?</h2>
+    <p class="text-gray-400 mb-6 word-keep">현재 상황에 맞는 맞춤 전략을 안내해드립니다.</p>
+    <div class="flex flex-col sm:flex-row justify-center gap-3">
+      <a href="/counsel/?idx=11" class="inline-flex items-center justify-center gap-2 bg-brand-orange text-white font-bold px-8 py-4 rounded-full text-lg hover:scale-[1.02] active:scale-[0.98]" style="transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+        무료 상담 신청하기
+        <iconify-icon icon="solar:arrow-right-bold" class="text-xl"></iconify-icon>
+      </a>
+      <a href="#" class="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-white/20" style="transition: all 0.3s ease;">
+        커리큘럼 보기
+        <iconify-icon icon="solar:map-bold" class="text-xl"></iconify-icon>
+      </a>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) e.target.classList.add('revealed');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
+  });
+</script>
+</body>
+</html>

@@ -82,6 +82,30 @@
         },
         items: [
           {
+            id: 'main-page',
+            title: '메인 페이지',
+            description: '사이트 메인 소개 페이지',
+            href: 'homepage/main-page.html',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['main-page.html'],
+            hubVisible: true
+          },
+          {
+            id: 'curriculum-page',
+            title: '커리큘럼 페이지',
+            description: '전체 커리큘럼 한눈에 보기',
+            href: 'homepage/curriculum.html',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['curriculum.html'],
+            hubVisible: true
+          },
+          {
             id: 'landing-page',
             title: '1:1 상담 랜딩페이지',
             description: '상세페이지 v3.5 미리보기',
