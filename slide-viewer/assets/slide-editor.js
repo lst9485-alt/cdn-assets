@@ -1988,6 +1988,40 @@
       }
     });
     menu.appendChild(delBtn);
+
+    const copyBtn = document.createElement('div');
+    copyBtn.textContent = '📋 이 슬라이드 복사';
+    copyBtn.style.cssText = 'padding:8px 16px;cursor:pointer;';
+    copyBtn.addEventListener('mouseenter', () => copyBtn.style.background = '#444');
+    copyBtn.addEventListener('mouseleave', () => copyBtn.style.background = 'none');
+    copyBtn.addEventListener('click', () => {
+      try {
+        hideSlideContextMenu();
+        pushUndo();
+        const container = document.getElementById('stage');
+        const source = slides[idx];
+        const clone = source.cloneNode(true);
+        // 새 slide-id 부여 (원본_copy_타임스탬프)
+        const origId = clone.dataset.slideId || clone.id || '';
+        clone.dataset.slideId = origId + '_copy_' + Date.now();
+        clone.id = '';
+        clone.classList.remove('active');
+        // 원본 바로 뒤에 삽입
+        const next = source.nextElementSibling;
+        if (next) container.insertBefore(clone, next);
+        else container.appendChild(clone);
+        slides = [...container.querySelectorAll(':scope > .slide')];
+        rebuildSlidesByKey();
+        buildFilmstrip();
+        buildOverview();
+        ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
+        if (typeof showToast === 'function') showToast('슬라이드 복사 완료', 2000);
+      } catch (err) {
+        if (typeof showToast === 'function') showToast('복사 오류: ' + err.message, 5000);
+      }
+    });
+    menu.appendChild(copyBtn);
+
     document.body.appendChild(menu);
     _ctxMenu = menu;
     setTimeout(() => {
@@ -3359,7 +3393,9 @@
       return;
     }
 
-    const el = e.target.closest(EDITABLE_SEL);
+    let el = e.target.closest(EDITABLE_SEL);
+    // img inside .slide-el → select parent .slide-el (prevents dual selection + fixes resize coords)
+    if (el && el.tagName === 'IMG' && el.closest('.slide-el')) el = el.closest('.slide-el');
 
     if (!el) {
       // 기존 다중 selection의 bounding box 안에 mousedown이면 selection 유지하고 multi-drag 시작
@@ -3735,6 +3771,7 @@
     const layer = selectedEl.closest('.step-layer') || selectedEl.parentElement;
     layer.querySelectorAll(EDITABLE_SEL).forEach(other => {
       if (other === selectedEl || other.classList.contains('step-dim')) return;
+      if (other.tagName === 'IMG' && other.closest('.slide-el')) return;
       xs.push(other.offsetLeft, other.offsetLeft + other.offsetWidth / 2, other.offsetLeft + other.offsetWidth);
       ys.push(other.offsetTop,  other.offsetTop  + other.offsetHeight / 2, other.offsetTop  + other.offsetHeight);
     });
@@ -3770,6 +3807,7 @@
       let hasRealLNeighbor = false, hasRealRNeighbor = false, hasRealTNeighbor = false, hasRealBNeighbor = false;
       layer.querySelectorAll(EDITABLE_SEL).forEach(other => {
         if (other === selectedEl || other.classList.contains('step-dim')) return;
+        if (other.tagName === 'IMG' && other.closest('.slide-el')) return;
         const ox = other.offsetLeft, oy = other.offsetTop, ow2 = other.offsetWidth, oh2 = other.offsetHeight;
         const ocx = ox + ow2 / 2, ocy = oy + oh2 / 2;
         // 수평 이웃: Y 중심 차이 < 요소 높이
@@ -3970,6 +4008,8 @@
         const hits = [];
         slide.querySelectorAll(EDITABLE_SEL).forEach(el => {
           if (el.classList.contains('step-dim')) return;
+          // img inside .slide-el → skip (parent .slide-el handles it)
+          if (el.tagName === 'IMG' && el.closest('.slide-el')) return;
           const lay = el.closest('.step-layer');
           if (!editMode && lay && lay.dataset.step !== '0' && !lay.classList.contains('visible')) return;
           const r = el.offsetLeft, t = el.offsetTop;
