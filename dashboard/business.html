@@ -47,16 +47,17 @@
         .funnel-side { flex: 0 0 220px; display: flex; flex-direction: column; gap: 16px; }
         .side-card { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; }
         .sim-title { font-size: 12px; font-weight: 700; color: #94A3B8; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; }
-        .sim-result { background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; padding: 16px 20px; margin-bottom: 14px; }
-        .sim-result-label { font-size: 14px; color: #64748B; font-weight: 600; margin-bottom: 2px; }
+        .sim-result { background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; padding: 12px 16px; margin-bottom: 14px; }
+        .sim-result-label { font-size: 13px; color: #64748B; font-weight: 600; margin-bottom: 2px; }
         .sim-revenue-row { display: flex; align-items: baseline; gap: 4px; white-space: nowrap; }
-        .sim-revenue-input { width: 100%; border: none; outline: none; font-size: 28px; font-weight: 800; color: #051C2C; background: transparent; padding: 0; box-sizing: border-box; cursor: text; border-bottom: 2px solid transparent; }
+        .sim-revenue-input { width: 100%; border: none; outline: none; font-size: 22px; font-weight: 800; color: #051C2C; background: transparent; padding: 0; box-sizing: border-box; cursor: text; border-bottom: 2px solid transparent; }
         .sim-revenue-input:hover { border-bottom-color: #CBD5E1; }
         .sim-revenue-input:focus { color: #0077C8; border-bottom-color: #0077C8; }
         .sim-revenue-unit { font-size: 16px; font-weight: 700; color: #64748B; flex-shrink: 0; }
-        .sim-sub-item { font-size: 14px; font-weight: 600; color: #64748B; margin-top: 6px; }
+        .sim-sub-item { font-size: 13px; font-weight: 600; color: #64748B; margin-top: 4px; }
         .sim-arrow { text-align: center; color: #CBD5E1; font-size: 14px; padding: 2px 0; }
         .sim-computed { font-size: 11px; color: #94A3B8; margin-top: 2px; }
+        .sim-field-input { padding: 5px 8px; font-size: 13px; }
         .sim-field { margin-bottom: 8px; }
         .sim-field-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
         .sim-field-label { font-size: 11px; color: #64748B; }
@@ -549,11 +550,11 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             fmtField('링크클릭률 (%)', linkClickRate.toFixed(1) + '%', 'sim-click', linkClickRate.toFixed(1), '0.1') +
             '<div class="sim-computed" id="sim-out-landing">→ 랜딩 —건</div>' +
             '<div class="sim-arrow">↓</div>' +
-            fmtField('연계율 (%)', interestRate.toFixed(1) + '%', 'sim-interest', interestRate.toFixed(1), '0.1') +
-            '<div class="sim-computed" id="sim-out-pulling">→ 풀링 —</div>' +
-            '<div class="sim-arrow">↓</div>' +
             '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">키콘텐츠 조회수</span></div>' +
-            '<input class="sim-field-input" id="sim-key" type="text" inputmode="numeric" value="' + (cw.key_views || 0).toLocaleString('ko-KR') + '"></div>';
+            '<input class="sim-field-input" id="sim-key" type="text" inputmode="numeric" value="' + (cw.key_views || 0).toLocaleString('ko-KR') + '"></div>' +
+            '<div class="sim-arrow">↓</div>' +
+            fmtField('연계율 (%)', interestRate.toFixed(1) + '%', 'sim-interest', interestRate.toFixed(1), '0.1') +
+            '<div class="sim-computed" id="sim-out-pulling">→ 풀링 —</div>';
         document.getElementById('simulator-panel').innerHTML = html;
         document.getElementById('sim-key').addEventListener('input', function() {
             var raw = this.value.replace(/,/g, '');
