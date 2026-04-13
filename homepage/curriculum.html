@@ -39,159 +39,94 @@
 </style>
 </head>
 <body class="bg-white">
-<!-- 전체 커리큘럼 — 아임웹 페이지용 (HTML 위젯 삽입) -->
+<!-- curriculum.html body 시작 -->
 <!-- head-code.html 공유 (Tailwind/Pretendard/G마켓산스/Iconify) -->
 
 <style>
-  /* 플로차트 커넥터 */
   .flow-line { position: relative; }
-  .flow-line::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -28px;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 28px;
-    background: #d1d5db;
-  }
+  .flow-line::after { content: ''; position: absolute; left: 50%; bottom: -28px; transform: translateX(-50%); width: 2px; height: 28px; background: #d1d5db; }
   .flow-arrow { position: relative; }
-  .flow-arrow::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: -8px;
-    transform: translateX(-50%);
-    width: 0; height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 8px solid #d1d5db;
-  }
-  /* 상태 스타일 */
+  .flow-arrow::before { content: ''; position: absolute; left: 50%; top: -8px; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid #d1d5db; }
   .status-active { border: 2px solid #FF6B00; background: rgba(255,107,0,0.04); box-shadow: 0 4px 12px rgba(255,107,0,0.1); }
   .status-upcoming { border: 2px dashed #9ca3af; background: white; }
   .status-idea { border: 1px solid #e5e7eb; background: #f9fafb; }
 </style>
 
-<!-- ===== 페이지 헤더 ===== -->
 <section data-section="curriculum-header" class="max-w-5xl mx-auto px-6 sm:px-8 pt-12 pb-8 text-center">
   <h1 class="text-3xl sm:text-4xl font-display font-black text-brand-dark mb-4 word-keep">전체 커리큘럼 한눈에 보기</h1>
   <p class="text-gray-500 text-lg word-keep">내집마련부터 재테크까지, 단계별 학습 로드맵입니다.</p>
   <div class="flex justify-center gap-6 mt-6 text-sm">
-    <div class="flex items-center gap-2">
-      <span class="w-5 h-3 border-2 border-brand-orange rounded-sm bg-brand-orange/5"></span>
-      <span class="text-gray-600">진행 중</span>
-    </div>
-    <div class="flex items-center gap-2">
-      <span class="w-5 h-3 border-2 border-dashed border-gray-400 rounded-sm"></span>
-      <span class="text-gray-600">준비 중</span>
-    </div>
-    <div class="flex items-center gap-2">
-      <span class="w-5 h-3 border border-gray-200 rounded-sm bg-gray-50"></span>
-      <span class="text-gray-600">추후 예정</span>
-    </div>
+    <div class="flex items-center gap-2"><span class="w-5 h-3 border-2 border-brand-orange rounded-sm bg-brand-orange/5"></span><span class="text-gray-600">진행 중</span></div>
+    <div class="flex items-center gap-2"><span class="w-5 h-3 border-2 border-dashed border-gray-400 rounded-sm"></span><span class="text-gray-600">준비 중</span></div>
+    <div class="flex items-center gap-2"><span class="w-5 h-3 border border-gray-200 rounded-sm bg-gray-50"></span><span class="text-gray-600">추후 예정</span></div>
   </div>
 </section>
 
-<!-- ===== 3컬럼 플로차트 ===== -->
 <section data-section="curriculum-lines" class="max-w-5xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6">
 
-    <!-- ========== 내집마련 (오렌지) ========== -->
     <div data-reveal>
-      <div class="text-center mb-6">
-        <h2 class="text-xl font-display font-bold text-brand-orange">내집마련</h2>
-      </div>
-
-      <div class="flex flex-col items-center gap-0">
-        <!-- 이메일 상담 -->
+      <div class="text-center mb-6"><h2 class="text-xl font-display font-bold text-brand-orange">내집마련</h2></div>
+      <div class="border-2 border-brand-orange rounded-3xl p-5 flex flex-col items-center gap-0">
         <div class="flow-line w-full">
           <div class="status-upcoming rounded-2xl p-5 text-center">
             <span class="inline-block bg-gray-200 text-gray-600 text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">준비 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">이메일 상담</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">내 상황 정리 + 방향 제시</p>
-            <p class="text-brand-dark font-display font-bold mt-2">150,000원</p>
           </div>
         </div>
-
         <div class="h-7"></div>
-
-        <!-- 내집마련 상담 -->
         <div class="flow-arrow flow-line w-full">
           <div class="status-active rounded-2xl p-5 text-center">
             <span class="inline-block bg-brand-orange text-white text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">진행 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">내집마련 1:1 상담</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">내 예산·상황에 맞는 맞춤 전략</p>
-            <p class="text-brand-orange font-display font-bold mt-2">400,000원</p>
             <p class="text-gray-400 text-xs mt-1">최종 50건 한정</p>
           </div>
         </div>
-
         <div class="h-7"></div>
-
-        <!-- 내집마련 올인원 -->
         <div class="flow-arrow w-full">
           <div class="status-idea rounded-2xl p-5 text-center">
             <span class="inline-block text-gray-400 text-xs font-medium px-2.5 py-0.5 rounded-full mb-2">추후 예정</span>
             <p class="font-bold text-gray-400 text-lg word-keep">내집마련 올인원</p>
             <p class="text-gray-300 text-sm mt-1 word-keep">상담 + 강의 + 임장 통합 패키지</p>
-            <p class="text-gray-400 font-display font-bold mt-2">1,000,000원</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ========== 재테크 (블루) ========== -->
     <div data-reveal>
-      <div class="text-center mb-6">
-        <h2 class="text-xl font-display font-bold text-brand-blue">재테크</h2>
-      </div>
-
+      <div class="text-center mb-6"><h2 class="text-xl font-display font-bold text-brand-blue">재테크</h2></div>
       <div class="flex flex-col items-center gap-0">
-        <!-- 전자책 -->
         <div class="flow-line w-full">
           <div class="status-upcoming rounded-2xl p-5 text-center" style="border-color: #93a3bf;">
             <span class="inline-block bg-brand-blue/10 text-brand-blue text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">준비 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">전자책</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">재테크 기초 지식 정리</p>
-            <p class="text-brand-dark font-display font-bold mt-2">50,000원</p>
           </div>
         </div>
-
         <div class="h-7"></div>
-
-        <!-- 독서모임 -->
         <div class="flow-arrow w-full">
           <div class="status-upcoming rounded-2xl p-5 text-center" style="border-color: #93a3bf;">
             <span class="inline-block bg-brand-blue/10 text-brand-blue text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">준비 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">독서모임</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">함께 읽고 함께 성장하는 시간</p>
-            <p class="text-brand-dark font-display font-bold mt-2">50,000원</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ========== 공통 프로그램 (그린) ========== -->
     <div data-reveal>
-      <div class="text-center mb-6">
-        <h2 class="text-xl font-display font-bold text-emerald-600">공통</h2>
-      </div>
-
+      <div class="text-center mb-6"><h2 class="text-xl font-display font-bold text-emerald-600">공통</h2></div>
       <div class="flex flex-col items-center gap-0">
-        <!-- 임장 -->
         <div class="flow-line w-full">
           <div class="status-upcoming rounded-2xl p-5 text-center" style="border-color: #6ee7b7;">
             <span class="inline-block bg-emerald-50 text-emerald-600 text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">준비 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">임장 (+원데이특강)</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">현장에서 직접 보고 배우기</p>
-            <p class="text-brand-dark font-display font-bold mt-2">100,000원</p>
           </div>
         </div>
-
         <div class="h-7"></div>
-
-        <!-- 스터디 -->
         <div class="flow-arrow flow-line w-full">
           <div class="status-idea rounded-2xl p-5 text-center">
             <span class="inline-block text-gray-400 text-xs font-medium px-2.5 py-0.5 rounded-full mb-2">추후 예정</span>
@@ -199,10 +134,7 @@
             <p class="text-gray-300 text-sm mt-1 word-keep">소규모 그룹 학습</p>
           </div>
         </div>
-
         <div class="h-7"></div>
-
-        <!-- 특강 -->
         <div class="flow-arrow w-full">
           <div class="status-idea rounded-2xl p-5 text-center">
             <span class="inline-block text-gray-400 text-xs font-medium px-2.5 py-0.5 rounded-full mb-2">추후 예정</span>
@@ -216,7 +148,6 @@
   </div>
 </section>
 
-<!-- ===== CTA ===== -->
 <div class="px-6 sm:px-8 pb-12">
   <section data-section="curriculum-cta" class="max-w-4xl mx-auto bg-brand-dark rounded-3xl py-12 sm:py-16 px-8 text-center" data-reveal>
     <iconify-icon icon="solar:compass-big-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
