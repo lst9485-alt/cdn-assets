@@ -1146,7 +1146,32 @@
     }
     // Ctrl+C: 요소 복사 (편집 모드)
     if ((e.ctrlKey || e.metaKey) && e.key === 'c' && editMode && !isEditing) {
-      if (selectedEl) clipboardEl = selectedEl.outerHTML;
+      if (selectedEl) {
+        clipboardEl = selectedEl.outerHTML;
+        showToast('요소 복사됨', 1500);
+      }
+      return;
+    }
+    // Ctrl+V: 요소 붙여넣기 (편집 모드, 내부 클립보드)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'v' && editMode && !isEditing && clipboardEl) {
+      e.preventDefault();
+      pushUndo();
+      const temp = document.createElement('div');
+      temp.innerHTML = clipboardEl;
+      const newEl = temp.firstElementChild;
+      if (!newEl) return;
+      newEl.style.left = (parseInt(newEl.style.left) || 0) + 20 + 'px';
+      newEl.style.top  = (parseInt(newEl.style.top)  || 0) + 20 + 'px';
+      newEl.classList.remove('edit-selected', 'edit-group-selected');
+      delete newEl.dataset.group;
+      const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
+      layer0.appendChild(newEl);
+      selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
+      selectedEl = newEl; selectedEls = [newEl];
+      newEl.classList.add('edit-selected');
+      updateCoordPanel(newEl);
+      updateResizeHandle();
+      if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
       return;
     }
     // Ctrl+G: 그룹화 / 해제 (편집 모드)
@@ -1198,7 +1223,8 @@
       if (!selectedEls.length) return;
       pushUndo();
       const slide = slides[currentSlide];
-      [...selectedEls].forEach(el => {
+      const toDelete = individualMode ? [selectedEl] : [...selectedEls];
+      toDelete.forEach(el => {
         const layer = el.closest('.step-layer');
         el.remove();
         if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
@@ -3352,19 +3378,41 @@
         return;
       }
       if (resizeEdge) { resizeImgInitRect = null; resizeInitFontSizes = null; return; } // edge on text — skip
-      // 그룹 진입 + 텍스트 자식 선택: 해당 자식 fontSize만 리사이즈 (corner drag)
+      // 그룹 진입 + 자식 선택: 리사이즈 방식 분기
       // 비텍스트 자식(.bar-fill 등)은 아래 기존 IMG/bubble 브랜치로 빠짐 (블랙리스트 방식)
       const _activeChildRaw = groupParent ? groupParent.querySelector('.child-selected') : null;
       const activeChild = (_activeChildRaw && !_activeChildRaw.matches(NON_TEXT_CHILD_SEL)) ? _activeChildRaw : null;
       if (activeChild) {
-        resizeImgInit = null;
-        resizeImgInitRect = null;
         const _stagePos = clientToStage(e.clientX, e.clientY);
         resizeAnchorX = _stagePos.x;
         resizeAnchorY = _stagePos.y;
+        // 고정 크기 자식(card-num 등): width/height 기반 박스 리사이즈
+        const compStyle = getComputedStyle(activeChild);
+        const hasFixedW = compStyle.width && compStyle.width !== 'auto' && parseFloat(compStyle.width) > 0;
+        const hasFixedH = compStyle.height && compStyle.height !== 'auto' && parseFloat(compStyle.height) > 0;
+        if (hasFixedW && hasFixedH) {
+          resizeInitFontSizes = null;
+          resizeImgInit = null;
+          const ow = activeChild.offsetWidth;
+          const oh = activeChild.offsetHeight;
+          const fs = parseFloat(activeChild.style.fontSize) || parseFloat(compStyle.fontSize) || 0;
+          resizeImgInitRect = {
+            left: activeChild.offsetLeft,
+            top: activeChild.offsetTop,
+            w: ow, h: oh,
+            ratio: ow / oh,
+            fontSize: fs > 0 ? fs : null,
+            _childEl: activeChild
+          };
+          resizeMultiInitRects = [];
+          return;
+        }
+        // 텍스트 자식: fontSize 기반 리사이즈
+        resizeImgInit = null;
+        resizeImgInitRect = null;
         resizeInitFontSizes = [{
           el: activeChild,
-          fs: parseFloat(activeChild.style.fontSize) || parseFloat(getComputedStyle(activeChild).fontSize) || 108
+          fs: parseFloat(activeChild.style.fontSize) || parseFloat(compStyle.fontSize) || 108
         }];
         return;
       }
@@ -3537,11 +3585,10 @@
       }
     }
 
-    // step-dim 선택 시 해당 step-layer를 visible로 표시, 드래그는 허용하되 좌표 정규화 건너뜀
+    // step-dim 선택 시 드래그 허용, 좌표 정규화 건너뜀
+    // (edit mode CSS !important로 이미 보이므로 layer.visible 추가 불필요 — 추가하면 오버레이 중첩으로 어두워짐)
     const isStepDim = el.classList.contains('step-dim');
     if (isStepDim) {
-      const layer = el.closest('.step-layer');
-      if (layer) layer.classList.add('visible');
       updateCoordPanel(el);
       updateGroupToolbar();
       if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
@@ -3636,8 +3683,9 @@
     }
 
     // 리사이즈 핸들 드래그
-    // IMG 리사이즈 (4모서리, 비율 유지)
+    // IMG / box 리사이즈 (4모서리, 비율 유지)
     if (isResizing && selectedEl && resizeImgInitRect) {
+      const resizeTarget = resizeImgInitRect._childEl || selectedEl;
       const pos = clientToStage(e.clientX, e.clientY);
       const dx = pos.x - resizeAnchorX;
       const dy = pos.y - resizeAnchorY;
@@ -3652,14 +3700,14 @@
         else if (resizeEdge === 't') { newH = Math.max(50, Math.round(initH - dy)); newTop = Math.round(initTop + initH - newH); }
         if (resizeImgInitRect.fontSize !== null) {
           const scale = (resizeEdge === 'l' || resizeEdge === 'r') ? newW / initW : newH / initH;
-          selectedEl.style.fontSize = Math.max(12, Math.round(resizeImgInitRect.fontSize * scale)) + 'px';
+          resizeTarget.style.fontSize = Math.max(12, Math.round(resizeImgInitRect.fontSize * scale)) + 'px';
         } else {
-          selectedEl.style.width = newW + 'px';
-          selectedEl.style.height = newH + 'px';
-          selectedEl.style.maxWidth = '';
+          resizeTarget.style.width = newW + 'px';
+          resizeTarget.style.height = newH + 'px';
+          resizeTarget.style.maxWidth = '';
         }
-        selectedEl.style.left = newLeft + 'px';
-        selectedEl.style.top = newTop + 'px';
+        resizeTarget.style.left = newLeft + 'px';
+        resizeTarget.style.top = newTop + 'px';
         updateResizeHandle();
         return;
       }
@@ -3684,14 +3732,14 @@
         newTop = Math.round(initTop + initH - newH);
       }
       if (resizeImgInitRect.fontSize !== null) {
-        selectedEl.style.fontSize = newW + 'px';
+        resizeTarget.style.fontSize = newW + 'px';
       } else {
-        selectedEl.style.width = newW + 'px';
-        selectedEl.style.height = newH + 'px';
-        selectedEl.style.maxWidth = '';
+        resizeTarget.style.width = newW + 'px';
+        resizeTarget.style.height = newH + 'px';
+        resizeTarget.style.maxWidth = '';
       }
-      selectedEl.style.left = newLeft + 'px';
-      selectedEl.style.top = newTop + 'px';
+      resizeTarget.style.left = newLeft + 'px';
+      resizeTarget.style.top = newTop + 'px';
       // 다중 선택 시 나머지 요소도 비례 적용
       if (resizeMultiInitRects && resizeMultiInitRects.length > 0) {
         const scale = resizeImgInitRect.w > 0 ? newW / resizeImgInitRect.w : 1;
@@ -4784,7 +4832,8 @@
     if (!selectedEls.length || !editMode) return;
     pushUndo();
     const slide = slides[currentSlide];
-    [...selectedEls].forEach(el => {
+    const toDelete = individualMode ? [selectedEl] : [...selectedEls];
+    toDelete.forEach(el => {
       const layer = el.closest('.step-layer');
       el.remove();
       if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
@@ -4837,7 +4886,9 @@
       return selectedEls.map(e => {
         if (e.matches('.hl')) return [e];
         const hls = e.querySelectorAll('.hl');
-        return hls.length ? Array.from(hls) : [];
+        if (hls.length) return Array.from(hls);
+        // .hl 없는 요소(카드, 박스 등): 요소 자체에 색 적용
+        return [e];
       }).flat();
     }
     function updateIndicators() {
@@ -5237,7 +5288,12 @@ ch.postMessage({ type: 'ready' });
     pushUndo();
     const gid = selectedEl.dataset.group;
     if (gid) {
-      selectedEls.forEach(el => delete el.dataset.group);
+      if (individualMode) {
+        // 개별 모드: 선택된 요소만 그룹 해제
+        delete selectedEl.dataset.group;
+      } else {
+        selectedEls.forEach(el => delete el.dataset.group);
+      }
     } else {
       // compound 분리
       const childSel = getCompoundChildSel(selectedEl);
@@ -5262,7 +5318,7 @@ ch.postMessage({ type: 'ready' });
         layer.removeChild(selectedEl);
       }
     }
-    selectedEl = null; selectedEls = [];
+    clearSelection();
     groupToolbar.classList.remove('visible');
     exitDrill();
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
@@ -5272,7 +5328,8 @@ ch.postMessage({ type: 'ready' });
     if (!selectedEls.length || !editMode) return;
     pushUndo();
     const slide = slides[currentSlide];
-    [...selectedEls].forEach(el => {
+    const toDelete = individualMode ? [selectedEl] : [...selectedEls];
+    toDelete.forEach(el => {
       const layer = el.closest('.step-layer');
       el.remove();
       if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
@@ -5280,10 +5337,9 @@ ch.postMessage({ type: 'ready' });
         recalcSteps(slide);
       }
     });
-    selectedEl = null; selectedEls = [];
+    clearSelection();
     groupToolbar.classList.remove('visible');
     exitDrill();
-    document.getElementById('coord-panel').style.display = 'none';
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
   });
 
