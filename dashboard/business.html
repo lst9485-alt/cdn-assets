@@ -606,15 +606,14 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             var targetRev = (parseInt((revEl.value || '').replace(/,/g, '')) || 0) * 10000;
             var revCustomers = price > 0 ? targetRev / price : 0;
             var revLanding = convert > 0 ? revCustomers / (convert / 100) : 0;
-            var multiplier = interest > 0 && click > 0 ? (1 + 100 / interest) * (click / 100) : 0;
-            key = multiplier > 0 ? revLanding / multiplier : 0;
+            key = click > 0 ? revLanding / (click / 100) : 0;
             keyEl.value = Math.round(key).toLocaleString('ko-KR');
         } else {
             key = parseFloat((keyEl.value || '').replace(/,/g, '')) || 0;
         }
 
         var pulling = interest > 0 ? key / (interest / 100) : 0;
-        var landing = (key + pulling) * (click / 100);
+        var landing = key * (click / 100);
         var customers = landing * (convert / 100);
         var revenue = customers * price;
         if (mode !== 'reverse') {
