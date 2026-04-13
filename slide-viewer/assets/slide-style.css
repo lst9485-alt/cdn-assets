@@ -334,7 +334,15 @@
   .bar-row { display: flex; align-items: center; gap: 20px; }
   .bar-label { width: 200px; text-align: right; font-size: 44px; font-weight: 700; color: var(--color-text); flex-shrink: 0; }
   .bar-track { flex: 1; height: 56px; background: rgba(0,0,0,0.06); border-radius: 12px; overflow: hidden; }
-  .bar-fill { height: 100%; background: var(--color-accent); border-radius: 12px; width: 0; transition: width 2.4s ease 0.4s; }
+  .bar-fill { height: 100%; background: var(--color-accent); border-radius: 12px; width: 0; transition: width 2.4s ease 0.4s; position: relative; overflow: hidden; }
+  .bar-fill.sweep-active::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -60%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    animation: bar-sweep 1.2s ease forwards;
+    pointer-events: none;
+  }
   .bar-fill.red { background: #999; }
   .bar-value { width: 100px; font-size: 44px; font-weight: 700; color: var(--color-text); flex-shrink: 0; }
   /* step 0: 바 즉시 표시 / anim-shown: 바 채움 애니메이션 */
@@ -359,9 +367,17 @@
   .hbar-label { width: 240px; text-align: right; font-size: 40px; font-weight: 700; color: var(--color-text); flex-shrink: 0; }
   .hbar-label.highlight { color: var(--color-accent); }
   .hbar-bar-wrap { flex: 1; height: 56px; background: rgba(0,0,0,0.04); border-radius: 8px; overflow: hidden; position: relative; }
-  .hbar-bar { height: 100%; background: #999; border-radius: 8px; width: 0; transition: width 4.8s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 16px; }
+  .hbar-bar { height: 100%; background: #999; border-radius: 8px; width: 0; transition: width 4.8s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 16px; position: relative; overflow: hidden; }
   .hbar-bar.highlight { background: var(--color-accent); }
-  .hbar-val { font-size: 36px; font-weight: 700; color: #fff; white-space: nowrap; }
+  .hbar-bar.sweep-active::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -60%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    animation: bar-sweep 1.2s ease forwards;
+    pointer-events: none;
+  }
+  .hbar-val { font-size: 36px; font-weight: 700; color: #fff; white-space: nowrap; position: relative; z-index: 1; }
   .slide-el.anim-shown .hbar-bar, .slide-el.hbar-row.anim-shown .hbar-bar { width: var(--bar-w); }
   body.edit-mode .hbar-bar { width: var(--bar-w) !important; }
   .step-layer[data-step="0"] .hbar-bar { width: var(--bar-w); }
@@ -957,9 +973,15 @@
     50% { transform: translateY(-20px); }
   }
   @keyframes count-bounce {
-    0% { transform: scale(1); }
-    40% { transform: scale(1.15); }
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.3); }
+    50%  { transform: scale(0.9); }
+    75%  { transform: scale(1.1); }
     100% { transform: scale(1); }
+  }
+  @keyframes bar-sweep {
+    0% { left: -60%; }
+    100% { left: 120%; }
   }
 
   /* ── 새 ambient @keyframes ── */
@@ -1070,7 +1092,7 @@
   body.edit-mode .tag-chip { opacity: 1 !important; transform: none !important; }
 
   /* ── 카운트 바운스 ── */
-  .count-bounce { animation: count-bounce 0.4s ease; }
+  .count-bounce { animation: count-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
   /* ── 입장 애니메이션 클래스 ── */
   .step-layer[data-step]:not([data-step="0"]) .slide-el.anim-right {

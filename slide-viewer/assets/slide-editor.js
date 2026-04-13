@@ -446,12 +446,29 @@
     fills.forEach((f, i) => {
       const target = f.style.getPropertyValue('--bar-w').trim();
       if (!target) return;
+      const targetNum = parseFloat(target);
+      const unit = target.replace(/[\d.]/g, '') || '%';
+      const overshoot = Math.min(targetNum * 1.06, 100);
       f.style.transition = 'none';
       f.style.width = '0';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        f.style.transition = '';
-        setTimeout(() => { f.style.width = target; }, i * 720);
-      }));
+      const anim = f.animate([
+        { width: '0' },
+        { width: overshoot + unit, offset: 0.7 },
+        { width: target }
+      ], {
+        duration: 2400,
+        easing: 'ease-out',
+        fill: 'forwards',
+        delay: i * 720
+      });
+      anim.onfinish = () => { f.style.width = target; };
+      // sweep highlight after bar partially fills
+      setTimeout(() => {
+        f.classList.add('sweep-active');
+        f.addEventListener('animationend', (e) => {
+          if (e.animationName === 'bar-sweep') f.classList.remove('sweep-active');
+        }, { once: true });
+      }, i * 720 + 600);
     });
     animateCountValues(el, 3200);
     playSound('chart');
@@ -635,12 +652,38 @@
     });
   }
 
+  // float-y 위상 오프셋 — 같은 슬라이드 내 동일 클래스 요소들이 동시에 움직이지 않도록
+  function staggerFloatY(root) {
+    if (!root || !root.querySelectorAll) return;
+    const FLOAT_CLASSES = [
+      'card','grid-card','flow-box','check-item','icon-circle','tl-circle',
+      'bullet-card','eq-box','flow-detail','branch-result','split-list',
+      'split-stat-main','big-stat','stat-block','icon-flow-icon',
+      'compare-col','emoji-icon'
+    ];
+    root.querySelectorAll('.slide').forEach(slide => {
+      FLOAT_CLASSES.forEach(cls => {
+        const els = slide.querySelectorAll('.' + cls);
+        if (els.length < 2) return;
+        const style = getComputedStyle(els[0]);
+        const dur = parseFloat(style.animationDuration) || 4;
+        els.forEach((el, i) => {
+          el.style.animationDelay = -(dur * i / els.length).toFixed(2) + 's';
+        });
+      });
+    });
+  }
+
   // 페이지 로드 후 자동 실행 (DOM 안정 대기 100ms)
   if (typeof document !== 'undefined') {
+    const _initAnimations = () => setTimeout(() => {
+      splitHandTyping(document);
+      staggerFloatY(document);
+    }, 100);
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => setTimeout(() => splitHandTyping(document), 100));
+      document.addEventListener('DOMContentLoaded', _initAnimations);
     } else {
-      setTimeout(() => splitHandTyping(document), 100);
+      _initAnimations();
     }
   }
 
