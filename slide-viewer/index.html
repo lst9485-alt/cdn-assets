@@ -157,6 +157,94 @@
             </div>
         </details>
 
+        <!-- 애니메이션 효과 프리뷰 -->
+        <details class="anim-preview-section">
+            <summary>애니메이션 효과</summary>
+            <div class="anim-grid">
+                <div class="anim-card">
+                    <div class="anim-demo"><div class="anim-bar" style="animation: anim-bar-grow 2s ease-out infinite;"></div><div class="anim-bar" style="animation: anim-bar-grow 2s ease-out 0.4s infinite; width: 70%;"></div><div class="anim-bar" style="animation: anim-bar-grow 2s ease-out 0.8s infinite; width: 50%;"></div></div>
+                    <div class="anim-name">바차트</div>
+                    <div class="anim-desc">바 성장 + 카운트 바운스</div>
+                </div>
+                <div class="anim-card">
+                    <div class="anim-demo"><div class="anim-float-box" style="animation: anim-float 3s ease-in-out infinite;">●</div></div>
+                    <div class="anim-name">float-y</div>
+                    <div class="anim-desc">위아래 떠다니기 (아이콘·카드)</div>
+                </div>
+                <div class="anim-card">
+                    <div class="anim-demo"><div class="anim-breathe-box" style="animation: anim-breathe 2.5s ease-in-out infinite;">◆</div></div>
+                    <div class="anim-name">breathe</div>
+                    <div class="anim-desc">숨쉬기 펄스</div>
+                </div>
+                <div class="anim-card">
+                    <div class="anim-demo"><div class="anim-pop-box" style="animation: anim-check-pop 1.2s ease infinite;">✓</div></div>
+                    <div class="anim-name">check-pop</div>
+                    <div class="anim-desc">체크 팝 (스케일+회전)</div>
+                </div>
+                <div class="anim-card">
+                    <div class="anim-demo"><div class="anim-line" style="animation: anim-draw-line 2s ease-in-out infinite;"></div></div>
+                    <div class="anim-name">hand-mark</div>
+                    <div class="anim-desc">손글씨 밑줄 그리기</div>
+                </div>
+                <div class="anim-card">
+                    <div class="anim-demo"><div class="anim-postit" style="animation: anim-postit 1.5s ease infinite;">메모</div></div>
+                    <div class="anim-name">postit-drop</div>
+                    <div class="anim-desc">포스트잇 떨어지기</div>
+                </div>
+                <div class="anim-card">
+                    <div class="anim-demo"><div class="anim-shake-box" style="animation: anim-shake 0.8s ease infinite;">⚠</div></div>
+                    <div class="anim-name">alert-shake</div>
+                    <div class="anim-desc">경고 흔들기</div>
+                </div>
+                <div class="anim-card">
+                    <div class="anim-demo"><div class="anim-tl-dot" style="animation: anim-tl-reveal 2.5s ease infinite;"></div><div class="anim-tl-line" style="animation: anim-tl-line 2.5s ease infinite;"></div></div>
+                    <div class="anim-name">타임라인</div>
+                    <div class="anim-desc">선 그리기 + 아이템 등장</div>
+                </div>
+            </div>
+        </details>
+        <style>
+            .anim-preview-section { margin-bottom: 24px; background: white; border: 1px solid #E2E8F0; border-radius: 12px; }
+            .anim-preview-section[open] { border-color: #0077C8; }
+            .anim-preview-section summary { padding: 14px 16px; font-size: 13px; font-weight: 700; color: #64748B; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
+            .anim-preview-section summary::-webkit-details-marker { display: none; }
+            .anim-preview-section summary::before { content: '▸'; font-size: 12px; color: #94A3B8; transition: transform 0.15s; }
+            .anim-preview-section[open] summary::before { transform: rotate(90deg); }
+            .anim-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 16px 16px; }
+            .anim-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px; text-align: center; }
+            .anim-demo { height: 60px; display: flex; align-items: center; justify-content: center; gap: 4px; overflow: hidden; margin-bottom: 8px; }
+            .anim-name { font-size: 12px; font-weight: 800; color: #051C2C; margin-bottom: 2px; }
+            .anim-desc { font-size: 10px; color: #94A3B8; }
+            /* 바차트 */
+            .anim-bar { width: 90%; height: 12px; background: #0077C8; border-radius: 4px; transform-origin: left; }
+            @keyframes anim-bar-grow { 0%,100% { transform: scaleX(0); } 30%,80% { transform: scaleX(1); } }
+            /* float-y */
+            .anim-float-box { font-size: 24px; color: #0077C8; }
+            @keyframes anim-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+            /* breathe */
+            .anim-breathe-box { font-size: 24px; color: #F59E0B; }
+            @keyframes anim-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+            /* check-pop */
+            .anim-pop-box { font-size: 28px; color: #10B981; font-weight: 900; }
+            @keyframes anim-check-pop { 0%,100% { transform: scale(0); } 30% { transform: scale(1.4) rotate(10deg); } 50%,80% { transform: scale(1) rotate(0); } }
+            /* hand-mark */
+            .anim-line { width: 80%; height: 3px; background: #E63946; border-radius: 2px; transform-origin: left; }
+            @keyframes anim-draw-line { 0%,100% { transform: scaleX(0); } 40%,80% { transform: scaleX(1); } }
+            /* postit-drop */
+            .anim-postit { background: #FEF3C7; padding: 4px 12px; border-radius: 2px; font-size: 12px; font-weight: 700; color: #92400E; box-shadow: 2px 2px 4px rgba(0,0,0,0.1); transform: rotate(-2deg); }
+            @keyframes anim-postit { 0% { transform: translateY(-40px) rotate(0); opacity: 0; } 40% { transform: translateY(4px) rotate(-3deg); opacity: 1; } 60%,100% { transform: translateY(0) rotate(-2deg); opacity: 1; } }
+            /* alert-shake */
+            .anim-shake-box { font-size: 24px; }
+            @keyframes anim-shake { 0%,60%,100% { transform: translateX(0); } 10% { transform: translateX(-6px); } 20% { transform: translateX(6px); } 30% { transform: translateX(-4px); } 40% { transform: translateX(4px); } 50% { transform: translateX(-2px); } }
+            /* timeline */
+            .anim-tl-dot { width: 12px; height: 12px; border-radius: 50%; background: #0077C8; }
+            .anim-tl-line { width: 40px; height: 2px; background: #0077C8; transform-origin: left; }
+            @keyframes anim-tl-reveal { 0%,100% { transform: scale(0); } 30%,80% { transform: scale(1); } }
+            @keyframes anim-tl-line { 0%,15%,100% { transform: scaleX(0); } 40%,80% { transform: scaleX(1); } }
+            @media (max-width: 768px) { .anim-grid { grid-template-columns: repeat(2, 1fr); } }
+            @media (max-width: 500px) { .anim-grid { grid-template-columns: 1fr; } }
+        </style>
+
         <!-- 타입 카탈로그 -->
 
         <!-- 텍스트 기본 -->

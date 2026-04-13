@@ -1266,6 +1266,9 @@
   #guide-toolbar .guide-btn.active { opacity:1; box-shadow:0 0 8px currentColor; }
   #guide-toolbar .guide-btn:hover { opacity:0.8; }
 
+  /* ── 리사이즈 치수 라벨 ── */
+  #resize-dim-label { position: absolute; pointer-events: none; z-index: 9100; display: none; background: rgba(0,0,0,0.75); color: #fff; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+
   /* ── 스냅 가이드선 (드래그 중) ── */
   #snap-x, #snap-y { position: absolute; pointer-events: none; z-index: 9001; display: none; }
   #snap-x { top: 0; bottom: 0; left: 0; width: 0; border-left: 2px dashed rgba(255, 60, 210, 0.9); }
@@ -1605,6 +1608,35 @@
     width: 16px; height: 4px; border-radius: 2px;
     display: block; margin: 2px auto 0; background: var(--editor-accent);
   }
+  /* 캔바 스타일 색상 원형 인디케이터 */
+  .tb-color-dot {
+    display: block; width: 20px; height: 20px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+  .tb-color-btn { padding: 3px 6px !important; }
+  /* B/I/U 서식 버튼 */
+  .tb-fmt { min-width: 32px; text-align: center; font-size: 15px !important; }
+
+  /* ── 플로팅 서식바 ── */
+  #format-bar {
+    position: fixed; z-index: 10001;
+    background: rgba(20,20,20,0.92); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px; padding: 4px 6px; gap: 2px;
+    display: none; align-items: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+  #format-bar.visible { display: flex; }
+  .fmt-btn {
+    background: none; border: 1px solid transparent; border-radius: 4px;
+    color: #fff; font-size: 14px; font-weight: 700; padding: 3px 8px;
+    cursor: pointer; white-space: nowrap;
+  }
+  .fmt-btn:hover { background: rgba(255,255,255,0.12); }
+  .fmt-btn.active { background: rgba(var(--editor-accent-rgb),0.25); border-color: var(--editor-accent); color: var(--editor-accent); }
+  .fmt-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.15); margin: 0 4px; }
+
+  /* ── 우클릭 메뉴 단축키 ── */
+  .menu-shortcut { float: right; margin-left: 24px; color: rgba(255,255,255,0.4); font-size: 12px; font-weight: 400; }
   .drill-active { outline: 3px dashed rgba(0,170,255,0.5) !important; outline-offset: 4px; }
   .drill-child-selected { outline: 3px solid #7c3aed !important; }
   .group-entered-parent {

@@ -218,15 +218,9 @@
 
   function reorderSlide(fromIdx, toIdx) {
     if (fromIdx === toIdx) return;
-    // 에디터: 같은 page-group 안에서만 (base/variant 인접성 보호)
-    // 생성 슬라이드: 자유 이동 허용
     const fromSlide = slides[fromIdx];
     const toSlide = slides[toIdx];
     if (!fromSlide || !toSlide) return;
-    if (!document.body.dataset.generated && fromSlide.dataset.pageGroup !== toSlide.dataset.pageGroup) {
-      if (typeof showToast === 'function') showToast('같은 그룹 안에서만 순서 변경 가능');
-      return;
-    }
     pushUndo();
     const container = document.getElementById('stage');
     const slideEls = [...container.querySelectorAll(':scope > .slide')];
@@ -238,8 +232,8 @@
     } else {
       container.insertBefore(moved, slideEls[toIdx]);
     }
-    // 생성 슬라이드: 다른 그룹으로 이동 시 고유 pageGroup 부여 (overview 그리드 깨짐 방지)
-    if (document.body.dataset.generated && fromSlide.dataset.pageGroup !== toSlide.dataset.pageGroup) {
+    // 다른 그룹으로 이동 시 고유 pageGroup 부여 (overview 그리드 깨짐 방지)
+    if (fromSlide.dataset.pageGroup !== toSlide.dataset.pageGroup) {
       const maxPg = Math.max(...[...container.querySelectorAll(':scope > .slide')].map(s => parseInt(s.dataset.pageGroup) || 0));
       moved.dataset.pageGroup = String(maxPg + 1);
       moved.dataset.variant = '0';
@@ -2739,7 +2733,7 @@
   // 비텍스트 자식 (fontSize 기반 리사이즈 대상 아님 — 이들은 기존 slide-el 박스 리사이즈로 처리)
   const NON_TEXT_CHILD_SEL = '.bar-fill, .check-box, .icon-circle, .tl-circle';
   // 툴바/팬널/팔레트 영역 — 편집 중 클릭 시 focus/selection 유지해야 하는 대상
-  const TOOLBAR_PROTECT_SEL = '#top-toolbar, #font-panel, .color-palette, .color-swatch';
+  const TOOLBAR_PROTECT_SEL = '#top-toolbar, #font-panel, #format-bar, .color-palette, .color-swatch';
   let groupEntered = false;
   let groupParent = null;
   let pendingDrag = false;
@@ -2879,11 +2873,26 @@
     }
   }
 
+  function showFormatBar(el) {
+    const bar = document.getElementById('format-bar');
+    if (!bar) return;
+    const rect = el.getBoundingClientRect();
+    bar.style.left = Math.max(4, rect.left + rect.width / 2 - 120) + 'px';
+    bar.style.top  = Math.max(52, rect.top - 44) + 'px';
+    bar.classList.add('visible');
+    bar.style.display = '';
+  }
+  function hideFormatBar() {
+    const bar = document.getElementById('format-bar');
+    if (bar) { bar.classList.remove('visible'); bar.style.display = 'none'; }
+  }
+
   function enterContentEditable(el, e) {
     pushUndo();
     isEditing = true;
     el.contentEditable = 'true';
     el.focus();
+    showFormatBar(el);
     if (e) {
       const range = document.caretRangeFromPoint(e.clientX, e.clientY);
       if (range) { const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range); }
@@ -2919,6 +2928,7 @@
     el.addEventListener('blur', () => {
       el.removeAttribute('contenteditable');
       isEditing = false;
+      hideFormatBar();
       el.removeEventListener('keydown', onKeydown);
       el.removeEventListener('paste', onPaste);
     }, { once: true });
@@ -3277,6 +3287,72 @@
     if (!redoStack.length) return;
     undoStack.push(document.getElementById('stage').innerHTML);
     restoreSnapshot(redoStack.pop());
+  }
+
+  // ── 리사이즈 치수 라벨 ──
+  function showResizeDimLabel(w, h, el) {
+    const lbl = document.getElementById('resize-dim-label');
+    if (!lbl) return;
+    lbl.textContent = Math.round(w) + ' × ' + Math.round(h);
+    lbl.style.display = 'block';
+    lbl.style.left = (el.offsetLeft + el.offsetWidth + 8) + 'px';
+    lbl.style.top  = (el.offsetTop  + el.offsetHeight + 8) + 'px';
+  }
+  function showResizeFontLabel(fs, el) {
+    const lbl = document.getElementById('resize-dim-label');
+    if (!lbl) return;
+    lbl.textContent = Math.round(fs) + 'px';
+    lbl.style.display = 'block';
+    lbl.style.left = (el.offsetLeft + el.offsetWidth + 8) + 'px';
+    lbl.style.top  = (el.offsetTop  + el.offsetHeight + 8) + 'px';
+  }
+  function hideResizeDimLabel() {
+    const lbl = document.getElementById('resize-dim-label');
+    if (lbl) lbl.style.display = 'none';
+  }
+
+  // ── 스냅 포인트 수집 (드래그 + 리사이즈 공용) ──
+  function collectSnapPoints(excludeEl) {
+    const stageEl = document.getElementById('stage');
+    const xs = [stageEl.offsetWidth / 2];
+    const ys = [stageEl.offsetHeight / 2];
+    const layer = excludeEl.closest('.step-layer') || excludeEl.parentElement;
+    layer.querySelectorAll(EDITABLE_SEL).forEach(other => {
+      if (other === excludeEl || other.classList.contains('step-dim')) return;
+      if (other.tagName === 'IMG' && other.closest('.slide-el')) return;
+      xs.push(other.offsetLeft, other.offsetLeft + other.offsetWidth / 2, other.offsetLeft + other.offsetWidth);
+      ys.push(other.offsetTop,  other.offsetTop  + other.offsetHeight / 2, other.offsetTop  + other.offsetHeight);
+    });
+    document.querySelectorAll('.guide').forEach(g => {
+      if (g.style.display === 'none' || getComputedStyle(g).display === 'none') return;
+      const gl = parseInt(g.style.left) || 0, gt = parseInt(g.style.top) || 0;
+      const gw = parseInt(g.style.width) || 0, gh = parseInt(g.style.height) || 0;
+      if (gw === 0 && gh === 0) return;
+      xs.push(gl, gl + gw);
+      ys.push(gt, gt + gh);
+    });
+    return { xs, ys };
+  }
+  function snapToValue(val, list, threshold) { for (const t of list) if (Math.abs(val - t) <= threshold) return t; return null; }
+  function showSnapLines(snapXLine, snapYLine) {
+    const sxEl = document.getElementById('snap-x'), syEl = document.getElementById('snap-y');
+    if (snapXLine !== null) { sxEl.style.left = snapXLine + 'px'; sxEl.style.display = 'block'; } else sxEl.style.display = 'none';
+    if (snapYLine !== null) { syEl.style.top  = snapYLine + 'px'; syEl.style.display = 'block'; } else syEl.style.display = 'none';
+  }
+  function applyResizeSnap(el, newLeft, newTop, newW, newH) {
+    const SNAP_T = 8;
+    const { xs, ys } = collectSnapPoints(el);
+    let snapX = null, snapY = null;
+    const right = newLeft + newW, bottom = newTop + newH;
+    const cx = newLeft + newW / 2, cy = newTop + newH / 2;
+    let s;
+    if      ((s = snapToValue(right, xs, SNAP_T)) !== null) snapX = s;
+    else if ((s = snapToValue(cx,    xs, SNAP_T)) !== null) snapX = s;
+    else if ((s = snapToValue(newLeft, xs, SNAP_T)) !== null) snapX = s;
+    if      ((s = snapToValue(bottom, ys, SNAP_T)) !== null) snapY = s;
+    else if ((s = snapToValue(cy,     ys, SNAP_T)) !== null) snapY = s;
+    else if ((s = snapToValue(newTop,  ys, SNAP_T)) !== null) snapY = s;
+    showSnapLines(snapX, snapY);
   }
 
   // resize handle는 stage 이벤트 위임으로 처리 (innerHTML 복원 후에도 동작)
@@ -3771,6 +3847,9 @@
         }
         resizeTarget.style.left = newLeft + 'px';
         resizeTarget.style.top = newTop + 'px';
+        if (resizeImgInitRect.fontSize !== null) showResizeFontLabel(parseFloat(resizeTarget.style.fontSize), resizeTarget);
+        else showResizeDimLabel(newW, newH, resizeTarget);
+        applyResizeSnap(resizeTarget, newLeft, newTop, newW, newH);
         updateResizeHandle();
         return;
       }
@@ -3815,6 +3894,9 @@
           oel.style.top    = Math.round(anchorY + (ot - anchorY) * scale) + 'px';
         });
       }
+      if (resizeImgInitRect.fontSize !== null) showResizeFontLabel(parseFloat(resizeTarget.style.fontSize), resizeTarget);
+      else showResizeDimLabel(newW, newH, resizeTarget);
+      applyResizeSnap(resizeTarget, newLeft, newTop, newW, newH);
       updateResizeHandle();
       return;
     }
@@ -3830,6 +3912,7 @@
       resizeInitFontSizes.forEach(({ el, fs }) => {
         el.style.fontSize = Math.max(10, Math.round(fs + delta)) + 'px';
       });
+      if (resizeInitFontSizes.length > 0) showResizeFontLabel(parseFloat(resizeInitFontSizes[0].el.style.fontSize), resizeInitFontSizes[0].el);
       updateResizeHandle();
       return;
     }
@@ -3918,37 +4001,16 @@
 
     // ── 스냅 가이드 ──
     const SNAP_T = 8;
-    const stageEl = document.getElementById('stage');
     const w = selectedEl.offsetWidth, h = selectedEl.offsetHeight;
-    const xs = [stageEl.offsetWidth / 2];
-    const ys = [stageEl.offsetHeight / 2];
-    const layer = selectedEl.closest('.step-layer') || selectedEl.parentElement;
-    layer.querySelectorAll(EDITABLE_SEL).forEach(other => {
-      if (other === selectedEl || other.classList.contains('step-dim')) return;
-      if (other.tagName === 'IMG' && other.closest('.slide-el')) return;
-      xs.push(other.offsetLeft, other.offsetLeft + other.offsetWidth / 2, other.offsetLeft + other.offsetWidth);
-      ys.push(other.offsetTop,  other.offsetTop  + other.offsetHeight / 2, other.offsetTop  + other.offsetHeight);
-    });
-    // 보이는 가이드 엣지 수집
-    document.querySelectorAll('.guide').forEach(g => {
-      if (g.style.display === 'none' || getComputedStyle(g).display === 'none') return;
-      const gl = parseInt(g.style.left) || 0, gt = parseInt(g.style.top) || 0;
-      const gw = parseInt(g.style.width) || 0, gh = parseInt(g.style.height) || 0;
-      if (gw === 0 && gh === 0) return;
-      xs.push(gl, gl + gw);
-      ys.push(gt, gt + gh);
-    });
-    function snapTo(val, list) { for (const t of list) if (Math.abs(val - t) <= SNAP_T) return t; return null; }
+    const { xs, ys } = collectSnapPoints(selectedEl);
     let snapXLine = null, snapYLine = null, s;
-    if      ((s = snapTo(newLeft + w / 2, xs)) !== null) { newLeft = Math.round(s - w / 2); snapXLine = s; }
-    else if ((s = snapTo(newLeft,         xs)) !== null) { newLeft = s;     snapXLine = s; }
-    else if ((s = snapTo(newLeft + w,     xs)) !== null) { newLeft = s - w; snapXLine = s; }
-    if      ((s = snapTo(newTop  + h / 2, ys)) !== null) { newTop  = Math.round(s - h / 2); snapYLine = s; }
-    else if ((s = snapTo(newTop,          ys)) !== null) { newTop  = s;     snapYLine = s; }
-    else if ((s = snapTo(newTop  + h,     ys)) !== null) { newTop  = s - h; snapYLine = s; }
-    const sxEl = document.getElementById('snap-x'), syEl = document.getElementById('snap-y');
-    if (snapXLine !== null) { sxEl.style.left = snapXLine + 'px'; sxEl.style.display = 'block'; } else sxEl.style.display = 'none';
-    if (snapYLine !== null) { syEl.style.top  = snapYLine + 'px'; syEl.style.display = 'block'; } else syEl.style.display = 'none';
+    if      ((s = snapToValue(newLeft + w / 2, xs, SNAP_T)) !== null) { newLeft = Math.round(s - w / 2); snapXLine = s; }
+    else if ((s = snapToValue(newLeft,         xs, SNAP_T)) !== null) { newLeft = s;     snapXLine = s; }
+    else if ((s = snapToValue(newLeft + w,     xs, SNAP_T)) !== null) { newLeft = s - w; snapXLine = s; }
+    if      ((s = snapToValue(newTop  + h / 2, ys, SNAP_T)) !== null) { newTop  = Math.round(s - h / 2); snapYLine = s; }
+    else if ((s = snapToValue(newTop,          ys, SNAP_T)) !== null) { newTop  = s;     snapYLine = s; }
+    else if ((s = snapToValue(newTop  + h,     ys, SNAP_T)) !== null) { newTop  = s - h; snapYLine = s; }
+    showSnapLines(snapXLine, snapYLine);
 
     // ── 간격 표시 + 등간격 스냅 ──
     {
@@ -4195,6 +4257,8 @@
       resizeMultiInitRects = null;
       pendingDrag = false;
       mouseDownPos = null;
+      hideResizeDimLabel();
+      showSnapLines(null, null);
       updateResizeHandle();
       return;
     }
@@ -4236,6 +4300,8 @@
     pendingDrag = false;
     selectBoxActive = false;
     isResizing = false;
+    hideResizeDimLabel();
+    showSnapLines(null, null);
     if (layerDragItem) { layerDragItem.style.opacity = ''; layerDragItem = null; }
   });
 
@@ -4884,12 +4950,65 @@
         selectedEls.forEach(el => { delete el.dataset.group; });
         refreshAfterUngroup();
       }
+    } else if (item.dataset.action === 'copy') {
+      if (selectedEl) { clipboardEl = selectedEl.outerHTML; showToast('요소 복사됨', 1500); }
+    } else if (item.dataset.action === 'paste') {
+      if (clipboardEl) {
+        pushUndo();
+        const temp = document.createElement('div');
+        temp.innerHTML = clipboardEl;
+        const newEl = temp.firstElementChild;
+        if (newEl) {
+          newEl.style.left = (parseInt(newEl.style.left) || 0) + 20 + 'px';
+          newEl.style.top  = (parseInt(newEl.style.top)  || 0) + 20 + 'px';
+          newEl.classList.remove('edit-selected', 'edit-group-selected');
+          delete newEl.dataset.group;
+          const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
+          layer0.appendChild(newEl);
+          clearSelection(); selectElement(newEl);
+          showToast('붙여넣기 완료', 1500);
+        }
+      }
+    } else if (item.dataset.action === 'duplicate') {
+      if (selectedEl) {
+        clipboardEl = selectedEl.outerHTML;
+        pushUndo();
+        const temp = document.createElement('div');
+        temp.innerHTML = clipboardEl;
+        const newEl = temp.firstElementChild;
+        if (newEl) {
+          newEl.style.left = (parseInt(newEl.style.left) || 0) + 20 + 'px';
+          newEl.style.top  = (parseInt(newEl.style.top)  || 0) + 20 + 'px';
+          newEl.classList.remove('edit-selected', 'edit-group-selected');
+          delete newEl.dataset.group;
+          const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
+          layer0.appendChild(newEl);
+          clearSelection(); selectElement(newEl);
+          showToast('복제 완료', 1500);
+        }
+      }
+    } else if (item.dataset.action === 'delete') {
+      document.getElementById('tb-delete').click();
     } else if (item.dataset.align) {
       alignToPage(item.dataset.align);
     }
     alignMenu.classList.remove('visible');
   });
   document.addEventListener('click', () => alignMenu.classList.remove('visible'));
+
+  // ── 플로팅 서식바 이벤트 ──
+  document.getElementById('format-bar').addEventListener('mousedown', e => e.preventDefault()); // 포커스 유지
+  document.querySelectorAll('#format-bar .fmt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.cmd) {
+        document.execCommand(btn.dataset.cmd);
+      } else if (btn.dataset.align) {
+        // 현재 편집 중인 요소의 textAlign 변경
+        const editingEl = document.querySelector('[contenteditable="true"]');
+        if (editingEl) editingEl.style.textAlign = btn.dataset.align;
+      }
+    });
+  });
 
   // ── 상단 툴바 이벤트 ──
   document.getElementById('tb-exit').addEventListener('click', () => toggleEditMode());
@@ -4903,9 +5022,10 @@
     document.getElementById('font-size-input').value = fs;
     applyFontSize(0);
   });
-  document.querySelectorAll('.tb-align').forEach(btn => {
-    btn.addEventListener('click', () => alignToPage(btn.dataset.align));
-  });
+  // B/I/U 버튼 (상단 툴바)
+  document.getElementById('tb-bold').addEventListener('click', () => document.execCommand('bold'));
+  document.getElementById('tb-italic').addEventListener('click', () => document.execCommand('italic'));
+  document.getElementById('tb-underline').addEventListener('click', () => document.execCommand('underline'));
   document.getElementById('tb-group').addEventListener('click', () => {
     if (selectedEls.length < 2) return;
     pushUndo();
