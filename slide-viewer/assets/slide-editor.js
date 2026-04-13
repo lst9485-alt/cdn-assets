@@ -1221,13 +1221,14 @@
     // Delete/Backspace: 선택 요소 삭제 (편집 모드)
     if ((e.code === 'Delete' || e.code === 'Backspace') && editMode) {
       if (!selectedEls.length) return;
-      // groupEntered 상태: .child-selected 자식만 삭제
+      // groupEntered 상태: .child-selected 자식만 삭제 (자리 유지: visibility hidden)
       if (groupEntered && groupParent) {
         const child = groupParent.querySelector('.child-selected');
         if (child) {
           pushUndo();
-          child.remove();
-          groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
+          child.style.visibility = 'hidden';
+          child.style.pointerEvents = 'none';
+          child.classList.remove('child-selected');
           if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
           return;
         }
@@ -4923,13 +4924,14 @@
   });
   document.getElementById('tb-delete').addEventListener('click', () => {
     if (!selectedEls.length || !editMode) return;
-    // groupEntered 상태: .child-selected 자식만 삭제
+    // groupEntered 상태: .child-selected 자식만 삭제 (자리 유지: visibility hidden)
     if (groupEntered && groupParent) {
       const child = groupParent.querySelector('.child-selected');
       if (child) {
         pushUndo();
-        child.remove();
-        groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
+        child.style.visibility = 'hidden';
+        child.style.pointerEvents = 'none';
+        child.classList.remove('child-selected');
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
         return;
       }
@@ -4972,10 +4974,20 @@
     const btnFc = document.getElementById('tb-fc-color');
     const indBg = document.getElementById('tb-bg-indicator');
     const indFc = document.getElementById('tb-fc-indicator');
-    const BG_CLASSES = ['bg-blue','bg-red','bg-green','bg-white','bg-black','bg-accent','bg-gray'];
+    const BG_CLASSES = ['bg-blue','bg-red','bg-green','bg-white','bg-black','bg-accent','bg-gray','bg-v-orange','bg-v-blue','bg-v-green','bg-v-red'];
     const FC_CLASSES = ['fc-white','fc-red','fc-blue','fc-yellow','fc-black'];
-    const BG_COLORS = {'':'transparent','bg-blue':'rgba(255,148,52,0.12)','bg-red':'rgba(0,0,0,0.06)','bg-green':'rgba(255,148,52,0.12)','bg-white':'#fff','bg-black':'#222','bg-accent':'rgba(255,148,52,0.15)','bg-gray':'#999'};
+    const BG_COLORS = {'':'transparent','bg-blue':'rgba(255,148,52,0.12)','bg-red':'rgba(0,0,0,0.06)','bg-green':'rgba(255,148,52,0.12)','bg-white':'#fff','bg-black':'#222','bg-accent':'rgba(255,148,52,0.15)','bg-gray':'#999','bg-v-orange':'#FF6B00','bg-v-blue':'#4A90D9','bg-v-green':'#2ECC71','bg-v-red':'#E63946'};
     const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#FF6B00','fc-blue':'#4A90D9','fc-yellow':'#E63946','fc-black':'#222'};
+    // 팔레트에 원색 스와치 동적 추가
+    [['bg-v-orange','#FF6B00','주황'],['bg-v-blue','#4A90D9','파랑'],['bg-v-green','#2ECC71','초록'],['bg-v-red','#E63946','빨강']].forEach(([cls, color, title]) => {
+      if (paletteBg.querySelector(`[data-cls="${cls}"]`)) return;
+      const sw = document.createElement('div');
+      sw.className = 'color-swatch';
+      sw.dataset.cls = cls;
+      sw.style.background = color;
+      sw.title = title;
+      paletteBg.appendChild(sw);
+    });
 
     function closePalettes() {
       paletteBg.classList.remove('open');
@@ -5102,6 +5114,33 @@
         updateCoordPanel(newEl);
         updateResizeHandle();
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+      } else {
+        // 외부 텍스트 → 새 텍스트 요소 생성
+        const textData = e.clipboardData.getData('text/plain');
+        if (textData && textData.trim()) {
+          e.preventDefault();
+          pushUndo();
+          const el = document.createElement('div');
+          el.className = 'text-area';
+          el.style.cssText = 'position:absolute; left:200px; top:400px; width:1600px;';
+          const wrap = document.createElement('div');
+          wrap.className = 'hl-wrap';
+          const inner = document.createElement('div');
+          const span = document.createElement('span');
+          span.className = 'hl';
+          span.textContent = textData;
+          inner.appendChild(span);
+          wrap.appendChild(inner);
+          el.appendChild(wrap);
+          const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
+          layer0.appendChild(el);
+          selectedEls.forEach(s => s.classList.remove('edit-selected'));
+          selectedEl = el; selectedEls = [el];
+          el.classList.add('edit-selected');
+          updateCoordPanel(el);
+          updateResizeHandle();
+          if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+        }
       }
       return;
     }
@@ -5466,13 +5505,14 @@ ch.postMessage({ type: 'ready' });
   document.getElementById('gt-delete').addEventListener('click', (e) => {
     e.stopPropagation();
     if (!selectedEls.length || !editMode) return;
-    // groupEntered 상태: .child-selected 자식만 삭제
+    // groupEntered 상태: .child-selected 자식만 삭제 (자리 유지: visibility hidden)
     if (groupEntered && groupParent) {
       const child = groupParent.querySelector('.child-selected');
       if (child) {
         pushUndo();
-        child.remove();
-        groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
+        child.style.visibility = 'hidden';
+        child.style.pointerEvents = 'none';
+        child.classList.remove('child-selected');
         groupToolbar.classList.remove('visible');
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
         return;
