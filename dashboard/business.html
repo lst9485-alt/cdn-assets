@@ -56,12 +56,12 @@
         .sim-revenue-unit { font-size: 16px; font-weight: 700; color: #64748B; flex-shrink: 0; }
         .sim-sub-item { font-size: 13px; font-weight: 600; color: #64748B; margin-top: 4px; }
         .sim-arrow { text-align: center; color: #CBD5E1; font-size: 14px; padding: 2px 0; }
-        .sim-computed { font-size: 11px; color: #94A3B8; margin-top: 2px; }
-        .sim-field-input { padding: 5px 8px; font-size: 13px; }
-        .sim-field { margin-bottom: 8px; }
-        .sim-field-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
-        .sim-field-label { font-size: 11px; color: #64748B; }
-        .sim-hint { font-size: 10px; color: #94A3B8; }
+        .sim-computed { font-size: 12px; color: #94A3B8; margin-top: 3px; }
+        .sim-field-input { padding: 6px 10px; font-size: 14px; }
+        .sim-field { margin-bottom: 10px; }
+        .sim-field-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+        .sim-field-label { font-size: 12px; color: #64748B; }
+        .sim-hint { font-size: 11px; color: #94A3B8; }
         .sim-field-input { width: 100%; padding: 4px 8px; border: 1px solid #E2E8F0; border-radius: 6px; font-size: 12px; font-weight: 600; color: #1E293B; box-sizing: border-box; outline: none; background: #F8FAFC; }
         .sim-field-input:focus { border-color: #0077C8; background: white; }
         .funnel-stage { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; }
@@ -530,7 +530,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         const convertRate = cw.convert_rate || targets.convert_rate || 3;
         const fmtField = function(label, hint, id, val, step) {
             return '<div class="sim-field">' +
-                '<div class="sim-field-header"><span class="sim-field-label">' + label + '</span><span class="sim-hint">현재 ' + hint + '</span></div>' +
+                '<div class="sim-field-header"><span class="sim-field-label">' + label + '</span><span class="sim-hint">기준 ' + hint + '</span></div>' +
                 '<input class="sim-field-input" id="' + id + '" type="number" step="' + (step || 1) + '" value="' + val + '"></div>';
         };
         const html =
@@ -539,7 +539,8 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             '<div class="sim-result-label">목표 매출</div>' +
             '<div class="sim-revenue-row"><input class="sim-revenue-input" id="sim-revenue" type="text" inputmode="numeric" placeholder="0"><span class="sim-revenue-unit">만원</span></div>' +
             '<div class="sim-sub-item" id="sim-sub-customers">유료고객 —명</div>' +
-            '<div class="sim-sub-item" id="sim-sub-landing">랜딩 —건</div>' +
+            '<div class="sim-sub-item" id="sim-sub-customers">유료고객 —명</div>' +
+            '<div class="sim-sub-item" id="sim-sub-landing">랜딩접속 —건</div>' +
             '</div>' +
             '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">객단가</span></div>' +
             '<input class="sim-field-input" id="sim-price" type="text" value="' + unitPrice.toLocaleString('ko-KR') + '"></div>' +
@@ -548,7 +549,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             '<div class="sim-computed" id="sim-out-customers">→ 유료고객 —명</div>' +
             '<div class="sim-arrow">↓</div>' +
             fmtField('링크클릭률 (%)', linkClickRate.toFixed(1) + '%', 'sim-click', linkClickRate.toFixed(1), '0.1') +
-            '<div class="sim-computed" id="sim-out-landing">→ 랜딩 —건</div>' +
+            '<div class="sim-computed" id="sim-out-landing">→ 랜딩접속 —건</div>' +
             '<div class="sim-arrow">↓</div>' +
             '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">키콘텐츠 조회수</span></div>' +
             '<input class="sim-field-input" id="sim-key" type="text" inputmode="numeric" value="' + (cw.key_views || 0).toLocaleString('ko-KR') + '"></div>' +
@@ -591,7 +592,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             var customers = price > 0 ? rev / price : 0;
             var landing = convert > 0 ? customers / (convert / 100) : 0;
             document.getElementById('sim-sub-customers').textContent = '유료고객 ' + customers.toFixed(1) + '명';
-            document.getElementById('sim-sub-landing').textContent = '랜딩 ' + fmtNum(Math.round(landing)) + '건';
+            document.getElementById('sim-sub-landing').textContent = '랜딩접속 ' + fmtNum(Math.round(landing)) + '건';
         });
         calcSimulator();
     }
@@ -605,15 +606,15 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         const convert = parseFloat(document.getElementById('sim-convert').value) || 0;
         const priceRaw = (document.getElementById('sim-price').value || '').replace(/,/g, '');
         const price = parseFloat(priceRaw) || 0;
-        const pulling = key * (interest / 100);
+        const pulling = interest > 0 ? key / (interest / 100) : 0;
         const landing = (key + pulling) * (click / 100);
         const customers = landing * (convert / 100);
         const revenue = customers * price;
         revEl.value = Math.round(revenue / 10000).toLocaleString('ko-KR');
         document.getElementById('sim-sub-customers').textContent = '유료고객 ' + customers.toFixed(1) + '명';
-        document.getElementById('sim-sub-landing').textContent = '랜딩 ' + fmtNum(Math.round(landing)) + '건';
+        document.getElementById('sim-sub-landing').textContent = '랜딩접속 ' + fmtNum(Math.round(landing)) + '건';
         document.getElementById('sim-out-pulling').textContent = '→ 풀링 ' + fmtNum(Math.round(pulling));
-        document.getElementById('sim-out-landing').textContent = '→ 랜딩 ' + fmtNum(Math.round(landing)) + '건';
+        document.getElementById('sim-out-landing').textContent = '→ 랜딩접속 ' + fmtNum(Math.round(landing)) + '건';
         document.getElementById('sim-out-customers').textContent = '→ 유료고객 ' + customers.toFixed(1) + '명';
     }
 
