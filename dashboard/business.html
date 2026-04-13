@@ -604,23 +604,20 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
 
         var key;
         if (mode === 'reverse') {
-            // 목표매출 유지하면서 키조회수 역산
             var targetRev = (parseInt((revEl.value || '').replace(/,/g, '')) || 0) * 10000;
-            var customers = price > 0 ? targetRev / price : 0;
-            var landing = convert > 0 ? customers / (convert / 100) : 0;
-            // landing = (key + pulling) * click/100 = (key + key/(interest/100)) * click/100
-            // landing = key * (1 + 100/interest) * click/100
+            var revCustomers = price > 0 ? targetRev / price : 0;
+            var revLanding = convert > 0 ? revCustomers / (convert / 100) : 0;
             var multiplier = interest > 0 && click > 0 ? (1 + 100 / interest) * (click / 100) : 0;
-            key = multiplier > 0 ? landing / multiplier : 0;
+            key = multiplier > 0 ? revLanding / multiplier : 0;
             keyEl.value = Math.round(key).toLocaleString('ko-KR');
         } else {
             key = parseFloat((keyEl.value || '').replace(/,/g, '')) || 0;
         }
 
-        const pulling = interest > 0 ? key / (interest / 100) : 0;
-        const landing = (key + pulling) * (click / 100);
-        const customers = landing * (convert / 100);
-        const revenue = customers * price;
+        var pulling = interest > 0 ? key / (interest / 100) : 0;
+        var landing = (key + pulling) * (click / 100);
+        var customers = landing * (convert / 100);
+        var revenue = customers * price;
         if (mode !== 'reverse') {
             revEl.value = Math.round(revenue / 10000).toLocaleString('ko-KR');
         }
