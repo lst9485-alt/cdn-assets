@@ -1880,15 +1880,21 @@
           ovDragGhost.style.left = (ev.clientX - item.offsetWidth / 2) + 'px';
           ovDragGhost.style.top = (ev.clientY - 40) + 'px';
           const allItems = [...ovGrid.querySelectorAll('.ov-item')];
-          // 보이는 카드만 드롭 대상 (접힌 variant 제외)
-          const visibleItems = allItems.filter(it => !it.classList.contains('ov-variant') || it.classList.contains('show'));
+          // 보이는 카드만 드롭 대상 (접힌 variant 제외 — getBoundingClientRect 오염 방지)
+          const visibleItems = allItems.filter(it => {
+            if (!it.classList.contains('ov-variant')) return true;
+            if (it.classList.contains('show')) return true;
+            return false;
+          });
+          // 그리드 행/열 기반 드롭 판정
           let visDropIdx = visibleItems.length;
           for (let i = 0; i < visibleItems.length; i++) {
             const r = visibleItems[i].getBoundingClientRect();
-            const midX = r.left + r.width / 2;
-            const midY = r.top + r.height / 2;
-            if (ev.clientY < r.bottom && ev.clientY > r.top && ev.clientX < midX) { visDropIdx = i; break; }
-            if (ev.clientY < midY) { visDropIdx = i; break; }
+            if (r.width === 0 && r.height === 0) continue;
+            // 마우스가 이 카드 행 위에 있으면 → 이 행 첫 칸 앞에 드롭
+            if (ev.clientY < r.top) { visDropIdx = i; break; }
+            // 같은 행: 마우스가 카드 좌측 절반 안이면 → 이 카드 앞에 드롭
+            if (ev.clientY < r.bottom && ev.clientX < r.left + r.width / 2) { visDropIdx = i; break; }
           }
           // 보이는 인덱스 → 실제 슬라이드 인덱스 변환
           ovDragDropIdx = visDropIdx < visibleItems.length ? visibleItems[visDropIdx]._slideIdx : allItems[allItems.length - 1]._slideIdx + 1;
