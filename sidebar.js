@@ -85,15 +85,11 @@
     return '<a href="' + resolveHref(anchor.href) + '" class="sb-sub">' + escapeHtml(anchor.label) + '</a>';
   }
 
-  function iconFor(key, small) {
+  function iconFor(key) {
     var html = (window.DASHBOARD_SITE.icons[key] || '');
-    if (!small) {
-      return html;
-    }
     return html
-      .replace('width="20"', 'width="12"')
-      .replace('height="20"', 'height="12"')
-      .replace('vertical-align:-2px', 'vertical-align:-1px');
+      .replace('width="20"', 'width="16"')
+      .replace('height="20"', 'height="16"');
   }
 
   function isActive(matchers) {
