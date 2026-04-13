@@ -4428,16 +4428,16 @@
 
     // 애니메이션 타입 선택 드롭다운
     const ANIM_TYPES = [
-      { cls: '', label: '기본 (아래에서)' },
-      { cls: 'anim-scale', label: '확대' },
-      { cls: 'anim-left', label: '왼쪽에서' },
-      { cls: 'anim-right', label: '오른쪽에서' },
-      { cls: 'anim-pop', label: '팝' },
-      { cls: 'anim-fade', label: '페이드' },
-      { cls: 'anim-zoom', label: '줌' },
-      { cls: 'anim-flip', label: '플립' },
-      { cls: 'anim-split', label: '스플릿' },
-      { cls: 'anim-center', label: '중앙 등장' },
+      { cls: '', label: '아래에서 올라옴' },
+      { cls: 'anim-scale', label: '작게→크게' },
+      { cls: 'anim-left', label: '왼쪽에서 슬라이드' },
+      { cls: 'anim-right', label: '오른쪽에서 슬라이드' },
+      { cls: 'anim-pop', label: '톡 튀어나옴' },
+      { cls: 'anim-fade', label: '서서히 나타남' },
+      { cls: 'anim-zoom', label: '확대 등장' },
+      { cls: 'anim-flip', label: '뒤집기' },
+      { cls: 'anim-split', label: '갈라짐' },
+      { cls: 'anim-center', label: '가운데서 등장' },
       { cls: 'anim-underline', label: '밑줄 긋기' },
     ];
     const animTypeRow = document.createElement('div');
@@ -4449,7 +4449,7 @@
       selectHTML += `<option value="${t.cls}"${t.cls === currentAnimCls ? ' selected' : ''}>${escHTML(t.label)}</option>`;
     });
     selectHTML += '</select>';
-    animTypeRow.innerHTML = `<span class="anim-type-label">애니메이션</span>${selectHTML}`;
+    animTypeRow.innerHTML = `<span class="anim-type-label">등장 효과</span>${selectHTML}`;
     if (!animTypeDisabled) {
       animTypeRow.querySelector('select').addEventListener('change', function() {
         // step-0에 있으면 자동으로 step-1로 이동 (moveToStep 내부에서 pushUndo)
@@ -4471,7 +4471,7 @@
     const pushupDisabled = !selectedEl;
     const pushupLayer = selectedEl ? selectedEl.closest('.step-layer') : null;
     const isPushup = pushupLayer ? pushupLayer.dataset.transition === 'pushup' : false;
-    pushupRow.innerHTML = `<span class="anim-pushup-label">밀어올리기 전환</span>
+    pushupRow.innerHTML = `<span class="anim-pushup-label">이전 내용 밀어내기</span>
       <label class="anim-toggle${pushupDisabled ? ' disabled' : ''}">
         <input type="checkbox" ${isPushup ? 'checked' : ''} ${pushupDisabled ? 'disabled' : ''}>
         <span class="anim-toggle-slider"></span>
@@ -4505,7 +4505,7 @@
     noDimRow.className = 'anim-pushup-row';
     const noDimDisabled = !selectedEl || isPushup;
     const isNoDim = pushupLayer ? pushupLayer.hasAttribute('data-no-dim') : false;
-    noDimRow.innerHTML = `<span class="anim-pushup-label">오버레이 없음</span>
+    noDimRow.innerHTML = `<span class="anim-pushup-label">배경 어둡게 안 함</span>
       <label class="anim-toggle${noDimDisabled ? ' disabled' : ''}">
         <input type="checkbox" ${isNoDim ? 'checked' : ''} ${noDimDisabled ? 'disabled' : ''}>
         <span class="anim-toggle-slider"></span>
