@@ -1152,6 +1152,25 @@
       }
       return;
     }
+    // Ctrl+X: 요소 잘라내기 (편집 모드)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'x' && editMode && !isEditing) {
+      if (selectedEl) {
+        e.preventDefault();
+        clipboardEl = selectedEl.outerHTML;
+        pushUndo();
+        const slide = slides[currentSlide];
+        const layer = selectedEl.closest('.step-layer');
+        selectedEl.remove();
+        if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
+          layer.remove();
+          recalcSteps(slide);
+        }
+        clearSelection();
+        showToast('요소 잘라내기', 1500);
+        if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+      }
+      return;
+    }
     // Ctrl+V: 요소 붙여넣기 (편집 모드, 내부 클립보드)
     if ((e.ctrlKey || e.metaKey) && e.key === 'v' && editMode && !isEditing && clipboardEl) {
       e.preventDefault();
@@ -3188,8 +3207,7 @@
       });
       return;
     }
-    // text-area / hl-wrap 등 텍스트 요소는 edge handle 숨김 (fontSize만 조절하므로)
-    const isTextEl = selectedEl.classList.contains('text-area') || selectedEl.classList.contains('hl-wrap') || selectedEl.classList.contains('step-title');
+    const isTextEl = false; // 모든 요소에 edge handle 표시 (폭/높이 조절 가능)
     if (selectedEls.length > 1) {
       let minL = Infinity, minT = Infinity, maxR = -Infinity, maxB = -Infinity;
       selectedEls.forEach(el => {
@@ -3427,8 +3445,8 @@
       const stagePos0 = clientToStage(e.clientX, e.clientY);
       resizeAnchorX = stagePos0.x;
       resizeAnchorY = stagePos0.y;
-      // edge handle: 단방향 리사이즈 (slide-el, img, emoji-icon, bubble 전용)
-      if (resizeEdge && (selectedEl.tagName === 'IMG' || selectedEl.classList.contains('emoji-icon') || selectedEl.classList.contains('slide-el') || selectedEl.classList.contains('bubble'))) {
+      // edge handle: 단방향 리사이즈
+      if (resizeEdge && (selectedEl.tagName === 'IMG' || selectedEl.classList.contains('emoji-icon') || selectedEl.classList.contains('slide-el') || selectedEl.classList.contains('bubble') || selectedEl.classList.contains('text-area') || selectedEl.classList.contains('hl-wrap'))) {
         resizeInitFontSizes = null;
         resizeImgInit = null;
         const fs = parseFloat(selectedEl.style.fontSize) || 0;
@@ -4974,12 +4992,12 @@
     const btnFc = document.getElementById('tb-fc-color');
     const indBg = document.getElementById('tb-bg-indicator');
     const indFc = document.getElementById('tb-fc-indicator');
-    const BG_CLASSES = ['bg-blue','bg-red','bg-green','bg-white','bg-black','bg-accent','bg-gray','bg-v-orange','bg-v-blue','bg-v-green','bg-v-red'];
-    const FC_CLASSES = ['fc-white','fc-red','fc-blue','fc-yellow','fc-black'];
-    const BG_COLORS = {'':'transparent','bg-blue':'rgba(255,148,52,0.12)','bg-red':'rgba(0,0,0,0.06)','bg-green':'rgba(255,148,52,0.12)','bg-white':'#fff','bg-black':'#222','bg-accent':'rgba(255,148,52,0.15)','bg-gray':'#999','bg-v-orange':'#FF6B00','bg-v-blue':'#4A90D9','bg-v-green':'#2ECC71','bg-v-red':'#E63946'};
-    const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#FF6B00','fc-blue':'#4A90D9','fc-yellow':'#E63946','fc-black':'#222'};
+    const BG_CLASSES = ['bg-blue','bg-red','bg-green','bg-white','bg-black','bg-accent','bg-gray','bg-v-orange','bg-v-blue','bg-v-green','bg-v-red','bg-v-purple','bg-v-brown'];
+    const FC_CLASSES = ['fc-white','fc-red','fc-blue','fc-yellow','fc-black','fc-green','fc-brown','fc-gray','fc-purple'];
+    const BG_COLORS = {'':'transparent','bg-blue':'rgba(255,148,52,0.12)','bg-red':'rgba(0,0,0,0.06)','bg-green':'rgba(255,148,52,0.12)','bg-white':'#fff','bg-black':'#222','bg-accent':'rgba(255,148,52,0.15)','bg-gray':'#999','bg-v-orange':'#FF6B00','bg-v-blue':'#4A90D9','bg-v-green':'#2ECC71','bg-v-red':'#E63946','bg-v-purple':'#9B59B6','bg-v-brown':'#8B4513'};
+    const FC_COLORS = {'':'#222','fc-white':'#fff','fc-red':'#FF6B00','fc-blue':'#4A90D9','fc-yellow':'#E63946','fc-black':'#222','fc-green':'#2ECC71','fc-brown':'#8B4513','fc-gray':'#999','fc-purple':'#9B59B6'};
     // 팔레트에 원색 스와치 동적 추가
-    [['bg-v-orange','#FF6B00','주황'],['bg-v-blue','#4A90D9','파랑'],['bg-v-green','#2ECC71','초록'],['bg-v-red','#E63946','빨강']].forEach(([cls, color, title]) => {
+    [['bg-v-orange','#FF6B00','주황'],['bg-v-blue','#4A90D9','파랑'],['bg-v-green','#2ECC71','초록'],['bg-v-red','#E63946','빨강'],['bg-v-purple','#9B59B6','보라'],['bg-v-brown','#8B4513','갈색']].forEach(([cls, color, title]) => {
       if (paletteBg.querySelector(`[data-cls="${cls}"]`)) return;
       const sw = document.createElement('div');
       sw.className = 'color-swatch';
@@ -4987,6 +5005,16 @@
       sw.style.background = color;
       sw.title = title;
       paletteBg.appendChild(sw);
+    });
+    // 글자색 팔레트에 추가 색상
+    [['fc-green','#2ECC71','초록'],['fc-brown','#8B4513','갈색'],['fc-gray','#999','회색'],['fc-purple','#9B59B6','보라']].forEach(([cls, color, title]) => {
+      if (paletteFc.querySelector(`[data-cls="${cls}"]`)) return;
+      const sw = document.createElement('div');
+      sw.className = 'color-swatch';
+      sw.dataset.cls = cls;
+      sw.style.background = color;
+      sw.title = title;
+      paletteFc.appendChild(sw);
     });
 
     function closePalettes() {
