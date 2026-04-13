@@ -53,10 +53,9 @@
             badgeText: 'LIVE',
             badgeTone: 'live',
             iconKey: 'business',
-            sidebarIconKey: 'dash',
             hubVisible: true,
             navVisible: true,
-            sidebarType: 'sub',
+            sidebarType: 'root',
             activeMatch: ['business.html']
           },
           {
@@ -70,7 +69,7 @@
             iconKey: 'branding',
             hubVisible: true,
             navVisible: true,
-            sidebarType: 'sub',
+            sidebarType: 'root',
             activeMatch: ['branding.html']
           }
         ]
