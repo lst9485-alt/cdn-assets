@@ -238,6 +238,12 @@
     } else {
       container.insertBefore(moved, slideEls[toIdx]);
     }
+    // 생성 슬라이드: 다른 그룹으로 이동 시 고유 pageGroup 부여 (overview 그리드 깨짐 방지)
+    if (document.body.dataset.generated && fromSlide.dataset.pageGroup !== toSlide.dataset.pageGroup) {
+      const maxPg = Math.max(...[...container.querySelectorAll(':scope > .slide')].map(s => parseInt(s.dataset.pageGroup) || 0));
+      moved.dataset.pageGroup = String(maxPg + 1);
+      moved.dataset.variant = '0';
+    }
     slides = [...container.querySelectorAll(':scope > .slide')];
     rebuildSlidesByKey();
     buildFilmstrip();
