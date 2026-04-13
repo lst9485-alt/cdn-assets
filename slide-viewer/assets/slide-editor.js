@@ -2895,16 +2895,23 @@
     };
     const onPaste = ev => {
       ev.preventDefault();
-      const text = (ev.clipboardData || window.clipboardData).getData('text/plain');
+      const text = ev.clipboardData?.getData('text/plain') ?? '';
       if (!text) return;
       const sel = window.getSelection();
-      if (!sel.rangeCount) return;
+      if (!sel) return;
+      if (!sel.rangeCount || !el.contains(sel.anchorNode)) {
+        el.focus();
+        const r = document.createRange();
+        r.selectNodeContents(el);
+        r.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(r);
+      }
       const range = sel.getRangeAt(0);
       range.deleteContents();
       const textNode = document.createTextNode(text);
       range.insertNode(textNode);
-      range.setStartAfter(textNode);
-      range.collapse(true);
+      range.collapse(false);
       sel.removeAllRanges();
       sel.addRange(range);
     };
@@ -3326,16 +3333,24 @@
     };
     const onPaste = ev => {
       ev.preventDefault();
-      const text = (ev.clipboardData || window.clipboardData).getData('text/plain');
+      const text = ev.clipboardData?.getData('text/plain') ?? '';
       if (!text) return;
       const sel = window.getSelection();
-      if (!sel.rangeCount) return;
+      if (!sel) return;
+      // selection이 el 밖에 있으면 el 끝으로 caret 이동
+      if (!sel.rangeCount || !el.contains(sel.anchorNode)) {
+        el.focus();
+        const r = document.createRange();
+        r.selectNodeContents(el);
+        r.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(r);
+      }
       const range = sel.getRangeAt(0);
       range.deleteContents();
       const textNode = document.createTextNode(text);
       range.insertNode(textNode);
-      range.setStartAfter(textNode);
-      range.collapse(true);
+      range.collapse(false);
       sel.removeAllRanges();
       sel.addRange(range);
     };
