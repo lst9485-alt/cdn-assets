@@ -633,7 +633,7 @@
         const span = document.createElement('span');
         span.className = 'ch';
         span.textContent = ch === ' ' ? '\u00A0' : ch;
-        span.style.transitionDelay = (i * 0.08) + 's';
+        span.style.transitionDelay = (i * 0.15) + 's';
         frag.appendChild(span);
       });
       el.appendChild(frag);
