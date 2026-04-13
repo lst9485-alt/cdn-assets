@@ -539,10 +539,9 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             '<div class="sim-result-label">목표 매출</div>' +
             '<div class="sim-revenue-row"><input class="sim-revenue-input" id="sim-revenue" type="text" inputmode="numeric" placeholder="0"><span class="sim-revenue-unit">만원</span></div>' +
             '<div class="sim-sub-item" id="sim-sub-customers">유료고객 —명</div>' +
-            '<div class="sim-sub-item" id="sim-sub-customers">유료고객 —명</div>' +
-            '</div>' +
-            '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">객단가</span></div>' +
+            '<div class="sim-field" style="margin-top:8px;margin-bottom:0;"><div class="sim-field-header"><span class="sim-field-label">객단가</span></div>' +
             '<input class="sim-field-input" id="sim-price" type="text" value="' + unitPrice.toLocaleString('ko-KR') + '"></div>' +
+            '</div>' +
             '<div class="sim-arrow">↓</div>' +
             fmtField('유료고객 전환율 (%)', convertRate.toFixed(1) + '%', 'sim-convert', convertRate.toFixed(1), '0.1') +
             '<div class="sim-computed" id="sim-out-customers">→ 유료고객 —명</div>' +
