@@ -46,6 +46,16 @@
         .funnel-main { flex: 1; min-width: 0; }
         .side-card { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 16px; }
         .bottleneck-panel { flex: 0 0 180px; }
+        .simulator-panel { flex: 0 0 200px; }
+        .sim-title { font-size: 13px; font-weight: 700; color: #1E293B; margin-bottom: 12px; }
+        .sim-row { margin-bottom: 8px; }
+        .sim-label { font-size: 11px; color: #64748B; margin-bottom: 3px; }
+        .sim-input { width: 100%; padding: 4px 8px; border: 1px solid #E2E8F0; border-radius: 6px; font-size: 12px; box-sizing: border-box; outline: none; }
+        .sim-input:focus { border-color: #0077C8; }
+        .sim-result { margin-top: 12px; padding-top: 12px; border-top: 1px solid #E2E8F0; }
+        .sim-result-label { font-size: 11px; color: #64748B; margin-bottom: 2px; }
+        .sim-result-value { font-size: 20px; font-weight: 700; color: #1E293B; }
+        .sim-result-sub { font-size: 11px; color: #64748B; margin-top: 4px; }
         .funnel-stage { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; }
         .funnel-stage-left {}
         .funnel-stage-label { font-size: 14px; color: #64748B; font-weight: 600; margin-bottom: 2px; }
@@ -131,6 +141,7 @@
         /* ── 반응형 ── */
         @media (max-width: 900px) {
             .bottleneck-panel { flex: 1 0 100%; }
+            .simulator-panel { flex: 1 0 100%; }
         }
         @media (max-width: 640px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -194,6 +205,7 @@
                 <div class="funnel-layout">
                     <div id="funnel-wrap" class="funnel funnel-main"></div>
                     <div id="bottleneck-rank" class="side-card bottleneck-panel"></div>
+                    <div id="simulator-panel" class="side-card simulator-panel"></div>
                 </div>
             </div>
 
@@ -497,6 +509,49 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             });
         }
         document.getElementById('bottleneck-rank').innerHTML = rankHtml;
+
+        // 시뮬레이터 초기값 세팅 (주차 변경 시마다 갱신)
+        initSimulator(cw, targets);
+    }
+
+    function initSimulator(cw, targets) {
+        const unitPrice = targets.unit_price || 440000;
+        const html =
+            '<div class="sim-title">매출 시뮬레이터</div>' +
+            '<div class="sim-row"><div class="sim-label">키콘텐츠 조회수</div>' +
+            '<input class="sim-input" id="sim-key" type="number" value="' + (cw.key_views || 0) + '"></div>' +
+            '<div class="sim-row"><div class="sim-label">연계율 (%)</div>' +
+            '<input class="sim-input" id="sim-interest" type="number" step="0.1" value="' + ((cw.interest_rate || 0).toFixed(1)) + '"></div>' +
+            '<div class="sim-row"><div class="sim-label">링크클릭률 (%)</div>' +
+            '<input class="sim-input" id="sim-click" type="number" step="0.1" value="' + ((cw.link_click_rate || 0).toFixed(1)) + '"></div>' +
+            '<div class="sim-row"><div class="sim-label">전환율 (%)</div>' +
+            '<input class="sim-input" id="sim-convert" type="number" step="0.1" value="' + ((cw.convert_rate || 0).toFixed(1)) + '"></div>' +
+            '<div class="sim-row"><div class="sim-label">객단가 (원)</div>' +
+            '<input class="sim-input" id="sim-price" type="number" value="' + unitPrice + '"></div>' +
+            '<div class="sim-result">' +
+            '<div class="sim-result-label">예상 매출</div>' +
+            '<div class="sim-result-value" id="sim-revenue"></div>' +
+            '<div class="sim-result-sub" id="sim-sub"></div>' +
+            '</div>';
+        document.getElementById('simulator-panel').innerHTML = html;
+        ['sim-key', 'sim-interest', 'sim-click', 'sim-convert', 'sim-price'].forEach(function(id) {
+            document.getElementById(id).addEventListener('input', calcSimulator);
+        });
+        calcSimulator();
+    }
+
+    function calcSimulator() {
+        const key = parseFloat(document.getElementById('sim-key').value) || 0;
+        const interest = (parseFloat(document.getElementById('sim-interest').value) || 0) / 100;
+        const click = (parseFloat(document.getElementById('sim-click').value) || 0) / 100;
+        const convert = (parseFloat(document.getElementById('sim-convert').value) || 0) / 100;
+        const price = parseFloat(document.getElementById('sim-price').value) || 0;
+        const pulling = key * interest;
+        const landing = (key + pulling) * click;
+        const customers = landing * convert;
+        const revenue = customers * price;
+        document.getElementById('sim-revenue').textContent = fmtWon(Math.round(revenue));
+        document.getElementById('sim-sub').textContent = '유료고객 ' + customers.toFixed(1) + '명 · 랜딩 ' + Math.round(landing) + '건';
     }
 
     // ── 주간 추이 ──
