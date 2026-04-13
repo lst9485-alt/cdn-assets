@@ -266,7 +266,7 @@
             badgeText: 'LIVE',
             badgeTone: 'live',
             iconKey: 'doc',
-            sidebarType: 'sub',
+            sidebarType: 'root',
             activeMatch: ['prep.html'],
             hubVisible: true
           },
