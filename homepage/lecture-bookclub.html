@@ -1,142 +1,276 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>내집마련 독서모임 — 우리동네재테크</title>
-<script src="https://cdn.tailwindcss.com"><\/script>
-<script>tailwind.config={theme:{extend:{fontFamily:{sans:["Pretendard","system-ui","sans-serif"],display:["GmarketSans","Pretendard","sans-serif"]},colors:{brand:{orange:"#FF6B00",beige:"#F5F0E8",dark:"#0a0a0a",blue:"#0055FF"}}}}}<\/script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>내집마련 독서모임 — 우리동네 재테크</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    important: true,
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+          display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+        },
+        colors: {
+          brand: { orange: '#FF6B00', beige: '#F5F0E8', dark: '#0a0a0a', blue: '#0055FF' }
+        }
+      }
+    }
+  }
+</script>
+<!-- Pretendard + GmarketSans -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
-<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"><\/script>
-<style>html{font-size:16px!important}body{-webkit-font-smoothing:antialiased;font-size:17px;background:#F8FAFC}.word-keep{word-break:keep-all;overflow-wrap:break-word}</style>
+<!-- Iconify -->
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+<!-- 랜딩 스타일 -->
+<style>
+  html { font-size: 16px !important; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; }
+  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+  [data-reveal] { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].revealed { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+  [data-stagger] > * { opacity: 0; transform: translateY(24px) scale(0.9); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  [data-stagger].revealed > *:nth-child(1) { transition-delay: 0s; }
+  [data-stagger].revealed > *:nth-child(2) { transition-delay: 0.12s; }
+  [data-stagger].revealed > *:nth-child(3) { transition-delay: 0.24s; }
+  [data-stagger].revealed > *:nth-child(4) { transition-delay: 0.36s; }
+  [data-stagger].revealed > * { opacity: 1; transform: translateY(0) scale(1); }
+  @keyframes bobUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+  @keyframes bobDown { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+</style>
 </head>
-<body>
-<!-- 내집마련 독서모임 — 아임웹 상품 설명용 -->
-<!-- 아임웹 head-code.html (Tailwind/Pretendard/아이콘) 공유 -->
+<body class="bg-white">
 
-<div class="max-w-4xl mx-auto px-6 sm:px-8 py-8">
-  <h3 class="text-xl font-bold text-brand-dark mb-2">참여 정보</h3>
-  <p class="text-base text-gray-500">진행 방식 &nbsp; <span class="text-brand-dark font-bold">온라인 그룹 모임 · 월 1회</span></p>
-  <p class="text-sm text-brand-orange font-semibold mt-2">* 오픈 예정 상품입니다. 2026년 6월 첫 모임 예정.</p>
+<!-- 내집마련 독서모임 — 아임웹 상품 설명용 -->
+<!-- head-code.html 공유 (Tailwind/Pretendard/G마켓산스/Iconify) -->
+
+<!-- ===== 참여 정보 ===== -->
+<div class="max-w-4xl mx-auto px-6 sm:px-8 pt-8 pb-4">
+  <div class="flex flex-wrap items-center gap-2 mb-3">
+    <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full tracking-wide">온라인 모임</span>
+    <span class="bg-gray-100 text-gray-700 text-xs font-bold px-3 py-1 rounded-full">40,000원</span>
+    <span class="bg-purple-50 text-purple-600 text-xs font-semibold px-3 py-1 rounded-full">2026년 6월 첫 모임 예정</span>
+  </div>
+  <p class="text-base text-gray-500 word-keep">진행 방식 &nbsp; <span class="text-brand-dark font-bold">월 1회 · 온라인(구글미트) · 소규모 그룹</span></p>
 </div>
 
 <!-- ===== 히어로 ===== -->
-<section class="max-w-4xl mx-auto relative overflow-hidden rounded-3xl mx-6 sm:mx-8" style="background: linear-gradient(135deg, #1a1a3e 0%, #2d1b4e 50%, #3d2b5e 100%);">
-  <div class="relative z-10 text-center px-8 py-16 sm:py-20">
-    <p class="text-white/70 text-lg mb-4 word-keep">함께 읽고, 함께 성장하는</p>
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-tight mb-6 word-keep">내집마련<br>독서모임</h1>
-    <p class="text-xl sm:text-2xl text-white/80 font-medium mb-8 word-keep">부동산·자산배분·경제 기초를 책으로 다지는 시간</p>
-    <div class="inline-flex items-center gap-3 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3">
-      <span class="text-white font-bold">월 1회</span>
-      <span class="text-white/50">|</span>
-      <span class="text-white font-bold">온라인</span>
-      <span class="text-white/50">|</span>
-      <span class="text-white font-bold">소규모</span>
+<div class="px-6 sm:px-8">
+  <section class="max-w-4xl mx-auto relative overflow-hidden rounded-3xl" style="background: linear-gradient(135deg, #1a1a3e 0%, #2d1b4e 50%, #3d2b5e 100%);">
+    <!-- floating decorative icons -->
+    <div class="absolute top-8 left-8 opacity-20 hidden sm:block" style="animation: bobUp 4s ease-in-out infinite">
+      <span class="iconify text-white text-4xl" data-icon="solar:book-bold"></span>
     </div>
-  </div>
-</section>
+    <div class="absolute top-14 right-10 opacity-15 hidden sm:block" style="animation: bobDown 5s ease-in-out infinite">
+      <span class="iconify text-white text-3xl" data-icon="solar:chat-round-dots-bold"></span>
+    </div>
+    <div class="absolute bottom-36 left-10 opacity-15 hidden sm:block" style="animation: bobDown 4.5s ease-in-out infinite">
+      <span class="iconify text-white text-2xl" data-icon="solar:users-group-rounded-bold"></span>
+    </div>
+
+    <div class="relative z-10 text-center px-8 pt-16 sm:pt-20 pb-10 sm:pb-14">
+      <p class="text-white/70 text-lg mb-4 word-keep">함께 읽고, 함께 성장하는</p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-tight mb-6 word-keep">내집마련<br>독서모임</h1>
+      <p class="text-xl sm:text-2xl text-white/80 font-medium mb-8 word-keep">부동산 · 자산배분 · 경제 기초를 책으로 다지는 시간</p>
+      <div class="inline-flex items-center gap-3 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3">
+        <span class="text-white font-bold">월 1회</span>
+        <span class="text-white/50">|</span>
+        <span class="text-white font-bold">온라인</span>
+        <span class="text-white/50">|</span>
+        <span class="text-white font-bold">소규모</span>
+      </div>
+    </div>
+
+    <!-- Process preview glass cards -->
+    <div class="relative z-10 px-6 sm:px-8 pb-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div class="bg-white/12 backdrop-blur-sm border border-white/15 rounded-2xl p-3 text-center" style="transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+        <span class="text-white/60 text-xs font-bold">STEP 1</span>
+        <p class="text-white font-bold mt-1 text-xs sm:text-sm word-keep">도서 선정</p>
+      </div>
+      <div class="bg-white/12 backdrop-blur-sm border border-white/15 rounded-2xl p-3 text-center" style="transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+        <span class="text-white/60 text-xs font-bold">STEP 2</span>
+        <p class="text-white font-bold mt-1 text-xs sm:text-sm word-keep">각자 읽기</p>
+      </div>
+      <div class="bg-white/12 backdrop-blur-sm border border-white/15 rounded-2xl p-3 text-center" style="transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+        <span class="text-white/60 text-xs font-bold">STEP 3</span>
+        <p class="text-white font-bold mt-1 text-xs sm:text-sm word-keep">온라인 모임</p>
+      </div>
+      <div class="bg-white/12 backdrop-blur-sm border border-white/15 rounded-2xl p-3 text-center" style="transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+        <span class="text-white/60 text-xs font-bold">STEP 4</span>
+        <p class="text-white font-bold mt-1 text-xs sm:text-sm word-keep">요약 제공</p>
+      </div>
+    </div>
+  </section>
+</div>
 
 <!-- ===== 이런 분께 추천 ===== -->
-<section class="max-w-4xl mx-auto px-6 sm:px-8 py-16">
+<section class="max-w-4xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
   <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark text-center mb-12 word-keep">이런 분께 추천합니다</h2>
-  <div class="grid sm:grid-cols-2 gap-4">
+  <div class="grid sm:grid-cols-2 gap-4" data-stagger>
     <div class="bg-gray-50 rounded-2xl p-6 flex items-start gap-4">
-      <span class="text-2xl flex-shrink-0">📚</span>
+      <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+        <span class="iconify text-purple-600 text-xl" data-icon="solar:book-bold"></span>
+      </div>
       <div>
-        <p class="font-bold text-brand-dark mb-1">혼자 책 읽기가 어려운 분</p>
-        <p class="text-gray-500 text-sm">함께 읽으면 끝까지 완독할 수 있습니다</p>
+        <p class="font-bold text-brand-dark mb-1 word-keep">혼자 책 읽기가 어려운 분</p>
+        <p class="text-gray-500 text-sm word-keep">함께 읽으면 끝까지 완독할 수 있습니다</p>
       </div>
     </div>
     <div class="bg-gray-50 rounded-2xl p-6 flex items-start gap-4">
-      <span class="text-2xl flex-shrink-0">💬</span>
+      <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+        <span class="iconify text-purple-600 text-xl" data-icon="solar:chat-round-dots-bold"></span>
+      </div>
       <div>
-        <p class="font-bold text-brand-dark mb-1">다른 사람의 관점이 궁금한 분</p>
-        <p class="text-gray-500 text-sm">같은 책도 상황에 따라 다르게 읽힙니다</p>
+        <p class="font-bold text-brand-dark mb-1 word-keep">다른 사람의 관점이 궁금한 분</p>
+        <p class="text-gray-500 text-sm word-keep">같은 책도 상황에 따라 다르게 읽힙니다</p>
       </div>
     </div>
     <div class="bg-gray-50 rounded-2xl p-6 flex items-start gap-4">
-      <span class="text-2xl flex-shrink-0">🏠</span>
+      <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+        <span class="iconify text-purple-600 text-xl" data-icon="solar:home-angle-bold"></span>
+      </div>
       <div>
-        <p class="font-bold text-brand-dark mb-1">내집마련 공부를 시작하고 싶은 분</p>
-        <p class="text-gray-500 text-sm">기초부터 체계적으로 공부하는 첫걸음</p>
+        <p class="font-bold text-brand-dark mb-1 word-keep">내집마련 공부를 시작하고 싶은 분</p>
+        <p class="text-gray-500 text-sm word-keep">기초부터 체계적으로 공부하는 첫걸음</p>
       </div>
     </div>
     <div class="bg-gray-50 rounded-2xl p-6 flex items-start gap-4">
-      <span class="text-2xl flex-shrink-0">🤝</span>
+      <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+        <span class="iconify text-purple-600 text-xl" data-icon="solar:users-group-rounded-bold"></span>
+      </div>
       <div>
-        <p class="font-bold text-brand-dark mb-1">같은 목표를 가진 사람들과 교류하고 싶은 분</p>
-        <p class="text-gray-500 text-sm">내집마련이라는 공통 목표를 가진 커뮤니티</p>
+        <p class="font-bold text-brand-dark mb-1 word-keep">같은 목표를 가진 사람들과 교류하고 싶은 분</p>
+        <p class="text-gray-500 text-sm word-keep">내집마련이라는 공통 목표를 가진 커뮤니티</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== 진행 방식 ===== -->
-<section class="max-w-4xl mx-auto px-6 sm:px-8 py-16">
-  <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark text-center mb-12 word-keep">진행 방식</h2>
-  <div class="space-y-6">
-    <div class="flex items-start gap-5">
-      <div class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center flex-shrink-0">
-        <span class="text-white font-bold">1</span>
+<section class="max-w-4xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
+  <div class="text-center mb-12">
+    <span class="inline-block bg-purple-100 text-purple-600 text-xs font-bold px-3 py-1 rounded-full tracking-wide mb-4">PROCESS</span>
+    <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark word-keep">진행 방식</h2>
+  </div>
+  <div class="space-y-0">
+    <div class="flex items-start gap-5 pb-8 relative" data-reveal>
+      <div class="absolute left-5 top-10 bottom-0 w-px bg-purple-200"></div>
+      <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 relative z-10">
+        <span class="text-white font-bold text-sm">1</span>
       </div>
-      <div>
-        <p class="font-bold text-brand-dark text-lg mb-1">도서 선정 안내</p>
-        <p class="text-gray-600">매월 초 선정 도서와 읽기 가이드를 안내합니다</p>
-      </div>
-    </div>
-    <div class="flex items-start gap-5">
-      <div class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center flex-shrink-0">
-        <span class="text-white font-bold">2</span>
-      </div>
-      <div>
-        <p class="font-bold text-brand-dark text-lg mb-1">각자 읽기 (약 3~4주)</p>
-        <p class="text-gray-600">본인 속도에 맞춰 읽고, 인상 깊은 부분을 메모합니다</p>
+      <div class="pt-1">
+        <p class="font-bold text-brand-dark text-lg mb-1 word-keep">도서 선정 안내</p>
+        <p class="text-gray-600 word-keep">매월 초 선정 도서와 읽기 가이드를 안내합니다</p>
       </div>
     </div>
-    <div class="flex items-start gap-5">
-      <div class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center flex-shrink-0">
-        <span class="text-white font-bold">3</span>
+    <div class="flex items-start gap-5 pb-8 relative" data-reveal>
+      <div class="absolute left-5 top-10 bottom-0 w-px bg-purple-200"></div>
+      <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 relative z-10">
+        <span class="text-white font-bold text-sm">2</span>
       </div>
-      <div>
-        <p class="font-bold text-brand-dark text-lg mb-1">온라인 모임 (월 1회, 약 60~90분)</p>
-        <p class="text-gray-600">구글미트로 진행. 핵심 내용 정리 + 자유 토론 + Q&A</p>
+      <div class="pt-1">
+        <p class="font-bold text-brand-dark text-lg mb-1 word-keep">각자 읽기 (약 3~4주)</p>
+        <p class="text-gray-600 word-keep">본인 속도에 맞춰 읽고, 인상 깊은 부분을 메모합니다</p>
       </div>
     </div>
-    <div class="flex items-start gap-5">
-      <div class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center flex-shrink-0">
-        <span class="text-white font-bold">4</span>
+    <div class="flex items-start gap-5 pb-8 relative" data-reveal>
+      <div class="absolute left-5 top-10 bottom-0 w-px bg-purple-200"></div>
+      <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 relative z-10">
+        <span class="text-white font-bold text-sm">3</span>
       </div>
-      <div>
-        <p class="font-bold text-brand-dark text-lg mb-1">모임 후 요약 노트 제공</p>
-        <p class="text-gray-600">핵심 내용 + 토론 인사이트 정리본을 공유합니다</p>
+      <div class="pt-1">
+        <p class="font-bold text-brand-dark text-lg mb-1 word-keep">온라인 모임 (월 1회, 약 60~90분)</p>
+        <p class="text-gray-600 word-keep">구글미트로 진행. 핵심 내용 정리 + 자유 토론 + Q&A</p>
+      </div>
+    </div>
+    <div class="flex items-start gap-5" data-reveal>
+      <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 relative z-10">
+        <span class="text-white font-bold text-sm">4</span>
+      </div>
+      <div class="pt-1">
+        <p class="font-bold text-brand-dark text-lg mb-1 word-keep">모임 후 요약 노트 제공</p>
+        <p class="text-gray-600 word-keep">핵심 내용 + 토론 인사이트 정리본을 공유합니다</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== 선정 도서 예시 ===== -->
-<section class="max-w-4xl mx-auto px-6 sm:px-8 py-16 bg-gray-50 rounded-3xl mx-6 sm:mx-8">
-  <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark text-center mb-4 word-keep">선정 도서 예시</h2>
-  <p class="text-gray-500 text-center mb-12">부동산·자산배분·경제 기초 분야의 필독서 중심</p>
-  <div class="grid sm:grid-cols-3 gap-4">
-    <div class="bg-white rounded-2xl p-5 text-center shadow-sm">
-      <p class="text-3xl mb-3">🏠</p>
-      <p class="font-bold text-brand-dark text-sm">부동산 기초</p>
-      <p class="text-gray-400 text-xs mt-1">입지 분석, 시장 읽기</p>
+<div class="px-6 sm:px-8">
+  <section class="max-w-4xl mx-auto py-16 sm:py-20 bg-gray-50 rounded-3xl px-6 sm:px-10">
+    <div class="text-center mb-4">
+      <span class="inline-block bg-white text-gray-500 text-xs font-bold px-3 py-1 rounded-full tracking-wide mb-4">READING LIST</span>
+      <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark word-keep">선정 도서 예시</h2>
     </div>
-    <div class="bg-white rounded-2xl p-5 text-center shadow-sm">
-      <p class="text-3xl mb-3">📈</p>
-      <p class="font-bold text-brand-dark text-sm">자산배분 전략</p>
-      <p class="text-gray-400 text-xs mt-1">ETF, 포트폴리오, 리밸런싱</p>
+    <p class="text-gray-500 text-center mb-12 word-keep">부동산 · 자산배분 · 경제 기초 분야의 필독서 중심</p>
+    <div class="grid sm:grid-cols-3 gap-4" data-stagger>
+      <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+          <span class="iconify text-purple-600 text-2xl" data-icon="solar:home-2-bold"></span>
+        </div>
+        <p class="font-bold text-brand-dark text-sm word-keep">부동산 기초</p>
+        <p class="text-gray-400 text-xs mt-1 word-keep">입지 분석, 시장 읽기</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+          <span class="iconify text-purple-600 text-2xl" data-icon="solar:graph-up-bold"></span>
+        </div>
+        <p class="font-bold text-brand-dark text-sm word-keep">자산배분 전략</p>
+        <p class="text-gray-400 text-xs mt-1 word-keep">ETF, 포트폴리오, 리밸런싱</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 text-center shadow-sm">
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+          <span class="iconify text-purple-600 text-2xl" data-icon="solar:lightbulb-bold"></span>
+        </div>
+        <p class="font-bold text-brand-dark text-sm word-keep">경제 · 마인드</p>
+        <p class="text-gray-400 text-xs mt-1 word-keep">경제 흐름, 돈에 대한 생각</p>
+      </div>
     </div>
-    <div class="bg-white rounded-2xl p-5 text-center shadow-sm">
-      <p class="text-3xl mb-3">💡</p>
-      <p class="font-bold text-brand-dark text-sm">경제·마인드</p>
-      <p class="text-gray-400 text-xs mt-1">경제 흐름, 돈에 대한 생각</p>
-    </div>
+    <p class="text-gray-400 text-xs text-center mt-6 word-keep">* 매월 참여자 의견을 반영하여 선정합니다</p>
+  </section>
+</div>
+
+<!-- ===== 진행자 소개 ===== -->
+<section class="max-w-4xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
+  <div class="text-center mb-12">
+    <span class="inline-block bg-purple-100 text-purple-600 text-xs font-bold px-3 py-1 rounded-full tracking-wide mb-4">HOST</span>
+    <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark word-keep">진행자 소개</h2>
   </div>
-  <p class="text-gray-400 text-xs text-center mt-6">* 매월 참여자 의견을 반영하여 선정합니다</p>
+  <div class="bg-gray-50 rounded-2xl p-8 sm:p-10" data-reveal>
+    <div class="flex items-center gap-4 mb-6">
+      <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center">
+        <span class="iconify text-purple-600 text-3xl" data-icon="solar:user-bold"></span>
+      </div>
+      <div>
+        <p class="text-2xl font-display font-bold text-brand-dark">우재</p>
+        <p class="text-purple-600 font-semibold">우리동네 재테크 대표</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 gap-3 mb-6">
+      <div class="bg-white rounded-xl p-4 text-center">
+        <p class="text-2xl font-display font-black text-brand-dark">9년+</p>
+        <p class="text-gray-500 text-xs mt-1">부동산 업계 경력</p>
+      </div>
+      <div class="bg-white rounded-xl p-4 text-center">
+        <p class="text-2xl font-display font-black text-brand-dark">1,000+</p>
+        <p class="text-gray-500 text-xs mt-1">독파한 책</p>
+      </div>
+      <div class="bg-white rounded-xl p-4 text-center">
+        <p class="text-2xl font-display font-black text-purple-600">4.97</p>
+        <p class="text-gray-500 text-xs mt-1">교육 만족도</p>
+      </div>
+    </div>
+    <ul class="space-y-2 text-gray-700">
+      <li class="flex items-start gap-2"><span class="text-purple-600 mt-0.5"><span class="iconify text-sm" data-icon="solar:check-circle-bold"></span></span><span class="word-keep">유튜브 "우리동네 재테크" 운영</span></li>
+      <li class="flex items-start gap-2"><span class="text-purple-600 mt-0.5"><span class="iconify text-sm" data-icon="solar:check-circle-bold"></span></span><span class="word-keep">117건+ 1:1 교육 진행 (만족도 4.97/5점)</span></li>
+      <li class="flex items-start gap-2"><span class="text-purple-600 mt-0.5"><span class="iconify text-sm" data-icon="solar:check-circle-bold"></span></span><span class="word-keep">강의 · 자기계발에 1억+ 투자</span></li>
+    </ul>
+  </div>
 </section>
 
 <!-- ===== 환불 규정 ===== -->
@@ -152,38 +286,60 @@
       </thead>
       <tbody class="text-gray-700">
         <tr class="border-b border-gray-100">
-          <td class="py-3 font-medium">모임 7일 전까지</td>
+          <td class="py-3 font-medium word-keep">모임 7일 전까지</td>
           <td class="py-3">전액 환불</td>
         </tr>
         <tr class="border-b border-gray-100">
-          <td class="py-3 font-medium">모임 3일 전까지</td>
+          <td class="py-3 font-medium word-keep">모임 3일 전까지</td>
           <td class="py-3">50% 환불</td>
         </tr>
         <tr>
-          <td class="py-3 font-medium">모임 3일 이내 ~ 당일</td>
+          <td class="py-3 font-medium word-keep">모임 3일 이내 ~ 당일</td>
           <td class="py-3">환불 불가</td>
         </tr>
       </tbody>
     </table>
-    <p class="text-gray-400 text-sm mt-4">환불 요청: contact@ourdongne.com</p>
+    <p class="text-gray-400 text-sm mt-4 word-keep">환불 요청: contact@ourdongne.com</p>
   </div>
 </section>
 
-<!-- ===== 안내 ===== -->
+<!-- ===== 안내사항 ===== -->
 <section class="max-w-4xl mx-auto px-6 sm:px-8 pb-16">
   <div class="bg-purple-50 border border-purple-200/50 rounded-2xl p-6 sm:p-8">
     <h3 class="text-lg font-bold text-brand-dark mb-4">안내사항</h3>
     <ul class="space-y-2 text-gray-600 text-sm">
-      <li>- 본 독서모임은 <strong>2026년 6월 첫 모임 예정</strong>입니다.</li>
-      <li>- 월 1회 온라인(구글미트)으로 진행되며, 소규모로 운영합니다.</li>
-      <li>- 도서 구입은 각자 준비해 주세요.</li>
-      <li>- 본 프로그램은 학습과 교류를 위한 교육 프로그램입니다.</li>
-      <li>- 특정 매물 추천·중개·계약 대행 서비스는 제공하지 않습니다.</li>
+      <li class="word-keep">- 본 독서모임은 <strong>2026년 6월 첫 모임 예정</strong>입니다.</li>
+      <li class="word-keep">- 월 1회 온라인(구글미트)으로 진행되며, 소규모로 운영합니다.</li>
+      <li class="word-keep">- 모임 참여 링크는 결제 후 이메일로 안내됩니다.</li>
+      <li class="word-keep">- 도서 구입은 각자 준비해 주세요.</li>
+      <li class="word-keep">- 본 프로그램은 학습과 교류를 위한 <strong>교육 프로그램</strong>입니다.</li>
+      <li class="word-keep">- 특정 매물 추천 · 중개 · 계약 대행 서비스는 제공하지 않습니다.</li>
     </ul>
   </div>
 </section>
 
-<section class="max-w-4xl mx-auto px-6 sm:px-8 pb-8">
-  <p class="text-center text-gray-400 text-xs">문의: contact@ourdongne.com</p>
-</section>
-</body></html>
+<!-- ===== CTA ===== -->
+<div class="px-6 sm:px-8 pb-12">
+  <section class="max-w-4xl mx-auto rounded-3xl py-12 sm:py-16 px-8 text-center" style="background: linear-gradient(135deg, #1a1a3e 0%, #2d1b4e 100%);">
+    <span class="iconify text-purple-400 text-4xl mb-4 inline-block" data-icon="solar:chat-round-dots-bold"></span>
+    <h2 class="text-2xl sm:text-3xl font-display font-black text-white mb-3 word-keep">궁금한 점이 있으신가요?</h2>
+    <p class="text-gray-400 mb-6 word-keep">독서모임 참여, 진행 방식 등 무엇이든 편하게 문의하세요.</p>
+    <a href="mailto:contact@ourdongne.com" class="inline-flex items-center gap-2 bg-purple-600 text-white font-bold px-8 py-4 rounded-full text-lg" style="transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
+      <span class="iconify text-xl" data-icon="solar:letter-bold"></span>
+      contact@ourdongne.com
+    </a>
+  </section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) e.target.classList.add('revealed');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
+  });
+</script>
+</body>
+</html>
