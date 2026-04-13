@@ -1,13 +1,13 @@
 {
-  "updated": "2026-04-13T06:00:00.736840+09:00",
+  "updated": "2026-04-13T22:35:33.080328+09:00",
   "projects": [
     {
       "name": "홈페이지",
       "type": "folder",
       "app": "homepage",
-      "modified": "2026-04-10",
+      "modified": "2026-04-13",
       "status": "v3.5 섹션 재배치 + UI/UX 개선. 서버 백엔드(Apps Script doPost) 배포 완료 (v24). 아임웹 삽입은 v3.4 기준 — v3.5 아직 미반영",
-      "next": "플로팅 CTA 추가 — 가격표 섹션 도달 시 \"상담신청하기\" 버튼 플로팅 (PC: 오른쪽 하단, 모바일: 하단 고정 바). 클릭 → 커스텀 폼으로 스크롤. footer-code.html에 IntersectionObserver + position:fixed"
+      "next": "~~강의/독서모임 상세페이지 HTML 작성~~ ✅ (2026-04-13, Supanova 리디자인 완료)"
     },
     {
       "name": "브랜딩 — 왜 하필 여기",
