@@ -218,11 +218,12 @@
 
   function reorderSlide(fromIdx, toIdx) {
     if (fromIdx === toIdx) return;
-    // 같은 page-group 안에서만 재정렬 허용 (다른 그룹 간 이동은 base/variant 인접성 깨짐)
+    // 에디터: 같은 page-group 안에서만 (base/variant 인접성 보호)
+    // 생성 슬라이드: 자유 이동 허용
     const fromSlide = slides[fromIdx];
     const toSlide = slides[toIdx];
     if (!fromSlide || !toSlide) return;
-    if (fromSlide.dataset.pageGroup !== toSlide.dataset.pageGroup) {
+    if (!document.body.dataset.generated && fromSlide.dataset.pageGroup !== toSlide.dataset.pageGroup) {
       if (typeof showToast === 'function') showToast('같은 그룹 안에서만 순서 변경 가능');
       return;
     }
