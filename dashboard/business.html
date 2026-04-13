@@ -47,11 +47,13 @@
         .funnel-side { flex: 0 0 220px; display: flex; flex-direction: column; gap: 16px; }
         .side-card { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; }
         .sim-title { font-size: 12px; font-weight: 700; color: #94A3B8; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; }
-        .sim-revenue { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9; }
-        .sim-revenue-input { width: 100%; border: 1px solid #E2E8F0; border-radius: 8px; outline: none; font-size: 20px; font-weight: 800; color: #1E293B; background: #F8FAFC; padding: 8px 10px; box-sizing: border-box; cursor: text; }
-        .sim-revenue-input:hover { border-color: #CBD5E1; }
-        .sim-revenue-input:focus { color: #0077C8; border-color: #0077C8; background: white; }
-        .sim-revenue-sub { font-size: 11px; color: #94A3B8; margin-top: 4px; }
+        .sim-result { background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; padding: 16px 20px; margin-bottom: 14px; }
+        .sim-result-label { font-size: 14px; color: #64748B; font-weight: 600; margin-bottom: 2px; }
+        .sim-revenue-input { width: 100%; border: none; outline: none; font-size: 28px; font-weight: 800; color: #051C2C; background: transparent; padding: 0; box-sizing: border-box; cursor: text; border-bottom: 2px solid transparent; }
+        .sim-revenue-input:hover { border-bottom-color: #CBD5E1; }
+        .sim-revenue-input:focus { color: #0077C8; border-bottom-color: #0077C8; }
+        .sim-sub-row { display: flex; gap: 16px; margin-top: 8px; }
+        .sim-sub-item { font-size: 14px; font-weight: 600; color: #64748B; }
         .sim-field { margin-bottom: 8px; }
         .sim-field-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; }
         .sim-field-label { font-size: 11px; color: #64748B; }
@@ -529,9 +531,10 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         };
         const html =
             '<div class="sim-title">시뮬레이터</div>' +
-            '<div class="sim-revenue">' +
+            '<div class="sim-result">' +
+            '<div class="sim-result-label">예상 매출</div>' +
             '<input class="sim-revenue-input" id="sim-revenue" type="text" placeholder="—">' +
-            '<div class="sim-revenue-sub" id="sim-sub"></div>' +
+            '<div class="sim-sub-row"><span class="sim-sub-item" id="sim-sub-customers">유료고객 —명</span><span class="sim-sub-item" id="sim-sub-landing">랜딩 —건</span></div>' +
             '</div>' +
             '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">키콘텐츠 조회수</span></div>' +
             '<input class="sim-field-input" id="sim-key" type="number" value="' + (cw.key_views || 0) + '"></div>' +
@@ -579,7 +582,8 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             var convert = parseFloat(document.getElementById('sim-convert').value) || 0;
             var customers = price > 0 ? rev / price : 0;
             var landing = convert > 0 ? customers / (convert / 100) : 0;
-            document.getElementById('sim-sub').textContent = '유료고객 ' + customers.toFixed(1) + '명 · 랜딩 ' + Math.round(landing) + '건';
+            document.getElementById('sim-sub-customers').textContent = '유료고객 ' + customers.toFixed(1) + '명';
+            document.getElementById('sim-sub-landing').textContent = '랜딩 ' + Math.round(landing) + '건';
         });
         calcSimulator();
     }
@@ -598,7 +602,8 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         const customers = landing * (convert / 100);
         const revenue = customers * price;
         revEl.value = fmtWon(Math.round(revenue));
-        document.getElementById('sim-sub').textContent = '유료고객 ' + customers.toFixed(1) + '명 · 랜딩 ' + Math.round(landing) + '건';
+        document.getElementById('sim-sub-customers').textContent = '유료고객 ' + customers.toFixed(1) + '명';
+            document.getElementById('sim-sub-landing').textContent = '랜딩 ' + Math.round(landing) + '건';
     }
 
     // ── 주간 추이 ──
