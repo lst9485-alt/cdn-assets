@@ -1879,18 +1879,21 @@
           }
           ovDragGhost.style.left = (ev.clientX - item.offsetWidth / 2) + 'px';
           ovDragGhost.style.top = (ev.clientY - 40) + 'px';
-          const items = [...ovGrid.querySelectorAll('.ov-item')];
-          let dropIdx = items.length;
-          for (let i = 0; i < items.length; i++) {
-            const r = items[i].getBoundingClientRect();
+          const allItems = [...ovGrid.querySelectorAll('.ov-item')];
+          // 보이는 카드만 드롭 대상 (접힌 variant 제외)
+          const visibleItems = allItems.filter(it => !it.classList.contains('ov-variant') || it.classList.contains('show'));
+          let visDropIdx = visibleItems.length;
+          for (let i = 0; i < visibleItems.length; i++) {
+            const r = visibleItems[i].getBoundingClientRect();
             const midX = r.left + r.width / 2;
             const midY = r.top + r.height / 2;
-            if (ev.clientY < r.bottom && ev.clientY > r.top && ev.clientX < midX) { dropIdx = i; break; }
-            if (ev.clientY < midY) { dropIdx = i; break; }
+            if (ev.clientY < r.bottom && ev.clientY > r.top && ev.clientX < midX) { visDropIdx = i; break; }
+            if (ev.clientY < midY) { visDropIdx = i; break; }
           }
-          ovDragDropIdx = dropIdx;
-          items.forEach(it => it.classList.remove('ov-drop-before'));
-          if (dropIdx < items.length) items[dropIdx].classList.add('ov-drop-before');
+          // 보이는 인덱스 → 실제 슬라이드 인덱스 변환
+          ovDragDropIdx = visDropIdx < visibleItems.length ? visibleItems[visDropIdx]._slideIdx : allItems[allItems.length - 1]._slideIdx + 1;
+          allItems.forEach(it => it.classList.remove('ov-drop-before'));
+          if (visDropIdx < visibleItems.length) visibleItems[visDropIdx].classList.add('ov-drop-before');
         };
 
         const onUp = () => {
