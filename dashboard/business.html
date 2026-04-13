@@ -44,9 +44,8 @@
         .funnel { background: white; border-radius: 12px; padding: 24px; border: 1px solid #E2E8F0; }
         .funnel-layout { display: flex; gap: 16px; flex-wrap: wrap; }
         .funnel-main { flex: 1; min-width: 0; }
-        .side-card { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 16px; }
-        .bottleneck-panel { flex: 0 0 180px; }
-        .simulator-panel { flex: 0 0 200px; }
+        .funnel-side { flex: 0 0 220px; display: flex; flex-direction: column; gap: 16px; }
+        .side-card { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; }
         .sim-title { font-size: 12px; font-weight: 700; color: #94A3B8; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; }
         .sim-revenue { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #F1F5F9; }
         .sim-revenue-input { width: 100%; border: none; outline: none; font-size: 22px; font-weight: 800; color: #1E293B; background: transparent; padding: 0; box-sizing: border-box; }
@@ -142,8 +141,7 @@
 
         /* ── 반응형 ── */
         @media (max-width: 900px) {
-            .bottleneck-panel { flex: 1 0 100%; }
-            .simulator-panel { flex: 1 0 100%; }
+            .funnel-side { flex: 1 0 100%; }
         }
         @media (max-width: 640px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -206,8 +204,10 @@
                 </div>
                 <div class="funnel-layout">
                     <div id="funnel-wrap" class="funnel funnel-main"></div>
-                    <div id="bottleneck-rank" class="side-card bottleneck-panel"></div>
-                    <div id="simulator-panel" class="side-card simulator-panel"></div>
+                    <div class="funnel-side">
+                        <div id="bottleneck-rank" class="side-card"></div>
+                        <div id="simulator-panel" class="side-card"></div>
+                    </div>
                 </div>
             </div>
 
@@ -529,7 +529,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         const html =
             '<div class="sim-title">시뮬레이터</div>' +
             '<div class="sim-revenue">' +
-            '<input class="sim-revenue-input" id="sim-revenue" type="text" readonly placeholder="—">' +
+            '<input class="sim-revenue-input" id="sim-revenue" type="text" placeholder="—">' +
             '<div class="sim-revenue-sub" id="sim-sub"></div>' +
             '</div>' +
             '<div class="sim-field"><div class="sim-field-header"><span class="sim-field-label">키콘텐츠 조회수</span></div>' +
@@ -550,10 +550,28 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             this.value = num.toLocaleString('ko-KR');
             calcSimulator();
         });
+        // 매출 역산: 매출 필드 직접 입력 시 유료고객수·랜딩접속수 역산
+        var revInput = document.getElementById('sim-revenue');
+        var revFocused = false;
+        revInput.addEventListener('focus', function() { revFocused = true; });
+        revInput.addEventListener('blur', function() { revFocused = false; });
+        revInput.addEventListener('input', function() {
+            var raw = this.value.replace(/[^0-9]/g, '');
+            var rev = parseInt(raw) || 0;
+            this.value = fmtWon(rev);
+            var priceRaw = (document.getElementById('sim-price').value || '').replace(/,/g, '');
+            var price = parseFloat(priceRaw) || 0;
+            var convert = parseFloat(document.getElementById('sim-convert').value) || 0;
+            var customers = price > 0 ? rev / price : 0;
+            var landing = convert > 0 ? customers / (convert / 100) : 0;
+            document.getElementById('sim-sub').textContent = '유료고객 ' + customers.toFixed(1) + '명 · 랜딩 ' + Math.round(landing) + '건';
+        });
         calcSimulator();
     }
 
     function calcSimulator() {
+        var revEl = document.getElementById('sim-revenue');
+        if (revEl === document.activeElement) return; // 역산 중이면 순방향 계산 스킵
         const key = parseFloat(document.getElementById('sim-key').value) || 0;
         const interest = parseFloat(document.getElementById('sim-interest').value) || 0;
         const click = parseFloat(document.getElementById('sim-click').value) || 0;
@@ -564,7 +582,7 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
         const landing = (key + pulling) * (click / 100);
         const customers = landing * (convert / 100);
         const revenue = customers * price;
-        document.getElementById('sim-revenue').value = fmtWon(Math.round(revenue));
+        revEl.value = fmtWon(Math.round(revenue));
         document.getElementById('sim-sub').textContent = '유료고객 ' + customers.toFixed(1) + '명 · 랜딩 ' + Math.round(landing) + '건';
     }
 
