@@ -1352,6 +1352,11 @@
   }
 
   /* ── 슬라이드 오버뷰 (O키) ── */
+  body.overview-active #stage { visibility: hidden; pointer-events: none; }
+  body.overview-active #filmstrip { display: none !important; }
+  body.overview-active #top-toolbar { display: none !important; }
+  body.overview-active > a[href="./"] { display: none !important; }
+
   #overview {
     display: none;
     position: fixed;

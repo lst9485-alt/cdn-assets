@@ -1345,6 +1345,7 @@
     }
     if (e.key === 'Escape') {
       document.getElementById('overview').classList.remove('visible');
+      document.body.classList.remove('overview-active');
       document.getElementById('help').classList.remove('visible');
       return;
     }
@@ -1924,6 +1925,7 @@
         if (ovDragItem) return;
         e.stopPropagation();
         overview.classList.remove('visible');
+        document.body.classList.remove('overview-active');
         goToSlide(slideIdx);
       });
       item.addEventListener('contextmenu', (e) => {
@@ -2122,9 +2124,11 @@
   function toggleOverview() {
     if (overview.classList.contains('visible')) {
       overview.classList.remove('visible');
+      document.body.classList.remove('overview-active');
     } else {
       buildOverview();
       overview.classList.add('visible');
+      document.body.classList.add('overview-active');
     }
   }
 
@@ -2318,6 +2322,7 @@
     const hadLayerVisible = layerPanel.classList.contains('visible');
     layerPanel.classList.remove('visible');
     document.body.classList.remove('edit-mode');
+    document.body.classList.remove('overview-active');
     // show-guide 클래스 백업 & 제거
     const guideClasses = [...document.body.classList].filter(c => c.startsWith('show-guide'));
     guideClasses.forEach(c => document.body.classList.remove(c));
@@ -2348,6 +2353,7 @@
     const animShownEls = Array.from(document.querySelectorAll('#stage .anim-shown'));
     animShownEls.forEach(el => el.classList.remove('anim-shown'));
 
+    document.getElementById('overview').classList.remove('visible');
     const ovGrid = document.getElementById('overview-grid');
     const ovChildren = [...ovGrid.childNodes];
     ovChildren.forEach(c => c.remove());
@@ -5624,4 +5630,3 @@ ch.postMessage({ type: 'ready' });
   }
 
   document.querySelectorAll('.line-chart').forEach(el => buildLineChart(el));
-
