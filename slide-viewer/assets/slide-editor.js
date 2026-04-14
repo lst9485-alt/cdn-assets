@@ -1857,30 +1857,28 @@
 
   function openOverview() {
     buildOverview();
-    document.title = 'OV-V13';
+    document.title = 'OV-V14';
     overview.dataset.open = '1';
     _ovStage.style.display = 'none';
     document.body.classList.add('overview-mode');
-    // overview 자체에 배경 + 크기 확실하게 (top/right/bottom/left 명시)
-    overview.style.cssText = 'display:flex;position:fixed;top:0;right:0;bottom:0;left:0;z-index:99999;background:#111;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;box-sizing:border-box';
-    // backdrop도 유지 (보험)
-    let ovBg = document.getElementById('ov-backdrop');
-    if (!ovBg) {
-      ovBg = document.createElement('div');
-      ovBg.id = 'ov-backdrop';
-      document.body.appendChild(ovBg);
-    }
-    ovBg.style.cssText = 'position:fixed;top:0;right:0;bottom:0;left:0;z-index:99998;background:#111;';
+    // Chrome GPU 렌더링 버그 우회: transform으로 새 합성 레이어 강제 생성
+    overview.style.cssText = 'display:flex;position:fixed;top:0;right:0;bottom:0;left:0;z-index:99999;background:#111;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;box-sizing:border-box;transform:translateZ(0);-webkit-backface-visibility:hidden';
+    // html/body 배경도 직접 덮기 (Chrome이 overview 배경을 안 그릴 때 보험)
+    document.documentElement.style.setProperty('background', '#111', 'important');
+    document.body.style.setProperty('background', '#111', 'important');
+    document.body.style.setProperty('background-image', 'none', 'important');
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
   function closeOverview() {
     delete overview.dataset.open;
     overview.style.cssText = 'display:none';
-    const ovBg = document.getElementById('ov-backdrop');
-    if (ovBg) ovBg.style.display = 'none';
     ovGrid.innerHTML = '';
     document.body.classList.remove('overview-mode');
+    // html/body 배경 복원
+    document.documentElement.style.removeProperty('background');
+    document.body.style.removeProperty('background');
+    document.body.style.removeProperty('background-image');
     _ovStage.style.display = '';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = el.dataset.ovPrev || ''; delete el.dataset.ovPrev; } });
     document.documentElement.focus();
