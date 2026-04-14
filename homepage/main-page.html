@@ -48,21 +48,20 @@
 
 <!-- ===== 히어로 (라이트 2컬럼) ===== -->
 <section data-section="main-hero" class="relative overflow-hidden bg-white">
-  <div class="max-w-5xl mx-auto relative z-10 px-6 sm:px-8 pt-16 sm:pt-24 pb-12 sm:pb-20">
-    <div class="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+  <div class="max-w-6xl mx-auto relative z-10 px-6 sm:px-10 pt-14 sm:pt-20 pb-10 sm:pb-16">
+    <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
 
       <!-- 왼쪽: 텍스트 -->
       <div>
-        <p class="text-brand-orange text-lg sm:text-xl font-bold tracking-widest uppercase mb-5">우리동네 재테크</p>
-        <h1 class="text-4xl sm:text-5xl lg:text-[3.4rem] font-display font-black text-brand-dark leading-[1.15] mb-5 word-keep">직장인을 위한<br>내집마련 로드맵</h1>
-        <p class="text-lg sm:text-xl text-gray-500 font-medium mb-8 word-keep">ETF로 종잣돈, 부동산으로 자산 — 데이터 기반 투자 전략</p>
+        <h1 class="text-4xl sm:text-5xl lg:text-[3.6rem] font-display font-black text-brand-dark leading-[1.12] mb-5 word-keep">직장인을 위한<br>내집마련 로드맵</h1>
+        <p class="text-base sm:text-lg text-gray-400 font-medium mb-8 word-keep">ETF로 종잣돈, 부동산으로 자산 — 데이터 기반 투자 전략</p>
 
         <div class="flex flex-wrap gap-3 mb-10">
           <a href="/counsel/?idx=11" class="inline-flex items-center gap-2 bg-brand-orange text-white font-semibold px-6 py-2.5 rounded-full text-sm hover:opacity-90 active:scale-[0.98]" style="transition: all 0.3s ease;">
             무료 상담 신청하기
             <iconify-icon icon="solar:arrow-right-bold" class="text-sm"></iconify-icon>
           </a>
-          <a href="#main-services-anchor" class="inline-flex items-center gap-2 border border-gray-200 text-gray-600 font-semibold px-6 py-2.5 rounded-full text-sm hover:border-brand-orange hover:text-brand-orange" style="transition: all 0.3s ease;">
+          <a href="#main-services-anchor" class="inline-flex items-center gap-2 border border-gray-200 text-gray-500 font-semibold px-6 py-2.5 rounded-full text-sm hover:border-brand-orange hover:text-brand-orange" style="transition: all 0.3s ease;">
             서비스 보기
           </a>
         </div>
@@ -85,31 +84,48 @@
       </div>
 
       <!-- 오른쪽: 이미지 콜라주 -->
-      <div class="relative hidden md:block" style="min-height: 420px;">
-        <!-- 장식 요소 -->
-        <div class="absolute -top-4 right-12 w-14 h-14 rounded-full bg-brand-orange/10" style="animation: bobUp 4s ease-in-out infinite;"></div>
-        <div class="absolute bottom-8 -left-4 w-10 h-10 rounded-full bg-blue-100" style="animation: bobDown 5s ease-in-out infinite;"></div>
-        <div class="absolute top-1/2 -right-2 w-6 h-6 rounded-full bg-emerald-200" style="animation: bobUp 3.5s ease-in-out infinite;"></div>
+      <div class="relative hidden md:block" style="min-height: 440px;">
+        <!-- 장식: 원 -->
+        <div class="absolute -top-2 left-[45%] w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+          <iconify-icon icon="solar:home-angle-bold" class="text-brand-orange text-sm"></iconify-icon>
+        </div>
+        <div class="absolute top-[38%] -left-3 w-7 h-7 rounded-full bg-blue-100"></div>
+        <div class="absolute bottom-[15%] right-[38%] w-5 h-5 rounded-full bg-orange-200/60"></div>
+        <div class="absolute bottom-4 left-[20%] w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
+          <iconify-icon icon="solar:chart-square-bold" class="text-emerald-500 text-xs"></iconify-icon>
+        </div>
+        <!-- 장식: 별 -->
+        <svg class="absolute top-[20%] left-[8%] text-orange-300/50" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
+        <svg class="absolute bottom-[35%] right-0 text-blue-200" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
+        <svg class="absolute top-[60%] left-[42%] text-emerald-200" width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
 
-        <!-- 메인 이미지 (큰 사각형) -->
-        <div class="absolute top-0 right-0 w-[58%] h-[55%] rounded-3xl overflow-hidden shadow-md bg-orange-50">
-          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=400&fit=crop" alt="아파트 전경" class="w-full h-full object-cover">
+        <!-- 이미지 1: 메인 (우상단, 파스텔 오렌지 배경) -->
+        <div class="absolute top-2 right-0 w-[56%] rounded-[1.8rem] bg-orange-50 p-2.5 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=400&fit=crop" alt="아파트 전경" class="w-full aspect-[4/3] object-cover rounded-[1.4rem]">
         </div>
 
-        <!-- 좌측 하단 이미지 -->
-        <div class="absolute bottom-0 left-0 w-[48%] h-[50%] rounded-3xl overflow-hidden shadow-md bg-blue-50">
-          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=400&fit=crop" alt="열쇠와 집 모형" class="w-full h-full object-cover">
+        <!-- 이미지 2: 좌하단 (파스텔 블루 배경, 따뜻한 인테리어) -->
+        <div class="absolute bottom-2 left-0 w-[50%] rounded-[1.8rem] bg-blue-50 p-2.5 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=400&fit=crop" alt="따뜻한 거실 인테리어" class="w-full aspect-[4/3] object-cover rounded-[1.4rem]">
         </div>
 
-        <!-- 우측 하단 작은 카드 -->
-        <div class="absolute bottom-4 right-4 w-[40%] h-[32%] rounded-2xl overflow-hidden shadow-md bg-emerald-50">
-          <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?w=400&h=300&fit=crop" alt="도시 전경" class="w-full h-full object-cover">
+        <!-- 이미지 3: 우하단 (파스텔 그린 배경, 열쇠) -->
+        <div class="absolute bottom-6 right-6 w-[38%] rounded-[1.4rem] bg-emerald-50 p-2 shadow-sm">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop" alt="열쇠와 집" class="w-full aspect-[4/3] object-cover rounded-[1rem]">
+        </div>
+
+        <!-- 플로팅 뱃지 -->
+        <div class="absolute top-[48%] left-[38%] bg-white rounded-2xl px-3 py-2 shadow-md flex items-center gap-2 z-10">
+          <div class="w-7 h-7 rounded-full bg-brand-orange/10 flex items-center justify-center">
+            <iconify-icon icon="solar:key-bold" class="text-brand-orange text-sm"></iconify-icon>
+          </div>
+          <span class="text-xs font-bold text-brand-dark">내집마련 A to Z</span>
         </div>
       </div>
 
-      <!-- 모바일용 이미지 (1장만) -->
-      <div class="md:hidden rounded-3xl overflow-hidden shadow-md">
-        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=400&fit=crop" alt="아파트 전경" class="w-full h-48 object-cover">
+      <!-- 모바일용 이미지 -->
+      <div class="md:hidden rounded-[1.4rem] bg-orange-50 p-2">
+        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=400&fit=crop" alt="따뜻한 거실" class="w-full h-48 object-cover rounded-xl">
       </div>
     </div>
   </div>
