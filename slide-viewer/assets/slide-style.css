@@ -1351,46 +1351,9 @@
     border-top: 2px dashed rgba(0, 120, 255, 0.55);
   }
 
-  /* ── 슬라이드 오버뷰 (O키) — <dialog> + showModal() ── */
-  dialog#overview {
-    display: flex;
-    position: fixed;
-    inset: 0;
-    border: none;
-    padding: 40px;
-    margin: 0;
-    max-width: none;
-    max-height: none;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.85);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    z-index: 10100;
-  }
-  dialog#overview::backdrop {
-    background: rgba(0,0,0,0.85);
-  }
-  dialog#overview:not([open]) {
-    display: none;
-  }
-  /* overview 열릴 때 모든 UI 숨김 (showModal 실패 대비) */
-  body.overview-active #stage {
-    visibility: hidden !important;
-  }
-  body.overview-active #top-toolbar,
-  body.overview-active #group-toolbar,
-  body.overview-active #guide-toolbar,
-  body.overview-active #align-menu,
-  body.overview-active #help,
-  body.overview-active #slideNum,
-  body.overview-active #edit-badge,
-  body.overview-active #filmstrip,
-  body.overview-active #dim-outer {
-    display: none !important;
-  }
+  /* ── 슬라이드 오버뷰 (O키) — JS 인라인 스타일이 주도, CSS는 기본 숨김만 ── */
+  #overview { display: none; border: none; padding: 0; margin: 0; }
+  #overview::backdrop { display: none; }
 
   #overview-grid {
     display: grid;

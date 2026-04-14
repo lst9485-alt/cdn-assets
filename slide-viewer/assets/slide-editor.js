@@ -1321,6 +1321,8 @@
       }
       return;
     }
+    // Escape: overview 열려있으면 닫기
+    if (e.key === 'Escape' && overview.hasAttribute('open')) { closeOverview(); return; }
     // Escape: 텍스트 편집 중이면 패스 (blur가 처리)
     if (e.key === 'Escape' && isEditing) return;
     // Escape: 개별모드 → 그룹모드, 선택 해제, 편집 모드 종료 순
@@ -1850,11 +1852,25 @@
   // 오버뷰
   const overview = document.getElementById('overview');
   const ovGrid = document.getElementById('overview-grid');
-  overview.addEventListener('close', () => {
-    document.body.classList.remove('overview-active');
-    overview.blur();
+  const _ovStage = document.getElementById('stage');
+  const _ovHideIds = ['top-toolbar','group-toolbar','guide-toolbar','align-menu','help','slideNum','edit-badge','filmstrip','dim-outer'];
+
+  function openOverview() {
+    buildOverview();
+    overview.setAttribute('open', '');
+    overview.style.cssText = 'display:flex;position:fixed;inset:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;border:none;margin:0;max-width:none;max-height:none';
+    _ovStage.style.visibility = 'hidden';
+    _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
+  }
+
+  function closeOverview() {
+    overview.removeAttribute('open');
+    overview.style.cssText = 'display:none';
+    ovGrid.innerHTML = '';
+    _ovStage.style.visibility = '';
+    _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = el.dataset.ovPrev || ''; delete el.dataset.ovPrev; } });
     document.documentElement.focus();
-  });
+  }
 
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
   let expandedOverviewGroups = new Set();  // 확장된 page-group(string) 집합 — overview 전용
@@ -1940,8 +1956,7 @@
       item.addEventListener('click', (e) => {
         if (ovDragItem) return;
         e.stopPropagation();
-        overview.close();
-        document.body.classList.remove('overview-active');
+        closeOverview();
         goToSlide(slideIdx);
       });
       item.addEventListener('contextmenu', (e) => {
@@ -2138,19 +2153,10 @@
   }
 
   function toggleOverview() {
-    if (overview.open) {
-      overview.close();
-      document.body.classList.remove('overview-active');
+    if (overview.hasAttribute('open')) {
+      closeOverview();
     } else {
-      buildOverview();
-      if (overview.open) overview.close();
-      try {
-        overview.showModal();
-      } catch (err) {
-        console.warn('[OV] showModal failed, using show():', err.message);
-        overview.show();
-      }
-      document.body.classList.add('overview-active');
+      openOverview();
     }
   }
 
@@ -2374,13 +2380,9 @@
     const animShownEls = Array.from(document.querySelectorAll('#stage .anim-shown'));
     animShownEls.forEach(el => el.classList.remove('anim-shown'));
 
-    if (document.getElementById('overview').open) {
-      document.getElementById('overview').close();
-      document.body.classList.remove('overview-active');
+    if (document.getElementById('overview').hasAttribute('open')) {
+      closeOverview();
     }
-    const ovGrid = document.getElementById('overview-grid');
-    const ovChildren = [...ovGrid.childNodes];
-    ovChildren.forEach(c => c.remove());
     const fsInner = document.getElementById('filmstrip-inner');
     const fsChildren = [...fsInner.childNodes];
     fsChildren.forEach(c => c.remove());
