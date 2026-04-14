@@ -83,42 +83,38 @@
         </div>
       </div>
 
-      <!-- 오른쪽: 이미지 콜라주 -->
-      <div class="relative hidden md:block" style="min-height: 460px;">
-        <!-- 장식: 원 -->
-        <div class="absolute -top-1 left-[42%] w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+      <!-- 오른쪽: 이미지 콜라주 (grid 기반) -->
+      <div class="relative hidden md:block">
+        <!-- 장식 요소 -->
+        <div class="absolute -top-3 left-[40%] w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center z-10">
           <iconify-icon icon="solar:home-angle-bold" class="text-brand-orange text-sm"></iconify-icon>
         </div>
-        <div class="absolute top-[35%] -left-5 w-7 h-7 rounded-full bg-blue-100"></div>
-        <div class="absolute bottom-[18%] right-[2%] w-6 h-6 rounded-full bg-orange-200/50"></div>
-        <div class="absolute bottom-2 left-[15%] w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
-          <iconify-icon icon="solar:chart-square-bold" class="text-emerald-500 text-xs"></iconify-icon>
-        </div>
-        <!-- 장식: 별 -->
-        <svg class="absolute top-[18%] left-[2%] text-orange-300/50" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
-        <svg class="absolute bottom-[32%] right-[-4px] text-blue-200" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
-        <svg class="absolute top-[55%] left-[40%] text-emerald-200" width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
+        <div class="absolute top-[50%] -left-4 w-7 h-7 rounded-full bg-blue-100 z-10"></div>
+        <div class="absolute bottom-[10%] -right-2 w-6 h-6 rounded-full bg-orange-200/50 z-10"></div>
+        <svg class="absolute top-[25%] -left-1 text-orange-300/40 z-10" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
+        <svg class="absolute bottom-[40%] right-0 text-blue-200 z-10" width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
 
-        <!-- 이미지 1: 좌상단 (파스텔 오렌지, 가족/손 따뜻한 이미지) -->
-        <div class="absolute top-0 left-[-8px] w-[55%] rounded-[1.8rem] bg-orange-50 p-2.5 shadow-sm">
-          <img src="https://images.unsplash.com/photo-1581579438747-104c53d7fbc4?w=600&h=500&fit=crop" alt="열쇠를 건네는 손" class="w-full aspect-[5/4] object-cover rounded-[1.4rem]">
-        </div>
-
-        <!-- 이미지 2: 우상단 (파스텔 블루, 거실 인테리어) -->
-        <div class="absolute top-4 right-[-4px] w-[50%] rounded-[1.8rem] bg-blue-50 p-2.5 shadow-sm">
-          <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=400&fit=crop" alt="따뜻한 거실 인테리어" class="w-full aspect-[4/3] object-cover rounded-[1.4rem]">
-        </div>
-
-        <!-- 이미지 3: 하단 중앙 (파스텔 그린, 열쇠) -->
-        <div class="absolute bottom-0 left-[18%] w-[52%] rounded-[1.6rem] bg-emerald-50 p-2.5 shadow-sm">
-          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=350&fit=crop" alt="열쇠와 집" class="w-full aspect-[3/2] object-cover rounded-[1.2rem]">
-        </div>
-
-        <!-- 장식: 추상 뱃지 (레퍼런스 스타일) -->
-        <div class="absolute top-[50%] left-[36%] bg-orange-100 rounded-full px-4 py-2 shadow-sm flex items-center gap-1.5 z-10">
-          <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-base"></iconify-icon>
-          <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange/50 text-base"></iconify-icon>
-          <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange/25 text-base"></iconify-icon>
+        <div class="grid grid-cols-2 gap-4" style="margin-left: -16px;">
+          <!-- 좌상: 따뜻한 가족 이미지 -->
+          <div class="rounded-[1.6rem] bg-orange-50 p-2.5 mt-6">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&h=600&fit=crop" alt="따뜻한 집" class="w-full aspect-[4/5] object-cover rounded-[1.2rem]">
+          </div>
+          <!-- 우상: 거실 인테리어 -->
+          <div class="rounded-[1.6rem] bg-blue-50 p-2.5">
+            <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=400&fit=crop" alt="따뜻한 거실 인테리어" class="w-full aspect-[4/3] object-cover rounded-[1.2rem]">
+          </div>
+          <!-- 좌하: 뱃지 장식 -->
+          <div class="flex items-start justify-end -mt-2">
+            <div class="bg-orange-100 rounded-full px-4 py-2.5 flex items-center gap-2">
+              <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-lg"></iconify-icon>
+              <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange/40 text-lg"></iconify-icon>
+              <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange/15 text-lg"></iconify-icon>
+            </div>
+          </div>
+          <!-- 우하: 열쇠 이미지 -->
+          <div class="rounded-[1.6rem] bg-emerald-50 p-2.5 -mt-8">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&h=400&fit=crop" alt="열쇠와 집" class="w-full aspect-[4/3] object-cover rounded-[1.2rem]">
+          </div>
         </div>
       </div>
 
