@@ -1315,7 +1315,7 @@
     }
     // E키 (오버뷰/도움말 닫힌 상태에서만)
     if (e.code === 'KeyE') {
-      if (!overview.open &&
+      if (overview.dataset.open !== '1' &&
           !document.getElementById('help').classList.contains('visible')) {
         toggleEditMode();
       }
@@ -1400,7 +1400,7 @@
   document.addEventListener('click', () => {
     if (editMode) return;
     if (document.body.classList.contains('show-guide')) return;
-    if (!document.getElementById('overview').open) goNext();
+    if (document.getElementById('overview').dataset.open !== '1') goNext();
   });
 
   // 가이드 툴바 클릭
@@ -2803,13 +2803,10 @@
       const localMeta = document.querySelector('meta[name="gh-sha"]');
       if (localMeta && localMeta.content === remoteSha) return; // 이미 최신
 
-      // 최신 HTML 가져와서 페이지 교체
-      showToast('최신 버전 불러오는 중...', 10000);
-      const html = decodeURIComponent(escape(atob(data.content)));
+      // 최신 버전 감지 → 새로고침으로 반영 (document.write는 Chrome 렌더링 깨짐 유발)
+      showToast('최신 버전 불러오는 중...', 3000);
       sessionStorage.setItem(freshKey, '1');
-      document.open();
-      document.write(html);
-      document.close();
+      location.reload();
     } catch (e) {
       console.error('ghCheckAndLoadLatest:', e);
     }
