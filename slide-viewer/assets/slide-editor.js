@@ -1852,7 +1852,8 @@
   const ovGrid = document.getElementById('overview-grid');
   overview.addEventListener('close', () => {
     document.body.classList.remove('overview-active');
-    document.body.focus();
+    overview.blur();
+    document.documentElement.focus();
   });
 
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;

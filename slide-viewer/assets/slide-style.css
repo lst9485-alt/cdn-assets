@@ -1376,12 +1376,19 @@
   dialog#overview:not([open]) {
     display: none;
   }
-  /* overview 열릴 때 z-index 경쟁 UI 숨김 (showModal 실패 대비) */
+  /* overview 열릴 때 모든 UI 숨김 (showModal 실패 대비) */
+  body.overview-active #stage {
+    visibility: hidden !important;
+  }
   body.overview-active #top-toolbar,
   body.overview-active #group-toolbar,
   body.overview-active #guide-toolbar,
   body.overview-active #align-menu,
-  body.overview-active #help {
+  body.overview-active #help,
+  body.overview-active #slideNum,
+  body.overview-active #edit-badge,
+  body.overview-active #filmstrip,
+  body.overview-active #dim-outer {
     display: none !important;
   }
 
