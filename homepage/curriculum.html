@@ -168,7 +168,7 @@
     <!-- 경로형 레이아웃 -->
     <div class="relative max-w-4xl mx-auto pt-8 pb-4" data-reveal>
       <!-- 점선 경로 + 깃발 + START/GOAL (데스크톱) -->
-      <svg class="hidden md:block absolute top-0 left-0 w-full pointer-events-none z-20" style="height: 420px;" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid meet">
+      <svg class="hidden md:block absolute top-0 left-0 w-full pointer-events-none" style="height: 420px;" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid meet">
         <!-- 점선 경로 -->
         <path d="M 30,280 C 150,280 180,120 300,120 C 420,120 420,280 540,200 C 660,120 720,280 870,280" fill="none" stroke="#d1d5db" stroke-width="3" stroke-dasharray="14,10" stroke-linecap="round"/>
         <!-- START 원 -->
@@ -177,27 +177,23 @@
         <!-- GOAL 원 -->
         <circle cx="870" cy="280" r="10" fill="#FF6B00"/>
         <text x="870" y="310" text-anchor="middle" fill="#FF6B00" font-size="12" font-weight="800" letter-spacing="0.1em">GOAL</text>
-        <!-- 깃발 1 (회색 — 시작) -->
-        <g transform="translate(190,165)">
-          <line x1="0" y1="0" x2="0" y2="-56" stroke="#888" stroke-width="2.5"/>
-          <polygon points="0,-56 42,-49 0,-42" fill="#9ca3af"/>
-        </g>
-        <!-- 깃발 2 (중간 주황) -->
-        <g transform="translate(450,95)">
-          <line x1="0" y1="0" x2="0" y2="-60" stroke="#777" stroke-width="2.5"/>
-          <polygon points="0,-60 42,-53 0,-46" fill="#FF8C3A"/>
-        </g>
-        <!-- 깃발 3 (브랜드 주황 — 도착) -->
-        <g transform="translate(720,165)">
-          <line x1="0" y1="0" x2="0" y2="-56" stroke="#555" stroke-width="2.5"/>
-          <polygon points="0,-56 42,-49 0,-42" fill="#FF6B00"/>
-        </g>
         <!-- 구름 장식 -->
         <ellipse cx="130" cy="60" rx="30" ry="12" fill="#e5e7eb" opacity=".5"/>
         <ellipse cx="150" cy="55" rx="20" ry="10" fill="#e5e7eb" opacity=".4"/>
         <ellipse cx="680" cy="50" rx="25" ry="10" fill="#e5e7eb" opacity=".4"/>
         <ellipse cx="700" cy="45" rx="18" ry="8" fill="#e5e7eb" opacity=".3"/>
       </svg>
+
+      <!-- 깃발 (HTML, 카드 위에 표시) -->
+      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:19%; top:12%;">
+        <svg width="16" height="56"><line x1="8" y1="56" x2="8" y2="14" stroke="#aaa" stroke-width="2.5"/><polygon points="8,0 50,7 8,14" fill="#9ca3af"/></svg>
+      </div>
+      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:48%; top:0%;">
+        <svg width="16" height="60"><line x1="8" y1="60" x2="8" y2="14" stroke="#bbb" stroke-width="2.5"/><polygon points="8,0 50,7 8,14" fill="#FFB380"/></svg>
+      </div>
+      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:77%; top:12%;">
+        <svg width="16" height="56"><line x1="8" y1="56" x2="8" y2="14" stroke="#888" stroke-width="2.5"/><polygon points="8,0 50,7 8,14" fill="#FF6B00"/></svg>
+      </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-6 relative z-10" style="min-height: 380px;">
         <!-- STEP 1 (아래쪽) -->
