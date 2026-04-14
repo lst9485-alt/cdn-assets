@@ -35,131 +35,172 @@
   [data-stagger].revealed > *:nth-child(2) { transition-delay: 0.12s; }
   [data-stagger].revealed > *:nth-child(3) { transition-delay: 0.24s; }
   [data-stagger].revealed > *:nth-child(4) { transition-delay: 0.36s; }
+  [data-stagger].revealed > *:nth-child(5) { transition-delay: 0.48s; }
   [data-stagger].revealed > * { opacity: 1; transform: translateY(0) scale(1); }
+
+  /* 슬라이더 */
   .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
   .slide { min-width: 100%; }
+
+  /* 글래스 */
+  .glass-chip { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(12px); }
+  .glass-info { background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(16px); box-shadow: 0 16px 40px rgba(0,0,0,.2); }
+
+  /* 오브 (빛 구체) */
+  @keyframes orbFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  .orb { filter: blur(40px); opacity: .4; animation: orbFloat 6s ease-in-out infinite; }
+
+  /* 아이콘 플로트 */
   @keyframes iconFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
   .icon-float { animation: iconFloat 3s ease-in-out infinite; }
   .icon-float:nth-child(2) { animation-delay: 0.4s; }
   .icon-float:nth-child(3) { animation-delay: 0.8s; }
   .icon-float:nth-child(4) { animation-delay: 1.2s; }
   .icon-float:nth-child(5) { animation-delay: 1.6s; }
+
+  /* 아이콘 도크 */
+  .icon-dock { background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(248,250,252,.88)); border: 1px solid rgba(148,163,184,.14); box-shadow: 0 20px 60px rgba(15,23,42,.07); backdrop-filter: blur(12px); }
+
+  /* 슬라이더 인디케이터 */
+  .dot { width: 10px; height: 10px; border-radius: 999px; background: rgba(255,255,255,.3); transition: all .3s ease; cursor: pointer; }
+  .dot.active { width: 32px; background: #fff; }
 </style>
 </head>
 <body class="bg-white">
 
 <!-- ===== 히어로 배너 슬라이더 ===== -->
 <section data-section="main-slider" class="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-6">
-  <div class="relative rounded-3xl overflow-hidden shadow-2xl" id="bannerSlider">
+  <div class="relative rounded-[28px] overflow-hidden shadow-2xl" id="bannerSlider" style="box-shadow: 0 30px 80px rgba(15,23,42,.18);">
     <div class="slider-track" id="sliderTrack">
-      <!-- 슬라이드 1: 코칭 A -->
+
+      <!-- 슬라이드 1: 코칭A -->
       <a href="/counsel/?idx=11" class="slide block">
-        <div class="relative h-[300px] sm:h-[400px] lg:h-[440px] flex items-center px-10 sm:px-16" style="background: linear-gradient(135deg, #1a1a3e 0%, #2d1b4e 50%, #FF6B00 150%);">
-          <div class="relative z-10 max-w-lg">
-            <span class="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">1:1 코칭</span>
+        <div class="relative h-[320px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+          <!-- 오브 -->
+          <div class="orb absolute right-20 top-10 w-32 h-32 rounded-full bg-orange-400/30"></div>
+          <div class="orb absolute right-40 bottom-16 w-24 h-24 rounded-full bg-purple-400/20" style="animation-delay:-2s"></div>
+          <div class="relative z-10 px-10 sm:px-16 max-w-xl">
+            <span class="glass-chip inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">
+              <iconify-icon icon="solar:chat-round-dots-bold" class="text-sm"></iconify-icon> 1:1 코칭
+            </span>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-white leading-tight word-keep mb-4">지금 여기,<br>사도 될까요?</h2>
-            <p class="text-white/70 text-base sm:text-lg word-keep">내 예산에 딱 맞는 내집마련 전략 →</p>
-          </div>
-          <div class="absolute right-6 sm:right-16 top-1/2 -translate-y-1/2 opacity-10">
-            <iconify-icon icon="solar:home-2-bold" class="text-white text-[160px] sm:text-[220px] lg:text-[260px]"></iconify-icon>
+            <p class="text-white/70 text-sm sm:text-base mb-6 word-keep">내 예산에 딱 맞는 내집마련 전략</p>
+            <!-- 글래스 정보칩 -->
+            <div class="flex gap-3">
+              <div class="glass-info rounded-xl px-4 py-2.5">
+                <p class="text-[10px] text-white/50 tracking-widest">만족도</p>
+                <p class="text-white font-bold text-lg">4.97</p>
+              </div>
+              <div class="glass-info rounded-xl px-4 py-2.5">
+                <p class="text-[10px] text-white/50 tracking-widest">누적</p>
+                <p class="text-white font-bold text-lg">100+건</p>
+              </div>
+              <div class="glass-info rounded-xl px-4 py-2.5">
+                <p class="text-[10px] text-white/50 tracking-widest">방식</p>
+                <p class="text-white font-bold text-lg">1:1 맞춤</p>
+              </div>
+            </div>
           </div>
         </div>
       </a>
-      <!-- 슬라이드 2: 코칭 B -->
+
+      <!-- 슬라이드 2: 코칭B -->
       <a href="/counsel/?idx=11" class="slide block">
-        <div class="relative h-[300px] sm:h-[400px] lg:h-[440px] flex items-center px-10 sm:px-16" style="background: linear-gradient(135deg, #0a2540 0%, #0055FF 100%);">
-          <div class="relative z-10 max-w-lg">
-            <span class="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">1:1 코칭</span>
+        <div class="relative h-[320px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-2.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+          <div class="orb absolute right-16 top-8 w-28 h-28 rounded-full bg-blue-300/30"></div>
+          <div class="relative z-10 px-10 sm:px-16 max-w-xl">
+            <span class="glass-chip inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">
+              <iconify-icon icon="solar:videocamera-record-bold" class="text-sm"></iconify-icon> 1:1 코칭
+            </span>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-white leading-tight word-keep mb-4">원하는 시간에<br>1:1 맞춤 학습</h2>
-            <p class="text-white/70 text-base sm:text-lg word-keep">Google Meet · 약 50분 · 배우자 동반 가능 →</p>
-          </div>
-          <div class="absolute right-6 sm:right-16 top-1/2 -translate-y-1/2 opacity-10">
-            <iconify-icon icon="solar:chat-round-dots-bold" class="text-white text-[160px] sm:text-[220px] lg:text-[260px]"></iconify-icon>
+            <p class="text-white/70 text-sm sm:text-base word-keep">Google Meet · 약 50분 · 배우자 동반 가능 →</p>
           </div>
         </div>
       </a>
+
       <!-- 슬라이드 3: 커리큘럼 -->
       <a href="#" class="slide block">
-        <div class="relative h-[300px] sm:h-[400px] lg:h-[440px] flex items-center px-10 sm:px-16" style="background: linear-gradient(135deg, #065f46 0%, #10b981 100%);">
-          <div class="relative z-10 max-w-lg">
-            <span class="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">커리큘럼</span>
+        <div class="relative h-[320px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-3.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+          <div class="orb absolute right-24 bottom-10 w-36 h-36 rounded-full bg-emerald-300/25"></div>
+          <div class="relative z-10 px-10 sm:px-16 max-w-xl">
+            <span class="glass-chip inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">
+              <iconify-icon icon="solar:map-bold" class="text-sm"></iconify-icon> 커리큘럼
+            </span>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-white leading-tight word-keep mb-4">내게 맞는<br>학습 로드맵 찾기</h2>
-            <p class="text-white/70 text-base sm:text-lg word-keep">내집마련부터 재테크까지 단계별 안내 →</p>
-          </div>
-          <div class="absolute right-6 sm:right-16 top-1/2 -translate-y-1/2 opacity-10">
-            <iconify-icon icon="solar:map-bold" class="text-white text-[160px] sm:text-[220px] lg:text-[260px]"></iconify-icon>
+            <p class="text-white/70 text-sm sm:text-base word-keep">내집마련부터 재테크까지 단계별 안내 →</p>
           </div>
         </div>
       </a>
+
       <!-- 슬라이드 4: 독서모임 -->
       <a href="#" class="slide block">
-        <div class="relative h-[300px] sm:h-[400px] lg:h-[440px] flex items-center px-10 sm:px-16" style="background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);">
-          <div class="relative z-10 max-w-lg">
-            <span class="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">독서모임</span>
+        <div class="relative h-[320px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-4.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+          <div class="relative z-10 px-10 sm:px-16 max-w-xl">
+            <span class="glass-chip inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">
+              <iconify-icon icon="solar:book-bookmark-bold" class="text-sm"></iconify-icon> 독서모임
+            </span>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-white leading-tight word-keep mb-4">함께 읽고<br>함께 성장하기</h2>
-            <p class="text-white/70 text-base sm:text-lg word-keep">매월 재테크 필독서 함께 읽기 →</p>
-          </div>
-          <div class="absolute right-6 sm:right-16 top-1/2 -translate-y-1/2 opacity-10">
-            <iconify-icon icon="solar:book-bookmark-bold" class="text-white text-[160px] sm:text-[220px] lg:text-[260px]"></iconify-icon>
+            <p class="text-white/70 text-sm sm:text-base word-keep">매월 재테크 필독서 함께 읽기 →</p>
           </div>
         </div>
       </a>
+
       <!-- 슬라이드 5: 온라인강의 -->
       <a href="#" class="slide block">
-        <div class="relative h-[300px] sm:h-[400px] lg:h-[440px] flex items-center px-10 sm:px-16" style="background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);">
-          <div class="relative z-10 max-w-lg">
-            <span class="inline-block bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">온라인강의</span>
+        <div class="relative h-[320px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-5.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+          <div class="relative z-10 px-10 sm:px-16 max-w-xl">
+            <span class="glass-chip inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">
+              <iconify-icon icon="solar:play-circle-bold" class="text-sm"></iconify-icon> 온라인강의
+            </span>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-white leading-tight word-keep mb-4">내집마련 실전반<br>VOD 강의</h2>
-            <p class="text-white/70 text-base sm:text-lg word-keep">예산 계산부터 계약까지 한 번에 →</p>
-          </div>
-          <div class="absolute right-6 sm:right-16 top-1/2 -translate-y-1/2 opacity-10">
-            <iconify-icon icon="solar:play-circle-bold" class="text-white text-[160px] sm:text-[220px] lg:text-[260px]"></iconify-icon>
+            <p class="text-white/70 text-sm sm:text-base word-keep">예산 계산부터 계약까지 한 번에 →</p>
           </div>
         </div>
       </a>
     </div>
-    <!-- 컨트롤 -->
-    <div class="absolute bottom-5 right-5 flex items-center gap-2.5 z-10">
+
+    <!-- 컨트롤: 좌하단 도트 + 우하단 화살표 -->
+    <div class="absolute bottom-5 left-6 sm:left-10 z-10 flex items-center gap-2" id="sliderDots"></div>
+    <div class="absolute bottom-5 right-5 flex items-center gap-2 z-10">
       <button id="sliderPause" class="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60 text-sm font-bold" style="transition:background 0.2s">||</button>
-      <span class="bg-black/40 backdrop-blur-sm text-white text-sm font-bold px-3.5 py-2 rounded-full"><span id="sliderCurrent">1</span>/<span id="sliderTotal">5</span></span>
       <button id="sliderPrev" class="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60" style="transition:background 0.2s"><iconify-icon icon="solar:alt-arrow-left-bold" class="text-base"></iconify-icon></button>
       <button id="sliderNext" class="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60" style="transition:background 0.2s"><iconify-icon icon="solar:alt-arrow-right-bold" class="text-base"></iconify-icon></button>
     </div>
   </div>
 </section>
 
-<!-- ===== 아이콘 바로가기 ===== -->
-<section data-section="main-icons" class="max-w-4xl mx-auto px-6 sm:px-8 py-8 sm:py-10">
-  <div class="flex justify-center gap-8 sm:gap-12" data-stagger>
-    <a href="/counsel/?idx=11" class="flex flex-col items-center gap-2.5 group icon-float">
-      <div class="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-[18px] bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-200/50 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-orange-300/50" style="transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)">
-        <iconify-icon icon="solar:chat-round-dots-bold" class="text-white text-2xl"></iconify-icon>
-      </div>
-      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color 0.2s">1:1 코칭</span>
+<!-- ===== 아이콘 도크 ===== -->
+<section data-section="main-icons" class="max-w-3xl mx-auto px-6 sm:px-8 py-8 sm:py-10">
+  <div class="icon-dock rounded-[28px] p-4 flex justify-center gap-4 sm:gap-8" data-stagger>
+    <a href="/counsel/?idx=11" class="flex flex-col items-center gap-2 group icon-float" style="transition:transform .3s ease">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-coaching.png" alt="1:1 코칭" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:scale-110 group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">1:1 코칭</span>
     </a>
-    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float">
-      <div class="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-[18px] bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-200/50 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-blue-300/50" style="transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)">
-        <iconify-icon icon="solar:map-bold" class="text-white text-2xl"></iconify-icon>
-      </div>
-      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color 0.2s">커리큘럼</span>
+    <a href="#" class="flex flex-col items-center gap-2 group icon-float">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-curriculum.png" alt="커리큘럼" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:scale-110 group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">커리큘럼</span>
     </a>
-    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float">
-      <div class="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-[18px] bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-200/50 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-emerald-300/50" style="transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)">
-        <iconify-icon icon="solar:book-bookmark-bold" class="text-white text-2xl"></iconify-icon>
-      </div>
-      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color 0.2s">독서모임</span>
+    <a href="#" class="flex flex-col items-center gap-2 group icon-float">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-bookclub.png" alt="독서모임" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:scale-110 group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">독서모임</span>
     </a>
-    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float">
-      <div class="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-[18px] bg-gradient-to-br from-violet-400 to-violet-600 flex items-center justify-center shadow-lg shadow-violet-200/50 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-violet-300/50" style="transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)">
-        <iconify-icon icon="solar:play-circle-bold" class="text-white text-2xl"></iconify-icon>
-      </div>
-      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color 0.2s">온라인강의</span>
+    <a href="#" class="flex flex-col items-center gap-2 group icon-float">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-lecture.png" alt="온라인강의" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:scale-110 group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">온라인강의</span>
     </a>
-    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float">
-      <div class="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-[18px] bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center shadow-lg shadow-pink-200/50 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-pink-300/50" style="transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)">
-        <iconify-icon icon="solar:document-text-bold" class="text-white text-2xl"></iconify-icon>
-      </div>
-      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color 0.2s">무료 템플릿</span>
+    <a href="#" class="flex flex-col items-center gap-2 group icon-float">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-template.png" alt="무료 템플릿" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:scale-110 group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">무료 템플릿</span>
     </a>
   </div>
 </section>
@@ -168,49 +209,35 @@
 <section data-section="main-content" class="max-w-5xl mx-auto px-6 sm:px-8 py-14 sm:py-18">
   <div class="text-center mb-10" data-reveal>
     <span class="inline-flex items-center gap-2 bg-red-50 text-red-500 text-sm font-bold px-4 py-1.5 rounded-full tracking-wide mb-4">
-      <iconify-icon icon="logos:youtube-icon" class="text-base"></iconify-icon>
-      YOUTUBE
+      <iconify-icon icon="logos:youtube-icon" class="text-base"></iconify-icon> YOUTUBE
     </span>
     <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark word-keep">이런 영상을 만들고 있어요</h2>
   </div>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-stagger>
     <a href="https://www.youtube.com/watch?v=wzGeLrBPEg8" target="_blank" class="group block">
-      <div class="relative rounded-xl overflow-hidden mb-3">
-        <img src="https://img.youtube.com/vi/wzGeLrBPEg8/mqdefault.jpg" alt="돈 되는 아파트 고르는 3가지 방법" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform 0.3s ease">
-        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background 0.3s ease"></div>
-      </div>
-      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color 0.2s">돈 되는 아파트 고르는 3가지 방법</p>
+      <div class="relative rounded-xl overflow-hidden mb-3"><img src="https://img.youtube.com/vi/wzGeLrBPEg8/mqdefault.jpg" alt="" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform .3s"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background .3s"></div></div>
+      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color .2s">돈 되는 아파트 고르는 3가지 방법</p>
       <p class="text-gray-400 text-xs mt-1">조회수 7.6만</p>
     </a>
     <a href="https://www.youtube.com/watch?v=0aPDvqjNm6M" target="_blank" class="group block">
-      <div class="relative rounded-xl overflow-hidden mb-3">
-        <img src="https://img.youtube.com/vi/0aPDvqjNm6M/mqdefault.jpg" alt="첫 번째 내집마련 이렇게 하세요" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform 0.3s ease">
-        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background 0.3s ease"></div>
-      </div>
-      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color 0.2s">첫 번째 내집마련 이렇게 하세요</p>
+      <div class="relative rounded-xl overflow-hidden mb-3"><img src="https://img.youtube.com/vi/0aPDvqjNm6M/mqdefault.jpg" alt="" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform .3s"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background .3s"></div></div>
+      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color .2s">첫 번째 내집마련 이렇게 하세요</p>
       <p class="text-gray-400 text-xs mt-1">조회수 4.1만</p>
     </a>
     <a href="https://www.youtube.com/watch?v=TkXfMsX13dg" target="_blank" class="group block">
-      <div class="relative rounded-xl overflow-hidden mb-3">
-        <img src="https://img.youtube.com/vi/TkXfMsX13dg/mqdefault.jpg" alt="30대 후반부터 격차가 벌어지는 과정" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform 0.3s ease">
-        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background 0.3s ease"></div>
-      </div>
-      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color 0.2s">30대 후반부터 격차가 벌어지는 과정</p>
+      <div class="relative rounded-xl overflow-hidden mb-3"><img src="https://img.youtube.com/vi/TkXfMsX13dg/mqdefault.jpg" alt="" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform .3s"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background .3s"></div></div>
+      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color .2s">30대 후반부터 격차가 벌어지는 과정</p>
       <p class="text-gray-400 text-xs mt-1">조회수 5.1만</p>
     </a>
     <a href="https://www.youtube.com/watch?v=WDh_RfgwdBI" target="_blank" class="group block">
-      <div class="relative rounded-xl overflow-hidden mb-3">
-        <img src="https://img.youtube.com/vi/WDh_RfgwdBI/mqdefault.jpg" alt="연봉별 적정 집값부터 대출까지 총정리" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform 0.3s ease">
-        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background 0.3s ease"></div>
-      </div>
-      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color 0.2s">연봉별 적정 집값부터 대출까지 총정리</p>
+      <div class="relative rounded-xl overflow-hidden mb-3"><img src="https://img.youtube.com/vi/WDh_RfgwdBI/mqdefault.jpg" alt="" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform .3s"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background .3s"></div></div>
+      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color .2s">연봉별 적정 집값부터 대출까지 총정리</p>
       <p class="text-gray-400 text-xs mt-1">조회수 2.8만</p>
     </a>
   </div>
   <div class="text-center mt-8">
-    <a href="https://www.youtube.com/@우리동네재테크" target="_blank" class="inline-flex items-center gap-2 text-gray-500 font-medium hover:text-brand-orange" style="transition:color 0.2s">
-      유튜브에서 더 보기
-      <iconify-icon icon="solar:arrow-right-bold" class="text-lg"></iconify-icon>
+    <a href="https://www.youtube.com/@우리동네재테크" target="_blank" class="inline-flex items-center gap-2 text-gray-500 font-medium hover:text-brand-orange" style="transition:color .2s">
+      유튜브에서 더 보기 <iconify-icon icon="solar:arrow-right-bold" class="text-lg"></iconify-icon>
     </a>
   </div>
 </section>
@@ -221,42 +248,52 @@
     <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
     <h2 class="text-2xl sm:text-3xl font-display font-black text-white mb-3 word-keep">내집마련, 어디서부터 시작할지 모르겠다면?</h2>
     <p class="text-gray-400 mb-8 word-keep">현재 상황에 맞는 맞춤 전략을 안내해드립니다.</p>
-    <div class="flex justify-center">
-      <a href="#" class="inline-flex items-center justify-center gap-2 bg-brand-orange text-white font-bold px-8 py-4 rounded-full text-lg hover:scale-[1.02] active:scale-[0.98]" style="transition:all 0.5s cubic-bezier(0.16,1,0.3,1)">
-        커리큘럼 보기
-        <iconify-icon icon="solar:map-bold" class="text-xl"></iconify-icon>
-      </a>
-    </div>
+    <a href="#" class="inline-flex items-center justify-center gap-2 bg-brand-orange text-white font-bold px-8 py-4 rounded-full text-lg hover:scale-[1.02] active:scale-[0.98]" style="transition:all .5s cubic-bezier(.16,1,.3,1)">
+      커리큘럼 보기 <iconify-icon icon="solar:map-bold" class="text-xl"></iconify-icon>
+    </a>
   </section>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // reveal observer
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('revealed'); });
-    }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
-    document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
+document.addEventListener('DOMContentLoaded', function() {
+  // reveal
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('revealed'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+  document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
 
-    // banner slider
-    var track = document.getElementById('sliderTrack');
-    var total = 5, idx = 0, paused = false;
-    function goTo(i) {
-      idx = ((i % total) + total) % total;
-      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
-      document.getElementById('sliderCurrent').textContent = idx + 1;
-    }
-    setInterval(function() { if (!paused) goTo(idx + 1); }, 4000);
-    document.getElementById('sliderNext').onclick = function() { goTo(idx + 1); };
-    document.getElementById('sliderPrev').onclick = function() { goTo(idx - 1); };
-    document.getElementById('sliderPause').onclick = function() {
-      paused = !paused;
-      this.textContent = paused ? '\u25B6' : '||';
-    };
-    var slider = document.getElementById('bannerSlider');
-    slider.onmouseenter = function() { paused = true; };
-    slider.onmouseleave = function() { paused = false; };
-  });
+  // slider
+  var track = document.getElementById('sliderTrack');
+  var dotsWrap = document.getElementById('sliderDots');
+  var total = 5, idx = 0, paused = false;
+
+  // 도트 생성
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.dataset.i = i;
+    d.onclick = function() { goTo(+this.dataset.i); };
+    dotsWrap.appendChild(d);
+  }
+
+  function goTo(i) {
+    idx = ((i % total) + total) % total;
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    dotsWrap.querySelectorAll('.dot').forEach(function(d, j) {
+      d.classList.toggle('active', j === idx);
+    });
+  }
+  setInterval(function() { if (!paused) goTo(idx + 1); }, 4500);
+  document.getElementById('sliderNext').onclick = function() { goTo(idx + 1); };
+  document.getElementById('sliderPrev').onclick = function() { goTo(idx - 1); };
+  document.getElementById('sliderPause').onclick = function() {
+    paused = !paused;
+    this.textContent = paused ? '\u25B6' : '||';
+  };
+  var slider = document.getElementById('bannerSlider');
+  slider.onmouseenter = function() { paused = true; };
+  slider.onmouseleave = function() { paused = false; };
+});
 </script>
 </body>
 </html>
