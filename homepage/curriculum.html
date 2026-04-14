@@ -199,7 +199,7 @@
         <ellipse cx="700" cy="45" rx="18" ry="8" fill="#e5e7eb" opacity=".3"/>
       </svg>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10" style="min-height: 380px;">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-6 relative z-10" style="min-height: 380px;">
         <!-- STEP 1 (아래쪽) -->
         <div class="md:self-end md:pb-4" data-reveal>
           <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
@@ -214,6 +214,12 @@
           </div>
         </div>
 
+        <!-- 모바일 점선 커넥터 1→2 -->
+        <div class="flex flex-col items-center py-2 md:hidden">
+          <svg width="2" height="28" class="text-gray-300"><line x1="1" y1="0" x2="1" y2="28" stroke="currentColor" stroke-width="2" stroke-dasharray="5,4"/></svg>
+          <svg width="12" height="8" class="text-brand-orange -mt-0.5"><polygon points="6,8 0,0 12,0" fill="currentColor"/></svg>
+        </div>
+
         <!-- STEP 2 (위쪽) -->
         <div class="md:self-start md:pt-4" data-reveal>
           <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
@@ -226,6 +232,12 @@
               <p>· 입지 확인 및 계약 학습</p>
             </div>
           </div>
+        </div>
+
+        <!-- 모바일 점선 커넥터 2→3 -->
+        <div class="flex flex-col items-center py-2 md:hidden">
+          <svg width="2" height="28" class="text-gray-300"><line x1="1" y1="0" x2="1" y2="28" stroke="currentColor" stroke-width="2" stroke-dasharray="5,4"/></svg>
+          <svg width="12" height="8" class="text-brand-orange -mt-0.5"><polygon points="6,8 0,0 12,0" fill="currentColor"/></svg>
         </div>
 
         <!-- STEP 3 (아래쪽) -->
