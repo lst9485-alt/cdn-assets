@@ -77,12 +77,12 @@
         </div>
         <div class="h-7"></div>
         <div class="flow-arrow flow-line w-full">
-          <div class="status-active rounded-2xl p-5 text-center">
+          <a href="/counsel/?idx=11" class="block status-active rounded-2xl p-5 text-center hover:shadow-lg" style="transition: box-shadow 0.3s ease; cursor: pointer;">
             <span class="inline-block bg-brand-orange text-white text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">진행 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">내집마련 1:1 코칭</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">내 예산·상황에 맞는 맞춤 학습</p>
-            <p class="text-gray-400 text-xs mt-1">최종 50건 한정</p>
-          </div>
+            <p class="text-brand-orange text-xs mt-2 font-semibold">신청하기 →</p>
+          </a>
         </div>
         <div class="h-7"></div>
         <div class="flow-arrow w-full">
@@ -164,62 +164,63 @@
     <p class="text-gray-500 mt-3 text-sm word-keep">온라인 화상 수업 (Google Meet, 약 50분) · 배우자 동반 가능</p>
   </div>
 
-  <div class="max-w-3xl mx-auto border-2 border-brand-orange rounded-3xl p-5 md:p-8" data-reveal>
-    <div class="space-y-5">
-      <!-- 1단계 -->
-      <div class="status-active rounded-2xl p-5 md:p-6">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-brand-orange text-white text-sm font-black rounded-lg">1</span>
-          <p class="text-lg font-display font-black text-brand-dark word-keep">현황 분석 학습</p>
-        </div>
-        <p class="text-xs text-brand-orange font-medium mb-3 ml-11">내 재무 상태와 투자 성향을 객관적으로 파악합니다</p>
-        <div class="ml-11 space-y-1.5 text-sm text-gray-600">
-          <p>기본 정보 확인 — 직장, 거주형태, 투자성향, 우선순위</p>
-          <p>재무 상황 분석 — 예산, 대출, 소득, 저축</p>
-          <p>사전 질문 Q&A 및 학습 방향 가이드</p>
-        </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5" data-stagger>
+    <!-- STEP 1 -->
+    <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl" style="transition: box-shadow 0.3s ease;" data-reveal>
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs font-bold text-brand-orange tracking-widest">STEP 1</span>
+        <div class="flex-1 h-px bg-brand-orange/20"></div>
       </div>
-
-      <!-- 연결선 -->
-      <div class="flex justify-center"><div class="w-0.5 h-6 bg-gray-200"></div></div>
-
-      <!-- 2단계 -->
-      <div class="status-active rounded-2xl p-5 md:p-6">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-brand-orange text-white text-sm font-black rounded-lg">2</span>
-          <p class="text-lg font-display font-black text-brand-dark word-keep">예산 분석법 및 지역·단지 선정 학습</p>
-        </div>
-        <p class="text-xs text-brand-orange font-medium mb-3 ml-11">예산에 맞는 지역 분석 방법과 단지 비교 기준을 배웁니다</p>
-        <div class="ml-11 space-y-1.5 text-sm text-gray-600">
-          <p>예산 체크 방법</p>
-          <p>지역 선정 — 단지 분석 방법론 학습</p>
-          <p>입지 및 단지 확인 방법</p>
-          <p>부동산 방문 및 계약 — 계약 절차 및 협상 방법 학습</p>
-          <p>잔금 및 입주 절차</p>
-        </div>
+      <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center mb-4">
+        <iconify-icon icon="solar:clipboard-check-bold" class="text-white text-xl"></iconify-icon>
       </div>
-
-      <!-- 연결선 -->
-      <div class="flex justify-center"><div class="w-0.5 h-6 bg-gray-200"></div></div>
-
-      <!-- 3단계 -->
-      <div class="status-active rounded-2xl p-5 md:p-6">
-        <div class="flex items-center gap-3 mb-3">
-          <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-brand-orange text-white text-sm font-black rounded-lg">3</span>
-          <p class="text-lg font-display font-black text-brand-dark word-keep">액션플랜 수립 및 자산 로드맵 학습</p>
-        </div>
-        <p class="text-xs text-brand-orange font-medium mb-3 ml-11">구체적인 실행 계획과 장기 자산 관리 방법을 세울 수 있습니다</p>
-        <div class="ml-11 space-y-1.5 text-sm text-gray-600">
-          <p>당장 해야 할 것 — 액션플랜 수립 (날짜 스케줄링)</p>
-          <p>내집마련 이후 자산 로드맵 — 자산배분 방법론 학습</p>
-          <p>체크리스트 및 가이드북 제공</p>
-          <p>마무리 및 추가 Q&A</p>
-        </div>
+      <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">현황 분석 학습</h3>
+      <p class="text-xs text-brand-orange font-medium mb-3">내 재무 상태와 투자 성향을 객관적으로 파악합니다</p>
+      <div class="space-y-2 text-sm text-gray-500">
+        <p class="flex items-start gap-2"><span class="text-brand-orange mt-0.5">·</span>기본 정보 확인</p>
+        <p class="flex items-start gap-2"><span class="text-brand-orange mt-0.5">·</span>재무 상황 분석</p>
+        <p class="flex items-start gap-2"><span class="text-brand-orange mt-0.5">·</span>사전 질문 Q&A</p>
       </div>
     </div>
 
-    <p class="text-center text-gray-400 text-xs mt-6 word-keep">수강 후 최대 6개월간 카카오톡 무제한 Q&A 제공</p>
+    <!-- STEP 2 -->
+    <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl" style="transition: box-shadow 0.3s ease;" data-reveal>
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs font-bold text-brand-orange tracking-widest">STEP 2</span>
+        <div class="flex-1 h-px bg-brand-orange/20"></div>
+      </div>
+      <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-4">
+        <iconify-icon icon="solar:map-point-search-bold" class="text-white text-xl"></iconify-icon>
+      </div>
+      <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">지역·단지 선정 학습</h3>
+      <p class="text-xs text-brand-orange font-medium mb-3">예산에 맞는 지역 분석 방법과 비교 기준을 배웁니다</p>
+      <div class="space-y-2 text-sm text-gray-500">
+        <p class="flex items-start gap-2"><span class="text-brand-orange mt-0.5">·</span>예산 체크 방법</p>
+        <p class="flex items-start gap-2"><span class="text-brand-orange mt-0.5">·</span>단지 분석 방법론</p>
+        <p class="flex items-start gap-2"><span class="text-brand-orange mt-0.5">·</span>입지 확인 및 계약 학습</p>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-xl" style="transition: box-shadow 0.3s ease;" data-reveal>
+      <div class="flex items-center gap-2 mb-4">
+        <span class="text-xs font-bold text-brand-orange tracking-widest">STEP 3</span>
+        <div class="flex-1 h-px bg-brand-orange/20"></div>
+      </div>
+      <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center mb-4">
+        <iconify-icon icon="solar:rocket-2-bold" class="text-white text-xl"></iconify-icon>
+      </div>
+      <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">액션플랜 및 로드맵</h3>
+      <p class="text-xs text-brand-orange font-medium mb-3">구체적인 실행 계획과 장기 자산 관리 방법을 세웁니다</p>
+      <div class="space-y-2 text-sm text-gray-500">
+        <p class="flex items-start gap-2"><span class="text-brand-orange mt-0.5">·</span>액션플랜 수립</p>
+        <p class="flex items-start gap-2"><span class="text-brand-orange mt-0.5">·</span>자산 로드맵 학습</p>
+        <p class="flex items-start gap-2"><span class="text-brand-orange mt-0.5">·</span>가이드북 제공 + Q&A</p>
+      </div>
+    </div>
   </div>
+
+  <p class="text-center text-gray-400 text-sm mt-8 word-keep">수강 후 최대 6개월간 카카오톡 무제한 Q&A 제공</p>
 </section>
 
 <div class="px-6 sm:px-8 pb-12">
