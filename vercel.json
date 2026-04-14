@@ -1,8 +1,13 @@
 {
-  "ignoreCommand": "bash -c 'changed=$(git diff HEAD^ HEAD --name-only); echo \"$changed\" | grep -qvE \"^slide-viewer/slides-editor\\.html$\" && exit 1 || exit 0'",
   "headers": [
     {
       "source": "/(.*)\\.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/slide-viewer/assets/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
