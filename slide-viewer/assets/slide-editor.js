@@ -1857,14 +1857,11 @@
 
   function openOverview() {
     buildOverview();
-    document.title = 'OV-V15';
+    document.title = 'OV-V16';
     overview.dataset.open = '1';
     _ovStage.style.display = 'none';
     document.body.classList.add('overview-mode');
-    // 뷰포트보다 살짝 크게 + html/body overflow 강제 차단 → 가장자리 틈 제거
-    document.documentElement.style.cssText = 'overflow:hidden!important;background:#111!important';
-    document.body.style.cssText = 'overflow:hidden!important;background:#111!important;background-image:none!important';
-    overview.style.cssText = 'display:flex;position:fixed;top:-5px;right:-5px;bottom:-5px;left:-5px;z-index:99999;background:#111;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:45px;margin:0;box-sizing:border-box';
+    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;background:#111;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;box-sizing:border-box';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
@@ -1873,9 +1870,6 @@
     overview.style.cssText = 'display:none';
     ovGrid.innerHTML = '';
     document.body.classList.remove('overview-mode');
-    // html/body 스타일 복원
-    document.documentElement.style.cssText = '';
-    document.body.style.cssText = '';
     _ovStage.style.display = '';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = el.dataset.ovPrev || ''; delete el.dataset.ovPrev; } });
     document.documentElement.focus();
