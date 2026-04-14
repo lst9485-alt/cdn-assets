@@ -1322,7 +1322,7 @@
       return;
     }
     // Escape: overview 열려있으면 닫기
-    if (e.key === 'Escape' && overview.hasAttribute('open')) { closeOverview(); return; }
+    if (e.key === 'Escape' && overview.dataset.open === '1') { closeOverview(); return; }
     // Escape: 텍스트 편집 중이면 패스 (blur가 처리)
     if (e.key === 'Escape' && isEditing) return;
     // Escape: 개별모드 → 그룹모드, 선택 해제, 편집 모드 종료 순
@@ -1857,19 +1857,22 @@
 
   function openOverview() {
     buildOverview();
-    overview.setAttribute('open', '');
-    overview.style.cssText = 'display:flex;position:fixed;inset:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;border:none;margin:0;max-width:none;max-height:none';
+    document.title = 'OV-V4';
+    overview.dataset.open = '1';
+    overview.style.cssText = 'display:flex;position:fixed;inset:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0';
+    console.log('[OV] open — tag:', overview.tagName, 'bg:', overview.style.background);
     _ovStage.style.visibility = 'hidden';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
   function closeOverview() {
-    overview.removeAttribute('open');
+    delete overview.dataset.open;
     overview.style.cssText = 'display:none';
     ovGrid.innerHTML = '';
     _ovStage.style.visibility = '';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = el.dataset.ovPrev || ''; delete el.dataset.ovPrev; } });
     document.documentElement.focus();
+    console.log('[OV] closed');
   }
 
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
@@ -2153,11 +2156,7 @@
   }
 
   function toggleOverview() {
-    if (overview.hasAttribute('open')) {
-      closeOverview();
-    } else {
-      openOverview();
-    }
+    overview.dataset.open === '1' ? closeOverview() : openOverview();
   }
 
   // ── 환경 감지 ──
@@ -2380,7 +2379,7 @@
     const animShownEls = Array.from(document.querySelectorAll('#stage .anim-shown'));
     animShownEls.forEach(el => el.classList.remove('anim-shown'));
 
-    if (document.getElementById('overview').hasAttribute('open')) {
+    if (document.getElementById('overview').dataset.open === '1') {
       closeOverview();
     }
     const fsInner = document.getElementById('filmstrip-inner');
