@@ -1859,7 +1859,7 @@
     buildOverview();
     document.title = 'OV-V4';
     overview.dataset.open = '1';
-    overview.style.cssText = 'display:flex;position:fixed;inset:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0';
+    overview.style.cssText = 'display:flex;position:fixed;inset:0;width:100vw;height:100vh;background:red;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0';
     console.log('[OV] open — tag:', overview.tagName, 'bg:', overview.style.background);
     _ovStage.style.visibility = 'hidden';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
