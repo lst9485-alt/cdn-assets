@@ -5624,3 +5624,4 @@ ch.postMessage({ type: 'ready' });
   }
 
   document.querySelectorAll('.line-chart').forEach(el => buildLineChart(el));
+
