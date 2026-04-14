@@ -157,76 +157,83 @@
 </section>
 
 <!-- ===== 1:1 코칭 상세 커리큘럼 (카카오 경로형) ===== -->
-<section data-section="coaching-detail" class="max-w-5xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
-  <div class="text-center mb-10" data-reveal>
-    <span class="inline-flex items-center gap-2 bg-brand-orange/10 text-brand-orange text-sm font-bold px-4 py-1.5 rounded-full tracking-wide mb-4">COACHING</span>
-    <h2 class="text-2xl sm:text-3xl font-display font-black text-brand-dark word-keep">내집마련 1:1 코칭 커리큘럼</h2>
-    <p class="text-gray-500 mt-3 text-sm word-keep">온라인 화상 수업 (Google Meet, 약 50분) · 배우자 동반 가능</p>
-  </div>
+<section data-section="coaching-detail" class="py-16 sm:py-20" style="background: #f7f7f3;">
+  <div class="max-w-5xl mx-auto px-6 sm:px-8">
+    <div class="text-center mb-12" data-reveal>
+      <span class="inline-flex items-center gap-2 bg-white text-brand-orange text-sm font-bold px-4 py-1.5 rounded-full tracking-wide mb-4 shadow-sm">COACHING</span>
+      <h2 class="text-2xl sm:text-3xl font-display font-black text-brand-dark word-keep">내집마련 1:1 코칭 커리큘럼</h2>
+      <p class="text-gray-500 mt-3 text-sm word-keep">온라인 화상 수업 (Google Meet, 약 50분) · 배우자 동반 가능</p>
+    </div>
 
-  <!-- 경로형 레이아웃 -->
-  <div class="relative max-w-4xl mx-auto" data-reveal>
-    <!-- 점선 경로 (데스크톱) -->
-    <svg class="hidden md:block absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 900 380" preserveAspectRatio="none">
-      <path d="M 60,190 C 200,190 200,80 450,80 S 700,190 840,190" fill="none" stroke="#d1d5db" stroke-width="3" stroke-dasharray="12,8"/>
-      <!-- START -->
-      <circle cx="60" cy="190" r="6" fill="#9ca3af"/>
-      <text x="60" y="215" text-anchor="middle" fill="#9ca3af" font-size="11" font-weight="bold">START</text>
-      <!-- GOAL -->
-      <circle cx="840" cy="190" r="6" fill="#FF6B00"/>
-      <text x="840" y="215" text-anchor="middle" fill="#FF6B00" font-size="11" font-weight="bold">GOAL</text>
-      <!-- 깃발 1 (노랑) -->
-      <g transform="translate(195,140)">
-        <line x1="0" y1="0" x2="0" y2="-30" stroke="#eab308" stroke-width="2"/>
-        <polygon points="0,-30 18,-24 0,-18" fill="#eab308"/>
-      </g>
-      <!-- 깃발 2 (빨강) -->
-      <g transform="translate(450,40)">
-        <line x1="0" y1="0" x2="0" y2="-30" stroke="#ef4444" stroke-width="2"/>
-        <polygon points="0,-30 18,-24 0,-18" fill="#ef4444"/>
-      </g>
-      <!-- 깃발 3 (파랑) -->
-      <g transform="translate(705,140)">
-        <line x1="0" y1="0" x2="0" y2="-30" stroke="#3b82f6" stroke-width="2"/>
-        <polygon points="0,-30 18,-24 0,-18" fill="#3b82f6"/>
-      </g>
-    </svg>
+    <!-- 경로형 레이아웃 -->
+    <div class="relative max-w-4xl mx-auto pt-8 pb-4" data-reveal>
+      <!-- 점선 경로 + 깃발 + START/GOAL (데스크톱) -->
+      <svg class="hidden md:block absolute top-0 left-0 w-full pointer-events-none" style="height: 420px;" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid meet">
+        <!-- 점선 경로 -->
+        <path d="M 30,280 C 150,280 180,120 300,120 C 420,120 420,280 540,200 C 660,120 720,280 870,280" fill="none" stroke="#d1d5db" stroke-width="3" stroke-dasharray="14,10" stroke-linecap="round"/>
+        <!-- START 원 -->
+        <circle cx="30" cy="280" r="8" fill="#9ca3af"/>
+        <text x="30" y="310" text-anchor="middle" fill="#9ca3af" font-size="12" font-weight="800" letter-spacing="0.1em">START</text>
+        <!-- GOAL 원 -->
+        <circle cx="870" cy="280" r="10" fill="#FF6B00"/>
+        <text x="870" y="310" text-anchor="middle" fill="#FF6B00" font-size="12" font-weight="800" letter-spacing="0.1em">GOAL</text>
+        <!-- 깃발 1 (노랑) -->
+        <g transform="translate(190,160)">
+          <line x1="0" y1="0" x2="0" y2="-40" stroke="#0a0a0a" stroke-width="2.5"/>
+          <rect x="0" y="-40" width="24" height="16" rx="2" fill="#eab308"/>
+        </g>
+        <!-- 깃발 2 (빨강) -->
+        <g transform="translate(450,110)">
+          <line x1="0" y1="0" x2="0" y2="-45" stroke="#0a0a0a" stroke-width="2.5"/>
+          <rect x="0" y="-45" width="24" height="16" rx="2" fill="#ef4444"/>
+        </g>
+        <!-- 깃발 3 (파랑) -->
+        <g transform="translate(720,160)">
+          <line x1="0" y1="0" x2="0" y2="-40" stroke="#0a0a0a" stroke-width="2.5"/>
+          <rect x="0" y="-40" width="24" height="16" rx="2" fill="#3b82f6"/>
+        </g>
+        <!-- 구름 장식 -->
+        <ellipse cx="130" cy="60" rx="30" ry="12" fill="#e5e7eb" opacity=".5"/>
+        <ellipse cx="150" cy="55" rx="20" ry="10" fill="#e5e7eb" opacity=".4"/>
+        <ellipse cx="680" cy="50" rx="25" ry="10" fill="#e5e7eb" opacity=".4"/>
+        <ellipse cx="700" cy="45" rx="18" ry="8" fill="#e5e7eb" opacity=".3"/>
+      </svg>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-      <!-- STEP 1 -->
-      <div class="md:mt-16" data-reveal>
-        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
-          <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full mb-3">1단계</span>
-          <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">현황 분석 학습</h3>
-          <p class="text-xs text-brand-orange font-medium mb-3">내 재무 상태를 객관적으로 파악합니다</p>
-          <div class="space-y-1.5 text-sm text-gray-500">
-            <p>· 기본 정보 확인</p>
-            <p>· 재무 상황 분석</p>
-            <p>· 사전 질문 Q&A</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10" style="min-height: 380px;">
+        <!-- STEP 1 (아래쪽) -->
+        <div class="md:self-end md:pb-4" data-reveal>
+          <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
+            <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full mb-3">1단계</span>
+            <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">현황 분석 학습</h3>
+            <p class="text-xs text-brand-orange font-medium mb-3">내 재무 상태를 객관적으로 파악합니다</p>
+            <div class="space-y-1.5 text-sm text-gray-500">
+              <p>· 기본 정보 확인</p>
+              <p>· 재무 상황 분석</p>
+              <p>· 사전 질문 Q&A</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- STEP 2 (위로 올림) -->
-      <div class="md:-mt-4" data-reveal>
-        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
-          <span class="inline-block bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-full mb-3">2단계</span>
-          <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">지역·단지 선정 학습</h3>
-          <p class="text-xs text-brand-orange font-medium mb-3">예산에 맞는 분석 방법을 배웁니다</p>
-          <div class="space-y-1.5 text-sm text-gray-500">
-            <p>· 예산 체크 방법</p>
-            <p>· 단지 분석 방법론</p>
-            <p>· 입지 확인 및 계약 학습</p>
+        <!-- STEP 2 (위쪽) -->
+        <div class="md:self-start md:pt-4" data-reveal>
+          <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
+            <span class="inline-block bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-full mb-3">2단계</span>
+            <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">지역·단지 선정 학습</h3>
+            <p class="text-xs text-brand-orange font-medium mb-3">예산에 맞는 분석 방법을 배웁니다</p>
+            <div class="space-y-1.5 text-sm text-gray-500">
+              <p>· 예산 체크 방법</p>
+              <p>· 단지 분석 방법론</p>
+              <p>· 입지 확인 및 계약 학습</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- STEP 3 -->
-      <div class="md:mt-16" data-reveal>
-        <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
-          <span class="inline-block bg-blue-100 text-blue-600 text-xs font-bold px-3 py-1 rounded-full mb-3">3단계</span>
-          <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">액션플랜 및 로드맵</h3>
-          <p class="text-xs text-brand-orange font-medium mb-3">실행 계획과 자산 관리 방법을 세웁니다</p>
+        <!-- STEP 3 (아래쪽) -->
+        <div class="md:self-end md:pb-4" data-reveal>
+          <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
+            <span class="inline-block bg-blue-100 text-blue-600 text-xs font-bold px-3 py-1 rounded-full mb-3">3단계</span>
+            <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">액션플랜 및 로드맵</h3>
+            <p class="text-xs text-brand-orange font-medium mb-3">실행 계획과 자산 관리 방법을 세웁니다</p>
           <div class="space-y-1.5 text-sm text-gray-500">
             <p>· 액션플랜 수립</p>
             <p>· 자산 로드맵 학습</p>
@@ -237,7 +244,8 @@
     </div>
   </div>
 
-  <p class="text-center text-gray-400 text-sm mt-10 word-keep">수강 후 최대 6개월간 카카오톡 무제한 Q&A 제공</p>
+    <p class="text-center text-gray-400 text-sm mt-10 word-keep">수강 후 최대 6개월간 카카오톡 무제한 Q&A 제공</p>
+  </div>
 </section>
 
 <div class="px-6 sm:px-8 pb-12">
