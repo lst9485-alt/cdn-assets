@@ -1351,25 +1351,31 @@
     border-top: 2px dashed rgba(0, 120, 255, 0.55);
   }
 
-  /* ── 슬라이드 오버뷰 (O키) ── */
-  body.overview-active #stage { visibility: hidden; pointer-events: none; }
-  body.overview-active #filmstrip { display: none !important; }
-  body.overview-active #top-toolbar { display: none !important; }
-  body.overview-active > a[href="./"] { display: none !important; }
-
-  #overview {
-    display: none;
+  /* ── 슬라이드 오버뷰 (O키) — <dialog> + showModal() ── */
+  dialog#overview {
+    display: flex;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.85);
-    z-index: 8000;
+    border: none;
+    padding: 40px;
+    margin: 0;
+    max-width: none;
+    max-height: none;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 24px;
-    padding: 40px;
+    z-index: 8000;
   }
-  #overview.visible { display: flex; }
+  dialog#overview::backdrop {
+    background: rgba(0,0,0,0.85);
+  }
+  dialog#overview:not([open]) {
+    display: none;
+  }
 
   #overview-grid {
     display: grid;

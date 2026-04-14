@@ -1303,7 +1303,7 @@
     }
     // E키 (오버뷰/도움말 닫힌 상태에서만)
     if (e.code === 'KeyE') {
-      if (!overview.classList.contains('visible') &&
+      if (!overview.open &&
           !document.getElementById('help').classList.contains('visible')) {
         toggleEditMode();
       }
@@ -1344,8 +1344,7 @@
       return;
     }
     if (e.key === 'Escape') {
-      document.getElementById('overview').classList.remove('visible');
-      document.body.classList.remove('overview-active');
+      // dialog#overview는 Escape로 자동 닫힘 (close 이벤트 핸들러에서 처리)
       document.getElementById('help').classList.remove('visible');
       return;
     }
@@ -1387,7 +1386,7 @@
   document.addEventListener('click', () => {
     if (editMode) return;
     if (document.body.classList.contains('show-guide')) return;
-    if (!document.getElementById('overview').classList.contains('visible')) goNext();
+    if (!document.getElementById('overview').open) goNext();
   });
 
   // 가이드 툴바 클릭
@@ -1924,8 +1923,7 @@
       item.addEventListener('click', (e) => {
         if (ovDragItem) return;
         e.stopPropagation();
-        overview.classList.remove('visible');
-        document.body.classList.remove('overview-active');
+        overview.close();
         goToSlide(slideIdx);
       });
       item.addEventListener('contextmenu', (e) => {
@@ -2122,13 +2120,11 @@
   }
 
   function toggleOverview() {
-    if (overview.classList.contains('visible')) {
-      overview.classList.remove('visible');
-      document.body.classList.remove('overview-active');
+    if (overview.open) {
+      overview.close();
     } else {
       buildOverview();
-      overview.classList.add('visible');
-      document.body.classList.add('overview-active');
+      overview.showModal();
     }
   }
 
@@ -2322,7 +2318,6 @@
     const hadLayerVisible = layerPanel.classList.contains('visible');
     layerPanel.classList.remove('visible');
     document.body.classList.remove('edit-mode');
-    document.body.classList.remove('overview-active');
     // show-guide 클래스 백업 & 제거
     const guideClasses = [...document.body.classList].filter(c => c.startsWith('show-guide'));
     guideClasses.forEach(c => document.body.classList.remove(c));
@@ -2353,7 +2348,7 @@
     const animShownEls = Array.from(document.querySelectorAll('#stage .anim-shown'));
     animShownEls.forEach(el => el.classList.remove('anim-shown'));
 
-    document.getElementById('overview').classList.remove('visible');
+    if (document.getElementById('overview').open) document.getElementById('overview').close();
     const ovGrid = document.getElementById('overview-grid');
     const ovChildren = [...ovGrid.childNodes];
     ovChildren.forEach(c => c.remove());
