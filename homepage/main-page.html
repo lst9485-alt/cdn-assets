@@ -123,43 +123,128 @@
 </section>
 <div id="main-services-anchor"></div>
 
-<!-- ===== 아이콘 바로가기 (월부 스타일) ===== -->
-<section data-section="main-icons" class="max-w-4xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
-  <div class="flex justify-center gap-6 sm:gap-10 flex-wrap" data-stagger>
-    <!-- 1:1 코칭 -->
-    <a href="/counsel/?idx=11" class="flex flex-col items-center gap-2 group">
-      <div class="w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-2xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:shadow-xl" style="transition: all 0.3s ease;">
-        <iconify-icon icon="solar:chat-round-dots-bold" class="text-white text-2xl sm:text-3xl"></iconify-icon>
+<!-- ===== 배너 슬라이더 (월부 스타일) ===== -->
+<style>
+  .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+  .slide { min-width: 100%; }
+  @keyframes iconFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  .icon-float { animation: iconFloat 3s ease-in-out infinite; }
+  .icon-float:nth-child(2) { animation-delay: 0.3s; }
+  .icon-float:nth-child(3) { animation-delay: 0.6s; }
+  .icon-float:nth-child(4) { animation-delay: 0.9s; }
+  .icon-float:nth-child(5) { animation-delay: 1.2s; }
+</style>
+<section data-section="main-slider" class="max-w-5xl mx-auto px-4 sm:px-8 pt-6 pb-2">
+  <div class="relative rounded-2xl overflow-hidden" id="bannerSlider">
+    <div class="slider-track" id="sliderTrack">
+      <!-- 슬라이드 1: 코칭 A -->
+      <a href="/counsel/?idx=11" class="slide">
+        <div class="relative h-[220px] sm:h-[280px] rounded-2xl overflow-hidden flex items-center px-8 sm:px-14" style="background: linear-gradient(135deg, #1a1a3e 0%, #2d1b4e 50%, #FF6B00 150%);">
+          <div class="relative z-10">
+            <span class="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">1:1 코칭</span>
+            <h3 class="text-2xl sm:text-3xl font-display font-black text-white leading-snug word-keep">지금 여기,<br>사도 될까요?</h3>
+            <p class="text-white/70 text-sm mt-3 word-keep">내 예산에 딱 맞는 내집마련 전략 →</p>
+          </div>
+          <div class="absolute right-8 sm:right-14 top-1/2 -translate-y-1/2 opacity-20">
+            <iconify-icon icon="solar:home-2-bold" class="text-white text-[120px] sm:text-[160px]"></iconify-icon>
+          </div>
+        </div>
+      </a>
+      <!-- 슬라이드 2: 코칭 B -->
+      <a href="/counsel/?idx=11" class="slide">
+        <div class="relative h-[220px] sm:h-[280px] rounded-2xl overflow-hidden flex items-center px-8 sm:px-14" style="background: linear-gradient(135deg, #0a2540 0%, #0055FF 100%);">
+          <div class="relative z-10">
+            <span class="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">1:1 코칭</span>
+            <h3 class="text-2xl sm:text-3xl font-display font-black text-white leading-snug word-keep">원하는 시간에<br>1:1 맞춤 학습</h3>
+            <p class="text-white/70 text-sm mt-3 word-keep">Google Meet · 약 50분 · 배우자 동반 가능 →</p>
+          </div>
+          <div class="absolute right-8 sm:right-14 top-1/2 -translate-y-1/2 opacity-20">
+            <iconify-icon icon="solar:chat-round-dots-bold" class="text-white text-[120px] sm:text-[160px]"></iconify-icon>
+          </div>
+        </div>
+      </a>
+      <!-- 슬라이드 3: 커리큘럼 -->
+      <a href="#" class="slide">
+        <div class="relative h-[220px] sm:h-[280px] rounded-2xl overflow-hidden flex items-center px-8 sm:px-14" style="background: linear-gradient(135deg, #065f46 0%, #10b981 100%);">
+          <div class="relative z-10">
+            <span class="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">커리큘럼</span>
+            <h3 class="text-2xl sm:text-3xl font-display font-black text-white leading-snug word-keep">내게 맞는<br>학습 로드맵 찾기</h3>
+            <p class="text-white/70 text-sm mt-3 word-keep">내집마련부터 재테크까지 단계별 안내 →</p>
+          </div>
+          <div class="absolute right-8 sm:right-14 top-1/2 -translate-y-1/2 opacity-20">
+            <iconify-icon icon="solar:map-bold" class="text-white text-[120px] sm:text-[160px]"></iconify-icon>
+          </div>
+        </div>
+      </a>
+      <!-- 슬라이드 4: 독서모임 -->
+      <a href="#" class="slide">
+        <div class="relative h-[220px] sm:h-[280px] rounded-2xl overflow-hidden flex items-center px-8 sm:px-14" style="background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);">
+          <div class="relative z-10">
+            <span class="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">독서모임</span>
+            <h3 class="text-2xl sm:text-3xl font-display font-black text-white leading-snug word-keep">함께 읽고<br>함께 성장하기</h3>
+            <p class="text-white/70 text-sm mt-3 word-keep">매월 재테크 필독서 함께 읽기 →</p>
+          </div>
+          <div class="absolute right-8 sm:right-14 top-1/2 -translate-y-1/2 opacity-20">
+            <iconify-icon icon="solar:book-bookmark-bold" class="text-white text-[120px] sm:text-[160px]"></iconify-icon>
+          </div>
+        </div>
+      </a>
+      <!-- 슬라이드 5: 온라인강의 -->
+      <a href="#" class="slide">
+        <div class="relative h-[220px] sm:h-[280px] rounded-2xl overflow-hidden flex items-center px-8 sm:px-14" style="background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);">
+          <div class="relative z-10">
+            <span class="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">온라인강의</span>
+            <h3 class="text-2xl sm:text-3xl font-display font-black text-white leading-snug word-keep">내집마련 실전반<br>VOD 강의</h3>
+            <p class="text-white/70 text-sm mt-3 word-keep">예산 계산부터 계약까지 한 번에 →</p>
+          </div>
+          <div class="absolute right-8 sm:right-14 top-1/2 -translate-y-1/2 opacity-20">
+            <iconify-icon icon="solar:play-circle-bold" class="text-white text-[120px] sm:text-[160px]"></iconify-icon>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- 컨트롤 -->
+    <div class="absolute bottom-4 right-4 flex items-center gap-2 z-10">
+      <button id="sliderPause" class="w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 text-sm" style="transition: background 0.2s;">||</button>
+      <span class="bg-black/40 text-white text-xs font-bold px-3 py-1.5 rounded-full"><span id="sliderCurrent">1</span>/<span id="sliderTotal">5</span></span>
+      <button id="sliderPrev" class="w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60" style="transition: background 0.2s;"><iconify-icon icon="solar:alt-arrow-left-bold" class="text-sm"></iconify-icon></button>
+      <button id="sliderNext" class="w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60" style="transition: background 0.2s;"><iconify-icon icon="solar:alt-arrow-right-bold" class="text-sm"></iconify-icon></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 아이콘 바로가기 ===== -->
+<section data-section="main-icons" class="max-w-4xl mx-auto px-6 sm:px-8 py-8 sm:py-10">
+  <div class="flex justify-center gap-8 sm:gap-12" data-stagger>
+    <a href="/counsel/?idx=11" class="flex flex-col items-center gap-2.5 group icon-float">
+      <div class="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-[18px] bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-200/50 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-orange-300/50" style="transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+        <iconify-icon icon="solar:chat-round-dots-bold" class="text-white text-2xl"></iconify-icon>
       </div>
-      <span class="text-xs sm:text-sm font-bold text-gray-700 group-hover:text-brand-orange" style="transition: color 0.2s;">1:1 코칭</span>
+      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition: color 0.2s;">1:1 코칭</span>
     </a>
-    <!-- 커리큘럼 -->
-    <a href="#" class="flex flex-col items-center gap-2 group">
-      <div class="w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:shadow-xl" style="transition: all 0.3s ease;">
-        <iconify-icon icon="solar:map-bold" class="text-white text-2xl sm:text-3xl"></iconify-icon>
+    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float">
+      <div class="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-[18px] bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-200/50 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-blue-300/50" style="transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+        <iconify-icon icon="solar:map-bold" class="text-white text-2xl"></iconify-icon>
       </div>
-      <span class="text-xs sm:text-sm font-bold text-gray-700 group-hover:text-brand-orange" style="transition: color 0.2s;">커리큘럼</span>
+      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition: color 0.2s;">커리큘럼</span>
     </a>
-    <!-- 독서모임 -->
-    <a href="#" class="flex flex-col items-center gap-2 group">
-      <div class="w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:shadow-xl" style="transition: all 0.3s ease;">
-        <iconify-icon icon="solar:book-bookmark-bold" class="text-white text-2xl sm:text-3xl"></iconify-icon>
+    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float">
+      <div class="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-[18px] bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-200/50 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-emerald-300/50" style="transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+        <iconify-icon icon="solar:book-bookmark-bold" class="text-white text-2xl"></iconify-icon>
       </div>
-      <span class="text-xs sm:text-sm font-bold text-gray-700 group-hover:text-brand-orange" style="transition: color 0.2s;">독서모임</span>
+      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition: color 0.2s;">독서모임</span>
     </a>
-    <!-- 온라인강의 -->
-    <a href="#" class="flex flex-col items-center gap-2 group">
-      <div class="w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-2xl bg-gradient-to-br from-violet-400 to-violet-600 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:shadow-xl" style="transition: all 0.3s ease;">
-        <iconify-icon icon="solar:play-circle-bold" class="text-white text-2xl sm:text-3xl"></iconify-icon>
+    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float">
+      <div class="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-[18px] bg-gradient-to-br from-violet-400 to-violet-600 flex items-center justify-center shadow-lg shadow-violet-200/50 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-violet-300/50" style="transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+        <iconify-icon icon="solar:play-circle-bold" class="text-white text-2xl"></iconify-icon>
       </div>
-      <span class="text-xs sm:text-sm font-bold text-gray-700 group-hover:text-brand-orange" style="transition: color 0.2s;">온라인강의</span>
+      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition: color 0.2s;">온라인강의</span>
     </a>
-    <!-- 무료 템플릿 -->
-    <a href="#" class="flex flex-col items-center gap-2 group">
-      <div class="w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-2xl bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:shadow-xl" style="transition: all 0.3s ease;">
-        <iconify-icon icon="solar:document-text-bold" class="text-white text-2xl sm:text-3xl"></iconify-icon>
+    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float">
+      <div class="w-[60px] h-[60px] sm:w-[68px] sm:h-[68px] rounded-[18px] bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center shadow-lg shadow-pink-200/50 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-pink-300/50" style="transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+        <iconify-icon icon="solar:document-text-bold" class="text-white text-2xl"></iconify-icon>
       </div>
-      <span class="text-xs sm:text-sm font-bold text-gray-700 group-hover:text-brand-orange" style="transition: color 0.2s;">무료 템플릿</span>
+      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition: color 0.2s;">무료 템플릿</span>
     </a>
   </div>
 </section>
@@ -237,12 +322,31 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // reveal observer
     var obs = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) e.target.classList.add('revealed');
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
     document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
+
+    // banner slider
+    var track = document.getElementById('sliderTrack');
+    var total = 5, idx = 0, paused = false;
+    function goTo(i) {
+      idx = ((i % total) + total) % total;
+      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+      document.getElementById('sliderCurrent').textContent = idx + 1;
+    }
+    var timer = setInterval(function() { if (!paused) goTo(idx + 1); }, 4000);
+    document.getElementById('sliderNext').onclick = function() { goTo(idx + 1); };
+    document.getElementById('sliderPrev').onclick = function() { goTo(idx - 1); };
+    document.getElementById('sliderPause').onclick = function() {
+      paused = !paused;
+      this.textContent = paused ? '▶' : '||';
+    };
+    document.getElementById('bannerSlider').onmouseenter = function() { paused = true; };
+    document.getElementById('bannerSlider').onmouseleave = function() { paused = false; };
   });
 </script>
 </body>
