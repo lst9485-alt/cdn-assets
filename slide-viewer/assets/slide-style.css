@@ -35,6 +35,10 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  /* html에 background를 명시 → body의 bg-paper.png가 canvas로 전파되지 않음
+     (CSS 스펙: html에 background가 없으면 body background가 canvas로 전파됨 → Chrome compositor 충돌) */
+  html { background: #fff; }
+
   body {
     font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     width: 100vw;
@@ -1354,14 +1358,6 @@
   /* ── 슬라이드 오버뷰 (O키) — JS 인라인 스타일이 주도, CSS는 기본 숨김만 ── */
   #overview { display: none; border: none; padding: 0; margin: 0; }
   #overview::backdrop { display: none; }
-  /* 방법 B: ::before 가상요소로 다크 배경 (background 속성 우회) */
-  #overview[data-open="1"]::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #111;
-    z-index: -1;
-  }
 
   #overview-grid {
     display: grid;

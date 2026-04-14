@@ -1857,19 +1857,16 @@
 
   function openOverview() {
     buildOverview();
-    document.title = 'OV-V8';
+    document.title = 'OV-V9';
     overview.dataset.open = '1';
-    // stage를 display:none으로 완전 제거 (visibility:hidden은 GPU 메모리 유지 → 138장 렌더링 과부하)
     _ovStage.style.display = 'none';
-    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;background:#111;box-shadow:inset 0 0 0 9999px rgba(17,17,17,0.95);transform:translateZ(0)';
+    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;background:rgba(0,0,0,0.92)';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
   function closeOverview() {
     delete overview.dataset.open;
     overview.style.cssText = 'display:none';
-    const bd = document.getElementById('ov-bd');
-    if (bd) bd.style.display = 'none';
     ovGrid.innerHTML = '';
     _ovStage.style.display = '';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = el.dataset.ovPrev || ''; delete el.dataset.ovPrev; } });
