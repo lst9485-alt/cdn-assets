@@ -75,7 +75,7 @@
 
       <!-- 슬라이드 1: 코칭A -->
       <a href="/counsel/?idx=11" class="slide block">
-        <div class="relative h-[320px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+        <div class="relative h-[380px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
           <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
           <!-- 오브 -->
@@ -88,16 +88,16 @@
             <h2 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-tight word-keep mb-5">지금 여기,<br>사도 될까요?</h2>
             <p class="text-white/70 text-base sm:text-lg mb-8 word-keep">내 예산에 딱 맞는 내집마련 전략</p>
             <!-- 글래스 정보칩 -->
-            <div class="flex gap-3 sm:gap-4">
-              <div class="glass-info rounded-2xl px-5 sm:px-6 py-3 sm:py-4">
+            <div class="flex flex-wrap gap-2 sm:gap-4">
+              <div class="glass-info rounded-2xl px-3 sm:px-6 py-2 sm:py-4">
                 <p class="text-[11px] sm:text-xs text-white/50 tracking-widest mb-1">만족도</p>
                 <p class="text-white font-bold text-xl sm:text-2xl">4.97</p>
               </div>
-              <div class="glass-info rounded-2xl px-5 sm:px-6 py-3 sm:py-4">
+              <div class="glass-info rounded-2xl px-3 sm:px-6 py-2 sm:py-4">
                 <p class="text-[11px] sm:text-xs text-white/50 tracking-widest mb-1">누적</p>
                 <p class="text-white font-bold text-xl sm:text-2xl">100+건</p>
               </div>
-              <div class="glass-info rounded-2xl px-5 sm:px-6 py-3 sm:py-4">
+              <div class="glass-info rounded-2xl px-3 sm:px-6 py-2 sm:py-4 hidden sm:block">
                 <p class="text-[11px] sm:text-xs text-white/50 tracking-widest mb-1">방식</p>
                 <p class="text-white font-bold text-xl sm:text-2xl">1:1 맞춤</p>
               </div>
@@ -108,7 +108,7 @@
 
       <!-- 슬라이드 2: 코칭B -->
       <a href="/counsel/?idx=11" class="slide block">
-        <div class="relative h-[320px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+        <div class="relative h-[380px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
           <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-2.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
           <div class="orb absolute right-16 top-8 w-28 h-28 rounded-full bg-blue-300/30"></div>
@@ -124,7 +124,7 @@
 
       <!-- 슬라이드 3: 커리큘럼 -->
       <a href="#" class="slide block">
-        <div class="relative h-[320px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+        <div class="relative h-[380px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
           <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-3.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
           <div class="orb absolute right-24 bottom-10 w-36 h-36 rounded-full bg-emerald-300/25"></div>
@@ -140,7 +140,7 @@
 
       <!-- 슬라이드 4: 독서모임 -->
       <a href="#" class="slide block">
-        <div class="relative h-[320px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+        <div class="relative h-[380px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
           <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-4.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
           <div class="relative z-10 px-10 sm:px-16 max-w-xl">
@@ -155,7 +155,7 @@
 
       <!-- 슬라이드 5: 온라인강의 -->
       <a href="#" class="slide block">
-        <div class="relative h-[320px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+        <div class="relative h-[380px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
           <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-5.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
           <div class="relative z-10 px-10 sm:px-16 max-w-xl">
@@ -170,11 +170,13 @@
     </div>
 
     <!-- 컨트롤: 좌하단 도트 + 우하단 화살표 -->
-    <div class="absolute bottom-5 left-6 sm:left-10 z-10 flex items-center gap-2" id="sliderDots"></div>
-    <div class="absolute bottom-5 right-5 flex items-center gap-2 z-10">
-      <button id="sliderPause" class="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60 text-sm font-bold" style="transition:background 0.2s">||</button>
-      <button id="sliderPrev" class="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60" style="transition:background 0.2s"><iconify-icon icon="solar:alt-arrow-left-bold" class="text-base"></iconify-icon></button>
-      <button id="sliderNext" class="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60" style="transition:background 0.2s"><iconify-icon icon="solar:alt-arrow-right-bold" class="text-base"></iconify-icon></button>
+    <div class="absolute bottom-4 sm:bottom-5 left-6 sm:left-10 right-5 sm:right-10 z-10 flex items-center justify-between">
+      <div class="flex items-center gap-2" id="sliderDots"></div>
+      <div class="flex items-center gap-2">
+        <button id="sliderPause" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60 text-xs sm:text-sm font-bold" style="transition:background 0.2s">||</button>
+        <button id="sliderPrev" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60" style="transition:background 0.2s"><iconify-icon icon="solar:alt-arrow-left-bold" class="text-sm sm:text-base"></iconify-icon></button>
+        <button id="sliderNext" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60" style="transition:background 0.2s"><iconify-icon icon="solar:alt-arrow-right-bold" class="text-sm sm:text-base"></iconify-icon></button>
+      </div>
     </div>
   </div>
 </section>
