@@ -184,21 +184,20 @@
         <ellipse cx="700" cy="45" rx="18" ry="8" fill="#e5e7eb" opacity=".3"/>
       </svg>
 
-      <!-- 깃발 (HTML, 카드 위에 z-20으로 표시) -->
-      <!-- 깃발 (HTML, 카드 바로 위 z-20) -->
-      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:calc(16.67% - 20px); top:26%;">
+      <!-- 깃발 (HTML, 카드 중앙 위 z-20, translateX로 중앙 정렬) -->
+      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:16.67%; top:29%; transform:translateX(-50%);">
         <svg width="40" height="48" viewBox="0 0 40 48">
           <line x1="4" y1="48" x2="4" y2="0" stroke="#999" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M4,2 L34,8 L4,16 Z" fill="#b0b8c4"/>
         </svg>
       </div>
-      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:calc(50% - 20px); top:-2%;">
+      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:50%; top:0%; transform:translateX(-50%);">
         <svg width="40" height="48" viewBox="0 0 40 48">
           <line x1="4" y1="48" x2="4" y2="0" stroke="#cc8855" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M4,2 L34,8 L4,16 Z" fill="#FFB380"/>
         </svg>
       </div>
-      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:calc(83.33% - 20px); top:26%;">
+      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:83.33%; top:29%; transform:translateX(-50%);">
         <svg width="40" height="48" viewBox="0 0 40 48">
           <line x1="4" y1="48" x2="4" y2="0" stroke="#885533" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M4,2 L34,8 L4,16 Z" fill="#FF6B00"/>
