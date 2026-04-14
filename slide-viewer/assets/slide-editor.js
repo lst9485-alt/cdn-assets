@@ -1857,19 +1857,20 @@
 
   function openOverview() {
     buildOverview();
-    document.title = 'OV-V12';
+    document.title = 'OV-V13';
     overview.dataset.open = '1';
     _ovStage.style.display = 'none';
     document.body.classList.add('overview-mode');
-    // 별도 배경 div — overview 자체 background가 Chrome에서 안 그려지는 문제 우회
+    // overview 자체에 배경 + 크기 확실하게 (top/right/bottom/left 명시)
+    overview.style.cssText = 'display:flex;position:fixed;top:0;right:0;bottom:0;left:0;z-index:99999;background:#111;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;box-sizing:border-box';
+    // backdrop도 유지 (보험)
     let ovBg = document.getElementById('ov-backdrop');
     if (!ovBg) {
       ovBg = document.createElement('div');
       ovBg.id = 'ov-backdrop';
       document.body.appendChild(ovBg);
     }
-    ovBg.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;background:#111;';
-    overview.style.cssText = 'display:flex;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;box-sizing:border-box';
+    ovBg.style.cssText = 'position:fixed;top:0;right:0;bottom:0;left:0;z-index:99998;background:#111;';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
