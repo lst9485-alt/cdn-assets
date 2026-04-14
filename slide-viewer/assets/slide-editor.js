@@ -1857,53 +1857,12 @@
 
   function openOverview() {
     buildOverview();
-    document.title = 'OV-V7';
+    document.title = 'OV-V8';
     overview.dataset.open = '1';
     // stage를 display:none으로 완전 제거 (visibility:hidden은 GPU 메모리 유지 → 138장 렌더링 과부하)
     _ovStage.style.display = 'none';
     overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;background:#111;box-shadow:inset 0 0 0 9999px rgba(17,17,17,0.95);transform:translateZ(0)';
-    // 독립 DOM 요소로 다크 배경
-    let bd = document.getElementById('ov-bd');
-    if (!bd) { bd = document.createElement('div'); bd.id = 'ov-bd'; overview.insertBefore(bd, overview.firstChild); }
-    bd.style.cssText = 'position:absolute;inset:0;background:#111;z-index:-1';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
-    // ── 진단: overview computed style을 화면에 표시 ──
-    requestAnimationFrame(() => {
-      const cs = getComputedStyle(overview);
-      const rect = overview.getBoundingClientRect();
-      const bdEl = document.getElementById('ov-bd');
-      const bdCs = bdEl ? getComputedStyle(bdEl) : null;
-      let diag = document.getElementById('ov-diag');
-      if (!diag) { diag = document.createElement('pre'); diag.id = 'ov-diag'; document.documentElement.appendChild(diag); }
-      diag.style.cssText = 'position:fixed;top:0;left:0;z-index:9999999;color:red;font-size:16px;background:yellow;padding:16px;max-width:60vw;white-space:pre-wrap;font-family:monospace';
-      diag.textContent = [
-        '=== overview ===',
-        'tag: ' + overview.tagName,
-        'parent: ' + overview.parentElement.tagName,
-        'bgColor: ' + cs.backgroundColor,
-        'bg: ' + cs.background,
-        'boxShadow: ' + cs.boxShadow,
-        'position: ' + cs.position,
-        'display: ' + cs.display,
-        'width: ' + cs.width + ' / height: ' + cs.height,
-        'rect: ' + Math.round(rect.width) + 'x' + Math.round(rect.height) + ' @ ' + Math.round(rect.left) + ',' + Math.round(rect.top),
-        'zIndex: ' + cs.zIndex,
-        'opacity: ' + cs.opacity,
-        'visibility: ' + cs.visibility,
-        'overflow: ' + cs.overflow,
-        'filter: ' + cs.filter,
-        'transform: ' + cs.transform,
-        'clipPath: ' + cs.clipPath,
-        'contain: ' + cs.contain,
-        'mixBlendMode: ' + cs.mixBlendMode,
-        '=== ov-bd ===',
-        bdCs ? 'bgColor: ' + bdCs.backgroundColor : 'NOT FOUND',
-        bdCs ? 'rect: ' + JSON.stringify(bdEl.getBoundingClientRect()) : '',
-        '=== body ===',
-        'bodyBg: ' + getComputedStyle(document.body).background,
-        'bodyFilter: ' + getComputedStyle(document.body).filter,
-      ].join('\n');
-    });
   }
 
   function closeOverview() {
