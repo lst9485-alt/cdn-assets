@@ -969,13 +969,19 @@
             currentOrder++;
           }
           curLayer.querySelectorAll('.slide-el[data-group="' + group + '"]').forEach(gel => {
-            if (isChartEl(gel)) animateCountValues(gel);
+            if (isChartEl(gel)) {
+              if (gel.classList.contains('bar-chart') || gel.classList.contains('hbar-chart')) animateBarChart(gel);
+              animateCountValues(gel);
+            }
             else if (gel.classList.contains('line-chart')) animateLineChart(gel);
           });
         } else {
           el.classList.add('anim-shown');
           addAnimReady(el);
-          if (isChartEl(el)) { animateCountValues(el); playSound('chart'); }
+          if (isChartEl(el)) {
+            if (el.classList.contains('bar-chart') || el.classList.contains('hbar-chart')) animateBarChart(el);
+            animateCountValues(el); playSound('chart');
+          }
           else if (el.classList.contains('line-chart')) { animateLineChart(el); playSound('chart'); }
           else if (el.classList.contains('btn-grid')) { animateBtnGrid(el); playSound('pop'); }
           else if (el.classList.contains('step-timeline')) { animateTimeline(el); playSound('timeline'); }
@@ -1020,13 +1026,19 @@
               currentOrder++;
             }
             newLayer.querySelectorAll('.slide-el[data-group="' + firstGroup + '"]').forEach(gel => {
-              if (isChartEl(gel)) animateCountValues(gel);
+              if (isChartEl(gel)) {
+                if (gel.classList.contains('bar-chart') || gel.classList.contains('hbar-chart')) animateBarChart(gel);
+                animateCountValues(gel);
+              }
               else if (gel.classList.contains('line-chart')) animateLineChart(gel);
             });
           } else {
             firstEl.classList.add('anim-shown');
             addAnimReady(firstEl);
-            if (isChartEl(firstEl)) animateCountValues(firstEl);
+            if (isChartEl(firstEl)) {
+              if (firstEl.classList.contains('bar-chart') || firstEl.classList.contains('hbar-chart')) animateBarChart(firstEl);
+              animateCountValues(firstEl);
+            }
             if (firstEl.classList.contains('line-chart')) animateLineChart(firstEl);
             currentOrder++;
             syncDimOuter(slide);
@@ -1840,6 +1852,7 @@
   const ovGrid = document.getElementById('overview-grid');
   overview.addEventListener('close', () => {
     document.body.classList.remove('overview-active');
+    document.body.focus();
   });
 
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
