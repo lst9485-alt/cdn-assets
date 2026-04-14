@@ -51,8 +51,9 @@
   .orb { filter: blur(40px); opacity: .4; animation: orbFloat 6s ease-in-out infinite; }
 
   /* 아이콘 플로트 */
-  @keyframes iconFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  @keyframes iconFloat { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-6px) scale(1)} }
   .icon-float { animation: iconFloat 3s ease-in-out infinite; }
+  .icon-float:hover { animation: none; transform: scale(1.08); }
   .icon-float:nth-child(2) { animation-delay: 0.4s; }
   .icon-float:nth-child(3) { animation-delay: 0.8s; }
   .icon-float:nth-child(4) { animation-delay: 1.2s; }
@@ -96,10 +97,6 @@
               <div class="glass-info rounded-2xl px-4 sm:px-6 py-2.5 sm:py-4">
                 <p class="text-[10px] sm:text-xs text-white/50 tracking-widest mb-1">누적상담</p>
                 <p class="text-white font-bold text-xl sm:text-2xl">100+건</p>
-              </div>
-              <div class="glass-info rounded-2xl px-4 sm:px-6 py-2.5 sm:py-4 hidden sm:block">
-                <p class="text-[11px] sm:text-xs text-white/50 tracking-widest mb-1">방식</p>
-                <p class="text-white font-bold text-xl sm:text-2xl">1:1 맞춤</p>
               </div>
             </div>
           </div>
@@ -183,26 +180,26 @@
 
 <!-- ===== 아이콘 도크 ===== -->
 <section data-section="main-icons" class="max-w-3xl mx-auto px-6 sm:px-8 py-8 sm:py-10">
-  <div class="icon-dock rounded-[28px] p-4 flex justify-center gap-4 sm:gap-8" data-stagger>
-    <a href="/counsel/?idx=11" class="flex flex-col items-center gap-2 group icon-float" style="transition:transform .3s ease">
-      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-coaching.png" alt="1:1 코칭" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:scale-110 group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
-      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">1:1 코칭</span>
+  <div class="icon-dock rounded-[28px] p-5 flex justify-center gap-6 sm:gap-10" data-stagger>
+    <a href="/counsel/?idx=11" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-coaching.png" alt="1:1 코칭" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-sm font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">1:1 코칭</span>
     </a>
-    <a href="#" class="flex flex-col items-center gap-2 group icon-float">
-      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-curriculum.png" alt="커리큘럼" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:scale-110 group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
-      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">커리큘럼</span>
+    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-curriculum.png" alt="커리큘럼" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-sm font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">커리큘럼</span>
     </a>
-    <a href="#" class="flex flex-col items-center gap-2 group icon-float">
-      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-bookclub.png" alt="독서모임" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:scale-110 group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
-      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">독서모임</span>
+    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-bookclub.png" alt="독서모임" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-sm font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">독서모임</span>
     </a>
-    <a href="#" class="flex flex-col items-center gap-2 group icon-float">
-      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-lecture.png" alt="온라인강의" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:scale-110 group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
-      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">온라인강의</span>
+    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-lecture.png" alt="온라인강의" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-sm font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">온라인강의</span>
     </a>
-    <a href="#" class="flex flex-col items-center gap-2 group icon-float">
-      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-template.png" alt="무료 템플릿" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:scale-110 group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
-      <span class="text-xs font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">무료 템플릿</span>
+    <a href="#" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-template.png" alt="무료 템플릿" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-sm font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">무료 템플릿</span>
     </a>
   </div>
 </section>
