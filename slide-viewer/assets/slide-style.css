@@ -1354,6 +1354,14 @@
   /* ── 슬라이드 오버뷰 (O키) — JS 인라인 스타일이 주도, CSS는 기본 숨김만 ── */
   #overview { display: none; border: none; padding: 0; margin: 0; }
   #overview::backdrop { display: none; }
+  /* 방법 B: ::before 가상요소로 다크 배경 (background 속성 우회) */
+  #overview[data-open="1"]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #111;
+    z-index: -1;
+  }
 
   #overview-grid {
     display: grid;

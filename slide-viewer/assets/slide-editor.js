@@ -1855,26 +1855,27 @@
   const _ovStage = document.getElementById('stage');
   const _ovHideIds = ['top-toolbar','group-toolbar','guide-toolbar','align-menu','help','slideNum','edit-badge','filmstrip','dim-outer'];
 
-  let _ovBodyBg = '';
-
   function openOverview() {
     buildOverview();
-    document.title = 'OV-V4';
+    document.title = 'OV-V5';
     overview.dataset.open = '1';
-    // body 배경을 직접 다크로 변경 (z-index/position 문제 완전 우회)
-    _ovBodyBg = document.body.style.cssText;
-    document.body.style.cssText = 'background:#111;overflow:hidden;width:100vw;height:100vh;margin:0';
-    overview.style.cssText = 'display:flex;width:100vw;height:100vh;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;position:relative;z-index:99999';
-    _ovStage.style.display = 'none';
+    // 방법 A: box-shadow로 다크 배경 (background 속성 우회)
+    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;box-shadow:inset 0 0 0 9999px rgba(17,17,17,0.95)';
+    // 방법 C: 독립 DOM 요소로 다크 배경
+    let bd = document.getElementById('ov-bd');
+    if (!bd) { bd = document.createElement('div'); bd.id = 'ov-bd'; overview.insertBefore(bd, overview.firstChild); }
+    bd.style.cssText = 'position:absolute;inset:0;background:#111;z-index:-1';
+    _ovStage.style.visibility = 'hidden';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
   function closeOverview() {
     delete overview.dataset.open;
     overview.style.cssText = 'display:none';
+    const bd = document.getElementById('ov-bd');
+    if (bd) bd.style.display = 'none';
     ovGrid.innerHTML = '';
-    document.body.style.cssText = _ovBodyBg;
-    _ovStage.style.display = '';
+    _ovStage.style.visibility = '';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = el.dataset.ovPrev || ''; delete el.dataset.ovPrev; } });
     document.documentElement.focus();
   }
