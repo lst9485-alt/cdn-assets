@@ -1,5 +1,4 @@
 {
-  "ignoreCommand": "bash -c '! git diff HEAD^ HEAD --name-only | grep -qvE \"^slide-viewer/slides-editor\\.html$\"'",
   "headers": [
     {
       "source": "/(.*)\\.html",
