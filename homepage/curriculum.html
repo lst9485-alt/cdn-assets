@@ -170,13 +170,13 @@
       <!-- 점선 경로 + 깃발 + START/GOAL (데스크톱) -->
       <svg class="hidden md:block absolute top-0 left-0 w-full pointer-events-none" style="height: 420px;" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid meet">
         <!-- 점선 경로 -->
-        <path d="M 30,240 C 120,240 180,100 300,100 C 420,100 480,240 540,240 C 600,240 660,100 750,100 C 810,100 830,200 850,240" fill="none" stroke="#d1d5db" stroke-width="3" stroke-dasharray="14,10" stroke-linecap="round"/>
+        <path d="M 40,180 C 160,180 220,55 450,55 C 680,55 700,180 720,180" fill="none" stroke="#d1d5db" stroke-width="3" stroke-dasharray="14,10" stroke-linecap="round"/>
         <!-- START 원 -->
-        <circle cx="30" cy="240" r="8" fill="#9ca3af"/>
-        <text x="30" y="270" text-anchor="middle" fill="#9ca3af" font-size="12" font-weight="800" letter-spacing="0.1em">START</text>
+        <circle cx="40" cy="180" r="7" fill="#9ca3af"/>
+        <text x="40" y="205" text-anchor="middle" fill="#9ca3af" font-size="11" font-weight="800" letter-spacing="0.1em">START</text>
         <!-- GOAL 원 -->
-        <circle cx="850" cy="240" r="10" fill="#FF6B00"/>
-        <text x="850" y="270" text-anchor="middle" fill="#FF6B00" font-size="12" font-weight="800" letter-spacing="0.1em">GOAL</text>
+        <circle cx="720" cy="180" r="8" fill="#FF6B00"/>
+        <text x="720" y="205" text-anchor="middle" fill="#FF6B00" font-size="11" font-weight="800" letter-spacing="0.1em">GOAL</text>
         <!-- 구름 장식 -->
         <ellipse cx="130" cy="60" rx="30" ry="12" fill="#e5e7eb" opacity=".5"/>
         <ellipse cx="150" cy="55" rx="20" ry="10" fill="#e5e7eb" opacity=".4"/>
@@ -185,22 +185,22 @@
       </svg>
 
       <!-- 깃발 (HTML, 카드 위에 z-20으로 표시) -->
-      <!-- 깃발 (HTML, 카드 위에 z-20으로 표시) -->
-      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:calc(16.67% - 20px); top:20%;">
-        <svg width="40" height="52" viewBox="0 0 40 52">
-          <line x1="4" y1="52" x2="4" y2="0" stroke="#999" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- 깃발 (HTML, 카드 바로 위 z-20) -->
+      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:calc(16.67% - 20px); top:26%;">
+        <svg width="40" height="48" viewBox="0 0 40 48">
+          <line x1="4" y1="48" x2="4" y2="0" stroke="#999" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M4,2 L34,8 L4,16 Z" fill="#b0b8c4"/>
         </svg>
       </div>
-      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:calc(50% - 20px); top:-4%;">
-        <svg width="40" height="56" viewBox="0 0 40 56">
-          <line x1="4" y1="56" x2="4" y2="0" stroke="#cc8855" stroke-width="2.5" stroke-linecap="round"/>
+      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:calc(50% - 20px); top:-2%;">
+        <svg width="40" height="48" viewBox="0 0 40 48">
+          <line x1="4" y1="48" x2="4" y2="0" stroke="#cc8855" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M4,2 L34,8 L4,16 Z" fill="#FFB380"/>
         </svg>
       </div>
-      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:calc(83.33% - 20px); top:20%;">
-        <svg width="40" height="52" viewBox="0 0 40 52">
-          <line x1="4" y1="52" x2="4" y2="0" stroke="#885533" stroke-width="2.5" stroke-linecap="round"/>
+      <div class="hidden md:block absolute z-20 pointer-events-none" style="left:calc(83.33% - 20px); top:26%;">
+        <svg width="40" height="48" viewBox="0 0 40 48">
+          <line x1="4" y1="48" x2="4" y2="0" stroke="#885533" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M4,2 L34,8 L4,16 Z" fill="#FF6B00"/>
         </svg>
       </div>
