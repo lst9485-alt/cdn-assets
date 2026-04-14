@@ -1857,13 +1857,12 @@
 
   function openOverview() {
     buildOverview();
-    document.title = 'OV-V10';
+    document.title = 'OV-V11';
     overview.dataset.open = '1';
     _ovStage.style.display = 'none';
-    // overview를 <html> 직속으로 이동 — body compositor 충돌 우회
-    // (diagnostic box가 html 직속에서 배경 정상 렌더링된 것과 동일한 원리)
-    document.documentElement.appendChild(overview);
-    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;background:rgba(0,0,0,0.92)';
+    // body.edit-mode와 동일한 메커니즘: CSS !important로 body 배경 변경
+    document.body.classList.add('overview-mode');
+    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
@@ -1871,8 +1870,7 @@
     delete overview.dataset.open;
     overview.style.cssText = 'display:none';
     ovGrid.innerHTML = '';
-    // overview를 body로 되돌림 (저장 시 body 안에 있어야 함)
-    document.body.appendChild(overview);
+    document.body.classList.remove('overview-mode');
     _ovStage.style.display = '';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = el.dataset.ovPrev || ''; delete el.dataset.ovPrev; } });
     document.documentElement.focus();
