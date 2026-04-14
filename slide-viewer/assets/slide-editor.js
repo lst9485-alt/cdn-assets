@@ -1857,18 +1857,27 @@
 
   function openOverview() {
     buildOverview();
-    document.title = 'OV-V11';
+    document.title = 'OV-V12';
     overview.dataset.open = '1';
     _ovStage.style.display = 'none';
-    // body.edit-mode와 동일한 메커니즘: CSS !important로 body 배경 변경
     document.body.classList.add('overview-mode');
-    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;background:#111;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0';
+    // 별도 배경 div — overview 자체 background가 Chrome에서 안 그려지는 문제 우회
+    let ovBg = document.getElementById('ov-backdrop');
+    if (!ovBg) {
+      ovBg = document.createElement('div');
+      ovBg.id = 'ov-backdrop';
+      document.body.appendChild(ovBg);
+    }
+    ovBg.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99998;background:#111;';
+    overview.style.cssText = 'display:flex;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;box-sizing:border-box';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
   function closeOverview() {
     delete overview.dataset.open;
     overview.style.cssText = 'display:none';
+    const ovBg = document.getElementById('ov-backdrop');
+    if (ovBg) ovBg.style.display = 'none';
     ovGrid.innerHTML = '';
     document.body.classList.remove('overview-mode');
     _ovStage.style.display = '';
