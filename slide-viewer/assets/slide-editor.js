@@ -1862,7 +1862,7 @@
     _ovStage.style.display = 'none';
     // body.edit-mode와 동일한 메커니즘: CSS !important로 body 배경 변경
     document.body.classList.add('overview-mode');
-    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0';
+    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;background:#111;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
