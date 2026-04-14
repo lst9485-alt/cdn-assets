@@ -1855,13 +1855,17 @@
   const _ovStage = document.getElementById('stage');
   const _ovHideIds = ['top-toolbar','group-toolbar','guide-toolbar','align-menu','help','slideNum','edit-badge','filmstrip','dim-outer'];
 
+  let _ovBodyBg = '';
+
   function openOverview() {
     buildOverview();
     document.title = 'OV-V4';
     overview.dataset.open = '1';
-    overview.style.cssText = 'display:flex;position:fixed;inset:0;width:100vw;height:100vh;background:red;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0';
-    console.log('[OV] open — tag:', overview.tagName, 'bg:', overview.style.background);
-    _ovStage.style.visibility = 'hidden';
+    // body 배경을 직접 다크로 변경 (z-index/position 문제 완전 우회)
+    _ovBodyBg = document.body.style.cssText;
+    document.body.style.cssText = 'background:#111;overflow:hidden;width:100vw;height:100vh;margin:0';
+    overview.style.cssText = 'display:flex;width:100vw;height:100vh;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;position:relative;z-index:99999';
+    _ovStage.style.display = 'none';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
@@ -1869,10 +1873,10 @@
     delete overview.dataset.open;
     overview.style.cssText = 'display:none';
     ovGrid.innerHTML = '';
-    _ovStage.style.visibility = '';
+    document.body.style.cssText = _ovBodyBg;
+    _ovStage.style.display = '';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = el.dataset.ovPrev || ''; delete el.dataset.ovPrev; } });
     document.documentElement.focus();
-    console.log('[OV] closed');
   }
 
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
