@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-14T06:00:02.800875+09:00",
+  "updated": "2026-04-15T06:00:00.988005+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -25,23 +25,31 @@
               "done": true
             },
             {
-              "text": "에스크로 가입 — 기업은행 4/15 방문",
+              "text": "KCP PG 승인 (2026-04-14, 22만원 미납/계약 미완료 — 이니시스 결과 보고 결정)",
+              "done": true
+            },
+            {
+              "text": "통신판매업 신고 — 정부24 완료 (2026-04-14, KCP 에스크로 확인증 사용)",
+              "done": true
+            },
+            {
+              "text": "아임웹 사이트 교육형 정비 — 코칭 상세페이지를 교육 구조로(커리큘럼/수강방식/환불규정), 푸터 정보 확인",
               "done": false
             },
             {
-              "text": "통신판매업 신고 — 정부24 (에스크로 이후)",
+              "text": "이니시스 무료 재신청 (교육서비스업 리프레이밍, 강의/독서모임 중심)",
               "done": false
             },
             {
-              "text": "아임웹: 코칭 상품 비공개 + 강의/독서모임 등록",
-              "done": false
-            },
-            {
-              "text": "KCP PG 신청",
+              "text": "이니시스 반려 시 → KCP 22만원 결제",
               "done": false
             },
             {
               "text": "카카오 비즈니스 재신청",
+              "done": false
+            },
+            {
+              "text": "(PG 통과 후) 자체 사이트 개발 본격 진행 → [[0. 자체 사이트 제작]]",
               "done": false
             }
           ]
@@ -76,7 +84,83 @@
               "done": true
             },
             {
-              "text": "세션 6 시각 확인: 바차트 overshoot/스윕/바운스 + float-y 위상 오프셋 (T11, T09, T05, T30 등) 브라우저에서 확인",
+              "text": "세션 6 시각 확인: T11 바차트 애니메이션 수정 완료 (step>0 animateBarChart 호출 추가). float-y 위상 오프셋은 미확인",
+              "done": true
+            },
+            {
+              "text": "overview 배경 복원 (세션27~30 미해결)",
+              "done": false
+            },
+            {
+              "text": "5-F. 타입 라벨 표시 — 슬라이드/오버뷰/필름스트립에 타입명 보이게",
+              "done": false
+            },
+            {
+              "text": "main-top.js rebuildSlidesByKey() — data-display-label에 data-type 추가",
+              "done": false
+            },
+            {
+              "text": "main-top.js buildFilmstrip() — .fs-num에 타입명 추가",
+              "done": false
+            },
+            {
+              "text": "main-mid.js buildOverview() — .ov-num에 타입명 추가",
+              "done": false
+            },
+            {
+              "text": "CSS 폰트 사이즈 조정 (배지/필름스트립/오버뷰)",
+              "done": false
+            },
+            {
+              "text": "pipeline.py build + pytest",
+              "done": false
+            },
+            {
+              "text": "5-G. 의도 태깅 — 스킬 타입 선택 개선",
+              "done": false
+            },
+            {
+              "text": "type-registry.json 38개 타입에 intent 배열 추가 (15개 인텐트 분류)",
+              "done": false
+            },
+            {
+              "text": "type-selection-rules.md에 \"인텐트→타입 역색인\" 섹션 추가",
+              "done": false
+            },
+            {
+              "text": "SKILL.md 서브에이전트 지시에 \"인텐트 먼저\" 로직 추가",
+              "done": false
+            },
+            {
+              "text": "regenerate-snippets.py intent 필드 보존 확인",
+              "done": false
+            },
+            {
+              "text": "pytest 통과 확인",
+              "done": false
+            },
+            {
+              "text": "템플릿 추가 후보 5종 (Codex 분석 기반, 기존 타입 대체 어려운 것):",
+              "done": false
+            },
+            {
+              "text": "5-A. 사분면/2x2 매트릭스 (판단형: 리스크vs수익, 입지 비교)",
+              "done": false
+            },
+            {
+              "text": "5-B. Before/After 변화형 (정책·매수 전후 차이)",
+              "done": false
+            },
+            {
+              "text": "5-C. 구성비/증감 분해 — waterfall/stacked bar (세금·대출·비용)",
+              "done": false
+            },
+            {
+              "text": "5-D. 지도/지역 콜아웃 (부동산·상권·생활권 — 아이콘은 있지만 전용 타입 없음)",
+              "done": false
+            },
+            {
+              "text": "5-E. 오해vs사실/FAQ 반박형 (T01 질문형과 다름 — 여러 반론 빠르게 정리)",
               "done": false
             }
           ]
@@ -91,7 +175,46 @@
               "done": false
             },
             {
+              "text": "https://github.com/Canine89/canine-remotion-slide 편집자p 리모션",
+              "done": false
+            },
+            {
               "text": "yt-assemble 스킬 신규 제작 — 원고 + ElevenLabs TTS → 슬라이드 + 음성 동기화 → MP4 출력",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "홈페이지 메인+커리큘럼 디자인 마무리 (4/14~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "8-1. 커리큘럼 깃발 위치 최종 확인 — 4/14 마지막 커밋(dcec24a)에서 SVG 폴을 중앙(x=20)으로 이동+translateX(-50%) 적용함. CDN 확인 URL: `https://lst9485-alt.github.io/cdn-assets/homepage/curriculum.html?v=13`. 데스크톱에서 깃발 3개가 각 카드 상단 정중앙에 있는지 확인. 안 맞으면 left% 미세 조정 (현재: 16.67%/50%/83.33%, grid gap-6 때문에 실제 컬럼 중심은 ~15.5%/50%/~84.5%)",
+              "done": false
+            },
+            {
+              "text": "8-2. 로컬 body curriculum.html 동기화 — `Workspace/apps/homepage/curriculum.html`(body only)에 코칭 상세 섹션(경로형 레이아웃+깃발+STEP카드+모바일점선커넥터)이 없음. CDN curriculum.html의 159~257라인(코칭 상세 섹션)을 body 버전으로 변환해서 로컬 body에 추가해야 함. head/html/body 태그 제거하고 body 내용만 복사",
+              "done": false
+            },
+            {
+              "text": "8-3. curriculum-all.html 갱신 — 현재 매우 오래된 버전(SVG 경로형 없음, 플로차트 내용도 구버전). CDN curriculum.html을 그대로 curriculum-all.html로 복사하면 됨. 경로: `Workspace/apps/homepage/curriculum-all.html`",
+              "done": false
+            },
+            {
+              "text": "8-4. 메인페이지 모바일 최종 확인 — CDN main-page.html 모바일(320px)에서: 정보칩 2개가 1줄에 들어가는지, 컨트롤+도트 겹침 없는지, 380px 높이 충분한지 확인. URL: `https://lst9485-alt.github.io/cdn-assets/homepage/main-page.html?v=13`",
+              "done": false
+            },
+            {
+              "text": "8-5. 아임웹 반영 — PG 심사 통과 후 코칭 재공개할 때 함께 진행. main-page.html → 아임웹 홈 페이지, curriculum.html → 아임웹 커리큘럼 페이지에 HTML 위젯으로 삽입. body 부분만 복사 (head/footer는 아임웹 코드에서 관리)",
+              "done": false
+            },
+            {
+              "text": "8-6. 후기 마키 캐러셀 튀는 현상 — imweb-body.html의 후기 섹션 marquee 애니메이션이 불안정. data-reveal 제거 + 고정높이 + will-change 적용했으나 미해결. 성능 최적화 또는 CSS will-change/transform 재검토 필요",
+              "done": false
+            },
+            {
+              "text": "8-7. Codex 지적 개선 — Apps Script doPost: 중복 방지 강화, WEBHOOK_SECRET 폴백 제거, 서버 amount/receiptType 검증 추가",
               "done": false
             }
           ]
