@@ -1838,6 +1838,9 @@
   // 오버뷰
   const overview = document.getElementById('overview');
   const ovGrid = document.getElementById('overview-grid');
+  overview.addEventListener('close', () => {
+    document.body.classList.remove('overview-active');
+  });
 
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
   let expandedOverviewGroups = new Set();  // 확장된 page-group(string) 집합 — overview 전용
@@ -1924,6 +1927,7 @@
         if (ovDragItem) return;
         e.stopPropagation();
         overview.close();
+        document.body.classList.remove('overview-active');
         goToSlide(slideIdx);
       });
       item.addEventListener('contextmenu', (e) => {
@@ -2122,9 +2126,17 @@
   function toggleOverview() {
     if (overview.open) {
       overview.close();
+      document.body.classList.remove('overview-active');
     } else {
       buildOverview();
-      overview.showModal();
+      if (overview.open) overview.close();
+      try {
+        overview.showModal();
+      } catch (err) {
+        console.warn('[OV] showModal failed, using show():', err.message);
+        overview.show();
+      }
+      document.body.classList.add('overview-active');
     }
   }
 
@@ -2348,7 +2360,10 @@
     const animShownEls = Array.from(document.querySelectorAll('#stage .anim-shown'));
     animShownEls.forEach(el => el.classList.remove('anim-shown'));
 
-    if (document.getElementById('overview').open) document.getElementById('overview').close();
+    if (document.getElementById('overview').open) {
+      document.getElementById('overview').close();
+      document.body.classList.remove('overview-active');
+    }
     const ovGrid = document.getElementById('overview-grid');
     const ovChildren = [...ovGrid.childNodes];
     ovChildren.forEach(c => c.remove());
