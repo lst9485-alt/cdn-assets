@@ -1857,14 +1857,15 @@
 
   function openOverview() {
     buildOverview();
-    document.title = 'OV-V6';
+    document.title = 'OV-V7';
     overview.dataset.open = '1';
-    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;background:#111;box-shadow:inset 0 0 0 9999px rgba(17,17,17,0.95)';
-    // 방법 C: 독립 DOM 요소로 다크 배경
+    // stage를 display:none으로 완전 제거 (visibility:hidden은 GPU 메모리 유지 → 138장 렌더링 과부하)
+    _ovStage.style.display = 'none';
+    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0;background:#111;box-shadow:inset 0 0 0 9999px rgba(17,17,17,0.95);transform:translateZ(0)';
+    // 독립 DOM 요소로 다크 배경
     let bd = document.getElementById('ov-bd');
     if (!bd) { bd = document.createElement('div'); bd.id = 'ov-bd'; overview.insertBefore(bd, overview.firstChild); }
     bd.style.cssText = 'position:absolute;inset:0;background:#111;z-index:-1';
-    _ovStage.style.visibility = 'hidden';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
     // ── 진단: overview computed style을 화면에 표시 ──
     requestAnimationFrame(() => {
@@ -1911,7 +1912,7 @@
     const bd = document.getElementById('ov-bd');
     if (bd) bd.style.display = 'none';
     ovGrid.innerHTML = '';
-    _ovStage.style.visibility = '';
+    _ovStage.style.display = '';
     _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = el.dataset.ovPrev || ''; delete el.dataset.ovPrev; } });
     document.documentElement.focus();
   }
