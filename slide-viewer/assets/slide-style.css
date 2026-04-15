@@ -1357,16 +1357,21 @@
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.85);
     z-index: 8000;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 24px;
     padding: 40px;
-    will-change: transform;
   }
   #overview.visible { display: flex; }
+  #overview-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    pointer-events: none;
+    z-index: -1;
+  }
 
   #overview-grid {
     display: grid;
