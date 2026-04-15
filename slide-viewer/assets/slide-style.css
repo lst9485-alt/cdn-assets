@@ -1448,22 +1448,9 @@
     display: flex;
     width: 300px;
   }
-  /* 접힌 상태: 전부 숨김 */
+  /* 접힌 상태: variant 완전 숨김 */
   .ov-item.ov-variant:not(.show) {
-    margin-left: -230px;
-    transition: margin-left 0.25s ease-out;
-  }
-  /* 접힌 상태: 첫 번째 variant만 1장 빼꼼 */
-  .ov-group > .ov-item.ov-variant:not(.show):nth-child(2) {
-    margin-left: -230px;
-  }
-  /* 빼꼼 나온 1장에 어두운 오버레이 */
-  .ov-item.ov-variant:not(.show) .ov-thumb::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    pointer-events: none;
+    display: none;
   }
   /* 펼친 상태: 정상 카드로 나열 */
   .ov-item.ov-variant.show {
