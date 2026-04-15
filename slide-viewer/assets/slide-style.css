@@ -1364,6 +1364,7 @@
     align-items: center;
     gap: 24px;
     padding: 40px;
+    will-change: transform;
   }
   #overview.visible { display: flex; }
 
