@@ -305,7 +305,7 @@
             id: 'slide-viewer',
             title: '슬라이드 템플릿',
             description: '기본 36종 + 베리언츠 95장',
-            href: 'https://cdn-assets-three.vercel.app/slide-viewer/',
+            href: './slide-viewer/',
             badgeText: 'LIVE',
             badgeTone: 'live',
             iconKey: 'doc',
