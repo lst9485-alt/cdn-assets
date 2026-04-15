@@ -1854,6 +1854,12 @@
   const ovGrid = document.getElementById('overview-grid');
   const ovBackdrop = document.getElementById('overview-backdrop');
 
+  function updateOvScale() {
+    const item = ovGrid.querySelector('.ov-item');
+    if (!item) return;
+    ovGrid.style.setProperty('--ov-scale', item.clientWidth / 1920);
+  }
+
   function openOverview() {
     buildOverview();
     document.documentElement.classList.add('overview-open');
@@ -1861,6 +1867,7 @@
     ovBackdrop.classList.add('visible');
     overview.classList.add('visible');
     overview.dataset.open = '1';
+    requestAnimationFrame(updateOvScale);
   }
 
   function closeOverview() {
@@ -2057,6 +2064,7 @@
         }
       }
     });
+    if (overview.dataset.open === '1') requestAnimationFrame(updateOvScale);
   }
 
   // ── 슬라이드 우클릭 메뉴 ──
@@ -2156,6 +2164,10 @@
   function toggleOverview() {
     overview.dataset.open === '1' ? closeOverview() : openOverview();
   }
+
+  window.addEventListener('resize', () => {
+    if (overview.dataset.open === '1') updateOvScale();
+  });
 
   // ── 환경 감지 ──
   const isGitHubPages = location.hostname.endsWith('.github.io') || location.hostname.endsWith('.vercel.app');

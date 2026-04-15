@@ -1424,7 +1424,7 @@
     position: relative;
     width: 1920px;
     height: 1080px;
-    transform: scale(calc(240/1920));
+    transform: scale(var(--ov-scale, 0.125));
     transform-origin: top left;
     pointer-events: none;
   }
