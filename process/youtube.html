@@ -13,26 +13,27 @@
         .back:hover { color: #0077C8; }
         h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 8px; }
         .subtitle { color: #64748B; font-size: 14px; margin-bottom: 28px; }
-        .flow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .step { background: white; border: 2px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; }
+        .flow { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+        .step { background: white; border: 2px solid #E2E8F0; border-radius: 8px; padding: 10px 12px; }
         .step:hover { border-color: #0077C8; }
         .step-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #0077C8; color: white; border-radius: 50%; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+        .step-num { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; height: 24px; background: #0077C8; color: white; border-radius: 12px; font-size: 11px; font-weight: 700; flex-shrink: 0; padding: 0 6px; }
         .step-skill { font-size: 11px; font-weight: 700; color: #0077C8; background: #E8F3FF; padding: 1px 6px; border-radius: 4px; }
         .step-title { font-size: 14px; font-weight: 700; color: #051C2C; }
-        .step-desc { font-size: 12px; color: #64748B; padding-left: 32px; }
+        .step-desc { font-size: 11px; color: #64748B; padding-left: 32px; }
         .phase-divider { text-align: left; margin: 24px 0 10px; }
         .phase-label { display: inline-block; background: #F1F5F9; color: #475569; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 10px; }
         .step-manual { border-left: 3px solid #94A3B8; }
         .step-manual .step-num { background: #94A3B8; }
-        @media (max-width: 600px) { .flow { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .flow { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 480px) { .flow { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="page">
         <a href="../" class="back">&larr; 메인</a>
         <h1>🎬 유튜브 제작 프로세스</h1>
-        <p class="subtitle">yt01 ~ yt09 스킬 기반 9단계</p>
+        <p class="subtitle">yt01 ~ yt09 스킬 기반 11단계</p>
 
         <div class="phase-divider"><span class="phase-label">기획</span></div>
         <div class="flow">
