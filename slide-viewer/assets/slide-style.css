@@ -1391,7 +1391,7 @@
 
   #overview-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 260px);
+    grid-template-columns: repeat(5, 300px);
     gap: 16px;
     justify-content: center;
     overflow-y: auto;
@@ -1405,8 +1405,8 @@
 
   .ov-item {
     position: relative;
-    width: 240px;
-    height: 135px;
+    width: 288px;
+    height: 162px;
     cursor: pointer;
     border: 3px solid transparent;
     border-radius: 6px;
@@ -1420,7 +1420,7 @@
     position: relative;
     width: 1920px;
     height: 1080px;
-    transform: scale(calc(240 / 1920));
+    transform: scale(calc(288 / 1920));
     transform-origin: top left;
     pointer-events: none;
     background: #111;
@@ -1446,7 +1446,7 @@
   .ov-group {
     position: relative;
     display: flex;
-    width: 260px;
+    width: 300px;
   }
   /* 접힌 상태: 전부 숨김 */
   .ov-item.ov-variant:not(.show) {
