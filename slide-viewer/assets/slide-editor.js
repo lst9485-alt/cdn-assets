@@ -1865,9 +1865,9 @@
   const ovBackdrop = document.getElementById('overview-backdrop');
 
   function updateOvScale() {
-    const item = ovGrid.querySelector('.ov-group:not(.expanded) .ov-item') || ovGrid.querySelector('.ov-item');
-    if (!item) return;
-    ovGrid.style.setProperty('--ov-scale', item.clientWidth / 1920);
+    ovGrid.querySelectorAll('.ov-item').forEach(item => {
+      item.style.setProperty('--ov-scale', item.clientWidth / 1920);
+    });
   }
 
   function openOverview() {

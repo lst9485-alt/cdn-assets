@@ -1455,7 +1455,7 @@
     overflow: hidden;
   }
   /* variant 완전 숨김 */
-  #overview .ov-item.ov-variant { display: none !important; }
+  #overview .ov-item.ov-variant:not(.show) { display: none !important; }
   /* 빼꼼 나온 1장에 어두운 오버레이 */
   .ov-item.ov-variant:not(.show) .ov-thumb::after {
     content: '';
