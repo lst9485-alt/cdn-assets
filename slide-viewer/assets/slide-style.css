@@ -1422,10 +1422,11 @@
   .ov-item.current { border-color: var(--editor-accent); }
 
   .ov-thumb {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 1920px;
     height: 1080px;
-    transform: scale(var(--ov-scale, 0.125));
     transform-origin: top left;
     pointer-events: none;
     background: #111;
@@ -1471,7 +1472,13 @@
   }
   /* 펼치면 ov-group이 여러 열 차지 */
   .ov-group.expanded {
-    width: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  .ov-group.expanded .ov-item {
+    flex: 1 1 0;
+    min-width: 0;
   }
   /* +/- 토글 버튼 */
   .ov-toggle {

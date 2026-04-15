@@ -1864,6 +1864,8 @@
   const ovGrid = document.getElementById('overview-grid');
   const ovBackdrop = document.getElementById('overview-backdrop');
 
+  let ovResizeObserver = null;
+
   function updateOvScale() {
     ovGrid.querySelectorAll('.ov-item').forEach(item => {
       const w = item.getBoundingClientRect().width;
@@ -1874,6 +1876,16 @@
     });
   }
 
+  function startOvObserver() {
+    stopOvObserver();
+    ovResizeObserver = new ResizeObserver(() => updateOvScale());
+    ovResizeObserver.observe(ovGrid);
+  }
+
+  function stopOvObserver() {
+    if (ovResizeObserver) { ovResizeObserver.disconnect(); ovResizeObserver = null; }
+  }
+
   function openOverview() {
     buildOverview();
     document.documentElement.classList.add('overview-open');
@@ -1881,10 +1893,11 @@
     ovBackdrop.classList.add('visible');
     overview.classList.add('visible');
     overview.dataset.open = '1';
-    requestAnimationFrame(() => requestAnimationFrame(updateOvScale));
+    startOvObserver();
   }
 
   function closeOverview() {
+    stopOvObserver();
     document.documentElement.classList.remove('overview-open');
     document.body.classList.remove('overview-open');
     ovBackdrop.classList.remove('visible');
@@ -2086,7 +2099,7 @@
         }
       }
     });
-    if (overview.dataset.open === '1') requestAnimationFrame(() => requestAnimationFrame(updateOvScale));
+    if (overview.dataset.open === '1') startOvObserver();
   }
 
   // ── 슬라이드 우클릭 메뉴 ──
