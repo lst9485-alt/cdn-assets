@@ -131,9 +131,17 @@
   }
   /* 편집 모드: 배경을 회색으로 (bg-paper 이미지 덮어씌우기) */
   body.edit-mode { background: var(--editor-bg) !important; }
-  /* 오버뷰 모드: edit-mode와 동일 패턴 — body 배경 + 스크롤 잠금 */
-  body.overview-open { background: rgba(0,0,0,0.85) !important; overflow: hidden !important; }
-  html.overview-open { overflow: hidden !important; }
+  /* 오버뷰 모드: edit-mode와 동일 패턴 — body 배경 + 스크롤 완전 잠금 */
+  html.overview-open,
+  body.overview-open {
+    background: rgba(0,0,0,0.85) !important;
+    overflow: hidden !important;
+    scrollbar-width: none;
+  }
+  html.overview-open::-webkit-scrollbar,
+  body.overview-open::-webkit-scrollbar { display: none; }
+  #overview-grid { scrollbar-width: none; }
+  #overview-grid::-webkit-scrollbar { display: none; }
 
   /* step 1+: text-area는 위치 전용, step-content가 애니메이션 담당 */
   .step-layer[data-step]:not([data-step="0"]) .text-area,
