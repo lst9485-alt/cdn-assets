@@ -1866,7 +1866,11 @@
 
   function updateOvScale() {
     ovGrid.querySelectorAll('.ov-item').forEach(item => {
-      item.style.setProperty('--ov-scale', item.clientWidth / 1920);
+      const w = item.getBoundingClientRect().width;
+      if (w > 0) {
+        const thumb = item.querySelector('.ov-thumb');
+        if (thumb) thumb.style.transform = `scale(${w / 1920})`;
+      }
     });
   }
 
@@ -1877,7 +1881,7 @@
     ovBackdrop.classList.add('visible');
     overview.classList.add('visible');
     overview.dataset.open = '1';
-    requestAnimationFrame(updateOvScale);
+    requestAnimationFrame(() => requestAnimationFrame(updateOvScale));
   }
 
   function closeOverview() {
@@ -2082,7 +2086,7 @@
         }
       }
     });
-    if (overview.dataset.open === '1') requestAnimationFrame(updateOvScale);
+    if (overview.dataset.open === '1') requestAnimationFrame(() => requestAnimationFrame(updateOvScale));
   }
 
   // ── 슬라이드 우클릭 메뉴 ──
