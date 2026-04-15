@@ -1852,27 +1852,16 @@
   // 오버뷰
   const overview = document.getElementById('overview');
   const ovGrid = document.getElementById('overview-grid');
-  const _ovStage = document.getElementById('stage');
-  const _ovHideIds = ['top-toolbar','group-toolbar','guide-toolbar','align-menu','help','slideNum','edit-badge','filmstrip','dim-outer'];
-
   function openOverview() {
     buildOverview();
-    document.title = 'OV-V11';
+    overview.classList.add('visible');
     overview.dataset.open = '1';
-    _ovStage.style.display = 'none';
-    // body.edit-mode와 동일한 메커니즘: CSS !important로 body 배경 변경
-    document.body.classList.add('overview-mode');
-    overview.style.cssText = 'display:flex;position:fixed;inset:0;z-index:99999;flex-direction:column;justify-content:center;align-items:center;gap:24px;padding:40px;margin:0';
-    _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.dataset.ovPrev = el.style.display; el.style.display = 'none'; } });
   }
 
   function closeOverview() {
+    overview.classList.remove('visible');
     delete overview.dataset.open;
-    overview.style.cssText = 'display:none';
     ovGrid.innerHTML = '';
-    document.body.classList.remove('overview-mode');
-    _ovStage.style.display = '';
-    _ovHideIds.forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = el.dataset.ovPrev || ''; delete el.dataset.ovPrev; } });
     document.documentElement.focus();
   }
 

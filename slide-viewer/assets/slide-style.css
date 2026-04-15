@@ -35,9 +35,6 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* html에 background를 명시 → body의 bg-paper.png가 canvas로 전파되지 않음
-     (CSS 스펙: html에 background가 없으면 body background가 canvas로 전파됨 → Chrome compositor 충돌) */
-  html { background: #fff; }
 
   body {
     font-family: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
@@ -134,8 +131,6 @@
   }
   /* 편집 모드: 배경을 회색으로 (bg-paper 이미지 덮어씌우기) */
   body.edit-mode { background: var(--editor-bg) !important; }
-  /* overview 모드: body.edit-mode와 동일한 메커니즘으로 다크 배경 */
-  body.overview-mode { background: #111 !important; }
 
   /* step 1+: text-area는 위치 전용, step-content가 애니메이션 담당 */
   .step-layer[data-step]:not([data-step="0"]) .text-area,
@@ -1357,9 +1352,20 @@
     border-top: 2px dashed rgba(0, 120, 255, 0.55);
   }
 
-  /* ── 슬라이드 오버뷰 (O키) — JS 인라인 스타일이 주도, CSS는 기본 숨김만 ── */
-  #overview { display: none; border: none; padding: 0; margin: 0; }
-  #overview::backdrop { display: none; }
+  /* ── 슬라이드 오버뷰 (O키) ── */
+  #overview {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 8000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 40px;
+  }
+  #overview.visible { display: flex; }
 
   #overview-grid {
     display: grid;
