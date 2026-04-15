@@ -1,11 +1,19 @@
 {
-  "updated": "2026-04-15T06:00:01.209825+09:00",
+  "updated": "2026-04-16T06:00:01.274927+09:00",
   "projects": [
+    {
+      "name": "yt-slide flexbox 리팩터",
+      "type": "file",
+      "app": "youtube/yt-slide",
+      "modified": "2026-04-15",
+      "status": null,
+      "next": null
+    },
     {
       "name": "홈페이지",
       "type": "folder",
       "app": "homepage",
-      "modified": "2026-04-14",
+      "modified": "2026-04-15",
       "status": "v3.5 섹션 재배치 + UI/UX 개선. 서버 백엔드(Apps Script doPost) 배포 완료 (v24). 아임웹 삽입은 v3.4 기준 — v3.5 아직 미반영",
       "next": "~~강의/독서모임 상세페이지 HTML 작성~~ ✅ (2026-04-13, Supanova 리디자인 완료)"
     },
@@ -13,9 +21,9 @@
       "name": "브랜딩 — 왜 하필 여기",
       "type": "file",
       "app": "brand-context",
-      "modified": "2026-04-09",
-      "status": "2026-04-08 기준 브랜드 정체성 확정 완료.",
-      "next": "이번 주 영상 원고에 새 정체성과 적 프레이밍 반영"
+      "modified": "2026-04-15",
+      "status": "2026-04-15 기준 브랜드 정체성 리밸런싱 완료.",
+      "next": "노션 동기화 (`/profile sync`)"
     },
     {
       "name": "컨설팅",
