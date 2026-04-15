@@ -2188,7 +2188,7 @@
   });
 
   // ── 환경 감지 ──
-  const isGitHubPages = location.hostname.endsWith('.github.io') || location.hostname.endsWith('.vercel.app');
+  const isGitHubPages = location.hostname.endsWith('.github.io');
 
   // ── 토스트 알림 ──
   function showToast(msg, duration = 3000) {
@@ -2974,7 +2974,7 @@
         }
       }
       if (autoSaveTimer) clearInterval(autoSaveTimer);
-      autoSaveTimer = setInterval(saveToFile, isGitHubPages ? GH_AUTO_SAVE_INTERVAL : 300000);
+      autoSaveTimer = setInterval(saveToFile, isGitHubPages ? GH_AUTO_SAVE_INTERVAL : 30000);
       // ── 편집중 배지 표시 ──
       showEditBadge(true);
     } else {
@@ -3007,7 +3007,7 @@
       if (!badge) {
         badge = document.createElement('div');
         badge.id = 'edit-mode-badge';
-        badge.textContent = isGitHubPages ? '편집중 — 자동저장 30초 (GitHub)' : '편집중 — 자동저장 10초';
+        badge.textContent = '편집중 — 자동저장 30초';
         badge.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:99999;background:#FF6B00;color:#fff;padding:6px 18px;border-radius:8px;font-size:14px;font-weight:900;pointer-events:none;animation:editBadgeBlink 1.5s infinite;';
         document.body.appendChild(badge);
         if (!document.getElementById('edit-badge-style')) {
