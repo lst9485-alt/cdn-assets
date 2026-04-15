@@ -1441,7 +1441,7 @@
   .ov-group {
     position: relative;
     display: flex;
-    width: 340px;
+    overflow: hidden;
   }
   /* 접힌 상태: 전부 숨김 */
   .ov-item.ov-variant:not(.show) {
