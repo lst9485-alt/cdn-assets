@@ -1,122 +1,3 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>내집마련 1:1 코칭 — 우리동네 재테크</title>
-<!-- 아임웹 환경설정 → HEAD 코드 삽입 -->
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    important: true,
-    theme: {
-      extend: {
-        fontFamily: {
-          sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
-          display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
-        },
-        colors: {
-          brand: { orange: '#FF6B00', beige: '#F5F0E8', dark: '#0a0a0a', blue: '#0055FF' }
-        }
-      }
-    }
-  }
-</script>
-<!-- Pretendard + GmarketSans -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
-<!-- Iconify -->
-<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
-<!-- 랜딩 스타일 -->
-<style>
-  html { font-size: 16px !important; }
-  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; }
-  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
-  [data-reveal] { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1); }
-  [data-reveal="left"] { transform: translateX(-60px); }
-  [data-reveal="right"] { transform: translateX(60px); }
-  [data-reveal="scale"] { transform: scale(0.9); }
-  [data-reveal].revealed { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
-  [data-stagger] > * { opacity: 0; transform: translateY(24px) scale(0.9); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-  [data-stagger].revealed > *:nth-child(1) { transition-delay: 0s; }
-  [data-stagger].revealed > *:nth-child(2) { transition-delay: 0.12s; }
-  [data-stagger].revealed > *:nth-child(3) { transition-delay: 0.24s; }
-  [data-stagger].revealed > *:nth-child(4) { transition-delay: 0.36s; }
-  [data-stagger].revealed > *:nth-child(5) { transition-delay: 0.48s; }
-  [data-stagger].revealed > *:nth-child(6) { transition-delay: 0.6s; }
-  [data-stagger].revealed > *:nth-child(7) { transition-delay: 0.72s; }
-  [data-stagger].revealed > *:nth-child(8) { transition-delay: 0.84s; }
-  [data-stagger].revealed > * { opacity: 1; transform: translateY(0) scale(1); }
-  .chart-line { stroke-dasharray: 1200; stroke-dashoffset: 1200; transition: stroke-dashoffset 3s ease; }
-  .chart-line.animated { stroke-dashoffset: 0; }
-  .chart-arrow { opacity: 0; transition: opacity 0.5s ease 1.5s; }
-  .chart-arrow.animated { opacity: 1; }
-
-  @keyframes bobUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
-  @keyframes bobDown { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
-  @keyframes glowPulse { 0%,100%{box-shadow:0 0 20px rgba(255,107,0,.3)} 50%{box-shadow:0 0 40px rgba(255,107,0,.6)} }
-  .glow-pulse { animation: glowPulse 2.5s ease infinite; }
-  @keyframes pulseAttention { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
-  .pulse-attention { animation: pulseAttention 1.5s ease infinite; }
-  .star { color: #FFB800; }
-  .hl-orange { background: linear-gradient(transparent 60%, rgba(255,107,0,0.15) 60%); }
-  @keyframes heroDrop {
-    0% { opacity:0; transform:translateY(-80px) rotate(-8deg); }
-    60% { opacity:1; transform:translateY(10px) rotate(2deg); }
-    80% { transform:translateY(-5px) rotate(-1deg); }
-    100% { opacity:1; transform:translateY(0) rotate(0deg); }
-  }
-  @keyframes heroFadeUp { 0%{opacity:0;transform:translateY(40px)} 100%{opacity:1;transform:translateY(0)} }
-  .hero-word { opacity:0; animation: heroDrop 0.8s cubic-bezier(.34,1.56,.64,1) forwards; }
-  .hero-main { opacity:0; animation: heroFadeUp 0.8s ease forwards; }
-  .hero-cta { opacity:0; animation: heroFadeUp 0.8s ease forwards; }
-  .hero-scroll { opacity:0; animation: heroFadeUp 0.6s ease forwards; }
-  .contract-img { border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
-  /* 동그란 체크박스 */
-  .cb-round { -webkit-appearance:none; appearance:none; width:22px; height:22px; border:2px solid #d1d5db; border-radius:50%; background:#fff; cursor:pointer; position:relative; flex-shrink:0; transition: all 0.2s; }
-  .cb-round:checked { background:#FF6B00; border-color:#FF6B00; }
-  .cb-round:checked::after { content:''; position:absolute; top:3px; left:6px; width:6px; height:10px; border:solid #fff; border-width:0 2.5px 2.5px 0; transform:rotate(45deg); }
-  /* 동그란 라디오 */
-  .radio-round { -webkit-appearance:none; appearance:none; width:22px; height:22px; border:2px solid #d1d5db; border-radius:50%; background:#fff; cursor:pointer; position:relative; flex-shrink:0; transition: all 0.2s; }
-  .radio-round:checked { border-color:#FF6B00; }
-  .radio-round:checked::after { content:''; position:absolute; top:4px; left:4px; width:10px; height:10px; border-radius:50%; background:#FF6B00; }
-  .radio-round:disabled { opacity:0.4; cursor:not-allowed; }
-  /* 네모 체크박스 (오렌지) */
-  .cb-square { -webkit-appearance:none; appearance:none; width:22px; height:22px; border:2px solid #d1d5db; border-radius:6px; background:#fff; cursor:pointer; position:relative; flex-shrink:0; transition: all 0.2s; }
-  .cb-square:checked { background:#FF6B00; border-color:#FF6B00; }
-  .cb-square:checked::after { content:''; position:absolute; top:3px; left:6px; width:6px; height:10px; border:solid #fff; border-width:0 2.5px 2.5px 0; transform:rotate(45deg); }
-  @keyframes marqueeLeft { 0%{transform:translate3d(0,0,0)} 100%{transform:translate3d(-50%,0,0)} }
-  @keyframes marqueeRight { 0%{transform:translate3d(-50%,0,0)} 100%{transform:translate3d(0,0,0)} }
-  .marquee-left { animation: marqueeLeft 25s linear infinite; will-change: transform; }
-  .marquee-right { animation: marqueeRight 25s linear infinite; will-change: transform; }
-  .marquee-left:hover, .marquee-right:hover { animation-play-state: paused; }
-  /* Wavy underline animation */
-  @keyframes wavyDraw { 0%{width:0} 100%{width:100%} }
-  .wavy-red { text-decoration: underline wavy #dc2626; text-underline-offset: 6px; text-decoration-thickness: 3px; }
-  .wavy-blue { text-decoration: underline wavy #0055FF; text-underline-offset: 6px; text-decoration-thickness: 3px; }
-  /* Shake effect */
-  @keyframes shake { 0%,100%{transform:translateX(0)} 10%,30%,50%,70%,90%{transform:translateX(-4px)} 20%,40%,60%,80%{transform:translateX(4px)} }
-  .shake-once.revealed { animation: shake 0.8s ease; }
-  /* Red underline decoration */
-  .underline-red { text-decoration: underline; text-decoration-color: #dc2626; text-underline-offset: 4px; text-decoration-thickness: 3px; }
-  /* Typing dots */
-  @keyframes dotFade1 { 0%,30%{opacity:0} 33%,100%{opacity:1} }
-  @keyframes dotFade2 { 0%,50%{opacity:0} 53%,100%{opacity:1} }
-  @keyframes dotFade3 { 0%,70%{opacity:0} 73%,100%{opacity:1} }
-  /* Speech bubble with tail */
-  .bubble-real-l { background: #ffffff; border: 2px solid #e5e7eb; border-radius: 24px 24px 24px 6px; position:relative; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-  .bubble-real-l::before { content:''; position:absolute; bottom:6px; left:-10px; width:0; height:0; border:10px solid transparent; border-right-color:#e5e7eb; border-left:0; }
-  .bubble-real-l::after { content:''; position:absolute; bottom:8px; left:-7px; width:0; height:0; border:8px solid transparent; border-right-color:#ffffff; border-left:0; }
-  .bubble-real-r { background: #FFF3E0; border: 2px solid #FF8F00; border-radius: 24px 24px 6px 24px; position:relative; box-shadow: 0 2px 8px rgba(255,143,0,0.15); }
-  .bubble-real-r::before { content:''; position:absolute; bottom:6px; right:-10px; width:0; height:0; border:10px solid transparent; border-left-color:#FF8F00; border-right:0; }
-  .bubble-real-r::after { content:''; position:absolute; bottom:8px; right:-7px; width:0; height:0; border:8px solid transparent; border-left-color:#FFF3E0; border-right:0; }
-  /* Card hover lift */
-  .card-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-  .card-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
-</style>
-</head>
-<body class="bg-white text-brand-dark font-sans">
 
   <!-- ===== 수강 정보 ===== -->
   <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-8 py-8">
@@ -396,17 +277,18 @@
       <div class="text-center mb-14" data-reveal>
         <p class="text-5xl mb-4">💰</p>
         <p class="text-brand-orange font-display font-bold text-xl mb-4">코칭 커리큘럼</p>
-        <h2 class="text-4xl md:text-5xl font-display font-black tracking-tight leading-tight word-keep">이렇게 도와드립니다</h2>
+        <h2 class="text-4xl md:text-5xl font-display font-black tracking-tight leading-tight word-keep">이렇게 학습합니다</h2>
+        <p class="text-gray-500 mt-4 text-base word-keep">수강 방식: 온라인 화상 수업 (Google Meet, 약 50분) · 배우자 동반 가능</p>
       </div>
 
       <!-- 커리큘럼 개요 -->
       <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-100 mb-10 max-w-2xl mx-auto" data-reveal>
         <div class="space-y-3 text-base text-gray-700">
-          <p class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> 소개 및 코칭 진행방식 설명</p>
-          <p class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> 현재 상황분석 및 포트폴리오 점검(사전 질문지)</p>
-          <p class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> 내 집 마련 코칭</p>
-          <p class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> 코칭 이후 해야 할 것</p>
-          <p class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> 코칭 이후 카톡 질의응답</p>
+          <p class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> 오리엔테이션 및 학습 진행방식 안내</p>
+          <p class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> 현황 분석 실습 (사전 질문지 기반)</p>
+          <p class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> 내집마련 실전 코칭</p>
+          <p class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> 수강 후 액션플랜 수립</p>
+          <p class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> 수강 후 카톡 Q&A (최대 3개월)</p>
         </div>
       </div>
 
@@ -415,8 +297,9 @@
         <!-- 1단계 -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100" data-reveal>
           <div class="bg-yellow-400 px-6 py-4">
-            <p class="text-xl md:text-2xl font-display font-black text-brand-dark">1. 현재 상황분석 및 포트폴리오 점검</p>
-            <p class="text-sm text-gray-700 mt-1">(사전질문지 체크)</p>
+            <p class="text-xl md:text-2xl font-display font-black text-brand-dark">1. 현황 분석 학습</p>
+            <p class="text-sm text-gray-700 mt-1">(사전질문지 기반 자기진단)</p>
+            <p class="text-xs text-brand-orange mt-1 font-medium">학습 목표: 내 재무 상태와 학습 성향을 객관적으로 파악할 수 있습니다</p>
           </div>
           <div class="px-6 py-5 space-y-3">
             <div>
@@ -429,7 +312,7 @@
             </div>
             <div>
               <p class="font-bold text-brand-dark">(3) 사전 질문</p>
-              <p class="text-gray-500 text-sm ml-4">- 질의응답 및 명확한 가이드 제시</p>
+              <p class="text-gray-500 text-sm ml-4">- 질의응답 및 학습 방향 가이드</p>
             </div>
           </div>
         </div>
@@ -437,19 +320,20 @@
         <!-- 2단계 -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100" data-reveal>
           <div class="bg-yellow-400 px-6 py-4">
-            <p class="text-xl md:text-2xl font-display font-black text-brand-dark">2. 예산 체크, 지역 및 단지 선정</p>
-            <p class="text-sm text-gray-700 mt-1">(내 집 마련  코칭)</p>
+            <p class="text-xl md:text-2xl font-display font-black text-brand-dark">2. 예산 분석법 및 지역·단지 선정 학습</p>
+            <p class="text-sm text-gray-700 mt-1">(내집마련 실전 코칭)</p>
+            <p class="text-xs text-brand-orange mt-1 font-medium">학습 목표: 예산에 맞는 지역 분석 방법과 단지 비교 기준을 배웁니다</p>
           </div>
           <div class="px-6 py-5 space-y-3">
             <p class="font-bold text-brand-dark">(1) 예산체크</p>
             <div>
               <p class="font-bold text-brand-dark">(2) 지역선정</p>
-              <p class="text-gray-500 text-sm ml-4">- 단지 선정 가이드 (1억 더 오를 집)</p>
+              <p class="text-gray-500 text-sm ml-4">- 단지 분석 방법론 학습</p>
             </div>
             <p class="font-bold text-brand-dark">(3) 입지 및 단지 확인</p>
             <div>
               <p class="font-bold text-brand-dark">(4) 부동산 방문 및 계약</p>
-              <p class="text-gray-500 text-sm ml-4">- 협상 노하우 등</p>
+              <p class="text-gray-500 text-sm ml-4">- 계약 절차 및 협상 방법 학습</p>
             </div>
             <p class="font-bold text-brand-dark">(5) 잔금 및 입주</p>
           </div>
@@ -458,8 +342,9 @@
         <!-- 3단계 -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100" data-reveal>
           <div class="bg-yellow-400 px-6 py-4">
-            <p class="text-xl md:text-2xl font-display font-black text-brand-dark">3. 코칭 후 액션플랜 & 자산 로드맵</p>
-            <p class="text-sm text-gray-700 mt-1">(당장 해야 할 것 & 향후 로드맵)</p>
+            <p class="text-xl md:text-2xl font-display font-black text-brand-dark">3. 액션플랜 수립 및 자산 로드맵 학습</p>
+            <p class="text-sm text-gray-700 mt-1">(실행 계획 & 향후 로드맵)</p>
+            <p class="text-xs text-brand-orange mt-1 font-medium">학습 목표: 구체적인 실행 계획과 장기 자산 관리 방법을 세울 수 있습니다</p>
           </div>
           <div class="px-6 py-5 space-y-3">
             <div>
@@ -468,7 +353,7 @@
             </div>
             <div>
               <p class="font-bold text-brand-dark">(2) 내 집 마련 이후 자산 로드맵</p>
-              <p class="text-gray-500 text-sm ml-4">- 자산배분 가이드</p>
+              <p class="text-gray-500 text-sm ml-4">- 자산배분 방법론 학습</p>
             </div>
             <p class="font-bold text-brand-dark">(3) 체크리스트 및 가이드북 제공</p>
             <p class="font-bold text-brand-dark">(4) 마무리 및 추가 질의응답</p>
@@ -485,16 +370,16 @@
       </div>
       <div class="text-center" data-reveal="scale">
         <div class="inline-block bg-brand-dark border border-brand-orange/30 rounded-2xl px-10 py-6 shadow-lg">
-          <p class="text-2xl md:text-3xl font-display font-black word-keep text-white mb-2">이 모든 걸 <span class="text-brand-orange">내집마련 코칭</span>에서!</p>
-          <p class="text-gray-400 word-keep"><iconify-icon icon="solar:shield-check-bold" class="text-brand-orange align-middle"></iconify-icon> 코칭 후 최대 3개월간 무제한 질의응답</p>
+          <p class="text-2xl md:text-3xl font-display font-black word-keep text-white mb-2">이 모든 걸 <span class="text-brand-orange">내집마련 코칭 프로그램</span>에서!</p>
+          <p class="text-gray-400 word-keep"><iconify-icon icon="solar:shield-check-bold" class="text-brand-orange align-middle"></iconify-icon> 수강 후 최대 3개월간 무제한 Q&A</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== ⑤ 컨설턴트 소개 ===== -->
-  <section data-section="consultant" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">⑤ 컨설턴트</span>
+  <!-- ===== ⑤ 코치 소개 ===== -->
+  <section data-section="coach" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">⑤ 코치</span>
 
     <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
       <div class="text-center mb-14" data-reveal>
@@ -608,8 +493,8 @@
       <!-- 마키 Row 2 -->
       <div class="overflow-hidden" data-reveal>
         <div class="flex gap-5 marquee-right">
-          <!-- 2 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">약속된 시간보다 한참 지나서까지 하나라도 더 알려주려고 계속 설명해주시는 모습에서 진짜 열정적인 분이구나 느꼈습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"현실적으로 선택할 수 있는 방향을 구체적으로 제안해주셨습니다"</span></p><p class="text-sm text-gray-500">수원 30대 · 내집마련+투자 · 직장인 · 이*수</p></div><!-- 4 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">기대 이상의 세심한 상담이었습니다. 덕분에 남편이랑 앞으로의 투자 방향성을 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"기대 이상의 세심한 상담이었습니다"</span></p><p class="text-sm text-gray-500">서울 마포 30대 · 투자 · 신혼부부 · 안*정</p></div><!-- 6 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">반신반의하며 상담을 신청했는데 명확한 투자 방향을 잡을 수 있었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"솔직히 반신반의했는데, 상담 후 확신이 생겼습니다"</span></p><p class="text-sm text-gray-500">부산 30대 · 내집마련 · 싱글 · 윤*아</p></div><!-- 8 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">투자는 하고싶은데 앞이 깜깜해서 컨설팅 요청드렸는데 기대 이상이었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"가이드 주신대로 열심히 해보겠습니다"</span></p><p class="text-sm text-gray-500">서울 강남 30대 · 투자 · 직장인 · 권*우</p></div><!-- 10 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">구체적인 단지까지 추천해주셔서 바로 매물 보러 다녔습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"상담 후 바로 행동에 옮길 수 있었습니다"</span></p><p class="text-sm text-gray-500">천안 40대 · 갈아타기 · 부부 · 서*진</p></div><!-- 12 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">혼자 공부하면서 놓치고 있던 부분을 정확하게 짚어주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"투자 방향성이 완전히 달라졌습니다"</span></p><p class="text-sm text-gray-500">대전 30대 · 투자 · 직장인 · 강*원</p></div><!-- 14 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">지금 사야 하는지 기다려야 하는지 명확한 답을 주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"매수 타이밍까지 잡아주셔서 감사합니다"</span></p><p class="text-sm text-gray-500">세종 40대 · 투자 · 자영업 · 신*경</p></div><!-- 16 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부부가 함께 상담받으니 의사결정이 훨씬 빨라졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"남편과 함께 들었는데 둘 다 만족했습니다"</span></p><p class="text-sm text-gray-500">서울 강서 30대 · 내집마련 · 부부동반 · 유*리</p></div><!-- 18 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산 용어도 모르는 상태에서 시작했는데 하나하나 쉽게 알려주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"초보자 눈높이에 맞춰 설명해주셨습니다"</span></p><p class="text-sm text-gray-500">대구 20대 · 내집마련 · 사회초년생 · 최*은</p></div><!-- 20 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">유튜브에서만 보다가 실제 상담받으니 확실히 다릅니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"다른 상담과는 차원이 다릅니다"</span></p><p class="text-sm text-gray-500">부산 40대 · 투자 · 자영업 · 배*선</p></div><!-- 22 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">1년 뒤 계획이었는데 지금이 적기라는 조언 덕분에 좋은 매물 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"내집마련 타이밍을 정확히 잡았습니다"</span></p><p class="text-sm text-gray-500">평택 30대 · 내집마련 · 신혼부부 · 정*희</p></div><!-- 24 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">진심으로 도와주고 싶어하시는 마음이 느껴졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"왠지 친한 지인처럼 상담해주셨습니다"</span></p><p class="text-sm text-gray-500">울산 30대 · 내집마련+투자 · 맞벌이 · 노*정</p></div><!-- 26 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산의 ㅂ자도 모르는 초심자였는데 유튜브 보고 상담 신청했습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"유튜브 보고 신청했는데 기대 이상이었습니다"</span></p><p class="text-sm text-gray-500">경기 30대 · 내집마련 · 생애최초 · 황*석</p></div>
-          <!-- 복제: 2 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">약속된 시간보다 한참 지나서까지 하나라도 더 알려주려고 계속 설명해주시는 모습에서 진짜 열정적인 분이구나 느꼈습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"현실적으로 선택할 수 있는 방향을 구체적으로 제안해주셨습니다"</span></p><p class="text-sm text-gray-500">수원 30대 · 내집마련+투자 · 직장인 · 이*수</p></div><!-- 복제: 4 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">기대 이상의 세심한 상담이었습니다. 덕분에 남편이랑 앞으로의 투자 방향성을 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"기대 이상의 세심한 상담이었습니다"</span></p><p class="text-sm text-gray-500">서울 마포 30대 · 투자 · 신혼부부 · 안*정</p></div><!-- 복제: 6 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">반신반의하며 상담을 신청했는데 명확한 투자 방향을 잡을 수 있었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"솔직히 반신반의했는데, 상담 후 확신이 생겼습니다"</span></p><p class="text-sm text-gray-500">부산 30대 · 내집마련 · 싱글 · 윤*아</p></div><!-- 복제: 8 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">투자는 하고싶은데 앞이 깜깜해서 컨설팅 요청드렸는데 기대 이상이었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"가이드 주신대로 열심히 해보겠습니다"</span></p><p class="text-sm text-gray-500">서울 강남 30대 · 투자 · 직장인 · 권*우</p></div><!-- 복제: 10 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">구체적인 단지까지 추천해주셔서 바로 매물 보러 다녔습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"상담 후 바로 행동에 옮길 수 있었습니다"</span></p><p class="text-sm text-gray-500">천안 40대 · 갈아타기 · 부부 · 서*진</p></div><!-- 복제: 12 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">혼자 공부하면서 놓치고 있던 부분을 정확하게 짚어주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"투자 방향성이 완전히 달라졌습니다"</span></p><p class="text-sm text-gray-500">대전 30대 · 투자 · 직장인 · 강*원</p></div><!-- 복제: 14 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">지금 사야 하는지 기다려야 하는지 명확한 답을 주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"매수 타이밍까지 잡아주셔서 감사합니다"</span></p><p class="text-sm text-gray-500">세종 40대 · 투자 · 자영업 · 신*경</p></div><!-- 복제: 16 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부부가 함께 상담받으니 의사결정이 훨씬 빨라졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"남편과 함께 들었는데 둘 다 만족했습니다"</span></p><p class="text-sm text-gray-500">서울 강서 30대 · 내집마련 · 부부동반 · 유*리</p></div><!-- 복제: 18 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산 용어도 모르는 상태에서 시작했는데 하나하나 쉽게 알려주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"초보자 눈높이에 맞춰 설명해주셨습니다"</span></p><p class="text-sm text-gray-500">대구 20대 · 내집마련 · 사회초년생 · 최*은</p></div><!-- 복제: 20 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">유튜브에서만 보다가 실제 상담받으니 확실히 다릅니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"다른 상담과는 차원이 다릅니다"</span></p><p class="text-sm text-gray-500">부산 40대 · 투자 · 자영업 · 배*선</p></div><!-- 복제: 22 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">1년 뒤 계획이었는데 지금이 적기라는 조언 덕분에 좋은 매물 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"내집마련 타이밍을 정확히 잡았습니다"</span></p><p class="text-sm text-gray-500">평택 30대 · 내집마련 · 신혼부부 · 정*희</p></div><!-- 복제: 24 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">진심으로 도와주고 싶어하시는 마음이 느껴졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"왠지 친한 지인처럼 상담해주셨습니다"</span></p><p class="text-sm text-gray-500">울산 30대 · 내집마련+투자 · 맞벌이 · 노*정</p></div><!-- 복제: 26 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산의 ㅂ자도 모르는 초심자였는데 유튜브 보고 상담 신청했습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"유튜브 보고 신청했는데 기대 이상이었습니다"</span></p><p class="text-sm text-gray-500">경기 30대 · 내집마련 · 생애최초 · 황*석</p></div>
+          <!-- 2 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">약속된 시간보다 한참 지나서까지 하나라도 더 알려주려고 계속 설명해주시는 모습에서 진짜 열정적인 분이구나 느꼈습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"현실적으로 선택할 수 있는 방향을 구체적으로 제안해주셨습니다"</span></p><p class="text-sm text-gray-500">수원 30대 · 내집마련+투자 · 직장인 · 이*수</p></div><!-- 4 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">기대 이상의 세심한 상담이었습니다. 덕분에 남편이랑 앞으로의 투자 방향성을 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"기대 이상의 세심한 상담이었습니다"</span></p><p class="text-sm text-gray-500">서울 마포 30대 · 투자 · 신혼부부 · 안*정</p></div><!-- 6 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">반신반의하며 상담을 신청했는데 명확한 투자 방향을 잡을 수 있었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"솔직히 반신반의했는데, 상담 후 확신이 생겼습니다"</span></p><p class="text-sm text-gray-500">부산 30대 · 내집마련 · 싱글 · 윤*아</p></div><!-- 8 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">투자는 하고싶은데 앞이 깜깜해서 코칭 신청했는데 기대 이상이었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"가이드 주신대로 열심히 해보겠습니다"</span></p><p class="text-sm text-gray-500">서울 강남 30대 · 투자 · 직장인 · 권*우</p></div><!-- 10 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">구체적인 단지까지 추천해주셔서 바로 매물 보러 다녔습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"상담 후 바로 행동에 옮길 수 있었습니다"</span></p><p class="text-sm text-gray-500">천안 40대 · 갈아타기 · 부부 · 서*진</p></div><!-- 12 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">혼자 공부하면서 놓치고 있던 부분을 정확하게 짚어주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"투자 방향성이 완전히 달라졌습니다"</span></p><p class="text-sm text-gray-500">대전 30대 · 투자 · 직장인 · 강*원</p></div><!-- 14 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">지금 사야 하는지 기다려야 하는지 명확한 답을 주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"매수 타이밍까지 잡아주셔서 감사합니다"</span></p><p class="text-sm text-gray-500">세종 40대 · 투자 · 자영업 · 신*경</p></div><!-- 16 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부부가 함께 상담받으니 의사결정이 훨씬 빨라졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"남편과 함께 들었는데 둘 다 만족했습니다"</span></p><p class="text-sm text-gray-500">서울 강서 30대 · 내집마련 · 부부동반 · 유*리</p></div><!-- 18 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산 용어도 모르는 상태에서 시작했는데 하나하나 쉽게 알려주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"초보자 눈높이에 맞춰 설명해주셨습니다"</span></p><p class="text-sm text-gray-500">대구 20대 · 내집마련 · 사회초년생 · 최*은</p></div><!-- 20 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">유튜브에서만 보다가 실제 상담받으니 확실히 다릅니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"다른 상담과는 차원이 다릅니다"</span></p><p class="text-sm text-gray-500">부산 40대 · 투자 · 자영업 · 배*선</p></div><!-- 22 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">1년 뒤 계획이었는데 지금이 적기라는 조언 덕분에 좋은 매물 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"내집마련 타이밍을 정확히 잡았습니다"</span></p><p class="text-sm text-gray-500">평택 30대 · 내집마련 · 신혼부부 · 정*희</p></div><!-- 24 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">진심으로 도와주고 싶어하시는 마음이 느껴졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"왠지 친한 지인처럼 상담해주셨습니다"</span></p><p class="text-sm text-gray-500">울산 30대 · 내집마련+투자 · 맞벌이 · 노*정</p></div><!-- 26 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산의 ㅂ자도 모르는 초심자였는데 유튜브 보고 상담 신청했습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"유튜브 보고 신청했는데 기대 이상이었습니다"</span></p><p class="text-sm text-gray-500">경기 30대 · 내집마련 · 생애최초 · 황*석</p></div>
+          <!-- 복제: 2 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">약속된 시간보다 한참 지나서까지 하나라도 더 알려주려고 계속 설명해주시는 모습에서 진짜 열정적인 분이구나 느꼈습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"현실적으로 선택할 수 있는 방향을 구체적으로 제안해주셨습니다"</span></p><p class="text-sm text-gray-500">수원 30대 · 내집마련+투자 · 직장인 · 이*수</p></div><!-- 복제: 4 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">기대 이상의 세심한 상담이었습니다. 덕분에 남편이랑 앞으로의 투자 방향성을 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"기대 이상의 세심한 상담이었습니다"</span></p><p class="text-sm text-gray-500">서울 마포 30대 · 투자 · 신혼부부 · 안*정</p></div><!-- 복제: 6 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">반신반의하며 상담을 신청했는데 명확한 투자 방향을 잡을 수 있었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"솔직히 반신반의했는데, 상담 후 확신이 생겼습니다"</span></p><p class="text-sm text-gray-500">부산 30대 · 내집마련 · 싱글 · 윤*아</p></div><!-- 복제: 8 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">투자는 하고싶은데 앞이 깜깜해서 코칭 신청했는데 기대 이상이었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"가이드 주신대로 열심히 해보겠습니다"</span></p><p class="text-sm text-gray-500">서울 강남 30대 · 투자 · 직장인 · 권*우</p></div><!-- 복제: 10 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">구체적인 단지까지 추천해주셔서 바로 매물 보러 다녔습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"상담 후 바로 행동에 옮길 수 있었습니다"</span></p><p class="text-sm text-gray-500">천안 40대 · 갈아타기 · 부부 · 서*진</p></div><!-- 복제: 12 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">혼자 공부하면서 놓치고 있던 부분을 정확하게 짚어주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"투자 방향성이 완전히 달라졌습니다"</span></p><p class="text-sm text-gray-500">대전 30대 · 투자 · 직장인 · 강*원</p></div><!-- 복제: 14 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">지금 사야 하는지 기다려야 하는지 명확한 답을 주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"매수 타이밍까지 잡아주셔서 감사합니다"</span></p><p class="text-sm text-gray-500">세종 40대 · 투자 · 자영업 · 신*경</p></div><!-- 복제: 16 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부부가 함께 상담받으니 의사결정이 훨씬 빨라졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"남편과 함께 들었는데 둘 다 만족했습니다"</span></p><p class="text-sm text-gray-500">서울 강서 30대 · 내집마련 · 부부동반 · 유*리</p></div><!-- 복제: 18 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산 용어도 모르는 상태에서 시작했는데 하나하나 쉽게 알려주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"초보자 눈높이에 맞춰 설명해주셨습니다"</span></p><p class="text-sm text-gray-500">대구 20대 · 내집마련 · 사회초년생 · 최*은</p></div><!-- 복제: 20 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">유튜브에서만 보다가 실제 상담받으니 확실히 다릅니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"다른 상담과는 차원이 다릅니다"</span></p><p class="text-sm text-gray-500">부산 40대 · 투자 · 자영업 · 배*선</p></div><!-- 복제: 22 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">1년 뒤 계획이었는데 지금이 적기라는 조언 덕분에 좋은 매물 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"내집마련 타이밍을 정확히 잡았습니다"</span></p><p class="text-sm text-gray-500">평택 30대 · 내집마련 · 신혼부부 · 정*희</p></div><!-- 복제: 24 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">진심으로 도와주고 싶어하시는 마음이 느껴졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"왠지 친한 지인처럼 상담해주셨습니다"</span></p><p class="text-sm text-gray-500">울산 30대 · 내집마련+투자 · 맞벌이 · 노*정</p></div><!-- 복제: 26 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="flex gap-0.5 mb-3"><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon><iconify-icon icon="solar:star-bold" class="star text-xs"></iconify-icon></div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산의 ㅂ자도 모르는 초심자였는데 유튜브 보고 상담 신청했습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"유튜브 보고 신청했는데 기대 이상이었습니다"</span></p><p class="text-sm text-gray-500">경기 30대 · 내집마련 · 생애최초 · 황*석</p></div>
         </div>
       </div>
     </div>
@@ -650,8 +535,8 @@
       </div>
       <div class="text-center" data-reveal="scale">
         <div class="inline-block bg-gradient-to-r from-brand-orange/20 to-red-500/20 border border-brand-orange/30 rounded-2xl px-10 py-6 shadow-lg">
-          <p class="text-2xl md:text-3xl font-display font-black word-keep text-white mb-2">이 모든 걸 <span class="text-brand-orange">내집마련 코칭</span>에서!</p>
-          <p class="text-gray-400 word-keep"><iconify-icon icon="solar:shield-check-bold" class="text-brand-orange align-middle"></iconify-icon> 코칭 후 최대 3개월간 무제한 질의응답</p>
+          <p class="text-2xl md:text-3xl font-display font-black word-keep text-white mb-2">이 모든 걸 <span class="text-brand-orange">내집마련 코칭 프로그램</span>에서!</p>
+          <p class="text-gray-400 word-keep"><iconify-icon icon="solar:shield-check-bold" class="text-brand-orange align-middle"></iconify-icon> 수강 후 최대 3개월간 무제한 Q&A</p>
         </div>
       </div>
     </div>
@@ -941,209 +826,3 @@
     </div>
   </div>
 
-<script>
-// 아임웹 설정 → SEO → 공통 코드 삽입 → Footer Code
-  // ===== 폼 설정 (수정은 여기서만) =====
-  var FORM_CONFIG = {
-    scriptUrl: 'https://script.google.com/macros/s/AKfycbxa-_oqlNBCa3s7mccHLfIejU50jLUyjZYVbmCZU6iAMpUAMDGcVBveGzCEIZCq_eKS/exec',
-    webhookKey: 'WUnbhvPp6hLP2oeJhYO4ctNld5QtvIRoKke1UjNtr-c'
-  };
-
-  // 전화번호 자동 포맷 (010-1234-5678)
-  function formatPhone(el) {
-    var v = el.value.replace(/[^0-9]/g, '');
-    if (v.length > 11) v = v.slice(0, 11);
-    if (v.length > 7) el.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
-    else if (v.length > 3) el.value = v.slice(0,3) + '-' + v.slice(3);
-    else el.value = v;
-    // 현금영수증 번호 실시간 동기화
-    syncReceiptPhone();
-  }
-
-  // 전화번호 변경 시 현금영수증 동기화
-  function syncReceiptPhone() {
-    var sameCheck = document.getElementById('f-receipt-same');
-    if (sameCheck && sameCheck.checked) {
-      document.getElementById('f-receipt-number').value = document.getElementById('f-phone').value.replace(/[^0-9]/g, '');
-    }
-  }
-
-  // 증빙 조건 분기
-  function toggleReceipt() {
-    var val = document.querySelector('input[name="receipt"]:checked').value;
-    document.getElementById('receipt-cash').classList.toggle('hidden', val !== '현금영수증');
-    document.getElementById('receipt-tax').classList.toggle('hidden', val !== '세금계산서');
-    if (val === '현금영수증') {
-      var sameCheck = document.getElementById('f-receipt-same');
-      sameCheck.checked = true;
-      toggleReceiptSame();
-    }
-    if (val === '세금계산서') {
-      var email = document.getElementById('f-email').value;
-      var bizEmail = document.getElementById('f-biz-email');
-      if (!bizEmail.value && email) bizEmail.value = email;
-    }
-  }
-
-  // 휴대폰번호와 동일 체크박스
-  function toggleReceiptSame() {
-    var same = document.getElementById('f-receipt-same').checked;
-    var input = document.getElementById('f-receipt-number');
-    if (same) {
-      input.value = document.getElementById('f-phone').value.replace(/[^0-9]/g, '');
-      input.disabled = true;
-    } else {
-      input.disabled = false;
-      input.focus();
-    }
-  }
-
-  // 기타의견 입력 시 자동으로 "기타" 체크
-  document.addEventListener('DOMContentLoaded', function() {
-    var memo = document.getElementById('f-memo');
-    if (memo) memo.addEventListener('input', function() {
-      if (memo.value.trim()) {
-        var cb = document.querySelector('input[name="purpose"][value="기타"]');
-        if (cb && !cb.checked) cb.checked = true;
-      }
-    });
-  });
-
-  function updateFileLabel(input) {
-    document.getElementById('file-label').textContent = input.files[0] ? input.files[0].name : '파일 선택 (PDF, JPG, PNG)';
-  }
-
-  // 폼 제출
-  function submitForm() {
-    var name = document.getElementById('f-name').value.trim();
-    var phone = document.getElementById('f-phone').value.replace(/[^0-9]/g, '');
-    var email = document.getElementById('f-email').value.trim();
-    var purposes = Array.from(document.querySelectorAll('input[name="purpose"]:checked')).map(function(c){return c.value});
-    var memo = document.getElementById('f-memo').value.trim();
-    var coaching = document.querySelector('input[name="coaching"]:checked');
-    var depositor = document.getElementById('f-depositor').value.trim();
-    var deposit = document.getElementById('f-deposit').checked;
-    var receipt = document.querySelector('input[name="receipt"]:checked').value;
-    var privacy = document.getElementById('f-privacy').checked;
-
-    // 검증 (순서대로)
-    if (!name) return showStatus('성함을 입력해주세요', 'error', 'f-name');
-    if (!phone || phone.length < 10) return showStatus('올바른 휴대폰 번호를 입력해주세요', 'error', 'f-phone');
-    if (purposes.length === 0) return showStatus('수강목적을 최소 1개 선택해주세요', 'error', 'f-purpose-wrap');
-    if (!deposit) return showStatus('입금완료 후 체크해주세요', 'error', 'f-deposit-wrap');
-    if (!privacy) return showStatus('개인정보 수집 동의가 필요합니다', 'error', 'f-privacy');
-
-    var amount = coaching ? (coaching.value === 'B' ? 96 : 44) : 44;
-    var params = new URLSearchParams(window.location.search);
-    var utm = params.get('utm_campaign') || '';
-
-    var payload = {
-      key: FORM_CONFIG.webhookKey,
-      name: name, phone: phone, email: email,
-      purpose: purposes.join(','), memo: memo,
-      amount: amount, depositor: depositor,
-      utm: utm, receiptType: receipt
-    };
-
-    if (receipt === '현금영수증') {
-      var sameCheck = document.getElementById('f-receipt-same');
-      payload.bizRegNo = (sameCheck && sameCheck.checked) ? phone : document.getElementById('f-receipt-number').value.replace(/[^0-9]/g, '');
-    }
-    if (receipt === '세금계산서') {
-      payload.bizRegNo = document.getElementById('f-biz-reg-no').value.replace(/[^0-9]/g, '');
-      payload.memo = (memo ? memo + ' | ' : '') + '상호: ' + document.getElementById('f-biz-name').value.trim() + ' | 세금계산서 이메일: ' + document.getElementById('f-biz-email').value.trim();
-    }
-
-    var btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = '제출 중...';
-    btn.classList.add('opacity-70');
-
-    var fileInput = document.getElementById('f-biz-file');
-    if (receipt === '세금계산서' && fileInput && fileInput.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function() {
-        payload.bizRegFile = { name: fileInput.files[0].name, type: fileInput.files[0].type, data: reader.result.split(',')[1] };
-        sendPayload(payload);
-      };
-      reader.readAsDataURL(fileInput.files[0]);
-    } else {
-      sendPayload(payload);
-    }
-  }
-
-  function sendPayload(payload) {
-    fetch(FORM_CONFIG.scriptUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      if (data.success) {
-        document.getElementById('consultForm').reset();
-        document.getElementById('receipt-cash').classList.add('hidden');
-        document.getElementById('receipt-tax').classList.add('hidden');
-        document.getElementById('file-label').textContent = '파일 선택 (PDF, JPG, PNG)';
-        document.getElementById('successModal').classList.remove('hidden');
-      } else {
-        showStatus(data.error || '제출에 실패했습니다. 다시 시도해주세요.', 'error', 'submitBtn');
-      }
-    })
-    .catch(function() {
-      showStatus('네트워크 오류가 발생했습니다. 다시 시도해주세요.', 'error', 'submitBtn');
-    })
-    .finally(function() {
-      var btn = document.getElementById('submitBtn');
-      btn.disabled = false;
-      btn.textContent = '제출하기 →';
-      btn.classList.remove('opacity-70');
-    });
-  }
-
-  function showStatus(msg, type, fieldId) {
-    var el = document.getElementById('form-status');
-    el.textContent = msg;
-    el.className = 'text-center text-sm mt-4 ' + (type === 'error' ? 'text-red-500 font-bold' : 'text-green-500');
-    el.classList.remove('hidden');
-    if (type === 'error' && fieldId) {
-      var field = document.getElementById(fieldId);
-      if (field) field.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } else if (type === 'error') {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) e.target.classList.add('revealed');
-        else e.target.classList.remove('revealed');
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
-    document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
-    var chartObs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) { if (e.isIntersecting) { e.target.querySelectorAll('.chart-line,.chart-arrow').forEach(function(l){l.classList.add('animated')}); chartObs.unobserve(e.target); } });
-    }, { threshold: 0.3 });
-    var c = document.getElementById('chartContainer'); if (c) chartObs.observe(c);
-    var secObs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) { if (e.isIntersecting && e.target.dataset.section && typeof gtag==='function') gtag('event','section_view',{section_name:e.target.dataset.section}); });
-    }, { threshold: 0.3 });
-    document.querySelectorAll('[data-section]').forEach(function(el) { secObs.observe(el); });
-    // Hero animation replay
-    var heroSection = document.querySelector('[data-section="hero"]');
-    if (heroSection) {
-      var heroObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          var words = e.target.querySelectorAll('.hero-word,.hero-main,.hero-cta,.hero-scroll');
-          if (e.isIntersecting) {
-            words.forEach(function(w) { w.style.animation = 'none'; w.offsetHeight; w.style.animation = ''; });
-          }
-        });
-      }, { threshold: 0.3 });
-      heroObs.observe(heroSection);
-    }
-  });
-  </script>
-</body>
-</html>
