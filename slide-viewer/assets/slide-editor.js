@@ -2954,7 +2954,7 @@
         }
       }
       if (autoSaveTimer) clearInterval(autoSaveTimer);
-      autoSaveTimer = setInterval(saveToFile, isGitHubPages ? GH_AUTO_SAVE_INTERVAL : 10000);
+      autoSaveTimer = setInterval(saveToFile, isGitHubPages ? GH_AUTO_SAVE_INTERVAL : 300000);
       // ── 편집중 배지 표시 ──
       showEditBadge(true);
     } else {

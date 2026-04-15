@@ -1832,7 +1832,7 @@
         }
       }
       if (autoSaveTimer) clearInterval(autoSaveTimer);
-      autoSaveTimer = setInterval(saveToFile, 10000);
+      autoSaveTimer = setInterval(saveToFile, 300000);
       // ── 편집중 배지 표시 ──
       showEditBadge(true);
     } else {
