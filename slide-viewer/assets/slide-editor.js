@@ -2413,6 +2413,8 @@
     const fsInner = document.getElementById('filmstrip-inner');
     const fsChildren = [...fsInner.childNodes];
     fsChildren.forEach(c => c.remove());
+    const ovChildren = [...ovGrid.childNodes];
+    ovChildren.forEach(c => c.remove());
 
     // 빈 step-dim만 있는 step-layer 제거 + data-steps 재계산 (저장 시만, 복원됨)
     const removedLayers = [];

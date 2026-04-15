@@ -1391,7 +1391,7 @@
 
   #overview-grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 10px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1401,7 +1401,6 @@
     margin: 0 auto;
     box-sizing: border-box;
   }
-  @media (max-width: 1600px) { #overview-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
   @media (max-width: 1300px) { #overview-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   @media (max-width: 1000px) { #overview-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
