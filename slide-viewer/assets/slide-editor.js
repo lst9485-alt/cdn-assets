@@ -1852,13 +1852,17 @@
   // 오버뷰
   const overview = document.getElementById('overview');
   const ovGrid = document.getElementById('overview-grid');
+  const ovBackdrop = document.getElementById('overview-backdrop');
+
   function openOverview() {
     buildOverview();
+    ovBackdrop.classList.add('visible');
     overview.classList.add('visible');
     overview.dataset.open = '1';
   }
 
   function closeOverview() {
+    ovBackdrop.classList.remove('visible');
     overview.classList.remove('visible');
     delete overview.dataset.open;
     ovGrid.innerHTML = '';
@@ -2408,7 +2412,7 @@
 
     const _bodyIds = [
       'layer-panel','guide-toolbar','dim-outer','stage',
-      'overview','help','align-menu','group-toolbar',
+      'overview-backdrop','overview','help','align-menu','group-toolbar',
       'slideNum','edit-badge','top-toolbar',
       'palette-bg','palette-fc','coord-panel','font-panel'
     ];

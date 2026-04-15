@@ -1352,7 +1352,17 @@
     border-top: 2px dashed rgba(0, 120, 255, 0.55);
   }
 
-  /* ── 슬라이드 오버뷰 (O키) ── */
+  /* ── 오버뷰 배경 (body 직속, 자식 없음 — Chrome 컴포지터 우회) ── */
+  #overview-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 7999;
+  }
+  #overview-backdrop.visible { display: block; }
+
+  /* ── 슬라이드 오버뷰 (O키) — 콘텐츠 전용, 배경 없음 ── */
   #overview {
     display: none;
     position: fixed;
@@ -1365,13 +1375,6 @@
     padding: 40px;
   }
   #overview.visible { display: flex; }
-  #overview-bg {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    pointer-events: none;
-    z-index: -1;
-  }
 
   #overview-grid {
     display: grid;
