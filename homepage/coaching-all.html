@@ -1117,8 +1117,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     var obs = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
-        if (e.isIntersecting) e.target.classList.add('revealed');
-        else e.target.classList.remove('revealed');
+        if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
     document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
