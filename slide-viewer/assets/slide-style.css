@@ -134,7 +134,7 @@
   /* 오버뷰 모드: edit-mode와 동일 패턴 — body 배경 + 스크롤 완전 잠금 */
   html.overview-open,
   body.overview-open {
-    background: rgba(0,0,0,0.85) !important;
+    background: #111 !important;
     overflow: hidden !important;
     scrollbar-width: none;
   }
@@ -1382,20 +1382,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 24px;
-    padding: 40px;
+    gap: 16px;
+    padding: 20px;
     overflow: hidden;
   }
   #overview.visible { display: flex; }
 
   #overview-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 260px);
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
     justify-content: center;
     overflow-y: auto;
-    width: 100%; max-width: 1500px;
-    max-height: 85vh;
+    width: 100%;
+    max-height: calc(100vh - 80px);
     padding: 8px;
   }
 
