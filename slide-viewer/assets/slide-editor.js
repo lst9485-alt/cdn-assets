@@ -1856,12 +1856,16 @@
 
   function openOverview() {
     buildOverview();
+    document.documentElement.classList.add('overview-open');
+    document.body.classList.add('overview-open');
     ovBackdrop.classList.add('visible');
     overview.classList.add('visible');
     overview.dataset.open = '1';
   }
 
   function closeOverview() {
+    document.documentElement.classList.remove('overview-open');
+    document.body.classList.remove('overview-open');
     ovBackdrop.classList.remove('visible');
     overview.classList.remove('visible');
     delete overview.dataset.open;

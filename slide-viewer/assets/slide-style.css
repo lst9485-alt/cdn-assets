@@ -131,6 +131,9 @@
   }
   /* 편집 모드: 배경을 회색으로 (bg-paper 이미지 덮어씌우기) */
   body.edit-mode { background: var(--editor-bg) !important; }
+  /* 오버뷰 모드: edit-mode와 동일 패턴 — body 배경 + 스크롤 잠금 */
+  body.overview-open { background: rgba(0,0,0,0.85) !important; overflow: hidden !important; }
+  html.overview-open { overflow: hidden !important; }
 
   /* step 1+: text-area는 위치 전용, step-content가 애니메이션 담당 */
   .step-layer[data-step]:not([data-step="0"]) .text-area,
@@ -1362,7 +1365,7 @@
   }
   #overview-backdrop.visible { display: block; }
 
-  /* ── 슬라이드 오버뷰 (O키) — 콘텐츠 전용, 배경 없음 ── */
+  /* ── 슬라이드 오버뷰 (O키) ── */
   #overview {
     display: none;
     position: fixed;
@@ -1373,6 +1376,7 @@
     align-items: center;
     gap: 24px;
     padding: 40px;
+    overflow: hidden;
   }
   #overview.visible { display: flex; }
 
