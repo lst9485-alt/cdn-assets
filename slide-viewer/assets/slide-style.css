@@ -1385,16 +1385,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 16px;
-    padding: 20px;
+    gap: 10px;
+    padding: 12px;
     overflow: hidden;
   }
   #overview.visible { display: flex; }
 
   #overview-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
     justify-content: center;
     overflow-y: auto;
     width: 100%;
@@ -1446,14 +1446,9 @@
     display: flex;
     overflow: hidden;
   }
-  /* 접힌 상태: 전부 숨김 */
+  /* 접힌 상태: 완전 숨김 */
   .ov-item.ov-variant:not(.show) {
-    margin-left: -320px;
-    transition: margin-left 0.25s ease-out;
-  }
-  /* 접힌 상태: 첫 번째 variant만 1장 빼꼼 (10px) */
-  .ov-group > .ov-item.ov-variant:not(.show):nth-child(2) {
-    margin-left: -300px;
+    display: none;
   }
   /* 빼꼼 나온 1장에 어두운 오버레이 */
   .ov-item.ov-variant:not(.show) .ov-thumb::after {
