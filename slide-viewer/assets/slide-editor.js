@@ -166,6 +166,14 @@
       } else {
         num.textContent = idx + 1;
       }
+      // 타입 라벨
+      const slideType = slide.dataset.type;
+      if (slideType) {
+        const typeSpan = document.createElement('span');
+        typeSpan.className = 'fs-type';
+        typeSpan.textContent = slideType;
+        num.appendChild(typeSpan);
+      }
 
       item.appendChild(fsInner);
       item.appendChild(num);
@@ -918,17 +926,19 @@
     // - 편집 모드: canonical 기준 (1~138 of all)
     // - 생성 슬라이드: 전체 순차 번호 (1~295 of all)
     // - 에디터 presentation 모드: base만 카운트 (1~38)
+    const _numEl = document.getElementById('slideNum');
+    const _curSlide = slides[currentSlide];
+    const _typeLabel = _curSlide && _curSlide.dataset.type ? ` ${_curSlide.dataset.type}` : '';
     if (editMode || document.body.dataset.generated) {
-      document.getElementById('slideNum').textContent = `${currentSlide + 1} / ${slides.length}`;
+      _numEl.textContent = `${currentSlide + 1} / ${slides.length}${_typeLabel}`;
     } else {
       const baseTotal = getBaseSlidesCount();
       // baseIdx가 -1이면(고아 variant 등 비정상 상태) 0으로 폴백 — 슬라이드 번호 표시 깨짐 방지
       const baseIdx = Math.max(0, getCurrentBaseDisplayIdx());
-      const cur = slides[currentSlide];
-      if (cur && cur.dataset.variant && cur.dataset.variant !== "0") {
-        document.getElementById('slideNum').textContent = `${baseIdx + 1}-${cur.dataset.variant} / ${baseTotal}`;
+      if (_curSlide && _curSlide.dataset.variant && _curSlide.dataset.variant !== "0") {
+        _numEl.textContent = `${baseIdx + 1}-${_curSlide.dataset.variant} / ${baseTotal}${_typeLabel}`;
       } else {
-        document.getElementById('slideNum').textContent = `${baseIdx + 1} / ${baseTotal}`;
+        _numEl.textContent = `${baseIdx + 1} / ${baseTotal}${_typeLabel}`;
       }
     }
     playSound('slide');
@@ -1955,6 +1965,14 @@
         num.textContent = isVariant ? `${pg}-${parseInt(variant) + 1}` : `${pg}`;
       } else {
         num.textContent = `${slideIdx + 1}`;
+      }
+      // 타입 라벨
+      const slideType = slide.dataset.type;
+      if (slideType) {
+        const typeSpan = document.createElement('span');
+        typeSpan.className = 'ov-type';
+        typeSpan.textContent = slideType;
+        num.appendChild(typeSpan);
       }
 
       item.appendChild(thumb);
