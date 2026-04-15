@@ -1391,7 +1391,7 @@
 
   #overview-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 10px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1401,13 +1401,14 @@
     margin: 0 auto;
     box-sizing: border-box;
   }
-  @media (max-width: 1200px) { #overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 1600px) { #overview-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (max-width: 1200px) { #overview-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
   .ov-item {
     position: relative;
     display: block;
     width: 100%;
-    aspect-ratio: 16/9;
+    height: 200px;
     max-width: 100%;
     box-sizing: border-box;
     cursor: pointer;
