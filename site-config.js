@@ -107,14 +107,14 @@
           },
           {
             id: 'landing-page',
-            title: '1:1 상담 랜딩페이지',
+            title: '1:1 코칭 랜딩페이지',
             description: '상세페이지 v3.5 미리보기',
-            href: 'homepage/landing.html',
+            href: 'homepage/coaching-all.html',
             badgeText: 'LIVE',
             badgeTone: 'live',
             iconKey: 'web',
             sidebarType: 'root',
-            activeMatch: ['landing.html'],
+            activeMatch: ['coaching-all.html'],
             hubVisible: true
           },
           {
