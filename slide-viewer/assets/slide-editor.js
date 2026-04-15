@@ -1864,28 +1864,6 @@
   const ovGrid = document.getElementById('overview-grid');
   const ovBackdrop = document.getElementById('overview-backdrop');
 
-  let ovResizeObserver = null;
-
-  function updateOvScale() {
-    ovGrid.querySelectorAll('.ov-item').forEach(item => {
-      const w = item.getBoundingClientRect().width;
-      if (w > 0) {
-        const thumb = item.querySelector('.ov-thumb');
-        if (thumb) thumb.style.transform = `scale(${w / 1920})`;
-      }
-    });
-  }
-
-  function startOvObserver() {
-    stopOvObserver();
-    ovResizeObserver = new ResizeObserver(() => updateOvScale());
-    ovResizeObserver.observe(ovGrid);
-  }
-
-  function stopOvObserver() {
-    if (ovResizeObserver) { ovResizeObserver.disconnect(); ovResizeObserver = null; }
-  }
-
   function openOverview() {
     buildOverview();
     document.documentElement.classList.add('overview-open');
@@ -1893,11 +1871,9 @@
     ovBackdrop.classList.add('visible');
     overview.classList.add('visible');
     overview.dataset.open = '1';
-    startOvObserver();
   }
 
   function closeOverview() {
-    stopOvObserver();
     document.documentElement.classList.remove('overview-open');
     document.body.classList.remove('overview-open');
     ovBackdrop.classList.remove('visible');
@@ -2099,7 +2075,7 @@
         }
       }
     });
-    if (overview.dataset.open === '1') startOvObserver();
+    // scale은 CSS 고정 (240/1920) — JS 계산 불필요
   }
 
   // ── 슬라이드 우클릭 메뉴 ──
@@ -2201,7 +2177,7 @@
   }
 
   window.addEventListener('resize', () => {
-    if (overview.dataset.open === '1') updateOvScale();
+    // scale은 CSS 고정 — resize 시 재계산 불필요
   });
 
   // ── 환경 감지 ──

@@ -1391,9 +1391,9 @@
 
   #overview-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    align-items: start;
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, 260px);
+    gap: 16px;
+    justify-content: center;
     overflow-y: auto;
     overflow-x: hidden;
     width: 100%;
@@ -1402,16 +1402,11 @@
     margin: 0 auto;
     box-sizing: border-box;
   }
-  @media (max-width: 1600px) { #overview-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  @media (max-width: 1200px) { #overview-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
   .ov-item {
     position: relative;
-    display: block;
-    width: 100%;
-    aspect-ratio: 16/9;
-    max-width: 100%;
-    box-sizing: border-box;
+    width: 240px;
+    height: 135px;
     cursor: pointer;
     border: 3px solid transparent;
     border-radius: 6px;
@@ -1422,11 +1417,10 @@
   .ov-item.current { border-color: var(--editor-accent); }
 
   .ov-thumb {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 1920px;
     height: 1080px;
+    transform: scale(calc(240 / 1920));
     transform-origin: top left;
     pointer-events: none;
     background: #111;
@@ -1450,13 +1444,19 @@
 
   /* ── Overview 인라인 확장: 종이 겹침 + 토글 ── */
   .ov-group {
-    display: block;
-    width: 100%;
-    min-width: 0;
-    overflow: hidden;
+    position: relative;
+    display: flex;
+    width: 260px;
   }
-  /* variant 완전 숨김 */
-  #overview .ov-item.ov-variant:not(.show) { display: none !important; }
+  /* 접힌 상태: 전부 숨김 */
+  .ov-item.ov-variant:not(.show) {
+    margin-left: -230px;
+    transition: margin-left 0.25s ease-out;
+  }
+  /* 접힌 상태: 첫 번째 variant만 1장 빼꼼 */
+  .ov-group > .ov-item.ov-variant:not(.show):nth-child(2) {
+    margin-left: -230px;
+  }
   /* 빼꼼 나온 1장에 어두운 오버레이 */
   .ov-item.ov-variant:not(.show) .ov-thumb::after {
     content: '';
@@ -1472,13 +1472,7 @@
   }
   /* 펼치면 ov-group이 여러 열 차지 */
   .ov-group.expanded {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 10px;
-  }
-  .ov-group.expanded .ov-item {
-    flex: 1 1 0;
-    min-width: 0;
+    width: auto;
   }
   /* +/- 토글 버튼 */
   .ov-toggle {
