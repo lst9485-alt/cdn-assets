@@ -1,11 +1,19 @@
 {
-  "updated": "2026-04-16T06:00:01.274927+09:00",
+  "updated": "2026-04-17T06:00:01.558154+09:00",
   "projects": [
     {
       "name": "yt-slide flexbox 리팩터",
       "type": "file",
       "app": "youtube/yt-slide",
-      "modified": "2026-04-15",
+      "modified": "2026-04-16",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "경쟁채널 모니터링 시스템",
+      "type": "file",
+      "app": null,
+      "modified": "2026-04-16",
       "status": null,
       "next": null
     },

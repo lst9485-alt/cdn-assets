@@ -1,11 +1,11 @@
 {
-  "updated": "2026-04-16T06:00:01.046450+09:00",
+  "updated": "2026-04-17T06:00:01.358576+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
       "categories": [
         {
-          "id": 2,
+          "id": 1,
           "title": "구글 계정 분리 (Workspace ↔ Gmail)",
           "ref": "구글 계정 분리",
           "items": [
@@ -16,253 +16,209 @@
           ]
         },
         {
-          "id": 3,
+          "id": 2,
           "title": "홈페이지 PG 승인 + 강의 준비",
           "ref": "PG·결제 로드맵",
           "items": [
             {
-              "text": "업종 추가 — 교육서비스업 809903 (2026-04-13 완료)",
-              "done": true
-            },
-            {
-              "text": "KCP PG 승인 (2026-04-14, 22만원 미납/계약 미완료 — 이니시스 결과 보고 결정)",
-              "done": true
-            },
-            {
-              "text": "통신판매업 신고 — 정부24 완료 (2026-04-14, KCP 에스크로 확인증 사용)",
-              "done": true
-            },
-            {
-              "text": "아임웹 사이트 교육형 정비 — 문구 일괄 정비 완료 (4/15). 푸터 정보는 아임웹에서 직접 확인 필요",
-              "done": true
-            },
-            {
-              "text": "이니시스 무료 재신청 (교육서비스업 리프레이밍, 강의/독서모임 중심)",
+              "text": "2-1. 이니시스 무료 재신청 (교육서비스업 리프레이밍, 강의/독서모임 중심)",
               "done": false
             },
             {
-              "text": "이니시스 반려 시 → KCP 22만원 결제",
+              "text": "2-2. 이니시스 반려 시 → KCP 22만원 결제",
               "done": false
             },
             {
-              "text": "카카오 비즈니스 재신청 (4/15, 심사 3~7영업일)",
+              "text": "2-3. (PG 통과 후) 자체 사이트 개발 본격 진행 → [[0. 자체 사이트 제작]]",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "홈페이지 디자인 + 구조 마무리 (4/14~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "3-1. 메인페이지 모바일 최종 확인 — 320px에서 슬라이더/정보칩/컨트롤 확인",
+              "done": false
+            },
+            {
+              "text": "3-2. 후기 마키 캐러셀 튀는 현상 — marquee 애니메이션 불안정",
+              "done": false
+            },
+            {
+              "text": "3-3. Codex 지적 개선 — Apps Script doPost: 중복 방지, WEBHOOK_SECRET 폴백 제거",
+              "done": false
+            },
+            {
+              "text": "3-4. homepage 파일을 CDN 레포 한 곳에서만 관리하도록 구조 정리 — workspace에 복사본 두는 대신 CDN 레포 직접 참조. workspace CLAUDE.md 동기화 플로우도 함께 수정",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "title": "yt-slide 템플릿 재편 7세션 로드맵 (4/16~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "4-1. 계측·골든셋 구축 (KPI 자동 측정, 베이스라인) — 세션 1 완료",
               "done": true
             },
             {
-              "text": "(PG 통과 후) 자체 사이트 개발 본격 진행 → [[0. 자체 사이트 제작]]",
+              "text": "4-2. 프리셋 라이브러리 + 라우터 (Top-5 추천, 다양성 페널티) — 세션 2a/2b/2c 완료",
+              "done": true
+            },
+            {
+              "text": "4-3. SceneSpec JSON + slug canonical ID",
               "done": false
+            },
+            {
+              "text": "4-4. 인프라 통합 (flex 표준+모듈+Fitty+글자예산) — **big-task 통제+하위작업**",
+              "done": false
+            },
+            {
+              "text": "4-5. 에디터 통합 + M키 (단일 정본 복귀)",
+              "done": false
+            },
+            {
+              "text": "4-6. 기획 스킬(yt07-slide) 개편 — **big-task 통제+하위작업**. 세션 6에서 라우터 통합·signal 강제 완료, signal 자동 추천만 남음",
+              "done": false
+            },
+            {
+              "text": "4-7. 신규 프리셋 보강 + freeze/이름 정리 + 최종 검증 — 세션 3에서 T39~T43 base HTML+flex 완료, variants/CSS 정리/최종 측정 남음",
+              "done": false
+            },
+            {
+              "text": "flexbox 전환 19타입 flex (세션 46~50)",
+              "done": true
+            },
+            {
+              "text": "템플릿 시스템 재검토 통제 세션 (세션 52 — 코덱스 지적 12개 반영)",
+              "done": true
             }
           ]
         },
         {
           "id": 5,
-          "title": "yt-slide 품질 + 기능 종합 개선 (4/13~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "세션 1: 버그 수정 모음 — NO_IMAGE_TYPES 동적 제외 + 260412 배열 + 이미지 리사이즈 + overview 복사",
-              "done": true
-            },
-            {
-              "text": "세션 2: 에디터 기능 버그 6건 — 사이즈 조절/색 변경/그룹 분리/복사/dim",
-              "done": true
-            },
-            {
-              "text": "세션 3: 템플릿 깨짐 + 품질 — 7개 타입 수정 + 애니메이션 + 일괄 점검",
-              "done": true
-            },
-            {
-              "text": "세션 4: 에디터 UX 캔바 스타일 2차 — 인라인 서식/리사이즈/툴바/드래그 순서",
-              "done": true
-            },
-            {
-              "text": "세션 5: Vercel 배포 제한 대응 (4/13)",
-              "done": true
-            },
-            {
-              "text": "세션 6: 차트 애니메이션 + float-y 위상 오프셋 코드 완료 (4/13)",
-              "done": true
-            },
-            {
-              "text": "세션 6 시각 확인: T11 바차트 애니메이션 수정 완료 (step>0 animateBarChart 호출 추가). float-y 위상 오프셋은 미확인",
-              "done": true
-            },
-            {
-              "text": "overview 전체화면 수정 (세션27~42, 진행 중)",
-              "done": false
-            },
-            {
-              "text": "5-F. 타입 라벨 표시 — 슬라이드/오버뷰/필름스트립에 타입명 보이게",
-              "done": false
-            },
-            {
-              "text": "main-top.js rebuildSlidesByKey() — data-display-label에 data-type 추가",
-              "done": false
-            },
-            {
-              "text": "main-top.js buildFilmstrip() — .fs-num에 타입명 추가",
-              "done": false
-            },
-            {
-              "text": "main-mid.js buildOverview() — .ov-num에 타입명 추가",
-              "done": false
-            },
-            {
-              "text": "CSS 폰트 사이즈 조정 (배지/필름스트립/오버뷰)",
-              "done": false
-            },
-            {
-              "text": "pipeline.py build + pytest",
-              "done": false
-            },
-            {
-              "text": "5-G. 의도 태깅 — 스킬 타입 선택 개선",
-              "done": false
-            },
-            {
-              "text": "type-registry.json 38개 타입에 intent 배열 추가 (15개 인텐트 분류)",
-              "done": false
-            },
-            {
-              "text": "type-selection-rules.md에 \"인텐트→타입 역색인\" 섹션 추가",
-              "done": false
-            },
-            {
-              "text": "SKILL.md 서브에이전트 지시에 \"인텐트 먼저\" 로직 추가",
-              "done": false
-            },
-            {
-              "text": "regenerate-snippets.py intent 필드 보존 확인",
-              "done": false
-            },
-            {
-              "text": "pytest 통과 확인",
-              "done": false
-            },
-            {
-              "text": "템플릿 추가 후보 5종 (Codex 분석 기반, 기존 타입 대체 어려운 것):",
-              "done": false
-            },
-            {
-              "text": "5-A. 사분면/2x2 매트릭스 (판단형: 리스크vs수익, 입지 비교)",
-              "done": false
-            },
-            {
-              "text": "5-B. Before/After 변화형 (정책·매수 전후 차이)",
-              "done": false
-            },
-            {
-              "text": "5-C. 구성비/증감 분해 — waterfall/stacked bar (세금·대출·비용)",
-              "done": false
-            },
-            {
-              "text": "5-D. 지도/지역 콜아웃 (부동산·상권·생활권 — 아이콘은 있지만 전용 타입 없음)",
-              "done": false
-            },
-            {
-              "text": "5-E. 오해vs사실/FAQ 반박형 (T01 질문형과 다름 — 여러 반론 빠르게 정리)",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 6,
           "title": "페이퍼클립 기획 (우선순위 낮음)",
           "ref": null,
           "items": []
         },
         {
+          "id": 6,
+          "title": "경쟁채널 모니터링 시스템 (4/16~)",
+          "ref": "경쟁채널 모니터링 시스템",
+          "items": [
+            {
+              "text": "6-0-1. GitHub 오픈소스 조사 — youtube competitor tracker, analytics dashboard, yt-dlp extensions 등 스타수 1K+ 도구 목록화 + 한국 채널 동작 여부 + 쿼터 관리법",
+              "done": false
+            },
+            {
+              "text": "6-0-2. YouTube Data API v3 조사 — 쿼터 상세, uploads playlist vs search 효율, 조회수 증가율 추적법, API 키 vs OAuth 필요성",
+              "done": false
+            },
+            {
+              "text": "6-0-3. 네이버 블로그 스크레이핑 PoC — RSS 동작 확인, 복사방지 본문 파싱(BeautifulSoup), 인기 지표 대안(공감/댓글/이웃 수), JS 렌더링 여부, 안티봇, robots.txt",
+              "done": false
+            },
+            {
+              "text": "6-0-4. 블로그 1군 후보 조사 — 네이버 부동산 파워블로거 10명+ 목록 + 이웃 수/일 발행량/최근 인기글 → 사용자와 확정",
+              "done": false
+            },
+            {
+              "text": "6-0-5. 기타 플랫폼 검토 — 스레드/인스타/블라인드 크롤링 가능성",
+              "done": false
+            },
+            {
+              "text": "6-1-1. 채널 1군/2군 설정 파일 확정 (YAML/JSON)",
+              "done": false
+            },
+            {
+              "text": "6-1-2. 유튜브 수집 파이프라인 — Data API v3 우선, yt-dlp 폴백",
+              "done": false
+            },
+            {
+              "text": "6-1-3. 네이버 블로그 수집 파이프라인 — RSS + 본문 파싱",
+              "done": false
+            },
+            {
+              "text": "6-1-4. 데이터 저장소 — SQLite or JSON 일자별",
+              "done": false
+            },
+            {
+              "text": "6-1-5. MVP 검증 — 7일 수집 후 쿼리 가능 여부 확인",
+              "done": false
+            },
+            {
+              "text": "6-2-1. 리포트 포맷 설계 — 신규/급상승/2주 TOP/3개월 TOP (주제별)",
+              "done": false
+            },
+            {
+              "text": "6-2-2. 출력 위치 — Obsidian `3. Resource/유튜브/모니터링/YYYY-MM-DD.md` + 텔레그램 요약",
+              "done": false
+            },
+            {
+              "text": "6-2-3. 급상승 감지 로직 — 조회수 증가율 + 채널 평균 대비 + 시의성 태깅",
+              "done": false
+            },
+            {
+              "text": "6-2-4. yt01-topic 스킬 연계 — 로컬 DB 조회로 STEP 3 대체 (SKILL.md 수정 필요)",
+              "done": false
+            },
+            {
+              "text": "6-3-1. 크론잡 등록 — 매일 7:00",
+              "done": false
+            },
+            {
+              "text": "6-3-2. 실패 알림 — 텔레그램 봇 (co-telegramocr 참고)",
+              "done": false
+            },
+            {
+              "text": "6-3-3. 수동 실행 옵션 — --now, --backfill N",
+              "done": false
+            }
+          ]
+        },
+        {
           "id": 7,
-          "title": "영상 자동화 (유보 — Remotion 도입 취소)",
+          "title": "유튜브 프로세스 대시보드 자동 동기화 (4/16~)",
           "ref": null,
           "items": [
             {
-              "text": "Remotion 조사 완료 (4/15) — 메인 영상에는 불필요. 이미지 삽입+효과음은 yt-image-pop으로 해결",
-              "done": true
-            },
-            {
-              "text": "yt-image-pop 스킬 제작 완료 (4/15) — 캡컷 이미지에 뽀옥 자동 삽입",
-              "done": true
-            }
-          ]
-        },
-        {
-          "id": 8,
-          "title": "홈페이지 디자인 + 구조 마무리 (4/14~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "8-1. 커리큘럼 깃발 크기 조정 + 카카오톡 Q&A 삭제 (4/15)",
-              "done": true
-            },
-            {
-              "text": "8-2. PG 문구 일괄 정비 — 컨설팅→코칭프로그램, 상담→코칭/수강, 투자X→제거, 전략→방법, 6개월→3개월, VOD→온라인강의, 올인원→실전반 (4/15)",
-              "done": true
-            },
-            {
-              "text": "8-3. 환불규정 — VOD→온라인강의, 1:1코칭 환불규정 추가 (4/15)",
-              "done": true
-            },
-            {
-              "text": "8-4. workspace ← CDN 동기화 (4/15)",
-              "done": true
-            },
-            {
-              "text": "8-5. 메인페이지 모바일 최종 확인 — 320px에서 슬라이더/정보칩/컨트롤 확인",
+              "text": "7-1. 파싱 스크립트 — 각 SKILL.md의 `📌 스킬 내부 단계` 블록에서 STEP 번호·제목 추출 (yt01~yt09 + autocut + image-pop)",
               "done": false
             },
             {
-              "text": "8-6. 후기 마키 캐러셀 튀는 현상 — marquee 애니메이션 불안정",
+              "text": "7-2. youtube.html 갱신 로직 — 각 `<details class=\"step\">`의 `<ol class=\"step-list\">` 내용 교체",
               "done": false
             },
             {
-              "text": "8-7. Codex 지적 개선 — Apps Script doPost: 중복 방지, WEBHOOK_SECRET 폴백 제거",
+              "text": "7-3. 체크리스트 템플릿도 함께 갱신 — `apps/youtube/yt-youtube-production/checklist-template.md`의 \"스킬 진행\" 섹션",
               "done": false
             },
             {
-              "text": "8-8. homepage 파일을 CDN 레포 한 곳에서만 관리하도록 구조 정리 — workspace에 복사본 두는 대신 CDN 레포 직접 참조. workspace CLAUDE.md 동기화 플로우도 함께 수정",
+              "text": "7-4. nightwatch 크론잡 등록 + dashboard/repo 자동 커밋·푸시 플로우",
               "done": false
             }
           ]
         },
         {
-          "id": 11,
-          "title": "yt-slide flexbox 리팩터 (4/15~)",
-          "ref": "yt-slide flexbox 리팩터",
-          "items": [
-            {
-              "text": "Phase 1: CSS + snippets 재작성 — slide-style.css flexbox 클래스 + snippets.md 38타입 재작성 + slides-editor.html 변형 100개 제거",
-              "done": false
-            },
-            {
-              "text": "Phase 2: 파이프라인 수정 — generate-slides.py 조회 키 단순화 + regenerate-snippets.py 변형 생성 제거",
-              "done": false
-            },
-            {
-              "text": "Phase 3: 기획 스킬 + 참조문서 — SKILL.md 항목 수 규칙 정리 + type-selection-rules.md + html-generation-rules.md",
-              "done": false
-            },
-            {
-              "text": "Phase 4: 삭제 + 검증 — snippets-variants.md 삭제 + pytest + full pipeline 테스트 + /rv",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 12,
-          "title": "Vercel 배포한도 폭주 방지 (4/15~)",
+          "id": 9,
+          "title": "~/.claude/plans/ 잔존 플랜 파일 정리 (4/17~)",
           "ref": null,
           "items": [
             {
-              "text": "자동저장 간격 10초 → 5분으로 변경 (storage.js) + O키는 수동 즉시저장 유지",
+              "text": "9-1. `ls -lt ~/.claude/plans/`로 mtime 기준 정렬 → 일주일+ 묵은 파일 우선 검토",
               "done": false
             },
             {
-              "text": "자동저장이 HTML `<link>` 캐시 버스터를 덮어쓰는 문제 — getCleanHTML()에서 캐시 버스터 보존하도록 수정",
+              "text": "9-2. 묵은 파일 헤더 읽고 어느 작업인지 식별 → 해당 .context.md/투두에 결과 반영됐는지 확인",
               "done": false
             },
             {
-              "text": "cdn-assets 레포에 Vercel 프로젝트 몇 개 연결됐는지 확인 (2개면 1개로 정리)",
+              "text": "9-3. 반영된 건 삭제, 진행 중인 건 투두/시작 프롬프트로 연결 후 삭제",
               "done": false
             }
           ]
@@ -270,52 +226,36 @@
       ]
     },
     {
-      "name": "회사PC",
+      "name": "노트북",
       "categories": [
         {
-          "id": 10,
-          "title": "co-viral PHP 수정 + telecheck.py 빌드 (4/15~)",
+          "id": 8,
+          "title": "Obsidian Git SSH 전환 (맥미니/회사PC는 완료, 노트북만 남음)",
           "ref": null,
           "items": [
             {
-              "text": "10-1. v7 빌드/배포 완료 (4/15)",
-              "done": true
-            },
-            {
-              "text": "10-2. telecheck.py safety net 조건 수정: `acpt<>''` → `acpt='ㅇ'` (거부된 방 자동 등록 방지) (4/15)",
-              "done": true
-            },
-            {
-              "text": "10-3. DB 정리: telrooma에서 우리 방 아닌 285~292번 8개 삭제 + telroom acpt='x' 8개 삭제 + 293번 담당자 '김정열' 설정 (4/15)",
-              "done": true
-            },
-            {
-              "text": "10-4. credentials.md에 cafe24 호스팅 계정 추가 (leap0603/leaplab) (4/15)",
-              "done": true
-            },
-            {
-              "text": "10-5. **telecheck.py v8 빌드 + 배포** — 10-2 수정분 반영. 회사PC에서 PyInstaller 빌드 → 실행PC 배포. 빌드 방법: `docs/build-guide.md` 참조",
+              "text": "8-1. SSH 키 확인: PowerShell에서 `ls ~/.ssh/id_*` 실행 → 키가 있으면 다음 단계로, 없으면 `ssh-keygen -t ed25519` 로 생성",
               "done": false
             },
             {
-              "text": "10-6. SSH 접속 확인 완료 — root / flvm1212!, 서버 경로 `/var/www/html/tele/` (4/15)",
-              "done": true
+              "text": "8-2. GitHub에 공개키 등록: `cat ~/.ssh/id_ed25519.pub` 내용 복사 → GitHub Settings → SSH and GPG keys → New SSH key → Title: `notebook` → 붙여넣기 → Add SSH key",
+              "done": false
             },
             {
-              "text": "10-7. proc.php 확인 — 소스 읽은 결과 telrooma INSERT 이미 존재, 수정 불필요 (4/15)",
-              "done": true
+              "text": "8-3. SSH 인증 테스트: `ssh -T git@github.com` 실행 → \"Hi lst9485-alt!\" 나오면 성공",
+              "done": false
             },
             {
-              "text": "10-8. room.php 수정 완료 — 페이지네이션 버그 2건(rnmae 오타 + foreach 변수 덮어쓰기) (4/15)",
-              "done": true
+              "text": "8-4. Obsidian 레포 리모트 변경: Obsidian vault 폴더에서 `git remote set-url origin git@github.com:lst9485-alt/Obsidian.git`",
+              "done": false
             },
             {
-              "text": "10-9. PHP 소스 로컬 백업 완료 (`src/php/proc.php`, `src/php/room.php`) (4/15)",
-              "done": true
+              "text": "8-5. 동작 확인: `git fetch && git push --dry-run` → \"Everything up-to-date\" 나오면 완료",
+              "done": false
             },
             {
-              "text": "10-10. DB 추가 정리 — 283, 284번 방도 acpt='x' 방이어서 삭제 (4/15)",
-              "done": true
+              "text": "8-6. (선택) 임시 인증 정리: `~/.git-credentials` 파일이 있으면 삭제, `.gitconfig`에서 `helper = store` 줄이 있으면 제거",
+              "done": false
             }
           ]
         }
