@@ -81,7 +81,10 @@
       // display label: 1-indexed (base: "3-1", variant1: "3-2", ...)
       const pg = s.dataset.pageGroup;
       const v = parseInt(s.dataset.variant || "0") + 1;
-      if (pg) s.dataset.displayLabel = `${pg}-${v}`;
+      if (pg) {
+        const t = s.dataset.type || '';
+        s.dataset.displayLabel = t ? `${pg}-${v} ${t}` : `${pg}-${v}`;
+      }
     });
   }
 

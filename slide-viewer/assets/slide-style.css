@@ -1909,8 +1909,9 @@
   .slide[data-display-label]::after {
     content: attr(data-display-label);
     position: absolute; top: 40px; left: 16px; z-index: 100;
-    background: rgba(0,0,0,0.7); color: #fff; font-size: 48px; font-weight: 700;
+    background: rgba(0,0,0,0.7); color: #fff; font-size: 36px; font-weight: 700;
     padding: 10px 24px; border-radius: 12px; pointer-events: none;
+    max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   body.presentation .slide[data-display-label]::after { display: none; }
 
