@@ -2289,17 +2289,6 @@
     display: flex; align-items: center; justify-content: center;
   }
 
-  /* ── 1개짜리 항목: 가로 max 70% + 가운데 정렬 (여러 개일 땐 :only-child 미충족 → 기존 규칙) ── */
-  .items-row > .slide-el:only-child,
-  .items-col > .slide-el:only-child,
-  .items-grid > .slide-el:only-child {
-    flex: 0 1 auto;
-    width: auto !important;
-    max-width: 70%;
-    margin-inline: auto;
-    grid-column: 1 / -1; /* grid 컨테이너일 때만 전체 폭 차지, 나머지 환경에선 무시됨 */
-  }
-
   /* ── 편집 모드: flex 컨테이너 선택 시 윤곽선 ── */
   body.edit-mode .items-row.edit-selected,
   body.edit-mode .items-col.edit-selected,
