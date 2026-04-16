@@ -2245,3 +2245,54 @@
     font-size: 30px; font-weight: 700; color: var(--color-text-sub); text-align: center;
   }
   .contrast-bottom strong { color: var(--color-accent); font-weight: 800; text-decoration: underline; }
+
+  /* ══════════════════════════════════════════════
+     Flex 컨테이너 시스템 (items-row / items-col / items-grid)
+  ══════════════════════════════════════════════ */
+
+  /* ── 가로 나열 래퍼 ── */
+  .items-row {
+    display: flex; gap: 40px; justify-content: center; align-items: stretch;
+    flex-wrap: wrap;
+    padding: 0 120px 40px; box-sizing: border-box;
+    width: 100%; position: absolute; left: 0;
+  }
+  /* ── 세로 나열 래퍼 ── */
+  .items-col {
+    display: flex; flex-direction: column; gap: 28px; align-items: center;
+    padding: 0 120px 40px; box-sizing: border-box;
+    width: 100%; position: absolute; left: 0;
+  }
+  /* ── 그리드 래퍼 ── */
+  .items-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;
+    padding: 0 120px 40px; box-sizing: border-box;
+    width: 100%; position: absolute; left: 0;
+  }
+
+  /* ── 래퍼 안 자식: absolute 해제 → flex/grid 배치 ── */
+  .items-row > .slide-el,
+  .items-col > .slide-el,
+  .items-grid > .slide-el {
+    position: static !important;
+    left: auto !important; top: auto !important;
+    flex: 1 1 0; min-width: 0;
+  }
+  /* 세로 나열 자식: 폭 100%, 5개+ 축소 허용 */
+  .items-col > .slide-el {
+    width: 100% !important;
+    flex-shrink: 1;
+  }
+  /* 플로우 화살표: 고정 폭 */
+  .items-row > .slide-el.flow-arrow {
+    flex: 0 0 auto; width: auto !important; min-width: 48px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ── 편집 모드: flex 컨테이너 선택 시 윤곽선 ── */
+  body.edit-mode .items-row.edit-selected,
+  body.edit-mode .items-col.edit-selected,
+  body.edit-mode .items-grid.edit-selected {
+    outline: 2px solid var(--editor-select);
+    outline-offset: 4px;
+  }

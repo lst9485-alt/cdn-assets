@@ -704,7 +704,16 @@
 
   function getOrderedEls(layer) {
     if (parseInt(layer.dataset.step) === 0) return [];
-    // EDITABLE_SEL과 독립 — anim-shown 흐름은 no-edit-select와 무관하게 모든 .slide-el 대상
+    // flex 컨테이너 내 data-appear-step 자식 우선 수집
+    const flexItems = Array.from(layer.querySelectorAll(
+      '.items-row > [data-appear-step], .items-col > [data-appear-step], .items-grid > [data-appear-step]'
+    ));
+    if (flexItems.length > 0) {
+      return flexItems.sort((a, b) =>
+        (parseInt(a.dataset.appearStep) || 0) - (parseInt(b.dataset.appearStep) || 0)
+      );
+    }
+    // 기존: 직접 자식 .slide-el (EDITABLE_SEL과 독립)
     return Array.from(layer.children).filter(el =>
       el.classList.contains('slide-el') &&
       !el.classList.contains('step-title') &&
@@ -2865,7 +2874,7 @@
 
   // ── 편집 모드 ──
   // [data-type]:not(.slide) — .slide 자체는 슬라이드 배경(data-type="카드" 등이 붙음), 편집 대상 아님
-  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el:not(.no-edit-select), img, .emoji-icon, .section-badge, .corner-label, .step-dim, [data-type]:not(.slide):not(.no-edit-select), .tl-circle, .tl-box, .tl-desc';
+  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el:not(.no-edit-select), img, .emoji-icon, .section-badge, .corner-label, .step-dim, [data-type]:not(.slide):not(.no-edit-select), .tl-circle, .tl-box, .tl-desc, .items-row, .items-col, .items-grid';
   let editMode = false;
   let isEditing = false;
   let clipboardEl = null;
@@ -3458,6 +3467,21 @@
   }
 
   // ── 스냅 포인트 수집 (드래그 + 리사이즈 공용) ──
+  // flex 자식의 offsetLeft/Top은 컨테이너 기준 → stage 좌표로 보정
+  function _stageLeft(el) {
+    const flex = el.parentElement;
+    if (flex && (flex.classList.contains('items-row') || flex.classList.contains('items-col') || flex.classList.contains('items-grid'))) {
+      return el.offsetLeft + flex.offsetLeft;
+    }
+    return el.offsetLeft;
+  }
+  function _stageTop(el) {
+    const flex = el.parentElement;
+    if (flex && (flex.classList.contains('items-row') || flex.classList.contains('items-col') || flex.classList.contains('items-grid'))) {
+      return el.offsetTop + flex.offsetTop;
+    }
+    return el.offsetTop;
+  }
   function collectSnapPoints(excludeEl) {
     const stageEl = document.getElementById('stage');
     const xs = [stageEl.offsetWidth / 2];
@@ -3466,8 +3490,9 @@
     layer.querySelectorAll(EDITABLE_SEL).forEach(other => {
       if (other === excludeEl || other.classList.contains('step-dim')) return;
       if (other.tagName === 'IMG' && other.closest('.slide-el')) return;
-      xs.push(other.offsetLeft, other.offsetLeft + other.offsetWidth / 2, other.offsetLeft + other.offsetWidth);
-      ys.push(other.offsetTop,  other.offsetTop  + other.offsetHeight / 2, other.offsetTop  + other.offsetHeight);
+      const ol = _stageLeft(other), ot = _stageTop(other);
+      xs.push(ol, ol + other.offsetWidth / 2, ol + other.offsetWidth);
+      ys.push(ot, ot + other.offsetHeight / 2, ot + other.offsetHeight);
     });
     document.querySelectorAll('.guide').forEach(g => {
       if (g.style.display === 'none' || getComputedStyle(g).display === 'none') return;
@@ -3861,8 +3886,8 @@
           el.classList.add('edit-selected');
           selectedEl = el;
         }
-      } else if (el.matches('.slide-el') && selectedEls.length === 1) {
-        // 카드 블록 재클릭 → mouseup에서 드래그 여부 확인 후 그룹 진입
+      } else if ((el.matches('.slide-el') || el.matches('.items-row, .items-col, .items-grid')) && selectedEls.length === 1) {
+        // 카드 블록/flex 컨테이너 재클릭 → mouseup에서 드래그 여부 확인 후 그룹 진입
         pendingGroupEntry = { el, target: e.target };
         selectedEl = el;
       } else {
@@ -4454,6 +4479,9 @@
   // ── 레이어 패널 ──
   function getElLabel(el) {
     if (el.matches('.step-dim')) return '오버레이';
+    if (el.matches('.items-row')) return '가로 컨테이너';
+    if (el.matches('.items-col')) return '세로 컨테이너';
+    if (el.matches('.items-grid')) return '그리드 컨테이너';
     if (el.matches('.text-area')) { const h = el.querySelector('.hl'); return h ? h.textContent.trim().slice(0, 18) : '텍스트'; }
     if (el.matches('.bubble')) return el.textContent.trim().slice(0, 18);
     if (el.matches('.bg-label')) return el.textContent.trim().slice(0, 18);
@@ -4470,6 +4498,9 @@
 
   function getElType(el) {
     if (el.matches('.step-dim')) return 'DIM';
+    if (el.matches('.items-row')) return 'FLEX-ROW';
+    if (el.matches('.items-col')) return 'FLEX-COL';
+    if (el.matches('.items-grid')) return 'GRID';
     if (el.matches('.text-area')) return 'HL';
     if (el.matches('.bubble')) return '말풍선';
     if (el.matches('.bg-label')) return '레이블';
@@ -4675,21 +4706,31 @@
     header.appendChild(sortBtn);
   }
 
+  const FLEX_CONTAINER_SEL = '.items-row, .items-col, .items-grid';
+
   function buildPositionTab(list) {
     const slide = slides[currentSlide];
-    // 모든 요소를 z-order 순서로 수집
+    // 모든 요소를 z-order 순서로 수집 (flex 자식은 컨테이너 하위로 묶음)
     const allEls = [];
     slide.querySelectorAll('.step-layer').forEach(layer => {
       const step = parseInt(layer.dataset.step);
       layer.querySelectorAll(EDITABLE_SEL).forEach(el => {
+        // flex 컨테이너 내부 자식은 별도 수집 (컨테이너 항목에서 표시)
+        if (el.parentElement && el.parentElement.matches(FLEX_CONTAINER_SEL)) return;
         allEls.push({ el, step, layer });
       });
     });
     // z-order: DOM 순서 기반 (뒤 = 높은 z)
-    // 그룹별로 묶기
+    // 그룹별로 ���기
     const seen = new Set();
-    const rows = []; // { type: 'single'|'group', gid, step, el, members }
+    const rows = []; // { type: 'single'|'group'|'flex', ... }
     allEls.forEach(({ el, step }) => {
+      // flex 컨테이너 → 자식 수집하여 flex 그룹으로 표시
+      if (el.matches(FLEX_CONTAINER_SEL)) {
+        const children = Array.from(el.querySelectorAll('.slide-el'));
+        rows.push({ type: 'flex', el, step, children });
+        return;
+      }
       const gid = el.dataset.group;
       if (gid) {
         if (!seen.has(gid)) {
@@ -4704,7 +4745,41 @@
 
     // 역순(위 z-order 먼저)으로 렌더
     [...rows].reverse().forEach(row => {
-      if (row.type === 'group') {
+      if (row.type === 'flex') {
+        // flex 컨테이너를 그룹처럼 표시
+        const flexId = 'flex-' + row.step + '-' + (row.el.className.match(/items-\w+/)?.[0] || 'box');
+        const isExpanded = expandedGroups.has(flexId);
+        const flexRow = document.createElement('div');
+        flexRow.className = 'layer-item-group';
+        flexRow.innerHTML = `<span class="layer-handle">⠿</span><span class="grp-name">${escHTML(getElLabel(row.el))}</span><span class="layer-badge">${escHTML(getElType(row.el))}</span><span class="layer-step-badge">S${row.step}</span><span class="grp-arrow">${isExpanded ? '▲' : '▽'}</span>`;
+        flexRow._el = row.el;
+        flexRow._step = row.step;
+        flexRow.addEventListener('click', () => {
+          if (expandedGroups.has(flexId)) expandedGroups.delete(flexId);
+          else expandedGroups.add(flexId);
+          buildLayerPanel();
+        });
+        flexRow.addEventListener('mousedown', ev => {
+          ev.stopPropagation(); ev.preventDefault();
+          layerDragPending = flexRow;
+          layerDragStartY = ev.clientY;
+        });
+        list.appendChild(flexRow);
+        if (isExpanded) {
+          row.children.forEach(child => {
+            const item = makeLayerItem(child, row.step);
+            item.classList.add('pos-child');
+            const as = child.dataset.appearStep;
+            if (as) {
+              const badge = document.createElement('span');
+              badge.className = 'layer-step-badge';
+              badge.textContent = '#' + as;
+              item.appendChild(badge);
+            }
+            list.appendChild(item);
+          });
+        }
+      } else if (row.type === 'group') {
         const isExpanded = expandedGroups.has(row.gid);
         const grpRow = document.createElement('div');
         grpRow.className = 'layer-item-group';

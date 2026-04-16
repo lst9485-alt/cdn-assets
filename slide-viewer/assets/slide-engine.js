@@ -466,6 +466,16 @@
 
   function getOrderedEls(layer) {
     if (parseInt(layer.dataset.step) === 0) return [];
+    // flex 컨테이너 내 data-appear-step 자식 우선 수집
+    const flexItems = Array.from(layer.querySelectorAll(
+      '.items-row > [data-appear-step], .items-col > [data-appear-step], .items-grid > [data-appear-step]'
+    ));
+    if (flexItems.length > 0) {
+      return flexItems.sort((a, b) =>
+        (parseInt(a.dataset.appearStep) || 0) - (parseInt(b.dataset.appearStep) || 0)
+      );
+    }
+    // 기존: 직접 자식 EDITABLE_SEL
     return Array.from(layer.children).filter(el => el.matches(EDITABLE_SEL) && !el.classList.contains('step-title'));
   }
 
@@ -1757,7 +1767,7 @@
   }
 
   // ── 편집 모드 ──
-  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el, img, .emoji-icon, .section-badge, .corner-label';
+  const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el, img, .emoji-icon, .section-badge, .corner-label, .items-row, .items-col, .items-grid';
   let editMode = false;
   let isEditing = false;
   let clipboardEl = null;
