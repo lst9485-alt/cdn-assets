@@ -2302,16 +2302,19 @@
     temp.innerHTML = m.html;
     const newEl = temp.firstElementChild;
     if (!newEl) return;
+    newEl.dataset.moduleId = m.id;
     const hintPos = {
-      top:    { left: 260, top: 80 },
-      bottom: { left: 260, top: 880 },
-      center: { left: 260, top: 460 },
-      left:   { left: 40,  top: 460 },
-      free:   { left: 760, top: 460 },
+      top:    { left: 260, top: 80,  width: 1400 },
+      bottom: { left: 260, top: 880, width: 1400 },
+      center: { left: 460, top: 460, width: 1000 },
+      left:   { left: 40,  top: 460, width: 400 },
+      free:   { left: 760, top: 460, width: 400 },
     };
     const pos = hintPos[m.default_slot_hint] || hintPos.center;
+    newEl.style.position = 'absolute';
     newEl.style.left = pos.left + 'px';
     newEl.style.top  = pos.top + 'px';
+    newEl.style.width = pos.width + 'px';
     const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
     if (!layer0) return;
     layer0.appendChild(newEl);
