@@ -2369,6 +2369,38 @@
     document.documentElement.focus();
   }
 
+  // 모듈 HTML placeholder 기본값 — 피커 미리보기 + 삽입 시 공통 사용
+  const MODULE_PLACEHOLDER_DEFAULTS = {
+    '{{STAT1_VALUE}}': '32%', '{{STAT2_VALUE}}': '45%', '{{STAT3_VALUE}}': '23%',
+    '{{STAT1_LABEL}}': '찬성', '{{STAT2_LABEL}}': '반대', '{{STAT3_LABEL}}': '유보',
+    '{{ICON1}}': '🔥', '{{ICON2}}': '⚡', '{{ICON3}}': '💡',
+    '{{TITLE1}}': '제목 1', '{{TITLE2}}': '제목 2', '{{TITLE3}}': '제목 3',
+    '{{SUB1}}': '부제 1', '{{SUB2}}': '부제 2', '{{SUB3}}': '부제 3',
+    '{{BULLETS1}}': '<li>항목 1</li><li>항목 2</li>',
+    '{{BULLETS2}}': '<li>항목 1</li><li>항목 2</li>',
+    '{{BULLETS3}}': '<li>항목 1</li><li>항목 2</li>',
+    '{{SUMMARY}}': '핵심 한 줄 요약',
+    '{{LEFT}}': '기존', '{{RIGHT}}': '신규',
+    '{{KO}}': '한국어', '{{EN}}': 'English',
+    '{{TAG}}': '태그',
+    '{{CURRENT}}': '3', '{{TOTAL}}': '7',
+    '{{PERCENT}}': '60',
+    '{{IMG_SRC}}': 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1" fill="%23ccc"/></svg>',
+    '{{IMG_ALT}}': '이미지 설명',
+    '{{OFFSET}}': '1',
+    '{{PREV_TITLE}}': '이전 장',
+    '{{ITEMS}}': '<li>항목 1</li><li>항목 2</li><li>항목 3</li>',
+    '{{TAGS}}': '<span class="tg">태그1</span><span class="tg">태그2</span><span class="tg">태그3</span>',
+  };
+
+  function fillModulePlaceholders(html) {
+    return html.replace(/\{\{[A-Z0-9_]+\}\}/g, (match) => {
+      return Object.prototype.hasOwnProperty.call(MODULE_PLACEHOLDER_DEFAULTS, match)
+        ? MODULE_PLACEHOLDER_DEFAULTS[match]
+        : match;
+    });
+  }
+
   function buildModulePicker(slideType) {
     if (!modulePickerGrid) return;
     modulePickerGrid.innerHTML = '';
@@ -2392,16 +2424,19 @@
       card.className = 'mp-card';
       card.type = 'button';
       card.dataset.moduleId = m.id;
+      const headDiv = document.createElement('div');
+      headDiv.className = 'mp-head';
       const idDiv = document.createElement('div');
       idDiv.className = 'mp-id';
       idDiv.textContent = m.id;
       const nameDiv = document.createElement('div');
       nameDiv.className = 'mp-name';
       nameDiv.textContent = m.name;
-      const hintDiv = document.createElement('div');
-      hintDiv.className = 'mp-hint';
-      hintDiv.textContent = m.default_slot_hint || '';
-      card.append(idDiv, nameDiv, hintDiv);
+      headDiv.append(idDiv, nameDiv);
+      const preview = document.createElement('div');
+      preview.className = 'mp-preview';
+      preview.innerHTML = fillModulePlaceholders(m.html);
+      card.append(headDiv, preview);
       card.addEventListener('click', () => {
         insertModule(m.id);
         closeModulePicker();
@@ -2416,7 +2451,7 @@
     if (!m) return;
     pushUndo();
     const temp = document.createElement('div');
-    temp.innerHTML = m.html;
+    temp.innerHTML = fillModulePlaceholders(m.html);
     const newEl = temp.firstElementChild;
     if (!newEl) return;
     newEl.dataset.moduleId = m.id;
@@ -2433,16 +2468,26 @@
     newEl.style.top  = pos.top + 'px';
     newEl.style.width = pos.width + 'px';
     newEl.style.minHeight = pos.minHeight + 'px';
-    const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
-    if (!layer0) return;
-    layer0.appendChild(newEl);
+    // 마지막 step 다음에 나타나도록 새 step-layer 생성
+    const slide = slides[currentSlide];
+    let maxStep = 0;
+    slide.querySelectorAll('.step-layer').forEach(l => {
+      maxStep = Math.max(maxStep, parseInt(l.dataset.step) || 0);
+    });
+    const newStep = maxStep + 1;
+    const newLayer = document.createElement('div');
+    newLayer.className = 'step-layer';
+    newLayer.dataset.step = String(newStep);
+    newLayer.appendChild(newEl);
+    slide.appendChild(newLayer);
+    slide.dataset.steps = String(newStep + 1);
     selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
     selectedEl = newEl; selectedEls = [newEl];
     newEl.classList.add('edit-selected');
     if (typeof updateCoordPanel === 'function') updateCoordPanel(newEl);
     if (typeof updateResizeHandle === 'function') updateResizeHandle();
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
-    if (typeof showToast === 'function') showToast(`모듈 삽입: ${m.id} ${m.name}`, 1500);
+    if (typeof showToast === 'function') showToast(`모듈 삽입: ${m.id} ${m.name} · step ${newStep}`, 1500);
   }
 
   if (modulePickerBackdrop) {
