@@ -4,7 +4,7 @@
 <title>slides-editor</title>
 <script>(function(){const name=location.pathname.split('/').pop().replace('.html','');const m=name.match(/(\d{4})(\d{2})(\d{2})/);document.title=m?`${m[1]}-${m[2]}-${m[3]}`:name;})()</script>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@900&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/slide-style.css?v=20260417142204">
+<link rel="stylesheet" href="./assets/slide-style.css?v=20260417170215">
 <style id="edit-badge-style">@keyframes editBadgeBlink{0%,100%{opacity:1}50%{opacity:0.3}}</style></head>
 <body class="">
 <a href="./" style="position:fixed;top:8px;left:8px;z-index:9999;background:#fff;border:2px solid #E2E8F0;border-radius:8px;padding:4px 12px;font-size:13px;font-weight:700;color:#64748B;text-decoration:none;font-family:Pretendard,sans-serif;">&#8592; 카탈로그</a>
@@ -4051,6 +4051,13 @@
   <div id="overview-grid"></div>
 </div>
 
+<div id="module-picker-backdrop"></div>
+<div id="module-picker">
+  <div id="module-picker-title">모듈 삽입</div>
+  <div id="module-picker-grid"></div>
+  <div id="module-picker-footer">Esc · 바깥 클릭으로 닫기</div>
+</div>
+
 <div id="help" class="">
   <table>
     <tbody><tr><td>→ / Space / 클릭</td><td>다음 step / 다음 슬라이드</td></tr>
@@ -4058,6 +4065,7 @@
     <tr><td>O</td><td>슬라이드 목록 (클릭으로 이동)</td></tr>
     <tr><td>G</td><td>위치 가이드 (개수 선택 + 드래그 이동)</td></tr>
     <tr><td>E</td><td>편집 모드 (드래그로 위치 조정 / Ctrl+V로 이미지 추가 / Ctrl+S로 저장)</td></tr>
+    <tr><td>M</td><td>모듈 삽입 피커 (편집 모드, 타입별 허용 모듈 표시)</td></tr>
     <tr><td>Alt+1</td><td>레이어 패널 열기/닫기 (편집 모드에서만)</td></tr>
     <tr><td>D</td><td>오버레이 토글 (편집 모드에서만)</td></tr>
 <tr><td>Delete / Backspace</td><td>선택 요소 삭제 (편집 모드에서만)</td></tr>
@@ -4141,7 +4149,7 @@ width: 680px;</span>
   <button class="fmt-btn" data-align="right" title="오른쪽 정렬">≡</button>
 </div>
 
-<script src="./assets/slide-editor.js?v=20260417142204"></script>
+<script src="./assets/slide-editor.js?v=20260417170215"></script>
 
 
 

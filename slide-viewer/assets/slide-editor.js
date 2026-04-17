@@ -306,6 +306,318 @@
     if (presenterWindow && !presenterWindow.closed) presenterWindow.close();
   });
 
+  // 자동 생성 — regenerate-snippets.py (MODULE_SPECS + ALLOWED_MODULES_BY_TYPE)
+  window.MODULES_DATA = {
+  "modules": [
+    {
+      "id": "M01",
+      "name": "스탯박스",
+      "html": "<div class=\"slide-el mod-M01 stat-box-row\"><div class=\"stat-box\"><div class=\"stat-value\">{{STAT1_VALUE}}</div><div class=\"stat-label\">{{STAT1_LABEL}}</div></div><div class=\"stat-box\"><div class=\"stat-value\">{{STAT2_VALUE}}</div><div class=\"stat-label\">{{STAT2_LABEL}}</div></div><div class=\"stat-box\"><div class=\"stat-value\">{{STAT3_VALUE}}</div><div class=\"stat-label\">{{STAT3_LABEL}}</div></div></div>",
+      "css_class": "mod-M01",
+      "default_slot_hint": "bottom"
+    },
+    {
+      "id": "M02",
+      "name": "3단 상세",
+      "html": "<div class=\"slide-el mod-M02 tri-detail\"><div class=\"tri-col\"><div class=\"tri-icon\">{{ICON1}}</div><div class=\"tri-title\">{{TITLE1}}</div><div class=\"tri-sub\">{{SUB1}}</div><ul class=\"tri-bullets\">{{BULLETS1}}</ul></div><div class=\"tri-col\"><div class=\"tri-icon\">{{ICON2}}</div><div class=\"tri-title\">{{TITLE2}}</div><div class=\"tri-sub\">{{SUB2}}</div><ul class=\"tri-bullets\">{{BULLETS2}}</ul></div><div class=\"tri-col\"><div class=\"tri-icon\">{{ICON3}}</div><div class=\"tri-title\">{{TITLE3}}</div><div class=\"tri-sub\">{{SUB3}}</div><ul class=\"tri-bullets\">{{BULLETS3}}</ul></div></div>",
+      "css_class": "mod-M02",
+      "default_slot_hint": "bottom"
+    },
+    {
+      "id": "M03",
+      "name": "요약바",
+      "html": "<div class=\"slide-el mod-M03 summary-bar\"><span class=\"summary-text\">{{SUMMARY}}</span></div>",
+      "css_class": "mod-M03",
+      "default_slot_hint": "bottom"
+    },
+    {
+      "id": "M04",
+      "name": "대비박스",
+      "html": "<div class=\"slide-el mod-M04 contrast-box\"><span class=\"contrast-left\">{{LEFT}}</span><span class=\"contrast-neq\">≠</span><span class=\"contrast-right\">{{RIGHT}}</span></div>",
+      "css_class": "mod-M04",
+      "default_slot_hint": "top"
+    },
+    {
+      "id": "M05",
+      "name": "영문병기",
+      "html": "<div class=\"slide-el mod-M05 ko-en\"><div class=\"ko-main\">{{KO}}</div><div class=\"en-sub\">{{EN}}</div></div>",
+      "css_class": "mod-M05",
+      "default_slot_hint": "center"
+    },
+    {
+      "id": "M06",
+      "name": "태그/뱃지",
+      "html": "<div class=\"slide-el mod-M06 tag-badge\"><span class=\"tag-label\">{{TAG}}</span></div>",
+      "css_class": "mod-M06",
+      "default_slot_hint": "top"
+    },
+    {
+      "id": "M07",
+      "name": "챕터카운터",
+      "html": "<div class=\"slide-el mod-M07 chapter-counter\"><span class=\"counter-current\">{{CURRENT}}</span><span class=\"counter-sep\">/</span><span class=\"counter-total\">{{TOTAL}}</span></div>",
+      "css_class": "mod-M07",
+      "default_slot_hint": "top"
+    },
+    {
+      "id": "M08",
+      "name": "프로그레스바",
+      "html": "<div class=\"slide-el mod-M08 progress-bar\"><div class=\"progress-fill\" style=\"width:{{PERCENT}}%;\"></div></div>",
+      "css_class": "mod-M08",
+      "default_slot_hint": "bottom"
+    },
+    {
+      "id": "M09",
+      "name": "이미지슬롯",
+      "html": "<div class=\"slide-el mod-M09 image-slot\"><img src=\"{{IMG_SRC}}\" alt=\"{{IMG_ALT}}\" /></div>",
+      "css_class": "mod-M09",
+      "default_slot_hint": "free"
+    },
+    {
+      "id": "M10",
+      "name": "빈카드 프리뷰",
+      "html": "<div class=\"slide-el mod-M10 empty-preview\"><div class=\"empty-card\"></div><div class=\"empty-card\"></div><div class=\"empty-card\"></div></div>",
+      "css_class": "mod-M10",
+      "default_slot_hint": "bottom"
+    },
+    {
+      "id": "M11",
+      "name": "좌측이전장",
+      "html": "<div class=\"slide-el mod-M11 prev-thumb\"><span class=\"prev-indicator\">-{{OFFSET}}</span><span class=\"prev-arrow\">&lt;</span><span class=\"prev-title\">{{PREV_TITLE}}</span></div>",
+      "css_class": "mod-M11",
+      "default_slot_hint": "left"
+    },
+    {
+      "id": "M12",
+      "name": "상세리스트",
+      "html": "<div class=\"slide-el mod-M12 detail-list\"><ul>{{ITEMS}}</ul></div>",
+      "css_class": "mod-M12",
+      "default_slot_hint": "bottom"
+    },
+    {
+      "id": "M13",
+      "name": "태그모음",
+      "html": "<div class=\"slide-el mod-M13 tag-group\">{{TAGS}}</div>",
+      "css_class": "mod-M13",
+      "default_slot_hint": "bottom"
+    }
+  ],
+  "allowedByType": {
+    "CTA버튼": [
+      "M09"
+    ],
+    "경고배너": [
+      "M06",
+      "M09"
+    ],
+    "그리드카드": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "그리드카드(아이콘좌측)": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "다이어그램": [
+      "M09"
+    ],
+    "대질문": [
+      "M06",
+      "M09"
+    ],
+    "등식플로우": [
+      "M03",
+      "M09"
+    ],
+    "라인차트": [
+      "M03",
+      "M09"
+    ],
+    "마지막정리": [
+      "M06",
+      "M09",
+      "M13"
+    ],
+    "말풍선+텍스트": [
+      "M06",
+      "M09"
+    ],
+    "바차트": [
+      "M03",
+      "M09"
+    ],
+    "버튼그리드": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "번호항목": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "분기플로우": [
+      "M03",
+      "M09"
+    ],
+    "분할레이아웃": [
+      "M03",
+      "M09"
+    ],
+    "블로그인트로": [
+      "M06",
+      "M07",
+      "M08",
+      "M09",
+      "M10"
+    ],
+    "비교박스": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "비교박스(불릿리스트)": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "비교박스(이모지VS)": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "비교테이블": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "섹션배지(챕터플로우)": [
+      "M05",
+      "M08",
+      "M09",
+      "M11"
+    ],
+    "섹션배지+코너레이블": [
+      "M05",
+      "M08",
+      "M09",
+      "M11"
+    ],
+    "숫자스탯": [
+      "M09",
+      "M12"
+    ],
+    "아이콘+텍스트": [
+      "M06",
+      "M09"
+    ],
+    "아이콘아이템": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "아이콘플로우": [
+      "M01",
+      "M03",
+      "M09"
+    ],
+    "아이콘플로우(스탯)": [
+      "M01",
+      "M03",
+      "M09"
+    ],
+    "아이콘행": [
+      "M03",
+      "M09"
+    ],
+    "용어정의": [
+      "M05",
+      "M06",
+      "M09"
+    ],
+    "이미지+텍스트": [
+      "M06",
+      "M09"
+    ],
+    "인물카드": [
+      "M06",
+      "M09"
+    ],
+    "인용": [
+      "M04",
+      "M09"
+    ],
+    "인용(대비)": [
+      "M03",
+      "M04",
+      "M09"
+    ],
+    "인용(미니멀)": [
+      "M04",
+      "M09"
+    ],
+    "좌우2분할": [
+      "M06",
+      "M09"
+    ],
+    "챕터전환": [
+      "M05",
+      "M08",
+      "M09",
+      "M11"
+    ],
+    "체크리스트": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "체크리스트(요약)": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "카드": [
+      "M01",
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "큰숫자(서클)": [
+      "M09",
+      "M12"
+    ],
+    "타임라인": [
+      "M08",
+      "M09"
+    ],
+    "태그칩": [
+      "M03",
+      "M09",
+      "M13"
+    ],
+    "토픽결론": [
+      "M01",
+      "M05",
+      "M06",
+      "M09",
+      "M12",
+      "M13"
+    ],
+    "플로우": [
+      "M01",
+      "M02",
+      "M03",
+      "M09"
+    ],
+    "플로우(상세)": [
+      "M01",
+      "M02",
+      "M03",
+      "M09"
+    ]
+  }
+};
   // 효과음
   const sndSlide = new Audio('./assets/sounds/slide.mp3');
   const sndStep  = new Audio('./assets/sounds/step.mp3');
@@ -1343,6 +1655,22 @@
       }
       return;
     }
+    // M키 (편집 모드에서 모듈 피커 열기/닫기)
+    if (e.code === 'KeyM' && editMode && !isEditing) {
+      if (overview.dataset.open === '1') return;
+      if (document.getElementById('help').classList.contains('visible')) return;
+      if (modulePicker && modulePicker.dataset.open === '1') {
+        closeModulePicker();
+      } else {
+        openModulePicker();
+      }
+      return;
+    }
+    // Escape: module picker 열려있으면 닫기 (overview보다 먼저 체크)
+    if (e.key === 'Escape' && modulePicker && modulePicker.dataset.open === '1') {
+      closeModulePicker();
+      return;
+    }
     // Escape: overview 열려있으면 닫기
     if (e.key === 'Escape' && overview.dataset.open === '1') { closeOverview(); return; }
     // Escape: 텍스트 편집 중이면 패스 (blur가 처리)
@@ -1893,6 +2221,111 @@
     delete overview.dataset.open;
     ovGrid.innerHTML = '';
     document.documentElement.focus();
+  }
+
+  // ── 모듈 피커 (M키) ──
+  const modulePicker = document.getElementById('module-picker');
+  const modulePickerGrid = document.getElementById('module-picker-grid');
+  const modulePickerBackdrop = document.getElementById('module-picker-backdrop');
+  const modulePickerTitle = document.getElementById('module-picker-title');
+
+  function openModulePicker() {
+    const slide = slides[currentSlide];
+    if (!slide || !modulePicker) return;
+    const slideType = slide.dataset.type || '';
+    buildModulePicker(slideType);
+    document.documentElement.classList.add('module-picker-open');
+    document.body.classList.add('module-picker-open');
+    modulePickerBackdrop.classList.add('visible');
+    modulePicker.classList.add('visible');
+    modulePicker.dataset.open = '1';
+  }
+
+  function closeModulePicker() {
+    if (!modulePicker) return;
+    document.documentElement.classList.remove('module-picker-open');
+    document.body.classList.remove('module-picker-open');
+    modulePickerBackdrop.classList.remove('visible');
+    modulePicker.classList.remove('visible');
+    delete modulePicker.dataset.open;
+    if (modulePickerGrid) modulePickerGrid.innerHTML = '';
+    document.documentElement.focus();
+  }
+
+  function buildModulePicker(slideType) {
+    if (!modulePickerGrid) return;
+    modulePickerGrid.innerHTML = '';
+    const data = window.MODULES_DATA || { modules: [], allowedByType: {} };
+    const allowed = data.allowedByType[slideType] || [];
+    if (modulePickerTitle) {
+      modulePickerTitle.textContent = `모듈 삽입 — ${slideType || '(타입 없음)'} · ${allowed.length}개`;
+    }
+    if (!allowed.length) {
+      const empty = document.createElement('div');
+      empty.className = 'mp-empty';
+      empty.textContent = '이 타입은 허용 모듈이 없습니다. Escape로 닫기.';
+      modulePickerGrid.appendChild(empty);
+      return;
+    }
+    const moduleById = new Map(data.modules.map(m => [m.id, m]));
+    allowed.forEach(mid => {
+      const m = moduleById.get(mid);
+      if (!m) return;
+      const card = document.createElement('button');
+      card.className = 'mp-card';
+      card.type = 'button';
+      card.dataset.moduleId = m.id;
+      const idDiv = document.createElement('div');
+      idDiv.className = 'mp-id';
+      idDiv.textContent = m.id;
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'mp-name';
+      nameDiv.textContent = m.name;
+      const hintDiv = document.createElement('div');
+      hintDiv.className = 'mp-hint';
+      hintDiv.textContent = m.default_slot_hint || '';
+      card.append(idDiv, nameDiv, hintDiv);
+      card.addEventListener('click', () => {
+        insertModule(m.id);
+        closeModulePicker();
+      });
+      modulePickerGrid.appendChild(card);
+    });
+  }
+
+  function insertModule(moduleId) {
+    const data = window.MODULES_DATA || { modules: [] };
+    const m = (data.modules || []).find(x => x.id === moduleId);
+    if (!m) return;
+    pushUndo();
+    const temp = document.createElement('div');
+    temp.innerHTML = m.html;
+    const newEl = temp.firstElementChild;
+    if (!newEl) return;
+    const hintPos = {
+      top:    { left: 260, top: 80 },
+      bottom: { left: 260, top: 880 },
+      center: { left: 260, top: 460 },
+      left:   { left: 40,  top: 460 },
+      free:   { left: 760, top: 460 },
+    };
+    const pos = hintPos[m.default_slot_hint] || hintPos.center;
+    newEl.style.left = pos.left + 'px';
+    newEl.style.top  = pos.top + 'px';
+    const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
+    if (!layer0) return;
+    layer0.appendChild(newEl);
+    selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
+    selectedEl = newEl; selectedEls = [newEl];
+    newEl.classList.add('edit-selected');
+    if (typeof updateCoordPanel === 'function') updateCoordPanel(newEl);
+    if (typeof updateResizeHandle === 'function') updateResizeHandle();
+    if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+    if (typeof showToast === 'function') showToast(`모듈 삽입: ${m.id} ${m.name}`, 1500);
+  }
+
+  if (modulePickerBackdrop) {
+    modulePickerBackdrop.addEventListener('click', () => closeModulePicker());
   }
 
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
