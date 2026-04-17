@@ -239,11 +239,6 @@
     word-break: keep-all;
     overflow-wrap: break-word;
   }
-  .items-col .bubble,
-  .items-row .bubble,
-  .items-grid .bubble {
-    position: relative;
-  }
   .bubble::after {
     content: '';
     position: absolute;
