@@ -1556,6 +1556,33 @@
   .ov-group.expanded {
     width: auto;
   }
+  /* 카테고리 섹션 헤더 (8개 시각 카테고리 구분) */
+  .ov-category-header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 6px 6px;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    color: #f0f0f0;
+    font-size: 14px;
+    font-weight: 700;
+    user-select: none;
+  }
+  .ov-category-header:first-child {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 2px;
+  }
+  .ov-category-header .ov-cat-icon { font-size: 18px; line-height: 1; }
+  .ov-category-header .ov-cat-name { flex: 1; letter-spacing: 0.2px; }
+  .ov-category-header .ov-cat-count {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.55;
+    padding-right: 4px;
+  }
   /* +/- 토글 버튼 */
   .ov-toggle {
     position: absolute;
@@ -2034,6 +2061,30 @@
   }
   /* 변형 슬라이드는 자체 좌측 컬러바를 약간 가늘게 (base와 시각적 구분) */
   .fs-item.fs-variant.show[data-group-color] { border-left-width: 2px; }
+
+  /* 필름스트립 카테고리 구분선 (8개 시각 카테고리) */
+  .fs-category-divider {
+    flex-shrink: 0;
+    height: 76px;
+    padding: 4px 10px;
+    margin: 0 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    border-left: 2px solid rgba(255,255,255,0.18);
+    border-right: 2px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.04);
+    color: #ddd;
+    font-size: 10px;
+    line-height: 1.1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .fs-category-divider .fs-cat-icon { font-size: 14px; line-height: 1; }
+  .fs-category-divider .fs-cat-name { font-weight: 700; white-space: nowrap; }
+  .fs-category-divider .fs-cat-count { opacity: 0.55; font-size: 9px; }
 
   /* ══════════════════════════════════════════════════════════════
      세션 2 변형: 이모지VS / 불릿리스트 / 아이콘좌측 / 챕터플로우

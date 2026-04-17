@@ -208,6 +208,9 @@
       });
       inner.appendChild(item);
     });
+    if (typeof insertFilmstripCategoryDividers === 'function') {
+      insertFilmstripCategoryDividers();
+    }
     scrollFilmstripToCurrent();
   }
   function scrollFilmstripToCurrent() {
@@ -306,6 +309,120 @@
     if (presenterWindow && !presenterWindow.closed) presenterWindow.close();
   });
 
+  // ── 카테고리 헤더 (설계 정본 §0 8개 시각 카테고리) ──
+  // 데이터 정본: references/type-compile-config.json의 visual_category 필드.
+  // JS에 미러링된 매핑은 tests/test_category_map_consistency.py 가 drift 검증.
+  // T번호(data-page-group)가 불변이므로 page-group → 카테고리 정적 매핑 사용.
+
+  const CATEGORY_META = [
+    { name: '임팩트',         icon: '🔥' },
+    { name: '아이콘+글',      icon: '🖼' },
+    { name: '카드/리스트',    icon: '📋' },
+    { name: '플로우',         icon: '➡️' },
+    { name: '비교',           icon: '⚖️' },
+    { name: '차트/다이어그램', icon: '📊' },
+    { name: '레이아웃/구분',  icon: '📐' },
+    { name: '텍스트',         icon: '📝' },
+  ];
+
+  const PG_TO_CATEGORY = {
+    1:  '아이콘+글',   2:  '아이콘+글',   3:  '카드/리스트', 4:  '카드/리스트',
+    5:  '카드/리스트', 6:  '카드/리스트', 7:  '아이콘+글',   8:  '아이콘+글',
+    9:  '플로우',      10: '플로우',      11: '차트/다이어그램', 12: '차트/다이어그램',
+    13: '임팩트',      14: '임팩트',      15: '차트/다이어그램', 16: '차트/다이어그램',
+    17: '비교',        18: '임팩트',      19: '아이콘+글',   20: '카드/리스트',
+    21: '임팩트',      22: '레이아웃/구분', 23: '아이콘+글', 24: '비교',
+    25: '비교',        26: '카드/리스트', 27: '플로우',      28: '비교',
+    29: '아이콘+글',   30: '플로우',      31: '레이아웃/구분', 32: '플로우',
+    33: '플로우',      34: '플로우',      35: '임팩트',      36: '아이콘+글',
+    37: '텍스트',      38: '레이아웃/구분', 39: '텍스트',    40: '텍스트',
+    41: '임팩트',      42: '비교',        43: '텍스트',
+  };
+
+  function categoryOfPageGroup(pg) {
+    if (pg == null || pg === '') return null;
+    return PG_TO_CATEGORY[parseInt(pg)] || null;
+  }
+
+  function findCategoryMeta(catName) {
+    return CATEGORY_META.find(function(c) { return c.name === catName; }) || null;
+  }
+
+  // base(variant=0)만 카테고리별로 카운트 (재사용 가능한 헬퍼)
+  function countBasePageGroupsByCategory(slideList) {
+    const counts = {};
+    const seenPgs = new Set();
+    slideList.forEach(function(s) {
+      const pg = s.dataset ? s.dataset.pageGroup : null;
+      if (!pg || seenPgs.has(pg)) return;
+      seenPgs.add(pg);
+      const cat = categoryOfPageGroup(pg);
+      if (!cat) return;
+      counts[cat] = (counts[cat] || 0) + 1;
+    });
+    return counts;
+  }
+
+  // 필름스트립 카테고리 분할선 삽입.
+  // buildFilmstrip() 직후 호출 — DOM 순회로 base fs-item 경계에 divider 삽입.
+  // 재호출 시 기존 divider 제거 후 재삽입 (idempotent).
+  function insertFilmstripCategoryDividers() {
+    const inner = document.getElementById('filmstrip-inner');
+    if (!inner) return;
+    inner.querySelectorAll('.fs-category-divider').forEach(function(el) { el.remove(); });
+
+    // base fs-item 기준으로 카테고리 카운트
+    const baseItems = [...inner.querySelectorAll('.fs-item')].filter(function(it) {
+      return !it.dataset.variant || it.dataset.variant === '0';
+    });
+    const counts = {};
+    const seen = new Set();
+    baseItems.forEach(function(it) {
+      const pg = it.dataset.pageGroup;
+      if (!pg || seen.has(pg)) return;
+      seen.add(pg);
+      const cat = categoryOfPageGroup(pg);
+      if (cat) counts[cat] = (counts[cat] || 0) + 1;
+    });
+
+    // 경계 감지 + divider 삽입
+    let prevCat = null;
+    const children = [...inner.children];
+    children.forEach(function(child) {
+      if (!child.classList || !child.classList.contains('fs-item')) return;
+      const isBase = !child.dataset.variant || child.dataset.variant === '0';
+      if (!isBase) return;
+      const cat = categoryOfPageGroup(child.dataset.pageGroup);
+      if (cat && cat !== prevCat) {
+        const meta = findCategoryMeta(cat);
+        const divider = document.createElement('div');
+        divider.className = 'fs-category-divider';
+        divider.dataset.category = cat;
+        const iconHtml = meta ? meta.icon : '';
+        divider.innerHTML =
+          '<span class="fs-cat-icon">' + iconHtml + '</span>' +
+          '<span class="fs-cat-name">' + cat + '</span>' +
+          '<span class="fs-cat-count">' + (counts[cat] || 0) + '</span>';
+        inner.insertBefore(divider, child);
+        prevCat = cat;
+      }
+    });
+  }
+
+  // 오버뷰 카테고리 섹션 헤더 element 생성 (buildOverview 내부에서 호출).
+  function overviewCategoryHeaderEl(catName, count) {
+    const meta = findCategoryMeta(catName);
+    const header = document.createElement('div');
+    header.className = 'ov-category-header';
+    header.dataset.category = catName;
+    const iconHtml = meta ? meta.icon : '';
+    const displayName = meta ? meta.name : catName;
+    header.innerHTML =
+      '<span class="ov-cat-icon">' + iconHtml + '</span>' +
+      '<span class="ov-cat-name">' + displayName + '</span>' +
+      '<span class="ov-cat-count">' + count + '</span>';
+    return header;
+  }
   // 자동 생성 — regenerate-snippets.py (MODULE_SPECS + ALLOWED_MODULES_BY_TYPE)
   window.MODULES_DATA = {
   "modules": [
@@ -2344,12 +2461,24 @@
 
     let currentGroup = null;
     let currentPg = null;
+    let currentCat = null;  // 카테고리 전환 감지용 (설계 정본 §0 8개)
 
     // base가 삭제된 page-group 감지: 첫 variant를 base 역할로 표시
     const pgsWithBase = new Set();
     const promotedFirst = new Set(); // pg → 이미 첫 variant를 base로 승격했는지
     slides.forEach(s => {
       if (!s.dataset.variant || s.dataset.variant === "0") pgsWithBase.add(s.dataset.pageGroup);
+    });
+
+    // 카테고리별 표시 page-group 수 (base 또는 orphan-first 기준)
+    const catCounts = {};
+    const catSeenPgs = new Set();
+    slides.forEach(s => {
+      const pg = s.dataset.pageGroup;
+      if (!pg || catSeenPgs.has(pg)) return;
+      catSeenPgs.add(pg);
+      const c = (typeof categoryOfPageGroup === 'function') ? categoryOfPageGroup(pg) : null;
+      if (c) catCounts[c] = (catCounts[c] || 0) + 1;
     });
 
     slides.forEach((slide, slideIdx) => {
@@ -2366,6 +2495,14 @@
       // 새 page-group이면 새 .ov-group wrapper
       // base가 삭제된 orphan variant도 새 그룹 시작
       if (!isVariant || !currentGroup || (pg && pg !== currentPg)) {
+        // 카테고리 전환 감지 → 섹션 헤더 삽입 (variant가 아닌 실 page-group 시작점에서만)
+        const slideCat = (typeof categoryOfPageGroup === 'function') ? categoryOfPageGroup(pg) : null;
+        if (slideCat && slideCat !== currentCat) {
+          if (typeof overviewCategoryHeaderEl === 'function') {
+            ovGrid.appendChild(overviewCategoryHeaderEl(slideCat, catCounts[slideCat] || 0));
+          }
+          currentCat = slideCat;
+        }
         const variantCount = pg ? [...slides].filter(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0").length : 0;
         const effectiveVariants = isOrphanFirst ? variantCount - 1 : variantCount;
         currentGroup = document.createElement('div');
