@@ -2304,17 +2304,18 @@
     if (!newEl) return;
     newEl.dataset.moduleId = m.id;
     const hintPos = {
-      top:    { left: 260, top: 80,  width: 1400 },
-      bottom: { left: 260, top: 880, width: 1400 },
-      center: { left: 460, top: 460, width: 1000 },
-      left:   { left: 40,  top: 460, width: 400 },
-      free:   { left: 760, top: 460, width: 400 },
+      top:    { left: 460, top: 160, width: 400,  minHeight: 60 },
+      bottom: { left: 260, top: 820, width: 1400, minHeight: 140 },
+      center: { left: 460, top: 440, width: 1000, minHeight: 200 },
+      left:   { left: 40,  top: 440, width: 400,  minHeight: 200 },
+      free:   { left: 760, top: 440, width: 400,  minHeight: 200 },
     };
     const pos = hintPos[m.default_slot_hint] || hintPos.center;
     newEl.style.position = 'absolute';
     newEl.style.left = pos.left + 'px';
     newEl.style.top  = pos.top + 'px';
     newEl.style.width = pos.width + 'px';
+    newEl.style.minHeight = pos.minHeight + 'px';
     const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
     if (!layer0) return;
     layer0.appendChild(newEl);
