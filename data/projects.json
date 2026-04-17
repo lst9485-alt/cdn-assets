@@ -1,11 +1,11 @@
 {
-  "updated": "2026-04-17T06:00:01.558154+09:00",
+  "updated": "2026-04-18T06:00:01.436884+09:00",
   "projects": [
     {
-      "name": "yt-slide flexbox 리팩터",
+      "name": "yt-slide 설계 정본",
       "type": "file",
       "app": "youtube/yt-slide",
-      "modified": "2026-04-16",
+      "modified": "2026-04-17",
       "status": null,
       "next": null
     },
@@ -47,14 +47,6 @@
       "app": "youtube/yt-content-sheet",
       "modified": "2026-04-08",
       "status": "스킬 구현 완성. 운영 중.",
-      "next": null
-    },
-    {
-      "name": "구글 계정 분리",
-      "type": "file",
-      "app": null,
-      "modified": "2026-04-08",
-      "status": null,
       "next": null
     }
   ]
