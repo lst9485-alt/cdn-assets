@@ -4923,6 +4923,34 @@
     if (editMode) e.preventDefault();
   });
 
+  // 더블클릭으로 직접 편집 가능한 텍스트 요소 셀렉터 (세션 37 rv: 한 줄 47개+ → 그룹별 상수)
+  // 신규 타입 추가 시 해당 그룹에 클래스 추가 (CLAUDE.md 체크리스트 8번)
+  const EDITABLE_TEXT_SEL = [
+    '.hl', '.bubble', '.bg-label',                                    // 공용 강조/말풍선/배경
+    '.card-title', '.card-desc',                                      // 카드
+    '.num-text',                                                      // 번호항목
+    '.bar-label', '.bar-value', '.hbar-label', '.hbar-val',           // 바차트
+    '.icon-label', '.icon-flow-label',                                // 아이콘+텍스트/플로우
+    '.flow-box', '.flow-arrow',                                       // 플로우
+    '.check-text',                                                    // 체크리스트
+    '.stat-num', '.stat-label',                                       // 숫자스탯
+    '.quote-text',                                                    // 인용
+    '.grid-title',                                                    // 그리드카드
+    '.section-badge', '.corner-label',                                // 섹션배지
+    '.btn-pill',                                                      // 버튼그리드
+    '.tag-chip',                                                      // 태그칩
+    '.alert-text',                                                    // 경고배너
+    '.compare-header', '.compare-item',                               // 비교박스
+    '.tl-box', '.tl-desc',                                            // 타임라인
+    '.cta-btn',                                                       // CTA버튼
+    '.cork-label', '.hand-title-mark', '.hand-typing',                // 마지막정리(코르크/손글씨)
+    '.contrast-word', '.contrast-sub', '.contrast-quote',             // 인용(대비)
+    '.contrast-top', '.contrast-bottom',                              // T45 두줄대비 / 기존 contrast-bottom 요약
+    '.line1-emph',                                                    // T44 한줄강조
+    '.counter-label', '.counter-sub',                                 // T46 카운터제목
+    '.emph-line1', '.emph-line2', '.icon-circle',                     // T47 아이콘강조
+  ].join(', ');
+
   document.getElementById('stage').addEventListener('dblclick', e => {
     if (!editMode) return;
     // 그룹 진입 상태에서 자식 더블클릭 → 텍스트 편집
@@ -4934,7 +4962,7 @@
       }
     }
     if (!editMode) return;
-    let el = e.target.closest('.hl, .bubble, .bg-label, .card-title, .card-desc, .num-text, .bar-label, .bar-value, .icon-label, .flow-box, .icon-flow-label, .flow-arrow, .check-text, .hbar-label, .hbar-val, .stat-num, .quote-text, .grid-title, .section-badge, .corner-label, .btn-pill, .tag-chip, .alert-text, .compare-header, .compare-item, .tl-box, .cta-btn, .stat-label, .cork-label, .hand-title-mark, .hand-typing, .contrast-word, .contrast-sub, .contrast-quote, .contrast-bottom, .tl-desc, .line1-emph, .contrast-top, .counter-label, .counter-sub, .emph-line1, .emph-line2, .icon-circle');
+    let el = e.target.closest(EDITABLE_TEXT_SEL);
     if (!el) {
       const area = e.target.closest('.text-area');
       if (area) el = area.querySelector('.hl');
