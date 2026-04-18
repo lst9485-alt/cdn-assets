@@ -2468,29 +2468,19 @@
     newEl.style.top  = pos.top + 'px';
     newEl.style.width = pos.width + 'px';
     newEl.style.minHeight = pos.minHeight + 'px';
-    // 마지막 step 다음에 나타나도록 새 step-layer 생성
-    // step-dim은 추가하지 않음 — 편집 모드에서 1920x1080 pointer-events:auto로 덮어
-    // 모듈 클릭을 가로채기 때문 (slide-style.css L1873). navigation.showStep은 dim 없어도
-    // 안전하게 동작 (null-check 경로 L108, L124).
-    const slide = slides[currentSlide];
-    let maxStep = 0;
-    slide.querySelectorAll('.step-layer').forEach(l => {
-      maxStep = Math.max(maxStep, parseInt(l.dataset.step) || 0);
-    });
-    const newStep = maxStep + 1;
-    const newLayer = document.createElement('div');
-    newLayer.className = 'step-layer';
-    newLayer.dataset.step = String(newStep);
-    newLayer.appendChild(newEl);
-    slide.appendChild(newLayer);
-    recalcSteps(slide);
+    // 기본 step(step-0) layer에 바로 삽입 — 기존 편집 요소와 동일 취급
+    // 드래그·선택·리사이즈는 기존 mousedown 핸들러(edit-events.js)에 자동 위임.
+    // step을 뒤로 옮기려면 레이어 패널(Alt+1)에서 수동 이동.
+    const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
+    if (!layer0) return;
+    layer0.appendChild(newEl);
     selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
     selectedEl = newEl; selectedEls = [newEl];
     newEl.classList.add('edit-selected');
     if (typeof updateCoordPanel === 'function') updateCoordPanel(newEl);
     if (typeof updateResizeHandle === 'function') updateResizeHandle();
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
-    if (typeof showToast === 'function') showToast(`모듈 삽입: ${m.id} ${m.name} · step ${newStep}`, 1500);
+    if (typeof showToast === 'function') showToast(`모듈 삽입: ${m.id} ${m.name}`, 1500);
   }
 
   if (modulePickerBackdrop) {
