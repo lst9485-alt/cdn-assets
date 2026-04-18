@@ -1,11 +1,11 @@
 {
-  "updated": "2026-04-18T06:00:01.436884+09:00",
+  "updated": "2026-04-19T06:00:01.974867+09:00",
   "projects": [
     {
       "name": "yt-slide 설계 정본",
       "type": "file",
       "app": "youtube/yt-slide",
-      "modified": "2026-04-17",
+      "modified": "2026-04-18",
       "status": null,
       "next": null
     },
