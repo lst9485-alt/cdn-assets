@@ -3067,7 +3067,7 @@
       'layer-panel','guide-toolbar','dim-outer','stage',
       'overview-backdrop','overview','help','align-menu','group-toolbar',
       'slideNum','edit-badge','top-toolbar',
-      'palette-bg','palette-fc','coord-panel','font-panel',
+      'palette-bg','palette-fc','coord-panel','font-panel','format-bar',
       'module-picker-backdrop','module-picker'
     ];
     const _afterScriptIds = ['gs-crosshair-h','gs-crosshair-v','filmstrip'];
