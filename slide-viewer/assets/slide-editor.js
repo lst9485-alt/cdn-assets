@@ -3044,23 +3044,23 @@
       const defaultCount = repeat ? (repeat.repeat_default || 1) : 1;
       card.dataset.count = String(defaultCount);
       if (recommended.has(m.id)) card.dataset.recommended = '1';
-      const headDiv = document.createElement('div');
-      headDiv.className = 'mp-head';
-      const idDiv = document.createElement('div');
-      idDiv.className = 'mp-id';
-      idDiv.textContent = recommended.has(m.id) ? ('★ ' + m.id) : m.id;
-      const nameDiv = document.createElement('div');
-      nameDiv.className = 'mp-name';
-      nameDiv.textContent = m.name;
-      headDiv.append(idDiv, nameDiv);
-      card.append(headDiv);
-      // 세션 36 Phase 3: position_hint_label 배지
+      // 세션 36 후속: mp-top = id + name + badge 한 줄
+      const topDiv = document.createElement('div');
+      topDiv.className = 'mp-top';
+      const idSpan = document.createElement('span');
+      idSpan.className = 'mp-id';
+      idSpan.textContent = recommended.has(m.id) ? ('★ ' + m.id) : m.id;
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'mp-name';
+      nameSpan.textContent = m.name;
+      topDiv.append(idSpan, nameSpan);
       if (m.position_hint_label) {
         const posBadge = document.createElement('span');
         posBadge.className = 'mp-pos-badge';
         posBadge.textContent = m.position_hint_label;
-        card.append(posBadge);
+        topDiv.append(posBadge);
       }
+      card.append(topDiv);
       // 세션 36 Phase 3: preview_text (이름 아래 1줄 설명)
       if (m.preview_text) {
         const pvText = document.createElement('div');
@@ -3132,26 +3132,36 @@
     if (!newEl) return;
     newEl.dataset.moduleId = m.id;
     // 세션 36 Phase 2A: count 인자로 반복 유닛 개수 조절
+    const effectiveCount = Math.max(1, count || 1);
     if (m.repeat && m.repeat.unit_selector) {
       const units = newEl.querySelectorAll(m.repeat.unit_selector);
-      const want = Math.max(1, Math.min(count || 1, units.length));
+      const want = Math.min(effectiveCount, units.length);
       for (let i = units.length - 1; i >= want; i--) {
         units[i].remove();
       }
     }
+    // 세션 36 후속 (치명 버그): 폭은 모듈 default_size 기반, count 비례 축소
+    // hint는 top/left 위치에만 사용. 폭/높이는 모듈 속성으로 결정.
     const hintPos = {
-      top:    { left: 40,  top: 60,  width: 400,  minHeight: 60 },
-      bottom: { left: 260, top: 820, width: 1400, minHeight: 140 },
-      center: { left: 460, top: 440, width: 1000, minHeight: 200 },
-      left:   { left: 40,  top: 440, width: 400,  minHeight: 200 },
-      free:   { left: 760, top: 440, width: 400,  minHeight: 200 },
+      top:    { left: 40,  top: 60  },
+      bottom: { left: 260, top: 820 },
+      center: { left: 460, top: 440 },
+      left:   { left: 40,  top: 440 },
+      free:   { left: 760, top: 440 },
     };
     const pos = hintPos[m.default_slot_hint] || hintPos.center;
+    const defaultW = (m.default_size && m.default_size.width)  || 600;
+    const defaultH = (m.default_size && m.default_size.height) || 200;
+    let finalW = defaultW;
+    if (m.repeat && m.repeat.repeat_max) {
+      // count / repeat_max 비례로 폭 축소 (M02 1640×3 → count 1: 547px)
+      finalW = Math.round(defaultW * effectiveCount / m.repeat.repeat_max);
+    }
     newEl.style.position = 'absolute';
     newEl.style.left = pos.left + 'px';
     newEl.style.top  = pos.top + 'px';
-    newEl.style.width = pos.width + 'px';
-    newEl.style.minHeight = pos.minHeight + 'px';
+    newEl.style.width = finalW + 'px';
+    newEl.style.minHeight = defaultH + 'px';
     // 기본 step(step-0) layer에 바로 삽입 — 기존 편집 요소와 동일 취급
     // 드래그·선택·리사이즈는 기존 mousedown 핸들러(edit-events.js)에 자동 위임.
     // step을 뒤로 옮기려면 레이어 패널(Alt+1)에서 수동 이동.
