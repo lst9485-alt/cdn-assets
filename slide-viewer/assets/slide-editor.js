@@ -2385,7 +2385,7 @@
     '{{TAG}}': '태그',
     '{{CURRENT}}': '3', '{{TOTAL}}': '7',
     '{{PERCENT}}': '60',
-    '{{IMG_SRC}}': 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><rect width="1" height="1" fill="%23ccc"/></svg>',
+    '{{IMG_SRC}}': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
     '{{IMG_ALT}}': '이미지 설명',
     '{{OFFSET}}': '1',
     '{{PREV_TITLE}}': '이전 장',
@@ -2468,7 +2468,7 @@
     newEl.style.top  = pos.top + 'px';
     newEl.style.width = pos.width + 'px';
     newEl.style.minHeight = pos.minHeight + 'px';
-    // 마지막 step 다음에 나타나도록 새 step-layer 생성
+    // 마지막 step 다음에 나타나도록 새 step-layer 생성 (toggleStepOverlay 패턴: step-dim 포함)
     const slide = slides[currentSlide];
     let maxStep = 0;
     slide.querySelectorAll('.step-layer').forEach(l => {
@@ -2478,9 +2478,12 @@
     const newLayer = document.createElement('div');
     newLayer.className = 'step-layer';
     newLayer.dataset.step = String(newStep);
+    const dim = document.createElement('div');
+    dim.className = 'step-dim';
+    newLayer.appendChild(dim);
     newLayer.appendChild(newEl);
     slide.appendChild(newLayer);
-    slide.dataset.steps = String(newStep + 1);
+    recalcSteps(slide);
     selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
     selectedEl = newEl; selectedEls = [newEl];
     newEl.classList.add('edit-selected');
