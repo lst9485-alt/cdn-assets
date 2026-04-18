@@ -15,8 +15,12 @@
 <div class="layer-tab active" data-tab="animation">애니메이션</div>
 <div class="layer-tab" data-tab="position">위치</div>
 </div>
-<div id="layer-tab-header"><div class="anim-sort-back">← &nbsp;클릭하여 정렬</div></div>
-<div id="layer-list"><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">상세 항목 3</span><span class="layer-badge">큰숫자</span><span class="layer-step-badge">4번째</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">상세 항목 2</span><span class="layer-badge">큰숫자</span><span class="layer-step-badge">3번째</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">상세 항목 1</span><span class="layer-badge">큰숫자</span><span class="layer-step-badge">2번째</span></div><div class="layer-item"><span class="layer-handle">⠿</span><span class="layer-label">75%</span><span class="layer-badge">큰숫자</span><span class="layer-step-badge">1번째</span></div></div>
+<div id="layer-tab-header"><div class="anim-section-title">프레젠테이션 설정</div><div class="anim-toggle-row"><span class="anim-toggle-label">클릭 시 표시</span>
+      <label class="anim-toggle disabled">
+        <input type="checkbox" disabled="">
+        <span class="anim-toggle-slider"></span>
+      </label></div><div class="anim-type-row"><span class="anim-type-label">등장 효과</span><select class="anim-type-select" disabled=""><option value="" selected="">아래에서 올라옴</option><option value="anim-scale">작게→크게</option><option value="anim-left">왼쪽에서 슬라이드</option><option value="anim-right">오른쪽에서 슬라이드</option><option value="anim-pop">톡 튀어나옴</option><option value="anim-fade">서서히 나타남</option><option value="anim-zoom">확대 등장</option><option value="anim-flip">뒤집기</option><option value="anim-split">갈라짐</option><option value="anim-center">가운데서 등장</option><option value="anim-underline">밑줄 긋기</option></select></div><div class="anim-sort-btn"><span class="anim-sort-icon">☰</span> 클릭하여 정렬 <span class="anim-sort-arrow">›</span></div></div>
+<div id="layer-list"></div>
 </div>
 <div id="guide-toolbar">
 <div class="guide-btn" data-target="title" style="border-color:rgba(255,200,0,0.7); color:rgba(255,200,0,0.9);">T</div>
@@ -32,22 +36,22 @@
 <div class="" id="snap-x" style="display: none; left: 960px;"></div>
 <div class="" id="snap-y" style="display: none; top: 694px;"></div>
 <div id="guide-snap-overlay"></div>
-<div id="multi-select-box" style="display: none; left: 280px; top: 135px; width: 1360px; height: 382px;"></div>
+<div id="multi-select-box" style="display: none; left: 120px; top: 160px; width: 1680px; height: 520px;"></div>
 <div id="group-box" style="display: none; left: 292px; top: 332px; width: 1212px; height: 420px;"></div>
 <div class="gap-indicator" id="gap-left" style="display: none; left: 0px; top: 667px; width: 701px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: 331px; top: -14px;">701px</div></div>
 <div class="gap-indicator" id="gap-right" style="display: none; left: 774px; top: 667px; width: 1146px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: 553px; top: -14px;">1146px</div></div>
 <div class="gap-indicator" id="gap-top" style="display: none; left: 737px; top: 0px; width: 0px; height: 656px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 318px; left: 6px;">656px</div></div>
 <div class="gap-indicator" id="gap-bottom" style="display: none; left: 737px; top: 679px; width: 0px; height: 401px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 191px; left: 6px;">401px</div></div>
-<div class="resize-handle" data-corner="tl" style="left: 49px; top: 688px;"></div>
-<div class="resize-handle" data-corner="tr" style="left: 1860px; top: 688px;"></div>
-<div class="resize-handle" data-corner="bl" style="left: 49px; top: 921px;"></div>
-<div class="resize-handle" data-corner="br" style="left: 1860px; top: 921px;"></div>
-<div class="resize-handle edge" data-edge="t" style="left: 954.5px; top: 688px;"></div>
-<div class="resize-handle edge" data-edge="r" style="left: 1860px; top: 804.5px;"></div>
-<div class="resize-handle edge" data-edge="b" style="left: 954.5px; top: 921px;"></div>
-<div class="resize-handle edge" data-edge="l" style="left: 49px; top: 804.5px;"></div>
+<div class="resize-handle" data-corner="tl" style="left: 114px; top: 154px;"></div>
+<div class="resize-handle" data-corner="tr" style="left: 1794px; top: 154px;"></div>
+<div class="resize-handle" data-corner="bl" style="left: 114px; top: 674px;"></div>
+<div class="resize-handle" data-corner="br" style="left: 1794px; top: 674px;"></div>
+<div class="resize-handle edge" data-edge="t" style="left: 954px; top: 154px;"></div>
+<div class="resize-handle edge" data-edge="r" style="left: 1794px; top: 414px;"></div>
+<div class="resize-handle edge" data-edge="b" style="left: 954px; top: 674px;"></div>
+<div class="resize-handle edge" data-edge="l" style="left: 114px; top: 414px;"></div>
 <div id="resize-dim-label" style="display: none; left: 2120px; top: 967px;">1811 × 233</div>
-<div id="select-box" style="left: 773.238px; top: 677.098px; width: 0px; height: 0px; display: none;"></div>
+<div id="select-box" style="left: 974.689px; top: 719.067px; width: 0px; height: 0px; display: none;"></div>
 <div class="slide active" data-page-group="13" data-slide-id="T13_base" data-steps="2" data-type="큰숫자(서클)" data-variant="0" id="T13_base" style="" data-display-label="13-1 큰숫자(서클)">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:160px; width:1680px;">
@@ -58,7 +62,7 @@
 <div class="sc-item" style="position: absolute; left: 701px; top: 656px;"><span class="sc-num">2</span><span class="sc-label">실행 단계</span></div></div>
 <div class="step-layer" data-step="1">
 <div class="slide-el stat-circle" data-type="큰숫자" style="position:absolute; left:280px; top:380px; width:300px; height:300px; background:rgba(74,144,217,0.15);">
-<div class="stat-num">75%</div>
+<div class="stat-num">65%</div>
 <div class="stat-label">핵심 지표</div>
 </div>
 <div class="slide-el stat-detail-item" data-type="큰숫자" style="position:absolute; left:640px; top:390px; width:720px;">
@@ -4259,7 +4263,7 @@
 <button class="tb-btn" id="tb-anim">애니메이션</button>
 <span class="tb-sep"></span>
 <button class="tb-btn" id="tb-undo">↩ 실행취소</button>
-<button class="tb-btn" id="tb-save">💾 저장</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button>
+<button class="tb-btn" id="tb-save">💾 저장</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button><button class="tb-btn" id="gh-settings" title="GitHub 토큰 설정" style="font-size: 14px; min-width: 28px; padding: 0px 4px;">⚙</button>
 <span id="save-status"></span>
 </div>
 <div class="color-palette" id="palette-bg" style="left: 1120.5px; top: 43px;">
@@ -4280,12 +4284,12 @@
 <div class="color-swatch swatch-fc-yellow" data-cls="fc-yellow" title="빨강(강조)"></div>
 <div class="color-swatch" data-cls="fc-green" title="초록" style="background: rgb(46, 204, 113);"></div><div class="color-swatch" data-cls="fc-brown" title="갈색" style="background: rgb(139, 69, 19);"></div><div class="color-swatch" data-cls="fc-gray" title="회색" style="background: rgb(153, 153, 153);"></div><div class="color-swatch" data-cls="fc-purple" title="보라" style="background: rgb(155, 89, 182);"></div></div>
 <div id="coord-panel" style="display: none;">
-<span id="coord-text">top: 694px;
-left: 55px;
-width: 1811px;</span>
+<span id="coord-text">top: 160px;
+left: 120px;
+width: 1680px;</span>
 <span class="copy-btn" onclick="copyCoords()">복사</span>
 </div>
-<div class="" id="font-panel" style="left: 4px; top: 465.081px;">
+<div class="" id="font-panel" style="left: 4px; top: 83.4471px;">
 <button id="font-dec">−</button>
 <input id="font-size-input" max="500" min="10" type="number">
 <span>px</span>
