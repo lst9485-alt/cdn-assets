@@ -4934,7 +4934,7 @@
       }
     }
     if (!editMode) return;
-    let el = e.target.closest('.hl, .bubble, .bg-label, .card-title, .card-desc, .num-text, .bar-label, .bar-value, .icon-label, .flow-box, .icon-flow-label, .flow-arrow, .check-text, .hbar-label, .hbar-val, .stat-num, .quote-text, .grid-title, .section-badge, .corner-label, .btn-pill, .tag-chip, .alert-text, .compare-header, .compare-item, .tl-box, .cta-btn, .stat-label, .cork-label, .hand-title-mark, .hand-typing, .contrast-word, .contrast-sub, .contrast-quote, .contrast-bottom, .tl-desc, .line1-emph, .contrast-top, .counter-label, .counter-sub, .emph-line1, .emph-line2');
+    let el = e.target.closest('.hl, .bubble, .bg-label, .card-title, .card-desc, .num-text, .bar-label, .bar-value, .icon-label, .flow-box, .icon-flow-label, .flow-arrow, .check-text, .hbar-label, .hbar-val, .stat-num, .quote-text, .grid-title, .section-badge, .corner-label, .btn-pill, .tag-chip, .alert-text, .compare-header, .compare-item, .tl-box, .cta-btn, .stat-label, .cork-label, .hand-title-mark, .hand-typing, .contrast-word, .contrast-sub, .contrast-quote, .contrast-bottom, .tl-desc, .line1-emph, .contrast-top, .counter-label, .counter-sub, .emph-line1, .emph-line2, .icon-circle');
     if (!el) {
       const area = e.target.closest('.text-area');
       if (area) el = area.querySelector('.hl');
