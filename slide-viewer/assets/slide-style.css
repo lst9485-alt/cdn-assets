@@ -1426,6 +1426,8 @@
     flex-direction: column;
     align-items: stretch;
     gap: 6px;
+    /* Phase E (세션 30): clamp으로 화면 크기에 맞춰 카드 폭 자동 조절 */
+    width: clamp(180px, 22vw, 260px);
     padding: 10px 10px 8px;
     background: #252525;
     border: 2px solid #444;
@@ -1439,6 +1441,17 @@
   .mp-card:hover {
     border-color: var(--editor-accent);
     background: #2e2e2e;
+  }
+  /* 추천 모듈 강조 — 노란 띠 + ★ (idDiv에 ★ 접두사는 main-mid.js에서 삽입) */
+  .mp-card[data-recommended="1"] {
+    border-top: 4px solid #FFD43B;
+    background: #2a2818;
+  }
+  .mp-card[data-recommended="1"]:hover {
+    background: #35321c;
+  }
+  .mp-card[data-recommended="1"] .mp-id {
+    color: #FFB800;
   }
   .mp-card .mp-head {
     display: flex;

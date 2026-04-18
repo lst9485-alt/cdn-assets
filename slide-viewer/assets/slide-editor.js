@@ -423,7 +423,7 @@
       '<span class="ov-cat-count">' + count + '</span>';
     return header;
   }
-  // 자동 생성 — regenerate-snippets.py (MODULE_SPECS + ALLOWED_MODULES_BY_TYPE)
+  // 자동 생성 — regenerate-snippets.py (MODULE_SPECS + RECOMMENDED_MODULES_BY_TYPE)
   window.MODULES_DATA = {
   "modules": [
     {
@@ -431,94 +431,425 @@
       "name": "스탯박스",
       "html": "<div class=\"slide-el mod-M01 stat-box-row\"><div class=\"stat-box\"><div class=\"stat-value\">{{STAT1_VALUE}}</div><div class=\"stat-label\">{{STAT1_LABEL}}</div></div><div class=\"stat-box\"><div class=\"stat-value\">{{STAT2_VALUE}}</div><div class=\"stat-label\">{{STAT2_LABEL}}</div></div><div class=\"stat-box\"><div class=\"stat-value\">{{STAT3_VALUE}}</div><div class=\"stat-label\">{{STAT3_LABEL}}</div></div></div>",
       "css_class": "mod-M01",
-      "default_slot_hint": "bottom"
+      "default_slot_hint": "bottom",
+      "slots": {
+        "STAT1_VALUE": {
+          "label": "1번 수치",
+          "required": true
+        },
+        "STAT1_LABEL": {
+          "label": "1번 라벨",
+          "required": true
+        },
+        "STAT2_VALUE": {
+          "label": "2번 수치",
+          "required": true
+        },
+        "STAT2_LABEL": {
+          "label": "2번 라벨",
+          "required": true
+        },
+        "STAT3_VALUE": {
+          "label": "3번 수치",
+          "required": true
+        },
+        "STAT3_LABEL": {
+          "label": "3번 라벨",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 1440,
+        "height": 240
+      },
+      "recommend_keywords": [
+        "수치",
+        "비율",
+        "%",
+        "억",
+        "만원"
+      ],
+      "recommend_intents": [
+        "수치",
+        "강조"
+      ]
     },
     {
       "id": "M02",
       "name": "3단 상세",
       "html": "<div class=\"slide-el mod-M02 tri-detail\"><div class=\"tri-col\"><div class=\"tri-icon\">{{ICON1}}</div><div class=\"tri-title\">{{TITLE1}}</div><div class=\"tri-sub\">{{SUB1}}</div><ul class=\"tri-bullets\">{{BULLETS1}}</ul></div><div class=\"tri-col\"><div class=\"tri-icon\">{{ICON2}}</div><div class=\"tri-title\">{{TITLE2}}</div><div class=\"tri-sub\">{{SUB2}}</div><ul class=\"tri-bullets\">{{BULLETS2}}</ul></div><div class=\"tri-col\"><div class=\"tri-icon\">{{ICON3}}</div><div class=\"tri-title\">{{TITLE3}}</div><div class=\"tri-sub\">{{SUB3}}</div><ul class=\"tri-bullets\">{{BULLETS3}}</ul></div></div>",
       "css_class": "mod-M02",
-      "default_slot_hint": "bottom"
+      "default_slot_hint": "bottom",
+      "slots": {
+        "ICON1": {
+          "label": "1번 아이콘",
+          "required": true
+        },
+        "TITLE1": {
+          "label": "1번 제목",
+          "required": true
+        },
+        "SUB1": {
+          "label": "1번 부제",
+          "required": false
+        },
+        "BULLETS1": {
+          "label": "1번 불릿",
+          "required": false
+        },
+        "ICON2": {
+          "label": "2번 아이콘",
+          "required": true
+        },
+        "TITLE2": {
+          "label": "2번 제목",
+          "required": true
+        },
+        "SUB2": {
+          "label": "2번 부제",
+          "required": false
+        },
+        "BULLETS2": {
+          "label": "2번 불릿",
+          "required": false
+        },
+        "ICON3": {
+          "label": "3번 아이콘",
+          "required": true
+        },
+        "TITLE3": {
+          "label": "3번 제목",
+          "required": true
+        },
+        "SUB3": {
+          "label": "3번 부제",
+          "required": false
+        },
+        "BULLETS3": {
+          "label": "3번 불릿",
+          "required": false
+        }
+      },
+      "default_size": {
+        "width": 1640,
+        "height": 420
+      },
+      "recommend_keywords": [
+        "상세",
+        "설명",
+        "비교",
+        "3가지",
+        "세 가지"
+      ],
+      "recommend_intents": [
+        "나열",
+        "비교"
+      ]
     },
     {
       "id": "M03",
       "name": "요약바",
       "html": "<div class=\"slide-el mod-M03 summary-bar\"><span class=\"summary-text\">{{SUMMARY}}</span></div>",
       "css_class": "mod-M03",
-      "default_slot_hint": "bottom"
+      "default_slot_hint": "bottom",
+      "slots": {
+        "SUMMARY": {
+          "label": "요약 문구",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 1440,
+        "height": 90
+      },
+      "recommend_keywords": [
+        "요약",
+        "정리",
+        "핵심",
+        "한 줄"
+      ],
+      "recommend_intents": [
+        "결론"
+      ]
     },
     {
       "id": "M04",
       "name": "대비박스",
       "html": "<div class=\"slide-el mod-M04 contrast-box\"><span class=\"contrast-left\">{{LEFT}}</span><span class=\"contrast-neq\">≠</span><span class=\"contrast-right\">{{RIGHT}}</span></div>",
       "css_class": "mod-M04",
-      "default_slot_hint": "top"
+      "default_slot_hint": "top",
+      "slots": {
+        "LEFT": {
+          "label": "좌측 값",
+          "required": true
+        },
+        "RIGHT": {
+          "label": "우측 값",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 1000,
+        "height": 120
+      },
+      "recommend_keywords": [
+        "대비",
+        "반대",
+        "차이",
+        "vs",
+        "아닌"
+      ],
+      "recommend_intents": [
+        "비교"
+      ]
     },
     {
       "id": "M05",
       "name": "영문병기",
       "html": "<div class=\"slide-el mod-M05 ko-en\"><div class=\"ko-main\">{{KO}}</div><div class=\"en-sub\">{{EN}}</div></div>",
       "css_class": "mod-M05",
-      "default_slot_hint": "center"
+      "default_slot_hint": "center",
+      "slots": {
+        "KO": {
+          "label": "한글",
+          "required": true
+        },
+        "EN": {
+          "label": "영문",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 760,
+        "height": 220
+      },
+      "recommend_keywords": [
+        "용어",
+        "영어",
+        "개념",
+        "뜻",
+        "정의"
+      ],
+      "recommend_intents": [
+        "전환"
+      ]
     },
     {
       "id": "M06",
       "name": "태그/뱃지",
       "html": "<div class=\"slide-el mod-M06 tag-badge\"><span class=\"tag-label\">{{TAG}}</span></div>",
       "css_class": "mod-M06",
-      "default_slot_hint": "top"
+      "default_slot_hint": "top",
+      "slots": {
+        "TAG": {
+          "label": "태그",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 260,
+        "height": 64
+      },
+      "recommend_keywords": [
+        "태그",
+        "라벨",
+        "분류",
+        "카테고리"
+      ],
+      "recommend_intents": [
+        "강조"
+      ]
     },
     {
       "id": "M07",
       "name": "챕터카운터",
       "html": "<div class=\"slide-el mod-M07 chapter-counter\"><span class=\"counter-current\">{{CURRENT}}</span><span class=\"counter-sep\">/</span><span class=\"counter-total\">{{TOTAL}}</span></div>",
       "css_class": "mod-M07",
-      "default_slot_hint": "top"
+      "default_slot_hint": "top",
+      "slots": {
+        "CURRENT": {
+          "label": "현재 번호",
+          "required": true
+        },
+        "TOTAL": {
+          "label": "전체 개수",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 200,
+        "height": 80
+      },
+      "recommend_keywords": [
+        "진행",
+        "챕터",
+        "순서",
+        "단계"
+      ],
+      "recommend_intents": [
+        "전환"
+      ]
     },
     {
       "id": "M08",
       "name": "프로그레스바",
       "html": "<div class=\"slide-el mod-M08 progress-bar\"><div class=\"progress-fill\" style=\"width:{{PERCENT}}%;\"></div></div>",
       "css_class": "mod-M08",
-      "default_slot_hint": "bottom"
+      "default_slot_hint": "bottom",
+      "slots": {
+        "PERCENT": {
+          "label": "퍼센트 (0~100)",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 840,
+        "height": 24
+      },
+      "recommend_keywords": [
+        "진행",
+        "퍼센트",
+        "상태",
+        "비율"
+      ],
+      "recommend_intents": [
+        "수치",
+        "전환"
+      ]
     },
     {
       "id": "M09",
       "name": "이미지슬롯",
       "html": "<div class=\"slide-el mod-M09 image-slot\"><img src=\"{{IMG_SRC}}\" alt=\"{{IMG_ALT}}\" /></div>",
       "css_class": "mod-M09",
-      "default_slot_hint": "free"
+      "default_slot_hint": "free",
+      "slots": {
+        "IMG_SRC": {
+          "label": "이미지 경로",
+          "required": true
+        },
+        "IMG_ALT": {
+          "label": "대체 텍스트",
+          "required": false
+        }
+      },
+      "default_size": {
+        "width": 480,
+        "height": 360
+      },
+      "recommend_keywords": [
+        "사진",
+        "이미지",
+        "그림",
+        "자료"
+      ],
+      "recommend_intents": [
+        "근거"
+      ]
     },
     {
       "id": "M10",
       "name": "빈카드 프리뷰",
       "html": "<div class=\"slide-el mod-M10 empty-preview\"><div class=\"empty-card\"></div><div class=\"empty-card\"></div><div class=\"empty-card\"></div></div>",
       "css_class": "mod-M10",
-      "default_slot_hint": "bottom"
+      "default_slot_hint": "bottom",
+      "slots": {},
+      "default_size": {
+        "width": 1200,
+        "height": 160
+      },
+      "recommend_keywords": [
+        "예고",
+        "다음",
+        "미리보기"
+      ],
+      "recommend_intents": [
+        "전환"
+      ]
     },
     {
       "id": "M11",
       "name": "좌측이전장",
       "html": "<div class=\"slide-el mod-M11 prev-thumb\"><span class=\"prev-indicator\">-{{OFFSET}}</span><span class=\"prev-arrow\">&lt;</span><span class=\"prev-title\">{{PREV_TITLE}}</span></div>",
       "css_class": "mod-M11",
-      "default_slot_hint": "left"
+      "default_slot_hint": "left",
+      "slots": {
+        "OFFSET": {
+          "label": "이전 거리",
+          "required": true
+        },
+        "PREV_TITLE": {
+          "label": "이전장 제목",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 360,
+        "height": 64
+      },
+      "recommend_keywords": [
+        "이전",
+        "돌아가기",
+        "복습",
+        "앞"
+      ],
+      "recommend_intents": [
+        "전환"
+      ]
     },
     {
       "id": "M12",
       "name": "상세리스트",
       "html": "<div class=\"slide-el mod-M12 detail-list\"><ul>{{ITEMS}}</ul></div>",
       "css_class": "mod-M12",
-      "default_slot_hint": "bottom"
+      "default_slot_hint": "bottom",
+      "slots": {
+        "ITEMS": {
+          "label": "목록 항목 (li)",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 900,
+        "height": 300
+      },
+      "recommend_keywords": [
+        "목록",
+        "항목",
+        "리스트"
+      ],
+      "recommend_intents": [
+        "나열"
+      ]
     },
     {
       "id": "M13",
       "name": "태그모음",
       "html": "<div class=\"slide-el mod-M13 tag-group\">{{TAGS}}</div>",
       "css_class": "mod-M13",
-      "default_slot_hint": "bottom"
+      "default_slot_hint": "bottom",
+      "slots": {
+        "TAGS": {
+          "label": "태그 묶음 (span)",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 1200,
+        "height": 80
+      },
+      "recommend_keywords": [
+        "해시태그",
+        "키워드",
+        "태그모음"
+      ],
+      "recommend_intents": [
+        "나열",
+        "결론"
+      ]
     }
   ],
-  "allowedByType": {
+  "recommendedByType": {
     "CTA버튼": [
       "M09"
     ],
@@ -2404,31 +2735,28 @@
   function buildModulePicker(slideType) {
     if (!modulePickerGrid) return;
     modulePickerGrid.innerHTML = '';
-    const data = window.MODULES_DATA || { modules: [], allowedByType: {} };
-    const allowed = data.allowedByType[slideType] || [];
+    // 세션 28 결정: M01~M13 전부 표시 + 추천 모듈은 상단 + ★/노란 띠 강조.
+    const data = window.MODULES_DATA || { modules: [], recommendedByType: {} };
+    const recommended = new Set(data.recommendedByType[slideType] || []);
+    const allModules = data.modules || [];
+    const ordered = [
+      ...allModules.filter(m => recommended.has(m.id)),
+      ...allModules.filter(m => !recommended.has(m.id)),
+    ];
     if (modulePickerTitle) {
-      modulePickerTitle.textContent = `모듈 삽입 — ${slideType || '(타입 없음)'} · ${allowed.length}개`;
+      modulePickerTitle.textContent = `모듈 삽입 — ${slideType || '(타입 없음)'} · ${allModules.length}개 (추천 ★${recommended.size})`;
     }
-    if (!allowed.length) {
-      const empty = document.createElement('div');
-      empty.className = 'mp-empty';
-      empty.textContent = '이 타입은 허용 모듈이 없습니다. Escape로 닫기.';
-      modulePickerGrid.appendChild(empty);
-      return;
-    }
-    const moduleById = new Map(data.modules.map(m => [m.id, m]));
-    allowed.forEach(mid => {
-      const m = moduleById.get(mid);
-      if (!m) return;
+    ordered.forEach(m => {
       const card = document.createElement('button');
       card.className = 'mp-card';
       card.type = 'button';
       card.dataset.moduleId = m.id;
+      if (recommended.has(m.id)) card.dataset.recommended = '1';
       const headDiv = document.createElement('div');
       headDiv.className = 'mp-head';
       const idDiv = document.createElement('div');
       idDiv.className = 'mp-id';
-      idDiv.textContent = m.id;
+      idDiv.textContent = recommended.has(m.id) ? ('★ ' + m.id) : m.id;
       const nameDiv = document.createElement('div');
       nameDiv.className = 'mp-name';
       nameDiv.textContent = m.name;
