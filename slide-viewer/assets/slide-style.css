@@ -1505,7 +1505,7 @@
   .mp-card .mp-preview {
     position: relative;
     width: 100%;
-    height: 130px;
+    height: 160px;
     overflow: hidden;
     background: #fafafa;
     border: 1px solid #333;
@@ -2946,3 +2946,93 @@
     color: var(--color-text, #222);
     text-align: center;
   }
+
+  /* ── 세션 36 후속3: 모듈 ambient 애니메이션 ──
+     CLAUDE.md 규칙 준수: 사각형 box-shadow 금지 / 둥근 요소만 pulse-glow /
+     float-y는 전역 사각·둥근 둘 다 OK. 부드러운 ambient만 사용 */
+
+  /* M01 스탯박스 — stagger float-y */
+  .mod-M01 .stat-box { animation: float-y 4s ease-in-out infinite; }
+  .mod-M01 .stat-box:nth-child(2) { animation-delay: 0.4s; }
+  .mod-M01 .stat-box:nth-child(3) { animation-delay: 0.8s; }
+
+  /* M02 3단 상세 — icon만 float (요소 전체는 움직이면 어지러움) */
+  .mod-M02 .tri-icon { animation: float-y 3s ease-in-out infinite; display: inline-block; }
+  .mod-M02 .tri-col:nth-child(2) .tri-icon { animation-delay: 0.3s; }
+  .mod-M02 .tri-col:nth-child(3) .tri-icon { animation-delay: 0.6s; }
+
+  /* M04 대비박스 — ≠ 기호 count-bounce 4s 반복 (사각 아닌 글자 요소) */
+  .mod-M04 .contrast-neq {
+    animation: count-bounce 4s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  /* M06 태그/뱃지 — 작은 float */
+  .mod-M06 .tag-label { animation: float-y 3s ease-in-out infinite; display: inline-block; }
+
+  /* M08 프로그레스바 — bar-sweep (이미 정의된 keyframe 재사용) */
+  .mod-M08.progress-bar { position: relative; }
+  .mod-M08.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.45) 50%,
+      rgba(255,255,255,0) 100%);
+    animation: bar-sweep 2.5s ease-in-out infinite;
+  }
+
+  /* M09 이미지 — 부드러운 float (5s 느리게) */
+  .mod-M09.image-slot { animation: float-y 5s ease-in-out infinite; }
+
+  /* M10 빈카드 — stagger float-y */
+  .mod-M10 .empty-card { animation: float-y 4s ease-in-out infinite; }
+  .mod-M10 .empty-card:nth-child(2) { animation-delay: 0.3s; }
+  .mod-M10 .empty-card:nth-child(3) { animation-delay: 0.6s; }
+
+  /* M14 화살표플로우 — 스텝 stagger + 화살표 색 pulse */
+  .mod-M14 .af-step { animation: float-y 4s ease-in-out infinite; display: inline-block; }
+  .mod-M14 .af-item:nth-child(2) .af-step { animation-delay: 0.3s; }
+  .mod-M14 .af-item:nth-child(3) .af-step { animation-delay: 0.6s; }
+  .mod-M14 .af-arrow {
+    animation: arrow-pulse 1.8s ease-in-out infinite;
+    display: inline-block;
+  }
+  @keyframes arrow-pulse {
+    0%, 100% { opacity: 0.7; transform: translateX(0); }
+    50%      { opacity: 1;   transform: translateX(3px); }
+  }
+
+  /* M15 체크리스트 — 체크 마크 pulse-glow (span inline 요소 OK, 사각 아님) */
+  .mod-M15 .cl-mark {
+    animation: check-pop 2s ease-in-out infinite;
+    display: inline-block;
+  }
+  .mod-M15 .cl-item:nth-child(2) .cl-mark { animation-delay: 0.25s; }
+  .mod-M15 .cl-item:nth-child(3) .cl-mark { animation-delay: 0.5s; }
+  @keyframes check-pop {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.18); }
+  }
+
+  /* M17 경고배너 — 아이콘만 float (배너 자체는 사각이라 움직이면 어지러움) */
+  .mod-M17 .wb-icon {
+    animation: warn-shake 2.4s ease-in-out infinite;
+    display: inline-block;
+  }
+  @keyframes warn-shake {
+    0%, 90%, 100% { transform: rotate(0deg); }
+    92%           { transform: rotate(-8deg); }
+    96%           { transform: rotate(8deg); }
+  }
+
+  /* M18 단계번호 — 원형이라 pulse-glow 허용 (둥근 요소) */
+  .mod-M18 .sc-num {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  .mod-M18 .sc-item:nth-child(2) .sc-num { animation-delay: 0.4s; }
+  .mod-M18 .sc-item:nth-child(3) .sc-num { animation-delay: 0.8s; }

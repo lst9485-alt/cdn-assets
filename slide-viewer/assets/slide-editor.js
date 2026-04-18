@@ -2997,17 +2997,20 @@
     });
   }
 
-  // 세션 36 후속2: stage에 default_size width/height 강제 설정되어 있으므로
-  // 거기서 값 읽어 scale 계산. 좁은 박스에서 wrap으로 모양 깨지는 문제 해결.
+  // 세션 36 후속3: stage는 자연 크기로 렌더되게 두고 scrollWidth/Height로 측정.
+  // wrap 허용 — 큰 모듈(M14 1400px)이 박스 안에 wrap으로 2~3줄 나와도 식별성 우선.
+  // scale 최소 바닥 0.3 — 너무 축소되면 글자 안 보임.
   function fitPreviewScale(previewEl) {
     const stage = previewEl.querySelector('.mp-preview-stage');
     if (!stage) return;
-    const elW = parseFloat(stage.style.width)  || stage.scrollWidth  || 1;
-    const elH = parseFloat(stage.style.height) || stage.scrollHeight || 1;
-    const boxW = previewEl.clientWidth  - 16;  // padding 제외
-    const boxH = previewEl.clientHeight - 16;
-    const scale = Math.min(boxW / elW, boxH / elH, 1);
-    const finalScale = Math.max(scale, 0.08);
+    // scale을 1로 리셋 후 자연 크기 측정 (scale 상태에서 scrollWidth 측정 시 오차)
+    stage.style.setProperty('--mp-scale', '1');
+    const elW = stage.scrollWidth  || stage.offsetWidth  || 1;
+    const elH = stage.scrollHeight || stage.offsetHeight || 1;
+    const boxW = previewEl.clientWidth  - 12;
+    const boxH = previewEl.clientHeight - 12;
+    const raw = Math.min(boxW / elW, boxH / elH, 1);
+    const finalScale = Math.max(raw, 0.3);
     stage.style.setProperty('--mp-scale', String(finalScale));
   }
 
@@ -3065,11 +3068,10 @@
       preview.className = 'mp-preview';
       const stage = document.createElement('div');
       stage.className = 'mp-preview-stage';
-      // 세션 36 후속2: stage에 default_size 강제 → 원본 레이아웃(wrap 없음)으로 배치 후 scale
-      const dW = (m.default_size && m.default_size.width)  || 600;
-      const dH = (m.default_size && m.default_size.height) || 200;
-      stage.style.width  = dW + 'px';
-      stage.style.height = dH + 'px';
+      // 세션 36 후속3: width 강제 제거. max-width는 default_size로 제한해 wrap 허용
+      // (좁은 프리뷰에서 큰 모듈은 2~3줄로 감겨도 글자 식별성 확보)
+      const dW = (m.default_size && m.default_size.width) || 600;
+      stage.style.maxWidth = dW + 'px';
       stage.innerHTML = fillModulePlaceholders(m.html);
       preview.appendChild(stage);
       card.append(preview);
@@ -4962,7 +4964,11 @@
         selectedEl = groupParent;
         selectedEls = [groupParent];
         // _pendingChildExtract: 드래그 임계값 넘으면 자식 추출
-        selectedEl._pendingChildExtract = child;
+        // 세션 36 후속3: 모듈은 자식 추출 금지 — 내부 .sc-item 등이 빠져나가면 모양 깨지고 고립됨.
+        //   그룹 진입/자식 선택/텍스트 편집은 그대로 허용. 드래그 시 부모 모듈 전체가 이동.
+        if (!groupParent.hasAttribute('data-module-id')) {
+          selectedEl._pendingChildExtract = child;
+        }
         elAnchor = { top: groupParent.offsetTop, left: groupParent.offsetLeft };
         elAnchors = [{ el: groupParent, top: groupParent.offsetTop, left: groupParent.offsetLeft }];
         updateCoordPanel(groupParent);
@@ -5200,14 +5206,9 @@
           el.classList.add('edit-selected');
           selectedEl = el;
         }
-      } else if (
-        ((el.matches('.slide-el') && !el.hasAttribute('data-module-id'))
-          || el.matches('.items-row, .items-col, .items-grid'))
-        && selectedEls.length === 1
-      ) {
-        // 카드 블록/flex 컨테이너 재클릭 → mouseup에서 드래그 여부 확인 후 그룹 진입.
-        // 세션 36 후속2: 모듈([data-module-id])은 그룹 진입 금지 — 내부 .sc-item 등이
-        // "자식 추출" 로직으로 빠져나가 모양 깨지고 삭제도 어려워지는 문제 방지.
+      } else if ((el.matches('.slide-el') || el.matches('.items-row, .items-col, .items-grid')) && selectedEls.length === 1) {
+        // 카드 블록/flex 컨테이너 재클릭 → mouseup에서 드래그 여부 확인 후 그룹 진입
+        // (모듈 포함 — 세션 36 후속3: 자식 추출만 별도 차단, 그룹 진입/편집은 허용)
         pendingGroupEntry = { el, target: e.target };
         selectedEl = el;
       } else {
