@@ -2820,35 +2820,8 @@
 
   function buildOverview() {
     ovGrid.innerHTML = '';
-    // 에디터(slides-editor.html)가 아니면 카테고리/variant 구분 없이 번호 순으로만 나열 — 촬영용
+    // 에디터(slides-editor.html)가 아니면 카테고리 섹션 헤더만 생략 — variant 묶음/+N/번호는 양쪽 공통
     const isEditor = /slides-editor\.html$/.test(location.pathname);
-    if (!isEditor) {
-      slides.forEach((slide, slideIdx) => {
-        const item = document.createElement('div');
-        item.className = 'ov-item' + (slideIdx === currentSlide ? ' current' : '');
-        const thumb = document.createElement('div');
-        thumb.className = 'ov-thumb';
-        const clone = slide.cloneNode(true);
-        clone.className = 'slide';
-        clone.style.cssText = 'position:relative; width:1920px; height:1080px; opacity:1; transform:none; pointer-events:none;';
-        if (typeof applyStepState === 'function' && typeof getSteps === 'function') {
-          applyStepState(clone, getSteps(slide) - 1);
-        }
-        thumb.appendChild(clone);
-        const num = document.createElement('div');
-        num.className = 'ov-num';
-        num.textContent = `${slideIdx + 1}`;
-        item.appendChild(thumb);
-        item.appendChild(num);
-        item.addEventListener('click', e => {
-          e.stopPropagation();
-          overview.classList.remove('visible');
-          if (typeof goToSlide === 'function') goToSlide(slideIdx);
-        });
-        ovGrid.appendChild(item);
-      });
-      return;
-    }
     // 삭제된 page-group sweep
     for (const pg of [...expandedOverviewGroups]) {
       if (![...slides].some(s => s.dataset.pageGroup === pg)) expandedOverviewGroups.delete(pg);
@@ -2890,9 +2863,9 @@
       // 새 page-group이면 새 .ov-group wrapper
       // base가 삭제된 orphan variant도 새 그룹 시작
       if (!isVariant || !currentGroup || (pg && pg !== currentPg)) {
-        // 카테고리 전환 감지 → 섹션 헤더 삽입 (variant가 아닌 실 page-group 시작점에서만)
+        // 카테고리 전환 감지 → 섹션 헤더 삽입 (에디터 전용 — 촬영용 생성 HTML은 생략)
         const slideCat = (typeof categoryOfPageGroup === 'function') ? categoryOfPageGroup(pg) : null;
-        if (slideCat && slideCat !== currentCat) {
+        if (slideCat && slideCat !== currentCat && isEditor) {
           if (typeof overviewCategoryHeaderEl === 'function') {
             ovGrid.appendChild(overviewCategoryHeaderEl(slideCat, catCounts[slideCat] || 0));
           }
