@@ -1426,10 +1426,11 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 6px;
-    /* Phase E (세션 30): clamp으로 화면 크기에 맞춰 카드 폭 자동 조절 */
-    width: clamp(180px, 22vw, 260px);
-    padding: 10px 10px 8px;
+    gap: 5px;
+    /* 세션 36 후속: grid cell 폭에 맡기고 카드 고정폭 제거 (가로 넘침 해결) */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
     background: #252525;
     border: 2px solid #444;
     border-radius: 8px;
@@ -1454,7 +1455,8 @@
   .mp-card[data-recommended="1"] .mp-id {
     color: #FFB800;
   }
-  .mp-card .mp-head {
+  /* 세션 36 후속: mp-top = id + name + badge를 한 줄에 배치 */
+  .mp-card .mp-top {
     display: flex;
     align-items: baseline;
     flex-wrap: wrap;

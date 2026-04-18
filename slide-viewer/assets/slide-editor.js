@@ -508,7 +508,16 @@
       "recommend_intents": [
         "수치",
         "강조"
-      ]
+      ],
+      "preview_text": "여러 수치를 한 줄에 나란히",
+      "position_hint_label": "하단",
+      "example": "조사 결과 찬성 32% / 반대 45% / 유보 23%",
+      "repeat": {
+        "unit_selector": ".stat-box",
+        "repeat_min": 1,
+        "repeat_max": 3,
+        "repeat_default": 1
+      }
     },
     {
       "id": "M02",
@@ -580,7 +589,16 @@
       "recommend_intents": [
         "나열",
         "비교"
-      ]
+      ],
+      "preview_text": "3개 항목 상세 설명(아이콘+제목+불릿)",
+      "position_hint_label": "하단",
+      "example": "투자·저축·소비 각 영역 설명",
+      "repeat": {
+        "unit_selector": ".tri-col",
+        "repeat_min": 1,
+        "repeat_max": 3,
+        "repeat_default": 1
+      }
     },
     {
       "id": "M03",
@@ -606,7 +624,10 @@
       ],
       "recommend_intents": [
         "결론"
-      ]
+      ],
+      "preview_text": "핵심을 한 줄로 요약",
+      "position_hint_label": "하단",
+      "example": "결국 중요한 건 시간이다"
     },
     {
       "id": "M04",
@@ -637,7 +658,10 @@
       ],
       "recommend_intents": [
         "비교"
-      ]
+      ],
+      "preview_text": "두 가지를 정면으로 대비",
+      "position_hint_label": "상단",
+      "example": "어제의 상식 ≠ 오늘의 정답"
     },
     {
       "id": "M05",
@@ -668,7 +692,10 @@
       ],
       "recommend_intents": [
         "전환"
-      ]
+      ],
+      "preview_text": "한글과 영문 개념 병기",
+      "position_hint_label": "중앙",
+      "example": "몰입 / Flow"
     },
     {
       "id": "M06",
@@ -694,7 +721,10 @@
       ],
       "recommend_intents": [
         "강조"
-      ]
+      ],
+      "preview_text": "작은 태그·분류 라벨",
+      "position_hint_label": "상단",
+      "example": "#중요"
     },
     {
       "id": "M07",
@@ -724,7 +754,10 @@
       ],
       "recommend_intents": [
         "전환"
-      ]
+      ],
+      "preview_text": "현재 챕터 / 전체 표시",
+      "position_hint_label": "상단",
+      "example": "3 / 7"
     },
     {
       "id": "M08",
@@ -751,7 +784,10 @@
       "recommend_intents": [
         "수치",
         "전환"
-      ]
+      ],
+      "preview_text": "진행률 막대바",
+      "position_hint_label": "하단",
+      "example": "진행률 60%"
     },
     {
       "id": "M09",
@@ -781,7 +817,10 @@
       ],
       "recommend_intents": [
         "근거"
-      ]
+      ],
+      "preview_text": "이미지 한 장 배치",
+      "position_hint_label": "자유",
+      "example": "본문에 사진·그래프 삽입"
     },
     {
       "id": "M10",
@@ -801,7 +840,16 @@
       ],
       "recommend_intents": [
         "전환"
-      ]
+      ],
+      "preview_text": "다음 내용 미리보기 빈카드",
+      "position_hint_label": "하단",
+      "example": "다음 장 예고 빈 카드 3장",
+      "repeat": {
+        "unit_selector": ".empty-card",
+        "repeat_min": 1,
+        "repeat_max": 3,
+        "repeat_default": 1
+      }
     },
     {
       "id": "M11",
@@ -831,7 +879,10 @@
       ],
       "recommend_intents": [
         "전환"
-      ]
+      ],
+      "preview_text": "이전 슬라이드로 되돌아가는 썸네일",
+      "position_hint_label": "좌측",
+      "example": "좌측 상단에 이전 장 썸네일"
     },
     {
       "id": "M12",
@@ -856,7 +907,10 @@
       ],
       "recommend_intents": [
         "나열"
-      ]
+      ],
+      "preview_text": "여러 항목을 불릿 목록으로",
+      "position_hint_label": "하단",
+      "example": "확인할 항목 6개 리스트"
     },
     {
       "id": "M13",
@@ -882,7 +936,211 @@
       "recommend_intents": [
         "나열",
         "결론"
-      ]
+      ],
+      "preview_text": "해시태그·키워드 묶음",
+      "position_hint_label": "하단",
+      "example": "#절약 #소비습관 #시간가치"
+    },
+    {
+      "id": "M14",
+      "name": "화살표플로우",
+      "html": "<div class=\"slide-el mod-M14 arrow-flow\"><span class=\"af-item\"><span class=\"af-step\">{{STEP1}}</span><span class=\"af-arrow\">→</span></span><span class=\"af-item\"><span class=\"af-step\">{{STEP2}}</span><span class=\"af-arrow\">→</span></span><span class=\"af-item\"><span class=\"af-step\">{{STEP3}}</span><span class=\"af-arrow\">→</span></span></div>",
+      "css_class": "mod-M14",
+      "default_slot_hint": "center",
+      "slots": {
+        "STEP1": {
+          "label": "1단계",
+          "required": true
+        },
+        "STEP2": {
+          "label": "2단계",
+          "required": true
+        },
+        "STEP3": {
+          "label": "3단계",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 1400,
+        "height": 120
+      },
+      "recommend_keywords": [
+        "흐름",
+        "단계",
+        "순서",
+        "→",
+        "과정"
+      ],
+      "recommend_intents": [
+        "나열",
+        "전환"
+      ],
+      "preview_text": "원인→결과, 단계 흐름 화살표",
+      "position_hint_label": "중앙",
+      "example": "원인 → 과정 → 결과",
+      "repeat": {
+        "unit_selector": ".af-item",
+        "repeat_min": 2,
+        "repeat_max": 3,
+        "repeat_default": 3
+      }
+    },
+    {
+      "id": "M15",
+      "name": "체크리스트",
+      "html": "<div class=\"slide-el mod-M15 check-list\"><div class=\"cl-item\"><span class=\"cl-mark\">☑</span><span class=\"cl-text\">{{CHECK1}}</span></div><div class=\"cl-item\"><span class=\"cl-mark\">☑</span><span class=\"cl-text\">{{CHECK2}}</span></div><div class=\"cl-item\"><span class=\"cl-mark\">☑</span><span class=\"cl-text\">{{CHECK3}}</span></div></div>",
+      "css_class": "mod-M15",
+      "default_slot_hint": "bottom",
+      "slots": {
+        "CHECK1": {
+          "label": "1번 항목",
+          "required": true
+        },
+        "CHECK2": {
+          "label": "2번 항목",
+          "required": true
+        },
+        "CHECK3": {
+          "label": "3번 항목",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 1200,
+        "height": 240
+      },
+      "recommend_keywords": [
+        "체크",
+        "확인",
+        "조건",
+        "요약",
+        "리스트"
+      ],
+      "recommend_intents": [
+        "나열",
+        "결론"
+      ],
+      "preview_text": "체크표시로 조건·항목 정리",
+      "position_hint_label": "하단",
+      "example": "체크 조건 3개 정리",
+      "repeat": {
+        "unit_selector": ".cl-item",
+        "repeat_min": 1,
+        "repeat_max": 3,
+        "repeat_default": 3
+      }
+    },
+    {
+      "id": "M16",
+      "name": "인용박스",
+      "html": "<div class=\"slide-el mod-M16 quote-box\"><div class=\"qb-text\">{{QUOTE}}</div><div class=\"qb-source\">— {{SOURCE}}</div></div>",
+      "css_class": "mod-M16",
+      "default_slot_hint": "center",
+      "slots": {
+        "QUOTE": {
+          "label": "인용 문구",
+          "required": true
+        },
+        "SOURCE": {
+          "label": "출처",
+          "required": false
+        }
+      },
+      "default_size": {
+        "width": 1200,
+        "height": 220
+      },
+      "recommend_keywords": [
+        "인용",
+        "출처",
+        "말",
+        "발언",
+        "격언"
+      ],
+      "recommend_intents": [
+        "근거",
+        "강조"
+      ],
+      "preview_text": "전문가 말·자료 인용",
+      "position_hint_label": "중앙",
+      "example": "시간은 돈이다 — 벤저민 프랭클린"
+    },
+    {
+      "id": "M17",
+      "name": "경고배너",
+      "html": "<div class=\"slide-el mod-M17 warn-banner\"><span class=\"wb-icon\">⚠️</span><span class=\"wb-text\">{{WARN}}</span></div>",
+      "css_class": "mod-M17",
+      "default_slot_hint": "top",
+      "slots": {
+        "WARN": {
+          "label": "경고 문구",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 1200,
+        "height": 90
+      },
+      "recommend_keywords": [
+        "주의",
+        "경고",
+        "위험",
+        "금지",
+        "중요"
+      ],
+      "recommend_intents": [
+        "강조"
+      ],
+      "preview_text": "주의·중요 포인트 경고",
+      "position_hint_label": "상단",
+      "example": "⚠️ 이것만은 반드시 주의하세요"
+    },
+    {
+      "id": "M18",
+      "name": "단계번호",
+      "html": "<div class=\"slide-el mod-M18 step-circles\"><div class=\"sc-item\"><span class=\"sc-num\">1</span><span class=\"sc-label\">{{NUMSTEP1}}</span></div><div class=\"sc-item\"><span class=\"sc-num\">2</span><span class=\"sc-label\">{{NUMSTEP2}}</span></div><div class=\"sc-item\"><span class=\"sc-num\">3</span><span class=\"sc-label\">{{NUMSTEP3}}</span></div></div>",
+      "css_class": "mod-M18",
+      "default_slot_hint": "center",
+      "slots": {
+        "NUMSTEP1": {
+          "label": "1번 설명",
+          "required": true
+        },
+        "NUMSTEP2": {
+          "label": "2번 설명",
+          "required": true
+        },
+        "NUMSTEP3": {
+          "label": "3번 설명",
+          "required": true
+        }
+      },
+      "default_size": {
+        "width": 1400,
+        "height": 180
+      },
+      "recommend_keywords": [
+        "단계",
+        "순서",
+        "절차",
+        "1",
+        "2",
+        "3"
+      ],
+      "recommend_intents": [
+        "나열",
+        "전환"
+      ],
+      "preview_text": "1·2·3 번호로 순서 강조",
+      "position_hint_label": "중앙",
+      "example": "① 준비 ② 실행 ③ 점검",
+      "repeat": {
+        "unit_selector": ".sc-item",
+        "repeat_min": 1,
+        "repeat_max": 3,
+        "repeat_default": 3
+      }
     }
   ],
   "recommendedByType": {
@@ -907,6 +1165,11 @@
       "M09"
     ],
     "대질문": [
+      "M06",
+      "M09"
+    ],
+    "두줄대비": [
+      "M04",
       "M06",
       "M09"
     ],
@@ -996,6 +1259,10 @@
       "M06",
       "M09"
     ],
+    "아이콘강조": [
+      "M06",
+      "M09"
+    ],
     "아이콘아이템": [
       "M03",
       "M09",
@@ -1067,6 +1334,12 @@
       "M09",
       "M13"
     ],
+    "카운터제목": [
+      "M06",
+      "M07",
+      "M08",
+      "M09"
+    ],
     "큰숫자(서클)": [
       "M09",
       "M12"
@@ -1098,6 +1371,10 @@
       "M01",
       "M02",
       "M03",
+      "M09"
+    ],
+    "한줄강조": [
+      "M06",
       "M09"
     ]
   }
@@ -2796,7 +3073,7 @@
   function buildModulePicker(slideType) {
     if (!modulePickerGrid) return;
     modulePickerGrid.innerHTML = '';
-    // 세션 28 결정: M01~M13 전부 표시 + 추천 모듈은 상단 + ★/노란 띠 강조.
+    // 세션 28 결정: 전체 모듈 표시 + 추천 모듈 상단 + ★/노란 띠 강조.
     const data = window.MODULES_DATA || { modules: [], recommendedByType: {} };
     const recommended = new Set(data.recommendedByType[slideType] || []);
     const allModules = data.modules || [];
@@ -2807,21 +3084,42 @@
     if (modulePickerTitle) {
       modulePickerTitle.textContent = `모듈 삽입 — ${slideType || '(타입 없음)'} · ${allModules.length}개 (추천 ★${recommended.size})`;
     }
+    // 세션 36: 카드 선택 개수 상태 저장 (card DOM에 data-count로)
+    const previewsToFit = [];
     ordered.forEach(m => {
       const card = document.createElement('button');
       card.className = 'mp-card';
       card.type = 'button';
       card.dataset.moduleId = m.id;
+      // 반복 메타 있으면 기본 개수로 초기화
+      const repeat = m.repeat || null;
+      const defaultCount = repeat ? (repeat.repeat_default || 1) : 1;
+      card.dataset.count = String(defaultCount);
       if (recommended.has(m.id)) card.dataset.recommended = '1';
-      const headDiv = document.createElement('div');
-      headDiv.className = 'mp-head';
-      const idDiv = document.createElement('div');
-      idDiv.className = 'mp-id';
-      idDiv.textContent = recommended.has(m.id) ? ('★ ' + m.id) : m.id;
-      const nameDiv = document.createElement('div');
-      nameDiv.className = 'mp-name';
-      nameDiv.textContent = m.name;
-      headDiv.append(idDiv, nameDiv);
+      // 세션 36 후속: mp-top = id + name + badge 한 줄
+      const topDiv = document.createElement('div');
+      topDiv.className = 'mp-top';
+      const idSpan = document.createElement('span');
+      idSpan.className = 'mp-id';
+      idSpan.textContent = recommended.has(m.id) ? ('★ ' + m.id) : m.id;
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'mp-name';
+      nameSpan.textContent = m.name;
+      topDiv.append(idSpan, nameSpan);
+      if (m.position_hint_label) {
+        const posBadge = document.createElement('span');
+        posBadge.className = 'mp-pos-badge';
+        posBadge.textContent = m.position_hint_label;
+        topDiv.append(posBadge);
+      }
+      card.append(topDiv);
+      // 세션 36 Phase 3: preview_text (이름 아래 1줄 설명)
+      if (m.preview_text) {
+        const pvText = document.createElement('div');
+        pvText.className = 'mp-preview-text';
+        pvText.textContent = m.preview_text;
+        card.append(pvText);
+      }
       const preview = document.createElement('div');
       preview.className = 'mp-preview';
       const stage = document.createElement('div');
@@ -2910,11 +3208,11 @@
     // 세션 36 후속 (치명 버그): 폭은 모듈 default_size 기반, count 비례 축소
     // hint는 top/left 위치에만 사용. 폭/높이는 모듈 속성으로 결정.
     const hintPos = {
-      top:    { left: 40,  top: 60,  width: 400,  minHeight: 60 },
-      bottom: { left: 260, top: 820, width: 1400, minHeight: 140 },
-      center: { left: 460, top: 440, width: 1000, minHeight: 200 },
-      left:   { left: 40,  top: 440, width: 400,  minHeight: 200 },
-      free:   { left: 760, top: 440, width: 400,  minHeight: 200 },
+      top:    { left: 40,  top: 60  },
+      bottom: { left: 260, top: 820 },
+      center: { left: 460, top: 440 },
+      left:   { left: 40,  top: 440 },
+      free:   { left: 760, top: 440 },
     };
     const pos = hintPos[m.default_slot_hint] || hintPos.center;
     const defaultW = (m.default_size && m.default_size.width)  || 600;
@@ -2954,35 +3252,8 @@
 
   function buildOverview() {
     ovGrid.innerHTML = '';
-    // 에디터(slides-editor.html)가 아니면 카테고리/variant 구분 없이 번호 순으로만 나열 — 촬영용
+    // 에디터(slides-editor.html)가 아니면 카테고리 섹션 헤더만 생략 — variant 묶음/+N/번호는 양쪽 공통
     const isEditor = /slides-editor\.html$/.test(location.pathname);
-    if (!isEditor) {
-      slides.forEach((slide, slideIdx) => {
-        const item = document.createElement('div');
-        item.className = 'ov-item' + (slideIdx === currentSlide ? ' current' : '');
-        const thumb = document.createElement('div');
-        thumb.className = 'ov-thumb';
-        const clone = slide.cloneNode(true);
-        clone.className = 'slide';
-        clone.style.cssText = 'position:relative; width:1920px; height:1080px; opacity:1; transform:none; pointer-events:none;';
-        if (typeof applyStepState === 'function' && typeof getSteps === 'function') {
-          applyStepState(clone, getSteps(slide) - 1);
-        }
-        thumb.appendChild(clone);
-        const num = document.createElement('div');
-        num.className = 'ov-num';
-        num.textContent = `${slideIdx + 1}`;
-        item.appendChild(thumb);
-        item.appendChild(num);
-        item.addEventListener('click', e => {
-          e.stopPropagation();
-          overview.classList.remove('visible');
-          if (typeof goToSlide === 'function') goToSlide(slideIdx);
-        });
-        ovGrid.appendChild(item);
-      });
-      return;
-    }
     // 삭제된 page-group sweep
     for (const pg of [...expandedOverviewGroups]) {
       if (![...slides].some(s => s.dataset.pageGroup === pg)) expandedOverviewGroups.delete(pg);
@@ -4128,7 +4399,7 @@
       }
       badge.style.display = '';
     } else if (badge) {
-      badge.style.display = 'none';
+      badge.remove();
     }
   }
 
@@ -4663,7 +4934,7 @@
       }
     }
     if (!editMode) return;
-    let el = e.target.closest('.hl, .bubble, .bg-label, .card-title, .card-desc, .num-text, .bar-label, .bar-value, .icon-label, .flow-box, .icon-flow-label, .flow-arrow, .check-text, .hbar-label, .hbar-val, .stat-num, .quote-text, .grid-title, .section-badge, .corner-label, .btn-pill, .tag-chip, .alert-text, .compare-header, .compare-item, .tl-box, .cta-btn, .stat-label, .cork-label, .hand-title-mark, .hand-typing, .contrast-word, .contrast-sub, .contrast-quote, .contrast-bottom, .tl-desc');
+    let el = e.target.closest('.hl, .bubble, .bg-label, .card-title, .card-desc, .num-text, .bar-label, .bar-value, .icon-label, .flow-box, .icon-flow-label, .flow-arrow, .check-text, .hbar-label, .hbar-val, .stat-num, .quote-text, .grid-title, .section-badge, .corner-label, .btn-pill, .tag-chip, .alert-text, .compare-header, .compare-item, .tl-box, .cta-btn, .stat-label, .cork-label, .hand-title-mark, .hand-typing, .contrast-word, .contrast-sub, .contrast-quote, .contrast-bottom, .tl-desc, .line1-emph, .contrast-top, .counter-label, .counter-sub, .emph-line1, .emph-line2');
     if (!el) {
       const area = e.target.closest('.text-area');
       if (area) el = area.querySelector('.hl');
@@ -6635,7 +6906,7 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
 .step-content { position: relative; z-index: 1; }
 <\/style>
 <\/head>
-<body>
+<body tabindex="-1">
 <div id="presenter-root">
   <div id="pres-header">
     <div id="pres-slide-info">슬라이드 1 / 1</div>
@@ -6710,8 +6981,20 @@ ch.onmessage = ev => {
 document.getElementById('pres-btn-prev').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'prev' }));
 document.getElementById('pres-btn-next').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'next' }));
 document.getElementById('pres-notes-input').addEventListener('input', ev => ch.postMessage({ type: 'notes', slide: curSlideIdx, text: ev.target.textContent }));
+// textarea 밖을 클릭하면 포커스 해제 (contenteditable는 자동 blur 안 되는 경우 있음)
+document.addEventListener('click', ev => {
+  const notes = document.getElementById('pres-notes-input');
+  if (notes && !notes.contains(ev.target)) notes.blur();
+});
+// 창 로드 직후 기본 포커스를 버튼/바디로 강제 (notes가 자동 포커스 먹어서 화살표 먹히는 문제 방지)
+setTimeout(() => {
+  const nxt = document.getElementById('pres-btn-next');
+  if (nxt) nxt.focus();
+  else document.body.focus();
+}, 0);
 document.addEventListener('keydown', ev => {
-  if (document.activeElement && document.activeElement.id === 'pres-notes-input') return;
+  const ae = document.activeElement;
+  if (ae && ae.id === 'pres-notes-input') return;
   if (ev.key === 'ArrowRight') { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'next' }); }
   if (ev.key === 'ArrowLeft') { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'prev' }); }
 });
