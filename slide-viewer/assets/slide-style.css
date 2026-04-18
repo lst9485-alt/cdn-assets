@@ -1392,8 +1392,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: min(900px, 90vw);
-    max-height: 80vh;
+    width: min(1400px, 95vw);
+    max-height: 85vh;
     z-index: 8100;
     background: #1a1a1a;
     border: 2px solid #444;
@@ -1415,8 +1415,8 @@
 
   #module-picker-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
     overflow-y: auto;
     padding: 4px;
   }
@@ -1425,10 +1425,10 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 6px;
-    /* Phase E (세션 30): clamp으로 화면 크기에 맞춰 카드 폭 자동 조절 */
-    width: clamp(180px, 22vw, 260px);
-    padding: 10px 10px 8px;
+    gap: 8px;
+    /* 세션 36 (4-21): 맥미니 FHD 기준 3~4열, 식별 가능한 크기로 확대 */
+    width: clamp(320px, 30vw, 420px);
+    padding: 14px 14px 12px;
     background: #252525;
     border: 2px solid #444;
     border-radius: 8px;
@@ -1459,44 +1459,104 @@
     gap: 2px;
   }
   .mp-card .mp-id {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 900;
     color: var(--editor-accent);
     letter-spacing: 0.03em;
   }
   .mp-card .mp-name {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: #fff;
+  }
+  /* 세션 36: 3필드 표시 영역 */
+  .mp-card .mp-pos-badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 2px 8px;
+    background: #3a3a3a;
+    border: 1px solid #555;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #ccc;
+    letter-spacing: 0.02em;
+  }
+  .mp-card .mp-preview-text {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #bbb;
+    margin-top: 2px;
+  }
+  .mp-card .mp-example {
+    font-size: 11px;
+    line-height: 1.35;
+    color: #888;
+    font-style: italic;
+    border-top: 1px dashed #3a3a3a;
+    padding-top: 6px;
+    margin-top: 2px;
   }
   .mp-card .mp-preview {
     position: relative;
     width: 100%;
-    height: 90px;
+    height: 180px;
     overflow: hidden;
     background: #fafafa;
     border: 1px solid #333;
     border-radius: 4px;
-    padding: 6px 8px;
+    padding: 8px 10px;
     pointer-events: none;
     color: #222;
     font-size: 12px;
     line-height: 1.3;
   }
-  .mp-card .mp-preview > .slide-el {
+  /* 세션 36: 프리뷰 내부 래퍼 — JS가 scale 계산해서 변수로 주입 */
+  .mp-card .mp-preview-stage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(var(--mp-scale, 0.4));
+    transform-origin: center center;
+  }
+  .mp-card .mp-preview-stage > .slide-el {
     position: static !important;
     left: auto !important;
     top: auto !important;
-    width: auto !important;
     min-height: 0 !important;
-    transform: scale(0.45);
-    transform-origin: top left;
     display: inline-block;
   }
   .mp-card .mp-preview img {
-    max-width: 60px;
-    max-height: 60px;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
+  }
+  /* 세션 36: 개수 토글 */
+  .mp-card .mp-count {
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    margin-top: 4px;
+  }
+  .mp-card .mp-count-btn {
+    min-width: 26px;
+    padding: 3px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    background: #1a1a1a;
+    border: 1px solid #555;
+    border-radius: 4px;
+    color: #ccc;
+    cursor: pointer;
+  }
+  .mp-card .mp-count-btn:hover {
+    background: #2a2a2a;
+    border-color: var(--editor-accent);
+  }
+  .mp-card .mp-count-btn[data-active="1"] {
+    background: var(--editor-accent);
+    color: #000;
+    border-color: var(--editor-accent);
   }
 
   .mp-empty {
@@ -2746,4 +2806,137 @@
     border-radius: 999px;
     font-size: 16px;
     font-weight: 600;
+  }
+
+  /* 세션 36: 신규 모듈 M14~M18 */
+
+  /* M14 화살표플로우 — step → step → step */
+  .mod-M14.arrow-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .mod-M14 .af-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mod-M14 .af-step {
+    padding: 10px 22px;
+    background: var(--color-sub-bg, #f0f4ff);
+    color: var(--color-text, #222);
+    border: 2px solid var(--color-accent, #2b6cff);
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .mod-M14 .af-arrow {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--color-accent, #2b6cff);
+  }
+  .mod-M14 .af-item:last-child .af-arrow {
+    display: none;
+  }
+
+  /* M15 체크리스트 */
+  .mod-M15.check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mod-M15 .cl-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 22px;
+    color: var(--color-text, #222);
+  }
+  .mod-M15 .cl-mark {
+    color: var(--color-accent, #2b6cff);
+    font-size: 26px;
+    font-weight: 900;
+  }
+  .mod-M15 .cl-text {
+    font-weight: 600;
+  }
+
+  /* M16 인용박스 */
+  .mod-M16.quote-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px 28px;
+    border-left: 6px solid var(--color-accent, #2b6cff);
+    background: var(--color-sub-bg, #f6f8ff);
+    border-radius: 6px;
+  }
+  .mod-M16 .qb-text {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-text, #222);
+    line-height: 1.35;
+    font-style: italic;
+  }
+  .mod-M16 .qb-text::before { content: "\201C"; margin-right: 4px; }
+  .mod-M16 .qb-text::after  { content: "\201D"; margin-left: 4px; }
+  .mod-M16 .qb-source {
+    font-size: 16px;
+    color: var(--color-text-muted, #666);
+    text-align: right;
+  }
+
+  /* M17 경고배너 */
+  .mod-M17.warn-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 22px;
+    background: #fff5e1;
+    border: 2px solid #ffb020;
+    border-radius: 10px;
+  }
+  .mod-M17 .wb-icon {
+    font-size: 26px;
+  }
+  .mod-M17 .wb-text {
+    font-size: 20px;
+    font-weight: 700;
+    color: #8a5500;
+  }
+
+  /* M18 단계번호 — 원형 번호 + 라벨 */
+  .mod-M18.step-circles {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 24px;
+  }
+  .mod-M18 .sc-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+  }
+  .mod-M18 .sc-num {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-accent, #2b6cff);
+    color: #fff;
+    font-size: 26px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mod-M18 .sc-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text, #222);
+    text-align: center;
   }
