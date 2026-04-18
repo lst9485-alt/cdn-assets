@@ -293,6 +293,38 @@
     if (btn.dataset.target !== 'title') btn.textContent = btn.dataset.target;
   });
 
+  // 세션 36 후속3: 모듈 밖 고아 조각 자동 정리 (페이지 로드 시 1회)
+  // 이전에 모듈 내부 자식이 드래그로 빠져나가 슬라이드에 남아있던 현상 해결.
+  // 조건: 모듈 전용 클래스를 가진 요소가 [data-module-id] 조상 없이 떠 있으면 고아.
+  (function cleanupOrphanModuleFragments() {
+    const classes = [
+      'sc-item', 'sc-num', 'sc-label',
+      'stat-box', 'stat-value', 'stat-label',
+      'tri-col', 'tri-icon', 'tri-title', 'tri-sub', 'tri-bullets',
+      'empty-card',
+      'cl-item', 'cl-mark', 'cl-text',
+      'af-item', 'af-step', 'af-arrow',
+      'qb-text', 'qb-source',
+      'wb-icon', 'wb-text',
+      'summary-text', 'tag-label',
+      'counter-current', 'counter-sep', 'counter-total',
+      'contrast-left', 'contrast-neq', 'contrast-right',
+      'ko-main', 'en-sub',
+      'prev-indicator', 'prev-arrow', 'prev-title',
+      'progress-fill'
+    ];
+    let removed = 0;
+    classes.forEach(cls => {
+      document.querySelectorAll('#stage .' + cls).forEach(el => {
+        if (!el.closest('[data-module-id]')) {
+          el.remove();
+          removed++;
+        }
+      });
+    });
+    if (removed > 0) console.log('[module cleanup] 고아 조각 제거:', removed);
+  })();
+
   let slides = document.querySelectorAll('#stage > .slide');
   let slidesByKey = {};       // data-slide-id → DOM 요소 (stable key)
   let expandedFilmGroups = new Set();  // 확장된 page-group(string) 집합
@@ -3068,11 +3100,16 @@
       preview.className = 'mp-preview';
       const stage = document.createElement('div');
       stage.className = 'mp-preview-stage';
-      // 세션 36 후속3: width 강제 제거. max-width는 default_size로 제한해 wrap 허용
-      // (좁은 프리뷰에서 큰 모듈은 2~3줄로 감겨도 글자 식별성 확보)
+      // 세션 36 후속3: maxWidth만 제한해 wrap 허용 (좁은 박스에서 감김)
       const dW = (m.default_size && m.default_size.width) || 600;
       stage.style.maxWidth = dW + 'px';
       stage.innerHTML = fillModulePlaceholders(m.html);
+      // 세션 36 후속3 (b): 프리뷰는 최대 2유닛만 — 3개짜리 복잡해서 안 보인다는 피드백
+      if (repeat && repeat.unit_selector) {
+        const units = stage.querySelectorAll(repeat.unit_selector);
+        const previewMax = 2;
+        for (let i = units.length - 1; i >= previewMax; i--) units[i].remove();
+      }
       preview.appendChild(stage);
       card.append(preview);
       previewsToFit.push(preview);
