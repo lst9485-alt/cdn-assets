@@ -2910,11 +2910,11 @@
     // 세션 36 후속 (치명 버그): 폭은 모듈 default_size 기반, count 비례 축소
     // hint는 top/left 위치에만 사용. 폭/높이는 모듈 속성으로 결정.
     const hintPos = {
-      top:    { left: 40,  top: 60  },
-      bottom: { left: 260, top: 820 },
-      center: { left: 460, top: 440 },
-      left:   { left: 40,  top: 440 },
-      free:   { left: 760, top: 440 },
+      top:    { left: 40,  top: 60,  width: 400,  minHeight: 60 },
+      bottom: { left: 260, top: 820, width: 1400, minHeight: 140 },
+      center: { left: 460, top: 440, width: 1000, minHeight: 200 },
+      left:   { left: 40,  top: 440, width: 400,  minHeight: 200 },
+      free:   { left: 760, top: 440, width: 400,  minHeight: 200 },
     };
     const pos = hintPos[m.default_slot_hint] || hintPos.center;
     const defaultW = (m.default_size && m.default_size.width)  || 600;
@@ -2954,8 +2954,35 @@
 
   function buildOverview() {
     ovGrid.innerHTML = '';
-    // 에디터(slides-editor.html)가 아니면 카테고리 섹션 헤더만 생략 — variant 묶음/+N/번호는 양쪽 공통
+    // 에디터(slides-editor.html)가 아니면 카테고리/variant 구분 없이 번호 순으로만 나열 — 촬영용
     const isEditor = /slides-editor\.html$/.test(location.pathname);
+    if (!isEditor) {
+      slides.forEach((slide, slideIdx) => {
+        const item = document.createElement('div');
+        item.className = 'ov-item' + (slideIdx === currentSlide ? ' current' : '');
+        const thumb = document.createElement('div');
+        thumb.className = 'ov-thumb';
+        const clone = slide.cloneNode(true);
+        clone.className = 'slide';
+        clone.style.cssText = 'position:relative; width:1920px; height:1080px; opacity:1; transform:none; pointer-events:none;';
+        if (typeof applyStepState === 'function' && typeof getSteps === 'function') {
+          applyStepState(clone, getSteps(slide) - 1);
+        }
+        thumb.appendChild(clone);
+        const num = document.createElement('div');
+        num.className = 'ov-num';
+        num.textContent = `${slideIdx + 1}`;
+        item.appendChild(thumb);
+        item.appendChild(num);
+        item.addEventListener('click', e => {
+          e.stopPropagation();
+          overview.classList.remove('visible');
+          if (typeof goToSlide === 'function') goToSlide(slideIdx);
+        });
+        ovGrid.appendChild(item);
+      });
+      return;
+    }
     // 삭제된 page-group sweep
     for (const pg of [...expandedOverviewGroups]) {
       if (![...slides].some(s => s.dataset.pageGroup === pg)) expandedOverviewGroups.delete(pg);
