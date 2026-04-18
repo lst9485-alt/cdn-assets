@@ -4805,7 +4805,8 @@
       const cx = newLeft + w / 2, cy = newTop + h / 2;
       let lNeighbor = null, rNeighbor = null, tNeighbor = null, bNeighbor = null;
       let hasRealLNeighbor = false, hasRealRNeighbor = false, hasRealTNeighbor = false, hasRealBNeighbor = false;
-      const layer = selectedEl.closest('.step-layer') || slides[currentSlide];
+      const layer = selectedEl.closest('.step-layer');
+      if (!layer) return;
       layer.querySelectorAll(EDITABLE_SEL).forEach(other => {
         if (other === selectedEl || other.classList.contains('step-dim')) return;
         if (other.tagName === 'IMG' && other.closest('.slide-el')) return;
