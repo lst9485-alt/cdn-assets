@@ -2468,7 +2468,10 @@
     newEl.style.top  = pos.top + 'px';
     newEl.style.width = pos.width + 'px';
     newEl.style.minHeight = pos.minHeight + 'px';
-    // 마지막 step 다음에 나타나도록 새 step-layer 생성 (toggleStepOverlay 패턴: step-dim 포함)
+    // 마지막 step 다음에 나타나도록 새 step-layer 생성
+    // step-dim은 추가하지 않음 — 편집 모드에서 1920x1080 pointer-events:auto로 덮어
+    // 모듈 클릭을 가로채기 때문 (slide-style.css L1873). navigation.showStep은 dim 없어도
+    // 안전하게 동작 (null-check 경로 L108, L124).
     const slide = slides[currentSlide];
     let maxStep = 0;
     slide.querySelectorAll('.step-layer').forEach(l => {
@@ -2478,9 +2481,6 @@
     const newLayer = document.createElement('div');
     newLayer.className = 'step-layer';
     newLayer.dataset.step = String(newStep);
-    const dim = document.createElement('div');
-    dim.className = 'step-dim';
-    newLayer.appendChild(dim);
     newLayer.appendChild(newEl);
     slide.appendChild(newLayer);
     recalcSteps(slide);
