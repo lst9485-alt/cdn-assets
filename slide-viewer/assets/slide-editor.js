@@ -296,6 +296,10 @@
   // 세션 36 후속3: 모듈 밖 고아 조각 자동 정리 (페이지 로드 시 1회)
   // 이전에 모듈 내부 자식이 드래그로 빠져나가 슬라이드에 남아있던 현상 해결.
   // 조건: 모듈 전용 클래스를 가진 요소가 [data-module-id] 조상 없이 떠 있으면 고아.
+  //
+  // ⚠️ rv-후속(Codex): 아래 classes 목록은 전부 MODULE_SPECS의 모듈 전용 클래스다.
+  // 새 요소에 이 클래스명(summary-text/tag-label/progress-fill/counter-*/prev-* 등)을
+  // 절대 재사용하지 말 것. 재사용 시 페이지 로드마다 조용히 제거되어 데이터 손실 발생.
   (function cleanupOrphanModuleFragments() {
     const classes = [
       'sc-item', 'sc-num', 'sc-label',
@@ -3033,9 +3037,10 @@
   // wrap 허용 — 큰 모듈(M14 1400px)이 박스 안에 wrap으로 2~3줄 나와도 식별성 우선.
   // scale 최소 바닥 0.3 — 너무 축소되면 글자 안 보임.
   function fitPreviewScale(previewEl) {
+    // rv-후속: 박스가 숨김(display:none) 또는 레이아웃 미확정이면 잘못된 scale 계산 방지
+    if (previewEl.clientWidth < 50 || previewEl.clientHeight < 50) return;
     const stage = previewEl.querySelector('.mp-preview-stage');
     if (!stage) return;
-    // scale을 1로 리셋 후 자연 크기 측정 (scale 상태에서 scrollWidth 측정 시 오차)
     stage.style.setProperty('--mp-scale', '1');
     const elW = stage.scrollWidth  || stage.offsetWidth  || 1;
     const elH = stage.scrollHeight || stage.offsetHeight || 1;
@@ -3169,7 +3174,11 @@
     if (!newEl) return;
     newEl.dataset.moduleId = m.id;
     // 세션 36 Phase 2A: count 인자로 반복 유닛 개수 조절
-    const effectiveCount = Math.max(1, count || 1);
+    // rv-후속(Codex): repeat_min/max 계약 강제 — 외부 호출이 범위 밖 count 넘겨도 clamp
+    const _r = m.repeat || {};
+    const _min = _r.repeat_min || 1;
+    const _max = _r.repeat_max || (count || 1);
+    const effectiveCount = Math.max(_min, Math.min(count || _r.repeat_default || 1, _max));
     if (m.repeat && m.repeat.unit_selector) {
       const units = newEl.querySelectorAll(m.repeat.unit_selector);
       const want = Math.min(effectiveCount, units.length);
