@@ -1,14 +1,6 @@
 {
-  "updated": "2026-04-19T06:00:01.974867+09:00",
+  "updated": "2026-04-20T06:00:01.198050+09:00",
   "projects": [
-    {
-      "name": "yt-slide 설계 정본",
-      "type": "file",
-      "app": "youtube/yt-slide",
-      "modified": "2026-04-18",
-      "status": null,
-      "next": null
-    },
     {
       "name": "경쟁채널 모니터링 시스템",
       "type": "file",
@@ -40,14 +32,6 @@
       "modified": "2026-04-08",
       "status": "탈리폼 열 매핑 수정 + 신규 필드 동기화 완료. 탈리폼에 이메일·입금완료·현금영수증/세금계산서 등 10여개 필드 추가로 열이 밀렸던 문제 해결. TALLY_COLS 교정, DB/Notion에 신규 필드(현금영수증번호·상호명·세금계산서이메일) 추가, 임승택 데이터 복구",
       "next": "TALLY_LAST_ROW 롤백 (유보 — blind create 중복 위험, 별도 설계 필요)"
-    },
-    {
-      "name": "내집마련-시리즈",
-      "type": "folder",
-      "app": "youtube/yt-content-sheet",
-      "modified": "2026-04-08",
-      "status": "스킬 구현 완성. 운영 중.",
-      "next": null
     }
   ]
 }
