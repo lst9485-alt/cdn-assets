@@ -9,59 +9,59 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; min-height: 100vh; }
         .container { max-width: 860px; margin: 0 auto; padding: 32px 20px; }
-        .back { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: #64748B; text-decoration: none; margin-bottom: 16px; }
+        .back { display: inline-flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 600; color: #64748B; text-decoration: none; margin-bottom: 16px; }
         .back:hover { color: #0077C8; }
-        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 4px; }
-        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 32px; }
+        h1 { font-size: 28px; font-weight: 800; color: #051C2C; margin-bottom: 6px; }
+        .subtitle { color: #64748B; font-size: 16px; margin-bottom: 32px; }
 
         /* 단계 카드 */
         .steps { display: flex; flex-direction: column; gap: 0; }
         .step-wrap { display: flex; gap: 0; }
         .step-connector { display: flex; flex-direction: column; align-items: center; width: 40px; flex-shrink: 0; }
-        .step-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 16px; }
+        .step-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; flex-shrink: 0; margin-top: 16px; }
         .step-line { width: 2px; background: #E2E8F0; flex-grow: 1; min-height: 20px; }
         .step-line.last { display: none; }
         .step-card { flex: 1; background: white; border: 1px solid #E2E8F0; border-radius: 12px; margin: 8px 0; overflow: hidden; transition: border-color 0.15s; }
         .step-card:hover { border-color: #94A3B8; }
-        .step-header { padding: 14px 16px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; }
-        .step-num { font-size: 10px; font-weight: 800; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0; margin-top: 2px; }
+        .step-header { padding: 16px 18px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; }
+        .step-num { font-size: 12px; font-weight: 800; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0; margin-top: 2px; }
         .step-title-area { flex: 1; }
-        .step-title { font-size: 15px; font-weight: 700; color: #051C2C; margin-bottom: 4px; }
+        .step-title { font-size: 17px; font-weight: 700; color: #051C2C; margin-bottom: 6px; }
         .step-io { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-        .io-box { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+        .io-box { font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 6px; white-space: nowrap; }
         .io-in { background: #E8F3FF; color: #0077C8; }
         .io-script { background: #FFF7ED; color: #92400E; }
         .io-out { background: #ECFDF5; color: #065F46; }
-        .io-arrow { color: #CBD5E1; font-size: 12px; }
-        .step-human { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; flex-shrink: 0; margin-top: 12px; }
+        .io-arrow { color: #CBD5E1; font-size: 14px; }
+        .step-human { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px; flex-shrink: 0; margin-top: 10px; }
         .human-yes { background: #FEF3C7; color: #92400E; }
         .human-no { background: #F1F5F9; color: #94A3B8; }
-        .step-toggle { color: #CBD5E1; font-size: 11px; flex-shrink: 0; margin-top: 4px; transition: transform 0.15s; }
-        .step-detail { padding: 0 16px 16px 16px; border-top: 1px solid #F1F5F9; font-size: 13px; color: #475569; line-height: 1.7; display: none; }
+        .step-toggle { color: #CBD5E1; font-size: 13px; flex-shrink: 0; margin-top: 4px; transition: transform 0.15s; }
+        .step-detail { padding: 0 18px 18px 18px; border-top: 1px solid #F1F5F9; font-size: 15px; color: #475569; line-height: 1.7; display: none; }
         .step-detail.open { display: block; }
         .step-toggle.open { transform: rotate(90deg); }
-        .detail-path { font-family: monospace; font-size: 11px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 2px 6px; color: #334155; }
-        .detail-paths { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+        .detail-path { font-family: monospace; font-size: 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 3px 8px; color: #334155; }
+        .detail-paths { margin-top: 10px; display: flex; flex-direction: column; gap: 5px; }
 
         /* 문제 섹션 */
         .problems-section { margin-top: 40px; }
-        .section-label { font-size: 11px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-        .problem-note { font-size: 11px; color: #94A3B8; margin-bottom: 16px; }
+        .section-label { font-size: 13px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .problem-note { font-size: 13px; color: #94A3B8; margin-bottom: 16px; }
         .problem-list { display: flex; flex-direction: column; gap: 8px; }
-        .problem-item { background: white; border: 1px solid #E2E8F0; border-left: 3px solid #EF4444; border-radius: 8px; padding: 12px 14px; display: flex; gap: 12px; }
-        .problem-num { font-size: 11px; font-weight: 800; color: #EF4444; flex-shrink: 0; }
+        .problem-item { background: white; border: 1px solid #E2E8F0; border-left: 3px solid #EF4444; border-radius: 8px; padding: 14px 16px; display: flex; gap: 12px; }
+        .problem-num { font-size: 13px; font-weight: 800; color: #EF4444; flex-shrink: 0; }
         .problem-body { flex: 1; }
-        .problem-title { font-size: 13px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
-        .problem-stage { font-size: 11px; color: #94A3B8; }
-        .problem-stage span { background: #FEF2F2; color: #991B1B; font-weight: 700; padding: 1px 6px; border-radius: 4px; font-size: 10px; }
+        .problem-title { font-size: 15px; font-weight: 700; color: #1A1A1A; margin-bottom: 3px; }
+        .problem-stage { font-size: 13px; color: #94A3B8; }
+        .problem-stage span { background: #FEF2F2; color: #991B1B; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-size: 12px; }
 
         /* 용어집 */
         .glossary { margin-top: 40px; }
         .glossary-grid { display: flex; flex-direction: column; gap: 0; background: white; border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; }
-        .glossary-item { display: flex; padding: 10px 14px; border-bottom: 1px solid #F1F5F9; gap: 12px; }
+        .glossary-item { display: flex; padding: 12px 16px; border-bottom: 1px solid #F1F5F9; gap: 14px; }
         .glossary-item:last-child { border-bottom: none; }
-        .glossary-term { font-size: 12px; font-weight: 800; color: #0077C8; width: 90px; flex-shrink: 0; font-family: monospace; }
-        .glossary-def { font-size: 12px; color: #475569; line-height: 1.6; }
+        .glossary-term { font-size: 14px; font-weight: 800; color: #0077C8; width: 100px; flex-shrink: 0; font-family: monospace; }
+        .glossary-def { font-size: 14px; color: #475569; line-height: 1.6; }
 
         @media (max-width: 500px) {
             .step-io { flex-direction: column; align-items: flex-start; }
