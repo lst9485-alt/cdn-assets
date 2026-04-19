@@ -63,9 +63,43 @@
         .glossary-term { font-size: 14px; font-weight: 800; color: #0077C8; width: 100px; flex-shrink: 0; font-family: monospace; }
         .glossary-def { font-size: 14px; color: #475569; line-height: 1.6; }
 
+        /* 단계별 관련 파일 */
+        .flow-files { margin-top: 14px; padding-top: 14px; border-top: 1px solid #F1F5F9; }
+        .flow-files-count { font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 10px; }
+        .flow-files-group { margin-bottom: 10px; }
+        .flow-lang-tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 5px; }
+        .lang-py { background: #EFF6FF; color: #1E40AF; }
+        .lang-json { background: #FEF3C7; color: #92400E; }
+        .lang-md { background: #F3F4F6; color: #374151; }
+        .lang-js { background: #FEF9C3; color: #854D0E; }
+        .lang-css { background: #DBEAFE; color: #1E3A8A; }
+        .lang-html { background: #FCE7F3; color: #9F1239; }
+        .lang-sh { background: #E0E7FF; color: #3730A3; }
+        .lang-out { background: #ECFDF5; color: #065F46; }
+        .flow-file-list { margin: 6px 0 0 24px; font-size: 13px; color: #475569; font-family: "SF Mono", Menlo, monospace; }
+        .flow-file-list li { line-height: 1.7; padding-left: 4px; }
+        .flow-group-details { margin-top: 4px; }
+        .flow-group-details summary { cursor: pointer; list-style: none; outline: none; }
+        .flow-group-details summary::-webkit-details-marker { display: none; }
+        .flow-group-details summary::after { content: ' ▸'; font-size: 10px; color: #94A3B8; }
+        .flow-group-details[open] summary::after { content: ' ▾'; }
+
+        /* 전체 파일 목록 섹션 */
+        .all-files { margin-top: 48px; }
+        .all-files-summary { font-size: 13px; color: #94A3B8; margin-bottom: 16px; }
+        .all-files-section { background: white; border: 1px solid #E2E8F0; border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+        .all-files-section[open] { border-color: #0077C8; }
+        .all-files-section > summary { padding: 14px 16px; font-size: 14px; font-weight: 700; color: #334155; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 10px; }
+        .all-files-section > summary::-webkit-details-marker { display: none; }
+        .all-files-section > summary::before { content: '▸'; font-size: 12px; color: #94A3B8; transition: transform 0.15s; }
+        .all-files-section[open] > summary::before { transform: rotate(90deg); }
+        .all-files-list { margin: 0 0 14px 46px; font-family: "SF Mono", Menlo, monospace; font-size: 12px; color: #475569; }
+        .all-files-list li { line-height: 1.85; }
+
         @media (max-width: 500px) {
             .step-io { flex-direction: column; align-items: flex-start; }
             .io-arrow { display: none; }
+            .flow-file-list, .all-files-list { margin-left: 18px; }
         }
     </style>
 </head>
@@ -105,6 +139,22 @@
                             <span class="detail-path">template/outline.py</span>
                             <span class="detail-path">tmp/outline.json</span>
                         </div>
+                        <div class="flow-files">
+                            <div class="flow-files-count">📁 관련 파일 3개</div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-py">🐍 Python 2</span>
+                                <ol class="flow-file-list">
+                                    <li>template/outline.py</li>
+                                    <li>template/router.py</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-out">📤 출력 1</span>
+                                <ol class="flow-file-list">
+                                    <li>tmp/outline.json</li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,6 +187,32 @@
                             <span class="detail-path">template/slide_plan.py</span>
                             <span class="detail-path">tmp/plan_{chunk_id}.json</span>
                         </div>
+                        <div class="flow-files">
+                            <div class="flow-files-count">📁 관련 파일 8개</div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-py">🐍 Python 5</span>
+                                <ol class="flow-file-list">
+                                    <li>template/slide_plan.py</li>
+                                    <li>template/scene_spec.py</li>
+                                    <li>template/recommend_modules.py</li>
+                                    <li>template/presets.py</li>
+                                    <li>template/plan_builder.py</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-json">📄 JSON 1</span>
+                                <ol class="flow-file-list">
+                                    <li>references/modules.json</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-out">📤 출력 2</span>
+                                <ol class="flow-file-list">
+                                    <li>tmp/plan_*.json</li>
+                                    <li>tmp/supervisor_*.json</li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,6 +243,35 @@
                         <p>콘티(plan)를 보고 실제 텍스트·이미지·단계 정보를 채워 넣습니다. 결과는 정해진 형식의 텍스트 파일(chunk_*.txt)로 저장됩니다. 작화는 chunk별로 1명씩 병렬 실행합니다.</p>
                         <div class="detail-paths">
                             <span class="detail-path">tmp/chunk_{chunk_id}.txt</span>
+                        </div>
+                        <div class="flow-files">
+                            <div class="flow-files-count">📁 관련 파일 6개</div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-py">🐍 Python 2</span>
+                                <ol class="flow-file-list">
+                                    <li>template/scene_spec_render.py</li>
+                                    <li>template/metrics.py</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-md">📄 Markdown 2</span>
+                                <ol class="flow-file-list">
+                                    <li>references/snippets.md</li>
+                                    <li>references/snippets-variants.md</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-json">📄 JSON 1</span>
+                                <ol class="flow-file-list">
+                                    <li>references/type-registry.json</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-out">📤 출력 1</span>
+                                <ol class="flow-file-list">
+                                    <li>tmp/chunk_*.txt</li>
+                                </ol>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -201,6 +306,25 @@
                             <span class="detail-path">template/compile_slidemd.py</span>
                             <span class="detail-path">slide.md</span>
                         </div>
+                        <div class="flow-files">
+                            <div class="flow-files-count">📁 관련 파일 6개</div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-py">🐍 Python 4</span>
+                                <ol class="flow-file-list">
+                                    <li>template/merge_chunks.py</li>
+                                    <li>template/compile_slidemd.py</li>
+                                    <li>template/step_calc.py</li>
+                                    <li>template/legacy_mapping.py</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-out">📤 출력 2</span>
+                                <ol class="flow-file-list">
+                                    <li>slide.md</li>
+                                    <li>tmp/merge_stats.json</li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -232,6 +356,41 @@
                         <div class="detail-paths">
                             <span class="detail-path">template/checks/ (검사기 19종)</span>
                             <span class="detail-path">pipeline.py verify</span>
+                        </div>
+                        <div class="flow-files">
+                            <div class="flow-files-count">📁 관련 파일 22개</div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-py">🐍 Python — 핵심 3</span>
+                                <ol class="flow-file-list">
+                                    <li>template/pipeline.py</li>
+                                    <li>template/validators.py</li>
+                                    <li>template/presets.py</li>
+                                </ol>
+                            </div>
+                            <details class="flow-group-details">
+                                <summary><span class="flow-lang-tag lang-py">🐍 Python — checks/ 19</span></summary>
+                                <ol class="flow-file-list">
+                                    <li>template/checks/__init__.py</li>
+                                    <li>template/checks/_preset_lookup.py</li>
+                                    <li>template/checks/check_abc_steps_equal.py</li>
+                                    <li>template/checks/check_abc_three_variants.py</li>
+                                    <li>template/checks/check_adjacent_types.py</li>
+                                    <li>template/checks/check_bc_not_exempt.py</li>
+                                    <li>template/checks/check_expander_empty_slots.py</li>
+                                    <li>template/checks/check_expander_field_names.py</li>
+                                    <li>template/checks/check_icon_catalog.py</li>
+                                    <li>template/checks/check_image_diversity.py</li>
+                                    <li>template/checks/check_module_coords.py</li>
+                                    <li>template/checks/check_module_id.py</li>
+                                    <li>template/checks/check_required_image.py</li>
+                                    <li>template/checks/check_required_slots.py</li>
+                                    <li>template/checks/check_source_span.py</li>
+                                    <li>template/checks/check_supported_counts.py</li>
+                                    <li>template/checks/check_text_slot_a.py</li>
+                                    <li>template/checks/check_type_distribution.py</li>
+                                    <li>template/checks/check_visual_diversity.py</li>
+                                </ol>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -266,6 +425,81 @@
                             <span class="detail-path">references/type-registry.json</span>
                             <span class="detail-path">references/snippets.md</span>
                         </div>
+                        <div class="flow-files">
+                            <div class="flow-files-count">📁 관련 파일 32개</div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-py">🐍 Python 4</span>
+                                <ol class="flow-file-list">
+                                    <li>template/generate-slides.py</li>
+                                    <li>template/regenerate-snippets.py</li>
+                                    <li>template/validators.py</li>
+                                    <li>template/step_calc.py</li>
+                                </ol>
+                            </div>
+                            <details class="flow-group-details">
+                                <summary><span class="flow-lang-tag lang-js">🟨 JavaScript 13</span></summary>
+                                <ol class="flow-file-list">
+                                    <li>template/js/main-top.js</li>
+                                    <li>template/js/main-mid.js</li>
+                                    <li>template/js/main-bottom.js</li>
+                                    <li>template/js/navigation.js</li>
+                                    <li>template/js/animations.js</li>
+                                    <li>template/js/sounds.js</li>
+                                    <li>template/js/storage.js</li>
+                                    <li>template/js/github-save.js</li>
+                                    <li>template/js/edit-core.js</li>
+                                    <li>template/js/edit-events.js</li>
+                                    <li>template/js/layer-panel.js</li>
+                                    <li>template/js/category-header.js</li>
+                                    <li>template/js/modules-data.js</li>
+                                </ol>
+                            </details>
+                            <details class="flow-group-details">
+                                <summary><span class="flow-lang-tag lang-json">📄 JSON 3</span></summary>
+                                <ol class="flow-file-list">
+                                    <li>references/type-registry.json</li>
+                                    <li>references/field-mapping.json</li>
+                                    <li>references/type-compile-config.json</li>
+                                </ol>
+                            </details>
+                            <details class="flow-group-details">
+                                <summary><span class="flow-lang-tag lang-md">📄 Markdown 3</span></summary>
+                                <ol class="flow-file-list">
+                                    <li>references/snippets.md</li>
+                                    <li>references/snippets-variants.md</li>
+                                    <li>references/html-generation-rules.md</li>
+                                </ol>
+                            </details>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-html">📄 HTML 3</span>
+                                <ol class="flow-file-list">
+                                    <li>template/prefix.html</li>
+                                    <li>template/suffix.html</li>
+                                    <li>slides-editor.html (정본)</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-css">📄 CSS 2</span>
+                                <ol class="flow-file-list">
+                                    <li>template/css/animations.css</li>
+                                    <li>assets/slide-style.css</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-py">🐍 빌드 도구 2</span>
+                                <ol class="flow-file-list">
+                                    <li>template/build-editor.py</li>
+                                    <li>template/sync-counts.py</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-out">📤 출력 2</span>
+                                <ol class="flow-file-list">
+                                    <li>{title}-slides.html</li>
+                                    <li>assets/slide-editor.js (JS 병합본)</li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -297,6 +531,16 @@
                         <div class="detail-paths">
                             <span class="detail-path">tools/scripts/sync-slide-viewer.sh</span>
                             <span class="detail-path">https://lst9485-alt.github.io/cdn-assets/slide-viewer/</span>
+                        </div>
+                        <div class="flow-files">
+                            <div class="flow-files-count">📁 관련 파일 2개</div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-sh">⚙️ Shell 2</span>
+                                <ol class="flow-file-list">
+                                    <li>Workspace/tools/scripts/sync-slide-viewer.sh (수동 배포)</li>
+                                    <li>Workspace/tools/scripts/nightwatch/sync-slide-viewer.sh (크론 자동 배포)</li>
+                                </ol>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -338,6 +582,124 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- 전체 관련 파일 -->
+        <div class="all-files">
+            <div class="section-label">전체 관련 파일 (2026-04-20 기준)</div>
+            <div class="all-files-summary">중복 제외 소스 파일 70개 (출력물 제외) · 언어별 구분 · 파이썬이 가장 많음 (42개)</div>
+
+            <details class="all-files-section">
+                <summary><span class="flow-lang-tag lang-py">🐍 Python 42</span></summary>
+                <ol class="all-files-list">
+                    <li>template/build-channel-logo.py</li>
+                    <li>template/build-editor.py</li>
+                    <li>template/compile_slidemd.py</li>
+                    <li>template/generate-slides.py</li>
+                    <li>template/legacy_mapping.py</li>
+                    <li>template/merge_chunks.py</li>
+                    <li>template/metrics.py</li>
+                    <li>template/outline.py</li>
+                    <li>template/pipeline.py</li>
+                    <li>template/plan_builder.py</li>
+                    <li>template/presets.py</li>
+                    <li>template/recommend_modules.py</li>
+                    <li>template/regenerate-snippets.py</li>
+                    <li>template/regenerate.py</li>
+                    <li>template/reorder_editor.py</li>
+                    <li>template/router.py</li>
+                    <li>template/scene_spec.py</li>
+                    <li>template/scene_spec_render.py</li>
+                    <li>template/semantic_router.py</li>
+                    <li>template/slide_plan.py</li>
+                    <li>template/step_calc.py</li>
+                    <li>template/sync-counts.py</li>
+                    <li>template/validators.py</li>
+                    <li>template/checks/__init__.py</li>
+                    <li>template/checks/_preset_lookup.py</li>
+                    <li>template/checks/check_abc_steps_equal.py</li>
+                    <li>template/checks/check_abc_three_variants.py</li>
+                    <li>template/checks/check_adjacent_types.py</li>
+                    <li>template/checks/check_bc_not_exempt.py</li>
+                    <li>template/checks/check_expander_empty_slots.py</li>
+                    <li>template/checks/check_expander_field_names.py</li>
+                    <li>template/checks/check_icon_catalog.py</li>
+                    <li>template/checks/check_image_diversity.py</li>
+                    <li>template/checks/check_module_coords.py</li>
+                    <li>template/checks/check_module_id.py</li>
+                    <li>template/checks/check_required_image.py</li>
+                    <li>template/checks/check_required_slots.py</li>
+                    <li>template/checks/check_source_span.py</li>
+                    <li>template/checks/check_supported_counts.py</li>
+                    <li>template/checks/check_text_slot_a.py</li>
+                    <li>template/checks/check_type_distribution.py</li>
+                    <li>template/checks/check_visual_diversity.py</li>
+                </ol>
+            </details>
+
+            <details class="all-files-section">
+                <summary><span class="flow-lang-tag lang-js">🟨 JavaScript 13</span></summary>
+                <ol class="all-files-list">
+                    <li>template/js/main-top.js</li>
+                    <li>template/js/main-mid.js</li>
+                    <li>template/js/main-bottom.js</li>
+                    <li>template/js/navigation.js</li>
+                    <li>template/js/animations.js</li>
+                    <li>template/js/sounds.js</li>
+                    <li>template/js/storage.js</li>
+                    <li>template/js/github-save.js</li>
+                    <li>template/js/edit-core.js</li>
+                    <li>template/js/edit-events.js</li>
+                    <li>template/js/layer-panel.js</li>
+                    <li>template/js/category-header.js</li>
+                    <li>template/js/modules-data.js</li>
+                </ol>
+            </details>
+
+            <details class="all-files-section">
+                <summary><span class="flow-lang-tag lang-json">📄 JSON 4</span></summary>
+                <ol class="all-files-list">
+                    <li>references/type-registry.json</li>
+                    <li>references/field-mapping.json</li>
+                    <li>references/modules.json</li>
+                    <li>references/type-compile-config.json</li>
+                </ol>
+            </details>
+
+            <details class="all-files-section">
+                <summary><span class="flow-lang-tag lang-md">📄 Markdown 4</span></summary>
+                <ol class="all-files-list">
+                    <li>references/snippets.md</li>
+                    <li>references/snippets-variants.md</li>
+                    <li>references/html-generation-rules.md</li>
+                    <li>references/type-selection-rules.md</li>
+                </ol>
+            </details>
+
+            <details class="all-files-section">
+                <summary><span class="flow-lang-tag lang-html">📄 HTML 3</span></summary>
+                <ol class="all-files-list">
+                    <li>slides-editor.html (정본)</li>
+                    <li>template/prefix.html</li>
+                    <li>template/suffix.html</li>
+                </ol>
+            </details>
+
+            <details class="all-files-section">
+                <summary><span class="flow-lang-tag lang-css">📄 CSS 2</span></summary>
+                <ol class="all-files-list">
+                    <li>template/css/animations.css</li>
+                    <li>assets/slide-style.css</li>
+                </ol>
+            </details>
+
+            <details class="all-files-section">
+                <summary><span class="flow-lang-tag lang-sh">⚙️ Shell 2</span></summary>
+                <ol class="all-files-list">
+                    <li>Workspace/tools/scripts/sync-slide-viewer.sh</li>
+                    <li>Workspace/tools/scripts/nightwatch/sync-slide-viewer.sh</li>
+                </ol>
+            </details>
         </div>
 
         <!-- 용어집 -->
