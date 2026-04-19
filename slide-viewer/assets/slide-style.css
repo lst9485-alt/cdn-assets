@@ -101,6 +101,10 @@
   }
   .step-layer[data-step].visible { opacity: 1; }
 
+  /* 오버뷰 썸네일에서는 모든 step 동시 표시 (변형 미리보기 선택용) */
+  .ov-thumb .step-layer,
+  .ov-thumb .step-layer[data-step]:not([data-step="0"]) { opacity: 1 !important; }
+
   /* ── 어두운 오버레이 ── */
   /* stage 바깥 여백용: stage(z:2) 아래 */
   #dim-outer {
