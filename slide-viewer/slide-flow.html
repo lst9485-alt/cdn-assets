@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <title>원고 → 슬라이드 7단계</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; min-height: 100vh; }
+        .container { max-width: 860px; margin: 0 auto; padding: 32px 20px; }
+        .back { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: #64748B; text-decoration: none; margin-bottom: 16px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 4px; }
+        .subtitle { color: #64748B; font-size: 14px; margin-bottom: 32px; }
+
+        /* 단계 카드 */
+        .steps { display: flex; flex-direction: column; gap: 0; }
+        .step-wrap { display: flex; gap: 0; }
+        .step-connector { display: flex; flex-direction: column; align-items: center; width: 40px; flex-shrink: 0; }
+        .step-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 16px; }
+        .step-line { width: 2px; background: #E2E8F0; flex-grow: 1; min-height: 20px; }
+        .step-line.last { display: none; }
+        .step-card { flex: 1; background: white; border: 1px solid #E2E8F0; border-radius: 12px; margin: 8px 0; overflow: hidden; transition: border-color 0.15s; }
+        .step-card:hover { border-color: #94A3B8; }
+        .step-header { padding: 14px 16px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; }
+        .step-num { font-size: 10px; font-weight: 800; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; flex-shrink: 0; margin-top: 2px; }
+        .step-title-area { flex: 1; }
+        .step-title { font-size: 15px; font-weight: 700; color: #051C2C; margin-bottom: 4px; }
+        .step-io { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .io-box { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+        .io-in { background: #E8F3FF; color: #0077C8; }
+        .io-script { background: #FFF7ED; color: #92400E; }
+        .io-out { background: #ECFDF5; color: #065F46; }
+        .io-arrow { color: #CBD5E1; font-size: 12px; }
+        .step-human { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; flex-shrink: 0; margin-top: 12px; }
+        .human-yes { background: #FEF3C7; color: #92400E; }
+        .human-no { background: #F1F5F9; color: #94A3B8; }
+        .step-toggle { color: #CBD5E1; font-size: 11px; flex-shrink: 0; margin-top: 4px; transition: transform 0.15s; }
+        .step-detail { padding: 0 16px 16px 16px; border-top: 1px solid #F1F5F9; font-size: 13px; color: #475569; line-height: 1.7; display: none; }
+        .step-detail.open { display: block; }
+        .step-toggle.open { transform: rotate(90deg); }
+        .detail-path { font-family: monospace; font-size: 11px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 4px; padding: 2px 6px; color: #334155; }
+        .detail-paths { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+
+        /* 문제 섹션 */
+        .problems-section { margin-top: 40px; }
+        .section-label { font-size: 11px; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .problem-note { font-size: 11px; color: #94A3B8; margin-bottom: 16px; }
+        .problem-list { display: flex; flex-direction: column; gap: 8px; }
+        .problem-item { background: white; border: 1px solid #E2E8F0; border-left: 3px solid #EF4444; border-radius: 8px; padding: 12px 14px; display: flex; gap: 12px; }
+        .problem-num { font-size: 11px; font-weight: 800; color: #EF4444; flex-shrink: 0; }
+        .problem-body { flex: 1; }
+        .problem-title { font-size: 13px; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; }
+        .problem-stage { font-size: 11px; color: #94A3B8; }
+        .problem-stage span { background: #FEF2F2; color: #991B1B; font-weight: 700; padding: 1px 6px; border-radius: 4px; font-size: 10px; }
+
+        /* 용어집 */
+        .glossary { margin-top: 40px; }
+        .glossary-grid { display: flex; flex-direction: column; gap: 0; background: white; border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; }
+        .glossary-item { display: flex; padding: 10px 14px; border-bottom: 1px solid #F1F5F9; gap: 12px; }
+        .glossary-item:last-child { border-bottom: none; }
+        .glossary-term { font-size: 12px; font-weight: 800; color: #0077C8; width: 90px; flex-shrink: 0; font-family: monospace; }
+        .glossary-def { font-size: 12px; color: #475569; line-height: 1.6; }
+
+        @media (max-width: 500px) {
+            .step-io { flex-direction: column; align-items: flex-start; }
+            .io-arrow { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./" class="back">← 슬라이드 템플릿</a>
+        <h1>원고 → 슬라이드 7단계</h1>
+        <p class="subtitle">원고를 주면 최종 슬라이드가 나오기까지 이런 과정을 거칩니다</p>
+
+        <div class="steps">
+
+            <!-- 단계 1 -->
+            <div class="step-wrap">
+                <div class="step-connector">
+                    <div class="step-dot" style="background:#E8F3FF; color:#0077C8;">①</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-card">
+                    <div class="step-header" onclick="toggleDetail(this)">
+                        <div class="step-num">STEP 1</div>
+                        <div class="step-title-area">
+                            <div class="step-title">아웃라인 생성</div>
+                            <div class="step-io">
+                                <span class="io-box io-in">manuscript.md</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-script">outline.py</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-out">tmp/outline.json</span>
+                            </div>
+                        </div>
+                        <div class="step-human human-yes">사람 확인 필요</div>
+                        <div class="step-toggle">▶</div>
+                    </div>
+                    <div class="step-detail">
+                        <p>원고를 chunk(묶음) 단위로 나누고, 각 장면마다 어떤 분위기·신호(intent)를 줄지 자동으로 제안합니다. 사용자가 약 15분 동안 outline.json을 훑으면서 intent가 맞는지 확인하고 OK합니다.</p>
+                        <div class="detail-paths">
+                            <span class="detail-path">template/outline.py</span>
+                            <span class="detail-path">tmp/outline.json</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 단계 2 -->
+            <div class="step-wrap">
+                <div class="step-connector">
+                    <div class="step-dot" style="background:#FFF7ED; color:#92400E;">②</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-card">
+                    <div class="step-header" onclick="toggleDetail(this)">
+                        <div class="step-num">STEP 2</div>
+                        <div class="step-title-area">
+                            <div class="step-title">기획 (감독)</div>
+                            <div class="step-io">
+                                <span class="io-box io-in">outline.json</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-script">서브에이전트 5개</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-out">tmp/plan_1~5.json</span>
+                            </div>
+                        </div>
+                        <div class="step-human human-no">자동</div>
+                        <div class="step-toggle">▶</div>
+                    </div>
+                    <div class="step-detail">
+                        <p>chunk마다 슬라이드 A/B/C 3가지 변형을 콘티처럼 짭니다. 각 슬라이드에 어떤 타입(T01~T47)을 쓸지, 텍스트 슬롯·step 수를 결정합니다. Claude 서브에이전트 5개가 동시에 chunk 하나씩 맡아서 처리합니다.</p>
+                        <div class="detail-paths">
+                            <span class="detail-path">template/slide_plan.py</span>
+                            <span class="detail-path">tmp/plan_1.json ~ plan_5.json</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 단계 3 -->
+            <div class="step-wrap">
+                <div class="step-connector">
+                    <div class="step-dot" style="background:#FFF7ED; color:#92400E;">③</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-card">
+                    <div class="step-header" onclick="toggleDetail(this)">
+                        <div class="step-num">STEP 3</div>
+                        <div class="step-title-area">
+                            <div class="step-title">작화</div>
+                            <div class="step-io">
+                                <span class="io-box io-in">plan_*.json</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-script">서브에이전트 5개</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-out">tmp/chunk_1~5.txt</span>
+                            </div>
+                        </div>
+                        <div class="step-human human-no">자동</div>
+                        <div class="step-toggle">▶</div>
+                    </div>
+                    <div class="step-detail">
+                        <p>콘티(plan)를 보고 실제 텍스트·이미지·단계 정보를 채워 넣습니다. 결과는 정해진 형식의 텍스트 파일(chunk_*.txt)로 저장됩니다. 서브에이전트 5개가 병렬로 처리합니다.</p>
+                        <div class="detail-paths">
+                            <span class="detail-path">tmp/chunk_1.txt ~ chunk_5.txt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 단계 4 -->
+            <div class="step-wrap">
+                <div class="step-connector">
+                    <div class="step-dot" style="background:#F1F5F9; color:#334155;">④</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-card">
+                    <div class="step-header" onclick="toggleDetail(this)">
+                        <div class="step-num">STEP 4</div>
+                        <div class="step-title-area">
+                            <div class="step-title">병합 (Merge)</div>
+                            <div class="step-io">
+                                <span class="io-box io-in">chunk_1~5.txt</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-script">merge_chunks.py</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-out">slide.md</span>
+                            </div>
+                        </div>
+                        <div class="step-human human-no">자동</div>
+                        <div class="step-toggle">▶</div>
+                    </div>
+                    <div class="step-detail">
+                        <p>5개 chunk 파일을 하나로 합치고 슬라이드 번호를 전체 기준으로 다시 매깁니다. 결과물인 slide.md가 이후 검증·HTML 생성의 원재료가 됩니다.</p>
+                        <div class="detail-paths">
+                            <span class="detail-path">template/merge_chunks.py (L51 merge_and_renumber)</span>
+                            <span class="detail-path">template/compile_slidemd.py</span>
+                            <span class="detail-path">slide.md</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 단계 5 -->
+            <div class="step-wrap">
+                <div class="step-connector">
+                    <div class="step-dot" style="background:#FEF3C7; color:#92400E;">⑤</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-card">
+                    <div class="step-header" onclick="toggleDetail(this)">
+                        <div class="step-num">STEP 5</div>
+                        <div class="step-title-area">
+                            <div class="step-title">검증</div>
+                            <div class="step-io">
+                                <span class="io-box io-in">slide.md</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-script">checks/*.py</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-out">오류 목록</span>
+                            </div>
+                        </div>
+                        <div class="step-human human-no">자동</div>
+                        <div class="step-toggle">▶</div>
+                    </div>
+                    <div class="step-detail">
+                        <p>슬라이드가 규칙에 맞는지 자동으로 검사합니다. 슬롯이 비었거나, A/B/C 변형의 step 수가 맞지 않거나, 필수 이미지가 없는 경우 등을 잡습니다. 문제가 있으면 다시 작화 단계로 돌아갑니다.</p>
+                        <div class="detail-paths">
+                            <span class="detail-path">template/checks/ (검사기 약 20종)</span>
+                            <span class="detail-path">pipeline.py verify</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 단계 6 -->
+            <div class="step-wrap">
+                <div class="step-connector">
+                    <div class="step-dot" style="background:#ECFDF5; color:#065F46;">⑥</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-card">
+                    <div class="step-header" onclick="toggleDetail(this)">
+                        <div class="step-num">STEP 6</div>
+                        <div class="step-title-area">
+                            <div class="step-title">HTML 생성</div>
+                            <div class="step-io">
+                                <span class="io-box io-in">slide.md</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-script">generate-slides.py</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-out">{날짜}-slides.html</span>
+                            </div>
+                        </div>
+                        <div class="step-human human-no">자동</div>
+                        <div class="step-toggle">▶</div>
+                    </div>
+                    <div class="step-detail">
+                        <p>slide.md를 읽어서 각 슬라이드 타입에 맞는 HTML로 변환합니다. type-registry.json에 정의된 좌표·필드 정보를 사용합니다. 결과물은 260419-slides.html 같은 이름의 단일 HTML 파일입니다.</p>
+                        <div class="detail-paths">
+                            <span class="detail-path">template/generate-slides.py</span>
+                            <span class="detail-path">references/type-registry.json</span>
+                            <span class="detail-path">references/snippets.md</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 단계 7 -->
+            <div class="step-wrap">
+                <div class="step-connector">
+                    <div class="step-dot" style="background:#ECFDF5; color:#065F46;">⑦</div>
+                    <div class="step-line last"></div>
+                </div>
+                <div class="step-card">
+                    <div class="step-header" onclick="toggleDetail(this)">
+                        <div class="step-num">STEP 7</div>
+                        <div class="step-title-area">
+                            <div class="step-title">CDN 배포</div>
+                            <div class="step-io">
+                                <span class="io-box io-in">{날짜}-slides.html</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-script">sync-slide-viewer.sh</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-out">GitHub Pages</span>
+                            </div>
+                        </div>
+                        <div class="step-human human-no">자동</div>
+                        <div class="step-toggle">▶</div>
+                    </div>
+                    <div class="step-detail">
+                        <p>완성된 HTML을 cdn-assets 레포에 복사하고 GitHub에 push합니다. 1~2분 후 슬라이드 뷰어 URL에서 볼 수 있습니다. JS/CSS만 바뀌면 --assets-only 옵션으로 HTML 덮어쓰기 없이 배포합니다.</p>
+                        <div class="detail-paths">
+                            <span class="detail-path">tools/scripts/sync-slide-viewer.sh</span>
+                            <span class="detail-path">https://lst9485-alt.github.io/cdn-assets/slide-viewer/</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 현재 의심 문제 -->
+        <div class="problems-section">
+            <div class="section-label">현재 의심되는 문제</div>
+            <div class="problem-note">2026-04-20 기준 — 세션마다 바뀔 수 있음. 틀릴 수도 있음.</div>
+            <div class="problem-list">
+                <div class="problem-item">
+                    <div class="problem-num">#1</div>
+                    <div class="problem-body">
+                        <div class="problem-title">슬라이드 번호 점프</div>
+                        <div class="problem-stage">발생 단계: <span>④ 병합</span> — merge_chunks.py L51, offset 누적 버그</div>
+                    </div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-num">#2</div>
+                    <div class="problem-body">
+                        <div class="problem-title">작화 단계 검사기 부재 (77건 사후 발견)</div>
+                        <div class="problem-stage">발생 단계: <span>③→④ 사이</span> — chunk_*.txt에서 못 잡고 merge 후에야 발견</div>
+                    </div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-num">#3</div>
+                    <div class="problem-body">
+                        <div class="problem-title">ICON 검사기 pytest 5건 실패</div>
+                        <div class="problem-stage">발생 단계: <span>⑤ 검증</span> — test_required_image.py, 세션 49부터 깨짐</div>
+                    </div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-num">#4</div>
+                    <div class="problem-body">
+                        <div class="problem-title">plan_builder 결정론화 미구현</div>
+                        <div class="problem-stage">발생 단계: <span>② 기획</span> — #2 해결되면 불필요할 수도 있음, 재검토 필요</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 용어집 -->
+        <div class="glossary" style="margin-bottom:48px;">
+            <div class="section-label" style="margin-top:40px; margin-bottom:12px;">용어집</div>
+            <div class="glossary-grid">
+                <div class="glossary-item">
+                    <span class="glossary-term">manuscript</span>
+                    <span class="glossary-def">사용자가 직접 쓴 원고 텍스트. 모든 것의 출발점.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">outline</span>
+                    <span class="glossary-def">원고를 chunk 단위로 나누고 각 장면의 분위기(intent)를 제안한 JSON.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">SlidePlan</span>
+                    <span class="glossary-def">슬라이드 콘티. 타입·슬롯·step 수를 A/B/C 3변형으로 미리 정해둔 것.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">chunk</span>
+                    <span class="glossary-def">원고를 5등분한 묶음. 서브에이전트 하나가 chunk 하나씩 담당.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">slide.md</span>
+                    <span class="glossary-def">5개 chunk를 합쳐서 만든 단일 마크다운. HTML 생성의 직접 재료.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">verify</span>
+                    <span class="glossary-def">slide.md를 자동으로 검사하는 단계. 오류 있으면 숫자와 종류를 리포트.</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleDetail(header) {
+            const card = header.parentElement;
+            const detail = card.querySelector('.step-detail');
+            const toggle = header.querySelector('.step-toggle');
+            const isOpen = detail.classList.contains('open');
+            detail.classList.toggle('open', !isOpen);
+            toggle.classList.toggle('open', !isOpen);
+        }
+    </script>
+</body>
+</html>
