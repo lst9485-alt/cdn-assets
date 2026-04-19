@@ -78,6 +78,7 @@
 | budget-limit.png | 게이지+안전구간 (적정예산) | ICON:budget-limit |
 | fluctuation.png | $+상승하락화살표 (등락) | ICON:fluctuation |
 | first-home.png | 손위의 집 (내집마련) | ICON:first-home |
+| optimist-bet.png | 손에 든 상승 화살표 (긍정 베팅) | ICON:optimist-bet |
 
 ## 사운드 (`sounds/`)
 
