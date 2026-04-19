@@ -123,19 +123,19 @@
                             <div class="step-io">
                                 <span class="io-box io-in">outline.json</span>
                                 <span class="io-arrow">→</span>
-                                <span class="io-box io-script">서브에이전트 5개</span>
+                                <span class="io-box io-script">감독 2~4명 병렬</span>
                                 <span class="io-arrow">→</span>
-                                <span class="io-box io-out">tmp/plan_1~5.json</span>
+                                <span class="io-box io-out">tmp/plan_*.json</span>
                             </div>
                         </div>
                         <div class="step-human human-no">자동</div>
                         <div class="step-toggle">▶</div>
                     </div>
                     <div class="step-detail">
-                        <p>chunk마다 슬라이드 A/B/C 3가지 변형을 콘티처럼 짭니다. 각 슬라이드에 어떤 타입(T01~T47)을 쓸지, 텍스트 슬롯·step 수를 결정합니다. Claude 서브에이전트 5개가 동시에 chunk 하나씩 맡아서 처리합니다.</p>
+                        <p>chunk마다 슬라이드 A/B/C 3가지 변형을 콘티처럼 짭니다. 각 슬라이드에 어떤 타입(T01~T47)을 쓸지, 텍스트 슬롯·step 수를 결정합니다. 감독 수는 슬라이드 수 기준(80장↓ 2명, 80~150장 3명, 150장↑ 4명)으로 정해지고, chunk가 더 많으면 감독 한 명이 연속 chunk를 묶어 담당합니다.</p>
                         <div class="detail-paths">
                             <span class="detail-path">template/slide_plan.py</span>
-                            <span class="detail-path">tmp/plan_1.json ~ plan_5.json</span>
+                            <span class="detail-path">tmp/plan_{chunk_id}.json</span>
                         </div>
                     </div>
                 </div>
@@ -155,18 +155,18 @@
                             <div class="step-io">
                                 <span class="io-box io-in">plan_*.json</span>
                                 <span class="io-arrow">→</span>
-                                <span class="io-box io-script">서브에이전트 5개</span>
+                                <span class="io-box io-script">작화 chunk별 병렬</span>
                                 <span class="io-arrow">→</span>
-                                <span class="io-box io-out">tmp/chunk_1~5.txt</span>
+                                <span class="io-box io-out">tmp/chunk_*.txt</span>
                             </div>
                         </div>
                         <div class="step-human human-no">자동</div>
                         <div class="step-toggle">▶</div>
                     </div>
                     <div class="step-detail">
-                        <p>콘티(plan)를 보고 실제 텍스트·이미지·단계 정보를 채워 넣습니다. 결과는 정해진 형식의 텍스트 파일(chunk_*.txt)로 저장됩니다. 서브에이전트 5개가 병렬로 처리합니다.</p>
+                        <p>콘티(plan)를 보고 실제 텍스트·이미지·단계 정보를 채워 넣습니다. 결과는 정해진 형식의 텍스트 파일(chunk_*.txt)로 저장됩니다. 작화는 chunk별로 1명씩 병렬 실행합니다.</p>
                         <div class="detail-paths">
-                            <span class="detail-path">tmp/chunk_1.txt ~ chunk_5.txt</span>
+                            <span class="detail-path">tmp/chunk_{chunk_id}.txt</span>
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                         <div class="step-title-area">
                             <div class="step-title">병합 (Merge)</div>
                             <div class="step-io">
-                                <span class="io-box io-in">chunk_1~5.txt</span>
+                                <span class="io-box io-in">chunk_*.txt</span>
                                 <span class="io-arrow">→</span>
                                 <span class="io-box io-script">merge_chunks.py</span>
                                 <span class="io-arrow">→</span>
@@ -195,7 +195,7 @@
                         <div class="step-toggle">▶</div>
                     </div>
                     <div class="step-detail">
-                        <p>5개 chunk 파일을 하나로 합치고 슬라이드 번호를 전체 기준으로 다시 매깁니다. 결과물인 slide.md가 이후 검증·HTML 생성의 원재료가 됩니다.</p>
+                        <p>chunk 파일들을 하나로 합치고 슬라이드 번호를 전체 기준으로 다시 매깁니다. 결과물인 slide.md가 이후 검증·HTML 생성의 원재료가 됩니다.</p>
                         <div class="detail-paths">
                             <span class="detail-path">template/merge_chunks.py (L51 merge_and_renumber)</span>
                             <span class="detail-path">template/compile_slidemd.py</span>
@@ -230,7 +230,7 @@
                     <div class="step-detail">
                         <p>슬라이드가 규칙에 맞는지 자동으로 검사합니다. 슬롯이 비었거나, A/B/C 변형의 step 수가 맞지 않거나, 필수 이미지가 없는 경우 등을 잡습니다. 문제가 있으면 다시 작화 단계로 돌아갑니다.</p>
                         <div class="detail-paths">
-                            <span class="detail-path">template/checks/ (검사기 약 20종)</span>
+                            <span class="detail-path">template/checks/ (검사기 19종)</span>
                             <span class="detail-path">pipeline.py verify</span>
                         </div>
                     </div>
@@ -358,11 +358,11 @@
                 </div>
                 <div class="glossary-item">
                     <span class="glossary-term">chunk</span>
-                    <span class="glossary-def">원고를 5등분한 묶음. 서브에이전트 하나가 chunk 하나씩 담당.</span>
+                    <span class="glossary-def">원고를 챕터 단위로 나눈 묶음. 영상마다 개수 다름. 작화 한 명이 chunk 하나씩 담당.</span>
                 </div>
                 <div class="glossary-item">
                     <span class="glossary-term">slide.md</span>
-                    <span class="glossary-def">5개 chunk를 합쳐서 만든 단일 마크다운. HTML 생성의 직접 재료.</span>
+                    <span class="glossary-def">chunk 파일들을 합쳐서 만든 단일 마크다운. HTML 생성의 직접 재료.</span>
                 </div>
                 <div class="glossary-item">
                     <span class="glossary-term">verify</span>
