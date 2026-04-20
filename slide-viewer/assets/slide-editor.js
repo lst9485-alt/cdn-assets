@@ -369,18 +369,18 @@
   ];
 
   const PG_TO_BUCKET = {
-    1:  'no-title', 2:  'no-title', 3:  'title',    4:  'title',
+    1:  'title',    2:  'title',    3:  'title',    4:  'title',
     5:  'title',    6:  'title',    7:  'title',    8:  'title',
     9:  'title',    10: 'title',    11: 'title',    12: 'title',
     13: 'title',    14: 'title',    15: 'title',    16: 'title',
     17: 'title',    18: 'title',    19: 'title',    20: 'title',
-    21: 'no-title', 22: 'title',    23: 'special',  24: 'title',
-    25: 'title',    26: 'title',    27: 'no-title', 28: 'title',
-    29: 'no-title', 30: 'title',    31: 'title',    32: 'title',
-    33: 'title',    34: 'title',    35: 'no-title', 36: 'title',
-    37: 'special',  38: 'special',  39: 'no-title', 40: 'no-title',
-    41: 'no-title', 42: 'no-title', 43: 'title',    44: 'no-title',
-    45: 'no-title', 46: 'title',    47: 'no-title',
+    21: 'title',    22: 'title',    23: 'special',  24: 'title',
+    25: 'title',    26: 'title',    27: 'title',    28: 'title',
+    29: 'title',    30: 'title',    31: 'title',    32: 'title',
+    33: 'title',    34: 'title',    35: 'title',    36: 'title',
+    37: 'special',  38: 'special',  39: 'title',    40: 'title',
+    41: 'title',    42: 'title',    43: 'title',    44: 'title',
+    45: 'title',    46: 'title',    47: 'title',
   };
 
   const PG_TO_CATEGORY = {
