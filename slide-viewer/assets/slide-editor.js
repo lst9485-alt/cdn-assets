@@ -88,9 +88,8 @@
 
   function getDisplayIndexByPageGroup(pg) {
     if (pg == null || pg === '') return null;
-    const ordered = getVisibleBasePageGroups();
-    const idx = ordered.indexOf(String(pg));
-    return idx === -1 ? null : idx + 1;
+    const parsed = parseInt(String(pg), 10);
+    return Number.isFinite(parsed) ? parsed : null;
   }
 
   function getEditorBaseTotal() {
@@ -98,29 +97,25 @@
   }
 
   function formatEditorDisplayNumber(pg, variant) {
-    const displayIdx = getDisplayIndexByPageGroup(pg);
-    if (displayIdx == null) return null;
+    const tnum = getDisplayIndexByPageGroup(pg);
+    if (tnum == null) return null;
     const parsedVariant = parseInt(variant || "0", 10);
     if (!Number.isFinite(parsedVariant) || parsedVariant <= 0) {
-      return String(displayIdx);
+      return `T${tnum}`;
     }
-    return `${displayIdx}-${parsedVariant + 1}`;
+    return `T${tnum}-${parsedVariant + 1}`;
   }
 
   // 같은 page-group의 base와 variants가 DOM에서 인접 배치되어 있다는 불변식에 의존
   function rebuildSlidesByKey() {
     slidesByKey = {};
-    const displayIndexByPg = new Map(
-      getVisibleBasePageGroups().map((pg, idx) => [String(pg), String(idx + 1)])
-    );
     slides.forEach(s => {
       if (s.dataset.slideId) slidesByKey[s.dataset.slideId] = s;
       const pg = s.dataset.pageGroup;
       if (!pg) return;
-      const displayIdx = displayIndexByPg.get(String(pg));
       const displayNumber = formatEditorDisplayNumber(pg, s.dataset.variant || "0");
-      if (!displayIdx || !displayNumber) return;
-      s.dataset.displayGroupIndex = displayIdx;
+      if (!displayNumber) return;
+      s.dataset.displayGroupIndex = String(pg);
       s.dataset.displayNumber = displayNumber;
       const t = s.dataset.type || '';
       s.dataset.displayLabel = t ? `${displayNumber} ${t}` : `${displayNumber}`;
@@ -202,7 +197,7 @@
       const num = document.createElement('div');
       num.className = 'fs-num';
       if (pg) {
-        num.textContent = slide.dataset.displayNumber || (isVariant ? `${pg}-${parseInt(variant) + 1}` : `${pg}`);
+        num.textContent = slide.dataset.displayNumber || (isVariant ? `T${pg}-${parseInt(variant) + 1}` : `T${pg}`);
         const colorSeed = parseInt(slide.dataset.displayGroupIndex || pg, 10);
         item.setAttribute('data-group-color', Number.isFinite(colorSeed) ? colorSeed % 4 : 0);
       } else {
@@ -417,7 +412,9 @@
     33: 'title',    34: 'title',    35: 'title',    36: 'title',
     37: 'special',  38: 'special',  39: 'title',    40: 'title',
     41: 'title',    42: 'title',    43: 'title',    44: 'title',
-    45: 'title',    46: 'title',    47: 'title',
+    45: 'title',    46: 'title',    47: 'title',    48: 'title',
+    49: 'title',    50: 'title',    51: 'title',    52: 'title',
+    53: 'title',    54: 'title',    55: 'title',
   };
 
   const PG_TO_CATEGORY = {
@@ -433,6 +430,8 @@
     37: '텍스트',      38: '텍스트',      39: '텍스트',    40: '텍스트',
     41: '텍스트',      42: '비교',        43: '텍스트',
     44: '텍스트',      45: '텍스트',      46: '텍스트',      47: '텍스트',
+    48: '텍스트',      49: '아이콘+글',   50: '비교',        51: '아이콘+글',
+    52: '비교',        53: '플로우',      54: '플로우',      55: '텍스트',
   };
 
   function bucketOfPageGroup(pg) {
@@ -1274,6 +1273,11 @@
     }
   ],
   "recommendedByType": {
+    "2단플로우": [
+      "M01",
+      "M03",
+      "M09"
+    ],
     "CTA버튼": [
       "M09"
     ],
@@ -1301,6 +1305,10 @@
     ],
     "두줄대비": [
       "M04",
+      "M06",
+      "M09"
+    ],
+    "두줄전개": [
       "M06",
       "M09"
     ],
@@ -1334,6 +1342,10 @@
       "M03",
       "M09",
       "M13"
+    ],
+    "분기2단플로우": [
+      "M03",
+      "M09"
     ],
     "분기플로우": [
       "M03",
@@ -1370,6 +1382,11 @@
       "M09",
       "M13"
     ],
+    "상하2단비교": [
+      "M04",
+      "M06",
+      "M09"
+    ],
     "섹션배지(챕터플로우)": [
       "M05",
       "M08",
@@ -1388,6 +1405,14 @@
     ],
     "아이콘+텍스트": [
       "M19",
+      "M06",
+      "M09"
+    ],
+    "아이콘2단강조": [
+      "M06",
+      "M09"
+    ],
+    "아이콘2단포인트": [
       "M06",
       "M09"
     ],
@@ -1438,6 +1463,11 @@
     ],
     "인용(미니멀)": [
       "M04",
+      "M09"
+    ],
+    "좌우2단비교": [
+      "M04",
+      "M06",
       "M09"
     ],
     "좌우2분할": [
@@ -2153,7 +2183,7 @@
       if (displayNumber) {
         _numEl.textContent = `${displayNumber} / ${baseTotal}${_typeLabel}`;
       } else {
-        _numEl.textContent = `${currentSlide + 1} / ${slides.length}${_typeLabel}`;
+        _numEl.textContent = `T${currentSlide + 1} / ${slides.length}${_typeLabel}`;
       }
     } else {
       const baseTotal = getBaseSlidesCount();
@@ -2163,7 +2193,7 @@
       } else {
         // baseIdx가 -1이면(고아 variant 등 비정상 상태) 0으로 폴백 — 슬라이드 번호 표시 깨짐 방지
         const baseIdx = Math.max(0, getCurrentBaseDisplayIdx());
-        _numEl.textContent = `${baseIdx + 1} / ${baseTotal}${_typeLabel}`;
+        _numEl.textContent = `T${baseIdx + 1} / ${baseTotal}${_typeLabel}`;
       }
     }
     playSound('slide');
@@ -3492,7 +3522,7 @@
       const num = document.createElement('div');
       num.className = 'ov-num';
       if (pg) {
-        num.textContent = slide.dataset.displayNumber || (isVariant ? `${pg}-${parseInt(variant) + 1}` : `${pg}`);
+        num.textContent = slide.dataset.displayNumber || (isVariant ? `T${pg}-${parseInt(variant) + 1}` : `T${pg}`);
       } else {
         num.textContent = `${slideIdx + 1}`;
       }
