@@ -66,25 +66,64 @@
   });
 
   // ── 필름스트립 ──
-  // 머지 후 슬라이드 모델: 138장 = 38 base + 100 variants
-  // - canonical idx: DOM 순서 (0..137)
+  // 편집기 번호 체계
+  // - canonical idx: DOM 순서
   // - visible idx: 필름스트립에서 보이는 fs-item 순서 (펼쳐진 page-group의 variants 포함)
   // - presentation 모드: base만 순회 (←/→는 다음/이전 base로)
-  // - 편집 모드: 모든 138장 순회 (←/→는 canonical ±1)
+  // - 편집 모드: 모든 slide 순회 (←/→는 canonical ±1)
   // - stable key: data-slide-id (예: T03_v1) → slidesByKey 매핑
+
+  function getVisibleBasePageGroups() {
+    const seen = new Set();
+    const ordered = [];
+    [...slides].forEach(s => {
+      if (s.dataset.variant && s.dataset.variant !== "0") return;
+      const pg = s.dataset.pageGroup;
+      if (!pg || seen.has(pg)) return;
+      seen.add(pg);
+      ordered.push(pg);
+    });
+    return ordered;
+  }
+
+  function getDisplayIndexByPageGroup(pg) {
+    if (pg == null || pg === '') return null;
+    const ordered = getVisibleBasePageGroups();
+    const idx = ordered.indexOf(String(pg));
+    return idx === -1 ? null : idx + 1;
+  }
+
+  function getEditorBaseTotal() {
+    return getVisibleBasePageGroups().length;
+  }
+
+  function formatEditorDisplayNumber(pg, variant) {
+    const displayIdx = getDisplayIndexByPageGroup(pg);
+    if (displayIdx == null) return null;
+    const parsedVariant = parseInt(variant || "0", 10);
+    if (!Number.isFinite(parsedVariant) || parsedVariant <= 0) {
+      return String(displayIdx);
+    }
+    return `${displayIdx}-${parsedVariant + 1}`;
+  }
 
   // 같은 page-group의 base와 variants가 DOM에서 인접 배치되어 있다는 불변식에 의존
   function rebuildSlidesByKey() {
     slidesByKey = {};
+    const displayIndexByPg = new Map(
+      getVisibleBasePageGroups().map((pg, idx) => [String(pg), String(idx + 1)])
+    );
     slides.forEach(s => {
       if (s.dataset.slideId) slidesByKey[s.dataset.slideId] = s;
-      // display label: 1-indexed (base: "3-1", variant1: "3-2", ...)
       const pg = s.dataset.pageGroup;
-      const v = parseInt(s.dataset.variant || "0") + 1;
-      if (pg) {
-        const t = s.dataset.type || '';
-        s.dataset.displayLabel = t ? `${pg}-${v} ${t}` : `${pg}-${v}`;
-      }
+      if (!pg) return;
+      const displayIdx = displayIndexByPg.get(String(pg));
+      const displayNumber = formatEditorDisplayNumber(pg, s.dataset.variant || "0");
+      if (!displayIdx || !displayNumber) return;
+      s.dataset.displayGroupIndex = displayIdx;
+      s.dataset.displayNumber = displayNumber;
+      const t = s.dataset.type || '';
+      s.dataset.displayLabel = t ? `${displayNumber} ${t}` : `${displayNumber}`;
     });
   }
 
@@ -162,10 +201,10 @@
 
       const num = document.createElement('div');
       num.className = 'fs-num';
-      // 번호 포맷: base = pg, variant = "pg-(variant+1)" (1-indexed, 예: "3-2")
       if (pg) {
-        num.textContent = isVariant ? `${pg}-${parseInt(variant) + 1}` : `${pg}`;
-        item.setAttribute('data-group-color', parseInt(pg) % 4);
+        num.textContent = slide.dataset.displayNumber || (isVariant ? `${pg}-${parseInt(variant) + 1}` : `${pg}`);
+        const colorSeed = parseInt(slide.dataset.displayGroupIndex || pg, 10);
+        item.setAttribute('data-group-color', Number.isFinite(colorSeed) ? colorSeed % 4 : 0);
       } else {
         num.textContent = idx + 1;
       }
@@ -344,7 +383,6 @@
   window.addEventListener('beforeunload', () => {
     if (presenterWindow && !presenterWindow.closed) presenterWindow.close();
   });
-
   // ── 에디터 구역/카테고리 헤더 ──
   // 데이터 정본:
   //   - references/type-compile-config.json 의 visual_category / editor_section
@@ -2102,21 +2140,29 @@
 
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
     // slideNum 표시:
-    // - 편집 모드: canonical 기준 (1~138 of all)
-    // - 생성 슬라이드: 전체 순차 번호 (1~295 of all)
-    // - 에디터 presentation 모드: base만 카운트 (1~38)
+    // - 에디터: visible base 순서 기준 (base=1, variant=1-2)
+    // - 생성 슬라이드: 전체 순차 번호 유지
     const _numEl = document.getElementById('slideNum');
     const _curSlide = slides[currentSlide];
     const _typeLabel = _curSlide && _curSlide.dataset.type ? ` ${_curSlide.dataset.type}` : '';
-    if (editMode || document.body.dataset.generated) {
+    if (document.body.dataset.generated) {
       _numEl.textContent = `${currentSlide + 1} / ${slides.length}${_typeLabel}`;
+    } else if (editMode) {
+      const baseTotal = typeof getEditorBaseTotal === 'function' ? getEditorBaseTotal() : getBaseSlidesCount();
+      const displayNumber = _curSlide && _curSlide.dataset.displayNumber;
+      if (displayNumber) {
+        _numEl.textContent = `${displayNumber} / ${baseTotal}${_typeLabel}`;
+      } else {
+        _numEl.textContent = `${currentSlide + 1} / ${slides.length}${_typeLabel}`;
+      }
     } else {
       const baseTotal = getBaseSlidesCount();
-      // baseIdx가 -1이면(고아 variant 등 비정상 상태) 0으로 폴백 — 슬라이드 번호 표시 깨짐 방지
-      const baseIdx = Math.max(0, getCurrentBaseDisplayIdx());
-      if (_curSlide && _curSlide.dataset.variant && _curSlide.dataset.variant !== "0") {
-        _numEl.textContent = `${baseIdx + 1}-${_curSlide.dataset.variant} / ${baseTotal}${_typeLabel}`;
+      const displayNumber = _curSlide && _curSlide.dataset.displayNumber;
+      if (displayNumber) {
+        _numEl.textContent = `${displayNumber} / ${baseTotal}${_typeLabel}`;
       } else {
+        // baseIdx가 -1이면(고아 variant 등 비정상 상태) 0으로 폴백 — 슬라이드 번호 표시 깨짐 방지
+        const baseIdx = Math.max(0, getCurrentBaseDisplayIdx());
         _numEl.textContent = `${baseIdx + 1} / ${baseTotal}${_typeLabel}`;
       }
     }
@@ -3446,7 +3492,7 @@
       const num = document.createElement('div');
       num.className = 'ov-num';
       if (pg) {
-        num.textContent = isVariant ? `${pg}-${parseInt(variant) + 1}` : `${pg}`;
+        num.textContent = slide.dataset.displayNumber || (isVariant ? `${pg}-${parseInt(variant) + 1}` : `${pg}`);
       } else {
         num.textContent = `${slideIdx + 1}`;
       }
