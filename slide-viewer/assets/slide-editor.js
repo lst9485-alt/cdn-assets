@@ -414,7 +414,8 @@
     41: 'title',    42: 'title',    43: 'title',    44: 'title',
     45: 'title',    46: 'title',    47: 'title',    48: 'title',
     49: 'title',    50: 'title',    51: 'title',    52: 'title',
-    53: 'title',    54: 'title',    55: 'title',
+    53: 'title',    54: 'title',    55: 'title',    56: 'title',
+    57: 'title',    58: 'title',    59: 'title',
   };
 
   const PG_TO_CATEGORY = {
@@ -432,6 +433,7 @@
     44: '텍스트',      45: '텍스트',      46: '텍스트',      47: '텍스트',
     48: '텍스트',      49: '아이콘+글',   50: '비교',        51: '아이콘+글',
     52: '비교',        53: '플로우',      54: '플로우',      55: '텍스트',
+    56: '텍스트',      57: '텍스트',      58: '텍스트',      59: '텍스트',
   };
 
   function bucketOfPageGroup(pg) {
@@ -1948,6 +1950,15 @@
         (parseInt(a.dataset.appearStep) || 0) - (parseInt(b.dataset.appearStep) || 0)
       );
     }
+    // generated 슬라이드는 .items-row 내부에 step용 .slide-el이 중첩되는 경우가 많다.
+    const nestedSlideEls = Array.from(layer.querySelectorAll(
+      '.items-row .slide-el, .items-col .slide-el, .items-grid .slide-el'
+    )).filter(el =>
+      !el.parentElement?.closest('.slide-el') &&
+      !el.classList.contains('step-title') &&
+      !el.classList.contains('step-dim')
+    );
+    if (nestedSlideEls.length > 0) return nestedSlideEls;
     // 기존: 직접 자식 .slide-el (EDITABLE_SEL과 독립)
     return Array.from(layer.children).filter(el =>
       el.classList.contains('slide-el') &&
