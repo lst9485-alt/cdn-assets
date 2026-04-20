@@ -358,6 +358,12 @@
     { key: 'special-no-title', label: '특수 / 제목 없음', icon: 'S' },
   ];
 
+  const DISPLAY_SECTION_META = [
+    { key: 'title', label: '제목 있음', icon: 'T' },
+    { key: 'no-title', label: '제목 없음', icon: 'N' },
+    { key: 'special', label: '특수', icon: 'S' },
+  ];
+
   const CATEGORY_META = [
     { name: '임팩트',         icon: '🔥' },
     { name: '아이콘+글',      icon: '🖼' },
@@ -417,11 +423,23 @@
     return BUCKET_META.find(function(b) { return b.key === bucketKey; }) || null;
   }
 
+  function displaySectionOfBucket(bucketKey) {
+    if (!bucketKey) return null;
+    if (bucketKey === 'normal-title') return 'title';
+    if (bucketKey === 'normal-no-title') return 'no-title';
+    if (bucketKey.indexOf('special-') === 0) return 'special';
+    return null;
+  }
+
+  function findDisplaySectionMeta(sectionKey) {
+    return DISPLAY_SECTION_META.find(function(section) { return section.key === sectionKey; }) || null;
+  }
+
   function findCategoryMeta(catName) {
     return CATEGORY_META.find(function(c) { return c.name === catName; }) || null;
   }
 
-  function countBasePageGroupsByBucket(slideList) {
+  function countBasePageGroupsByDisplaySection(slideList) {
     const counts = {};
     const seenPgs = new Set();
     slideList.forEach(function(s) {
@@ -429,34 +447,21 @@
       if (!pg || seenPgs.has(pg)) return;
       seenPgs.add(pg);
       const bucket = bucketOfPageGroup(pg);
-      if (!bucket) return;
-      counts[bucket] = (counts[bucket] || 0) + 1;
+      const section = displaySectionOfBucket(bucket);
+      if (!section) return;
+      counts[section] = (counts[section] || 0) + 1;
     });
     return counts;
   }
 
-  function countBasePageGroupsByCategory(slideList) {
-    const counts = {};
-    const seenPgs = new Set();
-    slideList.forEach(function(s) {
-      const pg = s.dataset ? s.dataset.pageGroup : null;
-      if (!pg || seenPgs.has(pg)) return;
-      seenPgs.add(pg);
-      const cat = categoryOfPageGroup(pg);
-      if (!cat) return;
-      counts[cat] = (counts[cat] || 0) + 1;
-    });
-    return counts;
-  }
-
-  function filmstripBucketDividerEl(bucketKey, count) {
-    const meta = findBucketMeta(bucketKey);
+  function filmstripBucketDividerEl(sectionKey, count) {
+    const meta = findDisplaySectionMeta(sectionKey);
     const divider = document.createElement('div');
     divider.className = 'fs-bucket-divider';
-    divider.dataset.bucket = bucketKey;
+    divider.dataset.bucket = sectionKey;
     divider.innerHTML =
       '<span class="fs-bucket-icon">' + (meta ? meta.icon : '') + '</span>' +
-      '<span class="fs-bucket-name">' + (meta ? meta.label : bucketKey) + '</span>' +
+      '<span class="fs-bucket-name">' + (meta ? meta.label : sectionKey) + '</span>' +
       '<span class="fs-bucket-count">' + count + '</span>';
     return divider;
   }
@@ -469,11 +474,9 @@
     const baseItems = [...inner.querySelectorAll('.fs-item')].filter(function(it) {
       return !it.dataset.variant || it.dataset.variant === '0';
     });
-    const bucketCounts = countBasePageGroupsByBucket(baseItems);
-    const categoryCounts = countBasePageGroupsByCategory(baseItems);
+    const sectionCounts = countBasePageGroupsByDisplaySection(baseItems);
 
-    let prevBucket = null;
-    let prevCat = null;
+    let prevSection = null;
     const children = [...inner.children];
     children.forEach(function(child) {
       if (!child.classList || !child.classList.contains('fs-item')) return;
@@ -481,49 +484,23 @@
       if (!isBase) return;
 
       const bucket = bucketOfPageGroup(child.dataset.pageGroup);
-      if (bucket && bucket !== prevBucket) {
-        inner.insertBefore(filmstripBucketDividerEl(bucket, bucketCounts[bucket] || 0), child);
-        prevBucket = bucket;
-        prevCat = null;
-      }
-
-      const cat = categoryOfPageGroup(child.dataset.pageGroup);
-      if (cat && cat !== prevCat) {
-        const meta = findCategoryMeta(cat);
-        const divider = document.createElement('div');
-        divider.className = 'fs-category-divider';
-        divider.dataset.category = cat;
-        divider.innerHTML =
-          '<span class="fs-cat-icon">' + (meta ? meta.icon : '') + '</span>' +
-          '<span class="fs-cat-name">' + cat + '</span>' +
-          '<span class="fs-cat-count">' + (categoryCounts[cat] || 0) + '</span>';
-        inner.insertBefore(divider, child);
-        prevCat = cat;
+      const section = displaySectionOfBucket(bucket);
+      if (section && section !== prevSection) {
+        inner.insertBefore(filmstripBucketDividerEl(section, sectionCounts[section] || 0), child);
+        prevSection = section;
       }
     });
   }
 
-  function overviewBucketHeaderEl(bucketKey, count) {
-    const meta = findBucketMeta(bucketKey);
+  function overviewBucketHeaderEl(sectionKey, count) {
+    const meta = findDisplaySectionMeta(sectionKey);
     const header = document.createElement('div');
     header.className = 'ov-bucket-header';
-    header.dataset.bucket = bucketKey;
+    header.dataset.bucket = sectionKey;
     header.innerHTML =
       '<span class="ov-bucket-icon">' + (meta ? meta.icon : '') + '</span>' +
-      '<span class="ov-bucket-name">' + (meta ? meta.label : bucketKey) + '</span>' +
+      '<span class="ov-bucket-name">' + (meta ? meta.label : sectionKey) + '</span>' +
       '<span class="ov-bucket-count">' + count + '</span>';
-    return header;
-  }
-
-  function overviewCategoryHeaderEl(catName, count) {
-    const meta = findCategoryMeta(catName);
-    const header = document.createElement('div');
-    header.className = 'ov-category-header';
-    header.dataset.category = catName;
-    header.innerHTML =
-      '<span class="ov-cat-icon">' + (meta ? meta.icon : '') + '</span>' +
-      '<span class="ov-cat-name">' + (meta ? meta.name : catName) + '</span>' +
-      '<span class="ov-cat-count">' + count + '</span>';
     return header;
   }
   // 자동 생성 — regenerate-snippets.py (MODULE_SPECS + RECOMMENDED_MODULES_BY_TYPE)
@@ -3319,7 +3296,7 @@
 
   function buildOverview() {
     ovGrid.innerHTML = '';
-    // 에디터(slides-editor.html)가 아니면 카테고리 섹션 헤더만 생략 — variant 묶음/+N/번호는 양쪽 공통
+    // 에디터(slides-editor.html)에서는 큰 구역 헤더만 표시 — variant 묶음/+N/번호는 양쪽 공통
     const isEditor = /slides-editor\.html$/.test(location.pathname);
     // 삭제된 page-group sweep
     for (const pg of [...expandedOverviewGroups]) {
@@ -3328,8 +3305,7 @@
 
     let currentGroup = null;
     let currentPg = null;
-    let currentBucket = null;  // 기본/특수 + 제목 유무 구역
-    let currentCat = null;     // 카테고리 전환 감지용 (설계 정본 §0 8개)
+    let currentSection = null;  // 제목 있음 / 제목 없음 / 특수
 
     // base가 삭제된 page-group 감지: 첫 variant를 base 역할로 표시
     const pgsWithBase = new Set();
@@ -3338,17 +3314,15 @@
       if (!s.dataset.variant || s.dataset.variant === "0") pgsWithBase.add(s.dataset.pageGroup);
     });
 
-    const bucketCounts = {};
-    const catCounts = {};
+    const sectionCounts = {};
     const metaSeenPgs = new Set();
     slides.forEach(s => {
       const pg = s.dataset.pageGroup;
       if (!pg || metaSeenPgs.has(pg)) return;
       metaSeenPgs.add(pg);
       const bucket = (typeof bucketOfPageGroup === 'function') ? bucketOfPageGroup(pg) : null;
-      const cat = (typeof categoryOfPageGroup === 'function') ? categoryOfPageGroup(pg) : null;
-      if (bucket) bucketCounts[bucket] = (bucketCounts[bucket] || 0) + 1;
-      if (cat) catCounts[cat] = (catCounts[cat] || 0) + 1;
+      const section = (typeof displaySectionOfBucket === 'function') ? displaySectionOfBucket(bucket) : null;
+      if (section) sectionCounts[section] = (sectionCounts[section] || 0) + 1;
     });
 
     slides.forEach((slide, slideIdx) => {
@@ -3366,20 +3340,12 @@
       // base가 삭제된 orphan variant도 새 그룹 시작
       if (!isVariant || !currentGroup || (pg && pg !== currentPg)) {
         const slideBucket = (typeof bucketOfPageGroup === 'function') ? bucketOfPageGroup(pg) : null;
-        const slideCat = (typeof categoryOfPageGroup === 'function') ? categoryOfPageGroup(pg) : null;
-        if (slideBucket && slideBucket !== currentBucket && isEditor) {
+        const slideSection = (typeof displaySectionOfBucket === 'function') ? displaySectionOfBucket(slideBucket) : null;
+        if (slideSection && slideSection !== currentSection && isEditor) {
           if (typeof overviewBucketHeaderEl === 'function') {
-            ovGrid.appendChild(overviewBucketHeaderEl(slideBucket, bucketCounts[slideBucket] || 0));
+            ovGrid.appendChild(overviewBucketHeaderEl(slideSection, sectionCounts[slideSection] || 0));
           }
-          currentBucket = slideBucket;
-          currentCat = null;
-        }
-        // 카테고리 전환 감지 → 섹션 헤더 삽입 (에디터 전용 — 촬영용 생성 HTML은 생략)
-        if (slideCat && slideCat !== currentCat && isEditor) {
-          if (typeof overviewCategoryHeaderEl === 'function') {
-            ovGrid.appendChild(overviewCategoryHeaderEl(slideCat, catCounts[slideCat] || 0));
-          }
-          currentCat = slideCat;
+          currentSection = slideSection;
         }
         const variantCount = pg ? [...slides].filter(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0").length : 0;
         const effectiveVariants = isOrphanFirst ? variantCount - 1 : variantCount;
