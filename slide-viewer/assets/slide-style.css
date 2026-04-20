@@ -3039,6 +3039,15 @@
     text-align: center;
   }
 
+  /* M19 말풍선 — T01 말풍선 톤을 모듈형으로 재사용 */
+  .mod-M19.speech-bubble-card {
+    min-height: 120px;
+  }
+  .mod-M19 .bubble {
+    margin: 0;
+    display: inline-block;
+  }
+
   /* ── 세션 36 후속3: 모듈 ambient 애니메이션 ──
      CLAUDE.md 규칙 준수: 사각형 box-shadow 금지 / 둥근 요소만 pulse-glow /
      float-y는 전역 사각·둥근 둘 다 OK. 부드러운 ambient만 사용 */
@@ -3128,3 +3137,6 @@
   }
   .mod-M18 .sc-item:nth-child(2) .sc-num { animation-delay: 0.4s; }
   .mod-M18 .sc-item:nth-child(3) .sc-num { animation-delay: 0.8s; }
+  .mod-M19 .bubble {
+    animation: float-bubble 2.5s ease-in-out infinite;
+  }
