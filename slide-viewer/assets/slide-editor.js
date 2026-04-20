@@ -345,10 +345,18 @@
     if (presenterWindow && !presenterWindow.closed) presenterWindow.close();
   });
 
-  // ── 카테고리 헤더 (설계 정본 §0 8개 시각 카테고리) ──
-  // 데이터 정본: references/type-compile-config.json의 visual_category 필드.
-  // JS에 미러링된 매핑은 tests/test_category_map_consistency.py 가 drift 검증.
-  // T번호(data-page-group)가 불변이므로 page-group → 카테고리 정적 매핑 사용.
+  // ── 에디터 구역/카테고리 헤더 ──
+  // 데이터 정본:
+  //   - references/type-compile-config.json 의 visual_category / editor_section
+  //   - references/type-registry.json 의 field_mapping.fields.title 존재 여부
+  // JS에는 page-group 기준 bucket/category 맵을 미러링하고, 테스트가 drift를 막는다.
+
+  const BUCKET_META = [
+    { key: 'normal-title', label: '기본 / 제목 있음', icon: 'N' },
+    { key: 'normal-no-title', label: '기본 / 제목 없음', icon: 'N' },
+    { key: 'special-title', label: '특수 / 제목 있음', icon: 'S' },
+    { key: 'special-no-title', label: '특수 / 제목 없음', icon: 'S' },
+  ];
 
   const CATEGORY_META = [
     { name: '임팩트',         icon: '🔥' },
@@ -360,6 +368,25 @@
     { name: '레이아웃/구분',  icon: '📐' },
     { name: '텍스트',         icon: '📝' },
   ];
+
+  const PG_TO_BUCKET = {
+    1:  'normal-no-title', 2:  'normal-no-title', 3:  'normal-title',
+    4:  'normal-title',    5:  'normal-title',    6:  'normal-title',
+    7:  'normal-title',    8:  'normal-title',    9:  'normal-title',
+    10: 'normal-title',    11: 'normal-title',    12: 'normal-title',
+    13: 'normal-title',    14: 'normal-title',    15: 'normal-title',
+    16: 'normal-title',    17: 'normal-title',    18: 'normal-title',
+    19: 'normal-title',    20: 'normal-title',    21: 'normal-no-title',
+    22: 'normal-title',    23: 'special-no-title', 24: 'normal-title',
+    25: 'normal-title',    26: 'normal-title',    27: 'normal-no-title',
+    28: 'normal-title',    29: 'normal-no-title', 30: 'normal-title',
+    31: 'normal-title',    32: 'normal-title',    33: 'normal-title',
+    34: 'normal-title',    35: 'special-no-title', 36: 'normal-title',
+    37: 'special-title',   38: 'special-title',   39: 'special-no-title',
+    40: 'special-no-title', 41: 'special-no-title', 42: 'normal-no-title',
+    43: 'special-title',   44: 'special-no-title', 45: 'special-no-title',
+    46: 'special-title',   47: 'special-no-title',
+  };
 
   const PG_TO_CATEGORY = {
     1:  '아이콘+글',   2:  '아이콘+글',   3:  '카드/리스트', 4:  '카드/리스트',
@@ -376,16 +403,38 @@
     44: '텍스트',      45: '텍스트',      46: '텍스트',      47: '텍스트',
   };
 
+  function bucketOfPageGroup(pg) {
+    if (pg == null || pg === '') return null;
+    return PG_TO_BUCKET[parseInt(pg)] || null;
+  }
+
   function categoryOfPageGroup(pg) {
     if (pg == null || pg === '') return null;
     return PG_TO_CATEGORY[parseInt(pg)] || null;
+  }
+
+  function findBucketMeta(bucketKey) {
+    return BUCKET_META.find(function(b) { return b.key === bucketKey; }) || null;
   }
 
   function findCategoryMeta(catName) {
     return CATEGORY_META.find(function(c) { return c.name === catName; }) || null;
   }
 
-  // base(variant=0)만 카테고리별로 카운트 (재사용 가능한 헬퍼)
+  function countBasePageGroupsByBucket(slideList) {
+    const counts = {};
+    const seenPgs = new Set();
+    slideList.forEach(function(s) {
+      const pg = s.dataset ? s.dataset.pageGroup : null;
+      if (!pg || seenPgs.has(pg)) return;
+      seenPgs.add(pg);
+      const bucket = bucketOfPageGroup(pg);
+      if (!bucket) return;
+      counts[bucket] = (counts[bucket] || 0) + 1;
+    });
+    return counts;
+  }
+
   function countBasePageGroupsByCategory(slideList) {
     const counts = {};
     const seenPgs = new Set();
@@ -400,63 +449,80 @@
     return counts;
   }
 
-  // 필름스트립 카테고리 분할선 삽입.
-  // buildFilmstrip() 직후 호출 — DOM 순회로 base fs-item 경계에 divider 삽입.
-  // 재호출 시 기존 divider 제거 후 재삽입 (idempotent).
+  function filmstripBucketDividerEl(bucketKey, count) {
+    const meta = findBucketMeta(bucketKey);
+    const divider = document.createElement('div');
+    divider.className = 'fs-bucket-divider';
+    divider.dataset.bucket = bucketKey;
+    divider.innerHTML =
+      '<span class="fs-bucket-icon">' + (meta ? meta.icon : '') + '</span>' +
+      '<span class="fs-bucket-name">' + (meta ? meta.label : bucketKey) + '</span>' +
+      '<span class="fs-bucket-count">' + count + '</span>';
+    return divider;
+  }
+
   function insertFilmstripCategoryDividers() {
     const inner = document.getElementById('filmstrip-inner');
     if (!inner) return;
-    inner.querySelectorAll('.fs-category-divider').forEach(function(el) { el.remove(); });
+    inner.querySelectorAll('.fs-bucket-divider, .fs-category-divider').forEach(function(el) { el.remove(); });
 
-    // base fs-item 기준으로 카테고리 카운트
     const baseItems = [...inner.querySelectorAll('.fs-item')].filter(function(it) {
       return !it.dataset.variant || it.dataset.variant === '0';
     });
-    const counts = {};
-    const seen = new Set();
-    baseItems.forEach(function(it) {
-      const pg = it.dataset.pageGroup;
-      if (!pg || seen.has(pg)) return;
-      seen.add(pg);
-      const cat = categoryOfPageGroup(pg);
-      if (cat) counts[cat] = (counts[cat] || 0) + 1;
-    });
+    const bucketCounts = countBasePageGroupsByBucket(baseItems);
+    const categoryCounts = countBasePageGroupsByCategory(baseItems);
 
-    // 경계 감지 + divider 삽입
+    let prevBucket = null;
     let prevCat = null;
     const children = [...inner.children];
     children.forEach(function(child) {
       if (!child.classList || !child.classList.contains('fs-item')) return;
       const isBase = !child.dataset.variant || child.dataset.variant === '0';
       if (!isBase) return;
+
+      const bucket = bucketOfPageGroup(child.dataset.pageGroup);
+      if (bucket && bucket !== prevBucket) {
+        inner.insertBefore(filmstripBucketDividerEl(bucket, bucketCounts[bucket] || 0), child);
+        prevBucket = bucket;
+        prevCat = null;
+      }
+
       const cat = categoryOfPageGroup(child.dataset.pageGroup);
       if (cat && cat !== prevCat) {
         const meta = findCategoryMeta(cat);
         const divider = document.createElement('div');
         divider.className = 'fs-category-divider';
         divider.dataset.category = cat;
-        const iconHtml = meta ? meta.icon : '';
         divider.innerHTML =
-          '<span class="fs-cat-icon">' + iconHtml + '</span>' +
+          '<span class="fs-cat-icon">' + (meta ? meta.icon : '') + '</span>' +
           '<span class="fs-cat-name">' + cat + '</span>' +
-          '<span class="fs-cat-count">' + (counts[cat] || 0) + '</span>';
+          '<span class="fs-cat-count">' + (categoryCounts[cat] || 0) + '</span>';
         inner.insertBefore(divider, child);
         prevCat = cat;
       }
     });
   }
 
-  // 오버뷰 카테고리 섹션 헤더 element 생성 (buildOverview 내부에서 호출).
+  function overviewBucketHeaderEl(bucketKey, count) {
+    const meta = findBucketMeta(bucketKey);
+    const header = document.createElement('div');
+    header.className = 'ov-bucket-header';
+    header.dataset.bucket = bucketKey;
+    header.innerHTML =
+      '<span class="ov-bucket-icon">' + (meta ? meta.icon : '') + '</span>' +
+      '<span class="ov-bucket-name">' + (meta ? meta.label : bucketKey) + '</span>' +
+      '<span class="ov-bucket-count">' + count + '</span>';
+    return header;
+  }
+
   function overviewCategoryHeaderEl(catName, count) {
     const meta = findCategoryMeta(catName);
     const header = document.createElement('div');
     header.className = 'ov-category-header';
     header.dataset.category = catName;
-    const iconHtml = meta ? meta.icon : '';
-    const displayName = meta ? meta.name : catName;
     header.innerHTML =
-      '<span class="ov-cat-icon">' + iconHtml + '</span>' +
-      '<span class="ov-cat-name">' + displayName + '</span>' +
+      '<span class="ov-cat-icon">' + (meta ? meta.icon : '') + '</span>' +
+      '<span class="ov-cat-name">' + (meta ? meta.name : catName) + '</span>' +
       '<span class="ov-cat-count">' + count + '</span>';
     return header;
   }
@@ -3262,7 +3328,8 @@
 
     let currentGroup = null;
     let currentPg = null;
-    let currentCat = null;  // 카테고리 전환 감지용 (설계 정본 §0 8개)
+    let currentBucket = null;  // 기본/특수 + 제목 유무 구역
+    let currentCat = null;     // 카테고리 전환 감지용 (설계 정본 §0 8개)
 
     // base가 삭제된 page-group 감지: 첫 variant를 base 역할로 표시
     const pgsWithBase = new Set();
@@ -3271,15 +3338,17 @@
       if (!s.dataset.variant || s.dataset.variant === "0") pgsWithBase.add(s.dataset.pageGroup);
     });
 
-    // 카테고리별 표시 page-group 수 (base 또는 orphan-first 기준)
+    const bucketCounts = {};
     const catCounts = {};
-    const catSeenPgs = new Set();
+    const metaSeenPgs = new Set();
     slides.forEach(s => {
       const pg = s.dataset.pageGroup;
-      if (!pg || catSeenPgs.has(pg)) return;
-      catSeenPgs.add(pg);
-      const c = (typeof categoryOfPageGroup === 'function') ? categoryOfPageGroup(pg) : null;
-      if (c) catCounts[c] = (catCounts[c] || 0) + 1;
+      if (!pg || metaSeenPgs.has(pg)) return;
+      metaSeenPgs.add(pg);
+      const bucket = (typeof bucketOfPageGroup === 'function') ? bucketOfPageGroup(pg) : null;
+      const cat = (typeof categoryOfPageGroup === 'function') ? categoryOfPageGroup(pg) : null;
+      if (bucket) bucketCounts[bucket] = (bucketCounts[bucket] || 0) + 1;
+      if (cat) catCounts[cat] = (catCounts[cat] || 0) + 1;
     });
 
     slides.forEach((slide, slideIdx) => {
@@ -3296,8 +3365,16 @@
       // 새 page-group이면 새 .ov-group wrapper
       // base가 삭제된 orphan variant도 새 그룹 시작
       if (!isVariant || !currentGroup || (pg && pg !== currentPg)) {
-        // 카테고리 전환 감지 → 섹션 헤더 삽입 (에디터 전용 — 촬영용 생성 HTML은 생략)
+        const slideBucket = (typeof bucketOfPageGroup === 'function') ? bucketOfPageGroup(pg) : null;
         const slideCat = (typeof categoryOfPageGroup === 'function') ? categoryOfPageGroup(pg) : null;
+        if (slideBucket && slideBucket !== currentBucket && isEditor) {
+          if (typeof overviewBucketHeaderEl === 'function') {
+            ovGrid.appendChild(overviewBucketHeaderEl(slideBucket, bucketCounts[slideBucket] || 0));
+          }
+          currentBucket = slideBucket;
+          currentCat = null;
+        }
+        // 카테고리 전환 감지 → 섹션 헤더 삽입 (에디터 전용 — 촬영용 생성 HTML은 생략)
         if (slideCat && slideCat !== currentCat && isEditor) {
           if (typeof overviewCategoryHeaderEl === 'function') {
             ovGrid.appendChild(overviewCategoryHeaderEl(slideCat, catCounts[slideCat] || 0));
@@ -3566,7 +3643,6 @@
   window.addEventListener('resize', () => {
     // scale은 CSS 고정 — resize 시 재계산 불필요
   });
-
   // ── 환경 감지 ──
   const isGitHubPages = location.hostname.endsWith('.github.io');
 

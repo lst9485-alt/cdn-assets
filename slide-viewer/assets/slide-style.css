@@ -1679,6 +1679,42 @@
   .ov-group.expanded {
     width: auto;
   }
+  .ov-bucket-header {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 6px 8px;
+    margin-top: 14px;
+    border-top: 2px solid rgba(255,255,255,0.18);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+    user-select: none;
+  }
+  .ov-bucket-header:first-child {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 2px;
+  }
+  .ov-bucket-header .ov-bucket-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.14);
+    font-size: 11px;
+    line-height: 1;
+  }
+  .ov-bucket-header .ov-bucket-name { flex: 1; letter-spacing: 0.2px; }
+  .ov-bucket-header .ov-bucket-count {
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.7;
+    padding-right: 4px;
+  }
   /* 카테고리 섹션 헤더 (8개 시각 카테고리 구분) */
   .ov-category-header {
     grid-column: 1 / -1;
@@ -2184,6 +2220,47 @@
   }
   /* 변형 슬라이드는 자체 좌측 컬러바를 약간 가늘게 (base와 시각적 구분) */
   .fs-item.fs-variant.show[data-group-color] { border-left-width: 2px; }
+
+  .fs-bucket-divider {
+    flex-shrink: 0;
+    min-width: 94px;
+    height: 76px;
+    padding: 6px 12px;
+    margin: 0 4px 0 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: 2px solid rgba(255,255,255,0.18);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    color: #f2f2f2;
+    font-size: 10px;
+    line-height: 1.15;
+    pointer-events: none;
+    user-select: none;
+  }
+  .fs-bucket-divider .fs-bucket-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.14);
+    font-size: 10px;
+    line-height: 1;
+  }
+  .fs-bucket-divider .fs-bucket-name {
+    font-weight: 800;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .fs-bucket-divider .fs-bucket-count {
+    opacity: 0.65;
+    font-size: 9px;
+  }
 
   /* 필름스트립 카테고리 구분선 (8개 시각 카테고리) */
   .fs-category-divider {
