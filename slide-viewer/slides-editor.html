@@ -5,13 +5,20 @@
 <title>slides-editor</title>
 <script>(function(){const name=location.pathname.split('/').pop().replace('.html','');const m=name.match(/(\d{4})(\d{2})(\d{2})/);document.title=m?`${m[1]}-${m[2]}-${m[3]}`:name;})()</script>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@900&amp;display=swap" rel="stylesheet"/>
-<link href="./assets/slide-style.css?v=20260421154934" rel="stylesheet"/>
+<link href="./assets/slide-style.css?v=20260421155831" rel="stylesheet"/>
 <style id="edit-badge-style">@keyframes editBadgeBlink{0%,100%{opacity:1}50%{opacity:0.3}}</style>
 <style id="slide-jump-nav-style">
-#slide-jump-nav{display:none;position:fixed;right:0;top:0;bottom:96px;width:260px;overflow-y:auto;overflow-x:hidden;z-index:8500;background:rgba(20,20,20,0.92);border-left:1px solid rgba(255,255,255,0.07);padding:8px;box-sizing:border-box;grid-template-columns:repeat(5,1fr);gap:4px;align-content:start;scrollbar-width:none;}
+#slide-jump-nav{display:none;position:fixed;right:0;top:0;bottom:96px;width:260px;overflow-y:auto;overflow-x:hidden;z-index:8500;background:rgba(20,20,20,0.92);border-left:1px solid rgba(255,255,255,0.07);padding:0;box-sizing:border-box;flex-direction:column;scrollbar-width:none;transition:width 0.18s ease;}
 #slide-jump-nav::-webkit-scrollbar{display:none;}
-body.edit-mode #slide-jump-nav{display:grid;}
-body.overview-open #slide-jump-nav{display:grid;bottom:0;}
+body.edit-mode #slide-jump-nav{display:flex;}
+body.overview-open #slide-jump-nav{display:flex;bottom:0;}
+#slide-jump-nav.collapsed{width:32px;}
+#slide-jump-nav.collapsed .sj-grid{display:none;}
+body.overview-open #overview{padding-right:260px;box-sizing:border-box;transition:padding 0.18s ease;}
+body.overview-open.sjn-collapsed #overview{padding-right:32px;}
+.sj-toggle{position:sticky;top:0;width:100%;padding:8px 0;background:rgba(0,0,0,0.7);color:#fff;border:none;border-bottom:1px solid rgba(255,255,255,0.1);cursor:pointer;font-size:18px;font-weight:700;z-index:1;line-height:1;}
+.sj-toggle:hover{background:rgba(255,255,255,0.15);}
+.sj-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;align-content:start;padding:8px;}
 .sj-item{font-size:14px;font-weight:700;color:rgba(255,255,255,0.55);cursor:pointer;padding:6px 4px;border-radius:4px;text-align:center;box-sizing:border-box;user-select:none;line-height:1.1;white-space:nowrap;letter-spacing:-0.3px;background:rgba(255,255,255,0.04);}
 .sj-item:hover{color:#fff;background:rgba(255,255,255,0.15);}
 .sj-item.active{color:#000;background:var(--editor-accent);font-weight:900;}
@@ -4557,6 +4564,6 @@ width: 680px;</span>
 <button class="fmt-btn" data-align="right" title="오른쪽 정렬">≡</button>
 </div>
 <div id="slide-jump-nav"></div>
-<script src="./assets/slide-editor.js?v=20260421154934"></script>
+<script src="./assets/slide-editor.js?v=20260421155831"></script>
 <div class="gs-crosshair-h" id="gs-crosshair-h" style="top: 195px; display: none;"></div><div class="gs-crosshair-v" id="gs-crosshair-v" style="left: 960px; display: none;"></div>
 <div id="filmstrip"><div id="filmstrip-inner"></div></div><div id="edit-mode-badge" style="position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 99999; background: rgb(230, 57, 70); color: rgb(255, 255, 255); padding: 6px 18px; border-radius: 8px; font-size: 14px; font-weight: 900; pointer-events: none; animation: 1.5s ease 0s infinite normal none running editBadgeBlink; display: none;">편집중 — 자동저장 10초</div></body></html>

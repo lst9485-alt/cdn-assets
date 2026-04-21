@@ -269,7 +269,28 @@
   function buildSlideJumpNav() {
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
-    nav.innerHTML = '';
+    let toggle = nav.querySelector('.sj-toggle');
+    let grid = nav.querySelector('.sj-grid');
+    if (!toggle) {
+      toggle = document.createElement('button');
+      toggle.className = 'sj-toggle';
+      toggle.type = 'button';
+      toggle.title = '접기/펴기';
+      toggle.textContent = '›';
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const collapsed = nav.classList.toggle('collapsed');
+        document.body.classList.toggle('sjn-collapsed', collapsed);
+        toggle.textContent = collapsed ? '‹' : '›';
+      });
+      nav.appendChild(toggle);
+    }
+    if (!grid) {
+      grid = document.createElement('div');
+      grid.className = 'sj-grid';
+      nav.appendChild(grid);
+    }
+    grid.innerHTML = '';
     const basePgs = getVisibleBasePageGroups();
     const sortedPgs = [...basePgs].sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
     const curPg = slides[currentSlide] ? slides[currentSlide].dataset.pageGroup : null;
@@ -294,21 +315,22 @@
           goToSlide(canonicalIdx);
         }
       });
-      nav.appendChild(item);
+      grid.appendChild(item);
     });
-    const active = nav.querySelector('.sj-item.active');
+    const active = grid.querySelector('.sj-item.active');
     if (active) active.scrollIntoView({ block: 'nearest' });
   }
 
   function updateSlideJumpNav() {
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
-    if (nav.children.length === 0) { buildSlideJumpNav(); return; }
+    const grid = nav.querySelector('.sj-grid');
+    if (!grid || grid.children.length === 0) { buildSlideJumpNav(); return; }
     const curPg = slides[currentSlide] ? slides[currentSlide].dataset.pageGroup : null;
-    nav.querySelectorAll('.sj-item').forEach(item => {
+    grid.querySelectorAll('.sj-item').forEach(item => {
       item.classList.toggle('active', item.dataset.pg === curPg);
     });
-    const active = nav.querySelector('.sj-item.active');
+    const active = grid.querySelector('.sj-item.active');
     if (active) active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 
