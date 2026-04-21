@@ -4624,26 +4624,32 @@
       // ── 편집중 배지 표시 ──
       showEditBadge(true);
     } else {
-      userZoom = 1; panX = 0; panY = 0;
-      clearInterval(autoSaveTimer);
-      autoSaveTimer = null;
-      (isGitHubPages ? saveToFile() : saveToFile(true)).then(() => releaseTabLock());
-      document.querySelectorAll('[data-group^="ag"]').forEach(el => delete el.dataset.group);
-      // dim-handle 배지 제거
-      document.querySelectorAll('.dim-handle').forEach(b => b.remove());
-      // 프레젠테이션 상태 리셋
-      currentStep = 0;
-      currentOrder = 0;
-      setDim(false);
-      showStep(slides[currentSlide], 0);
-      clearSelection();
-      selectBoxActive = false;
-      document.getElementById('select-box').style.display = 'none';
-      undoStack.length = 0;
-      redoStack.length = 0;
-      document.getElementById('layer-panel').classList.remove('visible');
-      // ── 편집중 배지 숨기기 ──
+      // ── 편집중 배지 먼저 숨김 (아래 cleanup 중 예외 나도 배지는 반드시 사라지게) ──
       showEditBadge(false);
+      try {
+        userZoom = 1; panX = 0; panY = 0;
+        clearInterval(autoSaveTimer);
+        autoSaveTimer = null;
+        (isGitHubPages ? saveToFile() : saveToFile(true)).then(() => releaseTabLock());
+        document.querySelectorAll('[data-group^="ag"]').forEach(el => delete el.dataset.group);
+        // dim-handle 배지 제거
+        document.querySelectorAll('.dim-handle').forEach(b => b.remove());
+        // 프레젠테이션 상태 리셋
+        currentStep = 0;
+        currentOrder = 0;
+        setDim(false);
+        if (slides[currentSlide]) showStep(slides[currentSlide], 0);
+        clearSelection();
+        selectBoxActive = false;
+        const sb = document.getElementById('select-box');
+        if (sb) sb.style.display = 'none';
+        undoStack.length = 0;
+        redoStack.length = 0;
+        const lp = document.getElementById('layer-panel');
+        if (lp) lp.classList.remove('visible');
+      } catch (err) {
+        console.error('[toggleEditMode exit cleanup]', err);
+      }
     }
   }
 
