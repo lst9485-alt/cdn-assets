@@ -246,6 +246,7 @@
       insertFilmstripCategoryDividers();
     }
     scrollFilmstripToCurrent();
+    buildSlideJumpNav();
   }
   function scrollFilmstripToCurrent() {
     // currentSlide가 collapsed page-group의 variant이면 자동 expand 후 스크롤
@@ -262,6 +263,43 @@
       item.classList.toggle('current', idx === currentSlide);
     });
     scrollFilmstripToCurrent();
+    updateSlideJumpNav();
+  }
+
+  function buildSlideJumpNav() {
+    const nav = document.getElementById('slide-jump-nav');
+    if (!nav) return;
+    nav.innerHTML = '';
+    const basePgs = getVisibleBasePageGroups();
+    const curPg = slides[currentSlide] ? slides[currentSlide].dataset.pageGroup : null;
+    basePgs.forEach(pg => {
+      const baseSlide = [...slides].find(s => s.dataset.pageGroup === pg && (s.dataset.variant === '0' || !s.dataset.variant));
+      if (!baseSlide) return;
+      const canonicalIdx = [...slides].indexOf(baseSlide);
+      const displayNumber = formatEditorDisplayNumber(pg, '0');
+      if (!displayNumber) return;
+      const item = document.createElement('div');
+      item.className = 'sj-item' + (pg === curPg ? ' active' : '');
+      item.dataset.pg = pg;
+      item.dataset.canonicalIdx = String(canonicalIdx);
+      item.textContent = displayNumber;
+      item.addEventListener('click', () => { goToSlide(canonicalIdx); });
+      nav.appendChild(item);
+    });
+    const active = nav.querySelector('.sj-item.active');
+    if (active) active.scrollIntoView({ block: 'nearest' });
+  }
+
+  function updateSlideJumpNav() {
+    const nav = document.getElementById('slide-jump-nav');
+    if (!nav) return;
+    if (nav.children.length === 0) { buildSlideJumpNav(); return; }
+    const curPg = slides[currentSlide] ? slides[currentSlide].dataset.pageGroup : null;
+    nav.querySelectorAll('.sj-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.pg === curPg);
+    });
+    const active = nav.querySelector('.sj-item.active');
+    if (active) active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 
   function reorderSlide(fromIdx, toIdx) {
@@ -4020,7 +4058,7 @@
       'overview-backdrop','overview','help','align-menu','group-toolbar',
       'slideNum','edit-badge','top-toolbar',
       'palette-bg','palette-fc','coord-panel','font-panel','format-bar',
-      'module-picker-backdrop','module-picker'
+      'module-picker-backdrop','module-picker','slide-jump-nav'
     ];
     const _afterScriptIds = ['gs-crosshair-h','gs-crosshair-v','filmstrip'];
 
