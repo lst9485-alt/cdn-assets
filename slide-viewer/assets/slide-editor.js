@@ -310,7 +310,13 @@
         if (overview && overview.dataset.open === '1') {
           const card = document.querySelector('#overview-grid .ov-group[data-page-group="' + pg + '"]')
             || document.querySelector('#overview-grid .ov-item[data-page-group="' + pg + '"]');
-          if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.classList.remove('sj-highlight');
+            void card.offsetWidth;
+            card.classList.add('sj-highlight');
+            setTimeout(() => card.classList.remove('sj-highlight'), 1700);
+          }
         } else {
           goToSlide(canonicalIdx);
         }
