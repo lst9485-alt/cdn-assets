@@ -5,7 +5,7 @@
 <title>slides-editor</title>
 <script>(function(){const name=location.pathname.split('/').pop().replace('.html','');const m=name.match(/(\d{4})(\d{2})(\d{2})/);document.title=m?`${m[1]}-${m[2]}-${m[3]}`:name;})()</script>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@900&amp;display=swap" rel="stylesheet"/>
-<link href="./assets/slide-style.css?v=20260421214525" rel="stylesheet"/>
+<link href="./assets/slide-style.css?v=20260422022151" rel="stylesheet"/>
 <style id="edit-badge-style">@keyframes editBadgeBlink{0%,100%{opacity:1}50%{opacity:0.3}}</style>
 <style id="slide-jump-nav-style">
 #slide-jump-nav{display:none;position:fixed;right:0;top:0;bottom:96px;width:260px;overflow-y:auto;overflow-x:hidden;z-index:8500;background:rgba(20,20,20,0.92);border-left:1px solid rgba(255,255,255,0.07);padding:0;box-sizing:border-box;flex-direction:column;scrollbar-width:none;transition:width 0.18s ease;}
@@ -14,14 +14,24 @@ body.edit-mode #slide-jump-nav{display:flex;}
 body.overview-open #slide-jump-nav{display:flex;bottom:0;}
 #slide-jump-nav.collapsed{width:32px;}
 #slide-jump-nav.collapsed .sj-grid{display:none;}
+#slide-jump-nav.collapsed .sj-toolbar{display:none;}
+#slide-jump-nav.collapsed .sj-notes{display:none;}
 body.overview-open #overview{padding-right:260px;box-sizing:border-box;transition:padding 0.18s ease;}
 body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 .sj-toggle{position:sticky;top:0;width:100%;padding:8px 0;background:rgba(0,0,0,0.7);color:#fff;border:none;border-bottom:1px solid rgba(255,255,255,0.1);cursor:pointer;font-size:18px;font-weight:700;z-index:1;line-height:1;}
 .sj-toggle:hover{background:rgba(255,255,255,0.15);}
+.sj-toolbar{position:sticky;top:35px;z-index:1;padding:8px;background:rgba(12,12,12,0.95);border-bottom:1px solid rgba(255,255,255,0.08);}
+.sj-search{width:100%;box-sizing:border-box;padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.16);background:rgba(255,255,255,0.08);color:#fff;font-size:13px;font-weight:600;}
+.sj-search::placeholder{color:rgba(255,255,255,0.42);}
 .sj-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;align-content:start;padding:8px;}
 .sj-item{font-size:14px;font-weight:700;color:rgba(255,255,255,0.55);cursor:pointer;padding:6px 4px;border-radius:4px;text-align:center;box-sizing:border-box;user-select:none;line-height:1.1;white-space:nowrap;letter-spacing:-0.3px;background:rgba(255,255,255,0.04);}
 .sj-item:hover{color:#fff;background:rgba(255,255,255,0.15);}
 .sj-item.active{color:#000;background:var(--editor-accent);font-weight:900;}
+.sj-notes{margin-top:auto;padding:12px 10px 16px;border-top:1px solid rgba(255,255,255,0.08);background:rgba(8,8,8,0.92);color:rgba(255,255,255,0.78);font-size:12px;line-height:1.45;white-space:pre-wrap;word-break:break-word;min-height:84px;}
+.ov-actions{position:absolute;left:8px;top:8px;display:flex;gap:6px;z-index:30;opacity:0;transition:opacity .15s ease;}
+.ov-item:hover .ov-actions{opacity:1;}
+.ov-action-btn{border:none;border-radius:999px;padding:4px 10px;background:rgba(0,0,0,0.68);color:#fff;font-size:11px;font-weight:800;cursor:pointer;}
+.ov-action-btn.danger{background:rgba(160,32,32,0.85);}
 @keyframes sjFlash{0%{box-shadow:0 0 0 0 rgba(var(--editor-accent-rgb),0.9),0 0 0 0 rgba(var(--editor-accent-rgb),0.6);outline:4px solid var(--editor-accent);}50%{box-shadow:0 0 0 8px rgba(var(--editor-accent-rgb),0.5),0 0 40px 12px rgba(var(--editor-accent-rgb),0.35);outline:4px solid var(--editor-accent);}100%{box-shadow:0 0 0 0 rgba(var(--editor-accent-rgb),0),0 0 0 0 rgba(var(--editor-accent-rgb),0);outline:4px solid rgba(var(--editor-accent-rgb),0);}}
 .sj-highlight{animation:sjFlash 3s ease-out;border-radius:8px;position:relative;z-index:9000;}
 </style></head>
@@ -463,8 +473,8 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="step-layer" data-step="1">
 <div class="slide-el" data-type="아이콘행" style="position:absolute; left:280px; top:480px; width:1360px; display:flex; align-items:center; gap:24px; background:white; border:4px solid #ddd; border-radius:16px; padding:12px 20px;">
 <div class="icon-circle" style="flex-shrink:0; background:#FF6B00; width:100px; height:100px; font-size:48px;">🏠</div>
-<div style="font-size:44px; font-weight:700; color:#FF6B00; width:220px; flex-shrink:0;">역할명</div>
-<div style="font-size:36px; font-weight:900; color:#111;">설명을 입력하세요</div>
+<div class="icon-row-role" style="font-size:44px; font-weight:700; color:#FF6B00; width:220px; flex-shrink:0;">역할명</div>
+<div class="icon-row-desc" style="font-size:36px; font-weight:900; color:#111;">설명을 입력하세요</div>
 </div>
 </div>
 </div>
@@ -477,15 +487,15 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="step-layer" data-step="1">
 <div class="slide-el" data-type="아이콘행" style="position:absolute; left:280px; top:370px; width:1360px; display:flex; align-items:center; gap:24px; background:white; border:4px solid #ddd; border-radius:16px; padding:12px 20px;">
 <div class="icon-circle" style="flex-shrink:0; background:#FF6B00; width:100px; height:100px; font-size:48px;">🏠</div>
-<div style="font-size:44px; font-weight:900; color:#FF6B00; width:220px; flex-shrink:0;">역할 1</div>
-<div style="font-size:36px; font-weight:900; color:#222;">설명 1</div>
+<div class="icon-row-role" style="font-size:44px; font-weight:900; color:#FF6B00; width:220px; flex-shrink:0;">역할 1</div>
+<div class="icon-row-desc" style="font-size:36px; font-weight:900; color:#222;">설명 1</div>
 </div>
 </div>
 <div class="step-layer" data-step="2">
 <div class="slide-el" data-type="아이콘행" style="position:absolute; left:280px; top:590px; width:1360px; display:flex; align-items:center; gap:24px; background:white; border:4px solid #ddd; border-radius:16px; padding:12px 20px;">
 <div class="icon-circle" style="flex-shrink:0; background:#E8F0FE; width:100px; height:100px; font-size:48px;">📊</div>
-<div style="font-size:44px; font-weight:900; color:#FF6B00; width:220px; flex-shrink:0;">역할 2</div>
-<div style="font-size:36px; font-weight:900; color:#222;">설명 2</div>
+<div class="icon-row-role" style="font-size:44px; font-weight:900; color:#FF6B00; width:220px; flex-shrink:0;">역할 2</div>
+<div class="icon-row-desc" style="font-size:36px; font-weight:900; color:#222;">설명 2</div>
 </div>
 </div>
 </div>
@@ -498,22 +508,22 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="step-layer" data-step="1">
 <div class="slide-el" data-type="아이콘행" style="position:absolute; left:280px; top:300px; width:1360px; display:flex; align-items:center; gap:24px; background:white; border:4px solid #ddd; border-radius:16px; padding:12px 20px;">
 <div class="icon-circle" style="flex-shrink:0; background:#FF6B00; width:100px; height:100px; font-size:48px;">🏠</div>
-<div style="font-size:44px; font-weight:900; color:#FF6B00; width:220px; flex-shrink:0;">역할 1</div>
-<div style="font-size:36px; font-weight:900; color:#222;">설명 1</div>
+<div class="icon-row-role" style="font-size:44px; font-weight:900; color:#FF6B00; width:220px; flex-shrink:0;">역할 1</div>
+<div class="icon-row-desc" style="font-size:36px; font-weight:900; color:#222;">설명 1</div>
 </div>
 </div>
 <div class="step-layer" data-step="2">
 <div class="slide-el" data-type="아이콘행" style="position:absolute; left:280px; top:480px; width:1360px; display:flex; align-items:center; gap:24px; background:white; border:4px solid #ddd; border-radius:16px; padding:12px 20px;">
 <div class="icon-circle" style="flex-shrink:0; background:#E8F0FE; width:100px; height:100px; font-size:48px;">📊</div>
-<div style="font-size:44px; font-weight:900; color:#FF6B00; width:220px; flex-shrink:0;">역할 2</div>
-<div style="font-size:36px; font-weight:900; color:#222;">설명 2</div>
+<div class="icon-row-role" style="font-size:44px; font-weight:900; color:#FF6B00; width:220px; flex-shrink:0;">역할 2</div>
+<div class="icon-row-desc" style="font-size:36px; font-weight:900; color:#222;">설명 2</div>
 </div>
 </div>
 <div class="step-layer" data-step="3">
 <div class="slide-el" data-type="아이콘행" style="position:absolute; left:280px; top:660px; width:1360px; display:flex; align-items:center; gap:24px; background:white; border:4px solid #ddd; border-radius:16px; padding:12px 20px;">
 <div class="icon-circle" style="flex-shrink:0; background:#FF6B00; width:100px; height:100px; font-size:48px;">🎯</div>
-<div style="font-size:44px; font-weight:900; color:#FF6B00; width:220px; flex-shrink:0;">역할 3</div>
-<div style="font-size:36px; font-weight:900; color:#222;">설명 3</div>
+<div class="icon-row-role" style="font-size:44px; font-weight:900; color:#FF6B00; width:220px; flex-shrink:0;">역할 3</div>
+<div class="icon-row-desc" style="font-size:36px; font-weight:900; color:#222;">설명 3</div>
 </div>
 </div>
 </div>
@@ -2585,13 +2595,13 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="slide-el flow-step1" data-type="1단계" style="position:absolute; left:300px; top:520px; width:620px; text-align:center; padding:38px 28px;">
-<div style="font-size:52px; font-weight:900; color:var(--color-text); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;">1단계 시작</div>
+<div class="flow-step-title" style="font-size:52px; font-weight:900; color:var(--color-text); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;">1단계 시작</div>
 </div>
 </div>
 <div class="step-layer" data-step="1">
 <div class="slide-el flow-arrow" data-type="화살표" style="position:absolute; left:978px; top:552px; font-size:60px; color:var(--color-accent);">→</div>
 <div class="slide-el flow-step2" data-type="2단계" style="position:absolute; left:1060px; top:520px; width:620px; text-align:center; padding:38px 28px;">
-<div style="font-size:52px; font-weight:900; color:var(--color-accent); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;">2단계 확장</div>
+<div class="flow-step-body" style="font-size:52px; font-weight:900; color:var(--color-accent); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;">2단계 확장</div>
 </div>
 </div>
 </div>
@@ -2602,11 +2612,11 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div><span class="hl" style="font-size:102px; line-height:1.2;">갈림길을 먼저 세운다</span></div>
 </div>
 </div>
-<div class="slide-el branch-root" data-type="기준질문" style="position:absolute; left:280px; top:440px; width:1360px; text-align:center; font-size:52px; font-weight:900; color:var(--color-text); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;">어떤 기준으로 볼까?</div>
+<div class="slide-el branch-root" data-type="기준질문" style="position:absolute; left:280px; top:440px; width:1360px; text-align:center; font-size:52px; font-weight:900; color:var(--color-text); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;"><div class="branch-root-text">어떤 기준으로 볼까?</div></div>
 </div>
 <div class="step-layer" data-step="1">
 <div class="slide-el branch-arrow" data-type="분기화살표" style="position:absolute; left:910px; top:560px; width:100px; text-align:center; font-size:66px; color:var(--color-accent);">↓</div>
-<div class="slide-el branch-result" data-type="선택경로" style="position:absolute; left:280px; top:660px; width:1360px; text-align:center; font-size:50px; font-weight:900; color:var(--color-accent); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;">그 기준에 맞는 경로</div>
+<div class="slide-el branch-result" data-type="선택경로" style="position:absolute; left:280px; top:660px; width:1360px; text-align:center; font-size:50px; font-weight:900; color:var(--color-accent); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;"><div class="branch-result-text">그 기준에 맞는 경로</div></div>
 </div>
 </div>
 <div class="slide" data-page-group="17" data-slide-id="T17_base" data-steps="2" data-type="비교박스" data-variant="0" id="T17_base" style="">
@@ -3184,13 +3194,13 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="items-row" style="top:360px; gap:80px; align-items:center;">
 <div class="slide-el split-left" data-appear-step="0" data-type="좌측" style="text-align:center; padding:60px 40px;">
 <div class="emoji-icon" style="font-size:160px; margin-bottom:32px;">🅰️</div>
-<div style="font-size:64px; font-weight:900; color:var(--color-text); margin-bottom:16px;">좌측 라벨</div>
-<div style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">좌측 설명 문구</div>
+<div class="split-compare-label" style="font-size:64px; font-weight:900; color:var(--color-text); margin-bottom:16px;">좌측 라벨</div>
+<div class="split-compare-desc" style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">좌측 설명 문구</div>
 </div>
 <div class="slide-el split-right" data-appear-step="0" data-type="우측" style="text-align:center; padding:60px 40px; border-left:6px solid var(--color-text-faint);">
 <div class="emoji-icon" style="font-size:160px; margin-bottom:32px;">🅱️</div>
-<div style="font-size:64px; font-weight:900; color:var(--color-accent); margin-bottom:16px;">우측 라벨</div>
-<div style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">우측 설명 문구</div>
+<div class="split-compare-label" style="font-size:64px; font-weight:900; color:var(--color-accent); margin-bottom:16px;">우측 라벨</div>
+<div class="split-compare-desc" style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">우측 설명 문구</div>
 </div>
 </div>
 </div>
@@ -3205,13 +3215,13 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="items-row" style="top:380px; gap:80px; align-items:center;">
 <div class="slide-el split-left" data-appear-step="0" data-type="좌측수치" style="text-align:center; padding:60px 40px;">
 <div class="emoji-icon" style="font-size:80px; margin-bottom:24px;">📉</div>
-<div style="font-size:144px; font-weight:900; color:var(--color-text-muted); margin-bottom:12px; line-height:1;">-100만</div>
-<div style="font-size:40px; font-weight:700; color:var(--color-text-sub); letter-spacing:1px;">무주택 1년</div>
+<div class="split-compare-value" style="font-size:144px; font-weight:900; color:var(--color-text-muted); margin-bottom:12px; line-height:1;">-100만</div>
+<div class="split-compare-label" style="font-size:40px; font-weight:700; color:var(--color-text-sub); letter-spacing:1px;">무주택 1년</div>
 </div>
 <div class="slide-el split-right" data-appear-step="0" data-type="우측수치" style="text-align:center; padding:60px 40px; border-left:6px solid var(--color-text-faint);">
 <div class="emoji-icon" style="font-size:80px; margin-bottom:24px;">📈</div>
-<div style="font-size:144px; font-weight:900; color:var(--color-accent); margin-bottom:12px; line-height:1;">+8,500만</div>
-<div style="font-size:40px; font-weight:700; color:var(--color-text-sub); letter-spacing:1px;">1주택 1년</div>
+<div class="split-compare-value" style="font-size:144px; font-weight:900; color:var(--color-accent); margin-bottom:12px; line-height:1;">+8,500만</div>
+<div class="split-compare-label" style="font-size:40px; font-weight:700; color:var(--color-text-sub); letter-spacing:1px;">1주택 1년</div>
 </div>
 </div>
 </div>
@@ -3225,10 +3235,10 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 <div class="items-row" style="top:390px; gap:80px; align-items:stretch;">
 <div class="slide-el split-left" data-appear-step="0" data-type="좌측" style="flex:1; text-align:center; padding:56px 44px;">
-<div style="font-size:78px; font-weight:900; color:var(--color-text); line-height:1.35;">먼저 왼쪽 기준</div>
+<div class="split-compare-label" style="font-size:78px; font-weight:900; color:var(--color-text); line-height:1.35;">먼저 왼쪽 기준</div>
 </div>
 <div class="slide-el split-right" data-appear-step="1" data-type="우측" style="flex:1; text-align:center; padding:56px 44px; border-left:6px solid var(--color-text-faint);">
-<div style="font-size:78px; font-weight:900; color:var(--color-accent); line-height:1.35;">다음 오른쪽 기준</div>
+<div class="split-compare-label" style="font-size:78px; font-weight:900; color:var(--color-accent); line-height:1.35;">다음 오른쪽 기준</div>
 </div>
 </div>
 </div>
@@ -3242,10 +3252,10 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 <div class="items-col" style="left:320px; top:320px; gap:56px; width:1280px; padding:0 0 40px;">
 <div class="slide-el vertical-top" data-appear-step="0" data-type="상단비교" style="text-align:center; padding:48px 56px;">
-<div style="font-size:76px; font-weight:900; color:var(--color-text); line-height:1.35;">먼저 상단 기준</div>
+<div class="split-compare-label" style="font-size:76px; font-weight:900; color:var(--color-text); line-height:1.35;">먼저 상단 기준</div>
 </div>
 <div class="slide-el vertical-bottom" data-appear-step="1" data-type="하단비교" style="max-width:980px; margin:0 auto; text-align:center; padding:48px 56px; border-top:6px solid var(--color-text-faint);">
-<div style="font-size:76px; font-weight:900; color:var(--color-accent); line-height:1.35;">그다음 하단 기준</div>
+<div class="split-compare-label" style="font-size:76px; font-weight:900; color:var(--color-accent); line-height:1.35;">그다음 하단 기준</div>
 </div>
 </div>
 </div>
@@ -3931,14 +3941,9 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="text-area" style="position:absolute; left:160px; top:140px; width:1600px; text-align:center;">
-<div class="hl-wrap" style="align-items:center;">
-<div><span class="hl" style="font-size:114px; line-height:1.16;">상단 강조</span></div>
-</div>
-</div>
 <div style="position:absolute; left:320px; top:350px; width:1280px; height:12px; border-radius:999px; background:linear-gradient(90deg, rgba(255,106,0,0), rgba(255,106,0,0.95), rgba(255,106,0,0));"></div>
 <div class="slide-el reveal-band" data-group="step2" data-type="전개" style="position:absolute; left:250px; top:516px; width:1420px; padding:40px 64px; border:4px solid var(--color-accent); border-radius:36px; background:rgba(255,106,0,0.08); text-align:center;">
-<div style="font-size:58px; font-weight:800; color:var(--color-text); line-height:1.52;">두 번째 줄</div>
+<div class="reveal-band-text" style="font-size:58px; font-weight:800; color:var(--color-text); line-height:1.52;">두 번째 줄</div>
 </div>
 </div>
 </div>
@@ -3952,18 +3957,15 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 <div class="step-layer" data-step="1">
 <div class="items-col" style="top:210px; gap:52px; width:1540px; margin:0 auto;">
-<div class="slide-el left-rail-title" data-appear-step="0" data-type="제목" style="padding-left:40px; border-left:16px solid var(--color-accent); text-align:left;">
-<span class="hl" style="font-size:108px; line-height:1.16;">좌측 바 제목</span>
-</div>
 <div class="slide-el left-rail-desc" data-appear-step="1" data-group="step2" data-type="전개" style="margin-left:64px; max-width:1260px; padding:32px 38px; border-radius:28px; background:rgba(0,0,0,0.04); text-align:left; font-size:60px; font-weight:800; color:var(--color-text-sub); line-height:1.48;">
-좌측 바 설명
+<span class="left-rail-desc-text">좌측 바 설명</span>
 </div>
 </div>
 </div>
 </div>
 <div class="slide" data-page-group="58" data-slide-id="T58_base" data-steps="2" data-type="인용형전개" data-variant="0" id="T58_base" style="">
 <div class="step-layer" data-step="0">
-<div class="slide-el quote-card" data-group="step2" data-type="인용" style="position:absolute; left:200px; top:140px; width:1520px; padding:56px 64px 52px; border:4px solid rgba(255,106,0,0.26); border-radius:36px; background:rgba(255,106,0,0.05);">
+<div class="slide-el quote-card" data-group="step1" data-type="인용" style="position:absolute; left:200px; top:140px; width:1520px; padding:56px 64px 52px; border:4px solid rgba(255,106,0,0.26); border-radius:36px; background:rgba(255,106,0,0.05);">
 <div style="font-size:126px; font-weight:900; color:var(--color-accent); line-height:0.8; margin-bottom:24px;">“</div>
 <div class="hl-wrap" style="align-items:flex-start;">
 <div><span class="hl" style="font-size:86px; line-height:1.26;">인용형 제목</span></div>
@@ -3972,7 +3974,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 <div class="step-layer" data-step="1">
 <div class="slide-el quote-tail" data-type="전개" data-group="step2" style="position:absolute; left:280px; top:560px; width:1280px; font-size:42px; font-weight:800; color:var(--color-text-sub); line-height:1.48; padding-left:20px; border-left:8px solid var(--color-accent); word-break:keep-all; overflow-wrap:anywhere;">
-인용형 설명
+<span class="quote-tail-text">인용형 설명</span>
 </div>
 </div>
 </div>
@@ -3986,8 +3988,13 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 <div class="step-layer" data-step="1">
 <div class="slide-el step-card step-card-2" data-group="step2" data-type="둘째줄" style="position:absolute; left:290px; top:540px; width:1340px; padding:36px 50px; border-radius:32px; background:#fff; border:4px solid rgba(0,0,0,0.08); box-shadow:0 14px 34px rgba(0,0,0,0.08); text-align:center;">
-<div style="font-size:52px; font-weight:800; color:var(--color-text-sub); line-height:1.46; word-break:keep-all; overflow-wrap:anywhere;">카드형 설명</div>
+<div class="step-card-body" style="font-size:52px; font-weight:800; color:var(--color-text-sub); line-height:1.46; word-break:keep-all; overflow-wrap:anywhere;">카드형 설명</div>
 </div>
+</div>
+</div>
+<div class="slide" data-page-group="1" data-slide-id="T01_base" data-steps="1" data-type="말풍선+텍스트" data-variant="0" id="T01_base" style="">
+<div class="step-layer" data-step="0">
+<div class="bubble" style="position:absolute; top:80px; left:1120px; width:680px;">\"이건 정말 괜찮을까요?\"</div>
 </div>
 </div>
 <div class="slide" data-page-group="23" data-slide-id="T23_base" data-steps="2" data-type="CTA버튼" data-variant="0" id="T23_base" style="">
@@ -4566,6 +4573,6 @@ width: 680px;</span>
 <button class="fmt-btn" data-align="right" title="오른쪽 정렬">≡</button>
 </div>
 <div id="slide-jump-nav"></div>
-<script src="./assets/slide-editor.js?v=20260421214525"></script>
+<script src="./assets/slide-editor.js?v=20260422022151"></script>
 <div class="gs-crosshair-h" id="gs-crosshair-h" style="top: 195px; display: none;"></div><div class="gs-crosshair-v" id="gs-crosshair-v" style="left: 960px; display: none;"></div>
 <div id="filmstrip"><div id="filmstrip-inner"></div></div><div id="edit-mode-badge" style="position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 99999; background: rgb(230, 57, 70); color: rgb(255, 255, 255); padding: 6px 18px; border-radius: 8px; font-size: 14px; font-weight: 900; pointer-events: none; animation: 1.5s ease 0s infinite normal none running editBadgeBlink; display: none;">편집중 — 자동저장 10초</div></body></html>

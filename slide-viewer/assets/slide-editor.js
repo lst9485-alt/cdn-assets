@@ -37,6 +37,7 @@
 
   // Space 키 상태 추적
   document.addEventListener('keydown', e => {
+    if (e.target && e.target.closest('input, textarea, [contenteditable="true"]')) return;
     if (e.code === 'Space' && editMode && !isEditing) { spaceHeld = true; e.preventDefault(); }
   });
   document.addEventListener('keyup', e => {
@@ -266,11 +267,35 @@
     updateSlideJumpNav();
   }
 
+  function isGeneratedDeck() {
+    return document.body.classList.contains('frozen-legacy-deck');
+  }
+
+  function getSlideScriptPreview(slide) {
+    if (!slide) return '';
+    return (slide.dataset.notes || '').trim();
+  }
+
+  function setSlideJumpNotesText(text) {
+    const nav = document.getElementById('slide-jump-nav');
+    if (!nav) return;
+    const notes = nav.querySelector('.sj-notes');
+    if (!notes) return;
+    notes.textContent = (text || '').trim() || '대본 없음';
+  }
+
+  function setSlideJumpNotesForSlide(slide) {
+    setSlideJumpNotesText(getSlideScriptPreview(slide));
+  }
+
   function buildSlideJumpNav() {
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
     let toggle = nav.querySelector('.sj-toggle');
+    let toolbar = nav.querySelector('.sj-toolbar');
+    let search = nav.querySelector('.sj-search');
     let grid = nav.querySelector('.sj-grid');
+    let notes = nav.querySelector('.sj-notes');
     if (!toggle) {
       toggle = document.createElement('button');
       toggle.className = 'sj-toggle';
@@ -285,10 +310,40 @@
       });
       nav.appendChild(toggle);
     }
+    if (!toolbar && !isGeneratedDeck()) {
+      toolbar = document.createElement('div');
+      toolbar.className = 'sj-toolbar';
+      search = document.createElement('input');
+      search.className = 'sj-search';
+      search.type = 'text';
+      search.placeholder = '번호 / T번호 / 타입';
+      search.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter') return;
+        const q = (search.value || '').trim().toLowerCase();
+        if (!q) return;
+        const first = [...grid.querySelectorAll('.sj-item')].find(item => item.style.display !== 'none');
+        if (!first) return;
+        first.click();
+      });
+      search.addEventListener('input', () => {
+        const q = (search.value || '').trim().toLowerCase();
+        grid.querySelectorAll('.sj-item').forEach(item => {
+          const hay = ((item.dataset.search || '') + ' ' + (item.textContent || '')).toLowerCase();
+          item.style.display = !q || hay.includes(q) ? '' : 'none';
+        });
+      });
+      toolbar.appendChild(search);
+      nav.appendChild(toolbar);
+    }
     if (!grid) {
       grid = document.createElement('div');
       grid.className = 'sj-grid';
       nav.appendChild(grid);
+    }
+    if (!notes && !isGeneratedDeck()) {
+      notes = document.createElement('div');
+      notes.className = 'sj-notes';
+      nav.appendChild(notes);
     }
     grid.innerHTML = '';
     const basePgs = getVisibleBasePageGroups();
@@ -297,6 +352,7 @@
     sortedPgs.forEach(pg => {
       const baseSlide = [...slides].find(s => s.dataset.pageGroup === pg && (s.dataset.variant === '0' || !s.dataset.variant));
       if (!baseSlide) return;
+      const baseType = baseSlide.dataset.type || '';
       const canonicalIdx = [...slides].indexOf(baseSlide);
       const displayNumber = formatEditorDisplayNumber(pg, '0');
       if (!displayNumber) return;
@@ -305,6 +361,7 @@
       item.dataset.pg = pg;
       item.dataset.canonicalIdx = String(canonicalIdx);
       item.textContent = displayNumber;
+      item.dataset.search = [displayNumber, pg, baseType, baseSlide.dataset.displayLabel || ''].join(' ');
       item.addEventListener('click', () => {
         const overview = document.getElementById('overview');
         if (overview && overview.dataset.open === '1') {
@@ -325,6 +382,7 @@
     });
     const active = grid.querySelector('.sj-item.active');
     if (active) active.scrollIntoView({ block: 'nearest' });
+    if (notes) setSlideJumpNotesForSlide(slides[currentSlide]);
   }
 
   function updateSlideJumpNav() {
@@ -338,6 +396,7 @@
     });
     const active = grid.querySelector('.sj-item.active');
     if (active) active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    setSlideJumpNotesForSlide(slides[currentSlide]);
   }
 
   function reorderSlide(fromIdx, toIdx) {
@@ -477,6 +536,7 @@
   ];
 
   const PG_TO_BUCKET = {
+    1:  'special',
     2:  'title',    3:  'title',    4:  'title',
     5:  'title',    6:  'title',    7:  'title',    8:  'title',
     9:  'title',    10: 'title',    11: 'title',    12: 'title',
@@ -495,6 +555,7 @@
   };
 
   const PG_TO_CATEGORY = {
+    1:  '아이콘+글',
     2:  '아이콘+글',   3:  '카드/리스트', 4:  '카드/리스트',
     5:  '카드/리스트', 6:  '카드/리스트', 7:  '아이콘+글',   8:  '아이콘+글',
     9:  '플로우',      10: '플로우',      11: '차트/다이어그램', 12: '차트/다이어그램',
@@ -2508,10 +2569,10 @@
   }
 
   document.addEventListener('keydown', e => {
+    if (e.target && e.target.closest('input, textarea, [contenteditable="true"]')) return;
     // Ctrl+S: 저장 (텍스트 편집 중에도 허용)
     if ((e.ctrlKey || e.metaKey) && e.key === 's') {
       e.preventDefault();
-      if (isGitHubPages && !ghIsDirty()) { showToast('변경사항 없음', 2000); return; }
       saveToFile(true);
       return;
     }
@@ -2527,6 +2588,7 @@
     if ((e.ctrlKey || e.metaKey) && e.key === 'c' && editMode && !isEditing) {
       if (selectedEl) {
         clipboardEl = selectedEl.outerHTML;
+        clipboardStep = parseInt(selectedEl.closest('.step-layer')?.dataset.step || '0', 10) || 0;
         showToast('요소 복사됨', 1500);
       }
       return;
@@ -2536,6 +2598,7 @@
       if (selectedEl) {
         e.preventDefault();
         clipboardEl = selectedEl.outerHTML;
+        clipboardStep = parseInt(selectedEl.closest('.step-layer')?.dataset.step || '0', 10) || 0;
         pushUndo();
         const slide = slides[currentSlide];
         const layer = selectedEl.closest('.step-layer');
@@ -2562,8 +2625,16 @@
       newEl.style.top  = (parseInt(newEl.style.top)  || 0) + 20 + 'px';
       newEl.classList.remove('edit-selected', 'edit-group-selected');
       delete newEl.dataset.group;
-      const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
-      layer0.appendChild(newEl);
+      const targetLayer =
+        slides[currentSlide].querySelector(`.step-layer[data-step="${clipboardStep}"]`) ||
+        slides[currentSlide].querySelector('.step-layer[data-step="0"]');
+      if (typeof insertEditableCloneNearReference === 'function') {
+        insertEditableCloneNearReference(newEl, selectedEl, targetLayer);
+      } else if (selectedEl && selectedEl.parentElement === targetLayer) {
+        targetLayer.insertBefore(newEl, selectedEl.nextSibling);
+      } else {
+        targetLayer.appendChild(newEl);
+      }
       selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
       selectedEl = newEl; selectedEls = [newEl];
       newEl.classList.add('edit-selected');
@@ -2624,9 +2695,7 @@
         const child = groupParent.querySelector('.child-selected');
         if (child) {
           pushUndo();
-          child.style.visibility = 'hidden';
-          child.style.pointerEvents = 'none';
-          child.classList.remove('child-selected');
+          removeEditableElement(child, slides[currentSlide]);
           if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
           return;
         }
@@ -2635,12 +2704,7 @@
       const slide = slides[currentSlide];
       const toDelete = individualMode ? [selectedEl] : [...selectedEls];
       toDelete.forEach(el => {
-        const layer = el.closest('.step-layer');
-        el.remove();
-        if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-          layer.remove();
-          recalcSteps(slide);
-        }
+        removeEditableElement(el, slide);
       });
       isResizing = false;
       resizeCorner = null;
@@ -3196,6 +3260,7 @@
     document.addEventListener('mouseup', () => {
       if (dragGuide && gUndoPushed) {
         // 가이드 위치가 변경됨 → 저장
+        if (isGitHubPages && typeof ghMarkDirty === 'function') ghMarkDirty();
         if (dirHandle) {
           saveToFile();
         } else {
@@ -3507,6 +3572,59 @@
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
   let expandedOverviewGroups = new Set();  // 확장된 page-group(string) 집합 — overview 전용
 
+  function deleteOverviewSlideAt(idx) {
+    if (slides.length <= 1) return;
+    pushUndo();
+    const container = document.getElementById('stage');
+    const target = slides[idx];
+    const deletedPg = target ? target.dataset.pageGroup : null;
+    container.removeChild(target);
+    slides = [...container.querySelectorAll(':scope > .slide')];
+    rebuildSlidesByKey();
+    if (deletedPg && ![...slides].some(s => s.dataset.pageGroup === deletedPg)) {
+      expandedFilmGroups.delete(deletedPg);
+      expandedOverviewGroups.delete(deletedPg);
+    }
+    currentSlide = Math.min(idx, slides.length - 1);
+    slides.forEach(s => {
+      s.classList.remove('active', 'leave-left', 'enter-from-left');
+      s.style.opacity = '';
+      s.style.transform = '';
+      s.style.transition = '';
+    });
+    if (slides[currentSlide]) {
+      slides[currentSlide].classList.add('active');
+      showStep(slides[currentSlide], 0);
+    }
+    currentStep = 0;
+    currentOrder = 0;
+    buildFilmstrip();
+    buildOverview();
+    if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
+    ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
+  }
+
+  function duplicateOverviewSlideAt(idx) {
+    pushUndo();
+    const container = document.getElementById('stage');
+    const source = slides[idx];
+    const clone = source.cloneNode(true);
+    const origId = clone.dataset.slideId || clone.id || '';
+    clone.dataset.slideId = origId + '_copy_' + Date.now();
+    clone.id = '';
+    clone.classList.remove('active');
+    const next = source.nextElementSibling;
+    if (next) container.insertBefore(clone, next);
+    else container.appendChild(clone);
+    slides = [...container.querySelectorAll(':scope > .slide')];
+    rebuildSlidesByKey();
+    buildFilmstrip();
+    buildOverview();
+    if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
+    ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
+    if (typeof showToast === 'function') showToast('슬라이드 복사 완료', 2000);
+  }
+
   function buildOverview() {
     ovGrid.innerHTML = '';
     // 에디터(slides-editor.html)에서는 3구역(title/no-title/special) + 카테고리 표시
@@ -3591,6 +3709,7 @@
         if (isExpanded) cls += ' show';
       }
       item.className = cls;
+      item.tabIndex = 0;
       item._slideIdx = slideIdx;
       if (pg) item.dataset.pageGroup = pg;
       if (variant != null) item.dataset.variant = variant;
@@ -3623,6 +3742,28 @@
 
       item.appendChild(thumb);
       item.appendChild(num);
+      if (!document.body.classList.contains('frozen-legacy-deck')) {
+        const actions = document.createElement('div');
+        actions.className = 'ov-actions';
+        const dupBtn = document.createElement('button');
+        dupBtn.type = 'button';
+        dupBtn.className = 'ov-action-btn';
+        dupBtn.textContent = '복제';
+        dupBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          duplicateOverviewSlideAt(slideIdx);
+        });
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'ov-action-btn danger';
+        delBtn.textContent = '삭제';
+        delBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          deleteOverviewSlideAt(slideIdx);
+        });
+        actions.append(dupBtn, delBtn);
+        item.appendChild(actions);
+      }
 
       // 카드 클릭 = 무조건 이동 + 모달 닫기
       item.addEventListener('click', (e) => {
@@ -3631,9 +3772,22 @@
         closeOverview();
         goToSlide(slideIdx);
       });
+      item.addEventListener('mouseenter', () => {
+        if (typeof setSlideJumpNotesForSlide === 'function') setSlideJumpNotesForSlide(slide);
+      });
+      item.addEventListener('mouseleave', () => {
+        if (typeof setSlideJumpNotesForSlide === 'function') setSlideJumpNotesForSlide(slides[currentSlide]);
+      });
+      item.addEventListener('focus', () => {
+        if (typeof setSlideJumpNotesForSlide === 'function') setSlideJumpNotesForSlide(slide);
+      });
+      item.addEventListener('blur', () => {
+        if (typeof setSlideJumpNotesForSlide === 'function') setSlideJumpNotesForSlide(slides[currentSlide]);
+      });
       item.addEventListener('contextmenu', (e) => {
         e.preventDefault();
         e.stopPropagation();
+        if (typeof setSlideJumpNotesForSlide === 'function') setSlideJumpNotesForSlide(slide);
         showSlideContextMenu(e.clientX, e.clientY, slideIdx);
       });
       item.addEventListener('mousedown', (e) => {
@@ -3748,36 +3902,7 @@
     delBtn.addEventListener('click', () => {
       try {
         hideSlideContextMenu();
-        if (slides.length <= 1) return;
-        // overview 전용 삭제: goToSlide 없이 직접 처리 (overview 유지)
-        pushUndo();
-        const container = document.getElementById('stage');
-        const target = slides[idx];
-        const deletedPg = target ? target.dataset.pageGroup : null;
-        container.removeChild(target);
-        slides = [...container.querySelectorAll(':scope > .slide')];
-        rebuildSlidesByKey();
-        if (deletedPg && ![...slides].some(s => s.dataset.pageGroup === deletedPg)) {
-          expandedFilmGroups.delete(deletedPg);
-          expandedOverviewGroups.delete(deletedPg);
-        }
-        // transition class 정리 + active + showStep (Codex 권고: 빈 화면 방지)
-        currentSlide = Math.min(idx, slides.length - 1);
-        slides.forEach(s => {
-          s.classList.remove('active', 'leave-left', 'enter-from-left');
-          s.style.opacity = '';
-          s.style.transform = '';
-          s.style.transition = '';
-        });
-        if (slides[currentSlide]) {
-          slides[currentSlide].classList.add('active');
-          showStep(slides[currentSlide], 0);
-        }
-        currentStep = 0;
-        currentOrder = 0;
-        buildFilmstrip();
-        buildOverview();
-        ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
+        deleteOverviewSlideAt(idx);
       } catch (err) {
         if (typeof showToast === 'function') showToast('삭제 오류: ' + err.message + '\n' + (err.stack || ''), 8000);
       }
@@ -3792,25 +3917,7 @@
     copyBtn.addEventListener('click', () => {
       try {
         hideSlideContextMenu();
-        pushUndo();
-        const container = document.getElementById('stage');
-        const source = slides[idx];
-        const clone = source.cloneNode(true);
-        // 새 slide-id 부여 (원본_copy_타임스탬프)
-        const origId = clone.dataset.slideId || clone.id || '';
-        clone.dataset.slideId = origId + '_copy_' + Date.now();
-        clone.id = '';
-        clone.classList.remove('active');
-        // 원본 바로 뒤에 삽입
-        const next = source.nextElementSibling;
-        if (next) container.insertBefore(clone, next);
-        else container.appendChild(clone);
-        slides = [...container.querySelectorAll(':scope > .slide')];
-        rebuildSlidesByKey();
-        buildFilmstrip();
-        buildOverview();
-        ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
-        if (typeof showToast === 'function') showToast('슬라이드 복사 완료', 2000);
+        duplicateOverviewSlideAt(idx);
       } catch (err) {
         if (typeof showToast === 'function') showToast('복사 오류: ' + err.message, 5000);
       }
@@ -3952,6 +4059,7 @@
   let autoSaveTimer = null;
   let lastSaveTime = 0; // 마지막 저장 시각 (ms)
   let isSaving = false;
+  let pendingLocalSave = false;
 
   async function ensureDirHandle() {
     if (isGitHubPages) return true;
@@ -4173,8 +4281,19 @@
   }
 
   async function saveToFile(force) {
+    if (typeof commitActiveEditors === 'function') {
+      await commitActiveEditors();
+    }
     if (isGitHubPages) { await ghSaveToFile(force); return; }
-    if (!dirHandle || isSaving) return;
+    if (!dirHandle && force) {
+      const ok = await ensureDirHandle();
+      if (!ok) return;
+    }
+    if (!dirHandle) return;
+    if (isSaving) {
+      pendingLocalSave = pendingLocalSave || !!force;
+      return;
+    }
     isSaving = true;
     // EF11: 저장 전 외부 변경 감지
     try {
@@ -4199,6 +4318,11 @@
       if (writable) try { await writable.abort(); } catch(_) {}
     } finally {
       isSaving = false;
+      if (pendingLocalSave) {
+        const rerunForce = pendingLocalSave;
+        pendingLocalSave = false;
+        setTimeout(() => { saveToFile(rerunForce); }, 0);
+      }
     }
   }
 
@@ -4212,7 +4336,6 @@
     } catch(e) { /* ignore */ }
     return false;
   }
-
   // ── GitHub 저장 (Contents API) ──
   const GH_REPO = 'lst9485-alt/cdn-assets';
   const GH_TOKEN_KEY = 'gh-save-token';
@@ -4225,6 +4348,10 @@
   let _ghFileSha = null;
   let _ghDirty = false;
   let _ghSaving = false;
+  let _ghStageObserver = null;
+  let _ghDirtyVersion = 0;
+  let _ghPendingSave = false;
+  let _ghPendingForce = false;
 
   function ghGetToken() {
     if (_ghToken) return _ghToken;
@@ -4280,11 +4407,18 @@
   }
 
   async function ghSaveToFile(force) {
-    if (_ghSaving) { if (force) showToast('저장 진행 중...', 2000); return; }
+    if (_ghSaving) {
+      _ghPendingSave = true;
+      _ghPendingForce = _ghPendingForce || !!force;
+      if (force) showToast('저장 진행 중... 변경분을 이어서 저장합니다.', 2000);
+      return;
+    }
     if (!force && !_ghDirty) return;
     const token = ghGetToken();
     if (!token) { showToast('GitHub 토큰이 없습니다. ⚙ 아이콘을 눌러 설정하세요.', 4000); return; }
     _ghSaving = true;
+    const startDirtyVersion = _ghDirtyVersion;
+    let saveCompleted = false;
     showToast('GitHub에 저장 중...', 2000);
     try {
       let content;
@@ -4319,12 +4453,18 @@
       if (res.ok) {
         const data = await res.json();
         _ghFileSha = data.content.sha;
-        _ghDirty = false;
+        saveCompleted = true;
+        if (_ghDirtyVersion === startDirtyVersion) {
+          _ghDirty = false;
+        } else {
+          _ghDirty = true;
+          _ghPendingSave = true;
+        }
         // SHA 마커 업데이트 (다음 열 때 최신 판별용)
         let shaMeta = document.querySelector('meta[name="gh-sha"]');
         if (!shaMeta) { shaMeta = document.createElement('meta'); shaMeta.name = 'gh-sha'; document.head.appendChild(shaMeta); }
         shaMeta.content = _ghFileSha;
-        showToast('저장 완료!', 4000);
+        showToast('GitHub 저장 완료! 공개 URL 반영은 잠시 늦을 수 있습니다.', 4000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
         await _ghHandleConflict(encoded, filePath);
@@ -4340,6 +4480,13 @@
       showToast('저장 오류: ' + e.message, 5000);
     } finally {
       _ghSaving = false;
+      const rerun = saveCompleted && (_ghPendingSave || _ghPendingForce || (_ghDirty && _ghDirtyVersion > startDirtyVersion));
+      const rerunForce = _ghPendingForce;
+      _ghPendingSave = false;
+      _ghPendingForce = false;
+      if (rerun) {
+        setTimeout(() => { ghSaveToFile(rerunForce || _ghDirty); }, 0);
+      }
     }
   }
 
@@ -4366,7 +4513,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
-        showToast('저장 완료!', 4000);
+        showToast('GitHub 저장 완료! 공개 URL 반영은 잠시 늦을 수 있습니다.', 4000);
         try { showSaveStatus(); } catch(_) {}
       } else {
         showToast('재시도 실패 (' + res.status + ')', 4000);
@@ -4381,8 +4528,59 @@
     showToast('GitHub 토큰이 만료되었습니다. 설정 아이콘을 눌러 다시 입력해주세요.', 5000);
   }
 
-  function ghMarkDirty() { _ghDirty = true; }
+  function ghMarkDirty() {
+    _ghDirty = true;
+    _ghDirtyVersion += 1;
+  }
   function ghIsDirty() { return _ghDirty; }
+
+  function ghBindDirtyObserver(stageEl) {
+    if (!isGitHubPages || !stageEl) return;
+    ghUnbindDirtyObserver();
+    _ghStageObserver = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (typeof editMode !== 'undefined' && !editMode) return;
+        if (m.type === 'childList') {
+          ghMarkDirty();
+          if (_ghSaving) _ghPendingSave = true;
+          return;
+        }
+        if (m.type === 'characterData') {
+          ghMarkDirty();
+          if (_ghSaving) _ghPendingSave = true;
+          return;
+        }
+        if (m.type === 'attributes') {
+          const attr = m.attributeName || '';
+          if (
+            attr === 'style' ||
+            attr === 'src' ||
+            attr === 'href' ||
+            attr === 'class' ||
+            attr.startsWith('data-')
+          ) {
+            ghMarkDirty();
+            if (_ghSaving) _ghPendingSave = true;
+            return;
+          }
+        }
+      }
+    });
+    _ghStageObserver.observe(stageEl, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['style', 'src', 'href', 'class', 'data-notes', 'data-group', 'data-step', 'data-steps']
+    });
+  }
+
+  function ghUnbindDirtyObserver() {
+    if (_ghStageObserver) {
+      _ghStageObserver.disconnect();
+      _ghStageObserver = null;
+    }
+  }
 
   // ── 텍스트 편집 시 dirty 감지 (contenteditable) ──
   if (isGitHubPages) {
@@ -4512,20 +4710,20 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _ghAddSettingsIcon);
     else _ghAddSettingsIcon();
   }
-
   // ── 편집 모드 ──
   // [data-type]:not(.slide) — .slide 자체는 슬라이드 배경(data-type="카드" 등이 붙음), 편집 대상 아님
   const EDITABLE_SEL = '.bubble, .text-area, .bg-label, .slide-el:not(.no-edit-select), img, .emoji-icon, .section-badge, .corner-label, .step-dim, [data-type]:not(.slide):not(.no-edit-select), .tl-circle, .tl-box, .tl-desc, .items-row, .items-col, .items-grid';
   let editMode = false;
   let isEditing = false;
   let clipboardEl = null;
+  let clipboardStep = 0;
   let selectedEl = null;
   let selectedEls = [];
   let elAnchors = [];
   // SVG connector(.step-timeline > svg) 동반 이동: SVGElement는 offsetLeft 미지원이라 selection 안 넣고 별도 추적
   let svgDragAnchors = [];
   let isDragging = false;
-  const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .check-text, .check-box, .bar-label, .bar-value, .bar-fill, .hbar-label, .hbar-val, .stat-num, .stat-label, .stat-detail-item, .icon-label, .icon-circle, .icon-flow-label, .flow-box, .flow-arrow, .alert-text, .alert-icon, .compare-header, .compare-item, .quote-text, .quote-source, .tag-chip, .tl-box, .tl-circle, .btn-pill, .cta-btn, .contrast-word, .contrast-sub';
+  const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .num-item, .check-text, .check-box, .check-item, .bar-label, .bar-value, .bar-fill, .hbar-label, .hbar-val, .chart-title, .chart-label, .chart-val, .lc-end-val, .stat-num, .stat-label, .stat-detail-item, .big-stat, .stat-block, .icon-label, .icon-row-role, .icon-row-desc, .icon-circle, .icon-flow-label, .icon-flow-icon, .icon-flow-arrow, .flow-box, .flow-arrow, .alert-text, .alert-icon, .compare-header, .compare-item, .compare-emoji-icon, .vs-badge, .quote-text, .quote-source, .tag-chip, .tl-box, .tl-circle, .tl-desc, .btn-pill, .cta-btn, .subscribe, .contrast-word, .contrast-sub, .contrast-top, .contrast-bottom, .contrast-quote, .contrast-vs, .contrast-source, .chapter-pill, .chapter-flow-title, .chapter-flow-desc, .chapter-flow-icon, .bullet-text, .bullet-summary, .bullet-icon, .comp-label, .comp-val, .comp-summary, .comp-table, .branch-question, .branch-sub, .branch-result, .branch-summary, .branch-node, .branch-arrow, .eq-title, .eq-desc, .eq-op, .eq-hl, .eq-chain-box, .eq-chain-sub, .eq-result, .flow-detail-title, .flow-detail-sub, .flow-detail-list, .flow-detail-icon, .flow-highlight, .flow-step-title, .flow-step-body, .branch-root-text, .branch-result-text, .split-compare-label, .split-compare-desc, .split-compare-value, .split-list-num, .split-list-title, .split-list-text, .split-stat-icon, .split-stat-label, .split-stat-value, .split-stat-desc, .split-summary, .icon-flow-stat-emoji, .icon-flow-stat-text, .icon-flow-stat-num, .icon-flow-stat-unit, .icon-flow-highlight, .counter-label, .counter-sub, .line1-emph, .emph-line1, .emph-line2, .person-role, .person-desc, .blog-counter, .blog-meta, .term-en, .term-desc, .img-caption, .step-title, .reveal-line1, .reveal-line2, .two-step-title, .two-step-desc, .point-title, .point-desc, .vertical-line1, .vertical-line2, .left-rail-title, .reveal-band-text, .left-rail-desc, .left-rail-desc-text, .quote-tail, .quote-tail-text, .step-card-body';
   // 비텍스트 자식 (fontSize 기반 리사이즈 대상 아님 — 이들은 기존 slide-el 박스 리사이즈로 처리)
   const NON_TEXT_CHILD_SEL = '.bar-fill, .check-box, .icon-circle, .tl-circle';
   // 툴바/팬널/팔레트 영역 — 편집 중 클릭 시 focus/selection 유지해야 하는 대상
@@ -4563,9 +4761,21 @@
   // ── 드래그 선택 박스 ──
   let selectBoxActive = false;
   let selectBoxOrigin = null;
+  let selectBoxAdditive = false;
+  let selectBoxSeedEls = [];
+  let pendingShiftSelect = null;
   // ── Undo / Redo ──
   const undoStack = [];
   const redoStack = [];
+  let activeSvgTextEditor = null;
+
+  if (
+    document.body &&
+    document.body.dataset.generated === 'true' &&
+    /260419-slides\.html$/.test(location.pathname)
+  ) {
+    document.body.classList.add('frozen-legacy-deck');
+  }
 
   async function toggleEditMode() {
     // ── 진입 시 파일 변경 감지 ──
@@ -4621,16 +4831,22 @@
       }
       if (autoSaveTimer) clearInterval(autoSaveTimer);
       autoSaveTimer = setInterval(saveToFile, isGitHubPages ? GH_AUTO_SAVE_INTERVAL : 30000);
+      if (isGitHubPages && typeof ghBindDirtyObserver === 'function') {
+        ghBindDirtyObserver(document.getElementById('stage'));
+      }
       // ── 편집중 배지 표시 ──
       showEditBadge(true);
     } else {
       // ── 편집중 배지 먼저 숨김 (아래 cleanup 중 예외 나도 배지는 반드시 사라지게) ──
       showEditBadge(false);
+      if (isGitHubPages && typeof ghUnbindDirtyObserver === 'function') {
+        ghUnbindDirtyObserver();
+      }
       try {
         userZoom = 1; panX = 0; panY = 0;
         clearInterval(autoSaveTimer);
         autoSaveTimer = null;
-        (isGitHubPages ? saveToFile() : saveToFile(true)).then(() => releaseTabLock());
+        saveToFile(true).then(() => releaseTabLock());
         document.querySelectorAll('[data-group^="ag"]').forEach(el => delete el.dataset.group);
         // dim-handle 배지 제거
         document.querySelectorAll('.dim-handle').forEach(b => b.remove());
@@ -4641,6 +4857,9 @@
         if (slides[currentSlide]) showStep(slides[currentSlide], 0);
         clearSelection();
         selectBoxActive = false;
+        selectBoxAdditive = false;
+        selectBoxSeedEls = [];
+        pendingShiftSelect = null;
         const sb = document.getElementById('select-box');
         if (sb) sb.style.display = 'none';
         undoStack.length = 0;
@@ -4689,9 +4908,106 @@
     if (bar) { bar.classList.remove('visible'); bar.style.display = 'none'; }
   }
 
+  function isSvgTextEditable(el) {
+    return !!(
+      el &&
+      el.namespaceURI === 'http://www.w3.org/2000/svg' &&
+      ['text', 'tspan'].includes((el.tagName || '').toLowerCase())
+    );
+  }
+
+  function enterSvgTextEditor(el) {
+    const oldText = el.textContent || '';
+    const rect = el.getBoundingClientRect();
+    const cs = window.getComputedStyle(el);
+    const ta = document.createElement('textarea');
+    ta.className = 'svg-text-editor';
+    ta.value = oldText;
+    ta.setAttribute('spellcheck', 'false');
+    ta.style.cssText = [
+      'position:fixed',
+      'z-index:120000',
+      `left:${Math.max(8, rect.left - 8)}px`,
+      `top:${Math.max(8, rect.top - 8)}px`,
+      `width:${Math.max(160, rect.width + 16)}px`,
+      `min-height:${Math.max(44, rect.height + 16)}px`,
+      'padding:8px 10px',
+      'border:2px solid rgba(255,106,0,0.45)',
+      'border-radius:10px',
+      'background:#fff',
+      'color:#111',
+      'box-shadow:0 8px 24px rgba(0,0,0,0.18)',
+      `font:${cs.font}`,
+      `line-height:${cs.lineHeight}`,
+      `letter-spacing:${cs.letterSpacing}`,
+      'resize:both',
+      'overflow:auto',
+      'white-space:pre-wrap'
+    ].join(';');
+    document.body.appendChild(ta);
+    showFormatBar(el);
+    requestAnimationFrame(() => {
+      ta.focus();
+      ta.select();
+    });
+
+    const finish = (commit) => {
+      ta.removeEventListener('keydown', onKeydown);
+      ta.removeEventListener('blur', onBlur);
+      if (ta.parentNode) ta.parentNode.removeChild(ta);
+      if (commit) {
+        el.textContent = ta.value;
+        if (typeof ghMarkDirty === 'function') ghMarkDirty();
+      }
+      if (activeSvgTextEditor && activeSvgTextEditor.textarea === ta) activeSvgTextEditor = null;
+      isEditing = false;
+      hideFormatBar();
+    };
+    const onKeydown = (ev) => {
+      if (ev.key === 'Escape') {
+        ev.preventDefault();
+        ta.value = oldText;
+        finish(false);
+        return;
+      }
+      if (ev.key === 'Enter' && !ev.shiftKey) {
+        ev.preventDefault();
+        finish(true);
+        return;
+      }
+      if ((ev.ctrlKey || ev.metaKey) && ev.key === 'z') {
+        ev.preventDefault();
+        finish(true);
+        ev.shiftKey ? doRedo() : doUndo();
+      }
+    };
+    const onBlur = () => finish(true);
+    ta.addEventListener('keydown', onKeydown);
+    ta.addEventListener('blur', onBlur, { once: true });
+    activeSvgTextEditor = { textarea: ta, finish };
+  }
+
+  async function commitActiveEditors() {
+    if (activeSvgTextEditor && typeof activeSvgTextEditor.finish === 'function') {
+      activeSvgTextEditor.finish(true);
+      await new Promise(resolve => requestAnimationFrame(resolve));
+      return;
+    }
+    const editingEl = document.querySelector('[contenteditable="true"]');
+    if (editingEl && typeof editingEl.blur === 'function') {
+      editingEl.blur();
+      await new Promise(resolve => requestAnimationFrame(resolve));
+    }
+  }
+  window.commitActiveEditors = commitActiveEditors;
+
   function enterContentEditable(el, e) {
     pushUndo();
     isEditing = true;
+    if (isSvgTextEditable(el)) {
+      enterSvgTextEditor(el);
+      return;
+    }
     el.contentEditable = 'true';
     el.focus();
     showFormatBar(el);
@@ -4779,6 +5095,45 @@
     document.getElementById('snap-x').style.display = 'none';
     document.getElementById('snap-y').style.display = 'none';
   }
+
+  function removeEditableElement(el, slide) {
+    const layer = el.closest('.step-layer');
+    const parent = el.parentElement;
+    const preserveLayout = !!(
+      parent &&
+      (
+        parent.classList.contains('items-row') ||
+        parent.classList.contains('items-col') ||
+        parent.classList.contains('items-grid') ||
+        parent.classList.contains('compare-box') ||
+        parent.classList.contains('compare-col')
+      )
+    );
+
+    if (preserveLayout) {
+      el.style.visibility = 'hidden';
+      el.style.pointerEvents = 'none';
+      el.style.opacity = '0';
+      el.classList.add('edit-hidden-placeholder');
+      return;
+    }
+
+    el.remove();
+    if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
+      layer.remove();
+      recalcSteps(slide);
+    }
+  }
+
+  function insertEditableCloneNearReference(newEl, referenceEl, fallbackParent) {
+    const refParent = referenceEl && referenceEl.parentElement;
+    if (refParent && refParent.closest && refParent.closest('.slide') === slides[currentSlide]) {
+      refParent.insertBefore(newEl, referenceEl.nextSibling);
+      return;
+    }
+    if (fallbackParent) fallbackParent.appendChild(newEl);
+  }
+  window.insertEditableCloneNearReference = insertEditableCloneNearReference;
 
   function showGroupBox(gid) {
     const box = document.getElementById('group-box');
@@ -5090,7 +5445,6 @@
     undoStack.push(document.getElementById('stage').innerHTML);
     restoreSnapshot(redoStack.pop());
   }
-
   // ── 리사이즈 치수 라벨 ──
   function showResizeDimLabel(w, h, el) {
     const lbl = document.getElementById('resize-dim-label');
@@ -5199,42 +5553,116 @@
   // 신규 타입 추가 시 해당 그룹에 클래스 추가 (CLAUDE.md 체크리스트 8번)
   const EDITABLE_TEXT_SEL = [
     '.hl', '.bubble', '.bg-label',                                    // 공용 강조/말풍선/배경
-    '.card-title', '.card-desc',                                      // 카드
-    '.num-text',                                                      // 번호항목
+    '.card-title', '.card-desc', '.card-num',                         // 카드
+    '.num-text', '.num-badge',                                        // 번호항목
     '.bar-label', '.bar-value', '.hbar-label', '.hbar-val',           // 바차트
-    '.icon-label', '.icon-flow-label',                                // 아이콘+텍스트/플로우
+    '.chart-title', '.chart-label', '.chart-val', '.lc-end-val',      // 차트 SVG 텍스트
+    '.icon-label', '.icon-row-role', '.icon-row-desc', '.icon-flow-label', '.icon-flow-icon', '.icon-flow-arrow', // 아이콘+텍스트/플로우
     '.flow-box', '.flow-arrow',                                       // 플로우
-    '.check-text',                                                    // 체크리스트
-    '.stat-num', '.stat-label',                                       // 숫자스탯
-    '.quote-text',                                                    // 인용
-    '.grid-title',                                                    // 그리드카드
+    '.check-text', '.check-item',                                     // 체크리스트
+    '.stat-num', '.stat-label', '.stat-detail-item', '.big-stat', '.stat-block', // 숫자스탯
+    '.quote-text', '.quote-source',                                   // 인용
+    '.grid-title', '.grid-desc',                                      // 그리드카드
     '.section-badge', '.corner-label',                                // 섹션배지
     '.btn-pill',                                                      // 버튼그리드
-    '.tag-chip',                                                      // 태그칩
-    '.alert-text',                                                    // 경고배너
-    '.compare-header', '.compare-item',                               // 비교박스
+    '.tag-chip', '.img-caption',                                      // 태그칩/이미지캡션
+    '.alert-text', '.alert-icon',                                     // 경고배너
+    '.compare-header', '.compare-item', '.compare-emoji-icon', '.comp-table', // 비교박스
     '.tl-box', '.tl-desc',                                            // 타임라인
-    '.cta-btn',                                                       // CTA버튼
+    '.cta-btn', '.subscribe',                                         // CTA버튼
     '.cork-label', '.hand-title-mark', '.hand-typing',                // 마지막정리(코르크/손글씨)
-    '.contrast-word', '.contrast-sub', '.contrast-quote',             // 인용(대비)
+    '.contrast-word', '.contrast-sub', '.contrast-quote', '.contrast-vs', '.contrast-source', // 인용(대비)
     '.contrast-top', '.contrast-bottom',                              // T45 두줄대비 / 기존 contrast-bottom 요약
     '.line1-emph',                                                    // T44 한줄강조
     '.counter-label', '.counter-sub',                                 // T46 카운터제목
     '.emph-line1', '.emph-line2', '.icon-circle',                     // T47 아이콘강조
+    '.chapter-pill', '.chapter-flow-title', '.chapter-flow-desc', '.chapter-flow-icon', // T27
+    '.bullet-text', '.bullet-summary', '.bullet-icon',                // T25
+    '.comp-label', '.comp-val', '.comp-summary', '.split-compare-label', '.split-compare-desc', '.split-compare-value', // T28 / split compare
+    '.branch-question', '.branch-sub', '.branch-result', '.branch-summary', '.branch-node', '.branch-arrow', // T30
+    '.eq-title', '.eq-desc', '.eq-op', '.eq-hl', '.eq-chain-box', '.eq-chain-sub', '.eq-result', // T32
+    '.flow-detail-title', '.flow-detail-sub', '.flow-detail-list', '.flow-detail-icon', '.flow-highlight', // T34
+    '.split-list-num', '.split-list-title', '.split-list-text', '.split-stat-icon', '.split-stat-label', '.split-stat-value', '.split-stat-desc', '.split-summary', // T31
+    '.icon-flow-stat-emoji', '.icon-flow-stat-text', '.icon-flow-stat-num', '.icon-flow-stat-unit', '.icon-flow-highlight', // T33
+    '.person-role', '.person-desc', '.blog-counter', '.blog-meta', '.term-en', '.term-desc', // T39~T43
+    '.step-title', '.reveal-line1', '.reveal-line2', '.two-step-title', '.two-step-desc', '.point-title', '.point-desc', '.vertical-line1', '.vertical-line2', '.left-rail-title', '.left-rail-desc', '.quote-tail', // T49~T59
+    '.reveal-band-text', '.left-rail-desc-text', '.quote-tail-text', '.step-card-body', // T56~T59
   ].join(', ');
+
+  function resolveEditableTextTarget(target) {
+    const direct = target.closest(EDITABLE_TEXT_SEL);
+    if (direct) return direct;
+
+    const root = target.closest('.slide-el, .text-area, .bubble');
+    if (!root) return null;
+
+    let node = target.nodeType === Node.ELEMENT_NODE ? target : target.parentElement;
+    while (node && node !== root) {
+      if (
+        node.matches &&
+        node.matches('div, span, p, strong, em, b, i, text, tspan') &&
+        node.textContent &&
+        node.textContent.trim()
+      ) {
+        const children = Array.from(node.children || []);
+        if (
+          children.length === 0 ||
+          children.every(ch => ['BR', 'SPAN', 'STRONG', 'EM', 'B', 'I'].includes(ch.tagName))
+        ) {
+          return node;
+        }
+      }
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  function resolvePreferredSelectionTarget(target) {
+    const leaf = resolveEditableTextTarget(target);
+    if (
+      leaf &&
+      leaf.matches &&
+      leaf.matches('div, span, p, strong, em, b, i') &&
+      !String(leaf.className || '').trim()
+    ) {
+      const boxedParent = leaf.closest('.slide-el, .text-area, .bubble');
+      if (boxedParent && boxedParent !== leaf) {
+        return boxedParent;
+      }
+    }
+    if (leaf && leaf.matches('.section-badge, .corner-label')) {
+      return leaf.closest('.slide-el') || leaf;
+    }
+
+    const structural = target.closest('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .step-timeline, .slide-el');
+    if (!structural) return leaf;
+
+    if (structural.matches('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .step-timeline')) {
+      return structural;
+    }
+
+    const parent = structural.parentElement;
+    if (parent && parent.matches('.items-row, .items-col, .items-grid, .compare-col, .compare-box, .compare-emoji')) {
+      return structural;
+    }
+
+    return leaf || structural;
+  }
 
   document.getElementById('stage').addEventListener('dblclick', e => {
     if (!editMode) return;
     // 그룹 진입 상태에서 자식 더블클릭 → 텍스트 편집
     if (groupEntered && groupParent) {
-      const child = e.target.closest(CHILD_SEL);
+      const child = e.target.closest(CHILD_SEL) ||
+        resolvePreferredSelectionTarget(e.target) ||
+        e.target.closest('.bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat');
       if (child && groupParent.contains(child)) {
         enterContentEditable(child, e);
         return;
       }
     }
     if (!editMode) return;
-    let el = e.target.closest(EDITABLE_TEXT_SEL);
+    let el = resolveEditableTextTarget(e.target);
     if (!el) {
       const area = e.target.closest('.text-area');
       if (area) el = area.querySelector('.hl');
@@ -5246,6 +5674,11 @@
       el = e.target;
     }
     if (!el) return;
+
+    if (typeof enterContentEditable === 'function') {
+      enterContentEditable(el, e);
+      return;
+    }
 
     isEditing = true;
     el.contentEditable = 'true';
@@ -5317,7 +5750,10 @@
       if (groupParent.contains(e.target) && e.target !== groupParent) {
         e.preventDefault(); e.stopPropagation();
         groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
-        const child = e.target.closest(CHILD_SEL) || e.target;
+        const child = e.target.closest(CHILD_SEL) ||
+          resolvePreferredSelectionTarget(e.target) ||
+          e.target.closest('.bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat') ||
+          e.target;
         child.classList.add('child-selected');
         updateFontPanel(child);
         // 자식 드래그 분리용 상태 저장
@@ -5452,14 +5888,15 @@
       return;
     }
 
-    let el = e.target.closest(EDITABLE_SEL);
+    const preferredTarget = resolvePreferredSelectionTarget(e.target);
+    let el = preferredTarget || e.target.closest(EDITABLE_SEL);
     // img inside .slide-el → select parent .slide-el (prevents dual selection + fixes resize coords)
     if (el && el.tagName === 'IMG' && el.closest('.slide-el')) el = el.closest('.slide-el');
 
     if (!el) {
       // 기존 다중 selection의 bounding box 안에 mousedown이면 selection 유지하고 multi-drag 시작
       // (예: .step-timeline.no-edit-select 같은 통과 컨테이너 위 빈 영역에서 자식 selection 옮기기)
-      if (selectedEls.length > 1) {
+      if (!e.shiftKey && selectedEls.length > 1) {
         const pos = clientToStage(e.clientX, e.clientY);
         let minL = Infinity, minT = Infinity, maxR = -Infinity, maxB = -Infinity;
         selectedEls.forEach(s => {
@@ -5482,7 +5919,10 @@
       // 빈 영역 클릭 → 드래그 선택 박스 시작
       e.preventDefault();
       e.stopPropagation();
-      clearSelection();
+      selectBoxAdditive = !!e.shiftKey;
+      selectBoxSeedEls = selectBoxAdditive ? [...selectedEls] : [];
+      pendingShiftSelect = null;
+      if (!selectBoxAdditive) clearSelection();
       selectBoxActive = true;
       selectBoxOrigin = clientToStage(e.clientX, e.clientY);
       const sb = document.getElementById('select-box');
@@ -5496,25 +5936,13 @@
     e.preventDefault();
     e.stopPropagation();
 
-    // Shift+클릭: 다중 선택 토글
     if (e.shiftKey) {
-      const idx = selectedEls.indexOf(el);
-      if (idx >= 0) {
-        el.classList.remove('edit-selected');
-        selectedEls.splice(idx, 1);
-        selectedEl = selectedEls[selectedEls.length - 1] || null;
-      } else {
-        el.classList.add('edit-selected');
-        selectedEls.push(el);
-        selectedEl = el;
-      }
-      if (selectedEl) updateCoordPanel(selectedEl);
-      else {
-        document.getElementById('coord-panel').style.display = 'none';
-        document.querySelectorAll('.resize-handle').forEach(h => h.classList.remove('visible'));
-      }
-      updateGroupToolbar();
-      if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+      pendingShiftSelect = {
+        el,
+        x: e.clientX,
+        y: e.clientY,
+        seed: [...selectedEls],
+      };
       return;
     }
 
@@ -5666,6 +6094,24 @@
       }
     }
     if (layerDragItem) { updateLayerHover(e.clientY); return; }
+
+    if (pendingShiftSelect && !selectBoxActive) {
+      const dx = e.clientX - pendingShiftSelect.x;
+      const dy = e.clientY - pendingShiftSelect.y;
+      if (Math.sqrt(dx * dx + dy * dy) > DRAG_THRESHOLD) {
+        selectBoxAdditive = true;
+        selectBoxSeedEls = [...pendingShiftSelect.seed];
+        selectBoxActive = true;
+        selectBoxOrigin = clientToStage(pendingShiftSelect.x, pendingShiftSelect.y);
+        const sb = document.getElementById('select-box');
+        sb.style.left = selectBoxOrigin.x + 'px';
+        sb.style.top = selectBoxOrigin.y + 'px';
+        sb.style.width = '0';
+        sb.style.height = '0';
+        sb.style.display = 'block';
+        pendingShiftSelect = null;
+      }
+    }
 
     // 드래그 선택 박스 그리기
     if (selectBoxActive && selectBoxOrigin) {
@@ -6090,9 +6536,13 @@
           const r = el.offsetLeft, t = el.offsetTop;
           if (r + el.offsetWidth > x1 && r < x2 && t + el.offsetHeight > y1 && t < y2) hits.push(el);
         });
-        selectedEls = hits;
-        hits.forEach(h => h.classList.add('edit-selected'));
-        selectedEl = hits[0] || null;
+        const nextSelected = selectBoxAdditive
+          ? Array.from(new Set([...selectBoxSeedEls, ...hits]))
+          : hits;
+        clearSelection();
+        selectedEls = nextSelected;
+        nextSelected.forEach(h => h.classList.add('edit-selected'));
+        selectedEl = nextSelected[nextSelected.length - 1] || null;
         if (selectedEl) {
           updateCoordPanel(selectedEl);
           elAnchors = selectedEls.map(s => ({ el: s, top: s.offsetTop, left: s.offsetLeft }));
@@ -6100,6 +6550,8 @@
         updateGroupToolbar();
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
       }
+      selectBoxAdditive = false;
+      selectBoxSeedEls = [];
       selectBoxOrigin = null;
       return;
     }
@@ -6125,6 +6577,27 @@
     isDragging = false;
     pendingDrag = false;
     mouseDownPos = null;
+    if (pendingShiftSelect) {
+      const { el } = pendingShiftSelect;
+      pendingShiftSelect = null;
+      const idx = selectedEls.indexOf(el);
+      if (idx >= 0) {
+        el.classList.remove('edit-selected');
+        selectedEls.splice(idx, 1);
+        selectedEl = selectedEls[selectedEls.length - 1] || null;
+      } else {
+        el.classList.add('edit-selected');
+        selectedEls.push(el);
+        selectedEl = el;
+      }
+      if (selectedEl) updateCoordPanel(selectedEl);
+      else {
+        document.getElementById('coord-panel').style.display = 'none';
+        document.querySelectorAll('.resize-handle').forEach(h => h.classList.remove('visible'));
+      }
+      updateGroupToolbar();
+      if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+    }
     if (selectedEl) delete selectedEl._pendingChildExtract;
     svgDragAnchors = [];
     document.getElementById('snap-x').style.display = 'none';
@@ -6140,7 +6613,9 @@
       groupParent = el;
       el.classList.remove('edit-selected');
       el.classList.add('group-entered-parent');
-      const child = target.closest(CHILD_SEL);
+      const child = target.closest(CHILD_SEL) ||
+        resolvePreferredSelectionTarget(target) ||
+        target.closest('.bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat');
       if (child && el.contains(child)) { child.classList.add('child-selected'); updateFontPanel(child); }
       updateCoordPanel(el);
       if (child && el.contains(child)) updateFontPanel(child); // 좌표 부모, 폰트 자식 (덮어쓰기 방지)
@@ -6158,12 +6633,14 @@
     isDragging = false;
     pendingDrag = false;
     selectBoxActive = false;
+    selectBoxAdditive = false;
+    selectBoxSeedEls = [];
+    pendingShiftSelect = null;
     isResizing = false;
     hideResizeDimLabel();
     showSnapLines(null, null);
     if (layerDragItem) { layerDragItem.style.opacity = ''; layerDragItem = null; }
   });
-
   // ── 레이어 패널 ──
   function getElLabel(el) {
     if (el.matches('.step-dim')) return '오버레이';
@@ -6178,7 +6655,7 @@
     if (el.matches('.section-badge')) return el.textContent.trim().slice(0, 18);
     if (el.matches('.emoji-icon')) return el.textContent.trim().slice(0, 6) || '이모지';
     if (el.dataset.type) {
-      const inner = el.querySelector('.card-title, .num-text, .icon-label, .bar-label, .flow-text, .hbar-label, .check-text, .grid-title, .quote-text, .stat-num') || el;
+      const inner = el.querySelector('.card-title, .num-text, .icon-label, .bar-label, .chart-title, .chart-val, .flow-text, .flow-box, .hbar-label, .check-text, .grid-title, .quote-text, .stat-num, .compare-header, .comp-label, .chapter-flow-title, .bullet-text, .split-list-title, .flow-detail-title') || el;
       return inner.textContent.trim().slice(0, 15) || el.dataset.type;
     }
     return '요소';
@@ -6718,7 +7195,11 @@
         refreshAfterUngroup();
       }
     } else if (item.dataset.action === 'copy') {
-      if (selectedEl) { clipboardEl = selectedEl.outerHTML; showToast('요소 복사됨', 1500); }
+      if (selectedEl) {
+        clipboardEl = selectedEl.outerHTML;
+        clipboardStep = parseInt(selectedEl.closest('.step-layer')?.dataset.step || '0', 10) || 0;
+        showToast('요소 복사됨', 1500);
+      }
     } else if (item.dataset.action === 'paste') {
       if (clipboardEl) {
         pushUndo();
@@ -6730,8 +7211,16 @@
           newEl.style.top  = (parseInt(newEl.style.top)  || 0) + 20 + 'px';
           newEl.classList.remove('edit-selected', 'edit-group-selected');
           delete newEl.dataset.group;
-          const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
-          layer0.appendChild(newEl);
+          const targetLayer =
+            slides[currentSlide].querySelector(`.step-layer[data-step="${clipboardStep}"]`) ||
+            slides[currentSlide].querySelector('.step-layer[data-step="0"]');
+          if (typeof insertEditableCloneNearReference === 'function') {
+            insertEditableCloneNearReference(newEl, selectedEl, targetLayer);
+          } else if (selectedEl && selectedEl.parentElement === targetLayer) {
+            targetLayer.insertBefore(newEl, selectedEl.nextSibling);
+          } else {
+            targetLayer.appendChild(newEl);
+          }
           clearSelection(); selectElement(newEl);
           showToast('붙여넣기 완료', 1500);
         }
@@ -6739,6 +7228,7 @@
     } else if (item.dataset.action === 'duplicate') {
       if (selectedEl) {
         clipboardEl = selectedEl.outerHTML;
+        clipboardStep = parseInt(selectedEl.closest('.step-layer')?.dataset.step || '0', 10) || 0;
         pushUndo();
         const temp = document.createElement('div');
         temp.innerHTML = clipboardEl;
@@ -6748,8 +7238,18 @@
           newEl.style.top  = (parseInt(newEl.style.top)  || 0) + 20 + 'px';
           newEl.classList.remove('edit-selected', 'edit-group-selected');
           delete newEl.dataset.group;
-          const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
-          layer0.appendChild(newEl);
+          const sourceLayer = selectedEl.closest('.step-layer');
+          const targetLayer =
+            sourceLayer ||
+            slides[currentSlide].querySelector(`.step-layer[data-step="${clipboardStep}"]`) ||
+            slides[currentSlide].querySelector('.step-layer[data-step="0"]');
+          if (typeof insertEditableCloneNearReference === 'function') {
+            insertEditableCloneNearReference(newEl, selectedEl, targetLayer);
+          } else if (sourceLayer && selectedEl.parentElement === sourceLayer) {
+            sourceLayer.insertBefore(newEl, selectedEl.nextSibling);
+          } else {
+            targetLayer.appendChild(newEl);
+          }
           clearSelection(); selectElement(newEl);
           showToast('복제 완료', 1500);
         }
@@ -6813,9 +7313,7 @@
       const child = groupParent.querySelector('.child-selected');
       if (child) {
         pushUndo();
-        child.style.visibility = 'hidden';
-        child.style.pointerEvents = 'none';
-        child.classList.remove('child-selected');
+        removeEditableElement(child, slides[currentSlide]);
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
         return;
       }
@@ -6824,19 +7322,13 @@
     const slide = slides[currentSlide];
     const toDelete = individualMode ? [selectedEl] : [...selectedEls];
     toDelete.forEach(el => {
-      const layer = el.closest('.step-layer');
-      el.remove();
-      if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-        layer.remove();
-        recalcSteps(slide);
-      }
+      removeEditableElement(el, slide);
     });
     clearSelection();
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
   });
   document.getElementById('tb-undo').addEventListener('click', () => doUndo());
   document.getElementById('tb-save').addEventListener('click', () => {
-    if (isGitHubPages && !ghIsDirty()) { showToast('변경사항 없음', 2000); return; }
     saveToFile(true);
   });
   document.getElementById('tb-anim').addEventListener('click', () => {
@@ -7000,8 +7492,14 @@
         newEl.style.top  = (parseInt(newEl.style.top)  || 0) + 20 + 'px';
         newEl.classList.remove('edit-selected');
         delete newEl.dataset.group;
-        const layer0 = slides[currentSlide].querySelector('.step-layer[data-step="0"]');
-        layer0.appendChild(newEl);
+        const targetLayer =
+          slides[currentSlide].querySelector(`.step-layer[data-step="${clipboardStep}"]`) ||
+          slides[currentSlide].querySelector('.step-layer[data-step="0"]');
+        if (typeof insertEditableCloneNearReference === 'function') {
+          insertEditableCloneNearReference(newEl, selectedEl, targetLayer);
+        } else {
+          targetLayer.appendChild(newEl);
+        }
         selectedEls.forEach(s => s.classList.remove('edit-selected'));
         selectedEl = newEl; selectedEls = [newEl];
         newEl.classList.add('edit-selected');
@@ -7129,6 +7627,8 @@
     return clone.outerHTML;
   }
 
+  let presenterNotesSaveTimer = null;
+
   function syncPresenter() {
     if (!presenterWindow || presenterWindow.closed) return;
     const slide = slides[currentSlide];
@@ -7163,7 +7663,14 @@
       else if (e.data.action === 'prev') goPrev();
     }
     if (e.data.type === 'notes') {
-      if (slides[e.data.slide]) slides[e.data.slide].dataset.notes = e.data.text;
+      if (slides[e.data.slide]) {
+        slides[e.data.slide].dataset.notes = e.data.text;
+        if (isGitHubPages && typeof ghMarkDirty === 'function') ghMarkDirty();
+        clearTimeout(presenterNotesSaveTimer);
+        presenterNotesSaveTimer = setTimeout(() => {
+          saveToFile(true);
+        }, 1200);
+      }
     }
   };
 
@@ -7280,7 +7787,15 @@ ch.onmessage = ev => {
 };
 document.getElementById('pres-btn-prev').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'prev' }));
 document.getElementById('pres-btn-next').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'next' }));
+const flushNotes = () => {
+  const notesEl = document.getElementById('pres-notes-input');
+  if (!notesEl) return;
+  ch.postMessage({ type: 'notes', slide: curSlideIdx, text: notesEl.textContent });
+};
 document.getElementById('pres-notes-input').addEventListener('input', ev => ch.postMessage({ type: 'notes', slide: curSlideIdx, text: ev.target.textContent }));
+document.getElementById('pres-notes-input').addEventListener('blur', flushNotes);
+window.addEventListener('pagehide', flushNotes);
+window.addEventListener('beforeunload', flushNotes);
 // textarea 밖을 클릭하면 포커스 해제 (contenteditable는 자동 blur 안 되는 경우 있음)
 document.addEventListener('click', ev => {
   const notes = document.getElementById('pres-notes-input');
@@ -7416,9 +7931,7 @@ ch.postMessage({ type: 'ready' });
       const child = groupParent.querySelector('.child-selected');
       if (child) {
         pushUndo();
-        child.style.visibility = 'hidden';
-        child.style.pointerEvents = 'none';
-        child.classList.remove('child-selected');
+        removeEditableElement(child, slides[currentSlide]);
         groupToolbar.classList.remove('visible');
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
         return;
