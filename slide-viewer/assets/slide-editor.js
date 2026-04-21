@@ -283,7 +283,16 @@
       item.dataset.pg = pg;
       item.dataset.canonicalIdx = String(canonicalIdx);
       item.textContent = displayNumber;
-      item.addEventListener('click', () => { goToSlide(canonicalIdx); });
+      item.addEventListener('click', () => {
+        const overview = document.getElementById('overview');
+        if (overview && overview.dataset.open === '1') {
+          const card = document.querySelector('#overview-grid .ov-group[data-page-group="' + pg + '"]')
+            || document.querySelector('#overview-grid .ov-item[data-page-group="' + pg + '"]');
+          if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          goToSlide(canonicalIdx);
+        }
+      });
       nav.appendChild(item);
     });
     const active = nav.querySelector('.sj-item.active');
@@ -3190,6 +3199,7 @@
     ovBackdrop.classList.add('visible');
     overview.classList.add('visible');
     overview.dataset.open = '1';
+    if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
   }
 
   function closeOverview() {
