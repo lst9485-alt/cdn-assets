@@ -2664,12 +2664,11 @@
       toggleLayerPanel();
       return;
     }
-    // E키 (오버뷰/도움말 닫힌 상태에서만)
+    // E키 (도움말 닫힌 상태에서만 / 오버뷰 열려있으면 먼저 닫고 토글)
     if (e.code === 'KeyE') {
-      if (overview.dataset.open !== '1' &&
-          !document.getElementById('help').classList.contains('visible')) {
-        toggleEditMode();
-      }
+      if (document.getElementById('help').classList.contains('visible')) return;
+      if (overview.dataset.open === '1') closeOverview();
+      toggleEditMode();
       return;
     }
     // M키 (편집 모드에서 모듈 피커 열기/닫기)
