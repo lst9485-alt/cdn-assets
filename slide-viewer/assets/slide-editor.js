@@ -271,8 +271,9 @@
     if (!nav) return;
     nav.innerHTML = '';
     const basePgs = getVisibleBasePageGroups();
+    const sortedPgs = [...basePgs].sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
     const curPg = slides[currentSlide] ? slides[currentSlide].dataset.pageGroup : null;
-    basePgs.forEach(pg => {
+    sortedPgs.forEach(pg => {
       const baseSlide = [...slides].find(s => s.dataset.pageGroup === pg && (s.dataset.variant === '0' || !s.dataset.variant));
       if (!baseSlide) return;
       const canonicalIdx = [...slides].indexOf(baseSlide);
