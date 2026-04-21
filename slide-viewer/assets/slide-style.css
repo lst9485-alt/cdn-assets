@@ -215,7 +215,9 @@
     font-weight: 800;
     color: var(--color-text);
     line-height: 1.2;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
   }
   .hl.sm { font-size: 72px; }
   .hl.lg { font-size: 128px; }

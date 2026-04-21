@@ -1952,9 +1952,8 @@
     }
     // generated 슬라이드는 .items-row 내부에 step용 .slide-el이 중첩되는 경우가 많다.
     const nestedSlideEls = Array.from(layer.querySelectorAll(
-      '.items-row .slide-el, .items-col .slide-el, .items-grid .slide-el'
+      '.items-row > .slide-el, .items-col > .slide-el, .items-grid > .slide-el'
     )).filter(el =>
-      !el.parentElement?.closest('.slide-el') &&
       !el.classList.contains('step-title') &&
       !el.classList.contains('step-dim')
     );
