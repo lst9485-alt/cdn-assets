@@ -315,7 +315,7 @@
             card.classList.remove('sj-highlight');
             void card.offsetWidth;
             card.classList.add('sj-highlight');
-            setTimeout(() => card.classList.remove('sj-highlight'), 1700);
+            setTimeout(() => card.classList.remove('sj-highlight'), 3100);
           }
         } else {
           goToSlide(canonicalIdx);
