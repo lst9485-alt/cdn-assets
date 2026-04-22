@@ -4900,6 +4900,7 @@
   let resizeEdge = null;
   let resizeImgInitRect = null;
   let resizeMultiInitRects = null;
+  let layoutDetachCounter = 0;
   let groupCounter = 0;
   let individualMode = false;
   let layerActiveTab = 'animation'; // 'animation' | 'position'
@@ -5282,6 +5283,47 @@
       recalcSteps(slide);
     }
   }
+
+  function detachLayoutManagedElement(el) {
+    if (!el || !el.parentElement) return el;
+    const parent = el.parentElement;
+    const parentDisplay = getComputedStyle(parent).display || '';
+    const isLayoutParent = !!(
+      parent.matches('.items-row, .items-col, .items-grid, .compare-box, .compare-col') ||
+      parentDisplay.includes('flex') ||
+      parentDisplay.includes('grid')
+    );
+    if (!isLayoutParent) return el;
+    if (el.classList.contains('layout-detached')) return el;
+
+    const layer = parent.closest('.step-layer');
+    const stageEl = document.getElementById('stage');
+    if (!layer || !stageEl) return el;
+
+    const stageRect = stageEl.getBoundingClientRect();
+    const scale = stageRect.width / 1920;
+    const rect = el.getBoundingClientRect();
+    const placeholder = el.cloneNode(true);
+    layoutDetachCounter += 1;
+    placeholder.classList.add('edit-hidden-placeholder', 'no-edit-select', 'layout-detached-placeholder');
+    placeholder.dataset.layoutPlaceholderId = 'ldp' + layoutDetachCounter;
+    placeholder.style.visibility = 'hidden';
+    placeholder.style.pointerEvents = 'none';
+    placeholder.style.opacity = '0';
+    delete placeholder.dataset.group;
+
+    parent.replaceChild(placeholder, el);
+
+    el.classList.add('layout-detached');
+    el.style.position = 'absolute';
+    el.style.left = Math.round((rect.left - stageRect.left) / scale) + 'px';
+    el.style.top = Math.round((rect.top - stageRect.top) / scale) + 'px';
+    el.style.width = Math.round(rect.width / scale) + 'px';
+    el.style.height = Math.round(rect.height / scale) + 'px';
+    layer.appendChild(el);
+    return el;
+  }
+  window.detachLayoutManagedElement = detachLayoutManagedElement;
 
   function insertEditableCloneNearReference(newEl, referenceEl, fallbackParent) {
     const refParent = referenceEl && referenceEl.parentElement;
@@ -6430,7 +6472,21 @@
           elAnchors = [{ el: newEl, top: newEl.offsetTop, left: newEl.offsetLeft }];
           updateCoordPanel(newEl);
         } else if (selectedEl && selectedEl._pendingChildExtract === undefined) {
-          // 일반 드래그 (추출 아님)
+          // flex/grid 레이아웃 자식은 left/top 이동이 안 먹으므로 드래그 시작 시 absolute로 분리
+          if (typeof detachLayoutManagedElement === 'function') {
+            const dragTargets = individualMode ? [selectedEl] : [...selectedEls];
+            dragTargets.forEach(el => detachLayoutManagedElement(el));
+            if (selectedEl) {
+              elAnchor = { top: selectedEl.offsetTop, left: selectedEl.offsetLeft };
+              elAnchors = (individualMode ? [selectedEl] : selectedEls).map(s => ({
+                el: s,
+                top: s.offsetTop,
+                left: s.offsetLeft,
+              }));
+              svgDragAnchors = collectSvgDragAnchors(individualMode ? [selectedEl] : selectedEls);
+              updateCoordPanel(selectedEl);
+            }
+          }
         }
         isDragging = true;
         pendingDrag = false;
