@@ -2625,12 +2625,7 @@
         clipboardStep = parseInt(cutTarget.closest('.step-layer')?.dataset.step || '0', 10) || 0;
         pushUndo();
         const slide = slides[currentSlide];
-        const layer = cutTarget.closest('.step-layer');
-        cutTarget.remove();
-        if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-          layer.remove();
-          recalcSteps(slide);
-        }
+        removeEditableElement(cutTarget, slide);
         clearSelection();
         showToast('요소 잘라내기', 1500);
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
@@ -4435,6 +4430,10 @@
   let _ghDirtyVersion = 0;
   let _ghPendingSave = false;
   let _ghPendingForce = false;
+  let _ghLastSavedHtml = '';
+  window.__ghLastSaveOk = false;
+  window.__ghLastSavedSha = '';
+  window.__ghPublicReflectOk = true;
 
   function ghGetToken() {
     if (_ghToken) return _ghToken;
@@ -4493,6 +4492,29 @@
       location.reload();
     }
   }
+  window.ghReloadFresh = ghReloadFresh;
+
+  async function ghWaitForPublicReflect(expectedHtml, timeoutMs = 12000, intervalMs = 1500) {
+    const expected = ghNormalizeHtmlForCompare(expectedHtml);
+    const baseUrl = new URL(location.href);
+    baseUrl.hash = '';
+    ['_ghsaved', '_ghfresh', '_ghprobe'].forEach(key => baseUrl.searchParams.delete(key));
+    const deadline = Date.now() + timeoutMs;
+    while (Date.now() < deadline) {
+      try {
+        const probeUrl = new URL(baseUrl.toString());
+        probeUrl.searchParams.set('_ghprobe', String(Date.now()));
+        const res = await fetch(probeUrl.toString(), { cache: 'no-store' });
+        if (res.ok) {
+          const html = await res.text();
+          if (ghNormalizeHtmlForCompare(html) === expected) return true;
+        }
+      } catch (_) {}
+      await new Promise(resolve => setTimeout(resolve, intervalMs));
+    }
+    return false;
+  }
+  window.ghWaitForPublicReflect = ghWaitForPublicReflect;
 
   function _ghFilePath() {
     const filename = location.pathname.split('/').pop() || 'slides.html';
@@ -4533,6 +4555,8 @@
     const token = ghGetToken();
     if (!token) { showToast('GitHub 토큰이 없습니다. ⚙ 아이콘을 눌러 설정하세요.', 4000); return; }
     _ghSaving = true;
+    window.__ghLastSaveOk = false;
+    window.__ghPublicReflectOk = true;
     const startDirtyVersion = _ghDirtyVersion;
     let saveCompleted = false;
     showToast('GitHub에 저장 중...', 2000);
@@ -4578,6 +4602,8 @@
       if (res.ok) {
         const data = await res.json();
         _ghFileSha = data.content.sha;
+        _ghLastSavedHtml = content;
+        window.__ghLastSavedSha = _ghFileSha;
         saveCompleted = true;
         if (_ghDirtyVersion === startDirtyVersion) {
           _ghDirty = false;
@@ -4590,6 +4616,14 @@
         if (!shaMeta) { shaMeta = document.createElement('meta'); shaMeta.name = 'gh-sha'; document.head.appendChild(shaMeta); }
         shaMeta.content = _ghFileSha;
         ghBumpFreshUrl();
+        window.__ghLastSaveOk = true;
+        if (window.__slideExitPendingSave) {
+          const reflected = await ghWaitForPublicReflect(_ghLastSavedHtml);
+          window.__ghPublicReflectOk = reflected;
+          if (!reflected) {
+            showToast('저장은 완료됐지만 공개 반영이 조금 늦고 있습니다.', 4000);
+          }
+        }
         showToast('GitHub 저장 완료! 공개 URL 반영은 잠시 늦을 수 있습니다.', 4000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
@@ -5005,6 +5039,10 @@
         autoSaveTimer = null;
         if (isGitHubPages) window.__slideExitPendingSave = true;
         saveToFile(true).finally(() => {
+          if (isGitHubPages && window.__ghLastSaveOk && window.__ghPublicReflectOk && typeof ghReloadFresh === 'function') {
+            ghReloadFresh(window.__ghLastSavedSha || String(Date.now()));
+            return;
+          }
           if (isGitHubPages) window.__slideExitPendingSave = false;
           releaseTabLock();
         });
@@ -5262,6 +5300,13 @@
     const layer = el.closest('.step-layer');
     const parent = el.parentElement;
     const parentDisplay = parent ? getComputedStyle(parent).display : '';
+    const elementPosition = getComputedStyle(el).position || '';
+    const preserveDirectFlowSlot = !!(
+      parent &&
+      el.parentElement === parent &&
+      parent.matches('.slide-el, .text-area, .bubble') &&
+      !['absolute', 'fixed'].includes(elementPosition)
+    );
     const preserveLayout = !!(
       parent &&
       (
@@ -5271,7 +5316,8 @@
         parent.classList.contains('compare-box') ||
         parent.classList.contains('compare-col') ||
         parentDisplay.includes('flex') ||
-        parentDisplay.includes('grid')
+        parentDisplay.includes('grid') ||
+        preserveDirectFlowSlot
       )
     );
 
@@ -5343,6 +5389,7 @@
   function getGroupActionTarget() {
     if (!groupEntered || !groupParent) return null;
     const child = groupParent.querySelector('.child-selected');
+    if (child && selectedEl === child) return child;
     if (child && !shouldPreferParentGroupAction(groupParent)) return child;
     return groupParent;
   }
@@ -5832,12 +5879,8 @@
   function resolveEditableTextTarget(target) {
     const direct = target.closest(EDITABLE_TEXT_SEL);
     if (direct) return direct;
-
-    const root = target.closest('.slide-el, .text-area, .bubble');
-    if (!root) return null;
-
     let node = target.nodeType === Node.ELEMENT_NODE ? target : target.parentElement;
-    while (node && node !== root) {
+    while (node && !node.matches?.('.slide, .step-layer')) {
       if (
         node.matches &&
         node.matches('div, span, p, strong, em, b, i, text, tspan') &&
@@ -5845,9 +5888,20 @@
         node.textContent.trim()
       ) {
         const children = Array.from(node.children || []);
+        const hasDirectText = Array.from(node.childNodes || []).some(ch =>
+          ch.nodeType === Node.TEXT_NODE &&
+          ch.textContent &&
+          ch.textContent.trim()
+        );
+        const inEditableScope = !!node.closest('.slide-el, .text-area, .bubble') ||
+          !!(node.parentElement && node.parentElement.matches('.step-layer'));
         if (
-          children.length === 0 ||
-          children.every(ch => ['BR', 'SPAN', 'STRONG', 'EM', 'B', 'I'].includes(ch.tagName))
+          inEditableScope &&
+          (
+            children.length === 0 ||
+            children.every(ch => ['BR', 'SPAN', 'STRONG', 'EM', 'B', 'I', 'TSPAN'].includes(ch.tagName)) ||
+            hasDirectText
+          )
         ) {
           return node;
         }
@@ -5995,9 +6049,12 @@
     if (groupEntered && groupParent) {
       if (groupParent.contains(e.target) && e.target !== groupParent) {
         e.preventDefault(); e.stopPropagation();
+        const prevChild = groupParent.querySelector('.child-selected');
         groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
         const child = resolveGroupChildTarget(groupParent, e.target) || e.target;
         const preferParentAction = typeof shouldPreferParentGroupAction === 'function' && shouldPreferParentGroupAction(groupParent);
+        const explicitChildAction = !!(prevChild && child === prevChild);
+        const useChildAction = !preferParentAction || explicitChildAction;
         child.classList.add('child-selected');
         updateFontPanel(child);
         // 자식 드래그 분리용 상태 저장
@@ -6006,18 +6063,18 @@
         dragAnchor = clientToStage(e.clientX, e.clientY);
         // 드래그 시작 시 자식을 부모에서 추출 (pushUndo → clone → 독립 배치)
         pendingGroupEntry = null;
-        selectedEl = preferParentAction ? groupParent : child;
+        selectedEl = useChildAction ? child : groupParent;
         selectedEls = [selectedEl];
         // _pendingChildExtract: 드래그 임계값 넘으면 자식 추출
         // 세션 36 후속3: 모듈은 자식 추출 금지 — 내부 .sc-item 등이 빠져나가면 모양 깨지고 고립됨.
         //   그룹 진입/자식 선택/텍스트 편집은 그대로 허용. 드래그 시 부모 모듈 전체가 이동.
         const canExtractChild = !child.closest('svg') && child.namespaceURI !== 'http://www.w3.org/2000/svg';
-        if (!preferParentAction && !groupParent.hasAttribute('data-module-id') && !(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck()) && canExtractChild) {
+        if (useChildAction && !groupParent.hasAttribute('data-module-id') && !(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck()) && canExtractChild) {
           selectedEl._pendingChildExtract = child;
         }
         elAnchor = { top: groupParent.offsetTop, left: groupParent.offsetLeft };
         elAnchors = [{ el: groupParent, top: groupParent.offsetTop, left: groupParent.offsetLeft }];
-        updateCoordPanel(preferParentAction ? groupParent : child);
+        updateCoordPanel(useChildAction ? child : groupParent);
         if (child) updateFontPanel(child);
         return;
       }
@@ -6874,11 +6931,13 @@
       el.classList.add('group-entered-parent');
       const child = resolveGroupChildTarget(el, target);
       const preferParentAction = typeof shouldPreferParentGroupAction === 'function' && shouldPreferParentGroupAction(el);
+      const explicitChildAction = !!(child && target && target !== el);
+      const useChildAction = !preferParentAction || explicitChildAction;
       if (child && el.contains(child)) {
         child.classList.add('child-selected');
-        selectedEl = preferParentAction ? el : child;
+        selectedEl = useChildAction ? child : el;
         selectedEls = [selectedEl];
-        updateCoordPanel(preferParentAction ? el : child);
+        updateCoordPanel(useChildAction ? child : el);
         updateFontPanel(child);
       } else {
         selectedEl = el;
@@ -7461,9 +7520,12 @@
         refreshAfterUngroup();
       }
     } else if (item.dataset.action === 'copy') {
-      if (selectedEl) {
-        clipboardEl = selectedEl.outerHTML;
-        clipboardStep = parseInt(selectedEl.closest('.step-layer')?.dataset.step || '0', 10) || 0;
+      const copyTarget = (typeof getGroupActionTarget === 'function' && groupEntered && groupParent)
+        ? getGroupActionTarget()
+        : selectedEl;
+      if (copyTarget) {
+        clipboardEl = copyTarget.outerHTML;
+        clipboardStep = parseInt(copyTarget.closest('.step-layer')?.dataset.step || '0', 10) || 0;
         showToast('요소 복사됨', 1500);
       }
     } else if (item.dataset.action === 'paste') {
@@ -7492,9 +7554,12 @@
         }
       }
     } else if (item.dataset.action === 'duplicate') {
-      if (selectedEl) {
-        clipboardEl = selectedEl.outerHTML;
-        clipboardStep = parseInt(selectedEl.closest('.step-layer')?.dataset.step || '0', 10) || 0;
+      const duplicateTarget = (typeof getGroupActionTarget === 'function' && groupEntered && groupParent)
+        ? getGroupActionTarget()
+        : selectedEl;
+      if (duplicateTarget) {
+        clipboardEl = duplicateTarget.outerHTML;
+        clipboardStep = parseInt(duplicateTarget.closest('.step-layer')?.dataset.step || '0', 10) || 0;
         pushUndo();
         const temp = document.createElement('div');
         temp.innerHTML = clipboardEl;
@@ -7504,15 +7569,15 @@
           newEl.style.top  = (parseInt(newEl.style.top)  || 0) + 20 + 'px';
           newEl.classList.remove('edit-selected', 'edit-group-selected');
           delete newEl.dataset.group;
-          const sourceLayer = selectedEl.closest('.step-layer');
+          const sourceLayer = duplicateTarget.closest('.step-layer');
           const targetLayer =
             sourceLayer ||
             slides[currentSlide].querySelector(`.step-layer[data-step="${clipboardStep}"]`) ||
             slides[currentSlide].querySelector('.step-layer[data-step="0"]');
           if (typeof insertEditableCloneNearReference === 'function') {
-            insertEditableCloneNearReference(newEl, selectedEl, targetLayer);
-          } else if (sourceLayer && selectedEl.parentElement === sourceLayer) {
-            sourceLayer.insertBefore(newEl, selectedEl.nextSibling);
+            insertEditableCloneNearReference(newEl, duplicateTarget, targetLayer);
+          } else if (sourceLayer && duplicateTarget.parentElement === sourceLayer) {
+            sourceLayer.insertBefore(newEl, duplicateTarget.nextSibling);
           } else {
             targetLayer.appendChild(newEl);
           }
