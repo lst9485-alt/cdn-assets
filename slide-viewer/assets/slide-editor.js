@@ -7307,50 +7307,61 @@
   });
   document.addEventListener('click', () => alignMenu.classList.remove('visible'));
 
+  const bindToolbarClick = (id, handler) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', handler);
+  };
+
   // ── 플로팅 서식바 이벤트 ──
-  document.getElementById('format-bar').addEventListener('mousedown', e => e.preventDefault()); // 포커스 유지
-  document.querySelectorAll('#format-bar .fmt-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (btn.dataset.cmd) {
-        document.execCommand(btn.dataset.cmd);
-      } else if (btn.dataset.align) {
-        // 현재 편집 중인 요소의 textAlign 변경
-        const editingEl = document.querySelector('[contenteditable="true"]');
-        if (editingEl) editingEl.style.textAlign = btn.dataset.align;
-      }
+  const formatBar = document.getElementById('format-bar');
+  if (formatBar) {
+    formatBar.addEventListener('mousedown', e => e.preventDefault()); // 포커스 유지
+    formatBar.querySelectorAll('.fmt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.cmd) {
+          document.execCommand(btn.dataset.cmd);
+        } else if (btn.dataset.align) {
+          // 현재 편집 중인 요소의 textAlign 변경
+          const editingEl = document.querySelector('[contenteditable="true"]');
+          if (editingEl) editingEl.style.textAlign = btn.dataset.align;
+        }
+      });
     });
-  });
+  }
 
   // ── 상단 툴바 이벤트 ──
-  document.getElementById('tb-exit').addEventListener('click', () => toggleEditMode());
-  document.getElementById('tb-font-dec').addEventListener('click', () => applyFontSize(-4));
-  document.getElementById('tb-font-inc').addEventListener('click', () => applyFontSize(4));
-  document.getElementById('tb-font-size').addEventListener('change', () => {
-    if (!selectedEl) return;
-    const tbInput = document.getElementById('tb-font-size');
-    const fs = Math.max(10, Math.min(500, parseInt(tbInput.value) || 108));
-    tbInput.value = fs;
-    document.getElementById('font-size-input').value = fs;
-    applyFontSize(0);
-  });
+  bindToolbarClick('tb-exit', () => toggleEditMode());
+  bindToolbarClick('tb-font-dec', () => applyFontSize(-4));
+  bindToolbarClick('tb-font-inc', () => applyFontSize(4));
+  const tbFontSize = document.getElementById('tb-font-size');
+  if (tbFontSize) {
+    tbFontSize.addEventListener('change', () => {
+      if (!selectedEl) return;
+      const fs = Math.max(10, Math.min(500, parseInt(tbFontSize.value) || 108));
+      tbFontSize.value = fs;
+      const fontSizeInput = document.getElementById('font-size-input');
+      if (fontSizeInput) fontSizeInput.value = fs;
+      applyFontSize(0);
+    });
+  }
   // B/I/U 버튼 (상단 툴바)
-  document.getElementById('tb-bold').addEventListener('click', () => document.execCommand('bold'));
-  document.getElementById('tb-italic').addEventListener('click', () => document.execCommand('italic'));
-  document.getElementById('tb-underline').addEventListener('click', () => document.execCommand('underline'));
-  document.getElementById('tb-group').addEventListener('click', () => {
+  bindToolbarClick('tb-bold', () => document.execCommand('bold'));
+  bindToolbarClick('tb-italic', () => document.execCommand('italic'));
+  bindToolbarClick('tb-underline', () => document.execCommand('underline'));
+  bindToolbarClick('tb-group', () => {
     if (selectedEls.length < 2) return;
     pushUndo();
     const gid = 'g' + Date.now();
     selectedEls.forEach(el => { el.dataset.group = gid; });
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
   });
-  document.getElementById('tb-ungroup').addEventListener('click', () => {
+  bindToolbarClick('tb-ungroup', () => {
     if (!selectedEls.length) return;
     pushUndo();
     selectedEls.forEach(el => { delete el.dataset.group; });
     refreshAfterUngroup();
   });
-  document.getElementById('tb-delete').addEventListener('click', () => {
+  bindToolbarClick('tb-delete', () => {
     if (!selectedEls.length || !editMode) return;
     // groupEntered 상태: .child-selected 자식만 삭제 (자리 유지: visibility hidden)
     if (groupEntered && groupParent) {
@@ -7371,11 +7382,11 @@
     clearSelection();
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
   });
-  document.getElementById('tb-undo').addEventListener('click', () => doUndo());
-  document.getElementById('tb-save').addEventListener('click', () => {
+  bindToolbarClick('tb-undo', () => doUndo());
+  bindToolbarClick('tb-save', () => {
     saveToFile(true);
   });
-  document.getElementById('tb-anim').addEventListener('click', () => {
+  bindToolbarClick('tb-anim', () => {
     layerActiveTab = 'animation';
     const panel = document.getElementById('layer-panel');
     if (panel.classList.contains('visible')) {
