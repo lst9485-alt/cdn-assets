@@ -5716,7 +5716,7 @@
     let child = target.closest(CHILD_SEL)
       || target.closest('.bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat')
       || resolvePreferredSelectionTarget(target);
-    if (!child || child === parent) {
+    if (!child || (child === parent && !parent.matches(CHILD_SEL))) {
       const candidates = Array.from(parent.querySelectorAll(CHILD_SEL + ', .section-badge, .corner-label'))
         .filter(c => !c.matches(NON_TEXT_CHILD_SEL));
       child = candidates[0] || child;
