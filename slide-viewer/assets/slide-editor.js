@@ -5816,6 +5816,12 @@
       return structural;
     }
 
+    // Center-filled stat/compare blocks leave almost no empty hit area.
+    // Prefer the parent on single-click so drag/move works, while dblclick still edits the leaf text.
+    if (structural.matches('.stat-circle, .big-stat, .stat-block, .compare-col')) {
+      return structural;
+    }
+
     const parent = structural.parentElement;
     if (parent && parent.matches('.items-row, .items-col, .items-grid, .compare-col, .compare-box, .compare-emoji')) {
       return structural;
