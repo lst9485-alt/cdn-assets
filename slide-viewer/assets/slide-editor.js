@@ -7711,6 +7711,26 @@
     });
   }
 
+  function applyPresenterNotes(payload) {
+    if (!payload || !slides[payload.slide]) return;
+    slides[payload.slide].dataset.notes = payload.text;
+    if (typeof setSlideJumpNotesForSlide === 'function' && payload.slide === currentSlide) {
+      setSlideJumpNotesForSlide(slides[payload.slide]);
+    }
+    if (isGitHubPages && typeof ghMarkDirty === 'function') ghMarkDirty();
+    if (payload.flush) {
+      clearTimeout(presenterNotesSaveTimer);
+      saveToFile(true);
+    } else {
+      clearTimeout(presenterNotesSaveTimer);
+      presenterNotesSaveTimer = setTimeout(() => {
+        saveToFile(true);
+      }, 1200);
+    }
+  }
+
+  window.__onPresenterNotes = applyPresenterNotes;
+
   presenterChannel.onmessage = e => {
     if (e.data.type === 'ready') { syncPresenter(); return; }
     if (e.data.type === 'nav') {
@@ -7718,22 +7738,7 @@
       else if (e.data.action === 'prev') goPrev();
     }
     if (e.data.type === 'notes') {
-      if (slides[e.data.slide]) {
-        slides[e.data.slide].dataset.notes = e.data.text;
-        if (typeof setSlideJumpNotesForSlide === 'function' && e.data.slide === currentSlide) {
-          setSlideJumpNotesForSlide(slides[e.data.slide]);
-        }
-        if (isGitHubPages && typeof ghMarkDirty === 'function') ghMarkDirty();
-        if (e.data.flush) {
-          clearTimeout(presenterNotesSaveTimer);
-          saveToFile(true);
-        } else {
-          clearTimeout(presenterNotesSaveTimer);
-          presenterNotesSaveTimer = setTimeout(() => {
-            saveToFile(true);
-          }, 1200);
-        }
-      }
+      applyPresenterNotes(e.data);
     }
   };
 
@@ -7850,12 +7855,21 @@ ch.onmessage = ev => {
 };
 document.getElementById('pres-btn-prev').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'prev' }));
 document.getElementById('pres-btn-next').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'next' }));
+const sendNotes = (text, flush = false) => {
+  const payload = { type: 'notes', slide: curSlideIdx, text, flush };
+  ch.postMessage(payload);
+  try {
+    if (window.opener && !window.opener.closed && typeof window.opener.__onPresenterNotes === 'function') {
+      window.opener.__onPresenterNotes(payload);
+    }
+  } catch (_) {}
+};
 const flushNotes = () => {
   const notesEl = document.getElementById('pres-notes-input');
   if (!notesEl) return;
-  ch.postMessage({ type: 'notes', slide: curSlideIdx, text: notesEl.textContent, flush: true });
+  sendNotes(notesEl.textContent, true);
 };
-document.getElementById('pres-notes-input').addEventListener('input', ev => ch.postMessage({ type: 'notes', slide: curSlideIdx, text: ev.target.textContent }));
+document.getElementById('pres-notes-input').addEventListener('input', ev => sendNotes(ev.target.textContent));
 document.getElementById('pres-notes-input').addEventListener('blur', flushNotes);
 window.addEventListener('pagehide', flushNotes);
 window.addEventListener('beforeunload', flushNotes);
