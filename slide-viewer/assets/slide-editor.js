@@ -476,7 +476,7 @@
   (function cleanupOrphanModuleFragments() {
     const classes = [
       'sc-item', 'sc-num', 'sc-label',
-      'stat-box', 'stat-value', 'stat-label',
+      'stat-box', 'stat-value',
       'tri-col', 'tri-icon', 'tri-title', 'tri-sub', 'tri-bullets',
       'empty-card',
       'cl-item', 'cl-mark', 'cl-text',
