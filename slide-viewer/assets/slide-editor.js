@@ -502,6 +502,30 @@
     if (removed > 0) console.log('[module cleanup] 고아 조각 제거:', removed);
   })();
 
+  // 레거시 runtime deck 중 T53/T54 계열은 예전 익명 텍스트 구조가 남아 있을 수 있다.
+  // 편집/리사이즈 훅을 잃지 않도록 현재 타입 훅 클래스로 자동 승격한다.
+  (function normalizeLegacyFlowBlocks() {
+    const upgradeTextHook = (selector, className, skipSelector = '') => {
+      document.querySelectorAll('#stage ' + selector).forEach(el => {
+        if (el.querySelector(':scope > .' + className)) return;
+        if (skipSelector && el.querySelector(skipSelector)) return;
+        const childEls = Array.from(el.children || []);
+        if (childEls.length === 1 && !(Array.from(el.childNodes || []).some(node => node.nodeType === Node.TEXT_NODE && node.textContent && node.textContent.trim()))) {
+          childEls[0].classList.add(className);
+          return;
+        }
+        const wrapper = document.createElement('div');
+        wrapper.className = className;
+        while (el.firstChild) wrapper.appendChild(el.firstChild);
+        el.appendChild(wrapper);
+      });
+    };
+    upgradeTextHook('.flow-step1', 'flow-step-title');
+    upgradeTextHook('.flow-step2', 'flow-step-body');
+    upgradeTextHook('.branch-root', 'branch-root-text');
+    upgradeTextHook('.branch-result', 'branch-result-text', '.branch-sub');
+  })();
+
   let slides = document.querySelectorAll('#stage > .slide');
   let slidesByKey = {};       // data-slide-id → DOM 요소 (stable key)
   let expandedFilmGroups = new Set();  // 확장된 page-group(string) 집합
@@ -2095,11 +2119,15 @@
   }
 
   function getOrderedEls(layer) {
+    const isActiveOrderedEl = el =>
+      !el.classList.contains('step-title') &&
+      !el.classList.contains('step-dim') &&
+      !el.classList.contains('edit-hidden-placeholder');
     if (parseInt(layer.dataset.step) === 0) return [];
     // flex 컨테이너 내 data-appear-step 자식 우선 수집
     const flexItems = Array.from(layer.querySelectorAll(
       '.items-row > [data-appear-step], .items-col > [data-appear-step], .items-grid > [data-appear-step]'
-    ));
+    )).filter(isActiveOrderedEl);
     if (flexItems.length > 0) {
       return flexItems.sort((a, b) =>
         (parseInt(a.dataset.appearStep) || 0) - (parseInt(b.dataset.appearStep) || 0)
@@ -2108,16 +2136,12 @@
     // generated 슬라이드는 .items-row 내부에 step용 .slide-el이 중첩되는 경우가 많다.
     const nestedSlideEls = Array.from(layer.querySelectorAll(
       '.items-row > .slide-el, .items-col > .slide-el, .items-grid > .slide-el'
-    )).filter(el =>
-      !el.classList.contains('step-title') &&
-      !el.classList.contains('step-dim')
-    );
+    )).filter(isActiveOrderedEl);
     if (nestedSlideEls.length > 0) return nestedSlideEls;
     // 기존: 직접 자식 .slide-el (EDITABLE_SEL과 독립)
     return Array.from(layer.children).filter(el =>
       el.classList.contains('slide-el') &&
-      !el.classList.contains('step-title') &&
-      !el.classList.contains('step-dim')
+      isActiveOrderedEl(el)
     );
   }
 
@@ -5432,6 +5456,20 @@
       el.style.pointerEvents = 'none';
       el.style.opacity = '0';
       el.classList.add('edit-hidden-placeholder');
+      if (layer && parseInt(layer.dataset.step) > 0) {
+        const activeTargets = Array.from(layer.querySelectorAll(
+          ':scope > .slide-el, :scope > .text-area, :scope > .bubble, :scope > .bar-chart, :scope > .line-chart, :scope > .hbar-chart, :scope > .step-timeline, :scope > .multi-stat,' +
+          ' :scope > .items-row > .slide-el, :scope > .items-col > .slide-el, :scope > .items-grid > .slide-el,' +
+          ' :scope > .compare-box > .slide-el, :scope > .compare-col > .slide-el'
+        )).filter(node =>
+          !node.classList.contains('step-dim') &&
+          !node.classList.contains('edit-hidden-placeholder')
+        );
+        if (!activeTargets.length) {
+          layer.remove();
+          recalcSteps(slide);
+        }
+      }
       return;
     }
 
@@ -6252,7 +6290,7 @@
         // 세션 36 후속3: 모듈은 자식 추출 금지 — 내부 .sc-item 등이 빠져나가면 모양 깨지고 고립됨.
         //   그룹 진입/자식 선택/텍스트 편집은 그대로 허용. 드래그 시 부모 모듈 전체가 이동.
         const canExtractChild = !child.closest('svg') && child.namespaceURI !== 'http://www.w3.org/2000/svg';
-        if (useChildAction && !groupParent.hasAttribute('data-module-id') && !(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck()) && canExtractChild) {
+        if (useChildAction && !groupParent.hasAttribute('data-module-id') && canExtractChild) {
           selectedEl._pendingChildExtract = child;
         }
         elAnchor = { top: groupParent.offsetTop, left: groupParent.offsetLeft };

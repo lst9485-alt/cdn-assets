@@ -2619,15 +2619,24 @@
   }
 
   /* ── 래퍼 안 자식: absolute 해제 → flex/grid 배치 ── */
-  .items-row > .slide-el,
-  .items-col > .slide-el,
+  .items-row > .slide-el:not(.flow-step1):not(.flow-step2),
+  .items-col > .slide-el:not(.branch-root):not(.branch-result):not(.branch-arrow),
   .items-grid > .slide-el {
     position: static !important;
     left: auto !important; top: auto !important;
     flex: 1 1 0; min-width: 0;
   }
+  .items-row > .slide-el.flow-step1,
+  .items-row > .slide-el.flow-step2,
+  .items-col > .slide-el.branch-root,
+  .items-col > .slide-el.branch-result,
+  .items-col > .slide-el.branch-arrow {
+    position: static !important;
+    left: auto !important; top: auto !important;
+    flex: 0 0 auto; min-width: 0;
+  }
   /* 세로 나열 자식: 폭 100%, 5개+ 축소 허용 */
-  .items-col > .slide-el {
+  .items-col > .slide-el:not(.branch-root):not(.branch-result):not(.branch-arrow) {
     width: 100% !important;
     flex-shrink: 1;
   }
