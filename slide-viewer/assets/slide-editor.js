@@ -4492,11 +4492,20 @@
     showToast('GitHub에 저장 중...', 2000);
     try {
       let content;
+      const stageEl = document.getElementById('stage');
+      const shouldRebindObserver = !!_ghStageObserver && !!stageEl;
+      if (shouldRebindObserver) ghUnbindDirtyObserver();
       try {
         content = getCleanHTML();
       } catch (htmlErr) {
+        if (shouldRebindObserver && typeof editMode !== 'undefined' && editMode) {
+          ghBindDirtyObserver(stageEl);
+        }
         showToast('HTML 직렬화 오류: ' + htmlErr.message, 5000);
         return;
+      }
+      if (shouldRebindObserver && typeof editMode !== 'undefined' && editMode) {
+        ghBindDirtyObserver(stageEl);
       }
       const encoded = btoa(unescape(encodeURIComponent(content)));
       const filename = location.pathname.split('/').pop() || 'slides.html';
@@ -6073,9 +6082,7 @@
       } else if (gid && individualMode) {
         if (el === selectedEl) {
           // individualMode + 같은 카드 재클릭 → 그룹 진입(자식 드릴다운). mouseup에서 드래그 여부 확인 후 확정
-          if (!(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck())) {
-            pendingGroupEntry = { el, target: e.target };
-          }
+          pendingGroupEntry = { el, target: e.target };
           selectedEl = el;
         } else {
           // 다른 멤버로 전환
@@ -6090,9 +6097,7 @@
       } else if ((el.matches('.slide-el') || el.matches('.items-row, .items-col, .items-grid')) && selectedEls.length === 1) {
         // 카드 블록/flex 컨테이너 재클릭 → mouseup에서 드래그 여부 확인 후 그룹 진입
         // (모듈 포함 — 세션 36 후속3: 자식 추출만 별도 차단, 그룹 진입/편집은 허용)
-        if (!(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck())) {
-          pendingGroupEntry = { el, target: e.target };
-        }
+        pendingGroupEntry = { el, target: e.target };
         selectedEl = el;
       } else {
         selectedEl = el;
