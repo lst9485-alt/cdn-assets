@@ -2604,23 +2604,29 @@
     }
     // Ctrl+C: 요소 복사 (편집 모드)
     if ((e.ctrlKey || e.metaKey) && e.key === 'c' && editMode && !isEditing) {
-      if (selectedEl) {
-        clipboardEl = selectedEl.outerHTML;
-        clipboardStep = parseInt(selectedEl.closest('.step-layer')?.dataset.step || '0', 10) || 0;
+      const copySource = (typeof getGroupActionTarget === 'function' && groupEntered && groupParent)
+        ? getGroupActionTarget()
+        : selectedEl;
+      if (copySource) {
+        clipboardEl = copySource.outerHTML;
+        clipboardStep = parseInt(copySource.closest('.step-layer')?.dataset.step || '0', 10) || 0;
         showToast('요소 복사됨', 1500);
       }
       return;
     }
     // Ctrl+X: 요소 잘라내기 (편집 모드)
     if ((e.ctrlKey || e.metaKey) && e.key === 'x' && editMode && !isEditing) {
-      if (selectedEl) {
+      const cutTarget = (typeof getGroupActionTarget === 'function' && groupEntered && groupParent)
+        ? getGroupActionTarget()
+        : selectedEl;
+      if (cutTarget) {
         e.preventDefault();
-        clipboardEl = selectedEl.outerHTML;
-        clipboardStep = parseInt(selectedEl.closest('.step-layer')?.dataset.step || '0', 10) || 0;
+        clipboardEl = cutTarget.outerHTML;
+        clipboardStep = parseInt(cutTarget.closest('.step-layer')?.dataset.step || '0', 10) || 0;
         pushUndo();
         const slide = slides[currentSlide];
-        const layer = selectedEl.closest('.step-layer');
-        selectedEl.remove();
+        const layer = cutTarget.closest('.step-layer');
+        cutTarget.remove();
         if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
           layer.remove();
           recalcSteps(slide);
@@ -2708,12 +2714,12 @@
     // Delete/Backspace: 선택 요소 삭제 (편집 모드)
     if ((e.code === 'Delete' || e.code === 'Backspace') && editMode) {
       if (!selectedEls.length) return;
-      // groupEntered 상태: .child-selected 자식만 삭제 (자리 유지: visibility hidden)
-      if (groupEntered && groupParent) {
-        const child = groupParent.querySelector('.child-selected');
-        if (child) {
+      // groupEntered 상태에서도 기본은 parent 우선, 정말 child-only 인 경우만 자식 삭제
+      if (groupEntered && groupParent && typeof getGroupActionTarget === 'function') {
+        const target = getGroupActionTarget();
+        if (target && target !== groupParent) {
           pushUndo();
-          removeEditableElement(child, slides[currentSlide]);
+          removeEditableElement(target, slides[currentSlide]);
           if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
           return;
         }
@@ -5325,6 +5331,23 @@
   }
   window.detachLayoutManagedElement = detachLayoutManagedElement;
 
+  function shouldPreferParentGroupAction(parent = groupParent) {
+    if (!parent) return false;
+    return !!(
+      parent.matches('.slide-el, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat') ||
+      parent.closest('.items-row, .items-col, .items-grid, .compare-box, .compare-col')
+    );
+  }
+  window.shouldPreferParentGroupAction = shouldPreferParentGroupAction;
+
+  function getGroupActionTarget() {
+    if (!groupEntered || !groupParent) return null;
+    const child = groupParent.querySelector('.child-selected');
+    if (child && !shouldPreferParentGroupAction(groupParent)) return child;
+    return groupParent;
+  }
+  window.getGroupActionTarget = getGroupActionTarget;
+
   function insertEditableCloneNearReference(newEl, referenceEl, fallbackParent) {
     const refParent = referenceEl && referenceEl.parentElement;
     if (refParent && refParent.closest && refParent.closest('.slide') === slides[currentSlide]) {
@@ -5974,6 +5997,7 @@
         e.preventDefault(); e.stopPropagation();
         groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
         const child = resolveGroupChildTarget(groupParent, e.target) || e.target;
+        const preferParentAction = typeof shouldPreferParentGroupAction === 'function' && shouldPreferParentGroupAction(groupParent);
         child.classList.add('child-selected');
         updateFontPanel(child);
         // 자식 드래그 분리용 상태 저장
@@ -5982,18 +6006,18 @@
         dragAnchor = clientToStage(e.clientX, e.clientY);
         // 드래그 시작 시 자식을 부모에서 추출 (pushUndo → clone → 독립 배치)
         pendingGroupEntry = null;
-        selectedEl = child;
-        selectedEls = [child];
+        selectedEl = preferParentAction ? groupParent : child;
+        selectedEls = [selectedEl];
         // _pendingChildExtract: 드래그 임계값 넘으면 자식 추출
         // 세션 36 후속3: 모듈은 자식 추출 금지 — 내부 .sc-item 등이 빠져나가면 모양 깨지고 고립됨.
         //   그룹 진입/자식 선택/텍스트 편집은 그대로 허용. 드래그 시 부모 모듈 전체가 이동.
         const canExtractChild = !child.closest('svg') && child.namespaceURI !== 'http://www.w3.org/2000/svg';
-        if (!groupParent.hasAttribute('data-module-id') && !(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck()) && canExtractChild) {
+        if (!preferParentAction && !groupParent.hasAttribute('data-module-id') && !(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck()) && canExtractChild) {
           selectedEl._pendingChildExtract = child;
         }
         elAnchor = { top: groupParent.offsetTop, left: groupParent.offsetLeft };
         elAnchors = [{ el: groupParent, top: groupParent.offsetTop, left: groupParent.offsetLeft }];
-        updateCoordPanel(child);
+        updateCoordPanel(preferParentAction ? groupParent : child);
         if (child) updateFontPanel(child);
         return;
       }
@@ -6849,11 +6873,12 @@
       el.classList.remove('edit-selected');
       el.classList.add('group-entered-parent');
       const child = resolveGroupChildTarget(el, target);
+      const preferParentAction = typeof shouldPreferParentGroupAction === 'function' && shouldPreferParentGroupAction(el);
       if (child && el.contains(child)) {
         child.classList.add('child-selected');
-        selectedEl = child;
-        selectedEls = [child];
-        updateCoordPanel(child);
+        selectedEl = preferParentAction ? el : child;
+        selectedEls = [selectedEl];
+        updateCoordPanel(preferParentAction ? el : child);
         updateFontPanel(child);
       } else {
         selectedEl = el;
@@ -7560,12 +7585,12 @@
   });
   bindToolbarClick('tb-delete', () => {
     if (!selectedEls.length || !editMode) return;
-    // groupEntered 상태: .child-selected 자식만 삭제 (자리 유지: visibility hidden)
-    if (groupEntered && groupParent) {
-      const child = groupParent.querySelector('.child-selected');
-      if (child) {
+    // groupEntered 상태에서도 기본은 parent 우선, 정말 child-only 인 경우만 자식 삭제
+    if (groupEntered && groupParent && typeof getGroupActionTarget === 'function') {
+      const target = getGroupActionTarget();
+      if (target && target !== groupParent) {
         pushUndo();
-        removeEditableElement(child, slides[currentSlide]);
+        removeEditableElement(target, slides[currentSlide]);
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
         return;
       }
