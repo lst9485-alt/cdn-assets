@@ -4132,6 +4132,7 @@
     const clone = el.cloneNode(true);
 
     if (clone.id === 'stage') {
+      clone.removeAttribute('style');
       const transientIds = ['select-box', 'multi-select-box', 'group-box', 'gap-left', 'gap-right', 'gap-top', 'gap-bottom', 'snap-x', 'snap-y', 'center-cross'];
       transientIds.forEach(id => {
         const target = clone.querySelector('#' + id);
@@ -4151,6 +4152,12 @@
         node.removeAttribute('style');
       });
       clone.querySelectorAll('.dim-handle').forEach(node => node.remove());
+    }
+
+    if (clone.id === 'top-toolbar') {
+      clone.querySelectorAll('#gh-settings').forEach(node => node.remove());
+      const saveStatus = clone.querySelector('#save-status');
+      if (saveStatus) saveStatus.textContent = '';
     }
 
     if (clone.id === 'gs-crosshair-h' || clone.id === 'gs-crosshair-v') {
@@ -4446,6 +4453,39 @@
   function ghClearToken() {
     _ghToken = null;
     localStorage.removeItem(GH_TOKEN_KEY);
+  }
+
+  function ghDecodeContent(data) {
+    if (!data || data.encoding !== 'base64' || !data.content) return '';
+    try {
+      return decodeURIComponent(escape(atob(String(data.content).replace(/\n/g, ''))));
+    } catch (_) {
+      return '';
+    }
+  }
+
+  function ghNormalizeHtmlForCompare(html) {
+    return String(html || '')
+      .replace(/<meta name="gh-sha" content="[^"]*">\s*/g, '');
+  }
+
+  function ghGetCurrentHtmlForCompare() {
+    if (typeof getCleanHTML === 'function') {
+      try {
+        return getCleanHTML();
+      } catch (_) {}
+    }
+    return document.documentElement.outerHTML;
+  }
+
+  function ghReloadFresh(remoteSha) {
+    try {
+      const url = new URL(location.href);
+      url.searchParams.set('_ghfresh', remoteSha || String(Date.now()));
+      location.replace(url.toString());
+    } catch (_) {
+      location.reload();
+    }
   }
 
   function _ghFilePath() {
@@ -4766,13 +4806,25 @@
       _ghFileSha = remoteSha;
 
       // 현재 페이지의 SHA 마커와 비교
-      const localMeta = document.querySelector('meta[name="gh-sha"]');
+      let localMeta = document.querySelector('meta[name="gh-sha"]');
       if (localMeta && localMeta.content === remoteSha) return; // 이미 최신
+
+      const remoteHtml = ghDecodeContent(data);
+      const localHtml = ghGetCurrentHtmlForCompare();
+      if (remoteHtml && ghNormalizeHtmlForCompare(remoteHtml) === ghNormalizeHtmlForCompare(localHtml)) {
+        if (!localMeta) {
+          localMeta = document.createElement('meta');
+          localMeta.name = 'gh-sha';
+          document.head.appendChild(localMeta);
+        }
+        localMeta.content = remoteSha;
+        return;
+      }
 
       // 최신 버전 감지 → 새로고침으로 반영 (document.write는 Chrome 렌더링 깨짐 유발)
       showToast('최신 버전 불러오는 중...', 3000);
-      sessionStorage.setItem(freshKey, '1');
-      location.reload();
+      sessionStorage.setItem(freshKey, remoteSha || '1');
+      ghReloadFresh(remoteSha);
     } catch (e) {
       console.error('ghCheckAndLoadLatest:', e);
     }
@@ -4791,6 +4843,7 @@
     const _ghAddSettingsIcon = () => {
       const saveBtn = document.getElementById('tb-save');
       if (!saveBtn) return;
+      if (document.getElementById('gh-settings')) return;
       const icon = document.createElement('button');
       icon.className = 'tb-btn';
       icon.id = 'gh-settings';
@@ -4816,7 +4869,7 @@
   // SVG connector(.step-timeline > svg) 동반 이동: SVGElement는 offsetLeft 미지원이라 selection 안 넣고 별도 추적
   let svgDragAnchors = [];
   let isDragging = false;
-  const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .num-item, .check-text, .check-box, .check-item, .bar-label, .bar-value, .bar-fill, .hbar-label, .hbar-val, .chart-title, .chart-label, .chart-val, .lc-end-val, .stat-num, .stat-label, .stat-detail-item, .big-stat, .stat-block, .icon-label, .icon-row-role, .icon-row-desc, .icon-circle, .emoji-icon, .icon-flow-label, .icon-flow-icon, .icon-flow-arrow, .flow-box, .flow-arrow, .alert-text, .alert-icon, .compare-header, .compare-item, .compare-emoji-icon, .vs-badge, .quote-text, .quote-source, .tag-chip, .tl-box, .tl-circle, .tl-desc, .btn-pill, .cta-btn, .subscribe, .contrast-word, .contrast-sub, .contrast-top, .contrast-bottom, .contrast-quote, .contrast-vs, .contrast-source, .chapter-pill, .chapter-flow-title, .chapter-flow-desc, .chapter-flow-icon, .bullet-text, .bullet-summary, .bullet-icon, .comp-label, .comp-val, .comp-summary, .comp-table, .branch-question, .branch-sub, .branch-result, .branch-summary, .branch-node, .branch-arrow, .eq-title, .eq-desc, .eq-op, .eq-hl, .eq-chain-box, .eq-chain-sub, .eq-result, .flow-detail-title, .flow-detail-sub, .flow-detail-list, .flow-detail-icon, .flow-highlight, .flow-step-title, .flow-step-body, .branch-root-text, .branch-result-text, .split-compare-label, .split-compare-desc, .split-compare-value, .split-list-num, .split-list-title, .split-list-text, .split-stat-icon, .split-stat-label, .split-stat-value, .split-stat-desc, .split-summary, .icon-flow-stat-emoji, .icon-flow-stat-text, .icon-flow-stat-num, .icon-flow-stat-unit, .icon-flow-highlight, .counter-label, .counter-sub, .line1-emph, .emph-line1, .emph-line2, .person-role, .person-desc, .blog-counter, .blog-meta, .term-en, .term-desc, .img-caption, .step-title, .reveal-line1, .reveal-line2, .two-step-title, .two-step-desc, .point-title, .point-desc, .vertical-line1, .vertical-line2, .left-rail-title, .reveal-band-text, .left-rail-desc, .left-rail-desc-text, .quote-tail, .quote-tail-text, .step-card-body';
+  const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .num-item, .check-text, .check-box, .check-item, .bar-label, .bar-value, .bar-fill, .bar-row, .bar-track, .hbar-label, .hbar-val, .chart-title, .chart-label, .chart-val, .lc-end-val, .stat-num, .stat-label, .stat-detail-item, .big-stat, .stat-block, .stat-circle, .icon-label, .icon-row-role, .icon-row-desc, .icon-circle, .emoji-icon, .icon-flow-item, .icon-flow-label, .icon-flow-icon, .icon-flow-arrow, .flow-box, .flow-arrow, .alert-text, .alert-icon, .compare-col, .compare-header, .compare-item, .compare-emoji-icon, .vs-badge, .quote-text, .quote-source, .tag-chip, .tl-box, .tl-circle, .tl-desc, .btn-pill, .cta-btn, .subscribe, .contrast-word, .contrast-sub, .contrast-top, .contrast-bottom, .contrast-quote, .contrast-vs, .contrast-source, .chapter-pill, .chapter-flow-title, .chapter-flow-desc, .chapter-flow-icon, .bullet-text, .bullet-summary, .bullet-icon, .comp-label, .comp-val, .comp-summary, .comp-table, .branch-question, .branch-sub, .branch-result, .branch-summary, .branch-node, .branch-arrow, .eq-title, .eq-desc, .eq-op, .eq-hl, .eq-chain-box, .eq-chain-sub, .eq-result, .flow-detail-title, .flow-detail-sub, .flow-detail-list, .flow-detail-icon, .flow-highlight, .flow-step-title, .flow-step-body, .branch-root-text, .branch-result-text, .split-compare-label, .split-compare-desc, .split-compare-value, .split-list-num, .split-list-title, .split-list-text, .split-stat-icon, .split-stat-label, .split-stat-value, .split-stat-desc, .split-summary, .icon-flow-stat-emoji, .icon-flow-stat-text, .icon-flow-stat-num, .icon-flow-stat-unit, .icon-flow-highlight, .counter-label, .counter-sub, .line1-emph, .emph-line1, .emph-line2, .person-role, .person-desc, .blog-counter, .blog-meta, .term-en, .term-desc, .img-caption, .step-title, .reveal-line1, .reveal-line2, .two-step-title, .two-step-desc, .point-title, .point-desc, .vertical-line1, .vertical-line2, .left-rail-title, .reveal-band-text, .left-rail-desc, .left-rail-desc-text, .quote-tail, .quote-tail-text, .step-card-body';
   // 비텍스트 자식 (fontSize 기반 리사이즈 대상 아님 — 이들은 기존 slide-el 박스 리사이즈로 처리)
   const NON_TEXT_CHILD_SEL = '.bar-fill, .check-box, .icon-circle, .tl-circle';
   // 툴바/팬널/팔레트 영역 — 편집 중 클릭 시 focus/selection 유지해야 하는 대상
@@ -5656,6 +5709,10 @@
 
   function resolveGroupChildTarget(parent, target) {
     if (!parent || !target || !parent.contains(target)) return null;
+    const textLeaf = resolveEditableTextTarget(target);
+    if (textLeaf && textLeaf !== parent && parent.contains(textLeaf)) {
+      return textLeaf;
+    }
     let child = target.closest(CHILD_SEL)
       || target.closest('.bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat')
       || resolvePreferredSelectionTarget(target);
@@ -5882,7 +5939,8 @@
         // _pendingChildExtract: 드래그 임계값 넘으면 자식 추출
         // 세션 36 후속3: 모듈은 자식 추출 금지 — 내부 .sc-item 등이 빠져나가면 모양 깨지고 고립됨.
         //   그룹 진입/자식 선택/텍스트 편집은 그대로 허용. 드래그 시 부모 모듈 전체가 이동.
-        if (!groupParent.hasAttribute('data-module-id') && !(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck())) {
+        const canExtractChild = !child.closest('svg') && child.namespaceURI !== 'http://www.w3.org/2000/svg';
+        if (!groupParent.hasAttribute('data-module-id') && !(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck()) && canExtractChild) {
           selectedEl._pendingChildExtract = child;
         }
         elAnchor = { top: groupParent.offsetTop, left: groupParent.offsetLeft };
@@ -8101,12 +8159,7 @@ ch.postMessage({ type: 'ready' });
     const slide = slides[currentSlide];
     const toDelete = individualMode ? [selectedEl] : [...selectedEls];
     toDelete.forEach(el => {
-      const layer = el.closest('.step-layer');
-      el.remove();
-      if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-        layer.remove();
-        recalcSteps(slide);
-      }
+      removeEditableElement(el, slide);
     });
     clearSelection();
     groupToolbar.classList.remove('visible');
