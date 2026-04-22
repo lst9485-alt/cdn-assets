@@ -7729,7 +7729,7 @@
     }
   }
 
-  window.__onPresenterNotes = applyPresenterNotes;
+  window.__onPresenterNotes = payload => applyPresenterNotes(payload);
 
   presenterChannel.onmessage = e => {
     if (e.data.type === 'ready') { syncPresenter(); return; }
