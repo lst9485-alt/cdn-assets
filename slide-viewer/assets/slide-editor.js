@@ -4992,6 +4992,7 @@
           document.head.appendChild(localMeta);
         }
         localMeta.content = remoteSha;
+        ghClearLocalDraft();
         return;
       }
 
@@ -5006,9 +5007,13 @@
 
   // 페이지 로드 시 자동 실행
   if (isGitHubPages) {
-    const _ghRunCheck = () => {
+    const _ghRunCheck = async () => {
       const restored = ghRestoreLocalDraftIfNeeded();
-      if (!restored) ghCheckAndLoadLatest();
+      if (!restored) {
+        await ghCheckAndLoadLatest();
+        return;
+      }
+      if (ghGetToken()) await ghCheckAndLoadLatest();
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _ghRunCheck);
     else _ghRunCheck();
@@ -5529,6 +5534,13 @@
     );
   }
   window.shouldPreferParentGroupAction = shouldPreferParentGroupAction;
+
+  function shouldAutoEnableChildAction(parent = groupParent, child = null) {
+    if (!parent || !child) return false;
+    if (child.matches(NON_TEXT_CHILD_SEL)) return false;
+    return !!parent.matches('.split-left, .split-right, .flow-step1, .flow-step2, .branch-root, .branch-result');
+  }
+  window.shouldAutoEnableChildAction = shouldAutoEnableChildAction;
 
   function markGroupActionChild(child = null) {
     if (!groupParent) return;
@@ -6274,7 +6286,13 @@
         const child = resolveGroupChildTarget(groupParent, e.target, e.clientX, e.clientY) || e.target;
         const preferParentAction = typeof shouldPreferParentGroupAction === 'function' && shouldPreferParentGroupAction(groupParent);
         const explicitChildAction = !!(prevChild && child === prevChild);
-        const useChildAction = !preferParentAction || explicitChildAction;
+        const autoChildAction = typeof shouldAutoEnableChildAction === 'function' && shouldAutoEnableChildAction(groupParent, child);
+        const useChildAction = !preferParentAction || explicitChildAction || autoChildAction;
+        const canExtractChild = !!(
+          child &&
+          !child.closest('svg') &&
+          child.namespaceURI !== 'http://www.w3.org/2000/svg'
+        );
         child.classList.add('child-selected');
         if (typeof markGroupActionChild === 'function') markGroupActionChild(useChildAction ? child : null);
         updateFontPanel(child);
@@ -6289,7 +6307,6 @@
         // _pendingChildExtract: 드래그 임계값 넘으면 자식 추출
         // 세션 36 후속3: 모듈은 자식 추출 금지 — 내부 .sc-item 등이 빠져나가면 모양 깨지고 고립됨.
         //   그룹 진입/자식 선택/텍스트 편집은 그대로 허용. 드래그 시 부모 모듈 전체가 이동.
-        const canExtractChild = !child.closest('svg') && child.namespaceURI !== 'http://www.w3.org/2000/svg';
         if (useChildAction && !groupParent.hasAttribute('data-module-id') && canExtractChild) {
           selectedEl._pendingChildExtract = child;
         }
@@ -6477,6 +6494,43 @@
       return;
     }
 
+    const activeSelectedCard = (
+      !groupEntered &&
+      selectedEls.length === 1 &&
+      selectedEl &&
+      selectedEl.matches('.slide-el')
+    ) ? selectedEl : null;
+    const directChildTarget = activeSelectedCard
+      ? resolveGroupChildTarget(activeSelectedCard, document.elementFromPoint(e.clientX, e.clientY) || e.target, e.clientX, e.clientY)
+      : null;
+    const directChildExtractable = !!(
+      directChildTarget &&
+      activeSelectedCard &&
+      activeSelectedCard.contains(directChildTarget) &&
+      directChildTarget !== activeSelectedCard &&
+      typeof shouldAutoEnableChildAction === 'function' &&
+      shouldAutoEnableChildAction(activeSelectedCard, directChildTarget) &&
+      !activeSelectedCard.hasAttribute('data-module-id') &&
+      !directChildTarget.closest('svg') &&
+      directChildTarget.namespaceURI !== 'http://www.w3.org/2000/svg'
+    );
+    if (directChildExtractable) {
+      selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
+      directChildTarget.classList.add('child-selected');
+      selectedEl = directChildTarget;
+      selectedEls = [directChildTarget];
+      selectedEl._pendingChildExtract = directChildTarget;
+      pendingGroupEntry = null;
+      pendingDrag = true;
+      mouseDownPos = { x: e.clientX, y: e.clientY };
+      dragAnchor = clientToStage(e.clientX, e.clientY);
+      elAnchor = { top: directChildTarget.offsetTop, left: directChildTarget.offsetLeft };
+      elAnchors = [{ el: directChildTarget, top: directChildTarget.offsetTop, left: directChildTarget.offsetLeft }];
+      updateCoordPanel(directChildTarget);
+      updateFontPanel(directChildTarget);
+      return;
+    }
+
     // 단일 선택 (이미 선택된 요소가 아니면 선택 초기화)
     if (!selectedEls.includes(el)) {
       // 새 요소 클릭
@@ -6518,7 +6572,7 @@
       } else if (gid && individualMode) {
         if (el === selectedEl) {
           // individualMode + 같은 카드 재클릭 → 그룹 진입(자식 드릴다운). mouseup에서 드래그 여부 확인 후 확정
-          pendingGroupEntry = { el, target: e.target };
+          pendingGroupEntry = { el, target: e.target, x: e.clientX, y: e.clientY };
           selectedEl = el;
         } else {
           // 다른 멤버로 전환
@@ -6533,7 +6587,7 @@
       } else if ((el.matches('.slide-el') || el.matches('.items-row, .items-col, .items-grid')) && selectedEls.length === 1) {
         // 카드 블록/flex 컨테이너 재클릭 → mouseup에서 드래그 여부 확인 후 그룹 진입
         // (모듈 포함 — 세션 36 후속3: 자식 추출만 별도 차단, 그룹 진입/편집은 허용)
-        pendingGroupEntry = { el, target: e.target };
+        pendingGroupEntry = { el, target: e.target, x: e.clientX, y: e.clientY };
         selectedEl = el;
       } else {
         selectedEl = el;
@@ -6756,8 +6810,29 @@
       const dx = e.clientX - mouseDownPos.x, dy = e.clientY - mouseDownPos.y;
       const dist = Math.sqrt(dx*dx + dy*dy);
       if (dist > DRAG_THRESHOLD) {
+        if (!groupEntered && pendingGroupEntry) {
+          const { el, target, x, y } = pendingGroupEntry;
+          const pointTarget = document.elementFromPoint(x, y) || target;
+          const child = resolveGroupChildTarget(el, pointTarget, x, y);
+          const preferParentAction = typeof shouldPreferParentGroupAction === 'function' && shouldPreferParentGroupAction(el);
+          const explicitChildAction = !!(child && target && target !== el);
+          const autoChildAction = typeof shouldAutoEnableChildAction === 'function' && shouldAutoEnableChildAction(el, child);
+          const useChildAction = !preferParentAction || explicitChildAction || autoChildAction;
+          const canExtractChild = !!(
+            child &&
+            !child.closest('svg') &&
+            child.namespaceURI !== 'http://www.w3.org/2000/svg'
+          );
+          if (useChildAction && child && el.contains(child) && !el.hasAttribute('data-module-id') && canExtractChild) {
+            selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
+            child.classList.add('child-selected');
+            selectedEl = child;
+            selectedEls = [child];
+            selectedEl._pendingChildExtract = child;
+          }
+        }
         pushUndo();
-        if (groupEntered && groupParent && typeof getGroupActionTarget === 'function') {
+        if (!(selectedEl && selectedEl._pendingChildExtract) && groupEntered && groupParent && typeof getGroupActionTarget === 'function') {
           const actionTarget = getGroupActionTarget();
           if (actionTarget && actionTarget !== groupParent) {
             selectedEl = actionTarget;
@@ -7168,17 +7243,19 @@
 
     // 드래그 안 했으면 그룹 진입 (캔바 스타일)
     if (pendingGroupEntry && !wasDragging) {
-      const { el, target } = pendingGroupEntry;
+      const { el, target, x, y } = pendingGroupEntry;
       pendingGroupEntry = null;
       exitGroup();
       groupEntered = true;
       groupParent = el;
       el.classList.remove('edit-selected');
       el.classList.add('group-entered-parent');
-      const child = resolveGroupChildTarget(el, target, mouseDownPos?.x, mouseDownPos?.y);
+      const pointTarget = document.elementFromPoint(e.clientX, e.clientY) || document.elementFromPoint(x, y) || target;
+      const child = resolveGroupChildTarget(el, pointTarget, e.clientX, e.clientY);
       const preferParentAction = typeof shouldPreferParentGroupAction === 'function' && shouldPreferParentGroupAction(el);
       const explicitChildAction = !!(child && target && target !== el);
-      const useChildAction = !preferParentAction || explicitChildAction;
+      const autoChildAction = typeof shouldAutoEnableChildAction === 'function' && shouldAutoEnableChildAction(el, child);
+      const useChildAction = !preferParentAction || explicitChildAction || autoChildAction;
       if (child && el.contains(child)) {
         child.classList.add('child-selected');
         if (typeof markGroupActionChild === 'function') markGroupActionChild(useChildAction ? child : null);
