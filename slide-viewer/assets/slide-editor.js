@@ -4418,6 +4418,7 @@
   const GH_REPO = 'lst9485-alt/cdn-assets';
   const GH_TOKEN_KEY = 'gh-save-token';
   const GH_AUTO_SAVE_INTERVAL = 30000;
+  const GH_LOCAL_DRAFT_TTL_MS = 24 * 60 * 60 * 1000;
 
   // GitHub Pages CDN 캐시(10분) 때문에 저장 직후 새로고침 시 이전 버전이 보임
   // document.write() 방식은 슬라이드 중복 위험 → 제거. 사용자에게 대기 안내.
@@ -4439,6 +4440,47 @@
     if (_ghToken) return _ghToken;
     _ghToken = localStorage.getItem(GH_TOKEN_KEY);
     return _ghToken;
+  }
+
+  function ghLocalDraftKey() {
+    return 'gh-local-draft:' + location.pathname;
+  }
+
+  function ghStoreLocalDraft(html, reason = 'fallback') {
+    if (!html) return;
+    try {
+      localStorage.setItem(ghLocalDraftKey(), JSON.stringify({
+        html,
+        savedAt: Date.now(),
+        reason,
+      }));
+    } catch (_) {}
+  }
+
+  function ghLoadLocalDraft() {
+    try {
+      const raw = localStorage.getItem(ghLocalDraftKey());
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!parsed || !parsed.html || !parsed.savedAt) {
+        localStorage.removeItem(ghLocalDraftKey());
+        return null;
+      }
+      if (Date.now() - parsed.savedAt > GH_LOCAL_DRAFT_TTL_MS) {
+        localStorage.removeItem(ghLocalDraftKey());
+        return null;
+      }
+      return parsed;
+    } catch (_) {
+      try { localStorage.removeItem(ghLocalDraftKey()); } catch (_) {}
+      return null;
+    }
+  }
+
+  function ghClearLocalDraft() {
+    try {
+      localStorage.removeItem(ghLocalDraftKey());
+    } catch (_) {}
   }
 
   async function ghSetToken(token) {
@@ -4493,6 +4535,60 @@
     }
   }
   window.ghReloadFresh = ghReloadFresh;
+
+  function ghRestoreLocalDraftIfNeeded() {
+    const draft = ghLoadLocalDraft();
+    if (!draft) return false;
+    const normalizedDraft = ghNormalizeHtmlForCompare(draft.html);
+    const normalizedCurrent = ghNormalizeHtmlForCompare(ghGetCurrentHtmlForCompare());
+    if (normalizedDraft === normalizedCurrent) {
+      ghClearLocalDraft();
+      return false;
+    }
+    try {
+      const parsed = new DOMParser().parseFromString(draft.html, 'text/html');
+      const draftStage = parsed.getElementById('stage');
+      const liveStage = document.getElementById('stage');
+      if (!draftStage || !liveStage) return false;
+
+      const currentActiveId = document.querySelector('#stage > .slide.active')?.id || '';
+      liveStage.innerHTML = draftStage.innerHTML;
+
+      let liveMeta = document.querySelector('meta[name="gh-sha"]');
+      const draftMeta = parsed.querySelector('meta[name="gh-sha"]');
+      if (draftMeta) {
+        if (!liveMeta) {
+          liveMeta = document.createElement('meta');
+          liveMeta.name = 'gh-sha';
+          document.head.appendChild(liveMeta);
+        }
+        liveMeta.content = draftMeta.content || '';
+      }
+
+      slides = document.querySelectorAll('#stage > .slide');
+      let nextSlide = currentActiveId
+        ? Array.from(slides).findIndex(slide => slide.id === currentActiveId)
+        : -1;
+      if (nextSlide < 0) nextSlide = Math.min(typeof currentSlide === 'number' ? currentSlide : 0, Math.max(slides.length - 1, 0));
+      if (typeof currentSlide !== 'undefined') currentSlide = Math.max(0, nextSlide);
+      if (typeof currentStep !== 'undefined') currentStep = 0;
+      if (typeof currentOrder !== 'undefined') currentOrder = 0;
+
+      document.querySelectorAll('#stage > .slide').forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+        slide.classList.remove('leave-left', 'enter-from-left');
+      });
+      if (slides[currentSlide] && typeof showStep === 'function') {
+        showStep(slides[currentSlide], 0, true);
+      }
+      if (typeof scaleStage === 'function') scaleStage();
+      showToast('이 브라우저의 임시 저장본을 복구했습니다.', 4000);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+  window.ghRestoreLocalDraftIfNeeded = ghRestoreLocalDraftIfNeeded;
 
   async function ghWaitForPublicReflect(expectedHtml, timeoutMs = 12000, intervalMs = 1500) {
     const expected = ghNormalizeHtmlForCompare(expectedHtml);
@@ -4552,16 +4648,14 @@
       return;
     }
     if (!force && !_ghDirty) return;
-    const token = ghGetToken();
-    if (!token) { showToast('GitHub 토큰이 없습니다. ⚙ 아이콘을 눌러 설정하세요.', 4000); return; }
     _ghSaving = true;
     window.__ghLastSaveOk = false;
     window.__ghPublicReflectOk = true;
     const startDirtyVersion = _ghDirtyVersion;
     let saveCompleted = false;
+    let content = '';
     showToast('GitHub에 저장 중...', 2000);
     try {
-      let content;
       const stageEl = document.getElementById('stage');
       const shouldRebindObserver = !!_ghStageObserver && !!stageEl;
       if (shouldRebindObserver) ghUnbindDirtyObserver();
@@ -4576,6 +4670,14 @@
       }
       if (shouldRebindObserver && typeof editMode !== 'undefined' && editMode) {
         ghBindDirtyObserver(stageEl);
+      }
+      const token = ghGetToken();
+      if (!token) {
+        ghStoreLocalDraft(content, 'missing-token');
+        _ghDirty = false;
+        showToast('GitHub 토큰이 없어 이 브라우저에 임시 저장했습니다. ⚙ 에서 설정하세요.', 5000);
+        try { showSaveStatus(); } catch(_) {}
+        return;
       }
       const encoded = btoa(unescape(encodeURIComponent(content)));
       const filename = location.pathname.split('/').pop() || 'slides.html';
@@ -4603,6 +4705,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghLastSavedHtml = content;
+        ghStoreLocalDraft(content, 'remote-save');
         window.__ghLastSavedSha = _ghFileSha;
         saveCompleted = true;
         if (_ghDirtyVersion === startDirtyVersion) {
@@ -4620,6 +4723,7 @@
         if (window.__slideExitPendingSave) {
           const reflected = await ghWaitForPublicReflect(_ghLastSavedHtml);
           window.__ghPublicReflectOk = reflected;
+          if (reflected) ghClearLocalDraft();
           if (!reflected) {
             showToast('저장은 완료됐지만 공개 반영이 조금 늦고 있습니다.', 4000);
           }
@@ -4630,13 +4734,18 @@
         await _ghHandleConflict(encoded, filePath);
       } else if (res.status === 401) {
         ghHandleAuthError();
+        ghStoreLocalDraft(content, 'auth-error');
+        showToast('GitHub 저장에 실패해 이 브라우저에 임시 저장했습니다.', 5000);
       } else if (res.status === 403) {
+        ghStoreLocalDraft(content, 'rate-limit');
         showToast('GitHub API 한도 초과 — 잠시 후 다시 시도됩니다', 4000);
       } else {
+        ghStoreLocalDraft(content, 'http-error');
         const errBody = await res.text().catch(() => '');
         showToast('저장 실패 (' + res.status + '): ' + errBody.slice(0, 100), 5000);
       }
     } catch (e) {
+      ghStoreLocalDraft(content, 'network-error');
       showToast('저장 오류: ' + e.message, 5000);
     } finally {
       _ghSaving = false;
@@ -4673,6 +4782,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
+        ghClearLocalDraft();
         ghBumpFreshUrl();
         showToast('GitHub 저장 완료! 공개 URL 반영은 잠시 늦을 수 있습니다.', 4000);
         try { showSaveStatus(); } catch(_) {}
@@ -4872,7 +4982,10 @@
 
   // 페이지 로드 시 자동 실행
   if (isGitHubPages) {
-    const _ghRunCheck = () => ghCheckAndLoadLatest();
+    const _ghRunCheck = () => {
+      const restored = ghRestoreLocalDraftIfNeeded();
+      if (!restored) ghCheckAndLoadLatest();
+    };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _ghRunCheck);
     else _ghRunCheck();
   }
@@ -4996,19 +5109,8 @@
       buildFilmstrip();
       buildLayerPanel();
       if (isGitHubPages) {
-        // GitHub Pages: 토큰 확인 → 없으면 설정 다이얼로그
         if (!ghGetToken()) {
-          ghShowTokenDialog();
-          const tokenSet = await new Promise(resolve => {
-            document.addEventListener('gh-token-set', () => resolve(true), { once: true });
-            document.addEventListener('gh-token-cancel', () => resolve(false), { once: true });
-          });
-          if (!tokenSet) {
-            editMode = false;
-            document.body.classList.remove('edit-mode');
-            document.getElementById('layer-panel').classList.remove('visible');
-            return;
-          }
+          showToast('GitHub 토큰이 없어 이 브라우저에 임시 저장됩니다. ⚙ 에서 설정하세요.', 5000);
         }
         await ghFetchFileSha();
       } else if (!dirHandle) {
@@ -5593,6 +5695,19 @@
   function updateResizeHandle() {
     const handles = document.querySelectorAll('.resize-handle');
     const msBox = document.getElementById('multi-select-box');
+    const stageEl = document.getElementById('stage');
+    const toStageBox = (el) => {
+      if (!stageEl || !el) return { left: 0, top: 0, width: 0, height: 0 };
+      const stageRect = stageEl.getBoundingClientRect();
+      const scale = stageRect.width / 1920 || 1;
+      const rect = el.getBoundingClientRect();
+      return {
+        left: (rect.left - stageRect.left) / scale,
+        top: (rect.top - stageRect.top) / scale,
+        width: rect.width / scale,
+        height: rect.height / scale,
+      };
+    };
     if (!selectedEl || !editMode) {
       handles.forEach(h => h.classList.remove('visible'));
       msBox.style.display = 'none';
@@ -5610,18 +5725,9 @@
     const activeChild = (_activeChildRaw && !_activeChildRaw.matches(NON_TEXT_CHILD_SEL)) ? _activeChildRaw : null;
     if (activeChild) {
       msBox.style.display = 'none';
-      // offsetLeft 체인으로 stage 기준 좌표 계산 (getBoundingClientRect는 transform 때문에 역변환 필요 → 체인 방식이 더 단순/정확)
-      const stageEl = document.getElementById('stage');
-      let l = 0, t = 0;
-      let cur = activeChild;
-      while (cur && cur !== stageEl && cur.offsetParent) {
-        l += cur.offsetLeft;
-        t += cur.offsetTop;
-        if (cur.offsetParent === stageEl) break;
-        cur = cur.offsetParent;
-      }
-      const w = activeChild.offsetWidth;
-      const hh = activeChild.offsetHeight;
+      const box = toStageBox(activeChild);
+      const l = box.left, t = box.top;
+      const w = box.width, hh = box.height;
       const cornerPos = { tl: [l-6, t-6], tr: [l+w-6, t-6], bl: [l-6, t+hh-6], br: [l+w-6, t+hh-6] };
       handles.forEach(h => {
         if (h.dataset.corner) {
@@ -5639,8 +5745,9 @@
     if (selectedEls.length > 1) {
       let minL = Infinity, minT = Infinity, maxR = -Infinity, maxB = -Infinity;
       selectedEls.forEach(el => {
-        const l = el.offsetLeft, t = el.offsetTop;
-        const r = l + el.offsetWidth, b = t + el.offsetHeight;
+        const box = toStageBox(el);
+        const l = box.left, t = box.top;
+        const r = l + box.width, b = t + box.height;
         if (l < minL) minL = l;
         if (t < minT) minT = t;
         if (r > maxR) maxR = r;
@@ -5660,8 +5767,9 @@
       });
     } else {
       msBox.style.display = 'none';
-      const l = selectedEl.offsetLeft, t = selectedEl.offsetTop;
-      const w = selectedEl.offsetWidth, hh = selectedEl.offsetHeight;
+      const box = toStageBox(selectedEl);
+      const l = box.left, t = box.top;
+      const w = box.width, hh = box.height;
       const cx = l + w / 2, cy = t + hh / 2;
       const cornerPos = { tl: [l-6, t-6], tr: [l+w-6, t-6], bl: [l-6, t+hh-6], br: [l+w-6, t+hh-6] };
       const edgePos = { t: [cx-6, t-6], r: [l+w-6, cy-6], b: [cx-6, t+hh-6], l: [l-6, cy-6] };
@@ -5827,12 +5935,73 @@
     }));
   }
 
+  function _pointWithinRect(rect, clientX, clientY) {
+    return clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom;
+  }
+
+  function findSmallestPointMatch(root, selectors, clientX, clientY) {
+    if (!root || !selectors) return null;
+    const candidates = Array.from(root.querySelectorAll(selectors)).filter(el => {
+      if (!el || el.classList.contains('edit-hidden-placeholder')) return false;
+      const style = getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden' || parseFloat(style.opacity || '1') === 0) return false;
+      const rect = el.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0 && _pointWithinRect(rect, clientX, clientY);
+    });
+    if (!candidates.length) return null;
+    candidates.sort((a, b) => {
+      const ar = a.getBoundingClientRect();
+      const br = b.getBoundingClientRect();
+      return (ar.width * ar.height) - (br.width * br.height);
+    });
+    return candidates[0];
+  }
+
+  function findLayoutChildAtPoint(container, clientX, clientY) {
+    if (!container || !container.matches('.items-row, .items-col, .items-grid, .compare-box, .compare-col')) return null;
+    return findSmallestPointMatch(
+      container,
+      ':scope > .slide-el, :scope > .text-area, :scope > .bubble, :scope > .bar-chart, :scope > .line-chart, :scope > .hbar-chart, :scope > .step-timeline, :scope > .multi-stat',
+      clientX,
+      clientY
+    );
+  }
+
+  function findStructuralTargetAtPoint(root, clientX, clientY) {
+    if (!root) return null;
+    return findSmallestPointMatch(
+      root,
+      '.slide-el, .text-area, .bubble, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat',
+      clientX,
+      clientY
+    ) || findSmallestPointMatch(
+      root,
+      '.items-row, .items-col, .items-grid, .compare-box, .compare-col',
+      clientX,
+      clientY
+    );
+  }
+
   document.getElementById('stage').addEventListener('dragstart', e => {
     if (editMode) e.preventDefault();
   });
 
-  function resolveGroupChildTarget(parent, target) {
-    if (!parent || !target || !parent.contains(target)) return null;
+  function resolveGroupChildTarget(parent, target, clientX = null, clientY = null) {
+    if (!parent) return null;
+    const pointChild = (
+      typeof clientX === 'number' &&
+      typeof clientY === 'number' &&
+      _pointWithinRect(parent.getBoundingClientRect(), clientX, clientY)
+    ) ? findSmallestPointMatch(
+      parent,
+      CHILD_SEL + ', .section-badge, .corner-label, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat',
+      clientX,
+      clientY
+    ) : null;
+    if (pointChild && !pointChild.matches(NON_TEXT_CHILD_SEL)) {
+      return pointChild;
+    }
+    if (!target || !parent.contains(target)) return null;
     const textLeaf = resolveEditableTextTarget(target);
     if (textLeaf && textLeaf !== parent && parent.contains(textLeaf)) {
       return textLeaf;
@@ -6059,11 +6228,12 @@
 
     // 그룹 진입 상태: 자식 요소 클릭 또는 밖 클릭 처리
     if (groupEntered && groupParent) {
-      if (groupParent.contains(e.target) && e.target !== groupParent) {
+      const pointInsideGroup = _pointWithinRect(groupParent.getBoundingClientRect(), e.clientX, e.clientY);
+      if ((groupParent.contains(e.target) && e.target !== groupParent) || pointInsideGroup) {
         e.preventDefault(); e.stopPropagation();
         const prevChild = groupParent.querySelector('.child-selected');
         groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
-        const child = resolveGroupChildTarget(groupParent, e.target) || e.target;
+        const child = resolveGroupChildTarget(groupParent, e.target, e.clientX, e.clientY) || e.target;
         const preferParentAction = typeof shouldPreferParentGroupAction === 'function' && shouldPreferParentGroupAction(groupParent);
         const explicitChildAction = !!(prevChild && child === prevChild);
         const useChildAction = !preferParentAction || explicitChildAction;
@@ -6203,7 +6373,15 @@
       return;
     }
 
-    const preferredTarget = resolvePreferredSelectionTarget(e.target);
+    const activeSlide = (typeof slides !== 'undefined' && slides[currentSlide]) || document.querySelector('#stage > .slide.active');
+    const pointStructuralTarget = findStructuralTargetAtPoint(activeSlide, e.clientX, e.clientY);
+    const layoutContainer = (pointStructuralTarget && pointStructuralTarget.matches('.items-row, .items-col, .items-grid, .compare-box, .compare-col'))
+      ? pointStructuralTarget
+      : e.target.closest('.items-row, .items-col, .items-grid, .compare-box, .compare-col');
+    const layoutChildTarget = layoutContainer
+      ? findLayoutChildAtPoint(layoutContainer, e.clientX, e.clientY)
+      : null;
+    const preferredTarget = layoutChildTarget || pointStructuralTarget || resolvePreferredSelectionTarget(e.target);
     let el = preferredTarget || e.target.closest(EDITABLE_SEL);
     // img inside .slide-el → select parent .slide-el (prevents dual selection + fixes resize coords)
     if (el && el.tagName === 'IMG' && el.closest('.slide-el')) el = el.closest('.slide-el');
@@ -6959,7 +7137,7 @@
       groupParent = el;
       el.classList.remove('edit-selected');
       el.classList.add('group-entered-parent');
-      const child = resolveGroupChildTarget(el, target);
+      const child = resolveGroupChildTarget(el, target, mouseDownPos?.x, mouseDownPos?.y);
       const preferParentAction = typeof shouldPreferParentGroupAction === 'function' && shouldPreferParentGroupAction(el);
       const explicitChildAction = !!(child && target && target !== el);
       const useChildAction = !preferParentAction || explicitChildAction;
