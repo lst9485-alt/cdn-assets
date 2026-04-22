@@ -362,6 +362,10 @@
       item.dataset.canonicalIdx = String(canonicalIdx);
       item.textContent = displayNumber;
       item.dataset.search = [displayNumber, pg, baseType, baseSlide.dataset.displayLabel || ''].join(' ');
+      const specialHint = (typeof specialUsageHintForPageGroup === 'function')
+        ? specialUsageHintForPageGroup(pg)
+        : '';
+      if (specialHint) item.title = specialHint;
       item.addEventListener('click', () => {
         const overview = document.getElementById('overview');
         if (overview && overview.dataset.open === '1') {
@@ -535,6 +539,8 @@
     { name: '텍스트',         icon: '📝' },
   ];
 
+  const SPECIAL_USAGE_HINT = 'T23=구독/좋아요 CTA · T37=영상 마무리 · T38=챕터 전환';
+
   const PG_TO_BUCKET = {
     1:  'special',
     2:  'title',    3:  'title',    4:  'title',
@@ -583,6 +589,14 @@
     return PG_TO_CATEGORY[parseInt(pg)] || null;
   }
 
+  function specialUsageHintForPageGroup(pg) {
+    const num = parseInt(pg, 10);
+    if (num === 23) return 'T23 CTA버튼: 구독/좋아요 CTA 전용';
+    if (num === 37) return 'T37 마지막정리: 영상 마무리 전용';
+    if (num === 38) return 'T38 챕터전환: 챕터 전환 전용';
+    return '';
+  }
+
   function findBucketMeta(bucketKey) {
     return BUCKET_META.find(function(b) { return b.key === bucketKey; }) || null;
   }
@@ -624,10 +638,12 @@
     const divider = document.createElement('div');
     divider.className = 'fs-bucket-divider';
     divider.dataset.bucket = bucketKey;
+    if (bucketKey === 'special') divider.title = SPECIAL_USAGE_HINT;
     divider.innerHTML =
       '<span class="fs-bucket-icon">' + (meta ? meta.icon : '') + '</span>' +
       '<span class="fs-bucket-name">' + (meta ? meta.label : bucketKey) + '</span>' +
-      '<span class="fs-bucket-count">' + count + '</span>';
+      '<span class="fs-bucket-count">' + count + '</span>' +
+      (bucketKey === 'special' ? '<span class="fs-bucket-hint"> · ' + SPECIAL_USAGE_HINT + '</span>' : '');
     return divider;
   }
 
@@ -678,10 +694,12 @@
     const header = document.createElement('div');
     header.className = 'ov-bucket-header';
     header.dataset.bucket = bucketKey;
+    if (bucketKey === 'special') header.title = SPECIAL_USAGE_HINT;
     header.innerHTML =
       '<span class="ov-bucket-icon">' + (meta ? meta.icon : '') + '</span>' +
       '<span class="ov-bucket-name">' + (meta ? meta.label : bucketKey) + '</span>' +
-      '<span class="ov-bucket-count">' + count + '</span>';
+      '<span class="ov-bucket-count">' + count + '</span>' +
+      (bucketKey === 'special' ? '<span class="ov-bucket-hint"> · ' + SPECIAL_USAGE_HINT + '</span>' : '');
     return header;
   }
 
@@ -2784,6 +2802,7 @@
       return;
     }
     if (e.code === 'KeyO') {
+      if (!editMode) return;
       toggleOverview();
       return;
     }
@@ -3713,6 +3732,10 @@
       item._slideIdx = slideIdx;
       if (pg) item.dataset.pageGroup = pg;
       if (variant != null) item.dataset.variant = variant;
+      const specialHint = (typeof specialUsageHintForPageGroup === 'function')
+        ? specialUsageHintForPageGroup(pg)
+        : '';
+      if (specialHint) item.title = specialHint;
       // z-index: base 맨 위, variants 순서대로 뒤로
       item.style.zIndex = isVariant ? String(10 - parseInt(variant)) : '20';
 
@@ -4016,9 +4039,11 @@
 
   _initTabLock();
   window.addEventListener('beforeunload', (e) => {
-    if (editMode) {
+    const ghPending = isGitHubPages && typeof ghHasPendingChanges === 'function' && ghHasPendingChanges();
+    const localPending = isSaving || pendingLocalSave;
+    if (editMode || ghPending || localPending) {
       releaseTabLock();
-      if (isGitHubPages && typeof ghIsDirty === 'function' && ghIsDirty()) {
+      if (ghPending || localPending) {
         e.preventDefault();
         e.returnValue = '';
       }
@@ -4380,9 +4405,9 @@
 
   function _ghFilePath() {
     const filename = location.pathname.split('/').pop() || 'slides.html';
-    // slide-viewer/ 하위 경로 추출
+    // slide-viewer/ 또는 slide-viewer-* 하위 경로 추출
     const parts = location.pathname.split('/');
-    const svIdx = parts.indexOf('slide-viewer');
+    const svIdx = parts.findIndex(p => /^slide-viewer(?:-.+)?$/.test(p));
     if (svIdx >= 0) return parts.slice(svIdx).join('/');
     return 'slide-viewer/' + filename;
   }
@@ -4533,6 +4558,9 @@
     _ghDirtyVersion += 1;
   }
   function ghIsDirty() { return _ghDirty; }
+  function ghHasPendingChanges() {
+    return _ghDirty || _ghSaving || _ghPendingSave || !!window.__slideExitPendingSave;
+  }
 
   function ghBindDirtyObserver(stageEl) {
     if (!isGitHubPages || !stageEl) return;
@@ -4570,8 +4598,7 @@
       subtree: true,
       childList: true,
       characterData: true,
-      attributes: true,
-      attributeFilter: ['style', 'src', 'href', 'class', 'data-notes', 'data-group', 'data-step', 'data-steps']
+      attributes: true
     });
   }
 
@@ -4588,6 +4615,8 @@
       if (e.target.closest && e.target.closest('[contenteditable]')) ghMarkDirty();
     });
   }
+
+  window.ghHasPendingChanges = ghHasPendingChanges;
 
   // ── 토큰 설정 다이얼로그 ──
   function ghShowTokenDialog() {
@@ -4846,7 +4875,11 @@
         userZoom = 1; panX = 0; panY = 0;
         clearInterval(autoSaveTimer);
         autoSaveTimer = null;
-        saveToFile(true).then(() => releaseTabLock());
+        if (isGitHubPages) window.__slideExitPendingSave = true;
+        saveToFile(true).finally(() => {
+          if (isGitHubPages) window.__slideExitPendingSave = false;
+          releaseTabLock();
+        });
         document.querySelectorAll('[data-group^="ag"]').forEach(el => delete el.dataset.group);
         // dim-handle 배지 제거
         document.querySelectorAll('.dim-handle').forEach(b => b.remove());
@@ -4864,6 +4897,7 @@
         if (sb) sb.style.display = 'none';
         undoStack.length = 0;
         redoStack.length = 0;
+        if (typeof closeOverview === 'function') closeOverview();
         const lp = document.getElementById('layer-panel');
         if (lp) lp.classList.remove('visible');
       } catch (err) {
@@ -5099,6 +5133,7 @@
   function removeEditableElement(el, slide) {
     const layer = el.closest('.step-layer');
     const parent = el.parentElement;
+    const parentDisplay = parent ? getComputedStyle(parent).display : '';
     const preserveLayout = !!(
       parent &&
       (
@@ -5106,7 +5141,9 @@
         parent.classList.contains('items-col') ||
         parent.classList.contains('items-grid') ||
         parent.classList.contains('compare-box') ||
-        parent.classList.contains('compare-col')
+        parent.classList.contains('compare-col') ||
+        parentDisplay.includes('flex') ||
+        parentDisplay.includes('grid')
       )
     );
 

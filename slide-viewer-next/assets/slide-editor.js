@@ -4405,9 +4405,9 @@
 
   function _ghFilePath() {
     const filename = location.pathname.split('/').pop() || 'slides.html';
-    // slide-viewer/ 하위 경로 추출
+    // slide-viewer/ 또는 slide-viewer-* 하위 경로 추출
     const parts = location.pathname.split('/');
-    const svIdx = parts.indexOf('slide-viewer');
+    const svIdx = parts.findIndex(p => /^slide-viewer(?:-.+)?$/.test(p));
     if (svIdx >= 0) return parts.slice(svIdx).join('/');
     return 'slide-viewer/' + filename;
   }
