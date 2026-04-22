@@ -2206,13 +2206,19 @@
 
   // step 내 레이어 표시 (revealAll=true: 현재 step ordered 요소 전부 표시)
   function showStep(slide, step, revealAll) {
+    const editorGalleryRevealAll = (
+      /slides-editor\.html$/.test(location.pathname) &&
+      !document.body.classList.contains('edit-mode') &&
+      !document.body.dataset.generated
+    );
     const editRevealAll = (
       document.body.classList.contains('edit-mode') &&
       !document.body.classList.contains('frozen-legacy-deck')
     );
+    const forceMaxStep = editRevealAll || editorGalleryRevealAll;
     const maxStep = Math.max(0, parseInt(slide.dataset.steps || '1', 10) - 1);
-    const effectiveStep = editRevealAll ? maxStep : step;
-    const forceRevealAll = revealAll || editRevealAll;
+    const effectiveStep = forceMaxStep ? maxStep : step;
+    const forceRevealAll = revealAll || forceMaxStep;
     let hasDim = false;
     slide.querySelectorAll('.step-layer[data-step]').forEach(layer => {
       const s = parseInt(layer.dataset.step);
@@ -2223,7 +2229,7 @@
         // pushup 레이어: 현재 step이면 보이고, 이전 pushup은 push-exit 상태
         if (isPushup) {
           layer.classList.remove('push-enter', 'push-exit');
-          if (s < effectiveStep && !editRevealAll) {
+          if (s < effectiveStep && !forceMaxStep) {
             // 이 pushup 레이어 위에 다른 pushup이 있으면 밀려난 상태
             const nextPushup = slide.querySelector(`.step-layer[data-transition="pushup"][data-step="${s + 1}"]`);
             if (nextPushup) layer.classList.add('push-exit');
@@ -2253,7 +2259,7 @@
             if (!noDim && !isPushup) {
               const dim = layer.querySelector('.step-dim');
               if (dim) {
-                if (editRevealAll) dim.classList.remove('anim-shown');
+                if (forceMaxStep) dim.classList.remove('anim-shown');
                 else dim.classList.add('anim-shown');
               }
             }
@@ -4476,13 +4482,41 @@
     return _ghToken;
   }
 
-  function ghLocalDraftKey() {
+  function ghRuntimeDraftRevision() {
+    try {
+      const script = Array.from(document.scripts || []).find(node =>
+        /(?:^|\/)assets\/slide-editor\.js(?:[?#].*)?$/.test(node.src || '')
+      );
+      if (!script) return 'noversion';
+      const url = new URL(script.src, location.href);
+      return url.searchParams.get('v') || 'noversion';
+    } catch (_) {
+      return 'noversion';
+    }
+  }
+
+  function ghLocalDraftPrefix() {
     return 'gh-local-draft:' + location.pathname;
+  }
+
+  function ghLocalDraftKey() {
+    return ghLocalDraftPrefix() + ':' + ghRuntimeDraftRevision();
+  }
+
+  function ghClearLegacyDrafts() {
+    const prefix = ghLocalDraftPrefix() + ':';
+    const keepKey = ghLocalDraftKey();
+    try {
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith(prefix) && key !== keepKey) localStorage.removeItem(key);
+      });
+    } catch (_) {}
   }
 
   function ghStoreLocalDraft(html, reason = 'fallback') {
     if (!html) return;
     try {
+      ghClearLegacyDrafts();
       localStorage.setItem(ghLocalDraftKey(), JSON.stringify({
         html,
         savedAt: Date.now(),
@@ -4493,6 +4527,7 @@
 
   function ghLoadLocalDraft() {
     try {
+      ghClearLegacyDrafts();
       const raw = localStorage.getItem(ghLocalDraftKey());
       if (!raw) return null;
       const parsed = JSON.parse(raw);
@@ -4513,6 +4548,7 @@
 
   function ghClearLocalDraft() {
     try {
+      ghClearLegacyDrafts();
       localStorage.removeItem(ghLocalDraftKey());
     } catch (_) {}
   }
@@ -4570,8 +4606,8 @@
   }
   window.ghReloadFresh = ghReloadFresh;
 
-  function ghRestoreLocalDraftIfNeeded() {
-    const draft = ghLoadLocalDraft();
+  function ghRestoreLocalDraftIfNeeded(draftOverride = null) {
+    const draft = draftOverride || ghLoadLocalDraft();
     if (!draft) return false;
     const normalizedDraft = ghNormalizeHtmlForCompare(draft.html);
     const normalizedCurrent = ghNormalizeHtmlForCompare(ghGetCurrentHtmlForCompare());
@@ -4796,7 +4832,11 @@
   async function _ghHandleConflict(encoded, filePath) {
     // SHA 불일치 — 외부에서 수정됨
     const choice = confirm('⚠️ 파일이 외부에서 변경되었습니다.\n\n확인 = 내 편집 유지 (덮어쓰기)\n취소 = 외부 변경 로드 (새로고침)');
-    if (!choice) { location.reload(); return; }
+    if (!choice) {
+      ghClearLocalDraft();
+      location.reload();
+      return;
+    }
     // 최신 SHA로 직접 재시도 (ghSaveToFile 재호출 시 _ghSaving 잠금 문제 회피)
     await ghFetchFileSha();
     const token = ghGetToken();
@@ -5018,7 +5058,22 @@
   // 페이지 로드 시 자동 실행
   if (isGitHubPages) {
     const _ghRunCheck = async () => {
-      const restored = ghRestoreLocalDraftIfNeeded();
+      ghClearLegacyDrafts();
+      const draft = ghLoadLocalDraft();
+      if (draft && draft.reason === 'remote-save' && ghGetToken()) {
+        await ghCheckAndLoadLatest();
+        const latestDraft = ghLoadLocalDraft();
+        if (!latestDraft) return;
+        const normalizedDraft = ghNormalizeHtmlForCompare(latestDraft.html);
+        const normalizedCurrent = ghNormalizeHtmlForCompare(ghGetCurrentHtmlForCompare());
+        if (normalizedDraft === normalizedCurrent) {
+          ghClearLocalDraft();
+          return;
+        }
+        ghRestoreLocalDraftIfNeeded(latestDraft);
+        return;
+      }
+      const restored = ghRestoreLocalDraftIfNeeded(draft);
       if (!restored) {
         await ghCheckAndLoadLatest();
         return;
@@ -5500,10 +5555,16 @@
     if (!el || !el.parentElement) return el;
     const parent = el.parentElement;
     const parentDisplay = getComputedStyle(parent).display || '';
+    const elementPosition = getComputedStyle(el).position || '';
+    const preserveDirectFlowSlot = !!(
+      parent.matches('.slide-el, .text-area, .bubble') &&
+      !['absolute', 'fixed'].includes(elementPosition)
+    );
     const isLayoutParent = !!(
       parent.matches('.items-row, .items-col, .items-grid, .compare-box, .compare-col') ||
       parentDisplay.includes('flex') ||
-      parentDisplay.includes('grid')
+      parentDisplay.includes('grid') ||
+      preserveDirectFlowSlot
     );
     if (!isLayoutParent) return el;
     if (el.classList.contains('layout-detached')) return el;
@@ -5518,6 +5579,7 @@
     const placeholder = el.cloneNode(true);
     layoutDetachCounter += 1;
     placeholder.classList.add('edit-hidden-placeholder', 'no-edit-select', 'layout-detached-placeholder');
+    placeholder.classList.remove('edit-selected', 'edit-group-selected', 'child-selected', 'child-action-target');
     placeholder.dataset.layoutPlaceholderId = 'ldp' + layoutDetachCounter;
     placeholder.style.visibility = 'hidden';
     placeholder.style.pointerEvents = 'none';
