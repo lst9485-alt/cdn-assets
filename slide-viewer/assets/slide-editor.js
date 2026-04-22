@@ -541,6 +541,45 @@
   window.addEventListener('beforeunload', () => {
     if (presenterWindow && !presenterWindow.closed) presenterWindow.close();
   });
+
+  function bootstrapInitialSlideView() {
+    slides = document.querySelectorAll('#stage > .slide');
+    if (!slides.length) return;
+    rebuildSlidesByKey();
+
+    const activeIdx = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    if (activeIdx >= 0) currentSlide = activeIdx;
+
+    const activeSlide = slides[currentSlide];
+    if (activeSlide) {
+      const visibleSteps = Array.from(activeSlide.querySelectorAll('.step-layer.visible[data-step]'))
+        .map(layer => parseInt(layer.dataset.step || '0', 10))
+        .filter(Number.isFinite);
+      currentStep = visibleSteps.length ? Math.max(...visibleSteps) : 0;
+    } else {
+      currentStep = 0;
+    }
+    currentOrder = 0;
+
+    slides.forEach((slide, index) => {
+      slide.classList.toggle('active', index === currentSlide);
+      slide.classList.remove('leave-left', 'enter-from-left');
+      slide.style.opacity = '';
+      slide.style.transform = '';
+      slide.style.transition = '';
+    });
+
+    if (slides[currentSlide] && typeof showStep === 'function') {
+      showStep(slides[currentSlide], currentStep);
+    }
+    if (typeof buildFilmstrip === 'function') buildFilmstrip();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrapInitialSlideView, { once: true });
+  } else {
+    setTimeout(bootstrapInitialSlideView, 0);
+  }
   // ── 에디터 구역/카테고리 헤더 ──
   // 데이터 정본:
   //   - references/type-compile-config.json 의 visual_category / editor_section
