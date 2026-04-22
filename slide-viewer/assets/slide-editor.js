@@ -5253,7 +5253,11 @@
   }
 
   function exitGroup() {
-    if (groupParent) { groupParent.classList.remove('group-entered-parent'); groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected')); }
+    if (groupParent) {
+      groupParent.classList.remove('group-entered-parent');
+      groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
+      groupParent.querySelectorAll('.child-action-target').forEach(c => c.classList.remove('child-action-target'));
+    }
     groupEntered = false;
     groupParent = null;
   }
@@ -5386,10 +5390,18 @@
   }
   window.shouldPreferParentGroupAction = shouldPreferParentGroupAction;
 
+  function markGroupActionChild(child = null) {
+    if (!groupParent) return;
+    groupParent.querySelectorAll('.child-action-target').forEach(c => c.classList.remove('child-action-target'));
+    if (child && groupParent.contains(child)) child.classList.add('child-action-target');
+  }
+  window.markGroupActionChild = markGroupActionChild;
+
   function getGroupActionTarget() {
     if (!groupEntered || !groupParent) return null;
+    const actionChild = groupParent.querySelector('.child-action-target');
+    if (actionChild) return actionChild;
     const child = groupParent.querySelector('.child-selected');
-    if (child && selectedEl === child) return child;
     if (child && !shouldPreferParentGroupAction(groupParent)) return child;
     return groupParent;
   }
@@ -5675,7 +5687,7 @@
   function restoreSnapshot(html) {
     document.getElementById('stage').innerHTML = html;
     slides = document.querySelectorAll('#stage > .slide');
-    document.querySelectorAll('.edit-selected, .edit-group-selected, .group-entered-parent, .child-selected').forEach(el => { el.classList.remove('edit-selected', 'edit-group-selected', 'group-entered-parent', 'child-selected'); });
+    document.querySelectorAll('.edit-selected, .edit-group-selected, .group-entered-parent, .child-selected, .child-action-target').forEach(el => { el.classList.remove('edit-selected', 'edit-group-selected', 'group-entered-parent', 'child-selected', 'child-action-target'); });
     document.body.classList.remove('individual-mode');
     selectedEl = null;
     selectedEls = [];
@@ -6056,6 +6068,7 @@
         const explicitChildAction = !!(prevChild && child === prevChild);
         const useChildAction = !preferParentAction || explicitChildAction;
         child.classList.add('child-selected');
+        if (typeof markGroupActionChild === 'function') markGroupActionChild(useChildAction ? child : null);
         updateFontPanel(child);
         // 자식 드래그 분리용 상태 저장
         pendingDrag = true;
@@ -6528,6 +6541,17 @@
       const dist = Math.sqrt(dx*dx + dy*dy);
       if (dist > DRAG_THRESHOLD) {
         pushUndo();
+        if (groupEntered && groupParent && typeof getGroupActionTarget === 'function') {
+          const actionTarget = getGroupActionTarget();
+          if (actionTarget && actionTarget !== groupParent) {
+            selectedEl = actionTarget;
+            selectedEls = [actionTarget];
+            const canExtractChild = !actionTarget.closest('svg') && actionTarget.namespaceURI !== 'http://www.w3.org/2000/svg';
+            if (!actionTarget._pendingChildExtract && canExtractChild) {
+              actionTarget._pendingChildExtract = actionTarget;
+            }
+          }
+        }
         // groupEntered 자식 드래그: 자식을 부모에서 추출하여 독립 요소로 전환
         if (selectedEl && selectedEl._pendingChildExtract) {
           const child = selectedEl._pendingChildExtract;
@@ -6941,11 +6965,13 @@
       const useChildAction = !preferParentAction || explicitChildAction;
       if (child && el.contains(child)) {
         child.classList.add('child-selected');
+        if (typeof markGroupActionChild === 'function') markGroupActionChild(useChildAction ? child : null);
         selectedEl = useChildAction ? child : el;
         selectedEls = [selectedEl];
         updateCoordPanel(useChildAction ? child : el);
         updateFontPanel(child);
       } else {
+        if (typeof markGroupActionChild === 'function') markGroupActionChild(null);
         selectedEl = el;
         selectedEls = [el];
         updateCoordPanel(el);
