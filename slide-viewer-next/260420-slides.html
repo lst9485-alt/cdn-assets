@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="UTF-8">
+<title>slides-editor</title>
+<script>(function(){const name=location.pathname.split('/').pop().replace('.html','');const m=name.match(/(\d{4})(\d{2})(\d{2})/);document.title=m?`${m[1]}-${m[2]}-${m[3]}`:name;})()</script>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@900&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/slide-style.css">
+<style id="edit-badge-style">@keyframes editBadgeBlink{0%,100%{opacity:1}50%{opacity:0.3}}</style></head>
+<body class="" data-generated="true">
+
+<div id="layer-panel" class="">
+  <div class="layer-tabs">
+    <div class="layer-tab active" data-tab="animation">애니메이션</div>
+    <div class="layer-tab" data-tab="position">위치</div>
+  </div>
+  <div id="layer-tab-header"><div class="anim-section-title">프레젠테이션 설정</div><div class="anim-toggle-row"><span class="anim-toggle-label">클릭 시 표시</span>
+      <label class="anim-toggle disabled">
+        <input type="checkbox" disabled="">
+        <span class="anim-toggle-slider"></span>
+      </label></div><div class="anim-type-row"><span class="anim-type-label">애니메이션</span><select class="anim-type-select" disabled=""><option value="" selected="">기본 (아래에서)</option><option value="anim-scale">확대</option><option value="anim-left">왼쪽에서</option><option value="anim-right">오른쪽에서</option><option value="anim-pop">팝</option><option value="anim-fade">페이드</option><option value="anim-zoom">줌</option><option value="anim-flip">플립</option><option value="anim-split">스플릿</option><option value="anim-center">중앙 등장</option><option value="anim-underline">밑줄 긋기</option></select></div><div class="anim-pushup-row"><span class="anim-pushup-label">밀어올리기 전환</span>
+      <label class="anim-toggle disabled">
+        <input type="checkbox" disabled="">
+        <span class="anim-toggle-slider"></span>
+      </label></div><div class="anim-pushup-row"><span class="anim-pushup-label">오버레이 없음</span>
+      <label class="anim-toggle disabled">
+        <input type="checkbox" disabled="">
+        <span class="anim-toggle-slider"></span>
+      </label></div><div class="anim-sort-label"><span class="anim-sort-icon">☰</span> 클릭하여 정렬</div></div>
+  <div id="layer-list"></div>
+</div>
+<div id="guide-toolbar">
+  <div class="guide-btn" data-target="title" style="border-color:rgba(255,200,0,0.7); color:rgba(255,200,0,0.9);">T</div>
+  <div class="guide-btn" data-target="1" style="border-color:rgba(255,60,60,0.6); color:rgba(255,60,60,0.9);">1</div>
+  <div class="guide-btn" data-target="2" style="border-color:rgba(255,140,0,0.6); color:rgba(255,140,0,0.9);">2</div>
+  <div class="guide-btn" data-target="3" style="border-color:rgba(0,180,80,0.6); color:rgba(0,180,80,0.9);">3</div>
+  <div class="guide-btn" data-target="4" style="border-color:rgba(0,120,255,0.6); color:rgba(0,120,255,0.9);">4</div>
+  <div class="guide-btn" data-target="5" style="border-color:rgba(150,60,200,0.6); color:rgba(150,60,200,0.9);">5</div>
+</div>
+<div id="dim-outer" class=""></div>
+<div id="stage" style="">
+<div id="center-cross"></div>
+<div id="snap-x" style="display:none;" class=""></div>
+<div id="snap-y" style="display:none;" class=""></div>
+<div id="guide-snap-overlay"></div>
+<div id="multi-select-box" style="display:none;"></div>
+<div id="group-box" style="display:none;"></div>
+<div id="gap-left" class="gap-indicator" style="display: none; left: 0px; top: 397px; width: 1089px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: 525px; top: -14px;">1089px</div></div>
+<div id="gap-right" class="gap-indicator" style="display: none; left: 1769px; top: 397px; width: 151px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: 56px; top: -14px;">151px</div></div>
+<div id="gap-top" class="gap-indicator" style="display: none; left: 1428px; top: 0px; width: 0px; height: 202px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 91px; left: 6px;">202px</div></div>
+<div id="gap-bottom" class="gap-indicator" style="display: none; left: 1428px; top: 594px; width: 0px; height: 486px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 233px; left: 6px;">486px</div></div>
+<div class="resize-handle" data-corner="tl" style="left: 1114px; top: 74px;"></div>
+<div class="resize-handle" data-corner="tr" style="left: 1794px; top: 74px;"></div>
+<div class="resize-handle" data-corner="bl" style="left: 1114px; top: 252px;"></div>
+<div class="resize-handle" data-corner="br" style="left: 1794px; top: 252px;"></div>
+<div class="resize-handle edge" data-edge="t" style="left: 1454px; top: 74px;"></div>
+<div class="resize-handle edge" data-edge="r" style="left: 1794px; top: 163px;"></div>
+<div class="resize-handle edge" data-edge="b" style="left: 1454px; top: 252px;"></div>
+<div class="resize-handle edge" data-edge="l" style="left: 1114px; top: 163px;"></div>
+<div id="select-box" style="display:none;"></div>
+
+
+  
+<div class="slide active" data-page-group="1" data-variant="0" id="slide1a" data-steps="1" data-notes="🟡 지금 집 사야 되나요?" data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 지금 집 사야 되나요?">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">핵심 질문</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">지금 집 사야 되나요?</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="1" data-variant="1" id="slide1b" data-steps="2" data-notes="🟡 지금 집 사야 되나요?" data-type="큰숫자(서클)">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 지금 집 사야 되나요?">
+    <div class="text-area" style="position:absolute; left:120px; top:160px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">지금 집 사야 되나요?</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el stat-circle" data-type="큰숫자" style="position:absolute; left:420px; top:380px; width:300px; height:300px; background:rgba(74,144,217,0.15);">
+      <div class="stat-num">모두의 질문</div>
+      <div class="stat-label">지금 집 사야 되나요?</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="1" data-variant="2" id="slide1c" data-steps="1" data-notes="🟡 지금 집 사야 되나요?" data-type="좌우2분할">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 지금 집 사야 되나요?">
+    <div class="text-area" style="position:absolute; left:200px; top:110px; width:1520px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:88px;">지금 집 사야 되나요?</span></div>
+      </div>
+    </div>
+    <div class="items-row" style="top:360px; gap:80px; align-items:center;">
+      <div class="slide-el split-left" data-type="좌측" data-appear-step="0" style="text-align:center; padding:60px 40px;">
+        <div class="emoji-icon" style="font-size:160px; margin-bottom:32px;">🏠</div>
+        <div style="font-size:64px; font-weight:900; color:var(--color-text); margin-bottom:16px;">지금 산다</div>
+        <div style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">무주택 탈출</div>
+      </div>
+      <div class="slide-el split-right" data-type="우측" data-appear-step="0" style="text-align:center; padding:60px 40px; border-left:6px solid var(--color-text-faint);">
+        <div class="emoji-icon" style="font-size:160px; margin-bottom:32px;">⏳</div>
+        <div style="font-size:64px; font-weight:900; color:var(--color-accent); margin-bottom:16px;">더 기다린다</div>
+        <div style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">집값 하락 기대</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="2" data-variant="0" id="slide2a" data-steps="1" data-notes="🟡 댓글이나 상담에서 정말 🟡 많이 받는 질문입니다." data-type="두줄전개">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 댓글이나 상담에서 정말">
+    <div class="items-col" style="top:310px; gap:44px;">
+      <div class="slide-el reveal-line1" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:108px;">댓글이나 상담에서</span>
+      </div>
+      <div class="slide-el reveal-line2" data-type="전개" data-appear-step="1" style="text-align:center; font-size:84px; font-weight:700; color:var(--color-accent); line-height:1.4;">정말 많이 받는 질문입니다</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="2" data-variant="1" id="slide2b" data-steps="1" data-notes="🟡 댓글이나 상담에서 정말 🟡 많이 받는 질문입니다." data-type="좌우2단비교">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 댓글이나 상담에서 정말">
+    <div class="text-area" style="position:absolute; left:200px; top:120px; width:1520px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:84px;">정말 많이 받는 질문</span></div>
+      </div>
+    </div>
+    <div class="items-row" style="top:390px; gap:80px; align-items:stretch;">
+      <div class="slide-el split-left" data-type="좌측" data-appear-step="0" style="flex:1; text-align:center; padding:56px 44px;">
+        <div style="font-size:78px; font-weight:900; color:var(--color-text); line-height:1.35;">댓글</div>
+      </div>
+      <div class="slide-el split-right" data-type="우측" data-appear-step="1" style="flex:1; text-align:center; padding:56px 44px; border-left:6px solid var(--color-text-faint);">
+        <div style="font-size:78px; font-weight:900; color:var(--color-accent); line-height:1.35;">상담</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="2" data-variant="2" id="slide2c" data-steps="1" data-notes="🟡 댓글이나 상담에서 정말 🟡 많이 받는 질문입니다." data-type="2단플로우">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 댓글이나 상담에서 정말">
+    <div class="text-area" style="position:absolute; left:220px; top:120px; width:1480px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:82px;">가장 자주 받는 질문</span></div>
+      </div>
+    </div>
+    <div class="items-row" style="top:390px; gap:64px; align-items:center;">
+      <div class="slide-el flow-step1" data-type="1단계" data-appear-step="0" style="width:520px; text-align:center; padding:52px 44px;">
+        <div style="font-size:74px; font-weight:900; color:var(--color-text); line-height:1.35;">댓글</div>
+      </div>
+      <div class="slide-el flow-arrow" data-type="화살표" data-appear-step="1" style="font-size:88px; color:var(--color-accent);">→</div>
+      <div class="slide-el flow-step2" data-type="2단계" data-appear-step="1" style="width:520px; text-align:center; padding:52px 44px;">
+        <div style="font-size:74px; font-weight:900; color:var(--color-accent); line-height:1.35;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="3" data-variant="0" id="slide3a" data-steps="1" data-notes="🟡 이 질문 자체가 틀렸습니다." data-type="블로그인트로">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 이 질문 자체가 틀렸습니다.">
+    <div class="items-col" style="top:200px; gap:40px;">
+      <div class="slide-el blog-counter" data-type="카운터" data-appear-step="0" style="text-align:center; font-size:48px; font-weight:900; color:var(--color-accent); letter-spacing:4px;">문제의 핵심</div>
+      <div class="slide-el" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:108px;">이 질문 자체가 틀렸습니다</span>
+      </div>
+      <div class="slide-el blog-meta" data-type="메타" data-appear-step="0" style="text-align:center; font-size:36px; font-weight:600; color:var(--color-text-muted); letter-spacing:1px;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="3" data-variant="1" id="slide3b" data-steps="1" data-notes="🟡 이 질문 자체가 틀렸습니다." data-type="이미지+텍스트">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 이 질문 자체가 틀렸습니다.">
+    <div class="slide-el" style="position:absolute; left:200px; top:80px; width:1520px; height:440px;"><img src="assets/icons/search.png" style="width:100%; height:100%; object-fit:contain;"></div>
+    <div class="text-area" style="position:absolute; left:200px; top:96px; width:1520px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:88px;">틀린 질문</span></div>
+      </div>
+    </div>
+    <div class="slide-el img-placeholder" data-type="이미지" style="position:absolute; left:200px; top:220px; width:1520px; height:380px;"><img src="assets/icons/search.png" style="width:100%; height:100%; object-fit:contain;"></div>
+    <div class="slide-el img-caption" data-type="캡션" style="position:absolute; left:200px; top:650px; width:1520px; text-align:center;">
+      살까 말까가 아닙니다
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="3" data-variant="2" id="slide3c" data-steps="1" data-notes="🟡 이 질문 자체가 틀렸습니다." data-type="좌우2분할">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 이 질문 자체가 틀렸습니다.">
+    <div class="text-area" style="position:absolute; left:200px; top:110px; width:1520px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:88px;">이 질문 자체가 틀렸습니다</span></div>
+      </div>
+    </div>
+    <div class="items-row" style="top:360px; gap:80px; align-items:center;">
+      <div class="slide-el split-left" data-type="좌측" data-appear-step="0" style="text-align:center; padding:60px 40px;">
+        <div class="emoji-icon" style="font-size:160px; margin-bottom:32px;">❌</div>
+        <div style="font-size:64px; font-weight:900; color:var(--color-text); margin-bottom:16px;">살까 말까?</div>
+        <div style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">잘못된 고민</div>
+      </div>
+      <div class="slide-el split-right" data-type="우측" data-appear-step="0" style="text-align:center; padding:60px 40px; border-left:6px solid var(--color-text-faint);">
+        <div class="emoji-icon" style="font-size:160px; margin-bottom:32px;">✅</div>
+        <div style="font-size:64px; font-weight:900; color:var(--color-accent); margin-bottom:16px;">어디를 살까?</div>
+        <div style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">올바른 고민</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="4" data-variant="0" id="slide4a" data-steps="1" data-notes="🟡 지금 우리가 할 고민은 🟡 &quot;살까 말까&quot;가 아닙니다." data-type="상하두줄전개">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 지금 우리가 할 고민은">
+    <div class="items-col" style="top:250px; gap:56px; width:1280px; margin:0 auto;">
+      <div class="slide-el vertical-line1" data-type="첫줄" data-appear-step="0" style="text-align:center; padding:18px 0;">
+        <span class="hl" style="font-size:96px;">지금 해야 할 고민은</span>
+      </div>
+      <div class="slide-el vertical-divider" data-type="구분선" data-appear-step="1" style="width:420px; height:6px; margin:0 auto; background:var(--color-text-faint);"></div>
+      <div class="slide-el vertical-line2" data-type="둘째줄" data-appear-step="1" style="text-align:center; font-size:74px; font-weight:800; color:var(--color-accent); line-height:1.4;">&quot;살까 말까&quot;가 아닙니다</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="4" data-variant="1" id="slide4b" data-steps="1" data-notes="🟡 지금 우리가 할 고민은 🟡 &quot;살까 말까&quot;가 아닙니다." data-type="상하2단비교">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 지금 우리가 할 고민은">
+    <div class="text-area" style="position:absolute; left:220px; top:120px; width:1480px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:82px;">잘못된 고민 vs 올바른 고민</span></div>
+      </div>
+    </div>
+    <div class="items-col" style="top:320px; gap:56px; width:1280px; margin:0 auto;">
+      <div class="slide-el vertical-top" data-type="상단비교" data-appear-step="0" style="text-align:center; padding:48px 56px;">
+        <div style="font-size:76px; font-weight:900; color:var(--color-text); line-height:1.35;">살까 말까?</div>
+      </div>
+      <div class="slide-el vertical-bottom" data-type="하단비교" data-appear-step="1" style="text-align:center; padding:48px 56px; border-top:6px solid var(--color-text-faint);">
+        <div style="font-size:76px; font-weight:900; color:var(--color-accent); line-height:1.35;">어디를 살까?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="4" data-variant="2" id="slide4c" data-steps="1" data-notes="🟡 지금 우리가 할 고민은 🟡 &quot;살까 말까&quot;가 아닙니다." data-type="분기2단플로우">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 지금 우리가 할 고민은">
+    <div class="text-area" style="position:absolute; left:220px; top:120px; width:1480px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:82px;">지금 해야 할 고민</span></div>
+      </div>
+    </div>
+    <div class="items-col" style="top:330px; gap:44px;">
+      <div class="slide-el branch-root" data-type="기준질문" data-appear-step="0" style="text-align:center; font-size:72px; font-weight:900; color:var(--color-text);">살까 말까?</div>
+      <div class="slide-el branch-arrow" data-type="분기화살표" data-appear-step="1" style="text-align:center; font-size:86px; color:var(--color-accent);">↓</div>
+      <div class="slide-el branch-result" data-type="선택경로" data-appear-step="1" style="text-align:center; font-size:72px; font-weight:900; color:var(--color-accent); line-height:1.35;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="5" data-variant="0" id="slide5a" data-steps="1" data-notes="🟡 바로 &quot;어디를 사야될까&quot;를 고민해야 합니다." data-type="한줄강조">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 바로 &quot;어디를 사야될까&quot;를 고민해야 합니다.">
+    <div class="items-col" style="top:380px; gap:0;">
+      <div class="slide-el line1-emph" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">&quot;어디를 사야될까&quot;를 고민하세요</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="5" data-variant="1" id="slide5b" data-steps="1" data-notes="🟡 바로 &quot;어디를 사야될까&quot;를 고민해야 합니다." data-type="이미지+텍스트">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 바로 &quot;어디를 사야될까&quot;를 고민해야 합니다.">
+    <div class="slide-el" style="position:absolute; left:200px; top:80px; width:1520px; height:440px;"><img src="assets/icons/target.png" style="width:100%; height:100%; object-fit:contain;"></div>
+    <div class="text-area" style="position:absolute; left:200px; top:96px; width:1520px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:88px;">올바른 방향</span></div>
+      </div>
+    </div>
+    <div class="slide-el img-placeholder" data-type="이미지" style="position:absolute; left:200px; top:220px; width:1520px; height:380px;"><img src="assets/icons/target.png" style="width:100%; height:100%; object-fit:contain;"></div>
+    <div class="slide-el img-caption" data-type="캡션" style="position:absolute; left:200px; top:650px; width:1520px; text-align:center;">
+      어디를 사야될까?
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="5" data-variant="2" id="slide5c" data-steps="1" data-notes="🟡 바로 &quot;어디를 사야될까&quot;를 고민해야 합니다." data-type="좌우2분할">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 바로 &quot;어디를 사야될까&quot;를 고민해야 합니다.">
+    <div class="text-area" style="position:absolute; left:200px; top:110px; width:1520px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:88px;">바로 이걸 고민하세요</span></div>
+      </div>
+    </div>
+    <div class="items-row" style="top:360px; gap:80px; align-items:center;">
+      <div class="slide-el split-left" data-type="좌측" data-appear-step="0" style="text-align:center; padding:60px 40px;">
+        <div class="emoji-icon" style="font-size:160px; margin-bottom:32px;">❌</div>
+        <div style="font-size:64px; font-weight:900; color:var(--color-text); margin-bottom:16px;">살까 말까?</div>
+        <div style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">잘못된 접근</div>
+      </div>
+      <div class="slide-el split-right" data-type="우측" data-appear-step="0" style="text-align:center; padding:60px 40px; border-left:6px solid var(--color-text-faint);">
+        <div class="emoji-icon" style="font-size:160px; margin-bottom:32px;">✅</div>
+        <div style="font-size:64px; font-weight:900; color:var(--color-accent); margin-bottom:16px;">어디를 살까?</div>
+        <div style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">지금 해야 할 고민</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="6" data-variant="0" id="slide6a" data-steps="1" data-notes="🟡 물론 무주택이 유리한 경우도 🟡 있습니다." data-type="두줄전개">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 물론 무주택이 유리한 경우도">
+    <div class="items-col" style="top:310px; gap:44px;">
+      <div class="slide-el reveal-line1" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:108px;">무주택이 유리한 경우도</span>
+      </div>
+      <div class="slide-el reveal-line2" data-type="전개" data-appear-step="1" style="text-align:center; font-size:84px; font-weight:700; color:var(--color-accent); line-height:1.4;">있습니다</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="6" data-variant="1" id="slide6b" data-steps="1" data-notes="🟡 물론 무주택이 유리한 경우도 🟡 있습니다." data-type="좌우2단비교">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 물론 무주택이 유리한 경우도">
+    <div class="text-area" style="position:absolute; left:200px; top:120px; width:1520px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:84px;">무주택이 유리한 2가지</span></div>
+      </div>
+    </div>
+    <div class="items-row" style="top:390px; gap:80px; align-items:stretch;">
+      <div class="slide-el split-left" data-type="좌측" data-appear-step="0" style="flex:1; text-align:center; padding:56px 44px;">
+        <div style="font-size:78px; font-weight:900; color:var(--color-text); line-height:1.35;">집값·전세 동반 하락</div>
+      </div>
+      <div class="slide-el split-right" data-type="우측" data-appear-step="1" style="flex:1; text-align:center; padding:56px 44px; border-left:6px solid var(--color-text-faint);">
+        <div style="font-size:78px; font-weight:900; color:var(--color-accent); line-height:1.35;">다른 자산으로 집값 이상 수익</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="6" data-variant="2" id="slide6c" data-steps="1" data-notes="🟡 물론 무주택이 유리한 경우도 🟡 있습니다." data-type="아이콘2단포인트">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 물론 무주택이 유리한 경우도">
+    <div class="items-col" style="top:250px; gap:38px;">
+      <div class="slide-el point-icon" data-type="아이콘" data-appear-step="0" style="text-align:center;">
+        <div class="icon-circle" style="width:128px; height:128px; border-radius:50%; background:rgba(255,165,0,0.12); display:inline-flex; align-items:center; justify-content:center; font-size:64px;">•</div>
+      </div>
+      <div class="slide-el point-title" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:96px;">집값·전세 동반하락</span>
+      </div>
+      <div class="slide-el point-desc" data-type="포인트" data-appear-step="1" style="text-align:center; font-size:62px; font-weight:700; color:var(--color-accent); line-height:1.45;">다른 자산으로 집값 이상 수익</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="7" data-variant="0" id="slide7a" data-steps="1" data-notes="🟡 오늘은 지금 왜 집을 사야하는지 🟡 그리고 산다면 어떤 집을 사야하는지 핵심만 말씀드리겠습니다." data-type="상하두줄전개">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 오늘은 지금 왜 집을 사야하는지">
+    <div class="items-col" style="top:250px; gap:56px; width:1280px; margin:0 auto;">
+      <div class="slide-el vertical-line1" data-type="첫줄" data-appear-step="0" style="text-align:center; padding:18px 0;">
+        <span class="hl" style="font-size:96px;">왜 지금 사야하나</span>
+      </div>
+      <div class="slide-el vertical-divider" data-type="구분선" data-appear-step="1" style="width:420px; height:6px; margin:0 auto; background:var(--color-text-faint);"></div>
+      <div class="slide-el vertical-line2" data-type="둘째줄" data-appear-step="1" style="text-align:center; font-size:74px; font-weight:800; color:var(--color-accent); line-height:1.4;">어떤 집을 사야 하는지 핵심만 말씀드립니다</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="7" data-variant="1" id="slide7b" data-steps="1" data-notes="🟡 오늘은 지금 왜 집을 사야하는지 🟡 그리고 산다면 어떤 집을 사야하는지 핵심만 말씀드리겠습니다." data-type="상하2단비교">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 오늘은 지금 왜 집을 사야하는지">
+    <div class="text-area" style="position:absolute; left:220px; top:120px; width:1480px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:82px;">오늘 핵심 2가지</span></div>
+      </div>
+    </div>
+    <div class="items-col" style="top:320px; gap:56px; width:1280px; margin:0 auto;">
+      <div class="slide-el vertical-top" data-type="상단비교" data-appear-step="0" style="text-align:center; padding:48px 56px;">
+        <div style="font-size:76px; font-weight:900; color:var(--color-text); line-height:1.35;">왜 지금 사야 하나</div>
+      </div>
+      <div class="slide-el vertical-bottom" data-type="하단비교" data-appear-step="1" style="text-align:center; padding:48px 56px; border-top:6px solid var(--color-text-faint);">
+        <div style="font-size:76px; font-weight:900; color:var(--color-accent); line-height:1.35;">어떤 집을 사야 하나</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="7" data-variant="2" id="slide7c" data-steps="1" data-notes="🟡 오늘은 지금 왜 집을 사야하는지 🟡 그리고 산다면 어떤 집을 사야하는지 핵심만 말씀드리겠습니다." data-type="2단플로우">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 오늘은 지금 왜 집을 사야하는지">
+    <div class="text-area" style="position:absolute; left:220px; top:120px; width:1480px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:82px;">오늘 핵심</span></div>
+      </div>
+    </div>
+    <div class="items-row" style="top:390px; gap:64px; align-items:center;">
+      <div class="slide-el flow-step1" data-type="1단계" data-appear-step="0" style="width:520px; text-align:center; padding:52px 44px;">
+        <div style="font-size:74px; font-weight:900; color:var(--color-text); line-height:1.35;">왜 지금 사야 하나</div>
+      </div>
+      <div class="slide-el flow-arrow" data-type="화살표" data-appear-step="1" style="font-size:88px; color:var(--color-accent);">→</div>
+      <div class="slide-el flow-step2" data-type="2단계" data-appear-step="1" style="width:520px; text-align:center; padding:52px 44px;">
+        <div style="font-size:74px; font-weight:900; color:var(--color-accent); line-height:1.35;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="8" data-variant="0" id="slide8a" data-steps="1" data-notes="🟡 같이 보시죠." data-type="두줄대비">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 같이 보시죠.">
+    <div class="items-col" style="top:330px; gap:40px;">
+      <div class="slide-el contrast-top" data-type="제목" data-appear-step="0" style="text-align:center; font-size:88px; font-weight:800; color:var(--color-text-sub);">지금부터 시작합니다</div>
+      <div class="slide-el contrast-bottom" data-type="하단" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:112px;">같이 보시죠</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="8" data-variant="1" id="slide8b" data-steps="2" data-notes="🟡 같이 보시죠." data-type="큰숫자(서클)">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 같이 보시죠.">
+    <div class="text-area" style="position:absolute; left:120px; top:160px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">같이 보시죠</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el stat-circle" data-type="큰숫자" style="position:absolute; left:420px; top:380px; width:300px; height:300px; background:rgba(74,144,217,0.15);">
+      <div class="stat-num">바로 시작</div>
+      <div class="stat-label">같이 보시죠</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="8" data-variant="2" id="slide8c" data-steps="1" data-notes="🟡 같이 보시죠." data-type="좌우2분할">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 같이 보시죠.">
+    <div class="text-area" style="position:absolute; left:200px; top:110px; width:1520px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:88px;">같이 보시죠</span></div>
+      </div>
+    </div>
+    <div class="items-row" style="top:360px; gap:80px; align-items:center;">
+      <div class="slide-el split-left" data-type="좌측" data-appear-step="0" style="text-align:center; padding:60px 40px;">
+        <div class="emoji-icon" style="font-size:160px; margin-bottom:32px;">📊</div>
+        <div style="font-size:64px; font-weight:900; color:var(--color-text); margin-bottom:16px;">무주택이 후진인 이유</div>
+        <div style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">지금 확인</div>
+      </div>
+      <div class="slide-el split-right" data-type="우측" data-appear-step="0" style="text-align:center; padding:60px 40px; border-left:6px solid var(--color-text-faint);">
+        <div class="emoji-icon" style="font-size:160px; margin-bottom:32px;">🏠</div>
+        <div style="font-size:64px; font-weight:900; color:var(--color-accent); margin-bottom:16px;">어떤 집을 사야 하나</div>
+        <div style="font-size:36px; font-weight:500; color:var(--color-text-muted); line-height:1.4;">핵심만 짚어드립니다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<div id="overview-backdrop"></div>
+<div id="overview" class="">
+  <div id="overview-grid"></div>
+</div>
+
+<div id="module-picker-backdrop"></div>
+<div id="module-picker">
+  <div id="module-picker-title">모듈 삽입</div>
+  <div id="module-picker-grid"></div>
+  <div id="module-picker-footer">Esc · 바깥 클릭으로 닫기</div>
+</div>
+
+<div id="help" class="">
+  <table>
+    <tbody><tr><td>→ / Space / 클릭</td><td>다음 step / 다음 슬라이드</td></tr>
+    <tr><td>←</td><td>이전 step / 이전 슬라이드</td></tr>
+    <tr><td>O</td><td>슬라이드 목록 (클릭으로 이동)</td></tr>
+    <tr><td>G</td><td>위치 가이드 (개수 선택 + 드래그 이동)</td></tr>
+    <tr><td>E</td><td>편집 모드 (드래그로 위치 조정 / Ctrl+V로 이미지 추가 / Ctrl+S로 저장)</td></tr>
+    <tr><td>Alt+1</td><td>레이어 패널 열기/닫기 (편집 모드에서만)</td></tr>
+    <tr><td>D</td><td>오버레이 토글 (편집 모드에서만)</td></tr>
+<tr><td>Delete / Backspace</td><td>선택 요소 삭제 (편집 모드에서만)</td></tr>
+    <tr><td>Ctrl+Z / Ctrl+Shift+Z</td><td>실행 취소 / 다시 실행 (편집 모드에서만)</td></tr>
+    <tr><td>F</td><td>전체화면 토글</td></tr>
+    <tr><td>P</td><td>발표자 모드 (전체화면에서만)</td></tr>
+    <tr><td>?</td><td>이 도움말 닫기</td></tr>
+  </tbody></table>
+</div>
+<div id="align-menu" class="" style="left: 732px; top: 425px;"><div class="align-item" data-align="h">⬌&nbsp;&nbsp;좌우 가운데</div><div class="align-item" data-align="v">⬍&nbsp;&nbsp;상하 가운데</div><div class="align-item" data-align="h-dist">⬌&nbsp;&nbsp;가로 균등</div><div class="align-item" data-align="v-dist">⬍&nbsp;&nbsp;세로 균등</div><div class="align-sep"></div><div class="align-item" data-action="group">⊞&nbsp;&nbsp;그룹화</div><div class="align-item" data-action="ungroup">⊟&nbsp;&nbsp;그룹 해제</div></div>
+<div id="group-toolbar" class="" style="left: 623.286px; top: 489.174px;">
+  <button id="gt-ungroup">그룹 해제</button>
+  <button id="gt-delete" title="삭제">🗑</button>
+</div>
+<div id="slideNum">34 / 36</div>
+<div id="edit-badge"></div>
+<div id="top-toolbar">
+  <span class="tb-label">편집 모드</span>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-exit">종료 (E)</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-font-dec">−</button>
+  <input class="tb-input" id="tb-font-size" type="number" min="10" max="500" value="108">
+  <span class="tb-unit">px</span>
+  <button class="tb-btn" id="tb-font-inc">+</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn tb-align" data-align="left" title="왼쪽 정렬">왼쪽</button>
+  <button class="tb-btn tb-align" data-align="h" title="좌우 가운데">가운데</button>
+  <button class="tb-btn tb-align" data-align="right" title="오른쪽 정렬">오른쪽</button>
+  <button class="tb-btn tb-align" data-align="top" title="위쪽 정렬">위</button>
+  <button class="tb-btn tb-align" data-align="v" title="상하 가운데">중앙</button>
+  <button class="tb-btn tb-align" data-align="bottom" title="아래쪽 정렬">아래</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-group">그룹</button>
+  <button class="tb-btn" id="tb-ungroup">해제</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-delete">삭제</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-anim">애니메이션</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-undo">↩ 실행취소</button>
+  <button class="tb-btn" id="tb-save">💾 저장</button>
+  <span id="save-status"></span>
+  <span class="tb-sep"></span>
+  <button class="tb-btn tb-color-btn" id="tb-bg-color" title="배경색" style="position:relative;">배경<span class="tb-color-indicator" id="tb-bg-indicator" style="background: rgb(255, 229, 0);"></span></button>
+  <button class="tb-btn tb-color-btn" id="tb-fc-color" title="글자색" style="position:relative;">글자<span class="tb-color-indicator" id="tb-fc-indicator" style="background: rgb(17, 17, 17);"></span></button>
+</div>
+<div class="color-palette" id="palette-bg" style="left: 1120.5px; top: 43px;">
+  <div class="color-swatch active" data-cls="" style="background:none; border-color:#aaa;" title="없음(기본)"></div>
+  <div class="color-swatch" data-cls="bg-blue" style="background:rgba(255,107,0,0.12);" title="연주황"></div>
+  <div class="color-swatch" data-cls="bg-red" style="background:rgba(0,0,0,0.06);" title="연회색"></div>
+  <div class="color-swatch" data-cls="bg-green" style="background:rgba(255,107,0,0.12);" title="연주황2"></div>
+  <div class="color-swatch" data-cls="bg-white" style="background:#fff; border-color:#aaa;" title="흰색"></div>
+  <div class="color-swatch" data-cls="bg-black" style="background:#222;" title="검정"></div>
+  <div class="color-swatch" data-cls="bg-accent" style="background:rgba(255,107,0,0.15);" title="주황음영"></div>
+  <div class="color-swatch" data-cls="bg-gray" style="background:#999;" title="회색"></div>
+</div>
+<div class="color-palette" id="palette-fc" style="left: 1079.69px; top: 44.5px;">
+  <div class="color-swatch active" data-cls="" style="background:#222;" title="검정(기본)"></div>
+  <div class="color-swatch" data-cls="fc-white" style="background:#fff; border-color:#aaa;" title="흰색"></div>
+  <div class="color-swatch swatch-fc-red" data-cls="fc-red" title="주황(메인)"></div>
+  <div class="color-swatch swatch-fc-blue" data-cls="fc-blue" title="파랑(서브)"></div>
+  <div class="color-swatch swatch-fc-yellow" data-cls="fc-yellow" title="빨강(강조)"></div>
+</div>
+<div id="coord-panel" style="display: none;">
+  <span id="coord-text">top: 80px;
+left: 1120px;
+width: 680px;</span>
+  <span class="copy-btn" onclick="copyCoords()">복사</span>
+</div>
+<div id="font-panel" class="" style="left: 500px; top: 61.7264px;">
+  <button id="font-dec">−</button>
+  <input id="font-size-input" type="number" min="10" max="500">
+  <span>px</span>
+  <button id="font-inc">+</button>
+</div>
+
+<script src="./assets/slide-editor.js?v=BUILD"></script>
+
+
+
+<div id="gs-crosshair-h" class="gs-crosshair-h" style="top: 195px; display: none;"></div><div id="gs-crosshair-v" class="gs-crosshair-v" style="left: 960px; display: none;"></div>
+<div id="filmstrip"><div id="filmstrip-inner"></div></div><div id="edit-mode-badge" style="position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 99999; background: rgb(230, 57, 70); color: rgb(255, 255, 255); padding: 6px 18px; border-radius: 8px; font-size: 14px; font-weight: 900; pointer-events: none; animation: 1.5s ease 0s infinite normal none running editBadgeBlink; display: none;">편집중 — 자동저장 10초</div></body></html>
