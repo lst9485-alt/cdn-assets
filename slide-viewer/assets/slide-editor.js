@@ -2206,17 +2206,24 @@
 
   // step 내 레이어 표시 (revealAll=true: 현재 step ordered 요소 전부 표시)
   function showStep(slide, step, revealAll) {
+    const editRevealAll = (
+      document.body.classList.contains('edit-mode') &&
+      !document.body.classList.contains('frozen-legacy-deck')
+    );
+    const maxStep = Math.max(0, parseInt(slide.dataset.steps || '1', 10) - 1);
+    const effectiveStep = editRevealAll ? maxStep : step;
+    const forceRevealAll = revealAll || editRevealAll;
     let hasDim = false;
     slide.querySelectorAll('.step-layer[data-step]').forEach(layer => {
       const s = parseInt(layer.dataset.step);
       const isPushup = layer.dataset.transition === 'pushup';
       const noDim = layer.hasAttribute('data-no-dim');
-      if (s <= step) {
+      if (s <= effectiveStep) {
         layer.classList.add('visible');
         // pushup 레이어: 현재 step이면 보이고, 이전 pushup은 push-exit 상태
         if (isPushup) {
           layer.classList.remove('push-enter', 'push-exit');
-          if (s < step) {
+          if (s < effectiveStep && !editRevealAll) {
             // 이 pushup 레이어 위에 다른 pushup이 있으면 밀려난 상태
             const nextPushup = slide.querySelector(`.step-layer[data-transition="pushup"][data-step="${s + 1}"]`);
             if (nextPushup) layer.classList.add('push-exit');
@@ -2224,7 +2231,7 @@
         }
         if (s > 0) {
           if (!noDim && !isPushup) hasDim = true;
-          if (s === step && !revealAll) {
+          if (s === effectiveStep && !forceRevealAll) {
             getOrderedEls(layer).forEach(el => { el.classList.remove('anim-shown'); removeAnimReady(el); });
             layer.querySelectorAll(':scope > .step-content').forEach(sc => sc.classList.remove('anim-shown'));
             if (!noDim && !isPushup) {
@@ -2237,7 +2244,7 @@
           } else {
             getOrderedEls(layer).forEach(el => {
               el.classList.add('anim-shown');
-              if (revealAll) addAnimReadyImmediate(el);
+              if (forceRevealAll) addAnimReadyImmediate(el);
               else addAnimReady(el);
               if (el.classList.contains('tag-group')) animateTagChips(el);
             });
@@ -2245,7 +2252,10 @@
             layer.querySelectorAll(':scope > .step-content').forEach(sc => sc.classList.add('anim-shown'));
             if (!noDim && !isPushup) {
               const dim = layer.querySelector('.step-dim');
-              if (dim) dim.classList.add('anim-shown');
+              if (dim) {
+                if (editRevealAll) dim.classList.remove('anim-shown');
+                else dim.classList.add('anim-shown');
+              }
             }
           }
         }
@@ -5051,7 +5061,7 @@
   // SVG connector(.step-timeline > svg) 동반 이동: SVGElement는 offsetLeft 미지원이라 selection 안 넣고 별도 추적
   let svgDragAnchors = [];
   let isDragging = false;
-  const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .num-item, .check-text, .check-box, .check-item, .bar-label, .bar-value, .bar-fill, .bar-row, .bar-track, .hbar-label, .hbar-val, .chart-title, .chart-label, .chart-val, .lc-end-val, .stat-num, .stat-label, .stat-detail-item, .big-stat, .stat-block, .stat-circle, .icon-label, .icon-row-role, .icon-row-desc, .icon-circle, .emoji-icon, .icon-flow-item, .icon-flow-label, .icon-flow-icon, .icon-flow-arrow, .flow-box, .flow-arrow, .alert-text, .alert-icon, .compare-col, .compare-header, .compare-item, .compare-emoji-icon, .vs-badge, .quote-text, .quote-source, .tag-chip, .tl-box, .tl-circle, .tl-desc, .btn-pill, .cta-btn, .subscribe, .contrast-word, .contrast-sub, .contrast-top, .contrast-bottom, .contrast-quote, .contrast-vs, .contrast-source, .chapter-pill, .chapter-flow-title, .chapter-flow-desc, .chapter-flow-icon, .bullet-text, .bullet-summary, .bullet-icon, .comp-label, .comp-val, .comp-summary, .comp-table, .branch-question, .branch-sub, .branch-result, .branch-summary, .branch-node, .branch-arrow, .eq-title, .eq-desc, .eq-op, .eq-hl, .eq-chain-box, .eq-chain-sub, .eq-result, .flow-detail-title, .flow-detail-sub, .flow-detail-list, .flow-detail-icon, .flow-highlight, .flow-step-title, .flow-step-body, .branch-root-text, .branch-result-text, .split-compare-label, .split-compare-desc, .split-compare-value, .split-list-num, .split-list-title, .split-list-text, .split-stat-icon, .split-stat-label, .split-stat-value, .split-stat-desc, .split-summary, .icon-flow-stat-emoji, .icon-flow-stat-text, .icon-flow-stat-num, .icon-flow-stat-unit, .icon-flow-highlight, .counter-label, .counter-sub, .line1-emph, .emph-line1, .emph-line2, .person-role, .person-desc, .blog-counter, .blog-meta, .term-en, .term-desc, .img-caption, .step-title, .reveal-line1, .reveal-line2, .two-step-title, .two-step-desc, .point-title, .point-desc, .vertical-line1, .vertical-line2, .left-rail-title, .reveal-band-text, .left-rail-desc, .left-rail-desc-text, .quote-tail, .quote-tail-text, .step-card-body';
+  const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .grid-icon-box, .grid-row-body, .num-text, .num-badge, .num-item, .check-text, .check-box, .check-item, .bar-label, .bar-value, .bar-fill, .bar-row, .bar-track, .hbar-label, .hbar-val, .chart-title, .chart-label, .chart-val, .lc-end-val, .stat-num, .stat-label, .stat-detail-item, .big-stat, .stat-block, .stat-circle, .icon-label, .icon-row-role, .icon-row-desc, .icon-circle, .emoji-icon, .icon-flow-item, .icon-flow-label, .icon-flow-icon, .icon-flow-arrow, .flow-box, .flow-arrow, .flow-step1, .flow-step2, .alert-text, .alert-icon, .compare-col, .compare-header, .compare-item, .compare-emoji-icon, .vs-badge, .quote-text, .quote-source, .quote-mark, .quote-img, .quote-card, .quote-layout, .quote-minimal, .tag-chip, .tl-box, .tl-circle, .tl-desc, .btn-pill, .cta-btn, .subscribe, .contrast-word, .contrast-sub, .contrast-top, .contrast-bottom, .contrast-quote, .contrast-vs, .contrast-source, .chapter-pill, .chapter-flow-title, .chapter-flow-desc, .chapter-flow-icon, .bullet-text, .bullet-summary, .bullet-icon, .comp-label, .comp-val, .comp-summary, .comp-table, .branch-question, .branch-sub, .branch-result, .branch-summary, .branch-node, .branch-arrow, .branch-root, .branch-cols, .branch-col, .eq-title, .eq-desc, .eq-op, .eq-hl, .eq-icon, .eq-chain-box, .eq-chain-sub, .eq-result, .flow-detail-title, .flow-detail-sub, .flow-detail-list, .flow-detail-icon, .flow-highlight, .flow-step-title, .flow-step-body, .branch-root-text, .branch-result-text, .split-compare-label, .split-compare-desc, .split-compare-value, .split-list-item, .split-list-num, .split-list-title, .split-list-text, .split-stat-card, .split-stat-main, .split-stat-row, .split-stat-icon, .split-stat-label, .split-stat-value, .split-stat-desc, .split-summary, .icon-flow-stat-emoji, .icon-flow-stat-text, .icon-flow-stat-num, .icon-flow-stat-unit, .icon-flow-highlight, .counter-label, .counter-sub, .line1-emph, .emph-line1, .emph-line2, .person-role, .person-desc, .blog-counter, .blog-meta, .term-en, .term-desc, .img-caption, .postit-num, .cork-label, .step-title, .reveal-line1, .reveal-line2, .two-step-title, .two-step-desc, .point-title, .point-desc, .vertical-line1, .vertical-line2, .left-rail-title, .reveal-band, .reveal-band-text, .left-rail-desc, .left-rail-desc-text, .quote-tail, .quote-tail-text, .step-card, .step-card-body';
   // 비텍스트 자식 (fontSize 기반 리사이즈 대상 아님 — 이들은 기존 slide-el 박스 리사이즈로 처리)
   const NON_TEXT_CHILD_SEL = '.bar-fill, .check-box, .icon-circle, .tl-circle';
   const NON_DETACHABLE_CHILD_SEL = '.bar-fill, .bar-row, .bar-track, .check-box, .icon-circle, .tl-circle, .flow-arrow, .branch-arrow, .icon-flow-arrow, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat';
@@ -5412,8 +5422,8 @@
   function clearSelection() {
     exitGroup();
     // 방어적: selectedEls 추적 누락된 stale 클래스도 함께 스크럽
-    document.querySelectorAll('.edit-selected, .edit-group-selected').forEach(el => {
-      el.classList.remove('edit-selected', 'edit-group-selected');
+    document.querySelectorAll('.edit-selected, .edit-group-selected, .child-selected, .child-action-target').forEach(el => {
+      el.classList.remove('edit-selected', 'edit-group-selected', 'child-selected', 'child-action-target');
     });
     selectedEl = null;
     selectedEls = [];
@@ -6022,7 +6032,7 @@
     if (!root) return null;
     return findSmallestPointMatch(
       root,
-      '.slide-el, .text-area, .bubble, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat',
+      '.slide-el, .text-area, .bubble, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat, .branch-cols, .branch-col',
       clientX,
       clientY
     ) || findSmallestPointMatch(
@@ -6088,8 +6098,12 @@
 
   function armDirectChildExtract(child, clientX, clientY) {
     if (!child) return false;
+    document.querySelectorAll('.child-selected, .child-action-target').forEach(el => {
+      if (el !== child) el.classList.remove('child-selected', 'child-action-target');
+    });
     selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
     child.classList.add('child-selected');
+    child.classList.add('child-action-target');
     selectedEl = child;
     selectedEls = [child];
     selectedEl._pendingChildExtract = child;
@@ -6116,8 +6130,8 @@
     '.flow-box', '.flow-arrow',                                       // 플로우
     '.check-text', '.check-item',                                     // 체크리스트
     '.stat-num', '.stat-label', '.stat-detail-item', '.big-stat', '.stat-block', // 숫자스탯
-    '.quote-text', '.quote-source',                                   // 인용
-    '.grid-title', '.grid-desc',                                      // 그리드카드
+    '.quote-text', '.quote-source', '.quote-mark',                    // 인용
+    '.grid-title', '.grid-desc', '.grid-icon-box',                    // 그리드카드
     '.section-badge', '.corner-label',                                // 섹션배지
     '.btn-pill',                                                      // 버튼그리드
     '.tag-chip', '.img-caption',                                      // 태그칩/이미지캡션
@@ -6135,13 +6149,13 @@
     '.bullet-text', '.bullet-summary', '.bullet-icon',                // T25
     '.comp-label', '.comp-val', '.comp-summary', '.split-compare-label', '.split-compare-desc', '.split-compare-value', // T28 / split compare
     '.branch-question', '.branch-sub', '.branch-result', '.branch-summary', '.branch-node', '.branch-arrow', // T30
-    '.eq-title', '.eq-desc', '.eq-op', '.eq-hl', '.eq-chain-box', '.eq-chain-sub', '.eq-result', // T32
-    '.flow-detail-title', '.flow-detail-sub', '.flow-detail-list', '.flow-detail-icon', '.flow-highlight', // T34
-    '.split-list-num', '.split-list-title', '.split-list-text', '.split-stat-icon', '.split-stat-label', '.split-stat-value', '.split-stat-desc', '.split-summary', // T31
+    '.eq-title', '.eq-desc', '.eq-op', '.eq-hl', '.eq-icon', '.eq-chain-box', '.eq-chain-sub', '.eq-result', // T32
+    '.flow-detail-title', '.flow-detail-sub', '.flow-detail-list', '.flow-detail-icon', '.flow-highlight', '.flow-step-title', '.flow-step-body', // T34 / 2단플로우
+    '.split-list-item', '.split-list-num', '.split-list-title', '.split-list-text', '.split-stat-card', '.split-stat-main', '.split-stat-row', '.split-stat-icon', '.split-stat-label', '.split-stat-value', '.split-stat-desc', '.split-summary', // T31
     '.icon-flow-stat-emoji', '.icon-flow-stat-text', '.icon-flow-stat-num', '.icon-flow-stat-unit', '.icon-flow-highlight', // T33
     '.person-role', '.person-desc', '.blog-counter', '.blog-meta', '.term-en', '.term-desc', // T39~T43
     '.step-title', '.reveal-line1', '.reveal-line2', '.two-step-title', '.two-step-desc', '.point-title', '.point-desc', '.vertical-line1', '.vertical-line2', '.left-rail-title', '.left-rail-desc', '.quote-tail', // T49~T59
-    '.reveal-band-text', '.left-rail-desc-text', '.quote-tail-text', '.step-card-body', // T56~T59
+    '.reveal-band-text', '.left-rail-desc-text', '.quote-tail-text', '.step-card-body', '.postit-num', '.branch-root-text', '.branch-result-text', // T56~T59
   ].join(', ');
 
   function resolveEditableTextTarget(target) {
@@ -6180,6 +6194,15 @@
   }
 
   function resolvePreferredSelectionTarget(target) {
+    if (
+      selectedEl &&
+      selectedEl.classList &&
+      selectedEl.classList.contains('child-selected') &&
+      target &&
+      (target === selectedEl || (target.closest && target.closest('.child-selected') === selectedEl) || selectedEl.contains(target))
+    ) {
+      return selectedEl;
+    }
     const leaf = resolveEditableTextTarget(target);
     if (
       leaf &&
@@ -6196,7 +6219,7 @@
       return leaf.closest('.slide-el') || leaf;
     }
 
-    const structural = target.closest('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .step-timeline, .slide-el');
+    const structural = target.closest('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .step-timeline, .branch-cols, .branch-col, .slide-el');
     if (!structural) return leaf;
 
     if (structural.matches('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .step-timeline')) {
@@ -6473,7 +6496,14 @@
     const layoutChildTarget = layoutContainer
       ? findLayoutChildAtPoint(layoutContainer, e.clientX, e.clientY)
       : null;
-    const preferredTarget = layoutChildTarget || pointStructuralTarget || resolvePreferredSelectionTarget(e.target);
+    const activeChildSelected = (
+      !groupEntered &&
+      selectedEl &&
+      selectedEl.classList &&
+      selectedEl.classList.contains('child-selected') &&
+      (selectedEl === e.target || selectedEl.contains(e.target))
+    ) ? selectedEl : null;
+    const preferredTarget = activeChildSelected || layoutChildTarget || pointStructuralTarget || resolvePreferredSelectionTarget(e.target);
     let el = preferredTarget || e.target.closest(EDITABLE_SEL);
     // img inside .slide-el → select parent .slide-el (prevents dual selection + fixes resize coords)
     if (el && el.tagName === 'IMG' && el.closest('.slide-el')) el = el.closest('.slide-el');
@@ -6562,6 +6592,9 @@
       selectedEls.forEach(s => {
         s.classList.remove('edit-selected');
         s.classList.remove('edit-group-selected');
+      });
+      document.querySelectorAll('.child-selected, .child-action-target').forEach(node => {
+        node.classList.remove('child-selected', 'child-action-target');
       });
       individualMode = false;
       document.body.classList.remove('individual-mode');
@@ -6897,12 +6930,16 @@
           const scale = stageRect.width / 1920;
           const cr = child.getBoundingClientRect();
           const newEl = child.cloneNode(true);
-          newEl.classList.remove('child-selected');
+          newEl.classList.remove('child-selected', 'child-action-target', 'edit-hidden-placeholder', 'layout-detached-placeholder');
+          newEl.classList.add('detached-child-el');
           newEl.style.position = 'absolute';
           newEl.style.left = Math.round((cr.left - stageRect.left) / scale) + 'px';
           newEl.style.top = Math.round((cr.top - stageRect.top) / scale) + 'px';
+          newEl.style.opacity = '1';
+          newEl.style.visibility = 'visible';
+          newEl.style.pointerEvents = 'all';
           layer.appendChild(newEl);
-          child.classList.remove('child-selected');
+          child.classList.remove('child-selected', 'child-action-target');
           if (typeof removeEditableElement === 'function') {
             removeEditableElement(child, slide);
           } else {
