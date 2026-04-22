@@ -4543,6 +4543,7 @@
         let shaMeta = document.querySelector('meta[name="gh-sha"]');
         if (!shaMeta) { shaMeta = document.createElement('meta'); shaMeta.name = 'gh-sha'; document.head.appendChild(shaMeta); }
         shaMeta.content = _ghFileSha;
+        ghBumpFreshUrl();
         showToast('GitHub 저장 완료! 공개 URL 반영은 잠시 늦을 수 있습니다.', 4000);
         try { showSaveStatus(); } catch(_) {}
       } else if (res.status === 409 || res.status === 422) {
@@ -4592,6 +4593,7 @@
         const data = await res.json();
         _ghFileSha = data.content.sha;
         _ghDirty = false;
+        ghBumpFreshUrl();
         showToast('GitHub 저장 완료! 공개 URL 반영은 잠시 늦을 수 있습니다.', 4000);
         try { showSaveStatus(); } catch(_) {}
       } else {
@@ -4605,6 +4607,14 @@
   function ghHandleAuthError() {
     ghClearToken();
     showToast('GitHub 토큰이 만료되었습니다. 설정 아이콘을 눌러 다시 입력해주세요.', 5000);
+  }
+
+  function ghBumpFreshUrl() {
+    try {
+      const url = new URL(location.href);
+      url.searchParams.set('_ghsaved', String(Date.now()));
+      history.replaceState(null, '', url.toString());
+    } catch (_) {}
   }
 
   function ghMarkDirty() {
@@ -5644,6 +5654,19 @@
     if (editMode) e.preventDefault();
   });
 
+  function resolveGroupChildTarget(parent, target) {
+    if (!parent || !target || !parent.contains(target)) return null;
+    let child = target.closest(CHILD_SEL)
+      || target.closest('.bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat')
+      || resolvePreferredSelectionTarget(target);
+    if (!child || child === parent) {
+      const candidates = Array.from(parent.querySelectorAll(CHILD_SEL + ', .section-badge, .corner-label'))
+        .filter(c => !c.matches(NON_TEXT_CHILD_SEL));
+      child = candidates[0] || child;
+    }
+    return (child && parent.contains(child)) ? child : null;
+  }
+
   // 더블클릭으로 직접 편집 가능한 텍스트 요소 셀렉터 (세션 37 rv: 한 줄 47개+ → 그룹별 상수)
   // 신규 타입 추가 시 해당 그룹에 클래스 추가 (CLAUDE.md 체크리스트 8번)
   const EDITABLE_TEXT_SEL = [
@@ -5845,10 +5868,7 @@
       if (groupParent.contains(e.target) && e.target !== groupParent) {
         e.preventDefault(); e.stopPropagation();
         groupParent.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
-        const child = e.target.closest(CHILD_SEL) ||
-          resolvePreferredSelectionTarget(e.target) ||
-          e.target.closest('.bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat') ||
-          e.target;
+        const child = resolveGroupChildTarget(groupParent, e.target) || e.target;
         child.classList.add('child-selected');
         updateFontPanel(child);
         // 자식 드래그 분리용 상태 저장
@@ -5857,8 +5877,8 @@
         dragAnchor = clientToStage(e.clientX, e.clientY);
         // 드래그 시작 시 자식을 부모에서 추출 (pushUndo → clone → 독립 배치)
         pendingGroupEntry = null;
-        selectedEl = groupParent;
-        selectedEls = [groupParent];
+        selectedEl = child;
+        selectedEls = [child];
         // _pendingChildExtract: 드래그 임계값 넘으면 자식 추출
         // 세션 36 후속3: 모듈은 자식 추출 금지 — 내부 .sc-item 등이 빠져나가면 모양 깨지고 고립됨.
         //   그룹 진입/자식 선택/텍스트 편집은 그대로 허용. 드래그 시 부모 모듈 전체가 이동.
@@ -5867,7 +5887,7 @@
         }
         elAnchor = { top: groupParent.offsetTop, left: groupParent.offsetLeft };
         elAnchors = [{ el: groupParent, top: groupParent.offsetTop, left: groupParent.offsetLeft }];
-        updateCoordPanel(groupParent);
+        updateCoordPanel(child);
         if (child) updateFontPanel(child);
         return;
       }
@@ -6708,12 +6728,18 @@
       groupParent = el;
       el.classList.remove('edit-selected');
       el.classList.add('group-entered-parent');
-      const child = target.closest(CHILD_SEL) ||
-        resolvePreferredSelectionTarget(target) ||
-        target.closest('.bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat');
-      if (child && el.contains(child)) { child.classList.add('child-selected'); updateFontPanel(child); }
-      updateCoordPanel(el);
-      if (child && el.contains(child)) updateFontPanel(child); // 좌표 부모, 폰트 자식 (덮어쓰기 방지)
+      const child = resolveGroupChildTarget(el, target);
+      if (child && el.contains(child)) {
+        child.classList.add('child-selected');
+        selectedEl = child;
+        selectedEls = [child];
+        updateCoordPanel(child);
+        updateFontPanel(child);
+      } else {
+        selectedEl = el;
+        selectedEls = [el];
+        updateCoordPanel(el);
+      }
     } else {
       pendingGroupEntry = null;
     }
