@@ -7729,7 +7729,12 @@
     }
   }
 
-  window.__onPresenterNotes = payload => applyPresenterNotes(payload);
+  window.__applyPresenterNotes = payload => applyPresenterNotes(payload);
+  function refreshPresenterNotesBridge() {
+    const orig = window.__applyPresenterNotes;
+    window.__onPresenterNotes = payload => orig(payload);
+  }
+  refreshPresenterNotesBridge();
 
   presenterChannel.onmessage = e => {
     if (e.data.type === 'ready') { syncPresenter(); return; }
@@ -7744,7 +7749,7 @@
 
   function openPresenterView() {
     if (presenterWindow && !presenterWindow.closed) { presenterWindow.close(); presenterWindow = null; return; }
-    window.__onPresenterNotes = payload => applyPresenterNotes(payload);
+    refreshPresenterNotesBridge();
     const sw = screen.width, sh = screen.height;
     const pw = 960, ph = 700;
     const pl = Math.round((sw - pw) / 2), pt = Math.round((sh - ph) / 2);
