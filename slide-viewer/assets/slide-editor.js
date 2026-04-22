@@ -4127,6 +4127,44 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  function cloneForSave(el) {
+    if (!el) return null;
+    const clone = el.cloneNode(true);
+
+    if (clone.id === 'stage') {
+      const transientIds = ['select-box', 'multi-select-box', 'group-box', 'gap-left', 'gap-right', 'gap-top', 'gap-bottom', 'snap-x', 'snap-y', 'center-cross'];
+      transientIds.forEach(id => {
+        const target = clone.querySelector('#' + id);
+        if (!target) return;
+        target.classList.remove('visible', 'equal');
+        target.style.cssText = 'display:none;';
+      });
+
+      const guideSnapOverlay = clone.querySelector('#guide-snap-overlay');
+      if (guideSnapOverlay) guideSnapOverlay.innerHTML = '';
+
+      clone.querySelectorAll('.resize-handle').forEach(handle => {
+        handle.classList.remove('visible');
+        handle.removeAttribute('style');
+      });
+      clone.querySelectorAll('.gap-indicator .gap-line, .gap-indicator .gap-val').forEach(node => {
+        node.removeAttribute('style');
+      });
+      clone.querySelectorAll('.dim-handle').forEach(node => node.remove());
+    }
+
+    if (clone.id === 'gs-crosshair-h' || clone.id === 'gs-crosshair-v') {
+      clone.style.cssText = 'display:none;';
+    }
+
+    if (clone.id === 'filmstrip') {
+      const inner = clone.querySelector('#filmstrip-inner');
+      if (inner) inner.innerHTML = '';
+    }
+
+    return clone;
+  }
+
   function getCleanHTML() {
     selectedEls.forEach(s => { s.classList.remove('edit-selected'); s.classList.remove('edit-group-selected'); });
     const backedUpChildSelected = [...document.querySelectorAll('.child-selected')];
@@ -4232,9 +4270,17 @@
     ];
     const _afterScriptIds = ['gs-crosshair-h','gs-crosshair-v','filmstrip'];
 
-    const bodyBefore = _bodyIds.map(id => document.getElementById(id)).filter(Boolean).map(el => el.outerHTML).join('\n');
+    const bodyBefore = _bodyIds
+      .map(id => cloneForSave(document.getElementById(id)))
+      .filter(Boolean)
+      .map(el => el.outerHTML)
+      .join('\n');
     const scriptTag = document.querySelector('script[src*="slide-editor"]') ? document.querySelector('script[src*="slide-editor"]').outerHTML : '';
-    const bodyAfter = _afterScriptIds.map(id => document.getElementById(id)).filter(Boolean).map(el => el.outerHTML).join('');
+    const bodyAfter = _afterScriptIds
+      .map(id => cloneForSave(document.getElementById(id)))
+      .filter(Boolean)
+      .map(el => el.outerHTML)
+      .join('');
 
     const bodyClass = document.body.className.trim();
     const bodyAttrs = [];
