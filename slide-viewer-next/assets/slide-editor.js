@@ -4805,6 +4805,10 @@
     document.body.classList.add('frozen-legacy-deck');
   }
 
+  function isGeneratedRuntimeDeck() {
+    return document.body && document.body.dataset.generated === 'true';
+  }
+
   async function toggleEditMode() {
     // ── 진입 시 파일 변경 감지 ──
     if (!editMode && !isGitHubPages && dirHandle) {
@@ -5803,7 +5807,7 @@
         // _pendingChildExtract: 드래그 임계값 넘으면 자식 추출
         // 세션 36 후속3: 모듈은 자식 추출 금지 — 내부 .sc-item 등이 빠져나가면 모양 깨지고 고립됨.
         //   그룹 진입/자식 선택/텍스트 편집은 그대로 허용. 드래그 시 부모 모듈 전체가 이동.
-        if (!groupParent.hasAttribute('data-module-id')) {
+        if (!groupParent.hasAttribute('data-module-id') && !(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck())) {
           selectedEl._pendingChildExtract = child;
         }
         elAnchor = { top: groupParent.offsetTop, left: groupParent.offsetLeft };
@@ -6023,7 +6027,9 @@
       } else if (gid && individualMode) {
         if (el === selectedEl) {
           // individualMode + 같은 카드 재클릭 → 그룹 진입(자식 드릴다운). mouseup에서 드래그 여부 확인 후 확정
-          pendingGroupEntry = { el, target: e.target };
+          if (!(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck())) {
+            pendingGroupEntry = { el, target: e.target };
+          }
           selectedEl = el;
         } else {
           // 다른 멤버로 전환
@@ -6038,7 +6044,9 @@
       } else if ((el.matches('.slide-el') || el.matches('.items-row, .items-col, .items-grid')) && selectedEls.length === 1) {
         // 카드 블록/flex 컨테이너 재클릭 → mouseup에서 드래그 여부 확인 후 그룹 진입
         // (모듈 포함 — 세션 36 후속3: 자식 추출만 별도 차단, 그룹 진입/편집은 허용)
-        pendingGroupEntry = { el, target: e.target };
+        if (!(typeof isGeneratedRuntimeDeck === 'function' && isGeneratedRuntimeDeck())) {
+          pendingGroupEntry = { el, target: e.target };
+        }
         selectedEl = el;
       } else {
         selectedEl = el;
@@ -7701,11 +7709,19 @@
     if (e.data.type === 'notes') {
       if (slides[e.data.slide]) {
         slides[e.data.slide].dataset.notes = e.data.text;
+        if (typeof setSlideJumpNotesForSlide === 'function' && e.data.slide === currentSlide) {
+          setSlideJumpNotesForSlide(slides[e.data.slide]);
+        }
         if (isGitHubPages && typeof ghMarkDirty === 'function') ghMarkDirty();
-        clearTimeout(presenterNotesSaveTimer);
-        presenterNotesSaveTimer = setTimeout(() => {
+        if (e.data.flush) {
+          clearTimeout(presenterNotesSaveTimer);
           saveToFile(true);
-        }, 1200);
+        } else {
+          clearTimeout(presenterNotesSaveTimer);
+          presenterNotesSaveTimer = setTimeout(() => {
+            saveToFile(true);
+          }, 1200);
+        }
       }
     }
   };
@@ -7826,7 +7842,7 @@ document.getElementById('pres-btn-next').addEventListener('click', () => ch.post
 const flushNotes = () => {
   const notesEl = document.getElementById('pres-notes-input');
   if (!notesEl) return;
-  ch.postMessage({ type: 'notes', slide: curSlideIdx, text: notesEl.textContent });
+  ch.postMessage({ type: 'notes', slide: curSlideIdx, text: notesEl.textContent, flush: true });
 };
 document.getElementById('pres-notes-input').addEventListener('input', ev => ch.postMessage({ type: 'notes', slide: curSlideIdx, text: ev.target.textContent }));
 document.getElementById('pres-notes-input').addEventListener('blur', flushNotes);
