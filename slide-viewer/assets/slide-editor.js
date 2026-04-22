@@ -5539,7 +5539,7 @@
   function shouldAutoEnableChildAction(parent = groupParent, child = null) {
     if (!parent || !child) return false;
     if (child.matches(NON_DETACHABLE_CHILD_SEL)) return false;
-    return !!parent.matches('.slide-el, .compare-col, .stat-circle, .big-stat, .stat-block, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat, .flow-step1, .flow-step2, .branch-root, .branch-result');
+    return !!parent.matches('.slide-el');
   }
   window.shouldAutoEnableChildAction = shouldAutoEnableChildAction;
 
