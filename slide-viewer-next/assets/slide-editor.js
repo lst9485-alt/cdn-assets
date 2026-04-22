@@ -2802,7 +2802,6 @@
       return;
     }
     if (e.code === 'KeyO') {
-      if (!editMode) return;
       toggleOverview();
       return;
     }
