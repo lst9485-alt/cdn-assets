@@ -6053,10 +6053,20 @@
       clientX,
       clientY
     ) : null;
+    const pointLeafCandidate = (
+      typeof clientX === 'number' &&
+      typeof clientY === 'number' &&
+      _pointWithinRect(parent.getBoundingClientRect(), clientX, clientY)
+    ) ? findSmallestPointMatch(
+      parent,
+      'div, span, p, strong, em, b, i, text, tspan',
+      clientX,
+      clientY
+    ) : null;
     if (pointChild && !pointChild.matches(NON_TEXT_CHILD_SEL)) {
       return pointChild;
     }
-    const pointTextLeaf = pointTarget ? resolveEditableTextTarget(pointTarget) : null;
+    const pointTextLeaf = resolveEditableTextTarget(pointLeafCandidate || pointTarget);
     if (pointTextLeaf && pointTextLeaf !== parent && parent.contains(pointTextLeaf)) {
       return pointTextLeaf;
     }
@@ -6074,6 +6084,24 @@
       child = candidates[0] || child;
     }
     return (child && parent.contains(child)) ? child : null;
+  }
+
+  function armDirectChildExtract(child, clientX, clientY) {
+    if (!child) return false;
+    selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
+    child.classList.add('child-selected');
+    selectedEl = child;
+    selectedEls = [child];
+    selectedEl._pendingChildExtract = child;
+    pendingGroupEntry = null;
+    pendingDrag = true;
+    mouseDownPos = { x: clientX, y: clientY };
+    dragAnchor = clientToStage(clientX, clientY);
+    elAnchor = { top: child.offsetTop, left: child.offsetLeft };
+    elAnchors = [{ el: child, top: child.offsetTop, left: child.offsetLeft }];
+    updateCoordPanel(child);
+    updateFontPanel(child);
+    return true;
   }
 
   // 더블클릭으로 직접 편집 가능한 텍스트 요소 셀렉터 (세션 37 rv: 한 줄 47개+ → 그룹별 상수)
@@ -6524,19 +6552,7 @@
       directChildTarget.namespaceURI !== 'http://www.w3.org/2000/svg'
     );
     if (directChildExtractable) {
-      selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
-      directChildTarget.classList.add('child-selected');
-      selectedEl = directChildTarget;
-      selectedEls = [directChildTarget];
-      selectedEl._pendingChildExtract = directChildTarget;
-      pendingGroupEntry = null;
-      pendingDrag = true;
-      mouseDownPos = { x: e.clientX, y: e.clientY };
-      dragAnchor = clientToStage(e.clientX, e.clientY);
-      elAnchor = { top: directChildTarget.offsetTop, left: directChildTarget.offsetLeft };
-      elAnchors = [{ el: directChildTarget, top: directChildTarget.offsetTop, left: directChildTarget.offsetLeft }];
-      updateCoordPanel(directChildTarget);
-      updateFontPanel(directChildTarget);
+      armDirectChildExtract(directChildTarget, e.clientX, e.clientY);
       return;
     }
 
@@ -6596,6 +6612,25 @@
       } else if ((el.matches('.slide-el') || el.matches('.items-row, .items-col, .items-grid')) && selectedEls.length === 1) {
         // 카드 블록/flex 컨테이너 재클릭 → mouseup에서 드래그 여부 확인 후 그룹 진입
         // (모듈 포함 — 세션 36 후속3: 자식 추출만 별도 차단, 그룹 진입/편집은 허용)
+        const reclickChildTarget = resolveGroupChildTarget(
+          el,
+          document.elementFromPoint(e.clientX, e.clientY) || e.target,
+          e.clientX,
+          e.clientY
+        );
+        const reclickChildExtractable = !!(
+          reclickChildTarget &&
+          el.contains(reclickChildTarget) &&
+          reclickChildTarget !== el &&
+          typeof shouldAutoEnableChildAction === 'function' &&
+          shouldAutoEnableChildAction(el, reclickChildTarget) &&
+          !el.hasAttribute('data-module-id') &&
+          !reclickChildTarget.closest('svg') &&
+          reclickChildTarget.namespaceURI !== 'http://www.w3.org/2000/svg'
+        );
+        if (reclickChildExtractable && armDirectChildExtract(reclickChildTarget, e.clientX, e.clientY)) {
+          return;
+        }
         pendingGroupEntry = { el, target: e.target, x: e.clientX, y: e.clientY };
         selectedEl = el;
       } else {
