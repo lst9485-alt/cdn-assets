@@ -6533,6 +6533,7 @@
           const child = selectedEl._pendingChildExtract;
           delete selectedEl._pendingChildExtract;
           const layer = selectedEl.closest('.step-layer');
+          const slide = slides[currentSlide];
           const stageRect = document.getElementById('stage').getBoundingClientRect();
           const scale = stageRect.width / 1920;
           const cr = child.getBoundingClientRect();
@@ -6542,7 +6543,12 @@
           newEl.style.left = Math.round((cr.left - stageRect.left) / scale) + 'px';
           newEl.style.top = Math.round((cr.top - stageRect.top) / scale) + 'px';
           layer.appendChild(newEl);
-          child.remove();
+          child.classList.remove('child-selected');
+          if (typeof removeEditableElement === 'function') {
+            removeEditableElement(child, slide);
+          } else {
+            child.remove();
+          }
           exitGroup();
           selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
           selectedEl = newEl;
