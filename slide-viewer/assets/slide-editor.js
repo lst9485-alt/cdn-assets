@@ -5054,6 +5054,7 @@
   const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .num-text, .num-badge, .num-item, .check-text, .check-box, .check-item, .bar-label, .bar-value, .bar-fill, .bar-row, .bar-track, .hbar-label, .hbar-val, .chart-title, .chart-label, .chart-val, .lc-end-val, .stat-num, .stat-label, .stat-detail-item, .big-stat, .stat-block, .stat-circle, .icon-label, .icon-row-role, .icon-row-desc, .icon-circle, .emoji-icon, .icon-flow-item, .icon-flow-label, .icon-flow-icon, .icon-flow-arrow, .flow-box, .flow-arrow, .alert-text, .alert-icon, .compare-col, .compare-header, .compare-item, .compare-emoji-icon, .vs-badge, .quote-text, .quote-source, .tag-chip, .tl-box, .tl-circle, .tl-desc, .btn-pill, .cta-btn, .subscribe, .contrast-word, .contrast-sub, .contrast-top, .contrast-bottom, .contrast-quote, .contrast-vs, .contrast-source, .chapter-pill, .chapter-flow-title, .chapter-flow-desc, .chapter-flow-icon, .bullet-text, .bullet-summary, .bullet-icon, .comp-label, .comp-val, .comp-summary, .comp-table, .branch-question, .branch-sub, .branch-result, .branch-summary, .branch-node, .branch-arrow, .eq-title, .eq-desc, .eq-op, .eq-hl, .eq-chain-box, .eq-chain-sub, .eq-result, .flow-detail-title, .flow-detail-sub, .flow-detail-list, .flow-detail-icon, .flow-highlight, .flow-step-title, .flow-step-body, .branch-root-text, .branch-result-text, .split-compare-label, .split-compare-desc, .split-compare-value, .split-list-num, .split-list-title, .split-list-text, .split-stat-icon, .split-stat-label, .split-stat-value, .split-stat-desc, .split-summary, .icon-flow-stat-emoji, .icon-flow-stat-text, .icon-flow-stat-num, .icon-flow-stat-unit, .icon-flow-highlight, .counter-label, .counter-sub, .line1-emph, .emph-line1, .emph-line2, .person-role, .person-desc, .blog-counter, .blog-meta, .term-en, .term-desc, .img-caption, .step-title, .reveal-line1, .reveal-line2, .two-step-title, .two-step-desc, .point-title, .point-desc, .vertical-line1, .vertical-line2, .left-rail-title, .reveal-band-text, .left-rail-desc, .left-rail-desc-text, .quote-tail, .quote-tail-text, .step-card-body';
   // 비텍스트 자식 (fontSize 기반 리사이즈 대상 아님 — 이들은 기존 slide-el 박스 리사이즈로 처리)
   const NON_TEXT_CHILD_SEL = '.bar-fill, .check-box, .icon-circle, .tl-circle';
+  const NON_DETACHABLE_CHILD_SEL = '.bar-fill, .bar-row, .bar-track, .check-box, .icon-circle, .tl-circle, .flow-arrow, .branch-arrow, .icon-flow-arrow, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat';
   // 툴바/팬널/팔레트 영역 — 편집 중 클릭 시 focus/selection 유지해야 하는 대상
   const TOOLBAR_PROTECT_SEL = '#top-toolbar, #font-panel, #format-bar, .color-palette, .color-swatch';
   let groupEntered = false;
@@ -5537,8 +5538,8 @@
 
   function shouldAutoEnableChildAction(parent = groupParent, child = null) {
     if (!parent || !child) return false;
-    if (child.matches(NON_TEXT_CHILD_SEL)) return false;
-    return !!parent.matches('.split-left, .split-right, .flow-step1, .flow-step2, .branch-root, .branch-result');
+    if (child.matches(NON_DETACHABLE_CHILD_SEL)) return false;
+    return !!parent.matches('.slide-el, .compare-col, .stat-circle, .big-stat, .stat-block, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat, .flow-step1, .flow-step2, .branch-root, .branch-result');
   }
   window.shouldAutoEnableChildAction = shouldAutoEnableChildAction;
 
@@ -6038,6 +6039,10 @@
 
   function resolveGroupChildTarget(parent, target, clientX = null, clientY = null) {
     if (!parent) return null;
+    const pointTarget = (
+      typeof clientX === 'number' &&
+      typeof clientY === 'number'
+    ) ? document.elementFromPoint(clientX, clientY) : null;
     const pointChild = (
       typeof clientX === 'number' &&
       typeof clientY === 'number' &&
@@ -6050,6 +6055,10 @@
     ) : null;
     if (pointChild && !pointChild.matches(NON_TEXT_CHILD_SEL)) {
       return pointChild;
+    }
+    const pointTextLeaf = pointTarget ? resolveEditableTextTarget(pointTarget) : null;
+    if (pointTextLeaf && pointTextLeaf !== parent && parent.contains(pointTextLeaf)) {
+      return pointTextLeaf;
     }
     if (!target || !parent.contains(target)) return null;
     const textLeaf = resolveEditableTextTarget(target);
