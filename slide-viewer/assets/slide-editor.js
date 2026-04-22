@@ -7744,6 +7744,7 @@
 
   function openPresenterView() {
     if (presenterWindow && !presenterWindow.closed) { presenterWindow.close(); presenterWindow = null; return; }
+    window.__onPresenterNotes = payload => applyPresenterNotes(payload);
     const sw = screen.width, sh = screen.height;
     const pw = 960, ph = 700;
     const pl = Math.round((sw - pw) / 2), pt = Math.round((sh - ph) / 2);
