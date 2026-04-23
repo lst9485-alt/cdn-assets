@@ -207,8 +207,15 @@
     align-items: flex-start;
     gap: 16px;
   }
+  body.edit-mode .slide.active .hl-wrap,
+  body.edit-mode .slide.active .hl-wrap > div {
+    pointer-events: none;
+  }
+  body.edit-mode .slide.active .hl-wrap .hl {
+    pointer-events: auto;
+  }
   .hl {
-    display: inline;
+    display: inline-block;
     background: none;
     padding: 0;
     font-size: 108px;

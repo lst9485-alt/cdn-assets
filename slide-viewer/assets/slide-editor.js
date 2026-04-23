@@ -2296,7 +2296,7 @@
         // pushup 레이어: 현재 step이면 보이고, 이전 pushup은 push-exit 상태
         if (isPushup) {
           layer.classList.remove('push-enter', 'push-exit');
-          if (s < effectiveStep) {
+          if (!forceRevealAll && s < effectiveStep) {
             // 이 pushup 레이어 위에 다른 pushup이 있으면 밀려난 상태
             const nextPushup = slide.querySelector(`.step-layer[data-transition="pushup"][data-step="${s + 1}"]`);
             if (nextPushup) layer.classList.add('push-exit');
@@ -4467,11 +4467,11 @@
     return html;
   }
 
-  function showSaveStatus() {
+  function showSaveStatus(label = '✓ 저장됨') {
     const el = document.getElementById('save-status');
     const now = new Date();
     const hhmm = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
-    el.textContent = '  ✓ 저장됨 ' + hhmm;
+    el.textContent = '  ' + label + ' ' + hhmm;
     setTimeout(() => { el.textContent = ''; }, 2000);
   }
 
@@ -4823,7 +4823,7 @@
         ghStoreLocalDraft(content, 'missing-token');
         _ghDirty = false;
         showToast('GitHub 토큰이 없어 이 브라우저에 임시 저장했습니다. ⚙ 에서 설정하세요.', 5000);
-        try { showSaveStatus(); } catch(_) {}
+        try { showSaveStatus('임시 저장'); } catch(_) {}
         return;
       }
       const encoded = btoa(unescape(encodeURIComponent(content)));
@@ -4883,17 +4883,21 @@
         ghHandleAuthError();
         ghStoreLocalDraft(content, 'auth-error');
         showToast('GitHub 저장에 실패해 이 브라우저에 임시 저장했습니다.', 5000);
+        try { showSaveStatus('임시 저장'); } catch(_) {}
       } else if (res.status === 403) {
         ghStoreLocalDraft(content, 'rate-limit');
         showToast('GitHub API 한도 초과 — 잠시 후 다시 시도됩니다', 4000);
+        try { showSaveStatus('임시 저장'); } catch(_) {}
       } else {
         ghStoreLocalDraft(content, 'http-error');
         const errBody = await res.text().catch(() => '');
         showToast('저장 실패 (' + res.status + '): ' + errBody.slice(0, 100), 5000);
+        try { showSaveStatus('임시 저장'); } catch(_) {}
       }
     } catch (e) {
       ghStoreLocalDraft(content, 'network-error');
       showToast('저장 오류: ' + e.message, 5000);
+      try { showSaveStatus('임시 저장'); } catch(_) {}
     } finally {
       _ghSaving = false;
       const rerun = _ghPendingSave || _ghPendingForce || (_ghDirty && _ghDirtyVersion > startDirtyVersion);
@@ -6315,6 +6319,62 @@
     return candidates[0];
   }
 
+  function findNearestTextAreaLeaf(area, clientX, clientY) {
+    if (!area) return null;
+    const candidates = Array.from(area.querySelectorAll('.hl, .section-badge, .corner-label')).filter(el => {
+      if (!el || el.classList.contains('edit-hidden-placeholder')) return false;
+      const style = getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden' || parseFloat(style.opacity || '1') === 0) return false;
+      const rect = el.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0;
+    });
+    if (!candidates.length) return null;
+    const containing = candidates.filter(el => _pointWithinRect(el.getBoundingClientRect(), clientX, clientY));
+    if (containing.length) {
+      containing.sort((a, b) => {
+        const ar = a.getBoundingClientRect();
+        const br = b.getBoundingClientRect();
+        return (ar.width * ar.height) - (br.width * br.height);
+      });
+      return containing[0];
+    }
+    const distanceToRect = rect => {
+      const dx = clientX < rect.left ? rect.left - clientX : clientX > rect.right ? clientX - rect.right : 0;
+      const dy = clientY < rect.top ? rect.top - clientY : clientY > rect.bottom ? clientY - rect.bottom : 0;
+      return dx * dx + dy * dy;
+    };
+    candidates.sort((a, b) => {
+      const ar = a.getBoundingClientRect();
+      const br = b.getBoundingClientRect();
+      const dist = distanceToRect(ar) - distanceToRect(br);
+      if (dist !== 0) return dist;
+      return (ar.width * ar.height) - (br.width * br.height);
+    });
+    return candidates[0];
+  }
+
+  let lastEditableTextProbe = null;
+
+  function rememberEditableTextProbe(target, clientX, clientY) {
+    const resolved = resolveEditableTextTarget(target);
+    if (!resolved) return;
+    lastEditableTextProbe = {
+      el: resolved,
+      x: clientX,
+      y: clientY,
+      ts: Date.now(),
+    };
+  }
+
+  function consumeEditableTextProbe(area) {
+    if (!lastEditableTextProbe) return null;
+    const probe = lastEditableTextProbe;
+    if ((Date.now() - probe.ts) > 800) return null;
+    if (!probe.el || !document.contains(probe.el)) return null;
+    if (area && !area.contains(probe.el)) return null;
+    return probe.el;
+  }
+
   function findLayoutChildAtPoint(container, clientX, clientY) {
     if (!container || !container.matches('.items-row, .items-col, .items-grid, .compare-box, .compare-col')) return null;
     return findSmallestPointMatch(
@@ -6351,6 +6411,15 @@
       clientX,
       clientY
     );
+  }
+
+  function shouldDeferPointLeafToStructuralParent(leafTarget) {
+    if (!leafTarget) return false;
+    const structural = leafTarget.closest('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .stat-circle, .big-stat, .stat-block, .compare-col');
+    if (!structural) return false;
+    if (selectedEl === structural) return false;
+    if (groupEntered && groupParent === structural) return false;
+    return true;
   }
 
   document.getElementById('stage').addEventListener('dragstart', e => {
@@ -6577,10 +6646,16 @@
       }
     }
     if (!editMode) return;
-    let el = resolveEditableTextTarget(e.target);
+    const activeSlide = (typeof slides !== 'undefined' && slides[currentSlide]) || document.querySelector('#stage > .slide.active');
+    const pointLeaf = findLeafTargetAtPoint(activeSlide, e.clientX, e.clientY);
+    const area = e.target.closest('.text-area, .step-title');
+    const probedLeaf = area ? consumeEditableTextProbe(area) : null;
+    const nearestAreaLeaf = area ? findNearestTextAreaLeaf(area, e.clientX, e.clientY) : null;
+    let el = resolveEditableTextTarget(probedLeaf || nearestAreaLeaf || pointLeaf || e.target);
     if (!el) {
-      const area = e.target.closest('.text-area');
-      if (area) el = area.querySelector('.hl');
+      if (area) {
+        el = probedLeaf || nearestAreaLeaf || area.querySelector('.hl');
+      }
     }
     // 모듈(M01~) 내부 leaf 요소 자동 편집 — 새 모듈 추가 시 화이트리스트 수정 불필요
     if (!el && e.target.closest('[data-module-id]')
@@ -6813,8 +6888,24 @@
     }
 
     const activeSlide = (typeof slides !== 'undefined' && slides[currentSlide]) || document.querySelector('#stage > .slide.active');
-    const pointLeafTarget = findLeafTargetAtPoint(activeSlide, e.clientX, e.clientY);
+    const rawPointLeafTarget = findLeafTargetAtPoint(activeSlide, e.clientX, e.clientY);
     const pointStructuralTarget = findStructuralTargetAtPoint(activeSlide, e.clientX, e.clientY);
+    const directTextArea = e.target.closest('.text-area, .step-title');
+    const directAreaLeaf = directTextArea
+      ? findNearestTextAreaLeaf(directTextArea, e.clientX, e.clientY)
+      : null;
+    const shouldPreserveExistingTextProbe = !!(
+      directTextArea &&
+      lastEditableTextProbe &&
+      (Date.now() - lastEditableTextProbe.ts) < 400 &&
+      directTextArea.contains(lastEditableTextProbe.el) &&
+      !rawPointLeafTarget &&
+      directTextArea.querySelectorAll('.hl, .section-badge, .corner-label').length > 1 &&
+      !e.target.closest('.hl, .section-badge, .corner-label')
+    );
+    if (!shouldPreserveExistingTextProbe) {
+      rememberEditableTextProbe(directAreaLeaf || rawPointLeafTarget || e.target, e.clientX, e.clientY);
+    }
     const layoutContainer = (pointStructuralTarget && pointStructuralTarget.matches('.items-row, .items-col, .items-grid, .compare-box, .compare-col'))
       ? pointStructuralTarget
       : e.target.closest('.items-row, .items-col, .items-grid, .compare-box, .compare-col');
@@ -6828,6 +6919,7 @@
       selectedEl.classList.contains('child-selected') &&
       (selectedEl === e.target || selectedEl.contains(e.target))
     ) ? selectedEl : null;
+    const pointLeafTarget = shouldDeferPointLeafToStructuralParent(rawPointLeafTarget) ? null : rawPointLeafTarget;
     const preferredTarget = activeChildSelected || pointLeafTarget || layoutChildTarget || pointStructuralTarget || resolvePreferredSelectionTarget(e.target);
     let el = preferredTarget || e.target.closest(EDITABLE_SEL);
     // img inside .slide-el → select parent .slide-el (prevents dual selection + fixes resize coords)
