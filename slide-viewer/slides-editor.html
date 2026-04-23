@@ -35,7 +35,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 @keyframes sjFlash{0%{box-shadow:0 0 0 0 rgba(var(--editor-accent-rgb),0.9),0 0 0 0 rgba(var(--editor-accent-rgb),0.6);outline:4px solid var(--editor-accent);}50%{box-shadow:0 0 0 8px rgba(var(--editor-accent-rgb),0.5),0 0 40px 12px rgba(var(--editor-accent-rgb),0.35);outline:4px solid var(--editor-accent);}100%{box-shadow:0 0 0 0 rgba(var(--editor-accent-rgb),0),0 0 0 0 rgba(var(--editor-accent-rgb),0);outline:4px solid rgba(var(--editor-accent-rgb),0);}}
 .sj-highlight{animation:sjFlash 3s ease-out;border-radius:8px;position:relative;z-index:9000;}
 </style>
-<meta name="gh-sha" content="623d9b2089d57f2a0cfb9d30274c50e28cc819d8">
+<meta name="gh-sha" content="08215f97a1bd6ff967df446cec8b541c2e22a55a">
 </head>
 <body>
 <div class="" id="layer-panel">
@@ -3431,7 +3431,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el line-chart" data-labels="1월,2월,3월,4월,5월,6월" data-title="추세 차트" data-type="라인차트" data-unit="%" data-values="30,45,60,55,70,80" style="position:absolute; left:200px; top:296px; width:1520px; height:680px;"><svg viewBox="0 0 1520 680" xmlns="http://www.w3.org/2000/svg">
+<div class="slide-el line-chart" data-labels="1월,2월,3월,4월,5월,6월" data-title="추세 차트" data-type="라인차트" data-unit="%" data-values="30,45,60,55,70,80" style="position:absolute; left:200px; top:296px; width:1520px; height:680px;" data-y-ticks="[&quot;30%&quot;,&quot;40%&quot;,&quot;50%&quot;,&quot;60%&quot;,&quot;70%&quot;,&quot;80%&quot;]"><svg viewBox="0 0 1520 680" xmlns="http://www.w3.org/2000/svg">
       <text class="chart-title" x="100" y="40">추세 차트</text>
       <line stroke="#ddd" stroke-width="1" x1="100" y1="620" x2="1440" y2="620"></line><text class="chart-label" x="92" y="628" text-anchor="end">30%</text><line stroke="#ddd" stroke-width="1" x1="100" y1="508" x2="1440" y2="508"></line><text class="chart-label" x="92" y="516" text-anchor="end">40%</text><line stroke="#ddd" stroke-width="1" x1="100" y1="396" x2="1440" y2="396"></line><text class="chart-label" x="92" y="404" text-anchor="end">50%</text><line stroke="#ddd" stroke-width="1" x1="100" y1="284" x2="1440" y2="284"></line><text class="chart-label" x="92" y="292" text-anchor="end">60%</text><line stroke="#ddd" stroke-width="1" x1="100" y1="171.99999999999997" x2="1440" y2="171.99999999999997"></line><text class="chart-label" x="92" y="179.99999999999997" text-anchor="end">70%</text><line stroke="#ddd" stroke-width="1" x1="100" y1="60" x2="1440" y2="60"></line><text class="chart-label" x="92" y="68" text-anchor="end">80%</text>
       <line class="chart-axis" x1="100" y1="60" x2="100" y2="620"></line>
@@ -4537,9 +4537,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="color-swatch swatch-fc-yellow" data-cls="fc-yellow" title="빨강(강조)"></div>
 <div class="color-swatch" data-cls="fc-green" title="초록" style="background: rgb(46, 204, 113);"></div><div class="color-swatch" data-cls="fc-brown" title="갈색" style="background: rgb(139, 69, 19);"></div><div class="color-swatch" data-cls="fc-gray" title="회색" style="background: rgb(153, 153, 153);"></div><div class="color-swatch" data-cls="fc-purple" title="보라" style="background: rgb(155, 89, 182);"></div></div>
 <div id="coord-panel" style="display: none;">
-<span id="coord-text">top: 266px;
-left: 427px;
-width: 806px;</span>
+<span id="coord-text"></span>
 <span class="copy-btn" onclick="copyCoords()">복사</span>
 </div>
 <div class="" id="font-panel" style="left: 4px; top: 201.809px;">
@@ -4548,7 +4546,7 @@ width: 806px;</span>
 <span>px</span>
 <button id="font-inc">+</button>
 </div>
-<div id="format-bar" style="display:none;">
+<div id="format-bar" style="left: 237.045px; top: 244.107px; display: none;" class="">
 <button class="fmt-btn" data-cmd="bold" title="굵게"><b>B</b></button>
 <button class="fmt-btn" data-cmd="italic" title="기울임"><i>I</i></button>
 <button class="fmt-btn" data-cmd="underline" title="밑줄"><u>U</u></button>
