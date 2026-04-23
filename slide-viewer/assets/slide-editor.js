@@ -432,6 +432,10 @@
   }
 
   function deleteSlide(idx, force) {
+    if (!(document.body && document.body.dataset.generated === 'true')) {
+      if (typeof showToast === 'function') showToast('에디터에서는 슬라이드 삭제를 막았습니다.');
+      return;
+    }
     if (slides.length <= 1) return;
     const target = slides[idx];
     // base 삭제 가드: force=true면 무조건 허용, 생성 슬라이드(data-generated)도 허용
@@ -2794,6 +2798,10 @@
     // Delete: 슬라이드 삭제 (선택 요소 없을 때, 편집 모드)
     if (e.key === 'Delete' && editMode && !selectedEls.length) {
       e.preventDefault();
+      if (!(document.body && document.body.dataset.generated === 'true')) {
+        if (typeof showToast === 'function') showToast('에디터에서는 슬라이드 삭제를 막았습니다.');
+        return;
+      }
       deleteSlide(currentSlide);
       return;
     }
@@ -3684,6 +3692,10 @@
   let expandedOverviewGroups = new Set();  // 확장된 page-group(string) 집합 — overview 전용
 
   function deleteOverviewSlideAt(idx) {
+    if (!(document.body && document.body.dataset.generated === 'true')) {
+      if (typeof showToast === 'function') showToast('에디터에서는 슬라이드 삭제를 막았습니다.');
+      return;
+    }
     if (slides.length <= 1) return;
     pushUndo();
     const container = document.getElementById('stage');
@@ -3716,6 +3728,10 @@
   }
 
   function duplicateOverviewSlideAt(idx) {
+    if (!(document.body && document.body.dataset.generated === 'true')) {
+      if (typeof showToast === 'function') showToast('에디터에서는 슬라이드 복제를 막았습니다.');
+      return;
+    }
     pushUndo();
     const container = document.getElementById('stage');
     const source = slides[idx];
@@ -3857,17 +3873,9 @@
 
       item.appendChild(thumb);
       item.appendChild(num);
-      if (!document.body.classList.contains('frozen-legacy-deck')) {
+      if (!document.body.classList.contains('frozen-legacy-deck') && document.body && document.body.dataset.generated === 'true') {
         const actions = document.createElement('div');
         actions.className = 'ov-actions';
-        const dupBtn = document.createElement('button');
-        dupBtn.type = 'button';
-        dupBtn.className = 'ov-action-btn';
-        dupBtn.textContent = '복제';
-        dupBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          duplicateOverviewSlideAt(slideIdx);
-        });
         const delBtn = document.createElement('button');
         delBtn.type = 'button';
         delBtn.className = 'ov-action-btn danger';
@@ -3876,7 +3884,7 @@
           e.stopPropagation();
           deleteOverviewSlideAt(slideIdx);
         });
-        actions.append(dupBtn, delBtn);
+        actions.append(delBtn);
         item.appendChild(actions);
       }
 
@@ -3902,6 +3910,7 @@
       item.addEventListener('contextmenu', (e) => {
         e.preventDefault();
         e.stopPropagation();
+        if (!(document.body && document.body.dataset.generated === 'true')) return;
         if (typeof setSlideJumpNotesForSlide === 'function') setSlideJumpNotesForSlide(slide);
         showSlideContextMenu(e.clientX, e.clientY, slideIdx);
       });
@@ -4004,6 +4013,7 @@
   let _ctxMenu = null;
   function hideSlideContextMenu() { if (_ctxMenu) { _ctxMenu.remove(); _ctxMenu = null; } }
   function showSlideContextMenu(x, y, idx) {
+    if (!(document.body && document.body.dataset.generated === 'true')) return;
     hideSlideContextMenu();
     const menu = document.createElement('div');
     menu.style.cssText = 'position:fixed;z-index:100000;background:#2a2a2a;border:1px solid #555;border-radius:6px;padding:4px 0;min-width:140px;box-shadow:0 4px 16px rgba(0,0,0,.5);font:14px/1 "Pretendard","Noto Sans KR",sans-serif;color:#eee;';
