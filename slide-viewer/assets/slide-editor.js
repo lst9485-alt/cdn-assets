@@ -2153,8 +2153,23 @@
     }
   }
 
+  function getMaxActualStepIndex(slide) {
+    if (!slide) return 0;
+    let maxStep = 0;
+    slide.querySelectorAll('.step-layer[data-step]').forEach(layer => {
+      maxStep = Math.max(maxStep, parseInt(layer.dataset.step, 10) || 0);
+    });
+    slide.querySelectorAll('[data-appear-step]').forEach(el => {
+      maxStep = Math.max(maxStep, parseInt(el.dataset.appearStep, 10) || 0);
+    });
+    return maxStep;
+  }
+  window.getMaxActualStepIndex = getMaxActualStepIndex;
+
   function getSteps(slide) {
-    return parseInt(slide.dataset.steps || '1');
+    if (!slide) return 1;
+    const actual = getMaxActualStepIndex(slide) + 1;
+    return Math.max(1, actual);
   }
 
   function getOrderedEls(layer) {
@@ -2250,7 +2265,7 @@
       !document.body.classList.contains('frozen-legacy-deck')
     );
     const forceMaxStep = editRevealAll;
-    const maxStep = Math.max(0, parseInt(slide.dataset.steps || '1', 10) - 1);
+    const maxStep = Math.max(0, getSteps(slide) - 1);
     const effectiveStep = forceMaxStep ? maxStep : step;
     const forceRevealAll = revealAll || forceMaxStep;
     let hasDim = false;
@@ -2639,21 +2654,20 @@
   }
 
   function recalcSteps(slide) {
-    let maxStep = 0;
-    slide.querySelectorAll('.step-layer').forEach(l => {
-      maxStep = Math.max(maxStep, parseInt(l.dataset.step));
-    });
-    slide.dataset.steps = String(maxStep + 1);
+    const totalSteps = (typeof getSteps === 'function')
+      ? getSteps(slide)
+      : Math.max(1, ...Array.from(slide.querySelectorAll('.step-layer')).map(l => (parseInt(l.dataset.step, 10) || 0) + 1));
+    slide.dataset.steps = String(totalSteps);
+    if (slide === slides[currentSlide] && typeof currentStep !== 'undefined') {
+      currentStep = Math.max(0, Math.min(currentStep, totalSteps - 1));
+      if (typeof showStep === 'function') showStep(slide, currentStep);
+    }
   }
 
   function toggleStepOverlay() {
     pushUndo();
     const slide = slides[currentSlide];
-    let maxStep = 0;
-    slide.querySelectorAll('.step-layer').forEach(l => {
-      maxStep = Math.max(maxStep, parseInt(l.dataset.step));
-    });
-    const newStep = maxStep + 1;
+    const newStep = (typeof getSteps === 'function' ? getSteps(slide) : 1);
     const newLayer = document.createElement('div');
     newLayer.className = 'step-layer';
     newLayer.dataset.step = String(newStep);
@@ -2792,6 +2806,7 @@
         if (target && target !== groupParent) {
           pushUndo();
           removeEditableElement(target, slides[currentSlide]);
+          clearSelection();
           if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
           return;
         }
@@ -4327,11 +4342,10 @@
           l.remove();
         }
       });
-      let maxStep = 0;
-      s.querySelectorAll('.step-layer').forEach(l => {
-        maxStep = Math.max(maxStep, parseInt(l.dataset.step) || 0);
-      });
-      s.dataset.steps = String(maxStep + 1);
+      const totalSteps = (typeof getSteps === 'function')
+        ? getSteps(s)
+        : Math.max(1, ...Array.from(s.querySelectorAll('.step-layer')).map(l => (parseInt(l.dataset.step, 10) || 0) + 1));
+      s.dataset.steps = String(totalSteps);
     });
 
     // ── HTML 조립 (확장 프로그램 오염 원천 차단) ──
@@ -5153,7 +5167,7 @@
   // SVG connector(.step-timeline > svg) 동반 이동: SVGElement는 offsetLeft 미지원이라 selection 안 넣고 별도 추적
   let svgDragAnchors = [];
   let isDragging = false;
-  const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .grid-icon-box, .grid-row-body, .num-text, .num-badge, .num-item, .check-text, .check-box, .check-item, .bar-label, .bar-value, .bar-fill, .bar-row, .bar-track, .hbar-label, .hbar-val, .chart-title, .chart-label, .chart-val, .lc-end-val, .stat-num, .stat-label, .stat-detail-item, .big-stat, .stat-block, .stat-circle, .icon-label, .icon-row-role, .icon-row-desc, .icon-circle, .emoji-icon, .icon-flow-item, .icon-flow-label, .icon-flow-icon, .icon-flow-arrow, .flow-box, .flow-arrow, .flow-step1, .flow-step2, .alert-text, .alert-icon, .compare-col, .compare-header, .compare-item, .compare-emoji-icon, .vs-badge, .quote-text, .quote-source, .quote-mark, .quote-img, .quote-card, .quote-layout, .quote-minimal, .tag-chip, .tl-box, .tl-circle, .tl-desc, .btn-pill, .cta-btn, .subscribe, .contrast-word, .contrast-sub, .contrast-top, .contrast-bottom, .contrast-quote, .contrast-vs, .contrast-source, .chapter-pill, .chapter-flow-title, .chapter-flow-desc, .chapter-flow-icon, .bullet-text, .bullet-summary, .bullet-icon, .comp-label, .comp-val, .comp-summary, .comp-table, .branch-question, .branch-sub, .branch-result, .branch-summary, .branch-node, .branch-arrow, .branch-root, .branch-cols, .branch-col, .eq-title, .eq-desc, .eq-op, .eq-hl, .eq-icon, .eq-chain-box, .eq-chain-sub, .eq-result, .flow-detail-title, .flow-detail-sub, .flow-detail-list, .flow-detail-icon, .flow-highlight, .flow-step-title, .flow-step-body, .branch-root-text, .branch-result-text, .split-compare-label, .split-compare-desc, .split-compare-value, .split-list-item, .split-list-num, .split-list-title, .split-list-text, .split-stat-card, .split-stat-main, .split-stat-row, .split-stat-icon, .split-stat-label, .split-stat-value, .split-stat-desc, .split-summary, .icon-flow-stat-emoji, .icon-flow-stat-text, .icon-flow-stat-num, .icon-flow-stat-unit, .icon-flow-highlight, .counter-label, .counter-sub, .line1-emph, .emph-line1, .emph-line2, .person-role, .person-desc, .blog-counter, .blog-meta, .term-en, .term-desc, .img-caption, .postit-num, .cork-label, .step-title, .reveal-line1, .reveal-line2, .two-step-title, .two-step-desc, .point-title, .point-desc, .vertical-line1, .vertical-line2, .left-rail-title, .reveal-band, .reveal-band-text, .left-rail-desc, .left-rail-desc-text, .quote-tail, .quote-tail-text, .step-card, .step-card-body';
+  const CHILD_SEL = '.card-title, .card-desc, .card-num, .grid-title, .grid-desc, .grid-icon, .grid-icon-box, .grid-row-body, .num-text, .num-badge, .num-item, .check-text, .check-box, .check-item, .bar-label, .bar-value, .bar-fill, .bar-row, .bar-track, .hbar-label, .hbar-val, .chart-title, .chart-label, .chart-val, .lc-end-val, .stat-num, .stat-label, .stat-detail-item, .big-stat, .stat-block, .stat-circle, .icon-label, .icon-row-role, .icon-row-desc, .icon-circle, .emoji-icon, .icon-flow-item, .icon-flow-label, .icon-flow-icon, .icon-flow-arrow, .flow-box, .flow-arrow, .flow-step1, .flow-step2, .alert-text, .alert-icon, .compare-col, .compare-header, .compare-item, .compare-emoji-icon, .vs-badge, .quote-text, .quote-source, .quote-mark, .quote-img, .quote-card, .quote-layout, .quote-minimal, .tag-chip, .tl-box, .tl-circle, .tl-desc, .btn-pill, .cta-btn, .subscribe, .contrast-word, .contrast-sub, .contrast-top, .contrast-bottom, .contrast-quote, .contrast-vs, .contrast-source, .chapter-pill, .chapter-flow-title, .chapter-flow-desc, .chapter-flow-icon, .chapter-flow-arrow, .bullet-text, .bullet-summary, .bullet-icon, .comp-label, .comp-val, .comp-summary, .comp-table, .branch-question, .branch-sub, .branch-result, .branch-summary, .branch-node, .branch-arrow, .branch-root, .branch-cols, .branch-col, .eq-title, .eq-desc, .eq-op, .eq-hl, .eq-icon, .eq-chain-box, .eq-chain-sub, .eq-chain-arrow, .eq-result, .flow-detail-title, .flow-detail-sub, .flow-detail-list, .flow-detail-icon, .flow-highlight, .flow-step-title, .flow-step-body, .branch-root-text, .branch-result-text, .split-compare-label, .split-compare-desc, .split-compare-value, .split-list-item, .split-list-num, .split-list-title, .split-list-text, .split-stat-card, .split-stat-main, .split-stat-row, .split-stat-icon, .split-stat-label, .split-stat-value, .split-stat-desc, .split-summary, .icon-flow-stat-emoji, .icon-flow-stat-text, .icon-flow-stat-num, .icon-flow-stat-unit, .icon-flow-highlight, .counter-label, .counter-sub, .line1-emph, .emph-line1, .emph-line2, .person-role, .person-desc, .blog-counter, .blog-meta, .term-en, .term-desc, .img-placeholder, .img-caption, .slide-caption, .postit-num, .cork-label, .step-title, .reveal-line1, .reveal-line2, .two-step-title, .two-step-desc, .point-title, .point-desc, .vertical-line1, .vertical-line2, .left-rail-title, .reveal-band, .reveal-band-text, .left-rail-desc, .left-rail-desc-text, .quote-tail, .quote-tail-text, .step-card, .step-card-body';
   // 비텍스트 자식 (fontSize 기반 리사이즈 대상 아님 — 이들은 기존 slide-el 박스 리사이즈로 처리)
   const NON_TEXT_CHILD_SEL = '.bar-fill, .check-box, .icon-circle, .tl-circle';
   const NON_DETACHABLE_CHILD_SEL = '.bar-fill, .bar-row, .bar-track, .check-box, .icon-circle, .tl-circle, .flow-arrow, .branch-arrow, .icon-flow-arrow, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat';
@@ -5648,7 +5662,7 @@
   function shouldAutoEnableChildAction(parent = groupParent, child = null) {
     if (!parent || !child) return false;
     if (child.matches(NON_DETACHABLE_CHILD_SEL)) return false;
-    return !!parent.matches('.slide-el');
+    return !!parent.matches('.slide-el, .text-area, .bubble');
   }
   window.shouldAutoEnableChildAction = shouldAutoEnableChildAction;
 
@@ -6248,13 +6262,14 @@
     '.bullet-text', '.bullet-summary', '.bullet-icon',                // T25
     '.comp-label', '.comp-val', '.comp-summary', '.split-compare-label', '.split-compare-desc', '.split-compare-value', // T28 / split compare
     '.branch-question', '.branch-sub', '.branch-result', '.branch-summary', '.branch-node', '.branch-arrow', // T30
-    '.eq-title', '.eq-desc', '.eq-op', '.eq-hl', '.eq-icon', '.eq-chain-box', '.eq-chain-sub', '.eq-result', // T32
+    '.eq-title', '.eq-desc', '.eq-op', '.eq-hl', '.eq-icon', '.eq-chain-box', '.eq-chain-sub', '.eq-chain-arrow', '.eq-result', // T32
     '.flow-detail-title', '.flow-detail-sub', '.flow-detail-list', '.flow-detail-icon', '.flow-highlight', '.flow-step-title', '.flow-step-body', // T34 / 2단플로우
     '.split-list-item', '.split-list-num', '.split-list-title', '.split-list-text', '.split-stat-card', '.split-stat-main', '.split-stat-row', '.split-stat-icon', '.split-stat-label', '.split-stat-value', '.split-stat-desc', '.split-summary', // T31
     '.icon-flow-stat-emoji', '.icon-flow-stat-text', '.icon-flow-stat-num', '.icon-flow-stat-unit', '.icon-flow-highlight', // T33
     '.person-role', '.person-desc', '.blog-counter', '.blog-meta', '.term-en', '.term-desc', // T39~T43
     '.step-title', '.reveal-line1', '.reveal-line2', '.two-step-title', '.two-step-desc', '.point-title', '.point-desc', '.vertical-line1', '.vertical-line2', '.left-rail-title', '.left-rail-desc', '.quote-tail', // T49~T59
     '.reveal-band-text', '.left-rail-desc-text', '.quote-tail-text', '.step-card-body', '.postit-num', '.branch-root-text', '.branch-result-text', // T56~T59
+    '.chapter-flow-arrow', '.slide-caption', '.img-placeholder', // fallback 의존 축소
   ].join(', ');
 
   function resolveEditableTextTarget(target) {
@@ -6314,8 +6329,8 @@
         return boxedParent;
       }
     }
-    if (leaf && leaf.matches('.section-badge, .corner-label')) {
-      return leaf.closest('.slide-el') || leaf;
+    if (leaf && leaf.matches('.hl, .section-badge, .corner-label')) {
+      return leaf.closest('.text-area, .bubble, .slide-el') || leaf;
     }
 
     const structural = target.closest('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .step-timeline, .branch-cols, .branch-col, .slide-el');
@@ -6664,7 +6679,7 @@
       !groupEntered &&
       selectedEls.length === 1 &&
       selectedEl &&
-      selectedEl.matches('.slide-el')
+      selectedEl.matches('.slide-el, .text-area, .bubble')
     ) ? selectedEl : null;
     const directChildTarget = activeSelectedCard
       ? resolveGroupChildTarget(activeSelectedCard, document.elementFromPoint(e.clientX, e.clientY) || e.target, e.clientX, e.clientY)
@@ -6741,7 +6756,7 @@
           el.classList.add('edit-selected');
           selectedEl = el;
         }
-      } else if ((el.matches('.slide-el') || el.matches('.items-row, .items-col, .items-grid')) && selectedEls.length === 1) {
+      } else if ((el.matches('.slide-el, .text-area, .bubble') || el.matches('.items-row, .items-col, .items-grid')) && selectedEls.length === 1) {
         // 카드 블록/flex 컨테이너 재클릭 → mouseup에서 드래그 여부 확인 후 그룹 진입
         // (모듈 포함 — 세션 36 후속3: 자식 추출만 별도 차단, 그룹 진입/편집은 허용)
         const reclickChildTarget = resolveGroupChildTarget(
@@ -8161,6 +8176,7 @@
       if (target && target !== groupParent) {
         pushUndo();
         removeEditableElement(target, slides[currentSlide]);
+        clearSelection();
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
         return;
       }
@@ -8807,6 +8823,7 @@ ch.postMessage({ type: 'ready' });
       if (child) {
         pushUndo();
         removeEditableElement(child, slides[currentSlide]);
+        clearSelection();
         groupToolbar.classList.remove('visible');
         if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
         return;
