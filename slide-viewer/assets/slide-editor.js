@@ -5298,6 +5298,9 @@
       }
       // ── 편집중 배지 표시 ──
       showEditBadge(true);
+      if (slides[currentSlide] && typeof showStep === 'function') {
+        showStep(slides[currentSlide], currentStep);
+      }
     } else {
       // ── 편집중 배지 먼저 숨김 (아래 cleanup 중 예외 나도 배지는 반드시 사라지게) ──
       showEditBadge(false);

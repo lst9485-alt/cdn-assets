@@ -2003,6 +2003,22 @@
     outline: 2px dashed rgba(0, 120, 255, 0.35);
     outline-offset: -2px;
   }
+  body.edit-mode .slide.active .step-layer.visible,
+  body.edit-mode .slide.active .step-layer.visible > .slide-el,
+  body.edit-mode .slide.active .step-layer.visible > .bubble,
+  body.edit-mode .slide.active .step-layer.visible > .text-area,
+  body.edit-mode .slide.active .step-layer.visible > img,
+  body.edit-mode .slide.active .step-layer.visible > .step-content,
+  body.edit-mode .slide.active .step-layer.visible .slide-el,
+  body.edit-mode .slide.active .step-layer.visible .bubble,
+  body.edit-mode .slide.active .step-layer.visible .text-area,
+  body.edit-mode .slide.active .step-layer.visible img,
+  body.edit-mode .slide.active .step-layer.visible .step-content {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation-delay: 0s !important;
+  }
   body.edit-mode #stage { overflow: visible; }
 
   #coord-panel {
