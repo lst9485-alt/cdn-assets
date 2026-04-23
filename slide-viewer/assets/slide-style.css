@@ -2211,6 +2211,23 @@
   body.overview-open #runtime-notes-dock { display: none; }
   #runtime-ink-layer { position:absolute; inset:0; z-index:40; pointer-events:none; }
   #runtime-ink-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+  #runtime-ink-cursor {
+    position:absolute;
+    width:18px;
+    height:18px;
+    margin-left:-9px;
+    margin-top:-9px;
+    border-radius:999px;
+    border:2px solid rgba(255,255,255,0.92);
+    box-shadow:0 0 0 4px rgba(0,0,0,0.18);
+    opacity:0;
+    transform:scale(0.9);
+    transition:opacity 80ms linear, transform 80ms linear, border-color 80ms linear, background 80ms linear;
+  }
+  #runtime-ink-cursor.visible { opacity:0.92; transform:scale(1); }
+  #runtime-ink-cursor.cursor-present { background:rgba(255,255,255,0.2); border-color:rgba(255,255,255,0.92); }
+  #runtime-ink-cursor.cursor-draw { background:rgba(255,59,48,0.34); border-color:rgba(255,117,97,0.98); }
+  #runtime-ink-cursor.cursor-erase { width:42px; height:42px; margin-left:-21px; margin-top:-21px; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.92); box-shadow:0 0 0 1px rgba(0,0,0,0.14), 0 0 0 6px rgba(255,255,255,0.08); }
   #runtime-ink-sparks { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
   .runtime-ink-spark {
     position:absolute;

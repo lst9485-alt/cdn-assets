@@ -396,6 +396,11 @@
 
   const runtimeInkActionsBySlide = new Map();
   const runtimeInkTransientBySlide = new Map();
+  const runtimeInkCursorState = {
+    slide: -1,
+    point: null,
+    mode: 'off',
+  };
 
   function cloneInkActions(actions) {
     return Array.isArray(actions)
@@ -418,6 +423,7 @@
     layer.innerHTML = `
       <div id="runtime-ink-sparks"></div>
       <canvas id="runtime-ink-canvas" width="1920" height="1080"></canvas>
+      <div id="runtime-ink-cursor" aria-hidden="true"></div>
     `;
     stage.appendChild(layer);
     return layer;
@@ -479,6 +485,33 @@
     }
   }
 
+  function renderRuntimeInkCursor() {
+    const layer = ensureRuntimeInkLayer();
+    const cursor = layer?.querySelector('#runtime-ink-cursor');
+    if (!cursor) return;
+    const point = runtimeInkCursorState.point;
+    const visible = (
+      runtimeInkCursorState.slide === currentSlide &&
+      !!point &&
+      runtimeInkCursorState.mode &&
+      runtimeInkCursorState.mode !== 'off'
+    );
+    cursor.classList.remove('visible', 'cursor-present', 'cursor-draw', 'cursor-erase');
+    if (!visible) return;
+    cursor.classList.add('visible', `cursor-${runtimeInkCursorState.mode}`);
+    cursor.style.left = `${point.x}px`;
+    cursor.style.top = `${point.y}px`;
+  }
+
+  function setRuntimeInkCursorState(slideIndex, point = null, mode = 'off') {
+    runtimeInkCursorState.slide = slideIndex;
+    runtimeInkCursorState.point = point
+      ? { x: Number(point.x) || 0, y: Number(point.y) || 0 }
+      : null;
+    runtimeInkCursorState.mode = point && mode ? mode : 'off';
+    renderRuntimeInkCursor();
+  }
+
   function renderRuntimeInkForSlide(slideIndex = currentSlide) {
     const layer = ensureRuntimeInkLayer();
     const canvas = layer?.querySelector('#runtime-ink-canvas');
@@ -488,14 +521,27 @@
     cloneInkActions(runtimeInkActionsBySlide.get(slideIndex) || []).forEach(action => renderInkAction(ctx, action));
     const transient = runtimeInkTransientBySlide.get(slideIndex);
     if (transient) renderInkAction(ctx, transient);
+    renderRuntimeInkCursor();
   }
 
-  function setRuntimeInkStateForSlide(slideIndex, actions, transientAction = null, sparkPoint = null) {
+  function setRuntimeInkStateForSlide(
+    slideIndex,
+    actions,
+    transientAction = null,
+    sparkPoint = null,
+    cursorPoint = null,
+    cursorMode = 'off',
+  ) {
     runtimeInkActionsBySlide.set(slideIndex, cloneInkActions(actions));
     if (transientAction && transientAction.points && transientAction.points.length) {
       runtimeInkTransientBySlide.set(slideIndex, cloneInkActions([transientAction])[0]);
     } else {
       runtimeInkTransientBySlide.delete(slideIndex);
+    }
+    if (slideIndex === currentSlide) {
+      setRuntimeInkCursorState(slideIndex, cursorPoint, cursorMode);
+    } else if (runtimeInkCursorState.slide === slideIndex && !cursorPoint) {
+      setRuntimeInkCursorState(slideIndex, null, 'off');
     }
     if (slideIndex === currentSlide && sparkPoint) spawnRuntimeInkSpark(sparkPoint);
     if (slideIndex === currentSlide) renderRuntimeInkForSlide(slideIndex);
@@ -505,13 +551,37 @@
     return cloneInkActions(runtimeInkActionsBySlide.get(slideIndex) || []);
   }
 
+  function clearRuntimeInkForSlide(slideIndex) {
+    runtimeInkActionsBySlide.delete(slideIndex);
+    runtimeInkTransientBySlide.delete(slideIndex);
+    if (runtimeInkCursorState.slide === slideIndex) {
+      setRuntimeInkCursorState(slideIndex, null, 'off');
+    }
+    if (slideIndex === currentSlide) renderRuntimeInkForSlide(slideIndex);
+  }
+
+  function clearRuntimeInkForView(slideIndex = currentSlide) {
+    clearRuntimeInkForSlide(slideIndex);
+  }
+
   window.getRuntimeInkActionsForSlide = getRuntimeInkActionsForSlide;
   window.setRuntimeInkStateForSlide = setRuntimeInkStateForSlide;
   window.renderRuntimeInkForSlide = renderRuntimeInkForSlide;
+  window.clearRuntimeInkForSlide = clearRuntimeInkForSlide;
+  window.clearRuntimeInkForView = clearRuntimeInkForView;
   window.__getRuntimeInkState = () => ({
     slide: currentSlide,
     actionCount: getRuntimeInkActionsForSlide(currentSlide).length,
     hasTransient: !!runtimeInkTransientBySlide.get(currentSlide),
+    cursorVisible: (
+      runtimeInkCursorState.slide === currentSlide &&
+      !!runtimeInkCursorState.point &&
+      runtimeInkCursorState.mode !== 'off'
+    ),
+    cursorMode: (
+      runtimeInkCursorState.slide === currentSlide &&
+      runtimeInkCursorState.point
+    ) ? runtimeInkCursorState.mode : 'off',
     lastShape: (() => {
       const actions = getRuntimeInkActionsForSlide(currentSlide);
       return actions.length ? actions[actions.length - 1].shape || null : null;
@@ -2644,6 +2714,7 @@
     const next = Math.max(0, Math.min(idx, slides.length - 1));
     if (next === currentSlide) return;
     animating = true;
+    if (typeof clearRuntimeInkForView === 'function') clearRuntimeInkForView(currentSlide);
 
     // variant로 점프 시 해당 page-group 자동 expand (필름스트립 표시 동기화)
     const nextSlide = slides[next];
@@ -2826,6 +2897,7 @@
     }
     const nextStep = getNextExistingStep(slide, currentStep);
     if (nextStep !== -1) {
+      if (typeof clearRuntimeInkForView === 'function') clearRuntimeInkForView(currentSlide);
       currentStep = nextStep;
       currentOrder = 0;
       showStep(slide, currentStep);
@@ -2937,6 +3009,7 @@
       if (currentOrder === 0 && currentStep > 0) {
         const dim2 = curLayer.querySelector('.step-dim');
         if (dim2) { dim2.classList.remove('anim-shown'); syncDimOuter(slide); }
+        if (typeof clearRuntimeInkForView === 'function') clearRuntimeInkForView(currentSlide);
         currentStep = getPrevExistingStep(slide, currentStep);
         const prevLayer = slide.querySelector(`.step-layer[data-step="${currentStep}"]`);
         if (prevLayer) currentOrder = getOrderedEls(prevLayer).length;
@@ -2948,6 +3021,7 @@
       playSound('step');
       syncPresenter();
     } else if (currentStep > 0) {
+      if (typeof clearRuntimeInkForView === 'function') clearRuntimeInkForView(currentSlide);
       currentStep = getPrevExistingStep(slide, currentStep);
       const prevLayer = slide.querySelector(`.step-layer[data-step="${currentStep}"]`);
       if (prevLayer) currentOrder = getOrderedEls(prevLayer).length;
@@ -9401,6 +9475,8 @@
           e.data.actions || [],
           e.data.transientAction || null,
           e.data.sparkPoint || null,
+          e.data.cursorPoint || null,
+          e.data.cursorMode || 'off',
         );
       }
     }
@@ -9505,6 +9581,7 @@ const inkCtx = inkCanvas.getContext('2d');
 const inkActionsBySlide = new Map();
 let inkMode = 'off';
 let activeInkAction = null;
+let hoverInkPoint = null;
 setInterval(() => {
   const e2 = Math.floor((Date.now() - startTime) / 1000);
   const h = String(Math.floor(e2 / 3600)).padStart(2,'0');
@@ -9613,6 +9690,12 @@ function getSparkPoint() {
   const points = activeInkAction?.points;
   return points && points.length ? points[points.length - 1] : null;
 }
+function getCursorMode() {
+  if (!hoverInkPoint) return 'off';
+  if (inkMode === 'erase') return 'erase';
+  if (inkMode === 'draw') return 'draw';
+  return 'present';
+}
 function postInkState() {
   ch.postMessage({
     type: 'ink',
@@ -9620,6 +9703,8 @@ function postInkState() {
     actions: cloneInkActions(getCurrentInkActions()),
     transientAction: activeInkAction ? cloneInkActions([activeInkAction])[0] : null,
     sparkPoint: getSparkPoint(),
+    cursorPoint: hoverInkPoint,
+    cursorMode: getCursorMode(),
   });
 }
 let inkBroadcastQueued = false;
@@ -9662,6 +9747,7 @@ function finishInkAction(ev) {
   if (ev && activeInkAction.points.length === 1) {
     activeInkAction.points.push(getInkPoint(ev));
   }
+  if (ev) hoverInkPoint = getInkPoint(ev);
   getCurrentInkActions().push(activeInkAction);
   activeInkAction = null;
   redrawPresenterInk();
@@ -9681,6 +9767,7 @@ ch.onmessage = ev => {
     el.textContent = fullNotes;
     inkActionsBySlide.set(curSlideIdx, cloneInkActions(d.inkActions || []));
     activeInkAction = null;
+    hoverInkPoint = null;
     redrawPresenterInk();
     updateInkToolbar();
   }
@@ -9691,30 +9778,44 @@ document.getElementById('pres-ink-pen').addEventListener('click', () => setInkMo
 document.getElementById('pres-ink-eraser').addEventListener('click', () => setInkMode(inkMode === 'erase' ? 'off' : 'erase'));
 document.getElementById('pres-ink-undo').addEventListener('click', undoPresenterInk);
 document.getElementById('pres-ink-clear').addEventListener('click', clearPresenterInk);
+currentPreview.addEventListener('pointerenter', ev => {
+  hoverInkPoint = getInkPoint(ev);
+  if (!activeInkAction) scheduleInkBroadcast(true);
+});
+currentPreview.addEventListener('pointermove', ev => {
+  hoverInkPoint = getInkPoint(ev);
+  if (!activeInkAction) scheduleInkBroadcast(inkMode === 'erase');
+});
+currentPreview.addEventListener('pointerleave', () => {
+  hoverInkPoint = null;
+  if (!activeInkAction) scheduleInkBroadcast(true);
+});
 inkCanvas.addEventListener('pointerdown', ev => {
   if (inkMode === 'off') return;
   ev.preventDefault();
+  hoverInkPoint = getInkPoint(ev);
   activeInkAction = {
     mode: inkMode === 'erase' ? 'erase' : 'draw',
-    shape: ev.ctrlKey ? 'rect' : (ev.shiftKey ? 'line' : 'freehand'),
+    shape: (ev.ctrlKey || ev.metaKey) ? 'rect' : (ev.shiftKey ? 'line' : 'freehand'),
     color: '#ff3b30',
     width: inkMode === 'erase' ? 42 : 18,
-    points: [getInkPoint(ev)],
+    points: [hoverInkPoint],
   };
   inkCanvas.setPointerCapture(ev.pointerId);
   redrawPresenterInk(activeInkAction);
-  scheduleInkBroadcast();
+  scheduleInkBroadcast(activeInkAction.mode === 'erase');
 });
 inkCanvas.addEventListener('pointermove', ev => {
   if (!activeInkAction) return;
   const point = getInkPoint(ev);
+  hoverInkPoint = point;
   if (activeInkAction.shape === 'rect' || activeInkAction.shape === 'line') {
     activeInkAction.points = [activeInkAction.points[0], point];
   } else {
     activeInkAction.points.push(point);
   }
   redrawPresenterInk(activeInkAction);
-  scheduleInkBroadcast();
+  scheduleInkBroadcast(activeInkAction.mode === 'erase');
 });
 inkCanvas.addEventListener('pointerup', finishInkAction);
 inkCanvas.addEventListener('pointercancel', () => {
@@ -9725,6 +9826,9 @@ inkCanvas.addEventListener('pointercancel', () => {
 inkCanvas.addEventListener('lostpointercapture', () => {
   if (!activeInkAction) return;
   getCurrentInkActions().push(activeInkAction);
+  hoverInkPoint = activeInkAction.points.length
+    ? activeInkAction.points[activeInkAction.points.length - 1]
+    : hoverInkPoint;
   activeInkAction = null;
   redrawPresenterInk();
   updateInkToolbar();
@@ -9733,6 +9837,8 @@ inkCanvas.addEventListener('lostpointercapture', () => {
 window.__getPresenterInkState = () => ({
   mode: inkMode,
   actionCount: getCurrentInkActions().length,
+  cursorVisible: !!hoverInkPoint,
+  cursorMode: getCursorMode(),
   lastShape: (() => {
     const actions = getCurrentInkActions();
     return actions.length ? actions[actions.length - 1].shape || null : null;
