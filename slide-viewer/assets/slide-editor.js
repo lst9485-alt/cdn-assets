@@ -5483,17 +5483,33 @@
     const oldText = el.textContent || '';
     const rect = el.getBoundingClientRect();
     const cs = window.getComputedStyle(el);
+    const lines = String(oldText).split('\n');
+    const longestLine = lines.reduce((max, line) => Math.max(max, line.length), 0);
+    const fontSize = parseFloat(cs.fontSize) || rect.height || 16;
+    const lineHeight = parseFloat(cs.lineHeight) || (fontSize * 1.2);
+    const approxCharWidth = Math.max(14, fontSize * 0.9);
+    const desiredWidth = Math.max(
+      rect.width + 24,
+      Math.min(960, longestLine * approxCharWidth + 48)
+    );
+    const minEditorWidth = lines.length === 1 ? 260 : 160;
+    const desiredMinHeight = Math.max(
+      44,
+      rect.height + 16,
+      lineHeight * Math.max(1, lines.length) + 16
+    );
     const ta = document.createElement('textarea');
     ta.className = 'svg-text-editor';
     ta.value = oldText;
     ta.setAttribute('spellcheck', 'false');
+    if (lines.length === 1) ta.setAttribute('wrap', 'off');
     ta.style.cssText = [
       'position:fixed',
       'z-index:120000',
       `left:${Math.max(8, rect.left - 8)}px`,
       `top:${Math.max(8, rect.top - 8)}px`,
-      `width:${Math.max(160, rect.width + 16)}px`,
-      `min-height:${Math.max(44, rect.height + 16)}px`,
+      `width:${Math.max(minEditorWidth, desiredWidth)}px`,
+      `min-height:${desiredMinHeight}px`,
       'padding:8px 10px',
       'border:2px solid rgba(255,106,0,0.45)',
       'border-radius:10px',
@@ -5885,6 +5901,22 @@
     const stageRect = stageEl.getBoundingClientRect();
     const scale = stageRect.width / 1920;
     const rect = el.getBoundingClientRect();
+    const directDetachChild = (() => {
+      if (!el.matches('.slide-el')) return null;
+      if (!parent.matches('.items-row, .items-col, .items-grid')) return null;
+      const children = Array.from(el.children).filter(child => {
+        if (!(child instanceof Element) || isRemovalPlaceholderEl(child)) return false;
+        const cs = getComputedStyle(child);
+        return cs.display !== 'none' && cs.visibility !== 'hidden';
+      });
+      if (children.length !== 1) return null;
+      const onlyChild = children[0];
+      if (!onlyChild.matches('.hl, .section-badge, .corner-label')) return null;
+      const childRect = onlyChild.getBoundingClientRect();
+      if (childRect.width <= 0 || childRect.height <= 0) return null;
+      return childRect;
+    })();
+    const detachRect = directDetachChild || rect;
     const placeholder = el.cloneNode(true);
     layoutDetachCounter += 1;
     placeholder.classList.add('edit-hidden-placeholder', 'no-edit-select', 'layout-detached-placeholder');
@@ -5899,10 +5931,10 @@
 
     el.classList.add('layout-detached');
     el.style.position = 'absolute';
-    el.style.left = Math.round((rect.left - stageRect.left) / scale) + 'px';
-    el.style.top = Math.round((rect.top - stageRect.top) / scale) + 'px';
-    el.style.width = Math.round(rect.width / scale) + 'px';
-    el.style.height = Math.round(rect.height / scale) + 'px';
+    el.style.left = Math.round((detachRect.left - stageRect.left) / scale) + 'px';
+    el.style.top = Math.round((detachRect.top - stageRect.top) / scale) + 'px';
+    el.style.width = Math.round(detachRect.width / scale) + 'px';
+    el.style.height = Math.round(detachRect.height / scale) + 'px';
     layer.appendChild(el);
     return el;
   }
