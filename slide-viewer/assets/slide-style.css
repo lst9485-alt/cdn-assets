@@ -2204,9 +2204,32 @@
   #runtime-notes-panel { display: none; width: min(420px, calc(100vw - 32px)); max-height: min(36vh, 320px); overflow: auto; border-radius: 18px; background: rgba(255,255,255,0.97); color: #222; padding: 14px 16px 16px; box-shadow: 0 18px 40px rgba(0,0,0,0.18); }
   #runtime-notes-dock.open #runtime-notes-panel { display: block; }
   #runtime-notes-panel .runtime-notes-label { font-size: 12px; font-weight: 800; color: #666; margin-bottom: 10px; }
-  #runtime-notes-panel .runtime-notes-body { white-space: pre-wrap; word-break: break-word; line-height: 1.65; font-size: 14px; min-height: 96px; }
+  #runtime-notes-panel .runtime-notes-body { display:block; width:100%; min-height: 132px; border:1px solid rgba(0,0,0,0.08); border-radius:14px; padding:12px 14px; background:rgba(255,255,255,0.96); color:#222; line-height:1.7; font-size:14px; resize:vertical; outline:none; }
+  #runtime-notes-panel .runtime-notes-body:focus { border-color: rgba(255, 107, 0, 0.55); box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.12); }
+  #runtime-notes-panel .runtime-notes-body::placeholder { color:#999; }
   body.edit-mode #runtime-notes-dock,
   body.overview-open #runtime-notes-dock { display: none; }
+  #runtime-ink-layer { position:absolute; inset:0; z-index:40; pointer-events:none; }
+  #runtime-ink-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+  #runtime-ink-sparks { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+  .runtime-ink-spark {
+    position:absolute;
+    width:10px;
+    height:10px;
+    margin-left:-5px;
+    margin-top:-5px;
+    border-radius:999px;
+    background: radial-gradient(circle, rgba(255,255,255,0.92) 0%, rgba(255,190,140,0.7) 34%, rgba(255,90,54,0) 72%);
+    opacity:0.65;
+    transform: translate(0, 0) scale(var(--spark-scale, 1));
+    animation: runtime-ink-spark 0.52s ease-out forwards;
+  }
+  @keyframes runtime-ink-spark {
+    from { opacity:0.68; transform:translate(0, 0) scale(var(--spark-scale, 1)); }
+    to { opacity:0; transform:translate(var(--spark-x, 0), var(--spark-y, -24px)) scale(0.08); }
+  }
+  body.edit-mode #runtime-ink-layer,
+  body.overview-open #runtime-ink-layer { display:none; }
   .fs-item { flex-shrink:0; cursor:pointer; border:2px solid transparent; border-radius:3px; overflow:hidden; position:relative; width:136px; height:76px; background:var(--editor-bg); }
   .fs-item.current { border-color:var(--editor-accent); box-shadow:0 0 8px 2px rgba(var(--editor-accent-rgb),0.6); background:#3a3a2a; }
   .fs-item .fs-inner { width:1920px; height:1080px; transform-origin:top left; transform:scale(0.0708); pointer-events:none; }
