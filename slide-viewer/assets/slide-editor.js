@@ -6426,6 +6426,19 @@
     const structural = target.closest('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .step-timeline, .branch-cols, .branch-col, .slide-el');
     if (!structural) return leaf;
 
+    const isSelectedStructuralParent = !!(
+      leaf &&
+      leaf !== structural &&
+      structural.contains(leaf) &&
+      (
+        selectedEl === structural ||
+        (groupEntered && groupParent === structural)
+      )
+    );
+    if (isSelectedStructuralParent) {
+      return leaf;
+    }
+
     if (structural.matches('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .step-timeline')) {
       return structural;
     }
