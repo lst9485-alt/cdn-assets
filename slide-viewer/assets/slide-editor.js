@@ -2787,8 +2787,13 @@
     }
     // 텍스트 편집 중: 나머지 단축키 비활성화
     if (isEditing) return;
+    const groupChildSelected = !!(
+      groupEntered &&
+      groupParent &&
+      groupParent.querySelector('.child-selected, .child-action-target')
+    );
     // Delete: 슬라이드 삭제 (선택 요소 없을 때, 편집 모드)
-    if (e.key === 'Delete' && editMode && !selectedEls.length) {
+    if (e.key === 'Delete' && editMode && !selectedEls.length && !groupChildSelected) {
       e.preventDefault();
       if (!(document.body && document.body.dataset.generated === 'true')) {
         if (typeof showToast === 'function') showToast('에디터에서는 슬라이드 삭제를 막았습니다.');
@@ -2799,7 +2804,7 @@
     }
     // Delete/Backspace: 선택 요소 삭제 (편집 모드)
     if ((e.code === 'Delete' || e.code === 'Backspace') && editMode) {
-      if (!selectedEls.length) return;
+      if (!selectedEls.length && !groupChildSelected) return;
       // groupEntered 상태에서도 기본은 parent 우선, 정말 child-only 인 경우만 자식 삭제
       if (groupEntered && groupParent && typeof getGroupActionTarget === 'function') {
         const target = getGroupActionTarget();
@@ -5406,7 +5411,9 @@
       ta.removeEventListener('blur', onBlur);
       if (ta.parentNode) ta.parentNode.removeChild(ta);
       if (commit) {
-        el.textContent = ta.value;
+        if (!(typeof syncLineChartSvgText === 'function' && syncLineChartSvgText(el, ta.value))) {
+          el.textContent = ta.value;
+        }
         if (typeof ghMarkDirty === 'function') ghMarkDirty();
       }
       if (activeSvgTextEditor && activeSvgTextEditor.textarea === ta) activeSvgTextEditor = null;
@@ -5450,6 +5457,48 @@
     }
   }
   window.commitActiveEditors = commitActiveEditors;
+
+  function syncLineChartSvgText(el, nextText = '', options = {}) {
+    const chart = el && el.closest ? el.closest('.line-chart') : null;
+    if (!chart) return false;
+    const remove = !!options.remove;
+    const text = remove ? '' : String(nextText ?? '');
+
+    if (el.classList.contains('chart-title')) {
+      chart.dataset.title = text;
+      if (typeof buildLineChart === 'function') buildLineChart(chart);
+      return true;
+    }
+
+    if (el.classList.contains('chart-label') && el.getAttribute('text-anchor') === 'middle') {
+      const labels = (chart.dataset.labels || '').split(',').map(s => s.trim());
+      const xLabels = Array.from(chart.querySelectorAll('.chart-label'))
+        .filter(node => node.getAttribute('text-anchor') === 'middle');
+      const idx = xLabels.indexOf(el);
+      if (idx >= 0) {
+        labels[idx] = text;
+        chart.dataset.labels = labels.join(',');
+        if (typeof buildLineChart === 'function') buildLineChart(chart);
+        return true;
+      }
+    }
+
+    if (el.classList.contains('lc-end-val')) {
+      const vals = (chart.dataset.values || '').split(',').map(s => s.trim());
+      if (vals.length) {
+        const numeric = text.replace(/[^0-9.\-]/g, '');
+        if (remove || numeric) {
+          vals[vals.length - 1] = remove ? '' : numeric;
+          chart.dataset.values = vals.join(',');
+          if (typeof buildLineChart === 'function') buildLineChart(chart);
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+  window.syncLineChartSvgText = syncLineChartSvgText;
 
   function enterContentEditable(el, e) {
     pushUndo();
@@ -5551,6 +5600,9 @@
   }
 
   function removeEditableElement(el, slide) {
+    if (isSvgTextEditable(el) && typeof syncLineChartSvgText === 'function') {
+      if (syncLineChartSvgText(el, '', { remove: true })) return;
+    }
     const layer = el.closest('.step-layer');
     const parent = el.parentElement;
     const parentDisplay = parent ? getComputedStyle(parent).display : '';
