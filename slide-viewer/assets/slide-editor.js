@@ -272,7 +272,7 @@
   }
 
   function shouldRevealAllInSourceBrowseView() {
-    return !document.body.dataset.generated && !editMode;
+    return false;
   }
 
   function getSourceBrowseStepState(slide) {
@@ -5299,14 +5299,6 @@
   let isResizing = false;
   let resizeAnchorY = null;
 
-  function collapseSlideJumpNavForEdit() {
-    const nav = document.getElementById('slide-jump-nav');
-    if (!nav || document.body.classList.contains('overview-open')) return;
-    nav.classList.add('collapsed');
-    document.body.classList.add('sjn-collapsed');
-    const toggle = nav.querySelector('.sj-toggle');
-    if (toggle) toggle.textContent = '‹';
-  }
   let resizeAnchorX = null;
   let resizeInitFontSizes = null;
   let resizeImgInit = null;
@@ -5369,7 +5361,6 @@
       if (fs && fs.parentElement !== document.body) document.body.appendChild(fs);
       buildFilmstrip();
       buildLayerPanel();
-      collapseSlideJumpNavForEdit();
       if (isGitHubPages) {
         if (!ghGetToken()) {
           showToast('GitHub 토큰이 없어 이 브라우저에 임시 저장됩니다. ⚙ 에서 설정하세요.', 5000);
