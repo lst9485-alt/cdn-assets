@@ -5369,10 +5369,8 @@
       } else if (!dirHandle) {
         const ok = await ensureDirHandle();
         if (!ok) {
-          editMode = false;
-          document.body.classList.remove('edit-mode');
-          document.getElementById('layer-panel').classList.remove('visible');
-          return;
+          showToast('저장 폴더를 선택하지 않아 저장 없이 편집합니다. 저장할 때 다시 물어봅니다.', 5000);
+          try { showSaveStatus('폴더 선택 필요'); } catch(_) {}
         }
       }
       if (autoSaveTimer) clearInterval(autoSaveTimer);
@@ -6487,7 +6485,7 @@
 
   function shouldDeferPointLeafToStructuralParent(leafTarget) {
     if (!leafTarget) return false;
-    const structural = leafTarget.closest('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .stat-circle, .big-stat, .stat-block, .compare-col');
+    const structural = leafTarget.closest('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .stat-circle, .big-stat, .stat-block, .compare-col, .split-list');
     if (!structural) return false;
     if (selectedEl === structural) return false;
     if (groupEntered && groupParent === structural) return false;
@@ -6720,7 +6718,7 @@
     if (!editMode) return;
     const activeSlide = (typeof slides !== 'undefined' && slides[currentSlide]) || document.querySelector('#stage > .slide.active');
     const pointLeaf = findLeafTargetAtPoint(activeSlide, e.clientX, e.clientY);
-    const area = e.target.closest('.text-area, .step-title');
+    const area = e.target.closest('.text-area, .step-title, .slide-el');
     const probedLeaf = area ? consumeEditableTextProbe(area) : null;
     const nearestAreaLeaf = area ? findNearestTextAreaLeaf(area, e.clientX, e.clientY) : null;
     let el = resolveEditableTextTarget(probedLeaf || nearestAreaLeaf || pointLeaf || e.target);
@@ -6962,7 +6960,7 @@
     const activeSlide = (typeof slides !== 'undefined' && slides[currentSlide]) || document.querySelector('#stage > .slide.active');
     const rawPointLeafTarget = findLeafTargetAtPoint(activeSlide, e.clientX, e.clientY);
     const pointStructuralTarget = findStructuralTargetAtPoint(activeSlide, e.clientX, e.clientY);
-    const directTextArea = e.target.closest('.text-area, .step-title');
+    const directTextArea = e.target.closest('.text-area, .step-title, .slide-el');
     const directAreaLeaf = directTextArea
       ? findNearestTextAreaLeaf(directTextArea, e.clientX, e.clientY)
       : null;
@@ -7041,8 +7039,10 @@
     e.stopPropagation();
 
     if (e.shiftKey) {
+      const gid = el.dataset.group;
       pendingShiftSelect = {
         el,
+        groupEls: gid ? Array.from(slides[currentSlide].querySelectorAll(`[data-group="${CSS.escape(gid)}"]`)) : null,
         x: e.clientX,
         y: e.clientY,
         seed: [...selectedEls],
@@ -7785,18 +7785,24 @@
     pendingDrag = false;
     mouseDownPos = null;
     if (pendingShiftSelect) {
-      const { el } = pendingShiftSelect;
+      const { el, groupEls } = pendingShiftSelect;
       pendingShiftSelect = null;
-      const idx = selectedEls.indexOf(el);
-      if (idx >= 0) {
-        el.classList.remove('edit-selected');
-        selectedEls.splice(idx, 1);
-        selectedEl = selectedEls[selectedEls.length - 1] || null;
+      const toggleTargets = (Array.isArray(groupEls) && groupEls.length) ? groupEls : [el];
+      const fullySelected = toggleTargets.every(node => selectedEls.includes(node));
+      if (fullySelected) {
+        toggleTargets.forEach(node => {
+          node.classList.remove('edit-selected', 'edit-group-selected');
+          const idx = selectedEls.indexOf(node);
+          if (idx >= 0) selectedEls.splice(idx, 1);
+        });
       } else {
-        el.classList.add('edit-selected');
-        selectedEls.push(el);
-        selectedEl = el;
+        toggleTargets.forEach(node => {
+          node.classList.remove('edit-group-selected');
+          node.classList.add('edit-selected');
+          if (!selectedEls.includes(node)) selectedEls.push(node);
+        });
       }
+      selectedEl = selectedEls[selectedEls.length - 1] || null;
       if (selectedEl) updateCoordPanel(selectedEl);
       else {
         document.getElementById('coord-panel').style.display = 'none';
