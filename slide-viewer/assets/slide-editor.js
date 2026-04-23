@@ -2276,8 +2276,13 @@
   // step 내 레이어 표시 (revealAll=true: 현재 step ordered 요소 전부 표시)
   function showStep(slide, step, revealAll) {
     const maxStep = Math.max(0, getSteps(slide) - 1);
-    const effectiveStep = Math.max(0, Math.min(step, maxStep));
-    const forceRevealAll = !!revealAll;
+    const revealAllInEditMode = !!(
+      editMode &&
+      document.body &&
+      !document.body.classList.contains('frozen-legacy-deck')
+    );
+    const effectiveStep = revealAllInEditMode ? maxStep : Math.max(0, Math.min(step, maxStep));
+    const forceRevealAll = !!revealAll || revealAllInEditMode;
     let hasDim = false;
     slide.querySelectorAll('.step-layer[data-step]').forEach(layer => {
       const s = parseInt(layer.dataset.step);
