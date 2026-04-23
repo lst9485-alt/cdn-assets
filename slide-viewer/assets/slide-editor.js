@@ -2166,10 +2166,13 @@
   function getMaxActualStepIndex(slide) {
     if (!slide) return 0;
     let maxStep = 0;
+    const NON_MEANINGFUL_STEP_SEL = '.vertical-divider, .branch-arrow, .flow-arrow, .icon-flow-arrow, .eq-chain-arrow, .chapter-flow-arrow';
     const isCountableStepEl = el =>
       el &&
+      !el.closest('.edit-hidden-placeholder, .layout-detached-placeholder') &&
       !el.classList.contains('edit-hidden-placeholder') &&
-      !el.classList.contains('layout-detached-placeholder');
+      !el.classList.contains('layout-detached-placeholder') &&
+      !el.matches(NON_MEANINGFUL_STEP_SEL);
     slide.querySelectorAll('.step-layer[data-step]').forEach(layer => {
       maxStep = Math.max(maxStep, parseInt(layer.dataset.step, 10) || 0);
     });
@@ -5194,6 +5197,8 @@
   // 비텍스트 자식 (fontSize 기반 리사이즈 대상 아님 — 이들은 기존 slide-el 박스 리사이즈로 처리)
   const NON_TEXT_CHILD_SEL = '.bar-fill, .check-box, .icon-circle, .tl-circle';
   const NON_DETACHABLE_CHILD_SEL = '.bar-fill, .bar-row, .bar-track, .check-box, .icon-circle, .tl-circle, .flow-arrow, .branch-arrow, .icon-flow-arrow, .bar-chart, .line-chart, .hbar-chart, .step-timeline, .multi-stat';
+  const NON_MEANINGFUL_STEP_SEL = '.vertical-divider, .branch-arrow, .flow-arrow, .icon-flow-arrow, .eq-chain-arrow, .chapter-flow-arrow';
+  const EMPTY_PRUNE_SEL = '.slide-el, .text-area, .bubble, .items-row, .items-col, .items-grid, .compare-box, .compare-col, .branch-flow, .branch-cols, .branch-col, .grid-row-body, .btn-grid, .split-list, .split-list-item, .split-stat-row, .split-stat-card, .icon-flow-item, .icon-flow, .icon-flow-stat, .icon-flow-highlight, table, thead, tbody, tr, td, th';
   // 툴바/팬널/팔레트 영역 — 편집 중 클릭 시 focus/selection 유지해야 하는 대상
   const TOOLBAR_PROTECT_SEL = '#top-toolbar, #font-panel, #format-bar, .color-palette, .color-swatch';
   let groupEntered = false;
@@ -5643,9 +5648,79 @@
     document.getElementById('snap-y').style.display = 'none';
   }
 
+  function isMeaningfulTextContent(text = '') {
+    return text.replace(/\u00a0/g, ' ').trim().length > 0;
+  }
+
+  function isRemovalPlaceholderEl(el) {
+    return !!(
+      el &&
+      el.classList &&
+      (
+        el.classList.contains('edit-hidden-placeholder') ||
+        el.classList.contains('layout-detached-placeholder')
+      )
+    );
+  }
+
+  function hasLiveRenderableContent(node) {
+    if (!node) return false;
+    if (node.nodeType === Node.TEXT_NODE) {
+      return isMeaningfulTextContent(node.textContent || '');
+    }
+    if (!(node instanceof Element)) return false;
+    if (isRemovalPlaceholderEl(node)) return false;
+    if (node.matches('.step-dim, .resize-handle')) return false;
+    if (node.matches(NON_MEANINGFUL_STEP_SEL)) return false;
+    const cs = getComputedStyle(node);
+    if (cs.display === 'none' || cs.visibility === 'hidden') return false;
+    if (node.matches('img, svg, video, canvas')) return true;
+    for (const child of node.childNodes) {
+      if (hasLiveRenderableContent(child)) return true;
+    }
+    return false;
+  }
+
+  function canAutoPruneEmptyNode(node) {
+    return !!(node && node.matches && node.matches(EMPTY_PRUNE_SEL));
+  }
+
+  function cleanupEmptyEditContainers(startNode, slide) {
+    let node = startNode;
+    while (node && node !== slide && node instanceof Element) {
+      const parent = node.parentElement;
+      if (node.matches('.step-layer')) break;
+      if (canAutoPruneEmptyNode(node) && !hasLiveRenderableContent(node)) {
+        node.remove();
+        node = parent;
+        continue;
+      }
+      node = parent;
+    }
+    slide.querySelectorAll('.step-layer[data-step]').forEach(layer => {
+      const step = parseInt(layer.dataset.step || '0', 10) || 0;
+      if (step === 0) return;
+      const hasLiveChild = Array.from(layer.childNodes).some(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          return isMeaningfulTextContent(child.textContent || '');
+        }
+        return (
+          child instanceof Element &&
+          !child.classList.contains('step-dim') &&
+          hasLiveRenderableContent(child)
+        );
+      });
+      if (!hasLiveChild) layer.remove();
+    });
+    recalcSteps(slide);
+  }
+
   function removeEditableElement(el, slide) {
     if (isSvgTextEditable(el) && typeof syncLineChartSvgText === 'function') {
-      if (syncLineChartSvgText(el, '', { remove: true })) return;
+      if (syncLineChartSvgText(el, '', { remove: true })) {
+        recalcSteps(slide);
+        return;
+      }
     }
     const layer = el.closest('.step-layer');
     const parent = el.parentElement;
@@ -5676,28 +5751,12 @@
       el.style.pointerEvents = 'none';
       el.style.opacity = '0';
       el.classList.add('edit-hidden-placeholder');
-      if (layer && parseInt(layer.dataset.step) > 0) {
-        const activeTargets = Array.from(layer.querySelectorAll(
-          ':scope > .slide-el, :scope > .text-area, :scope > .bubble, :scope > .bar-chart, :scope > .line-chart, :scope > .hbar-chart, :scope > .step-timeline, :scope > .multi-stat,' +
-          ' :scope > .items-row > .slide-el, :scope > .items-col > .slide-el, :scope > .items-grid > .slide-el,' +
-          ' :scope > .compare-box > .slide-el, :scope > .compare-col > .slide-el'
-        )).filter(node =>
-          !node.classList.contains('step-dim') &&
-          !node.classList.contains('edit-hidden-placeholder')
-        );
-        if (!activeTargets.length) {
-          layer.remove();
-          recalcSteps(slide);
-        }
-      }
+      cleanupEmptyEditContainers(parent || layer, slide);
       return;
     }
 
     el.remove();
-    if (layer && parseInt(layer.dataset.step) > 0 && !layer.querySelector(EDITABLE_SEL + ':not(.step-dim)')) {
-      layer.remove();
-      recalcSteps(slide);
-    }
+    cleanupEmptyEditContainers(parent || layer, slide);
   }
 
   function detachLayoutManagedElement(el) {
