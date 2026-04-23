@@ -5,13 +5,13 @@
 <title>slides-editor</title>
 <script>(function(){const name=location.pathname.split('/').pop().replace('.html','');const m=name.match(/(\d{4})(\d{2})(\d{2})/);document.title=m?`${m[1]}-${m[2]}-${m[3]}`:name;})()</script>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@900&amp;display=swap" rel="stylesheet"/>
-<link href="./assets/slide-style.css?v=20260422121219" rel="stylesheet"/>
+<link href="./assets/slide-style.css?v=20260423233549" rel="stylesheet"/>
 <style id="edit-badge-style">@keyframes editBadgeBlink{0%,100%{opacity:1}50%{opacity:0.3}}</style>
 <style id="slide-jump-nav-style">
 #slide-jump-nav{display:none;position:fixed;right:0;top:0;bottom:96px;width:260px;overflow-y:auto;overflow-x:hidden;z-index:8500;background:rgba(20,20,20,0.92);border-left:1px solid rgba(255,255,255,0.07);padding:0;box-sizing:border-box;flex-direction:column;scrollbar-width:none;transition:width 0.18s ease;}
 #slide-jump-nav::-webkit-scrollbar{display:none;}
-body.edit-mode #slide-jump-nav{display:flex;}
-body.overview-open #slide-jump-nav{display:flex;bottom:0;}
+body.edit-mode #slide-jump-nav{display:flex;top:96px;bottom:96px;}
+body.overview-open #slide-jump-nav{display:flex;top:0;bottom:0;}
 #slide-jump-nav.collapsed{width:32px;}
 #slide-jump-nav.collapsed .sj-grid{display:none;}
 #slide-jump-nav.collapsed .sj-toolbar{display:none;}
@@ -245,7 +245,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 <div class="slide" data-page-group="18" data-slide-id="T18_v1" data-steps="3" data-type="인용" data-variant="1" id="T18_v1" style="">
 <div class="step-layer" data-step="0">
-<div class="text-area" style="position:absolute; left:120px; top:80px; width:1680px;">
+<div class="text-area" style="position:absolute; left:120px; top:60px; width:1680px;">
 <div class="hl-wrap" style="align-items:center;"><div><span class="hl">전문가 의견</span></div></div>
 </div>
 </div>
@@ -330,7 +330,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div><span class="hl">두 번째 줄</span></div>
 </div>
 </div>
-<div class="corner-label" style="position:absolute; left:1609px; top:40px;">코너 레이블</div>
+<div class="corner-label" style="position:absolute; left:1340px; top:40px;">코너 레이블</div>
 <div style="position:absolute; top:200px; left:1200px; font-size:300px; opacity:0.12; user-select:none; width:412px;">📌</div>
 </div>
 </div>
@@ -340,7 +340,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="section-badge">CHAPTER 01</div>
 <div class="hl-wrap" style="margin-top:40px;"><div><span class="hl sm">섹션 제목 1</span></div></div>
 </div>
-<div class="corner-label" style="position:absolute; left:1609px; top:40px;">코너 레이블</div>
+<div class="corner-label" style="position:absolute; left:1340px; top:40px;">코너 레이블</div>
 </div>
 <div class="step-layer" data-step="1">
 <div class="text-area" style="position:absolute; left:140px; top:530px; width:1300px;">
@@ -355,7 +355,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="section-badge">CHAPTER 01</div>
 <div class="hl-wrap" style="margin-top:40px;"><div><span class="hl sm">섹션 제목 1</span></div></div>
 </div>
-<div class="corner-label" style="position:absolute; left:1609px; top:40px;">코너 레이블</div>
+<div class="corner-label" style="position:absolute; left:1340px; top:40px;">코너 레이블</div>
 </div>
 <div class="step-layer" data-step="1">
 <div class="text-area" style="position:absolute; left:140px; top:400px; width:1300px;">
@@ -376,7 +376,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="section-badge">CHAPTER 01</div>
 <div class="hl-wrap" style="margin-top:40px;"><div><span class="hl sm">섹션 제목 1</span></div></div>
 </div>
-<div class="corner-label" style="position:absolute; left:1609px; top:40px;">코너 레이블</div>
+<div class="corner-label" style="position:absolute; left:1340px; top:40px;">코너 레이블</div>
 </div>
 <div class="step-layer" data-step="1">
 <div class="text-area" style="position:absolute; left:140px; top:380px; width:700px;">
@@ -403,7 +403,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="section-badge">CHAPTER 01</div>
 <div class="hl-wrap" style="margin-top:30px;"><div><span class="hl sm">섹션 제목 1</span></div></div>
 </div>
-<div class="corner-label" style="position:absolute; left:1609px; top:40px;">코너 레이블</div>
+<div class="corner-label" style="position:absolute; left:1340px; top:40px;">코너 레이블</div>
 </div>
 <div class="step-layer" data-step="1">
 <div class="text-area" style="position:absolute; left:140px; top:380px; width:700px;">
@@ -746,7 +746,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 <div class="slide" data-page-group="19" data-slide-id="T19_v4" data-steps="6" data-type="경고배너" data-variant="4" id="T19_v4">
 <div class="step-layer" data-step="0">
-<div class="text-area" style="position:absolute; left:120px; top:80px; width:1680px;">
+<div class="text-area" style="position:absolute; left:120px; top:70px; width:1680px;">
 <div class="hl-wrap" style="align-items:center;"><div><span class="hl">경고 사항 5개</span></div></div>
 </div>
 </div>
@@ -2151,7 +2151,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
       </div>
 </div>
 </div>
-<div class="slide" data-page-group="30" data-slide-id="T30_v1" data-steps="2" data-type="분기플로우" data-variant="1" id="T30_v1">
+<div class="slide" data-page-group="30" data-slide-id="T30_v1" data-steps="3" data-type="분기플로우" data-variant="1" id="T30_v1">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">DECISION</div>
@@ -2186,7 +2186,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
     </div>
 </div>
 </div>
-<div class="slide" data-page-group="30" data-slide-id="T30_v2" data-steps="2" data-type="분기플로우" data-variant="2" id="T30_v2">
+<div class="slide" data-page-group="30" data-slide-id="T30_v2" data-steps="3" data-type="분기플로우" data-variant="2" id="T30_v2">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">DECISION</div>
@@ -2590,17 +2590,17 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:160px; top:128px; width:1600px;">
 <div class="hl-wrap" style="align-items:center;">
-<div><span class="hl" style="font-size:102px; line-height:1.2;">흐름을 두 단계로 본다</span></div>
+<div><span class="hl" style="font-size:110px; line-height:1.18;">흐름을 두 단계로 본다</span></div>
 </div>
 </div>
-<div class="slide-el flow-step1" data-type="1단계" style="position:absolute; left:300px; top:520px; width:620px; text-align:center; padding:38px 28px;">
-<div class="flow-step-title" style="font-size:52px; font-weight:900; color:var(--color-text); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;">1단계 시작</div>
+<div class="slide-el flow-step1" data-type="1단계" style="position:absolute; left:240px; top:500px; width:680px; text-align:center; padding:44px 32px;">
+<div class="flow-step-title" style="font-size:60px; font-weight:900; color:var(--color-text); line-height:1.3; word-break:keep-all; overflow-wrap:anywhere;">1단계 시작</div>
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el flow-arrow" data-type="화살표" style="position:absolute; left:978px; top:552px; font-size:60px; color:var(--color-accent);">→</div>
-<div class="slide-el flow-step2" data-type="2단계" style="position:absolute; left:1060px; top:520px; width:620px; text-align:center; padding:38px 28px;">
-<div class="flow-step-body" style="font-size:52px; font-weight:900; color:var(--color-accent); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;">2단계 확장</div>
+<div class="slide-el flow-arrow" data-type="화살표" style="position:absolute; left:948px; top:544px; font-size:68px; color:var(--color-accent);">→</div>
+<div class="slide-el flow-step2" data-type="2단계" style="position:absolute; left:1000px; top:500px; width:680px; text-align:center; padding:44px 32px;">
+<div class="flow-step-body" style="font-size:60px; font-weight:900; color:var(--color-accent); line-height:1.3; word-break:keep-all; overflow-wrap:anywhere;">2단계 확장</div>
 </div>
 </div>
 </div>
@@ -2608,14 +2608,14 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:160px; top:128px; width:1600px;">
 <div class="hl-wrap" style="align-items:center;">
-<div><span class="hl" style="font-size:102px; line-height:1.2;">갈림길을 먼저 세운다</span></div>
+<div><span class="hl" style="font-size:110px; line-height:1.18;">갈림길을 먼저 세운다</span></div>
 </div>
 </div>
-<div class="slide-el branch-root" data-type="기준질문" style="position:absolute; left:280px; top:440px; width:1360px; text-align:center; font-size:52px; font-weight:900; color:var(--color-text); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;"><div class="branch-root-text">어떤 기준으로 볼까?</div></div>
+<div class="slide-el branch-root" data-type="기준질문" style="position:absolute; left:220px; top:430px; width:1480px; text-align:center; font-size:60px; font-weight:900; color:var(--color-text); line-height:1.3; word-break:keep-all; overflow-wrap:anywhere;"><div class="branch-root-text">어떤 기준으로 볼까?</div></div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el branch-arrow" data-type="분기화살표" style="position:absolute; left:910px; top:560px; width:100px; text-align:center; font-size:66px; color:var(--color-accent);">↓</div>
-<div class="slide-el branch-result" data-type="선택경로" style="position:absolute; left:280px; top:660px; width:1360px; text-align:center; font-size:50px; font-weight:900; color:var(--color-accent); line-height:1.34; word-break:keep-all; overflow-wrap:anywhere;"><div class="branch-result-text">그 기준에 맞는 경로</div></div>
+<div class="slide-el branch-arrow" data-type="분기화살표" style="position:absolute; left:894px; top:554px; width:132px; text-align:center; font-size:82px; color:var(--color-accent);">↓</div>
+<div class="slide-el branch-result" data-type="선택경로" style="position:absolute; left:220px; top:684px; width:1480px; text-align:center; font-size:58px; font-weight:900; color:var(--color-accent); line-height:1.3; word-break:keep-all; overflow-wrap:anywhere;"><div class="branch-result-text">그 기준에 맞는 경로</div></div>
 </div>
 </div>
 <div class="slide" data-page-group="17" data-slide-id="T17_base" data-steps="2" data-type="비교박스" data-variant="0" id="T17_base" style="">
@@ -2973,7 +2973,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 <div class="slide" data-page-group="31" data-slide-id="T31_base" data-steps="3" data-type="분할레이아웃" data-variant="0" id="T31_base" style="">
 <div class="step-layer" data-step="0">
-<div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+<div class="text-area" style="position:absolute; left:120px; top:60px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">OVERVIEW</div>
 <div class="hl-wrap" style="align-items:center;">
 <div><span class="hl">핵심 비교</span></div>
@@ -2981,7 +2981,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:420px; width:820px;">
+<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
 <div class="split-list-title">📌 목록 제목</div>
 <div class="split-list-item">
 <div class="split-list-num">1</div>
@@ -2996,7 +2996,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="split-list-text"><strong>항목 제목</strong><br/>설명 텍스트</div>
 </div>
 </div>
-<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:420px; width:820px;">
+<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
 <div class="split-stat-main">
 <div class="split-stat-label">핵심 수치</div>
 <div class="split-stat-value">90%</div>
@@ -3017,14 +3017,14 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="2">
-<div class="slide-el split-summary" data-type="요약" style="position:absolute; left:200px; top:840px; width:1520px;">
+<div class="slide-el split-summary" data-type="요약" style="position:absolute; left:200px; top:815px; width:1520px;">
         결과: <strong>50%+</strong> 절감
       </div>
 </div>
 </div>
-<div class="slide" data-page-group="31" data-slide-id="T31_v1" data-steps="2" data-type="분할레이아웃" data-variant="1" id="T31_v1">
+<div class="slide" data-page-group="31" data-slide-id="T31_v1" data-steps="3" data-type="분할레이아웃" data-variant="1" id="T31_v1">
 <div class="step-layer" data-step="0">
-<div class="text-area" style="position:absolute; left:120px; top:120px; width:1680px;">
+<div class="text-area" style="position:absolute; left:120px; top:60px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">OVERVIEW</div>
 <div class="hl-wrap" style="align-items:center;">
 <div><span class="hl">핵심 비교</span></div>
@@ -3032,7 +3032,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:380px; width:820px;">
+<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
 <div class="split-list-title">📌 목록 제목</div>
 <div class="split-list-item">
 <div class="split-list-num">1</div>
@@ -3043,7 +3043,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="split-list-text"><strong>항목 제목</strong><br/>설명 텍스트</div>
 </div>
 </div>
-<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:380px; width:820px;">
+<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
 <div class="split-stat-main">
 <div class="split-stat-label">핵심 수치</div>
 <div class="split-stat-value">90%</div>
@@ -3064,14 +3064,14 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="2">
-<div class="slide-el split-summary" data-type="요약" style="position:absolute; left:200px; top:840px; width:1520px;">
+<div class="slide-el split-summary" data-type="요약" style="position:absolute; left:200px; top:815px; width:1520px;">
       결과: <strong>50%+</strong> 절감
     </div>
 </div>
 </div>
-<div class="slide" data-page-group="31" data-slide-id="T31_v2" data-steps="2" data-type="분할레이아웃" data-variant="2" id="T31_v2">
+<div class="slide" data-page-group="31" data-slide-id="T31_v2" data-steps="3" data-type="분할레이아웃" data-variant="2" id="T31_v2">
 <div class="step-layer" data-step="0">
-<div class="text-area" style="position:absolute; left:120px; top:120px; width:1680px;">
+<div class="text-area" style="position:absolute; left:120px; top:60px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">OVERVIEW</div>
 <div class="hl-wrap" style="align-items:center;">
 <div><span class="hl">핵심 비교</span></div>
@@ -3079,7 +3079,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:380px; width:820px;">
+<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
 <div class="split-list-title">📌 목록 제목</div>
 <div class="split-list-item">
 <div class="split-list-num">1</div>
@@ -3098,7 +3098,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="split-list-text"><strong>항목 제목</strong><br/>설명 텍스트</div>
 </div>
 </div>
-<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:380px; width:820px;">
+<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
 <div class="split-stat-main">
 <div class="split-stat-label">핵심 수치</div>
 <div class="split-stat-value">90%</div>
@@ -3119,14 +3119,14 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="2">
-<div class="slide-el split-summary" data-type="요약" style="position:absolute; left:200px; top:840px; width:1520px;">
+<div class="slide-el split-summary" data-type="요약" style="position:absolute; left:200px; top:815px; width:1520px;">
       결과: <strong>50%+</strong> 절감
     </div>
 </div>
 </div>
-<div class="slide" data-page-group="31" data-slide-id="T31_v3" data-steps="2" data-type="분할레이아웃" data-variant="3" id="T31_v3">
+<div class="slide" data-page-group="31" data-slide-id="T31_v3" data-steps="3" data-type="분할레이아웃" data-variant="3" id="T31_v3">
 <div class="step-layer" data-step="0">
-<div class="text-area" style="position:absolute; left:120px; top:120px; width:1680px;">
+<div class="text-area" style="position:absolute; left:120px; top:60px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">OVERVIEW</div>
 <div class="hl-wrap" style="align-items:center;">
 <div><span class="hl">핵심 비교</span></div>
@@ -3134,7 +3134,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:380px; width:820px;">
+<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
 <div class="split-list-title">📌 목록 제목</div>
 <div class="split-list-item">
 <div class="split-list-num">1</div>
@@ -3157,7 +3157,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="split-list-text"><strong>항목 제목</strong><br/>설명 텍스트</div>
 </div>
 </div>
-<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:380px; width:820px;">
+<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
 <div class="split-stat-main">
 <div class="split-stat-label">핵심 수치</div>
 <div class="split-stat-value">90%</div>
@@ -3178,7 +3178,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="2">
-<div class="slide-el split-summary" data-type="요약" style="position:absolute; left:200px; top:840px; width:1520px;">
+<div class="slide-el split-summary" data-type="요약" style="position:absolute; left:200px; top:815px; width:1520px;">
       결과: <strong>50%+</strong> 절감
     </div>
 </div>
@@ -3955,7 +3955,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="items-col" style="top:210px; gap:52px; width:1540px; margin:0 auto;">
+<div class="items-col" style="top:500px; gap:52px; width:1540px; margin:0 auto;">
 <div class="slide-el left-rail-desc" data-appear-step="1" data-group="step2" data-type="전개" style="margin-left:64px; max-width:1260px; padding:32px 38px; border-radius:28px; background:rgba(0,0,0,0.04); text-align:left; font-size:60px; font-weight:800; color:var(--color-text-sub); line-height:1.48;">
 <span class="left-rail-desc-text">좌측 바 설명</span>
 </div>
@@ -4572,6 +4572,6 @@ width: 680px;</span>
 <button class="fmt-btn" data-align="right" title="오른쪽 정렬">≡</button>
 </div>
 <div id="slide-jump-nav"></div>
-<script src="./assets/slide-editor.js?v=20260422121219"></script>
+<script src="./assets/slide-editor.js?v=20260423233549"></script>
 <div class="gs-crosshair-h" id="gs-crosshair-h" style="top: 195px; display: none;"></div><div class="gs-crosshair-v" id="gs-crosshair-v" style="left: 960px; display: none;"></div>
-<div id="filmstrip"><div id="filmstrip-inner"></div></div><div id="edit-mode-badge" style="position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 99999; background: rgb(230, 57, 70); color: rgb(255, 255, 255); padding: 6px 18px; border-radius: 8px; font-size: 14px; font-weight: 900; pointer-events: none; animation: 1.5s ease 0s infinite normal none running editBadgeBlink; display: none;">편집중 — 자동저장 10초</div></body></html>
+<div id="filmstrip"><div id="filmstrip-inner"></div></div><div id="edit-mode-badge" style="position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 99999; background: rgb(230, 57, 70); color: rgb(255, 255, 255); padding: 6px 18px; border-radius: 8px; font-size: 14px; font-weight: 900; pointer-events: none; animation: 1.5s ease 0s infinite normal none running editBadgeBlink; display: none;">편집중 — 자동저장 30초</div></body></html>

@@ -5511,70 +5511,102 @@
     const rect = el.getBoundingClientRect();
     const cs = window.getComputedStyle(el);
     const lines = String(oldText).split('\n');
-    const longestLine = lines.reduce((max, line) => Math.max(max, line.length), 0);
     const fontSize = parseFloat(cs.fontSize) || rect.height || 16;
     const lineHeight = parseFloat(cs.lineHeight) || (fontSize * 1.2);
     const approxCharWidth = Math.max(14, fontSize * 0.9);
-    const desiredWidth = Math.max(
-      rect.width + 24,
-      Math.min(960, longestLine * approxCharWidth + 48)
+    const isChartTitle = el.classList.contains('chart-title');
+    const minEditorWidth = Math.max(
+      isChartTitle ? 180 : 96,
+      rect.width + (isChartTitle ? 28 : 18)
     );
-    const minEditorWidth = lines.length === 1 ? 260 : 160;
-    const desiredMinHeight = Math.max(
-      44,
-      rect.height + 16,
-      lineHeight * Math.max(1, lines.length) + 16
+    const minEditorHeight = Math.max(
+      lineHeight + 12,
+      rect.height + 12,
+      lines.length > 1 ? lineHeight * lines.length + 12 : rect.height + 12
     );
-    const ta = document.createElement('textarea');
-    ta.className = 'svg-text-editor';
-    ta.value = oldText;
-    ta.setAttribute('spellcheck', 'false');
-    if (lines.length === 1) ta.setAttribute('wrap', 'off');
-    ta.style.cssText = [
+    const editor = document.createElement('div');
+    editor.className = 'svg-text-editor';
+    editor.contentEditable = 'true';
+    editor.dataset.svgTextEditor = 'true';
+    editor.dataset.singleLine = lines.length === 1 ? 'true' : 'false';
+    editor.setAttribute('spellcheck', 'false');
+    editor.style.cssText = [
       'position:fixed',
       'z-index:120000',
-      `left:${Math.max(8, rect.left - 8)}px`,
-      `top:${Math.max(8, rect.top - 8)}px`,
-      `width:${Math.max(minEditorWidth, desiredWidth)}px`,
-      `min-height:${desiredMinHeight}px`,
-      'padding:8px 10px',
+      `left:${Math.max(8, rect.left - 6)}px`,
+      `top:${Math.max(8, rect.top - 6)}px`,
+      `min-width:${minEditorWidth}px`,
+      `min-height:${minEditorHeight}px`,
+      'padding:4px 8px',
       'border:2px solid rgba(255,106,0,0.45)',
-      'border-radius:10px',
-      'background:#fff',
+      'border-radius:8px',
+      'background:rgba(255,255,255,0.96)',
       'color:#111',
-      'box-shadow:0 8px 24px rgba(0,0,0,0.18)',
+      'box-shadow:0 4px 16px rgba(0,0,0,0.12)',
       `font:${cs.font}`,
       `line-height:${cs.lineHeight}`,
       `letter-spacing:${cs.letterSpacing}`,
-      'resize:both',
-      'overflow:auto',
-      'white-space:pre-wrap'
+      'outline:none',
+      'white-space:pre-wrap',
+      'word-break:keep-all',
+      'overflow:visible',
+      'caret-color:#111'
     ].join(';');
-    document.body.appendChild(ta);
+    if (lines.length === 1) editor.style.whiteSpace = 'pre';
+    editor.textContent = oldText;
+    const readEditorText = () => {
+      const raw = typeof editor.innerText === 'string' ? editor.innerText : editor.textContent || '';
+      return raw.replace(/\r/g, '').replace(/\u00a0/g, ' ');
+    };
+    const syncEditorSize = () => {
+      const editorLines = String(readEditorText() || '').split('\n');
+      const longestLine = editorLines.reduce((max, line) => Math.max(max, line.length), 0);
+      const width = Math.max(
+        minEditorWidth,
+        Math.min(960, longestLine * approxCharWidth + 28)
+      );
+      const height = Math.max(
+        minEditorHeight,
+        lineHeight * Math.max(1, editorLines.length) + 12
+      );
+      editor.style.width = width + 'px';
+      editor.style.minHeight = height + 'px';
+      editor.style.height = height + 'px';
+    };
+    syncEditorSize();
+    document.body.appendChild(editor);
     showFormatBar(el);
     requestAnimationFrame(() => {
-      ta.focus();
-      ta.select();
+      editor.focus();
+      const sel = window.getSelection();
+      if (!sel) return;
+      const range = document.createRange();
+      range.selectNodeContents(editor);
+      sel.removeAllRanges();
+      sel.addRange(range);
     });
 
     const finish = (commit) => {
-      ta.removeEventListener('keydown', onKeydown);
-      ta.removeEventListener('blur', onBlur);
-      if (ta.parentNode) ta.parentNode.removeChild(ta);
+      editor.removeEventListener('keydown', onKeydown);
+      editor.removeEventListener('blur', onBlur);
+      editor.removeEventListener('input', onInput);
+      editor.removeEventListener('paste', onPaste);
+      if (editor.parentNode) editor.parentNode.removeChild(editor);
       if (commit) {
-        if (!(typeof syncLineChartSvgText === 'function' && syncLineChartSvgText(el, ta.value))) {
-          el.textContent = ta.value;
+        const nextText = readEditorText();
+        if (!(typeof syncLineChartSvgText === 'function' && syncLineChartSvgText(el, nextText))) {
+          el.textContent = nextText;
         }
         if (typeof ghMarkDirty === 'function') ghMarkDirty();
       }
-      if (activeSvgTextEditor && activeSvgTextEditor.textarea === ta) activeSvgTextEditor = null;
+      if (activeSvgTextEditor && activeSvgTextEditor.element === editor) activeSvgTextEditor = null;
       isEditing = false;
       hideFormatBar();
     };
     const onKeydown = (ev) => {
       if (ev.key === 'Escape') {
         ev.preventDefault();
-        ta.value = oldText;
+        editor.textContent = oldText;
         finish(false);
         return;
       }
@@ -5589,10 +5621,20 @@
         ev.shiftKey ? doRedo() : doUndo();
       }
     };
+    const onInput = () => syncEditorSize();
+    const onPaste = ev => {
+      ev.preventDefault();
+      const text = ev.clipboardData?.getData('text/plain') ?? '';
+      if (!text) return;
+      document.execCommand('insertText', false, text);
+      syncEditorSize();
+    };
     const onBlur = () => finish(true);
-    ta.addEventListener('keydown', onKeydown);
-    ta.addEventListener('blur', onBlur, { once: true });
-    activeSvgTextEditor = { textarea: ta, finish };
+    editor.addEventListener('keydown', onKeydown);
+    editor.addEventListener('input', onInput);
+    editor.addEventListener('paste', onPaste);
+    editor.addEventListener('blur', onBlur, { once: true });
+    activeSvgTextEditor = { element: editor, finish };
   }
 
   async function commitActiveEditors() {
@@ -6359,6 +6401,33 @@
     }
     return el.offsetTop;
   }
+  function getStageBoxFromRect(el) {
+    const stage = document.getElementById('stage');
+    if (!stage || !el || !el.getBoundingClientRect) return null;
+    const stageRect = stage.getBoundingClientRect();
+    const scale = stageRect.width / 1920 || 1;
+    const rect = el.getBoundingClientRect();
+    return {
+      left: (rect.left - stageRect.left) / scale,
+      top: (rect.top - stageRect.top) / scale,
+      width: rect.width / scale,
+      height: rect.height / scale,
+    };
+  }
+  function shouldNormalizeSelectionElement(el) {
+    if (!el || !el.matches) return false;
+    if (el.matches('.slide-el, .text-area, .bubble, .items-row, .items-col, .items-grid, .compare-box, .compare-col, .step-dim, img')) {
+      return true;
+    }
+    const cs = getComputedStyle(el);
+    const position = cs.position || '';
+    if (['absolute', 'fixed'].includes(position)) return true;
+    if (position !== 'relative') return false;
+    return !!(
+      (el.style.left && el.style.left !== 'auto') ||
+      (el.style.top && el.style.top !== 'auto')
+    );
+  }
   function collectSnapPoints(excludeEl) {
     const stageEl = document.getElementById('stage');
     const xs = [stageEl.offsetWidth / 2];
@@ -6462,6 +6531,31 @@
       });
       return containing[0];
     }
+    const distanceToRect = rect => {
+      const dx = clientX < rect.left ? rect.left - clientX : clientX > rect.right ? clientX - rect.right : 0;
+      const dy = clientY < rect.top ? rect.top - clientY : clientY > rect.bottom ? clientY - rect.bottom : 0;
+      return dx * dx + dy * dy;
+    };
+    candidates.sort((a, b) => {
+      const ar = a.getBoundingClientRect();
+      const br = b.getBoundingClientRect();
+      const dist = distanceToRect(ar) - distanceToRect(br);
+      if (dist !== 0) return dist;
+      return (ar.width * ar.height) - (br.width * br.height);
+    });
+    return candidates[0];
+  }
+
+  function findNearestChartTextLeaf(area, clientX, clientY) {
+    if (!area) return null;
+    const candidates = Array.from(area.querySelectorAll('.chart-title, .chart-label, .chart-val, .lc-end-val')).filter(el => {
+      if (!el || el.classList.contains('edit-hidden-placeholder')) return false;
+      const style = getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden' || parseFloat(style.opacity || '1') === 0) return false;
+      const rect = el.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0;
+    });
+    if (!candidates.length) return null;
     const distanceToRect = rect => {
       const dx = clientX < rect.left ? rect.left - clientX : clientX > rect.right ? clientX - rect.right : 0;
       const dy = clientY < rect.top ? rect.top - clientY : clientY > rect.bottom ? clientY - rect.bottom : 0;
@@ -6806,7 +6900,10 @@
     const isChartArea = !!(area && area.matches('.line-chart'));
     const probedLeaf = (area && !isChartArea) ? consumeEditableTextProbe(area) : null;
     const nearestAreaLeaf = area ? findNearestTextAreaLeaf(area, e.clientX, e.clientY) : null;
-    const preferredLeaf = isChartArea ? (pointLeaf || nearestAreaLeaf || probedLeaf) : (probedLeaf || nearestAreaLeaf || pointLeaf);
+    const nearestChartLeaf = isChartArea ? findNearestChartTextLeaf(area, e.clientX, e.clientY) : null;
+    const preferredLeaf = isChartArea
+      ? ((isChartSvgTextLeaf(e.target) ? e.target : null) || pointLeaf || nearestChartLeaf || probedLeaf)
+      : (probedLeaf || nearestAreaLeaf || pointLeaf);
     let el = resolveEditableTextTarget(preferredLeaf || e.target);
     if (!el) {
       if (area) {
@@ -7276,11 +7373,37 @@
     }
 
     // right/bottom/% → top+left px로 정규화 (transform은 유지)
-    el.style.left = el.offsetLeft + 'px';
-    el.style.top = el.offsetTop + 'px';
-    if (!el.style.width) el.style.width = el.offsetWidth + 'px';
-    el.style.right = '';
-    el.style.bottom = '';
+    if (shouldNormalizeSelectionElement(el)) {
+      const normalizedBox = getStageBoxFromRect(el);
+      if (normalizedBox) {
+        el.style.left = normalizedBox.left + 'px';
+        el.style.top = normalizedBox.top + 'px';
+        if (!el.style.width) el.style.width = normalizedBox.width + 'px';
+      } else {
+        el.style.left = el.offsetLeft + 'px';
+        el.style.top = el.offsetTop + 'px';
+        if (!el.style.width) el.style.width = el.offsetWidth + 'px';
+      }
+      el.style.right = '';
+      el.style.bottom = '';
+    }
+
+    const isInlineEditableLeaf = !!(
+      el &&
+      !isChartSvgTextLeaf(el) &&
+      !shouldNormalizeSelectionElement(el) &&
+      typeof resolveEditableTextTarget === 'function' &&
+      resolveEditableTextTarget(el) === el
+    );
+    if (isInlineEditableLeaf && e.detail >= 2) {
+      pendingDrag = false;
+      mouseDownPos = null;
+      dragAnchor = null;
+      updateCoordPanel(el);
+      updateGroupToolbar();
+      if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+      return;
+    }
 
     pendingDrag = true;
     mouseDownPos = { x: e.clientX, y: e.clientY };
