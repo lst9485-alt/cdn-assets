@@ -1990,30 +1990,7 @@
     pointer-events: none;
   }
 
-  /* 편집모드: 현재 슬라이드의 모든 step-layer 표시 + dim 숨김 */
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer[data-step] {
-    opacity: 1 !important;
-    pointer-events: none !important;
-  }
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer[data-step] * {
-    pointer-events: all !important;
-  }
-  /* .no-edit-select 컨테이너(예: .step-timeline)는 클릭 통과 — 위 step-layer가 아래 step의 자식을 가리지 않게 */
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer[data-step] .no-edit-select {
-    pointer-events: none !important;
-  }
-  /* .no-edit-select 안 svg(타임라인 connector)도 클릭 통과 — 1920x1080 svg가 빈 영역 클릭 가로채지 않게. drag-box로는 selection 가능 */
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer[data-step] .no-edit-select svg {
-    pointer-events: none !important;
-  }
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer[data-step] .step-dim {
-    background: rgba(0,0,0,0) !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    cursor: default !important;
-  }
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer[data-step] .step-title { pointer-events: none !important; }
-  body.edit-mode.hide-dims:not(.frozen-legacy-deck) .slide.active .step-layer[data-step] .step-dim { opacity: 0 !important; }
+  body.edit-mode.hide-dims:not(.frozen-legacy-deck) .slide.active .step-layer.visible .step-dim { opacity: 0 !important; }
   .fs-drop-line { position:absolute; top:0; bottom:0; width:3px; background:var(--editor-accent); pointer-events:none; z-index:10; }
   body.edit-mode .step-content {
     opacity: 1 !important;

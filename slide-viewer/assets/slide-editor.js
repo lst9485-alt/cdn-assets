@@ -2264,14 +2264,9 @@
 
   // step 내 레이어 표시 (revealAll=true: 현재 step ordered 요소 전부 표시)
   function showStep(slide, step, revealAll) {
-    const editRevealAll = (
-      document.body.classList.contains('edit-mode') &&
-      !document.body.classList.contains('frozen-legacy-deck')
-    );
-    const forceMaxStep = editRevealAll;
     const maxStep = Math.max(0, getSteps(slide) - 1);
-    const effectiveStep = forceMaxStep ? maxStep : step;
-    const forceRevealAll = revealAll || forceMaxStep;
+    const effectiveStep = Math.max(0, Math.min(step, maxStep));
+    const forceRevealAll = !!revealAll;
     let hasDim = false;
     slide.querySelectorAll('.step-layer[data-step]').forEach(layer => {
       const s = parseInt(layer.dataset.step);
@@ -2282,7 +2277,7 @@
         // pushup 레이어: 현재 step이면 보이고, 이전 pushup은 push-exit 상태
         if (isPushup) {
           layer.classList.remove('push-enter', 'push-exit');
-          if (s < effectiveStep && !forceMaxStep) {
+          if (s < effectiveStep) {
             // 이 pushup 레이어 위에 다른 pushup이 있으면 밀려난 상태
             const nextPushup = slide.querySelector(`.step-layer[data-transition="pushup"][data-step="${s + 1}"]`);
             if (nextPushup) layer.classList.add('push-exit');
@@ -2311,10 +2306,7 @@
             layer.querySelectorAll(':scope > .step-content').forEach(sc => sc.classList.add('anim-shown'));
             if (!noDim && !isPushup) {
               const dim = layer.querySelector('.step-dim');
-              if (dim) {
-                if (forceMaxStep) dim.classList.remove('anim-shown');
-                else dim.classList.add('anim-shown');
-              }
+              if (dim) dim.classList.add('anim-shown');
             }
           }
         }
