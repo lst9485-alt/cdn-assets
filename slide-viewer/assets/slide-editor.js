@@ -271,6 +271,24 @@
     return document.body.classList.contains('frozen-legacy-deck');
   }
 
+  function shouldRevealAllInSourceBrowseView() {
+    return !document.body.dataset.generated && !editMode;
+  }
+
+  function getSourceBrowseStepState(slide) {
+    if (!slide) return { step: 0, revealAll: false, order: 0 };
+    const revealAll = shouldRevealAllInSourceBrowseView();
+    const step = revealAll ? Math.max(0, getSteps(slide) - 1) : 0;
+    const layer = slide.querySelector(`.step-layer[data-step="${step}"]`);
+    const order = revealAll && layer && typeof getOrderedEls === 'function'
+      ? getOrderedEls(layer).length
+      : 0;
+    return { step, revealAll, order };
+  }
+
+  window.shouldRevealAllInSourceBrowseView = shouldRevealAllInSourceBrowseView;
+  window.getSourceBrowseStepState = getSourceBrowseStepState;
+
   function getSlideScriptPreview(slide) {
     if (!slide) return '';
     return (slide.dataset.notes || '').trim();
@@ -555,15 +573,23 @@
     if (activeIdx >= 0) currentSlide = activeIdx;
 
     const activeSlide = slides[currentSlide];
-    if (activeSlide) {
+    const sourceBrowseState = (
+      activeSlide &&
+      typeof getSourceBrowseStepState === 'function'
+    ) ? getSourceBrowseStepState(activeSlide) : null;
+    if (sourceBrowseState && sourceBrowseState.revealAll) {
+      currentStep = sourceBrowseState.step;
+      currentOrder = sourceBrowseState.order;
+    } else if (activeSlide) {
       const visibleSteps = Array.from(activeSlide.querySelectorAll('.step-layer.visible[data-step]'))
         .map(layer => parseInt(layer.dataset.step || '0', 10))
         .filter(Number.isFinite);
       currentStep = visibleSteps.length ? Math.max(...visibleSteps) : 0;
+      currentOrder = 0;
     } else {
       currentStep = 0;
+      currentOrder = 0;
     }
-    currentOrder = 0;
 
     slides.forEach((slide, index) => {
       slide.classList.toggle('active', index === currentSlide);
@@ -574,7 +600,11 @@
     });
 
     if (slides[currentSlide] && typeof showStep === 'function') {
-      showStep(slides[currentSlide], currentStep);
+      showStep(
+        slides[currentSlide],
+        currentStep,
+        !!(sourceBrowseState && sourceBrowseState.revealAll)
+      );
     }
     if (typeof buildFilmstrip === 'function') buildFilmstrip();
   }
@@ -2424,15 +2454,32 @@
 
     // step 초기화:
     // - 생성 런타임: 뒤로 가면 마지막 step, 앞으로 가면 0 (프레젠테이션 탐색 유지)
-    // - 에디터/카탈로그: 방향과 무관하게 항상 step 0부터 (생성 결과와 동일한 첫 화면 유지)
+    // - source editor browse: 항상 최종 step 전체 표시
     setDim(false);
     currentSlide = next;
     const generatedRuntime = !!document.body.dataset.generated;
-    currentStep = generatedRuntime ? (forward ? 0 : getSteps(inSlide) - 1) : 0;
-    currentOrder = 0;
+    const revealAllInSourceBrowse = (
+      !generatedRuntime &&
+      typeof getSourceBrowseStepState === 'function' &&
+      getSourceBrowseStepState(inSlide).revealAll
+    );
+    if (generatedRuntime) {
+      currentStep = forward ? 0 : getSteps(inSlide) - 1;
+      currentOrder = 0;
+    } else if (revealAllInSourceBrowse) {
+      const browseState = getSourceBrowseStepState(inSlide);
+      currentStep = browseState.step;
+      currentOrder = browseState.order;
+    } else {
+      currentStep = 0;
+      currentOrder = 0;
+    }
     if (generatedRuntime && !forward) {
       const lastLayer = inSlide.querySelector(`.step-layer[data-step="${currentStep}"]`);
       if (lastLayer) currentOrder = getOrderedEls(lastLayer).length;
+      showStep(inSlide, currentStep, true);
+      triggerStep0Anims(inSlide);
+    } else if (revealAllInSourceBrowse) {
       showStep(inSlide, currentStep, true);
       triggerStep0Anims(inSlide);
     } else {
@@ -2485,6 +2532,16 @@
   }
 
   function goNext() {
+    const sourceBrowseRevealAll = (
+      !document.body.dataset.generated &&
+      typeof shouldRevealAllInSourceBrowseView === 'function' &&
+      shouldRevealAllInSourceBrowseView()
+    );
+    if (sourceBrowseRevealAll) {
+      const nextBase = findNextBaseCanonical(currentSlide);
+      if (nextBase !== -1) goToSlide(nextBase);
+      return;
+    }
     const slide = slides[currentSlide];
     const totalSteps = getSteps(slide);
     const curLayer = slide.querySelector(`.step-layer[data-step="${currentStep}"]`);
@@ -2608,6 +2665,16 @@
   }
 
   function goPrev() {
+    const sourceBrowseRevealAll = (
+      !document.body.dataset.generated &&
+      typeof shouldRevealAllInSourceBrowseView === 'function' &&
+      shouldRevealAllInSourceBrowseView()
+    );
+    if (sourceBrowseRevealAll) {
+      const prevBase = findPrevBaseCanonical(currentSlide);
+      if (prevBase !== -1) goToSlide(prevBase);
+      return;
+    }
     const slide = slides[currentSlide];
     if (currentOrder > 0) {
       currentOrder--;
@@ -4383,6 +4450,7 @@
       document.querySelector('link[href*="fonts.googleapis"]') ? document.querySelector('link[href*="fonts.googleapis"]').outerHTML : '',
       document.querySelector('link[href*="slide-style"]') ? document.querySelector('link[href*="slide-style"]').outerHTML : '',
       document.getElementById('edit-badge-style') ? document.getElementById('edit-badge-style').outerHTML : '',
+      document.getElementById('slide-jump-nav-style') ? document.getElementById('slide-jump-nav-style').outerHTML : '',
       document.querySelector('meta[name="gh-sha"]') ? document.querySelector('meta[name="gh-sha"]').outerHTML : ''
     ].filter(Boolean);
 
@@ -4718,15 +4786,21 @@
         : -1;
       if (nextSlide < 0) nextSlide = Math.min(typeof currentSlide === 'number' ? currentSlide : 0, Math.max(slides.length - 1, 0));
       if (typeof currentSlide !== 'undefined') currentSlide = Math.max(0, nextSlide);
-      if (typeof currentStep !== 'undefined') currentStep = 0;
-      if (typeof currentOrder !== 'undefined') currentOrder = 0;
-
       document.querySelectorAll('#stage > .slide').forEach((slide, index) => {
         slide.classList.toggle('active', index === currentSlide);
         slide.classList.remove('leave-left', 'enter-from-left');
       });
       if (slides[currentSlide] && typeof showStep === 'function') {
-        showStep(slides[currentSlide], 0, true);
+        if (typeof getSourceBrowseStepState === 'function') {
+          const browseState = getSourceBrowseStepState(slides[currentSlide]);
+          if (typeof currentStep !== 'undefined') currentStep = browseState.step;
+          if (typeof currentOrder !== 'undefined') currentOrder = browseState.order;
+          showStep(slides[currentSlide], currentStep, browseState.revealAll);
+        } else {
+          if (typeof currentStep !== 'undefined') currentStep = 0;
+          if (typeof currentOrder !== 'undefined') currentOrder = 0;
+          showStep(slides[currentSlide], 0, true);
+        }
       }
       if (typeof scaleStage === 'function') scaleStage();
       showToast('이 브라우저의 임시 저장본을 복구했습니다.', 4000);
@@ -5343,10 +5417,17 @@
         // dim-handle 배지 제거
         document.querySelectorAll('.dim-handle').forEach(b => b.remove());
         // 프레젠테이션 상태 리셋
-        currentStep = 0;
-        currentOrder = 0;
         setDim(false);
-        if (slides[currentSlide]) showStep(slides[currentSlide], 0);
+        if (slides[currentSlide] && typeof getSourceBrowseStepState === 'function') {
+          const browseState = getSourceBrowseStepState(slides[currentSlide]);
+          currentStep = browseState.step;
+          currentOrder = browseState.order;
+          showStep(slides[currentSlide], currentStep, browseState.revealAll);
+        } else {
+          currentStep = 0;
+          currentOrder = 0;
+          if (slides[currentSlide]) showStep(slides[currentSlide], 0);
+        }
         clearSelection();
         selectBoxActive = false;
         selectBoxAdditive = false;
