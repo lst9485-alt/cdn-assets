@@ -5371,7 +5371,6 @@
       if (!badge) {
         badge = document.createElement('div');
         badge.id = 'edit-mode-badge';
-        badge.textContent = '편집중 — 자동저장 30초';
         badge.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:99999;background:#FF6B00;color:#fff;padding:6px 18px;border-radius:8px;font-size:14px;font-weight:900;pointer-events:none;animation:editBadgeBlink 1.5s infinite;';
         document.body.appendChild(badge);
         if (!document.getElementById('edit-badge-style')) {
@@ -5381,6 +5380,7 @@
           document.head.appendChild(style);
         }
       }
+      badge.textContent = '편집중 — 자동저장 30초';
       badge.style.display = '';
     } else if (badge) {
       badge.remove();
