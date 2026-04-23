@@ -294,6 +294,61 @@
     return (slide.dataset.notes || '').trim();
   }
 
+  function normalizePresenterNotesText(text) {
+    return (text || '')
+      .replace(/🟡[\d]+(?:[-–][\d]+)?\s*/g, '🟡 ')
+      .replace(/[ \t]+\n/g, '\n')
+      .trim();
+  }
+
+  function ensureRuntimeNotesDock() {
+    let dock = document.getElementById('runtime-notes-dock');
+    if (dock) return dock;
+
+    dock = document.createElement('div');
+    dock.id = 'runtime-notes-dock';
+    dock.innerHTML = `
+      <button id="runtime-notes-toggle" type="button" aria-expanded="false">발표자 노트</button>
+      <div id="runtime-notes-panel" aria-hidden="true">
+        <div class="runtime-notes-label">참고 (원고)</div>
+        <div class="runtime-notes-body">대본 없음</div>
+      </div>
+    `;
+    dock.addEventListener('click', e => e.stopPropagation());
+
+    const toggle = dock.querySelector('#runtime-notes-toggle');
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      toggleRuntimeNotesPanel();
+    });
+
+    document.body.appendChild(dock);
+    return dock;
+  }
+
+  function toggleRuntimeNotesPanel(forceOpen) {
+    const dock = ensureRuntimeNotesDock();
+    const toggle = dock.querySelector('#runtime-notes-toggle');
+    const panel = dock.querySelector('#runtime-notes-panel');
+    const nextOpen = typeof forceOpen === 'boolean'
+      ? forceOpen
+      : !dock.classList.contains('open');
+    dock.classList.toggle('open', nextOpen);
+    toggle.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
+    panel.setAttribute('aria-hidden', nextOpen ? 'false' : 'true');
+  }
+
+  function setRuntimeNotesPanelText(text) {
+    const dock = ensureRuntimeNotesDock();
+    const body = dock.querySelector('.runtime-notes-body');
+    if (!body) return;
+    body.textContent = normalizePresenterNotesText(text) || '대본 없음';
+  }
+
+  function setRuntimeNotesForSlide(slide) {
+    setRuntimeNotesPanelText(getSlideScriptPreview(slide));
+  }
+
   function setSlideJumpNotesText(text) {
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
@@ -408,6 +463,7 @@
   }
 
   function updateSlideJumpNav() {
+    setRuntimeNotesForSlide(slides[currentSlide]);
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
     const grid = nav.querySelector('.sj-grid');
@@ -568,6 +624,7 @@
     slides = document.querySelectorAll('#stage > .slide');
     if (!slides.length) return;
     rebuildSlidesByKey();
+    ensureRuntimeNotesDock();
 
     const activeIdx = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
     if (activeIdx >= 0) currentSlide = activeIdx;
@@ -606,6 +663,7 @@
         !!(sourceBrowseState && sourceBrowseState.revealAll)
       );
     }
+    setRuntimeNotesForSlide(slides[currentSlide]);
     if (typeof buildFilmstrip === 'function') buildFilmstrip();
   }
 
@@ -9129,6 +9187,9 @@
     if (typeof setSlideJumpNotesForSlide === 'function' && payload.slide === currentSlide) {
       setSlideJumpNotesForSlide(slides[payload.slide]);
     }
+    if (typeof setRuntimeNotesForSlide === 'function' && payload.slide === currentSlide) {
+      setRuntimeNotesForSlide(slides[payload.slide]);
+    }
     if (isGitHubPages && typeof ghMarkDirty === 'function') ghMarkDirty();
     if (payload.flush) {
       clearTimeout(presenterNotesSaveTimer);
@@ -9181,13 +9242,22 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
 #pres-slide-info { color: #FF6B00; }
 #pres-timer { color: #aaa; font-family: monospace; font-size: 18px; }
 #pres-main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
-#pres-current-wrap { flex: 6; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+#pres-current-wrap { flex: 6; padding: 12px; display: flex; flex-direction: column; gap: 8px; position: relative; }
 #pres-next-wrap { flex: 4; padding: 12px; display: flex; flex-direction: column; gap: 4px; border-left: 1px solid #333; }
 #pres-next-slide-wrap { flex: 1; display: flex; flex-direction: column; gap: 4px; border-top: 1px solid #333; padding-top: 8px; }
 .pres-label { font-size: 11px; color: #888; font-weight: 700; flex-shrink: 0; }
 .slide-preview { position: relative; overflow: hidden; flex: 1; background: #ddd; border-radius: 4px; }
+.pres-scene { position: absolute; inset: 0; }
 .slide-clone-wrap { position: absolute; top: 0; left: 0; transform-origin: top left; pointer-events: none; }
 .slide-clone-wrap * { transition: none !important; animation: none !important; }
+#pres-ink-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 12; pointer-events: none; touch-action: none; }
+#pres-current.annotate-draw #pres-ink-canvas,
+#pres-current.annotate-erase #pres-ink-canvas { pointer-events: auto; cursor: crosshair; }
+#pres-ink-toolbar { position: absolute; right: 24px; bottom: 24px; z-index: 18; display: flex; gap: 8px; padding: 10px; border-radius: 16px; background: rgba(15,15,15,0.9); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 14px 32px rgba(0,0,0,0.32); }
+#pres-ink-toolbar button { min-width: 46px; height: 46px; border: 0; border-radius: 12px; background: rgba(255,255,255,0.08); color: #fff; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 10px; }
+#pres-ink-toolbar button.active { background: rgba(255,59,48,0.2); outline: 2px solid rgba(255,90,54,0.95); }
+#pres-ink-toolbar button:disabled { opacity: 0.45; cursor: default; }
+.pres-ink-dot { width: 16px; height: 16px; border-radius: 999px; background: #ff3b30; box-shadow: 0 0 0 2px rgba(255,255,255,0.18) inset; flex-shrink: 0; }
 #pres-notes { padding: 10px 16px; background: #111; border-top: 1px solid #333; height: 160px; display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
 #pres-notes-label { font-size: 11px; color: #888; font-weight: 700; }
 #pres-notes-input { flex: 1; background: #222; border: 1px solid #444; border-radius: 6px; color: #fff; font-size: 13px; padding: 6px 10px; font-family: inherit; overflow-y: auto; line-height: 1.8; }
@@ -9208,14 +9278,23 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
   <div id="pres-main">
     <div id="pres-current-wrap">
       <div class="pres-label">현재 슬라이드</div>
-      <div class="slide-preview" id="pres-current"><\/div>
+      <div class="slide-preview" id="pres-current">
+        <div class="pres-scene" id="pres-current-scene"><\/div>
+        <canvas id="pres-ink-canvas" width="1920" height="1080"><\/canvas>
+      <\/div>
+      <div id="pres-ink-toolbar">
+        <button id="pres-ink-pen" type="button" title="빨간 펜 (R)"><span class="pres-ink-dot"><\/span>펜<\/button>
+        <button id="pres-ink-eraser" type="button" title="지우개 (E)">지우개<\/button>
+        <button id="pres-ink-undo" type="button" title="실행 취소 (Ctrl+Z)">↶<\/button>
+        <button id="pres-ink-clear" type="button" title="전체 지우기">지우기<\/button>
+      <\/div>
     <\/div>
     <div id="pres-next-wrap">
       <div class="pres-label">다음 화면</div>
-      <div class="slide-preview" id="pres-next" style="flex:1;"><\/div>
+      <div class="slide-preview" id="pres-next" style="flex:1;"><div class="pres-scene" id="pres-next-scene"><\/div><\/div>
       <div id="pres-next-slide-wrap">
         <div class="pres-label">다음 슬라이드</div>
-        <div class="slide-preview" id="pres-next-slide" style="flex:1;"><\/div>
+        <div class="slide-preview" id="pres-next-slide" style="flex:1;"><div class="pres-scene" id="pres-next-slide-scene"><\/div><\/div>
       <\/div>
     <\/div>
   <\/div>
@@ -9230,8 +9309,16 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
 <\/div>
 <script>
 const ch = new BroadcastChannel('slide-presenter-${sessionId}');
+const PREVIEW_W = 1920;
+const PREVIEW_H = 1080;
 let curSlideIdx = 0;
 const startTime = Date.now();
+const currentPreview = document.getElementById('pres-current');
+const inkCanvas = document.getElementById('pres-ink-canvas');
+const inkCtx = inkCanvas.getContext('2d');
+const inkActionsBySlide = new Map();
+let inkMode = 'off';
+let activeInkAction = null;
 setInterval(() => {
   const e2 = Math.floor((Date.now() - startTime) / 1000);
   const h = String(Math.floor(e2 / 3600)).padStart(2,'0');
@@ -9240,7 +9327,8 @@ setInterval(() => {
   document.getElementById('pres-timer').textContent = h+':'+m+':'+s;
 }, 1000);
 function renderPreview(container, html) {
-  container.innerHTML = '';
+  const scene = container.querySelector('.pres-scene') || container;
+  scene.innerHTML = '';
   if (!html) return;
   const wrap = document.createElement('div');
   wrap.className = 'slide-clone-wrap';
@@ -9251,12 +9339,94 @@ function renderPreview(container, html) {
   slideEl.style.cssText = 'position:relative; width:1920px; height:1080px; opacity:1; transform:none; pointer-events:none;';
   slideEl.querySelectorAll('.edit-selected, .edit-group-selected').forEach(el => { el.classList.remove('edit-selected'); el.classList.remove('edit-group-selected'); });
   wrap.appendChild(slideEl);
-  container.appendChild(wrap);
+  scene.appendChild(wrap);
   const cw = container.offsetWidth, ch2 = container.offsetHeight;
-  const scale = Math.min(cw / 1920, ch2 / 1080);
+  const scale = Math.min(cw / PREVIEW_W, ch2 / PREVIEW_H);
   wrap.style.transform = 'scale(' + scale + ')';
-  wrap.style.width = '1920px';
-  wrap.style.height = '1080px';
+  wrap.style.width = PREVIEW_W + 'px';
+  wrap.style.height = PREVIEW_H + 'px';
+}
+function getCurrentInkActions() {
+  const existing = inkActionsBySlide.get(curSlideIdx);
+  if (existing) return existing;
+  const next = [];
+  inkActionsBySlide.set(curSlideIdx, next);
+  return next;
+}
+function drawInkPath(ctx, points) {
+  if (!points || !points.length) return;
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i < points.length; i++) {
+    ctx.lineTo(points[i].x, points[i].y);
+  }
+  if (points.length === 1) {
+    ctx.lineTo(points[0].x + 0.01, points[0].y + 0.01);
+  }
+  ctx.stroke();
+}
+function renderInkAction(ctx, action) {
+  if (!action || !action.points || !action.points.length) return;
+  ctx.save();
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = action.width || (action.mode === 'erase' ? 42 : 18);
+  if (action.mode === 'erase') {
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.strokeStyle = 'rgba(0,0,0,1)';
+  } else {
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.strokeStyle = action.color || '#ff3b30';
+  }
+  drawInkPath(ctx, action.points);
+  ctx.restore();
+}
+function redrawPresenterInk(transientAction = null) {
+  inkCtx.clearRect(0, 0, PREVIEW_W, PREVIEW_H);
+  getCurrentInkActions().forEach(action => renderInkAction(inkCtx, action));
+  if (transientAction) renderInkAction(inkCtx, transientAction);
+}
+function updateInkToolbar() {
+  document.getElementById('pres-ink-pen').classList.toggle('active', inkMode === 'draw');
+  document.getElementById('pres-ink-eraser').classList.toggle('active', inkMode === 'erase');
+  const hasInk = getCurrentInkActions().length > 0;
+  document.getElementById('pres-ink-undo').disabled = !hasInk;
+  document.getElementById('pres-ink-clear').disabled = !hasInk;
+}
+function setInkMode(nextMode) {
+  inkMode = nextMode;
+  currentPreview.classList.toggle('annotate-draw', nextMode === 'draw');
+  currentPreview.classList.toggle('annotate-erase', nextMode === 'erase');
+  updateInkToolbar();
+}
+function clearPresenterInk() {
+  inkActionsBySlide.set(curSlideIdx, []);
+  redrawPresenterInk();
+  updateInkToolbar();
+}
+function undoPresenterInk() {
+  const actions = getCurrentInkActions();
+  if (!actions.length) return;
+  actions.pop();
+  redrawPresenterInk();
+  updateInkToolbar();
+}
+function getInkPoint(ev) {
+  const rect = inkCanvas.getBoundingClientRect();
+  return {
+    x: ((ev.clientX - rect.left) / rect.width) * PREVIEW_W,
+    y: ((ev.clientY - rect.top) / rect.height) * PREVIEW_H,
+  };
+}
+function finishInkAction(ev) {
+  if (!activeInkAction) return;
+  if (ev && activeInkAction.points.length === 1) {
+    activeInkAction.points.push(getInkPoint(ev));
+  }
+  getCurrentInkActions().push(activeInkAction);
+  activeInkAction = null;
+  redrawPresenterInk();
+  updateInkToolbar();
 }
 ch.onmessage = ev => {
   const d = ev.data;
@@ -9266,13 +9436,52 @@ ch.onmessage = ev => {
     renderPreview(document.getElementById('pres-current'), d.currentHTML);
     renderPreview(document.getElementById('pres-next'), d.nextHTML);
     renderPreview(document.getElementById('pres-next-slide'), d.nextSlideHTML || '');
-    const fullNotes = (d.notes || '').replace(/🟡[\d]+(?:[-–][\d]+)?\s*/g, '🟡');
+    const fullNotes = (d.notes || '').replace(/🟡[\d]+(?:[-–][\d]+)?\s*/g, '🟡 ').trim();
     const el = document.getElementById('pres-notes-input');
     el.textContent = fullNotes;
+    redrawPresenterInk();
+    updateInkToolbar();
   }
 };
 document.getElementById('pres-btn-prev').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'prev' }));
 document.getElementById('pres-btn-next').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'next' }));
+document.getElementById('pres-ink-pen').addEventListener('click', () => setInkMode(inkMode === 'draw' ? 'off' : 'draw'));
+document.getElementById('pres-ink-eraser').addEventListener('click', () => setInkMode(inkMode === 'erase' ? 'off' : 'erase'));
+document.getElementById('pres-ink-undo').addEventListener('click', undoPresenterInk);
+document.getElementById('pres-ink-clear').addEventListener('click', clearPresenterInk);
+inkCanvas.addEventListener('pointerdown', ev => {
+  if (inkMode === 'off') return;
+  ev.preventDefault();
+  activeInkAction = {
+    mode: inkMode === 'erase' ? 'erase' : 'draw',
+    color: '#ff3b30',
+    width: inkMode === 'erase' ? 42 : 18,
+    points: [getInkPoint(ev)],
+  };
+  inkCanvas.setPointerCapture(ev.pointerId);
+  redrawPresenterInk(activeInkAction);
+});
+inkCanvas.addEventListener('pointermove', ev => {
+  if (!activeInkAction) return;
+  activeInkAction.points.push(getInkPoint(ev));
+  redrawPresenterInk(activeInkAction);
+});
+inkCanvas.addEventListener('pointerup', finishInkAction);
+inkCanvas.addEventListener('pointercancel', () => {
+  activeInkAction = null;
+  redrawPresenterInk();
+});
+inkCanvas.addEventListener('lostpointercapture', () => {
+  if (!activeInkAction) return;
+  getCurrentInkActions().push(activeInkAction);
+  activeInkAction = null;
+  redrawPresenterInk();
+  updateInkToolbar();
+});
+window.__getPresenterInkState = () => ({
+  mode: inkMode,
+  actionCount: getCurrentInkActions().length,
+});
 const sendNotes = (text, flush = false) => {
   const payload = { type: 'notes', slide: curSlideIdx, text, flush };
   ch.postMessage(payload);
@@ -9305,10 +9514,31 @@ setTimeout(() => {
 document.addEventListener('keydown', ev => {
   const ae = document.activeElement;
   if (ae && ae.id === 'pres-notes-input') return;
+  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'z') {
+    ev.preventDefault();
+    undoPresenterInk();
+    return;
+  }
+  if (ev.key.toLowerCase() === 'r') {
+    ev.preventDefault();
+    setInkMode(inkMode === 'draw' ? 'off' : 'draw');
+    return;
+  }
+  if (ev.key.toLowerCase() === 'e') {
+    ev.preventDefault();
+    setInkMode(inkMode === 'erase' ? 'off' : 'erase');
+    return;
+  }
+  if (ev.key === 'Escape' && inkMode !== 'off') {
+    ev.preventDefault();
+    setInkMode('off');
+    return;
+  }
   if (ev.key === 'ArrowRight') { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'next' }); }
   if (ev.key === 'ArrowLeft') { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'prev' }); }
 });
 ch.postMessage({ type: 'ready' });
+updateInkToolbar();
 <\/script>
 <\/body><\/html>`);
     presenterWindow.document.close();
