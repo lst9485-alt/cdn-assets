@@ -5479,6 +5479,33 @@
     );
   }
 
+  function getSingleVisibleTextProxy(el, options = {}) {
+    if (!el || !el.querySelectorAll) return null;
+    if (el.matches && el.matches('.line-chart, .bar-chart, .hbar-chart, .step-timeline, .multi-stat')) return null;
+    const directOnly = !!options.directOnly;
+    const requireLayoutParent = !!options.requireLayoutParent;
+    const parent = el.parentElement;
+    if (requireLayoutParent && !(parent && parent.matches('.items-row, .items-col, .items-grid, .compare-box, .compare-col'))) {
+      return null;
+    }
+    const nodes = directOnly
+      ? Array.from(el.children)
+      : Array.from(el.querySelectorAll(CHILD_SEL + ', .section-badge, .corner-label, .hl'));
+    const candidates = nodes.filter(node => {
+      if (!(node instanceof Element) || !el.contains(node)) return false;
+      if (node.matches('.slide-el, .text-area, .bubble, .hl-wrap')) return false;
+      if (node.matches(NON_TEXT_CHILD_SEL) || node.matches(NON_DETACHABLE_CHILD_SEL)) return false;
+      const cs = getComputedStyle(node);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || parseFloat(cs.opacity || '1') === 0) return false;
+      const rect = node.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return false;
+      return !!(node.textContent || '').trim();
+    });
+    if (candidates.length !== 1) return null;
+    return candidates[0];
+  }
+  window.getSingleVisibleTextProxy = getSingleVisibleTextProxy;
+
   function enterSvgTextEditor(el) {
     const oldText = el.textContent || '';
     const rect = el.getBoundingClientRect();
@@ -5624,9 +5651,11 @@
       const idx = yLabels.indexOf(el);
       if (idx >= 0) {
         const ticks = readYTicks();
-        while (ticks.length < yLabels.length) ticks.push('');
-        ticks[idx] = text;
-        writeYTicks(ticks);
+        const currentLabels = yLabels.map(node => String(node.textContent ?? ''));
+        const nextTicks = currentLabels.map((label, i) => (i < ticks.length ? ticks[i] : label));
+        while (nextTicks.length < yLabels.length) nextTicks.push(currentLabels[nextTicks.length] || '');
+        nextTicks[idx] = text;
+        writeYTicks(nextTicks);
         if (typeof buildLineChart === 'function') buildLineChart(chart);
         return true;
       }
@@ -5902,16 +5931,8 @@
     const scale = stageRect.width / 1920;
     const rect = el.getBoundingClientRect();
     const directDetachChild = (() => {
-      if (!el.matches('.slide-el')) return null;
-      if (!parent.matches('.items-row, .items-col, .items-grid')) return null;
-      const children = Array.from(el.children).filter(child => {
-        if (!(child instanceof Element) || isRemovalPlaceholderEl(child)) return false;
-        const cs = getComputedStyle(child);
-        return cs.display !== 'none' && cs.visibility !== 'hidden';
-      });
-      if (children.length !== 1) return null;
-      const onlyChild = children[0];
-      if (!onlyChild.matches('.hl, .section-badge, .corner-label')) return null;
+      const onlyChild = getSingleVisibleTextProxy(el, { directOnly: true, requireLayoutParent: true });
+      if (!onlyChild) return null;
       const childRect = onlyChild.getBoundingClientRect();
       if (childRect.width <= 0 || childRect.height <= 0) return null;
       return childRect;
@@ -6205,7 +6226,8 @@
       });
       return;
     }
-    const isTextEl = false; // 모든 요소에 edge handle 표시 (폭/높이 조절 가능)
+    const textProxy = selectedEls.length === 1 ? getSingleVisibleTextProxy(selectedEl) : null;
+    const isTextEl = !!textProxy;
     if (selectedEls.length > 1) {
       let minL = Infinity, minT = Infinity, maxR = -Infinity, maxB = -Infinity;
       selectedEls.forEach(el => {
@@ -6231,7 +6253,7 @@
       });
     } else {
       msBox.style.display = 'none';
-      const box = toStageBox(selectedEl);
+      const box = toStageBox(textProxy || selectedEl);
       const l = box.left, t = box.top;
       const w = box.width, hh = box.height;
       const cx = l + w / 2, cy = t + hh / 2;
@@ -6781,9 +6803,11 @@
     const activeSlide = (typeof slides !== 'undefined' && slides[currentSlide]) || document.querySelector('#stage > .slide.active');
     const pointLeaf = findLeafTargetAtPoint(activeSlide, e.clientX, e.clientY);
     const area = e.target.closest('.text-area, .step-title, .slide-el');
-    const probedLeaf = area ? consumeEditableTextProbe(area) : null;
+    const isChartArea = !!(area && area.matches('.line-chart'));
+    const probedLeaf = (area && !isChartArea) ? consumeEditableTextProbe(area) : null;
     const nearestAreaLeaf = area ? findNearestTextAreaLeaf(area, e.clientX, e.clientY) : null;
-    let el = resolveEditableTextTarget(probedLeaf || nearestAreaLeaf || pointLeaf || e.target);
+    const preferredLeaf = isChartArea ? (pointLeaf || nearestAreaLeaf || probedLeaf) : (probedLeaf || nearestAreaLeaf || pointLeaf);
+    let el = resolveEditableTextTarget(preferredLeaf || e.target);
     if (!el) {
       if (area) {
         el = probedLeaf || nearestAreaLeaf || area.querySelector('.hl');
@@ -6924,10 +6948,24 @@
       resizeAnchorX = stagePos0.x;
       resizeAnchorY = stagePos0.y;
       // edge handle: 단방향 리사이즈
-      if (resizeEdge && (selectedEl.tagName === 'IMG' || selectedEl.classList.contains('emoji-icon') || selectedEl.classList.contains('slide-el') || selectedEl.classList.contains('bubble') || selectedEl.classList.contains('text-area') || selectedEl.classList.contains('hl-wrap'))) {
-        resizeInitFontSizes = null;
-        resizeImgInit = null;
-        const fs = parseFloat(selectedEl.style.fontSize) || 0;
+        const selectedTextProxy = (
+          selectedEl &&
+          typeof getSingleVisibleTextProxy === 'function'
+        ) ? getSingleVisibleTextProxy(selectedEl) : null;
+        if (selectedTextProxy) {
+          resizeImgInitRect = null;
+          resizeImgInit = null;
+          resizeInitFontSizes = [{
+            el: selectedTextProxy,
+            fs: parseFloat(selectedTextProxy.style.fontSize) || parseFloat(getComputedStyle(selectedTextProxy).fontSize) || 108
+          }];
+          if (resizeEdge) return;
+          return;
+        }
+        if (resizeEdge && (selectedEl.tagName === 'IMG' || selectedEl.classList.contains('emoji-icon') || selectedEl.classList.contains('slide-el') || selectedEl.classList.contains('bubble') || selectedEl.classList.contains('text-area') || selectedEl.classList.contains('hl-wrap'))) {
+          resizeInitFontSizes = null;
+          resizeImgInit = null;
+          const fs = parseFloat(selectedEl.style.fontSize) || 0;
         resizeImgInitRect = {
           left: selectedEl.offsetLeft,
           top: selectedEl.offsetTop,
