@@ -6483,8 +6483,31 @@
     );
   }
 
+  function isChartSvgTextLeaf(target) {
+    return !!(
+      target &&
+      target.matches &&
+      target.matches('.chart-title, .chart-label, .chart-val, .lc-end-val')
+    );
+  }
+
+  function isLayoutManagedTextLeaf(target) {
+    if (!target || !target.matches) return false;
+    if (!target.matches('.hl, .section-badge, .corner-label')) return false;
+    if (target.closest('.text-area, .bubble')) return false;
+    const slideEl = target.closest('.slide-el');
+    if (!slideEl) return false;
+    const parent = slideEl.parentElement;
+    return !!(
+      parent &&
+      parent.matches('.items-row, .items-col, .items-grid')
+    );
+  }
+
   function shouldDeferPointLeafToStructuralParent(leafTarget) {
     if (!leafTarget) return false;
+    if (isChartSvgTextLeaf(leafTarget)) return false;
+    if (isLayoutManagedTextLeaf(leafTarget)) return true;
     const structural = leafTarget.closest('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .stat-circle, .big-stat, .stat-block, .compare-col, .split-list');
     if (!structural) return false;
     if (selectedEl === structural) return false;
@@ -6665,6 +6688,12 @@
         return boxedParent;
       }
     }
+    if (isChartSvgTextLeaf(leaf)) {
+      return leaf;
+    }
+    if (isLayoutManagedTextLeaf(leaf)) {
+      return leaf.closest('.slide-el') || leaf;
+    }
     if (leaf && leaf.matches('.hl, .section-badge, .corner-label')) {
       return leaf.closest('.text-area, .bubble, .slide-el') || leaf;
     }
@@ -6686,6 +6715,7 @@
     }
 
     if (structural.matches('.bar-chart, .line-chart, .hbar-chart, .multi-stat, .step-timeline')) {
+      if (isChartSvgTextLeaf(leaf)) return leaf;
       return structural;
     }
 
