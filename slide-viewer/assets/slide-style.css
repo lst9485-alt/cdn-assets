@@ -1817,13 +1817,25 @@
   /* ── 편집 모드 (E키) ── */
   body.edit-mode * { user-select: none; }
   body.edit-mode [contenteditable="true"] { user-select: text; cursor: text !important; outline: 3px solid #00aaff !important; }
-  /* 현재 step만 보이더라도 active/visible layer 자체는 hit target을 받아야 자식 클릭이 slide 루트로 새지 않는다. */
+  /* reveal-all 편집에서는 layer 전체가 앞 step 클릭을 가로채지 않게 한다. */
   body.edit-mode .slide.active .step-layer[data-step="0"],
   body.edit-mode .slide.active .step-layer.visible {
+    pointer-events: none !important;
+  }
+  body.edit-mode .slide.active .step-layer[data-step="0"] > *,
+  body.edit-mode .slide.active .step-layer.visible > * {
     pointer-events: auto !important;
   }
-  body.edit-mode .slide.active .step-layer[data-step="0"] *,
-  body.edit-mode .slide.active .step-layer.visible * {
+  body.edit-mode .slide.active .step-layer[data-step="0"] > svg,
+  body.edit-mode .slide.active .step-layer.visible > svg,
+  body.edit-mode .slide.active .step-layer .step-timeline,
+  body.edit-mode .slide.active .step-layer .step-timeline svg,
+  body.edit-mode .slide.active .step-layer .step-timeline svg * {
+    pointer-events: none !important;
+  }
+  body.edit-mode .slide.active .step-layer .step-timeline .tl-circle,
+  body.edit-mode .slide.active .step-layer .step-timeline .tl-box,
+  body.edit-mode .slide.active .step-layer .step-timeline .tl-desc {
     pointer-events: all !important;
   }
   body.edit-mode .slide.active .bubble,

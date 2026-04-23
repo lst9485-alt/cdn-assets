@@ -5670,7 +5670,7 @@
     }
     if (!(node instanceof Element)) return false;
     if (isRemovalPlaceholderEl(node)) return false;
-    if (node.matches('.step-dim, .resize-handle')) return false;
+    if (node.matches('.step-dim, .step-title, .resize-handle')) return false;
     if (node.matches(NON_MEANINGFUL_STEP_SEL)) return false;
     const cs = getComputedStyle(node);
     if (cs.display === 'none' || cs.visibility === 'hidden') return false;
@@ -5707,6 +5707,7 @@
         return (
           child instanceof Element &&
           !child.classList.contains('step-dim') &&
+          !child.classList.contains('step-title') &&
           hasLiveRenderableContent(child)
         );
       });
@@ -6298,6 +6299,19 @@
     );
   }
 
+  function findLeafTargetAtPoint(root, clientX, clientY) {
+    if (!root) return null;
+    const leaf = findSmallestPointMatch(
+      root,
+      CHILD_SEL + ', .section-badge, .corner-label, .hl',
+      clientX,
+      clientY
+    );
+    if (!leaf) return null;
+    if (leaf.matches(NON_TEXT_CHILD_SEL) || leaf.matches(NON_DETACHABLE_CHILD_SEL)) return null;
+    return leaf;
+  }
+
   function findStructuralTargetAtPoint(root, clientX, clientY) {
     if (!root) return null;
     return findSmallestPointMatch(
@@ -6773,6 +6787,7 @@
     }
 
     const activeSlide = (typeof slides !== 'undefined' && slides[currentSlide]) || document.querySelector('#stage > .slide.active');
+    const pointLeafTarget = findLeafTargetAtPoint(activeSlide, e.clientX, e.clientY);
     const pointStructuralTarget = findStructuralTargetAtPoint(activeSlide, e.clientX, e.clientY);
     const layoutContainer = (pointStructuralTarget && pointStructuralTarget.matches('.items-row, .items-col, .items-grid, .compare-box, .compare-col'))
       ? pointStructuralTarget
@@ -6787,7 +6802,7 @@
       selectedEl.classList.contains('child-selected') &&
       (selectedEl === e.target || selectedEl.contains(e.target))
     ) ? selectedEl : null;
-    const preferredTarget = activeChildSelected || layoutChildTarget || pointStructuralTarget || resolvePreferredSelectionTarget(e.target);
+    const preferredTarget = activeChildSelected || pointLeafTarget || layoutChildTarget || pointStructuralTarget || resolvePreferredSelectionTarget(e.target);
     let el = preferredTarget || e.target.closest(EDITABLE_SEL);
     // img inside .slide-el → select parent .slide-el (prevents dual selection + fixes resize coords)
     if (el && el.tagName === 'IMG' && el.closest('.slide-el')) el = el.closest('.slide-el');
