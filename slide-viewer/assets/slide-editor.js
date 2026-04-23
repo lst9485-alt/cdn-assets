@@ -2245,16 +2245,11 @@
 
   // step 내 레이어 표시 (revealAll=true: 현재 step ordered 요소 전부 표시)
   function showStep(slide, step, revealAll) {
-    const editorGalleryRevealAll = (
-      /slides-editor\.html$/.test(location.pathname) &&
-      !document.body.classList.contains('edit-mode') &&
-      !document.body.dataset.generated
-    );
     const editRevealAll = (
       document.body.classList.contains('edit-mode') &&
       !document.body.classList.contains('frozen-legacy-deck')
     );
-    const forceMaxStep = editRevealAll || editorGalleryRevealAll;
+    const forceMaxStep = editRevealAll;
     const maxStep = Math.max(0, parseInt(slide.dataset.steps || '1', 10) - 1);
     const effectiveStep = forceMaxStep ? maxStep : step;
     const forceRevealAll = revealAll || forceMaxStep;
@@ -2397,12 +2392,15 @@
       clearSelection();
     }
 
-    // step 초기화: 뒤로 가면 마지막 step, 앞으로 가면 0
+    // step 초기화:
+    // - 생성 런타임: 뒤로 가면 마지막 step, 앞으로 가면 0 (프레젠테이션 탐색 유지)
+    // - 에디터/카탈로그: 방향과 무관하게 항상 step 0부터 (생성 결과와 동일한 첫 화면 유지)
     setDim(false);
     currentSlide = next;
-    currentStep = forward ? 0 : getSteps(inSlide) - 1;
+    const generatedRuntime = !!document.body.dataset.generated;
+    currentStep = generatedRuntime ? (forward ? 0 : getSteps(inSlide) - 1) : 0;
     currentOrder = 0;
-    if (!forward) {
+    if (generatedRuntime && !forward) {
       const lastLayer = inSlide.querySelector(`.step-layer[data-step="${currentStep}"]`);
       if (lastLayer) currentOrder = getOrderedEls(lastLayer).length;
       showStep(inSlide, currentStep, true);
