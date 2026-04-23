@@ -2451,57 +2451,57 @@
 
   /* ── T28 분할레이아웃 ── */
   .split-list {
-    background: white; border-radius: 16px; padding: 28px 24px;
+    background: white; border-radius: 16px; padding: 24px;
     border: 1.5px solid #222;
   }
   .split-list-title {
-    font-size: 28px; font-weight: 700; color: var(--color-text); margin-bottom: 20px;
+    font-size: 26px; font-weight: 700; color: var(--color-text); margin-bottom: 16px;
   }
   .split-list-item {
-    display: flex; align-items: flex-start; gap: 16px;
-    padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
   }
   .split-list-item:last-child { border-bottom: none; }
   .split-list-num {
-    flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
-    background: var(--color-accent); color: white; font-size: 22px; font-weight: 700;
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--color-accent); color: white; font-size: 20px; font-weight: 700;
     display: flex; align-items: center; justify-content: center; margin-top: 2px;
   }
-  .split-list-text { font-size: 28px; font-weight: 600; color: #333; line-height: 1.6; }
-  .split-list-text strong { font-size: 30px; font-weight: 800; color: var(--color-text); }
+  .split-list-text { font-size: 23px; font-weight: 600; color: #333; line-height: 1.38; }
+  .split-list-text strong { font-size: 27px; font-weight: 800; color: var(--color-text); }
   .split-stats {
-    display: flex; flex-direction: column; gap: 16px;
+    display: flex; flex-direction: column; gap: 14px;
     justify-content: stretch;
   }
   .split-stat-main {
-    background: white; border: 1.5px solid #222; border-radius: 16px; padding: 24px;
+    background: white; border: 1.5px solid #222; border-radius: 16px; padding: 20px;
     text-align: center;
   }
   .split-stat-main .split-stat-label {
-    font-size: 25px; font-weight: 700; color: var(--color-text-sub); margin-bottom: 4px;
+    font-size: 23px; font-weight: 700; color: var(--color-text-sub); margin-bottom: 4px;
   }
   .split-stat-main .split-stat-value {
-    font-size: 90px; font-weight: 800; color: var(--color-sub); line-height: 1.1;
+    font-size: 80px; font-weight: 800; color: var(--color-sub); line-height: 1.05;
   }
   .split-stat-main .split-stat-desc {
-    font-size: 28px; font-weight: 700; color: #333; margin-top: 4px;
+    font-size: 24px; font-weight: 700; color: #333; margin-top: 4px;
   }
-  .split-stat-row { display: flex; gap: 16px; flex: 1; }
+  .split-stat-row { display: flex; gap: 14px; flex: 1; }
   .split-stat-card {
-    flex: 1; background: white; border-radius: 16px; padding: 20px;
+    flex: 1; background: white; border-radius: 16px; padding: 18px;
     text-align: center; border: 1.5px solid #222;
   }
-  .split-stat-icon { font-size: 40px; margin-bottom: 8px; }
+  .split-stat-icon { font-size: 36px; margin-bottom: 6px; }
   .split-stat-card .split-stat-value {
-    font-size: 56px; font-weight: 800; color: var(--color-sub); line-height: 1.2;
+    font-size: 46px; font-weight: 800; color: var(--color-sub); line-height: 1.15;
   }
   .split-stat-card .split-stat-label {
-    font-size: 22px; font-weight: 700; color: var(--color-text-sub); margin-top: 4px;
+    font-size: 20px; font-weight: 700; color: var(--color-text-sub); margin-top: 4px;
   }
   .split-summary {
-    font-size: 36px; font-weight: 700; color: #333;
-    text-align: center; line-height: 1.6;
-    background: rgba(var(--color-accent-rgb),0.06); border-radius: 14px; padding: 18px 32px;
+    font-size: 34px; font-weight: 700; color: #333;
+    text-align: center; line-height: 1.5;
+    background: rgba(var(--color-accent-rgb),0.06); border-radius: 14px; padding: 14px 28px;
   }
   .split-summary strong { color: var(--color-accent); font-weight: 800; }
 
