@@ -2036,6 +2036,11 @@
     const labels = (el.dataset.labels || '').split(',').map(s => s.trim());
     const title = el.dataset.title || '';
     const unit = el.dataset.unit || '';
+    let customYTicks = [];
+    try {
+      const parsed = JSON.parse(el.dataset.yTicks || '[]');
+      if (Array.isArray(parsed)) customYTicks = parsed.map(v => String(v ?? ''));
+    } catch (err) {}
     if (vals.length < 2) return;
     const W = parseInt(el.style.width) || 800;
     const H = parseInt(el.style.height) || 400;
@@ -2057,9 +2062,10 @@
     for (let i = 0; i <= YTICKS; i++) {
       const v = minV + (range * i / YTICKS);
       const y = pad.top + (1 - i / YTICKS) * chartH;
-      const label = Number.isInteger(v) ? v : v.toFixed(1);
+      const fallbackLabel = `${Number.isInteger(v) ? v : v.toFixed(1)}${unit}`;
+      const label = customYTicks[i] ?? fallbackLabel;
       yTicksHTML += `<line stroke="#ddd" stroke-width="1" x1="${pad.left}" y1="${y}" x2="${pad.left + chartW}" y2="${y}"/>`;
-      yTicksHTML += `<text class="chart-label" x="${pad.left - 8}" y="${y + 8}" text-anchor="end">${label}${unit}</text>`;
+      yTicksHTML += `<text class="chart-label" x="${pad.left - 8}" y="${y + 8}" text-anchor="end">${label}</text>`;
     }
     const pathD = 'M' + pts.map(p => `${p.x} ${p.y}`).join(' L');
     const svgHTML = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
@@ -2160,10 +2166,15 @@
   function getMaxActualStepIndex(slide) {
     if (!slide) return 0;
     let maxStep = 0;
+    const isCountableStepEl = el =>
+      el &&
+      !el.classList.contains('edit-hidden-placeholder') &&
+      !el.classList.contains('layout-detached-placeholder');
     slide.querySelectorAll('.step-layer[data-step]').forEach(layer => {
       maxStep = Math.max(maxStep, parseInt(layer.dataset.step, 10) || 0);
     });
     slide.querySelectorAll('[data-appear-step]').forEach(el => {
+      if (!isCountableStepEl(el)) return;
       maxStep = Math.max(maxStep, parseInt(el.dataset.appearStep, 10) || 0);
     });
     return maxStep;
@@ -5463,6 +5474,17 @@
     if (!chart) return false;
     const remove = !!options.remove;
     const text = remove ? '' : String(nextText ?? '');
+    const readYTicks = () => {
+      try {
+        const parsed = JSON.parse(chart.dataset.yTicks || '[]');
+        return Array.isArray(parsed) ? parsed.map(v => String(v ?? '')) : [];
+      } catch (err) {
+        return [];
+      }
+    };
+    const writeYTicks = ticks => {
+      chart.dataset.yTicks = JSON.stringify(ticks.map(v => String(v ?? '')));
+    };
 
     if (el.classList.contains('chart-title')) {
       chart.dataset.title = text;
@@ -5478,6 +5500,20 @@
       if (idx >= 0) {
         labels[idx] = text;
         chart.dataset.labels = labels.join(',');
+        if (typeof buildLineChart === 'function') buildLineChart(chart);
+        return true;
+      }
+    }
+
+    if (el.classList.contains('chart-label') && el.getAttribute('text-anchor') === 'end') {
+      const yLabels = Array.from(chart.querySelectorAll('.chart-label'))
+        .filter(node => node.getAttribute('text-anchor') === 'end');
+      const idx = yLabels.indexOf(el);
+      if (idx >= 0) {
+        const ticks = readYTicks();
+        while (ticks.length < yLabels.length) ticks.push('');
+        ticks[idx] = text;
+        writeYTicks(ticks);
         if (typeof buildLineChart === 'function') buildLineChart(chart);
         return true;
       }
