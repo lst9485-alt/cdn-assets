@@ -475,7 +475,10 @@
   /* ── 타입 19: 코너 레이블 ── */
   .corner-label {
     position: absolute; top: 40px; right: 60px;
+    display: inline-flex; align-items: center;
+    min-height: 48px; padding: 4px 14px;
     font-size: 36px; font-weight: 700; color: var(--color-text-faint);
+    line-height: 1.1;
   }
 
   /* ── 타입 20: 필 버튼 그리드 ── */
@@ -1894,7 +1897,9 @@
     z-index: 9001;
     flex-wrap: nowrap;
     overflow: hidden;
+    pointer-events: none;
   }
+  #top-toolbar > * { pointer-events: auto; }
   body.edit-mode #top-toolbar { display: flex; }
   body.edit-mode::after {
     top: 48px !important;
