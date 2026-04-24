@@ -1,20 +1,90 @@
 {
-  "updated": "2026-04-22T06:00:02.726693+09:00",
+  "updated": "2026-04-25T06:00:02.033137+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
       "categories": [
+        {
+          "id": 0,
+          "title": "슬라이드 템플릿 메타 전수 점검 + 에디터 UI 수정 (최우선)",
+          "ref": null,
+          "items": [
+            {
+              "text": "0-1. STEP 1: 59개 타입 × 메타 6개 현재 상태 **전수조사 리포트** (읽기만, 파괴적 변경 없음) — 불일치/누락 빨간색 표시. 메타 6개 = 변형 개수 / 스텝 수 / 필드(required+max_chars) / 아이템 범위 / 시각자료 지원 / **타입별 사용 비중(편중 실측)**",
+              "done": true
+            },
+            {
+              "text": "0-2. STEP 2 완료 (규칙 결정): 각 타입별 `required`·`max_chars`·`items_range`·`media_support`·**`max_ratio`(전체 대비 상한)** **초안 제안** → 59개 한 문서로 사용자 승인 → Codex가 `type-registry.json`·`field-mapping.json`·`type-compile-config.json` 반영",
+              "done": true
+            },
+            {
+              "text": "0-3. STEP 3 완료: 변형 개수(+N) 실제 vs 표기 불일치 수정 (`slides-editor.html`·`sync-counts.py`)",
+              "done": true
+            },
+            {
+              "text": "0-4. STEP 4 완료: 에디터 UI에 **5종 태그 표시** 추가 (카드 CSS + 마크업, `sync-counts.py`가 자동 갱신)",
+              "done": true
+            },
+            {
+              "text": "0-5. STEP 5 완료: 검증·편중 강화 — (a) `verify-md.py`/`compile_slidemd.py`에 required 미충족 에러 + max_ratio 경고 (b) `select_templates.py`에 **편중 방어선** — (신호×타입) 연속 3회 금지 + 메타 max_ratio 하드 제약 + 2-step 통합 상한 (c) 회귀 테스트 추가",
+              "done": true
+            },
+            {
+              "text": "0-5-END. **Codex 여기서 멈춤** — todo 0-5까지 체크한 뒤 사용자에게 \"STEP 5 완료, Claude 인수 대기\" 보고. 배포·스킬 문서·T35 개별 처리는 Claude 담당",
+              "done": true
+            },
+            {
+              "text": "0-5-R. 사용자 지적 반영 재감사 v2 완료 — T23 1표시/CTA전용, T37 마무리전용, T38 챕터전환전용, T12/T15/T16 `fill_range` 재보정, T12 자동선택 blocklist 유지 명시, 서브에이전트 최종 검토 + `pytest tests/` 982 passed/1 skipped 확인 (4/25)",
+              "done": true
+            },
+            {
+              "text": "0-6. STEP 6: `.claude/skills/yt07-slide/SKILL.md` 동기화 — type-registry 변경 내용 스킬 문서 표·규칙에 반영 (사용자 합의)",
+              "done": false
+            },
+            {
+              "text": "0-7. 최종 점검 A: yt-slide 스킬 전체 일관성, 기존 회귀 테스트 979+ 유지, 에디터 브라우저 시각 확인, 59개 타입 태그 표기 확인",
+              "done": false
+            },
+            {
+              "text": "0-8. 최종 점검 B: **편중 실측** — 사용자가 실제 원고 주고 생성 돌려서 T41 같은 타입 max_ratio 이하인지 확인 + 필요 시 상한 튜닝",
+              "done": false
+            },
+            {
+              "text": "0-9. STEP 7: 260426 기획 T35 8개 처리 — 사용자가 직접 5필드 채움 or T44 자동 교체 결정",
+              "done": false
+            },
+            {
+              "text": "0-10. 배포: slide-viewer에 복사 → `Workspace/apps/dashboard/repo` commit+push (사용자 승인 후)",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "title": "slide-viewer 백업 브랜치 삭제 (2026-05-01 경, 1주일 뒤)",
+          "ref": null,
+          "items": [
+            {
+              "text": "1-1. cdn-assets 로컬 백업 브랜치·태그 삭제",
+              "done": false
+            },
+            {
+              "text": "1-2. workspace 3개 backup/* 브랜치 삭제 (원격 포함)",
+              "done": false
+            }
+          ]
+        },
         {
           "id": 2,
           "title": "홈페이지 PG 승인 + 강의 준비",
           "ref": "PG·결제 로드맵",
           "items": [
             {
-              "text": "2-1. 이니시스 무료 재신청 (교육서비스업 리프레이밍, 강의/독서모임 중심)",
-              "done": false
+              "text": "2-1. 이니시스 무료 재신청 — 2026-04-24 전자서명·AML 완료, 카드사 심사 대기 중 (비씨·삼성·현대 제외, 7~10영업일 소요, ~5월 초 결과)",
+              "done": true
             },
             {
-              "text": "2-2. 이니시스 반려 시 → KCP 22만원 결제",
+              "text": "2-2. 카드사 심사 결과 확인 (~2026-05-08) → 반려 시 KCP 22만원 결제 또는 KCP 보험용 계약 검토",
               "done": false
             },
             {
@@ -23,6 +93,18 @@
             },
             {
               "text": "2-4. (PG 통과 후) 자체 사이트 개발 본격 진행 → [[0. 자체 사이트 제작]]",
+              "done": false
+            },
+            {
+              "text": "2-5. 이니시스 임시패스워드 변경 (~2026-05-24 필수)",
+              "done": false
+            },
+            {
+              "text": "2-6. 아임웹 상품 배송 설정 \"배송 없음\"으로 수정 (idx=18, idx=19 — 디지털 상품)",
+              "done": false
+            },
+            {
+              "text": "2-7. 세무사 문의 — 교육서비스업 809903 창업중소기업 세액감면 가능 여부",
               "done": false
             }
           ]
@@ -51,32 +133,6 @@
           ]
         },
         {
-          "id": 4,
-          "title": "yt-slide 템플릿 재편 (4/16~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "4-23. **영상 촬영** — 세션 37 (맨 마지막). 기획 품질 확정 상태에서 녹음·편집. 세션 36 배포된 피커 + 신규 모듈 5종 실전 검증",
-              "done": false
-            },
-            {
-              "text": "4-24. **세션 45 본질 fix** (세션 44 임시방편 정리) — `Workspace/apps/youtube/yt-slide/.context.md` 다음세션 항목 참조",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 5,
-          "title": "`.context.md` 청소 (비대 방지)",
-          "ref": null,
-          "items": [
-            {
-              "text": "5-2. 다른 `.context.md` 점검 — 동일 기준으로 비대 여부 확인, 필요 시 정리",
-              "done": false
-            }
-          ]
-        },
-        {
           "id": 6,
           "title": "경쟁채널 모니터링 시스템 (4/16~)",
           "ref": "경쟁채널 모니터링 시스템",
@@ -94,7 +150,11 @@
               "done": false
             },
             {
-              "text": "6-0-4. 블로그 1군 후보 조사 — 네이버 부동산 파워블로거 10명+ 목록 + 이웃 수/일 발행량/최근 인기글 → 사용자와 확정",
+              "text": "6-0-4. 블로그 1군 후보 조사 — 네이버 부동산 파워블로거 10명+ 목록 + 이웃 수/일 발행량/최근 인기글 → 사용자와 확정(유튜브+블로그 모두 사용자가 갖고있는 핵심 리스트 위주로)",
+              "done": false
+            },
+            {
+              "text": "-> 유튜브 및 블로그 리스트 완료 후 유튜브 리서치 스킬에도 반영 필수.",
               "done": false
             },
             {
@@ -147,6 +207,191 @@
             },
             {
               "text": "6-3-3. 수동 실행 옵션 — --now, --backfill N",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "title": "autocut \"자막 1개 = 영상 1개\" 원칙 리팩터 (4/22~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "9-1. split_subtitles_at_silences 비활성 (또는 --no-silence 기본값 변경)",
+              "done": false
+            },
+            {
+              "text": "9-2. 자막별 단일 영상 segment 생성 (source: 자막 start~end, target: 누적 배치)",
+              "done": false
+            },
+            {
+              "text": "9-3. GAP_CUT_THRESHOLD=1000ms 유지 (리테이크·긴 gap 컷 기능 보존)",
+              "done": false
+            },
+            {
+              "text": "9-4. 샘플 SRT로 A/B 테스트 — 빈 공간 제거·영상 길이·재생 매끄러움 검증",
+              "done": false
+            },
+            {
+              "text": "9-5. 다음 유튜브 영상 촬영 전 완료 + 실전 적용",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "title": "맥미니 Parsec 로그인 아이템 등록 (4/24~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "12-1. 맥미니 앞에서 시스템 설정 > 일반 > 로그인 항목 및 확장 프로그램 > \"로그인 시 열기\"에 Parsec.app 추가",
+              "done": false
+            },
+            {
+              "text": "12-2. 재부팅 후 Parsec 프로세스 자동 뜨는지 확인(`ps aux | grep Parsec.app`) + 회사PC/노트북에서 접속 테스트",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "title": "라오어 무한매수법 텔레그램 자동화 (4/24~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "13-1. 미국장 마감 후 체결 확인 + 메리츠 \"보유종목\"에서 평단 자동 표시 여부 확인 (**Day 2 로직 분기점** — 자동이면 단순, 수동이면 n8n 계산 보조 노드 추가)",
+              "done": false
+            },
+            {
+              "text": "13-2. 메인 3주 + 대폭락 티어 체결 시 가중평균 자동 계산되는지 확인",
+              "done": false
+            },
+            {
+              "text": "13-3. 시트 TQQQ 40 탭에 B6(보유수량)/B7(평단) 수동 입력 → G3 체크 → F3/F4/F5 LOC 메리츠 수동 접수",
+              "done": false
+            },
+            {
+              "text": "13-4. `feat/05-mumae` 브랜치 생성",
+              "done": false
+            },
+            {
+              "text": "13-5. 테스트용 시트 사본 생성 (실시트 보존)",
+              "done": false
+            },
+            {
+              "text": "13-6. 언이 기존 `onEdit` 함수명 확인 (충돌 방지용, Apps Script 에디터 열어서 조회)",
+              "done": false
+            },
+            {
+              "text": "13-7. 보조 Apps Script `onEditMumae` 코드 작성 → 사용자가 시트에 붙여넣기 → 트리거 등록",
+              "done": false
+            },
+            {
+              "text": "13-8. n8n webhook 엔드포인트 등록 + curl 테스트",
+              "done": false
+            },
+            {
+              "text": "13-9. `config/secrets/services/mumae.env` 생성 (webhook 토큰 32자 랜덤, 시트 ID, chat_id, user_id 슬롯)",
+              "done": false
+            },
+            {
+              "text": "13-10. 본인 텔레그램 user_id 확보 (첫 테스트 메시지에서 `from.id` 추출)",
+              "done": false
+            },
+            {
+              "text": "13-11. `workflows/05 무한매수/workflow.json` 초안 작성 (Telegram Trigger + Cron 08:00 + Webhook Trigger 3개)",
+              "done": false
+            },
+            {
+              "text": "13-12. `workflowStaticData.infmSessions[chat_id]` 상태 관리 Code 노드 (step/qty/price/TTL 30분)",
+              "done": false
+            },
+            {
+              "text": "13-13. callback_data 라우팅 (`infm:action:payload` 형식) + Switch 노드",
+              "done": false
+            },
+            {
+              "text": "13-14. ForceReply + answerQuery + editMessageText 패턴 구현",
+              "done": false
+            },
+            {
+              "text": "13-15. 테스트 시트로 E2E 동작 확인 (Cron → 버튼 → 숫자 입력 → 확인 → 시트 쓰기 → webhook push → 주문표 수신)",
+              "done": false
+            },
+            {
+              "text": "13-16. 입력 검증 정규식: 주수 `^[1-9][0-9]{0,2}$`, 평단 `^[1-9][0-9]{0,2}(\\.[0-9]{1,2})?$`",
+              "done": false
+            },
+            {
+              "text": "13-17. from.id 필터 (본인 user_id 외 모든 입력 무시 — 그룹 채널이라 필수)",
+              "done": false
+            },
+            {
+              "text": "13-18. 모든 Telegram/Sheets 노드에 Retry On Fail 3회 설정",
+              "done": false
+            },
+            {
+              "text": "13-19. Apps Script 60초 타임아웃 감지 로직 (webhook 안 오면 \"계산 실패\" 알림)",
+              "done": false
+            },
+            {
+              "text": "13-20. session 30분 TTL 자동 만료 + `/reset` 명령어 (session 초기화)",
+              "done": false
+            },
+            {
+              "text": "13-21. n8n 시트 ID를 테스트 → 실시트로 전환",
+              "done": false
+            },
+            {
+              "text": "13-22. 2~3일 병행 운영 (텔레그램 입력 + 시트 수동 확인 동시) → 안정화 확인",
+              "done": false
+            },
+            {
+              "text": "13-23. `/cycle_start` (확인 버튼 필수, G2 체크)",
+              "done": false
+            },
+            {
+              "text": "13-24. `/skip` (체결 안 됐을 때 G3만 체크)",
+              "done": false
+            },
+            {
+              "text": "13-25. `/orders` (주문표 재전송) + `/status` (현재 상태 조회)",
+              "done": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "회사PC",
+      "categories": [
+        {
+          "id": 11,
+          "title": "co-telegramocr 이름 변조 버그수정 브랜치 테스트+main 합치기 (4/24~, 4/27 월요일 정산 때 실행)",
+          "ref": null,
+          "items": [
+            {
+              "text": "11-1. 브랜치 전환: `cd /Users/yunjitaegi/HQ/Workspace && git checkout fix/co-telegramocr-name-drift-clean` → `git branch --show-current`로 `fix/co-telegramocr-name-drift-clean` 확인",
+              "done": false
+            },
+            {
+              "text": "11-2. `/daily-check` 스킬 실행 (평소 매일정산 그대로)",
+              "done": false
+            },
+            {
+              "text": "11-3. 정산 중/후 자체 체크 (사용자에게 결과 보고):",
+              "done": false
+            },
+            {
+              "text": "11-4. 11-3 전부 OK → main 합치기 자동 실행: `git checkout main && git merge fix/co-telegramocr-name-drift-clean && git push` → 사용자에게 \"main 합치기 완료\" 보고 → 투두 11번 done 처리",
+              "done": false
+            },
+            {
+              "text": "11-5. 11-3에서 문제 발견 → 즉시 롤백: `git checkout main` → 사용자에게 \"문제 [증상] 발견, main으로 롤백 완료. 어떻게 할까요?\" 보고 → 투두 11번 유지(done 처리 X)",
+              "done": false
+            },
+            {
+              "text": "11-6. **11-4 성공 후 브랜치 뒷정리** (main 합치기 성공했을 때만 실행):",
               "done": false
             }
           ]
