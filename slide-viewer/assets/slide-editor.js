@@ -3299,6 +3299,11 @@
       return;
     }
     if (e.code === 'KeyF') {
+      if (presenterWindow && !presenterWindow.closed && typeof togglePresenterNotesFromMain === 'function') {
+        e.preventDefault();
+        togglePresenterNotesFromMain();
+        return;
+      }
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
       } else {
@@ -9430,6 +9435,25 @@
     };
   }
 
+  function setPresenterWindowOpenState(isOpen) {
+    document.body.classList.toggle('presenter-open', !!isOpen);
+    if (!isOpen && presenterWindow && presenterWindow.closed) presenterWindow = null;
+  }
+
+  window.__setPresenterWindowOpen = isOpen => setPresenterWindowOpenState(isOpen);
+
+  function togglePresenterNotesFromMain(force) {
+    if (!presenterWindow || presenterWindow.closed) return false;
+    try {
+      if (typeof presenterWindow.__togglePresenterNotesHidden === 'function') {
+        presenterWindow.__togglePresenterNotesHidden(force);
+        return true;
+      }
+    } catch (_) {}
+    presenterChannel.postMessage({ type: 'presenter-ui', action: 'toggle-notes-hidden', force });
+    return true;
+  }
+
   function syncPresenter() {
     if (!presenterWindow || presenterWindow.closed) return;
     const payload = buildPresenterSyncPayload();
@@ -9526,7 +9550,12 @@
   };
 
   function openPresenterView() {
-    if (presenterWindow && !presenterWindow.closed) { presenterWindow.close(); presenterWindow = null; return; }
+    if (presenterWindow && !presenterWindow.closed) {
+      presenterWindow.close();
+      presenterWindow = null;
+      setPresenterWindowOpenState(false);
+      return;
+    }
     refreshPresenterNotesBridge();
     const sw = screen.width, sh = screen.height;
     const pw = 960, ph = 700;
@@ -9555,6 +9584,7 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
 .pres-scene { position: absolute; inset: 0; }
 .slide-clone-wrap { position: absolute; top: 0; left: 0; transform-origin: top left; pointer-events: none; }
 .slide-clone-wrap * { transition: none !important; animation: none !important; }
+#pres-ink-sparks { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 13; }
 #pres-ink-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 12; pointer-events: none; touch-action: none; }
 #pres-current.annotate-draw #pres-ink-canvas,
 #pres-current.annotate-erase #pres-ink-canvas { pointer-events: auto; cursor: crosshair; }
@@ -9593,6 +9623,7 @@ body.pres-notes-hidden #pres-notes { display:none; }
       <div class="pres-label">현재 슬라이드</div>
       <div class="slide-preview" id="pres-current">
         <div class="pres-scene" id="pres-current-scene"><\/div>
+        <div id="pres-ink-sparks"><\/div>
         <canvas id="pres-ink-canvas" width="1920" height="1080"><\/canvas>
       <\/div>
       <div id="pres-ink-toolbar">
@@ -9648,6 +9679,9 @@ let presenterNotesDirty = false;
 let presenterNotesHidden = false;
 let inkActionSeq = 1;
 let bridgeDeliverySeq = 1;
+let previewRefitQueued = false;
+let lastSparkAt = 0;
+let lastSparkPoint = null;
 setInterval(() => {
   const e2 = Math.floor((Date.now() - startTime) / 1000);
   const h = String(Math.floor(e2 / 3600)).padStart(2,'0');
@@ -9669,15 +9703,49 @@ function renderPreview(container, html) {
   slideEl.querySelectorAll('.edit-selected, .edit-group-selected').forEach(el => { el.classList.remove('edit-selected'); el.classList.remove('edit-group-selected'); });
   wrap.appendChild(slideEl);
   scene.appendChild(wrap);
+  fitPreview(container);
+}
+function fitPreview(container) {
+  if (!container) return;
+  const scene = container.querySelector('.pres-scene') || container;
+  const wrap = scene.querySelector('.slide-clone-wrap');
+  if (!wrap) return;
   const cw = container.offsetWidth, ch2 = container.offsetHeight;
   if (!cw || !ch2) {
-    requestAnimationFrame(() => renderPreview(container, html));
+    requestAnimationFrame(() => fitPreview(container));
     return;
   }
   const scale = Math.min(cw / PREVIEW_W, ch2 / PREVIEW_H);
   wrap.style.transform = 'scale(' + scale + ')';
   wrap.style.width = PREVIEW_W + 'px';
   wrap.style.height = PREVIEW_H + 'px';
+  wrap.style.left = Math.max((cw - (PREVIEW_W * scale)) / 2, 0) + 'px';
+  wrap.style.top = Math.max((ch2 - (PREVIEW_H * scale)) / 2, 0) + 'px';
+}
+function schedulePresenterPreviewRefit() {
+  if (previewRefitQueued) return;
+  previewRefitQueued = true;
+  requestAnimationFrame(() => {
+    previewRefitQueued = false;
+    fitPreview(document.getElementById('pres-current'));
+    fitPreview(document.getElementById('pres-next'));
+    fitPreview(document.getElementById('pres-next-slide'));
+  });
+}
+function spawnPresenterSpark(point) {
+  const sparks = document.getElementById('pres-ink-sparks');
+  if (!sparks || !point) return;
+  for (let i = 0; i < 4; i++) {
+    const spark = document.createElement('span');
+    spark.className = 'runtime-ink-spark';
+    spark.style.left = point.x + 'px';
+    spark.style.top = point.y + 'px';
+    spark.style.setProperty('--spark-x', ((Math.random() - 0.5) * 54) + 'px');
+    spark.style.setProperty('--spark-y', ((Math.random() - 0.5) * 54) + 'px');
+    spark.style.setProperty('--spark-scale', (0.7 + Math.random() * 0.8).toFixed(2));
+    sparks.appendChild(spark);
+    setTimeout(() => spark.remove(), 520);
+  }
 }
 function createInkActionId() {
   return 'ink-' + Date.now().toString(36) + '-' + (inkActionSeq++).toString(36);
@@ -9794,6 +9862,7 @@ function updateInkToolbar() {
 function setInkMode(nextMode) {
   inkMode = nextMode;
   eraseDragActive = false;
+  lastSparkPoint = null;
   currentPreview.classList.toggle('annotate-draw', nextMode === 'draw');
   currentPreview.classList.toggle('annotate-erase', nextMode === 'erase');
   updateInkToolbar();
@@ -9801,7 +9870,18 @@ function setInkMode(nextMode) {
 }
 function getSparkPoint() {
   const points = activeInkAction?.points;
-  return points && points.length ? points[points.length - 1] : null;
+  const point = points && points.length ? points[points.length - 1] : hoverInkPoint;
+  if (!point || inkMode === 'off') return null;
+  const now = Date.now();
+  const movedEnough = (
+    !lastSparkPoint ||
+    Math.hypot(point.x - lastSparkPoint.x, point.y - lastSparkPoint.y) >= 18
+  );
+  const minGap = activeInkAction ? 70 : 120;
+  if (!movedEnough || now - lastSparkAt < minGap) return null;
+  lastSparkAt = now;
+  lastSparkPoint = { x: point.x, y: point.y };
+  return point;
 }
 function getCursorMode() {
   if (!hoverInkPoint) return 'off';
@@ -9810,15 +9890,17 @@ function getCursorMode() {
   return 'present';
 }
 function postInkState() {
+  const sparkPoint = getSparkPoint();
   const payload = {
     type: 'ink',
     slide: curSlideIdx,
     actions: cloneInkActions(getCurrentInkActions()),
     transientAction: activeInkAction ? cloneInkActions([activeInkAction])[0] : null,
-    sparkPoint: getSparkPoint(),
+    sparkPoint,
     cursorPoint: hoverInkPoint,
     cursorMode: getCursorMode(),
   };
+  if (sparkPoint) spawnPresenterSpark(sparkPoint);
   if (ch) ch.postMessage(payload);
   try {
     if (window.opener && !window.opener.closed && typeof window.opener.__applyPresenterInk === 'function') {
@@ -9913,7 +9995,13 @@ function togglePresenterNotesHidden(force) {
   document.body.classList.toggle('pres-notes-hidden', presenterNotesHidden);
   if (presenterNotesHidden) setPresenterNotesStatus('원고 숨김 (F로 복귀)', 'hidden');
   else setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
+  schedulePresenterPreviewRefit();
 }
+window.__togglePresenterNotesHidden = force => {
+  if (presenterNotesDirty) flushNotes('manual');
+  togglePresenterNotesHidden(force);
+  return presenterNotesHidden;
+};
 function postNav(action) {
   if (presenterNotesDirty) flushNotes('nav');
   if (ch) ch.postMessage({ type: 'nav', action });
@@ -9956,8 +10044,10 @@ function handleSyncPayload(d) {
   activeInkAction = null;
   eraseDragActive = false;
   hoverInkPoint = null;
+  lastSparkPoint = null;
   redrawPresenterInk();
   updateInkToolbar();
+  schedulePresenterPreviewRefit();
 }
 function handleNotesStatus(status) {
   if (status === 'pending') {
@@ -9983,6 +10073,9 @@ if (ch) {
     const d = ev.data;
     if (d.type === 'sync') handleSyncPayload(d);
     if (d.type === 'notes-status') handleNotesStatus(d.status);
+    if (d.type === 'presenter-ui' && d.action === 'toggle-notes-hidden') {
+      window.__togglePresenterNotesHidden(d.force);
+    }
   };
 }
 document.getElementById('pres-btn-prev').addEventListener('click', () => postNav('prev'));
@@ -10001,6 +10094,7 @@ currentPreview.addEventListener('pointermove', ev => {
 });
 currentPreview.addEventListener('pointerleave', () => {
   hoverInkPoint = null;
+  lastSparkPoint = null;
   if (!activeInkAction) scheduleInkBroadcast(true);
 });
 inkCanvas.addEventListener('pointerdown', ev => {
@@ -10116,6 +10210,22 @@ document.getElementById('pres-notes-input').addEventListener('blur', () => {
 });
 window.addEventListener('pagehide', () => flushNotes('manual'));
 window.addEventListener('beforeunload', () => flushNotes('manual'));
+window.addEventListener('beforeunload', () => {
+  try {
+    if (window.opener && !window.opener.closed && typeof window.opener.__setPresenterWindowOpen === 'function') {
+      window.opener.__setPresenterWindowOpen(false);
+    }
+  } catch (_) {}
+});
+window.addEventListener('resize', schedulePresenterPreviewRefit);
+if (window.visualViewport) window.visualViewport.addEventListener('resize', schedulePresenterPreviewRefit);
+if (typeof ResizeObserver === 'function') {
+  const previewObserver = new ResizeObserver(() => schedulePresenterPreviewRefit());
+  ['pres-current', 'pres-next', 'pres-next-slide'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) previewObserver.observe(el);
+  });
+}
 // textarea 밖을 클릭하면 포커스 해제 (contenteditable는 자동 blur 안 되는 경우 있음)
 document.addEventListener('click', ev => {
   const notes = document.getElementById('pres-notes-input');
@@ -10177,6 +10287,7 @@ setPresenterNotesStatus('저장됨', 'saved');
     presenterWindow.document.close();
     presenterWindow.resizeTo(pw, ph);
     presenterWindow.moveTo(pl, pt);
+    setPresenterWindowOpenState(true);
     setTimeout(() => syncPresenter(), 200);
   }
 
