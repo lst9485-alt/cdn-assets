@@ -303,6 +303,7 @@
 
   let runtimeNotesEditingSlide = -1;
   let runtimeNotesSuppressApply = false;
+  let runtimeNotesHidden = false;
 
   function ensureRuntimeNotesDock() {
     let dock = document.getElementById('runtime-notes-dock');
@@ -376,6 +377,15 @@
     toggle.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
     panel.setAttribute('aria-hidden', nextOpen ? 'false' : 'true');
   }
+
+  function toggleRuntimeNotesHidden(force) {
+    runtimeNotesHidden = typeof force === 'boolean' ? force : !runtimeNotesHidden;
+    document.body.classList.toggle('runtime-notes-hidden', runtimeNotesHidden);
+    if (runtimeNotesHidden) toggleRuntimeNotesPanel(false);
+    return runtimeNotesHidden;
+  }
+
+  window.__toggleRuntimeNotesHidden = force => toggleRuntimeNotesHidden(force);
 
   function setRuntimeNotesPanelText(text) {
     const dock = ensureRuntimeNotesDock();
@@ -472,14 +482,14 @@
     const layer = ensureRuntimeInkLayer();
     const sparks = layer?.querySelector('#runtime-ink-sparks');
     if (!sparks || !point) return;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       const spark = document.createElement('span');
       spark.className = 'runtime-ink-spark';
       spark.style.left = `${point.x}px`;
       spark.style.top = `${point.y}px`;
-      spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 66}px`);
-      spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 66}px`);
-      spark.style.setProperty('--spark-scale', (0.95 + Math.random() * 0.95).toFixed(2));
+      spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 60}px`);
+      spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 60}px`);
+      spark.style.setProperty('--spark-scale', (0.88 + Math.random() * 0.82).toFixed(2));
       sparks.appendChild(spark);
       setTimeout(() => spark.remove(), 520);
     }
@@ -9451,13 +9461,20 @@
   window.__setPresenterWindowOpen = isOpen => setPresenterWindowOpenState(isOpen);
 
   function togglePresenterNotesFromMain(force) {
+    let hiddenState = typeof force === 'boolean' ? force : null;
     if (!presenterWindow || presenterWindow.closed) return false;
     try {
       if (typeof presenterWindow.__togglePresenterNotesHidden === 'function') {
-        presenterWindow.__togglePresenterNotesHidden(force);
+        hiddenState = presenterWindow.__togglePresenterNotesHidden(force);
+        if (typeof window.__toggleRuntimeNotesHidden === 'function') {
+          window.__toggleRuntimeNotesHidden(hiddenState);
+        }
         return true;
       }
     } catch (_) {}
+    if (typeof window.__toggleRuntimeNotesHidden === 'function') {
+      window.__toggleRuntimeNotesHidden(hiddenState);
+    }
     presenterChannel.postMessage({ type: 'presenter-ui', action: 'toggle-notes-hidden', force });
     return true;
   }
@@ -9743,14 +9760,14 @@ function schedulePresenterPreviewRefit() {
 function spawnPresenterSpark(point) {
   const sparks = document.getElementById('pres-ink-sparks');
   if (!sparks || !point) return;
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     const spark = document.createElement('span');
     spark.className = 'runtime-ink-spark';
     spark.style.left = point.x + 'px';
     spark.style.top = point.y + 'px';
-    spark.style.setProperty('--spark-x', ((Math.random() - 0.5) * 66) + 'px');
-    spark.style.setProperty('--spark-y', ((Math.random() - 0.5) * 66) + 'px');
-    spark.style.setProperty('--spark-scale', (0.95 + Math.random() * 0.95).toFixed(2));
+    spark.style.setProperty('--spark-x', ((Math.random() - 0.5) * 60) + 'px');
+    spark.style.setProperty('--spark-y', ((Math.random() - 0.5) * 60) + 'px');
+    spark.style.setProperty('--spark-scale', (0.88 + Math.random() * 0.82).toFixed(2));
     sparks.appendChild(spark);
     setTimeout(() => spark.remove(), 520);
   }
@@ -10001,6 +10018,11 @@ function flushNotes(reason = 'manual') {
 function togglePresenterNotesHidden(force) {
   presenterNotesHidden = typeof force === 'boolean' ? force : !presenterNotesHidden;
   document.body.classList.toggle('pres-notes-hidden', presenterNotesHidden);
+  try {
+    if (window.opener && !window.opener.closed && typeof window.opener.__toggleRuntimeNotesHidden === 'function') {
+      window.opener.__toggleRuntimeNotesHidden(presenterNotesHidden);
+    }
+  } catch (_) {}
   if (presenterNotesHidden) setPresenterNotesStatus('원고 숨김 (F로 복귀)', 'hidden');
   else setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
   schedulePresenterPreviewRefit();
