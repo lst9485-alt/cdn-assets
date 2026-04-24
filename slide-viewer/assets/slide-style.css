@@ -2230,23 +2230,24 @@
   #runtime-ink-cursor.cursor-draw { background:rgba(255,59,48,0.34); border-color:rgba(255,117,97,0.98); }
   #runtime-ink-cursor.cursor-erase { width:42px; height:42px; margin-left:-21px; margin-top:-21px; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.92); box-shadow:0 0 0 1px rgba(0,0,0,0.14), 0 0 0 6px rgba(255,255,255,0.08); }
   #runtime-ink-sparks { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:2; }
-  .runtime-ink-spark {
-    position:absolute;
-    width:12px;
-    height:12px;
-    margin-left:-6px;
-    margin-top:-6px;
-    border-radius:999px;
-    background: radial-gradient(circle, rgba(255,255,255,0.92) 0%, rgba(255,190,140,0.7) 34%, rgba(255,90,54,0) 72%);
-    opacity:0.88;
-    mix-blend-mode:screen;
-    transform: translate(0, 0) scale(var(--spark-scale, 1));
-    animation: runtime-ink-spark 0.52s ease-out forwards;
-  }
-  @keyframes runtime-ink-spark {
-    from { opacity:0.95; transform:translate(0, 0) scale(var(--spark-scale, 1)); }
-    to { opacity:0; transform:translate(var(--spark-x, 0), var(--spark-y, -24px)) scale(0.05); }
-  }
+.runtime-ink-spark {
+  position:absolute;
+  width:18px;
+  height:18px;
+  margin-left:-9px;
+  margin-top:-9px;
+  border-radius:999px;
+  background: radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(255,228,170,0.96) 18%, rgba(255,146,97,0.88) 42%, rgba(255,90,54,0.14) 72%, rgba(255,90,54,0) 100%);
+  box-shadow:0 0 12px rgba(255,190,140,0.68), 0 0 24px rgba(255,90,54,0.26);
+  opacity:0.96;
+  mix-blend-mode:screen;
+  transform: translate(0, 0) scale(var(--spark-scale, 1));
+  animation: runtime-ink-spark 0.62s ease-out forwards;
+}
+@keyframes runtime-ink-spark {
+  from { opacity:1; transform:translate(0, 0) scale(var(--spark-scale, 1)); }
+  to { opacity:0; transform:translate(var(--spark-x, 0), var(--spark-y, -28px)) scale(0.08); }
+}
   body.edit-mode:not(.presenter-open) #runtime-ink-layer,
   body.overview-open #runtime-ink-layer { display:none; }
   .fs-item { flex-shrink:0; cursor:pointer; border:2px solid transparent; border-radius:3px; overflow:hidden; position:relative; width:136px; height:76px; background:var(--editor-bg); }

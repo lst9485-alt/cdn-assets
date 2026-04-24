@@ -472,14 +472,14 @@
     const layer = ensureRuntimeInkLayer();
     const sparks = layer?.querySelector('#runtime-ink-sparks');
     if (!sparks || !point) return;
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 6; i++) {
       const spark = document.createElement('span');
       spark.className = 'runtime-ink-spark';
       spark.style.left = `${point.x}px`;
       spark.style.top = `${point.y}px`;
-      spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 54}px`);
-      spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 54}px`);
-      spark.style.setProperty('--spark-scale', (0.7 + Math.random() * 0.8).toFixed(2));
+      spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 66}px`);
+      spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 66}px`);
+      spark.style.setProperty('--spark-scale', (0.95 + Math.random() * 0.95).toFixed(2));
       sparks.appendChild(spark);
       setTimeout(() => spark.remove(), 520);
     }
@@ -9743,14 +9743,14 @@ function schedulePresenterPreviewRefit() {
 function spawnPresenterSpark(point) {
   const sparks = document.getElementById('pres-ink-sparks');
   if (!sparks || !point) return;
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     const spark = document.createElement('span');
     spark.className = 'runtime-ink-spark';
     spark.style.left = point.x + 'px';
     spark.style.top = point.y + 'px';
-    spark.style.setProperty('--spark-x', ((Math.random() - 0.5) * 54) + 'px');
-    spark.style.setProperty('--spark-y', ((Math.random() - 0.5) * 54) + 'px');
-    spark.style.setProperty('--spark-scale', (0.7 + Math.random() * 0.8).toFixed(2));
+    spark.style.setProperty('--spark-x', ((Math.random() - 0.5) * 66) + 'px');
+    spark.style.setProperty('--spark-y', ((Math.random() - 0.5) * 66) + 'px');
+    spark.style.setProperty('--spark-scale', (0.95 + Math.random() * 0.95).toFixed(2));
     sparks.appendChild(spark);
     setTimeout(() => spark.remove(), 520);
   }
@@ -10257,7 +10257,7 @@ document.addEventListener('keydown', ev => {
     flushNotes('manual');
     return;
   }
-  if (ev.key.toLowerCase() === 'f') {
+  if (ev.code === 'KeyF' || ev.key.toLowerCase() === 'f') {
     ev.preventDefault();
     if (presenterNotesDirty) flushNotes('manual');
     togglePresenterNotesHidden();
@@ -10281,7 +10281,7 @@ document.addEventListener('keydown', ev => {
   }
   if (ev.key === 'ArrowRight') { ev.preventDefault(); postNav('next'); }
   if (ev.key === 'ArrowLeft') { ev.preventDefault(); postNav('prev'); }
-});
+}, true);
 if (ch) ch.postMessage({ type: 'ready' });
 try {
   if (window.opener && !window.opener.closed && typeof window.opener.__getPresenterSyncPayload === 'function') {
