@@ -207,8 +207,15 @@
     align-items: flex-start;
     gap: 16px;
   }
+  body.edit-mode .slide.active .hl-wrap,
+  body.edit-mode .slide.active .hl-wrap > div {
+    pointer-events: none;
+  }
+  body.edit-mode .slide.active .hl-wrap .hl {
+    pointer-events: auto;
+  }
   .hl {
-    display: inline;
+    display: inline-block;
     background: none;
     padding: 0;
     font-size: 108px;
@@ -475,7 +482,10 @@
   /* ── 타입 19: 코너 레이블 ── */
   .corner-label {
     position: absolute; top: 40px; right: 60px;
+    display: inline-flex; align-items: center;
+    min-height: 48px; padding: 4px 14px;
     font-size: 36px; font-weight: 700; color: var(--color-text-faint);
+    line-height: 1.1;
   }
 
   /* ── 타입 20: 필 버튼 그리드 ── */
@@ -1817,10 +1827,25 @@
   /* ── 편집 모드 (E키) ── */
   body.edit-mode * { user-select: none; }
   body.edit-mode [contenteditable="true"] { user-select: text; cursor: text !important; outline: 3px solid #00aaff !important; }
-  /* step-layer 자체는 pointer-events:none 유지 (빈 공간이 아래 레이어로 통과) */
-  /* 자식 요소만 클릭 허용 (978행 규칙으로 처리) */
-  body.edit-mode .slide.active .step-layer[data-step="0"] *,
-  body.edit-mode .slide.active .step-layer.visible * {
+  /* reveal-all 편집에서는 layer 전체가 앞 step 클릭을 가로채지 않게 한다. */
+  body.edit-mode .slide.active .step-layer[data-step="0"],
+  body.edit-mode .slide.active .step-layer.visible {
+    pointer-events: none !important;
+  }
+  body.edit-mode .slide.active .step-layer[data-step="0"] > *,
+  body.edit-mode .slide.active .step-layer.visible > * {
+    pointer-events: auto !important;
+  }
+  body.edit-mode .slide.active .step-layer[data-step="0"] > svg,
+  body.edit-mode .slide.active .step-layer.visible > svg,
+  body.edit-mode .slide.active .step-layer .step-timeline,
+  body.edit-mode .slide.active .step-layer .step-timeline svg,
+  body.edit-mode .slide.active .step-layer .step-timeline svg * {
+    pointer-events: none !important;
+  }
+  body.edit-mode .slide.active .step-layer .step-timeline .tl-circle,
+  body.edit-mode .slide.active .step-layer .step-timeline .tl-box,
+  body.edit-mode .slide.active .step-layer .step-timeline .tl-desc {
     pointer-events: all !important;
   }
   body.edit-mode .slide.active .bubble,
@@ -1856,6 +1881,10 @@
     outline: 3px solid #7B61FF !important;
     box-shadow: 0 0 0 6px rgba(123,97,255,0.15) !important;
   }
+  .detached-child-el {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
   body.individual-mode .edit-group-selected {
     outline: 2px dashed rgba(123,97,255,0.4) !important;
     box-shadow: none !important;
@@ -1875,7 +1904,9 @@
     z-index: 9001;
     flex-wrap: nowrap;
     overflow: hidden;
+    pointer-events: none;
   }
+  #top-toolbar > * { pointer-events: auto; }
   body.edit-mode #top-toolbar { display: flex; }
   body.edit-mode::after {
     top: 48px !important;
@@ -1986,25 +2017,7 @@
     pointer-events: none;
   }
 
-  /* 편집모드: 모든 step-layer 표시 + dim 숨김 */
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer.visible[data-step] {
-    opacity: 1 !important;
-    pointer-events: none !important;
-  }
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer.visible[data-step] * {
-    pointer-events: all !important;
-  }
-  /* .no-edit-select 컨테이너(예: .step-timeline)는 클릭 통과 — 위 step-layer가 아래 step의 자식을 가리지 않게 */
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer.visible[data-step] .no-edit-select {
-    pointer-events: none !important;
-  }
-  /* .no-edit-select 안 svg(타임라인 connector)도 클릭 통과 — 1920x1080 svg가 빈 영역 클릭 가로채지 않게. drag-box로는 selection 가능 */
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer.visible[data-step] .no-edit-select svg {
-    pointer-events: none !important;
-  }
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer.visible[data-step] .step-dim { background: rgba(0,0,0,0.5) !important; pointer-events: auto !important; cursor: pointer; }
-  body.edit-mode:not(.frozen-legacy-deck) .slide.active .step-layer.visible[data-step] .step-title { pointer-events: none !important; }
-  body.edit-mode.hide-dims:not(.frozen-legacy-deck) .slide.active .step-layer.visible[data-step] .step-dim { opacity: 0 !important; }
+  body.edit-mode.hide-dims:not(.frozen-legacy-deck) .slide.active .step-layer.visible .step-dim { opacity: 0 !important; }
   .fs-drop-line { position:absolute; top:0; bottom:0; width:3px; background:var(--editor-accent); pointer-events:none; z-index:10; }
   body.edit-mode .step-content {
     opacity: 1 !important;
@@ -2013,6 +2026,22 @@
   body.edit-mode .slide.active .step-layer:not([data-step="0"]) {
     outline: 2px dashed rgba(0, 120, 255, 0.35);
     outline-offset: -2px;
+  }
+  body.edit-mode .slide.active .step-layer.visible,
+  body.edit-mode .slide.active .step-layer.visible > .slide-el,
+  body.edit-mode .slide.active .step-layer.visible > .bubble,
+  body.edit-mode .slide.active .step-layer.visible > .text-area,
+  body.edit-mode .slide.active .step-layer.visible > img,
+  body.edit-mode .slide.active .step-layer.visible > .step-content,
+  body.edit-mode .slide.active .step-layer.visible .slide-el,
+  body.edit-mode .slide.active .step-layer.visible .bubble,
+  body.edit-mode .slide.active .step-layer.visible .text-area,
+  body.edit-mode .slide.active .step-layer.visible img,
+  body.edit-mode .slide.active .step-layer.visible .step-content {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation-delay: 0s !important;
   }
   body.edit-mode #stage { overflow: visible; }
 
@@ -2170,6 +2199,56 @@
   #filmstrip { display:none; position:fixed; bottom:0; left:0; right:0; height:96px; background:rgba(50,50,50,0.92); border-top:1px solid #333; z-index:200; overflow-x:auto; overflow-y:hidden; }
   body.edit-mode #filmstrip { display:flex; align-items:center; }
   #filmstrip-inner { display:flex; gap:6px; padding:8px 10px; align-items:center; flex-shrink:0; }
+  #runtime-notes-dock { position: fixed; left: 16px; bottom: 16px; z-index: 8800; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+  #runtime-notes-toggle { border: 0; border-radius: 999px; padding: 10px 16px; background: rgba(20,20,20,0.88); color: #fff; font-size: 13px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+  #runtime-notes-panel { display: none; width: min(420px, calc(100vw - 32px)); max-height: min(36vh, 320px); overflow: auto; border-radius: 18px; background: rgba(255,255,255,0.97); color: #222; padding: 14px 16px 16px; box-shadow: 0 18px 40px rgba(0,0,0,0.18); }
+  #runtime-notes-dock.open #runtime-notes-panel { display: block; }
+  #runtime-notes-panel .runtime-notes-label { font-size: 12px; font-weight: 800; color: #666; margin-bottom: 10px; }
+  #runtime-notes-panel .runtime-notes-body { display:block; width:100%; min-height: 132px; border:1px solid rgba(0,0,0,0.08); border-radius:14px; padding:12px 14px; background:rgba(255,255,255,0.96); color:#222; line-height:1.7; font-size:14px; resize:vertical; outline:none; }
+  #runtime-notes-panel .runtime-notes-body:focus { border-color: rgba(255, 107, 0, 0.55); box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.12); }
+  #runtime-notes-panel .runtime-notes-body::placeholder { color:#999; }
+  body.edit-mode #runtime-notes-dock,
+  body.overview-open #runtime-notes-dock { display: none; }
+  #runtime-ink-layer { position:absolute; inset:0; z-index:40; pointer-events:none; }
+  #runtime-ink-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+  #runtime-ink-cursor {
+    position:absolute;
+    z-index:3;
+    width:18px;
+    height:18px;
+    margin-left:-9px;
+    margin-top:-9px;
+    border-radius:999px;
+    border:2px solid rgba(255,255,255,0.92);
+    box-shadow:0 0 0 4px rgba(0,0,0,0.18);
+    opacity:0;
+    transform:scale(0.9);
+    transition:opacity 80ms linear, transform 80ms linear, border-color 80ms linear, background 80ms linear;
+  }
+  #runtime-ink-cursor.visible { opacity:0.92; transform:scale(1); }
+  #runtime-ink-cursor.cursor-present { background:rgba(255,255,255,0.2); border-color:rgba(255,255,255,0.92); }
+  #runtime-ink-cursor.cursor-draw { background:rgba(255,59,48,0.34); border-color:rgba(255,117,97,0.98); }
+  #runtime-ink-cursor.cursor-erase { width:42px; height:42px; margin-left:-21px; margin-top:-21px; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.92); box-shadow:0 0 0 1px rgba(0,0,0,0.14), 0 0 0 6px rgba(255,255,255,0.08); }
+  #runtime-ink-sparks { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:2; }
+  .runtime-ink-spark {
+    position:absolute;
+    width:12px;
+    height:12px;
+    margin-left:-6px;
+    margin-top:-6px;
+    border-radius:999px;
+    background: radial-gradient(circle, rgba(255,255,255,0.92) 0%, rgba(255,190,140,0.7) 34%, rgba(255,90,54,0) 72%);
+    opacity:0.88;
+    mix-blend-mode:screen;
+    transform: translate(0, 0) scale(var(--spark-scale, 1));
+    animation: runtime-ink-spark 0.52s ease-out forwards;
+  }
+  @keyframes runtime-ink-spark {
+    from { opacity:0.95; transform:translate(0, 0) scale(var(--spark-scale, 1)); }
+    to { opacity:0; transform:translate(var(--spark-x, 0), var(--spark-y, -24px)) scale(0.05); }
+  }
+  body.edit-mode:not(.presenter-open) #runtime-ink-layer,
+  body.overview-open #runtime-ink-layer { display:none; }
   .fs-item { flex-shrink:0; cursor:pointer; border:2px solid transparent; border-radius:3px; overflow:hidden; position:relative; width:136px; height:76px; background:var(--editor-bg); }
   .fs-item.current { border-color:var(--editor-accent); box-shadow:0 0 8px 2px rgba(var(--editor-accent-rgb),0.6); background:#3a3a2a; }
   .fs-item .fs-inner { width:1920px; height:1080px; transform-origin:top left; transform:scale(0.0708); pointer-events:none; }
@@ -2442,57 +2521,57 @@
 
   /* ── T28 분할레이아웃 ── */
   .split-list {
-    background: white; border-radius: 16px; padding: 28px 24px;
+    background: white; border-radius: 16px; padding: 24px;
     border: 1.5px solid #222;
   }
   .split-list-title {
-    font-size: 28px; font-weight: 700; color: var(--color-text); margin-bottom: 20px;
+    font-size: 26px; font-weight: 700; color: var(--color-text); margin-bottom: 16px;
   }
   .split-list-item {
-    display: flex; align-items: flex-start; gap: 16px;
-    padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
   }
   .split-list-item:last-child { border-bottom: none; }
   .split-list-num {
-    flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
-    background: var(--color-accent); color: white; font-size: 22px; font-weight: 700;
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--color-accent); color: white; font-size: 20px; font-weight: 700;
     display: flex; align-items: center; justify-content: center; margin-top: 2px;
   }
-  .split-list-text { font-size: 28px; font-weight: 600; color: #333; line-height: 1.6; }
-  .split-list-text strong { font-size: 30px; font-weight: 800; color: var(--color-text); }
+  .split-list-text { font-size: 23px; font-weight: 600; color: #333; line-height: 1.38; }
+  .split-list-text strong { font-size: 27px; font-weight: 800; color: var(--color-text); }
   .split-stats {
-    display: flex; flex-direction: column; gap: 16px;
+    display: flex; flex-direction: column; gap: 14px;
     justify-content: stretch;
   }
   .split-stat-main {
-    background: white; border: 1.5px solid #222; border-radius: 16px; padding: 24px;
+    background: white; border: 1.5px solid #222; border-radius: 16px; padding: 20px;
     text-align: center;
   }
   .split-stat-main .split-stat-label {
-    font-size: 25px; font-weight: 700; color: var(--color-text-sub); margin-bottom: 4px;
+    font-size: 23px; font-weight: 700; color: var(--color-text-sub); margin-bottom: 4px;
   }
   .split-stat-main .split-stat-value {
-    font-size: 90px; font-weight: 800; color: var(--color-sub); line-height: 1.1;
+    font-size: 80px; font-weight: 800; color: var(--color-sub); line-height: 1.05;
   }
   .split-stat-main .split-stat-desc {
-    font-size: 28px; font-weight: 700; color: #333; margin-top: 4px;
+    font-size: 24px; font-weight: 700; color: #333; margin-top: 4px;
   }
-  .split-stat-row { display: flex; gap: 16px; flex: 1; }
+  .split-stat-row { display: flex; gap: 14px; flex: 1; }
   .split-stat-card {
-    flex: 1; background: white; border-radius: 16px; padding: 20px;
+    flex: 1; background: white; border-radius: 16px; padding: 18px;
     text-align: center; border: 1.5px solid #222;
   }
-  .split-stat-icon { font-size: 40px; margin-bottom: 8px; }
+  .split-stat-icon { font-size: 36px; margin-bottom: 6px; }
   .split-stat-card .split-stat-value {
-    font-size: 56px; font-weight: 800; color: var(--color-sub); line-height: 1.2;
+    font-size: 46px; font-weight: 800; color: var(--color-sub); line-height: 1.15;
   }
   .split-stat-card .split-stat-label {
-    font-size: 22px; font-weight: 700; color: var(--color-text-sub); margin-top: 4px;
+    font-size: 20px; font-weight: 700; color: var(--color-text-sub); margin-top: 4px;
   }
   .split-summary {
-    font-size: 36px; font-weight: 700; color: #333;
-    text-align: center; line-height: 1.6;
-    background: rgba(var(--color-accent-rgb),0.06); border-radius: 14px; padding: 18px 32px;
+    font-size: 34px; font-weight: 700; color: #333;
+    text-align: center; line-height: 1.5;
+    background: rgba(var(--color-accent-rgb),0.06); border-radius: 14px; padding: 14px 28px;
   }
   .split-summary strong { color: var(--color-accent); font-weight: 800; }
 
@@ -2619,15 +2698,24 @@
   }
 
   /* ── 래퍼 안 자식: absolute 해제 → flex/grid 배치 ── */
-  .items-row > .slide-el,
-  .items-col > .slide-el,
+  .items-row > .slide-el:not(.flow-step1):not(.flow-step2),
+  .items-col > .slide-el:not(.branch-root):not(.branch-result):not(.branch-arrow),
   .items-grid > .slide-el {
     position: static !important;
     left: auto !important; top: auto !important;
     flex: 1 1 0; min-width: 0;
   }
+  .items-row > .slide-el.flow-step1,
+  .items-row > .slide-el.flow-step2,
+  .items-col > .slide-el.branch-root,
+  .items-col > .slide-el.branch-result,
+  .items-col > .slide-el.branch-arrow {
+    position: static !important;
+    left: auto !important; top: auto !important;
+    flex: 0 0 auto; min-width: 0;
+  }
   /* 세로 나열 자식: 폭 100%, 5개+ 축소 허용 */
-  .items-col > .slide-el {
+  .items-col > .slide-el:not(.branch-root):not(.branch-result):not(.branch-arrow) {
     width: 100% !important;
     flex-shrink: 1;
   }

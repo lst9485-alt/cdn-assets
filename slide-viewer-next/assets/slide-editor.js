@@ -3064,6 +3064,14 @@
   }
 
   document.addEventListener('keydown', e => {
+    if (e.code !== 'KeyF') return;
+    if (!(presenterWindow && !presenterWindow.closed && typeof togglePresenterNotesFromMain === 'function')) return;
+    e.preventDefault();
+    e.stopPropagation();
+    togglePresenterNotesFromMain();
+  }, true);
+
+  document.addEventListener('keydown', e => {
     if (e.target && e.target.closest('input, textarea, [contenteditable="true"]')) return;
     // Ctrl+S: 저장 (텍스트 편집 중에도 허용)
     if ((e.ctrlKey || e.metaKey) && e.key === 's') {
