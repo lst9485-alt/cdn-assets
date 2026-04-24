@@ -9670,6 +9670,10 @@ function renderPreview(container, html) {
   wrap.appendChild(slideEl);
   scene.appendChild(wrap);
   const cw = container.offsetWidth, ch2 = container.offsetHeight;
+  if (!cw || !ch2) {
+    requestAnimationFrame(() => renderPreview(container, html));
+    return;
+  }
   const scale = Math.min(cw / PREVIEW_W, ch2 / PREVIEW_H);
   wrap.style.transform = 'scale(' + scale + ')';
   wrap.style.width = PREVIEW_W + 'px';
@@ -10094,7 +10098,7 @@ const getPresenterNotesText = () => {
   const notesEl = document.getElementById('pres-notes-input');
   if (!notesEl) return '';
   return String(notesEl.innerText || notesEl.textContent || '')
-    .replace(/\r\n?/g, '\n')
+    .replace(/\\r\\n?/g, '\\n')
     .trimEnd();
 };
 document.getElementById('pres-notes-input').addEventListener('focus', () => {
