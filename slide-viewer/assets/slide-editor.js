@@ -304,6 +304,7 @@
   let runtimeNotesEditingSlide = -1;
   let runtimeNotesSuppressApply = false;
   let runtimeNotesHidden = false;
+  document.body.classList.remove('presenter-open', 'runtime-notes-hidden');
 
   function ensureRuntimeNotesDock() {
     let dock = document.getElementById('runtime-notes-dock');
@@ -386,6 +387,26 @@
   }
 
   window.__toggleRuntimeNotesHidden = force => toggleRuntimeNotesHidden(force);
+
+  function shouldHandleRuntimeNotesShortcut(e) {
+    if (!e || e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey) return false;
+    if (!(e.code === 'KeyF' || String(e.key || '').toLowerCase() === 'f')) return false;
+    const target = e.target;
+    const isTyping = !!(target && target.closest && target.closest('input, textarea, [contenteditable="true"]'));
+    const isRuntimeNotes = !!(target && target.closest && target.closest('#runtime-notes-dock'));
+    return !isTyping || isRuntimeNotes;
+  }
+
+  function toggleRuntimeOrPresenterNotes(force) {
+    if (presenterWindow && !presenterWindow.closed && typeof togglePresenterNotesFromMain === 'function') {
+      if (togglePresenterNotesFromMain(force)) return true;
+    }
+    if (typeof window.__toggleRuntimeNotesHidden === 'function') {
+      window.__toggleRuntimeNotesHidden(force);
+      return true;
+    }
+    return false;
+  }
 
   function setRuntimeNotesPanelText(text) {
     const dock = ensureRuntimeNotesDock();
@@ -482,16 +503,16 @@
     const layer = ensureRuntimeInkLayer();
     const sparks = layer?.querySelector('#runtime-ink-sparks');
     if (!sparks || !point) return;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       const spark = document.createElement('span');
       spark.className = 'runtime-ink-spark';
       spark.style.left = `${point.x}px`;
       spark.style.top = `${point.y}px`;
-      spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 60}px`);
-      spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 60}px`);
-      spark.style.setProperty('--spark-scale', (0.88 + Math.random() * 0.82).toFixed(2));
+      spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 36}px`);
+      spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 36}px`);
+      spark.style.setProperty('--spark-scale', (0.62 + Math.random() * 0.34).toFixed(2));
       sparks.appendChild(spark);
-      setTimeout(() => spark.remove(), 520);
+      setTimeout(() => spark.remove(), 420);
     }
   }
 
@@ -3074,11 +3095,10 @@
   }
 
   document.addEventListener('keydown', e => {
-    if (e.code !== 'KeyF') return;
-    if (!(presenterWindow && !presenterWindow.closed && typeof togglePresenterNotesFromMain === 'function')) return;
+    if (!shouldHandleRuntimeNotesShortcut(e)) return;
     e.preventDefault();
     e.stopPropagation();
-    togglePresenterNotesFromMain();
+    toggleRuntimeOrPresenterNotes();
   }, true);
 
   document.addEventListener('keydown', e => {
@@ -3317,16 +3337,8 @@
       return;
     }
     if (e.code === 'KeyF') {
-      if (presenterWindow && !presenterWindow.closed && typeof togglePresenterNotesFromMain === 'function') {
-        e.preventDefault();
-        togglePresenterNotesFromMain();
-        return;
-      }
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else {
-        document.exitFullscreen();
-      }
+      e.preventDefault();
+      toggleRuntimeOrPresenterNotes();
       return;
     }
     if (e.code === 'KeyP') {
@@ -4802,7 +4814,19 @@
       .map(el => el.outerHTML)
       .join('');
 
-    const bodyClass = document.body.className.trim();
+    const transientBodyClasses = new Set([
+      'edit-mode',
+      'hide-dims',
+      'individual-mode',
+      'module-picker-open',
+      'overview-open',
+      'presenter-open',
+      'runtime-notes-hidden',
+      'sjn-collapsed',
+    ]);
+    const bodyClass = [...document.body.classList]
+      .filter(c => !transientBodyClasses.has(c) && !c.startsWith('show-guide'))
+      .join(' ');
     const bodyAttrs = [];
     if (bodyClass) bodyAttrs.push('class="' + escHTML(bodyClass) + '"');
     for (const [k, v] of Object.entries(document.body.dataset)) {
@@ -9760,16 +9784,16 @@ function schedulePresenterPreviewRefit() {
 function spawnPresenterSpark(point) {
   const sparks = document.getElementById('pres-ink-sparks');
   if (!sparks || !point) return;
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 3; i++) {
     const spark = document.createElement('span');
     spark.className = 'runtime-ink-spark';
     spark.style.left = point.x + 'px';
     spark.style.top = point.y + 'px';
-    spark.style.setProperty('--spark-x', ((Math.random() - 0.5) * 60) + 'px');
-    spark.style.setProperty('--spark-y', ((Math.random() - 0.5) * 60) + 'px');
-    spark.style.setProperty('--spark-scale', (0.88 + Math.random() * 0.82).toFixed(2));
+    spark.style.setProperty('--spark-x', ((Math.random() - 0.5) * 36) + 'px');
+    spark.style.setProperty('--spark-y', ((Math.random() - 0.5) * 36) + 'px');
+    spark.style.setProperty('--spark-scale', (0.62 + Math.random() * 0.34).toFixed(2));
     sparks.appendChild(spark);
-    setTimeout(() => spark.remove(), 520);
+    setTimeout(() => spark.remove(), 420);
   }
 }
 function createInkActionId() {
