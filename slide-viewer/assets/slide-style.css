@@ -2233,20 +2233,20 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
   #runtime-ink-sparks { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:2; }
 .runtime-ink-spark {
   position:absolute;
-  width:12px;
-  height:12px;
-  margin-left:-6px;
-  margin-top:-6px;
+  width:14px;
+  height:14px;
+  margin-left:-7px;
+  margin-top:-7px;
   border-radius:999px;
-  background: radial-gradient(circle, rgba(255,255,255,0.86) 0%, rgba(255,228,170,0.72) 22%, rgba(255,146,97,0.52) 48%, rgba(255,90,54,0.08) 72%, rgba(255,90,54,0) 100%);
-  box-shadow:0 0 5px rgba(255,190,140,0.34), 0 0 10px rgba(255,90,54,0.1);
-  opacity:0.68;
+  background: radial-gradient(circle, rgba(255,255,255,0.92) 0%, rgba(255,228,170,0.84) 20%, rgba(255,146,97,0.68) 46%, rgba(255,90,54,0.11) 72%, rgba(255,90,54,0) 100%);
+  box-shadow:0 0 7px rgba(255,190,140,0.46), 0 0 14px rgba(255,90,54,0.15);
+  opacity:0.78;
   mix-blend-mode:screen;
   transform: translate(0, 0) scale(var(--spark-scale, 1));
-  animation: runtime-ink-spark 0.42s ease-out forwards;
+  animation: runtime-ink-spark 0.48s ease-out forwards;
 }
 @keyframes runtime-ink-spark {
-  from { opacity:0.72; transform:translate(0, 0) scale(var(--spark-scale, 1)); }
+  from { opacity:0.82; transform:translate(0, 0) scale(var(--spark-scale, 1)); }
   to { opacity:0; transform:translate(var(--spark-x, 0), var(--spark-y, -28px)) scale(0.08); }
 }
   body.edit-mode:not(.presenter-open) #runtime-ink-layer,
