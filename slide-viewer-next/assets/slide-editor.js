@@ -294,6 +294,300 @@
     return (slide.dataset.notes || '').trim();
   }
 
+  function normalizePresenterNotesText(text) {
+    return (text || '')
+      .replace(/🟡[\d]+(?:[-–][\d]+)?\s*/g, '🟡 ')
+      .replace(/[ \t]+\n/g, '\n')
+      .trim();
+  }
+
+  let runtimeNotesEditingSlide = -1;
+  let runtimeNotesSuppressApply = false;
+
+  function ensureRuntimeNotesDock() {
+    let dock = document.getElementById('runtime-notes-dock');
+    if (dock) return dock;
+
+    dock = document.createElement('div');
+    dock.id = 'runtime-notes-dock';
+    dock.innerHTML = `
+      <button id="runtime-notes-toggle" type="button" aria-expanded="false">발표자 노트</button>
+      <div id="runtime-notes-panel" aria-hidden="true">
+        <div class="runtime-notes-label">참고 (원고)</div>
+        <textarea class="runtime-notes-body" spellcheck="false" placeholder="대본 없음"></textarea>
+      </div>
+    `;
+    dock.addEventListener('click', e => e.stopPropagation());
+    dock.addEventListener('keydown', e => e.stopPropagation());
+
+    const toggle = dock.querySelector('#runtime-notes-toggle');
+    const editor = dock.querySelector('.runtime-notes-body');
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      toggleRuntimeNotesPanel();
+    });
+    if (editor) {
+      editor.addEventListener('focus', () => {
+        runtimeNotesEditingSlide = currentSlide;
+      });
+      editor.addEventListener('input', () => {
+        if (runtimeNotesSuppressApply) return;
+        runtimeNotesEditingSlide = currentSlide;
+        if (typeof window.__applyPresenterNotes === 'function') {
+          window.__applyPresenterNotes({
+            slide: currentSlide,
+            text: editor.value,
+            flush: false,
+            source: 'runtime-dock',
+          });
+        } else if (slides[currentSlide]) {
+          slides[currentSlide].dataset.notes = editor.value;
+        }
+      });
+      editor.addEventListener('blur', () => {
+        const slideIndex = runtimeNotesEditingSlide === -1 ? currentSlide : runtimeNotesEditingSlide;
+        runtimeNotesEditingSlide = -1;
+        if (typeof window.__applyPresenterNotes === 'function') {
+          window.__applyPresenterNotes({
+            slide: slideIndex,
+            text: editor.value,
+            flush: true,
+            source: 'runtime-dock',
+          });
+        } else if (slides[slideIndex]) {
+          slides[slideIndex].dataset.notes = editor.value;
+          if (typeof saveToFile === 'function') saveToFile(true);
+        }
+      });
+    }
+
+    document.body.appendChild(dock);
+    return dock;
+  }
+
+  function toggleRuntimeNotesPanel(forceOpen) {
+    const dock = ensureRuntimeNotesDock();
+    const toggle = dock.querySelector('#runtime-notes-toggle');
+    const panel = dock.querySelector('#runtime-notes-panel');
+    const nextOpen = typeof forceOpen === 'boolean'
+      ? forceOpen
+      : !dock.classList.contains('open');
+    dock.classList.toggle('open', nextOpen);
+    toggle.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
+    panel.setAttribute('aria-hidden', nextOpen ? 'false' : 'true');
+  }
+
+  function setRuntimeNotesPanelText(text) {
+    const dock = ensureRuntimeNotesDock();
+    const body = dock.querySelector('.runtime-notes-body');
+    if (!body) return;
+    if (
+      runtimeNotesEditingSlide === currentSlide &&
+      document.activeElement === body
+    ) return;
+    runtimeNotesSuppressApply = true;
+    body.value = normalizePresenterNotesText(text);
+    runtimeNotesSuppressApply = false;
+  }
+
+  function setRuntimeNotesForSlide(slide) {
+    setRuntimeNotesPanelText(getSlideScriptPreview(slide));
+  }
+
+  const runtimeInkActionsBySlide = new Map();
+  const runtimeInkTransientBySlide = new Map();
+  const runtimeInkCursorState = {
+    slide: -1,
+    point: null,
+    mode: 'off',
+  };
+
+  function cloneInkActions(actions) {
+    return Array.isArray(actions)
+      ? actions.map(action => ({
+          ...action,
+          points: Array.isArray(action?.points)
+            ? action.points.map(point => ({ x: Number(point.x) || 0, y: Number(point.y) || 0 }))
+            : [],
+        }))
+      : [];
+  }
+
+  function ensureRuntimeInkLayer() {
+    let layer = document.getElementById('runtime-ink-layer');
+    if (layer) return layer;
+    const stage = document.getElementById('stage');
+    if (!stage) return null;
+    layer = document.createElement('div');
+    layer.id = 'runtime-ink-layer';
+    layer.innerHTML = `
+      <div id="runtime-ink-sparks"></div>
+      <canvas id="runtime-ink-canvas" width="1920" height="1080"></canvas>
+      <div id="runtime-ink-cursor" aria-hidden="true"></div>
+    `;
+    stage.appendChild(layer);
+    return layer;
+  }
+
+  function drawInkPath(ctx, points) {
+    if (!points || !points.length) return;
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    for (let i = 1; i < points.length; i++) ctx.lineTo(points[i].x, points[i].y);
+    if (points.length === 1) ctx.lineTo(points[0].x + 0.01, points[0].y + 0.01);
+    ctx.stroke();
+  }
+
+  function renderInkAction(ctx, action) {
+    if (!action) return;
+    ctx.save();
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = action.width || (action.mode === 'erase' ? 42 : 18);
+    if (action.mode === 'erase') {
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.strokeStyle = 'rgba(0,0,0,1)';
+    } else {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = action.color || '#ff3b30';
+    }
+    if (action.shape === 'rect' && action.points && action.points.length >= 2) {
+      const start = action.points[0];
+      const end = action.points[action.points.length - 1];
+      ctx.strokeRect(
+        Math.min(start.x, end.x),
+        Math.min(start.y, end.y),
+        Math.abs(end.x - start.x),
+        Math.abs(end.y - start.y),
+      );
+    } else if (action.shape === 'line' && action.points && action.points.length >= 2) {
+      drawInkPath(ctx, [action.points[0], action.points[action.points.length - 1]]);
+    } else {
+      drawInkPath(ctx, action.points);
+    }
+    ctx.restore();
+  }
+
+  function spawnRuntimeInkSpark(point) {
+    const layer = ensureRuntimeInkLayer();
+    const sparks = layer?.querySelector('#runtime-ink-sparks');
+    if (!sparks || !point) return;
+    for (let i = 0; i < 4; i++) {
+      const spark = document.createElement('span');
+      spark.className = 'runtime-ink-spark';
+      spark.style.left = `${point.x}px`;
+      spark.style.top = `${point.y}px`;
+      spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 54}px`);
+      spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 54}px`);
+      spark.style.setProperty('--spark-scale', (0.7 + Math.random() * 0.8).toFixed(2));
+      sparks.appendChild(spark);
+      setTimeout(() => spark.remove(), 520);
+    }
+  }
+
+  function renderRuntimeInkCursor() {
+    const layer = ensureRuntimeInkLayer();
+    const cursor = layer?.querySelector('#runtime-ink-cursor');
+    if (!cursor) return;
+    const point = runtimeInkCursorState.point;
+    const visible = (
+      runtimeInkCursorState.slide === currentSlide &&
+      !!point &&
+      runtimeInkCursorState.mode &&
+      runtimeInkCursorState.mode !== 'off'
+    );
+    cursor.classList.remove('visible', 'cursor-present', 'cursor-draw', 'cursor-erase');
+    if (!visible) return;
+    cursor.classList.add('visible', `cursor-${runtimeInkCursorState.mode}`);
+    cursor.style.left = `${point.x}px`;
+    cursor.style.top = `${point.y}px`;
+  }
+
+  function setRuntimeInkCursorState(slideIndex, point = null, mode = 'off') {
+    runtimeInkCursorState.slide = slideIndex;
+    runtimeInkCursorState.point = point
+      ? { x: Number(point.x) || 0, y: Number(point.y) || 0 }
+      : null;
+    runtimeInkCursorState.mode = point && mode ? mode : 'off';
+    renderRuntimeInkCursor();
+  }
+
+  function renderRuntimeInkForSlide(slideIndex = currentSlide) {
+    const layer = ensureRuntimeInkLayer();
+    const canvas = layer?.querySelector('#runtime-ink-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, 1920, 1080);
+    cloneInkActions(runtimeInkActionsBySlide.get(slideIndex) || []).forEach(action => renderInkAction(ctx, action));
+    const transient = runtimeInkTransientBySlide.get(slideIndex);
+    if (transient) renderInkAction(ctx, transient);
+    renderRuntimeInkCursor();
+  }
+
+  function setRuntimeInkStateForSlide(
+    slideIndex,
+    actions,
+    transientAction = null,
+    sparkPoint = null,
+    cursorPoint = null,
+    cursorMode = 'off',
+  ) {
+    runtimeInkActionsBySlide.set(slideIndex, cloneInkActions(actions));
+    if (transientAction && transientAction.points && transientAction.points.length) {
+      runtimeInkTransientBySlide.set(slideIndex, cloneInkActions([transientAction])[0]);
+    } else {
+      runtimeInkTransientBySlide.delete(slideIndex);
+    }
+    if (slideIndex === currentSlide) {
+      setRuntimeInkCursorState(slideIndex, cursorPoint, cursorMode);
+    } else if (runtimeInkCursorState.slide === slideIndex && !cursorPoint) {
+      setRuntimeInkCursorState(slideIndex, null, 'off');
+    }
+    if (slideIndex === currentSlide && sparkPoint) spawnRuntimeInkSpark(sparkPoint);
+    if (slideIndex === currentSlide) renderRuntimeInkForSlide(slideIndex);
+  }
+
+  function getRuntimeInkActionsForSlide(slideIndex) {
+    return cloneInkActions(runtimeInkActionsBySlide.get(slideIndex) || []);
+  }
+
+  function clearRuntimeInkForSlide(slideIndex) {
+    runtimeInkActionsBySlide.delete(slideIndex);
+    runtimeInkTransientBySlide.delete(slideIndex);
+    if (runtimeInkCursorState.slide === slideIndex) {
+      setRuntimeInkCursorState(slideIndex, null, 'off');
+    }
+    if (slideIndex === currentSlide) renderRuntimeInkForSlide(slideIndex);
+  }
+
+  function clearRuntimeInkForView(slideIndex = currentSlide) {
+    clearRuntimeInkForSlide(slideIndex);
+  }
+
+  window.getRuntimeInkActionsForSlide = getRuntimeInkActionsForSlide;
+  window.setRuntimeInkStateForSlide = setRuntimeInkStateForSlide;
+  window.renderRuntimeInkForSlide = renderRuntimeInkForSlide;
+  window.clearRuntimeInkForSlide = clearRuntimeInkForSlide;
+  window.clearRuntimeInkForView = clearRuntimeInkForView;
+  window.__getRuntimeInkState = () => ({
+    slide: currentSlide,
+    actionCount: getRuntimeInkActionsForSlide(currentSlide).length,
+    hasTransient: !!runtimeInkTransientBySlide.get(currentSlide),
+    cursorVisible: (
+      runtimeInkCursorState.slide === currentSlide &&
+      !!runtimeInkCursorState.point &&
+      runtimeInkCursorState.mode !== 'off'
+    ),
+    cursorMode: (
+      runtimeInkCursorState.slide === currentSlide &&
+      runtimeInkCursorState.point
+    ) ? runtimeInkCursorState.mode : 'off',
+    lastShape: (() => {
+      const actions = getRuntimeInkActionsForSlide(currentSlide);
+      return actions.length ? actions[actions.length - 1].shape || null : null;
+    })(),
+  });
+
   function setSlideJumpNotesText(text) {
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
@@ -408,6 +702,8 @@
   }
 
   function updateSlideJumpNav() {
+    setRuntimeNotesForSlide(slides[currentSlide]);
+    renderRuntimeInkForSlide(currentSlide);
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
     const grid = nav.querySelector('.sj-grid');
@@ -568,6 +864,8 @@
     slides = document.querySelectorAll('#stage > .slide');
     if (!slides.length) return;
     rebuildSlidesByKey();
+    ensureRuntimeNotesDock();
+    ensureRuntimeInkLayer();
 
     const activeIdx = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
     if (activeIdx >= 0) currentSlide = activeIdx;
@@ -606,6 +904,8 @@
         !!(sourceBrowseState && sourceBrowseState.revealAll)
       );
     }
+    setRuntimeNotesForSlide(slides[currentSlide]);
+    renderRuntimeInkForSlide(currentSlide);
     if (typeof buildFilmstrip === 'function') buildFilmstrip();
   }
 
@@ -2414,6 +2714,7 @@
     const next = Math.max(0, Math.min(idx, slides.length - 1));
     if (next === currentSlide) return;
     animating = true;
+    if (typeof clearRuntimeInkForView === 'function') clearRuntimeInkForView(currentSlide);
 
     // variant로 점프 시 해당 page-group 자동 expand (필름스트립 표시 동기화)
     const nextSlide = slides[next];
@@ -2596,6 +2897,7 @@
     }
     const nextStep = getNextExistingStep(slide, currentStep);
     if (nextStep !== -1) {
+      if (typeof clearRuntimeInkForView === 'function') clearRuntimeInkForView(currentSlide);
       currentStep = nextStep;
       currentOrder = 0;
       showStep(slide, currentStep);
@@ -2707,6 +3009,7 @@
       if (currentOrder === 0 && currentStep > 0) {
         const dim2 = curLayer.querySelector('.step-dim');
         if (dim2) { dim2.classList.remove('anim-shown'); syncDimOuter(slide); }
+        if (typeof clearRuntimeInkForView === 'function') clearRuntimeInkForView(currentSlide);
         currentStep = getPrevExistingStep(slide, currentStep);
         const prevLayer = slide.querySelector(`.step-layer[data-step="${currentStep}"]`);
         if (prevLayer) currentOrder = getOrderedEls(prevLayer).length;
@@ -2718,6 +3021,7 @@
       playSound('step');
       syncPresenter();
     } else if (currentStep > 0) {
+      if (typeof clearRuntimeInkForView === 'function') clearRuntimeInkForView(currentSlide);
       currentStep = getPrevExistingStep(slide, currentStep);
       const prevLayer = slide.querySelector(`.step-layer[data-step="${currentStep}"]`);
       if (prevLayer) currentOrder = getOrderedEls(prevLayer).length;
@@ -9095,9 +9399,9 @@
   }
 
   let presenterNotesSaveTimer = null;
+  let lastPresenterNotesDeliveryId = null;
 
-  function syncPresenter() {
-    if (!presenterWindow || presenterWindow.closed) return;
+  function buildPresenterSyncPayload() {
     const slide = slides[currentSlide];
     const totalSteps = getSteps(slide);
     const nextSlide = slides[currentSlide + 1];
@@ -9111,7 +9415,7 @@
       const nextNextSlide = slides[currentSlide + 2];
       nextSlideHTML = nextNextSlide ? slidePreviewHTML(nextNextSlide, 0) : '';
     }
-    presenterChannel.postMessage({
+    return {
       type: 'sync',
       slide: currentSlide,
       step: currentStep,
@@ -9119,29 +9423,88 @@
       currentHTML: slidePreviewHTML(slide, currentStep),
       nextHTML,
       nextSlideHTML,
-      notes: slide.dataset.notes || ''
-    });
+      notes: slide.dataset.notes || '',
+      inkActions: typeof getRuntimeInkActionsForSlide === 'function'
+        ? getRuntimeInkActionsForSlide(currentSlide)
+        : [],
+    };
+  }
+
+  function syncPresenter() {
+    if (!presenterWindow || presenterWindow.closed) return;
+    const payload = buildPresenterSyncPayload();
+    presenterChannel.postMessage(payload);
+    try {
+      if (typeof presenterWindow.__presenterReceiveSync === 'function') {
+        presenterWindow.__presenterReceiveSync(payload);
+      }
+    } catch (_) {}
+  }
+
+  function notifyPresenterNotesStatus(status) {
+    if (!presenterWindow || presenterWindow.closed) return;
+    presenterChannel.postMessage({ type: 'notes-status', status });
+    try {
+      if (typeof presenterWindow.__presenterReceiveNotesStatus === 'function') {
+        presenterWindow.__presenterReceiveNotesStatus(status);
+      }
+    } catch (_) {}
+  }
+
+  function resolvePresenterNotesSavedStatus() {
+    if (isGitHubPages) {
+      try {
+        if (typeof ghGetToken === 'function' && !ghGetToken()) return 'draft-saved';
+        if (!window.__ghLastSaveOk) return 'draft-saved';
+      } catch (_) {
+        return 'draft-saved';
+      }
+    }
+    return 'saved';
   }
 
   function applyPresenterNotes(payload) {
     if (!payload || !slides[payload.slide]) return;
+    if (payload.deliveryId && payload.deliveryId === lastPresenterNotesDeliveryId) return;
+    if (payload.deliveryId) lastPresenterNotesDeliveryId = payload.deliveryId;
     slides[payload.slide].dataset.notes = payload.text;
     if (typeof setSlideJumpNotesForSlide === 'function' && payload.slide === currentSlide) {
       setSlideJumpNotesForSlide(slides[payload.slide]);
     }
+    if (typeof setRuntimeNotesForSlide === 'function' && payload.slide === currentSlide) {
+      setRuntimeNotesForSlide(slides[payload.slide]);
+    }
     if (isGitHubPages && typeof ghMarkDirty === 'function') ghMarkDirty();
     if (payload.flush) {
       clearTimeout(presenterNotesSaveTimer);
-      saveToFile(true);
+      notifyPresenterNotesStatus('saving');
+      Promise.resolve(saveToFile(true))
+        .then(() => notifyPresenterNotesStatus(resolvePresenterNotesSavedStatus()))
+        .catch(() => notifyPresenterNotesStatus('failed'));
     } else {
-      clearTimeout(presenterNotesSaveTimer);
-      presenterNotesSaveTimer = setTimeout(() => {
-        saveToFile(true);
-      }, 1200);
+      notifyPresenterNotesStatus('pending');
     }
+    if (payload.source !== 'presenter') syncPresenter();
   }
 
   window.__applyPresenterNotes = payload => applyPresenterNotes(payload);
+  window.__getPresenterSyncPayload = () => buildPresenterSyncPayload();
+  function applyPresenterInkPayload(payload) {
+    if (typeof setRuntimeInkStateForSlide !== 'function') return;
+    setRuntimeInkStateForSlide(
+      payload.slide,
+      payload.actions || [],
+      payload.transientAction || null,
+      payload.sparkPoint || null,
+      payload.cursorPoint || null,
+      payload.cursorMode || 'off',
+    );
+  }
+  window.__applyPresenterInk = payload => applyPresenterInkPayload(payload);
+  window.__applyPresenterNav = action => {
+    if (action === 'next') goNext();
+    else if (action === 'prev') goPrev();
+  };
   function refreshPresenterNotesBridge() {
     const orig = window.__applyPresenterNotes;
     window.__onPresenterNotes = payload => orig(payload);
@@ -9156,6 +9519,9 @@
     }
     if (e.data.type === 'notes') {
       applyPresenterNotes(e.data);
+    }
+    if (e.data.type === 'ink') {
+      applyPresenterInkPayload(e.data);
     }
   };
 
@@ -9181,19 +9547,36 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
 #pres-slide-info { color: #FF6B00; }
 #pres-timer { color: #aaa; font-family: monospace; font-size: 18px; }
 #pres-main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
-#pres-current-wrap { flex: 6; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+#pres-current-wrap { flex: 6; padding: 12px; display: flex; flex-direction: column; gap: 8px; position: relative; }
 #pres-next-wrap { flex: 4; padding: 12px; display: flex; flex-direction: column; gap: 4px; border-left: 1px solid #333; }
 #pres-next-slide-wrap { flex: 1; display: flex; flex-direction: column; gap: 4px; border-top: 1px solid #333; padding-top: 8px; }
 .pres-label { font-size: 11px; color: #888; font-weight: 700; flex-shrink: 0; }
 .slide-preview { position: relative; overflow: hidden; flex: 1; background: #ddd; border-radius: 4px; }
+.pres-scene { position: absolute; inset: 0; }
 .slide-clone-wrap { position: absolute; top: 0; left: 0; transform-origin: top left; pointer-events: none; }
 .slide-clone-wrap * { transition: none !important; animation: none !important; }
+#pres-ink-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 12; pointer-events: none; touch-action: none; }
+#pres-current.annotate-draw #pres-ink-canvas,
+#pres-current.annotate-erase #pres-ink-canvas { pointer-events: auto; cursor: crosshair; }
+#pres-ink-toolbar { position: absolute; right: 24px; bottom: 24px; z-index: 18; display: flex; gap: 8px; padding: 10px; border-radius: 16px; background: rgba(15,15,15,0.9); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 14px 32px rgba(0,0,0,0.32); }
+#pres-ink-toolbar button { min-width: 46px; height: 46px; border: 0; border-radius: 12px; background: rgba(255,255,255,0.08); color: #fff; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 10px; }
+#pres-ink-toolbar button.active { background: rgba(255,59,48,0.2); outline: 2px solid rgba(255,90,54,0.95); }
+#pres-ink-toolbar button:disabled { opacity: 0.45; cursor: default; }
+.pres-ink-dot { width: 16px; height: 16px; border-radius: 999px; background: #ff3b30; box-shadow: 0 0 0 2px rgba(255,255,255,0.18) inset; flex-shrink: 0; }
 #pres-notes { padding: 10px 16px; background: #111; border-top: 1px solid #333; height: 160px; display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
 #pres-notes-label { font-size: 11px; color: #888; font-weight: 700; }
 #pres-notes-input { flex: 1; background: #222; border: 1px solid #444; border-radius: 6px; color: #fff; font-size: 13px; padding: 6px 10px; font-family: inherit; overflow-y: auto; line-height: 1.8; }
+#pres-notes-meta { display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:11px; color:#8a8a8a; }
+#pres-notes-status[data-tone="dirty"] { color:#ffb24d; }
+#pres-notes-status[data-tone="saving"] { color:#8ec5ff; }
+#pres-notes-status[data-tone="saved"] { color:#7ee787; }
+#pres-notes-status[data-tone="draft"] { color:#ffd866; }
+#pres-notes-status[data-tone="failed"] { color:#ff7b72; }
+#pres-notes-status[data-tone="hidden"] { color:#bdbdbd; }
 #pres-footer { display: flex; justify-content: space-between; padding: 8px 16px; background: #111; border-top: 1px solid #333; flex-shrink: 0; }
 #pres-footer button { background: #333; border: 1px solid #555; color: #fff; font-size: 14px; font-weight: 700; padding: 6px 20px; border-radius: 6px; cursor: pointer; }
 #pres-footer button:hover { background: #444; }
+body.pres-notes-hidden #pres-notes { display:none; }
 .step-layer { position: absolute; inset: 0; pointer-events: none; }
 .step-dim { position: absolute; inset: 0; }
 .step-content { position: relative; z-index: 1; }
@@ -9202,26 +9585,39 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
 <body tabindex="-1">
 <div id="presenter-root">
   <div id="pres-header">
-    <div id="pres-slide-info">슬라이드 1 / 1</div>
+    <div id="pres-slide-info">슬라이드 ${currentSlide + 1} / ${slides.length}</div>
     <div id="pres-timer">00:00:00</div>
   </div>
   <div id="pres-main">
     <div id="pres-current-wrap">
       <div class="pres-label">현재 슬라이드</div>
-      <div class="slide-preview" id="pres-current"><\/div>
+      <div class="slide-preview" id="pres-current">
+        <div class="pres-scene" id="pres-current-scene"><\/div>
+        <canvas id="pres-ink-canvas" width="1920" height="1080"><\/canvas>
+      <\/div>
+      <div id="pres-ink-toolbar">
+        <button id="pres-ink-pen" type="button" title="빨간 펜 (R)"><span class="pres-ink-dot"><\/span>펜<\/button>
+        <button id="pres-ink-eraser" type="button" title="지우개 (E)">지우개<\/button>
+        <button id="pres-ink-undo" type="button" title="실행 취소 (Ctrl+Z)">↶<\/button>
+        <button id="pres-ink-clear" type="button" title="전체 지우기">지우기<\/button>
+      <\/div>
     <\/div>
     <div id="pres-next-wrap">
       <div class="pres-label">다음 화면</div>
-      <div class="slide-preview" id="pres-next" style="flex:1;"><\/div>
+      <div class="slide-preview" id="pres-next" style="flex:1;"><div class="pres-scene" id="pres-next-scene"><\/div><\/div>
       <div id="pres-next-slide-wrap">
         <div class="pres-label">다음 슬라이드</div>
-        <div class="slide-preview" id="pres-next-slide" style="flex:1;"><\/div>
+        <div class="slide-preview" id="pres-next-slide" style="flex:1;"><div class="pres-scene" id="pres-next-slide-scene"><\/div><\/div>
       <\/div>
     <\/div>
   <\/div>
   <div id="pres-notes">
     <div id="pres-notes-label">참고 (원고)<\/div>
     <div id="pres-notes-input" contenteditable="true" style="white-space:pre-wrap;overflow-y:auto;" placeholder="발표 노트..."><\/div>
+    <div id="pres-notes-meta">
+      <div id="pres-notes-status" data-tone="saved">저장됨<\/div>
+      <div id="pres-notes-shortcut">저장: ⌘/Ctrl+S · 숨기기: F<\/div>
+    <\/div>
   <\/div>
   <div id="pres-footer">
     <button id="pres-btn-prev">◀ 이전<\/button>
@@ -9229,9 +9625,29 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
   <\/div>
 <\/div>
 <script>
-const ch = new BroadcastChannel('slide-presenter-${sessionId}');
-let curSlideIdx = 0;
+let ch = null;
+try {
+  ch = new BroadcastChannel('slide-presenter-${sessionId}');
+} catch (_) {
+  ch = null;
+}
+const PREVIEW_W = 1920;
+const PREVIEW_H = 1080;
+let curSlideIdx = ${currentSlide};
 const startTime = Date.now();
+const currentPreview = document.getElementById('pres-current');
+const inkCanvas = document.getElementById('pres-ink-canvas');
+const inkCtx = inkCanvas.getContext('2d');
+const inkActionsBySlide = new Map();
+let inkMode = 'off';
+let activeInkAction = null;
+let hoverInkPoint = null;
+let eraseDragActive = false;
+let presenterNotesEditingSlide = -1;
+let presenterNotesDirty = false;
+let presenterNotesHidden = false;
+let inkActionSeq = 1;
+let bridgeDeliverySeq = 1;
 setInterval(() => {
   const e2 = Math.floor((Date.now() - startTime) / 1000);
   const h = String(Math.floor(e2 / 3600)).padStart(2,'0');
@@ -9240,7 +9656,8 @@ setInterval(() => {
   document.getElementById('pres-timer').textContent = h+':'+m+':'+s;
 }, 1000);
 function renderPreview(container, html) {
-  container.innerHTML = '';
+  const scene = container.querySelector('.pres-scene') || container;
+  scene.innerHTML = '';
   if (!html) return;
   const wrap = document.createElement('div');
   wrap.className = 'slide-clone-wrap';
@@ -9251,46 +9668,450 @@ function renderPreview(container, html) {
   slideEl.style.cssText = 'position:relative; width:1920px; height:1080px; opacity:1; transform:none; pointer-events:none;';
   slideEl.querySelectorAll('.edit-selected, .edit-group-selected').forEach(el => { el.classList.remove('edit-selected'); el.classList.remove('edit-group-selected'); });
   wrap.appendChild(slideEl);
-  container.appendChild(wrap);
+  scene.appendChild(wrap);
   const cw = container.offsetWidth, ch2 = container.offsetHeight;
-  const scale = Math.min(cw / 1920, ch2 / 1080);
+  const scale = Math.min(cw / PREVIEW_W, ch2 / PREVIEW_H);
   wrap.style.transform = 'scale(' + scale + ')';
-  wrap.style.width = '1920px';
-  wrap.style.height = '1080px';
+  wrap.style.width = PREVIEW_W + 'px';
+  wrap.style.height = PREVIEW_H + 'px';
 }
-ch.onmessage = ev => {
-  const d = ev.data;
-  if (d.type === 'sync') {
-    curSlideIdx = d.slide;
-    document.getElementById('pres-slide-info').textContent = '슬라이드 ' + (d.slide + 1) + ' / ' + d.total;
-    renderPreview(document.getElementById('pres-current'), d.currentHTML);
-    renderPreview(document.getElementById('pres-next'), d.nextHTML);
-    renderPreview(document.getElementById('pres-next-slide'), d.nextSlideHTML || '');
-    const fullNotes = (d.notes || '').replace(/🟡[\d]+(?:[-–][\d]+)?\s*/g, '🟡');
-    const el = document.getElementById('pres-notes-input');
-    el.textContent = fullNotes;
+function createInkActionId() {
+  return 'ink-' + Date.now().toString(36) + '-' + (inkActionSeq++).toString(36);
+}
+function createBridgeDeliveryId(prefix = 'tx') {
+  return prefix + '-' + Date.now().toString(36) + '-' + (bridgeDeliverySeq++).toString(36);
+}
+function getCurrentInkActions() {
+  const existing = inkActionsBySlide.get(curSlideIdx);
+  if (existing) return existing;
+  const next = [];
+  inkActionsBySlide.set(curSlideIdx, next);
+  return next;
+}
+function cloneInkActions(actions) {
+  return Array.isArray(actions)
+    ? actions.map(action => ({
+        ...action,
+        points: Array.isArray(action?.points)
+          ? action.points.map(point => ({ x: Number(point.x) || 0, y: Number(point.y) || 0 }))
+          : [],
+      }))
+    : [];
+}
+function pointToSegmentDistance(point, start, end) {
+  const dx = end.x - start.x;
+  const dy = end.y - start.y;
+  if (!dx && !dy) return Math.hypot(point.x - start.x, point.y - start.y);
+  const t = Math.max(0, Math.min(1, (((point.x - start.x) * dx) + ((point.y - start.y) * dy)) / ((dx * dx) + (dy * dy))));
+  const px = start.x + (dx * t);
+  const py = start.y + (dy * t);
+  return Math.hypot(point.x - px, point.y - py);
+}
+function actionIntersectsErasePoint(action, point, radius = 28) {
+  if (!action || !point || !action.points || !action.points.length) return false;
+  const hitRadius = radius + ((action.width || 18) / 2);
+  const points = action.shape === 'line'
+    ? [action.points[0], action.points[action.points.length - 1]]
+    : action.points;
+  if (action.shape === 'rect' && action.points.length >= 2) {
+    const start = action.points[0];
+    const end = action.points[action.points.length - 1];
+    const left = Math.min(start.x, end.x);
+    const right = Math.max(start.x, end.x);
+    const top = Math.min(start.y, end.y);
+    const bottom = Math.max(start.y, end.y);
+    const segments = [
+      [{ x: left, y: top }, { x: right, y: top }],
+      [{ x: right, y: top }, { x: right, y: bottom }],
+      [{ x: right, y: bottom }, { x: left, y: bottom }],
+      [{ x: left, y: bottom }, { x: left, y: top }],
+    ];
+    return segments.some(([a, b]) => pointToSegmentDistance(point, a, b) <= hitRadius);
   }
-};
-document.getElementById('pres-btn-prev').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'prev' }));
-document.getElementById('pres-btn-next').addEventListener('click', () => ch.postMessage({ type: 'nav', action: 'next' }));
-const sendNotes = (text, flush = false) => {
-  const payload = { type: 'notes', slide: curSlideIdx, text, flush };
-  ch.postMessage(payload);
+  if (points.length === 1) return Math.hypot(point.x - points[0].x, point.y - points[0].y) <= hitRadius;
+  for (let i = 1; i < points.length; i++) {
+    if (pointToSegmentDistance(point, points[i - 1], points[i]) <= hitRadius) return true;
+  }
+  return false;
+}
+function drawInkPath(ctx, points) {
+  if (!points || !points.length) return;
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i < points.length; i++) {
+    ctx.lineTo(points[i].x, points[i].y);
+  }
+  if (points.length === 1) {
+    ctx.lineTo(points[0].x + 0.01, points[0].y + 0.01);
+  }
+  ctx.stroke();
+}
+function renderInkAction(ctx, action) {
+  if (!action) return;
+  ctx.save();
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = action.width || (action.mode === 'erase' ? 42 : 18);
+  if (action.mode === 'erase') {
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.strokeStyle = 'rgba(0,0,0,1)';
+  } else {
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.strokeStyle = action.color || '#ff3b30';
+  }
+  if (action.shape === 'rect' && action.points && action.points.length >= 2) {
+    const start = action.points[0];
+    const end = action.points[action.points.length - 1];
+    ctx.strokeRect(
+      Math.min(start.x, end.x),
+      Math.min(start.y, end.y),
+      Math.abs(end.x - start.x),
+      Math.abs(end.y - start.y),
+    );
+  } else if (action.shape === 'line' && action.points && action.points.length >= 2) {
+    drawInkPath(ctx, [action.points[0], action.points[action.points.length - 1]]);
+  } else {
+    drawInkPath(ctx, action.points);
+  }
+  ctx.restore();
+}
+function redrawPresenterInk(transientAction = null) {
+  inkCtx.clearRect(0, 0, PREVIEW_W, PREVIEW_H);
+  getCurrentInkActions().forEach(action => renderInkAction(inkCtx, action));
+  if (transientAction) renderInkAction(inkCtx, transientAction);
+}
+function updateInkToolbar() {
+  document.getElementById('pres-ink-pen').classList.toggle('active', inkMode === 'draw');
+  document.getElementById('pres-ink-eraser').classList.toggle('active', inkMode === 'erase');
+  const hasInk = getCurrentInkActions().length > 0;
+  document.getElementById('pres-ink-undo').disabled = !hasInk;
+  document.getElementById('pres-ink-clear').disabled = !hasInk;
+}
+function setInkMode(nextMode) {
+  inkMode = nextMode;
+  eraseDragActive = false;
+  currentPreview.classList.toggle('annotate-draw', nextMode === 'draw');
+  currentPreview.classList.toggle('annotate-erase', nextMode === 'erase');
+  updateInkToolbar();
+  scheduleInkBroadcast(true);
+}
+function getSparkPoint() {
+  const points = activeInkAction?.points;
+  return points && points.length ? points[points.length - 1] : null;
+}
+function getCursorMode() {
+  if (!hoverInkPoint) return 'off';
+  if (inkMode === 'erase') return 'erase';
+  if (inkMode === 'draw') return 'draw';
+  return 'present';
+}
+function postInkState() {
+  const payload = {
+    type: 'ink',
+    slide: curSlideIdx,
+    actions: cloneInkActions(getCurrentInkActions()),
+    transientAction: activeInkAction ? cloneInkActions([activeInkAction])[0] : null,
+    sparkPoint: getSparkPoint(),
+    cursorPoint: hoverInkPoint,
+    cursorMode: getCursorMode(),
+  };
+  if (ch) ch.postMessage(payload);
   try {
-    if (window.opener && !window.opener.closed && typeof window.opener.__onPresenterNotes === 'function') {
-      window.opener.__onPresenterNotes(payload);
+    if (window.opener && !window.opener.closed && typeof window.opener.__applyPresenterInk === 'function') {
+      window.opener.__applyPresenterInk(payload);
+    }
+  } catch (_) {}
+}
+let inkBroadcastQueued = false;
+function scheduleInkBroadcast(force = false) {
+  if (force) {
+    inkBroadcastQueued = false;
+    postInkState();
+    return;
+  }
+  if (inkBroadcastQueued) return;
+  inkBroadcastQueued = true;
+  requestAnimationFrame(() => {
+    inkBroadcastQueued = false;
+    postInkState();
+  });
+}
+function clearPresenterInk() {
+  inkActionsBySlide.set(curSlideIdx, []);
+  redrawPresenterInk();
+  updateInkToolbar();
+  scheduleInkBroadcast(true);
+}
+function eraseActionsAtPoint(point) {
+  const actions = getCurrentInkActions();
+  if (!actions.length) return false;
+  const kept = [];
+  let removed = false;
+  actions.forEach(action => {
+    if (actionIntersectsErasePoint(action, point)) removed = true;
+    else kept.push(action);
+  });
+  if (!removed) return false;
+  inkActionsBySlide.set(curSlideIdx, kept);
+  redrawPresenterInk();
+  updateInkToolbar();
+  return true;
+}
+function undoPresenterInk() {
+  const actions = getCurrentInkActions();
+  if (!actions.length) return;
+  actions.pop();
+  redrawPresenterInk();
+  updateInkToolbar();
+  scheduleInkBroadcast(true);
+}
+function getInkPoint(ev) {
+  const rect = inkCanvas.getBoundingClientRect();
+  return {
+    x: ((ev.clientX - rect.left) / rect.width) * PREVIEW_W,
+    y: ((ev.clientY - rect.top) / rect.height) * PREVIEW_H,
+  };
+}
+function finishInkAction(ev) {
+  if (!activeInkAction) return;
+  if (ev && activeInkAction.points.length === 1) {
+    activeInkAction.points.push(getInkPoint(ev));
+  }
+  if (ev) hoverInkPoint = getInkPoint(ev);
+  getCurrentInkActions().push(activeInkAction);
+  activeInkAction = null;
+  redrawPresenterInk();
+  updateInkToolbar();
+  scheduleInkBroadcast(true);
+}
+function setPresenterNotesStatus(text, tone = 'saved') {
+  const el = document.getElementById('pres-notes-status');
+  if (!el) return;
+  el.textContent = text;
+  el.dataset.tone = tone;
+}
+function flushNotes(reason = 'manual') {
+  const notesEl = document.getElementById('pres-notes-input');
+  if (!notesEl) return;
+  if (!presenterNotesDirty) {
+    setPresenterNotesStatus(
+      presenterNotesHidden ? '원고 숨김 (F로 복귀)' : '저장됨',
+      presenterNotesHidden ? 'hidden' : 'saved'
+    );
+    return;
+  }
+  presenterNotesDirty = false;
+  setPresenterNotesStatus(reason === 'nav' ? '이동 전 저장 중…' : '저장 중…', 'saving');
+  sendNotes(getPresenterNotesText(), true);
+}
+function togglePresenterNotesHidden(force) {
+  presenterNotesHidden = typeof force === 'boolean' ? force : !presenterNotesHidden;
+  document.body.classList.toggle('pres-notes-hidden', presenterNotesHidden);
+  if (presenterNotesHidden) setPresenterNotesStatus('원고 숨김 (F로 복귀)', 'hidden');
+  else setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
+}
+function postNav(action) {
+  if (presenterNotesDirty) flushNotes('nav');
+  if (ch) ch.postMessage({ type: 'nav', action });
+  try {
+    if (window.opener && !window.opener.closed && typeof window.opener.__applyPresenterNav === 'function') {
+      window.opener.__applyPresenterNav(action);
+    }
+  } catch (_) {}
+}
+function handleSyncPayload(d) {
+  if (!d || d.type !== 'sync') return;
+  const prevSlideIdx = curSlideIdx;
+  if (prevSlideIdx !== d.slide && presenterNotesDirty) {
+    const dirtySlide = presenterNotesEditingSlide !== -1 ? presenterNotesEditingSlide : prevSlideIdx;
+    presenterNotesDirty = false;
+    setPresenterNotesStatus('이동 전 저장 중…', 'saving');
+    const payload = { type: 'notes', slide: dirtySlide, text: getPresenterNotesText(), flush: true, source: 'presenter', deliveryId: createBridgeDeliveryId('note') };
+    if (ch) ch.postMessage(payload);
+    try {
+      if (window.opener && !window.opener.closed && typeof window.opener.__applyPresenterNotes === 'function') {
+        window.opener.__applyPresenterNotes(payload);
+      }
+    } catch (_) {}
+  }
+  curSlideIdx = d.slide;
+  document.getElementById('pres-slide-info').textContent = '슬라이드 ' + (d.slide + 1) + ' / ' + d.total;
+  renderPreview(document.getElementById('pres-current'), d.currentHTML);
+  renderPreview(document.getElementById('pres-next'), d.nextHTML);
+  renderPreview(document.getElementById('pres-next-slide'), d.nextSlideHTML || '');
+  const el = document.getElementById('pres-notes-input');
+  const fullNotes = (d.notes || '').trim();
+  if (prevSlideIdx !== d.slide) presenterNotesEditingSlide = -1;
+  if (!(presenterNotesEditingSlide === d.slide && document.activeElement === el)) {
+    el.textContent = fullNotes;
+    if (!presenterNotesHidden) {
+      setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
+    }
+  }
+  inkActionsBySlide.set(curSlideIdx, cloneInkActions(d.inkActions || []));
+  activeInkAction = null;
+  eraseDragActive = false;
+  hoverInkPoint = null;
+  redrawPresenterInk();
+  updateInkToolbar();
+}
+function handleNotesStatus(status) {
+  if (status === 'pending') {
+    presenterNotesDirty = true;
+    setPresenterNotesStatus('자동 저장 대기', 'dirty');
+  } else if (status === 'saving') {
+    setPresenterNotesStatus('저장 중…', 'saving');
+  } else if (status === 'draft-saved') {
+    presenterNotesDirty = false;
+    setPresenterNotesStatus('임시 저장됨', 'draft');
+  } else if (status === 'failed') {
+    presenterNotesDirty = true;
+    setPresenterNotesStatus('저장 실패', 'failed');
+  } else {
+    presenterNotesDirty = false;
+    setPresenterNotesStatus('저장됨', 'saved');
+  }
+}
+window.__presenterReceiveSync = payload => handleSyncPayload(payload);
+window.__presenterReceiveNotesStatus = status => handleNotesStatus(status);
+if (ch) {
+  ch.onmessage = ev => {
+    const d = ev.data;
+    if (d.type === 'sync') handleSyncPayload(d);
+    if (d.type === 'notes-status') handleNotesStatus(d.status);
+  };
+}
+document.getElementById('pres-btn-prev').addEventListener('click', () => postNav('prev'));
+document.getElementById('pres-btn-next').addEventListener('click', () => postNav('next'));
+document.getElementById('pres-ink-pen').addEventListener('click', () => setInkMode(inkMode === 'draw' ? 'off' : 'draw'));
+document.getElementById('pres-ink-eraser').addEventListener('click', () => setInkMode(inkMode === 'erase' ? 'off' : 'erase'));
+document.getElementById('pres-ink-undo').addEventListener('click', undoPresenterInk);
+document.getElementById('pres-ink-clear').addEventListener('click', clearPresenterInk);
+currentPreview.addEventListener('pointerenter', ev => {
+  hoverInkPoint = getInkPoint(ev);
+  if (!activeInkAction) scheduleInkBroadcast(true);
+});
+currentPreview.addEventListener('pointermove', ev => {
+  hoverInkPoint = getInkPoint(ev);
+  if (!activeInkAction) scheduleInkBroadcast(inkMode !== 'draw');
+});
+currentPreview.addEventListener('pointerleave', () => {
+  hoverInkPoint = null;
+  if (!activeInkAction) scheduleInkBroadcast(true);
+});
+inkCanvas.addEventListener('pointerdown', ev => {
+  if (inkMode === 'off') return;
+  ev.preventDefault();
+  hoverInkPoint = getInkPoint(ev);
+  if (inkMode === 'erase') {
+    eraseDragActive = true;
+    inkCanvas.setPointerCapture(ev.pointerId);
+    eraseActionsAtPoint(hoverInkPoint);
+    scheduleInkBroadcast(true);
+    return;
+  }
+  activeInkAction = {
+    id: createInkActionId(),
+    mode: 'draw',
+    shape: (ev.ctrlKey || ev.metaKey) ? 'rect' : (ev.shiftKey ? 'line' : 'freehand'),
+    color: '#ff3b30',
+    width: 18,
+    points: [hoverInkPoint],
+  };
+  inkCanvas.setPointerCapture(ev.pointerId);
+  redrawPresenterInk(activeInkAction);
+  scheduleInkBroadcast();
+});
+inkCanvas.addEventListener('pointermove', ev => {
+  const point = getInkPoint(ev);
+  hoverInkPoint = point;
+  if (eraseDragActive) {
+    eraseActionsAtPoint(point);
+    scheduleInkBroadcast(true);
+    return;
+  }
+  if (!activeInkAction) return;
+  if (activeInkAction.shape === 'rect' || activeInkAction.shape === 'line') {
+    activeInkAction.points = [activeInkAction.points[0], point];
+  } else {
+    activeInkAction.points.push(point);
+  }
+  redrawPresenterInk(activeInkAction);
+  scheduleInkBroadcast();
+});
+inkCanvas.addEventListener('pointerup', ev => {
+  if (eraseDragActive) {
+    eraseDragActive = false;
+    hoverInkPoint = getInkPoint(ev);
+    scheduleInkBroadcast(true);
+    return;
+  }
+  finishInkAction(ev);
+});
+inkCanvas.addEventListener('pointercancel', () => {
+  activeInkAction = null;
+  eraseDragActive = false;
+  redrawPresenterInk();
+  scheduleInkBroadcast(true);
+});
+inkCanvas.addEventListener('lostpointercapture', () => {
+  if (eraseDragActive) {
+    eraseDragActive = false;
+    scheduleInkBroadcast(true);
+    return;
+  }
+  if (!activeInkAction) return;
+  getCurrentInkActions().push(activeInkAction);
+  hoverInkPoint = activeInkAction.points.length
+    ? activeInkAction.points[activeInkAction.points.length - 1]
+    : hoverInkPoint;
+  activeInkAction = null;
+  redrawPresenterInk();
+  updateInkToolbar();
+  scheduleInkBroadcast(true);
+});
+window.__getPresenterInkState = () => ({
+  mode: inkMode,
+  actionCount: getCurrentInkActions().length,
+  cursorVisible: !!hoverInkPoint,
+  cursorMode: getCursorMode(),
+  eraseDragActive,
+  lastShape: (() => {
+    const actions = getCurrentInkActions();
+    return actions.length ? actions[actions.length - 1].shape || null : null;
+  })(),
+});
+const sendNotes = (text, flush = false) => {
+  const payload = { type: 'notes', slide: curSlideIdx, text, flush, source: 'presenter', deliveryId: createBridgeDeliveryId('note') };
+  if (ch) ch.postMessage(payload);
+  try {
+    if (window.opener && !window.opener.closed && typeof window.opener.__applyPresenterNotes === 'function') {
+      window.opener.__applyPresenterNotes(payload);
     }
   } catch (_) {}
 };
-const flushNotes = () => {
+const getPresenterNotesText = () => {
   const notesEl = document.getElementById('pres-notes-input');
-  if (!notesEl) return;
-  sendNotes(notesEl.textContent, true);
+  if (!notesEl) return '';
+  return String(notesEl.innerText || notesEl.textContent || '')
+    .replace(/\r\n?/g, '\n')
+    .trimEnd();
 };
-document.getElementById('pres-notes-input').addEventListener('input', ev => sendNotes(ev.target.textContent));
-document.getElementById('pres-notes-input').addEventListener('blur', flushNotes);
-window.addEventListener('pagehide', flushNotes);
-window.addEventListener('beforeunload', flushNotes);
+document.getElementById('pres-notes-input').addEventListener('focus', () => {
+  presenterNotesEditingSlide = curSlideIdx;
+});
+document.getElementById('pres-notes-input').addEventListener('input', ev => {
+  presenterNotesEditingSlide = curSlideIdx;
+  presenterNotesDirty = true;
+  setPresenterNotesStatus('자동 저장 대기', 'dirty');
+  sendNotes(getPresenterNotesText());
+});
+document.getElementById('pres-notes-input').addEventListener('blur', () => {
+  presenterNotesEditingSlide = -1;
+  flushNotes('manual');
+});
+window.addEventListener('pagehide', () => flushNotes('manual'));
+window.addEventListener('beforeunload', () => flushNotes('manual'));
 // textarea 밖을 클릭하면 포커스 해제 (contenteditable는 자동 blur 안 되는 경우 있음)
 document.addEventListener('click', ev => {
   const notes = document.getElementById('pres-notes-input');
@@ -9304,11 +10125,49 @@ setTimeout(() => {
 }, 0);
 document.addEventListener('keydown', ev => {
   const ae = document.activeElement;
+  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'z') {
+    ev.preventDefault();
+    undoPresenterInk();
+    return;
+  }
+  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 's') {
+    ev.preventDefault();
+    flushNotes('manual');
+    return;
+  }
+  if (ev.key.toLowerCase() === 'f') {
+    ev.preventDefault();
+    if (presenterNotesDirty) flushNotes('manual');
+    togglePresenterNotesHidden();
+    return;
+  }
   if (ae && ae.id === 'pres-notes-input') return;
-  if (ev.key === 'ArrowRight') { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'next' }); }
-  if (ev.key === 'ArrowLeft') { ev.preventDefault(); ch.postMessage({ type: 'nav', action: 'prev' }); }
+  if (ev.key.toLowerCase() === 'r') {
+    ev.preventDefault();
+    setInkMode(inkMode === 'draw' ? 'off' : 'draw');
+    return;
+  }
+  if (ev.key.toLowerCase() === 'e') {
+    ev.preventDefault();
+    setInkMode(inkMode === 'erase' ? 'off' : 'erase');
+    return;
+  }
+  if (ev.key === 'Escape' && inkMode !== 'off') {
+    ev.preventDefault();
+    setInkMode('off');
+    return;
+  }
+  if (ev.key === 'ArrowRight') { ev.preventDefault(); postNav('next'); }
+  if (ev.key === 'ArrowLeft') { ev.preventDefault(); postNav('prev'); }
 });
-ch.postMessage({ type: 'ready' });
+if (ch) ch.postMessage({ type: 'ready' });
+try {
+  if (window.opener && !window.opener.closed && typeof window.opener.__getPresenterSyncPayload === 'function') {
+    handleSyncPayload(window.opener.__getPresenterSyncPayload());
+  }
+} catch (_) {}
+updateInkToolbar();
+setPresenterNotesStatus('저장됨', 'saved');
 <\/script>
 <\/body><\/html>`);
     presenterWindow.document.close();
