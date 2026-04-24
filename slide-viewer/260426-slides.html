@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="UTF-8">
+<title>slides-editor</title>
+<script>(function(){const name=location.pathname.split('/').pop().replace('.html','');const m=name.match(/(\d{4})(\d{2})(\d{2})/);document.title=m?`${m[1]}-${m[2]}-${m[3]}`:name;})()</script>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@900&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/slide-style.css?v=1777007796702564809">
+<style id="edit-badge-style">@keyframes editBadgeBlink{0%,100%{opacity:1}50%{opacity:0.3}}</style></head>
+<body class="" data-generated="true">
+
+<div id="layer-panel" class="">
+  <div class="layer-tabs">
+    <div class="layer-tab active" data-tab="animation">애니메이션</div>
+    <div class="layer-tab" data-tab="position">위치</div>
+  </div>
+  <div id="layer-tab-header"><div class="anim-section-title">프레젠테이션 설정</div><div class="anim-toggle-row"><span class="anim-toggle-label">클릭 시 표시</span>
+      <label class="anim-toggle disabled">
+        <input type="checkbox" disabled="">
+        <span class="anim-toggle-slider"></span>
+      </label></div><div class="anim-type-row"><span class="anim-type-label">애니메이션</span><select class="anim-type-select" disabled=""><option value="" selected="">기본 (아래에서)</option><option value="anim-scale">확대</option><option value="anim-left">왼쪽에서</option><option value="anim-right">오른쪽에서</option><option value="anim-pop">팝</option><option value="anim-fade">페이드</option><option value="anim-zoom">줌</option><option value="anim-flip">플립</option><option value="anim-split">스플릿</option><option value="anim-center">중앙 등장</option><option value="anim-underline">밑줄 긋기</option></select></div><div class="anim-pushup-row"><span class="anim-pushup-label">밀어올리기 전환</span>
+      <label class="anim-toggle disabled">
+        <input type="checkbox" disabled="">
+        <span class="anim-toggle-slider"></span>
+      </label></div><div class="anim-pushup-row"><span class="anim-pushup-label">오버레이 없음</span>
+      <label class="anim-toggle disabled">
+        <input type="checkbox" disabled="">
+        <span class="anim-toggle-slider"></span>
+      </label></div><div class="anim-sort-label"><span class="anim-sort-icon">☰</span> 클릭하여 정렬</div></div>
+  <div id="layer-list"></div>
+</div>
+<div id="guide-toolbar">
+  <div class="guide-btn" data-target="title" style="border-color:rgba(255,200,0,0.7); color:rgba(255,200,0,0.9);">T</div>
+  <div class="guide-btn" data-target="1" style="border-color:rgba(255,60,60,0.6); color:rgba(255,60,60,0.9);">1</div>
+  <div class="guide-btn" data-target="2" style="border-color:rgba(255,140,0,0.6); color:rgba(255,140,0,0.9);">2</div>
+  <div class="guide-btn" data-target="3" style="border-color:rgba(0,180,80,0.6); color:rgba(0,180,80,0.9);">3</div>
+  <div class="guide-btn" data-target="4" style="border-color:rgba(0,120,255,0.6); color:rgba(0,120,255,0.9);">4</div>
+  <div class="guide-btn" data-target="5" style="border-color:rgba(150,60,200,0.6); color:rgba(150,60,200,0.9);">5</div>
+</div>
+<div id="dim-outer" class=""></div>
+<div id="stage" style="">
+<div id="center-cross"></div>
+<div id="snap-x" style="display:none;" class=""></div>
+<div id="snap-y" style="display:none;" class=""></div>
+<div id="guide-snap-overlay"></div>
+<div id="multi-select-box" style="display:none;"></div>
+<div id="group-box" style="display:none;"></div>
+<div id="gap-left" class="gap-indicator" style="display: none; left: 0px; top: 397px; width: 1089px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: 525px; top: -14px;">1089px</div></div>
+<div id="gap-right" class="gap-indicator" style="display: none; left: 1769px; top: 397px; width: 151px; height: 0px;"><div class="gap-line" style="left: 0px; top: 0px; width: 100%; height: 2px;"></div><div class="gap-val" style="left: 56px; top: -14px;">151px</div></div>
+<div id="gap-top" class="gap-indicator" style="display: none; left: 1428px; top: 0px; width: 0px; height: 202px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 91px; left: 6px;">202px</div></div>
+<div id="gap-bottom" class="gap-indicator" style="display: none; left: 1428px; top: 594px; width: 0px; height: 486px;"><div class="gap-line" style="left: 0px; top: 0px; width: 2px; height: 100%;"></div><div class="gap-val" style="top: 233px; left: 6px;">486px</div></div>
+<div class="resize-handle" data-corner="tl" style="left: 1114px; top: 74px;"></div>
+<div class="resize-handle" data-corner="tr" style="left: 1794px; top: 74px;"></div>
+<div class="resize-handle" data-corner="bl" style="left: 1114px; top: 252px;"></div>
+<div class="resize-handle" data-corner="br" style="left: 1794px; top: 252px;"></div>
+<div class="resize-handle edge" data-edge="t" style="left: 1454px; top: 74px;"></div>
+<div class="resize-handle edge" data-edge="r" style="left: 1794px; top: 163px;"></div>
+<div class="resize-handle edge" data-edge="b" style="left: 1454px; top: 252px;"></div>
+<div class="resize-handle edge" data-edge="l" style="left: 1114px; top: 163px;"></div>
+<div id="select-box" style="display:none;"></div>
+
+
+  
+<div class="slide active" data-page-group="1" data-variant="0" id="slide1a" data-steps="1" data-notes="🟡 🟡1 300년째 똑같이 반복되는 장면이 하나 있습니다." data-type="한줄강조">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡1 300년째 똑같이 반복되는 장면이 하나 있습니다.">
+    <div class="items-col" style="top:380px; gap:0;">
+      <div class="slide-el line1-emph" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">300년째 반복되는 장면</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="1" data-variant="1" id="slide1b" data-steps="1" data-type="토픽결론">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
+      <div class="hl-wrap">
+        <div><span class="hl" style="font-size:84px;">300년째 반복</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="1" data-variant="2" id="slide1c" data-steps="1" data-type="아이콘+텍스트">
+  <div class="step-layer" data-step="0">
+    <div class="items-row" style="top:240px; align-items:center;">
+      <div class="slide-el emoji-icon" style="width:300px; height:300px; flex:0 0 300px;">
+        <svg viewBox="0 0 200 200" style="width:100%;height:100%;">
+          <circle cx="100" cy="100" r="92" fill="#FF6B00" stroke="#222" stroke-width="10"/>
+          <text x="100" y="148" text-anchor="middle" font-family="'Pretendard','Noto Sans KR',sans-serif"
+            font-size="140" font-weight="900" fill="#222">?</text>
+        </svg>
+      </div>
+      <div class="slide-el text-area" style="width:960px; flex:1 1 auto;">
+        <div class="hl-wrap">
+          <div><span class="hl">반복의 패턴</span></div>
+          <div><span class="hl">300년 동안 한 번도 바뀌지 않았습니다</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="2" data-variant="0" id="slide2a" data-steps="1" data-notes="🟡 🟡2 1793년 프랑스에서, 한 정치인이 가난한 사람도 우유를 마실 자격이 있다며 우유값을 반으로 내렸습니다." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡2 1793년 프랑스에서, 한 정치인이 가난한 사람도 우유를 마실 자격이 있다며 우유값을 반으로 내렸습니다.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">WHY</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">1793년 프랑스</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">한 정치인의 선택</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="2" data-variant="1" id="slide2b" data-steps="1" data-type="이미지+텍스트">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:200px; top:96px; width:1520px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl" style="font-size:88px;">로베스피에르</span></div>
+      </div>
+    </div>
+    <div class="slide-el img-caption" data-type="캡션" style="position:absolute; left:200px; top:650px; width:1520px; text-align:center;">
+      우유값을 반으로 낮춰라
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="2" data-variant="2" id="slide2c" data-steps="1" data-type="토픽결론">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
+      <div class="hl-wrap">
+        <div><span class="hl" style="font-size:84px;">가난한 사람도 우유를 마실 자격이 있다</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="3" data-variant="0" id="slide3a" data-steps="1" data-notes="🟡 🟡3 선의로 시작했지만, 결과는 반대였습니다." data-type="한줄강조">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡3 선의로 시작했지만, 결과는 반대였습니다.">
+    <div class="items-col" style="top:380px; gap:0;">
+      <div class="slide-el line1-emph" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">선의로 시작했지만, 결과는 반대였습니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="3" data-variant="1" id="slide3b" data-steps="1" data-type="토픽결론">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
+      <div class="hl-wrap">
+        <div><span class="hl" style="font-size:84px;">선의의 역설</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="3" data-variant="2" id="slide3c" data-steps="1" data-type="태그칩">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">정책의 역설</span></div>
+      </div>
+    </div>
+    <div class="items-col" style="top:380px;">
+      <div class="slide-el tag-group" data-type="태그그룹">
+        <div class="tag-chip white">의도</div>
+        <div class="tag-chip white">결과</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="4" data-variant="0" id="slide4a" data-steps="1" data-notes="🟡 🟡4 우유값이 오히려 10배 폭등했고, 서민들은 더 굶었습니다." data-type="두줄대비">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡4 우유값이 오히려 10배 폭등했고, 서민들은 더 굶었습니다.">
+    <div class="items-col" style="top:330px; gap:40px;">
+      <div class="slide-el contrast-top" data-type="제목" data-appear-step="0" style="text-align:center; font-size:88px; font-weight:800; color:var(--color-text-sub);">우유값 10배 폭등</div>
+      <div class="slide-el contrast-bottom" data-type="하단" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:112px;">서민들은 더 굶었습니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="4" data-variant="1" id="slide4b" data-steps="1" data-type="아이콘+텍스트">
+  <div class="step-layer" data-step="0">
+    <div class="items-row" style="top:240px; align-items:center;">
+      <div class="slide-el emoji-icon" style="width:300px; height:300px; flex:0 0 300px;">
+        <svg viewBox="0 0 200 200" style="width:100%;height:100%;">
+          <circle cx="100" cy="100" r="92" fill="#FF6B00" stroke="#222" stroke-width="10"/>
+          <text x="100" y="148" text-anchor="middle" font-family="'Pretendard','Noto Sans KR',sans-serif"
+            font-size="140" font-weight="900" fill="#222">?</text>
+        </svg>
+      </div>
+      <div class="slide-el text-area" style="width:960px; flex:1 1 auto;">
+        <div class="hl-wrap">
+          <div><span class="hl">가격 폭등</span></div>
+          <div><span class="hl">통제가 오히려 가격을 올렸습니다</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="4" data-variant="2" id="slide4c" data-steps="1" data-type="토픽결론">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
+      <div class="hl-wrap">
+        <div><span class="hl" style="font-size:84px;">시장은 통제할 수 없다</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="5" data-variant="0" id="slide5a" data-steps="1" data-notes="🟡 🟡5 그런데, 2026년 한국에서도 비슷한 일이 벌어지고 있습니다." data-type="한줄강조">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡5 그런데, 2026년 한국에서도 비슷한 일이 벌어지고 있습니다.">
+    <div class="items-col" style="top:380px; gap:0;">
+      <div class="slide-el line1-emph" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">2026년 한국에서도 같은 일이 벌어집니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="5" data-variant="1" id="slide5b" data-steps="1" data-type="토픽결론">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
+      <div class="hl-wrap">
+        <div><span class="hl" style="font-size:84px;">지금 이 순간</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="5" data-variant="2" id="slide5c" data-steps="1" data-type="아이콘+텍스트">
+  <div class="step-layer" data-step="0">
+    <div class="items-row" style="top:240px; align-items:center;">
+      <div class="slide-el emoji-icon" style="width:300px; height:300px; flex:0 0 300px;">
+        <svg viewBox="0 0 200 200" style="width:100%;height:100%;">
+          <circle cx="100" cy="100" r="92" fill="#FF6B00" stroke="#222" stroke-width="10"/>
+          <text x="100" y="148" text-anchor="middle" font-family="'Pretendard','Noto Sans KR',sans-serif"
+            font-size="140" font-weight="900" fill="#222">?</text>
+        </svg>
+      </div>
+      <div class="slide-el text-area" style="width:960px; flex:1 1 auto;">
+        <div class="hl-wrap">
+          <div><span class="hl">한국의 현실</span></div>
+          <div><span class="hl">똑같은 패턴이 반복되고 있습니다</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="6" data-variant="0" id="slide6a" data-steps="1" data-notes="🟡 🟡6 정부가 가격을 통제해서 성공한 적은 300년 동안 한 번도 없었습니다." data-type="한줄강조">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡6 정부가 가격을 통제해서 성공한 적은 300년 동안 한 번도 없었습니다.">
+    <div class="items-col" style="top:380px; gap:0;">
+      <div class="slide-el line1-emph" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">가격통제로 성공한 정부는 없습니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="6" data-variant="1" id="slide6b" data-steps="1" data-type="태그칩">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">역사의 기록</span></div>
+      </div>
+    </div>
+    <div class="items-col" style="top:380px;">
+      <div class="slide-el tag-group" data-type="태그그룹">
+        <div class="tag-chip white">성공 사례</div>
+        <div class="tag-chip white">실패 사례</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="6" data-variant="2" id="slide6c" data-steps="1" data-type="아이콘+텍스트">
+  <div class="step-layer" data-step="0">
+    <div class="items-row" style="top:240px; align-items:center;">
+      <div class="slide-el emoji-icon" style="width:300px; height:300px; flex:0 0 300px;">
+        <svg viewBox="0 0 200 200" style="width:100%;height:100%;">
+          <circle cx="100" cy="100" r="92" fill="#FF6B00" stroke="#222" stroke-width="10"/>
+          <text x="100" y="148" text-anchor="middle" font-family="'Pretendard','Noto Sans KR',sans-serif"
+            font-size="140" font-weight="900" fill="#222">?</text>
+        </svg>
+      </div>
+      <div class="slide-el text-area" style="width:960px; flex:1 1 auto;">
+        <div class="hl-wrap">
+          <div><span class="hl">300년의 교훈</span></div>
+          <div><span class="hl">한 번도 성공하지 못했습니다</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="7" data-variant="0" id="slide7a" data-steps="1" data-notes="🟡 🟡7 이번에도 똑같을겁니다." data-type="카운터제목">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡7 이번에도 똑같을겁니다.">
+    <div class="items-col" style="top:320px; gap:48px;">
+      <div class="slide-el counter-label" data-type="카운터" data-appear-step="0" style="text-align:center; font-size:42px; font-weight:800; color:var(--color-accent); letter-spacing:3px;">300년</div>
+      <div class="slide-el" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:128px;">한 번도 성공한 적 없다</span>
+      </div>
+      <div class="slide-el counter-sub" data-type="부제" data-appear-step="0" style="text-align:center; font-size:38px; font-weight:500; color:var(--color-text-muted); line-height:1.5;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="7" data-variant="1" id="slide7b" data-steps="1" data-type="토픽결론">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
+      <div class="hl-wrap">
+        <div><span class="hl" style="font-size:84px;">이번에도 똑같을겁니다</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="7" data-variant="2" id="slide7c" data-steps="1" data-type="아이콘+텍스트">
+  <div class="step-layer" data-step="0">
+    <div class="items-row" style="top:240px; align-items:center;">
+      <div class="slide-el emoji-icon" style="width:300px; height:300px; flex:0 0 300px;">
+        <svg viewBox="0 0 200 200" style="width:100%;height:100%;">
+          <circle cx="100" cy="100" r="92" fill="#FF6B00" stroke="#222" stroke-width="10"/>
+          <text x="100" y="148" text-anchor="middle" font-family="'Pretendard','Noto Sans KR',sans-serif"
+            font-size="140" font-weight="900" fill="#222">?</text>
+        </svg>
+      </div>
+      <div class="slide-el text-area" style="width:960px; flex:1 1 auto;">
+        <div class="hl-wrap">
+          <div><span class="hl">역사의 반복</span></div>
+          <div><span class="hl">패턴은 항상 같습니다</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="8" data-variant="0" id="slide8a" data-steps="1" data-notes="🟡 🟡8 그런데, 통제의 역사에서 살아남아 부자가 된 사람들의 한가지 공통점이 있습니다." data-type="블로그인트로">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡8 그런데, 통제의 역사에서 살아남아 부자가 된 사람들의 한가지 공통점이 있습니다.">
+    <div class="items-col" style="top:200px; gap:40px;">
+      <div class="slide-el blog-counter" data-type="카운터" data-appear-step="0" style="text-align:center; font-size:48px; font-weight:900; color:var(--color-accent); letter-spacing:4px;">그런데</div>
+      <div class="slide-el" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:108px;">살아남아 부자가 된 사람들의 공통점</span>
+      </div>
+      <div class="slide-el blog-meta" data-type="메타" data-appear-step="0" style="text-align:center; font-size:36px; font-weight:600; color:var(--color-text-muted); letter-spacing:1px;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="8" data-variant="1" id="slide8b" data-steps="1" data-type="토픽결론">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
+      <div class="hl-wrap">
+        <div><span class="hl" style="font-size:84px;">살아남은 소수</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="8" data-variant="2" id="slide8c" data-steps="1" data-type="태그칩">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">공통점</span></div>
+      </div>
+    </div>
+    <div class="items-col" style="top:380px;">
+      <div class="slide-el tag-group" data-type="태그그룹">
+        <div class="tag-chip white">딱 하나</div>
+        <div class="tag-chip white">지금부터</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="9" data-variant="0" id="slide9a" data-steps="1" data-notes="🟡 🟡9 같이 보시죠." data-type="한줄강조">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡9 같이 보시죠.">
+    <div class="items-col" style="top:380px; gap:0;">
+      <div class="slide-el line1-emph" data-type="제목" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">같이 보시죠</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="9" data-variant="1" id="slide9b" data-steps="1" data-type="아이콘+텍스트">
+  <div class="step-layer" data-step="0">
+    <div class="items-row" style="top:240px; align-items:center;">
+      <div class="slide-el emoji-icon" style="width:300px; height:300px; flex:0 0 300px;">
+        <svg viewBox="0 0 200 200" style="width:100%;height:100%;">
+          <circle cx="100" cy="100" r="92" fill="#FF6B00" stroke="#222" stroke-width="10"/>
+          <text x="100" y="148" text-anchor="middle" font-family="'Pretendard','Noto Sans KR',sans-serif"
+            font-size="140" font-weight="900" fill="#222">?</text>
+        </svg>
+      </div>
+      <div class="slide-el text-area" style="width:960px; flex:1 1 auto;">
+        <div class="hl-wrap">
+          <div><span class="hl">시작하겠습니다</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="9" data-variant="2" id="slide9c" data-steps="1" data-type="토픽결론">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
+      <div class="hl-wrap">
+        <div><span class="hl" style="font-size:84px;">지금 시작합니다</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="10" data-variant="0" id="slide10a" data-steps="3" data-notes="🟡 🟡10" data-type="챕터전환">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡10">
+    <div class="slide-el cork-board" data-type="게시판" style="left:140px; top:80px; width:1640px; height:920px;"></div>
+    <div class="slide-el" data-type="제목" style="position:absolute; left:240px; top:120px; width:1440px; text-align:center;">
+      <span class="cork-label hand lg bold thicker">본론 1</span>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1" data-no-dim="">
+    <div class="slide-el postit-mid tilt-l" data-type="포스트잇" data-group="ch1" style="left:410px; top:360px; width:380px; height:460px;"></div>
+    <div class="slide-el postit-pin" data-type="핀" data-group="ch1" data-sound="pop" style="left:572px; top:340px;"></div>
+    <div class="slide-el hand md bold hand-typing" data-type="손글씨" data-group="ch1" data-sound="write" style="position:absolute; left:430px; top:540px; width:340px; text-align:center;">로베스피에르의 실험</div>
+    <div class="slide-el hand sm bold hand-typing" data-type="손글씨" data-group="ch1" style="position:absolute; left:430px; top:680px; width:340px; text-align:center;">선의가 만든 비극</div>
+  </div>
+  <div class="step-layer" data-step="2" data-no-dim="">
+    <div class="slide-el postit-mid tilt-r" data-type="포스트잇" data-group="ch2" style="left:1130px; top:360px; width:380px; height:460px;"></div>
+    <div class="slide-el postit-pin" data-type="핀" data-group="ch2" data-sound="pop" style="left:1292px; top:340px;"></div>
+    <div class="slide-el hand md bold hand-typing" data-type="손글씨" data-group="ch2" data-sound="write" style="position:absolute; left:1150px; top:540px; width:340px; text-align:center;">가격통제의 역설</div>
+    <div class="slide-el hand sm bold hand-typing" data-type="손글씨" data-group="ch2" style="position:absolute; left:1150px; top:680px; width:340px; text-align:center;">파리 시민의 비극</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="11" data-variant="0" id="slide11a" data-steps="1" data-notes="🟡 🟡11 가난한 사람도 우유 한 잔은 마실 수 있어야 한다." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡11 가난한 사람도 우유 한 잔은 마실 수 있어야 한다.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">질문</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">가난한 사람도 우유를 마실 권리가 있다</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">이 말, 틀렸을까요?</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="11" data-variant="1" id="slide11b" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">정의로운 법?</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 의도</div>
+      <div class="compare-item">가난한 자 보호</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 결과</div>
+      <div class="compare-item">서민을 굶겼다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="11" data-variant="2" id="slide11c" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">법의 결과</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">선의</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">반대 결과</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="12" data-variant="0" id="slide12a" data-steps="1" data-notes="🟡 🟡12 저도 맞는 말이라고 생각합니다. 언뜻 들어보면 좋은 얘기거든요." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡12 저도 맞는 말이라고 생각합니다. 언뜻 들어보면 좋은 얘기거든요.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">공감</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">저도 맞는 말이라 생각합니다</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">언뜻 들으면 좋은 얘기거든요</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="12" data-variant="1" id="slide12b" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">좋은 말의 함정</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 표면</div>
+      <div class="compare-item">좋은 의도</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 현실</div>
+      <div class="compare-item">파국적 결과</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="12" data-variant="2" id="slide12c" data-steps="2" data-type="카드">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:202px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">선의의 함정</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:440px;">
+      <div class="slide-el card" data-type="카드" data-appear-step="1">
+        <div class="card-num">1</div>
+        <div class="card-title">좋은 의도</div>
+        <div class="card-desc">결과는 정반대였다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="13" data-variant="0" id="slide13a" data-steps="1" data-notes="🟡 🟡13 1793년 프랑스에서 로베스피에르라는 정치인이 우유 최고가격제를 만들었습니다." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡13 1793년 프랑스에서 로베스피에르라는 정치인이 우유 최고가격제를 만들었습니다.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">사건</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">1793년, 로베스피에르</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">우유 최고가격제 시행</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="13" data-variant="1" id="slide13b" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">가격통제법</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 목표</div>
+      <div class="compare-item">우유값 반으로</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 현실</div>
+      <div class="compare-item">시장이 무너졌다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="13" data-variant="2" id="slide13c" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">정책 시행</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">법 제정</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">시장 붕괴</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="14" data-variant="0" id="slide14a" data-steps="1" data-notes="🟡 🟡14 누구나 살 수 있도록 우유값을 반값으로 내려라. 법으로 강제했습니다." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡14 누구나 살 수 있도록 우유값을 반값으로 내려라. 법으로 강제했습니다.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">법</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">우유값을 반값으로 내려라</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">어기면 처벌받습니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="14" data-variant="1" id="slide14b" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">법의 구조</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">가격 고정</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">강제 집행</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="14" data-variant="2" id="slide14c" data-steps="2" data-type="숫자스탯">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">원래 가격의 절반으로 고정</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:300px;">
+      <div class="slide-el big-stat" data-type="숫자스탯" data-appear-step="1" style="text-align:center;">
+        <div class="stat-num" style="font-size:180px; line-height:1;">1/2</div>
+        <div class="stat-label" style="font-size:50px; margin-top:24px;">원래 가격의 절반으로 고정</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="15" data-variant="0" id="slide15a" data-steps="1" data-notes="🟡 🟡15 갑자기 파리의 목장주인들이 젖소를 도축하기 시작한거에요. 도대체 이게 무슨 일일까요?" data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡15 갑자기 파리의 목장주인들이 젖소를 도축하기 시작한거에요. 도대체 이게 무슨 일일까요?">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">이상한 일</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">목장주들이 젖소를 도축하기 시작했습니다</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">도대체 왜일까요?</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="15" data-variant="1" id="slide15b" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">농부의 선택</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 우유 생산</div>
+      <div class="compare-item">손해</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 도축</div>
+      <div class="compare-item">이익</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="15" data-variant="2" id="slide15c" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">목장주의 결정</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">판매 불가</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">도축 결정</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="16" data-variant="0" id="slide16a" data-steps="1" data-notes="🟡 🟡16 우유값을 절반으로 내리니, 사료값이나 인건비가 감당이 안되기 시작합니다." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡16 우유값을 절반으로 내리니, 사료값이나 인건비가 감당이 안되기 시작합니다.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">원리</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">우유값 절반, 사료비 그대로</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">키울수록 손해니까 팔아버린 거죠</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="16" data-variant="1" id="slide16b" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">수익 구조</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">우유값↓</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">사료비↑</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="16" data-variant="2" id="slide16c" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">농장 경제</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 수입</div>
+      <div class="compare-item">절반 토막</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 비용</div>
+      <div class="compare-item">그대로</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="17" data-variant="0" id="slide17a" data-steps="1" data-notes="🟡 🟡17 공급이 줄어드니 우유값은 어떻게 됐을까요?" data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡17 공급이 줄어드니 우유값은 어떻게 됐을까요?">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">결과</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">공급이 줄었습니다</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">우유값은 어떻게 됐을까요?</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="17" data-variant="1" id="slide17b" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">공급 감소</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 통제 전</div>
+      <div class="compare-item">정상 공급</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 통제 후</div>
+      <div class="compare-item">공급 급감</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="17" data-variant="2" id="slide17c" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">공급 붕괴</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">가격 통제</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">공급 급감</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="18" data-variant="0" id="slide18a" data-steps="1" data-notes="🟡 🟡18 원래 가격의 10배까지 폭등합니다." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡18 원래 가격의 10배까지 폭등합니다.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">결과</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">원래 가격의 10배까지 폭등</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">통제가 오히려 가격을 올렸습니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="18" data-variant="1" id="slide18b" data-steps="2" data-type="숫자스탯">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">우유값 폭등</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:300px;">
+      <div class="slide-el big-stat" data-type="숫자스탯" data-appear-step="1" style="text-align:center;">
+        <div class="stat-num" style="font-size:180px; line-height:1;">×10</div>
+        <div class="stat-label" style="font-size:50px; margin-top:24px;">우유값 폭등</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="18" data-variant="2" id="slide18c" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">가격 폭등</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">통제 시행</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">10배 상승</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="19" data-variant="0" id="slide19a" data-steps="1" data-notes="🟡 🟡19 가난한 사람들을 위해 만든 법인데, 가난한 사람들이 가장 먼저 우유를 못 마시게 됐습니다." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡19 가난한 사람들을 위해 만든 법인데, 가난한 사람들이 가장 먼저 우유를 못 마시게 됐습니다.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">아이러니</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">가난한 자를 위한 법</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">가난한 자가 가장 먼저 굶었습니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="19" data-variant="1" id="slide19b" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">법의 아이러니</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 의도</div>
+      <div class="compare-item">가난한 자 보호</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 결과</div>
+      <div class="compare-item">서민 먼저 굶음</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="19" data-variant="2" id="slide19c" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">선의의 역설</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">보호 목적</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">역효과</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="20" data-variant="0" id="slide20a" data-steps="1" data-notes="🟡 🟡20 이게 끝이 아닙니다. 로베스피에르는 한 술 더 떠서 사료값까지 통제했는데요." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡20 이게 끝이 아닙니다. 로베스피에르는 한 술 더 떠서 사료값까지 통제했는데요.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">연쇄</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">여기서 끝이 아닙니다</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">사료값까지 통제했습니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="20" data-variant="1" id="slide20b" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">통제 확대</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">우유값 통제</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">사료값 통제</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="20" data-variant="2" id="slide20c" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">통제의 연쇄</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 우유</div>
+      <div class="compare-item">가격 폭등</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 사료</div>
+      <div class="compare-item">공급 소멸</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="21" data-variant="0" id="slide21a" data-steps="1" data-notes="🟡 🟡21 사료 농가도 똑같이 사라졌습니다. 도미노처럼 파리 시민들이 굶어 죽기 시작했죠." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡21 사료 농가도 똑같이 사라졌습니다. 도미노처럼 파리 시민들이 굶어 죽기 시작했죠.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">도미노</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">사료 농가도 사라졌습니다</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">파리 시민들이 굶어 죽기 시작했습니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="21" data-variant="1" id="slide21b" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">도미노 붕괴</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 우유 공급</div>
+      <div class="compare-item">소멸</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 빵</div>
+      <div class="compare-item">고기</div>
+      <div class="compare-item">모두 폭등</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="21" data-variant="2" id="slide21c" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">연쇄 붕괴</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">사료 농가 붕괴</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">파리 시민 기아</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="22" data-variant="0" id="slide22a" data-steps="1" data-notes="🟡 🟡22 맹자에 &#x27;조장&#x27;이라는 말이 있습니다. 의도는 좋았지만 결과는 항상 반대로 갑니다." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡22 맹자에 &#x27;조장&#x27;이라는 말이 있습니다. 의도는 좋았지만 결과는 항상 반대로 갑니다.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">교훈</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">맹자의 조장 — 억지로 앞당기면</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">결과는 항상 반대로 갑니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="22" data-variant="1" id="slide22b" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">조장의 교훈</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 의도</div>
+      <div class="compare-item">빨리 자라라</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 결과</div>
+      <div class="compare-item">다 말라죽었다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="22" data-variant="2" id="slide22c" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">조장</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">억지로 앞당기다</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">반드시 실패한다</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="23" data-variant="0" id="slide23a" data-steps="1" data-notes="🟡 🟡23 그럼 로베스피에르 본인은 어떻게 됐을까요?" data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡23 그럼 로베스피에르 본인은 어떻게 됐을까요?">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">결말</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">그럼 로베스피에르 본인은?</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">어떻게 됐을까요?</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="23" data-variant="1" id="slide23b" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">본인의 운명</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">우유 파동</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">처형?</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="23" data-variant="2" id="slide23c" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">예상 vs 현실</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 입안자</div>
+      <div class="compare-item">영웅?</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 결과</div>
+      <div class="compare-item">처형됨</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="24" data-variant="0" id="slide24a" data-steps="1" data-notes="🟡 🟡24 1년 뒤인 1794년, 우유파동이 불씨가 돼서 단두대에서 처형됩니다." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡24 1년 뒤인 1794년, 우유파동이 불씨가 돼서 단두대에서 처형됩니다.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">결말</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">1794년, 로베스피에르 단두대 처형</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">우유 파동이 불씨였습니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="24" data-variant="1" id="slide24b" data-steps="2" data-type="숫자스탯">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">처형 집행</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:300px;">
+      <div class="slide-el big-stat" data-type="숫자스탯" data-appear-step="1" style="text-align:center;">
+        <div class="stat-num" style="font-size:180px; line-height:1;">1794년</div>
+        <div class="stat-label" style="font-size:50px; margin-top:24px;">처형 집행</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="24" data-variant="2" id="slide24c" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">역전</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 통제자</div>
+      <div class="compare-item">처형됨</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 피해자</div>
+      <div class="compare-item">분노 폭발</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="25" data-variant="0" id="slide25a" data-steps="1" data-notes="🟡 🟡25 자기가 굶긴 파리 시민들이 들고 일어나서 처형대로 끌고 간 겁니다." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡25 자기가 굶긴 파리 시민들이 들고 일어나서 처형대로 끌고 간 겁니다.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">반전</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">자기가 굶긴 시민들이</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">처형대로 끌고 간 겁니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="25" data-variant="1" id="slide25b" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">역습</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">기아 유발</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">시민 봉기</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="25" data-variant="2" id="slide25c" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">역전의 드라마</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 통제자</div>
+      <div class="compare-item">권력의 정점</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 시민 봉기</div>
+      <div class="compare-item">처형 집행</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="26" data-variant="0" id="slide26a" data-steps="1" data-notes="🟡 🟡26 가난한 사람을 돕겠다고 만든 정책이, 결국 본인까지 죽인 거죠." data-type="대질문">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡26 가난한 사람을 돕겠다고 만든 정책이, 결국 본인까지 죽인 거죠.">
+    <div class="items-col" style="top:280px; gap:48px;">
+      <div class="slide-el" data-type="태그" data-appear-step="0" style="text-align:center;">
+        <div class="section-badge" style="display:inline-block;">결론</div>
+      </div>
+      <div class="slide-el" data-type="질문1" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px;">가난한 사람을 돕겠다던 정책이</span>
+      </div>
+      <div class="slide-el" data-type="질문2" data-appear-step="0" style="text-align:center;">
+        <span class="hl" style="font-size:120px; color:var(--color-accent);">가난한 사람을 굶기고, 본인도 죽였습니다</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="26" data-variant="1" id="slide26b" data-steps="2" data-type="비교박스">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;">
+        <div><span class="hl">정책의 결말</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="items-row" style="top:380px;">
+      <div class="slide-el compare-col good" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">✅ 목표</div>
+      <div class="compare-item">서민 보호</div>
+      </div>
+      <div class="slide-el compare-col bad" data-type="비교" data-appear-step="1" data-group="cmp">
+        <div class="compare-header">❌ 현실</div>
+      <div class="compare-item">서민 굶기고 본인 처형</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="26" data-variant="2" id="slide26c" data-steps="3" data-type="플로우">
+  <div class="step-layer" data-step="0">
+    <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
+      <div class="hl-wrap" style="align-items:center;"><div><span class="hl">가격통제의 결말</span></div></div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:576px; top:456px; width:300px;">서민 피해</div>
+  </div>
+  <div class="step-layer" data-step="2">
+    <div class="slide-el flow-arrow" data-group="f1" data-type="화살표" style="position:absolute; left:936px; top:471px; width:48px;">→</div>
+    <div class="slide-el flow-box" data-group="f1" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">입안자도 처형</div>
+  </div>
+</div>
+
+<div class="slide" data-page-group="27" data-variant="0" id="slide27a" data-steps="2" data-notes="🟡 🟡27 구독 좋아요 부탁드립니다." data-type="CTA버튼">
+  <div class="step-layer" data-step="0" data-step-notes="🟡 🟡27 구독 좋아요 부탁드립니다.">
+    <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px; text-align:center;">
+      <div class="hl-wrap" style="align-items:center; justify-content:center;">
+        <div><span class="hl">구독과 좋아요</span></div>
+      </div>
+      <div class="hl-wrap" style="align-items:center; justify-content:center; margin-top:20px;">
+        <div><span class="hl sm">다음 영상도 함께해요</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="step-layer" data-step="1">
+    <div class="step-dim"></div>
+    <div class="step-title" style="position:absolute; left:120px; top:100px; width:1680px; text-align:center; z-index:1;">
+      <div class="hl-wrap" style="align-items:center; justify-content:center;">
+        <div><span class="hl">구독과 좋아요</span></div>
+      </div>
+      <div class="hl-wrap" style="align-items:center; justify-content:center; margin-top:20px;">
+        <div><span class="hl sm">다음 영상도 함께해요</span></div>
+      </div>
+    </div>
+    <div class="slide-el anim-pulse-loop" data-type="이미지"
+      style="position:absolute; left:810px; top:380px; width:280px; height:280px; border-radius:50%; background:url('./assets/images/channel-logo.png') center/cover no-repeat;"></div>
+    <div class="slide-el anim-pop cta-btn like" data-type="CTA" data-sound="click"
+      style="position:absolute; left:600px; top:730px; width:340px; text-align:center;">👍&nbsp;&nbsp;&nbsp;좋아요</div>
+    <div class="slide-el anim-pop cta-btn subscribe" data-type="CTA" data-sound="ding"
+      style="position:absolute; left:980px; top:730px; width:340px; text-align:center;">🔔&nbsp;&nbsp;&nbsp;구독</div>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<div id="overview-backdrop"></div>
+<div id="overview" class="">
+  <div id="overview-grid"></div>
+</div>
+
+<div id="module-picker-backdrop"></div>
+<div id="module-picker">
+  <div id="module-picker-title">모듈 삽입</div>
+  <div id="module-picker-grid"></div>
+  <div id="module-picker-footer">Esc · 바깥 클릭으로 닫기</div>
+</div>
+
+<div id="help" class="">
+  <table>
+    <tbody><tr><td>→ / Space / 클릭</td><td>다음 step / 다음 슬라이드</td></tr>
+    <tr><td>←</td><td>이전 step / 이전 슬라이드</td></tr>
+    <tr><td>O</td><td>슬라이드 목록 (클릭으로 이동)</td></tr>
+    <tr><td>G</td><td>위치 가이드 (개수 선택 + 드래그 이동)</td></tr>
+    <tr><td>E</td><td>편집 모드 (드래그로 위치 조정 / Ctrl+V로 이미지 추가 / Ctrl+S로 저장)</td></tr>
+    <tr><td>Alt+1</td><td>레이어 패널 열기/닫기 (편집 모드에서만)</td></tr>
+    <tr><td>D</td><td>오버레이 토글 (편집 모드에서만)</td></tr>
+<tr><td>Delete / Backspace</td><td>선택 요소 삭제 (편집 모드에서만)</td></tr>
+    <tr><td>Ctrl+Z / Ctrl+Shift+Z</td><td>실행 취소 / 다시 실행 (편집 모드에서만)</td></tr>
+    <tr><td>F</td><td>전체화면 토글</td></tr>
+    <tr><td>P</td><td>발표자 모드 (전체화면에서만)</td></tr>
+    <tr><td>?</td><td>이 도움말 닫기</td></tr>
+  </tbody></table>
+</div>
+<div id="align-menu" class="" style="left: 732px; top: 425px;"><div class="align-item" data-align="h">⬌&nbsp;&nbsp;좌우 가운데</div><div class="align-item" data-align="v">⬍&nbsp;&nbsp;상하 가운데</div><div class="align-item" data-align="h-dist">⬌&nbsp;&nbsp;가로 균등</div><div class="align-item" data-align="v-dist">⬍&nbsp;&nbsp;세로 균등</div><div class="align-sep"></div><div class="align-item" data-action="group">⊞&nbsp;&nbsp;그룹화</div><div class="align-item" data-action="ungroup">⊟&nbsp;&nbsp;그룹 해제</div></div>
+<div id="group-toolbar" class="" style="left: 623.286px; top: 489.174px;">
+  <button id="gt-ungroup">그룹 해제</button>
+  <button id="gt-delete" title="삭제">🗑</button>
+</div>
+<div id="slideNum">34 / 36</div>
+<div id="edit-badge"></div>
+<div id="top-toolbar">
+  <span class="tb-label">편집 모드</span>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-exit">종료 (E)</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-font-dec">−</button>
+  <input class="tb-input" id="tb-font-size" type="number" min="10" max="500" value="108">
+  <span class="tb-unit">px</span>
+  <button class="tb-btn" id="tb-font-inc">+</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn tb-align" data-align="left" title="왼쪽 정렬">왼쪽</button>
+  <button class="tb-btn tb-align" data-align="h" title="좌우 가운데">가운데</button>
+  <button class="tb-btn tb-align" data-align="right" title="오른쪽 정렬">오른쪽</button>
+  <button class="tb-btn tb-align" data-align="top" title="위쪽 정렬">위</button>
+  <button class="tb-btn tb-align" data-align="v" title="상하 가운데">중앙</button>
+  <button class="tb-btn tb-align" data-align="bottom" title="아래쪽 정렬">아래</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-group">그룹</button>
+  <button class="tb-btn" id="tb-ungroup">해제</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-delete">삭제</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-anim">애니메이션</button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" id="tb-undo">↩ 실행취소</button>
+  <button class="tb-btn" id="tb-save">💾 저장</button>
+  <span id="save-status"></span>
+  <span class="tb-sep"></span>
+  <button class="tb-btn tb-color-btn" id="tb-bg-color" title="배경색" style="position:relative;">배경<span class="tb-color-indicator" id="tb-bg-indicator" style="background: rgb(255, 229, 0);"></span></button>
+  <button class="tb-btn tb-color-btn" id="tb-fc-color" title="글자색" style="position:relative;">글자<span class="tb-color-indicator" id="tb-fc-indicator" style="background: rgb(17, 17, 17);"></span></button>
+</div>
+<div class="color-palette" id="palette-bg" style="left: 1120.5px; top: 43px;">
+  <div class="color-swatch active" data-cls="" style="background:none; border-color:#aaa;" title="없음(기본)"></div>
+  <div class="color-swatch" data-cls="bg-blue" style="background:rgba(255,107,0,0.12);" title="연주황"></div>
+  <div class="color-swatch" data-cls="bg-red" style="background:rgba(0,0,0,0.06);" title="연회색"></div>
+  <div class="color-swatch" data-cls="bg-green" style="background:rgba(255,107,0,0.12);" title="연주황2"></div>
+  <div class="color-swatch" data-cls="bg-white" style="background:#fff; border-color:#aaa;" title="흰색"></div>
+  <div class="color-swatch" data-cls="bg-black" style="background:#222;" title="검정"></div>
+  <div class="color-swatch" data-cls="bg-accent" style="background:rgba(255,107,0,0.15);" title="주황음영"></div>
+  <div class="color-swatch" data-cls="bg-gray" style="background:#999;" title="회색"></div>
+</div>
+<div class="color-palette" id="palette-fc" style="left: 1079.69px; top: 44.5px;">
+  <div class="color-swatch active" data-cls="" style="background:#222;" title="검정(기본)"></div>
+  <div class="color-swatch" data-cls="fc-white" style="background:#fff; border-color:#aaa;" title="흰색"></div>
+  <div class="color-swatch swatch-fc-red" data-cls="fc-red" title="주황(메인)"></div>
+  <div class="color-swatch swatch-fc-blue" data-cls="fc-blue" title="파랑(서브)"></div>
+  <div class="color-swatch swatch-fc-yellow" data-cls="fc-yellow" title="빨강(강조)"></div>
+</div>
+<div id="coord-panel" style="display: none;">
+  <span id="coord-text">top: 80px;
+left: 1120px;
+width: 680px;</span>
+  <span class="copy-btn" onclick="copyCoords()">복사</span>
+</div>
+<div id="font-panel" class="" style="left: 500px; top: 61.7264px;">
+  <button id="font-dec">−</button>
+  <input id="font-size-input" type="number" min="10" max="500">
+  <span>px</span>
+  <button id="font-inc">+</button>
+</div>
+
+<script src="./assets/slide-editor.js?v=1777007796702564809"></script>
+
+
+
+<div id="gs-crosshair-h" class="gs-crosshair-h" style="top: 195px; display: none;"></div><div id="gs-crosshair-v" class="gs-crosshair-v" style="left: 960px; display: none;"></div>
+<div id="filmstrip"><div id="filmstrip-inner"></div></div><div id="edit-mode-badge" style="position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 99999; background: rgb(230, 57, 70); color: rgb(255, 255, 255); padding: 6px 18px; border-radius: 8px; font-size: 14px; font-weight: 900; pointer-events: none; animation: 1.5s ease 0s infinite normal none running editBadgeBlink; display: none;">편집중 — 자동저장 30초</div></body></html>
