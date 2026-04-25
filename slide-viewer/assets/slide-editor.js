@@ -5946,6 +5946,9 @@
     editMode = !editMode;
     document.body.classList.toggle('edit-mode', editMode);
     scaleStage();
+    if (editMode && slides[currentSlide] && typeof showStep === 'function') {
+      showStep(slides[currentSlide], currentStep);
+    }
     if (editMode) {
       // filmstrip이 stage 내부에 파싱될 수 있으므로 body 직속으로 이동
       const fs = document.getElementById('filmstrip');
@@ -6464,10 +6467,20 @@
   }
 
   function cleanupEmptyEditContainers(startNode, slide) {
+    const hasDecorativePlaceholderContent = node => !!(
+      node &&
+      node.querySelector &&
+      node.querySelector('.edit-hidden-placeholder, .layout-detached-placeholder') &&
+      node.querySelector('.vertical-divider')
+    );
     let node = startNode;
     while (node && node !== slide && node instanceof Element) {
       const parent = node.parentElement;
       if (node.matches('.step-layer')) break;
+      if (hasDecorativePlaceholderContent(node)) {
+        node = parent;
+        continue;
+      }
       if (canAutoPruneEmptyNode(node) && !hasLiveRenderableContent(node)) {
         node.remove();
         node = parent;
@@ -6481,6 +6494,9 @@
       const hasLiveChild = Array.from(layer.childNodes).some(child => {
         if (child.nodeType === Node.TEXT_NODE) {
           return isMeaningfulTextContent(child.textContent || '');
+        }
+        if (child instanceof Element && hasDecorativePlaceholderContent(child)) {
+          return true;
         }
         return (
           child instanceof Element &&
@@ -6657,6 +6673,16 @@
     box.style.height = (maxB - minT + PAD * 2) + 'px';
     box.style.display = 'block';
   }
+
+  function shouldExpandDataGroupForSelection(el) {
+    if (!el || !el.dataset) return false;
+    const gid = el.dataset.group || '';
+    if (!gid) return false;
+    // data-group is also used by templates as an animation/reveal bucket.
+    // Only editor-created groups and chapter post-it bundles behave as selection groups.
+    return /^ag\d+$/.test(gid) || /^ch\d+$/.test(gid);
+  }
+  window.shouldExpandDataGroupForSelection = shouldExpandDataGroupForSelection;
 
   function clientToStage(cx, cy) {
     const rect = document.getElementById('stage').getBoundingClientRect();
@@ -7830,7 +7856,9 @@
       const gid = el.dataset.group;
       pendingShiftSelect = {
         el,
-        groupEls: gid ? Array.from(slides[currentSlide].querySelectorAll(`[data-group="${CSS.escape(gid)}"]`)) : null,
+        groupEls: (gid && shouldExpandDataGroupForSelection(el))
+          ? Array.from(slides[currentSlide].querySelectorAll(`[data-group="${CSS.escape(gid)}"]`))
+          : null,
         x: e.clientX,
         y: e.clientY,
         seed: [...selectedEls],
@@ -7876,7 +7904,7 @@
       individualMode = false;
       document.body.classList.remove('individual-mode');
       const gid = el.dataset.group;
-      if (gid) {
+      if (gid && shouldExpandDataGroupForSelection(el)) {
         selectedEls = Array.from(slides[currentSlide].querySelectorAll(`[data-group="${CSS.escape(gid)}"]`));
         selectedEl = el;
         selectedEls.forEach(s => s.classList.add('edit-group-selected'));
