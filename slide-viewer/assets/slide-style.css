@@ -312,6 +312,15 @@
   .step-layer[data-step]:not([data-step="0"]).visible .slide-el.anim-shown {
     opacity: 1; transform: translateY(0);
   }
+  body:not(.edit-mode) .step-layer[data-step="0"] [data-appear-step]:not([data-appear-step="0"]) {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+  }
+  body:not(.edit-mode) .step-layer[data-step="0"] [data-appear-step]:not([data-appear-step="0"]).anim-shown {
+    opacity: 1;
+    transform: translateY(0);
+  }
   body.edit-mode .slide-el { opacity: 1 !important; transform: none !important; }
 
   /* ── 선택적 애니메이션 (.anim-scale, .anim-left) ── */
@@ -1671,6 +1680,49 @@
   }
   .ov-num .ov-type { display: block; font-size: 11px; font-weight: 600; opacity: 0.7; }
   .ov-item.current .ov-num { color: var(--editor-accent); }
+
+  .type-meta-chips {
+    position: absolute;
+    left: 7px;
+    top: 7px;
+    z-index: 25;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    max-width: 210px;
+    pointer-events: none;
+  }
+  .type-meta-chip {
+    height: 22px;
+    padding: 0 7px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.62);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 22px;
+    text-shadow: 0 0 3px #000;
+    white-space: nowrap;
+  }
+  .type-meta-chip.media {
+    min-width: 22px;
+    padding: 0 5px;
+    text-align: center;
+  }
+  .type-meta-chips.compact {
+    left: 4px;
+    top: 4px;
+    gap: 2px;
+    max-width: 92px;
+  }
+  .type-meta-chips.compact .type-meta-chip {
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 8px;
+    font-size: 8px;
+    line-height: 16px;
+    font-weight: 800;
+  }
 
   /* ── Overview 인라인 확장: 종이 겹침 + 토글 ── */
   .ov-group {

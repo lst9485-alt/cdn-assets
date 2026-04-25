@@ -5,7 +5,7 @@
 <title>slides-editor</title>
 <script>(function(){const name=location.pathname.split('/').pop().replace('.html','');const m=name.match(/(\d{4})(\d{2})(\d{2})/);document.title=m?`${m[1]}-${m[2]}-${m[3]}`:name;})()</script>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@900&amp;display=swap" rel="stylesheet"/>
-<link href="./assets/slide-style.css?v=20260424130349" rel="stylesheet"/>
+<link href="./assets/slide-style.css?v=20260425095750" rel="stylesheet"/>
 <style id="edit-badge-style">@keyframes editBadgeBlink{0%,100%{opacity:1}50%{opacity:0.3}}</style>
 <style id="slide-jump-nav-style">
 #slide-jump-nav{display:none;position:fixed;right:0;top:0;bottom:96px;width:260px;overflow-y:auto;overflow-x:hidden;z-index:8500;background:rgba(20,20,20,0.92);border-left:1px solid rgba(255,255,255,0.07);padding:0;box-sizing:border-box;flex-direction:column;scrollbar-width:none;transition:width 0.18s ease;}
@@ -97,17 +97,17 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el stat-circle" data-type="큰숫자" style="position:absolute; left:280px; top:380px; width:300px; height:300px; background:rgba(74,144,217,0.15);">
+<div class="slide-el stat-circle" data-group="stat-main" data-type="큰숫자" style="position:absolute; left:280px; top:380px; width:300px; height:300px; background:rgba(74,144,217,0.15);">
 <div class="stat-num">75%</div>
 <div class="stat-label">핵심 지표</div>
 </div>
-<div class="slide-el stat-detail-item" data-type="큰숫자" style="position:absolute; left:640px; top:390px; width:720px;">
+<div class="slide-el stat-detail-item" data-group="stat-main" data-type="큰숫자" style="position:absolute; left:640px; top:390px; width:720px;">
 <span>상세 항목 1</span>
 </div>
-<div class="slide-el stat-detail-item" data-type="큰숫자" style="position:absolute; left:640px; top:460px; width:720px;">
+<div class="slide-el stat-detail-item" data-group="stat-main" data-type="큰숫자" style="position:absolute; left:640px; top:460px; width:720px;">
 <span>상세 항목 2</span>
 </div>
-<div class="slide-el stat-detail-item" data-type="큰숫자" style="position:absolute; left:640px; top:530px; width:720px;">
+<div class="slide-el stat-detail-item" data-group="stat-main" data-type="큰숫자" style="position:absolute; left:640px; top:530px; width:720px;">
 <span>상세 항목 3</span>
 </div>
 </div>
@@ -119,13 +119,13 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el stat-circle" data-type="큰숫자" style="position:absolute; left:420px; top:380px; width:280px; height:280px; background:rgba(74,144,217,0.15);">
+<div class="slide-el stat-circle" data-group="stat-main" data-type="큰숫자" style="position:absolute; left:420px; top:380px; width:280px; height:280px; background:rgba(74,144,217,0.15);">
 <div class="stat-num">25%</div>
 <div class="stat-label">지표 1</div>
 </div>
 </div>
 <div class="step-layer" data-step="2">
-<div class="slide-el stat-circle" data-type="큰숫자" style="position:absolute; left:1220px; top:380px; width:280px; height:280px; background:rgba(230,57,70,0.15);">
+<div class="slide-el stat-circle" data-group="stat-main" data-type="큰숫자" style="position:absolute; left:1220px; top:380px; width:280px; height:280px; background:rgba(230,57,70,0.15);">
 <div class="stat-num">50%</div>
 <div class="stat-label">지표 2</div>
 </div>
@@ -138,19 +138,19 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el stat-circle" data-type="큰숫자" style="position:absolute; left:200px; top:380px; width:260px; height:260px; background:rgba(74,144,217,0.15);">
+<div class="slide-el stat-circle" data-group="stat-main" data-type="큰숫자" style="position:absolute; left:200px; top:380px; width:260px; height:260px; background:rgba(74,144,217,0.15);">
 <div class="stat-num">25%</div>
 <div class="stat-label">지표 1</div>
 </div>
 </div>
 <div class="step-layer" data-step="2">
-<div class="slide-el stat-circle" data-type="큰숫자" style="position:absolute; left:830px; top:380px; width:260px; height:260px; background:rgba(230,57,70,0.15);">
+<div class="slide-el stat-circle" data-group="stat-main" data-type="큰숫자" style="position:absolute; left:830px; top:380px; width:260px; height:260px; background:rgba(230,57,70,0.15);">
 <div class="stat-num">50%</div>
 <div class="stat-label">지표 2</div>
 </div>
 </div>
 <div class="step-layer" data-step="3">
-<div class="slide-el stat-circle" data-type="큰숫자" style="position:absolute; left:1460px; top:380px; width:260px; height:260px; background:rgba(46,125,50,0.15);">
+<div class="slide-el stat-circle" data-group="stat-main" data-type="큰숫자" style="position:absolute; left:1460px; top:380px; width:260px; height:260px; background:rgba(46,125,50,0.15);">
 <div class="stat-num">75%</div>
 <div class="stat-label">지표 3</div>
 </div>
@@ -1442,10 +1442,10 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:690px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:690px; top:480px;">
 <div class="btn-pill">버튼 1</div>
 </div>
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:1030px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:1030px; top:480px;">
 <div class="btn-pill">버튼 2</div>
 </div>
 </div>
@@ -1457,13 +1457,13 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:520px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:520px; top:480px;">
 <div class="btn-pill">버튼 1</div>
 </div>
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:860px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:860px; top:480px;">
 <div class="btn-pill">버튼 2</div>
 </div>
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:1200px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:1200px; top:480px;">
 <div class="btn-pill">버튼 3</div>
 </div>
 </div>
@@ -1475,16 +1475,16 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:350px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:350px; top:480px;">
 <div class="btn-pill">버튼 1</div>
 </div>
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:690px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:690px; top:480px;">
 <div class="btn-pill">버튼 2</div>
 </div>
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:1030px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:1030px; top:480px;">
 <div class="btn-pill">버튼 3</div>
 </div>
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:1370px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:1370px; top:480px;">
 <div class="btn-pill">버튼 4</div>
 </div>
 </div>
@@ -1496,19 +1496,19 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:180px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:180px; top:480px;">
 <div class="btn-pill">버튼 1</div>
 </div>
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:520px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:520px; top:480px;">
 <div class="btn-pill">버튼 2</div>
 </div>
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:860px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:860px; top:480px;">
 <div class="btn-pill">버튼 3</div>
 </div>
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:1200px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:1200px; top:480px;">
 <div class="btn-pill">버튼 4</div>
 </div>
-<div class="slide-el" data-type="버튼그리드" style="position:absolute; left:1540px; top:480px;">
+<div class="slide-el" data-type="버튼그리드" data-group="btn-grid" style="position:absolute; left:1540px; top:480px;">
 <div class="btn-pill">버튼 5</div>
 </div>
 </div>
@@ -1671,7 +1671,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="slide-el flow-box accent" data-type="플로우" style="position:absolute; left:760px; top:456px; width:400px;">항목 텍스트</div>
 </div>
 </div>
-<div class="slide" data-page-group="9" data-slide-id="T09_v1" data-steps="2" data-type="플로우" data-variant="1" id="T09_v1" style="">
+<div class="slide" data-page-group="9" data-slide-id="T09_v1" data-steps="3" data-type="플로우" data-variant="1" id="T09_v1" style="">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
 <div class="hl-wrap" style="align-items:center;"><div><span class="hl">프로세스</span></div></div>
@@ -1683,7 +1683,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="slide-el flow-box" data-group="flow" data-type="플로우" style="position:absolute; left:1044px; top:456px; width:300px;">목표 달성</div>
 </div>
 </div>
-<div class="slide" data-page-group="9" data-slide-id="T09_v2" data-steps="3" data-type="플로우" data-variant="2" id="T09_v2" style="">
+<div class="slide" data-page-group="9" data-slide-id="T09_v2" data-steps="4" data-type="플로우" data-variant="2" id="T09_v2" style="">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:184px; width:1680px;">
 <div class="hl-wrap" style="align-items:center;"><div><span class="hl">플로우 3개</span></div></div>
@@ -2327,19 +2327,19 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el icon-flow" data-type="아이콘플로우" style="position:absolute; left:835px; top:190px; width:250px;">
+<div class="slide-el icon-flow" data-group="icon-stat" data-type="아이콘플로우" style="position:absolute; left:835px; top:190px; width:250px;">
 <div class="icon-flow-item">
 <div class="icon-flow-icon"><svg fill="none" stroke="#FF6B00" stroke-linecap="round" stroke-width="5" viewbox="0 0 80 80"><circle cx="40" cy="40" r="30"></circle></svg></div>
 <div class="icon-flow-label">단계</div>
 </div>
 </div>
-<div class="slide-el icon-flow-stat" data-type="스탯" style="position:absolute; left:200px; top:500px; width:1520px;">
+<div class="slide-el icon-flow-stat" data-group="icon-stat" data-type="스탯" style="position:absolute; left:200px; top:500px; width:1520px;">
 <span class="icon-flow-stat-emoji">🎯</span>
 <span class="icon-flow-stat-text">핵심 수치</span>
 <span class="icon-flow-stat-num">~16,500</span>
 <span class="icon-flow-stat-unit">단위</span>
 </div>
-<div class="slide-el icon-flow-highlight" data-type="강조" style="position:absolute; left:200px; top:650px; width:1520px;">
+<div class="slide-el icon-flow-highlight" data-group="icon-stat" data-type="강조" style="position:absolute; left:200px; top:650px; width:1520px;">
         요약: <strong>강조 텍스트</strong>를 포함한 설명
       </div>
 </div>
@@ -2598,8 +2598,8 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el flow-arrow" data-type="화살표" style="position:absolute; left:948px; top:544px; font-size:68px; color:var(--color-accent);">→</div>
-<div class="slide-el flow-step2" data-type="2단계" style="position:absolute; left:1000px; top:500px; width:680px; text-align:center; padding:44px 32px;">
+<div class="slide-el flow-arrow" data-group="flow-step2" data-type="화살표" style="position:absolute; left:948px; top:544px; font-size:68px; color:var(--color-accent);">→</div>
+<div class="slide-el flow-step2" data-type="2단계" data-group="flow-step2" style="position:absolute; left:1000px; top:500px; width:680px; text-align:center; padding:44px 32px;">
 <div class="flow-step-body" style="font-size:60px; font-weight:900; color:var(--color-accent); line-height:1.3; word-break:keep-all; overflow-wrap:anywhere;">2단계 확장</div>
 </div>
 </div>
@@ -2614,8 +2614,8 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="slide-el branch-root" data-type="기준질문" style="position:absolute; left:220px; top:430px; width:1480px; text-align:center; font-size:60px; font-weight:900; color:var(--color-text); line-height:1.3; word-break:keep-all; overflow-wrap:anywhere;"><div class="branch-root-text">어떤 기준으로 볼까?</div></div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el branch-arrow" data-type="분기화살표" style="position:absolute; left:894px; top:554px; width:132px; text-align:center; font-size:82px; color:var(--color-accent);">↓</div>
-<div class="slide-el branch-result" data-type="선택경로" style="position:absolute; left:220px; top:684px; width:1480px; text-align:center; font-size:58px; font-weight:900; color:var(--color-accent); line-height:1.3; word-break:keep-all; overflow-wrap:anywhere;"><div class="branch-result-text">그 기준에 맞는 경로</div></div>
+<div class="slide-el branch-arrow" data-type="분기화살표" data-group="branch-result" style="position:absolute; left:894px; top:554px; width:132px; text-align:center; font-size:82px; color:var(--color-accent);">↓</div>
+<div class="slide-el branch-result" data-type="선택경로" data-group="branch-result" style="position:absolute; left:220px; top:684px; width:1480px; text-align:center; font-size:58px; font-weight:900; color:var(--color-accent); line-height:1.3; word-break:keep-all; overflow-wrap:anywhere;"><div class="branch-result-text">그 기준에 맞는 경로</div></div>
 </div>
 </div>
 <div class="slide" data-page-group="17" data-slide-id="T17_base" data-steps="2" data-type="비교박스" data-variant="0" id="T17_base" style="">
@@ -2627,11 +2627,11 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el compare-col good" data-type="비교" style="position:absolute; left:280px; top:380px; width:664px;">
+<div class="slide-el compare-col good" data-group="compare" data-type="비교" style="position:absolute; left:280px; top:380px; width:664px;">
 <div class="compare-header">✅ 좋은 쪽</div>
 <div class="compare-item">항목 1</div>
 </div>
-<div class="slide-el compare-col bad" data-type="비교" style="position:absolute; left:976px; top:380px; width:664px;">
+<div class="slide-el compare-col bad" data-group="compare" data-type="비교" style="position:absolute; left:976px; top:380px; width:664px;">
 <div class="compare-header">❌ 나쁜 쪽</div>
 <div class="compare-item">항목 1</div>
 </div>
@@ -2644,12 +2644,12 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el compare-col good" data-type="비교" style="position:absolute; left:240px; top:380px; width:664px;">
+<div class="slide-el compare-col good" data-group="compare" data-type="비교" style="position:absolute; left:240px; top:380px; width:664px;">
 <div class="compare-header">✅ 좋은 쪽</div>
 <div class="compare-item">항목 1</div>
 <div class="compare-item">항목 2</div>
 </div>
-<div class="slide-el compare-col bad" data-type="비교" style="position:absolute; left:1020px; top:380px; width:664px;">
+<div class="slide-el compare-col bad" data-group="compare" data-type="비교" style="position:absolute; left:1020px; top:380px; width:664px;">
 <div class="compare-header">❌ 나쁜 쪽</div>
 <div class="compare-item">항목 1</div>
 <div class="compare-item">항목 2</div>
@@ -2663,13 +2663,13 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el compare-col good" data-type="비교" style="position:absolute; left:240px; top:380px; width:664px;">
+<div class="slide-el compare-col good" data-group="compare" data-type="비교" style="position:absolute; left:240px; top:380px; width:664px;">
 <div class="compare-header">✅ 좋은 쪽</div>
 <div class="compare-item">항목 1</div>
 <div class="compare-item">항목 2</div>
 <div class="compare-item">항목 3</div>
 </div>
-<div class="slide-el compare-col bad" data-type="비교" style="position:absolute; left:1020px; top:380px; width:664px;">
+<div class="slide-el compare-col bad" data-group="compare" data-type="비교" style="position:absolute; left:1020px; top:380px; width:664px;">
 <div class="compare-header">❌ 나쁜 쪽</div>
 <div class="compare-item">항목 1</div>
 <div class="compare-item">항목 2</div>
@@ -2684,14 +2684,14 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el compare-col good" data-type="비교" style="position:absolute; left:240px; top:380px; width:664px;">
+<div class="slide-el compare-col good" data-group="compare" data-type="비교" style="position:absolute; left:240px; top:380px; width:664px;">
 <div class="compare-header">✅ 좋은 쪽</div>
 <div class="compare-item">항목 1</div>
 <div class="compare-item">항목 2</div>
 <div class="compare-item">항목 3</div>
 <div class="compare-item">항목 4</div>
 </div>
-<div class="slide-el compare-col bad" data-type="비교" style="position:absolute; left:1020px; top:380px; width:664px;">
+<div class="slide-el compare-col bad" data-group="compare" data-type="비교" style="position:absolute; left:1020px; top:380px; width:664px;">
 <div class="compare-header">❌ 나쁜 쪽</div>
 <div class="compare-item">항목 1</div>
 <div class="compare-item">항목 2</div>
@@ -2707,7 +2707,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el compare-col good" data-type="비교" style="position:absolute; left:240px; top:340px; width:664px;">
+<div class="slide-el compare-col good" data-group="compare" data-type="비교" style="position:absolute; left:240px; top:340px; width:664px;">
 <div class="compare-header">✅ 좋은 쪽</div>
 <div class="compare-item">항목 1</div>
 <div class="compare-item">항목 2</div>
@@ -2715,7 +2715,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="compare-item">항목 4</div>
 <div class="compare-item">항목 5</div>
 </div>
-<div class="slide-el compare-col bad" data-type="비교" style="position:absolute; left:1020px; top:340px; width:664px;">
+<div class="slide-el compare-col bad" data-group="compare" data-type="비교" style="position:absolute; left:1020px; top:340px; width:664px;">
 <div class="compare-header">❌ 나쁜 쪽</div>
 <div class="compare-item">항목 1</div>
 <div class="compare-item">항목 2</div>
@@ -2734,13 +2734,13 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el compare-col compare-emoji good" data-type="비교" style="position:absolute; left:200px; top:300px; width:600px;">
+<div class="slide-el compare-col compare-emoji good" data-group="compare" data-type="비교" style="position:absolute; left:200px; top:300px; width:600px;">
 <div class="compare-emoji-icon">☕</div>
 <div class="compare-header">좌측 제목</div>
 <div class="compare-item">좌측 설명</div>
 </div>
-<div class="slide-el vs-badge" data-type="VS" style="position:absolute; left:920px; top:460px;">VS</div>
-<div class="slide-el compare-col compare-emoji bad" data-type="비교" style="position:absolute; left:1120px; top:300px; width:600px;">
+<div class="slide-el vs-badge" data-group="compare" data-type="VS" style="position:absolute; left:920px; top:460px;">VS</div>
+<div class="slide-el compare-col compare-emoji bad" data-group="compare" data-type="비교" style="position:absolute; left:1120px; top:300px; width:600px;">
 <div class="compare-emoji-icon">💧</div>
 <div class="compare-header">우측 제목</div>
 <div class="compare-item">우측 설명</div>
@@ -2754,14 +2754,14 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="1">
-<div class="slide-el compare-col compare-emoji good" data-type="비교" style="position:absolute; left:200px; top:300px; width:600px;">
+<div class="slide-el compare-col compare-emoji good" data-group="compare" data-type="비교" style="position:absolute; left:200px; top:300px; width:600px;">
 <div class="compare-emoji-icon">☕</div>
 <div class="compare-header">좌측 제목</div>
 <div class="compare-item">항목 1</div>
 <div class="compare-item">항목 2</div>
 </div>
-<div class="slide-el vs-badge" data-type="VS" style="position:absolute; left:920px; top:460px;">VS</div>
-<div class="slide-el compare-col compare-emoji bad" data-type="비교" style="position:absolute; left:1120px; top:300px; width:600px;">
+<div class="slide-el vs-badge" data-group="compare" data-type="VS" style="position:absolute; left:920px; top:460px;">VS</div>
+<div class="slide-el compare-col compare-emoji bad" data-group="compare" data-type="비교" style="position:absolute; left:1120px; top:300px; width:600px;">
 <div class="compare-emoji-icon">💧</div>
 <div class="compare-header">우측 제목</div>
 <div class="compare-item">항목 1</div>
@@ -2776,15 +2776,15 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="1">
-<div class="slide-el compare-col compare-emoji good" data-type="비교" style="position:absolute; left:200px; top:300px; width:600px;">
+<div class="slide-el compare-col compare-emoji good" data-group="compare" data-type="비교" style="position:absolute; left:200px; top:300px; width:600px;">
 <div class="compare-emoji-icon">☕</div>
 <div class="compare-header">좌측 제목</div>
 <div class="compare-item">항목 1</div>
 <div class="compare-item">항목 2</div>
 <div class="compare-item">항목 3</div>
 </div>
-<div class="slide-el vs-badge" data-type="VS" style="position:absolute; left:920px; top:460px;">VS</div>
-<div class="slide-el compare-col compare-emoji bad" data-type="비교" style="position:absolute; left:1120px; top:300px; width:600px;">
+<div class="slide-el vs-badge" data-group="compare" data-type="VS" style="position:absolute; left:920px; top:460px;">VS</div>
+<div class="slide-el compare-col compare-emoji bad" data-group="compare" data-type="비교" style="position:absolute; left:1120px; top:300px; width:600px;">
 <div class="compare-emoji-icon">💧</div>
 <div class="compare-header">우측 제목</div>
 <div class="compare-item">항목 1</div>
@@ -2793,7 +2793,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 </div>
-<div class="slide" data-page-group="25" data-slide-id="T25_base" data-steps="2" data-type="비교박스" data-variant="0" id="T25_base" style="">
+<div class="slide" data-page-group="25" data-slide-id="T25_base" data-steps="3" data-type="비교박스" data-variant="0" id="T25_base" style="">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
 <div class="section-badge" style="margin-bottom:20px;">RECAP</div>
@@ -2803,14 +2803,14 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el bullet-card" data-type="불릿" style="position:absolute; left:200px; top:380px; width:1520px;">
+<div class="slide-el bullet-card" data-group="bullet-list" data-type="불릿" style="position:absolute; left:200px; top:380px; width:1520px;">
 <div class="bullet-icon">💰</div>
 <div class="bullet-text">키워드 <strong>강조 텍스트</strong></div>
 </div>
 <div class="slide-el bullet-summary" data-type="요약" style="position:absolute; left:200px; top:520px; width:1520px;">요약 텍스트를 입력하세요</div>
 </div>
 </div>
-<div class="slide" data-page-group="25" data-slide-id="T25_v1" data-steps="2" data-type="비교박스" data-variant="1" id="T25_v1">
+<div class="slide" data-page-group="25" data-slide-id="T25_v1" data-steps="3" data-type="비교박스" data-variant="1" id="T25_v1">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
 <div class="section-badge" style="margin-bottom:20px;">RECAP</div>
@@ -2818,18 +2818,18 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="1">
-<div class="slide-el bullet-card" data-type="불릿" style="position:absolute; left:200px; top:380px; width:1520px;">
+<div class="slide-el bullet-card" data-group="bullet-list" data-type="불릿" style="position:absolute; left:200px; top:380px; width:1520px;">
 <div class="bullet-icon">💰</div>
 <div class="bullet-text">키워드 <strong>강조 텍스트</strong></div>
 </div>
-<div class="slide-el bullet-card" data-type="불릿" style="position:absolute; left:200px; top:560px; width:1520px;">
+<div class="slide-el bullet-card" data-group="bullet-list" data-type="불릿" style="position:absolute; left:200px; top:560px; width:1520px;">
 <div class="bullet-icon">⚡</div>
 <div class="bullet-text">키워드 <strong>강조 텍스트</strong></div>
 </div>
 <div class="slide-el bullet-summary" data-type="요약" style="position:absolute; left:200px; top:740px; width:1520px;">요약 텍스트</div>
 </div>
 </div>
-<div class="slide" data-page-group="25" data-slide-id="T25_v2" data-steps="2" data-type="비교박스" data-variant="2" id="T25_v2">
+<div class="slide" data-page-group="25" data-slide-id="T25_v2" data-steps="3" data-type="비교박스" data-variant="2" id="T25_v2">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:200px; top:100px; width:1520px;">
 <div class="section-badge" style="margin-bottom:20px;">RECAP</div>
@@ -2837,22 +2837,22 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="1">
-<div class="slide-el bullet-card" data-type="불릿" style="position:absolute; left:200px; top:360px; width:1520px;">
+<div class="slide-el bullet-card" data-group="bullet-list" data-type="불릿" style="position:absolute; left:200px; top:360px; width:1520px;">
 <div class="bullet-icon">💰</div>
 <div class="bullet-text">키워드 <strong>강조 텍스트</strong></div>
 </div>
-<div class="slide-el bullet-card" data-type="불릿" style="position:absolute; left:200px; top:520px; width:1520px;">
+<div class="slide-el bullet-card" data-group="bullet-list" data-type="불릿" style="position:absolute; left:200px; top:520px; width:1520px;">
 <div class="bullet-icon">⚡</div>
 <div class="bullet-text">키워드 <strong>강조 텍스트</strong></div>
 </div>
-<div class="slide-el bullet-card" data-type="불릿" style="position:absolute; left:200px; top:680px; width:1520px;">
+<div class="slide-el bullet-card" data-group="bullet-list" data-type="불릿" style="position:absolute; left:200px; top:680px; width:1520px;">
 <div class="bullet-icon">📋</div>
 <div class="bullet-text">키워드 <strong>강조 텍스트</strong></div>
 </div>
 <div class="slide-el bullet-summary" data-type="요약" style="position:absolute; left:200px; top:840px; width:1520px;">요약 텍스트</div>
 </div>
 </div>
-<div class="slide" data-page-group="28" data-slide-id="T28_base" data-steps="2" data-type="비교테이블" data-variant="0" id="T28_base" style="">
+<div class="slide" data-page-group="28" data-slide-id="T28_base" data-steps="3" data-type="비교테이블" data-variant="0" id="T28_base" style="">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:80px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">COMPARISON</div>
@@ -2877,7 +2877,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
       </div>
 </div>
 </div>
-<div class="slide" data-page-group="28" data-slide-id="T28_v1" data-steps="2" data-type="비교테이블" data-variant="1" id="T28_v1">
+<div class="slide" data-page-group="28" data-slide-id="T28_v1" data-steps="3" data-type="비교테이블" data-variant="1" id="T28_v1">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:80px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">COMPARISON</div>
@@ -2899,7 +2899,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
     </div>
 </div>
 </div>
-<div class="slide" data-page-group="28" data-slide-id="T28_v2" data-steps="2" data-type="비교테이블" data-variant="2" id="T28_v2">
+<div class="slide" data-page-group="28" data-slide-id="T28_v2" data-steps="3" data-type="비교테이블" data-variant="2" id="T28_v2">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:80px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">COMPARISON</div>
@@ -2922,7 +2922,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
     </div>
 </div>
 </div>
-<div class="slide" data-page-group="28" data-slide-id="T28_v3" data-steps="2" data-type="비교테이블" data-variant="3" id="T28_v3">
+<div class="slide" data-page-group="28" data-slide-id="T28_v3" data-steps="3" data-type="비교테이블" data-variant="3" id="T28_v3">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:80px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">COMPARISON</div>
@@ -2946,7 +2946,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
     </div>
 </div>
 </div>
-<div class="slide" data-page-group="28" data-slide-id="T28_v4" data-steps="2" data-type="비교테이블" data-variant="4" id="T28_v4">
+<div class="slide" data-page-group="28" data-slide-id="T28_v4" data-steps="3" data-type="비교테이블" data-variant="4" id="T28_v4">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:80px; width:1680px;">
 <div class="section-badge" style="margin-bottom:16px;">COMPARISON</div>
@@ -2981,7 +2981,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
+<div class="slide-el split-list" data-group="split-body" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
 <div class="split-list-title">📌 목록 제목</div>
 <div class="split-list-item">
 <div class="split-list-num">1</div>
@@ -2996,7 +2996,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="split-list-text"><strong>항목 제목</strong><br/>설명 텍스트</div>
 </div>
 </div>
-<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
+<div class="slide-el split-stats" data-group="split-body" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
 <div class="split-stat-main">
 <div class="split-stat-label">핵심 수치</div>
 <div class="split-stat-value">90%</div>
@@ -3032,7 +3032,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
+<div class="slide-el split-list" data-group="split-body" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
 <div class="split-list-title">📌 목록 제목</div>
 <div class="split-list-item">
 <div class="split-list-num">1</div>
@@ -3043,7 +3043,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="split-list-text"><strong>항목 제목</strong><br/>설명 텍스트</div>
 </div>
 </div>
-<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
+<div class="slide-el split-stats" data-group="split-body" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
 <div class="split-stat-main">
 <div class="split-stat-label">핵심 수치</div>
 <div class="split-stat-value">90%</div>
@@ -3079,7 +3079,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
+<div class="slide-el split-list" data-group="split-body" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
 <div class="split-list-title">📌 목록 제목</div>
 <div class="split-list-item">
 <div class="split-list-num">1</div>
@@ -3098,7 +3098,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="split-list-text"><strong>항목 제목</strong><br/>설명 텍스트</div>
 </div>
 </div>
-<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
+<div class="slide-el split-stats" data-group="split-body" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
 <div class="split-stat-main">
 <div class="split-stat-label">핵심 수치</div>
 <div class="split-stat-value">90%</div>
@@ -3134,7 +3134,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el split-list" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
+<div class="slide-el split-list" data-group="split-body" data-type="리스트" style="position:absolute; left:120px; top:330px; width:820px;">
 <div class="split-list-title">📌 목록 제목</div>
 <div class="split-list-item">
 <div class="split-list-num">1</div>
@@ -3157,7 +3157,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="split-list-text"><strong>항목 제목</strong><br/>설명 텍스트</div>
 </div>
 </div>
-<div class="slide-el split-stats" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
+<div class="slide-el split-stats" data-group="split-body" data-type="스탯" style="position:absolute; left:980px; top:330px; width:820px;">
 <div class="split-stat-main">
 <div class="split-stat-label">핵심 수치</div>
 <div class="split-stat-value">90%</div>
@@ -3513,8 +3513,8 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <svg style="position:absolute; left:0; top:0; width:1920px; height:1080px; pointer-events:none; overflow:visible;">
 <line stroke="#111" stroke-width="5" x1="960" x2="300" y1="440" y2="620"></line>
 </svg>
-<div class="slide-el flow-box accent" data-type="다이어그램" style="position:absolute; left:820px; top:340px; width:280px;">핵심</div>
-<div class="slide-el flow-box" data-type="다이어그램" style="position:absolute; left:200px; top:530px; width:200px;">가지 1</div>
+<div class="slide-el flow-box accent" data-group="dg1" data-type="다이어그램" style="position:absolute; left:820px; top:340px; width:280px;">핵심</div>
+<div class="slide-el flow-box" data-group="dg1" data-type="다이어그램" style="position:absolute; left:200px; top:530px; width:200px;">가지 1</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="2">
 <svg style="position:absolute; left:0; top:0; width:1920px; height:1080px; pointer-events:none; overflow:visible;">
@@ -3533,8 +3533,8 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <svg style="position:absolute; left:0; top:0; width:1920px; height:1080px; pointer-events:none; overflow:visible;">
 <line stroke="#111" stroke-width="5" x1="960" x2="300" y1="440" y2="620"></line>
 </svg>
-<div class="slide-el flow-box accent" data-type="다이어그램" style="position:absolute; left:820px; top:340px; width:280px;">핵심</div>
-<div class="slide-el flow-box" data-type="다이어그램" style="position:absolute; left:200px; top:530px; width:200px;">가지 1</div>
+<div class="slide-el flow-box accent" data-group="dg1" data-type="다이어그램" style="position:absolute; left:820px; top:340px; width:280px;">핵심</div>
+<div class="slide-el flow-box" data-group="dg1" data-type="다이어그램" style="position:absolute; left:200px; top:530px; width:200px;">가지 1</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="2">
 <svg style="position:absolute; left:0; top:0; width:1920px; height:1080px; pointer-events:none; overflow:visible;">
@@ -3559,8 +3559,8 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <svg style="position:absolute; left:0; top:0; width:1920px; height:1080px; pointer-events:none; overflow:visible;">
 <line stroke="#111" stroke-width="5" x1="960" x2="240" y1="440" y2="620"></line>
 </svg>
-<div class="slide-el flow-box accent" data-type="다이어그램" style="position:absolute; left:820px; top:340px; width:280px;">핵심</div>
-<div class="slide-el flow-box" data-type="다이어그램" style="position:absolute; left:140px; top:530px; width:200px;">가지 1</div>
+<div class="slide-el flow-box accent" data-group="dg1" data-type="다이어그램" style="position:absolute; left:820px; top:340px; width:280px;">핵심</div>
+<div class="slide-el flow-box" data-group="dg1" data-type="다이어그램" style="position:absolute; left:140px; top:530px; width:200px;">가지 1</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="2">
 <svg style="position:absolute; left:0; top:0; width:1920px; height:1080px; pointer-events:none; overflow:visible;">
@@ -3591,8 +3591,8 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <svg style="position:absolute; left:0; top:0; width:1920px; height:1080px; pointer-events:none; overflow:visible;">
 <line stroke="#111" stroke-width="5" x1="960" x2="200" y1="440" y2="620"></line>
 </svg>
-<div class="slide-el flow-box accent" data-type="다이어그램" style="position:absolute; left:820px; top:340px; width:280px;">핵심</div>
-<div class="slide-el flow-box" data-type="다이어그램" style="position:absolute; left:100px; top:530px; width:200px;">가지 1</div>
+<div class="slide-el flow-box accent" data-group="dg1" data-type="다이어그램" style="position:absolute; left:820px; top:340px; width:280px;">핵심</div>
+<div class="slide-el flow-box" data-group="dg1" data-type="다이어그램" style="position:absolute; left:100px; top:530px; width:200px;">가지 1</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="2">
 <svg style="position:absolute; left:0; top:0; width:1920px; height:1080px; pointer-events:none; overflow:visible;">
@@ -3849,8 +3849,8 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="slide-el" data-appear-step="0" data-type="기존질문" style="text-align:center;">
 <span style="font-size:108px; font-weight:900; color:var(--color-text-muted); text-decoration:line-through;">살까 말까</span>
 </div>
-<div class="slide-el" data-appear-step="1" data-type="화살표" style="text-align:center; font-size:96px; color:var(--color-text-faint);">↓</div>
-<div class="slide-el" data-appear-step="1" data-type="새질문" style="text-align:center;">
+<div class="slide-el" data-appear-step="1" data-group="question-shift" data-type="화살표" style="text-align:center; font-size:96px; color:var(--color-text-faint);">↓</div>
+<div class="slide-el" data-appear-step="1" data-group="question-shift" data-type="새질문" style="text-align:center;">
 <span class="hl" style="font-size:132px; color:var(--color-accent);">어디를 살까</span>
 </div>
 </div>
@@ -3923,11 +3923,15 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="slide" data-page-group="55" data-slide-id="T55_base" data-steps="2" data-type="상하두줄전개" data-variant="0" id="T55_base" style="">
 <div class="step-layer" data-step="0">
 <div class="items-col" style="top:250px; gap:56px; width:1280px; margin:0 auto;">
-<div class="slide-el vertical-line1" data-appear-step="0" data-type="첫줄" style="text-align:center; padding:18px 0;">
+<div class="slide-el vertical-line1" data-type="첫줄" style="text-align:center; padding:18px 0;">
 <span class="hl" style="font-size:96px;">첫 줄로 핵심을 던지고</span>
 </div>
-<div class="slide-el vertical-divider" data-appear-step="1" data-type="구분선" style="width:420px; height:6px; margin:0 auto; background:var(--color-text-faint);"></div>
-<div class="slide-el vertical-line2" data-appear-step="1" data-type="둘째줄" style="text-align:center; font-size:74px; font-weight:800; color:var(--color-accent); line-height:1.4;">둘째 줄로 정리합니다</div>
+</div>
+</div>
+<div class="step-layer" data-step="1">
+<div class="items-col" style="top:430px; gap:32px; width:1280px; margin:0 auto;">
+<div class="slide-el vertical-divider" data-group="step2" data-type="구분선" style="width:420px; height:6px; margin:0 auto; background:var(--color-text-faint);"></div>
+<div class="slide-el vertical-line2" data-group="step2" data-type="둘째줄" style="text-align:center; font-size:74px; font-weight:800; color:var(--color-accent); line-height:1.4;">둘째 줄로 정리합니다</div>
 </div>
 </div>
 </div>
@@ -3996,7 +4000,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="bubble" style="position:absolute; top:80px; left:1120px; width:680px;">\"이건 정말 괜찮을까요?\"</div>
 </div>
 </div>
-<div class="slide" data-page-group="23" data-slide-id="T23_base" data-steps="2" data-type="CTA버튼" data-variant="0" id="T23_base" style="">
+<div class="slide" data-page-group="23" data-slide-id="T23_base" data-steps="4" data-type="CTA버튼" data-variant="0" id="T23_base" style="">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px; text-align:center;">
 <div class="hl-wrap" style="align-items:center; justify-content:center;">
@@ -4029,22 +4033,22 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="1">
-<div class="slide-el postit tilt-l" data-type="포스트잇" style="left:200px; top:300px; width:380px; height:400px;">
+<div class="slide-el postit tilt-l" data-group="note1" data-type="포스트잇" style="left:200px; top:300px; width:380px; height:400px;">
 <div class="postit-num">①</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:232px; top:430px; width:316px; text-align:center;">아침은 거르지 마세요</div>
+<div class="slide-el hand md bold hand-typing" data-group="note1" data-sound="write" data-type="손글씨" style="position:absolute; left:232px; top:430px; width:316px; text-align:center;">아침은 거르지 마세요</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="2">
-<div class="slide-el postit tilt-r" data-type="포스트잇" style="left:770px; top:300px; width:380px; height:400px;">
+<div class="slide-el postit tilt-r" data-group="note2" data-type="포스트잇" style="left:770px; top:300px; width:380px; height:400px;">
 <div class="postit-num">②</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:802px; top:430px; width:316px; text-align:center;">물 자주 마시기</div>
+<div class="slide-el hand md bold hand-typing" data-group="note2" data-sound="write" data-type="손글씨" style="position:absolute; left:802px; top:430px; width:316px; text-align:center;">물 자주 마시기</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="3">
-<div class="slide-el postit tilt-c" data-type="포스트잇" style="left:1340px; top:300px; width:380px; height:400px;">
+<div class="slide-el postit tilt-c" data-group="note3" data-type="포스트잇" style="left:1340px; top:300px; width:380px; height:400px;">
 <div class="postit-num">③</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:1372px; top:430px; width:316px; text-align:center;">잠은 7시간 이상</div>
+<div class="slide-el hand md bold hand-typing" data-group="note3" data-sound="write" data-type="손글씨" style="position:absolute; left:1372px; top:430px; width:316px; text-align:center;">잠은 7시간 이상</div>
 </div>
 </div>
 <div class="slide" data-page-group="37" data-slide-id="T37_v1" data-steps="3" data-type="마지막정리" data-variant="1" id="T37_v1" style="">
@@ -4054,16 +4058,16 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="1">
-<div class="slide-el postit tilt-l" data-type="포스트잇" style="left:320px; top:280px; width:480px; height:460px;">
+<div class="slide-el postit tilt-l" data-group="note4" data-type="포스트잇" style="left:320px; top:280px; width:480px; height:460px;">
 <div class="postit-num">①</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:352px; top:410px; width:416px; text-align:center;">핵심 정리 첫번째</div>
+<div class="slide-el hand md bold hand-typing" data-group="note4" data-sound="write" data-type="손글씨" style="position:absolute; left:352px; top:410px; width:416px; text-align:center;">핵심 정리 첫번째</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="2">
-<div class="slide-el postit tilt-r" data-type="포스트잇" style="left:1120px; top:280px; width:480px; height:460px;">
+<div class="slide-el postit tilt-r" data-group="note5" data-type="포스트잇" style="left:1120px; top:280px; width:480px; height:460px;">
 <div class="postit-num">②</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:1152px; top:410px; width:416px; text-align:center;">핵심 정리 두번째</div>
+<div class="slide-el hand md bold hand-typing" data-group="note5" data-sound="write" data-type="손글씨" style="position:absolute; left:1152px; top:410px; width:416px; text-align:center;">핵심 정리 두번째</div>
 </div>
 </div>
 <div class="slide" data-page-group="37" data-slide-id="T37_v2" data-steps="4" data-type="마지막정리" data-variant="2" id="T37_v2" style="">
@@ -4073,22 +4077,22 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="1">
-<div class="slide-el postit tilt-l" data-type="포스트잇" style="left:200px; top:300px; width:380px; height:400px;">
+<div class="slide-el postit tilt-l" data-group="note6" data-type="포스트잇" style="left:200px; top:300px; width:380px; height:400px;">
 <div class="postit-num">①</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:232px; top:430px; width:316px; text-align:center;">핵심 정리 첫번째</div>
+<div class="slide-el hand md bold hand-typing" data-group="note6" data-sound="write" data-type="손글씨" style="position:absolute; left:232px; top:430px; width:316px; text-align:center;">핵심 정리 첫번째</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="2">
-<div class="slide-el postit tilt-r" data-type="포스트잇" style="left:770px; top:300px; width:380px; height:400px;">
+<div class="slide-el postit tilt-r" data-group="note7" data-type="포스트잇" style="left:770px; top:300px; width:380px; height:400px;">
 <div class="postit-num">②</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:802px; top:430px; width:316px; text-align:center;">핵심 정리 두번째</div>
+<div class="slide-el hand md bold hand-typing" data-group="note7" data-sound="write" data-type="손글씨" style="position:absolute; left:802px; top:430px; width:316px; text-align:center;">핵심 정리 두번째</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="3">
-<div class="slide-el postit tilt-c" data-type="포스트잇" style="left:1340px; top:300px; width:380px; height:400px;">
+<div class="slide-el postit tilt-c" data-group="note8" data-type="포스트잇" style="left:1340px; top:300px; width:380px; height:400px;">
 <div class="postit-num">③</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:1372px; top:430px; width:316px; text-align:center;">핵심 정리 세번째</div>
+<div class="slide-el hand md bold hand-typing" data-group="note8" data-sound="write" data-type="손글씨" style="position:absolute; left:1372px; top:430px; width:316px; text-align:center;">핵심 정리 세번째</div>
 </div>
 </div>
 <div class="slide" data-page-group="37" data-slide-id="T37_v3" data-steps="5" data-type="마지막정리" data-variant="3" id="T37_v3" style="">
@@ -4098,28 +4102,28 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="1">
-<div class="slide-el postit tilt-l" data-type="포스트잇" style="left:112px; top:300px; width:340px; height:400px;">
+<div class="slide-el postit tilt-l" data-group="note9" data-type="포스트잇" style="left:112px; top:300px; width:340px; height:400px;">
 <div class="postit-num">①</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:144px; top:430px; width:276px; text-align:center;">핵심 첫번째</div>
+<div class="slide-el hand md bold hand-typing" data-group="note9" data-sound="write" data-type="손글씨" style="position:absolute; left:144px; top:430px; width:276px; text-align:center;">핵심 첫번째</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="2">
-<div class="slide-el postit tilt-r" data-type="포스트잇" style="left:564px; top:300px; width:340px; height:400px;">
+<div class="slide-el postit tilt-r" data-group="note10" data-type="포스트잇" style="left:564px; top:300px; width:340px; height:400px;">
 <div class="postit-num">②</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:596px; top:430px; width:276px; text-align:center;">핵심 두번째</div>
+<div class="slide-el hand md bold hand-typing" data-group="note10" data-sound="write" data-type="손글씨" style="position:absolute; left:596px; top:430px; width:276px; text-align:center;">핵심 두번째</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="3">
-<div class="slide-el postit tilt-c" data-type="포스트잇" style="left:1016px; top:300px; width:340px; height:400px;">
+<div class="slide-el postit tilt-c" data-group="note11" data-type="포스트잇" style="left:1016px; top:300px; width:340px; height:400px;">
 <div class="postit-num">③</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:1048px; top:430px; width:276px; text-align:center;">핵심 세번째</div>
+<div class="slide-el hand md bold hand-typing" data-group="note11" data-sound="write" data-type="손글씨" style="position:absolute; left:1048px; top:430px; width:276px; text-align:center;">핵심 세번째</div>
 </div>
 <div class="step-layer" data-no-dim="" data-step="4">
-<div class="slide-el postit tilt-l" data-type="포스트잇" style="left:1468px; top:300px; width:340px; height:400px;">
+<div class="slide-el postit tilt-l" data-group="note12" data-type="포스트잇" style="left:1468px; top:300px; width:340px; height:400px;">
 <div class="postit-num">④</div>
 </div>
-<div class="slide-el hand md bold hand-typing" data-sound="write" data-type="손글씨" style="position:absolute; left:1500px; top:430px; width:276px; text-align:center;">핵심 네번째</div>
+<div class="slide-el hand md bold hand-typing" data-group="note12" data-sound="write" data-type="손글씨" style="position:absolute; left:1500px; top:430px; width:276px; text-align:center;">핵심 네번째</div>
 </div>
 </div>
 <div class="slide" data-page-group="38" data-slide-id="T38_base" data-steps="3" data-type="챕터전환" data-variant="0" id="T38_base" style="">
@@ -4572,6 +4576,6 @@ width: 680px;</span>
 <button class="fmt-btn" data-align="right" title="오른쪽 정렬">≡</button>
 </div>
 <div id="slide-jump-nav"></div>
-<script src="./assets/slide-editor.js?v=20260424130349"></script>
+<script src="./assets/slide-editor.js?v=20260425095750"></script>
 <div class="gs-crosshair-h" id="gs-crosshair-h" style="top: 195px; display: none;"></div><div class="gs-crosshair-v" id="gs-crosshair-v" style="left: 960px; display: none;"></div>
 <div id="filmstrip"><div id="filmstrip-inner"></div></div><div id="edit-mode-badge" style="position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 99999; background: rgb(230, 57, 70); color: rgb(255, 255, 255); padding: 6px 18px; border-radius: 8px; font-size: 14px; font-weight: 900; pointer-events: none; animation: 1.5s ease 0s infinite normal none running editBadgeBlink; display: none;">편집중 — 자동저장 30초</div></body></html>

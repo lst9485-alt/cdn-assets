@@ -215,6 +215,9 @@
 
       item.appendChild(fsInner);
       item.appendChild(num);
+      if (typeof createTypeMetaChips === 'function') {
+        item.appendChild(createTypeMetaChips(slide, { compact: true }));
+      }
 
       item.addEventListener('click', () => {
         if (fsDragItem || fsDragDone) return;
@@ -304,6 +307,7 @@
   let runtimeNotesEditingSlide = -1;
   let runtimeNotesSuppressApply = false;
   let runtimeNotesHidden = false;
+  document.body.classList.remove('presenter-open', 'runtime-notes-hidden');
 
   function ensureRuntimeNotesDock() {
     let dock = document.getElementById('runtime-notes-dock');
@@ -386,6 +390,40 @@
   }
 
   window.__toggleRuntimeNotesHidden = force => toggleRuntimeNotesHidden(force);
+
+  function shouldHandleRuntimeNotesShortcut(e) {
+    if (!e || e.defaultPrevented || e.isComposing || e.ctrlKey || e.metaKey || e.altKey) return false;
+    if (!(e.code === 'KeyF' || String(e.key || '').toLowerCase() === 'f')) return false;
+    const target = e.target;
+    const isTyping = !!(target && target.closest && target.closest('input, textarea, [contenteditable="true"]'));
+    const isRuntimeNotes = !!(target && target.closest && target.closest('#runtime-notes-dock'));
+    return !isTyping || isRuntimeNotes;
+  }
+
+  function toggleFullscreenForShortcut() {
+    if (!document.fullscreenElement) {
+      const request = document.documentElement?.requestFullscreen;
+      if (request) Promise.resolve(request.call(document.documentElement)).catch(() => {});
+    } else if (document.exitFullscreen) {
+      Promise.resolve(document.exitFullscreen()).catch(() => {});
+    }
+  }
+
+  function toggleRuntimeOrPresenterNotes(force) {
+    if (presenterWindow && !presenterWindow.closed && typeof togglePresenterNotesFromMain === 'function') {
+      if (togglePresenterNotesFromMain(force)) return true;
+    }
+    if (typeof window.__toggleRuntimeNotesHidden === 'function') {
+      window.__toggleRuntimeNotesHidden(force);
+      return true;
+    }
+    return false;
+  }
+
+  function handleRuntimePresentationShortcut(force) {
+    toggleRuntimeOrPresenterNotes(force);
+    toggleFullscreenForShortcut();
+  }
 
   function setRuntimeNotesPanelText(text) {
     const dock = ensureRuntimeNotesDock();
@@ -482,16 +520,16 @@
     const layer = ensureRuntimeInkLayer();
     const sparks = layer?.querySelector('#runtime-ink-sparks');
     if (!sparks || !point) return;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 4; i++) {
       const spark = document.createElement('span');
       spark.className = 'runtime-ink-spark';
       spark.style.left = `${point.x}px`;
       spark.style.top = `${point.y}px`;
-      spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 60}px`);
-      spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 60}px`);
-      spark.style.setProperty('--spark-scale', (0.88 + Math.random() * 0.82).toFixed(2));
+      spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 44}px`);
+      spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 44}px`);
+      spark.style.setProperty('--spark-scale', (0.72 + Math.random() * 0.48).toFixed(2));
       sparks.appendChild(spark);
-      setTimeout(() => spark.remove(), 520);
+      setTimeout(() => spark.remove(), 480);
     }
   }
 
@@ -1120,6 +1158,155 @@
       '<span class="ov-cat-name">' + (meta ? meta.name : catName) + '</span>' +
       '<span class="ov-cat-count">' + count + '</span>';
     return header;
+  }
+  // 자동 생성 보조 데이터 — references/type-registry.json + type-compile-config.json 기준
+  // 에디터 개요/필름스트립 카드의 메타 태그 표시용.
+  const PG_TO_TYPE_META = {
+    1: {"label": "T01 말풍선+텍스트", "schemaRequiredCount": 1, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    2: {"label": "T02 아이콘+텍스트", "schemaRequiredCount": 1, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
+    3: {"label": "T03 카드", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": false}},
+    4: {"label": "T04 그리드카드", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
+    5: {"label": "T05 번호항목", "schemaRequiredCount": 2, "fillRange": [2, 6], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": false}},
+    6: {"label": "T06 체크리스트", "schemaRequiredCount": 2, "fillRange": [2, 6], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": false}},
+    7: {"label": "T07 아이콘행", "schemaRequiredCount": 5, "fillRange": [5, 13], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
+    8: {"label": "T08 아이콘아이템", "schemaRequiredCount": 3, "fillRange": [3, 11], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
+    9: {"label": "T09 플로우", "schemaRequiredCount": 2, "fillRange": [2, 6], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": false}},
+    10: {"label": "T10 아이콘플로우", "schemaRequiredCount": 3, "fillRange": [3, 11], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
+    11: {"label": "T11 바차트", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    12: {"label": "T12 라인차트", "schemaRequiredCount": 4, "fillRange": [5, 5], "itemsRange": [1, 2], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    13: {"label": "T13 큰숫자(서클)", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": false}},
+    14: {"label": "T14 숫자스탯", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    15: {"label": "T15 다이어그램", "schemaRequiredCount": 2, "fillRange": [2, 7], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    16: {"label": "T16 타임라인", "schemaRequiredCount": 3, "fillRange": [3, 11], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    17: {"label": "T17 비교박스", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    18: {"label": "T18 인용", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    19: {"label": "T19 경고배너", "schemaRequiredCount": 3, "fillRange": [3, 11], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    20: {"label": "T20 태그칩", "schemaRequiredCount": 2, "fillRange": [3, 4], "itemsRange": [2, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    21: {"label": "T21 섹션배지+코너레이블", "schemaRequiredCount": 5, "fillRange": [5, 5], "itemsRange": [2, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    22: {"label": "T22 버튼그리드", "schemaRequiredCount": 2, "fillRange": [2, 6], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    23: {"label": "T23 CTA버튼", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": 4, "usageScope": "cta_only", "media": {"image": false, "imageRequired": false, "emoji": false}},
+    24: {"label": "T24 비교박스(이모지VS)", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    25: {"label": "T25 비교박스(불릿리스트)", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    26: {"label": "T26 그리드카드(아이콘좌측)", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
+    27: {"label": "T27 섹션배지(챕터플로우)", "schemaRequiredCount": 6, "fillRange": [7, 10], "itemsRange": [2, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    28: {"label": "T28 비교테이블", "schemaRequiredCount": 8, "fillRange": [8, 20], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    29: {"label": "T29 이미지+텍스트", "schemaRequiredCount": 1, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": true, "emoji": true}},
+    30: {"label": "T30 분기플로우", "schemaRequiredCount": 7, "fillRange": [10, 13], "itemsRange": [2, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    31: {"label": "T31 분할레이아웃", "schemaRequiredCount": 15, "fillRange": [17, 23], "itemsRange": [2, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    32: {"label": "T32 등식플로우", "schemaRequiredCount": 5, "fillRange": [8, 11], "itemsRange": [2, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    33: {"label": "T33 아이콘플로우(스탯)", "schemaRequiredCount": 3, "fillRange": [3, 9], "itemsRange": [1, 4], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    34: {"label": "T34 플로우(상세)", "schemaRequiredCount": 5, "fillRange": [9, 13], "itemsRange": [2, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    35: {"label": "T35 토픽결론", "schemaRequiredCount": 5, "fillRange": [5, 5], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    36: {"label": "T36 인용(대비)", "schemaRequiredCount": 5, "fillRange": [5, 5], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    37: {"label": "T37 마지막정리", "schemaRequiredCount": 2, "fillRange": [3, 5], "itemsRange": [2, 4], "displaySteps": null, "usageScope": "outro_only", "media": {"image": false, "imageRequired": false, "emoji": false}},
+    38: {"label": "T38 챕터전환", "schemaRequiredCount": 3, "fillRange": [5, 9], "itemsRange": [2, 4], "displaySteps": null, "usageScope": "chapter_only", "media": {"image": false, "imageRequired": false, "emoji": false}},
+    39: {"label": "T39 용어정의", "schemaRequiredCount": 2, "fillRange": [4, 4], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    40: {"label": "T40 인물카드", "schemaRequiredCount": 2, "fillRange": [4, 4], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    41: {"label": "T41 대질문", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    42: {"label": "T42 좌우2분할", "schemaRequiredCount": 6, "fillRange": [7, 7], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    43: {"label": "T43 블로그인트로", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    44: {"label": "T44 한줄강조", "schemaRequiredCount": 1, "fillRange": [1, 1], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    45: {"label": "T45 두줄대비", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    46: {"label": "T46 카운터제목", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    47: {"label": "T47 아이콘강조", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": true, "emoji": true}},
+    48: {"label": "T48 두줄전개", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    49: {"label": "T49 아이콘2단강조", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    50: {"label": "T50 좌우2단비교", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    51: {"label": "T51 아이콘2단포인트", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
+    52: {"label": "T52 상하2단비교", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    53: {"label": "T53 2단플로우", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    54: {"label": "T54 분기2단플로우", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    55: {"label": "T55 상하두줄전개", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    56: {"label": "T56 상단강조전개", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    57: {"label": "T57 좌측바전개", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    58: {"label": "T58 인용형전개", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    59: {"label": "T59 카드형전개", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+  };
+
+  function typeMetaOfPageGroup(pg) {
+    if (pg == null || pg === '') return null;
+    return PG_TO_TYPE_META[parseInt(pg, 10)] || null;
+  }
+
+  function countBySelector(slide, selector) {
+    return slide ? slide.querySelectorAll(selector).length : 0;
+  }
+
+  function inputLabelOfSlide(slide, meta) {
+    if (!slide || !slide.dataset) return null;
+    const pg = parseInt(slide.dataset.pageGroup, 10);
+    let n = 0;
+    if ([3, 4, 26].includes(pg)) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .grid-card, .step-layer[data-step]:not([data-step="0"]) .card');
+    else if ([5, 6].includes(pg)) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .num-item, .step-layer[data-step]:not([data-step="0"]) .check-item');
+    else if (pg === 7) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) [data-type="아이콘행"]');
+    else if (pg === 8) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .icon-item');
+    else if (pg === 9) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .flow-box');
+    else if (pg === 10) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .icon-flow-item');
+    else if (pg === 11) n = countBySelector(slide, '.bar-row, .hbar-row');
+    else if (pg === 15) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .flow-box');
+    else if (pg === 16) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .step-timeline');
+    else if (pg === 17) n = countBySelector(slide, '.compare-col.good .compare-item');
+    else if (pg === 19) n = countBySelector(slide, '.alert-banner');
+    else if (pg === 20) n = countBySelector(slide, '.tag-chip');
+    else if (pg === 21) n = countBySelector(slide, '.section-badge');
+    else if (pg === 22) n = countBySelector(slide, '.btn-pill');
+    else if (pg === 24) n = countBySelector(slide, '.compare-col.good .compare-item');
+    else if (pg === 25) n = countBySelector(slide, '.bullet-card');
+    else if (pg === 28) n = countBySelector(slide, '.comp-table tbody tr');
+    else if (pg === 37) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .postit');
+    else if (pg === 38) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .postit-mid');
+
+    if (pg === 11 && n) return String(1 + (n * 2));
+    if (pg === 12) return '5';
+    if (pg === 13) return '3+';
+    if (pg === 15 && n) return String(1 + n);
+    if (pg === 16 && n) return String(1 + (n * 2));
+    if (pg === 17 && n) return String(1 + (n * 2));
+    if (pg === 24 && n) return String(1 + (n * 2));
+    if (pg === 25 && n) return String(1 + n + 1);
+    if (pg === 28 && n) return String(1 + (n * 3) + 1);
+    if (pg === 37 && n) return String(1 + n);
+    if (pg === 38 && n) return String(1 + (n * 2));
+    if (n) return String(1 + n);
+    if (meta && Array.isArray(meta.fillRange)) {
+      const minF = meta.fillRange[0];
+      const maxF = meta.fillRange[1];
+      return minF === maxF ? String(minF) : (minF + '~' + maxF);
+    }
+    return null;
+  }
+
+  function createTypeMetaChips(slide, options) {
+    options = options || {};
+    const row = document.createElement('div');
+    row.className = options.compact ? 'type-meta-chips compact' : 'type-meta-chips';
+    if (!slide) return row;
+    const meta = typeMetaOfPageGroup(slide.dataset ? slide.dataset.pageGroup : null);
+    const addChip = function(label, title, extraClass) {
+      if (!label) return;
+      const chip = document.createElement('span');
+      chip.className = 'type-meta-chip' + (extraClass ? ' ' + extraClass : '');
+      chip.textContent = label;
+      if (title) chip.title = title;
+      row.appendChild(chip);
+    };
+    const steps = (typeof getDisplaySteps === 'function')
+      ? getDisplaySteps(slide)
+      : ((meta && Number.isFinite(meta.displaySteps)) ? meta.displaySteps : ((typeof getSteps === 'function') ? getSteps(slide) : 1));
+    addChip(steps + '스텝', '실제 표시 스텝 수');
+    const inputLabel = inputLabelOfSlide(slide, meta);
+    if (inputLabel) addChip('입력 ' + inputLabel, '채워야 하는 실제 입력값 수');
+    if (meta && Array.isArray(meta.itemsRange)) {
+      const min = meta.itemsRange[0];
+      const max = meta.itemsRange[1];
+      addChip((min === max ? String(min) : (min + '~' + max)) + '개', '지원 아이템 수');
+    }
+    if (meta && meta.media) {
+      if (meta.media.imageRequired) addChip('🖼!', '이미지 필수', 'media');
+      else if (meta.media.image) addChip('🖼', '이미지 지원', 'media');
+      if (meta.media.emoji) addChip('🙂', '이모지/아이콘 슬롯', 'media');
+    }
+    return row;
   }
   // 자동 생성 — regenerate-snippets.py (MODULE_SPECS + RECOMMENDED_MODULES_BY_TYPE)
   window.MODULES_DATA = {
@@ -2513,8 +2700,17 @@
       !el.classList.contains('edit-hidden-placeholder') &&
       !el.classList.contains('layout-detached-placeholder') &&
       !el.matches(NON_MEANINGFUL_STEP_SEL);
+    const hasMeaningfulLayerContent = layer => {
+      const candidates = Array.from(layer.querySelectorAll(
+        '.slide-el, .step-content, .text-area, .bubble, .corner-label, [data-appear-step]'
+      ));
+      return candidates.some(el => isCountableStepEl(el));
+    };
     slide.querySelectorAll('.step-layer[data-step]').forEach(layer => {
-      maxStep = Math.max(maxStep, parseInt(layer.dataset.step, 10) || 0);
+      const layerStep = parseInt(layer.dataset.step, 10) || 0;
+      if (layerStep > 0 && hasMeaningfulLayerContent(layer)) {
+        maxStep = Math.max(maxStep, layerStep);
+      }
     });
     slide.querySelectorAll('[data-appear-step]').forEach(el => {
       if (!isCountableStepEl(el)) return;
@@ -2535,7 +2731,14 @@
       !el.classList.contains('step-title') &&
       !el.classList.contains('step-dim') &&
       !el.classList.contains('edit-hidden-placeholder');
-    if (parseInt(layer.dataset.step) === 0) return [];
+    const layerStep = parseInt(layer.dataset.step, 10) || 0;
+    if (layerStep === 0) {
+      return Array.from(layer.querySelectorAll(
+        '.items-row > [data-appear-step], .items-col > [data-appear-step], .items-grid > [data-appear-step]'
+      ))
+        .filter(el => isActiveOrderedEl(el) && (parseInt(el.dataset.appearStep, 10) || 0) > 0)
+        .sort((a, b) => (parseInt(a.dataset.appearStep, 10) || 0) - (parseInt(b.dataset.appearStep, 10) || 0));
+    }
     // flex 컨테이너 내 data-appear-step 자식 우선 수집
     const flexItems = Array.from(layer.querySelectorAll(
       '.items-row > [data-appear-step], .items-col > [data-appear-step], .items-grid > [data-appear-step]'
@@ -2556,6 +2759,49 @@
       isActiveOrderedEl(el)
     );
   }
+
+  function countLogicalOrderedUnits(ordered) {
+    let count = 0;
+    let idx = 0;
+    while (idx < ordered.length) {
+      const group = ordered[idx].dataset.group;
+      count++;
+      idx++;
+      if (group) {
+        while (idx < ordered.length && ordered[idx].dataset.group === group) idx++;
+      }
+    }
+    return count;
+  }
+
+  function getDisplaySteps(slide) {
+    if (!slide) return 1;
+    let steps = 1;
+    const hasMeaningfulLayerContent = layer => {
+      const candidates = Array.from(layer.querySelectorAll(
+        '.slide-el, .step-content, .text-area, .bubble, .corner-label, [data-appear-step]'
+      ));
+      return candidates.some(el =>
+        !el.closest('.edit-hidden-placeholder, .layout-detached-placeholder') &&
+        !el.classList.contains('edit-hidden-placeholder') &&
+        !el.classList.contains('layout-detached-placeholder') &&
+        !el.matches('.vertical-divider, .branch-arrow, .flow-arrow, .icon-flow-arrow, .eq-chain-arrow, .chapter-flow-arrow')
+      );
+    };
+    const layers = Array.from(slide.querySelectorAll('.step-layer[data-step]'))
+      .sort((a, b) => (parseInt(a.dataset.step, 10) || 0) - (parseInt(b.dataset.step, 10) || 0));
+    layers.forEach(layer => {
+      const layerStep = parseInt(layer.dataset.step, 10) || 0;
+      const ordered = getOrderedEls(layer);
+      if (ordered.length > 0) {
+        steps += countLogicalOrderedUnits(ordered);
+      } else if (layerStep > 0 && hasMeaningfulLayerContent(layer)) {
+        steps += 1;
+      }
+    });
+    return Math.max(1, steps);
+  }
+  window.getDisplaySteps = getDisplaySteps;
 
   // 비연속 스텝 지원: 실제 존재하는 다음/이전 스텝 탐색
   function getNextExistingStep(slide, current) {
@@ -2640,6 +2886,18 @@
             // 이 pushup 레이어 위에 다른 pushup이 있으면 밀려난 상태
             const nextPushup = slide.querySelector(`.step-layer[data-transition="pushup"][data-step="${s + 1}"]`);
             if (nextPushup) layer.classList.add('push-exit');
+          }
+        }
+        if (s === 0) {
+          const ordered0 = getOrderedEls(layer);
+          if (forceRevealAll || effectiveStep > 0) {
+            ordered0.forEach(el => {
+              el.classList.add('anim-shown');
+              if (forceRevealAll) addAnimReadyImmediate(el);
+              else addAnimReady(el);
+            });
+          } else {
+            ordered0.forEach(el => { el.classList.remove('anim-shown'); removeAnimReady(el); });
           }
         }
         if (s > 0) {
@@ -3074,11 +3332,10 @@
   }
 
   document.addEventListener('keydown', e => {
-    if (e.code !== 'KeyF') return;
-    if (!(presenterWindow && !presenterWindow.closed && typeof togglePresenterNotesFromMain === 'function')) return;
+    if (!shouldHandleRuntimeNotesShortcut(e)) return;
     e.preventDefault();
     e.stopPropagation();
-    togglePresenterNotesFromMain();
+    handleRuntimePresentationShortcut();
   }, true);
 
   document.addEventListener('keydown', e => {
@@ -3317,16 +3574,8 @@
       return;
     }
     if (e.code === 'KeyF') {
-      if (presenterWindow && !presenterWindow.closed && typeof togglePresenterNotesFromMain === 'function') {
-        e.preventDefault();
-        togglePresenterNotesFromMain();
-        return;
-      }
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else {
-        document.exitFullscreen();
-      }
+      e.preventDefault();
+      handleRuntimePresentationShortcut();
       return;
     }
     if (e.code === 'KeyP') {
@@ -4283,6 +4532,9 @@
 
       item.appendChild(thumb);
       item.appendChild(num);
+      if (typeof createTypeMetaChips === 'function') {
+        item.appendChild(createTypeMetaChips(slide));
+      }
       if (!document.body.classList.contains('frozen-legacy-deck') && document.body && document.body.dataset.generated === 'true') {
         const actions = document.createElement('div');
         actions.className = 'ov-actions';
@@ -4802,7 +5054,19 @@
       .map(el => el.outerHTML)
       .join('');
 
-    const bodyClass = document.body.className.trim();
+    const transientBodyClasses = new Set([
+      'edit-mode',
+      'hide-dims',
+      'individual-mode',
+      'module-picker-open',
+      'overview-open',
+      'presenter-open',
+      'runtime-notes-hidden',
+      'sjn-collapsed',
+    ]);
+    const bodyClass = [...document.body.classList]
+      .filter(c => !transientBodyClasses.has(c) && !c.startsWith('show-guide'))
+      .join(' ');
     const bodyAttrs = [];
     if (bodyClass) bodyAttrs.push('class="' + escHTML(bodyClass) + '"');
     for (const [k, v] of Object.entries(document.body.dataset)) {
@@ -9760,16 +10024,16 @@ function schedulePresenterPreviewRefit() {
 function spawnPresenterSpark(point) {
   const sparks = document.getElementById('pres-ink-sparks');
   if (!sparks || !point) return;
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 4; i++) {
     const spark = document.createElement('span');
     spark.className = 'runtime-ink-spark';
     spark.style.left = point.x + 'px';
     spark.style.top = point.y + 'px';
-    spark.style.setProperty('--spark-x', ((Math.random() - 0.5) * 60) + 'px');
-    spark.style.setProperty('--spark-y', ((Math.random() - 0.5) * 60) + 'px');
-    spark.style.setProperty('--spark-scale', (0.88 + Math.random() * 0.82).toFixed(2));
+    spark.style.setProperty('--spark-x', ((Math.random() - 0.5) * 44) + 'px');
+    spark.style.setProperty('--spark-y', ((Math.random() - 0.5) * 44) + 'px');
+    spark.style.setProperty('--spark-scale', (0.72 + Math.random() * 0.48).toFixed(2));
     sparks.appendChild(spark);
-    setTimeout(() => spark.remove(), 520);
+    setTimeout(() => spark.remove(), 480);
   }
 }
 function createInkActionId() {
@@ -10283,6 +10547,12 @@ document.addEventListener('keydown', ev => {
     ev.preventDefault();
     if (presenterNotesDirty) flushNotes('manual');
     togglePresenterNotesHidden();
+    if (!document.fullscreenElement) {
+      const request = document.documentElement?.requestFullscreen;
+      if (request) Promise.resolve(request.call(document.documentElement)).catch(() => {});
+    } else if (document.exitFullscreen) {
+      Promise.resolve(document.exitFullscreen()).catch(() => {});
+    }
     return;
   }
   if (ae && ae.id === 'pres-notes-input') return;
