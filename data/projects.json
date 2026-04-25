@@ -1,11 +1,11 @@
 {
-  "updated": "2026-04-25T06:00:02.275441+09:00",
+  "updated": "2026-04-26T06:00:01.364595+09:00",
   "projects": [
     {
-      "name": "라오어 무한매수법 조사",
-      "type": "file",
+      "name": "원소스 멀티유즈",
+      "type": "folder",
       "app": null,
-      "modified": "2026-04-24",
+      "modified": "2026-04-25",
       "status": null,
       "next": null
     },
@@ -13,15 +13,15 @@
       "name": "홈페이지",
       "type": "folder",
       "app": "homepage",
-      "modified": "2026-04-24",
+      "modified": "2026-04-25",
       "status": "v3.5 섹션 재배치 + UI/UX 개선. 서버 백엔드(Apps Script doPost) 배포 완료 (v24). 아임웹 삽입은 v3.4 기준 — v3.5 아직 미반영",
       "next": "코칭 랜딩 v3.5 아임웹 반영 — PG 심사 통과 후 코칭 재공개 시 함께"
     },
     {
-      "name": "yt-slide 설계 정본",
+      "name": "상담 CRM",
       "type": "file",
-      "app": "youtube/yt-slide",
-      "modified": "2026-04-24",
+      "app": null,
+      "modified": "2026-04-25",
       "status": null,
       "next": null
     },
@@ -48,14 +48,6 @@
       "modified": "2026-04-15",
       "status": "2026-04-15 기준 브랜드 정체성 리밸런싱 완료.",
       "next": "노션 동기화 (`/profile sync`)"
-    },
-    {
-      "name": "컨설팅",
-      "type": "folder",
-      "app": "consulting-crm",
-      "modified": "2026-04-08",
-      "status": "탈리폼 열 매핑 수정 + 신규 필드 동기화 완료. 탈리폼에 이메일·입금완료·현금영수증/세금계산서 등 10여개 필드 추가로 열이 밀렸던 문제 해결. TALLY_COLS 교정, DB/Notion에 신규 필드(현금영수증번호·상호명·세금계산서이메일) 추가, 임승택 데이터 복구",
-      "next": "TALLY_LAST_ROW 롤백 (유보 — blind create 중복 위험, 별도 설계 필요)"
     }
   ]
 }
