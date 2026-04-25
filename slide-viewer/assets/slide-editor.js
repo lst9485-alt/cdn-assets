@@ -1186,7 +1186,7 @@
     22: {"label": "T22 버튼그리드", "schemaRequiredCount": 2, "fillRange": [2, 6], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     23: {"label": "T23 CTA버튼", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": 4, "usageScope": "cta_only", "media": {"image": false, "imageRequired": false, "emoji": false}},
     24: {"label": "T24 비교박스(이모지VS)", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
-    25: {"label": "T25 비교박스(불릿리스트)", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    25: {"label": "T25 비교박스(불릿리스트)", "schemaRequiredCount": 3, "fillRange": [3, 7], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     26: {"label": "T26 그리드카드(아이콘좌측)", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
     27: {"label": "T27 섹션배지(챕터플로우)", "schemaRequiredCount": 6, "fillRange": [7, 10], "itemsRange": [2, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     28: {"label": "T28 비교테이블", "schemaRequiredCount": 8, "fillRange": [8, 20], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
