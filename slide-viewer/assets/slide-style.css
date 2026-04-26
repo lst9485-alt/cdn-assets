@@ -1900,6 +1900,13 @@
     pointer-events: auto;
   }
   .ov-global-toggle:hover { background: rgba(0,0,0,0.9); }
+  .ov-notes-mode-toggle.active {
+    background: var(--editor-accent);
+    color: #111;
+  }
+  .ov-notes-mode-toggle.active:hover {
+    background: #ffd83d;
+  }
 
   .ov-actions {
     position: absolute;
@@ -1940,10 +1947,11 @@
   }
   .ov-notes-panel {
     position: fixed;
-    right: 18px;
+    left: clamp(16px, calc(100vw - 520px), 1040px);
+    right: auto;
     top: 58px;
     z-index: 8060;
-    width: min(380px, calc(100vw - 36px));
+    width: min(440px, calc(100vw - 32px));
     max-height: calc(100vh - 92px);
     display: none;
     flex-direction: column;

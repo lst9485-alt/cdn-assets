@@ -4352,6 +4352,7 @@
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
   let expandedOverviewGroups = new Set();  // 확장된 page-group(string) 집합 — overview 전용
   let overviewNoteSlideIdx = -1;
+  let overviewNotesClickMode = false;
 
   function ensureOverviewNotesPanel() {
     let panel = document.getElementById('ov-notes-panel');
@@ -4361,7 +4362,7 @@
     panel.className = 'ov-notes-panel';
     panel.innerHTML = `
       <div class="ov-notes-title">발표자 노트</div>
-      <div class="ov-notes-hint">Alt/⌘ + 썸네일 클릭으로 미리보기</div>
+      <div class="ov-notes-hint">대본 보기 켜짐: 썸네일 클릭으로 미리보기</div>
       <div class="ov-notes-body">대본 없음</div>
     `;
     overview.appendChild(panel);
@@ -4496,6 +4497,18 @@
         buildOverview();
       });
       toolbar.appendChild(toggleAllBtn);
+      const notesModeBtn = document.createElement('button');
+      notesModeBtn.type = 'button';
+      notesModeBtn.className = 'ov-global-toggle ov-notes-mode-toggle' + (overviewNotesClickMode ? ' active' : '');
+      notesModeBtn.textContent = overviewNotesClickMode ? '대본 보기 켜짐' : '대본 보기';
+      notesModeBtn.title = '켜면 썸네일 클릭 시 슬라이드로 들어가지 않고 발표자 노트만 보여줍니다.';
+      notesModeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        overviewNotesClickMode = !overviewNotesClickMode;
+        if (!overviewNotesClickMode) hideOverviewNotesPanel();
+        buildOverview();
+      });
+      toolbar.appendChild(notesModeBtn);
       ovGrid.appendChild(toolbar);
     }
 
@@ -4624,7 +4637,7 @@
       item.addEventListener('click', (e) => {
         if (ovDragItem) return;
         e.stopPropagation();
-        if (e.altKey || e.metaKey) {
+        if (overviewNotesClickMode || e.altKey || e.metaKey) {
           showOverviewNotesForSlide(slide, slideIdx, item);
           return;
         }
