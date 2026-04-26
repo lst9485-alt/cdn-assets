@@ -383,13 +383,26 @@
   }
 
   function toggleRuntimeNotesHidden(force) {
-    runtimeNotesHidden = typeof force === 'boolean' ? force : !runtimeNotesHidden;
+    const currentlyHidden = document.body.classList.contains('runtime-notes-hidden');
+    runtimeNotesHidden = typeof force === 'boolean' ? force : !currentlyHidden;
     document.body.classList.toggle('runtime-notes-hidden', runtimeNotesHidden);
     if (runtimeNotesHidden) toggleRuntimeNotesPanel(false);
     return runtimeNotesHidden;
   }
 
   window.__toggleRuntimeNotesHidden = force => toggleRuntimeNotesHidden(force);
+
+  document.addEventListener('keydown', e => {
+    if (e.defaultPrevented || e.isComposing || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (typeof editMode !== 'undefined' && editMode) return;
+    if (e.code !== 'Digit1') return;
+    const target = e.target;
+    const isTyping = !!(target && target.closest && target.closest('input, textarea, [contenteditable="true"]'));
+    if (isTyping) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    toggleRuntimeNotesHidden();
+  }, true);
 
   function shouldHandleRuntimeNotesShortcut(e) {
     if (!e || e.defaultPrevented || e.isComposing || e.ctrlKey || e.metaKey || e.altKey) return false;
@@ -3546,6 +3559,7 @@
     }
     if (!editMode && e.code === 'Digit1') {
       e.preventDefault();
+      e.stopImmediatePropagation();
       if (typeof window.__toggleRuntimeNotesHidden === 'function') {
         window.__toggleRuntimeNotesHidden();
       }
@@ -6703,6 +6717,7 @@
 
   function detachLayoutManagedElement(el) {
     if (!el || !el.parentElement) return el;
+    if (el.matches(NON_DETACHABLE_CHILD_SEL)) return el;
     const PRESERVE_LAYOUT_BOX_SEL = [
       '.reveal-line1', '.reveal-line2',
       '.two-step-title', '.two-step-desc',
@@ -7806,7 +7821,7 @@
         dragAnchor = clientToStage(e.clientX, e.clientY);
         // 드래그 시작 시 자식을 부모에서 추출 (pushUndo → clone → 독립 배치)
         pendingGroupEntry = null;
-        selectedEl = useChildAction ? child : groupParent;
+        selectedEl = (useChildAction && canExtractChild) ? child : groupParent;
         selectedEls = [selectedEl];
         // _pendingChildExtract: 드래그 임계값 넘으면 자식 추출
         // 세션 36 후속3: 모듈은 자식 추출 금지 — 내부 .sc-item 등이 빠져나가면 모양 깨지고 고립됨.
@@ -7816,7 +7831,7 @@
         }
         elAnchor = { top: groupParent.offsetTop, left: groupParent.offsetLeft };
         elAnchors = [{ el: groupParent, top: groupParent.offsetTop, left: groupParent.offsetLeft }];
-        updateCoordPanel(useChildAction ? child : groupParent);
+        updateCoordPanel(selectedEl);
         if (child) updateFontPanel(child);
         return;
       }
@@ -8061,6 +8076,34 @@
     );
     if (directChildExtractable) {
       armDirectChildExtract(directChildTarget, e.clientX, e.clientY);
+      return;
+    }
+    if (
+      directChildTarget &&
+      activeSelectedCard &&
+      activeSelectedCard.contains(directChildTarget) &&
+      directChildTarget !== activeSelectedCard &&
+      directChildTarget.matches(NON_DETACHABLE_CHILD_SEL)
+    ) {
+      e.preventDefault();
+      e.stopPropagation();
+      exitGroup();
+      groupEntered = true;
+      groupParent = activeSelectedCard;
+      activeSelectedCard.classList.remove('edit-selected');
+      activeSelectedCard.classList.add('group-entered-parent');
+      activeSelectedCard.querySelectorAll('.child-selected').forEach(c => c.classList.remove('child-selected'));
+      directChildTarget.classList.add('child-selected');
+      if (typeof markGroupActionChild === 'function') markGroupActionChild(directChildTarget);
+      selectedEl = activeSelectedCard;
+      selectedEls = [activeSelectedCard];
+      pendingDrag = true;
+      mouseDownPos = { x: e.clientX, y: e.clientY };
+      dragAnchor = clientToStage(e.clientX, e.clientY);
+      elAnchor = { top: activeSelectedCard.offsetTop, left: activeSelectedCard.offsetLeft };
+      elAnchors = [{ el: activeSelectedCard, top: activeSelectedCard.offsetTop, left: activeSelectedCard.offsetLeft }];
+      updateCoordPanel(activeSelectedCard);
+      updateFontPanel(directChildTarget);
       return;
     }
 
@@ -8408,10 +8451,12 @@
         if (!(selectedEl && selectedEl._pendingChildExtract) && groupEntered && groupParent && typeof getGroupActionTarget === 'function') {
           const actionTarget = getGroupActionTarget();
           if (actionTarget && actionTarget !== groupParent) {
-            selectedEl = actionTarget;
-            selectedEls = [actionTarget];
             const canExtractChild = canExtractEditableChild(actionTarget);
-            if (!actionTarget._pendingChildExtract && canExtractChild) {
+            if (canExtractChild) {
+              selectedEl = actionTarget;
+              selectedEls = [actionTarget];
+            }
+            if (canExtractChild && !actionTarget._pendingChildExtract) {
               actionTarget._pendingChildExtract = actionTarget;
             }
           }
@@ -8873,12 +8918,13 @@
       const explicitChildAction = !!(child && target && target !== el);
       const autoChildAction = typeof shouldAutoEnableChildAction === 'function' && shouldAutoEnableChildAction(el, child);
       const useChildAction = !preferParentAction || explicitChildAction || autoChildAction;
+      const canExtractChild = canExtractEditableChild(child);
       if (child && el.contains(child)) {
         child.classList.add('child-selected');
         if (typeof markGroupActionChild === 'function') markGroupActionChild(useChildAction ? child : null);
-        selectedEl = useChildAction ? child : el;
+        selectedEl = (useChildAction && canExtractChild) ? child : el;
         selectedEls = [selectedEl];
-        updateCoordPanel(useChildAction ? child : el);
+        updateCoordPanel(selectedEl);
         updateFontPanel(child);
       } else {
         if (typeof markGroupActionChild === 'function') markGroupActionChild(null);
@@ -10850,6 +10896,7 @@ document.addEventListener('keydown', ev => {
   }
   if (ae && ae.id === 'pres-notes-input') return;
   if (ev.code === 'Digit1') {
+    if (!document.getElementById('presenter-root')) return;
     ev.preventDefault();
     if (presenterNotesDirty) flushNotes('manual');
     togglePresenterNotesHidden();
