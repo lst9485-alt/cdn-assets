@@ -584,6 +584,10 @@
     padding: 16px 40px; width: 1360px;
   }
   .alert-banner .alert-icon { font-size: 70px; flex-shrink: 0; }
+  .alert-banner .alert-icon img {
+    width: 70px !important; height: 70px !important;
+    object-fit: contain; display: block;
+  }
   .alert-banner .alert-text { font-size: 50px; font-weight: 700; color: var(--color-text); }
 
   /* ── 타입 25: 적합/부적합 비교 ── */
@@ -1145,7 +1149,17 @@
   }
 
   /* ── ambient: 이모지 떠다님 ── */
-  .emoji-icon { animation: float-y 3s ease-in-out infinite; }
+  .emoji-icon {
+    position: relative;
+    overflow: hidden;
+    animation: float-y 3s ease-in-out infinite;
+  }
+  .emoji-icon .t02-icon-overlay img,
+  .emoji-icon .t02-icon-overlay [data-user-image] {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+  }
 
   /* ── 등장 애니메이션: 화살표 clip-path ── */
   .step-layer[data-step]:not([data-step="0"]) .slide-el.flow-arrow,
@@ -2510,6 +2524,10 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
     border: 1.5px solid #222;
   }
   .bullet-icon { font-size: 60px; flex-shrink: 0; }
+  .bullet-icon img {
+    width: 64px !important; height: 64px !important;
+    object-fit: contain; display: block;
+  }
   .bullet-text { font-size: 40px; font-weight: 700; color: var(--color-text); line-height: 1.5; }
   .bullet-summary { font-size: 36px; font-weight: 700; color: #fff; background: var(--color-accent); border: none; border-radius: 12px; padding: 16px 24px; }
 
