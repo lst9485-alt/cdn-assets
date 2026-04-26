@@ -481,7 +481,7 @@
   .quote-img img { width: 100%; height: 100%; object-fit: cover; }
   body[data-generated="true"] .quote-img:has(img[src*="assets/images/"]) {
     width: 360px;
-    height: 203px;
+    height: 400px;
     background: #fff !important;
   }
   body[data-generated="true"] .quote-img:has(img[src*="assets/images/"]) img {
@@ -2700,7 +2700,8 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
     width: 1200px !important;
     height: 675px !important;
     min-height: 0 !important;
-    background: rgba(255,255,255,0.68);
+    background: transparent !important;
+    border: none !important;
   }
   body[data-generated="true"] .slide-el.img-caption {
     left: 240px !important;
