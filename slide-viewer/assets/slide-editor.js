@@ -6698,6 +6698,10 @@
   function detachLayoutManagedElement(el) {
     if (!el || !el.parentElement) return el;
     const PRESERVE_LAYOUT_BOX_SEL = [
+      '.reveal-line1', '.reveal-line2',
+      '.two-step-title', '.two-step-desc',
+      '.point-title', '.point-desc',
+      '.vertical-top', '.vertical-bottom',
       '.flow-step1', '.flow-step2',
       '.branch-root', '.branch-result',
       '.split-left', '.split-right',
