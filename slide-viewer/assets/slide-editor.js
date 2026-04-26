@@ -8086,15 +8086,15 @@
       }
     } else {
       // 이미 선택된 요소 재클릭
-	      const gid = el.dataset.group;
-	      if (gid && !individualMode) {
-	        // 그룹 재클릭은 click이면 개별 모드, drag이면 그룹 이동으로 해석한다.
-	        if (selectedEls.length > 1) {
-	          pendingIndividualModeEntry = { el };
-	          selectedEl = el;
-	        } else {
-	          enterIndividualModeForGroupSelection(el);
-	        }
+      const gid = el.dataset.group;
+      if (gid && !individualMode) {
+        // 그룹 재클릭은 click이면 개별 모드, drag이면 그룹 이동으로 해석한다.
+        if (selectedEls.length > 1) {
+          pendingIndividualModeEntry = { el };
+          selectedEl = el;
+        } else {
+          enterIndividualModeForGroupSelection(el);
+        }
       } else if (gid && individualMode) {
         if (el === selectedEl) {
           // individualMode + 같은 카드 재클릭 → 그룹 진입(자식 드릴다운). mouseup에서 드래그 여부 확인 후 확정
@@ -8763,12 +8763,12 @@
           const expanded = [];
           items.forEach(item => {
             if (!item) return;
-	            const groupOwner = item.closest && item.closest('[data-group]');
-	            const gid = (item.dataset && item.dataset.group) || (groupOwner && groupOwner.dataset && groupOwner.dataset.group);
-	            const splitOwner = item.matches('.split-list') ? item : (groupOwner && groupOwner.closest('.split-list'));
-	            if (gid && !splitOwner) {
-	              slide.querySelectorAll(`[data-group="${CSS.escape(gid)}"]`).forEach(member => expanded.push(member));
-	            } else {
+            const groupOwner = item.closest && item.closest('[data-group]');
+            const gid = (item.dataset && item.dataset.group) || (groupOwner && groupOwner.dataset && groupOwner.dataset.group);
+            const splitOwner = item.matches('.split-list') ? item : (groupOwner && groupOwner.closest('.split-list'));
+            if (gid && !splitOwner) {
+              slide.querySelectorAll(`[data-group="${CSS.escape(gid)}"]`).forEach(member => expanded.push(member));
+            } else {
               expanded.push(item);
             }
           });
@@ -8846,18 +8846,18 @@
     svgDragAnchors = [];
     document.getElementById('snap-x').style.display = 'none';
     document.getElementById('snap-y').style.display = 'none';
-	    ['gap-left','gap-right','gap-top','gap-bottom'].forEach(id => { document.getElementById(id).style.display = 'none'; });
-	
-	    if (pendingIndividualModeEntry) {
-	      const { el } = pendingIndividualModeEntry;
-	      pendingIndividualModeEntry = null;
-	      if (!wasDragging && el && selectedEls.includes(el)) {
-	        enterIndividualModeForGroupSelection(el);
-	        return;
-	      }
-	    }
+    ['gap-left','gap-right','gap-top','gap-bottom'].forEach(id => { document.getElementById(id).style.display = 'none'; });
 
-	    // 드래그 안 했으면 그룹 진입 (캔바 스타일)
+    if (pendingIndividualModeEntry) {
+      const { el } = pendingIndividualModeEntry;
+      pendingIndividualModeEntry = null;
+      if (!wasDragging && el && selectedEls.includes(el)) {
+        enterIndividualModeForGroupSelection(el);
+        return;
+      }
+    }
+
+    // 드래그 안 했으면 그룹 진입 (캔바 스타일)
     if (pendingGroupEntry && !wasDragging) {
       const { el, target, x, y } = pendingGroupEntry;
       pendingGroupEntry = null;
