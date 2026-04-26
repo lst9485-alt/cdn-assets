@@ -316,7 +316,7 @@
     dock = document.createElement('div');
     dock.id = 'runtime-notes-dock';
     dock.innerHTML = `
-      <button id="runtime-notes-toggle" type="button" aria-expanded="false">발표자 노트</button>
+      <button id="runtime-notes-toggle" type="button" aria-expanded="false">발표자노트(1)</button>
       <div id="runtime-notes-panel" aria-hidden="true">
         <div class="runtime-notes-label">참고 (원고)</div>
         <textarea class="runtime-notes-body" spellcheck="false" placeholder="대본 없음"></textarea>
@@ -9499,24 +9499,63 @@
     return '☰';
   }
 
-  function applyTextAlignToTarget(align) {
+  function getTextStyleTargets(el) {
+    if (!el) return [];
+    if (el.matches('.hl, .section-badge, .corner-label, .slide-el, .text-area, .bubble')) {
+      const children = Array.from(el.querySelectorAll('.hl, .section-badge, .corner-label'));
+      return children.length ? children : [el];
+    }
+    const parent = el.closest('.slide-el, .text-area, .bubble');
+    if (parent) {
+      const children = Array.from(parent.querySelectorAll('.hl, .section-badge, .corner-label'));
+      return children.length ? children : [parent];
+    }
+    return [el];
+  }
+
+  function applyTextFormatToElement(el, cmd) {
+    if (!el) return;
+    if (cmd === 'bold') {
+      el.style.fontWeight = (el.style.fontWeight === '900' || el.style.fontWeight === 'bold') ? '' : '900';
+    } else if (cmd === 'italic') {
+      el.style.fontStyle = el.style.fontStyle === 'italic' ? '' : 'italic';
+    } else if (cmd === 'underline' || cmd === 'strikeThrough') {
+      const current = (el.style.textDecorationLine || el.style.textDecoration || '').split(/\s+/).filter(Boolean);
+      const token = cmd === 'underline' ? 'underline' : 'line-through';
+      const next = current.includes(token) ? current.filter(v => v !== token) : [...current, token];
+      el.style.textDecorationLine = next.join(' ');
+    }
+  }
+
+  function applyTextFormat(cmd) {
     const editingEl = document.querySelector('[contenteditable="true"]');
     if (editingEl) {
-      editingEl.style.textAlign = align;
+      editingEl.focus();
+      document.execCommand(cmd);
+      if (typeof ghMarkDirty === 'function') ghMarkDirty();
       return;
     }
     const targets = selectedEls.length ? selectedEls : (selectedEl ? [selectedEl] : []);
     if (!targets.length) return;
     pushUndo();
     targets.forEach(el => {
-      const textTargets = el.matches('.hl, .section-badge, .corner-label')
-        ? [el]
-        : Array.from(el.querySelectorAll('.hl, .section-badge, .corner-label'));
-      if (textTargets.length) {
-        textTargets.forEach(t => { t.style.textAlign = align; });
-      } else {
-        el.style.textAlign = align;
-      }
+      getTextStyleTargets(el).forEach(target => applyTextFormatToElement(target, cmd));
+    });
+    if (typeof ghMarkDirty === 'function') ghMarkDirty();
+  }
+
+  function applyTextAlignToTarget(align) {
+    const editingEl = document.querySelector('[contenteditable="true"]');
+    if (editingEl) {
+      editingEl.style.textAlign = align;
+      if (typeof ghMarkDirty === 'function') ghMarkDirty();
+      return;
+    }
+    const targets = selectedEls.length ? selectedEls : (selectedEl ? [selectedEl] : []);
+    if (!targets.length) return;
+    pushUndo();
+    targets.forEach(el => {
+      getTextStyleTargets(el).forEach(t => { t.style.textAlign = align; });
     });
     if (typeof ghMarkDirty === 'function') ghMarkDirty();
   }
@@ -9535,7 +9574,7 @@
     formatBar.querySelectorAll('.fmt-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         if (btn.dataset.cmd) {
-          document.execCommand(btn.dataset.cmd);
+          applyTextFormat(btn.dataset.cmd);
         } else if (btn.dataset.alignCycle) {
           cycleTextAlign(btn);
         } else if (btn.dataset.align) {
@@ -9546,6 +9585,9 @@
   }
 
   // ── 상단 툴바 이벤트 ──
+  document.querySelectorAll('#top-toolbar .tb-fmt').forEach(btn => {
+    btn.addEventListener('mousedown', e => e.preventDefault());
+  });
   bindToolbarClick('tb-exit', () => toggleEditMode());
   bindToolbarClick('tb-font-dec', () => applyFontSize(-4));
   bindToolbarClick('tb-font-inc', () => applyFontSize(4));
@@ -9561,10 +9603,10 @@
     });
   }
   // B/I/U 버튼 (상단 툴바)
-  bindToolbarClick('tb-bold', () => document.execCommand('bold'));
-  bindToolbarClick('tb-italic', () => document.execCommand('italic'));
-  bindToolbarClick('tb-underline', () => document.execCommand('underline'));
-  bindToolbarClick('tb-strike', () => document.execCommand('strikeThrough'));
+  bindToolbarClick('tb-bold', () => applyTextFormat('bold'));
+  bindToolbarClick('tb-italic', () => applyTextFormat('italic'));
+  bindToolbarClick('tb-underline', () => applyTextFormat('underline'));
+  bindToolbarClick('tb-strike', () => applyTextFormat('strikeThrough'));
   bindToolbarClick('tb-text-align', () => {
     const btn = document.getElementById('tb-text-align');
     if (btn) cycleTextAlign(btn);
