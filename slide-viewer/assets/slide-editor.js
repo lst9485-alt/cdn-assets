@@ -7483,8 +7483,17 @@
     return (child && parent.contains(child)) ? child : null;
   }
 
+  function canExtractEditableChild(child) {
+    return !!(
+      child &&
+      !child.matches(NON_DETACHABLE_CHILD_SEL) &&
+      !child.closest('svg') &&
+      child.namespaceURI !== 'http://www.w3.org/2000/svg'
+    );
+  }
+
   function armDirectChildExtract(child, clientX, clientY) {
-    if (!child) return false;
+    if (!canExtractEditableChild(child)) return false;
     document.querySelectorAll('.child-selected, .child-action-target').forEach(el => {
       if (el !== child) el.classList.remove('child-selected', 'child-action-target');
     });
@@ -7787,11 +7796,7 @@
         const explicitChildAction = !!(prevChild && child === prevChild);
         const autoChildAction = typeof shouldAutoEnableChildAction === 'function' && shouldAutoEnableChildAction(groupParent, child);
         const useChildAction = !preferParentAction || explicitChildAction || autoChildAction;
-        const canExtractChild = !!(
-          child &&
-          !child.closest('svg') &&
-          child.namespaceURI !== 'http://www.w3.org/2000/svg'
-        );
+        const canExtractChild = canExtractEditableChild(child);
         child.classList.add('child-selected');
         if (typeof markGroupActionChild === 'function') markGroupActionChild(useChildAction ? child : null);
         updateFontPanel(child);
@@ -8380,9 +8385,9 @@
     if (pendingDrag && mouseDownPos) {
       const dx = e.clientX - mouseDownPos.x, dy = e.clientY - mouseDownPos.y;
       const dist = Math.sqrt(dx*dx + dy*dy);
-	      if (dist > DRAG_THRESHOLD) {
-	        pendingIndividualModeEntry = null;
-	        if (!groupEntered && pendingGroupEntry) {
+      if (dist > DRAG_THRESHOLD) {
+        pendingIndividualModeEntry = null;
+        if (!groupEntered && pendingGroupEntry) {
           const { el, target, x, y } = pendingGroupEntry;
           const pointTarget = document.elementFromPoint(x, y) || target;
           const child = resolveGroupChildTarget(el, pointTarget, x, y);
@@ -8390,11 +8395,7 @@
           const explicitChildAction = !!(child && target && target !== el);
           const autoChildAction = typeof shouldAutoEnableChildAction === 'function' && shouldAutoEnableChildAction(el, child);
           const useChildAction = !preferParentAction || explicitChildAction || autoChildAction;
-          const canExtractChild = !!(
-            child &&
-            !child.closest('svg') &&
-            child.namespaceURI !== 'http://www.w3.org/2000/svg'
-          );
+          const canExtractChild = canExtractEditableChild(child);
           if (useChildAction && child && el.contains(child) && !el.hasAttribute('data-module-id') && canExtractChild) {
             selectedEls.forEach(s => s.classList.remove('edit-selected', 'edit-group-selected'));
             child.classList.add('child-selected');
@@ -8409,7 +8410,7 @@
           if (actionTarget && actionTarget !== groupParent) {
             selectedEl = actionTarget;
             selectedEls = [actionTarget];
-            const canExtractChild = !actionTarget.closest('svg') && actionTarget.namespaceURI !== 'http://www.w3.org/2000/svg';
+            const canExtractChild = canExtractEditableChild(actionTarget);
             if (!actionTarget._pendingChildExtract && canExtractChild) {
               actionTarget._pendingChildExtract = actionTarget;
             }
