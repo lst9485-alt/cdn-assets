@@ -2750,13 +2750,13 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
   .branch-node.branch-left { background: var(--color-sub); color: white; border: 2px solid var(--color-sub); }
   .branch-node.branch-right { background: var(--color-accent); color: #fff; border: none; }
   .branch-node.branch-center { background: var(--color-text); color: white; border: 2px solid var(--color-text); }
-  .branch-result {
+  .branch-flow .branch-result {
     background: white; border: 2px solid #222; border-radius: 12px;
     padding: 16px 24px; font-size: 28px; font-weight: 800; color: #333;
     text-align: center; width: 100%; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
-  .branch-col:first-child .branch-result { color: var(--color-sub); }
-  .branch-col:last-child .branch-result { color: var(--color-accent); }
+  .branch-flow .branch-col:first-child .branch-result { color: var(--color-sub); }
+  .branch-flow .branch-col:last-child .branch-result { color: var(--color-accent); }
   .branch-sub { font-size: 22px; font-weight: 600; color: #999; }
   .branch-summary {
     font-size: 36px; font-weight: 700; color: var(--color-text);

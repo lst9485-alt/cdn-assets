@@ -409,9 +409,6 @@
   }
 
   function toggleRuntimeOrPresenterNotes(force) {
-    if (presenterWindow && !presenterWindow.closed && typeof togglePresenterNotesFromMain === 'function') {
-      if (togglePresenterNotesFromMain(force)) return true;
-    }
     if (typeof window.__toggleRuntimeNotesHidden === 'function') {
       window.__toggleRuntimeNotesHidden(force);
       return true;
@@ -420,6 +417,9 @@
   }
 
   function handleRuntimePresentationShortcut(force) {
+    if (typeof window.__toggleRuntimeNotesHidden === 'function') {
+      window.__toggleRuntimeNotesHidden(true);
+    }
     toggleFullscreenForShortcut();
   }
 
@@ -3546,8 +3546,8 @@
     }
     if (!editMode && e.code === 'Digit1') {
       e.preventDefault();
-      if (typeof toggleRuntimeOrPresenterNotes === 'function') {
-        toggleRuntimeOrPresenterNotes();
+      if (typeof window.__toggleRuntimeNotesHidden === 'function') {
+        window.__toggleRuntimeNotesHidden();
       }
       return;
     }
@@ -8748,9 +8748,22 @@
           const r = el.offsetLeft, t = el.offsetTop;
           if (r + el.offsetWidth > x1 && r < x2 && t + el.offsetHeight > y1 && t < y2) hits.push(el);
         });
+        const expandSelectionGroups = items => {
+          const expanded = [];
+          items.forEach(item => {
+            if (!item) return;
+            const gid = item.dataset && item.dataset.group;
+            if (gid && !item.matches('.split-list')) {
+              slide.querySelectorAll(`[data-group="${CSS.escape(gid)}"]`).forEach(member => expanded.push(member));
+            } else {
+              expanded.push(item);
+            }
+          });
+          return Array.from(new Set(expanded));
+        };
         const nextSelected = selectBoxAdditive
-          ? Array.from(new Set([...selectBoxSeedEls, ...hits]))
-          : hits;
+          ? expandSelectionGroups([...selectBoxSeedEls, ...hits])
+          : expandSelectionGroups(hits);
         clearSelection();
         selectedEls = nextSelected;
         nextSelected.forEach(h => h.classList.add('edit-selected'));
@@ -10010,15 +10023,9 @@
     try {
       if (typeof presenterWindow.__togglePresenterNotesHidden === 'function') {
         hiddenState = presenterWindow.__togglePresenterNotesHidden(force);
-        if (typeof window.__toggleRuntimeNotesHidden === 'function') {
-          window.__toggleRuntimeNotesHidden(hiddenState);
-        }
         return true;
       }
     } catch (_) {}
-    if (typeof window.__toggleRuntimeNotesHidden === 'function') {
-      window.__toggleRuntimeNotesHidden(hiddenState);
-    }
     presenterChannel.postMessage({ type: 'presenter-ui', action: 'toggle-notes-hidden', force });
     return true;
   }
@@ -10562,11 +10569,6 @@ function flushNotes(reason = 'manual') {
 function togglePresenterNotesHidden(force) {
   presenterNotesHidden = typeof force === 'boolean' ? force : !presenterNotesHidden;
   document.body.classList.toggle('pres-notes-hidden', presenterNotesHidden);
-  try {
-    if (window.opener && !window.opener.closed && typeof window.opener.__toggleRuntimeNotesHidden === 'function') {
-      window.opener.__toggleRuntimeNotesHidden(presenterNotesHidden);
-    }
-  } catch (_) {}
   if (presenterNotesHidden) setPresenterNotesStatus('원고 숨김 (F로 복귀)', 'hidden');
   else setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
   schedulePresenterPreviewRefit();
