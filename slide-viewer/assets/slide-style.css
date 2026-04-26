@@ -2708,7 +2708,7 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
   .img-placeholder img {
     width: 100%; height: 100%; object-fit: contain; border-radius: 12px;
   }
-  body[data-generated="true"] .slide-el.img-placeholder {
+  body[data-generated="true"]:not(.edit-mode) .slide-el.img-placeholder {
     left: 360px !important;
     top: 220px !important;
     width: 1200px !important;
@@ -2717,7 +2717,7 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
     background: transparent !important;
     border: none !important;
   }
-  body[data-generated="true"] .slide-el.img-caption {
+  body[data-generated="true"]:not(.edit-mode) .slide-el.img-caption {
     left: 240px !important;
     top: 920px !important;
     width: 1440px !important;

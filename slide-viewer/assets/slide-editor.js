@@ -6114,7 +6114,9 @@
       // ── 편집중 배지 표시 ──
       showEditBadge(true);
       if (slides[currentSlide] && typeof showStep === 'function') {
-        showStep(slides[currentSlide], currentStep);
+        const editMaxStep = typeof getSteps === 'function' ? Math.max(0, getSteps(slides[currentSlide]) - 1) : currentStep;
+        currentStep = editMaxStep;
+        showStep(slides[currentSlide], editMaxStep, true);
       }
     } else {
       // ── 편집중 배지 먼저 숨김 (아래 cleanup 중 예외 나도 배지는 반드시 사라지게) ──
@@ -6720,6 +6722,7 @@
     const scale = stageRect.width / 1920;
     const rect = el.getBoundingClientRect();
     const directDetachChild = (() => {
+      if (el.matches('.vertical-line1, .vertical-line2')) return null;
       const onlyChild = getSingleVisibleTextProxy(el, { directOnly: true, requireLayoutParent: true });
       if (!onlyChild) return null;
       const childRect = onlyChild.getBoundingClientRect();
