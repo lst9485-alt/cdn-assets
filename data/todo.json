@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-26T06:00:01.081541+09:00",
+  "updated": "2026-04-27T06:00:00.885001+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -39,6 +39,50 @@
             },
             {
               "text": "0-5-R2. 실제 넘김 기준 재감사/수정 완료 — `스텝=실제 넘김`, `입력=사용자 입력 수`로 용어 통일. T23 4스텝, T38 챕터전환, T37 마무리전용, 베리언트별 입력수 태그, T12 라인차트 자동선택 복구, slide-viewer 배포판 동기화까지 재검증 (4/25)",
+              "done": true
+            },
+            {
+              "text": "0-5-R3. 에디터/런타임 후속 QA — T29/T53/T54/T55/T57 개별모드 드래그 전수검사, 생성본 163장 스텝·타입 편중 재측정, 스텝 넘김 소리 누락 검사, 서브에이전트 검증, slide-viewer 공개본 반영 확인 (4/26)",
+              "done": false
+            },
+            {
+              "text": "0-5-R3a. 사이드파인드: `getGroupActionTarget()` 금지 자식이 `selectedEl` 로 남아 일반 detach 경로로 분리될 수 있는 누락 경로 수정 (T53/T54/T57 영향) (4/26)",
+              "done": true
+            },
+            {
+              "text": "0-5-R3b. 사이드파인드: 생성본 분포 검사에서 A/B/C 3변형을 기본 강제해 실제 생성 HTML에 불필요한 variant 오류가 뜨는 문제 수정 (4/26)",
+              "done": true
+            },
+            {
+              "text": "0-5-R3c. `260426-slides.html` T20-2/T42-2 원고 마커 3개 vs `data-steps=2` 불일치 원인 추적 — 현재 generator 재생성 기준 재현 안 됨, stale 산출물로 판정 (4/26)",
+              "done": true
+            },
+            {
+              "text": "0-5-R3d. 사이드파인드 — 큰 덱에서 5-step이 0개가 될 수 있는 select-templates 보정 추가 및 회귀 테스트 통과 (4/26)",
+              "done": true
+            },
+            {
+              "text": "0-5-R3e. 사이드파인드: 기존 완성본 `2026-04-26/slide.md` 자체는 여전히 3+step 5.6%, 1/2step 94.4%, 5-step 0개. 다음 생성에는 보정 적용됨. 기존 산출물은 사용자 승인 후 재생성/재기획 필요",
+              "done": false
+            },
+            {
+              "text": "0-5-R3f. 야간 슬라이드 전체 마무리 — 기존 260426 산출물 재생성 후보 생성, T35 처리안, 런타임/소리/공개본 재검증, rv 리뷰, source/dashboard 커밋·푸시 완료 (4/27)",
+              "done": true
+            },
+            {
+              "text": "0-5-R3g. 사이드파인드 대기: 야간 작업 중 발견한 추가 이슈를 이 아래에 계속 추가",
+              "done": false
+            },
+            {
+              "text": "0-5-R3h. 사이드파인드 — T35 5구분 canonical 필드의 CAPTION 누락 파서 드리프트를 generate/compile 양쪽에서 수정하고 테스트 추가 (4/27)",
+              "done": true
+            },
+            {
+              "text": "0-5-R3i. 사이드파인드 — Playwright smoke spec이 `playwright/test`만 require해서 `@playwright/test` 일회성 실행 환경에서 실패하는 문제 수정 + 서버 기동 후 59개 브라우저 smoke 통과 (4/27)",
+              "done": true
+            },
+            {
+              "text": "0-5-R3j. 사이드파인드 — dashboard/public `260426-slides.html` 이 archive `slide.md` 최신 216행과 달라 168장 stale 산출물 + 20-2/42-2 마커 오류가 남음. archive 기준 216장 HTML로 재생성/동기화 완료 (4/27)",
               "done": true
             },
             {
@@ -211,33 +255,6 @@
             },
             {
               "text": "6-3-3. 수동 실행 옵션 — --now, --backfill N",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 9,
-          "title": "autocut \"자막 1개 = 영상 1개\" 원칙 리팩터 (4/22~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "9-1. split_subtitles_at_silences 비활성 (또는 --no-silence 기본값 변경)",
-              "done": false
-            },
-            {
-              "text": "9-2. 자막별 단일 영상 segment 생성 (source: 자막 start~end, target: 누적 배치)",
-              "done": false
-            },
-            {
-              "text": "9-3. GAP_CUT_THRESHOLD=1000ms 유지 (리테이크·긴 gap 컷 기능 보존)",
-              "done": false
-            },
-            {
-              "text": "9-4. 샘플 SRT로 A/B 테스트 — 빈 공간 제거·영상 길이·재생 매끄러움 검증",
-              "done": false
-            },
-            {
-              "text": "9-5. 다음 유튜브 영상 촬영 전 완료 + 실전 적용",
               "done": false
             }
           ]
