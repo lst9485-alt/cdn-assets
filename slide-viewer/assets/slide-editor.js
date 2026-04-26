@@ -420,7 +420,6 @@
   }
 
   function handleRuntimePresentationShortcut(force) {
-    toggleRuntimeOrPresenterNotes(force);
     toggleFullscreenForShortcut();
   }
 
@@ -6698,6 +6697,14 @@
 
   function detachLayoutManagedElement(el) {
     if (!el || !el.parentElement) return el;
+    const PRESERVE_LAYOUT_BOX_SEL = [
+      '.flow-step1', '.flow-step2',
+      '.branch-root', '.branch-result',
+      '.split-left', '.split-right',
+      '.vertical-line1', '.vertical-line2',
+      '.left-rail-title', '.left-rail-desc',
+      '.reveal-band', '.quote-tail', '.step-card',
+    ].join(', ');
     const parent = el.parentElement;
     const parentDisplay = getComputedStyle(parent).display || '';
     const elementPosition = getComputedStyle(el).position || '';
@@ -6722,7 +6729,7 @@
     const scale = stageRect.width / 1920;
     const rect = el.getBoundingClientRect();
     const directDetachChild = (() => {
-      if (el.matches('.vertical-line1, .vertical-line2')) return null;
+      if (el.matches(PRESERVE_LAYOUT_BOX_SEL)) return null;
       const onlyChild = getSingleVisibleTextProxy(el, { directOnly: true, requireLayoutParent: true });
       if (!onlyChild) return null;
       const childRect = onlyChild.getBoundingClientRect();
@@ -10817,7 +10824,6 @@ document.addEventListener('keydown', ev => {
   if (ev.code === 'KeyF' || ev.key.toLowerCase() === 'f') {
     ev.preventDefault();
     if (presenterNotesDirty) flushNotes('manual');
-    togglePresenterNotesHidden();
     if (!document.fullscreenElement) {
       const request = document.documentElement?.requestFullscreen;
       if (request) Promise.resolve(request.call(document.documentElement)).catch(() => {});
