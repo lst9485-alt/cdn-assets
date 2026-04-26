@@ -4421,6 +4421,7 @@
     }
     currentStep = 0;
     currentOrder = 0;
+    hideOverviewNotesPanel();
     buildFilmstrip();
     buildOverview();
     if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
@@ -4625,7 +4626,16 @@
         delBtn.className = 'ov-action-btn danger';
         delBtn.textContent = '삭제';
         delBtn.title = '이 슬라이드 삭제';
+        delBtn.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        });
+        delBtn.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        });
         delBtn.addEventListener('click', (e) => {
+          e.preventDefault();
           e.stopPropagation();
           deleteOverviewSlideAt(slideIdx);
         });
