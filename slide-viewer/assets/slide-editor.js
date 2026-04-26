@@ -396,8 +396,7 @@
     if (!(e.code === 'KeyF' || String(e.key || '').toLowerCase() === 'f')) return false;
     const target = e.target;
     const isTyping = !!(target && target.closest && target.closest('input, textarea, [contenteditable="true"]'));
-    const isRuntimeNotes = !!(target && target.closest && target.closest('#runtime-notes-dock'));
-    return !isTyping || isRuntimeNotes;
+    return !isTyping;
   }
 
   function toggleFullscreenForShortcut() {
@@ -3484,7 +3483,7 @@
       }
       pushUndo();
       const slide = slides[currentSlide];
-      const toDelete = individualMode ? [selectedEl] : [...selectedEls];
+      const toDelete = typeof getDeleteTargets === 'function' ? getDeleteTargets() : (individualMode ? [selectedEl] : [...selectedEls]);
       toDelete.forEach(el => {
         removeEditableElement(el, slide);
       });
@@ -3539,6 +3538,13 @@
       e.preventDefault();
       if (e.key === '1') toggleOverviewExpansionAll();
       else toggleOverviewNotesMode();
+      return;
+    }
+    if (!editMode && e.code === 'Digit1') {
+      e.preventDefault();
+      if (typeof toggleRuntimeOrPresenterNotes === 'function') {
+        toggleRuntimeOrPresenterNotes();
+      }
       return;
     }
     // Escape: 텍스트 편집 중이면 패스 (blur가 처리)
@@ -4071,6 +4077,7 @@
   const ovBackdrop = document.getElementById('overview-backdrop');
 
   function openOverview() {
+    overviewNotesClickMode = true;
     buildOverview();
     document.documentElement.classList.add('overview-open');
     document.body.classList.add('overview-open');
@@ -6673,6 +6680,20 @@
     cleanupEmptyEditContainers(parent || layer, slide);
   }
 
+  function getDeleteTargets() {
+    if (individualMode) return selectedEl ? [selectedEl] : [];
+    if (
+      selectedEl &&
+      selectedEls.length > 1 &&
+      selectedEl.dataset &&
+      selectedEl.dataset.group &&
+      selectedEls.every(el => el && el.dataset && el.dataset.group === selectedEl.dataset.group)
+    ) {
+      return [selectedEl];
+    }
+    return [...selectedEls];
+  }
+
   function detachLayoutManagedElement(el) {
     if (!el || !el.parentElement) return el;
     const parent = el.parentElement;
@@ -7566,7 +7587,11 @@
       return leaf;
     }
     if (isLayoutManagedTextLeaf(leaf)) {
-      return leaf.closest('.slide-el') || leaf;
+      const slideEl = leaf.closest('.slide-el');
+      const layoutParent = slideEl && slideEl.parentElement && slideEl.parentElement.matches('.items-row, .items-col, .items-grid')
+        ? slideEl.parentElement
+        : null;
+      return individualMode ? (slideEl || leaf) : (layoutParent || slideEl || leaf);
     }
     if (leaf && leaf.matches('.hl, .section-badge, .corner-label')) {
       return leaf.closest('.text-area, .bubble, .slide-el') || leaf;
@@ -7601,6 +7626,7 @@
 
     const parent = structural.parentElement;
     if (parent && parent.matches('.items-row, .items-col, .items-grid, .compare-col, .compare-box, .compare-emoji')) {
+      if (parent.matches('.items-row, .items-col, .items-grid') && !individualMode) return parent;
       return structural;
     }
 
@@ -8011,7 +8037,8 @@
       individualMode = false;
       document.body.classList.remove('individual-mode');
       const gid = el.dataset.group;
-      if (gid) {
+      const useGroupSelection = !!(gid && !el.matches('.split-list'));
+      if (useGroupSelection) {
         selectedEls = Array.from(slides[currentSlide].querySelectorAll(`[data-group="${CSS.escape(gid)}"]`));
         selectedEl = el;
         selectedEls.forEach(s => s.classList.add('edit-group-selected'));
@@ -8573,8 +8600,18 @@
       else gapBottom.style.display = 'none';
     }
 
-    selectedEl.style.left = newLeft + 'px';
-    selectedEl.style.top  = newTop + 'px';
+    if (
+      document.body &&
+      document.body.dataset.generated === 'true' &&
+      selectedEl.matches &&
+      selectedEl.matches('.img-placeholder, .img-caption')
+    ) {
+      selectedEl.style.setProperty('left', newLeft + 'px', 'important');
+      selectedEl.style.setProperty('top', newTop + 'px', 'important');
+    } else {
+      selectedEl.style.left = newLeft + 'px';
+      selectedEl.style.top  = newTop + 'px';
+    }
     // SVG connector 동반 이동(단일 selection drag)
     svgDragAnchors.forEach(({ el, top, left }) => {
       el.style.left = Math.round(left + dxDrag) + 'px';
@@ -9450,6 +9487,48 @@
   };
 
   // ── 플로팅 서식바 이벤트 ──
+  function getNextTextAlign(current) {
+    if (current === 'left') return 'center';
+    if (current === 'center') return 'right';
+    return 'left';
+  }
+
+  function getTextAlignGlyph(align) {
+    if (align === 'left') return '≡';
+    if (align === 'right') return '☷';
+    return '☰';
+  }
+
+  function applyTextAlignToTarget(align) {
+    const editingEl = document.querySelector('[contenteditable="true"]');
+    if (editingEl) {
+      editingEl.style.textAlign = align;
+      return;
+    }
+    const targets = selectedEls.length ? selectedEls : (selectedEl ? [selectedEl] : []);
+    if (!targets.length) return;
+    pushUndo();
+    targets.forEach(el => {
+      const textTargets = el.matches('.hl, .section-badge, .corner-label')
+        ? [el]
+        : Array.from(el.querySelectorAll('.hl, .section-badge, .corner-label'));
+      if (textTargets.length) {
+        textTargets.forEach(t => { t.style.textAlign = align; });
+      } else {
+        el.style.textAlign = align;
+      }
+    });
+    if (typeof ghMarkDirty === 'function') ghMarkDirty();
+  }
+
+  function cycleTextAlign(btn) {
+    const current = btn.dataset.alignState || 'center';
+    const next = getNextTextAlign(current);
+    btn.dataset.alignState = next;
+    btn.textContent = getTextAlignGlyph(next);
+    applyTextAlignToTarget(next);
+  }
+
   const formatBar = document.getElementById('format-bar');
   if (formatBar) {
     formatBar.addEventListener('mousedown', e => e.preventDefault()); // 포커스 유지
@@ -9457,10 +9536,10 @@
       btn.addEventListener('click', () => {
         if (btn.dataset.cmd) {
           document.execCommand(btn.dataset.cmd);
+        } else if (btn.dataset.alignCycle) {
+          cycleTextAlign(btn);
         } else if (btn.dataset.align) {
-          // 현재 편집 중인 요소의 textAlign 변경
-          const editingEl = document.querySelector('[contenteditable="true"]');
-          if (editingEl) editingEl.style.textAlign = btn.dataset.align;
+          applyTextAlignToTarget(btn.dataset.align);
         }
       });
     });
@@ -9485,6 +9564,11 @@
   bindToolbarClick('tb-bold', () => document.execCommand('bold'));
   bindToolbarClick('tb-italic', () => document.execCommand('italic'));
   bindToolbarClick('tb-underline', () => document.execCommand('underline'));
+  bindToolbarClick('tb-strike', () => document.execCommand('strikeThrough'));
+  bindToolbarClick('tb-text-align', () => {
+    const btn = document.getElementById('tb-text-align');
+    if (btn) cycleTextAlign(btn);
+  });
   bindToolbarClick('tb-group', () => {
     if (selectedEls.length < 2) return;
     pushUndo();
@@ -9513,7 +9597,7 @@
     }
     pushUndo();
     const slide = slides[currentSlide];
-    const toDelete = individualMode ? [selectedEl] : [...selectedEls];
+    const toDelete = typeof getDeleteTargets === 'function' ? getDeleteTargets() : (individualMode ? [selectedEl] : [...selectedEls]);
     toDelete.forEach(el => {
       removeEditableElement(el, slide);
     });
@@ -10017,7 +10101,7 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
 #pres-ink-toolbar button.active { background: rgba(255,59,48,0.2); outline: 2px solid rgba(255,90,54,0.95); }
 #pres-ink-toolbar button:disabled { opacity: 0.45; cursor: default; }
 .pres-ink-dot { width: 16px; height: 16px; border-radius: 999px; background: #ff3b30; box-shadow: 0 0 0 2px rgba(255,255,255,0.18) inset; flex-shrink: 0; }
-#pres-notes { padding: 10px 16px; background: #111; border-top: 1px solid #333; height: 160px; display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+#pres-notes { padding: 10px 16px; background: #111; border-top: 1px solid #333; height: clamp(150px, 22vh, 260px); display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
 #pres-notes-label { font-size: 11px; color: #888; font-weight: 700; }
 #pres-notes-input { flex: 1; background: #222; border: 1px solid #444; border-radius: 6px; color: #fff; font-size: 13px; padding: 6px 10px; font-family: inherit; overflow-y: auto; line-height: 1.8; }
 #pres-notes-meta { display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:11px; color:#8a8a8a; }
@@ -10071,7 +10155,7 @@ body.pres-notes-hidden #pres-notes { display:none; }
     <div id="pres-notes-input" contenteditable="true" style="white-space:pre-wrap;overflow-y:auto;" placeholder="발표 노트..."><\/div>
     <div id="pres-notes-meta">
       <div id="pres-notes-status" data-tone="saved">저장됨<\/div>
-      <div id="pres-notes-shortcut">저장: ⌘/Ctrl+S · 숨기기: F<\/div>
+      <div id="pres-notes-shortcut">저장: ⌘/Ctrl+S · 숨기기: F / 1<\/div>
     <\/div>
   <\/div>
   <div id="pres-footer">
@@ -10678,6 +10762,13 @@ document.addEventListener('keydown', ev => {
     flushNotes('manual');
     return;
   }
+  if (ae && ae.id === 'pres-notes-input') return;
+  if (ev.code === 'Digit1') {
+    ev.preventDefault();
+    if (presenterNotesDirty) flushNotes('manual');
+    togglePresenterNotesHidden();
+    return;
+  }
   if (ev.code === 'KeyF' || ev.key.toLowerCase() === 'f') {
     ev.preventDefault();
     if (presenterNotesDirty) flushNotes('manual');
@@ -10690,7 +10781,6 @@ document.addEventListener('keydown', ev => {
     }
     return;
   }
-  if (ae && ae.id === 'pres-notes-input') return;
   if (ev.key.toLowerCase() === 'r') {
     ev.preventDefault();
     setInkMode(inkMode === 'draw' ? 'off' : 'draw');
@@ -10844,7 +10934,7 @@ setPresenterNotesStatus('저장됨', 'saved');
     }
     pushUndo();
     const slide = slides[currentSlide];
-    const toDelete = individualMode ? [selectedEl] : [...selectedEls];
+    const toDelete = typeof getDeleteTargets === 'function' ? getDeleteTargets() : (individualMode ? [selectedEl] : [...selectedEls]);
     toDelete.forEach(el => {
       removeEditableElement(el, slide);
     });
