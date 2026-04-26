@@ -2586,10 +2586,11 @@
     const lastPt = pts[pts.length - 1];
     const YTICKS = 5;
     let yTicksHTML = '';
+    const compactUnit = unit && unit.length <= 2;
     for (let i = 0; i <= YTICKS; i++) {
       const v = minV + (range * i / YTICKS);
       const y = pad.top + (1 - i / YTICKS) * chartH;
-      const fallbackLabel = `${Number.isInteger(v) ? v : v.toFixed(1)}${unit}`;
+      const fallbackLabel = `${Number.isInteger(v) ? v : v.toFixed(1)}${compactUnit ? unit : ''}`;
       const label = customYTicks[i] ?? fallbackLabel;
       yTicksHTML += `<line stroke="#ddd" stroke-width="1" x1="${pad.left}" y1="${y}" x2="${pad.left + chartW}" y2="${y}"/>`;
       yTicksHTML += `<text class="chart-label" x="${pad.left - 8}" y="${y + 8}" text-anchor="end">${label}</text>`;
@@ -2604,7 +2605,7 @@
       <polygon class="chart-area" points="${areaPts}"/>
       <polyline class="chart-line lc-line" points="${polyPts}"/>
       <circle cx="${lastPt.x}" cy="${lastPt.y}" r="6" fill="#FF6B00"/>
-      <text class="chart-val lc-end-val" x="${lastPt.x + 12}" y="${lastPt.y + 10}">${vals[vals.length-1]}${unit}</text>
+      <text class="chart-val lc-end-val" x="${lastPt.x + 12}" y="${lastPt.y + 10}">${vals[vals.length-1]}${compactUnit ? unit : ''}</text>
       <defs><filter id="lcGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
       <circle class="lc-travel-dot" r="8" fill="#FF6B00" filter="url(#lcGlow)"><animateMotion dur="4s" repeatCount="indefinite" path="${pathD}" begin="5.5s"/></circle>
     </svg>`;
@@ -4432,6 +4433,33 @@
       if (!s.dataset.variant || s.dataset.variant === "0") pgsWithBase.add(s.dataset.pageGroup);
     });
 
+    const variantGroupSet = new Set();
+    slides.forEach(s => {
+      if (s.dataset.pageGroup && s.dataset.variant && s.dataset.variant !== "0") {
+        variantGroupSet.add(String(s.dataset.pageGroup));
+      }
+    });
+    if (variantGroupSet.size > 0) {
+      const toolbar = document.createElement('div');
+      toolbar.className = 'ov-toolbar';
+      const allExpanded = [...variantGroupSet].every(pg => expandedOverviewGroups.has(pg));
+      const toggleAllBtn = document.createElement('button');
+      toggleAllBtn.type = 'button';
+      toggleAllBtn.className = 'ov-global-toggle';
+      toggleAllBtn.textContent = allExpanded ? '전체 접기' : '전체 펼치기';
+      toggleAllBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (allExpanded) {
+          variantGroupSet.forEach(pg => expandedOverviewGroups.delete(pg));
+        } else {
+          variantGroupSet.forEach(pg => expandedOverviewGroups.add(pg));
+        }
+        buildOverview();
+      });
+      toolbar.appendChild(toggleAllBtn);
+      ovGrid.appendChild(toolbar);
+    }
+
     const bucketCounts = {};
     const catCounts = {};
     const metaSeenPgs = new Set();
@@ -5946,9 +5974,6 @@
     editMode = !editMode;
     document.body.classList.toggle('edit-mode', editMode);
     scaleStage();
-    if (editMode && slides[currentSlide] && typeof showStep === 'function') {
-      showStep(slides[currentSlide], currentStep);
-    }
     if (editMode) {
       // filmstrip이 stage 내부에 파싱될 수 있으므로 body 직속으로 이동
       const fs = document.getElementById('filmstrip');
@@ -6467,20 +6492,10 @@
   }
 
   function cleanupEmptyEditContainers(startNode, slide) {
-    const hasDecorativePlaceholderContent = node => !!(
-      node &&
-      node.querySelector &&
-      node.querySelector('.edit-hidden-placeholder, .layout-detached-placeholder') &&
-      node.querySelector('.vertical-divider')
-    );
     let node = startNode;
     while (node && node !== slide && node instanceof Element) {
       const parent = node.parentElement;
       if (node.matches('.step-layer')) break;
-      if (hasDecorativePlaceholderContent(node)) {
-        node = parent;
-        continue;
-      }
       if (canAutoPruneEmptyNode(node) && !hasLiveRenderableContent(node)) {
         node.remove();
         node = parent;
@@ -6494,9 +6509,6 @@
       const hasLiveChild = Array.from(layer.childNodes).some(child => {
         if (child.nodeType === Node.TEXT_NODE) {
           return isMeaningfulTextContent(child.textContent || '');
-        }
-        if (child instanceof Element && hasDecorativePlaceholderContent(child)) {
-          return true;
         }
         return (
           child instanceof Element &&
@@ -6673,16 +6685,6 @@
     box.style.height = (maxB - minT + PAD * 2) + 'px';
     box.style.display = 'block';
   }
-
-  function shouldExpandDataGroupForSelection(el) {
-    if (!el || !el.dataset) return false;
-    const gid = el.dataset.group || '';
-    if (!gid) return false;
-    // data-group is also used by templates as an animation/reveal bucket.
-    // Only editor-created groups and chapter post-it bundles behave as selection groups.
-    return /^ag\d+$/.test(gid) || /^ch\d+$/.test(gid);
-  }
-  window.shouldExpandDataGroupForSelection = shouldExpandDataGroupForSelection;
 
   function clientToStage(cx, cy) {
     const rect = document.getElementById('stage').getBoundingClientRect();
@@ -7856,9 +7858,7 @@
       const gid = el.dataset.group;
       pendingShiftSelect = {
         el,
-        groupEls: (gid && shouldExpandDataGroupForSelection(el))
-          ? Array.from(slides[currentSlide].querySelectorAll(`[data-group="${CSS.escape(gid)}"]`))
-          : null,
+        groupEls: gid ? Array.from(slides[currentSlide].querySelectorAll(`[data-group="${CSS.escape(gid)}"]`)) : null,
         x: e.clientX,
         y: e.clientY,
         seed: [...selectedEls],
@@ -7904,7 +7904,7 @@
       individualMode = false;
       document.body.classList.remove('individual-mode');
       const gid = el.dataset.group;
-      if (gid && shouldExpandDataGroupForSelection(el)) {
+      if (gid) {
         selectedEls = Array.from(slides[currentSlide].querySelectorAll(`[data-group="${CSS.escape(gid)}"]`));
         selectedEl = el;
         selectedEls.forEach(s => s.classList.add('edit-group-selected'));
