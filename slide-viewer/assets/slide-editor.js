@@ -4558,11 +4558,11 @@
         const variantCount = pg ? [...slides].filter(s => s.dataset.pageGroup === pg && s.dataset.variant !== "0").length : 0;
         const effectiveVariants = isOrphanFirst ? variantCount - 1 : variantCount;
         currentGroup = document.createElement('div');
-        currentGroup.className = 'ov-group' + (isExpanded && effectiveVariants > 0 ? ' expanded' : '');
+        currentGroup.className = 'ov-group' + (isExpanded ? ' expanded' : '');
         if (pg) currentGroup.dataset.pageGroup = pg;
-        // 펼치면 base+variants가 들어갈 만큼 grid-column span
-        if (isExpanded && effectiveVariants > 0) {
-          currentGroup.style.gridColumn = `span ${Math.min(1 + effectiveVariants, 5)}`;
+        // 펼친 page-group은 삭제 후 카드가 줄어도 항상 한 줄을 단독 사용한다.
+        if (isExpanded) {
+          currentGroup.style.gridColumn = '1 / -1';
         }
         currentPg = pg;
         ovGrid.appendChild(currentGroup);
@@ -5215,6 +5215,7 @@
       overviewBackdropEl.classList.add('visible');
       overviewEl.classList.add('visible');
       overviewEl.dataset.open = '1';
+      if (typeof buildOverview === 'function') buildOverview();
     }
     guideClasses.forEach(c => document.body.classList.add(c));
     guideBtnBackup.forEach(b => { if (b.hadActive) b.el.classList.add('active'); b.el.textContent = b.text; });

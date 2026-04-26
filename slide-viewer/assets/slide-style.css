@@ -1792,6 +1792,7 @@
   }
   /* 펼치면 ov-group이 여러 열 차지 */
   .ov-group.expanded {
+    grid-column: 1 / -1;
     width: auto;
   }
   .ov-bucket-header {
