@@ -983,7 +983,7 @@
     { name: '텍스트',         icon: '📝' },
   ];
 
-  const SPECIAL_USAGE_HINT = 'T23=구독/좋아요 CTA · T37=영상 마무리 · T38=챕터 전환';
+  const SPECIAL_USAGE_HINT = 'T23=구독/좋아요 CTA · T37=마무리/3+step 정리 · T38=챕터 전환/3+step 보정';
 
   const PG_TO_BUCKET = {
     1:  'special',
@@ -1036,8 +1036,8 @@
   function specialUsageHintForPageGroup(pg) {
     const num = parseInt(pg, 10);
     if (num === 23) return 'T23 CTA버튼: 구독/좋아요 CTA 전용';
-    if (num === 37) return 'T37 마지막정리: 영상 마무리 전용';
-    if (num === 38) return 'T38 챕터전환: 챕터 전환 전용';
+    if (num === 37) return 'T37 마지막정리: 영상 마무리 또는 3+step 정리 보정';
+    if (num === 38) return 'T38 챕터전환: 챕터 전환 또는 3+step 전개 보정';
     return '';
   }
 
@@ -1197,8 +1197,8 @@
     34: {"label": "T34 플로우(상세)", "schemaRequiredCount": 5, "fillRange": [9, 13], "itemsRange": [2, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     35: {"label": "T35 토픽결론", "schemaRequiredCount": 5, "fillRange": [5, 5], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     36: {"label": "T36 인용(대비)", "schemaRequiredCount": 5, "fillRange": [5, 5], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
-    37: {"label": "T37 마지막정리", "schemaRequiredCount": 2, "fillRange": [3, 5], "itemsRange": [2, 4], "displaySteps": null, "usageScope": "outro_only", "media": {"image": false, "imageRequired": false, "emoji": false}},
-    38: {"label": "T38 챕터전환", "schemaRequiredCount": 3, "fillRange": [5, 9], "itemsRange": [2, 4], "displaySteps": null, "usageScope": "chapter_only", "media": {"image": false, "imageRequired": false, "emoji": false}},
+    37: {"label": "T37 마지막정리", "schemaRequiredCount": 2, "fillRange": [3, 5], "itemsRange": [2, 4], "displaySteps": null, "usageScope": "outro_or_3plus_summary", "media": {"image": false, "imageRequired": false, "emoji": false}},
+    38: {"label": "T38 챕터전환", "schemaRequiredCount": 3, "fillRange": [5, 9], "itemsRange": [2, 4], "displaySteps": null, "usageScope": "chapter_or_3plus_flow", "media": {"image": false, "imageRequired": false, "emoji": false}},
     39: {"label": "T39 용어정의", "schemaRequiredCount": 2, "fillRange": [4, 4], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     40: {"label": "T40 인물카드", "schemaRequiredCount": 2, "fillRange": [4, 4], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     41: {"label": "T41 대질문", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
