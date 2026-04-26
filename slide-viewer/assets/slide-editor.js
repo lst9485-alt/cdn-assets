@@ -4080,6 +4080,7 @@
     ovBackdrop.classList.remove('visible');
     overview.classList.remove('visible');
     delete overview.dataset.open;
+    hideOverviewNotesPanel();
     ovGrid.innerHTML = '';
     document.documentElement.focus();
   }
@@ -4350,6 +4351,44 @@
 
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
   let expandedOverviewGroups = new Set();  // 확장된 page-group(string) 집합 — overview 전용
+  let overviewNoteSlideIdx = -1;
+
+  function ensureOverviewNotesPanel() {
+    let panel = document.getElementById('ov-notes-panel');
+    if (panel) return panel;
+    panel = document.createElement('aside');
+    panel.id = 'ov-notes-panel';
+    panel.className = 'ov-notes-panel';
+    panel.innerHTML = `
+      <div class="ov-notes-title">발표자 노트</div>
+      <div class="ov-notes-hint">Alt/⌘ + 썸네일 클릭으로 미리보기</div>
+      <div class="ov-notes-body">대본 없음</div>
+    `;
+    overview.appendChild(panel);
+    return panel;
+  }
+
+  function hideOverviewNotesPanel() {
+    const panel = document.getElementById('ov-notes-panel');
+    if (panel) panel.classList.remove('visible');
+    overviewNoteSlideIdx = -1;
+    if (ovGrid) ovGrid.querySelectorAll('.ov-note-target').forEach(el => el.classList.remove('ov-note-target'));
+  }
+
+  function showOverviewNotesForSlide(slide, slideIdx, item) {
+    const panel = ensureOverviewNotesPanel();
+    const label = slide?.dataset?.displayNumber || (slideIdx + 1);
+    const type = slide?.dataset?.type || '';
+    const notes = (slide?.dataset?.notes || '').trim() || '대본 없음';
+    const title = panel.querySelector('.ov-notes-title');
+    const body = panel.querySelector('.ov-notes-body');
+    if (title) title.textContent = `${label}${type ? ' · ' + type : ''}`;
+    if (body) body.textContent = notes;
+    panel.classList.add('visible');
+    overviewNoteSlideIdx = slideIdx;
+    ovGrid.querySelectorAll('.ov-note-target').forEach(el => el.classList.remove('ov-note-target'));
+    if (item) item.classList.add('ov-note-target');
+  }
 
   function deleteOverviewSlideAt(idx) {
     if (!(document.body && document.body.dataset.generated === 'true')) {
@@ -4566,10 +4605,13 @@
       if (!document.body.classList.contains('frozen-legacy-deck') && document.body && document.body.dataset.generated === 'true') {
         const actions = document.createElement('div');
         actions.className = 'ov-actions';
+        actions.addEventListener('pointerdown', (e) => e.stopPropagation());
+        actions.addEventListener('mousedown', (e) => e.stopPropagation());
         const delBtn = document.createElement('button');
         delBtn.type = 'button';
         delBtn.className = 'ov-action-btn danger';
         delBtn.textContent = '삭제';
+        delBtn.title = '이 슬라이드 삭제';
         delBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           deleteOverviewSlideAt(slideIdx);
@@ -4582,6 +4624,10 @@
       item.addEventListener('click', (e) => {
         if (ovDragItem) return;
         e.stopPropagation();
+        if (e.altKey || e.metaKey) {
+          showOverviewNotesForSlide(slide, slideIdx, item);
+          return;
+        }
         closeOverview();
         goToSlide(slideIdx);
       });
