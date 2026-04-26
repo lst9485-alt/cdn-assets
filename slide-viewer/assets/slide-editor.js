@@ -5091,7 +5091,10 @@
     const animShownEls = Array.from(document.querySelectorAll('#stage .anim-shown'));
     animShownEls.forEach(el => el.classList.remove('anim-shown'));
 
-    if (document.getElementById('overview').dataset.open === '1') {
+    const overviewEl = document.getElementById('overview');
+    const overviewBackdropEl = document.getElementById('overview-backdrop');
+    const hadOverviewOpen = overviewEl && overviewEl.dataset.open === '1';
+    if (hadOverviewOpen) {
       closeOverview();
     }
     const fsInner = document.getElementById('filmstrip-inner');
@@ -5206,6 +5209,13 @@
     if (hadFontVisible) fontPanel.classList.add('visible');
     if (hadLayerVisible) layerPanel.classList.add('visible');
     if (editMode) document.body.classList.add('edit-mode');
+    if (hadOverviewOpen && overviewEl && overviewBackdropEl) {
+      document.documentElement.classList.add('overview-open');
+      document.body.classList.add('overview-open');
+      overviewBackdropEl.classList.add('visible');
+      overviewEl.classList.add('visible');
+      overviewEl.dataset.open = '1';
+    }
     guideClasses.forEach(c => document.body.classList.add(c));
     guideBtnBackup.forEach(b => { if (b.hadActive) b.el.classList.add('active'); b.el.textContent = b.text; });
     selectedEls.forEach(s => {
