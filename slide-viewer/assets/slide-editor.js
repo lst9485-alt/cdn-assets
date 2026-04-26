@@ -6046,6 +6046,7 @@
   let layoutDetachCounter = 0;
   let groupCounter = 0;
   let individualMode = false;
+  let pendingIndividualModeEntry = null;
   let layerActiveTab = 'animation'; // 'animation' | 'position'
   let expandedGroups = new Set();
   // ── 드래그 선택 박스 ──
@@ -7504,6 +7505,21 @@
     return true;
   }
 
+  function enterIndividualModeForGroupSelection(el) {
+    individualMode = true;
+    document.body.classList.add('individual-mode');
+    selectedEls.forEach(s => {
+      s.classList.remove('edit-selected');
+      s.classList.add('edit-group-selected');
+    });
+    el.classList.remove('edit-group-selected');
+    el.classList.add('edit-selected');
+    selectedEl = el;
+    updateCoordPanel(el);
+    updateGroupToolbar();
+    if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+  }
+
   // 더블클릭으로 직접 편집 가능한 텍스트 요소 셀렉터 (세션 37 rv: 한 줄 47개+ → 그룹별 상수)
   // 신규 타입 추가 시 해당 그룹에 클래스 추가 (CLAUDE.md 체크리스트 8번)
   const EDITABLE_TEXT_SEL = [
@@ -8070,21 +8086,15 @@
       }
     } else {
       // 이미 선택된 요소 재클릭
-      const gid = el.dataset.group;
-      if (gid && !individualMode) {
-        // 그룹 재클릭 → 개별 모드 진입
-        individualMode = true;
-        document.body.classList.add('individual-mode');
-        selectedEls.forEach(s => {
-          s.classList.remove('edit-selected');
-          s.classList.add('edit-group-selected');
-        });
-        el.classList.remove('edit-group-selected');
-        el.classList.add('edit-selected');
-        selectedEl = el;
-        updateCoordPanel(el);
-        updateGroupToolbar();
-        if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
+	      const gid = el.dataset.group;
+	      if (gid && !individualMode) {
+	        // 그룹 재클릭은 click이면 개별 모드, drag이면 그룹 이동으로 해석한다.
+	        if (selectedEls.length > 1) {
+	          pendingIndividualModeEntry = { el };
+	          selectedEl = el;
+	        } else {
+	          enterIndividualModeForGroupSelection(el);
+	        }
       } else if (gid && individualMode) {
         if (el === selectedEl) {
           // individualMode + 같은 카드 재클릭 → 그룹 진입(자식 드릴다운). mouseup에서 드래그 여부 확인 후 확정
@@ -8370,8 +8380,9 @@
     if (pendingDrag && mouseDownPos) {
       const dx = e.clientX - mouseDownPos.x, dy = e.clientY - mouseDownPos.y;
       const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist > DRAG_THRESHOLD) {
-        if (!groupEntered && pendingGroupEntry) {
+	      if (dist > DRAG_THRESHOLD) {
+	        pendingIndividualModeEntry = null;
+	        if (!groupEntered && pendingGroupEntry) {
           const { el, target, x, y } = pendingGroupEntry;
           const pointTarget = document.elementFromPoint(x, y) || target;
           const child = resolveGroupChildTarget(el, pointTarget, x, y);
@@ -8752,10 +8763,12 @@
           const expanded = [];
           items.forEach(item => {
             if (!item) return;
-            const gid = item.dataset && item.dataset.group;
-            if (gid && !item.matches('.split-list')) {
-              slide.querySelectorAll(`[data-group="${CSS.escape(gid)}"]`).forEach(member => expanded.push(member));
-            } else {
+	            const groupOwner = item.closest && item.closest('[data-group]');
+	            const gid = (item.dataset && item.dataset.group) || (groupOwner && groupOwner.dataset && groupOwner.dataset.group);
+	            const splitOwner = item.matches('.split-list') ? item : (groupOwner && groupOwner.closest('.split-list'));
+	            if (gid && !splitOwner) {
+	              slide.querySelectorAll(`[data-group="${CSS.escape(gid)}"]`).forEach(member => expanded.push(member));
+	            } else {
               expanded.push(item);
             }
           });
@@ -8833,9 +8846,18 @@
     svgDragAnchors = [];
     document.getElementById('snap-x').style.display = 'none';
     document.getElementById('snap-y').style.display = 'none';
-    ['gap-left','gap-right','gap-top','gap-bottom'].forEach(id => { document.getElementById(id).style.display = 'none'; });
+	    ['gap-left','gap-right','gap-top','gap-bottom'].forEach(id => { document.getElementById(id).style.display = 'none'; });
+	
+	    if (pendingIndividualModeEntry) {
+	      const { el } = pendingIndividualModeEntry;
+	      pendingIndividualModeEntry = null;
+	      if (!wasDragging && el && selectedEls.includes(el)) {
+	        enterIndividualModeForGroupSelection(el);
+	        return;
+	      }
+	    }
 
-    // 드래그 안 했으면 그룹 진입 (캔바 스타일)
+	    // 드래그 안 했으면 그룹 진입 (캔바 스타일)
     if (pendingGroupEntry && !wasDragging) {
       const { el, target, x, y } = pendingGroupEntry;
       pendingGroupEntry = null;
