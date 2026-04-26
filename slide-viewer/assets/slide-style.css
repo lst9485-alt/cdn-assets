@@ -1883,11 +1883,16 @@
 
   .ov-toolbar {
     grid-column: 1 / -1;
+    position: sticky;
+    top: 0;
+    z-index: 70;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
     margin: 0 0 6px;
+    padding: 4px 0 8px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.96), rgba(0,0,0,0.78));
   }
   .ov-global-toggle {
     border: none;
