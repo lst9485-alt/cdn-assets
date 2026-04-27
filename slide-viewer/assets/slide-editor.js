@@ -3563,9 +3563,9 @@
     }
     // Escape: overview 열려있으면 닫기
     if (e.key === 'Escape' && overview.dataset.open === '1') { closeOverview(); return; }
-    if (overview.dataset.open === '1' && (e.key === '1' || e.key === '2')) {
+    if (overview.dataset.open === '1' && (e.key === '2' || e.key === '3')) {
       e.preventDefault();
-      if (e.key === '1') toggleOverviewExpansionAll();
+      if (e.key === '3') toggleOverviewExpansionAll();
       else toggleOverviewNotesMode();
       return;
     }
@@ -4557,13 +4557,12 @@
       const toggleAllBtn = document.createElement('button');
       toggleAllBtn.type = 'button';
       toggleAllBtn.className = 'ov-global-toggle';
-      toggleAllBtn.textContent = allExpanded ? '전체 접기 (1)' : '전체 펼치기 (1)';
-      toggleAllBtn.title = '단축키 1';
+      toggleAllBtn.textContent = allExpanded ? '전체 접기 (3)' : '전체 펼치기 (3)';
+      toggleAllBtn.title = '단축키 3';
       toggleAllBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         toggleOverviewExpansionAll();
       });
-      toolbar.appendChild(toggleAllBtn);
       const notesModeBtn = document.createElement('button');
       notesModeBtn.type = 'button';
       notesModeBtn.className = 'ov-global-toggle ov-notes-mode-toggle' + (overviewNotesClickMode ? ' active' : '');
@@ -4574,6 +4573,7 @@
         toggleOverviewNotesMode();
       });
       toolbar.appendChild(notesModeBtn);
+      toolbar.appendChild(toggleAllBtn);
       ovGrid.appendChild(toolbar);
     }
 
