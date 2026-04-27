@@ -52,7 +52,7 @@
     <div class="header">
       <div>
         <h1>경쟁채널 모니터링</h1>
-        <p class="subtitle">유튜브 경쟁 채널 신규 영상과 조회수 상승 흐름</p>
+        <p class="subtitle">구독자수와 채널 평균 대비 잘된 영상을 중심으로 보는 경쟁 채널 흐름</p>
       </div>
       <div class="updated" id="updated">로딩 중...</div>
     </div>
@@ -78,6 +78,7 @@ function render(data) {
   html += stat('채널', num(s.channel_count) + '개');
   html += '</div>';
   html += '<div class="grid">';
+  html += section('기여도 TOP', data.contribution_top, 'contribution');
   html += section('신규 영상', data.new_videos, 'published');
   html += section('24시간 조회수 증가 TOP', data.daily_top, 'daily');
   html += section('7일 급상승 TOP', data.weekly_top, 'weekly');
@@ -99,7 +100,7 @@ function section(title, rows, mode) {
     html += '<div class="item">';
     html += '<div class="rank">' + (idx + 1) + '</div>';
     html += '<div><a class="title" href="' + esc(row.url) + '" target="_blank" rel="noopener">' + esc(row.title) + '</a>';
-    html += '<div class="meta">' + esc(row.channel_name) + ' · ' + fmtDate(row.published_at) + '</div></div>';
+    html += '<div class="meta">' + esc(row.channel_name) + ' · 구독자 ' + num(row.subscriber_count) + ' · ' + fmtDate(row.published_at) + '</div></div>';
     html += '<div class="metric">' + metric(row, mode) + '</div>';
     html += '</div>';
   });
@@ -112,7 +113,7 @@ function channelSection(rows) {
   rows.forEach(function(row) {
     var best = row.best_video || {};
     html += '<div class="channel"><div class="channel-name">' + esc(row.channel_name) + '</div>';
-    html += '<div class="channel-meta">영상 ' + num(row.video_count) + '개 · 24시간 +' + num(row.daily_delta) + '</div>';
+    html += '<div class="channel-meta">구독자 ' + num(row.subscriber_count) + ' · 영상 ' + num(row.video_count) + '개 · 24시간 +' + num(row.daily_delta) + '</div>';
     html += '<div class="channel-meta">최고 상승: ' + esc(best.title || '-') + '</div></div>';
   });
   return html + '</div></div>';
@@ -128,6 +129,7 @@ function hintSection(rows) {
 }
 
 function metric(row, mode) {
+  if (mode === 'contribution') return '기여도 ' + ratio(row.contribution_score) + '배 / 구독자대비 ' + pct(row.subscriber_view_rate_pct);
   if (mode === 'daily') return '+' + num(row.daily_delta) + ' / ' + num(row.view_count) + '회';
   if (mode === 'weekly') return '+' + num(row.week_delta) + ' / ' + num(row.view_count) + '회';
   if (mode === 'published') return num(row.view_count) + '회';
@@ -144,6 +146,16 @@ function fmtDate(value) {
 function num(value) {
   var n = Number(value || 0);
   return n.toLocaleString('ko-KR');
+}
+
+function ratio(value) {
+  var n = Number(value || 0);
+  return n ? n.toFixed(2) : '-';
+}
+
+function pct(value) {
+  var n = Number(value || 0);
+  return n ? n.toFixed(2) + '%' : '-';
 }
 
 function esc(value) {
