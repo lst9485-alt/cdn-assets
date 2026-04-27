@@ -78,19 +78,19 @@
     <div class="container">
         <a href="../" class="back">← 대시보드</a>
         <h1>슬라이드 템플릿</h1>
-        <p class="subtitle">61종 59장 (base 61 + variants 104) — 유튜브 슬라이드 제작 시스템</p>
+        <p class="subtitle">59종 163장 (base 59 + variants 104) — 유튜브 슬라이드 제작 시스템</p>
 
         <!-- 에디터 바로가기 (맨 위) — 단일 파일 정본 -->
         <div class="editor-links" style="margin-top:0; margin-bottom:20px;">
             <a href="./slides-editor.html" class="editor-card">
                 <div class="editor-card-icon">📋</div>
                 <div class="editor-card-title">슬라이드 에디터</div>
-                <div class="editor-card-desc">59장 · base 61 + variants 104 (인라인 확장)</div>
+                <div class="editor-card-desc">59종 · 163장 · base 59 + variants 104</div>
             </a>
             <a href="./slide-flow.html" class="editor-card">
                 <div class="editor-card-icon">🗺️</div>
                 <div class="editor-card-title">원고 → 슬라이드 7단계</div>
-                <div class="editor-card-desc">전체 흐름 · 현재 의심 문제 매핑</div>
+                <div class="editor-card-desc">skeleton 생성 · 검증 게이트 · GitHub Pages 배포</div>
             </a>
         </div>
 
@@ -100,8 +100,8 @@
             <div class="video-slides-grid">
                 <a href="./260426-slides.html" class="editor-card">
                     <div class="editor-card-icon">🎬</div>
-                    <div class="editor-card-title">260426 가격통제의 비극 (테스트)</div>
-                    <div class="editor-card-desc">1793년 프랑스 로베스피에르 우유값 통제</div>
+                    <div class="editor-card-title">260426 가격통제의 비극</div>
+                    <div class="editor-card-desc">72개 화면 · 216장 · 1793년 프랑스 가격통제</div>
                 </a>
                 <a href="./260419-slides.html" class="editor-card">
                     <div class="editor-card-icon">🎬</div>
@@ -140,22 +140,22 @@
                         <b>1.</b> 아래 카탈로그에서 원하는 슬라이드를 클릭해서 열기<br>
                         <b>2.</b> E키를 누르면 편집 모드 (드래그로 이동, 텍스트 클릭해서 수정, 이미지 Ctrl+V로 추가)<br>
                         <b>3.</b> E키를 다시 누르면 자동 저장 (GitHub에 직접 커밋)<br>
-                        <b>4.</b> 1~2분 후 반영됨 (Vercel CDN 배포)
+                        <b>4.</b> 1~2분 후 반영됨 (GitHub Pages 배포)
                     </div>
                 </div>
 
                 <div class="diagram-section">
                     <div class="diagram-label">호스팅</div>
                     <div style="font-size:13px; color:#64748B; line-height:1.9; padding:4px 0 0;">
-                        GitHub 레포(lst9485-alt/cdn-assets)에 저장 → Vercel이 자동 배포<br>
-                        에디터에서 E키로 저장하면 GitHub API로 커밋되고, Vercel이 감지해서 1~2분 내 CDN에 반영
+                        GitHub 레포(lst9485-alt/cdn-assets)에 저장 → GitHub Pages로 공개<br>
+                        에디터에서 E키로 저장하면 GitHub API로 커밋되고, 1~2분 내 공개 URL에 반영
                     </div>
                 </div>
 
                 <div class="diagram-section">
                     <div class="diagram-label">편집 가능한 파일</div>
                     <div style="font-size:13px; color:#475569; line-height:2;">
-                        <span style="display:inline-block; width:8px; height:8px; background:#0077C8; border-radius:2px; margin-right:6px;"></span><b>슬라이드 에디터 (단일 파일)</b> <span style="color:#94A3B8; font-size:11px;">slides-editor.html</span> — 38개 타입 138장 (base + variants 인라인 확장)<br>
+                        <span style="display:inline-block; width:8px; height:8px; background:#0077C8; border-radius:2px; margin-right:6px;"></span><b>슬라이드 에디터 (단일 파일)</b> <span style="color:#94A3B8; font-size:11px;">slides-editor.html</span> — 59개 타입 163장 (base 59 + variants 104 인라인 확장)<br>
                         <span style="display:inline-block; width:8px; height:8px; background:#10B981; border-radius:2px; margin-right:6px;"></span><b>완성 슬라이드</b> <span style="color:#94A3B8; font-size:11px;">YYYYMMDD-slides.html</span> — 영상별 최종 슬라이드<br>
                         <span style="padding-left:20px; color:#64748B;">모든 파일에서 E키 편집 + 자동 저장 가능 (처음 1회만 GitHub 토큰 설정)</span>
                     </div>
@@ -164,9 +164,9 @@
                 <div class="diagram-section">
                     <div class="diagram-label">새 슬라이드 만들기</div>
                     <div style="font-size:13px; color:#64748B; line-height:1.9; padding:4px 0 0;">
-                        <b>1.</b> 원고를 Claude에게 주면 5구간 동시 기획 → 타입 자동 선택 → 자동 점검<br>
-                        <b>2.</b> 점검 통과하면 HTML 슬라이드 자동 생성<br>
-                        <b>3.</b> 생성된 파일을 이 사이트에서 바로 확인 + 편집 가능
+                        <b>1.</b> 원고를 에이전트에게 주면 outline → skeleton 생성 → chunk 작화 순서로 진행<br>
+                        <b>2.</b> 감독 plan, chunk, 최종 slide.md를 각각 자동 검증<br>
+                        <b>3.</b> 통과한 HTML을 이 사이트에서 바로 확인 + 편집 가능
                     </div>
                 </div>
             </div>
@@ -271,8 +271,8 @@
                         <span class="t-code">T35</span>
                         <span class="t-name">토픽결론</span>
                     </div>
-                    <div class="t-desc">태그+2줄 큰 제목+서브타이틀+자막바</div>
-                    <div class="t-usage">핵심 결론 임팩트</div>
+                    <div class="t-desc">BADGE + LINE1 + LINE2 + SUBTITLE + CAPTION</div>
+                    <div class="t-usage">5필드 결론 슬라이드</div>
                 </a>
                 <a href="./slides-editor.html" class="type-card">
                     <div class="type-card-head">
@@ -287,7 +287,7 @@
                         <span class="t-code">T02</span>
                         <span class="t-name">아이콘+텍스트</span>
                     </div>
-                    <div class="t-desc">좌측 SVG 아이콘(원/삼각/전구) + 우측 텍스트</div>
+                    <div class="t-desc">좌측 아이콘/이미지 + 우측 핵심문장</div>
                     <div class="t-usage">팁/경고/포인트</div>
                 </a>
                 <a href="./slides-editor.html" class="type-card">
@@ -667,6 +667,157 @@
                     </div>
                     <div class="t-desc">N/M 카운터 + 큰 제목 + 메타 정보</div>
                     <div class="t-usage">블로그/챕터 시작</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 최근 추가 (T44~T59) -->
+        <div class="cat-section">
+            <div class="cat-title">최근 추가 (T44~T59)</div>
+            <div class="type-grid">
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T44</span>
+                        <span class="t-name">한줄강조</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">한 문장 대형 강조</div>
+                    <div class="t-usage">짧은 결론/전환</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T45</span>
+                        <span class="t-name">두줄대비</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">상하 2줄 대비 문장</div>
+                    <div class="t-usage">A/B 관점 전환</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T46</span>
+                        <span class="t-name">카운터제목</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">카운터 라벨 + 큰 제목 + 부제</div>
+                    <div class="t-usage">반복 질문/핵심 구분</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T47</span>
+                        <span class="t-name">아이콘강조</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">아이콘 + 대형 강조문</div>
+                    <div class="t-usage">핵심 포인트</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T48</span>
+                        <span class="t-name">두줄전개</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">첫 문장 → 둘째 문장 순차 전개</div>
+                    <div class="t-usage">논리 전개</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T49</span>
+                        <span class="t-name">아이콘2단강조</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">아이콘 + 제목 + 설명 2단 구조</div>
+                    <div class="t-usage">강조 + 보충</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T50</span>
+                        <span class="t-name">좌우2단비교</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">좌우 2단 비교 카드</div>
+                    <div class="t-usage">전/후, A/B 비교</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T51</span>
+                        <span class="t-name">아이콘2단포인트</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">아이콘 + 제목 + 포인트</div>
+                    <div class="t-usage">한 줄 포인트 강화</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T52</span>
+                        <span class="t-name">상하2단비교</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">상단/하단 2단 비교</div>
+                    <div class="t-usage">대조 설명</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T53</span>
+                        <span class="t-name">2단플로우</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">1단계 → 2단계 흐름</div>
+                    <div class="t-usage">원인과 결과</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T54</span>
+                        <span class="t-name">분기2단플로우</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">중앙 지표 + 하단 결과 분기</div>
+                    <div class="t-usage">숫자 기반 결론</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T55</span>
+                        <span class="t-name">상하두줄전개</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">상단 문장 + 하단 강조 전개</div>
+                    <div class="t-usage">대화형 설명</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T56</span>
+                        <span class="t-name">상단강조전개</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">상단 결론 + 하단 강조 박스</div>
+                    <div class="t-usage">결론 후 이유</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T57</span>
+                        <span class="t-name">좌측바전개</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">좌측 강조바 + 상세 전개</div>
+                    <div class="t-usage">근거 설명</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T58</span>
+                        <span class="t-name">인용형전개</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">인용 스타일 문장 + 보충 설명</div>
+                    <div class="t-usage">발언/근거 강조</div>
+                </a>
+                <a href="./slides-editor.html" class="type-card">
+                    <div class="type-card-head">
+                        <span class="t-code">T59</span>
+                        <span class="t-name">카드형전개</span>
+                        <span class="t-new">NEW</span>
+                    </div>
+                    <div class="t-desc">카드 2단 구성으로 문장 전개</div>
+                    <div class="t-usage">요약 + 보충</div>
                 </a>
             </div>
         </div>

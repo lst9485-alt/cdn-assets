@@ -107,7 +107,7 @@
     <div class="container">
         <a href="./" class="back">← 슬라이드 템플릿</a>
         <h1>원고 → 슬라이드 7단계</h1>
-        <p class="subtitle">원고를 주면 최종 슬라이드가 나오기까지 이런 과정을 거칩니다</p>
+        <p class="subtitle">원고를 주면 skeleton, chunk 검증, HTML 배포를 거쳐 공개본이 됩니다</p>
 
         <div class="steps">
 
@@ -169,47 +169,49 @@
                     <div class="step-header" onclick="toggleDetail(this)">
                         <div class="step-num">STEP 2</div>
                         <div class="step-title-area">
-                            <div class="step-title">기획 (감독)</div>
+                            <div class="step-title">템플릿 선택 / skeleton 생성</div>
                             <div class="step-io">
-                                <span class="io-box io-in">outline.json</span>
+                                <span class="io-box io-in">manuscript.md</span>
                                 <span class="io-arrow">→</span>
-                                <span class="io-box io-script">감독 2~4명 병렬</span>
+                                <span class="io-box io-script">select_templates.py</span>
                                 <span class="io-arrow">→</span>
-                                <span class="io-box io-out">tmp/plan_*.json</span>
+                                <span class="io-box io-out">slide.md skeleton</span>
                             </div>
                         </div>
                         <div class="step-human human-no">자동</div>
                         <div class="step-toggle">▶</div>
                     </div>
                     <div class="step-detail">
-                        <p>chunk마다 슬라이드 A/B/C 3가지 변형을 콘티처럼 짭니다. 각 슬라이드에 어떤 타입(T01~T47)을 쓸지, 텍스트 슬롯·step 수를 결정합니다. 감독 수는 슬라이드 수 기준(80장↓ 2명, 80~150장 3명, 150장↑ 4명)으로 정해지고, chunk가 더 많으면 감독 한 명이 연속 chunk를 묶어 담당합니다.</p>
+                        <p>원고에서 A/B/C 변형의 T번호, type, step 수, 필수 슬롯을 먼저 고정합니다. 현재 템플릿 범위는 T01~T59이고, 작화자는 이 skeleton의 타입을 바꾸지 않고 내용만 채웁니다. 이미지가 필요한 타입은 asset request도 같이 생성합니다.</p>
                         <div class="detail-paths">
-                            <span class="detail-path">template/slide_plan.py</span>
-                            <span class="detail-path">tmp/plan_{chunk_id}.json</span>
+                            <span class="detail-path">template/pipeline.py select-templates</span>
+                            <span class="detail-path">template/select_templates.py</span>
+                            <span class="detail-path">slide.md skeleton</span>
+                            <span class="detail-path">*.asset-requests.json</span>
                         </div>
                         <div class="flow-files">
-                            <div class="flow-files-count">📁 관련 파일 8개</div>
+                            <div class="flow-files-count">📁 핵심 파일 7개</div>
                             <div class="flow-files-group">
-                                <span class="flow-lang-tag lang-py">🐍 Python 5</span>
+                                <span class="flow-lang-tag lang-py">🐍 Python 4</span>
                                 <ol class="flow-file-list">
-                                    <li>template/slide_plan.py</li>
-                                    <li>template/scene_spec.py</li>
-                                    <li>template/recommend_modules.py</li>
+                                    <li>template/pipeline.py</li>
+                                    <li>template/select_templates.py</li>
                                     <li>template/presets.py</li>
-                                    <li>template/plan_builder.py</li>
+                                    <li>template/step_calc.py</li>
                                 </ol>
                             </div>
                             <div class="flow-files-group">
-                                <span class="flow-lang-tag lang-json">📄 JSON 1</span>
+                                <span class="flow-lang-tag lang-json">📄 JSON 2</span>
                                 <ol class="flow-file-list">
-                                    <li>references/modules.json</li>
+                                    <li>references/type-registry.json</li>
+                                    <li>references/type-compile-config.json</li>
                                 </ol>
                             </div>
                             <div class="flow-files-group">
                                 <span class="flow-lang-tag lang-out">📤 출력 2</span>
                                 <ol class="flow-file-list">
-                                    <li>tmp/plan_*.json</li>
-                                    <li>tmp/supervisor_*.json</li>
+                                    <li>slide.md skeleton</li>
+                                    <li>*.asset-requests.json</li>
                                 </ol>
                             </div>
                         </div>
@@ -229,7 +231,7 @@
                         <div class="step-title-area">
                             <div class="step-title">작화</div>
                             <div class="step-io">
-                                <span class="io-box io-in">plan_*.json</span>
+                                <span class="io-box io-in">slide.md skeleton</span>
                                 <span class="io-arrow">→</span>
                                 <span class="io-box io-script">작화 chunk별 병렬</span>
                                 <span class="io-arrow">→</span>
@@ -240,15 +242,19 @@
                         <div class="step-toggle">▶</div>
                     </div>
                     <div class="step-detail">
-                        <p>콘티(plan)를 보고 실제 텍스트·이미지·단계 정보를 채워 넣습니다. 결과는 정해진 형식의 텍스트 파일(chunk_*.txt)로 저장됩니다. 작화는 chunk별로 1명씩 병렬 실행합니다.</p>
+                        <p>skeleton이 정한 T번호와 필드명은 그대로 두고, 실제 텍스트·이미지·단계 내용을 채웁니다. 작화 직후에는 <b>verify-chunks</b>가 빈 슬롯, 필드명 drift, type drift, 필수 이미지 누락을 먼저 막습니다.</p>
                         <div class="detail-paths">
                             <span class="detail-path">tmp/chunk_{chunk_id}.txt</span>
+                            <span class="detail-path">pipeline.py verify-chunks tmp/chunk_*.txt --skeleton slide.md</span>
+                            <span class="detail-path">template/checks/__init__.py run_chunk_checks</span>
                         </div>
                         <div class="flow-files">
-                            <div class="flow-files-count">📁 관련 파일 6개</div>
+                            <div class="flow-files-count">📁 핵심 파일 7개</div>
                             <div class="flow-files-group">
-                                <span class="flow-lang-tag lang-py">🐍 Python 2</span>
+                                <span class="flow-lang-tag lang-py">🐍 Python 4</span>
                                 <ol class="flow-file-list">
+                                    <li>template/pipeline.py</li>
+                                    <li>template/checks/__init__.py</li>
                                     <li>template/scene_spec_render.py</li>
                                     <li>template/metrics.py</li>
                                 </ol>
@@ -300,9 +306,9 @@
                         <div class="step-toggle">▶</div>
                     </div>
                     <div class="step-detail">
-                        <p>chunk 파일들을 하나로 합치고 슬라이드 번호를 전체 기준으로 다시 매깁니다. 결과물인 slide.md가 이후 검증·HTML 생성의 원재료가 됩니다.</p>
+                        <p>chunk 파일들을 하나로 합치고 슬라이드 번호를 전체 기준으로 다시 매깁니다. skeleton과 맞지 않거나 step 정보가 깨지면 병합 단계에서 fail-fast로 멈춥니다. 결과물인 slide.md가 이후 최종 검증·HTML 생성의 원재료가 됩니다.</p>
                         <div class="detail-paths">
-                            <span class="detail-path">template/merge_chunks.py (L51 merge_and_renumber)</span>
+                            <span class="detail-path">template/merge_chunks.py --skeleton</span>
                             <span class="detail-path">template/compile_slidemd.py</span>
                             <span class="detail-path">slide.md</span>
                         </div>
@@ -339,11 +345,11 @@
                     <div class="step-header" onclick="toggleDetail(this)">
                         <div class="step-num">STEP 5</div>
                         <div class="step-title-area">
-                            <div class="step-title">검증</div>
+                            <div class="step-title">검증 게이트</div>
                             <div class="step-io">
-                                <span class="io-box io-in">slide.md</span>
+                                <span class="io-box io-in">plan/chunk/slide.md</span>
                                 <span class="io-arrow">→</span>
-                                <span class="io-box io-script">checks/*.py</span>
+                                <span class="io-box io-script">verify-supervisor / verify-chunks / verify-md</span>
                                 <span class="io-arrow">→</span>
                                 <span class="io-box io-out">오류 목록</span>
                             </div>
@@ -352,10 +358,12 @@
                         <div class="step-toggle">▶</div>
                     </div>
                     <div class="step-detail">
-                        <p>슬라이드가 규칙에 맞는지 자동으로 검사합니다. 슬롯이 비었거나, A/B/C 변형의 step 수가 맞지 않거나, 필수 이미지가 없는 경우 등을 잡습니다. 문제가 있으면 다시 작화 단계로 돌아갑니다.</p>
+                        <p>검증은 한 번이 아니라 세 번 걸립니다. 감독 plan 검증, 작화 chunk 검증, 최종 slide.md 검증을 통과해야 HTML 생성으로 넘어갑니다. 슬롯 누락, A/B/C step 불일치, 필수 이미지 누락, type drift, 분포 경고를 여기서 잡습니다.</p>
                         <div class="detail-paths">
                             <span class="detail-path">template/checks/ (검사기 19종)</span>
-                            <span class="detail-path">pipeline.py verify</span>
+                            <span class="detail-path">pipeline.py verify-supervisor</span>
+                            <span class="detail-path">pipeline.py verify-chunks</span>
+                            <span class="detail-path">pipeline.py verify-md</span>
                         </div>
                         <div class="flow-files">
                             <div class="flow-files-count">📁 관련 파일 22개</div>
@@ -514,7 +522,7 @@
                     <div class="step-header" onclick="toggleDetail(this)">
                         <div class="step-num">STEP 7</div>
                         <div class="step-title-area">
-                            <div class="step-title">CDN 배포</div>
+                            <div class="step-title">GitHub Pages 배포</div>
                             <div class="step-io">
                                 <span class="io-box io-in">{날짜}-slides.html</span>
                                 <span class="io-arrow">→</span>
@@ -527,7 +535,7 @@
                         <div class="step-toggle">▶</div>
                     </div>
                     <div class="step-detail">
-                        <p>완성된 HTML을 cdn-assets 레포에 복사하고 GitHub에 push합니다. 1~2분 후 슬라이드 뷰어 URL에서 볼 수 있습니다. JS/CSS만 바뀌면 --assets-only 옵션으로 HTML 덮어쓰기 없이 배포합니다.</p>
+                        <p>완성된 HTML을 cdn-assets 레포의 slide-viewer에 반영하고 GitHub에 push합니다. 1~2분 후 공개 URL에서 볼 수 있습니다. JS/CSS만 바뀌면 assets만 동기화하고, 생성 HTML은 덮어쓰지 않습니다.</p>
                         <div class="detail-paths">
                             <span class="detail-path">tools/scripts/sync-slide-viewer.sh</span>
                             <span class="detail-path">https://lst9485-alt.github.io/cdn-assets/slide-viewer/</span>
@@ -548,37 +556,37 @@
 
         </div>
 
-        <!-- 현재 의심 문제 -->
+        <!-- 최근 사이드파인딩 상태 -->
         <div class="problems-section">
-            <div class="section-label">현재 의심되는 문제</div>
-            <div class="problem-note">2026-04-20 기준 — 세션마다 바뀔 수 있음. 틀릴 수도 있음.</div>
+            <div class="section-label">최근 사이드파인딩 상태</div>
+            <div class="problem-note">2026-04-27 기준 — 생성기 방어장치와 기존 공개본 상태를 분리해서 봅니다.</div>
             <div class="problem-list">
                 <div class="problem-item">
                     <div class="problem-num">#1</div>
                     <div class="problem-body">
-                        <div class="problem-title">슬라이드 번호 점프</div>
-                        <div class="problem-stage">발생 단계: <span>④ 병합</span> — merge_chunks.py L51, offset 누적 버그</div>
+                        <div class="problem-title">기존 260426 공개본 분포 편중은 유지</div>
+                        <div class="problem-stage">상태: <span>기존 산출물</span> — 3+step 비율 5.6%, 5-step 없음. 임의 재생성은 하지 않음.</div>
                     </div>
                 </div>
                 <div class="problem-item">
                     <div class="problem-num">#2</div>
                     <div class="problem-body">
-                        <div class="problem-title">작화 단계 검사기 부재 (77건 사후 발견)</div>
-                        <div class="problem-stage">발생 단계: <span>③→④ 사이</span> — chunk_*.txt에서 못 잡고 merge 후에야 발견</div>
+                        <div class="problem-title">다음 생성용 분포 보정은 적용됨</div>
+                        <div class="problem-stage">상태: <span>생성기</span> — select_templates.py가 큰 deck에서 5-step 후보를 최소 1개 유지하도록 보정.</div>
                     </div>
                 </div>
                 <div class="problem-item">
                     <div class="problem-num">#3</div>
                     <div class="problem-body">
-                        <div class="problem-title">ICON 검사기 pytest 5건 실패</div>
-                        <div class="problem-stage">발생 단계: <span>⑤ 검증</span> — test_required_image.py, 세션 49부터 깨짐</div>
+                        <div class="problem-title">작화 단계 검사기 부재는 해결됨</div>
+                        <div class="problem-stage">상태: <span>검증 게이트</span> — verify-chunks가 빈 슬롯, 필드명, type drift, 필수 이미지를 사전 검사.</div>
                     </div>
                 </div>
                 <div class="problem-item">
                     <div class="problem-num">#4</div>
                     <div class="problem-body">
-                        <div class="problem-title">plan_builder 결정론화 미구현</div>
-                        <div class="problem-stage">발생 단계: <span>② 기획</span> — #2 해결되면 불필요할 수도 있음, 재검토 필요</div>
+                        <div class="problem-title">공개본 stale 방지는 dashboard 정본 기준으로 확인</div>
+                        <div class="problem-stage">상태: <span>배포</span> — workspace/apps/dashboard/repo/slide-viewer와 GitHub Pages URL을 기준으로 확인.</div>
                     </div>
                 </div>
             </div>
@@ -586,8 +594,8 @@
 
         <!-- 전체 관련 파일 -->
         <div class="all-files">
-            <div class="section-label">전체 관련 파일 (2026-04-20 기준)</div>
-            <div class="all-files-summary">중복 제외 소스 파일 70개 (출력물 제외) · 언어별 구분 · 파이썬이 가장 많음 (42개)</div>
+            <div class="section-label">전체 관련 파일 (2026-04-27 기준)</div>
+            <div class="all-files-summary">핵심 파일 묶음 · skeleton 생성, chunk 검증, HTML 생성, GitHub Pages 배포 기준</div>
 
             <details class="all-files-section">
                 <summary><span class="flow-lang-tag lang-py">🐍 Python 42</span></summary>
@@ -715,8 +723,8 @@
                     <span class="glossary-def">원고를 chunk 단위로 나누고 각 장면의 분위기(intent)를 제안한 JSON.</span>
                 </div>
                 <div class="glossary-item">
-                    <span class="glossary-term">SlidePlan</span>
-                    <span class="glossary-def">슬라이드 콘티. 타입·슬롯·step 수를 A/B/C 3변형으로 미리 정해둔 것.</span>
+                    <span class="glossary-term">skeleton</span>
+                    <span class="glossary-def">A/B/C 변형의 T번호, type, step 수, 필수 슬롯을 먼저 고정한 slide.md 초안.</span>
                 </div>
                 <div class="glossary-item">
                     <span class="glossary-term">chunk</span>
@@ -728,7 +736,7 @@
                 </div>
                 <div class="glossary-item">
                     <span class="glossary-term">verify</span>
-                    <span class="glossary-def">slide.md를 자동으로 검사하는 단계. 오류 있으면 숫자와 종류를 리포트.</span>
+                    <span class="glossary-def">plan, chunk, slide.md를 자동으로 검사하는 단계. 오류가 있으면 HTML 생성 전에 멈춤.</span>
                 </div>
             </div>
         </div>
