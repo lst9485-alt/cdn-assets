@@ -107,6 +107,16 @@
     return `T${tnum}-${parsedVariant + 1}`;
   }
 
+  function formatGeneratedDisplayNumber(pg, variant, fallbackIdx) {
+    const baseNum = getDisplayIndexByPageGroup(pg);
+    const parsedVariant = parseInt(variant || "0", 10);
+    const numeric = baseNum != null ? String(baseNum) : String((fallbackIdx || 0) + 1);
+    if (Number.isFinite(parsedVariant) && parsedVariant > 0) {
+      return `${numeric}-${parsedVariant + 1}`;
+    }
+    return `${numeric}-1`;
+  }
+
   // 같은 page-group의 base와 variants가 DOM에서 인접 배치되어 있다는 불변식에 의존
   function rebuildSlidesByKey() {
     slidesByKey = {};
@@ -198,7 +208,9 @@
       const num = document.createElement('div');
       num.className = 'fs-num';
       if (pg) {
-        num.textContent = slide.dataset.displayNumber || (isVariant ? `T${pg}-${parseInt(variant) + 1}` : `T${pg}`);
+        num.textContent = document.body.dataset.generated
+          ? formatGeneratedDisplayNumber(pg, variant, idx)
+          : (slide.dataset.displayNumber || (isVariant ? `T${pg}-${parseInt(variant) + 1}` : `T${pg}`));
         const colorSeed = parseInt(slide.dataset.displayGroupIndex || pg, 10);
         item.setAttribute('data-group-color', Number.isFinite(colorSeed) ? colorSeed % 4 : 0);
       } else {
@@ -4650,7 +4662,9 @@
       const num = document.createElement('div');
       num.className = 'ov-num';
       if (pg) {
-        num.textContent = slide.dataset.displayNumber || (isVariant ? `T${pg}-${parseInt(variant) + 1}` : `T${pg}`);
+        num.textContent = document.body.dataset.generated && typeof formatGeneratedDisplayNumber === 'function'
+          ? formatGeneratedDisplayNumber(pg, variant, slideIdx)
+          : (slide.dataset.displayNumber || (isVariant ? `T${pg}-${parseInt(variant) + 1}` : `T${pg}`));
       } else {
         num.textContent = `${slideIdx + 1}`;
       }
@@ -4668,7 +4682,7 @@
       if (typeof createTypeMetaChips === 'function') {
         item.appendChild(createTypeMetaChips(slide));
       }
-      if (!document.body.classList.contains('frozen-legacy-deck') && document.body && document.body.dataset.generated === 'true') {
+      if (editMode && !document.body.classList.contains('frozen-legacy-deck') && document.body && document.body.dataset.generated === 'true') {
         const actions = document.createElement('div');
         actions.className = 'ov-actions';
         actions.addEventListener('pointerdown', (e) => e.stopPropagation());
@@ -4676,7 +4690,8 @@
         const delBtn = document.createElement('button');
         delBtn.type = 'button';
         delBtn.className = 'ov-action-btn danger';
-        delBtn.textContent = '삭제';
+        delBtn.textContent = '×';
+        delBtn.setAttribute('aria-label', '이 슬라이드 삭제');
         delBtn.title = '이 슬라이드 삭제';
         delBtn.addEventListener('pointerdown', (e) => {
           e.preventDefault();
@@ -5069,9 +5084,38 @@
     }
 
     if (clone.id === 'top-toolbar') {
+      clone.classList.remove('visible');
+      clone.style.display = 'none';
       clone.querySelectorAll('#gh-settings').forEach(node => node.remove());
       const saveStatus = clone.querySelector('#save-status');
       if (saveStatus) saveStatus.textContent = '';
+    }
+
+    if (clone.id === 'align-menu') {
+      clone.className = '';
+      clone.removeAttribute('style');
+    }
+
+    if (clone.id === 'group-toolbar') {
+      clone.className = '';
+      clone.removeAttribute('style');
+    }
+
+    if (clone.id === 'overview') {
+      clone.className = '';
+      clone.dataset.open = '0';
+      clone.querySelector('#overview-grid')?.replaceChildren();
+    }
+
+    if (clone.id === 'overview-backdrop' || clone.id === 'module-picker-backdrop') {
+      clone.className = '';
+      clone.removeAttribute('style');
+    }
+
+    if (clone.id === 'module-picker') {
+      clone.className = '';
+      clone.removeAttribute('style');
+      clone.querySelector('#module-picker-grid')?.replaceChildren();
     }
 
     if (clone.id === 'gs-crosshair-h' || clone.id === 'gs-crosshair-v') {
