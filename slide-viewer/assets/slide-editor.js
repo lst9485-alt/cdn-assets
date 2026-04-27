@@ -4682,7 +4682,7 @@
       if (typeof createTypeMetaChips === 'function') {
         item.appendChild(createTypeMetaChips(slide));
       }
-      if (editMode && !document.body.classList.contains('frozen-legacy-deck') && document.body && document.body.dataset.generated === 'true') {
+      if (!document.body.classList.contains('frozen-legacy-deck') && document.body && document.body.dataset.generated === 'true') {
         const actions = document.createElement('div');
         actions.className = 'ov-actions';
         actions.addEventListener('pointerdown', (e) => e.stopPropagation());
