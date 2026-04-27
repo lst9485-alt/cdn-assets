@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <title>경쟁채널 - 운영 대시보드</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1E293B; line-height: 1.55; }
+    .page { max-width: 1180px; margin: 0 auto; padding: 32px 20px 64px; }
+    .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 18px; }
+    .back:hover { color: #DC2626; }
+    .header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    h1 { font-size: 24px; font-weight: 850; color: #0F172A; }
+    .subtitle { color: #64748B; font-size: 14px; margin-top: 4px; }
+    .updated { color: #94A3B8; font-size: 12px; text-align: right; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px; }
+    .stat { background: #fff; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; }
+    .stat-label { color: #64748B; font-size: 12px; font-weight: 700; }
+    .stat-value { color: #0F172A; font-size: 24px; font-weight: 850; margin-top: 2px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .section { background: #fff; border: 1px solid #E2E8F0; border-radius: 8px; padding: 18px; margin-bottom: 16px; }
+    .section.wide { grid-column: 1 / -1; }
+    .section-title { font-size: 16px; font-weight: 800; color: #0F172A; margin-bottom: 12px; }
+    .item { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; padding: 10px 0; border-bottom: 1px solid #F1F5F9; }
+    .item:last-child { border-bottom: 0; }
+    .rank { width: 24px; height: 24px; border-radius: 5px; background: #F1F5F9; color: #475569; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+    .title { color: #0F172A; font-size: 14px; font-weight: 750; text-decoration: none; }
+    .title:hover { color: #DC2626; }
+    .meta { color: #64748B; font-size: 12px; margin-top: 3px; }
+    .metric { color: #0F172A; font-size: 13px; font-weight: 800; text-align: right; white-space: nowrap; }
+    .channel-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .channel { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px; }
+    .channel-name { font-size: 14px; font-weight: 800; color: #0F172A; }
+    .channel-meta { color: #64748B; font-size: 12px; margin-top: 4px; }
+    .hint { background: #FFF7ED; border: 1px solid #FED7AA; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+    .hint strong { color: #9A3412; }
+    .empty, .error { color: #94A3B8; font-size: 14px; padding: 18px; text-align: center; border: 1px dashed #CBD5E1; border-radius: 8px; background: #F8FAFC; }
+    @media (max-width: 860px) {
+      .stats, .grid, .channel-grid { grid-template-columns: 1fr; }
+      .header { display: block; }
+      .updated { text-align: left; margin-top: 8px; }
+      .item { grid-template-columns: 24px 1fr; }
+      .metric { grid-column: 2; text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a href="../" class="back">&larr; 메인</a>
+    <div class="header">
+      <div>
+        <h1>경쟁채널 모니터링</h1>
+        <p class="subtitle">유튜브 경쟁 채널 신규 영상과 조회수 상승 흐름</p>
+      </div>
+      <div class="updated" id="updated">로딩 중...</div>
+    </div>
+    <div id="app"><div class="empty">데이터 로딩 중...</div></div>
+  </div>
+<script>
+fetch('../data/competitors/latest.json?v=' + Date.now())
+  .then(function(r) { if (!r.ok) throw new Error('load failed'); return r.json(); })
+  .then(render)
+  .catch(function() {
+    document.getElementById('app').innerHTML = '<div class="error">데이터를 불러오지 못했습니다.</div>';
+    document.getElementById('updated').textContent = '';
+  });
+
+function render(data) {
+  document.getElementById('updated').textContent = '업데이트 ' + fmtDate(data.updated_at);
+  var s = data.summary || {};
+  var html = '';
+  html += '<div class="stats">';
+  html += stat('리포트 날짜', data.report_date || '-');
+  html += stat('신규 영상', num(s.new_video_count) + '개');
+  html += stat('추적 영상', num(s.tracked_video_count) + '개');
+  html += stat('채널', num(s.channel_count) + '개');
+  html += '</div>';
+  html += '<div class="grid">';
+  html += section('신규 영상', data.new_videos, 'published');
+  html += section('24시간 조회수 증가 TOP', data.daily_top, 'daily');
+  html += section('7일 급상승 TOP', data.weekly_top, 'weekly');
+  html += section('최근 90일 조회수 TOP', data.top_90d, 'views');
+  html += channelSection(data.channel_summary || []);
+  html += hintSection(data.topic_hints || []);
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function stat(label, value) {
+  return '<div class="stat"><div class="stat-label">' + esc(label) + '</div><div class="stat-value">' + esc(value) + '</div></div>';
+}
+
+function section(title, rows, mode) {
+  var html = '<div class="section"><div class="section-title">' + esc(title) + '</div>';
+  if (!rows || rows.length === 0) return html + '<div class="empty">데이터가 더 쌓이면 표시됩니다.</div></div>';
+  rows.slice(0, 10).forEach(function(row, idx) {
+    html += '<div class="item">';
+    html += '<div class="rank">' + (idx + 1) + '</div>';
+    html += '<div><a class="title" href="' + esc(row.url) + '" target="_blank" rel="noopener">' + esc(row.title) + '</a>';
+    html += '<div class="meta">' + esc(row.channel_name) + ' · ' + fmtDate(row.published_at) + '</div></div>';
+    html += '<div class="metric">' + metric(row, mode) + '</div>';
+    html += '</div>';
+  });
+  return html + '</div>';
+}
+
+function channelSection(rows) {
+  var html = '<div class="section wide"><div class="section-title">채널별 오늘 요약</div><div class="channel-grid">';
+  if (!rows.length) return html + '</div><div class="empty">데이터가 없습니다.</div></div>';
+  rows.forEach(function(row) {
+    var best = row.best_video || {};
+    html += '<div class="channel"><div class="channel-name">' + esc(row.channel_name) + '</div>';
+    html += '<div class="channel-meta">영상 ' + num(row.video_count) + '개 · 24시간 +' + num(row.daily_delta) + '</div>';
+    html += '<div class="channel-meta">최고 상승: ' + esc(best.title || '-') + '</div></div>';
+  });
+  return html + '</div></div>';
+}
+
+function hintSection(rows) {
+  var html = '<div class="section wide"><div class="section-title">오늘 참고 주제 힌트</div>';
+  if (!rows.length) return html + '<div class="empty">데이터가 더 쌓이면 표시됩니다.</div></div>';
+  rows.forEach(function(row) {
+    html += '<div class="hint"><strong>' + esc(row.keyword) + '</strong><div class="meta">' + esc(row.sample_title || '') + '</div></div>';
+  });
+  return html + '</div>';
+}
+
+function metric(row, mode) {
+  if (mode === 'daily') return '+' + num(row.daily_delta) + ' / ' + num(row.view_count) + '회';
+  if (mode === 'weekly') return '+' + num(row.week_delta) + ' / ' + num(row.view_count) + '회';
+  if (mode === 'published') return num(row.view_count) + '회';
+  return num(row.view_count) + '회';
+}
+
+function fmtDate(value) {
+  if (!value) return '-';
+  var d = new Date(value);
+  if (isNaN(d.getTime())) return value;
+  return (d.getMonth() + 1) + '/' + d.getDate() + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+}
+
+function num(value) {
+  var n = Number(value || 0);
+  return n.toLocaleString('ko-KR');
+}
+
+function esc(value) {
+  var span = document.createElement('span');
+  span.textContent = value == null ? '' : String(value);
+  return span.innerHTML;
+}
+</script>
+</body>
+</html>

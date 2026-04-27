@@ -65,6 +65,20 @@
             navVisible: true,
             sidebarType: 'root',
             activeMatch: ['branding.html']
+          },
+          {
+            id: 'competitors',
+            title: '경쟁채널',
+            sidebarLabel: '경쟁채널',
+            description: '유튜브 신규 · 급상승 모니터링',
+            href: 'dashboard/competitors.html',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'yt',
+            hubVisible: true,
+            navVisible: true,
+            sidebarType: 'root',
+            activeMatch: ['competitors.html']
           }
         ]
       },
