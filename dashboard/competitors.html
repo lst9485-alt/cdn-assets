@@ -15,34 +15,47 @@
     h1 { font-size: 24px; font-weight: 850; color: #0F172A; }
     .subtitle { color: #64748B; font-size: 14px; margin-top: 4px; }
     .updated { color: #94A3B8; font-size: 12px; text-align: right; }
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px; }
-    .stat { background: #fff; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px; }
+    .stat { background: #fff; border: 1px solid #E2E8F0; border-radius: 8px; padding: 13px 14px; }
     .stat-label { color: #64748B; font-size: 12px; font-weight: 700; }
-    .stat-value { color: #0F172A; font-size: 24px; font-weight: 850; margin-top: 2px; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
-    .section { background: #fff; border: 1px solid #E2E8F0; border-radius: 8px; padding: 18px; margin-bottom: 16px; }
-    .section.wide { grid-column: 1 / -1; }
-    .section-title { font-size: 16px; font-weight: 800; color: #0F172A; margin-bottom: 12px; }
-    .item { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; padding: 10px 0; border-bottom: 1px solid #F1F5F9; }
-    .item:last-child { border-bottom: 0; }
-    .rank { width: 24px; height: 24px; border-radius: 5px; background: #F1F5F9; color: #475569; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
-    .title { color: #0F172A; font-size: 14px; font-weight: 750; text-decoration: none; }
+    .stat-value { color: #0F172A; font-size: 20px; font-weight: 850; margin-top: 2px; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .section { background: #fff; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; }
+    .section-title { font-size: 16px; font-weight: 850; color: #0F172A; margin-bottom: 10px; }
+    .section-subtitle { color: #94A3B8; font-size: 12px; margin-top: -6px; margin-bottom: 10px; }
+    .video-list { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .video-card { border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px; background: #fff; }
+    .video-head { display: grid; grid-template-columns: 26px 1fr; gap: 9px; align-items: start; }
+    .rank { width: 22px; height: 22px; border-radius: 5px; background: #F1F5F9; color: #475569; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 850; }
+    .title { color: #0F172A; font-size: 14px; font-weight: 760; text-decoration: none; line-height: 1.45; }
     .title:hover { color: #DC2626; }
-    .meta { color: #64748B; font-size: 12px; margin-top: 3px; }
-    .metric { color: #0F172A; font-size: 13px; font-weight: 800; text-align: right; white-space: nowrap; }
-    .channel-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .channel { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px; }
-    .channel-name { font-size: 14px; font-weight: 800; color: #0F172A; }
-    .channel-meta { color: #64748B; font-size: 12px; margin-top: 4px; }
-    .hint { background: #FFF7ED; border: 1px solid #FED7AA; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+    .source { color: #64748B; font-size: 12px; margin-top: 3px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .pill { display: inline-flex; align-items: center; gap: 3px; min-height: 24px; padding: 3px 7px; border-radius: 5px; background: #F8FAFC; color: #64748B; font-size: 12px; font-weight: 750; white-space: nowrap; }
+    .pill strong { color: #0F172A; font-weight: 850; }
+    .pill.good { background: #ECFDF5; color: #059669; }
+    .pill.good strong { color: #059669; }
+    .pill.ok { background: #EFF6FF; color: #2563EB; }
+    .pill.ok strong { color: #2563EB; }
+    .pill.watch { background: #FFFBEB; color: #D97706; }
+    .pill.watch strong { color: #D97706; }
+    details.section { padding: 0; overflow: hidden; }
+    details.section summary { cursor: pointer; list-style: none; padding: 14px 16px; font-size: 15px; font-weight: 850; color: #0F172A; display: flex; justify-content: space-between; gap: 12px; }
+    details.section summary::-webkit-details-marker { display: none; }
+    details.section summary::after { content: "펼치기"; color: #94A3B8; font-size: 12px; font-weight: 750; }
+    details.section[open] summary::after { content: "접기"; }
+    .details-body { padding: 0 16px 16px; }
+    .channel-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .channel { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 10px 11px; }
+    .channel-name { font-size: 13px; font-weight: 850; color: #0F172A; }
+    .channel-meta { color: #64748B; font-size: 12px; margin-top: 3px; }
+    .hint { background: #FFF7ED; border: 1px solid #FED7AA; border-radius: 8px; padding: 9px 11px; margin-bottom: 7px; }
     .hint strong { color: #9A3412; }
     .empty, .error { color: #94A3B8; font-size: 14px; padding: 18px; text-align: center; border: 1px dashed #CBD5E1; border-radius: 8px; background: #F8FAFC; }
     @media (max-width: 860px) {
-      .stats, .grid, .channel-grid { grid-template-columns: 1fr; }
+      .stats, .channel-grid { grid-template-columns: 1fr; }
       .header { display: block; }
       .updated { text-align: left; margin-top: 8px; }
-      .item { grid-template-columns: 24px 1fr; }
-      .metric { grid-column: 2; text-align: left; }
     }
   </style>
 </head>
@@ -77,12 +90,12 @@ function render(data) {
   html += stat('추적 영상', num(s.tracked_video_count) + '개');
   html += stat('채널', num(s.channel_count) + '개');
   html += '</div>';
-  html += '<div class="grid">';
-  html += section('기여도 TOP', data.contribution_top, 'contribution');
-  html += section('신규 영상', data.new_videos, 'published');
-  html += section('24시간 조회수 증가 TOP', data.daily_top, 'daily');
-  html += section('7일 급상승 TOP', data.weekly_top, 'weekly');
-  html += section('최근 90일 조회수 TOP', data.top_90d, 'views');
+  html += '<div class="layout">';
+  html += section('잘된 영상', '채널 평균 대비 튄 영상만 먼저 봅니다.', data.contribution_top, 'contribution', 12);
+  html += detailSection('신규 영상', data.new_videos, 'published', 10);
+  html += detailSection('24시간 조회수 증가 TOP', data.daily_top, 'daily', 10);
+  html += detailSection('7일 급상승 TOP', data.weekly_top, 'weekly', 10);
+  html += detailSection('최근 90일 조회수 TOP', data.top_90d, 'views', 10);
   html += channelSection(data.channel_summary || []);
   html += hintSection(data.topic_hints || []);
   html += '</div>';
@@ -93,18 +106,50 @@ function stat(label, value) {
   return '<div class="stat"><div class="stat-label">' + esc(label) + '</div><div class="stat-value">' + esc(value) + '</div></div>';
 }
 
-function section(title, rows, mode) {
+function section(title, subtitle, rows, mode, limit) {
   var html = '<div class="section"><div class="section-title">' + esc(title) + '</div>';
-  if (!rows || rows.length === 0) return html + '<div class="empty">데이터가 더 쌓이면 표시됩니다.</div></div>';
-  rows.slice(0, 10).forEach(function(row, idx) {
-    html += '<div class="item">';
-    html += '<div class="rank">' + (idx + 1) + '</div>';
-    html += '<div><a class="title" href="' + esc(row.url) + '" target="_blank" rel="noopener">' + esc(row.title) + '</a>';
-    html += '<div class="meta">' + esc(row.channel_name) + ' · 구독자 ' + num(row.subscriber_count) + ' · ' + fmtDate(row.published_at) + '</div></div>';
-    html += '<div class="metric">' + metric(row, mode) + '</div>';
+  if (subtitle) html += '<div class="section-subtitle">' + esc(subtitle) + '</div>';
+  html += videoList(rows, mode, limit || 10);
+  return html + '</div>';
+}
+
+function detailSection(title, rows, mode, limit) {
+  var count = rows && rows.length ? rows.length : 0;
+  var html = '<details class="section"><summary><span>' + esc(title) + '</span><span>' + count + '개</span></summary><div class="details-body">';
+  html += videoList(rows, mode, limit || 10);
+  return html + '</div></details>';
+}
+
+function videoList(rows, mode, limit) {
+  if (!rows || rows.length === 0) return '<div class="empty">데이터가 더 쌓이면 표시됩니다.</div>';
+  var html = '<div class="video-list">';
+  rows.slice(0, limit || 10).forEach(function(row, idx) {
+    html += '<div class="video-card">';
+    html += '<div class="video-head"><div class="rank">' + (idx + 1) + '</div><div>';
+    html += '<a class="title" href="' + esc(row.url) + '" target="_blank" rel="noopener">' + esc(row.title) + '</a>';
+    html += '<div class="source">' + esc(row.channel_name) + '</div>';
+    html += pillRow(row, mode);
+    html += '</div></div>';
     html += '</div>';
   });
   return html + '</div>';
+}
+
+function pillRow(row, mode) {
+  var html = '<div class="pills">';
+  html += pill('게시일', fmtDate(row.published_at));
+  html += pill('구독자', compact(row.subscriber_count));
+  html += pill('기여도', gradeContribution(row.contribution_score), toneContribution(row.contribution_score));
+  html += pill('성과도', gradePerformance(row.view_count), tonePerformance(row.view_count));
+  if (mode === 'daily') html += pill('24h', '+' + compact(row.daily_delta));
+  if (mode === 'weekly') html += pill('7일', '+' + compact(row.week_delta));
+  if (mode === 'contribution') html += pill('상세', ratio(row.contribution_score) + '배 · ' + pct(row.subscriber_view_rate_pct));
+  html += '</div>';
+  return html;
+}
+
+function pill(label, value, tone) {
+  return '<span class="pill ' + esc(tone || '') + '">' + esc(label) + ' · <strong>' + esc(value) + '</strong></span>';
 }
 
 function channelSection(rows) {
@@ -136,6 +181,34 @@ function metric(row, mode) {
   return num(row.view_count) + '회';
 }
 
+function gradeContribution(value) {
+  var n = Number(value || 0);
+  if (n >= 2) return 'Good';
+  if (n >= 1) return 'OK';
+  return 'Watch';
+}
+
+function toneContribution(value) {
+  var n = Number(value || 0);
+  if (n >= 2) return 'good';
+  if (n >= 1) return 'ok';
+  return 'watch';
+}
+
+function gradePerformance(value) {
+  var n = Number(value || 0);
+  if (n >= 100000) return 'Good';
+  if (n >= 50000) return 'OK';
+  return 'Watch';
+}
+
+function tonePerformance(value) {
+  var n = Number(value || 0);
+  if (n >= 100000) return 'good';
+  if (n >= 50000) return 'ok';
+  return 'watch';
+}
+
 function fmtDate(value) {
   if (!value) return '-';
   var d = new Date(value);
@@ -145,6 +218,14 @@ function fmtDate(value) {
 
 function num(value) {
   var n = Number(value || 0);
+  return n.toLocaleString('ko-KR');
+}
+
+function compact(value) {
+  var n = Number(value || 0);
+  if (!n) return '-';
+  if (n >= 100000000) return (n / 100000000).toFixed(1).replace(/\.0$/, '') + '억';
+  if (n >= 10000) return (n / 10000).toFixed(1).replace(/\.0$/, '') + '만';
   return n.toLocaleString('ko-KR');
 }
 
