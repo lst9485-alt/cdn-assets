@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-27T06:00:07.570599+09:00",
+  "updated": "2026-04-28T06:00:06.883194+09:00",
   "workflows": [
     {
       "name": "01-1 반복태스크 생성",
@@ -143,6 +143,21 @@
         "httpRequest",
         "if",
         "respondToWebhook",
+        "webhook"
+      ]
+    },
+    {
+      "name": "05 무한매수",
+      "active": true,
+      "category": "",
+      "triggers": [
+        "scheduleTrigger",
+        "scheduleTrigger"
+      ],
+      "nodes": [
+        "code",
+        "httpRequest",
+        "if",
         "webhook"
       ]
     }

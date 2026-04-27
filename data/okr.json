@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-27T06:00:07.186491+09:00",
+  "updated": "2026-04-28T06:00:06.691302+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 330,
-    "done": 305,
-    "overdue": 8,
+    "total": 337,
+    "done": 312,
+    "overdue": 10,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,63 +56,33 @@
         "overdue": true
       },
       {
-        "title": "주주명부 사진찍고 재업로드 당산로92로",
-        "date": "2026-04-24T20:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원격평생교육원 알아보기",
-        "date": "2026-04-26T17:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "메모정리",
         "date": "2026-04-27",
-        "overdue": false
-      },
-      {
-        "title": "마케팅업체 정산",
-        "date": "2026-04-27T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "텔레그램 ocr관련 투두리스트 11번확인필요",
-        "date": "2026-04-27T09:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-04-27T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "1:1코칭페이지 수정(카톡비즈니스+카톡비즈니스채널 코칭페이지 추가)",
-        "date": "2026-04-27T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "isa계좌확인",
-        "date": "2026-04-27T10:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "예전 매출 잘됐을때 내 원고들 한번보자",
         "date": "2026-04-27T12:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
-        "title": "강의 기획",
-        "date": "2026-04-27T15:30:00.000+09:00",
-        "overdue": false
+        "title": "원씽복기",
+        "date": "2026-04-27T14:00:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "date": "2026-04-27T19:00:00.000+09:00",
-        "overdue": false
+        "title": "1:1코칭페이지 수정(카톡비즈니스+카톡비즈니스채널 코칭페이지 추가)",
+        "date": "2026-04-27T15:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "주제선정&썸네일&제목",
         "date": "2026-04-28",
+        "overdue": false
+      },
+      {
+        "title": "텔레그램 ocr관련 투두리스트 11번확인필요",
+        "date": "2026-04-28T09:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -121,8 +91,23 @@
         "overdue": false
       },
       {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-04-28T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의 기획",
+        "date": "2026-04-28T15:45:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "자료수집&도입부",
         "date": "2026-04-29",
+        "overdue": false
+      },
+      {
+        "title": "연차취합",
+        "date": "2026-04-29T10:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -149,60 +134,51 @@
         "title": "촬영&편집&업로드",
         "date": "2026-05-02",
         "overdue": false
+      },
+      {
+        "title": "메모정리",
+        "date": "2026-05-04",
+        "overdue": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "date": "2026-05-04T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "date": "2026-05-04T10:00:00.000+09:00",
+        "overdue": false
       }
     ],
     "schedule": [
       {
-        "title": "메모정리",
+        "title": "주제선정&썸네일&제목",
         "time": "",
         "allDay": true,
         "done": false
       },
       {
-        "title": "마케팅업체 정산",
+        "title": "텔레그램 ocr관련 투두리스트 11번확인필요",
         "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "텔레그램 ocr관련 투두리스트 11번확인필요",
-        "time": "09:15",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "1:1코칭페이지 수정(카톡비즈니스+카톡비즈니스채널 코칭페이지 추가)",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "isa계좌확인",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "예전 매출 잘됐을때 내 원고들 한번보자",
-        "time": "12:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의 기획",
-        "time": "15:30",
+        "title": "11주차",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "time": "19:00",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의 기획",
+        "time": "15:45",
         "allDay": false,
         "done": false
       }
@@ -237,11 +213,6 @@
       "rate": "32%",
       "days": [
         {
-          "date": "2026-04-21",
-          "done": 2,
-          "total": 4
-        },
-        {
           "date": "2026-04-22",
           "done": 2,
           "total": 4
@@ -263,11 +234,16 @@
         },
         {
           "date": "2026-04-26",
-          "done": 1,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-04-27",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-04-28",
           "done": 0,
           "total": 4
         }
