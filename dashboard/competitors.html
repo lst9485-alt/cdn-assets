@@ -86,7 +86,8 @@
             <div class="guide-title">지표 기준</div>
             <div class="guide-line"><strong>기여도</strong>: 조회수 ÷ 해당 채널 최근 90일 평균 조회수</div>
             <div class="guide-line"><strong>성과도</strong>: 조회수 기준. 10만 이상 Good, 5만 이상 OK</div>
-            <div class="guide-line"><strong>상세</strong>: 기여도 배수 + 구독자 대비 조회율 원 숫자</div>
+            <div class="guide-line"><strong>평균대비</strong>: 조회수 ÷ 해당 채널 최근 90일 평균 조회수</div>
+            <div class="guide-line"><strong>구독자대비</strong>: 조회수 ÷ 구독자수</div>
           </div>
         </div>
       </div>
@@ -171,12 +172,16 @@ function videoList(rows, mode, limit) {
 function pillRow(row, mode) {
   var html = '<div class="pills">';
   html += pill('게시일', fmtDate(row.published_at));
+  html += pill('조회수', compact(row.view_count), tonePerformance(row.view_count));
   html += pill('구독자', compact(row.subscriber_count));
   html += pill('기여도', gradeContribution(row.contribution_score), toneContribution(row.contribution_score));
   html += pill('성과도', gradePerformance(row.view_count), tonePerformance(row.view_count));
   if (mode === 'daily') html += pill('24h', '+' + compact(row.daily_delta));
   if (mode === 'weekly') html += pill('7일', '+' + compact(row.week_delta));
-  if (mode === 'contribution') html += pill('상세', ratio(row.contribution_score) + '배 · ' + pct(row.subscriber_view_rate_pct));
+  if (mode === 'contribution') {
+    html += pill('평균대비', ratio(row.contribution_score) + '배');
+    html += pill('구독자대비', pct(row.subscriber_view_rate_pct));
+  }
   html += '</div>';
   return html;
 }
@@ -246,7 +251,7 @@ function fmtDate(value) {
   if (!value) return '-';
   var d = new Date(value);
   if (isNaN(d.getTime())) return value;
-  return (d.getMonth() + 1) + '/' + d.getDate() + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  return (d.getMonth() + 1) + '/' + d.getDate();
 }
 
 function num(value) {
