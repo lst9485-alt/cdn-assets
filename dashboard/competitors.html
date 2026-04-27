@@ -14,7 +14,16 @@
     .header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
     h1 { font-size: 24px; font-weight: 850; color: #0F172A; }
     .subtitle { color: #64748B; font-size: 14px; margin-top: 4px; }
+    .header-side { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; min-width: 260px; }
     .updated { color: #94A3B8; font-size: 12px; text-align: right; }
+    .guide { position: relative; }
+    .guide-toggle { border: 1px solid #E2E8F0; background: #fff; color: #475569; border-radius: 7px; padding: 6px 10px; font-size: 12px; font-weight: 800; cursor: pointer; }
+    .guide-toggle:hover { border-color: #94A3B8; color: #0F172A; }
+    .guide-panel { display: none; position: absolute; right: 0; top: calc(100% + 6px); width: 310px; padding: 12px; background: #fff; border: 1px solid #CBD5E1; border-radius: 8px; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.14); z-index: 20; text-align: left; }
+    .guide.open .guide-panel { display: block; }
+    .guide-title { font-size: 13px; font-weight: 850; color: #0F172A; margin-bottom: 6px; }
+    .guide-line { font-size: 12px; color: #475569; margin-top: 5px; }
+    .guide-line strong { color: #0F172A; }
     .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px; }
     .stat { background: #fff; border: 1px solid #E2E8F0; border-radius: 8px; padding: 13px 14px; }
     .stat-label { color: #64748B; font-size: 12px; font-weight: 700; }
@@ -55,7 +64,9 @@
     @media (max-width: 860px) {
       .stats, .channel-grid { grid-template-columns: 1fr; }
       .header { display: block; }
-      .updated { text-align: left; margin-top: 8px; }
+      .header-side { align-items: flex-start; min-width: 0; margin-top: 10px; }
+      .updated { text-align: left; }
+      .guide-panel { left: 0; right: auto; width: min(310px, calc(100vw - 40px)); }
     }
   </style>
 </head>
@@ -67,7 +78,18 @@
         <h1>경쟁채널 모니터링</h1>
         <p class="subtitle">구독자수와 채널 평균 대비 잘된 영상을 중심으로 보는 경쟁 채널 흐름</p>
       </div>
-      <div class="updated" id="updated">로딩 중...</div>
+      <div class="header-side">
+        <div class="updated" id="updated">로딩 중...</div>
+        <div class="guide" id="guide">
+          <button class="guide-toggle" type="button" id="guide-toggle">기준 보기</button>
+          <div class="guide-panel">
+            <div class="guide-title">지표 기준</div>
+            <div class="guide-line"><strong>기여도</strong>: 조회수 ÷ 해당 채널 최근 90일 평균 조회수</div>
+            <div class="guide-line"><strong>성과도</strong>: 조회수 기준. 10만 이상 Good, 5만 이상 OK</div>
+            <div class="guide-line"><strong>상세</strong>: 기여도 배수 + 구독자 대비 조회율 원 숫자</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="app"><div class="empty">데이터 로딩 중...</div></div>
   </div>
@@ -79,6 +101,17 @@ fetch('../data/competitors/latest.json?v=' + Date.now())
     document.getElementById('app').innerHTML = '<div class="error">데이터를 불러오지 못했습니다.</div>';
     document.getElementById('updated').textContent = '';
   });
+
+document.addEventListener('click', function(event) {
+  var guide = document.getElementById('guide');
+  var toggle = document.getElementById('guide-toggle');
+  if (!guide || !toggle) return;
+  if (toggle.contains(event.target)) {
+    guide.classList.toggle('open');
+    return;
+  }
+  if (!guide.contains(event.target)) guide.classList.remove('open');
+});
 
 function render(data) {
   document.getElementById('updated').textContent = '업데이트 ' + fmtDate(data.updated_at);
