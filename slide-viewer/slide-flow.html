@@ -434,7 +434,7 @@
                             <span class="detail-path">references/snippets.md</span>
                         </div>
                         <div class="flow-files">
-                            <div class="flow-files-count">📁 관련 파일 32개</div>
+                            <div class="flow-files-count">📁 관련 파일 33개</div>
                             <div class="flow-files-group">
                                 <span class="flow-lang-tag lang-py">🐍 Python 4</span>
                                 <ol class="flow-file-list">
@@ -445,7 +445,7 @@
                                 </ol>
                             </div>
                             <details class="flow-group-details">
-                                <summary><span class="flow-lang-tag lang-js">🟨 JavaScript 13</span></summary>
+                                <summary><span class="flow-lang-tag lang-js">🟨 JavaScript 14</span></summary>
                                 <ol class="flow-file-list">
                                     <li>template/js/main-top.js</li>
                                     <li>template/js/main-mid.js</li>
@@ -457,6 +457,7 @@
                                     <li>template/js/github-save.js</li>
                                     <li>template/js/edit-core.js</li>
                                     <li>template/js/edit-events.js</li>
+                                    <li>template/js/editor-type-meta.js</li>
                                     <li>template/js/layer-panel.js</li>
                                     <li>template/js/category-header.js</li>
                                     <li>template/js/modules-data.js</li>
@@ -526,7 +527,7 @@
                             <div class="step-io">
                                 <span class="io-box io-in">{날짜}-slides.html</span>
                                 <span class="io-arrow">→</span>
-                                <span class="io-box io-script">sync-slide-viewer.sh</span>
+                                <span class="io-box io-script">git commit / push</span>
                                 <span class="io-arrow">→</span>
                                 <span class="io-box io-out">GitHub Pages</span>
                             </div>
@@ -537,16 +538,17 @@
                     <div class="step-detail">
                         <p>완성된 HTML을 cdn-assets 레포의 slide-viewer에 반영하고 GitHub에 push합니다. 1~2분 후 공개 URL에서 볼 수 있습니다. JS/CSS만 바뀌면 assets만 동기화하고, 생성 HTML은 덮어쓰지 않습니다.</p>
                         <div class="detail-paths">
-                            <span class="detail-path">tools/scripts/sync-slide-viewer.sh</span>
+                            <span class="detail-path">workspace/apps/dashboard/repo/slide-viewer/</span>
+                            <span class="detail-path">git push origin main</span>
                             <span class="detail-path">https://lst9485-alt.github.io/cdn-assets/slide-viewer/</span>
                         </div>
                         <div class="flow-files">
-                            <div class="flow-files-count">📁 관련 파일 2개</div>
+                            <div class="flow-files-count">📁 배포 기준 2개</div>
                             <div class="flow-files-group">
-                                <span class="flow-lang-tag lang-sh">⚙️ Shell 2</span>
+                                <span class="flow-lang-tag lang-out">📤 공개 경로</span>
                                 <ol class="flow-file-list">
-                                    <li>Workspace/tools/scripts/sync-slide-viewer.sh (수동 배포)</li>
-                                    <li>Workspace/tools/scripts/nightwatch/sync-slide-viewer.sh (크론 자동 배포)</li>
+                                    <li>workspace/apps/dashboard/repo/slide-viewer/</li>
+                                    <li>https://lst9485-alt.github.io/cdn-assets/slide-viewer/</li>
                                 </ol>
                             </div>
                         </div>
@@ -598,7 +600,7 @@
             <div class="all-files-summary">핵심 파일 묶음 · skeleton 생성, chunk 검증, HTML 생성, GitHub Pages 배포 기준</div>
 
             <details class="all-files-section">
-                <summary><span class="flow-lang-tag lang-py">🐍 Python 42</span></summary>
+                <summary><span class="flow-lang-tag lang-py">🐍 Python 44</span></summary>
                 <ol class="all-files-list">
                     <li>template/build-channel-logo.py</li>
                     <li>template/build-editor.py</li>
@@ -618,9 +620,11 @@
                     <li>template/router.py</li>
                     <li>template/scene_spec.py</li>
                     <li>template/scene_spec_render.py</li>
+                    <li>template/select_templates.py</li>
                     <li>template/semantic_router.py</li>
                     <li>template/slide_plan.py</li>
                     <li>template/step_calc.py</li>
+                    <li>template/structure_evidence.py</li>
                     <li>template/sync-counts.py</li>
                     <li>template/validators.py</li>
                     <li>template/checks/__init__.py</li>
@@ -646,7 +650,7 @@
             </details>
 
             <details class="all-files-section">
-                <summary><span class="flow-lang-tag lang-js">🟨 JavaScript 13</span></summary>
+                <summary><span class="flow-lang-tag lang-js">🟨 JavaScript 14</span></summary>
                 <ol class="all-files-list">
                     <li>template/js/main-top.js</li>
                     <li>template/js/main-mid.js</li>
@@ -658,6 +662,7 @@
                     <li>template/js/github-save.js</li>
                     <li>template/js/edit-core.js</li>
                     <li>template/js/edit-events.js</li>
+                    <li>template/js/editor-type-meta.js</li>
                     <li>template/js/layer-panel.js</li>
                     <li>template/js/category-header.js</li>
                     <li>template/js/modules-data.js</li>
@@ -701,13 +706,6 @@
                 </ol>
             </details>
 
-            <details class="all-files-section">
-                <summary><span class="flow-lang-tag lang-sh">⚙️ Shell 2</span></summary>
-                <ol class="all-files-list">
-                    <li>Workspace/tools/scripts/sync-slide-viewer.sh</li>
-                    <li>Workspace/tools/scripts/nightwatch/sync-slide-viewer.sh</li>
-                </ol>
-            </details>
         </div>
 
         <!-- 용어집 -->
