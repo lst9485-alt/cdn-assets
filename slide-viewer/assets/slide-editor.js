@@ -117,6 +117,109 @@
     return `${numeric}-1`;
   }
 
+  function isGeneratedMutableDeck() {
+    return !!(document.body && document.body.dataset.generated === 'true');
+  }
+
+  function remapExpandedPageGroups(map) {
+    if (!(map instanceof Map) || map.size === 0) return;
+    if (typeof expandedFilmGroups !== 'undefined' && expandedFilmGroups instanceof Set) {
+      expandedFilmGroups = new Set([...expandedFilmGroups].map(pg => map.get(String(pg))).filter(Boolean));
+    }
+    if (typeof expandedOverviewGroups !== 'undefined' && expandedOverviewGroups instanceof Set) {
+      expandedOverviewGroups = new Set([...expandedOverviewGroups].map(pg => map.get(String(pg))).filter(Boolean));
+    }
+  }
+
+  function normalizeGeneratedSlideGroups() {
+    if (!isGeneratedMutableDeck()) return new Map();
+    const container = document.getElementById('stage');
+    if (!container) return new Map();
+    const slideEls = [...container.querySelectorAll(':scope > .slide')];
+    const oldToNew = new Map();
+    let nextPg = 0;
+    let currentOldPg = null;
+    let variant = 0;
+    slideEls.forEach(slide => {
+      const oldPg = String(slide.dataset.pageGroup || '');
+      if (oldPg !== currentOldPg) {
+        currentOldPg = oldPg;
+        nextPg += 1;
+        variant = 0;
+      }
+      const newPg = String(nextPg);
+      if (oldPg) oldToNew.set(oldPg, newPg);
+      slide.dataset.pageGroup = newPg;
+      slide.dataset.variant = String(variant);
+      variant += 1;
+    });
+    remapExpandedPageGroups(oldToNew);
+    return oldToNew;
+  }
+
+  function persistSlideStructureChange() {
+    if (typeof ghMarkDirty === 'function') ghMarkDirty();
+    if (typeof ensureDirHandle === 'function' && typeof saveToFile === 'function') {
+      ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
+    } else if (typeof saveToFile === 'function') {
+      saveToFile(true);
+    }
+  }
+
+  function refreshSlideStructureAfterMutation(activeSlide, options = {}) {
+    const container = document.getElementById('stage');
+    if (!container) return;
+    if (isGeneratedMutableDeck()) normalizeGeneratedSlideGroups();
+    slides = [...container.querySelectorAll(':scope > .slide')];
+    rebuildSlidesByKey();
+    const activeIdx = activeSlide ? slides.indexOf(activeSlide) : -1;
+    if (activeIdx >= 0) currentSlide = activeIdx;
+    else currentSlide = Math.max(0, Math.min(currentSlide, slides.length - 1));
+    const maxStep = slides[currentSlide] && typeof getSteps === 'function'
+      ? Math.max(0, getSteps(slides[currentSlide]) - 1)
+      : 0;
+    currentStep = Math.max(0, Math.min(currentStep || 0, maxStep));
+    currentOrder = Math.max(0, currentOrder || 0);
+    slides.forEach((slide, index) => {
+      slide.classList.toggle('active', index === currentSlide);
+      slide.classList.remove('leave-left', 'enter-from-left');
+      slide.style.opacity = '';
+      slide.style.transform = '';
+      slide.style.transition = '';
+    });
+    if (slides[currentSlide] && typeof showStep === 'function') showStep(slides[currentSlide], currentStep);
+    if (typeof buildFilmstrip === 'function') buildFilmstrip();
+    const overviewEl = document.getElementById('overview');
+    if (overviewEl && overviewEl.dataset.open === '1' && typeof buildOverview === 'function') buildOverview();
+    if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
+    if (typeof updateSlideJumpNav === 'function') updateSlideJumpNav();
+    if (options.save) persistSlideStructureChange();
+  }
+
+  function reorderGeneratedSlideBlockBefore(fromIdx, beforeIdx, options = {}) {
+    if (!isGeneratedMutableDeck()) return false;
+    const container = document.getElementById('stage');
+    if (!container) return false;
+    const slideEls = [...container.querySelectorAll(':scope > .slide')];
+    const fromSlide = slideEls[fromIdx];
+    if (!fromSlide) return false;
+    const pg = fromSlide.dataset.pageGroup;
+    const moving = pg
+      ? slideEls.filter(slide => slide.dataset.pageGroup === pg)
+      : [fromSlide];
+    const target = beforeIdx >= 0 && beforeIdx < slideEls.length ? slideEls[beforeIdx] : null;
+    if (target && moving.includes(target)) return false;
+    if (options.pushUndo !== false && typeof pushUndo === 'function') pushUndo();
+    moving.forEach(slide => container.removeChild(slide));
+    if (target && target.parentNode === container) {
+      moving.forEach(slide => container.insertBefore(slide, target));
+    } else {
+      moving.forEach(slide => container.appendChild(slide));
+    }
+    refreshSlideStructureAfterMutation(fromSlide, { save: options.save });
+    return true;
+  }
+
   // 같은 page-group의 base와 variants가 DOM에서 인접 배치되어 있다는 불변식에 의존
   function rebuildSlidesByKey() {
     slidesByKey = {};
@@ -790,6 +893,11 @@
 
   function reorderSlide(fromIdx, toIdx) {
     if (fromIdx === toIdx) return;
+    if (isGeneratedMutableDeck()) {
+      const beforeIdx = toIdx > fromIdx ? toIdx + 1 : toIdx;
+      reorderGeneratedSlideBlockBefore(fromIdx, beforeIdx);
+      return;
+    }
     const fromSlide = slides[fromIdx];
     const toSlide = slides[toIdx];
     if (!fromSlide || !toSlide) return;
@@ -3563,9 +3671,10 @@
     }
     // Escape: overview 열려있으면 닫기
     if (e.key === 'Escape' && overview.dataset.open === '1') { closeOverview(); return; }
-    if (overview.dataset.open === '1' && (e.key === '2' || e.key === '3')) {
+    if (overview.dataset.open === '1' && (e.key === '2' || e.key === '3' || e.key === '4')) {
       e.preventDefault();
       if (e.key === '3') toggleOverviewExpansionAll();
+      else if (e.key === '4') openTemplateSlidePicker();
       else toggleOverviewNotesMode();
       return;
     }
@@ -4108,6 +4217,7 @@
 
   function openOverview() {
     overviewNotesClickMode = true;
+    overviewInsertAfterIdx = currentSlide;
     buildOverview();
     document.documentElement.classList.add('overview-open');
     document.body.classList.add('overview-open');
@@ -4123,6 +4233,7 @@
     ovBackdrop.classList.remove('visible');
     overview.classList.remove('visible');
     delete overview.dataset.open;
+    overviewInsertAfterIdx = -1;
     hideOverviewNotesPanel();
     ovGrid.innerHTML = '';
     document.documentElement.focus();
@@ -4153,7 +4264,11 @@
     modulePickerBackdrop.classList.remove('visible');
     modulePicker.classList.remove('visible');
     delete modulePicker.dataset.open;
-    if (modulePickerGrid) modulePickerGrid.innerHTML = '';
+    delete modulePicker.dataset.mode;
+    if (modulePickerGrid) {
+      modulePickerGrid.classList.remove('template-grid');
+      modulePickerGrid.innerHTML = '';
+    }
     document.documentElement.focus();
   }
 
@@ -4392,6 +4507,135 @@
     modulePickerBackdrop.addEventListener('click', () => closeModulePicker());
   }
 
+  // ── 오버뷰: 에디터 템플릿 슬라이드 삽입 (O → 4) ──
+  let templateSlidesCache = null;
+  let overviewInsertAfterIdx = -1;
+
+  async function loadTemplateSlides() {
+    if (templateSlidesCache) return templateSlidesCache;
+    const res = await fetch('./slides-editor.html', { cache: 'no-store' });
+    if (!res.ok) throw new Error('slides-editor.html 로드 실패 (' + res.status + ')');
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    templateSlidesCache = [...doc.querySelectorAll('#stage > .slide')].map((slide, idx) => ({
+      idx,
+      id: slide.dataset.slideId || slide.id || `template-${idx + 1}`,
+      type: slide.dataset.type || '',
+      pageGroup: slide.dataset.pageGroup || '',
+      variant: slide.dataset.variant || '0',
+      html: slide.outerHTML,
+    }));
+    return templateSlidesCache;
+  }
+
+  function templateInsertAnchorIdx() {
+    if (overviewInsertAfterIdx >= 0 && slides[overviewInsertAfterIdx]) return overviewInsertAfterIdx;
+    if (typeof currentSlide === 'number' && slides[currentSlide]) return currentSlide;
+    return Math.max(0, slides.length - 1);
+  }
+
+  async function openTemplateSlidePicker() {
+    if (!(document.body && document.body.dataset.generated === 'true')) {
+      if (typeof showToast === 'function') showToast('생성 슬라이드에서만 템플릿 추가가 가능합니다.');
+      return;
+    }
+    if (!modulePicker || !modulePickerGrid) return;
+    try {
+      modulePicker.dataset.mode = 'template';
+      modulePickerGrid.innerHTML = '<div class="tp-loading">템플릿 불러오는 중...</div>';
+      if (modulePickerTitle) modulePickerTitle.textContent = '슬라이드 추가 — 에디터 템플릿 (4)';
+      document.documentElement.classList.add('module-picker-open');
+      document.body.classList.add('module-picker-open');
+      modulePickerBackdrop.classList.add('visible');
+      modulePicker.classList.add('visible');
+      modulePicker.dataset.open = '1';
+      const templates = await loadTemplateSlides();
+      buildTemplateSlidePicker(templates);
+    } catch (err) {
+      modulePickerGrid.innerHTML = '';
+      closeModulePicker();
+      if (typeof showToast === 'function') showToast('템플릿 로드 오류: ' + err.message, 5000);
+    }
+  }
+
+  function buildTemplateSlidePicker(templates) {
+    modulePickerGrid.innerHTML = '';
+    modulePickerGrid.classList.add('template-grid');
+    const previewsToFit = [];
+    templates.forEach(tpl => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'mp-card tp-card';
+      card.dataset.templateId = tpl.id;
+      const top = document.createElement('div');
+      top.className = 'mp-top';
+      const id = document.createElement('span');
+      id.className = 'mp-id';
+      id.textContent = tpl.id;
+      const name = document.createElement('span');
+      name.className = 'mp-name';
+      name.textContent = tpl.type || '타입 없음';
+      top.append(id, name);
+      card.append(top);
+
+      const preview = document.createElement('div');
+      preview.className = 'tp-preview';
+      const stage = document.createElement('div');
+      stage.className = 'tp-preview-stage';
+      stage.innerHTML = tpl.html;
+      const clone = stage.querySelector('.slide');
+      if (clone) {
+        clone.className = 'slide';
+        clone.style.cssText = 'position:relative;width:1920px;height:1080px;opacity:1;transform:none;pointer-events:none;';
+        if (typeof applyStepState === 'function') applyStepState(clone, Math.max(0, (parseInt(clone.dataset.steps || '1', 10) || 1) - 1));
+      }
+      preview.appendChild(stage);
+      card.append(preview);
+      previewsToFit.push(preview);
+
+      card.addEventListener('click', () => {
+        insertTemplateSlide(tpl);
+        closeModulePicker();
+      });
+      modulePickerGrid.appendChild(card);
+    });
+    requestAnimationFrame(() => requestAnimationFrame(() => previewsToFit.forEach(fitTemplatePreviewScale)));
+  }
+
+  function fitTemplatePreviewScale(previewEl) {
+    const stage = previewEl.querySelector('.tp-preview-stage');
+    if (!stage) return;
+    const boxW = previewEl.clientWidth || 1;
+    const boxH = previewEl.clientHeight || 1;
+    const scale = Math.min(boxW / 1920, boxH / 1080, 1);
+    stage.style.setProperty('--tp-scale', String(scale));
+  }
+
+  function insertTemplateSlide(tpl) {
+    const container = document.getElementById('stage');
+    if (!container || !tpl) return;
+    pushUndo();
+    const temp = document.createElement('div');
+    temp.innerHTML = tpl.html;
+    const newSlide = temp.firstElementChild;
+    if (!newSlide) return;
+    const stamp = Date.now();
+    newSlide.classList.remove('active', 'leave-left', 'enter-from-left');
+    newSlide.id = 'inserted-' + stamp;
+    newSlide.dataset.slideId = (tpl.id || 'template') + '_inserted_' + stamp;
+    newSlide.dataset.generatedInsert = 'true';
+    delete newSlide.dataset.displayNumber;
+    delete newSlide.dataset.displayLabel;
+    const anchorIdx = templateInsertAnchorIdx();
+    const anchor = slides[anchorIdx];
+    if (anchor && anchor.nextElementSibling) container.insertBefore(newSlide, anchor.nextElementSibling);
+    else container.appendChild(newSlide);
+    currentStep = 0;
+    currentOrder = 0;
+    refreshSlideStructureAfterMutation(newSlide, { save: true });
+    if (typeof showToast === 'function') showToast('슬라이드 추가 완료: ' + (tpl.type || tpl.id), 1800);
+  }
+
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
   let expandedOverviewGroups = new Set();  // 확장된 page-group(string) 집합 — overview 전용
   let overviewNoteSlideIdx = -1;
@@ -4475,32 +4719,12 @@
     pushUndo();
     const container = document.getElementById('stage');
     const target = slides[idx];
-    const deletedPg = target ? target.dataset.pageGroup : null;
+    const nextActive = target ? (target.nextElementSibling || target.previousElementSibling) : null;
     container.removeChild(target);
-    slides = [...container.querySelectorAll(':scope > .slide')];
-    rebuildSlidesByKey();
-    if (deletedPg && ![...slides].some(s => s.dataset.pageGroup === deletedPg)) {
-      expandedFilmGroups.delete(deletedPg);
-      expandedOverviewGroups.delete(deletedPg);
-    }
-    currentSlide = Math.min(idx, slides.length - 1);
-    slides.forEach(s => {
-      s.classList.remove('active', 'leave-left', 'enter-from-left');
-      s.style.opacity = '';
-      s.style.transform = '';
-      s.style.transition = '';
-    });
-    if (slides[currentSlide]) {
-      slides[currentSlide].classList.add('active');
-      showStep(slides[currentSlide], 0);
-    }
     currentStep = 0;
     currentOrder = 0;
     hideOverviewNotesPanel();
-    buildFilmstrip();
-    buildOverview();
-    if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
-    ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
+    refreshSlideStructureAfterMutation(nextActive, { save: true });
   }
 
   function duplicateOverviewSlideAt(idx) {
@@ -4519,12 +4743,7 @@
     const next = source.nextElementSibling;
     if (next) container.insertBefore(clone, next);
     else container.appendChild(clone);
-    slides = [...container.querySelectorAll(':scope > .slide')];
-    rebuildSlidesByKey();
-    buildFilmstrip();
-    buildOverview();
-    if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
-    ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
+    refreshSlideStructureAfterMutation(clone, { save: true });
     if (typeof showToast === 'function') showToast('슬라이드 복사 완료', 2000);
   }
 
@@ -4550,19 +4769,11 @@
     });
 
     const variantGroupSet = overviewVariantGroups();
-    if (variantGroupSet.size > 0) {
+    const isGenerated = !!(document.body && document.body.dataset.generated === 'true');
+    if (variantGroupSet.size > 0 || isGenerated) {
       const toolbar = document.createElement('div');
       toolbar.className = 'ov-toolbar';
       const allExpanded = overviewAllGroupsExpanded(variantGroupSet);
-      const toggleAllBtn = document.createElement('button');
-      toggleAllBtn.type = 'button';
-      toggleAllBtn.className = 'ov-global-toggle';
-      toggleAllBtn.textContent = allExpanded ? '전체 접기 (3)' : '전체 펼치기 (3)';
-      toggleAllBtn.title = '단축키 3';
-      toggleAllBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleOverviewExpansionAll();
-      });
       const notesModeBtn = document.createElement('button');
       notesModeBtn.type = 'button';
       notesModeBtn.className = 'ov-global-toggle ov-notes-mode-toggle' + (overviewNotesClickMode ? ' active' : '');
@@ -4573,7 +4784,30 @@
         toggleOverviewNotesMode();
       });
       toolbar.appendChild(notesModeBtn);
-      toolbar.appendChild(toggleAllBtn);
+      if (variantGroupSet.size > 0) {
+        const toggleAllBtn = document.createElement('button');
+        toggleAllBtn.type = 'button';
+        toggleAllBtn.className = 'ov-global-toggle';
+        toggleAllBtn.textContent = allExpanded ? '전체 접기 (3)' : '전체 펼치기 (3)';
+        toggleAllBtn.title = '단축키 3';
+        toggleAllBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleOverviewExpansionAll();
+        });
+        toolbar.appendChild(toggleAllBtn);
+      }
+      if (isGenerated) {
+        const addTemplateBtn = document.createElement('button');
+        addTemplateBtn.type = 'button';
+        addTemplateBtn.className = 'ov-global-toggle';
+        addTemplateBtn.textContent = '슬라이드 추가 (4)';
+        addTemplateBtn.title = '단축키 4 · 에디터 템플릿을 현재/마우스 위치 뒤에 추가';
+        addTemplateBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openTemplateSlidePicker();
+        });
+        toolbar.appendChild(addTemplateBtn);
+      }
       ovGrid.appendChild(toolbar);
     }
 
@@ -4714,6 +4948,7 @@
       item.addEventListener('click', (e) => {
         if (ovDragItem) return;
         e.stopPropagation();
+        overviewInsertAfterIdx = slideIdx;
         if (overviewNotesClickMode || e.altKey || e.metaKey) {
           showOverviewNotesForSlide(slide, slideIdx, item);
           return;
@@ -4722,6 +4957,7 @@
         goToSlide(slideIdx);
       });
       item.addEventListener('mouseenter', () => {
+        overviewInsertAfterIdx = slideIdx;
         if (typeof setSlideJumpNotesForSlide === 'function') setSlideJumpNotesForSlide(slide);
       });
       item.addEventListener('mouseleave', () => {
@@ -4795,8 +5031,12 @@
             const from = ovDragFromIdx;
             const to = ovDragDropIdx > from ? ovDragDropIdx - 1 : ovDragDropIdx;
             if (from !== to) {
-              reorderSlide(from, to);
-              buildOverview();
+              if (document.body && document.body.dataset.generated === 'true' && typeof reorderGeneratedSlideBlockBefore === 'function') {
+                reorderGeneratedSlideBlockBefore(from, ovDragDropIdx, { save: true });
+              } else {
+                reorderSlide(from, to);
+                buildOverview();
+              }
             }
             ovDragItem = null;
           }
@@ -7139,16 +7379,44 @@
   }
 
   // ── Undo / Redo ──
+  function captureUndoSnapshot() {
+    return {
+      html: document.getElementById('stage').innerHTML,
+      currentSlide,
+      currentStep,
+      currentOrder,
+      expandedFilmGroups: typeof expandedFilmGroups !== 'undefined' ? [...expandedFilmGroups] : [],
+      expandedOverviewGroups: typeof expandedOverviewGroups !== 'undefined' ? [...expandedOverviewGroups] : [],
+    };
+  }
+
   function pushUndo() {
     if (isGitHubPages) ghMarkDirty();
-    undoStack.push(document.getElementById('stage').innerHTML);
+    undoStack.push(captureUndoSnapshot());
     if (undoStack.length > 50) undoStack.shift();
     redoStack.length = 0;
   }
 
-  function restoreSnapshot(html) {
-    document.getElementById('stage').innerHTML = html;
-    slides = document.querySelectorAll('#stage > .slide');
+  function restoreSnapshot(snapshot) {
+    const state = typeof snapshot === 'string' ? { html: snapshot } : (snapshot || {});
+    document.getElementById('stage').innerHTML = state.html || '';
+    slides = [...document.querySelectorAll('#stage > .slide')];
+    if (typeof rebuildSlidesByKey === 'function') rebuildSlidesByKey();
+    if (typeof expandedFilmGroups !== 'undefined') {
+      expandedFilmGroups = new Set(state.expandedFilmGroups || []);
+    }
+    if (typeof expandedOverviewGroups !== 'undefined') {
+      expandedOverviewGroups = new Set(state.expandedOverviewGroups || []);
+    }
+    currentSlide = Math.max(0, Math.min(
+      typeof state.currentSlide === 'number' ? state.currentSlide : currentSlide,
+      Math.max(0, slides.length - 1)
+    ));
+    currentStep = Math.max(0, typeof state.currentStep === 'number' ? state.currentStep : currentStep);
+    currentOrder = Math.max(0, typeof state.currentOrder === 'number' ? state.currentOrder : currentOrder);
+    if (slides[currentSlide] && typeof getSteps === 'function') {
+      currentStep = Math.min(currentStep, Math.max(0, getSteps(slides[currentSlide]) - 1));
+    }
     document.querySelectorAll('.edit-selected, .edit-group-selected, .group-entered-parent, .child-selected, .child-action-target').forEach(el => { el.classList.remove('edit-selected', 'edit-group-selected', 'group-entered-parent', 'child-selected', 'child-action-target'); });
     document.body.classList.remove('individual-mode');
     selectedEl = null;
@@ -7173,21 +7441,27 @@
       s.classList.toggle('active', i === currentSlide);
       s.classList.remove('leave-left', 'enter-from-left');
     });
-    showStep(slides[currentSlide], currentStep);
+    if (slides[currentSlide]) showStep(slides[currentSlide], currentStep);
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
     buildFilmstrip();
+    const overviewEl = document.getElementById('overview');
+    if (overviewEl && overviewEl.dataset.open === '1' && typeof buildOverview === 'function') buildOverview();
+    if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
+    if (typeof updateSlideJumpNav === 'function') updateSlideJumpNav();
   }
 
   function doUndo() {
     if (!undoStack.length) return;
-    redoStack.push(document.getElementById('stage').innerHTML);
+    redoStack.push(captureUndoSnapshot());
     restoreSnapshot(undoStack.pop());
+    if (typeof persistSlideStructureChange === 'function') persistSlideStructureChange();
   }
 
   function doRedo() {
     if (!redoStack.length) return;
-    undoStack.push(document.getElementById('stage').innerHTML);
+    undoStack.push(captureUndoSnapshot());
     restoreSnapshot(redoStack.pop());
+    if (typeof persistSlideStructureChange === 'function') persistSlideStructureChange();
   }
   // ── 리사이즈 치수 라벨 ──
   function showResizeDimLabel(w, h, el) {
