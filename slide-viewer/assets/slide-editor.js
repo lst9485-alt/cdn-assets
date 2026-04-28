@@ -803,7 +803,7 @@
       });
       nav.appendChild(toggle);
     }
-    if (!toolbar && !isGeneratedDeck()) {
+    if (!toolbar) {
       toolbar = document.createElement('div');
       toolbar.className = 'sj-toolbar';
       search = document.createElement('input');
@@ -833,7 +833,7 @@
       grid.className = 'sj-grid';
       nav.appendChild(grid);
     }
-    if (!notes && !isGeneratedDeck()) {
+    if (!notes) {
       notes = document.createElement('div');
       notes.className = 'sj-notes';
       nav.appendChild(notes);
@@ -1317,7 +1317,7 @@
     15: {"label": "T15 다이어그램", "schemaRequiredCount": 2, "fillRange": [2, 7], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     16: {"label": "T16 타임라인", "schemaRequiredCount": 3, "fillRange": [3, 11], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     17: {"label": "T17 비교박스", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
-    18: {"label": "T18 인용", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": true, "emoji": true}},
+    18: {"label": "T18 인용", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": true, "emoji": false}},
     19: {"label": "T19 경고배너", "schemaRequiredCount": 3, "fillRange": [3, 11], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     20: {"label": "T20 태그칩", "schemaRequiredCount": 2, "fillRange": [3, 4], "itemsRange": [2, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     21: {"label": "T21 섹션배지+코너레이블", "schemaRequiredCount": 5, "fillRange": [5, 5], "itemsRange": [2, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
@@ -4811,6 +4811,39 @@
     if (typeof showToast === 'function') showToast('슬라이드 복사 완료', 2000);
   }
 
+  function overviewTypeRatioEl() {
+    const firstByGroup = new Map();
+    slides.forEach((slide, idx) => {
+      const pg = slide.dataset.pageGroup || String(idx + 1);
+      if (!firstByGroup.has(pg) || slide.dataset.variant === '0' || !slide.dataset.variant) {
+        firstByGroup.set(pg, slide);
+      }
+    });
+    const counts = {};
+    firstByGroup.forEach(slide => {
+      const type = slide.dataset.type || '미분류';
+      counts[type] = (counts[type] || 0) + 1;
+    });
+    const total = Math.max(1, firstByGroup.size);
+    const wrap = document.createElement('div');
+    wrap.className = 'ov-type-ratio';
+    const head = document.createElement('div');
+    head.className = 'ov-type-ratio-head';
+    head.textContent = `타입 비율 ${total}장`;
+    wrap.appendChild(head);
+    Object.entries(counts)
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'))
+      .slice(0, 8)
+      .forEach(([type, count]) => {
+        const item = document.createElement('div');
+        item.className = 'ov-type-ratio-item';
+        const pct = Math.round((count / total) * 100);
+        item.innerHTML = `<span>${type}</span><b>${count}장 · ${pct}%</b>`;
+        wrap.appendChild(item);
+      });
+    return wrap;
+  }
+
   function buildOverview() {
     ovGrid.innerHTML = '';
     // 에디터(slides-editor.html)에서는 3구역(title/no-title/special) + 카테고리 표시
@@ -4873,6 +4906,7 @@
         toolbar.appendChild(addTemplateBtn);
       }
       ovGrid.appendChild(toolbar);
+      if (isGenerated) ovGrid.appendChild(overviewTypeRatioEl());
     }
 
     const bucketCounts = {};

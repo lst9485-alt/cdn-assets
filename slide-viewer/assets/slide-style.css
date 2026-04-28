@@ -1022,7 +1022,7 @@
     animation: none;
   }
 
-  .bubble { animation: float-bubble 2.5s ease-in-out infinite; }
+  .bubble { animation: bubble-enter-pop 0.82s cubic-bezier(0.18, 0.9, 0.2, 1.25) both, bubble-active-shake 1.7s ease-in-out 0.82s infinite; }
   .card { animation: float-y 4s ease-in-out infinite; }
   .icon-flow-icon { animation: float-y 3s ease-in-out infinite; }
   .bar-track { animation: none; }
@@ -1062,6 +1062,18 @@
   @keyframes float-bubble {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }
+  }
+  @keyframes bubble-enter-pop {
+    0% { opacity: 0; transform: translateX(180px) scale(0.82) rotate(2deg); }
+    62% { opacity: 1; transform: translateX(-8px) scale(1.08) rotate(-1deg); }
+    100% { opacity: 1; transform: translateX(0) scale(1) rotate(0); }
+  }
+  @keyframes bubble-active-shake {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    18% { transform: translateX(-16px) rotate(-1.1deg); }
+    36% { transform: translateX(14px) rotate(1deg); }
+    54% { transform: translateX(-10px) rotate(-0.7deg); }
+    72% { transform: translateX(8px) rotate(0.6deg); }
   }
   @keyframes count-bounce {
     0%   { transform: scale(1); }
@@ -1978,6 +1990,42 @@
   }
   .ov-notes-mode-toggle.active:hover {
     background: #ffd83d;
+  }
+  .ov-type-ratio {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 6px;
+    align-items: center;
+    padding: 8px 10px;
+    margin: -2px 0 6px;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.45);
+    color: rgba(255,255,255,0.88);
+  }
+  .ov-type-ratio-head {
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--editor-accent);
+  }
+  .ov-type-ratio-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .ov-type-ratio-item span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ov-type-ratio-item b {
+    flex-shrink: 0;
+    color: rgba(255,255,255,0.62);
+    font-weight: 800;
   }
 
   .ov-actions {
@@ -3606,5 +3654,5 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
   .mod-M18 .sc-item:nth-child(2) .sc-num { animation-delay: 0.4s; }
   .mod-M18 .sc-item:nth-child(3) .sc-num { animation-delay: 0.8s; }
   .mod-M19 .bubble {
-    animation: float-bubble 2.5s ease-in-out infinite;
+    animation: bubble-enter-pop 0.82s cubic-bezier(0.18, 0.9, 0.2, 1.25) both, bubble-active-shake 1.7s ease-in-out 0.82s infinite;
   }
