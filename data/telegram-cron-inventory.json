@@ -150,6 +150,17 @@
           ]
         },
         {
+          "name": "content-calendar-sync-error",
+          "runtime": "n8n",
+          "trigger": "오류 발생 시 / 수동 동기화 실패 시",
+          "purpose": "Notion 콘텐츠캘린더 to Obsidian 동기화 오류 알림",
+          "content": "평소에는 안 오고, 동기화가 실패할 때만 오는 예비 오류 알림",
+          "evidence": [
+            "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:353",
+            "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:358"
+          ]
+        },
+        {
           "name": "n8n-monitor",
           "runtime": "standalone crontab shell",
           "trigger": "매분 확인, 상태 변경 때만 알림",
@@ -298,6 +309,18 @@
       "content": "Telegram 발송 없음",
       "evidence": [
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:18"
+      ]
+    },
+    {
+      "name": "content-calendar-sync",
+      "runtime": "n8n",
+      "trigger": "매주 월 07:00 + 버튼/webhook 수동 동기화",
+      "purpose": "Notion 콘텐츠캘린더 to Obsidian 정기 동기화",
+      "content": "Notion 콘텐츠캘린더 페이지를 Obsidian 마크다운 파일로 동기화. 정기 전체 동기화와 버튼/webhook 단건 동기화가 같이 있음",
+      "evidence": [
+        "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:14",
+        "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:375",
+        "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:358"
       ]
     },
     {

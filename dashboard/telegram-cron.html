@@ -191,6 +191,7 @@
         'task-reminder': '태스크 리마인더',
         'time-based-reminder': '시간별 태스크 알림',
         'task-done-callback': '완료 버튼 처리',
+        'content-calendar-sync-error': '콘텐츠 동기화 오류',
         'n8n-monitor': 'n8n 상태 감시',
         'consulting-crm-sms': '상담 문자 발송 결과',
         'waiting-reminder': '대기 메모 리마인더',
@@ -199,6 +200,7 @@
         'dashboard-data': '대시보드 데이터 갱신',
         'button-poller': '버튼 응답 확인',
         'repeat-task-generator': '반복 태스크 생성',
+        'content-calendar-sync': '콘텐츠캘린더 동기화',
         'consulting-after-dashboard': '상담 후 대시보드 확인',
         'consulting-followup-sms': '후속문자 발송'
     };
@@ -482,7 +484,7 @@
         var text = typeof item === 'string' ? item : [item.name, item.trigger, item.purpose, item.content].join(' ');
         var name = typeof item === 'string' ? '' : item.name;
         if (text.indexOf('비활성화') >= 0) return '비활성';
-        if (['n8n-monitor', 'co-viral-alarm'].indexOf(name) >= 0) return '오류 때만';
+        if (['content-calendar-sync-error', 'n8n-monitor', 'co-viral-alarm'].indexOf(name) >= 0) return '오류 때만';
         if (text.indexOf('오류 발생') >= 0 || text.indexOf('조건부') >= 0) return '오류 때만';
         if (text.indexOf('매분') >= 0 || text.indexOf('300초') >= 0) return '수시 확인';
         if (text.indexOf('매일') >= 0) return '매일';
