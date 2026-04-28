@@ -825,6 +825,13 @@
     if (!panel) return;
     panel.innerHTML = '';
     const rows = slideJumpTypeRatioRows();
+    const totalTypes = (typeof PG_TO_TYPE_META !== 'undefined')
+      ? Object.keys(PG_TO_TYPE_META).length
+      : rows.length;
+    const title = document.createElement('div');
+    title.className = 'sj-ratio-title';
+    title.textContent = `${rows.length}/${totalTypes} 타입 사용`;
+    panel.appendChild(title);
     rows.forEach(row => {
       const item = document.createElement('div');
       item.className = 'sj-ratio-item';
