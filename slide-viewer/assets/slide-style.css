@@ -1513,6 +1513,29 @@
   #module-picker-grid.template-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
+  .tp-search-row {
+    grid-column: 1 / -1;
+    position: sticky;
+    top: -4px;
+    z-index: 2;
+    padding: 0 0 8px;
+    background: #1a1a1a;
+  }
+  .tp-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #555;
+    border-radius: 6px;
+    padding: 10px 12px;
+    background: #111;
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    outline: none;
+  }
+  .tp-search-input:focus {
+    border-color: var(--editor-accent);
+  }
 
   .mp-card {
     display: flex;

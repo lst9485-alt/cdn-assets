@@ -3674,7 +3674,10 @@
     if (overview.dataset.open === '1' && (e.key === '2' || e.key === '3' || e.key === '4')) {
       e.preventDefault();
       if (e.key === '3') toggleOverviewExpansionAll();
-      else if (e.key === '4') openTemplateSlidePicker();
+      else if (e.key === '4') {
+        if (modulePicker && modulePicker.dataset.open === '1' && modulePicker.dataset.mode === 'template') closeModulePicker();
+        else openTemplateSlidePicker();
+      }
       else toggleOverviewNotesMode();
       return;
     }
@@ -4534,6 +4537,15 @@
     return Math.max(0, slides.length - 1);
   }
 
+  function templateInsertAnchorSlide() {
+    const anchor = slides[templateInsertAnchorIdx()];
+    if (!anchor) return null;
+    const pg = anchor.dataset.pageGroup;
+    if (!pg) return anchor;
+    const groupSlides = [...slides].filter(slide => slide.dataset.pageGroup === pg);
+    return groupSlides[groupSlides.length - 1] || anchor;
+  }
+
   async function openTemplateSlidePicker() {
     if (!(document.body && document.body.dataset.generated === 'true')) {
       if (typeof showToast === 'function') showToast('생성 슬라이드에서만 템플릿 추가가 가능합니다.');
@@ -4561,12 +4573,30 @@
   function buildTemplateSlidePicker(templates) {
     modulePickerGrid.innerHTML = '';
     modulePickerGrid.classList.add('template-grid');
+    const searchRow = document.createElement('div');
+    searchRow.className = 'tp-search-row';
+    const searchInput = document.createElement('input');
+    searchInput.className = 'tp-search-input';
+    searchInput.type = 'search';
+    searchInput.placeholder = 'T번호 / 타입 검색';
+    searchInput.autocomplete = 'off';
+    searchInput.addEventListener('keydown', e => e.stopPropagation());
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      modulePickerGrid.querySelectorAll('.tp-card').forEach(card => {
+        const haystack = (card.dataset.search || '').toLowerCase();
+        card.style.display = !!q && !haystack.includes(q) ? 'none' : '';
+      });
+    });
+    searchRow.appendChild(searchInput);
+    modulePickerGrid.appendChild(searchRow);
     const previewsToFit = [];
     templates.forEach(tpl => {
       const card = document.createElement('button');
       card.type = 'button';
       card.className = 'mp-card tp-card';
       card.dataset.templateId = tpl.id;
+      card.dataset.search = [tpl.id, tpl.type, tpl.pageGroup, tpl.variant].join(' ');
       const top = document.createElement('div');
       top.className = 'mp-top';
       const id = document.createElement('span');
@@ -4626,8 +4656,7 @@
     newSlide.dataset.generatedInsert = 'true';
     delete newSlide.dataset.displayNumber;
     delete newSlide.dataset.displayLabel;
-    const anchorIdx = templateInsertAnchorIdx();
-    const anchor = slides[anchorIdx];
+    const anchor = templateInsertAnchorSlide();
     if (anchor && anchor.nextElementSibling) container.insertBefore(newSlide, anchor.nextElementSibling);
     else container.appendChild(newSlide);
     currentStep = 0;
