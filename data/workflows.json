@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-28T13:37:25.111456+09:00",
+  "updated": "2026-04-28T13:54:47.904172+09:00",
   "workflows": [
     {
       "name": "01-1 반복태스크 생성",
@@ -37,19 +37,6 @@
         "httpRequest",
         "if",
         "notion",
-        "webhook"
-      ]
-    },
-    {
-      "name": "01-4 태스크 명령어",
-      "active": false,
-      "category": "Notion 태스크",
-      "triggers": [],
-      "nodes": [
-        "code",
-        "httpRequest",
-        "notion",
-        "switch",
         "webhook"
       ]
     },
