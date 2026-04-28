@@ -207,7 +207,14 @@
     const moving = pg
       ? slideEls.filter(slide => slide.dataset.pageGroup === pg)
       : [fromSlide];
-    const target = beforeIdx >= 0 && beforeIdx < slideEls.length ? slideEls[beforeIdx] : null;
+    const rawTarget = beforeIdx >= 0 && beforeIdx < slideEls.length ? slideEls[beforeIdx] : null;
+    if (rawTarget && moving.includes(rawTarget)) return false;
+    let target = rawTarget;
+    if (rawTarget && rawTarget.dataset.pageGroup && rawTarget.dataset.variant !== "0") {
+      const targetGroupSlides = slideEls.filter(slide => slide.dataset.pageGroup === rawTarget.dataset.pageGroup);
+      const lastInTargetGroup = targetGroupSlides[targetGroupSlides.length - 1];
+      target = lastInTargetGroup ? lastInTargetGroup.nextElementSibling : rawTarget;
+    }
     if (target && moving.includes(target)) return false;
     if (options.pushUndo !== false && typeof pushUndo === 'function') pushUndo();
     moving.forEach(slide => container.removeChild(slide));
@@ -1293,24 +1300,24 @@
   // 자동 생성 보조 데이터 — references/type-registry.json + type-compile-config.json 기준
   // 에디터 개요/필름스트립 카드의 메타 태그 표시용.
   const PG_TO_TYPE_META = {
-    1: {"label": "T01 말풍선+텍스트", "schemaRequiredCount": 1, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
-    2: {"label": "T02 아이콘+텍스트", "schemaRequiredCount": 1, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
+    1: {"label": "T01 말풍선+텍스트", "schemaRequiredCount": 1, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    2: {"label": "T02 아이콘+텍스트", "schemaRequiredCount": 1, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     3: {"label": "T03 카드", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": false}},
     4: {"label": "T04 그리드카드", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
     5: {"label": "T05 번호항목", "schemaRequiredCount": 2, "fillRange": [2, 6], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": false}},
     6: {"label": "T06 체크리스트", "schemaRequiredCount": 2, "fillRange": [2, 6], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": false}},
-    7: {"label": "T07 아이콘행", "schemaRequiredCount": 5, "fillRange": [5, 13], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
+    7: {"label": "T07 아이콘행", "schemaRequiredCount": 5, "fillRange": [5, 13], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     8: {"label": "T08 아이콘아이템", "schemaRequiredCount": 3, "fillRange": [3, 11], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
     9: {"label": "T09 플로우", "schemaRequiredCount": 2, "fillRange": [2, 6], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": false}},
     10: {"label": "T10 아이콘플로우", "schemaRequiredCount": 3, "fillRange": [3, 11], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
     11: {"label": "T11 바차트", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     12: {"label": "T12 라인차트", "schemaRequiredCount": 4, "fillRange": [5, 5], "itemsRange": [1, 2], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
-    13: {"label": "T13 큰숫자(서클)", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": false}},
+    13: {"label": "T13 큰숫자(서클)", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     14: {"label": "T14 숫자스탯", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     15: {"label": "T15 다이어그램", "schemaRequiredCount": 2, "fillRange": [2, 7], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     16: {"label": "T16 타임라인", "schemaRequiredCount": 3, "fillRange": [3, 11], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     17: {"label": "T17 비교박스", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
-    18: {"label": "T18 인용", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
+    18: {"label": "T18 인용", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": [1, 3], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": true, "emoji": true}},
     19: {"label": "T19 경고배너", "schemaRequiredCount": 3, "fillRange": [3, 11], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     20: {"label": "T20 태그칩", "schemaRequiredCount": 2, "fillRange": [3, 4], "itemsRange": [2, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     21: {"label": "T21 섹션배지+코너레이블", "schemaRequiredCount": 5, "fillRange": [5, 5], "itemsRange": [2, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
@@ -1318,7 +1325,7 @@
     23: {"label": "T23 CTA버튼", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": 4, "usageScope": "cta_only", "media": {"image": false, "imageRequired": false, "emoji": false}},
     24: {"label": "T24 비교박스(이모지VS)", "schemaRequiredCount": 2, "fillRange": [3, 3], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     25: {"label": "T25 비교박스(불릿리스트)", "schemaRequiredCount": 3, "fillRange": [3, 7], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
-    26: {"label": "T26 그리드카드(아이콘좌측)", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": false, "emoji": true}},
+    26: {"label": "T26 그리드카드(아이콘좌측)", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     27: {"label": "T27 섹션배지(챕터플로우)", "schemaRequiredCount": 6, "fillRange": [7, 10], "itemsRange": [2, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     28: {"label": "T28 비교테이블", "schemaRequiredCount": 8, "fillRange": [8, 20], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     29: {"label": "T29 이미지+텍스트", "schemaRequiredCount": 1, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": true, "emoji": true}},
@@ -1339,7 +1346,7 @@
     44: {"label": "T44 한줄강조", "schemaRequiredCount": 1, "fillRange": [1, 1], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     45: {"label": "T45 두줄대비", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     46: {"label": "T46 카운터제목", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
-    47: {"label": "T47 아이콘강조", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": true, "emoji": true}},
+    47: {"label": "T47 아이콘강조", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     48: {"label": "T48 두줄전개", "schemaRequiredCount": 2, "fillRange": [2, 2], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     49: {"label": "T49 아이콘2단강조", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     50: {"label": "T50 좌우2단비교", "schemaRequiredCount": 3, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
