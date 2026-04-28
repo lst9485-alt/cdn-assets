@@ -17,9 +17,16 @@
         .metric { background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px 15px; min-height: 78px; }
         .metric-label { font-size: 12px; color: #64748B; font-weight: 700; margin-bottom: 6px; }
         .metric-value { font-size: 24px; font-weight: 900; color: #051C2C; }
-        .controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
+        .controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; align-items: center; }
         .view-btn { border: 1px solid #CBD5E1; background: white; color: #475569; border-radius: 999px; padding: 8px 13px; font-size: 12px; font-weight: 800; cursor: pointer; }
         .view-btn.active { border-color: #0077C8; background: #E8F3FF; color: #0077C8; }
+        .fold-btn { border: 1px solid #E2E8F0; background: #F8FAFC; color: #64748B; border-radius: 999px; padding: 8px 11px; font-size: 12px; font-weight: 800; cursor: pointer; }
+        .control-spacer { flex: 1 1 auto; min-width: 12px; }
+        .quick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }
+        .quick-card { background: #FFFFFF; border: 1px solid #D9E2EC; border-radius: 8px; padding: 12px 14px; }
+        .quick-label { font-size: 11px; color: #64748B; font-weight: 800; margin-bottom: 5px; }
+        .quick-title { font-size: 14px; color: #051C2C; font-weight: 900; margin-bottom: 3px; }
+        .quick-text { font-size: 12px; color: #475569; }
         .period-filters { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 18px; border-bottom: 1px solid #E2E8F0; background: #F8FAFC; }
         .period-filter { border: 1px solid #CBD5E1; background: white; color: #475569; border-radius: 999px; padding: 6px 10px; font-size: 11px; font-weight: 800; cursor: pointer; }
         .period-filter.active { border-color: #0077C8; background: #E8F3FF; color: #0077C8; }
@@ -59,16 +66,22 @@
         .non-tg { background: white; border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; }
         .non-tg .item { grid-template-columns: 180px 150px minmax(0, 1fr); }
         .recurring .item { grid-template-columns: 180px 150px 110px minmax(0, 1fr); }
+        .flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+        .flow-step { background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px; }
+        .flow-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 999px; background: #E8F3FF; color: #0077C8; font-size: 12px; font-weight: 900; margin-bottom: 8px; }
         .note { margin-top: 14px; padding: 12px 14px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; color: #64748B; font-size: 12px; }
         .hint { margin-bottom: 12px; padding: 10px 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; color: #64748B; font-size: 12px; }
         @media (max-width: 1200px) { .page { padding-right: 20px; } }
         @media (max-width: 900px) {
             .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .quick, .flow { grid-template-columns: 1fr; }
             .room-top { grid-template-columns: 1fr; gap: 8px; }
             .item, .non-tg .item, .recurring .item { grid-template-columns: 1fr; gap: 5px; }
         }
         @media (max-width: 560px) {
-            .summary { grid-template-columns: 1fr; }
+            .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+            .metric { min-height: 64px; padding: 10px 11px; }
+            .metric-value { font-size: 20px; }
             h1 { font-size: 24px; }
             .page { padding: 24px 16px 32px; }
         }
@@ -81,9 +94,13 @@
         <p class="subtitle">텔레그램 방별로 어떤 자동화가 언제, 왜 오는지 정리했습니다. 텔레그램이 아닌 크론/스케줄도 아래에 따로 분리했습니다.</p>
 
         <div class="summary" id="summary"></div>
+        <div class="quick" id="quickSummary"></div>
         <div class="controls" aria-label="보기 방식">
             <button class="view-btn active" type="button" data-view="period">주기별 보기</button>
             <button class="view-btn" type="button" data-view="room">방별 보기</button>
+            <span class="control-spacer"></span>
+            <button class="fold-btn" type="button" data-fold="open">전체 펼치기</button>
+            <button class="fold-btn" type="button" data-fold="close">전체 접기</button>
         </div>
 
         <div class="section">
@@ -91,16 +108,15 @@
                 <h2 id="mainTitle">주기별 알림</h2>
                 <div class="updated" id="updated"></div>
             </div>
-            <div class="hint">방 제목은 텔레그램 화면에 보이는 이름 기준입니다. 방 제목 줄을 누르면 접거나 펼칠 수 있고, 방 안의 주기 버튼을 누르면 그 주기만 시간순으로 봅니다.</div>
+            <div class="hint" id="mainHint">매일 오는 알림을 먼저 열어두었습니다. 다른 주기 줄을 누르면 접거나 펼칠 수 있습니다.</div>
             <div class="rooms" id="rooms"></div>
         </div>
 
         <div class="section">
             <div class="section-head">
-                <h2>텔레그램 아닌 크론/스케줄</h2>
+                <h2>테스크 방 알림 흐름</h2>
             </div>
-            <div class="non-tg" id="nonTelegram"></div>
-            <div class="note">비밀값은 표시하지 않습니다. 근거는 파일 경로와 줄번호만 남겼고, 실제 토큰은 대시보드 데이터에 넣지 않았습니다.</div>
+            <div class="flow" id="taskFlow"></div>
         </div>
 
         <div class="section">
@@ -110,16 +126,43 @@
             <div class="hint">이 항목들은 텔레그램 알림이 아니라 n8n이 Notion에 자동으로 만들어두는 반복 태스크입니다. 생성된 태스크가 마감 시간에 걸리면 위의 `테스크` 방 리마인더에 잡힐 수 있습니다.</div>
             <div class="rooms recurring" id="recurringTasks"></div>
         </div>
+
+        <div class="section">
+            <div class="section-head">
+                <h2>비텔레그램 스케줄</h2>
+            </div>
+            <div class="non-tg" id="nonTelegram"></div>
+            <div class="note">비밀값은 표시하지 않습니다. 근거는 파일 경로와 줄번호만 남겼고, 실제 토큰은 대시보드 데이터에 넣지 않았습니다.</div>
+        </div>
+
+        <div class="section">
+            <div class="section-head">
+                <h2>webhook/이벤트성 작업</h2>
+            </div>
+            <div class="non-tg" id="webhooks"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-head">
+                <h2>통합되어 꺼둔 작업</h2>
+            </div>
+            <div class="non-tg" id="retiredJobs"></div>
+        </div>
     </div>
 
 <script>
 (function() {
     var summaryEl = document.getElementById('summary');
+    var quickSummaryEl = document.getElementById('quickSummary');
     var roomsEl = document.getElementById('rooms');
     var nonTelegramEl = document.getElementById('nonTelegram');
+    var taskFlowEl = document.getElementById('taskFlow');
     var recurringEl = document.getElementById('recurringTasks');
+    var webhooksEl = document.getElementById('webhooks');
+    var retiredJobsEl = document.getElementById('retiredJobs');
     var updatedEl = document.getElementById('updated');
     var mainTitleEl = document.getElementById('mainTitle');
+    var mainHintEl = document.getElementById('mainHint');
     var buttons = Array.prototype.slice.call(document.querySelectorAll('.view-btn'));
     var currentData = null;
     var currentView = 'period';
@@ -158,6 +201,7 @@
         'dashboard-data': '대시보드 데이터 갱신',
         'button-poller': '버튼 응답 확인',
         'repeat-task-generator': '반복 태스크 생성',
+        'content-calendar-sync': '콘텐츠캘린더 동기화',
         'consulting-after-dashboard': '상담 후 대시보드 폴링',
         'consulting-followup-sms': '후속문자 발송'
     };
@@ -175,6 +219,15 @@
         if (!target) return;
         roomFilters[target.getAttribute('data-room')] = target.getAttribute('data-period');
         if (currentData) renderMain(currentData);
+    });
+
+    document.addEventListener('click', function(event) {
+        var button = event.target.closest('.fold-btn');
+        if (!button) return;
+        var open = button.getAttribute('data-fold') === 'open';
+        Array.prototype.slice.call(document.querySelectorAll('details.room')).forEach(function(detail) {
+            detail.open = open;
+        });
     });
 
     fetch('../data/telegram-cron-inventory.json')
@@ -195,6 +248,8 @@
         var telegramSenders = rooms.reduce(function(sum, room) { return sum + (room.items || []).length; }, 0);
         var nonTelegram = data.nonTelegramCronJobs || [];
         var recurringTasks = data.notionRecurringTasks || [];
+        var webhooks = data.nonTelegramWebhooks || [];
+        var retiredJobs = data.retiredJobs || [];
         var n8nCount = rooms.reduce(function(sum, room) {
             return sum + (room.items || []).filter(function(item) { return item.runtime.indexOf('n8n') >= 0; }).length;
         }, 0);
@@ -205,14 +260,21 @@
             metric('비텔레그램 크론', nonTelegram.length + '개'),
             metric('Notion 반복태스크', recurringTasks.length + '개')
         ].join('');
+        quickSummaryEl.innerHTML = renderQuickSummary(data);
         updatedEl.textContent = '조사일 ' + esc(data.updated || '');
         renderMain(data);
+        taskFlowEl.innerHTML = renderTaskFlow(data.taskFlow || []);
         nonTelegramEl.innerHTML = nonTelegram.map(renderNonTelegram).join('');
         recurringEl.innerHTML = renderRecurringTasks(recurringTasks);
+        webhooksEl.innerHTML = webhooks.length ? webhooks.map(renderNonTelegram).join('') : emptyRow('이벤트성 작업 없음');
+        retiredJobsEl.innerHTML = retiredJobs.length ? retiredJobs.map(renderNonTelegram).join('') : emptyRow('꺼둔 작업 없음');
     }
 
     function renderMain(data) {
         mainTitleEl.textContent = currentView === 'period' ? '주기별 알림' : '텔레그램 방별 알림';
+        mainHintEl.textContent = currentView === 'period'
+            ? '주기별로 묶었습니다. 매일 오는 알림만 먼저 열어두고, 다른 주기 줄을 누르면 펼쳐집니다.'
+            : '텔레그램 화면에 보이는 방 제목 기준입니다. 알림이 많은 알림봇과 테스크 방은 먼저 열어두었습니다.';
         roomsEl.innerHTML = currentView === 'period'
             ? renderPeriodView((data.rooms || []).slice().sort(compareRooms))
             : (data.rooms || []).slice().sort(compareRooms).map(renderRoom).join('');
@@ -247,13 +309,39 @@
         return '<div class="metric"><div class="metric-label">' + esc(label) + '</div><div class="metric-value">' + esc(value) + '</div></div>';
     }
 
+    function renderQuickSummary(data) {
+        var rooms = data.rooms || [];
+        var weekly = findItem(rooms, 'weekly-ops-brief');
+        var aarrr = findItem(rooms, 'aarrr-weekly');
+        var taskReminder = findItem(rooms, 'task-reminder');
+        return [
+            quickCard('AI 토큰 큰 작업', weekly ? '주간 운영 브리핑으로 통합' : '통합 항목 없음', weekly ? weekly.trigger + ' · 일간추천/건강검진/어드바이저 대체' : ''),
+            quickCard('AARRR', aarrr ? '별도 유지' : '항목 없음', aarrr ? aarrr.trigger + ' · 성과 리포트 전용' : ''),
+            quickCard('테스크 방 원인', taskReminder ? '반복태스크 생성 후 리마인더' : '리마인더 항목 없음', '아래 흐름에서 생성과 발송 관계 확인')
+        ].join('');
+    }
+
+    function quickCard(label, title, text) {
+        return '<div class="quick-card"><div class="quick-label">' + esc(label) + '</div><div class="quick-title">' + esc(title) + '</div><div class="quick-text">' + esc(text) + '</div></div>';
+    }
+
+    function findItem(rooms, name) {
+        for (var i = 0; i < rooms.length; i++) {
+            var items = rooms[i].items || [];
+            for (var j = 0; j < items.length; j++) {
+                if (items[j].name === name) return items[j];
+            }
+        }
+        return null;
+    }
+
     function renderRoom(room) {
         var volumeClass = room.volume === '매우 높음' ? 'volume-very' : room.volume === '높음' ? 'volume-high' : '';
         var labels = roomLabels[room.id] || { bot: room.bot, env: room.sourceEnv };
         var activePeriod = roomFilters[room.id] || '전체';
         var items = (room.items || []).slice().sort(compareItems);
         var visibleItems = activePeriod === '전체' ? items : items.filter(function(item) { return getPeriod(item) === activePeriod; }).sort(compareItems);
-        var openAttr = activePeriod !== '전체' ? ' open' : '';
+        var openAttr = activePeriod !== '전체' || room.id === 'system' || room.id === 'reminder' ? ' open' : '';
         return ''
             + '<details class="room"' + openAttr + '>'
             + '<summary class="room-summary">'
@@ -295,6 +383,25 @@
             + '<div class="trigger">' + esc(item.trigger) + '</div>'
             + '<div><span class="period">' + esc(periodLabel(getPeriod(item))) + '</span><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc(item.content) + '</div>' + renderEvidence(item) + '</div>'
             + '</div>';
+    }
+
+    function renderTaskFlow(items) {
+        if (!items.length) return emptyRow('흐름 데이터 없음');
+        return items.map(function(item) {
+            return ''
+                + '<div class="flow-step">'
+                + '<div class="flow-num">' + esc(item.step) + '</div>'
+                + '<div class="name">' + esc(item.title) + '</div>'
+                + '<div class="trigger" style="margin-top:4px">' + esc(item.trigger) + '</div>'
+                + '<div class="content">' + esc(item.content) + '</div>'
+                + '<div class="runtime" style="margin-top:6px">' + esc(runtimeLabel(item.runtime)) + '</div>'
+                + renderEvidence(item)
+                + '</div>';
+        }).join('');
+    }
+
+    function emptyRow(text) {
+        return '<div class="item"><div class="runtime">' + esc(text) + '</div></div>';
     }
 
     function renderRecurringTasks(tasks) {
@@ -362,6 +469,7 @@
         if (period === '수시 확인') return '수시로 확인';
         if (period === '버튼/명령') return '버튼/명령 때만';
         if (period === '오류 때만') return '오류 때만';
+        if (period === '비활성') return '비활성';
         return period;
     }
 
@@ -376,6 +484,7 @@
     function getPeriod(item) {
         var text = typeof item === 'string' ? item : [item.name, item.trigger, item.purpose, item.content].join(' ');
         var name = typeof item === 'string' ? '' : item.name;
+        if (text.indexOf('비활성화') >= 0) return '비활성';
         if (['content-calendar-sync-error', 'n8n-monitor', 'co-viral-alarm'].indexOf(name) >= 0) return '오류 때만';
         if (text.indexOf('오류 발생') >= 0 || text.indexOf('조건부') >= 0) return '오류 때만';
         if (text.indexOf('매분') >= 0 || text.indexOf('300초') >= 0) return '수시 확인';

@@ -4,7 +4,9 @@
     "telegramRooms": 5,
     "telegramSenders": 17,
     "nonTelegramCronJobs": 4,
+    "nonTelegramWebhooks": 1,
     "notionRecurringTasks": 14,
+    "retiredJobs": 4,
     "sources": [
       "macOS crontab",
       "nightwatch shell scripts",
@@ -41,7 +43,7 @@
           "purpose": "AARRR 주간 리포트",
           "content": "YouTube, Notion, 콘텐츠관리시트 기반 주간 성과",
           "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:30",
+            "workspace/tools/scripts/nightwatch/jobs.json:39",
             "workspace/tools/scripts/nightwatch/aarrr-weekly.sh:203"
           ]
         },
@@ -52,7 +54,7 @@
           "purpose": "운영 인프라 고정점검",
           "content": "홈페이지, 미커밋, 트리거, 인증, CRM 정합성",
           "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:48",
+            "workspace/tools/scripts/nightwatch/jobs.json:57",
             "workspace/tools/scripts/nightwatch/daily-check-infra.sh:51"
           ]
         },
@@ -63,7 +65,7 @@
           "purpose": "NotebookLM 인증 갱신",
           "content": "갱신 성공/실패. 이미 유효하면 미발송",
           "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:57",
+            "workspace/tools/scripts/nightwatch/jobs.json:66",
             "workspace/tools/scripts/nightwatch/nlm-auth-refresh.sh:13",
             "workspace/tools/scripts/nightwatch/nlm-auth-refresh.sh:41"
           ]
@@ -75,7 +77,7 @@
           "purpose": "경쟁 YouTube 채널 모니터링",
           "content": "신규/급상승 영상 수집, 대시보드 갱신, 상세 리포트",
           "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:84",
+            "workspace/tools/scripts/nightwatch/jobs.json:93",
             "workspace/tools/scripts/nightwatch/competitor-monitor.sh:56",
             "workspace/apps/youtube/yt-competitor-monitor/competitor_monitor/report.py:180"
           ]
@@ -110,7 +112,7 @@
           "purpose": "아침 플래너",
           "content": "오늘 루틴 링크, 원씽, 오늘 마감 태스크, 어제 루틴 미기입",
           "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:66",
+            "workspace/tools/scripts/nightwatch/jobs.json:75",
             "workspace/tools/scripts/nightwatch/morning-planner.sh:332"
           ]
         },
@@ -263,6 +265,41 @@
       ]
     }
   ],
+  "taskFlow": [
+    {
+      "step": "1",
+      "title": "반복태스크 생성",
+      "runtime": "n8n",
+      "trigger": "매일 08:30",
+      "content": "Notion 태스크 DB에 매일/평일/주간/월간 태스크를 미리 생성",
+      "evidence": [
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:18",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "step": "2",
+      "title": "태스크 리마인더",
+      "runtime": "n8n",
+      "trigger": "매일 08:00, 14:00, 19:00, 22:00",
+      "content": "같은 Notion 태스크 DB를 조회해서 테스크 방에 오늘/지연/내일 할 일을 발송",
+      "evidence": [
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-2 태스크 리마인더/workflow.json:15",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-2 태스크 리마인더/workflow.json:101"
+      ]
+    },
+    {
+      "step": "3",
+      "title": "시간별 개별 알림",
+      "runtime": "n8n",
+      "trigger": "매분",
+      "content": "시간이 지정된 태스크가 현재 시각 ±2분에 걸리면 테스크 방에 개별 알림",
+      "evidence": [
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-5 시간별 리마인더/workflow.json:15",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-5 시간별 리마인더/workflow.json:216"
+      ]
+    }
+  ],
   "nonTelegramCronJobs": [
     {
       "name": "dashboard-data",
@@ -271,7 +308,7 @@
       "purpose": "대시보드 JSON 생성과 GitHub Pages push",
       "content": "todo, projects, OKR, workflows, sales, funnel, business cumulative, page dates",
       "evidence": [
-        "workspace/tools/scripts/nightwatch/jobs.json:75",
+        "workspace/tools/scripts/nightwatch/jobs.json:84",
         "workspace/tools/scripts/nightwatch/dashboard-data.sh"
       ]
     },
@@ -286,6 +323,17 @@
       ]
     },
     {
+      "name": "content-calendar-sync",
+      "runtime": "n8n",
+      "trigger": "매주 월 07:00",
+      "purpose": "Notion 콘텐츠캘린더 to Obsidian 정기 동기화",
+      "content": "정상 실행 시 Telegram 발송 없음. 실패 시에만 테스크 방 오류 알림",
+      "evidence": [
+        "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:14",
+        "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:358"
+      ]
+    },
+    {
       "name": "consulting-after-dashboard",
       "runtime": "n8n",
       "trigger": "매분",
@@ -294,7 +342,9 @@
       "evidence": [
         "workspace/apps/n8n/workflows/04 consulting-crm/04-2 상담후-대시보드/workflow.json:1"
       ]
-    },
+    }
+  ],
+  "nonTelegramWebhooks": [
     {
       "name": "consulting-followup-sms",
       "runtime": "n8n",
@@ -303,6 +353,52 @@
       "content": "Telegram 노드 없음",
       "evidence": [
         "workspace/apps/n8n/workflows/04 consulting-crm/04-3 후속문자-SMS발송/workflow.json:1"
+      ]
+    }
+  ],
+  "retiredJobs": [
+    {
+      "name": "health-check",
+      "runtime": "nightwatch shell + Claude/Codex",
+      "trigger": "비활성화됨",
+      "purpose": "주간 건강검진",
+      "content": "weekly-ops-brief로 통합",
+      "evidence": [
+        "workspace/tools/scripts/nightwatch/jobs.json:3",
+        "workspace/tools/scripts/nightwatch/weekly-ops-brief.sh:2"
+      ]
+    },
+    {
+      "name": "daily-recommend",
+      "runtime": "nightwatch shell + Claude/Codex",
+      "trigger": "비활성화됨",
+      "purpose": "일간 추천",
+      "content": "weekly-ops-brief로 통합. 매일 LLM 호출 중단",
+      "evidence": [
+        "workspace/tools/scripts/nightwatch/jobs.json:12",
+        "workspace/tools/scripts/nightwatch/weekly-ops-brief.sh:2"
+      ]
+    },
+    {
+      "name": "advisor",
+      "runtime": "nightwatch shell + Claude",
+      "trigger": "비활성화됨",
+      "purpose": "주간 어드바이저",
+      "content": "weekly-ops-brief로 통합",
+      "evidence": [
+        "workspace/tools/scripts/nightwatch/jobs.json:48",
+        "workspace/tools/scripts/nightwatch/weekly-ops-brief.sh:2"
+      ]
+    },
+    {
+      "name": "button-poller",
+      "runtime": "nightwatch shell",
+      "trigger": "비활성화됨",
+      "purpose": "일간추천 버튼 콜백 확인",
+      "content": "daily-recommend 비활성화로 같이 중단",
+      "evidence": [
+        "workspace/tools/scripts/nightwatch/jobs.json:30",
+        "workspace/tools/scripts/nightwatch/button-poller.sh:1"
       ]
     }
   ],
@@ -315,7 +411,7 @@
       "status": "대기",
       "content": "Notion에 매일 생성되는 계획/목실감 태스크",
       "evidence": [
-        "references/recurring-tasks.md:10",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:10",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -327,7 +423,7 @@
       "status": "대기",
       "content": "Notion에 매일 생성되는 원씽 복기 태스크",
       "evidence": [
-        "references/recurring-tasks.md:9",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:9",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -339,7 +435,7 @@
       "status": "대기",
       "content": "영업일에만 Notion에 생성되는 체크/링크/db 기입 태스크",
       "evidence": [
-        "references/recurring-tasks.md:15",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:15",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -351,7 +447,7 @@
       "status": "백로그",
       "content": "월요일 기준으로 생성되는 주간 메모 정리 태스크",
       "evidence": [
-        "references/recurring-tasks.md:20",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:20",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -363,7 +459,7 @@
       "status": "대기",
       "content": "월요일에 생성되는 마케팅업체 정산 태스크",
       "evidence": [
-        "references/recurring-tasks.md:21",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:21",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -375,7 +471,7 @@
       "status": "대기",
       "content": "월요일에 생성되는 현금영수증/세금계산서 발행 태스크",
       "evidence": [
-        "references/recurring-tasks.md:22",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:22",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -387,7 +483,7 @@
       "status": "대기",
       "content": "화요일 기준으로 생성되는 콘텐츠 기획 태스크",
       "evidence": [
-        "references/recurring-tasks.md:23",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:23",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -399,7 +495,7 @@
       "status": "대기",
       "content": "수요일 기준으로 생성되는 자료수집/도입부 태스크",
       "evidence": [
-        "references/recurring-tasks.md:24",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:24",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -411,7 +507,7 @@
       "status": "대기",
       "content": "수요일에 생성되는 콘텐츠 관리시트 작업 태스크",
       "evidence": [
-        "references/recurring-tasks.md:25",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:25",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -423,7 +519,7 @@
       "status": "대기",
       "content": "목요일 기준으로 생성되는 원고 완성 태스크",
       "evidence": [
-        "references/recurring-tasks.md:26",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:26",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -435,7 +531,7 @@
       "status": "대기",
       "content": "목요일에 생성되는 주간계획 수정 태스크",
       "evidence": [
-        "references/recurring-tasks.md:27",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:27",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -447,7 +543,7 @@
       "status": "백로그",
       "content": "금요일 기준으로 생성되는 PPT 완료 태스크",
       "evidence": [
-        "references/recurring-tasks.md:28",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:28",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -459,7 +555,7 @@
       "status": "대기",
       "content": "토요일 기준으로 생성되는 촬영/편집/업로드 태스크",
       "evidence": [
-        "references/recurring-tasks.md:29",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:29",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     },
@@ -471,7 +567,7 @@
       "status": "백로그",
       "content": "월 10일 기준으로 생성되는 급여/자산 체크 태스크. 주말/공휴일이면 앞 영업일로 당겨집니다.",
       "evidence": [
-        "references/recurring-tasks.md:34",
+        "workspace/config/skills-source/task/references/recurring-tasks.md:34",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     }
