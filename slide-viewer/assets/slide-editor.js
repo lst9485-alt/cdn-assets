@@ -781,6 +781,17 @@
     setSlideJumpNotesText(getSlideScriptPreview(slide));
   }
 
+  function bindSlideJumpToggle(toggle, nav) {
+    if (!toggle || !nav || toggle.dataset.bound === '1') return;
+    toggle.dataset.bound = '1';
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const collapsed = nav.classList.toggle('collapsed');
+      document.body.classList.toggle('sjn-collapsed', collapsed);
+      toggle.textContent = collapsed ? '‹' : '›';
+    });
+  }
+
   function buildSlideJumpNav() {
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
@@ -795,14 +806,9 @@
       toggle.type = 'button';
       toggle.title = '접기/펴기';
       toggle.textContent = '›';
-      toggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const collapsed = nav.classList.toggle('collapsed');
-        document.body.classList.toggle('sjn-collapsed', collapsed);
-        toggle.textContent = collapsed ? '‹' : '›';
-      });
       nav.appendChild(toggle);
     }
+    bindSlideJumpToggle(toggle, nav);
     if (!toolbar) {
       toolbar = document.createElement('div');
       toolbar.className = 'sj-toolbar';
