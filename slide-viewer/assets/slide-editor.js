@@ -792,10 +792,60 @@
     });
   }
 
+  function slideJumpTypeRatioRows() {
+    const basePgs = getVisibleBasePageGroups();
+    const sortedPgs = [...basePgs].sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+    const counts = {};
+    sortedPgs.forEach(pg => {
+      const baseSlide = [...slides].find(s => s.dataset.pageGroup === pg && (s.dataset.variant === '0' || !s.dataset.variant));
+      if (!baseSlide) return;
+      const type = baseSlide.dataset.type || '미분류';
+      counts[type] = (counts[type] || 0) + 1;
+    });
+    const total = Math.max(1, Object.values(counts).reduce((sum, count) => sum + count, 0));
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'))
+      .map(([type, count]) => ({ type, count, pct: Math.round((count / total) * 100) }));
+  }
+
+  function renderSlideJumpTypeRatio(panel) {
+    if (!panel) return;
+    panel.innerHTML = '';
+    const rows = slideJumpTypeRatioRows();
+    const title = document.createElement('div');
+    title.className = 'sj-ratio-title';
+    title.textContent = `타입 비율 ${rows.reduce((sum, row) => sum + row.count, 0)}장`;
+    panel.appendChild(title);
+    rows.forEach(row => {
+      const item = document.createElement('div');
+      item.className = 'sj-ratio-item';
+      const name = document.createElement('span');
+      name.textContent = row.type;
+      const value = document.createElement('b');
+      value.textContent = `${row.count}장 · ${row.pct}%`;
+      item.appendChild(name);
+      item.appendChild(value);
+      panel.appendChild(item);
+    });
+  }
+
+  function bindSlideJumpRatioToggle(button, nav, panel) {
+    if (!button || !nav || !panel || button.dataset.bound === '1') return;
+    button.dataset.bound = '1';
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = nav.classList.toggle('ratio-open');
+      button.classList.toggle('active', open);
+      renderSlideJumpTypeRatio(panel);
+    });
+  }
+
   function buildSlideJumpNav() {
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
     let toggle = nav.querySelector('.sj-toggle');
+    let ratioToggle = nav.querySelector('.sj-ratio-toggle');
+    let ratioPanel = nav.querySelector('.sj-ratio-panel');
     let toolbar = nav.querySelector('.sj-toolbar');
     let search = nav.querySelector('.sj-search');
     let grid = nav.querySelector('.sj-grid');
@@ -809,6 +859,22 @@
       nav.appendChild(toggle);
     }
     bindSlideJumpToggle(toggle, nav);
+    if (!ratioToggle) {
+      ratioToggle = document.createElement('button');
+      ratioToggle.className = 'sj-ratio-toggle';
+      ratioToggle.type = 'button';
+      ratioToggle.textContent = '비율';
+      ratioToggle.title = '타입별 사용 비율';
+      toggle.insertAdjacentElement('afterend', ratioToggle);
+    }
+    if (!ratioPanel) {
+      ratioPanel = document.createElement('div');
+      ratioPanel.className = 'sj-ratio-panel';
+      ratioToggle.insertAdjacentElement('afterend', ratioPanel);
+    }
+    bindSlideJumpRatioToggle(ratioToggle, nav, ratioPanel);
+    ratioToggle.classList.toggle('active', nav.classList.contains('ratio-open'));
+    renderSlideJumpTypeRatio(ratioPanel);
     if (!toolbar) {
       toolbar = document.createElement('div');
       toolbar.className = 'sj-toolbar';
