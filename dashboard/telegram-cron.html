@@ -29,11 +29,18 @@
         .updated { font-size: 12px; color: #94A3B8; }
         .rooms { display: grid; gap: 12px; }
         .room { background: white; border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; }
+        .room[open] { border-color: #CBD5E1; }
+        .room-summary { cursor: pointer; list-style: none; display: block; }
+        .room-summary::-webkit-details-marker { display: none; }
+        .room-summary .room-top { border-bottom: 0; }
+        .room[open] .room-summary .room-top { border-bottom: 1px solid #E2E8F0; }
         .room-top { padding: 16px 18px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.8fr) auto; gap: 16px; align-items: start; border-bottom: 1px solid #E2E8F0; }
         .room-name { font-size: 17px; font-weight: 900; color: #051C2C; margin-bottom: 4px; }
         .room-meta { font-size: 12px; color: #64748B; }
         .room-role { font-size: 13px; color: #334155; font-weight: 700; margin-bottom: 5px; }
         .room-cadence { font-size: 12px; color: #64748B; }
+        .open-hint { display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #64748B; background: #F1F5F9; border-radius: 999px; padding: 4px 8px; white-space: nowrap; }
+        .room[open] .open-hint { background: #E8F3FF; color: #0077C8; }
         .volume { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 999px; background: #E8F3FF; color: #0077C8; white-space: nowrap; }
         .volume-high { background: #FFF7ED; color: #C2410C; }
         .volume-very { background: #FEE2E2; color: #B91C1C; }
@@ -83,7 +90,7 @@
                 <h2 id="mainTitle">주기별 알림</h2>
                 <div class="updated" id="updated"></div>
             </div>
-            <div class="hint">알림량은 “그 방에 정기적으로 오는 알림이 얼마나 많은지”입니다. 많은 방일수록 매일/매분 알림이 많이 섞여 있습니다.</div>
+            <div class="hint">방 제목은 텔레그램 화면에 보이는 이름 기준입니다. 방 제목 줄을 누르면 접거나 펼칠 수 있고, 방 안의 주기 버튼을 누르면 그 주기만 시간순으로 봅니다.</div>
             <div class="rooms" id="rooms"></div>
         </div>
 
@@ -107,6 +114,7 @@
     var currentData = null;
     var currentView = 'period';
     var roomFilters = {};
+    var roomOrder = { system: 0, reminder: 1, customer: 2, memo: 3, custom: 99 };
 
     var roomLabels = {
         system: { bot: '시스템/알림 봇', env: '무한매수·인프라·경쟁채널' },
@@ -192,29 +200,32 @@
     function renderMain(data) {
         mainTitleEl.textContent = currentView === 'period' ? '주기별 알림' : '텔레그램 방별 알림';
         roomsEl.innerHTML = currentView === 'period'
-            ? renderPeriodView(data.rooms || [])
-            : (data.rooms || []).map(renderRoom).join('');
+            ? renderPeriodView((data.rooms || []).slice().sort(compareRooms))
+            : (data.rooms || []).slice().sort(compareRooms).map(renderRoom).join('');
     }
 
     function renderPeriodView(rooms) {
         var flat = [];
         rooms.forEach(function(room) {
             (room.items || []).forEach(function(item) {
-                flat.push({ room: room, item: item, period: getPeriod(item.trigger) });
+                flat.push({ room: room, item: item, period: getPeriod(item) });
             });
         });
-        var order = ['매일', '주간', '평일', '매분/상시', '이벤트/버튼', '조건부'];
+        var order = ['매일', '주간', '평일', '수시 확인', '버튼/명령', '오류 때만'];
         return order.map(function(period) {
-            var entries = flat.filter(function(entry) { return entry.period === period; });
+            var entries = flat.filter(function(entry) { return entry.period === period; }).sort(compareEntries);
             if (!entries.length) return '';
+            var openAttr = period === '매일' ? ' open' : '';
             return ''
-                + '<article class="room">'
+                + '<details class="room"' + openAttr + '>'
+                + '<summary class="room-summary">'
                 + '<div class="room-top">'
-                + '<div><div class="room-name">' + esc(period) + '</div><div class="room-meta">' + entries.length + '개 알림</div></div>'
-                + '<div><div class="room-role">이 주기로 오는 텔레그램 알림</div><div class="room-cadence">방 이름과 목적을 같이 표시합니다.</div></div>'
-                + '</div>'
+                + '<div><div class="room-name">' + esc(periodLabel(period)) + '</div><div class="room-meta">' + entries.length + '개 알림 · 시간순</div></div>'
+                + '<div><div class="room-role">이 주기로 오는 텔레그램 알림</div><div class="room-cadence">시간이 있는 알림은 이른 시간부터 정렬합니다.</div></div>'
+                + '<div class="open-hint">열기/접기</div>'
+                + '</div></summary>'
                 + '<div class="items">' + entries.map(function(entry) { return renderItem(entry.item, entry.room, period); }).join('') + '</div>'
-                + '</article>';
+                + '</details>';
         }).join('');
     }
 
@@ -227,36 +238,38 @@
         var labels = roomLabels[room.id] || { bot: room.bot, env: room.sourceEnv };
         var activePeriod = roomFilters[room.id] || '전체';
         var items = (room.items || []).slice().sort(compareItems);
-        var visibleItems = activePeriod === '전체' ? items : items.filter(function(item) { return getPeriod(item.trigger) === activePeriod; });
+        var visibleItems = activePeriod === '전체' ? items : items.filter(function(item) { return getPeriod(item) === activePeriod; }).sort(compareItems);
+        var openAttr = activePeriod !== '전체' ? ' open' : '';
         return ''
-            + '<article class="room">'
+            + '<details class="room"' + openAttr + '>'
+            + '<summary class="room-summary">'
             + '<div class="room-top">'
             + '<div><div class="room-name">' + esc(room.name) + '</div><div class="room-meta">' + esc(labels.bot) + ' · ' + esc(labels.env) + '</div></div>'
             + '<div><div class="room-role">' + esc(room.role) + '</div><div class="room-cadence">' + esc(room.cadence) + '</div></div>'
-            + '<div class="volume ' + volumeClass + '">' + esc(volumeLabel(room.volume)) + '</div>'
-            + '</div>'
+            + '<div><div class="volume ' + volumeClass + '">' + esc(volumeLabel(room.volume)) + '</div><div class="open-hint" style="margin-top:6px">열기/접기</div></div>'
+            + '</div></summary>'
             + renderRoomFilters(room, items, activePeriod)
             + '<div class="items">' + (visibleItems.length ? visibleItems.map(function(item) { return renderItem(item, room); }).join('') : '<div class="item"><div class="runtime">해당 주기 알림 없음</div></div>') + '</div>'
-            + '</article>';
+            + '</details>';
     }
 
     function renderRoomFilters(room, items, activePeriod) {
-        var periods = ['전체', '매일', '주간', '평일', '매분/상시', '이벤트/버튼', '조건부'];
+        var periods = ['전체', '매일', '주간', '평일', '수시 확인', '버튼/명령', '오류 때만'];
         return '<div class="period-filters">' + periods.map(function(period) {
-            var count = period === '전체' ? items.length : items.filter(function(item) { return getPeriod(item.trigger) === period; }).length;
+            var count = period === '전체' ? items.length : items.filter(function(item) { return getPeriod(item) === period; }).length;
             if (!count && period !== '전체') return '';
             var active = activePeriod === period ? ' active' : '';
-            return '<button type="button" class="period-filter' + active + '" data-room="' + esc(room.id) + '" data-period="' + esc(period) + '">' + esc(period) + ' ' + count + '</button>';
+            return '<button type="button" class="period-filter' + active + '" data-room="' + esc(room.id) + '" data-period="' + esc(period) + '">' + esc(period === '전체' ? '전체 ' + count : periodLabel(period) + ' ' + count) + '</button>';
         }).join('') + '</div>';
     }
 
     function renderItem(item, room, forcedPeriod) {
-        var period = forcedPeriod || getPeriod(item.trigger);
+        var period = forcedPeriod || getPeriod(item);
         return ''
             + '<div class="item">'
             + '<div><div class="name">' + esc(itemLabels[item.name] || item.name) + '</div><div class="runtime">' + esc(runtimeLabel(item.runtime)) + '</div></div>'
             + '<div class="trigger">' + esc(item.trigger) + '</div>'
-            + '<div><span class="period">' + esc(period) + '</span><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc((room ? room.name + ' · ' : '') + item.content) + '</div>' + renderEvidence(item) + '</div>'
+            + '<div><span class="period">' + esc(periodLabel(period)) + '</span><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc((room ? room.name + ' · ' : '') + item.content) + '</div>' + renderEvidence(item) + '</div>'
             + '<div class="runtime">' + esc(roomlessTag(item.runtime)) + '</div>'
             + '</div>';
     }
@@ -266,7 +279,7 @@
             + '<div class="item">'
             + '<div><div class="name">' + esc(itemLabels[item.name] || item.name) + '</div><div class="runtime">' + esc(runtimeLabel(item.runtime)) + '</div></div>'
             + '<div class="trigger">' + esc(item.trigger) + '</div>'
-            + '<div><span class="period">' + esc(getPeriod(item.trigger)) + '</span><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc(item.content) + '</div>' + renderEvidence(item) + '</div>'
+            + '<div><span class="period">' + esc(periodLabel(getPeriod(item))) + '</span><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc(item.content) + '</div>' + renderEvidence(item) + '</div>'
             + '</div>';
     }
 
@@ -299,19 +312,55 @@
         return value;
     }
 
-    function getPeriod(trigger) {
-        var text = String(trigger || '');
-        if (text.indexOf('매분') >= 0 || text.indexOf('300초') >= 0) return '매분/상시';
+    function periodLabel(period) {
+        if (period === '매일') return '매일 오는 알림';
+        if (period === '주간') return '매주 오는 알림';
+        if (period === '평일') return '평일만 오는 알림';
+        if (period === '수시 확인') return '수시로 확인';
+        if (period === '버튼/명령') return '버튼/명령 때만';
+        if (period === '오류 때만') return '오류 때만';
+        return period;
+    }
+
+    function getPeriod(item) {
+        var text = typeof item === 'string' ? item : [item.name, item.trigger, item.purpose, item.content].join(' ');
+        var name = typeof item === 'string' ? '' : item.name;
+        if (['content-calendar-sync-error', 'n8n-monitor', 'co-viral-alarm'].indexOf(name) >= 0) return '오류 때만';
+        if (text.indexOf('오류 발생') >= 0 || text.indexOf('조건부') >= 0) return '오류 때만';
+        if (text.indexOf('매분') >= 0 || text.indexOf('300초') >= 0) return '수시 확인';
         if (text.indexOf('매일') >= 0) return '매일';
         if (text.indexOf('매주') >= 0) return '주간';
         if (text.indexOf('평일') >= 0) return '평일';
-        if (text.indexOf('조건부') >= 0) return '조건부';
-        return '이벤트/버튼';
+        return '버튼/명령';
     }
 
     function compareItems(a, b) {
-        var order = { '매일': 0, '주간': 1, '평일': 2, '매분/상시': 3, '이벤트/버튼': 4, '조건부': 5 };
-        return (order[getPeriod(a.trigger)] || 0) - (order[getPeriod(b.trigger)] || 0);
+        var order = { '매일': 0, '주간': 1, '평일': 2, '수시 확인': 3, '버튼/명령': 4, '오류 때만': 5 };
+        var periodDiff = (order[getPeriod(a)] || 0) - (order[getPeriod(b)] || 0);
+        if (periodDiff) return periodDiff;
+        return timeSortValue(a.trigger) - timeSortValue(b.trigger);
+    }
+
+    function compareEntries(a, b) {
+        var timeDiff = timeSortValue(a.item.trigger) - timeSortValue(b.item.trigger);
+        if (timeDiff) return timeDiff;
+        return compareRooms(a.room, b.room);
+    }
+
+    function compareRooms(a, b) {
+        var aOrder = Object.prototype.hasOwnProperty.call(roomOrder, a.id) ? roomOrder[a.id] : 50;
+        var bOrder = Object.prototype.hasOwnProperty.call(roomOrder, b.id) ? roomOrder[b.id] : 50;
+        return aOrder - bOrder;
+    }
+
+    function timeSortValue(trigger) {
+        var text = String(trigger || '');
+        var dayOrder = { '일': 0, '월': 1, '화': 2, '수': 3, '목': 4, '금': 5, '토': 6 };
+        var dayMatch = text.match(/매주\s*([월화수목금토일])/);
+        var day = dayMatch ? dayOrder[dayMatch[1]] * 1440 : 0;
+        var timeMatch = text.match(/(\d{1,2}):(\d{2})/);
+        if (!timeMatch) return day + 9999;
+        return day + (parseInt(timeMatch[1], 10) * 60) + parseInt(timeMatch[2], 10);
     }
 
     function esc(value) {

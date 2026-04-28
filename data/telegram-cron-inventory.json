@@ -183,9 +183,9 @@
         {
           "name": "content-calendar-sync-error",
           "runtime": "n8n",
-          "trigger": "매주 월 07:00 / 수동 webhook",
+          "trigger": "오류 발생 시 / 수동 동기화 실패 시",
           "purpose": "Notion 콘텐츠캘린더 to Obsidian 동기화 오류 알림",
-          "content": "동기화 실패 메시지",
+          "content": "평소에는 안 오고, 동기화가 실패할 때만 오는 예비 오류 알림",
           "evidence": [
             "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:353",
             "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:358"
