@@ -1328,7 +1328,7 @@
     26: {"label": "T26 그리드카드(아이콘좌측)", "schemaRequiredCount": 4, "fillRange": [4, 16], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     27: {"label": "T27 섹션배지(챕터플로우)", "schemaRequiredCount": 6, "fillRange": [7, 10], "itemsRange": [2, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     28: {"label": "T28 비교테이블", "schemaRequiredCount": 8, "fillRange": [8, 20], "itemsRange": [1, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
-    29: {"label": "T29 이미지+텍스트", "schemaRequiredCount": 1, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": true, "emoji": true}},
+    29: {"label": "T29 이미지+텍스트", "schemaRequiredCount": 1, "fillRange": [3, 3], "itemsRange": null, "displaySteps": null, "usageScope": null, "media": {"image": true, "imageRequired": true, "emoji": false}},
     30: {"label": "T30 분기플로우", "schemaRequiredCount": 7, "fillRange": [10, 13], "itemsRange": [2, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": false}},
     31: {"label": "T31 분할레이아웃", "schemaRequiredCount": 15, "fillRange": [17, 23], "itemsRange": [2, 5], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
     32: {"label": "T32 등식플로우", "schemaRequiredCount": 5, "fillRange": [8, 11], "itemsRange": [2, 3], "displaySteps": null, "usageScope": null, "media": {"image": false, "imageRequired": false, "emoji": true}},
@@ -1366,13 +1366,41 @@
     return PG_TO_TYPE_META[parseInt(pg, 10)] || null;
   }
 
+  function typeNameOfMeta(meta) {
+    if (!meta || !meta.label) return '';
+    return String(meta.label).replace(/^T\d+\s+/, '').trim();
+  }
+
+  const TYPE_NAME_TO_TYPE_META = Object.values(PG_TO_TYPE_META).reduce((map, meta) => {
+    const name = typeNameOfMeta(meta);
+    if (name && !map[name]) map[name] = meta;
+    return map;
+  }, {});
+
+  function typeMetaOfSlide(slide) {
+    if (!slide || !slide.dataset) return null;
+    if (document.body && document.body.dataset.generated === 'true' && slide.dataset.type) {
+      const byType = TYPE_NAME_TO_TYPE_META[slide.dataset.type];
+      if (byType) return byType;
+    }
+    return typeMetaOfPageGroup(slide.dataset.pageGroup);
+  }
+
+  function typeNumberOfMeta(meta) {
+    if (!meta || !meta.label) return null;
+    const m = String(meta.label).match(/^T(\d+)/);
+    return m ? parseInt(m[1], 10) : null;
+  }
+
   function countBySelector(slide, selector) {
     return slide ? slide.querySelectorAll(selector).length : 0;
   }
 
   function inputLabelOfSlide(slide, meta) {
     if (!slide || !slide.dataset) return null;
-    const pg = parseInt(slide.dataset.pageGroup, 10);
+    const pg = (document.body && document.body.dataset.generated === 'true')
+      ? (typeNumberOfMeta(meta) || parseInt(slide.dataset.pageGroup, 10))
+      : parseInt(slide.dataset.pageGroup, 10);
     let n = 0;
     if ([3, 4, 26].includes(pg)) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .grid-card, .step-layer[data-step]:not([data-step="0"]) .card');
     else if ([5, 6].includes(pg)) n = countBySelector(slide, '.step-layer[data-step]:not([data-step="0"]) .num-item, .step-layer[data-step]:not([data-step="0"]) .check-item');
@@ -1419,7 +1447,7 @@
     const row = document.createElement('div');
     row.className = options.compact ? 'type-meta-chips compact' : 'type-meta-chips';
     if (!slide) return row;
-    const meta = typeMetaOfPageGroup(slide.dataset ? slide.dataset.pageGroup : null);
+    const meta = typeMetaOfSlide(slide);
     const addChip = function(label, title, extraClass) {
       if (!label) return;
       const chip = document.createElement('span');
