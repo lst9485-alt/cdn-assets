@@ -800,21 +800,25 @@
       const baseSlide = [...slides].find(s => s.dataset.pageGroup === pg && (s.dataset.variant === '0' || !s.dataset.variant));
       if (!baseSlide) return;
       const type = baseSlide.dataset.type || '미분류';
-      if (!counts[type]) {
-        const meta = (typeof typeMetaOfSlide === 'function') ? typeMetaOfSlide(baseSlide) : null;
-        const typeNumber = (typeof typeNumberOfMeta === 'function') ? typeNumberOfMeta(meta) : null;
-        counts[type] = {
+      const meta = (typeof typeMetaOfSlide === 'function') ? typeMetaOfSlide(baseSlide) : null;
+      const typeNumber = (typeof typeNumberOfMeta === 'function') ? typeNumberOfMeta(meta) : null;
+      const typeNumberLabel = typeNumber ? `T${String(typeNumber).padStart(2, '0')}` : '';
+      const typeLabel = (typeof typeNameOfMeta === 'function' && meta) ? typeNameOfMeta(meta) : type;
+      const key = typeNumberLabel || typeLabel;
+      if (!counts[key]) {
+        counts[key] = {
+          type: typeLabel,
           count: 0,
-          typeNumber: typeNumber ? `T${String(typeNumber).padStart(2, '0')}` : ''
+          typeNumber: typeNumberLabel
         };
       }
-      counts[type].count += 1;
+      counts[key].count += 1;
     });
     const total = Math.max(1, Object.values(counts).reduce((sum, row) => sum + row.count, 0));
     return Object.entries(counts)
       .sort((a, b) => b[1].count - a[1].count || a[0].localeCompare(b[0], 'ko'))
-      .map(([type, row]) => ({
-        type,
+      .map(([_, row]) => ({
+        type: row.type,
         typeNumber: row.typeNumber,
         count: row.count,
         pct: Math.round((row.count / total) * 100)
@@ -823,13 +827,14 @@
 
   function renderSlideJumpTypeRatio(panel) {
     if (!panel) return;
+    panel.querySelectorAll('.sj-ratio-title').forEach(el => el.remove());
     panel.innerHTML = '';
     const rows = slideJumpTypeRatioRows();
     const totalTypes = (typeof PG_TO_TYPE_META !== 'undefined')
       ? Object.keys(PG_TO_TYPE_META).length
       : rows.length;
     const title = document.createElement('div');
-    title.className = 'sj-ratio-title';
+    title.className = 'sj-ratio-summary';
     title.textContent = `${rows.length}/${totalTypes} 타입 사용`;
     panel.appendChild(title);
     rows.forEach(row => {
