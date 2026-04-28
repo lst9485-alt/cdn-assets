@@ -2,7 +2,7 @@
   "updated": "2026-04-28",
   "summary": {
     "telegramRooms": 5,
-    "telegramSenders": 17,
+    "telegramSenders": 16,
     "nonTelegramCronJobs": 4,
     "nonTelegramWebhooks": 1,
     "notionRecurringTasks": 14,
@@ -102,7 +102,7 @@
       "bot": "reminder9485_bot",
       "sourceEnv": "TELEGRAM_NOTI_CHAT_ID",
       "role": "Notion 태스크, 루틴, n8n 상태, 콘텐츠 동기화 오류",
-      "cadence": "매분 / 매일 07:00, 08:00, 14:00, 19:00, 22:00 / 매주 월 07:00 / 이벤트성",
+      "cadence": "매분 / 매일 07:00, 08:00, 14:00, 19:00, 22:00 / 오류 때만 / 버튼 이벤트",
       "volume": "매우 높음",
       "items": [
         {
@@ -139,17 +139,6 @@
           ]
         },
         {
-          "name": "task-command-router",
-          "runtime": "n8n",
-          "trigger": "Telegram webhook",
-          "purpose": "태스크 명령어 처리",
-          "content": "list, today, add, end, change 명령 응답",
-          "evidence": [
-            "workspace/apps/n8n/workflows/01 notion 태스크/01-4 태스크 명령어/workflow.json:7",
-            "workspace/apps/n8n/workflows/01 notion 태스크/01-4 태스크 명령어/workflow.json:400"
-          ]
-        },
-        {
           "name": "task-done-callback",
           "runtime": "n8n",
           "trigger": "Telegram callback webhook",
@@ -174,9 +163,9 @@
         {
           "name": "n8n-monitor",
           "runtime": "standalone crontab shell",
-          "trigger": "매분",
+          "trigger": "매분 확인, 상태 변경 때만 알림",
           "purpose": "n8n Docker 컨테이너 상태 감시",
-          "content": "n8n 중단, n8n 복구",
+          "content": "n8n 컨테이너가 내려가거나 복구될 때만 Telegram 알림. LLM/토큰 사용 없음",
           "evidence": [
             "workspace/tools/scripts/n8n-monitor.sh:14",
             "workspace/tools/scripts/n8n-monitor.sh:48"
@@ -325,22 +314,24 @@
     {
       "name": "content-calendar-sync",
       "runtime": "n8n",
-      "trigger": "매주 월 07:00",
+      "trigger": "매주 월 07:00 + 버튼/webhook 수동 동기화",
       "purpose": "Notion 콘텐츠캘린더 to Obsidian 정기 동기화",
-      "content": "정상 실행 시 Telegram 발송 없음. 실패 시에만 테스크 방 오류 알림",
+      "content": "Notion 콘텐츠캘린더 페이지를 Obsidian 마크다운 파일로 동기화. 정기 전체 동기화와 버튼/webhook 단건 동기화가 같이 있음",
       "evidence": [
         "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:14",
+        "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:375",
         "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:358"
       ]
     },
     {
       "name": "consulting-after-dashboard",
       "runtime": "n8n",
-      "trigger": "매분",
-      "purpose": "상담 후 대시보드/Apps Script 폴링",
-      "content": "Telegram 노드 없음",
+      "trigger": "매분 폴링",
+      "purpose": "상담 후 대시보드 트리거 확인",
+      "content": "Apps Script checkDashboard를 1분마다 호출해서 상담 후 대시보드 생성/갱신 요청을 처리. Telegram 노드 없음",
       "evidence": [
-        "workspace/apps/n8n/workflows/04 consulting-crm/04-2 상담후-대시보드/workflow.json:1"
+        "workspace/apps/n8n/workflows/04 consulting-crm/04-2 상담후-대시보드/workflow.json:28",
+        "workspace/apps/n8n/workflows/04 consulting-crm/04-2 상담후-대시보드/workflow.json:32"
       ]
     }
   ],
