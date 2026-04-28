@@ -17,6 +17,9 @@
         .metric { background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px 15px; min-height: 78px; }
         .metric-label { font-size: 12px; color: #64748B; font-weight: 700; margin-bottom: 6px; }
         .metric-value { font-size: 24px; font-weight: 900; color: #051C2C; }
+        .controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
+        .view-btn { border: 1px solid #CBD5E1; background: white; color: #475569; border-radius: 999px; padding: 8px 13px; font-size: 12px; font-weight: 800; cursor: pointer; }
+        .view-btn.active { border-color: #0077C8; background: #E8F3FF; color: #0077C8; }
         .section { margin-top: 22px; }
         .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; margin-bottom: 10px; }
         h2 { font-size: 18px; color: #051C2C; font-weight: 900; }
@@ -31,6 +34,7 @@
         .volume { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 999px; background: #E8F3FF; color: #0077C8; white-space: nowrap; }
         .volume-high { background: #FFF7ED; color: #C2410C; }
         .volume-very { background: #FEE2E2; color: #B91C1C; }
+        .period { display: inline-block; font-size: 11px; font-weight: 800; padding: 3px 7px; border-radius: 999px; background: #F1F5F9; color: #475569; margin-bottom: 5px; }
         .items { display: grid; }
         .item { display: grid; grid-template-columns: 180px 150px minmax(0, 1fr) 150px; gap: 12px; padding: 13px 18px; border-bottom: 1px solid #F1F5F9; align-items: start; }
         .item:last-child { border-bottom: 0; }
@@ -39,9 +43,13 @@
         .purpose { font-size: 13px; color: #1F2937; font-weight: 700; }
         .content { margin-top: 4px; }
         .source { font-size: 11px; color: #94A3B8; margin-top: 5px; overflow-wrap: anywhere; }
+        .source-details { margin-top: 6px; }
+        .source-details summary { cursor: pointer; list-style: none; display: inline-flex; font-size: 11px; font-weight: 800; color: #64748B; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 999px; padding: 3px 8px; }
+        .source-details summary::-webkit-details-marker { display: none; }
         .non-tg { background: white; border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; }
         .non-tg .item { grid-template-columns: 180px 150px minmax(0, 1fr); }
         .note { margin-top: 14px; padding: 12px 14px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; color: #64748B; font-size: 12px; }
+        .hint { margin-bottom: 12px; padding: 10px 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; color: #64748B; font-size: 12px; }
         @media (max-width: 1200px) { .page { padding-right: 20px; } }
         @media (max-width: 900px) {
             .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -62,12 +70,17 @@
         <p class="subtitle">텔레그램 방별로 어떤 자동화가 언제, 왜 오는지 정리했습니다. 텔레그램이 아닌 크론/스케줄도 아래에 따로 분리했습니다.</p>
 
         <div class="summary" id="summary"></div>
+        <div class="controls" aria-label="보기 방식">
+            <button class="view-btn active" type="button" data-view="period">주기별 보기</button>
+            <button class="view-btn" type="button" data-view="room">방별 보기</button>
+        </div>
 
         <div class="section">
             <div class="section-head">
-                <h2>텔레그램 방별 알림</h2>
+                <h2 id="mainTitle">주기별 알림</h2>
                 <div class="updated" id="updated"></div>
             </div>
+            <div class="hint">알림량은 “그 방에 정기적으로 오는 알림이 얼마나 많은지”입니다. 많은 방일수록 매일/매분 알림이 많이 섞여 있습니다.</div>
             <div class="rooms" id="rooms"></div>
         </div>
 
@@ -86,13 +99,63 @@
     var roomsEl = document.getElementById('rooms');
     var nonTelegramEl = document.getElementById('nonTelegram');
     var updatedEl = document.getElementById('updated');
+    var mainTitleEl = document.getElementById('mainTitle');
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('.view-btn'));
+    var currentData = null;
+    var currentView = 'period';
+
+    var roomLabels = {
+        system: { bot: '시스템봇', env: '시스템 알림 설정' },
+        reminder: { bot: '리마인더봇', env: '리마인더 설정' },
+        customer: { bot: '우리동네봇', env: '고객/상담 알림 설정' },
+        memo: { bot: '메모봇', env: '메모봇 설정' },
+        custom: { bot: '기타 봇', env: '방 식별 필요' }
+    };
+
+    var itemLabels = {
+        'health-check': '주간 건강검진',
+        'daily-recommend': '일간 추천',
+        'aarrr-weekly': 'AARRR 주간 리포트',
+        advisor: '주간 어드바이저',
+        'daily-check-infra': '인프라 고정점검',
+        'nlm-auth-refresh': 'NotebookLM 인증 갱신',
+        'competitor-monitor': '경쟁채널 모니터링',
+        mumae: '무한매수 알림',
+        'morning-planner': '아침 플래너',
+        'task-reminder': '태스크 리마인더',
+        'time-based-reminder': '시간별 태스크 알림',
+        'task-command-router': '태스크 명령어 처리',
+        'task-done-callback': '완료 버튼 처리',
+        'content-calendar-sync-error': '콘텐츠 동기화 오류',
+        'n8n-monitor': 'n8n 상태 감시',
+        'consulting-crm-sms': '상담 문자 발송 결과',
+        'waiting-reminder': '대기 메모 리마인더',
+        'memo-bot': '메모 분류/저장',
+        'co-viral-alarm': '바이럴 페이지 감시',
+        'dashboard-data': '대시보드 데이터 갱신',
+        'button-poller': '버튼 응답 확인',
+        'repeat-task-generator': '반복 태스크 생성',
+        'consulting-after-dashboard': '상담 후 대시보드 폴링',
+        'consulting-followup-sms': '후속문자 발송'
+    };
+
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            currentView = button.getAttribute('data-view');
+            buttons.forEach(function(btn) { btn.classList.toggle('active', btn === button); });
+            if (currentData) renderMain(currentData);
+        });
+    });
 
     fetch('../data/telegram-cron-inventory.json')
         .then(function(response) {
             if (!response.ok) throw new Error('load failed');
             return response.json();
         })
-        .then(render)
+        .then(function(data) {
+            currentData = data;
+            render(data);
+        })
         .catch(function() {
             summaryEl.innerHTML = '<div class="metric"><div class="metric-label">상태</div><div class="metric-value">로드 실패</div></div>';
         });
@@ -111,8 +174,37 @@
             metric('비텔레그램 크론', nonTelegram.length + '개')
         ].join('');
         updatedEl.textContent = '조사일 ' + esc(data.updated || '');
-        roomsEl.innerHTML = rooms.map(renderRoom).join('');
+        renderMain(data);
         nonTelegramEl.innerHTML = nonTelegram.map(renderNonTelegram).join('');
+    }
+
+    function renderMain(data) {
+        mainTitleEl.textContent = currentView === 'period' ? '주기별 알림' : '텔레그램 방별 알림';
+        roomsEl.innerHTML = currentView === 'period'
+            ? renderPeriodView(data.rooms || [])
+            : (data.rooms || []).map(renderRoom).join('');
+    }
+
+    function renderPeriodView(rooms) {
+        var flat = [];
+        rooms.forEach(function(room) {
+            (room.items || []).forEach(function(item) {
+                flat.push({ room: room, item: item, period: getPeriod(item.trigger) });
+            });
+        });
+        var order = ['매일', '주간', '평일', '매분/상시', '이벤트/버튼', '조건부'];
+        return order.map(function(period) {
+            var entries = flat.filter(function(entry) { return entry.period === period; });
+            if (!entries.length) return '';
+            return ''
+                + '<article class="room">'
+                + '<div class="room-top">'
+                + '<div><div class="room-name">' + esc(period) + '</div><div class="room-meta">' + entries.length + '개 알림</div></div>'
+                + '<div><div class="room-role">이 주기로 오는 텔레그램 알림</div><div class="room-cadence">방 이름과 목적을 같이 표시합니다.</div></div>'
+                + '</div>'
+                + '<div class="items">' + entries.map(function(entry) { return renderItem(entry.item, entry.room, period); }).join('') + '</div>'
+                + '</article>';
+        }).join('');
     }
 
     function metric(label, value) {
@@ -121,23 +213,25 @@
 
     function renderRoom(room) {
         var volumeClass = room.volume === '매우 높음' ? 'volume-very' : room.volume === '높음' ? 'volume-high' : '';
+        var labels = roomLabels[room.id] || { bot: room.bot, env: room.sourceEnv };
         return ''
             + '<article class="room">'
             + '<div class="room-top">'
-            + '<div><div class="room-name">' + esc(room.name) + '</div><div class="room-meta">' + esc(room.bot) + ' · ' + esc(room.sourceEnv) + '</div></div>'
+            + '<div><div class="room-name">' + esc(room.name) + '</div><div class="room-meta">' + esc(labels.bot) + ' · ' + esc(labels.env) + '</div></div>'
             + '<div><div class="room-role">' + esc(room.role) + '</div><div class="room-cadence">' + esc(room.cadence) + '</div></div>'
-            + '<div class="volume ' + volumeClass + '">' + esc(room.volume) + '</div>'
+            + '<div class="volume ' + volumeClass + '">' + esc(volumeLabel(room.volume)) + '</div>'
             + '</div>'
-            + '<div class="items">' + (room.items || []).map(renderItem).join('') + '</div>'
+            + '<div class="items">' + (room.items || []).slice().sort(compareItems).map(function(item) { return renderItem(item, room); }).join('') + '</div>'
             + '</article>';
     }
 
-    function renderItem(item) {
+    function renderItem(item, room, forcedPeriod) {
+        var period = forcedPeriod || getPeriod(item.trigger);
         return ''
             + '<div class="item">'
-            + '<div><div class="name">' + esc(item.name) + '</div><div class="runtime">' + esc(item.runtime) + '</div></div>'
+            + '<div><div class="name">' + esc(itemLabels[item.name] || item.name) + '</div><div class="runtime">' + esc(runtimeLabel(item.runtime)) + '</div></div>'
             + '<div class="trigger">' + esc(item.trigger) + '</div>'
-            + '<div><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc(item.content) + '</div><div class="source">' + esc((item.evidence || []).join(' · ')) + '</div></div>'
+            + '<div><span class="period">' + esc(period) + '</span><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc((room ? room.name + ' · ' : '') + item.content) + '</div>' + renderEvidence(item) + '</div>'
             + '<div class="runtime">' + esc(roomlessTag(item.runtime)) + '</div>'
             + '</div>';
     }
@@ -145,17 +239,54 @@
     function renderNonTelegram(item) {
         return ''
             + '<div class="item">'
-            + '<div><div class="name">' + esc(item.name) + '</div><div class="runtime">' + esc(item.runtime) + '</div></div>'
+            + '<div><div class="name">' + esc(itemLabels[item.name] || item.name) + '</div><div class="runtime">' + esc(runtimeLabel(item.runtime)) + '</div></div>'
             + '<div class="trigger">' + esc(item.trigger) + '</div>'
-            + '<div><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc(item.content) + '</div><div class="source">' + esc((item.evidence || []).join(' · ')) + '</div></div>'
+            + '<div><span class="period">' + esc(getPeriod(item.trigger)) + '</span><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc(item.content) + '</div>' + renderEvidence(item) + '</div>'
             + '</div>';
+    }
+
+    function renderEvidence(item) {
+        var evidence = item.evidence || [];
+        if (!evidence.length) return '';
+        return '<details class="source-details"><summary>근거 파일 ' + evidence.length + '개</summary><div class="source">' + esc(evidence.join(' · ')) + '</div></details>';
     }
 
     function roomlessTag(runtime) {
         if (runtime.indexOf('n8n') >= 0) return 'n8n';
-        if (runtime.indexOf('Python') >= 0) return 'Python';
-        if (runtime.indexOf('crontab') >= 0) return 'crontab';
-        return 'nightwatch';
+        if (runtime.indexOf('Python') >= 0) return '파이썬';
+        if (runtime.indexOf('crontab') >= 0) return '시스템 크론';
+        return '나이트워치';
+    }
+
+    function runtimeLabel(runtime) {
+        if (runtime.indexOf('n8n') >= 0) return 'n8n 자동화';
+        if (runtime.indexOf('Python') >= 0) return '파이썬 감시';
+        if (runtime.indexOf('crontab') >= 0) return '시스템 크론';
+        if (runtime.indexOf('shell') >= 0) return '나이트워치 스크립트';
+        return runtime;
+    }
+
+    function volumeLabel(value) {
+        if (value === '매우 높음') return '알림 매우 많음';
+        if (value === '높음') return '알림 많음';
+        if (value === '중간') return '알림 보통';
+        if (value === '조건부') return '문제 때만';
+        return value;
+    }
+
+    function getPeriod(trigger) {
+        var text = String(trigger || '');
+        if (text.indexOf('매분') >= 0 || text.indexOf('300초') >= 0) return '매분/상시';
+        if (text.indexOf('매일') >= 0) return '매일';
+        if (text.indexOf('매주') >= 0) return '주간';
+        if (text.indexOf('평일') >= 0) return '평일';
+        if (text.indexOf('조건부') >= 0) return '조건부';
+        return '이벤트/버튼';
+    }
+
+    function compareItems(a, b) {
+        var order = { '매일': 0, '주간': 1, '평일': 2, '매분/상시': 3, '이벤트/버튼': 4, '조건부': 5 };
+        return (order[getPeriod(a.trigger)] || 0) - (order[getPeriod(b.trigger)] || 0);
     }
 
     function esc(value) {
