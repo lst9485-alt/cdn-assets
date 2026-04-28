@@ -13,7 +13,7 @@
         .back:hover { color: #0077C8; }
         h1 { font-size: 28px; font-weight: 900; color: #051C2C; margin-bottom: 6px; letter-spacing: 0; }
         .subtitle { color: #64748B; font-size: 15px; margin-bottom: 20px; }
-        .summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }
+        .summary { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }
         .metric { background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px 15px; min-height: 78px; }
         .metric-label { font-size: 12px; color: #64748B; font-weight: 700; margin-bottom: 6px; }
         .metric-value { font-size: 24px; font-weight: 900; color: #051C2C; }
@@ -58,13 +58,14 @@
         .source-details summary::-webkit-details-marker { display: none; }
         .non-tg { background: white; border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; }
         .non-tg .item { grid-template-columns: 180px 150px minmax(0, 1fr); }
+        .recurring .item { grid-template-columns: 180px 150px 110px minmax(0, 1fr); }
         .note { margin-top: 14px; padding: 12px 14px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; color: #64748B; font-size: 12px; }
         .hint { margin-bottom: 12px; padding: 10px 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; color: #64748B; font-size: 12px; }
         @media (max-width: 1200px) { .page { padding-right: 20px; } }
         @media (max-width: 900px) {
             .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .room-top { grid-template-columns: 1fr; gap: 8px; }
-            .item, .non-tg .item { grid-template-columns: 1fr; gap: 5px; }
+            .item, .non-tg .item, .recurring .item { grid-template-columns: 1fr; gap: 5px; }
         }
         @media (max-width: 560px) {
             .summary { grid-template-columns: 1fr; }
@@ -101,6 +102,14 @@
             <div class="non-tg" id="nonTelegram"></div>
             <div class="note">비밀값은 표시하지 않습니다. 근거는 파일 경로와 줄번호만 남겼고, 실제 토큰은 대시보드 데이터에 넣지 않았습니다.</div>
         </div>
+
+        <div class="section">
+            <div class="section-head">
+                <h2>n8n · Notion 반복태스크</h2>
+            </div>
+            <div class="hint">이 항목들은 텔레그램 알림이 아니라 n8n이 Notion에 자동으로 만들어두는 반복 태스크입니다. 생성된 태스크가 마감 시간에 걸리면 위의 `테스크` 방 리마인더에 잡힐 수 있습니다.</div>
+            <div class="rooms recurring" id="recurringTasks"></div>
+        </div>
     </div>
 
 <script>
@@ -108,6 +117,7 @@
     var summaryEl = document.getElementById('summary');
     var roomsEl = document.getElementById('rooms');
     var nonTelegramEl = document.getElementById('nonTelegram');
+    var recurringEl = document.getElementById('recurringTasks');
     var updatedEl = document.getElementById('updated');
     var mainTitleEl = document.getElementById('mainTitle');
     var buttons = Array.prototype.slice.call(document.querySelectorAll('.view-btn'));
@@ -183,6 +193,7 @@
         var rooms = data.rooms || [];
         var telegramSenders = rooms.reduce(function(sum, room) { return sum + (room.items || []).length; }, 0);
         var nonTelegram = data.nonTelegramCronJobs || [];
+        var recurringTasks = data.notionRecurringTasks || [];
         var n8nCount = rooms.reduce(function(sum, room) {
             return sum + (room.items || []).filter(function(item) { return item.runtime.indexOf('n8n') >= 0; }).length;
         }, 0);
@@ -190,11 +201,13 @@
             metric('텔레그램 방', rooms.length + '개'),
             metric('텔레그램 발송원', telegramSenders + '개'),
             metric('n8n 발송원', n8nCount + '개'),
-            metric('비텔레그램 크론', nonTelegram.length + '개')
+            metric('비텔레그램 크론', nonTelegram.length + '개'),
+            metric('Notion 반복태스크', recurringTasks.length + '개')
         ].join('');
         updatedEl.textContent = '조사일 ' + esc(data.updated || '');
         renderMain(data);
         nonTelegramEl.innerHTML = nonTelegram.map(renderNonTelegram).join('');
+        recurringEl.innerHTML = renderRecurringTasks(recurringTasks);
     }
 
     function renderMain(data) {
@@ -283,6 +296,35 @@
             + '</div>';
     }
 
+    function renderRecurringTasks(tasks) {
+        var order = ['매일', '평일', '주간', '월간'];
+        return order.map(function(repeat) {
+            var entries = tasks.filter(function(task) { return task.repeat === repeat; }).sort(compareRecurringTasks);
+            if (!entries.length) return '';
+            var openAttr = repeat === '매일' ? ' open' : '';
+            return ''
+                + '<details class="room"' + openAttr + '>'
+                + '<summary class="room-summary">'
+                + '<div class="room-top">'
+                + '<div><div class="room-name">' + esc(recurringLabel(repeat)) + '</div><div class="room-meta">' + entries.length + '개 태스크 · 생성 시간순</div></div>'
+                + '<div><div class="room-role">n8n이 Notion 태스크 DB에 생성</div><div class="room-cadence">텔레그램 직접 발송 없음. 이후 리마인더 대상이 될 수 있습니다.</div></div>'
+                + '<div class="open-hint">열기/접기</div>'
+                + '</div></summary>'
+                + '<div class="items">' + entries.map(renderRecurringItem).join('') + '</div>'
+                + '</details>';
+        }).join('');
+    }
+
+    function renderRecurringItem(task) {
+        return ''
+            + '<div class="item">'
+            + '<div><div class="name">' + esc(task.title) + '</div><div class="runtime">n8n 반복태스크 생성</div></div>'
+            + '<div class="trigger">' + esc(task.trigger) + '</div>'
+            + '<div><span class="period">' + esc(recurringLabel(task.repeat)) + '</span><div class="runtime">' + esc(task.priority) + ' · ' + esc(task.status) + '</div></div>'
+            + '<div><div class="purpose">Notion 태스크 자동 생성</div><div class="content">' + esc(task.content) + '</div>' + renderEvidence(task) + '</div>'
+            + '</div>';
+    }
+
     function renderEvidence(item) {
         var evidence = item.evidence || [];
         if (!evidence.length) return '';
@@ -322,6 +364,14 @@
         return period;
     }
 
+    function recurringLabel(repeat) {
+        if (repeat === '매일') return '매일 생성';
+        if (repeat === '평일') return '평일 생성';
+        if (repeat === '주간') return '매주 생성';
+        if (repeat === '월간') return '매월 생성';
+        return repeat;
+    }
+
     function getPeriod(item) {
         var text = typeof item === 'string' ? item : [item.name, item.trigger, item.purpose, item.content].join(' ');
         var name = typeof item === 'string' ? '' : item.name;
@@ -353,13 +403,19 @@
         return aOrder - bOrder;
     }
 
+    function compareRecurringTasks(a, b) {
+        var timeDiff = timeSortValue(a.trigger) - timeSortValue(b.trigger);
+        if (timeDiff) return timeDiff;
+        return String(a.title).localeCompare(String(b.title), 'ko');
+    }
+
     function timeSortValue(trigger) {
         var text = String(trigger || '');
         var dayOrder = { '일': 0, '월': 1, '화': 2, '수': 3, '목': 4, '금': 5, '토': 6 };
         var dayMatch = text.match(/매주\s*([월화수목금토일])/);
         var day = dayMatch ? dayOrder[dayMatch[1]] * 1440 : 0;
         var timeMatch = text.match(/(\d{1,2}):(\d{2})/);
-        if (!timeMatch) return day + 9999;
+        if (!timeMatch) return dayMatch ? day + 1439 : day + 9999;
         return day + (parseInt(timeMatch[1], 10) * 60) + parseInt(timeMatch[2], 10);
     }
 

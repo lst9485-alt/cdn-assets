@@ -4,6 +4,7 @@
     "telegramRooms": 5,
     "telegramSenders": 19,
     "nonTelegramCronJobs": 5,
+    "notionRecurringTasks": 14,
     "sources": [
       "macOS crontab",
       "nightwatch shell scripts",
@@ -337,6 +338,176 @@
       "content": "Telegram 노드 없음",
       "evidence": [
         "workspace/apps/n8n/workflows/04 consulting-crm/04-3 후속문자-SMS발송/workflow.json:1"
+      ]
+    }
+  ],
+  "notionRecurringTasks": [
+    {
+      "title": "P1~P3/목실감",
+      "repeat": "매일",
+      "trigger": "매일 08:30",
+      "priority": "P2",
+      "status": "대기",
+      "content": "Notion에 매일 생성되는 계획/목실감 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:10",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "원씽복기",
+      "repeat": "매일",
+      "trigger": "매일 14:00",
+      "priority": "P2",
+      "status": "대기",
+      "content": "Notion에 매일 생성되는 원씽 복기 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:9",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "체크남&링크, db기입",
+      "repeat": "평일",
+      "trigger": "평일 09:00",
+      "priority": "P2",
+      "status": "대기",
+      "content": "영업일에만 Notion에 생성되는 체크/링크/db 기입 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:15",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "메모정리",
+      "repeat": "주간",
+      "trigger": "매주 월",
+      "priority": "P3",
+      "status": "백로그",
+      "content": "월요일 기준으로 생성되는 주간 메모 정리 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:20",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "마케팅업체 정산",
+      "repeat": "주간",
+      "trigger": "매주 월 09:00",
+      "priority": "P1",
+      "status": "대기",
+      "content": "월요일에 생성되는 마케팅업체 정산 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:21",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "현금영수증&세금계산서 발행",
+      "repeat": "주간",
+      "trigger": "매주 월 10:00",
+      "priority": "P2",
+      "status": "대기",
+      "content": "월요일에 생성되는 현금영수증/세금계산서 발행 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:22",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "주제선정&썸네일&제목",
+      "repeat": "주간",
+      "trigger": "매주 화",
+      "priority": "P2",
+      "status": "대기",
+      "content": "화요일 기준으로 생성되는 콘텐츠 기획 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:23",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "자료수집&도입부",
+      "repeat": "주간",
+      "trigger": "매주 수",
+      "priority": "P2",
+      "status": "대기",
+      "content": "수요일 기준으로 생성되는 자료수집/도입부 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:24",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "콘텐츠 관리시트",
+      "repeat": "주간",
+      "trigger": "매주 수 12:00",
+      "priority": "P2",
+      "status": "대기",
+      "content": "수요일에 생성되는 콘텐츠 관리시트 작업 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:25",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "원고완성",
+      "repeat": "주간",
+      "trigger": "매주 목",
+      "priority": "P2",
+      "status": "대기",
+      "content": "목요일 기준으로 생성되는 원고 완성 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:26",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "주간계획 수정",
+      "repeat": "주간",
+      "trigger": "매주 목 08:30",
+      "priority": "P2",
+      "status": "대기",
+      "content": "목요일에 생성되는 주간계획 수정 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:27",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "PPT완료",
+      "repeat": "주간",
+      "trigger": "매주 금",
+      "priority": "P2",
+      "status": "백로그",
+      "content": "금요일 기준으로 생성되는 PPT 완료 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:28",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "촬영&편집&업로드",
+      "repeat": "주간",
+      "trigger": "매주 토",
+      "priority": "P2",
+      "status": "대기",
+      "content": "토요일 기준으로 생성되는 촬영/편집/업로드 태스크",
+      "evidence": [
+        "references/recurring-tasks.md:29",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
+      ]
+    },
+    {
+      "title": "급여&자산체크",
+      "repeat": "월간",
+      "trigger": "매월 10일",
+      "priority": "P3",
+      "status": "백로그",
+      "content": "월 10일 기준으로 생성되는 급여/자산 체크 태스크. 주말/공휴일이면 앞 영업일로 당겨집니다.",
+      "evidence": [
+        "references/recurring-tasks.md:34",
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"
       ]
     }
   ]
