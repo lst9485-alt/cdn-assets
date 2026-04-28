@@ -102,7 +102,7 @@
         nav: {
           type: 'single',
           label: '홈페이지',
-          href: 'homepage/',
+          href: 'homepage/main-page.html',
           activeMatch: ['/homepage']
         },
         sidebar: {
