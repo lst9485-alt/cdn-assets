@@ -1991,43 +1991,6 @@
   .ov-notes-mode-toggle.active:hover {
     background: #ffd83d;
   }
-  .ov-type-ratio {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 6px;
-    align-items: center;
-    padding: 8px 10px;
-    margin: -2px 0 6px;
-    border: 1px solid rgba(255,255,255,0.10);
-    border-radius: 8px;
-    background: rgba(0,0,0,0.45);
-    color: rgba(255,255,255,0.88);
-  }
-  .ov-type-ratio-head {
-    font-size: 13px;
-    font-weight: 900;
-    color: var(--editor-accent);
-  }
-  .ov-type-ratio-item {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    min-width: 0;
-    font-size: 12px;
-    font-weight: 700;
-  }
-  .ov-type-ratio-item span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .ov-type-ratio-item b {
-    flex-shrink: 0;
-    color: rgba(255,255,255,0.62);
-    font-weight: 800;
-  }
-
   .ov-actions {
     position: absolute;
     left: 6px;

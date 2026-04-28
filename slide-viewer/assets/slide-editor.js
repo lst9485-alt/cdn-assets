@@ -1473,6 +1473,12 @@
 
   function typeMetaOfSlide(slide) {
     if (!slide || !slide.dataset) return null;
+    const typeCode = slide.dataset.typeCode || '';
+    const typeCodeMatch = String(typeCode).match(/^T(\d+)/);
+    if (typeCodeMatch) {
+      const byTypeCode = PG_TO_TYPE_META[parseInt(typeCodeMatch[1], 10)];
+      if (byTypeCode) return byTypeCode;
+    }
     if (document.body && document.body.dataset.generated === 'true' && slide.dataset.type) {
       const byType = TYPE_NAME_TO_TYPE_META[slide.dataset.type];
       if (byType) return byType;
@@ -4905,39 +4911,6 @@
     if (typeof showToast === 'function') showToast('슬라이드 복사 완료', 2000);
   }
 
-  function overviewTypeRatioEl() {
-    const firstByGroup = new Map();
-    slides.forEach((slide, idx) => {
-      const pg = slide.dataset.pageGroup || String(idx + 1);
-      if (!firstByGroup.has(pg) || slide.dataset.variant === '0' || !slide.dataset.variant) {
-        firstByGroup.set(pg, slide);
-      }
-    });
-    const counts = {};
-    firstByGroup.forEach(slide => {
-      const type = slide.dataset.type || '미분류';
-      counts[type] = (counts[type] || 0) + 1;
-    });
-    const total = Math.max(1, firstByGroup.size);
-    const wrap = document.createElement('div');
-    wrap.className = 'ov-type-ratio';
-    const head = document.createElement('div');
-    head.className = 'ov-type-ratio-head';
-    head.textContent = `타입 비율 ${total}장`;
-    wrap.appendChild(head);
-    Object.entries(counts)
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'))
-      .slice(0, 8)
-      .forEach(([type, count]) => {
-        const item = document.createElement('div');
-        item.className = 'ov-type-ratio-item';
-        const pct = Math.round((count / total) * 100);
-        item.innerHTML = `<span>${type}</span><b>${count}장 · ${pct}%</b>`;
-        wrap.appendChild(item);
-      });
-    return wrap;
-  }
-
   function buildOverview() {
     ovGrid.innerHTML = '';
     // 에디터(slides-editor.html)에서는 3구역(title/no-title/special) + 카테고리 표시
@@ -5000,7 +4973,6 @@
         toolbar.appendChild(addTemplateBtn);
       }
       ovGrid.appendChild(toolbar);
-      if (isGenerated) ovGrid.appendChild(overviewTypeRatioEl());
     }
 
     const bucketCounts = {};
