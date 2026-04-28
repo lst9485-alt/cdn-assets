@@ -1433,9 +1433,9 @@
       addChip((min === max ? String(min) : (min + '~' + max)) + '개', '지원 아이템 수');
     }
     if (meta && meta.media) {
-      if (meta.media.imageRequired) addChip('🖼!', '이미지 필수', 'media');
-      else if (meta.media.image) addChip('🖼', '이미지 지원', 'media');
-      if (meta.media.emoji) addChip('🙂', '이모지/아이콘 슬롯', 'media');
+      if (meta.media.imageRequired) addChip('이미지필수', '이미지 필수', 'media');
+      else if (meta.media.image) addChip('이미지', '이미지 지원', 'media');
+      if (meta.media.emoji) addChip('아이콘', '이모지/아이콘 슬롯', 'media');
     }
     return row;
   }
