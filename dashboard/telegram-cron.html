@@ -20,6 +20,9 @@
         .controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
         .view-btn { border: 1px solid #CBD5E1; background: white; color: #475569; border-radius: 999px; padding: 8px 13px; font-size: 12px; font-weight: 800; cursor: pointer; }
         .view-btn.active { border-color: #0077C8; background: #E8F3FF; color: #0077C8; }
+        .period-filters { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 18px; border-bottom: 1px solid #E2E8F0; background: #F8FAFC; }
+        .period-filter { border: 1px solid #CBD5E1; background: white; color: #475569; border-radius: 999px; padding: 6px 10px; font-size: 11px; font-weight: 800; cursor: pointer; }
+        .period-filter.active { border-color: #0077C8; background: #E8F3FF; color: #0077C8; }
         .section { margin-top: 22px; }
         .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; margin-bottom: 10px; }
         h2 { font-size: 18px; color: #051C2C; font-weight: 900; }
@@ -103,13 +106,14 @@
     var buttons = Array.prototype.slice.call(document.querySelectorAll('.view-btn'));
     var currentData = null;
     var currentView = 'period';
+    var roomFilters = {};
 
     var roomLabels = {
-        system: { bot: '시스템봇', env: '시스템 알림 설정' },
-        reminder: { bot: '리마인더봇', env: '리마인더 설정' },
-        customer: { bot: '우리동네봇', env: '고객/상담 알림 설정' },
-        memo: { bot: '메모봇', env: '메모봇 설정' },
-        custom: { bot: '기타 봇', env: '방 식별 필요' }
+        system: { bot: '시스템/알림 봇', env: '무한매수·인프라·경쟁채널' },
+        reminder: { bot: '리마인더봇', env: '태스크·루틴·n8n 상태' },
+        customer: { bot: '우리동네봇', env: '상담·SMS 처리' },
+        memo: { bot: '메모봇', env: '메모 저장·대기 리마인더' },
+        custom: { bot: '바이럴 알림봇', env: '페이지 정상화 감시' }
     };
 
     var itemLabels = {
@@ -145,6 +149,13 @@
             buttons.forEach(function(btn) { btn.classList.toggle('active', btn === button); });
             if (currentData) renderMain(currentData);
         });
+    });
+
+    roomsEl.addEventListener('click', function(event) {
+        var target = event.target.closest('.period-filter');
+        if (!target) return;
+        roomFilters[target.getAttribute('data-room')] = target.getAttribute('data-period');
+        if (currentData) renderMain(currentData);
     });
 
     fetch('../data/telegram-cron-inventory.json')
@@ -214,6 +225,9 @@
     function renderRoom(room) {
         var volumeClass = room.volume === '매우 높음' ? 'volume-very' : room.volume === '높음' ? 'volume-high' : '';
         var labels = roomLabels[room.id] || { bot: room.bot, env: room.sourceEnv };
+        var activePeriod = roomFilters[room.id] || '전체';
+        var items = (room.items || []).slice().sort(compareItems);
+        var visibleItems = activePeriod === '전체' ? items : items.filter(function(item) { return getPeriod(item.trigger) === activePeriod; });
         return ''
             + '<article class="room">'
             + '<div class="room-top">'
@@ -221,8 +235,19 @@
             + '<div><div class="room-role">' + esc(room.role) + '</div><div class="room-cadence">' + esc(room.cadence) + '</div></div>'
             + '<div class="volume ' + volumeClass + '">' + esc(volumeLabel(room.volume)) + '</div>'
             + '</div>'
-            + '<div class="items">' + (room.items || []).slice().sort(compareItems).map(function(item) { return renderItem(item, room); }).join('') + '</div>'
+            + renderRoomFilters(room, items, activePeriod)
+            + '<div class="items">' + (visibleItems.length ? visibleItems.map(function(item) { return renderItem(item, room); }).join('') : '<div class="item"><div class="runtime">해당 주기 알림 없음</div></div>') + '</div>'
             + '</article>';
+    }
+
+    function renderRoomFilters(room, items, activePeriod) {
+        var periods = ['전체', '매일', '주간', '평일', '매분/상시', '이벤트/버튼', '조건부'];
+        return '<div class="period-filters">' + periods.map(function(period) {
+            var count = period === '전체' ? items.length : items.filter(function(item) { return getPeriod(item.trigger) === period; }).length;
+            if (!count && period !== '전체') return '';
+            var active = activePeriod === period ? ' active' : '';
+            return '<button type="button" class="period-filter' + active + '" data-room="' + esc(room.id) + '" data-period="' + esc(period) + '">' + esc(period) + ' ' + count + '</button>';
+        }).join('') + '</div>';
     }
 
     function renderItem(item, room, forcedPeriod) {

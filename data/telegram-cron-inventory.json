@@ -14,7 +14,7 @@
   "rooms": [
     {
       "id": "system",
-      "name": "시스템 알림방",
+      "name": "알림봇",
       "bot": "wooridongne_noti_bot",
       "sourceEnv": "TELEGRAM_SYSTEM_CHAT_ID",
       "role": "크론잡 결과, 시스템 점검, 유튜브/경쟁채널 리포트",
@@ -118,7 +118,7 @@
     },
     {
       "id": "reminder",
-      "name": "리마인더 그룹",
+      "name": "테스크",
       "bot": "reminder9485_bot",
       "sourceEnv": "TELEGRAM_NOTI_CHAT_ID",
       "role": "Notion 태스크, 루틴, n8n 상태, 콘텐츠 동기화 오류",
@@ -206,7 +206,7 @@
     },
     {
       "id": "customer",
-      "name": "우리동네봇 그룹",
+      "name": "우리동네봇",
       "bot": "wooridongnebot",
       "sourceEnv": "TELEGRAM_CUSTOMER_CHAT_ID",
       "role": "상담 CRM, SMS 처리 결과",
@@ -229,7 +229,7 @@
     },
     {
       "id": "memo",
-      "name": "메모봇/메모장",
+      "name": "메모장(정식)",
       "bot": "wooridongne_memo_bot",
       "sourceEnv": "TELEGRAM_MEMO_CHAT_ID / workflow dynamic chat",
       "role": "짜투리 메모 수집과 대기 메모 리마인더",
@@ -263,7 +263,7 @@
     },
     {
       "id": "custom",
-      "name": "기타/방 식별 필요",
+      "name": "바이럴알림봇",
       "bot": "custom Telegram Bot API",
       "sourceEnv": "TELEGRAM_CHAT_ID",
       "role": "회사 운영 모니터 중 일부",
