@@ -2,8 +2,8 @@
   "updated": "2026-04-28",
   "summary": {
     "telegramRooms": 5,
-    "telegramSenders": 19,
-    "nonTelegramCronJobs": 5,
+    "telegramSenders": 17,
+    "nonTelegramCronJobs": 4,
     "notionRecurringTasks": 14,
     "sources": [
       "macOS crontab",
@@ -18,32 +18,20 @@
       "name": "알림봇",
       "bot": "wooridongne_noti_bot",
       "sourceEnv": "TELEGRAM_SYSTEM_CHAT_ID",
-      "role": "크론잡 결과, 시스템 점검, 유튜브/경쟁채널 리포트",
-      "cadence": "매일 08:00, 23:00 / 매주 일 07:00 / 매주 월 03:00, 10:00 / 조건부",
+      "role": "크론잡 결과, 시스템 점검, 주간 운영 브리핑, 유튜브/경쟁채널 리포트",
+      "cadence": "매일 08:00 / 매주 일 07:00 / 매주 월 03:00, 10:00 / 조건부",
       "volume": "높음",
       "items": [
         {
-          "name": "health-check",
-          "runtime": "nightwatch shell",
+          "name": "weekly-ops-brief",
+          "runtime": "nightwatch shell + Claude/Codex",
           "trigger": "매주 월 10:00",
-          "purpose": "주간 건강검진과 최근 변경 프로젝트 Codex 리뷰 요약",
-          "content": "건강검진 결과, 코드 리뷰 요약",
+          "purpose": "주간 운영 브리핑",
+          "content": "건강검진, 핵심 코드리뷰, OKR/상담/태스크 원씽, 추천 작업 1~3개",
           "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:3",
-            "workspace/tools/scripts/nightwatch/health-check.sh:68",
-            "workspace/tools/scripts/nightwatch/health-check.sh:189"
-          ]
-        },
-        {
-          "name": "daily-recommend",
-          "runtime": "nightwatch shell",
-          "trigger": "매일 23:00",
-          "purpose": "일간 리포트와 다음날 추천 작업 생성",
-          "content": "오늘 변경 요약, 추천 1-2건, 바로 시작 버튼",
-          "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:12",
-            "workspace/tools/scripts/nightwatch/daily-recommend.sh:300",
-            "workspace/tools/scripts/nightwatch/daily-recommend.sh:327"
+            "workspace/tools/scripts/nightwatch/jobs.json:21",
+            "workspace/tools/scripts/nightwatch/weekly-ops-brief.sh:1",
+            "workspace/tools/scripts/nightwatch/weekly-ops-brief.sh:141"
           ]
         },
         {
@@ -55,17 +43,6 @@
           "evidence": [
             "workspace/tools/scripts/nightwatch/jobs.json:30",
             "workspace/tools/scripts/nightwatch/aarrr-weekly.sh:203"
-          ]
-        },
-        {
-          "name": "advisor",
-          "runtime": "nightwatch shell",
-          "trigger": "매주 일 07:00",
-          "purpose": "주간 어드바이저와 원씽 처방",
-          "content": "OKR, 상담, 태스크, 인프라 기반 우선순위",
-          "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:39",
-            "workspace/tools/scripts/nightwatch/advisor.sh:155"
           ]
         },
         {
@@ -296,18 +273,6 @@
       "evidence": [
         "workspace/tools/scripts/nightwatch/jobs.json:75",
         "workspace/tools/scripts/nightwatch/dashboard-data.sh"
-      ]
-    },
-    {
-      "name": "button-poller",
-      "runtime": "nightwatch shell",
-      "trigger": "매분",
-      "purpose": "nightwatch inline 버튼 콜백 확인",
-      "content": "sendMessage 없음. getUpdates/answerCallbackQuery만 사용",
-      "evidence": [
-        "workspace/tools/scripts/nightwatch/jobs.json:21",
-        "workspace/tools/scripts/nightwatch/button-poller.sh:17",
-        "workspace/tools/scripts/nightwatch/common.sh:122"
       ]
     },
     {
