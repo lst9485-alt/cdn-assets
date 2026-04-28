@@ -800,29 +800,39 @@
       const baseSlide = [...slides].find(s => s.dataset.pageGroup === pg && (s.dataset.variant === '0' || !s.dataset.variant));
       if (!baseSlide) return;
       const type = baseSlide.dataset.type || '미분류';
-      counts[type] = (counts[type] || 0) + 1;
+      if (!counts[type]) {
+        const meta = (typeof typeMetaOfSlide === 'function') ? typeMetaOfSlide(baseSlide) : null;
+        const typeNumber = (typeof typeNumberOfMeta === 'function') ? typeNumberOfMeta(meta) : null;
+        counts[type] = {
+          count: 0,
+          typeNumber: typeNumber ? `T${String(typeNumber).padStart(2, '0')}` : ''
+        };
+      }
+      counts[type].count += 1;
     });
-    const total = Math.max(1, Object.values(counts).reduce((sum, count) => sum + count, 0));
+    const total = Math.max(1, Object.values(counts).reduce((sum, row) => sum + row.count, 0));
     return Object.entries(counts)
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'))
-      .map(([type, count]) => ({ type, count, pct: Math.round((count / total) * 100) }));
+      .sort((a, b) => b[1].count - a[1].count || a[0].localeCompare(b[0], 'ko'))
+      .map(([type, row]) => ({
+        type,
+        typeNumber: row.typeNumber,
+        count: row.count,
+        pct: Math.round((row.count / total) * 100)
+      }));
   }
 
   function renderSlideJumpTypeRatio(panel) {
     if (!panel) return;
     panel.innerHTML = '';
     const rows = slideJumpTypeRatioRows();
-    const title = document.createElement('div');
-    title.className = 'sj-ratio-title';
-    title.textContent = `타입 비율 ${rows.reduce((sum, row) => sum + row.count, 0)}장`;
-    panel.appendChild(title);
     rows.forEach(row => {
       const item = document.createElement('div');
       item.className = 'sj-ratio-item';
+      item.title = `${row.typeNumber ? `${row.typeNumber} ` : ''}${row.type} ${row.pct}%`;
       const name = document.createElement('span');
-      name.textContent = row.type;
+      name.textContent = `${row.typeNumber ? `${row.typeNumber} ` : ''}${row.type}`;
       const value = document.createElement('b');
-      value.textContent = `${row.count}장 · ${row.pct}%`;
+      value.textContent = `${row.pct}%`;
       item.appendChild(name);
       item.appendChild(value);
       panel.appendChild(item);
