@@ -26,6 +26,20 @@
         sidebar: {},
         items: [
           {
+            id: 'telegram-cron',
+            title: '텔레그램 · 크론 알림',
+            sidebarLabel: '텔레그램·크론',
+            description: '방별 주기 · 목적 · 발송원 전수조사',
+            href: 'dashboard/telegram-cron.html',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'tg',
+            hubVisible: true,
+            navVisible: true,
+            sidebarType: 'root',
+            activeMatch: ['telegram-cron.html']
+          },
+          {
             id: 'dashboard-main',
             title: '투두 · 프로젝트 · OKR',
             description: '크론잡 자동 갱신 (매일 06시)',

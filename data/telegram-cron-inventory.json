@@ -1,0 +1,343 @@
+{
+  "updated": "2026-04-28",
+  "summary": {
+    "telegramRooms": 5,
+    "telegramSenders": 19,
+    "nonTelegramCronJobs": 5,
+    "sources": [
+      "macOS crontab",
+      "nightwatch shell scripts",
+      "n8n workflow exports",
+      "Python monitors"
+    ]
+  },
+  "rooms": [
+    {
+      "id": "system",
+      "name": "시스템 알림방",
+      "bot": "wooridongne_noti_bot",
+      "sourceEnv": "TELEGRAM_SYSTEM_CHAT_ID",
+      "role": "크론잡 결과, 시스템 점검, 유튜브/경쟁채널 리포트",
+      "cadence": "매일 08:00, 23:00 / 매주 일 07:00 / 매주 월 03:00, 10:00 / 조건부",
+      "volume": "높음",
+      "items": [
+        {
+          "name": "health-check",
+          "runtime": "nightwatch shell",
+          "trigger": "매주 월 10:00",
+          "purpose": "주간 건강검진과 최근 변경 프로젝트 Codex 리뷰 요약",
+          "content": "건강검진 결과, 코드 리뷰 요약",
+          "evidence": [
+            "workspace/tools/scripts/nightwatch/jobs.json:3",
+            "workspace/tools/scripts/nightwatch/health-check.sh:68",
+            "workspace/tools/scripts/nightwatch/health-check.sh:189"
+          ]
+        },
+        {
+          "name": "daily-recommend",
+          "runtime": "nightwatch shell",
+          "trigger": "매일 23:00",
+          "purpose": "일간 리포트와 다음날 추천 작업 생성",
+          "content": "오늘 변경 요약, 추천 1-2건, 바로 시작 버튼",
+          "evidence": [
+            "workspace/tools/scripts/nightwatch/jobs.json:12",
+            "workspace/tools/scripts/nightwatch/daily-recommend.sh:300",
+            "workspace/tools/scripts/nightwatch/daily-recommend.sh:327"
+          ]
+        },
+        {
+          "name": "aarrr-weekly",
+          "runtime": "nightwatch shell",
+          "trigger": "매주 일 07:00",
+          "purpose": "AARRR 주간 리포트",
+          "content": "YouTube, Notion, 콘텐츠관리시트 기반 주간 성과",
+          "evidence": [
+            "workspace/tools/scripts/nightwatch/jobs.json:30",
+            "workspace/tools/scripts/nightwatch/aarrr-weekly.sh:203"
+          ]
+        },
+        {
+          "name": "advisor",
+          "runtime": "nightwatch shell",
+          "trigger": "매주 일 07:00",
+          "purpose": "주간 어드바이저와 원씽 처방",
+          "content": "OKR, 상담, 태스크, 인프라 기반 우선순위",
+          "evidence": [
+            "workspace/tools/scripts/nightwatch/jobs.json:39",
+            "workspace/tools/scripts/nightwatch/advisor.sh:155"
+          ]
+        },
+        {
+          "name": "daily-check-infra",
+          "runtime": "nightwatch shell",
+          "trigger": "매일 08:00",
+          "purpose": "운영 인프라 고정점검",
+          "content": "홈페이지, 미커밋, 트리거, 인증, CRM 정합성",
+          "evidence": [
+            "workspace/tools/scripts/nightwatch/jobs.json:48",
+            "workspace/tools/scripts/nightwatch/daily-check-infra.sh:51"
+          ]
+        },
+        {
+          "name": "nlm-auth-refresh",
+          "runtime": "nightwatch shell",
+          "trigger": "매주 월 03:00",
+          "purpose": "NotebookLM 인증 갱신",
+          "content": "갱신 성공/실패. 이미 유효하면 미발송",
+          "evidence": [
+            "workspace/tools/scripts/nightwatch/jobs.json:57",
+            "workspace/tools/scripts/nightwatch/nlm-auth-refresh.sh:13",
+            "workspace/tools/scripts/nightwatch/nlm-auth-refresh.sh:41"
+          ]
+        },
+        {
+          "name": "competitor-monitor",
+          "runtime": "nightwatch shell + Python",
+          "trigger": "매일 07:10",
+          "purpose": "경쟁 YouTube 채널 모니터링",
+          "content": "신규/급상승 영상 수집, 대시보드 갱신, 상세 리포트",
+          "evidence": [
+            "workspace/tools/scripts/nightwatch/jobs.json:84",
+            "workspace/tools/scripts/nightwatch/competitor-monitor.sh:56",
+            "workspace/apps/youtube/yt-competitor-monitor/competitor_monitor/report.py:180"
+          ]
+        },
+        {
+          "name": "mumae",
+          "runtime": "n8n",
+          "trigger": "평일 08:00, 22:25 / webhook",
+          "purpose": "무한매수 주문표와 체결 확인",
+          "content": "주문표, 체결 확인 버튼, 체결 입력/확인 메시지",
+          "evidence": [
+            "workspace/apps/n8n/workflows/05 무한매수/workflow.json:7",
+            "workspace/apps/n8n/workflows/05 무한매수/workflow.json:176",
+            "workspace/apps/n8n/workflows/05 무한매수/workflow.json:228"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reminder",
+      "name": "리마인더 그룹",
+      "bot": "reminder9485_bot",
+      "sourceEnv": "TELEGRAM_NOTI_CHAT_ID",
+      "role": "Notion 태스크, 루틴, n8n 상태, 콘텐츠 동기화 오류",
+      "cadence": "매분 / 매일 07:00, 08:00, 14:00, 19:00, 22:00 / 매주 월 07:00 / 이벤트성",
+      "volume": "매우 높음",
+      "items": [
+        {
+          "name": "morning-planner",
+          "runtime": "nightwatch shell",
+          "trigger": "매일 07:00",
+          "purpose": "아침 플래너",
+          "content": "오늘 루틴 링크, 원씽, 오늘 마감 태스크, 어제 루틴 미기입",
+          "evidence": [
+            "workspace/tools/scripts/nightwatch/jobs.json:66",
+            "workspace/tools/scripts/nightwatch/morning-planner.sh:332"
+          ]
+        },
+        {
+          "name": "task-reminder",
+          "runtime": "n8n",
+          "trigger": "매일 08:00, 14:00, 19:00, 22:00",
+          "purpose": "하루 4회 태스크 리마인더",
+          "content": "오늘 할 일, 지연 항목, 내일 할 일, 완료 버튼",
+          "evidence": [
+            "workspace/apps/n8n/workflows/01 notion 태스크/01-2 태스크 리마인더/workflow.json:15",
+            "workspace/apps/n8n/workflows/01 notion 태스크/01-2 태스크 리마인더/workflow.json:101"
+          ]
+        },
+        {
+          "name": "time-based-reminder",
+          "runtime": "n8n",
+          "trigger": "매분",
+          "purpose": "시간 지정 태스크 개별 알림",
+          "content": "현재 시간 기준 ±2분에 해당하는 태스크",
+          "evidence": [
+            "workspace/apps/n8n/workflows/01 notion 태스크/01-5 시간별 리마인더/workflow.json:216",
+            "workspace/apps/n8n/workflows/01 notion 태스크/01-5 시간별 리마인더/workflow.json:60"
+          ]
+        },
+        {
+          "name": "task-command-router",
+          "runtime": "n8n",
+          "trigger": "Telegram webhook",
+          "purpose": "태스크 명령어 처리",
+          "content": "list, today, add, end, change 명령 응답",
+          "evidence": [
+            "workspace/apps/n8n/workflows/01 notion 태스크/01-4 태스크 명령어/workflow.json:7",
+            "workspace/apps/n8n/workflows/01 notion 태스크/01-4 태스크 명령어/workflow.json:400"
+          ]
+        },
+        {
+          "name": "task-done-callback",
+          "runtime": "n8n",
+          "trigger": "Telegram callback webhook",
+          "purpose": "완료 버튼 처리",
+          "content": "done 버튼 콜백, 메시지 편집",
+          "evidence": [
+            "workspace/apps/n8n/workflows/01 notion 태스크/01-3 태스크 완료/workflow.json:13",
+            "workspace/apps/n8n/workflows/01 notion 태스크/01-3 태스크 완료/workflow.json:229"
+          ]
+        },
+        {
+          "name": "content-calendar-sync-error",
+          "runtime": "n8n",
+          "trigger": "매주 월 07:00 / 수동 webhook",
+          "purpose": "Notion 콘텐츠캘린더 to Obsidian 동기화 오류 알림",
+          "content": "동기화 실패 메시지",
+          "evidence": [
+            "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:353",
+            "workspace/apps/n8n/workflows/02 notion 콘텐츠캘린더→obsidian/workflow.json:358"
+          ]
+        },
+        {
+          "name": "n8n-monitor",
+          "runtime": "standalone crontab shell",
+          "trigger": "매분",
+          "purpose": "n8n Docker 컨테이너 상태 감시",
+          "content": "n8n 중단, n8n 복구",
+          "evidence": [
+            "workspace/tools/scripts/n8n-monitor.sh:14",
+            "workspace/tools/scripts/n8n-monitor.sh:48"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "customer",
+      "name": "우리동네봇 그룹",
+      "bot": "wooridongnebot",
+      "sourceEnv": "TELEGRAM_CUSTOMER_CHAT_ID",
+      "role": "상담 CRM, SMS 처리 결과",
+      "cadence": "상담/SMS 버튼 이벤트성",
+      "volume": "중간",
+      "items": [
+        {
+          "name": "consulting-crm-sms",
+          "runtime": "n8n",
+          "trigger": "POST /webhook/telegram-sms",
+          "purpose": "상담 신청/예약 문자 발송 결과 알림",
+          "content": "Aligo SMS 발송 성공/실패",
+          "evidence": [
+            "workspace/apps/n8n/workflows/04 consulting-crm/04-1 신청접수-SMS발송/workflow.json:13",
+            "workspace/apps/n8n/workflows/04 consulting-crm/04-1 신청접수-SMS발송/workflow.json:102",
+            "workspace/apps/n8n/workflows/04 consulting-crm/04-1 신청접수-SMS발송/workflow.json:156"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "memo",
+      "name": "메모봇/메모장",
+      "bot": "wooridongne_memo_bot",
+      "sourceEnv": "TELEGRAM_MEMO_CHAT_ID / workflow dynamic chat",
+      "role": "짜투리 메모 수집과 대기 메모 리마인더",
+      "cadence": "매일 09:00 / 메시지 이벤트성",
+      "volume": "중간",
+      "items": [
+        {
+          "name": "waiting-reminder",
+          "runtime": "n8n",
+          "trigger": "매일 09:00",
+          "purpose": "Notion 대기 항목 리마인더",
+          "content": "대기 메모 목록과 처리 버튼",
+          "evidence": [
+            "workspace/apps/n8n/workflows/03 memo-bot/waiting-reminder.json:90",
+            "workspace/apps/n8n/workflows/03 memo-bot/waiting-reminder.json:104"
+          ]
+        },
+        {
+          "name": "memo-bot",
+          "runtime": "n8n",
+          "trigger": "Telegram message/callback",
+          "purpose": "메모 분류와 저장",
+          "content": "카테고리 버튼, 저장 완료 후 원 메시지 편집",
+          "evidence": [
+            "workspace/apps/n8n/workflows/03 memo-bot/memo-bot.json:13",
+            "workspace/apps/n8n/workflows/03 memo-bot/memo-bot.json:45",
+            "workspace/apps/n8n/workflows/03 memo-bot/memo-bot.json:559"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "custom",
+      "name": "기타/방 식별 필요",
+      "bot": "custom Telegram Bot API",
+      "sourceEnv": "TELEGRAM_CHAT_ID",
+      "role": "회사 운영 모니터 중 일부",
+      "cadence": "300초 간격 장기 실행형",
+      "volume": "조건부",
+      "items": [
+        {
+          "name": "co-viral-alarm",
+          "runtime": "Python long-running monitor",
+          "trigger": "기본 300초 간격, 영업시간",
+          "purpose": "바이럴 마케팅 페이지 최신 타임스탬프 감시",
+          "content": "1시간 이상 무변화 또는 복구 알림",
+          "evidence": [
+            "workspace/apps/company/co-viral-alarm/Viral_alarm/monitor.py:55",
+            "workspace/apps/company/co-viral-alarm/Viral_alarm/monitor.py:142",
+            "workspace/apps/company/co-viral-alarm/Viral_alarm/monitor.py:197"
+          ]
+        }
+      ]
+    }
+  ],
+  "nonTelegramCronJobs": [
+    {
+      "name": "dashboard-data",
+      "runtime": "nightwatch shell",
+      "trigger": "매일 06:00",
+      "purpose": "대시보드 JSON 생성과 GitHub Pages push",
+      "content": "todo, projects, OKR, workflows, sales, funnel, business cumulative, page dates",
+      "evidence": [
+        "workspace/tools/scripts/nightwatch/jobs.json:75",
+        "workspace/tools/scripts/nightwatch/dashboard-data.sh"
+      ]
+    },
+    {
+      "name": "button-poller",
+      "runtime": "nightwatch shell",
+      "trigger": "매분",
+      "purpose": "nightwatch inline 버튼 콜백 확인",
+      "content": "sendMessage 없음. getUpdates/answerCallbackQuery만 사용",
+      "evidence": [
+        "workspace/tools/scripts/nightwatch/jobs.json:21",
+        "workspace/tools/scripts/nightwatch/button-poller.sh:17",
+        "workspace/tools/scripts/nightwatch/common.sh:122"
+      ]
+    },
+    {
+      "name": "repeat-task-generator",
+      "runtime": "n8n",
+      "trigger": "매일 08:30",
+      "purpose": "Notion 반복 태스크 생성",
+      "content": "Telegram 발송 없음",
+      "evidence": [
+        "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:18"
+      ]
+    },
+    {
+      "name": "consulting-after-dashboard",
+      "runtime": "n8n",
+      "trigger": "매분",
+      "purpose": "상담 후 대시보드/Apps Script 폴링",
+      "content": "Telegram 노드 없음",
+      "evidence": [
+        "workspace/apps/n8n/workflows/04 consulting-crm/04-2 상담후-대시보드/workflow.json:1"
+      ]
+    },
+    {
+      "name": "consulting-followup-sms",
+      "runtime": "n8n",
+      "trigger": "POST /webhook/aligo-followup",
+      "purpose": "후속문자 SMS 발송",
+      "content": "Telegram 노드 없음",
+      "evidence": [
+        "workspace/apps/n8n/workflows/04 consulting-crm/04-3 후속문자-SMS발송/workflow.json:1"
+      ]
+    }
+  ]
+}

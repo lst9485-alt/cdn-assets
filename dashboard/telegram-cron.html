@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <title>텔레그램 · 크론 알림 - 운영 대시보드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; line-height: 1.5; }
+        .page { max-width: 1160px; margin: 0 auto; padding: 30px 20px 36px; padding-right: 190px; }
+        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 22px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 28px; font-weight: 900; color: #051C2C; margin-bottom: 6px; letter-spacing: 0; }
+        .subtitle { color: #64748B; font-size: 15px; margin-bottom: 20px; }
+        .summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }
+        .metric { background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px 15px; min-height: 78px; }
+        .metric-label { font-size: 12px; color: #64748B; font-weight: 700; margin-bottom: 6px; }
+        .metric-value { font-size: 24px; font-weight: 900; color: #051C2C; }
+        .section { margin-top: 22px; }
+        .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; margin-bottom: 10px; }
+        h2 { font-size: 18px; color: #051C2C; font-weight: 900; }
+        .updated { font-size: 12px; color: #94A3B8; }
+        .rooms { display: grid; gap: 12px; }
+        .room { background: white; border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; }
+        .room-top { padding: 16px 18px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.8fr) auto; gap: 16px; align-items: start; border-bottom: 1px solid #E2E8F0; }
+        .room-name { font-size: 17px; font-weight: 900; color: #051C2C; margin-bottom: 4px; }
+        .room-meta { font-size: 12px; color: #64748B; }
+        .room-role { font-size: 13px; color: #334155; font-weight: 700; margin-bottom: 5px; }
+        .room-cadence { font-size: 12px; color: #64748B; }
+        .volume { font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 999px; background: #E8F3FF; color: #0077C8; white-space: nowrap; }
+        .volume-high { background: #FFF7ED; color: #C2410C; }
+        .volume-very { background: #FEE2E2; color: #B91C1C; }
+        .items { display: grid; }
+        .item { display: grid; grid-template-columns: 180px 150px minmax(0, 1fr) 150px; gap: 12px; padding: 13px 18px; border-bottom: 1px solid #F1F5F9; align-items: start; }
+        .item:last-child { border-bottom: 0; }
+        .name { font-size: 13px; font-weight: 900; color: #051C2C; word-break: keep-all; overflow-wrap: anywhere; }
+        .trigger, .runtime, .content { font-size: 12px; color: #475569; }
+        .purpose { font-size: 13px; color: #1F2937; font-weight: 700; }
+        .content { margin-top: 4px; }
+        .source { font-size: 11px; color: #94A3B8; margin-top: 5px; overflow-wrap: anywhere; }
+        .non-tg { background: white; border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; }
+        .non-tg .item { grid-template-columns: 180px 150px minmax(0, 1fr); }
+        .note { margin-top: 14px; padding: 12px 14px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; color: #64748B; font-size: 12px; }
+        @media (max-width: 1200px) { .page { padding-right: 20px; } }
+        @media (max-width: 900px) {
+            .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .room-top { grid-template-columns: 1fr; gap: 8px; }
+            .item, .non-tg .item { grid-template-columns: 1fr; gap: 5px; }
+        }
+        @media (max-width: 560px) {
+            .summary { grid-template-columns: 1fr; }
+            h1 { font-size: 24px; }
+            .page { padding: 24px 16px 32px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../" class="back">&larr; 메인</a>
+        <h1>텔레그램 · 크론 알림 현황</h1>
+        <p class="subtitle">텔레그램 방별로 어떤 자동화가 언제, 왜 오는지 정리했습니다. 텔레그램이 아닌 크론/스케줄도 아래에 따로 분리했습니다.</p>
+
+        <div class="summary" id="summary"></div>
+
+        <div class="section">
+            <div class="section-head">
+                <h2>텔레그램 방별 알림</h2>
+                <div class="updated" id="updated"></div>
+            </div>
+            <div class="rooms" id="rooms"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-head">
+                <h2>텔레그램 아닌 크론/스케줄</h2>
+            </div>
+            <div class="non-tg" id="nonTelegram"></div>
+            <div class="note">비밀값은 표시하지 않습니다. 근거는 파일 경로와 줄번호만 남겼고, 실제 토큰은 대시보드 데이터에 넣지 않았습니다.</div>
+        </div>
+    </div>
+
+<script>
+(function() {
+    var summaryEl = document.getElementById('summary');
+    var roomsEl = document.getElementById('rooms');
+    var nonTelegramEl = document.getElementById('nonTelegram');
+    var updatedEl = document.getElementById('updated');
+
+    fetch('../data/telegram-cron-inventory.json')
+        .then(function(response) {
+            if (!response.ok) throw new Error('load failed');
+            return response.json();
+        })
+        .then(render)
+        .catch(function() {
+            summaryEl.innerHTML = '<div class="metric"><div class="metric-label">상태</div><div class="metric-value">로드 실패</div></div>';
+        });
+
+    function render(data) {
+        var rooms = data.rooms || [];
+        var telegramSenders = rooms.reduce(function(sum, room) { return sum + (room.items || []).length; }, 0);
+        var nonTelegram = data.nonTelegramCronJobs || [];
+        var n8nCount = rooms.reduce(function(sum, room) {
+            return sum + (room.items || []).filter(function(item) { return item.runtime.indexOf('n8n') >= 0; }).length;
+        }, 0);
+        summaryEl.innerHTML = [
+            metric('텔레그램 방', rooms.length + '개'),
+            metric('텔레그램 발송원', telegramSenders + '개'),
+            metric('n8n 발송원', n8nCount + '개'),
+            metric('비텔레그램 크론', nonTelegram.length + '개')
+        ].join('');
+        updatedEl.textContent = '조사일 ' + esc(data.updated || '');
+        roomsEl.innerHTML = rooms.map(renderRoom).join('');
+        nonTelegramEl.innerHTML = nonTelegram.map(renderNonTelegram).join('');
+    }
+
+    function metric(label, value) {
+        return '<div class="metric"><div class="metric-label">' + esc(label) + '</div><div class="metric-value">' + esc(value) + '</div></div>';
+    }
+
+    function renderRoom(room) {
+        var volumeClass = room.volume === '매우 높음' ? 'volume-very' : room.volume === '높음' ? 'volume-high' : '';
+        return ''
+            + '<article class="room">'
+            + '<div class="room-top">'
+            + '<div><div class="room-name">' + esc(room.name) + '</div><div class="room-meta">' + esc(room.bot) + ' · ' + esc(room.sourceEnv) + '</div></div>'
+            + '<div><div class="room-role">' + esc(room.role) + '</div><div class="room-cadence">' + esc(room.cadence) + '</div></div>'
+            + '<div class="volume ' + volumeClass + '">' + esc(room.volume) + '</div>'
+            + '</div>'
+            + '<div class="items">' + (room.items || []).map(renderItem).join('') + '</div>'
+            + '</article>';
+    }
+
+    function renderItem(item) {
+        return ''
+            + '<div class="item">'
+            + '<div><div class="name">' + esc(item.name) + '</div><div class="runtime">' + esc(item.runtime) + '</div></div>'
+            + '<div class="trigger">' + esc(item.trigger) + '</div>'
+            + '<div><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc(item.content) + '</div><div class="source">' + esc((item.evidence || []).join(' · ')) + '</div></div>'
+            + '<div class="runtime">' + esc(roomlessTag(item.runtime)) + '</div>'
+            + '</div>';
+    }
+
+    function renderNonTelegram(item) {
+        return ''
+            + '<div class="item">'
+            + '<div><div class="name">' + esc(item.name) + '</div><div class="runtime">' + esc(item.runtime) + '</div></div>'
+            + '<div class="trigger">' + esc(item.trigger) + '</div>'
+            + '<div><div class="purpose">' + esc(item.purpose) + '</div><div class="content">' + esc(item.content) + '</div><div class="source">' + esc((item.evidence || []).join(' · ')) + '</div></div>'
+            + '</div>';
+    }
+
+    function roomlessTag(runtime) {
+        if (runtime.indexOf('n8n') >= 0) return 'n8n';
+        if (runtime.indexOf('Python') >= 0) return 'Python';
+        if (runtime.indexOf('crontab') >= 0) return 'crontab';
+        return 'nightwatch';
+    }
+
+    function esc(value) {
+        var span = document.createElement('span');
+        span.textContent = value == null ? '' : String(value);
+        return span.innerHTML;
+    }
+})();
+</script>
+<script src="../nav.js"></script>
+<script src="../footer.js"></script>
+<script src="../sidebar.js"></script>
+</body>
+</html>
