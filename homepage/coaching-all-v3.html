@@ -167,6 +167,21 @@
 	  .future-result-card { border-radius:18px; border:1px solid rgba(18,24,38,0.10); background:#fff; box-shadow:0 12px 28px rgba(15,23,42,0.08); }
 	  .future-result-card.good { border-color:#fecaca; }
 	  .future-result-card.bad { border-color:#bfdbfe; }
+      .story-chart-report { border:1px solid rgba(18,24,38,.12); border-radius:18px; background:#fff; overflow:hidden; box-shadow:0 18px 46px rgba(15,23,42,.08); }
+      .story-chart-body { display:grid; grid-template-columns:minmax(0,1fr) 250px; border-top:1px solid rgba(18,24,38,.08); }
+      .story-chart-side { border-left:1px solid rgba(18,24,38,.08); background:#fafafa; }
+      .story-chart-report .chart-line { stroke-dasharray:none; stroke-dashoffset:0; transition:none; }
+      .future-split { position:relative; display:grid; grid-template-columns:1fr 96px 1fr; align-items:center; gap:18px; }
+      .future-split-node { width:86px; height:86px; border-radius:999px; border:3px solid #ff6b00; background:#fff7ed; display:grid; place-items:center; font-weight:900; color:#ff6b00; box-shadow:0 14px 28px rgba(255,107,0,.14); }
+      .future-split-line { position:absolute; left:50%; top:50%; width:1px; height:74%; background:#e5e7eb; transform:translate(-50%,-50%); z-index:0; }
+      .future-choice-pill { display:inline-flex; align-items:center; gap:7px; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:900; }
+      @media (max-width: 767px) {
+        .story-chart-body { grid-template-columns:1fr; }
+        .story-chart-side { border-left:0; border-top:1px solid rgba(18,24,38,.08); }
+        .future-split { grid-template-columns:1fr; }
+        .future-split-line { display:none; }
+        .future-split-node { margin:0 auto; }
+      }
 	  .story-proof-wrap { background:#e8f4ee; border-radius:28px; padding:22px; }
 	  .story-proof-card { border:2px solid #121826; border-radius:14px; background:#fff; box-shadow:5px 5px 0 #121826; padding:22px; }
 	  .recommend-card { background:rgba(255,255,255,0.92); border:1px solid rgba(255,255,255,0.55); color:#121826; }
@@ -345,46 +360,45 @@
       <div class="text-center mb-14" data-reveal="scale">
         <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep">어떻게<br>됐을까요?</p>
       </div>
-      <!-- SVG 차트 -->
-	      <div class="bg-white rounded-2xl p-5 md:p-8 mb-10 shadow-lg shadow-slate-200/60 border border-gray-200" data-reveal id="chartContainer">
-        <div class="flex items-center gap-6 mb-4 text-sm font-medium">
-          <span class="flex items-center gap-2 text-base"><span class="w-3.5 h-3.5 rounded-full bg-red-600"></span> 분당 (김과장)</span>
-          <span class="flex items-center gap-2 text-base"><span class="w-3.5 h-3.5 rounded-full bg-brand-blue"></span> 일산 (의사 강씨)</span>
-        </div>
-        <svg viewBox="0 0 620 400" class="w-full" aria-label="분당과 일산 아파트 시세 비교 차트">
-          <line x1="60" y1="30" x2="60" y2="340" stroke="#e5e7eb" stroke-width="1"/><line x1="60" y1="340" x2="590" y2="340" stroke="#e5e7eb" stroke-width="1"/>
-          <text x="50" y="340" text-anchor="end" fill="#9ca3af" font-size="12">0</text><text x="50" y="278" text-anchor="end" fill="#9ca3af" font-size="12">4억</text><text x="50" y="216" text-anchor="end" fill="#9ca3af" font-size="12">8억</text><text x="50" y="154" text-anchor="end" fill="#9ca3af" font-size="12">12억</text><text x="50" y="92" text-anchor="end" fill="#9ca3af" font-size="12">16억</text><text x="50" y="40" text-anchor="end" fill="#9ca3af" font-size="12">20억</text>
-          <text x="60" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2006</text><text x="192" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2011</text><text x="325" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2016</text><text x="458" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2021</text><text x="590" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2026</text>
-          <line x1="60" y1="278" x2="590" y2="278" stroke="#f3f4f6"/><line x1="60" y1="216" x2="590" y2="216" stroke="#f3f4f6"/><line x1="60" y1="154" x2="590" y2="154" stroke="#f3f4f6"/><line x1="60" y1="92" x2="590" y2="92" stroke="#f3f4f6"/>
-          <!-- 2011년 수직 점선 -->
-	          <line x1="192" y1="30" x2="192" y2="340" stroke="#FF6B00" stroke-width="2" stroke-dasharray="7,5" class="chart-arrow"/>
-          <!-- 2026년 수직 점선 -->
-	          <line x1="590" y1="30" x2="590" y2="340" stroke="#FF6B00" stroke-width="2" stroke-dasharray="7,5" class="chart-arrow"/>
-          <!-- 분당 (빨강) -->
-	          <path class="chart-line" d="M60 231 L140 247 L192 231 C260 176 314 126 380 60 L450 107 L520 76 L590 60" fill="none" stroke="#dc2626" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- 일산 (파랑) -->
-	          <path class="chart-line" d="M60 185 L140 216 L192 231 C260 210 322 184 380 154 L450 216 L520 247 L590 247" fill="none" stroke="#0055FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- 교차점 동그라미 (가운데 점 없음) -->
-	          <circle cx="192" cy="231" r="11" fill="#fff7ed" stroke="#FF6B00" stroke-width="3" class="chart-arrow"/>
-          <!-- 2006년 시작점 라벨 -->
-	          <rect x="72" y="148" width="44" height="25" rx="8" fill="white" stroke="#dbeafe" class="chart-arrow"/>
-	          <text x="94" y="166" text-anchor="middle" fill="#0055FF" font-size="15" font-weight="900" class="chart-arrow">10억</text>
-	          <rect x="72" y="256" width="40" height="25" rx="8" fill="white" stroke="#fee2e2" class="chart-arrow"/>
-	          <text x="92" y="274" text-anchor="middle" fill="#dc2626" font-size="15" font-weight="900" class="chart-arrow">7억</text>
-          <!-- 끝점 라벨 -->
-	          <circle cx="590" cy="60" r="7" fill="#dc2626" class="chart-arrow"/>
-	          <rect x="500" y="10" width="82" height="50" rx="12" fill="white" stroke="#fee2e2" class="chart-arrow"/>
-	          <text x="541" y="31" text-anchor="middle" fill="#dc2626" font-size="13" font-weight="900" class="chart-arrow">폭등 ↑</text>
-	          <text x="541" y="52" text-anchor="middle" fill="#dc2626" font-size="18" font-weight="900" class="chart-arrow">19억</text>
-	          <circle cx="590" cy="247" r="7" fill="#0055FF" class="chart-arrow"/>
-	          <rect x="500" y="255" width="82" height="50" rx="12" fill="white" stroke="#dbeafe" class="chart-arrow"/>
-	          <text x="541" y="276" text-anchor="middle" fill="#0055FF" font-size="18" font-weight="900" class="chart-arrow">6억</text>
-	          <text x="541" y="296" text-anchor="middle" fill="#0055FF" font-size="13" font-weight="900" class="chart-arrow">하락 ↓</text>
-          <!-- 추세 강조선: 화살표 대신 흐름만 은은하게 표시 -->
-          <path class="chart-arrow" d="M310 140 C332 118 350 98 368 78" fill="none" stroke="#dc2626" stroke-width="4" stroke-linecap="round" stroke-dasharray="7 8" opacity="0.72"/>
-          <path class="chart-arrow" d="M318 245 C338 258 356 272 374 286" fill="none" stroke="#0055FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="7 8" opacity="0.72"/>
-        </svg>
-      </div>
+	      <!-- 보고서형 차트 -->
+	      <div class="story-chart-report mb-10" data-reveal id="chartContainer">
+	        <div class="flex flex-col gap-4 p-6 md:flex-row md:items-end md:justify-between md:p-8">
+	          <div>
+	            <p class="text-xs font-black tracking-widest text-gray-400">FIG. 01 · 매매가 추이 (단위: 억)</p>
+	            <p class="mt-2 text-2xl md:text-3xl font-display font-black text-brand-dark word-keep">분당 vs 일산 — 2006 → 2026</p>
+	          </div>
+	          <div class="flex items-center gap-5 text-sm font-bold">
+	            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-red-500"></span>분당</span>
+	            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[#5f83a8]"></span>일산</span>
+	          </div>
+	        </div>
+	        <div class="story-chart-body">
+	          <div class="p-5 md:p-8">
+	            <svg viewBox="0 0 620 330" class="w-full" aria-label="분당과 일산 아파트 시세 비교 차트">
+	              <line x1="58" y1="24" x2="58" y2="270" stroke="#e5e7eb" stroke-width="1"/><line x1="58" y1="270" x2="560" y2="270" stroke="#e5e7eb" stroke-width="1"/>
+	              <text x="48" y="270" text-anchor="end" fill="#9ca3af" font-size="12">0억</text><text x="48" y="215" text-anchor="end" fill="#9ca3af" font-size="12">5억</text><text x="48" y="160" text-anchor="end" fill="#9ca3af" font-size="12">10억</text><text x="48" y="105" text-anchor="end" fill="#9ca3af" font-size="12">15억</text><text x="48" y="50" text-anchor="end" fill="#9ca3af" font-size="12">20억</text>
+	              <line x1="58" y1="215" x2="560" y2="215" stroke="#f3f4f6"/><line x1="58" y1="160" x2="560" y2="160" stroke="#f3f4f6"/><line x1="58" y1="105" x2="560" y2="105" stroke="#f3f4f6"/><line x1="58" y1="50" x2="560" y2="50" stroke="#f3f4f6"/>
+	              <text x="58" y="296" text-anchor="middle" fill="#8b95a5" font-size="12">2006</text><text x="184" y="296" text-anchor="middle" fill="#8b95a5" font-size="12">2011</text><text x="310" y="296" text-anchor="middle" fill="#8b95a5" font-size="12">2016</text><text x="436" y="296" text-anchor="middle" fill="#8b95a5" font-size="12">2021</text><text x="560" y="296" text-anchor="middle" fill="#8b95a5" font-size="12">2026</text>
+	              <path class="chart-line" d="M58 193 L184 171 L310 138 L436 78 L560 32" fill="none" stroke="#ff5a52" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+	              <path class="chart-line" d="M58 160 L184 149 L310 160 L436 182 L560 204" fill="none" stroke="#5f83a8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+	              <g class="chart-arrow">
+	                <circle cx="58" cy="193" r="5" fill="#ff5a52"/><circle cx="560" cy="32" r="5" fill="#ff5a52"/>
+	                <circle cx="58" cy="160" r="5" fill="#5f83a8"/><circle cx="560" cy="204" r="5" fill="#5f83a8"/>
+	                <line x1="560" y1="32" x2="560" y2="204" stroke="#94a3b8" stroke-dasharray="4 4"/>
+	                <text x="570" y="122" fill="#111827" font-size="13" font-weight="900">13억 차</text>
+	              </g>
+	            </svg>
+	          </div>
+	          <div class="story-chart-side p-6 md:p-8">
+	            <p class="text-xs font-black tracking-widest text-gray-400">핵심 인사이트</p>
+	            <p class="mt-5 text-lg leading-8 font-black text-brand-dark word-keep">중소기업 김과장은 <span class="text-red-600">분당 7억</span>을, 고소득 의사 강씨는 <span class="text-brand-blue">일산 10억</span>을 샀습니다. 20년 뒤 격차는 <span class="text-red-600">13억</span>으로 벌어졌습니다.</p>
+	            <div class="mt-10 border-t border-gray-200 pt-5">
+	              <p class="text-xs font-black tracking-widest text-gray-400">SOURCE</p>
+	              <p class="mt-2 text-sm font-black text-brand-dark">KB부동산 시계열 · 2006-2026</p>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
       <div class="text-center mb-16" data-reveal="scale">
         <p class="text-2xl md:text-3xl font-display font-black word-keep mb-3"><span class="text-red-600">7억 분당</span>은 → <span class="text-red-600 font-black">19억</span>이 됐고,</p>
         <p class="text-2xl md:text-3xl font-display font-black word-keep mb-8"><span class="text-brand-blue">10억 일산</span>은 → <span class="text-brand-blue font-black">6억</span>이 됐습니다</p>
@@ -396,37 +410,30 @@
         <p class="text-xl md:text-2xl text-gray-600 word-keep leading-relaxed mb-10"><span class="text-brand-blue font-bold">의사 강씨</span>는 고소득임에도<br><span class="text-red-600 font-bold">김과장</span>과 갈수록 격차가 벌어졌습니다</p>
         <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-[1.28]">지금 이 순간에도<br><span class="text-brand-orange">똑같은 일</span>이 생기고 있습니다</p>
       </div>
-	      <div class="future-choice-card mt-14 mb-16 max-w-3xl mx-auto p-5 md:p-8" data-reveal>
-        <p class="text-center text-sm text-gray-500 mb-6 font-bold">2026년, 지금 선택이 이후 결과를 가릅니다</p>
-        <div class="grid gap-6 md:grid-cols-[1.05fr_0.95fr] md:items-center">
-          <svg viewBox="0 0 420 250" class="w-full" aria-label="2026년 선택 이후 자산과 손실 방향을 비교한 차트">
-            <rect x="24" y="58" width="115" height="138" rx="18" fill="#f3f4f6"/>
-            <line x1="50" y1="198" x2="392" y2="198" stroke="#e5e7eb" stroke-width="2"/>
-            <line x1="148" y1="42" x2="148" y2="198" stroke="#ff6b00" stroke-width="2.2" stroke-dasharray="7 7"/>
-            <path d="M40 144 C74 126 106 132 148 126" fill="none" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
-            <path d="M148 126 C210 94 270 70 374 50" fill="none" stroke="#dc2626" stroke-width="4.5" stroke-linecap="round"/>
-            <path d="M148 126 C210 154 278 178 374 188" fill="none" stroke="#0055FF" stroke-width="4.5" stroke-linecap="round"/>
-            <circle cx="148" cy="126" r="17" fill="#fff7ed" stroke="#ff6b00" stroke-width="4"/>
-            <text x="148" y="232" text-anchor="middle" fill="#8b95a5" font-size="22" font-weight="900">2026</text>
-            <text x="268" y="232" text-anchor="middle" fill="#8b95a5" font-size="16" font-weight="700">2028</text>
-            <text x="374" y="232" text-anchor="middle" fill="#8b95a5" font-size="16" font-weight="700">2030</text>
-            <rect x="93" y="101" width="52" height="34" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
-            <text x="119" y="123" text-anchor="middle" fill="#ff6b00" font-size="14" font-weight="900">지금</text>
-          </svg>
-          <div class="space-y-4">
-            <div class="future-result-card good p-5">
-              <p class="text-xs font-black tracking-widest text-red-500">GOOD CHOICE</p>
-              <p class="mt-2 text-xl font-display font-black text-red-600 word-keep">잘 고르면 자산이 남습니다</p>
-              <p class="mt-2 text-sm text-gray-500 word-keep">예산, 입지, 대출, 매도 가능성까지 기준을 세운 선택</p>
-            </div>
-            <div class="future-result-card bad p-5">
-              <p class="text-xs font-black tracking-widest text-brand-blue">BAD CHOICE</p>
-              <p class="mt-2 text-xl font-display font-black text-brand-blue word-keep">잘못 고르면 손실이 남습니다</p>
-              <p class="mt-2 text-sm text-gray-500 word-keep">분위기, 주변 말, 막연한 기대만으로 내린 선택</p>
-            </div>
-          </div>
-        </div>
-      </div>
+		      <div class="future-choice-card mt-14 mb-16 max-w-3xl mx-auto p-6 md:p-8" data-reveal>
+	        <p class="text-center text-sm text-gray-500 mb-2 font-bold">지금 필요한 건 예측이 아니라 기준입니다</p>
+	        <p class="text-center text-2xl md:text-3xl font-display font-black text-brand-dark word-keep mb-8">같은 예산도 기준에 따라 결과가 갈립니다</p>
+	        <div class="future-split">
+	          <div class="future-result-card good p-6">
+	            <span class="future-choice-pill bg-red-50 text-red-600"><iconify-icon icon="solar:check-circle-bold"></iconify-icon>기준 있는 선택</span>
+	            <p class="mt-4 text-2xl font-display font-black text-red-600 word-keep">자산이 남습니다</p>
+	            <p class="mt-3 text-sm leading-6 text-gray-500 word-keep">예산, 입지, 대출, 매도 가능성까지 확인하고 들어간 선택</p>
+	          </div>
+	          <div class="future-split-node relative z-10">지금</div>
+	          <div class="future-result-card bad p-6">
+	            <span class="future-choice-pill bg-blue-50 text-brand-blue"><iconify-icon icon="solar:danger-triangle-bold"></iconify-icon>기준 없는 선택</span>
+	            <p class="mt-4 text-2xl font-display font-black text-brand-blue word-keep">손실이 남습니다</p>
+	            <p class="mt-3 text-sm leading-6 text-gray-500 word-keep">분위기, 주변 말, 막연한 기대만 믿고 들어간 선택</p>
+	          </div>
+	          <div class="future-split-line"></div>
+	        </div>
+	        <div class="mt-7 flex flex-wrap justify-center gap-2 text-sm font-bold text-gray-600">
+	          <span class="rounded-full bg-gray-100 px-4 py-2">예산</span>
+	          <span class="rounded-full bg-gray-100 px-4 py-2">대출</span>
+	          <span class="rounded-full bg-gray-100 px-4 py-2">입지</span>
+	          <span class="rounded-full bg-gray-100 px-4 py-2">매도 가능성</span>
+	        </div>
+	      </div>
 	      <div class="chat-stack max-w-2xl mx-auto space-y-5 mb-16" data-stagger>
 	        <div class="bubble-real-l px-7 py-5 w-[72%] md:w-[360px]"><p class="text-lg md:text-xl word-keep font-bold text-gray-800">"지금 여기 사도 될까요?"</p></div>
 	        <div class="bubble-real-r px-7 py-5 w-[76%] md:w-[390px] ml-auto"><p class="text-lg md:text-xl word-keep text-gray-800">"고민하고 있는 단지중에<br><span class="font-black text-brand-orange">어디가 더 많이 오를까요?</span>"</p></div>
@@ -512,23 +519,16 @@
         </div>
 	        <p class="text-xl md:text-2xl text-gray-200 word-keep mt-4 font-medium">문제는, 이 실수가 특별한 일이 아니라는 겁니다</p>
 	      </div>
-	      <div class="story-proof-wrap mt-16 grid grid-cols-1 gap-4 md:grid-cols-3" data-stagger>
-	        <div class="story-proof-card">
-	          <p class="mb-3 text-brand-orange text-sm tracking-widest">★★★★★</p>
-	          <p class="text-sm leading-6 text-brand-dark font-black word-keep">"처음 보는 단지도 비교 기준이 생겨서 훨씬 덜 흔들렸습니다."</p>
-	          <p class="mt-4 text-xs font-bold text-gray-500">30대 맞벌이 부부 · 서울 영등포 · 김*하 님</p>
-	        </div>
-	        <div class="story-proof-card">
-	          <p class="mb-3 text-brand-orange text-sm tracking-widest">★★★★★</p>
-	          <p class="text-sm leading-6 text-brand-dark font-black word-keep">"보류해야 할 매물을 걸러내니까 오히려 선택이 쉬워졌습니다."</p>
-	          <p class="mt-4 text-xs font-bold text-gray-500">갈아타기 준비 · 광주 · 박*우 님</p>
-	        </div>
-	        <div class="story-proof-card">
-	          <p class="mb-3 text-brand-orange text-sm tracking-widest">★★★★★</p>
-	          <p class="text-sm leading-6 text-brand-dark font-black word-keep">"90일 동안 확인할 수 있다는 점 때문에 계약 전 마음이 놓였습니다."</p>
-	          <p class="mt-4 text-xs font-bold text-gray-500">내집마련 준비 · 천안 · 이*서 님</p>
-	        </div>
-	      </div>
+		      <div class="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2" data-stagger>
+		        <div class="testimonial-sticker bg-[#38c5be] p-7 text-white md:p-8">
+		          <p class="text-sm font-black word-keep">최*윤님 · 서울 용산 30대</p>
+		          <p class="mt-4 text-xl md:text-2xl font-display font-black leading-snug word-keep">"상담 리포트 덕분에 부부가 같은 기준으로 이야기할 수 있었습니다."</p>
+		        </div>
+		        <div class="testimonial-sticker bg-[#f4c430] p-7 text-brand-dark md:p-8">
+		          <p class="text-sm font-black word-keep">박*준님 · 경기 안양 40대</p>
+		          <p class="mt-4 text-xl md:text-2xl font-display font-black leading-snug word-keep">"체크리스트를 보고 계약 전에 놓친 부분을 다시 확인했습니다."</p>
+		        </div>
+		      </div>
       <!-- 추천 대상 -->
       <div class="mt-20 max-w-2xl mx-auto" data-reveal>
         <div class="text-center mb-10">
@@ -1152,11 +1152,18 @@
   <section class="max-w-4xl mx-auto bg-[#262626] px-6 py-14 text-center text-white relative">
     <div class="max-w-3xl mx-auto">
       <p class="text-2xl md:text-3xl font-display font-black word-keep">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
-      <button class="scroll-to-form mt-8 inline-flex items-center justify-center rounded-2xl bg-white px-8 py-4 shadow-lg transition-transform hover:scale-[1.02]">
-        <span class="mr-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange text-white shadow-md"><iconify-icon icon="solar:user-id-bold" class="text-3xl"></iconify-icon></span>
-        <span class="text-left"><span class="block text-sm font-bold text-gray-500">우리동네재테크</span><span class="block text-2xl md:text-3xl font-display font-black text-brand-dark">대기신청하기</span></span>
-      </button>
-      <p class="mt-5 text-sm text-gray-300 word-keep">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
+	      <button class="scroll-to-form mt-8 inline-flex items-center justify-center rounded-2xl bg-white px-8 py-4 shadow-lg transition-transform hover:scale-[1.02]">
+	        <span class="mr-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange text-white shadow-md"><iconify-icon icon="solar:user-id-bold" class="text-3xl"></iconify-icon></span>
+	        <span class="text-left"><span class="block text-sm font-bold text-gray-500">우리동네재테크</span><span class="block text-2xl md:text-3xl font-display font-black text-brand-dark">대기신청하기</span></span>
+	      </button>
+	      <div class="mt-5 flex justify-center">
+	        <div class="inline-flex items-center gap-3 rounded-full bg-[#FEE500] px-5 py-2 text-brand-dark shadow-md">
+	          <span class="grid h-7 w-7 place-items-center rounded-full bg-brand-dark text-xs font-black text-[#FEE500]">Ch</span>
+	          <span class="text-sm font-black">카카오톡 플러스 ID</span>
+	          <span class="text-sm font-black">우리동네재테크</span>
+	        </div>
+	      </div>
+	      <p class="mt-5 text-sm text-gray-300 word-keep">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
     </div>
   </section>
 
