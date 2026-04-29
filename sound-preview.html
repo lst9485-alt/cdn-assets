@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>yt-slide 효과음 미리듣기</title>
+<style>
+body { font-family: -apple-system, sans-serif; max-width: 720px; margin: 40px auto; padding: 20px; }
+h1 { font-size: 22px; margin-bottom: 24px; }
+h2 { font-size: 16px; color: #555; margin-top: 32px; border-bottom: 1px solid #eee; padding-bottom: 6px; }
+.row { display: flex; align-items: center; gap: 16px; padding: 10px 0; border-bottom: 1px solid #f5f5f5; }
+.label { width: 220px; font-weight: 500; }
+.usage { font-size: 13px; color: #888; }
+audio { flex: 1; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-left: 6px; }
+.tag-unused { background: #fff4cc; color: #8a6d00; }
+.tag-active { background: #d4f1d4; color: #2d6a2d; }
+</style>
+</head>
+<body>
+<h1>yt-slide 효과음 미리듣기</h1>
+<p style="color:#666; font-size:14px;">현재 슬라이드에서 사용/미사용 효과음 전체 목록</p>
+
+<h2>미사용 (플로우 후보)</h2>
+<div class="row">
+  <div class="label">띠링1.wav <span class="tag tag-unused">미사용</span></div>
+  <audio controls src="slide-viewer/assets/sounds/띠링1.wav"></audio>
+</div>
+<div class="row">
+  <div class="label">뽀옥3.wav <span class="tag tag-unused">미사용</span></div>
+  <audio controls src="slide-viewer/assets/sounds/뽀옥3.wav"></audio>
+</div>
+
+<h2>현재 사용 중</h2>
+<div class="row">
+  <div class="label">slide.mp3 <span class="tag tag-active">사용</span></div>
+  <audio controls src="slide-viewer/assets/sounds/slide.mp3"></audio>
+  <div class="usage">페이지 전환</div>
+</div>
+<div class="row">
+  <div class="label">step.mp3 <span class="tag tag-active">사용</span></div>
+  <audio controls src="slide-viewer/assets/sounds/step.mp3"></audio>
+  <div class="usage">스텝 진행 (기본)</div>
+</div>
+<div class="row">
+  <div class="label">딸깍.mp3 <span class="tag tag-active">사용</span></div>
+  <audio controls src="slide-viewer/assets/sounds/딸깍.mp3"></audio>
+  <div class="usage">CTA 좋아요</div>
+</div>
+<div class="row">
+  <div class="label">띠링(구독좋아요).mp3 <span class="tag tag-active">사용</span></div>
+  <audio controls src="slide-viewer/assets/sounds/띠링(구독좋아요).mp3"></audio>
+  <div class="usage">CTA 구독</div>
+</div>
+<div class="row">
+  <div class="label">장면전환.mp3 <span class="tag tag-active">사용</span></div>
+  <audio controls src="slide-viewer/assets/sounds/장면전환.mp3"></audio>
+  <div class="usage">장면 전환</div>
+</div>
+<div class="row">
+  <div class="label">금액.mp3 <span class="tag tag-active">사용</span></div>
+  <audio controls src="slide-viewer/assets/sounds/금액.mp3"></audio>
+  <div class="usage">금액 표시</div>
+</div>
+<div class="row">
+  <div class="label">삐삑.mp3 <span class="tag tag-active">사용</span></div>
+  <audio controls src="slide-viewer/assets/sounds/삐삑.mp3"></audio>
+  <div class="usage">부저/경고</div>
+</div>
+<div class="row">
+  <div class="label">pen-sketch.mp3 <span class="tag tag-active">사용</span></div>
+  <audio controls src="slide-viewer/assets/sounds/pen-sketch.mp3"></audio>
+  <div class="usage">펜 글씨</div>
+</div>
+</body>
+</html>
