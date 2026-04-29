@@ -82,21 +82,22 @@
   <main class="wrap">
     <div class="eyebrow">HOMEPAGE DESIGN DRAFTS</div>
     <h1>메인 페이지 시안</h1>
-    <p class="lead">현재 메인 페이지 원본과 기존 메인 페이지 시안 v2, 추가 시안 v3부터 v8까지 한 번에 확인하는 진입 화면입니다. 각 카드의 홈을 누르면 해당 시안의 메인 화면으로 들어가고, 칩을 누르면 세부 페이지로 바로 이동합니다.</p>
+    <p class="lead">현재 메인 페이지 원본과 시안 v00, 기존 메인 페이지 시안 v2, 추가 시안 v3부터 v8까지 한 번에 확인하는 진입 화면입니다. 각 카드의 홈을 누르면 해당 시안의 메인 화면으로 들어가고, 칩을 누르면 세부 페이지로 바로 이동합니다.</p>
     <a class="dashboard-link" href="../index.html">대시보드로 돌아가기</a>
     <section class="grid" id="draftGrid" aria-label="홈페이지 시안 목록"></section>
   </main>
 
   <script>
     const drafts = [
-      { name: "메인 페이지 원본", href: "main-page.html", tone: "Current Main", desc: "현재 운영 기준 메인 페이지" },
-      { name: "메인 페이지 시안 v2", href: "main-page-test2.html", tone: "WBF Refined", desc: "기존 절제형 브랜드 컬러 적용 방향" },
-      { name: "메인 페이지 시안 v3", src: "v1", tone: "Editorial Magazine", desc: "큰 타이포와 매거진형 레이아웃 중심의 단호한 방향" },
-      { name: "메인 페이지 시안 v4", src: "v2", tone: "Sticker Collage", desc: "스티커와 콜라주 감성의 친근하고 다채로운 방향" },
-      { name: "메인 페이지 시안 v5", src: "v3", tone: "Data Story", desc: "차트와 데이터 위젯을 강조한 신뢰형 방향" },
-      { name: "메인 페이지 시안 v6", src: "v4", tone: "Neighborhood Map", desc: "동네 지도와 로드맵 메타포를 쓰는 방향" },
-      { name: "메인 페이지 시안 v7", src: "v5", tone: "Kakao Chat", desc: "대화창 흐름으로 편하게 읽히는 상담형 방향" },
-      { name: "메인 페이지 시안 v8", src: "v6", tone: "Risograph Zine", desc: "포스터와 진 스타일의 강한 색감 중심 방향" }
+      { num: "01", name: "메인 페이지 원본", href: "main-page.html", tone: "Current Main", desc: "현재 운영 기준 메인 페이지" },
+      { num: "00", name: "메인 페이지 시안 v00", href: "v00/index.html", tone: "Design Canvas", desc: "새 시안 비교용 캔버스" },
+      { num: "02", name: "메인 페이지 시안 v2", href: "main-page-test2.html", tone: "WBF Refined", desc: "기존 절제형 브랜드 컬러 적용 방향" },
+      { num: "03", name: "메인 페이지 시안 v3", src: "v1", tone: "Editorial Magazine", desc: "큰 타이포와 매거진형 레이아웃 중심의 단호한 방향" },
+      { num: "04", name: "메인 페이지 시안 v4", src: "v2", tone: "Sticker Collage", desc: "스티커와 콜라주 감성의 친근하고 다채로운 방향" },
+      { num: "05", name: "메인 페이지 시안 v5", src: "v3", tone: "Data Story", desc: "차트와 데이터 위젯을 강조한 신뢰형 방향" },
+      { num: "06", name: "메인 페이지 시안 v6", src: "v4", tone: "Neighborhood Map", desc: "동네 지도와 로드맵 메타포를 쓰는 방향" },
+      { num: "07", name: "메인 페이지 시안 v7", src: "v5", tone: "Kakao Chat", desc: "대화창 흐름으로 편하게 읽히는 상담형 방향" },
+      { num: "08", name: "메인 페이지 시안 v8", src: "v6", tone: "Risograph Zine", desc: "포스터와 진 스타일의 강한 색감 중심 방향" }
     ];
     const pages = [
       ["main", "홈"],
@@ -110,7 +111,7 @@
     document.getElementById("draftGrid").innerHTML = drafts.map((draft, index) => `
       <article class="card">
         <div>
-          <div class="num">${String(index + 1).padStart(2, "0")}</div>
+          <div class="num">${draft.num}</div>
           <div class="title">${draft.name}</div>
           <div class="desc">${draft.tone}<br>${draft.desc}</div>
           <a class="main-link" href="${draft.href || `${base}/${draft.src}/main.html`}">홈 화면 보기</a>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>메인 페이지 시안 v00 — 우리동네재테크</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+  body { margin: 0; font-family: 'Pretendard', sans-serif; background: #2a2a28; }
+  * { box-sizing: border-box; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="variants/v1-editorial.jsx"></script>
+<script type="text/babel" src="variants/v2-sticker.jsx"></script>
+<script type="text/babel" src="variants/v3-data.jsx"></script>
+<script type="text/babel" src="variants/v4-map.jsx"></script>
+<script type="text/babel" src="variants/v5-chat.jsx"></script>
+<script type="text/babel" src="variants/v6-zine.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+  const App = () => (
+    <DesignCanvas title="우리동네재테크 · 랜딩 페이지 탐색" subtitle="다채롭고 친근한 톤으로 6가지 방향성">
+      <DCSection id="editorial" title="01 · Bold Editorial — 매거진처럼 단호하게">
+        <DCArtboard id="v1" label="Editorial Magazine" width={1280} height={2200}>
+          <V1Editorial />
+        </DCArtboard>
+      </DCSection>
+      <DCSection id="sticker" title="02 · Friendly Sticker — 포스트잇 콜라주">
+        <DCArtboard id="v2" label="Sticker Collage" width={1280} height={2300}>
+          <V2Sticker />
+        </DCArtboard>
+      </DCSection>
+      <DCSection id="data" title="03 · Data Story — 차트가 주인공, 진중한 톤">
+        <DCArtboard id="v3" label="Data Story" width={1280} height={1900}>
+          <V3Data />
+        </DCArtboard>
+      </DCSection>
+      <DCSection id="map" title="04 · Neighborhood Map — 동네 지도 메타포">
+        <DCArtboard id="v4" label="Neighborhood Map" width={1280} height={2100}>
+          <V4Map />
+        </DCArtboard>
+      </DCSection>
+      <DCSection id="chat" title="05 · Kakao Chat — 친구처럼 편하게">
+        <DCArtboard id="v5" label="Chat Style" width={1280} height={2400}>
+          <V5Chat />
+        </DCArtboard>
+      </DCSection>
+      <DCSection id="zine" title="06 · Risograph Zine — 큼직한 포스터 타이포">
+        <DCArtboard id="v6" label="Zine Poster" width={1280} height={2400}>
+          <V6Zine />
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+<script src="../draft-switcher.js"></script>
+</body>
+</html>

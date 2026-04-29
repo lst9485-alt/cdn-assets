@@ -96,6 +96,7 @@ window.CONTENT = {
   ],
   versions: [
     { id: "main-original", href: "../../main-page.html", displayId: "원본", displayName: "메인 페이지 원본", label: "메인" },
+    { id: "preview-v00", href: "../../v00/index.html", displayId: "v00", displayName: "메인 페이지 시안 v00", label: "비교" },
     { id: "preview-v2", href: "../../main-page-test2.html", displayId: "v2", displayName: "메인 페이지 시안 v2", label: "WBF" },
     { id: "v1", displayId: "v3", displayName: "메인 페이지 시안 v3", label: "Editorial" },
     { id: "v2", displayId: "v4", displayName: "메인 페이지 시안 v4", label: "Sticker" },
