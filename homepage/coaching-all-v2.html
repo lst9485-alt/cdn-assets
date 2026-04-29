@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>내집마련 1:1 코칭 v2 — 우리동네 재테크</title>
+  <title>내집마련 1:1 코칭 v2 — 우리동네 재테크</title>
+  <meta name="robots" content="noindex,nofollow">
 <!-- 아임웹 환경설정 → HEAD 코드 삽입 -->
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -131,34 +132,9 @@
   /* Card hover lift */
   .card-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
   .card-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
-  .v2-page { background: #f7f3eb; }
-  .v2-soft-shadow { box-shadow: 0 24px 80px rgba(67, 44, 25, 0.12); }
-  .v2-card { border: 1px solid rgba(67, 44, 25, 0.10); background: rgba(255,255,255,0.86); box-shadow: 0 18px 48px rgba(67, 44, 25, 0.09); }
-  .v2-dark-card { border: 1px solid rgba(255,255,255,0.10); background: rgba(18,18,18,0.92); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 24px 80px rgba(10,10,10,0.22); }
-  .v2-pill { border-radius: 999px; border: 1px solid rgba(255,107,0,0.22); background: rgba(255,107,0,0.08); color: #c65300; }
-  .v2-link-btn { transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s cubic-bezier(0.16,1,0.3,1); }
-  .v2-link-btn:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 18px 44px rgba(255,107,0,0.26); }
-  .v2-link-btn:active { transform: translateY(0) scale(0.98); }
-  .v2-map-grid { background-image: linear-gradient(rgba(10,10,10,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,10,0.05) 1px, transparent 1px); background-size: 34px 34px; }
-  .v2-noise::before { content:''; position:absolute; inset:0; pointer-events:none; opacity:.20; background-image: radial-gradient(rgba(255,107,0,.16) 1px, transparent 1px); background-size: 18px 18px; mask-image: linear-gradient(to bottom, black, transparent 70%); }
-  .v2-page .hero-main, .v2-page .hero-word,
-  .v2-page [data-reveal], .v2-page [data-stagger] > * {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
-    transition: none !important;
-  }
-  .v2-page .chart-line { stroke-dashoffset: 0 !important; }
-  .v2-page .chart-arrow { opacity: 1 !important; }
-  @keyframes v2Fall {
-    0% { opacity: 0; transform: translateY(-42px) rotate(-5deg); }
-    70% { opacity: 1; transform: translateY(6px) rotate(1deg); }
-    100% { opacity: 1; transform: translateY(0) rotate(0deg); }
-  }
-  .v2-fall { opacity: 0; animation: v2Fall .75s cubic-bezier(.34,1.56,.64,1) forwards; }
 </style>
 </head>
-<body class="v2-page text-brand-dark font-sans">
+<body class="bg-white text-brand-dark font-sans">
 
   <nav class="dashboard-section-nav" aria-label="대시보드 섹션 이동">
     <button type="button" data-nav-target="hero">01 히어로</button>
@@ -174,76 +150,60 @@
     <button type="button" data-nav-target="faq">11 FAQ</button>
   </nav>
 
+  <!-- ===== 코칭 정보 ===== -->
+  <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-8 py-8">
+    <h3 class="text-xl font-bold text-brand-dark mb-2">코칭 정보</h3>
+    <p class="text-base text-gray-500">코칭 지원 기간 &nbsp; <span class="text-brand-dark font-bold underline underline-offset-4">상담일로부터 '최대 90일'</span></p>
+    <h3 class="text-xl font-bold text-brand-dark mt-6 mb-2">설명</h3>
+  </div>
+
   <!-- ===== 01 히어로 ===== -->
-  <section data-section="hero" class="max-w-4xl mx-auto relative min-h-[82dvh] overflow-hidden bg-[#f7f3eb] v2-noise">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">01 히어로</span>
-    <div class="absolute inset-0 v2-map-grid opacity-70"></div>
-    <div class="absolute -right-32 top-10 h-72 w-72 rounded-full bg-brand-orange/15 blur-3xl"></div>
-    <div class="absolute -left-24 bottom-20 h-64 w-64 rounded-full bg-[#8a5b2f]/10 blur-3xl"></div>
-    <div class="relative z-10 grid min-h-[82dvh] grid-cols-1 items-center gap-10 px-6 py-16 md:grid-cols-[1.05fr_.95fr] md:px-10">
-      <div class="hero-main text-left" style="animation-delay:0.1s">
-        <div class="mb-7 inline-flex items-center gap-2 rounded-full border border-brand-orange/20 bg-white/70 px-4 py-2 text-sm font-bold text-brand-orange shadow-sm">
-          <iconify-icon icon="solar:home-2-bold" class="text-lg"></iconify-icon>
-          내집마련 1:1 코칭
-        </div>
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-black leading-tight tracking-tight word-keep text-brand-dark">
-          지금 여기<br>
-          사도 될까요?
-        </h1>
-        <p class="mt-6 max-w-xl text-xl md:text-2xl font-bold leading-snug text-[#4f463d] word-keep">
-          후회없는 최고의 내집마련<br class="hidden sm:block">
-          1:1 코칭으로 확신을 잡아드립니다.
-        </p>
-        <div class="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <div class="v2-card rounded-2xl px-4 py-4"><p class="text-2xl font-display font-black">50분</p><p class="mt-1 text-xs font-bold text-gray-500">온라인 코칭</p></div>
-          <div class="v2-card rounded-2xl px-4 py-4"><p class="text-2xl font-display font-black">90일</p><p class="mt-1 text-xs font-bold text-gray-500">카톡 질의응답</p></div>
-          <div class="v2-card rounded-2xl px-4 py-4"><p class="text-2xl font-display font-black">117건+</p><p class="mt-1 text-xs font-bold text-gray-500">상담 데이터</p></div>
-          <div class="v2-card rounded-2xl px-4 py-4"><p class="text-2xl font-display font-black">4.97</p><p class="mt-1 text-xs font-bold text-gray-500">만족도</p></div>
-        </div>
-        <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <button class="scroll-to-form v2-link-btn inline-flex items-center justify-center gap-3 rounded-full bg-brand-orange px-8 py-5 text-lg font-display font-black text-white">
-            코칭 신청하기
-            <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white/18"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
-          </button>
-          <p class="text-sm font-bold text-gray-500 word-keep">사고 후회 말고, 확신 갖고 후회없이 결정하세요.</p>
-        </div>
+  <section data-section="hero" class="max-w-4xl mx-auto relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden" style="background: linear-gradient(135deg, #0a0a2e 0%, #1a1a3e 30%, #2d1b4e 60%, #1a1a3e 100%);">
+    <span class="absolute top-2 left-2 bg-white/20 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">01 히어로</span>
+    <!-- Decorative city silhouette effect -->
+    <div class="absolute bottom-0 left-0 right-0 h-48 opacity-20" style="background: linear-gradient(to top, #0a0a2e, transparent); border-top: 1px solid rgba(255,255,255,0.05);"></div>
+    <div class="absolute bottom-0 left-0 right-0 flex justify-center gap-1 opacity-10">
+      <div class="w-8 bg-white/30" style="height:80px"></div>
+      <div class="w-6 bg-white/20" style="height:120px"></div>
+      <div class="w-10 bg-white/25" style="height:100px"></div>
+      <div class="w-5 bg-white/15" style="height:60px"></div>
+      <div class="w-12 bg-white/30" style="height:140px"></div>
+      <div class="w-7 bg-white/20" style="height:90px"></div>
+      <div class="w-9 bg-white/25" style="height:110px"></div>
+      <div class="w-6 bg-white/15" style="height:70px"></div>
+      <div class="w-11 bg-white/30" style="height:130px"></div>
+      <div class="w-8 bg-white/20" style="height:85px"></div>
+    </div>
+    <div class="relative w-full max-w-3xl mx-auto mb-10 px-4 z-10" style="height:220px;">
+      <div class="hero-word absolute border-2 border-white/30 rounded-xl px-5 py-3 bg-white/10 backdrop-blur-sm shadow-lg" style="top:10px;left:5%;animation-delay:0s"><span class="text-2xl md:text-3xl font-display font-black text-white">생애최초</span></div>
+      <div class="hero-word absolute border-2 border-white/30 rounded-xl px-5 py-3 bg-white/10 backdrop-blur-sm shadow-lg" style="top:5px;right:8%;animation-delay:.2s"><span class="text-2xl md:text-3xl font-display font-black text-white">갈아타기</span></div>
+      <div class="hero-word absolute border-2 border-white/30 rounded-xl px-5 py-3 bg-white/10 backdrop-blur-sm shadow-lg" style="top:85px;left:12%;animation-delay:.4s"><span class="text-2xl md:text-3xl font-display font-black text-white">대출</span></div>
+      <div class="hero-word absolute border-2 border-white/30 rounded-xl px-5 py-3 bg-white/10 backdrop-blur-sm shadow-lg" style="top:90px;right:12%;animation-delay:.6s"><span class="text-2xl md:text-3xl font-display font-black text-white">매매</span></div>
+      <div class="hero-word absolute border-2 border-brand-orange rounded-xl px-5 py-3 bg-brand-orange/20 backdrop-blur-sm shadow-lg" style="top:160px;left:22%;animation-delay:.8s"><span class="text-2xl md:text-3xl font-display font-black text-brand-orange">지금 사도 될까?</span></div>
+    </div>
+    <div class="relative z-10 text-center px-6 hero-main" style="animation-delay:0.3s">
+      <p class="text-gray-400 text-lg md:text-xl mb-6 word-keep">후회없는 최고의 내집마련</p>
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-black text-white leading-tight mb-4 word-keep">지금 여기<br>사도 될까요?</h1>
+      <p class="text-xl md:text-2xl font-display font-bold text-brand-orange mb-8 word-keep">후회없는 내집마련 1:1 코칭</p>
+      <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-10">
+        <span class="text-xl">👉</span>
+        <p class="text-white text-base md:text-lg word-keep">사고 후회 말고, <span class="text-brand-orange font-black text-xl">확신</span> 갖고 후회없이!</p>
       </div>
-      <div class="hero-word relative min-h-[500px]" style="animation-delay:0.25s">
-        <div class="absolute inset-x-0 top-0 z-20 h-24 md:-top-8">
-          <span class="v2-fall absolute left-0 top-2 rounded-xl border border-white/70 bg-white/90 px-4 py-2 font-display font-black shadow-md" style="animation-delay:0s">생애최초</span>
-          <span class="v2-fall absolute right-8 top-0 rounded-xl border border-white/70 bg-white/90 px-4 py-2 font-display font-black shadow-md" style="animation-delay:.04s">갈아타기</span>
-          <span class="v2-fall absolute left-24 top-12 rounded-xl border border-white/70 bg-white/90 px-4 py-2 font-display font-black shadow-md" style="animation-delay:.08s">대출</span>
-          <span class="v2-fall absolute right-0 top-12 rounded-xl border border-white/70 bg-white/90 px-4 py-2 font-display font-black shadow-md" style="animation-delay:.12s">매매</span>
-          <span class="v2-fall absolute left-2 top-[5.5rem] rounded-xl border border-brand-orange bg-brand-orange/10 px-4 py-2 font-display font-black text-brand-orange shadow-md" style="animation-delay:.16s">지금 사도 될까?</span>
-        </div>
-        <div class="absolute left-0 top-5 w-[88%] rounded-[2rem] bg-[#15120f] p-5 text-white v2-soft-shadow md:left-6">
-          <div class="rounded-[1.55rem] border border-white/10 bg-white/[0.04] p-6">
-            <p class="mb-4 text-sm font-bold text-brand-orange">오늘의 판단</p>
-            <div class="space-y-3">
-              <div class="flex items-center justify-between rounded-2xl bg-white px-4 py-3 text-brand-dark"><span class="font-bold">예산</span><span class="font-display font-black">4.8억</span></div>
-              <div class="flex items-center justify-between rounded-2xl bg-white px-4 py-3 text-brand-dark"><span class="font-bold">대출 가능선</span><span class="font-display font-black">3.1억</span></div>
-              <div class="flex items-center justify-between rounded-2xl bg-white px-4 py-3 text-brand-dark"><span class="font-bold">후보 단지</span><span class="font-display font-black text-brand-orange">3곳 압축</span></div>
-            </div>
-            <div class="mt-6 rounded-3xl bg-brand-orange p-5">
-              <p class="text-sm font-bold text-white/80">결론</p>
-              <p class="mt-1 text-3xl font-display font-black leading-tight word-keep">사는 것보다<br>어디를 피할지가 먼저입니다</p>
-            </div>
-          </div>
-        </div>
-        <div class="absolute bottom-8 right-0 w-[72%] rounded-[1.75rem] border border-[#eadfce] bg-white p-6 shadow-[0_24px_70px_rgba(67,44,25,.16)]">
-          <p class="text-sm font-bold text-gray-400">코칭 후 남는 것</p>
-          <div class="mt-4 space-y-3 text-base font-bold text-brand-dark">
-            <p class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>살지/보류할지 판단</p>
-            <p class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>지역·단지 비교 기준</p>
-            <p class="flex items-center gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>계약 전 체크리스트</p>
-          </div>
-        </div>
+    </div>
+    <div class="relative z-10 text-center hero-cta" style="animation-delay:0.8s">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-8 text-sm md:text-base text-gray-400">
+        <span class="font-medium">100건+ 코칭</span><span class="hidden sm:inline text-gray-600">|</span>
+        <span class="font-medium">만족도 4.97점 (5점 만점)</span><span class="hidden sm:inline text-gray-600">|</span>
+        <span class="font-medium">1:1 맞춤 코칭</span>
       </div>
+      <button class="scroll-to-form bg-brand-orange text-white px-8 sm:px-12 py-5 text-xl font-display font-bold rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-transform glow-pulse mb-16">상담 신청하기</button>
+    </div>
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 hero-scroll z-10" style="animation-delay:1.5s">
+      <div class="flex flex-col items-center gap-2 text-gray-500"><span class="text-xs">스크롤</span><iconify-icon icon="solar:alt-arrow-down-linear" class="text-xl animate-bounce"></iconify-icon></div>
     </div>
   </section>
 
-  
-<!-- ===== 02 스토리 후킹 ===== -->
+  <!-- ===== 02 스토리 후킹 ===== -->
   <section data-section="story-hook" class="max-w-4xl mx-auto bg-white py-16 md:py-24 relative">
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">02 스토리 후킹</span>
 
@@ -547,8 +507,7 @@
     </div>
   </section>
 
-  
-<!-- ===== 04 컨설턴트 소개 ===== -->
+  <!-- ===== 04 컨설턴트 소개 ===== -->
   <section data-section="consultant" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">04 컨설턴트</span>
 
@@ -559,16 +518,14 @@
         <p class="text-6xl md:text-7xl text-gray-300 font-display font-black leading-none mt-2">"</p>
       </div>
       <!-- 자기 소개 -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 mb-10 max-w-md mx-auto" data-reveal>
-        <div class="mb-7 rounded-2xl bg-[#151515] px-5 py-4 text-white shadow-[0_18px_42px_rgba(10,10,10,.18)]">
-          <div class="flex items-center gap-4">
-            <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-white">
-              <iconify-icon icon="solar:user-id-bold" class="text-4xl"></iconify-icon>
-            </div>
-            <div>
-              <h3 class="text-3xl font-display font-black leading-none">우재</h3>
-              <p class="mt-2 text-sm font-bold text-white/70">우리동네 재테크</p>
-            </div>
+      <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 mb-10 text-center max-w-md mx-auto" data-reveal>
+        <div class="mb-7 inline-flex items-center gap-4 rounded-2xl border border-brand-orange/15 bg-orange-50 px-5 py-4 text-left">
+          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-white shadow-md shadow-orange-200">
+            <iconify-icon icon="solar:user-id-bold" class="text-3xl"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="text-2xl font-display font-black leading-none text-brand-dark">우재</h3>
+            <p class="mt-2 text-sm font-bold text-gray-500">우리동네 재테크</p>
           </div>
         </div>
         <div class="text-left max-w-md mx-auto space-y-3 mb-6">
@@ -577,7 +534,7 @@
           <p class="flex items-center gap-3 text-base"><span class="w-2 h-2 bg-brand-dark rounded-full flex-shrink-0"></span> 최근 8개월간 아파트매매만 <span class="font-bold">5건</span> <span class="text-gray-400 text-sm">(작성시점 기준)</span></p>
           <p class="flex items-center gap-3 text-base"><span class="w-2 h-2 bg-brand-dark rounded-full flex-shrink-0"></span> 포트폴리오: 강남3구+압여목성 2채+@</p>
         </div>
-        <p class="text-center text-lg md:text-xl word-keep"><span class="text-red-600 font-bold">10년간 쌓아온</span> 모든 투자 노하우를<br>통째로 오픈해 드리겠습니다</p>
+        <p class="text-lg md:text-xl word-keep"><span class="text-red-600 font-bold">10년간 쌓아온</span> 모든 투자 노하우를<br>통째로 오픈해 드리겠습니다</p>
       </div>
       <!-- 실적 카드 + 이미지 (모자이크 처리) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-stretch" data-reveal>
@@ -680,8 +637,7 @@
     </div>
   </section>
 
-  
-<!-- ===== 8항목 패키지 ===== -->
+  <!-- ===== 8항목 패키지 ===== -->
   <section data-section="package" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">06 패키지</span>
     <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
@@ -863,44 +819,44 @@
         <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
           <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">01</span>
           <div>
-            <p class="font-bold text-brand-dark word-keep">코칭 신청 및 접수</p>
-            <p class="text-gray-400 text-sm mt-1">신청자 본인 정보로 접수해주시면 안내가 가장 정확합니다.</p>
+            <p class="font-bold text-brand-dark word-keep">상담 신청서 제출</p>
+            <p class="text-gray-500 text-sm mt-1">성함, 연락처, 신청 목적을 남겨주시면 접수됩니다.</p>
           </div>
         </div>
         <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
           <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">02</span>
           <div>
             <p class="font-bold text-brand-dark word-keep">카드결제 또는 계좌이체 선택</p>
-            <p class="text-gray-500 text-sm mt-1">신청 완료 화면에서 결제 방법을 확인하고 결제·입금을 진행합니다.</p>
+            <p class="text-gray-500 text-sm mt-1">신청 완료 화면에서 결제 방법을 확인합니다.</p>
           </div>
         </div>
         <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
           <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">03</span>
           <div>
-            <p class="font-bold text-brand-dark word-keep">결제·입금 확인 후 사전 질문지 작성</p>
-            <p class="text-gray-500 text-sm mt-1">확인 후 12시간 내 카카오톡으로 사전질문지 안내를 드립니다.</p>
+            <p class="font-bold text-brand-dark word-keep">결제·입금 확인 후 사전질문지 안내</p>
+            <p class="text-gray-500 text-sm mt-1">운영자가 확인한 뒤 12시간 내 카카오톡으로 안내드립니다.</p>
           </div>
         </div>
         <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
           <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">04</span>
           <div>
-            <p class="font-bold text-brand-dark word-keep">일정 선택</p>
-            <p class="text-gray-500 text-sm mt-1">사전질문지 작성 후 가능한 일정을 신중하게 선택합니다.</p>
+            <p class="font-bold text-brand-dark word-keep">사전질문지 작성</p>
+            <p class="text-gray-500 text-sm mt-1">현재 상황, 예산, 후보 지역과 고민을 미리 정리합니다.</p>
           </div>
         </div>
         <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
           <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">05</span>
           <div>
-            <p class="font-bold text-brand-dark word-keep">온라인 1:1 코칭 진행</p>
-            <p class="font-bold word-keep"><span class="text-red-500">Google Meet 기준 약 50분</span></p>
-            <p class="text-gray-500 text-sm mt-1">배우자 동반 가능합니다.</p>
+            <p class="font-bold text-brand-dark word-keep">코칭 일정 확정</p>
+            <p class="text-gray-500 text-sm mt-1">사전질문지 확인 후 카카오톡으로 가능한 날짜와 시간을 안내드립니다.</p>
           </div>
         </div>
         <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
           <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">06</span>
           <div>
-            <p class="font-bold text-brand-dark word-keep">상담 리포트 및 90일 질의응답</p>
-            <p class="text-gray-500 text-sm mt-1">상담 내용을 정리하고 실행 과정의 질문을 이어서 확인합니다.</p>
+            <p class="font-bold text-brand-dark word-keep">온라인 1:1 코칭 진행</p>
+            <p class="font-bold word-keep"><span class="text-red-500">Google Meet 기준 약 50분</span></p>
+            <p class="text-gray-500 text-sm mt-1">상담 리포트와 코칭 후 최대 90일 질의응답이 함께 제공됩니다.</p>
           </div>
         </div>
       </div>
@@ -908,9 +864,9 @@
       <div class="mt-10 bg-gray-50 border border-gray-200 rounded-2xl p-8 md:p-10" data-reveal>
         <h3 class="text-xl md:text-2xl font-display font-black text-brand-dark mb-6 word-keep">꼭 확인해주세요!</h3>
         <ul class="space-y-4 text-gray-600 text-sm leading-relaxed">
-          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>일정 선택 완료 후에는 일정 변경이 불가합니다.</li>
+          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>일정 확정 전 가능한 시간을 꼭 확인해주세요. 확정 후 변경은 어려울 수 있습니다.</li>
           <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>환불은 환불 정책에 따라 진행됩니다.</li>
-          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>코칭 일정은 최대 4주 단위로 오픈되며, 퀄리티 유지를 위해 매주 최대 3명만 진행합니다.</li>
+          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>코칭 일정은 최대 4주 단위로 오픈되며, 퀄리티 유지를 위해 소수로 진행합니다.</li>
           <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>코칭은 최선의 의사결정을 돕기 위한 과정이며, 최종 결정 및 책임은 본인에게 있음을 안내드립니다.</li>
         </ul>
       </div>
@@ -918,20 +874,34 @@
   </section>
 
   <!-- ===== 09 CTA ===== -->
-  <section data-section="cta" class="max-w-4xl mx-auto bg-[#15120f] py-20 md:py-28 relative overflow-hidden">
-    <span class="absolute top-2 left-2 bg-white/20 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">09 CTA</span>
-    <div class="absolute -right-20 top-10 h-64 w-64 rounded-full bg-brand-orange/20 blur-3xl"></div>
-    <div class="relative max-w-4xl mx-auto px-6 sm:px-8 lg:px-8 text-center text-white">
-      <p class="text-sm font-black text-brand-orange" data-reveal>결정 전 마지막 점검</p>
-      <h2 class="mt-5 text-4xl md:text-6xl font-display font-black leading-tight word-keep" data-reveal>혼자 더 찾아보는 시간보다<br>내 상황에 맞는 기준이 먼저입니다</h2>
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-white/65 leading-relaxed word-keep" data-reveal>사야 할지 말아야 할지, 어느 단지를 버리고 남길지, 대출은 어디까지가 안전한지 같이 정리합니다.</p>
-      <button class="scroll-to-form v2-link-btn mt-10 inline-flex items-center justify-center gap-3 rounded-full bg-brand-orange px-10 py-5 text-xl font-display font-black text-white" data-reveal>코칭 신청하기<span class="flex h-8 w-8 items-center justify-center rounded-full bg-white/18"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span></button>
-      <div class="mt-8 flex flex-wrap justify-center gap-3 text-sm font-bold text-white/70" data-reveal><span class="rounded-full border border-white/10 px-4 py-2">하루 1명 중심</span><span class="rounded-full border border-white/10 px-4 py-2">온라인 코칭</span><span class="rounded-full border border-white/10 px-4 py-2">90일 질의응답</span><span class="rounded-full border border-white/10 px-4 py-2">부부동반 가능</span></div>
+  <section data-section="cta" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">09 CTA</span>
+    <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-8 text-center">
+      <div class="mb-20" data-reveal>
+        <p class="text-2xl md:text-3xl font-display font-black word-keep text-red-600 mb-6">혼자 스트레스 받지 마세요!</p>
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-tight"><span class="text-red-600">최고의 코칭</span>을<br>약속드리겠습니다</p>
+      </div>
+      <div class="mb-16" data-reveal="scale">
+        <div class="text-6xl md:text-7xl mb-8">🏠</div>
+        <p class="text-2xl md:text-3xl font-display font-black word-keep text-brand-dark mb-6">지금도 조용히 '집'으로<br>인생이 바뀐 분들이 많습니다</p>
+        <p class="text-lg text-gray-500 word-keep mb-3">💰 후회없는 내집마련 하시기 바랍니다</p>
+        <p class="text-sm text-gray-400 word-keep">(매주 수많은 분들이 함께 결과를 내고 있습니다)</p>
+      </div>
+      <div data-reveal>
+        <button class="scroll-to-form bg-brand-orange text-white px-10 sm:px-16 py-6 sm:py-8 text-xl sm:text-2xl md:text-3xl font-display font-black rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-transform glow-pulse mb-8">지금 바로 신청하세요 <iconify-icon icon="solar:arrow-right-bold" class="align-middle"></iconify-icon></button>
+        <p class="text-sm text-gray-500 mt-4 word-keep">*퀄리티 유지를 위해 하루 최대 1명만 진행합니다</p>
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-gray-500 mb-6 mt-6">
+          <span class="flex items-center gap-1.5"><iconify-icon icon="solar:clock-circle-linear"></iconify-icon> 하루 1명 한정</span>
+          <span class="flex items-center gap-1.5"><iconify-icon icon="solar:videocamera-record-linear"></iconify-icon> 온라인 상담</span>
+          <span class="flex items-center gap-1.5"><iconify-icon icon="solar:shield-check-linear"></iconify-icon> 최대 90일 케어</span>
+          <span class="flex items-center gap-1.5"><iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon> 부부동반 가능</span>
+        </div>
+        <p class="text-red-500 text-xl md:text-2xl font-display font-black word-keep pulse-attention">지금 바로 신청하세요 <iconify-icon icon="solar:double-alt-arrow-down-bold" class="align-middle"></iconify-icon></p>
+      </div>
     </div>
   </section>
 
-  
-<!-- ===== 10 상담 신청 폼 ===== -->
+  <!-- ===== 10 상담 신청 폼 ===== -->
   <section id="apply-form" data-section="apply-form" class="max-w-4xl mx-auto bg-gradient-to-b from-brand-beige to-white py-16 md:py-24 relative">
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">10 상담 신청 폼</span>
     <div class="max-w-2xl mx-auto px-6 sm:px-8 lg:px-8">
@@ -972,12 +942,12 @@
         <div id="f-deposit-wrap">
           <label class="block text-brand-dark font-bold mb-3">5. 결제 안내</label>
           <div class="bg-orange-50 border border-orange-200 rounded-xl p-5 mb-4">
-            <p class="text-gray-600 text-sm mb-3">신청 접수 후 완료 화면에서 카드결제 또는 계좌이체 방법을 선택할 수 있습니다.</p>
+            <p class="text-gray-600 text-sm mb-3">신청서를 제출하면 완료 화면에서 카드결제 또는 계좌이체 방법을 선택할 수 있습니다.</p>
             <div class="space-y-2">
               <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="radio" name="coaching" value="A" checked class="radio-round"><span class="bg-brand-orange text-white text-xs font-bold px-2 py-0.5 rounded">1</span> 코칭 A : 40만 원</label>
               <label class="flex items-center gap-3 text-gray-400 cursor-pointer"><input type="radio" name="coaching" value="B" disabled class="radio-round"><span class="bg-gray-300 text-gray-500 text-xs font-bold px-2 py-0.5 rounded">2</span> 코칭 B : 96만 원 <span class="text-xs text-red-400 font-bold ml-1">4,5월 마감</span></label>
             </div>
-            <p class="text-gray-400 text-sm mt-3">결제·입금 확인 후 12시간 내 카카오톡으로 사전질문지 안내를 드립니다.</p>
+            <p class="text-gray-400 text-sm mt-3">결제·입금 확인 후 12시간 내 카카오톡으로 사전질문지를 안내드립니다.</p>
           </div>
         </div>
 
@@ -1043,7 +1013,7 @@
         <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 특정 지역, 아파트를 추천해 주시나요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">물론입니다. <strong>예산과 상황에 맞는 지역·단지를 함께 분석합니다.</strong><br><br>다만, 무조건 내집마련이나 아파트 매수만 고집하지는 않습니다. 때로는 "지금은 ETF에 집중하고, 1년 후 매수하세요"라는 답변을 드리기도 합니다.</div></details>
         <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 자산이 적어도 코칭이 가능할까요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep"><strong>자산 5천만원 미만</strong>으로 코칭을 받으시는 분들도 많습니다. 자금이 적을수록 <strong>초기 방향 설정이 더 중요</strong>합니다.</div></details>
         <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭 A와 B의 차이는 무엇인가요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep"><strong>동행임장 1회 제외, 모두 동일</strong>합니다.<br><br>• 코칭 A (400,000원): 온라인 화상 코칭 약 50분 + 최대 90일 질의응답 + 상담 리포트 + 자산관리시트 + 체크리스트 PDF<br>• 코칭 B (960,000원): 코칭 A 전체 + 동행임장 1회<br><br>코칭 B는 <strong>매월 선착순 2명</strong>만 진행합니다.</div></details>
-        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭은 어떻게 진행되나요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">1. 신청서 제출<br>2. 신청 완료 화면에서 카드결제 또는 계좌이체 선택<br>3. 결제·입금 확인 후 12시간 내 카카오톡 안내<br>4. 사전질문지 작성<br>5. 일정 선택<br>6. <strong>Google Meet 온라인 1:1 코칭 약 50분</strong> (부부동반 가능)<br>7. 상담 리포트 및 자료 수령<br>8. 코칭 후 최대 90일 카카오톡 질의응답<br><br>코칭은 퀄리티 유지를 위해 소수로 진행합니다.</div></details>
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭은 어떻게 진행되나요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">1. 신청서 제출<br>2. 신청 완료 화면에서 카드결제 또는 계좌이체 선택<br>3. 결제·입금 확인 후 12시간 내 사전질문지 안내<br>4. 사전질문지 작성<br>5. 카카오톡으로 코칭 일정 확정<br>6. <strong>Google Meet 온라인 1:1 코칭 약 50분</strong> (부부동반 가능)<br>7. 상담 리포트 및 자료 수령<br>8. 코칭 후 최대 90일 카카오톡 질의응답<br><br>코칭은 퀄리티 유지를 위해 소수로 진행합니다.</div></details>
         <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭을 꼭 받아야 하나요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">아닙니다. 유튜브 영상만으로도 충분히 공부하실 수 있습니다.<br><br>다만, 영상은 일반적인 내용이고 코칭은 "내 상황"에 맞춘 답변입니다. <strong>잘못된 선택 한 번이 수천만~수억 차이</strong>를 만들기 때문에, 중요한 결정 앞에서 전문가 의견을 듣는 것을 추천드립니다.</div></details>
         <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭 이후에도 도움을 받을 수 있나요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">네. 코칭 후 <strong>최대 90일간</strong> 카카오톡으로 <strong>물건비교, 계약, 질의응답을 무제한</strong> 지원합니다.</div></details>
         <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 혼자 준비할 때와 어떤 차이가 있을까요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">혼자 준비하면 <strong>"내가 모르는 걸 모릅니다."</strong><br><br>• 검색으로 찾은 정보는 편향되어 있을 수 있습니다<br>• 부동산 중개사는 거래 성사가 목적이라 객관적이지 않을 수 있습니다<br><br>"혼자 많이 고민하고 시행착오도 많았습니다. 선생님 덕분에 무엇을 먼저 해야할지 보이는 것 같습니다." — 실제 후기</div></details>
@@ -1063,20 +1033,29 @@
     <p class="text-center text-gray-400 text-xs leading-relaxed">본 서비스는 내집마련 전략에 대한 정보 제공 목적의 컨설팅이며, 특정 매물의 매수·매도 추천 및 거래 알선을 하지 않습니다. 최종 투자 판단과 책임은 본인에게 있습니다.</p>
   </div>
 
-  
-<!-- 완료 팝업 -->
+  <!-- 완료 팝업 -->
   <div id="successModal" class="fixed inset-0 bg-black/55 backdrop-blur-sm z-[9999] flex items-center justify-center hidden px-4">
-    <div class="bg-white rounded-[2rem] p-7 md:p-9 max-w-lg w-full text-left shadow-2xl">
-      <div class="flex items-start justify-between gap-4"><div><p class="text-sm font-black text-brand-orange">신청 접수 완료</p><h3 class="mt-2 text-2xl md:text-3xl font-display font-black text-brand-dark word-keep">신청이 접수되었습니다.<br>아래에서 결제 방법을 선택해주세요.</h3></div><button id="closeModal" class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-xl font-black text-gray-500">×</button></div>
+    <div class="bg-white rounded-3xl p-7 md:p-9 max-w-lg w-full text-left shadow-2xl">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p class="text-sm font-black text-brand-orange">신청 접수 완료</p>
+          <h3 class="mt-2 text-2xl md:text-3xl font-display font-black text-brand-dark word-keep">신청이 접수되었습니다.<br>아래에서 결제 방법을 선택해주세요.</h3>
+        </div>
+        <button id="closeModal" class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-xl font-black text-gray-500">×</button>
+      </div>
       <p class="mt-4 text-gray-500 leading-relaxed word-keep">결제·입금 확인 후 12시간 내 카카오톡으로 사전질문지 안내를 보내드립니다.</p>
       <div class="mt-6 grid gap-3">
         <a href="https://lst9485-alt.github.io/cdn-assets/homepage/coaching-payment-guide-v2.html" class="rounded-2xl border border-brand-orange/25 bg-brand-orange px-5 py-4 font-display font-black text-white text-center">카드결제 안내 보기</a>
-        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-5"><p class="font-display font-black text-brand-dark">계좌이체 안내</p><p class="mt-2 text-sm text-gray-600">주식회사 우리동네사람들 · 하나은행 125-910032-26304</p><p class="mt-2 text-sm text-gray-500 word-keep">입금자명은 신청자명과 동일하게 보내주세요. 다르면 카카오톡으로 알려주세요.</p></div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+          <p class="font-display font-black text-brand-dark">계좌이체 안내</p>
+          <p class="mt-2 text-sm text-gray-600">주식회사 우리동네사람들 · 하나은행 125-910032-26304</p>
+          <p class="mt-2 text-sm text-gray-500 word-keep">입금자명은 신청자명과 동일하게 보내주세요. 다르면 카카오톡으로 알려주세요.</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <script>
+<script>
 // 아임웹 설정 → SEO → 공통 코드 삽입 → Footer Code
   // ===== 폼 설정 (수정은 여기서만) =====
   var FORM_CONFIG = {
@@ -1216,17 +1195,21 @@
     if (fileInput) fileInput.value = '';
   }
 
+  function finishPreviewSubmit() {
+    resetConsultForm();
+    document.getElementById('receipt-cash').classList.add('hidden');
+    document.getElementById('receipt-tax').classList.add('hidden');
+    document.getElementById('file-label').textContent = '파일 선택 (PDF, JPG, PNG)';
+    document.getElementById('successModal').classList.remove('hidden');
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = false;
+    btn.textContent = '제출하기 →';
+    btn.classList.remove('opacity-70');
+  }
+
   function sendPayload(payload) {
     if (V2_PREVIEW_MODE || !FORM_CONFIG.scriptUrl) {
-      resetConsultForm();
-      document.getElementById('receipt-cash').classList.add('hidden');
-      document.getElementById('receipt-tax').classList.add('hidden');
-      document.getElementById('file-label').textContent = '파일 선택 (PDF, JPG, PNG)';
-      document.getElementById('successModal').classList.remove('hidden');
-      var btn = document.getElementById('submitBtn');
-      btn.disabled = false;
-      btn.textContent = '제출하기 →';
-      btn.classList.remove('opacity-70');
+      finishPreviewSubmit();
       return;
     }
     fetch(FORM_CONFIG.scriptUrl, {
@@ -1317,7 +1300,14 @@
   document.addEventListener('DOMContentLoaded', function() {
     initReviewMarquees();
     var phoneInput = document.getElementById('f-phone');
-    if (phoneInput) phoneInput.addEventListener('input', function() { formatPhone(this); });
+    if (phoneInput) phoneInput.addEventListener('input', function() { formatPhone(phoneInput); });
+    document.querySelectorAll('input[name="receipt"]').forEach(function(input) {
+      input.addEventListener('change', toggleReceipt);
+    });
+    var receiptSame = document.getElementById('f-receipt-same');
+    if (receiptSame) receiptSame.addEventListener('change', toggleReceiptSame);
+    var bizFile = document.getElementById('f-biz-file');
+    if (bizFile) bizFile.addEventListener('change', function() { updateFileLabel(bizFile); });
     var submitBtn = document.getElementById('submitBtn');
     if (submitBtn) submitBtn.addEventListener('click', submitForm);
     var closeModal = document.getElementById('closeModal');
@@ -1326,8 +1316,8 @@
     });
     document.querySelectorAll('.scroll-to-form').forEach(function(btn) {
       btn.addEventListener('click', function() {
-        var target = document.getElementById('apply-form');
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var formSection = document.getElementById('apply-form');
+        if (formSection) formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
     var obs = new IntersectionObserver(function(entries) {
