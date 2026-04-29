@@ -112,13 +112,13 @@
           {
             id: 'main-page',
             title: '메인 페이지',
-            description: '사이트 메인 소개 페이지',
-            href: 'homepage/main-page.html',
+            description: '원본과 v2~v8 시안 비교',
+            href: 'homepage/index.html',
             badgeText: 'NEW',
             badgeTone: 'live',
             iconKey: 'web',
             sidebarType: 'root',
-            activeMatch: ['main-page.html'],
+            activeMatch: ['homepage/index.html', 'main-page.html', 'main-page-test2.html'],
             hubVisible: true
           },
           {
@@ -131,7 +131,7 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['homepage/index.html', 'main-page-test2.html'],
-            hubVisible: true
+            hubVisible: false
           },
           {
             id: 'curriculum-page',

@@ -13,9 +13,9 @@ const VersionSwitcher = ({ version, page }) => {
       padding: '8px 24px', fontFamily: ds.fontBody, fontSize: 13
     }}>
       <span style={{ opacity: 0.7, fontWeight: 600 }}>버전 전환:</span>
-      <div style={{ display: 'flex', gap: 6 }}>
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {versions.map(v => (
-          <a key={v.id} href={`../${v.id}/${page}.html`} style={{
+          <a key={v.id} href={v.href || `../${v.id}/${page}.html`} style={{
             padding: '6px 14px',
             background: v.id === version ? ds.accent : 'transparent',
             color: v.id === version ? (v.id === 'v5' ? ds.ink : ds.bg) : ds.bg,
