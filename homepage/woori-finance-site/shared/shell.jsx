@@ -3,33 +3,40 @@
 // page: 'main' | 'coaching' | 'curriculum' | 'lecture' | 'bookclub' | 'refund'
 
 const VersionSwitcher = ({ version, page }) => {
-  const ds = window.DS[version];
   const versions = window.CONTENT.versions;
   return (
     <div style={{
-      position: 'sticky', top: 0, zIndex: 100,
-      background: ds.ink, color: ds.bg,
+      position: 'sticky', top: 0, zIndex: 9999,
+      background: '#0a0a0a', color: '#fff',
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      padding: '8px 24px', fontFamily: ds.fontBody, fontSize: 13
+      gap: 16,
+      padding: '9px 20px',
+      fontFamily: 'Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+      fontSize: 13,
+      boxShadow: '0 8px 24px rgba(0,0,0,.14)'
     }}>
-      <span style={{ opacity: 0.7, fontWeight: 600 }}>버전 전환:</span>
-      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+        <span style={{ opacity: 0.68, fontWeight: 800, marginRight: 4, whiteSpace: 'nowrap' }}>버전 전환:</span>
         {versions.map(v => (
           <a key={v.id} href={v.href || `../${v.id}/${page}.html`} style={{
-            padding: '6px 14px',
-            background: v.id === version ? ds.accent : 'transparent',
-            color: v.id === version ? (v.id === 'v5' ? ds.ink : ds.bg) : ds.bg,
-            border: `1px solid ${v.id === version ? ds.accent : 'rgba(255,255,255,0.25)'}`,
+            display: 'inline-flex',
+            alignItems: 'center',
+            minHeight: 28,
+            padding: '6px 11px',
+            background: v.id === version ? '#ff6b00' : 'transparent',
+            color: '#fff',
+            border: `1px solid ${v.id === version ? '#ff6b00' : 'rgba(255,255,255,.28)'}`,
             borderRadius: 999, textDecoration: 'none',
-            fontWeight: 700, fontSize: 12
+            fontWeight: 800, fontSize: 12,
+            whiteSpace: 'nowrap'
           }}>
             {(v.displayId || v.id).toUpperCase()} · {v.label}
           </a>
         ))}
       </div>
-      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-        <a href="../index.html" style={{ color: ds.bg, textDecoration: 'none', opacity: 0.75, fontSize: 12 }}>← 시안 목록</a>
-        <a href="../../../index.html" style={{ color: ds.bg, textDecoration: 'none', opacity: 0.75, fontSize: 12 }}>대시보드</a>
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center', whiteSpace: 'nowrap' }}>
+        <a href="../index.html" style={{ color: '#fff', textDecoration: 'none', opacity: 0.78, fontSize: 12, fontWeight: 800 }}>시안 목록</a>
+        <a href="../../../index.html" style={{ color: '#fff', textDecoration: 'none', opacity: 0.78, fontSize: 12, fontWeight: 800 }}>대시보드</a>
       </div>
     </div>
   );
