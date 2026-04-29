@@ -2567,6 +2567,7 @@
   const sndMoney      = new Audio('./assets/sounds/금액.mp3');
   const sndBuzz       = new Audio('./assets/sounds/삐삑.mp3');
   const sndPenWrite   = new Audio('./assets/sounds/pen-sketch.mp3');
+  const sndFlow       = new Audio('./assets/sounds/뽀옥3.wav');
 
   // AudioContext lazy 싱글톤 (브라우저 동시 ctx 제한 회피 + 메모리 누수 방지)
   let _sharedAudioCtx = null;
@@ -2622,6 +2623,7 @@
     if (type === 'transition') { sndTransition.currentTime = 0; sndTransition.play().catch(() => {}); return; }
     if (type === 'money') { sndMoney.currentTime = 0; sndMoney.play().catch(() => {}); return; }
     if (type === 'buzz') { sndBuzz.currentTime = 0; sndBuzz.play().catch(() => {}); return; }
+    if (type === 'flow') { sndFlow.currentTime = 0; sndFlow.play().catch(() => {}); return; }
     const snd = (type === 'slide') ? sndSlide : sndStep;
     snd.currentTime = 0;
     snd.play().catch(() => {});
@@ -2960,6 +2962,14 @@
     } else {
       _initAnimations();
     }
+  }
+
+  function isFlowSlide(slide) {
+    if (!slide) return false;
+    return !!slide.querySelector('.flow-arrow, .icon-flow-arrow, .branch-arrow, .eq-chain-arrow, .chapter-flow-arrow');
+  }
+  function stepSoundFor(slide) {
+    return isFlowSlide(slide) ? 'flow' : 'step';
   }
 
   function getMaxActualStepIndex(slide) {
@@ -3427,10 +3437,10 @@
           }
           else if (el.classList.contains('alert-banner') || el.classList.contains('quote-layout')) { playSound('draw'); }
           else if (el.dataset.sound) { playSound(el.dataset.sound); }
-          else playSound('step');
+          else playSound(stepSoundFor(slide));
           currentOrder++;
         }
-        if (group) playSound('step');
+        if (group) playSound(stepSoundFor(slide));
         syncPresenter();
         return;
       }
@@ -3493,7 +3503,7 @@
           }
         }
       }
-      playSound('step');
+      playSound(stepSoundFor(slide));
       syncPresenter();
     } else {
       // 생성 슬라이드: 모든 variant 순차 탐색 / 에디터: base만 순회
@@ -3554,11 +3564,11 @@
         const prevLayer = slide.querySelector(`.step-layer[data-step="${currentStep}"]`);
         if (prevLayer) currentOrder = getOrderedEls(prevLayer).length;
         showStep(slide, currentStep, true);
-        playSound('step');
+        playSound(stepSoundFor(slide));
         syncPresenter();
         return;
       }
-      playSound('step');
+      playSound(stepSoundFor(slide));
       syncPresenter();
     } else if (currentStep > 0) {
       if (typeof clearRuntimeInkForView === 'function') clearRuntimeInkForView(currentSlide);
@@ -3566,7 +3576,7 @@
       const prevLayer = slide.querySelector(`.step-layer[data-step="${currentStep}"]`);
       if (prevLayer) currentOrder = getOrderedEls(prevLayer).length;
       showStep(slide, currentStep, true);
-      playSound('step');
+      playSound(stepSoundFor(slide));
       syncPresenter();
     } else {
       // 생성 슬라이드: 모든 variant 순차 탐색 / 에디터: base만 순회
