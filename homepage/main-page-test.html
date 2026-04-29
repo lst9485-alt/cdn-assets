@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>우리동네 재테크 — 추측 그만, 데이터로 내집마련</title>
-  <meta name="description" content="ETF로 종잣돈, 부동산으로 자산. 117건+ 상담 데이터 기반 내집마련 로드맵.">
+  <meta name="description" content="ETF로 종잣돈, 부동산으로 자산. 100건++ 상담 데이터 기반 내집마련 로드맵.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,13 +28,19 @@
     .faq-icon { transition: transform 0.25s ease; }
     [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease-out, transform 0.55s ease-out; }
     [data-reveal].revealed { opacity: 1; transform: translateY(0); }
-    /* 카드 hover — 회전 유지하면서 위로 살짝 */
+    /* 카드 hover — 회전·확대 유지하면서 위로 살짝 */
     .card-hover { transition: transform 0.18s ease-out; }
     .card-hover:hover { transform: translateY(-8px) var(--rot, rotate(0deg)); }
     .rot-1 { --rot: rotate(1deg); transform: rotate(1deg); }
     .rot-n1 { --rot: rotate(-1deg); transform: rotate(-1deg); }
     .rot-2 { --rot: rotate(2deg); transform: rotate(2deg); }
     .rot-n2 { --rot: rotate(-2deg); transform: rotate(-2deg); }
+    /* 앵커 점프 시 sticky 헤더 가림 방지 */
+    section[id] { scroll-margin-top: 80px; }
+    /* 모바일에서 scale 카드 좌우 깨짐 방지 */
+    @media (max-width: 640px) {
+      .featured-card { transform: var(--rot-mobile, none) !important; }
+    }
     /* 버튼 active 햅틱 */
     .btn-haptic { transition: transform 0.08s ease-out, box-shadow 0.08s ease-out; }
     .btn-haptic:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000 !important; }
@@ -71,12 +77,12 @@
   <div class="max-w-4xl mx-auto px-5 sm:px-8 pt-16 sm:pt-20 pb-16 sm:pb-20 text-center relative z-10">
     <!-- 회전 배지 -->
     <div class="inline-block bg-white border-2 border-black px-4 py-1 mb-7 font-bold text-sm" style="box-shadow: 4px 4px 0 #000; transform: rotate(-2deg);">
-      ⭐ 117건+ 상담 · 만족도 4.97/5
+      ⭐ 100건++ 상담 · 만족도 4.97/5
     </div>
 
     <h1 class="text-5xl md:text-7xl mb-7 word-keep" style="line-height: 1.0;">
       추측 그만.<br>
-      <span style="color:#fff; background:#000; padding: 0 10px;">데이터로 내집마련.</span>
+      <span style="color:#fff; background:#000; padding: 4px 14px; line-height: 1.25; display: inline-block; margin-top: 6px;">데이터로 내집마련.</span>
     </h1>
 
     <p class="text-xl md:text-2xl text-black font-medium mb-10 max-w-2xl mx-auto word-keep" style="line-height: 1.45;">
@@ -93,21 +99,17 @@
       </a>
     </div>
 
-    <!-- 신뢰 지표 — 카드 4개 회전 -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-3xl mx-auto">
+    <!-- 신뢰 지표 — 카드 3개 (시세차익 제외) -->
+    <div class="grid grid-cols-3 gap-5 max-w-2xl mx-auto">
       <div class="card-hover rot-n1 border-2 border-black p-4 text-left" style="background:#fff; box-shadow: 4px 4px 0 #000;">
-        <p class="text-3xl font-black">117+</p>
+        <p class="text-3xl font-black">100++</p>
         <p class="text-black text-sm font-bold mt-1">상담 진행</p>
       </div>
       <div class="card-hover rot-1 border-2 border-black p-4 text-left" style="background:#CEFF00; box-shadow: 4px 4px 0 #000;">
         <p class="text-3xl font-black">4.97<span class="text-base">/5</span></p>
         <p class="text-black text-sm font-bold mt-1">만족도</p>
       </div>
-      <div class="card-hover rot-n1 border-2 border-black p-4 text-left" style="background:#E0FFE0; box-shadow: 4px 4px 0 #000;">
-        <p class="text-3xl font-black">+18.3<span class="text-base">억</span></p>
-        <p class="text-black text-sm font-bold mt-1">시세차익</p>
-      </div>
-      <div class="card-hover rot-1 border-2 border-black p-4 text-left" style="background:#FEF2F2; box-shadow: 4px 4px 0 #000;">
+      <div class="card-hover rot-n1 border-2 border-black p-4 text-left" style="background:#FEF2F2; box-shadow: 4px 4px 0 #000;">
         <p class="text-3xl font-black">10년+</p>
         <p class="text-black text-sm font-bold mt-1">투자업계</p>
       </div>
@@ -122,7 +124,7 @@
       <div class="inline-block bg-white border-2 border-black px-4 py-1 mb-6 font-bold text-sm uppercase tracking-wider" style="box-shadow: 4px 4px 0 #000; transform: rotate(-1deg);">The Problem</div>
       <h2 class="text-4xl sm:text-5xl md:text-6xl mt-2 mb-5 word-keep" style="line-height: 1.05;">
         대부분 이렇게 합니다.<br>
-        <span style="color:#fff; background:#000; padding: 0 10px;">그래서 실패합니다.</span>
+        <span style="color:#fff; background:#000; padding: 4px 14px; line-height: 1.25; display: inline-block; margin-top: 6px;">그래서 실패합니다.</span>
       </h2>
       <p class="text-xl text-black font-medium mt-6 word-keep">집 살 시점, 예산, 갈아타기 — 다들 막연하게 추측합니다.</p>
     </div>
@@ -141,10 +143,10 @@
       </div>
 
       <!-- 우리동네 Way (4중 누적 강조: border-4 + shadow-8 + scale + 페일그린) -->
-      <div class="card-hover border-4 border-black p-7 relative" style="background:#E0FFE0; box-shadow: 8px 8px 0 #000; transform: rotate(-1deg) scale(1.04);">
+      <div class="card-hover featured-card border-4 border-black p-7 relative" style="background:#E0FFE0; box-shadow: 8px 8px 0 #000; --rot: rotate(-1deg) scale(1.04); --rot-mobile: rotate(-1deg); transform: rotate(-1deg) scale(1.04);">
         <div class="absolute border-2 border-black px-4 py-1 font-bold text-black" style="top: -18px; left: 50%; transform: translateX(-50%); background: #00D084; box-shadow: 4px 4px 0 #000; white-space: nowrap;">우리동네 방식</div>
         <ul class="space-y-4 mt-4 text-black text-lg font-medium">
-          <li class="flex gap-3"><span class="text-2xl shrink-0">✓</span><span class="word-keep">117건+ 상담 데이터 기반 진단</span></li>
+          <li class="flex gap-3"><span class="text-2xl shrink-0">✓</span><span class="word-keep">100건++ 상담 데이터 기반 진단</span></li>
           <li class="flex gap-3"><span class="text-2xl shrink-0">✓</span><span class="word-keep">내 예산·소득 맞춤 전략</span></li>
           <li class="flex gap-3"><span class="text-2xl shrink-0">✓</span><span class="word-keep">ETF→집→ETF 순환 (양자택일 X)</span></li>
           <li class="flex gap-3"><span class="text-2xl shrink-0">✓</span><span class="word-keep">단호한 판단: "이 조건이면 사세요/마세요"</span></li>
@@ -165,7 +167,7 @@
     <div class="text-center mb-16" data-reveal>
       <div class="inline-block bg-white border-2 border-black px-4 py-1 mb-6 font-bold text-sm uppercase tracking-wider" style="box-shadow: 4px 4px 0 #000; transform: rotate(2deg);">The Solution</div>
       <h2 class="text-4xl sm:text-5xl md:text-6xl mt-2 mb-5 word-keep" style="line-height: 1.05;">
-        내집마련, <span style="color:#fff; background:#000; padding: 0 10px;">3단계로 끝.</span>
+        내집마련, <span style="color:#fff; background:#000; padding: 4px 14px; line-height: 1.25; display: inline-block; margin-top: 6px;">3단계로 끝.</span>
       </h2>
       <p class="text-xl text-black font-medium mt-6 word-keep">ETF→집→ETF, 직장인이 따라할 수 있는 순서.</p>
     </div>
@@ -187,14 +189,14 @@
       </div>
 
       <!-- Step 2 (중앙 강조 — 라임 배경) -->
-      <div class="card-hover border-4 border-black p-7 relative" style="background:#CEFF00; box-shadow: 12px 12px 0 #000; transform: scale(1.04);">
+      <div class="card-hover featured-card border-4 border-black p-7 relative" style="background:#CEFF00; box-shadow: 12px 12px 0 #000; --rot: scale(1.04); --rot-mobile: none; transform: scale(1.04);">
         <div class="absolute border-2 border-black px-3 py-1 font-bold text-black text-sm" style="top: -16px; left: 50%; transform: translateX(-50%) rotate(-3deg); background:#00D084; box-shadow: 4px 4px 0 #000; white-space: nowrap;">★ 핵심 단계</div>
         <div class="font-mono text-xs font-black tracking-widest mb-5 text-black mt-2">STEP 02</div>
         <div class="inline-flex items-center justify-center w-16 h-16 mb-5 bg-black border-2 border-black rounded-full" style="box-shadow: 4px 4px 0 #000;">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CEFF00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
         <h3 class="text-2xl mb-3 word-keep" style="font-weight: 900;">내가 살 수 있는<br>가장 좋은 집 사기</h3>
-        <p class="text-black text-lg leading-relaxed word-keep mb-5 font-medium">예산 진단부터 계약까지. 117건+ 상담 데이터로 맞춤 전략 설계.</p>
+        <p class="text-black text-lg leading-relaxed word-keep mb-5 font-medium">예산 진단부터 계약까지. 100건++ 상담 데이터로 맞춤 전략 설계.</p>
         <ul class="space-y-2 text-base text-black font-bold">
           <li class="flex gap-2"><span>→</span>예산·대출 분석</li>
           <li class="flex gap-2"><span>→</span>지역·단지 추천</li>
@@ -225,36 +227,36 @@
   <div class="max-w-6xl mx-auto px-5 sm:px-8">
     <div class="text-center mb-12" data-reveal>
       <div class="inline-block bg-white border-2 border-black px-4 py-1 mb-6 font-bold text-sm uppercase tracking-wider" style="box-shadow: 4px 4px 0 #000; transform: rotate(-1deg);">Free · YouTube</div>
-      <h2 class="text-4xl sm:text-5xl md:text-6xl mt-2 mb-5 word-keep">우선 <span style="background:#CEFF00; padding: 0 10px; box-shadow: 4px 4px 0 #000; border: 2px solid #000; display: inline-block; transform: rotate(-1deg);">무료부터</span> 보세요.</h2>
+      <h2 class="text-4xl sm:text-5xl md:text-6xl mt-2 mb-5 word-keep">우선 <span style="background:#000; color:#fff; padding: 4px 14px; line-height: 1.25; display: inline-block; margin-top: 6px; box-shadow: 4px 4px 0 #CEFF00; border: 2px solid #000; transform: rotate(-1deg);">무료부터</span> 보세요.</h2>
       <p class="text-xl text-black font-medium mt-6 word-keep">현실적인 내집마련 영상 70개+. 70만+ 조회수.</p>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <a href="https://www.youtube.com/watch?v=wzGeLrBPEg8" target="_blank" rel="noopener" class="card-hover rot-1 block border-2 border-black overflow-hidden" style="background:#fff; box-shadow: 4px 4px 0 #000;">
+      <a href="https://www.youtube.com/watch?v=WDh_RfgwdBI" target="_blank" rel="noopener" class="card-hover rot-1 block border-2 border-black overflow-hidden" style="background:#fff; box-shadow: 4px 4px 0 #000;">
+        <img src="https://img.youtube.com/vi/WDh_RfgwdBI/mqdefault.jpg" alt="직장인 내집마련, 연봉별 적정 집값부터 대출까지 총정리" class="w-full aspect-video object-cover" style="border-bottom: 2px solid #000;">
+        <div class="p-3">
+          <p class="font-bold text-base leading-snug word-keep">연봉별 적정 집값부터 대출까지</p>
+          <p class="text-black text-xs mt-1 font-mono font-bold">조회수 3.2만</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=wzGeLrBPEg8" target="_blank" rel="noopener" class="card-hover rot-n1 block border-2 border-black overflow-hidden" style="background:#fff; box-shadow: 4px 4px 0 #000;">
         <img src="https://img.youtube.com/vi/wzGeLrBPEg8/mqdefault.jpg" alt="돈 되는 아파트 고르는 3가지 방법" class="w-full aspect-video object-cover" style="border-bottom: 2px solid #000;">
         <div class="p-3">
           <p class="font-bold text-base leading-snug word-keep">돈 되는 아파트 고르는 3가지 방법</p>
-          <p class="text-black text-xs mt-1 font-mono font-bold">조회수 7.6만</p>
+          <p class="text-black text-xs mt-1 font-mono font-bold">조회수 7.7만</p>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=ppTNK0ZWAeo" target="_blank" rel="noopener" class="card-hover rot-1 block border-2 border-black overflow-hidden" style="background:#fff; box-shadow: 4px 4px 0 #000;">
+        <img src="https://img.youtube.com/vi/ppTNK0ZWAeo/mqdefault.jpg" alt="대구 아파트는 여기를 사야 3년안에 웃습니다" class="w-full aspect-video object-cover" style="border-bottom: 2px solid #000;">
+        <div class="p-3">
+          <p class="font-bold text-base leading-snug word-keep">대구 아파트는 여기를 사야 3년안에 웃습니다</p>
+          <p class="text-black text-xs mt-1 font-mono font-bold">조회수 20만</p>
         </div>
       </a>
       <a href="https://www.youtube.com/watch?v=0aPDvqjNm6M" target="_blank" rel="noopener" class="card-hover rot-n1 block border-2 border-black overflow-hidden" style="background:#fff; box-shadow: 4px 4px 0 #000;">
         <img src="https://img.youtube.com/vi/0aPDvqjNm6M/mqdefault.jpg" alt="첫 번째 내집마련 이렇게 하세요" class="w-full aspect-video object-cover" style="border-bottom: 2px solid #000;">
         <div class="p-3">
           <p class="font-bold text-base leading-snug word-keep">첫 번째 내집마련 이렇게 하세요</p>
-          <p class="text-black text-xs mt-1 font-mono font-bold">조회수 4.1만</p>
-        </div>
-      </a>
-      <a href="https://www.youtube.com/watch?v=TkXfMsX13dg" target="_blank" rel="noopener" class="card-hover rot-1 block border-2 border-black overflow-hidden" style="background:#fff; box-shadow: 4px 4px 0 #000;">
-        <img src="https://img.youtube.com/vi/TkXfMsX13dg/mqdefault.jpg" alt="30대 후반부터 격차가 벌어지는 과정" class="w-full aspect-video object-cover" style="border-bottom: 2px solid #000;">
-        <div class="p-3">
-          <p class="font-bold text-base leading-snug word-keep">30대 후반부터 격차가 벌어지는 과정</p>
-          <p class="text-black text-xs mt-1 font-mono font-bold">조회수 5.1만</p>
-        </div>
-      </a>
-      <a href="https://www.youtube.com/watch?v=WDh_RfgwdBI" target="_blank" rel="noopener" class="card-hover rot-n1 block border-2 border-black overflow-hidden" style="background:#fff; box-shadow: 4px 4px 0 #000;">
-        <img src="https://img.youtube.com/vi/WDh_RfgwdBI/mqdefault.jpg" alt="연봉별 적정 집값부터 대출까지 총정리" class="w-full aspect-video object-cover" style="border-bottom: 2px solid #000;">
-        <div class="p-3">
-          <p class="font-bold text-base leading-snug word-keep">연봉별 적정 집값부터 대출까지</p>
-          <p class="text-black text-xs mt-1 font-mono font-bold">조회수 2.8만</p>
+          <p class="text-black text-xs mt-1 font-mono font-bold">조회수 4.2만</p>
         </div>
       </a>
     </div>
@@ -271,7 +273,7 @@
   <div class="max-w-6xl mx-auto px-5 sm:px-8 relative z-10">
     <div class="text-center mb-16" data-reveal>
       <div class="inline-block bg-white border-2 border-black px-4 py-1 mb-6 font-bold text-sm uppercase tracking-wider" style="box-shadow: 4px 4px 0 #000; transform: rotate(1deg);">Pricing</div>
-      <h2 class="text-4xl sm:text-5xl md:text-6xl mt-2 mb-5 word-keep">필요한 것만 <span style="color:#fff; background:#000; padding: 0 10px;">골라 시작.</span></h2>
+      <h2 class="text-4xl sm:text-5xl md:text-6xl mt-2 mb-5 word-keep">필요한 것만 <span style="color:#fff; background:#000; padding: 4px 14px; line-height: 1.25; display: inline-block; margin-top: 6px;">골라 시작.</span></h2>
       <p class="text-xl text-black font-medium mt-6 word-keep">진심으로 도울 수 있는 만큼만 받습니다.</p>
     </div>
 
@@ -291,7 +293,7 @@
       </div>
 
       <!-- 1:1 코칭 (Best Value 4중 누적 — 라벤더 강조 WBF 패턴) -->
-      <div class="card-hover border-4 border-black p-7 flex flex-col relative" style="background:#E0E7F1; box-shadow: 12px 12px 0 #000; transform: scale(1.05); z-index: 10;">
+      <div class="card-hover featured-card border-4 border-black p-7 flex flex-col relative" style="background:#E0E7F1; box-shadow: 12px 12px 0 #000; --rot: scale(1.05); --rot-mobile: none; transform: scale(1.05); z-index: 10;">
         <div class="absolute border-2 border-black px-3 py-1 font-bold text-black text-sm" style="top: -16px; right: 16px; background:#CEFF00; box-shadow: 4px 4px 0 #000; white-space: nowrap;">★ Best Value</div>
         <h3 class="text-2xl mb-2 mt-3" style="font-weight: 900;">내집마련 1:1 코칭</h3>
         <p class="text-black text-base mb-5 word-keep font-medium">내 상황에 딱 맞는 맞춤 진단</p>
@@ -388,7 +390,7 @@
           <span class="faq-icon text-3xl shrink-0 ml-4 font-black">+</span>
         </summary>
         <div class="px-5 pb-5 text-black leading-relaxed word-keep text-base font-medium" style="border-top: 2px solid #000; padding-top: 16px;">
-          오히려 예산이 빠듯할수록 도움이 됩니다. "지금 사야 하나"부터 "얼마를 더 모아야 하나"까지 데이터로 진단해드립니다. 117건+ 상담 중 실수령 300만 원대 직장인도 다수입니다.
+          오히려 예산이 빠듯할수록 도움이 됩니다. "지금 사야 하나"부터 "얼마를 더 모아야 하나"까지 데이터로 진단해드립니다. 100건++ 상담 중 실수령 300만 원대 직장인도 다수입니다.
         </div>
       </details>
       <details class="faq-item border-2 border-black" style="background:#fff; box-shadow: 4px 4px 0 #000;">
@@ -415,7 +417,7 @@
           <span class="faq-icon text-3xl shrink-0 ml-4 font-black">+</span>
         </summary>
         <div class="px-5 pb-5 text-black leading-relaxed word-keep text-base font-medium" style="border-top: 2px solid #000; padding-top: 16px;">
-          가능합니다. 다만 우리는 "ETF→집→ETF" 순환 전략을 추천합니다. 주식만 vs 부동산만이 아니라, 둘 다 순서대로 가는 게 직장인에게 가장 현실적이라는 게 117건+ 상담의 결론입니다.
+          가능합니다. 다만 우리는 "ETF→집→ETF" 순환 전략을 추천합니다. 주식만 vs 부동산만이 아니라, 둘 다 순서대로 가는 게 직장인에게 가장 현실적이라는 게 100건++ 상담의 결론입니다.
         </div>
       </details>
       <details class="faq-item border-2 border-black" style="background:#E0FFE0; box-shadow: 4px 4px 0 #000;">
@@ -440,9 +442,9 @@
     <div class="inline-block bg-white border-2 border-black px-4 py-1 mb-7 font-bold text-sm" style="box-shadow: 4px 4px 0 #CEFF00; transform: rotate(-2deg);">Ready?</div>
     <h2 class="text-4xl sm:text-5xl md:text-6xl text-white mb-7 word-keep" style="line-height: 1.05;">
       지금 여기,<br>
-      <span style="background:#CEFF00; color:#000; padding: 0 10px;">사도 될까요?</span>
+      <span style="background:#CEFF00; color:#000; padding: 4px 14px; line-height: 1.25; display: inline-block; margin-top: 6px;">사도 될까요?</span>
     </h2>
-    <p class="text-xl text-gray-300 font-medium mb-10 max-w-xl mx-auto word-keep">막연한 추측 대신, 데이터 기반 답을 받아보세요.<br class="hidden sm:block">무료 상담으로 시작합니다.</p>
+    <p class="text-xl text-gray-300 font-medium mb-10 max-w-xl mx-auto word-keep">막연한 추측 대신, 데이터 기반 답을 받아보세요. <br class="hidden sm:block">무료 상담으로 시작합니다.</p>
     <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
       <a href="/counsel/?idx=11" class="btn-haptic inline-flex items-center justify-center gap-2 font-bold border-2 border-black px-8 py-4 text-lg" style="background:#00D084; color:#000; box-shadow: 4px 4px 0 #fff;">
         무료 상담 신청 →
@@ -451,7 +453,7 @@
         먼저 유튜브로 보기
       </a>
     </div>
-    <p class="text-gray-500 text-xs font-mono uppercase tracking-widest font-bold">⭐ 7-Day Money Back · 117+ 상담 · 4.97/5</p>
+    <p class="text-gray-500 text-xs font-mono uppercase tracking-widest font-bold">⭐ 7일 환불 보장 · 100++ 상담 · 4.97/5</p>
   </div>
 </section>
 
