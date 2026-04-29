@@ -212,6 +212,11 @@
 	  .region-pill:nth-child(4n+4) { background:#ffd3cc; }
 	  .region-pill-solid { display:inline-flex; align-items:center; justify-content:center; min-height:34px; border:1px solid rgba(255,255,255,0.16); border-radius:999px; background:#f5f0e8; color:#121826; padding:7px 15px; font-size:13px; font-weight:900; white-space:nowrap; }
 	  .region-pill-solid.capital { background:#fff8e7; border-color:rgba(244,196,48,0.55); }
+      .kakao-channel-pill { display:inline-flex; align-items:center; min-height:44px; border-radius:999px; background:#FEE500; color:#111; padding:5px 6px 5px 18px; box-shadow:0 12px 24px rgba(0,0,0,.18); transition:transform .18s ease, box-shadow .18s ease; }
+      .kakao-channel-pill:hover { transform:translateY(-2px); box-shadow:0 16px 30px rgba(0,0,0,.24); }
+      .kakao-channel-pill .ch { display:grid; place-items:center; width:30px; height:30px; border-radius:999px; background:#111; color:#FEE500; font-size:12px; font-weight:900; margin:0 10px; }
+      .kakao-channel-pill .id { display:inline-flex; align-items:center; gap:12px; min-height:34px; border-radius:999px; background:#fffdf2; padding:0 5px 0 16px; font-weight:900; }
+      .kakao-channel-pill .plus { display:grid; place-items:center; width:26px; height:26px; border-radius:999px; background:#111; color:#fff; font-size:20px; line-height:1; }
 	  .package-postit { position:relative; border-radius:8px; border:1px solid rgba(18,24,38,0.10); box-shadow:0 14px 30px rgba(18,24,38,0.10); transform:rotate(-1deg); }
 	  .package-postit:nth-child(even) { transform:rotate(1deg); }
 	  .package-postit::before { content:''; position:absolute; top:-10px; left:50%; width:22px; height:22px; margin-left:-11px; border-radius:999px; background:#f4c430; box-shadow:0 4px 10px rgba(18,24,38,0.18); }
@@ -1157,11 +1162,11 @@
 	        <span class="text-left"><span class="block text-sm font-bold text-gray-500">우리동네재테크</span><span class="block text-2xl md:text-3xl font-display font-black text-brand-dark">대기신청하기</span></span>
 	      </button>
 	      <div class="mt-5 flex justify-center">
-	        <div class="inline-flex items-center gap-3 rounded-full bg-[#FEE500] px-5 py-2 text-brand-dark shadow-md">
-	          <span class="grid h-7 w-7 place-items-center rounded-full bg-brand-dark text-xs font-black text-[#FEE500]">Ch</span>
-	          <span class="text-sm font-black">카카오톡 플러스 ID</span>
-	          <span class="text-sm font-black">우리동네재테크</span>
-	        </div>
+	        <a href="http://pf.kakao.com/_mcxnjX/friend" target="_blank" rel="noopener" class="kakao-channel-pill" aria-label="우리동네재테크 카카오톡 채널 추가하기">
+	          <span class="text-sm font-black">카카오톡 채널추가</span>
+	          <span class="ch">Ch</span>
+	          <span class="id"><span>우리동네재테크</span><span class="plus">+</span></span>
+	        </a>
 	      </div>
 	      <p class="mt-5 text-sm text-gray-300 word-keep">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
     </div>
