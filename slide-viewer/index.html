@@ -8,7 +8,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; min-height: 100vh; }
-        .container { max-width: 1080px; margin: 0 auto; padding: 32px 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
         .back { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: #64748B; text-decoration: none; margin-bottom: 16px; }
         .back:hover { color: #0077C8; }
         h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 4px; }
@@ -38,63 +38,20 @@
         /* (파일 트리·빌드 명령어 — 미사용, 제거됨) */
 
         /* 카테고리 섹션 */
-        .cat-section { margin-bottom: 28px; }
-        .cat-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            min-height: 30px;
-            font-size: 15px;
-            font-weight: 900;
-            color: #051C2C;
-            letter-spacing: 0;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #D8E2EE;
-        }
-        .cat-title::before {
-            content: "";
-            width: 4px;
-            height: 16px;
-            border-radius: 999px;
-            background: #0077C8;
-            flex-shrink: 0;
-        }
+        .cat-section { margin-bottom: 20px; }
+        .cat-title { font-size: 13px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #E2E8F0; }
 
         /* 타입 카드 그리드 */
-        .type-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-        .type-card {
-            display: flex;
-            flex-direction: column;
-            min-height: 132px;
-            background: white;
-            border: 1px solid #D8E2EE;
-            border-radius: 8px;
-            padding: 14px;
-            text-decoration: none;
-            color: #1A1A1A;
-            transition: border-color 0.15s, box-shadow 0.15s;
-        }
-        .type-card:hover { border-color: #0077C8; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08); }
-        .type-card-head { display: flex; align-items: center; gap: 8px; min-width: 0; margin-bottom: 10px; }
-        .t-code { background: #E8F3FF; color: #0077C8; font-size: 12px; font-weight: 900; line-height: 1.35; padding: 3px 8px; border-radius: 6px; flex-shrink: 0; }
-        .t-name { min-width: 0; color: #051C2C; font-size: 16px; font-weight: 900; line-height: 1.25; overflow-wrap: anywhere; }
-        .t-usage { order: 1; color: #334155; font-size: 13px; font-weight: 700; line-height: 1.45; margin-bottom: 8px; }
-        .t-usage::before { content: "추천 "; color: #0077C8; font-size: 11px; font-weight: 900; }
-        .t-desc { order: 2; color: #64748B; font-size: 12px; line-height: 1.45; margin-top: auto; }
-        .t-desc::before { content: "구성 "; color: #94A3B8; font-weight: 800; }
-        .t-variants,
-        .t-new {
-            border-radius: 999px;
-            font-size: 10px;
-            font-weight: 900;
-            line-height: 1.35;
-            padding: 3px 7px;
-            margin-left: auto;
-            flex-shrink: 0;
-        }
-        .t-variants { background: #FFF7ED; color: #B45309; }
-        .t-new { background: #ECFDF5; color: #047857; }
+        .type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .type-card { background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 14px; text-decoration: none; color: #1A1A1A; transition: all 0.15s; display: block; }
+        .type-card:hover { border-color: #0077C8; box-shadow: 0 2px 8px rgba(0,119,200,0.1); }
+        .type-card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .t-code { background: #E8F3FF; color: #0077C8; font-size: 11px; font-weight: 800; padding: 2px 7px; border-radius: 6px; flex-shrink: 0; }
+        .t-name { font-size: 14px; font-weight: 700; color: #051C2C; }
+        .t-desc { font-size: 12px; color: #64748B; margin-bottom: 2px; }
+        .t-usage { font-size: 11px; color: #94A3B8; }
+        .t-variants { background: #FFF7ED; color: #92400E; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 6px; margin-left: auto; flex-shrink: 0; }
+        .t-new { background: #ECFDF5; color: #065F46; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 6px; margin-left: auto; flex-shrink: 0; }
 
         /* 에디터 바로가기 */
         .editor-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; margin-bottom: 24px; }
