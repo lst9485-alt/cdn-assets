@@ -23,7 +23,7 @@
     .word-keep { word-break: keep-all; overflow-wrap: break-word; }
     /* WBF: letter-spacing normal — 한국어는 살짝만 */
     h1, h2, h3 { letter-spacing: -0.005em; line-height: 1.05; font-weight: 900; }
-    p, li { font-weight: 500; }
+    /* p/li font-weight는 Tailwind 클래스(font-medium/font-bold)에 위임 — 부모 상속 가능하게 */
     .faq-item[open] .faq-icon { transform: rotate(45deg); }
     .faq-icon { transition: transform 0.25s ease; }
     [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease-out, transform 0.55s ease-out; }
