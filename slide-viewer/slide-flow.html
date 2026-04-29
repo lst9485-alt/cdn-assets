@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <title>원고 → 슬라이드 7단계</title>
+    <title>원고 → 슬라이드 8단계</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; min-height: 100vh; }
@@ -106,8 +106,8 @@
 <body>
     <div class="container">
         <a href="./" class="back">← 슬라이드 템플릿</a>
-        <h1>원고 → 슬라이드 7단계</h1>
-        <p class="subtitle">원고를 주면 skeleton, chunk 검증, HTML 배포를 거쳐 공개본이 됩니다</p>
+        <h1>원고 → 슬라이드 8단계</h1>
+        <p class="subtitle">원고를 주면 skeleton, chunk 검증, HTML 화면 검수, 배포를 거쳐 공개본이 됩니다</p>
 
         <div class="steps">
 
@@ -516,12 +516,68 @@
             <!-- 단계 7 -->
             <div class="step-wrap">
                 <div class="step-connector">
-                    <div class="step-dot" style="background:#ECFDF5; color:#065F46;">⑦</div>
-                    <div class="step-line last"></div>
+                    <div class="step-dot" style="background:#E8F3FF; color:#0077C8;">⑦</div>
+                    <div class="step-line"></div>
                 </div>
                 <div class="step-card">
                     <div class="step-header" onclick="toggleDetail(this)">
                         <div class="step-num">STEP 7</div>
+                        <div class="step-title-area">
+                            <div class="step-title">최종 HTML 검수</div>
+                            <div class="step-io">
+                                <span class="io-box io-in">slide.md + {날짜}-slides.html</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-script">pipeline.py final-audit</span>
+                                <span class="io-arrow">→</span>
+                                <span class="io-box io-out">검수 리포트</span>
+                            </div>
+                        </div>
+                        <div class="step-human human-no">자동</div>
+                        <div class="step-toggle">▶</div>
+                    </div>
+                    <div class="step-detail">
+                        <p><b>verify-md</b>가 기획표 검사라면, <b>final-audit</b>는 실제 HTML 화면 검사입니다. slide.md의 내용 칸과 HTML의 보이는 글자를 비교하고, Playwright로 화면을 열어 빈 슬라이드, placeholder, 이미지 깨짐, 글자 넘침을 잡습니다.</p>
+                        <div class="detail-paths">
+                            <span class="detail-path">pipeline.py final-audit slide.md --html {날짜}-slides.html</span>
+                            <span class="detail-path">tools/verify_html_text.py</span>
+                            <span class="detail-path">tools/audit_render.cjs</span>
+                            <span class="detail-path">tmp/final-audit/{HTML파일명}/manifest.json</span>
+                        </div>
+                        <div class="flow-files">
+                            <div class="flow-files-count">📁 검수 기준 4개</div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-py">🐍 Python 2</span>
+                                <ol class="flow-file-list">
+                                    <li>template/pipeline.py</li>
+                                    <li>tools/verify_html_text.py</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-js">🟨 JavaScript 1</span>
+                                <ol class="flow-file-list">
+                                    <li>tools/audit_render.cjs</li>
+                                </ol>
+                            </div>
+                            <div class="flow-files-group">
+                                <span class="flow-lang-tag lang-out">📤 출력 1</span>
+                                <ol class="flow-file-list">
+                                    <li>tmp/final-audit/{HTML파일명}/</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 단계 8 -->
+            <div class="step-wrap">
+                <div class="step-connector">
+                    <div class="step-dot" style="background:#ECFDF5; color:#065F46;">⑧</div>
+                    <div class="step-line last"></div>
+                </div>
+                <div class="step-card">
+                    <div class="step-header" onclick="toggleDetail(this)">
+                        <div class="step-num">STEP 8</div>
                         <div class="step-title-area">
                             <div class="step-title">GitHub Pages 배포</div>
                             <div class="step-io">
@@ -536,7 +592,7 @@
                         <div class="step-toggle">▶</div>
                     </div>
                     <div class="step-detail">
-                        <p>완성된 HTML을 cdn-assets 레포의 slide-viewer에 반영하고 GitHub에 push합니다. 1~2분 후 공개 URL에서 볼 수 있습니다. JS/CSS만 바뀌면 assets만 동기화하고, 생성 HTML은 덮어쓰지 않습니다.</p>
+                        <p>final-audit를 통과한 HTML을 cdn-assets 레포의 slide-viewer에 반영하고 GitHub에 push합니다. 브라우저에서 운영본을 편집했다면 최종 운영 HTML을 대상으로 final-audit를 한 번 더 돌린 뒤 공개 URL을 확인합니다.</p>
                         <div class="detail-paths">
                             <span class="detail-path">workspace/apps/dashboard/repo/slide-viewer/</span>
                             <span class="detail-path">git push origin main</span>
@@ -561,7 +617,7 @@
         <!-- 최근 사이드파인딩 상태 -->
         <div class="problems-section">
             <div class="section-label">최근 사이드파인딩 상태</div>
-            <div class="problem-note">2026-04-27 기준 — 생성기 방어장치와 기존 공개본 상태를 분리해서 봅니다.</div>
+            <div class="problem-note">2026-04-29 기준 — 생성기 방어장치와 최종 HTML 화면 검수를 분리해서 봅니다.</div>
             <div class="problem-list">
                 <div class="problem-item">
                     <div class="problem-num">#1</div>
@@ -591,16 +647,23 @@
                         <div class="problem-stage">상태: <span>배포</span> — workspace/apps/dashboard/repo/slide-viewer와 GitHub Pages URL을 기준으로 확인.</div>
                     </div>
                 </div>
+                <div class="problem-item">
+                    <div class="problem-num">#5</div>
+                    <div class="problem-body">
+                        <div class="problem-title">최종 HTML 화면 검수 단계 추가</div>
+                        <div class="problem-stage">상태: <span>final-audit</span> — 기획표 문구 누락, 빈 슬라이드, placeholder, 이미지 깨짐을 배포·녹화 전에 자동 검사.</div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 전체 관련 파일 -->
         <div class="all-files">
-            <div class="section-label">전체 관련 파일 (2026-04-27 기준)</div>
-            <div class="all-files-summary">핵심 파일 묶음 · skeleton 생성, chunk 검증, HTML 생성, GitHub Pages 배포 기준</div>
+            <div class="section-label">전체 관련 파일 (2026-04-29 기준)</div>
+            <div class="all-files-summary">핵심 파일 묶음 · skeleton 생성, chunk 검증, HTML 생성, final-audit, GitHub Pages 배포 기준</div>
 
             <details class="all-files-section">
-                <summary><span class="flow-lang-tag lang-py">🐍 Python 44</span></summary>
+                <summary><span class="flow-lang-tag lang-py">🐍 Python 45</span></summary>
                 <ol class="all-files-list">
                     <li>template/build-channel-logo.py</li>
                     <li>template/build-editor.py</li>
@@ -627,6 +690,7 @@
                     <li>template/structure_evidence.py</li>
                     <li>template/sync-counts.py</li>
                     <li>template/validators.py</li>
+                    <li>tools/verify_html_text.py</li>
                     <li>template/checks/__init__.py</li>
                     <li>template/checks/_preset_lookup.py</li>
                     <li>template/checks/check_abc_steps_equal.py</li>
@@ -650,7 +714,7 @@
             </details>
 
             <details class="all-files-section">
-                <summary><span class="flow-lang-tag lang-js">🟨 JavaScript 14</span></summary>
+                <summary><span class="flow-lang-tag lang-js">🟨 JavaScript 15</span></summary>
                 <ol class="all-files-list">
                     <li>template/js/main-top.js</li>
                     <li>template/js/main-mid.js</li>
@@ -666,6 +730,7 @@
                     <li>template/js/layer-panel.js</li>
                     <li>template/js/category-header.js</li>
                     <li>template/js/modules-data.js</li>
+                    <li>tools/audit_render.cjs</li>
                 </ol>
             </details>
 
@@ -735,6 +800,10 @@
                 <div class="glossary-item">
                     <span class="glossary-term">verify</span>
                     <span class="glossary-def">plan, chunk, slide.md를 자동으로 검사하는 단계. 오류가 있으면 HTML 생성 전에 멈춤.</span>
+                </div>
+                <div class="glossary-item">
+                    <span class="glossary-term">final-audit</span>
+                    <span class="glossary-def">생성된 HTML을 실제 화면 기준으로 검사하는 단계. 빈 슬라이드, placeholder, 이미지 깨짐, 기획표 문구 누락을 잡음.</span>
                 </div>
             </div>
         </div>
