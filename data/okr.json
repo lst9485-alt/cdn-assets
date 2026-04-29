@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-29T06:00:09.592771+09:00",
+  "updated": "2026-04-30T06:00:09.218862+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -8,22 +8,22 @@
       "rate": "🟢 70%"
     },
     {
-      "title": "구독자3만(3월30일 17,736명)",
-      "target": 12264,
+      "title": "홈페이지 가입 100명",
+      "target": 100,
       "current": 0,
       "rate": "🔴 0%"
     },
     {
-      "title": "홈페이지 가입 100명",
-      "target": 100,
+      "title": "구독자3만(3월30일 17,736명)",
+      "target": 12264,
       "current": 0,
       "rate": "🔴 0%"
     }
   ],
   "tasks": {
-    "total": 341,
-    "done": 318,
-    "overdue": 8,
+    "total": 350,
+    "done": 323,
+    "overdue": 9,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,44 +61,14 @@
         "overdue": true
       },
       {
-        "title": "1:1코칭페이지 수정(카톡비즈니스+카톡비즈니스채널 코칭페이지 추가)",
-        "date": "2026-04-28T15:00:00.000+09:00",
+        "title": "랜딩수정",
+        "date": "2026-04-29T10:00:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "자료수집&도입부",
-        "date": "2026-04-29",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-04-29T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "연차취합",
-        "date": "2026-04-29T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-04-29T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "date": "2026-04-29T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의 기획",
+        "title": "crm구조",
         "date": "2026-04-29T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-04-30",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "주간계획 수정",
@@ -106,13 +76,38 @@
         "overdue": false
       },
       {
-        "title": "PPT완료",
-        "date": "2026-05-01",
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-04-30T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "date": "2026-04-30T10:45:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고",
+        "date": "2026-04-30T19:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고완성",
+        "date": "2026-05-01T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "홈페이지테마 정하기+랜딩 수정",
+        "date": "2026-05-01T15:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-05-02",
+        "overdue": false
+      },
+      {
+        "title": "PPT완료",
+        "date": "2026-05-02T14:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -131,21 +126,46 @@
         "overdue": false
       },
       {
+        "title": "강의 기획",
+        "date": "2026-05-04T09:45:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "연차취합",
+        "date": "2026-05-04T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "현금영수증&세금계산서 발행",
         "date": "2026-05-04T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-05-04T15:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "주제선정&썸네일&제목",
         "date": "2026-05-05",
         "overdue": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "date": "2026-05-06",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-05-06T12:00:00.000+09:00",
+        "overdue": false
       }
     ],
     "schedule": [
       {
-        "title": "자료수집&도입부",
-        "time": "",
-        "allDay": true,
+        "title": "주간계획 수정",
+        "time": "08:30",
+        "allDay": false,
         "done": false
       },
       {
@@ -155,26 +175,14 @@
         "done": false
       },
       {
-        "title": "연차취합",
-        "time": "10:00",
+        "title": "자료수집&도입부",
+        "time": "10:45",
         "allDay": false,
         "done": false
       },
       {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "time": "13:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의 기획",
-        "time": "15:00",
+        "title": "원고",
+        "time": "19:00",
         "allDay": false,
         "done": false
       }
@@ -209,11 +217,6 @@
       "rate": "32%",
       "days": [
         {
-          "date": "2026-04-23",
-          "done": 1,
-          "total": 4
-        },
-        {
           "date": "2026-04-24",
           "done": 2,
           "total": 4
@@ -240,6 +243,11 @@
         },
         {
           "date": "2026-04-29",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-04-30",
           "done": 0,
           "total": 4
         }

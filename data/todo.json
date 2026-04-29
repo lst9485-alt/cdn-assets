@@ -1,287 +1,392 @@
 {
-  "updated": "2026-04-29T06:00:02.056102+09:00",
+  "updated": "2026-04-30T06:00:02.813013+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
       "categories": [
         {
           "id": 1,
-          "title": "슬라이드 템플릿 메타 전수 점검 + 에디터 UI 수정 + 백업 정리 (최우선)",
-          "ref": null,
+          "title": "홈페이지 신청 퍼널 + 상담 CRM 알림톡 전환 (4/14~)",
+          "ref": "랜딩페이지 v4 수정",
           "items": [
             {
-              "text": "1-1. 최종 점검 B: **편중 실측** — 실제 새 원고 필요. 기존 260426 공개본은 3+step 5.6%, 5-step 0개라 재생성 승인 전까지 경고 유지. 새 원고 생성 시점에 다시 점검.",
+              "text": "1-1. **우선순위** 랜딩페이지 v4 최종 수정 — 대시보드 정본 기준. `pg-version`은 사용자가 따로 말하기 전에는 수정하지 않는다.",
               "done": false
             },
             {
-              "text": "1-2. cdn-assets 로컬 백업 브랜치·태그 삭제",
+              "text": "1-1-1. 신청/결제 구조 확정 (4/29) — `랜딩 → 짧은 신청폼 → 완료 화면에서 카드/계좌 안내 → 결제·입금 확인 → 사전질문지 카톡 → 일정 선택`",
+              "done": true
+            },
+            {
+              "text": "1-1-2. CTA 문구 확정 (4/29) — `코칭 신청하기` 중심. `대기신청`, `가능 일정 확인하기`는 사용하지 않음.",
+              "done": true
+            },
+            {
+              "text": "1-1-3. 일정 선택 안내 문구 확정 (4/29) — Google Calendar에 아래 문구 반영: \"🗓️ 일정 확정 후에는 변경이 어려우니 신중하게 선택해주세요. / 일정은 최대 4주 단위로 오픈됩니다. / 퀄리티 유지를 위해 코칭은 매주 최대 3명만 진행합니다. / 변경·취소는 환불규정에 따라 안내드립니다.\"",
+              "done": true
+            },
+            {
+              "text": "1-1-4. **아침 1순위: 신청폼 축소** — `coaching-all.html`, `coaching-body.html`, `footer-code.html`에서 이메일 입력, 입금완료 체크, 입금자명 필수 흐름 제거. 폼은 성함/휴대폰/상담목적/개인정보 동의 중심으로 줄인다.",
               "done": false
             },
             {
-              "text": "1-3. workspace 3개 backup/* 브랜치 삭제 (원격 포함)",
+              "text": "1-1-5. 폼 제출 JS 수정 — `f-email`, `f-deposit`, `f-depositor` 의존 제거. Apps Script payload 기본값과 CRM 저장 필드가 깨지지 않는지 확인. `입금완료 후 체크해주세요` 검증 제거.",
               "done": false
+            },
+            {
+              "text": "1-1-6. 신청 완료 모달 변경 — \"신청이 접수되었습니다. 아래에서 결제 방법을 선택해주세요.\" 문구 + `카드결제 안내`, `계좌이체 안내` 선택지. 결제·입금 확인 후 12시간 내 카톡 안내 문구 포함.",
+              "done": false
+            },
+            {
+              "text": "1-1-7. 카드결제 안내 페이지 생성 — 자체 홈페이지에 별도 페이지로 만들고 `noindex` 처리. 포함 문구: 상품명, 40만원, 실물 배송 없음, 온라인 1:1 코칭, `구매하기 → 비회원 주문 → 카드결제`, 환불규정 링크, 아임웹 상품 상세 링크(`idx=17` 우선 후보).",
+              "done": false
+            },
+            {
+              "text": "1-1-8. 계좌이체 안내 정리 — 완료 모달 또는 안내 영역에 계좌, 입금자명은 신청자명과 동일하게, 다르면 카톡으로 알려달라는 문구 추가. 현금영수증/세금계산서는 1차 폼에서 받지 않고 카톡/운영 확인으로 처리.",
+              "done": false
+            },
+            {
+              "text": "1-1-9. 진행순서/FAQ/환불 문구 일괄 수정 — `신청 → 결제/입금 확인 → 사전질문지 → 일정 선택 → 구글미트 코칭 → 90일 질의응답` 기준으로 통일. 결제 전 사전질문지 발송으로 보이는 문구 제거.",
+              "done": false
+            },
+            {
+              "text": "1-1-10. 히어로/가격 카드 보강 — 40만원 가치가 바로 보이게 `50분 코칭 + 90일 카톡 질의응답 + 리포트/시트/PDF + 부부동반 가능`을 CTA 근처에 반영.",
+              "done": false
+            },
+            {
+              "text": "1-1-11. 최종 반영 점검 — 작업 파일 `Workspace/apps/homepage/coaching-all.html`과 대시보드 정본 `Workspace/apps/dashboard/repo/homepage/coaching-all.html` 동일성 확인, 아임웹 조각에는 네비게이션/배지 제외, 공개 URL `https://lst9485-alt.github.io/cdn-assets/homepage/coaching-all.html`에서 폼/모달/결제 안내 확인, 관련 repo 커밋/푸시.",
+              "done": false
+            },
+            {
+              "text": "1-2-1-1. `상담 CRM.md`의 \"알림톡 문구 검수 후보\" 10종 최종 문구 확정 (4/28)",
+              "done": true
+            },
+            {
+              "text": "1-2-1-2. 사전질문지 작성 버튼 URL 확정 (4/28) — Google Forms: https://forms.gle/PwpdbUa5dQLFy1PV7",
+              "done": true
+            },
+            {
+              "text": "1-2-1-3. 상담 일정 예약 버튼 URL 확정 (4/28) — Google Calendar: https://calendar.app.google/SkWbhMhwqjUE8b5Y6",
+              "done": true
+            },
+            {
+              "text": "1-2-1-4. 회의 링크 버튼 운영 방식 확인 (4/28) — Calendar `hangoutLink`를 `#{미팅URL}`로 사용, 없으면 전날/당일 알림톡 보류 + Telegram 수동 확인",
+              "done": true
+            },
+            {
+              "text": "1-2-1-5. 상담 자료 보기 버튼 운영 방식 확인 (4/28) — `#{자료URL}` 생성/입력 후 Telegram `자료 안내 발송` 버튼으로 수동 승인 발송, 만료 문구 제외",
+              "done": true
+            },
+            {
+              "text": "1-2-1-6. 알리고 관리자에서 템플릿 10종 등록 + 카카오 검수 요청 완료 — 10/10 검수중 확인 (4/28)",
+              "done": true
+            },
+            {
+              "text": "1-2-1-7. 검수 결과 확인 — 승인/반려 여부와 반려 사유를 상담 CRM 작업 세션에 전달",
+              "done": false
+            },
+            {
+              "text": "1-2-1-8. 승인된 템플릿코드/`tpl_code` 10종(`UH_5034`~`UH_5043`)을 확인해 저장 위치 결정 요청",
+              "done": false
+            },
+            {
+              "text": "1-2-1-9. 알리고 `senderkey` 확인 — 원문을 채팅/노트에 붙이기 전에 보안 저장 방식 먼저 결정",
+              "done": false
+            },
+            {
+              "text": "1-2-1-10. 신청 직후 결제 안내 메시지 설계 — 카드결제 안내 페이지 URL, 아임웹 상품 URL, 계좌이체 안내, 비회원 주문 안내, 실물 배송 없음 문구 포함",
+              "done": false
+            },
+            {
+              "text": "1-2-2-1. 기존 멘트 10종 정리 + 알림톡 후보 10종 초안 작성 (4/27)",
+              "done": true
+            },
+            {
+              "text": "1-2-2-2. 서브에이전트 3중 검수 — 검수 리스크, 고객 안내 톤, 변수·버튼 자동화 적합성 확인 (4/27)",
+              "done": true
+            },
+            {
+              "text": "1-2-2-3. 상담 CRM 프로젝트 노트에 내일 확인용 문구 정본 정리 (4/27)",
+              "done": true
+            },
+            {
+              "text": "1-2-2-4. 알림톡 10종 최종 문구 확인 완료 (4/28) — `상담 CRM.md`의 \"알림톡 문구 검수 후보\" 기준",
+              "done": true
+            },
+            {
+              "text": "1-2-2-5. 버튼 URL/변수 운영 확정 (4/28) — 사전질문지 작성: https://forms.gle/PwpdbUa5dQLFy1PV7 / 상담 일정 예약: https://calendar.app.google/SkWbhMhwqjUE8b5Y6 / 회의 링크: `#{미팅URL}` / 상담 자료 보기: `#{자료URL}`",
+              "done": true
+            },
+            {
+              "text": "1-2-2-6. 알리고 템플릿 등록 + 카카오 검수 요청 완료 — UH_5034~UH_5043 10종 검수중 확인 (4/28)",
+              "done": true
+            },
+            {
+              "text": "1-2-2-7. 승인된 템플릿코드/`tpl_code` 10종(`UH_5034`~`UH_5043`) 저장 위치 확정",
+              "done": false
+            },
+            {
+              "text": "1-2-3-1. 알리고 발신프로필 `senderkey` 확인 + 노출 금지 위치 정리",
+              "done": false
+            },
+            {
+              "text": "1-2-3-2. 변수 생성 규칙 구현 — `상담일시`, `상담시간`, `미팅URL`, `자료URL`",
+              "done": false
+            },
+            {
+              "text": "1-2-3-3. URL 필수값 검증 — `미팅URL` 없으면 전날/당일 알림톡 발송 보류 + Telegram 수동 확인",
+              "done": false
+            },
+            {
+              "text": "1-2-3-4. `자료URL` 운영 방식 확정 (4/28) — 자료URL 생성/입력 후 Telegram 수동 승인 발송, 30일 만료 문구는 실제 만료 제어 전까지 미사용",
+              "done": true
+            },
+            {
+              "text": "1-2-3-5. Notion/DB 알림톡 발송 체크 필드와 중복 발송 방지 키 설계",
+              "done": false
+            },
+            {
+              "text": "1-2-3-6. 알림톡 실패 시 Telegram 실패 알림 + SMS 발송 버튼 설계",
+              "done": false
+            },
+            {
+              "text": "1-2-3-7. 신청 직후 전환 스위치 설계 — 기존 `📤 문자발송` 버튼은 유지하고, 알림톡 승인/테스트 후 버튼 대상만 교체",
+              "done": false
+            },
+            {
+              "text": "1-2-3-8. 신청 직후 결제 안내 발송 흐름 설계 — 신청 완료 직후 Telegram 운영 알림에 `결제 안내 발송` 버튼 추가, 승인 후 고객에게 카드/계좌 안내 발송",
+              "done": false
+            },
+            {
+              "text": "1-2-3-9. 결제/입금 확인 후 사전질문지 안내 발송으로 이어지는 상태값 설계 — 카드결제 완료, 계좌입금 확인, 사전질문지 안내 발송 체크 분리",
+              "done": false
+            },
+            {
+              "text": "1-2-3-10. 결제 확인 Telegram 버튼 설계 — 운영자가 카드결제/입금 확인 후 `사전질문지 안내 발송` 버튼을 누르면 1번 알림톡 또는 임시 SMS/카톡 안내 발송",
+              "done": false
+            },
+            {
+              "text": "1-2-3-11. Google Calendar 예약 페이지에 확정 일정 문구 반영",
+              "done": false
+            },
+            {
+              "text": "1-2-3-12. 후속 3/30/90/180일 실패 재시도 정책 결정",
+              "done": false
+            },
+            {
+              "text": "1-2-3-13. n8n 공통 알림톡 발송 workflow 작성",
+              "done": false
+            },
+            {
+              "text": "1-2-3-14. Apps Script에서 신청/결제안내/질문지/상담일/자료/후속 발송 지점 연결",
+              "done": false
+            },
+            {
+              "text": "1-2-3-15. 모든 발송 결과를 Notion/DB 체크박스와 Telegram 운영 알림에 반영",
+              "done": false
+            },
+            {
+              "text": "1-2-4-1. 본인 번호로 템플릿별 1건씩 테스트",
+              "done": false
+            },
+            {
+              "text": "1-2-4-2. 실패 케이스 테스트 — 잘못된 번호, 템플릿 불일치, 알리고 실패 응답",
+              "done": false
+            },
+            {
+              "text": "1-2-4-3. 실제 신청 1건 E2E 점검: 신청서 → DB/Notion → Telegram → 결제 안내 → 카드/계좌 결제 확인 → 사전질문지 안내 → 상태 체크",
+              "done": false
+            },
+            {
+              "text": "1-2-4-4. 기존 SMS workflow 병행 기간 결정 후 안정화되면 자동 SMS 비활성화",
+              "done": false
+            },
+            {
+              "text": "1-2-4-5. 운영 문서 업데이트: `상담 CRM.md`, n8n README",
+              "done": false
+            },
+            {
+              "text": "1-2-5-1. 카카오 비즈니스채널 노트 아카이브 + 상담 CRM 흡수 (4/27)",
+              "done": true
+            },
+            {
+              "text": "1-2-5-2. 유튜브 short.io 링크를 카카오 채널 URL(`http://pf.kakao.com/_mcxnjX/chat`)로 변경 완료 (4/27)",
+              "done": true
             }
           ]
         },
         {
           "id": 2,
-          "title": "홈페이지 PG 승인 + 강의 준비",
-          "ref": "PG·결제 로드맵",
+          "title": "슬라이드 템플릿 메타 점검 후속 + 백업 정리 대기",
+          "ref": null,
           "items": [
             {
-              "text": "2-1. 카드사 심사 결과 확인 (~2026-05-08) → 반려 시 KCP 22만원 결제 또는 KCP 보험용 계약 검토",
+              "text": "2-1. 최종 점검 B: **편중 실측** — 실제 새 원고 필요. 기존 260426 공개본은 3+step 5.6%, 5-step 0개라 재생성 승인 전까지 경고 유지. 새 원고 생성 시점에 다시 점검.",
               "done": false
             },
             {
-              "text": "2-2. (PG 통과 후) pg-version 원복 — 대시보드 정본 기준으로 메인·커리큘럼·환불규정 아임웹 복원 + 1:1 코칭 상품(idx=17) 공개 복구 + coaching-body.html v3.5 재삽입",
+              "text": "2-2. cdn-assets 로컬 백업 브랜치·태그 삭제",
               "done": false
             },
             {
-              "text": "2-3. (PG 통과 후) 자체 사이트 개발 본격 진행 → [[0. 자체 사이트 제작]]",
-              "done": false
-            },
-            {
-              "text": "2-4. 이니시스 임시패스워드 변경 (~2026-05-24 필수)",
-              "done": false
-            },
-            {
-              "text": "2-5. 아임웹 상품 배송 설정 \"배송 없음\"으로 수정 (idx=18, idx=19 — 디지털 상품)",
-              "done": false
-            },
-            {
-              "text": "2-6. 세무사 문의 — 교육서비스업 809903 창업중소기업 세액감면 가능 여부",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 3,
-          "title": "홈페이지 디자인 + 구조 마무리 (4/14~)",
-          "ref": "랜딩페이지 v4 수정",
-          "items": [
-            {
-              "text": "3-5. **우선순위** 랜딩페이지 v4 최종 수정 — 대시보드 정본 기준. `pg-version`은 사용자가 따로 말하기 전에는 수정하지 않는다.",
-              "done": false
-            },
-            {
-              "text": "3-5-1. 신청/결제 구조 확정 (4/29) — `랜딩 → 짧은 신청폼 → 완료 화면에서 카드/계좌 안내 → 결제·입금 확인 → 사전질문지 카톡 → 일정 선택`",
-              "done": true
-            },
-            {
-              "text": "3-5-2. CTA 문구 확정 (4/29) — `코칭 신청하기` 중심. `대기신청`, `가능 일정 확인하기`는 사용하지 않음.",
-              "done": true
-            },
-            {
-              "text": "3-5-3. 일정 선택 안내 문구 확정 (4/29) — Google Calendar에 아래 문구 반영: \"🗓️ 일정 확정 후에는 변경이 어려우니 신중하게 선택해주세요. / 일정은 최대 4주 단위로 오픈됩니다. / 퀄리티 유지를 위해 코칭은 매주 최대 3명만 진행합니다. / 변경·취소는 환불규정에 따라 안내드립니다.\"",
-              "done": true
-            },
-            {
-              "text": "3-5-4. **아침 1순위: 신청폼 축소** — `coaching-all.html`, `coaching-body.html`, `footer-code.html`에서 이메일 입력, 입금완료 체크, 입금자명 필수 흐름 제거. 폼은 성함/휴대폰/상담목적/개인정보 동의 중심으로 줄인다.",
-              "done": false
-            },
-            {
-              "text": "3-5-5. 폼 제출 JS 수정 — `f-email`, `f-deposit`, `f-depositor` 의존 제거. Apps Script payload 기본값과 CRM 저장 필드가 깨지지 않는지 확인. `입금완료 후 체크해주세요` 검증 제거.",
-              "done": false
-            },
-            {
-              "text": "3-5-6. 신청 완료 모달 변경 — \"신청이 접수되었습니다. 아래에서 결제 방법을 선택해주세요.\" 문구 + `카드결제 안내`, `계좌이체 안내` 선택지. 결제·입금 확인 후 12시간 내 카톡 안내 문구 포함.",
-              "done": false
-            },
-            {
-              "text": "3-5-7. 카드결제 안내 페이지 생성 — 자체 홈페이지에 별도 페이지로 만들고 `noindex` 처리. 포함 문구: 상품명, 40만원, 실물 배송 없음, 온라인 1:1 코칭, `구매하기 → 비회원 주문 → 카드결제`, 환불규정 링크, 아임웹 상품 상세 링크(`idx=17` 우선 후보).",
-              "done": false
-            },
-            {
-              "text": "3-5-8. 계좌이체 안내 정리 — 완료 모달 또는 안내 영역에 계좌, 입금자명은 신청자명과 동일하게, 다르면 카톡으로 알려달라는 문구 추가. 현금영수증/세금계산서는 1차 폼에서 받지 않고 카톡/운영 확인으로 처리.",
-              "done": false
-            },
-            {
-              "text": "3-5-9. 진행순서/FAQ/환불 문구 일괄 수정 — `신청 → 결제/입금 확인 → 사전질문지 → 일정 선택 → 구글미트 코칭 → 90일 질의응답` 기준으로 통일. 결제 전 사전질문지 발송으로 보이는 문구 제거.",
-              "done": false
-            },
-            {
-              "text": "3-5-10. 히어로/가격 카드 보강 — 40만원 가치가 바로 보이게 `50분 코칭 + 90일 카톡 질의응답 + 리포트/시트/PDF + 부부동반 가능`을 CTA 근처에 반영.",
-              "done": false
-            },
-            {
-              "text": "3-5-11. 최종 반영 점검 — 작업 파일 `Workspace/apps/homepage/coaching-all.html`과 대시보드 정본 `Workspace/apps/dashboard/repo/homepage/coaching-all.html` 동일성 확인, 아임웹 조각에는 네비게이션/배지 제외, 공개 URL `https://lst9485-alt.github.io/cdn-assets/homepage/coaching-all.html`에서 폼/모달/결제 안내 확인, 관련 repo 커밋/푸시.",
+              "text": "2-3. workspace 3개 backup/* 브랜치 삭제 (원격 포함)",
               "done": false
             }
           ]
         },
         {
           "id": 4,
-          "title": "경쟁채널/콘텐츠 모니터링 시스템 (4/16~)",
-          "ref": "경쟁채널 모니터링 시스템",
+          "title": "원소스 멀티유즈 콘텐츠 시스템 셋업 (4/25~)",
+          "ref": "원소스 멀티유즈",
           "items": [
             {
-              "text": "4-1-1. 채널 1군/2군 설정 파일 확정 (4/27) — `config/channels.yaml`",
-              "done": true
-            },
-            {
-              "text": "4-1-2. 유튜브 수집 파이프라인 MVP 구축 (4/27) — YouTube Data API v3 우선",
-              "done": true
-            },
-            {
-              "text": "4-1-4. 데이터 저장소 구축 (4/27) — SQLite + 최신/일자별 dashboard JSON",
-              "done": true
-            },
-            {
-              "text": "4-2-1. 리포트 포맷 MVP 설계 (4/27) — 신규/잘된 영상/핵심 지표",
-              "done": true
-            },
-            {
-              "text": "4-2-2. 출력 위치 MVP 확정 (4/27) — GitHub Pages 대시보드 + Telegram 요약",
-              "done": true
-            },
-            {
-              "text": "4-3-1. 크론잡 등록 (4/27) — 매일 07:10",
-              "done": true
-            },
-            {
-              "text": "4-3-2. Telegram 알림 연결 (4/27)",
-              "done": true
-            },
-            {
-              "text": "4-3-3. 수동 실행 옵션 마련 (4/27) — `python3 -m competitor_monitor run`",
-              "done": true
-            },
-            {
-              "text": "4-0-1. 고스타 모니터링 시스템 심화 조사 — n8n, Huginn, RSSHub, changedetection.io, Grafana, Uptime Kuma, ntfy, Apprise 등 스타 많은 프로젝트를 “도입/구조 차용/제외” 매트릭스로 정리",
+              "text": "4-1. 첫 주제 선정 — [[주제 풀]] 6개 카테고리에서 1주차 주제 1개 확정",
               "done": false
             },
             {
-              "text": "4-0-2. n8n으로 맡길 범위 결정 — 수집까지 맡길지, Python 수집기는 유지하고 알림/오케스트레이션만 맡길지 비교",
+              "text": "4-2. L3 롱폼 원고 초안 작성 (유튜브 or 네이버 블로그 중 주력 채널 1개)",
               "done": false
             },
             {
-              "text": "4-0-3. YouTube Data API v3 쿼터/수집 안정성 재점검 — uploads playlist vs search, 일일 quota, 실패 재시도, API key만으로 충분한지",
+              "text": "4-3. L3 → L2 카드뉴스·블로그 미드폼 파생 1세트",
               "done": false
             },
             {
-              "text": "4-0-4. yt-dlp/scrapetube 폴백 PoC — API 장애 또는 quota 초과 시 신규 영상/기본 메타데이터만 보강 가능한지 확인",
+              "text": "4-4. L3 → L1 숏폼 1-2개 컷 편집",
               "done": false
             },
             {
-              "text": "4-1-3. 전일 스냅샷 2~3일 누적 후 24시간 증가 TOP 안정화 확인",
+              "text": "4-5. 성공포맷 분석 1회차 — 타 분야 인기 콘텐츠 1개 구조 해체 기록",
               "done": false
             },
             {
-              "text": "4-1-5. 7일 스냅샷 누적 후 주간 급상승 TOP 안정화 확인",
+              "text": "4-6. 내 영상 제목 30개 훈련 1회차 완료",
               "done": false
             },
             {
-              "text": "4-1-6. 대시보드 운영 상태 카드 추가 — 마지막 실행, 성공/실패, 수집 영상 수, Telegram 발송 여부",
-              "done": false
-            },
-            {
-              "text": "4-1-7. Telegram 요약 문구 축약 — 매일 볼 내용만 남기기",
-              "done": false
-            },
-            {
-              "text": "4-2-3. 네이버 블로그 수집 PoC — RSS 동작, 본문 파싱, 공감/댓글/이웃 수 대안, robots.txt 확인",
-              "done": false
-            },
-            {
-              "text": "4-2-4. 블로그 1군 후보 조사 — 네이버 부동산 파워블로거 10명+ 목록 + 이웃 수/일 발행량/최근 인기글",
-              "done": false
-            },
-            {
-              "text": "4-2-5. RSSHub 기반 뉴스/블로그/커뮤니티 소스 확장 가능성 확인",
-              "done": false
-            },
-            {
-              "text": "4-2-6. changedetection.io식 웹 변경 감지 대상 후보 정리 — RSS 없는 페이지, 강의/커뮤니티/뉴스 페이지",
-              "done": false
-            },
-            {
-              "text": "4-3-4. yt01-topic에서 최근 히트작 후보를 로컬 DB/JSON으로 조회하는 방식 설계",
-              "done": false
-            },
-            {
-              "text": "4-3-5. 제목/자막/설명 검색용 SQLite FTS 또는 yt-fts류 구조 검토",
-              "done": false
-            },
-            {
-              "text": "4-3-6. 주제 선정 리포트에 “최근 2주 히트작 + 최근 3개월 TOP + 채널 평균대비 TOP” 연결",
+              "text": "4-7. 1주 사이클 회고 → [[SNS 포맷]]·[[주제 풀]] 가이드 보완",
               "done": false
             }
           ]
         },
         {
           "id": 5,
-          "title": "원소스 멀티유즈 콘텐츠 시스템 셋업 (4/25~)",
-          "ref": "원소스 멀티유즈",
+          "title": "경쟁채널/콘텐츠 모니터링 시스템 (4/16~)",
+          "ref": "경쟁채널 모니터링 시스템",
           "items": [
             {
-              "text": "5-1. 첫 주제 선정 — [[주제 풀]] 6개 카테고리에서 1주차 주제 1개 확정",
+              "text": "5-2-1. 채널 1군/2군 설정 파일 확정 (4/27) — `config/channels.yaml`",
+              "done": true
+            },
+            {
+              "text": "5-2-2. 유튜브 수집 파이프라인 MVP 구축 (4/27) — YouTube Data API v3 우선",
+              "done": true
+            },
+            {
+              "text": "5-2-4. 데이터 저장소 구축 (4/27) — SQLite + 최신/일자별 dashboard JSON",
+              "done": true
+            },
+            {
+              "text": "5-3-1. 리포트 포맷 MVP 설계 (4/27) — 신규/잘된 영상/핵심 지표",
+              "done": true
+            },
+            {
+              "text": "5-3-2. 출력 위치 MVP 확정 (4/27) — GitHub Pages 대시보드 + Telegram 요약",
+              "done": true
+            },
+            {
+              "text": "5-4-1. 크론잡 등록 (4/27) — 매일 07:10",
+              "done": true
+            },
+            {
+              "text": "5-4-2. Telegram 알림 연결 (4/27)",
+              "done": true
+            },
+            {
+              "text": "5-4-3. 수동 실행 옵션 마련 (4/27) — `python3 -m competitor_monitor run`",
+              "done": true
+            },
+            {
+              "text": "5-1-1. 고스타 모니터링 시스템 심화 조사 — n8n, Huginn, RSSHub, changedetection.io, Grafana, Uptime Kuma, ntfy, Apprise 등 스타 많은 프로젝트를 “도입/구조 차용/제외” 매트릭스로 정리",
               "done": false
             },
             {
-              "text": "5-2. L3 롱폼 원고 초안 작성 (유튜브 or 네이버 블로그 중 주력 채널 1개)",
+              "text": "5-1-2. n8n으로 맡길 범위 결정 — 수집까지 맡길지, Python 수집기는 유지하고 알림/오케스트레이션만 맡길지 비교",
               "done": false
             },
             {
-              "text": "5-3. L3 → L2 카드뉴스·블로그 미드폼 파생 1세트",
+              "text": "5-1-3. YouTube Data API v3 쿼터/수집 안정성 재점검 — uploads playlist vs search, 일일 quota, 실패 재시도, API key만으로 충분한지",
               "done": false
             },
             {
-              "text": "5-4. L3 → L1 숏폼 1-2개 컷 편집",
+              "text": "5-1-4. yt-dlp/scrapetube 폴백 PoC — API 장애 또는 quota 초과 시 신규 영상/기본 메타데이터만 보강 가능한지 확인",
               "done": false
             },
             {
-              "text": "5-5. 성공포맷 분석 1회차 — 타 분야 인기 콘텐츠 1개 구조 해체 기록",
+              "text": "5-2-3. 전일 스냅샷 2~3일 누적 후 24시간 증가 TOP 안정화 확인",
               "done": false
             },
             {
-              "text": "5-6. 내 영상 제목 30개 훈련 1회차 완료",
+              "text": "5-2-5. 7일 스냅샷 누적 후 주간 급상승 TOP 안정화 확인",
               "done": false
             },
             {
-              "text": "5-7. 1주 사이클 회고 → [[SNS 포맷]]·[[주제 풀]] 가이드 보완",
+              "text": "5-2-6. 대시보드 운영 상태 카드 추가 — 마지막 실행, 성공/실패, 수집 영상 수, Telegram 발송 여부",
+              "done": false
+            },
+            {
+              "text": "5-2-7. Telegram 요약 문구 축약 — 매일 볼 내용만 남기기",
+              "done": false
+            },
+            {
+              "text": "5-3-3. 네이버 블로그 수집 PoC — RSS 동작, 본문 파싱, 공감/댓글/이웃 수 대안, robots.txt 확인",
+              "done": false
+            },
+            {
+              "text": "5-3-4. 블로그 1군 후보 조사 — 네이버 부동산 파워블로거 10명+ 목록 + 이웃 수/일 발행량/최근 인기글",
+              "done": false
+            },
+            {
+              "text": "5-3-5. RSSHub 기반 뉴스/블로그/커뮤니티 소스 확장 가능성 확인",
+              "done": false
+            },
+            {
+              "text": "5-3-6. changedetection.io식 웹 변경 감지 대상 후보 정리 — RSS 없는 페이지, 강의/커뮤니티/뉴스 페이지",
+              "done": false
+            },
+            {
+              "text": "5-4-4. yt01-topic에서 최근 히트작 후보를 로컬 DB/JSON으로 조회하는 방식 설계",
+              "done": false
+            },
+            {
+              "text": "5-4-5. 제목/자막/설명 검색용 SQLite FTS 또는 yt-fts류 구조 검토",
+              "done": false
+            },
+            {
+              "text": "5-4-6. 주제 선정 리포트에 “최근 2주 히트작 + 최근 3개월 TOP + 채널 평균대비 TOP” 연결",
               "done": false
             }
           ]
         },
         {
           "id": 6,
-          "title": "에르메스 에이전트 텔레그램 연동 마무리 (4/27~)",
+          "title": "유튜브 제작 GitHub 오픈소스·스킬 조사 (4/27~) — 1차 조사 완료, 채택 결정 대기",
           "ref": null,
           "items": [
             {
-              "text": "6-1. Codex 환경에서 에르메스 에이전트 설치 가능성 확인 후 설치 진행 (4/27)",
+              "text": "6-1. 4개 카테고리 후보 리스트업 + 분류 (4/27) — 노트 참조",
               "done": true
             },
             {
-              "text": "6-2. BotFather에서 Telegram 봇 생성 또는 기존 봇 사용 여부 결정 → `TELEGRAM_BOT_TOKEN` 확보",
+              "text": "6-2. 사용자 결정: TOP 5 중 우선 채택할 도구 1~2개 선택",
               "done": false
             },
             {
-              "text": "6-3. 본인 Telegram user id 확인 후 `TELEGRAM_ALLOWED_USERS=`에 단독 허용으로 설정",
+              "text": "6-3. nova-youtube-agent 코드 깊이 분석 → yt01-topic v3.0 설계 베이스 검토 (투두 5번과 연계)",
               "done": false
             },
             {
-              "text": "6-4. `/Users/yunjitaegi/.hermes/.env`에 `TELEGRAM_BOT_TOKEN`, `TELEGRAM_ALLOWED_USERS`, 필요 시 `TELEGRAM_HOME_CHANNEL` 입력",
-              "done": false
-            },
-            {
-              "text": "6-5. `hermes gateway setup` 실행해서 Telegram 플랫폼 설정 확인",
-              "done": false
-            },
-            {
-              "text": "6-6. 먼저 포그라운드 테스트: `hermes gateway run` → 텔레그램에서 봇에게 메시지 보내고 응답 확인",
-              "done": false
-            },
-            {
-              "text": "6-7. 테스트 성공 후 백그라운드 등록: `hermes gateway install` → `hermes gateway start` → `hermes gateway status` 확인",
-              "done": false
-            },
-            {
-              "text": "6-8. 보안 점검: 허용 사용자 외 메시지 차단, 토큰 로그 노출 없음, `hermes doctor` 경고 중 필수 항목만 남았는지 확인",
-              "done": false
-            },
-            {
-              "text": "6-9. 다른 PC에도 Hermes 텔레그램 실행이 필요하면 PC별 설치 필요 여부 정리 (자동 동기화 안 됨)",
+              "text": "6-4. youtube-comment-downloader PoC: 우리 채널 코멘트 → 다음 주제 발굴 시도",
               "done": false
             }
           ]
@@ -323,187 +428,80 @@
         },
         {
           "id": 8,
-          "title": "유튜브 제작 GitHub 오픈소스·스킬 조사 (4/27~) — 1차 조사 완료, 채택 결정 대기",
+          "title": "Hermes/OpenClaw 텔레그램 연동 + Android MTS 자동화 검토 (4/27~)",
           "ref": null,
           "items": [
             {
-              "text": "8-1. 4개 카테고리 후보 리스트업 + 분류 (4/27) — 노트 참조",
+              "text": "8-1. Codex 환경에서 에르메스 에이전트 설치 가능성 확인 후 설치 진행 (4/27)",
               "done": true
             },
             {
-              "text": "8-2. 사용자 결정: TOP 5 중 우선 채택할 도구 1~2개 선택",
+              "text": "8-2. BotFather에서 Telegram 봇 생성 또는 기존 봇 사용 여부 결정 → `TELEGRAM_BOT_TOKEN` 확보",
               "done": false
             },
             {
-              "text": "8-3. nova-youtube-agent 코드 깊이 분석 → yt01-topic v3.0 설계 베이스 검토 (투두 4번과 연계)",
+              "text": "8-3. 본인 Telegram user id 확인 후 `TELEGRAM_ALLOWED_USERS=`에 단독 허용으로 설정",
               "done": false
             },
             {
-              "text": "8-4. youtube-comment-downloader PoC: 우리 채널 코멘트 → 다음 주제 발굴 시도",
+              "text": "8-4. `/Users/yunjitaegi/.hermes/.env`에 `TELEGRAM_BOT_TOKEN`, `TELEGRAM_ALLOWED_USERS`, 필요 시 `TELEGRAM_HOME_CHANNEL` 입력",
               "done": false
-            }
-          ]
-        },
-        {
-          "id": 9,
-          "title": "카카오 비즈채널 + 상담 CRM 알림톡 전환 (4/27~)",
-          "ref": null,
-          "items": [
+            },
             {
-              "text": "9-0-1. `상담 CRM.md`의 \"알림톡 문구 검수 후보\" 10종 최종 문구 확정 (4/28)",
+              "text": "8-5. `hermes gateway setup` 실행해서 Telegram 플랫폼 설정 확인",
+              "done": false
+            },
+            {
+              "text": "8-6. 먼저 포그라운드 테스트: `hermes gateway run` → 텔레그램에서 봇에게 메시지 보내고 응답 확인",
+              "done": false
+            },
+            {
+              "text": "8-7. 테스트 성공 후 백그라운드 등록: `hermes gateway install` → `hermes gateway start` → `hermes gateway status` 확인",
+              "done": false
+            },
+            {
+              "text": "8-8. 보안 점검: 허용 사용자 외 메시지 차단, 토큰 로그 노출 없음, `hermes doctor` 경고 중 필수 항목만 남았는지 확인",
+              "done": false
+            },
+            {
+              "text": "8-9. 다른 PC에도 Hermes 텔레그램 실행이 필요하면 PC별 설치 필요 여부 정리 (자동 동기화 안 됨)",
+              "done": false
+            },
+            {
+              "text": "8-10. OpenClaw 설치/운영 PoC 범위 결정 — Telegram 컨트롤러, PC 원격 명령, MacroDroid/ADB 실행 지시 중 어디까지 쓸지 정리",
+              "done": false
+            },
+            {
+              "text": "8-11. Windows 세팅 난이도 비교 — Windows HTS/RPA가 Android MTS 자동화보다 쉬운지, 사용 가능한 개인 Windows 장비/회사PC/공기계 제약과 함께 판단",
+              "done": false
+            },
+            {
+              "text": "8-12. MacroDroid 1단계 확인 — `메리츠 SMART` 앱 실행 동작 테스트 성공 (4/30)",
               "done": true
             },
             {
-              "text": "9-0-2. 사전질문지 작성 버튼 URL 확정 (4/28) — Google Forms: https://forms.gle/PwpdbUa5dQLFy1PV7",
+              "text": "8-13. Mac mini ADB 도구 설치 — `android-platform-tools` 설치 완료, `adb` 사용 가능 상태 (4/30)",
               "done": true
             },
             {
-              "text": "9-0-3. 상담 일정 예약 버튼 URL 확정 (4/28) — Google Calendar: https://calendar.app.google/SkWbhMhwqjUE8b5Y6",
-              "done": true
-            },
-            {
-              "text": "9-0-4. 회의 링크 버튼 운영 방식 확인 (4/28) — Calendar `hangoutLink`를 `#{미팅URL}`로 사용, 없으면 전날/당일 알림톡 보류 + Telegram 수동 확인",
-              "done": true
-            },
-            {
-              "text": "9-0-5. 상담 자료 보기 버튼 운영 방식 확인 (4/28) — `#{자료URL}` 생성/입력 후 Telegram `자료 안내 발송` 버튼으로 수동 승인 발송, 만료 문구 제외",
-              "done": true
-            },
-            {
-              "text": "9-0-6. 알리고 관리자에서 템플릿 10종 등록 + 카카오 검수 요청 완료 — 10/10 검수중 확인 (4/28)",
-              "done": true
-            },
-            {
-              "text": "9-0-7. 검수 결과 확인 — 승인/반려 여부와 반려 사유를 상담 CRM 작업 세션에 전달",
+              "text": "8-14. Android 개발자 옵션/USB 디버깅 연결 확인 — `adb devices`에서 authorized 상태 확인",
               "done": false
             },
             {
-              "text": "9-0-8. 승인된 템플릿코드/`tpl_code` 10종(`UH_5034`~`UH_5043`)을 확인해 저장 위치 결정 요청",
+              "text": "8-15. ADB 스크린샷으로 메리츠 주문 화면 좌표 확인 — 앱 실행, 주문 화면 이동, 첫 클릭 좌표를 캡처 기반으로 기록",
               "done": false
             },
             {
-              "text": "9-0-9. 알리고 `senderkey` 확인 — 원문을 채팅/노트에 붙이기 전에 보안 저장 방식 먼저 결정",
+              "text": "8-16. MacroDroid에 주문 화면 이동 동작 추가 — `앱 실행 → 대기 → UI 상호작용 클릭` 최소 흐름 검증",
               "done": false
             },
             {
-              "text": "9-0-10. 신청 직후 결제 안내 메시지 설계 — 카드결제 안내 페이지 URL, 아임웹 상품 URL, 계좌이체 안내, 비회원 주문 안내, 실물 배송 없음 문구 포함",
+              "text": "8-17. 주문 실행 전 안전 범위 결정 — 실제 주문 전 단계까지 자동화할지, 매수/매도 버튼까지 자동화할지, 텔레그램 수동 승인 버튼을 둘지 결정",
               "done": false
             },
             {
-              "text": "9-1-1. 기존 멘트 10종 정리 + 알림톡 후보 10종 초안 작성 (4/27)",
-              "done": true
-            },
-            {
-              "text": "9-1-2. 서브에이전트 3중 검수 — 검수 리스크, 고객 안내 톤, 변수·버튼 자동화 적합성 확인 (4/27)",
-              "done": true
-            },
-            {
-              "text": "9-1-3. 상담 CRM 프로젝트 노트에 내일 확인용 문구 정본 정리 (4/27)",
-              "done": true
-            },
-            {
-              "text": "9-1-4. 알림톡 10종 최종 문구 확인 완료 (4/28) — `상담 CRM.md`의 \"알림톡 문구 검수 후보\" 기준",
-              "done": true
-            },
-            {
-              "text": "9-1-5. 버튼 URL/변수 운영 확정 (4/28) — 사전질문지 작성: https://forms.gle/PwpdbUa5dQLFy1PV7 / 상담 일정 예약: https://calendar.app.google/SkWbhMhwqjUE8b5Y6 / 회의 링크: `#{미팅URL}` / 상담 자료 보기: `#{자료URL}`",
-              "done": true
-            },
-            {
-              "text": "9-1-6. 알리고 템플릿 등록 + 카카오 검수 요청 완료 — UH_5034~UH_5043 10종 검수중 확인 (4/28)",
-              "done": true
-            },
-            {
-              "text": "9-1-7. 승인된 템플릿코드/`tpl_code` 10종(`UH_5034`~`UH_5043`) 저장 위치 확정",
+              "text": "8-18. Telegram 실행 버튼 설계 — `오늘 주문 걸기` 버튼 또는 명령이 MacroDroid/Hermes/OpenClaw 중 어느 경로로 실행될지 확정",
               "done": false
-            },
-            {
-              "text": "9-2-1. 알리고 발신프로필 `senderkey` 확인 + 노출 금지 위치 정리",
-              "done": false
-            },
-            {
-              "text": "9-2-2. 변수 생성 규칙 구현 — `상담일시`, `상담시간`, `미팅URL`, `자료URL`",
-              "done": false
-            },
-            {
-              "text": "9-2-3. URL 필수값 검증 — `미팅URL` 없으면 전날/당일 알림톡 발송 보류 + Telegram 수동 확인",
-              "done": false
-            },
-            {
-              "text": "9-2-4. `자료URL` 운영 방식 확정 (4/28) — 자료URL 생성/입력 후 Telegram 수동 승인 발송, 30일 만료 문구는 실제 만료 제어 전까지 미사용",
-              "done": true
-            },
-            {
-              "text": "9-2-5. Notion/DB 알림톡 발송 체크 필드와 중복 발송 방지 키 설계",
-              "done": false
-            },
-            {
-              "text": "9-2-6. 알림톡 실패 시 Telegram 실패 알림 + SMS 발송 버튼 설계",
-              "done": false
-            },
-            {
-              "text": "9-2-7. 신청 직후 전환 스위치 설계 — 기존 `📤 문자발송` 버튼은 유지하고, 알림톡 승인/테스트 후 버튼 대상만 교체",
-              "done": false
-            },
-            {
-              "text": "9-2-8. 신청 직후 결제 안내 발송 흐름 설계 — 신청 완료 직후 Telegram 운영 알림에 `결제 안내 발송` 버튼 추가, 승인 후 고객에게 카드/계좌 안내 발송",
-              "done": false
-            },
-            {
-              "text": "9-2-9. 결제/입금 확인 후 사전질문지 안내 발송으로 이어지는 상태값 설계 — 카드결제 완료, 계좌입금 확인, 사전질문지 안내 발송 체크 분리",
-              "done": false
-            },
-            {
-              "text": "9-2-10. 결제 확인 Telegram 버튼 설계 — 운영자가 카드결제/입금 확인 후 `사전질문지 안내 발송` 버튼을 누르면 1번 알림톡 또는 임시 SMS/카톡 안내 발송",
-              "done": false
-            },
-            {
-              "text": "9-2-11. Google Calendar 예약 페이지에 확정 일정 문구 반영",
-              "done": false
-            },
-            {
-              "text": "9-2-12. 후속 3/30/90/180일 실패 재시도 정책 결정",
-              "done": false
-            },
-            {
-              "text": "9-2-13. n8n 공통 알림톡 발송 workflow 작성",
-              "done": false
-            },
-            {
-              "text": "9-2-14. Apps Script에서 신청/결제안내/질문지/상담일/자료/후속 발송 지점 연결",
-              "done": false
-            },
-            {
-              "text": "9-2-15. 모든 발송 결과를 Notion/DB 체크박스와 Telegram 운영 알림에 반영",
-              "done": false
-            },
-            {
-              "text": "9-3-1. 본인 번호로 템플릿별 1건씩 테스트",
-              "done": false
-            },
-            {
-              "text": "9-3-2. 실패 케이스 테스트 — 잘못된 번호, 템플릿 불일치, 알리고 실패 응답",
-              "done": false
-            },
-            {
-              "text": "9-3-3. 실제 신청 1건 E2E 점검: 신청서 → DB/Notion → Telegram → 결제 안내 → 카드/계좌 결제 확인 → 사전질문지 안내 → 상태 체크",
-              "done": false
-            },
-            {
-              "text": "9-3-4. 기존 SMS workflow 병행 기간 결정 후 안정화되면 자동 SMS 비활성화",
-              "done": false
-            },
-            {
-              "text": "9-3-5. 운영 문서 업데이트: `상담 CRM.md`, n8n README",
-              "done": false
-            },
-            {
-              "text": "9-4-1. 카카오 비즈니스채널 노트 아카이브 + 상담 CRM 흡수 (4/27)",
-              "done": true
-            },
-            {
-              "text": "9-4-2. 유튜브 short.io 링크를 카카오 채널 URL(`http://pf.kakao.com/_mcxnjX/chat`)로 변경 완료 (4/27)",
-              "done": true
             }
           ]
         }
