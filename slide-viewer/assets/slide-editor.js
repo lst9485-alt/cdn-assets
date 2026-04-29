@@ -1149,8 +1149,6 @@
 
     const activeIdx = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
     if (activeIdx >= 0) currentSlide = activeIdx;
-    const hashIdx = getInitialSlideIndexFromHash();
-    if (hashIdx >= 0) currentSlide = hashIdx;
 
     const activeSlide = slides[currentSlide];
     const sourceBrowseState = (
@@ -1189,34 +1187,6 @@
     setRuntimeNotesForSlide(slides[currentSlide]);
     renderRuntimeInkForSlide(currentSlide);
     if (typeof buildFilmstrip === 'function') buildFilmstrip();
-  }
-
-  function getInitialSlideIndexFromHash() {
-    const rawHash = window.location.hash ? window.location.hash.slice(1).trim() : '';
-    if (!rawHash) return -1;
-    const decoded = decodeURIComponent(rawHash);
-    const key = normalizeSlideHashKey(decoded);
-    if (!key) return -1;
-    const target = slidesByKey[key] || document.getElementById(key);
-    if (!target) return -1;
-    const idx = Array.from(slides).indexOf(target);
-    if (idx < 0) return -1;
-    if (target.dataset.variant && target.dataset.variant !== "0" && target.dataset.pageGroup) {
-      if (typeof expandPageGroup === 'function') expandPageGroup(target.dataset.pageGroup);
-    }
-    return idx;
-  }
-
-  function normalizeSlideHashKey(hashValue) {
-    const clean = String(hashValue || '').replace(/^slide=/, '').replace(/^#/, '').trim();
-    if (!clean) return '';
-    const shortMatch = clean.match(/^T(\d{1,2})$/i);
-    if (shortMatch) return `T${shortMatch[1].padStart(2, '0')}_base`;
-    const baseMatch = clean.match(/^T(\d{1,2})_base$/i);
-    if (baseMatch) return `T${baseMatch[1].padStart(2, '0')}_base`;
-    const variantMatch = clean.match(/^T(\d{1,2})_v(\d+)$/i);
-    if (variantMatch) return `T${variantMatch[1].padStart(2, '0')}_v${variantMatch[2]}`;
-    return clean;
   }
 
   if (document.readyState === 'loading') {
