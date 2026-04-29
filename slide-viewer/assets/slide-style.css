@@ -214,6 +214,11 @@
   body.edit-mode img {
     opacity: 1 !important;
     transform: none !important;
+    translate: none !important;
+    scale: none !important;
+    rotate: none !important;
+    transition: none !important;
+    animation: none !important;
   }
 
   /* ── 노란 하이라이트 (줄별) ── */
@@ -278,24 +283,33 @@
     text-align: center;
     word-break: keep-all;
     overflow-wrap: break-word;
+    transform-origin: 82% 12%;
   }
   .bubble::after {
     content: '';
     position: absolute;
-    bottom: -60px;
-    left: 80px;
-    border: 30px solid transparent;
-    border-top: 60px solid #222;
+    right: -24px;
+    bottom: -48px;
+    width: 0;
+    height: 0;
+    border-top: 54px solid transparent;
+    border-left: 122px solid #222;
     border-bottom: 0;
+    transform: rotate(8deg);
+    transform-origin: left top;
   }
   .bubble::before {
     content: '';
     position: absolute;
-    bottom: -46px;
-    left: 86px;
-    border: 24px solid transparent;
-    border-top: 50px solid white;
+    right: -14px;
+    bottom: -39px;
+    width: 0;
+    height: 0;
+    border-top: 44px solid transparent;
+    border-left: 102px solid white;
     border-bottom: 0;
+    transform: rotate(8deg);
+    transform-origin: left top;
     z-index: 1;
   }
 
@@ -1023,10 +1037,10 @@
   }
 
   .bubble {
-    animation-name: bubble-enter-right, bubble-sway-x;
-    animation-duration: 0.9s, 3.2s;
-    animation-timing-function: cubic-bezier(0.18, 0.9, 0.2, 1.12), ease-in-out;
-    animation-delay: 0s, 0.9s;
+    animation-name: bubble-enter-pop-right, bubble-viking-swing;
+    animation-duration: 0.78s, 3s;
+    animation-timing-function: cubic-bezier(0.12, 0.9, 0.16, 1.08), ease-in-out;
+    animation-delay: 0s, 0.78s;
     animation-iteration-count: 1, infinite;
     animation-fill-mode: both, none;
   }
@@ -1070,16 +1084,17 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }
   }
-  @keyframes bubble-enter-right {
-    0% { opacity: 0; transform: translateX(360px) scale(0.92) rotate(1deg); }
-    66% { opacity: 1; transform: translateX(-28px) scale(1.03) rotate(-0.4deg); }
-    100% { opacity: 1; transform: translateX(0) scale(1) rotate(0); }
+  @keyframes bubble-enter-pop-right {
+    0% { opacity: 0; translate: 560px 0; scale: 0.82; }
+    54% { opacity: 1; translate: -52px 0; scale: 1.18; }
+    78% { opacity: 1; translate: 14px 0; scale: 0.98; }
+    100% { opacity: 1; translate: 0 0; scale: 1; }
   }
-  @keyframes bubble-sway-x {
-    0%, 100% { margin-left: 0; }
-    25% { margin-left: -34px; }
-    50% { margin-left: 28px; }
-    75% { margin-left: -18px; }
+  @keyframes bubble-viking-swing {
+    0%, 100% { rotate: 0deg; }
+    25% { rotate: -4.5deg; }
+    50% { rotate: 3.7deg; }
+    75% { rotate: -2.4deg; }
   }
   @keyframes count-bounce {
     0%   { transform: scale(1); }
@@ -2558,10 +2573,10 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
   @keyframes step0-enter { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
   .slide.active .step-layer[data-step="0"] > * { animation: step0-enter 1s ease-out both; }
   .slide.active .step-layer[data-step="0"] > .bubble {
-    animation-name: bubble-enter-right, bubble-sway-x;
-    animation-duration: 0.9s, 3.2s;
-    animation-timing-function: cubic-bezier(0.18, 0.9, 0.2, 1.12), ease-in-out;
-    animation-delay: 0s, 0.9s;
+    animation-name: bubble-enter-pop-right, bubble-viking-swing;
+    animation-duration: 0.78s, 3s;
+    animation-timing-function: cubic-bezier(0.12, 0.9, 0.16, 1.08), ease-in-out;
+    animation-delay: 0s, 0.78s;
     animation-iteration-count: 1, infinite;
     animation-fill-mode: both, none;
   }
@@ -2575,7 +2590,7 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
   .slide.active .step-layer[data-step="0"] > :nth-child(8) { animation-delay:0.8s; }
   .slide.active .step-layer[data-step="0"] > :nth-child(9) { animation-delay:0.9s; }
   .slide.active .step-layer[data-step="0"] > :nth-child(10) { animation-delay:1.0s; }
-  .slide.active .step-layer[data-step="0"] > .bubble { animation-delay: 0s, 0.9s; }
+  .slide.active .step-layer[data-step="0"] > .bubble { animation-delay: 0s, 0.78s; }
 
   /* ── Variant badge (기본 표시, 프레젠테이션 모드에서만 숨김) ── */
   .slide[data-display-label]::after {
@@ -3632,10 +3647,10 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
   .mod-M18 .sc-item:nth-child(2) .sc-num { animation-delay: 0.4s; }
   .mod-M18 .sc-item:nth-child(3) .sc-num { animation-delay: 0.8s; }
   .mod-M19 .bubble {
-    animation-name: bubble-enter-right, bubble-sway-x;
-    animation-duration: 0.9s, 3.2s;
-    animation-timing-function: cubic-bezier(0.18, 0.9, 0.2, 1.12), ease-in-out;
-    animation-delay: 0s, 0.9s;
+    animation-name: bubble-enter-pop-right, bubble-viking-swing;
+    animation-duration: 0.78s, 3s;
+    animation-timing-function: cubic-bezier(0.12, 0.9, 0.16, 1.08), ease-in-out;
+    animation-delay: 0s, 0.78s;
     animation-iteration-count: 1, infinite;
     animation-fill-mode: both, none;
   }
