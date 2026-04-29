@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <title>슬라이드 UI 정리 시안</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            min-height: 100vh;
+            background: #F8FAFC;
+            color: #0F172A;
+            font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        }
+        .container { max-width: 1080px; margin: 0 auto; padding: 32px 20px 56px; }
+        .back { display: inline-flex; color: #64748B; text-decoration: none; font-size: 13px; font-weight: 700; margin-bottom: 18px; }
+        h1 { font-size: 28px; line-height: 1.2; letter-spacing: 0; margin-bottom: 8px; }
+        .subtitle { color: #64748B; font-size: 15px; line-height: 1.6; margin-bottom: 28px; }
+        .preview-note {
+            background: #FFFFFF;
+            border: 1px solid #D8E2EE;
+            border-left: 4px solid #0066CC;
+            border-radius: 8px;
+            padding: 14px 16px;
+            color: #334155;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+        .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 28px 0 12px; }
+        .section-title { font-size: 17px; font-weight: 900; }
+        .section-desc { color: #64748B; font-size: 13px; }
+        .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+        .type-card {
+            display: block;
+            min-height: 132px;
+            background: #FFFFFF;
+            border: 1px solid #D8E2EE;
+            border-radius: 8px;
+            padding: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .type-card:hover { border-color: #0066CC; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); }
+        .card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+        .code { font-size: 12px; font-weight: 900; color: #0066CC; background: #EAF3FF; border-radius: 6px; padding: 3px 8px; }
+        .category { color: #64748B; font-size: 12px; font-weight: 800; }
+        .name { font-size: 17px; font-weight: 900; margin-bottom: 6px; line-height: 1.25; }
+        .desc { color: #475569; font-size: 13px; line-height: 1.45; margin-bottom: 12px; }
+        .badges { display: flex; flex-wrap: wrap; gap: 6px; }
+        .badge { border-radius: 999px; padding: 3px 8px; font-size: 11px; font-weight: 800; line-height: 1.25; }
+        .badge.input { background: #EEF2FF; color: #3730A3; }
+        .badge.count { background: #ECFDF5; color: #047857; }
+        .badge.media { background: #FFF7ED; color: #B45309; }
+        .badge.warn { background: #FEF2F2; color: #B91C1C; }
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .panel {
+            background: #FFFFFF;
+            border: 1px solid #D8E2EE;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .panel h2 { font-size: 16px; margin-bottom: 10px; }
+        .panel ul { padding-left: 18px; color: #475569; font-size: 14px; line-height: 1.8; }
+        @media (max-width: 860px) {
+            .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .compare { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 560px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <a class="back" href="./">← 슬라이드 템플릿으로 돌아가기</a>
+        <h1>슬라이드 UI 정리 시안</h1>
+        <p class="subtitle">원티드 디자인시스템에서 가져올 만한 “정리 방식”만 눈으로 보는 테스트 페이지입니다.</p>
+
+        <div class="preview-note">
+            이 페이지는 운영 에디터가 아닙니다. 링크 이동, 자동 점프, 저장 기능 없이 카드와 배지 정리 방향만 비교합니다.
+        </div>
+
+        <div class="section-head">
+            <div>
+                <div class="section-title">템플릿 카드 정리 예시</div>
+                <div class="section-desc">T번호, 이름, 설명, 조건 배지를 같은 순서로 보여줍니다.</div>
+            </div>
+        </div>
+
+        <section class="grid" aria-label="정리된 템플릿 카드 예시">
+            <a class="type-card" href="./slides-editor.html">
+                <div class="card-top"><span class="code">T01</span><span class="category">텍스트</span></div>
+                <div class="name">말풍선+텍스트</div>
+                <div class="desc">질문을 던지고 바로 답을 보여줄 때 씁니다.</div>
+                <div class="badges"><span class="badge input">입력 2</span><span class="badge count">1장</span></div>
+            </a>
+            <a class="type-card" href="./slides-editor.html">
+                <div class="card-top"><span class="code">T07</span><span class="category">아이콘</span></div>
+                <div class="name">아이콘행</div>
+                <div class="desc">아이콘 1~3개를 가로로 놓고 역할을 설명합니다.</div>
+                <div class="badges"><span class="badge input">입력 3</span><span class="badge count">1~3개</span><span class="badge media">아이콘</span></div>
+            </a>
+            <a class="type-card" href="./slides-editor.html">
+                <div class="card-top"><span class="code">T19</span><span class="category">경고</span></div>
+                <div class="name">경고배너</div>
+                <div class="desc">위험, 실수, 주의할 포인트를 강하게 보여줍니다.</div>
+                <div class="badges"><span class="badge input">입력 2</span><span class="badge warn">주의</span></div>
+            </a>
+            <a class="type-card" href="./slides-editor.html">
+                <div class="card-top"><span class="code">T03</span><span class="category">카드/리스트</span></div>
+                <div class="name">카드</div>
+                <div class="desc">여러 항목을 같은 무게로 나란히 비교합니다.</div>
+                <div class="badges"><span class="badge input">입력 4</span><span class="badge count">1~5개</span></div>
+            </a>
+            <a class="type-card" href="./slides-editor.html">
+                <div class="card-top"><span class="code">T09</span><span class="category">흐름</span></div>
+                <div class="name">플로우</div>
+                <div class="desc">순서, 원인과 결과, 진행 과정을 설명합니다.</div>
+                <div class="badges"><span class="badge input">입력 2</span><span class="badge count">1~5개</span></div>
+            </a>
+            <a class="type-card" href="./slides-editor.html">
+                <div class="card-top"><span class="code">T37</span><span class="category">마무리</span></div>
+                <div class="name">마지막정리</div>
+                <div class="desc">영상 끝에서 핵심만 다시 정리합니다.</div>
+                <div class="badges"><span class="badge input">입력 2</span><span class="badge count">2~4개</span></div>
+            </a>
+        </section>
+
+        <section class="compare" aria-label="비교 설명">
+            <div class="panel">
+                <h2>지금 방식</h2>
+                <ul>
+                    <li>카드마다 정보 순서가 눈에 덜 들어옵니다.</li>
+                    <li>배지가 많아지면 어떤 조건이 중요한지 헷갈립니다.</li>
+                    <li>기능 설명과 개발용 정보가 섞여 보입니다.</li>
+                </ul>
+            </div>
+            <div class="panel">
+                <h2>정리 방식</h2>
+                <ul>
+                    <li>T번호 → 이름 → 언제 쓰는지 → 조건 순서로 고정합니다.</li>
+                    <li>배지 색은 의미별로만 씁니다.</li>
+                    <li>기능은 추가하지 않고 보기만 정리합니다.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
