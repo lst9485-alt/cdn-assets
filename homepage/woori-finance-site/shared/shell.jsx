@@ -60,11 +60,14 @@ const PageNav = ({ version, page }) => {
           }}>{p.label}</a>
         ))}
       </nav>
-      <a href="coaching.html" style={{
-        background: ds.ink, color: ds.bg, textDecoration: 'none',
-        padding: '10px 18px', borderRadius: version === 'v6' ? 0 : 999,
-        fontSize: 13, fontWeight: 700
-      }}>상담 신청 →</a>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <a href="../../../index.html" style={{ color: ds.accent, textDecoration: 'none', fontSize: 13, fontWeight: 800 }}>대시보드</a>
+        <a href="coaching.html" style={{
+          background: ds.ink, color: ds.bg, textDecoration: 'none',
+          padding: '10px 18px', borderRadius: version === 'v6' ? 0 : 999,
+          fontSize: 13, fontWeight: 700
+        }}>상담 신청 →</a>
+      </div>
     </div>
   );
 };
@@ -72,30 +75,24 @@ const PageNav = ({ version, page }) => {
 const PageFooter = ({ version }) => {
   const ds = window.DS[version];
   return (
-    <footer style={{ background: ds.ink, color: ds.bg, padding: '48px 40px 32px', fontFamily: ds.fontBody }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 32, paddingBottom: 32, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-        <div>
-          <div style={{ fontSize: 22, fontWeight: 900, marginBottom: 12 }}>{window.CONTENT.brand}</div>
-          <div style={{ fontSize: 14, opacity: 0.7, lineHeight: 1.6, maxWidth: 400 }}>
-            직장인을 위한 내집마련 로드맵.<br/>잃지 않는 투자, 따라할 수 있는 순서.
-          </div>
+    <footer data-homepage-footer="true" style={{ background: '#2d2d2d', color: '#fff', padding: '42px 24px 38px', fontFamily: ds.fontBody, fontSize: 13, lineHeight: 1.85 }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '18px 26px', marginBottom: 22 }}>
+          <strong style={{ fontSize: 20, fontWeight: 900, color: '#fff' }}>우리동네 재테크</strong>
+          <a href="https://ourdongne.com/" style={{ color: '#d1d5db', textDecoration: 'none', fontWeight: 700 }}>우리동네 클래스</a>
+          <a href="https://ourdongne.com/refund" style={{ color: '#d1d5db', textDecoration: 'none', fontWeight: 700 }}>환불규정</a>
+          <a href="https://ourdongne.com/privacy" style={{ color: '#d1d5db', textDecoration: 'none', fontWeight: 700 }}>개인정보 처리방침</a>
+          <a href="https://ourdongne.com/terms" style={{ color: '#d1d5db', textDecoration: 'none', fontWeight: 700 }}>이용약관</a>
         </div>
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 700, opacity: 0.5, marginBottom: 12, letterSpacing: 1 }}>SERVICE</div>
-          {window.CONTENT.pages.map(p => (
-            <a key={p.id} href={p.file} style={{ display: 'block', color: ds.bg, textDecoration: 'none', fontSize: 13, opacity: 0.8, marginBottom: 8 }}>{p.label}</a>
-          ))}
+        <div style={{ color: '#909090' }}>
+          <p style={{ margin: 0 }}>(주)우리동네사람들 | 대표자 : 홍윤지 | 소재지 : 당산로 92, 301-이3호(당산동1가, 호서빌딩)</p>
+          <p style={{ margin: 0 }}>사업자 등록번호 : 386-86-03832 | 통신판매신고번호 : 제 2026-서울영등포-0991 호</p>
+          <p style={{ margin: 0 }}>개인정보관리책임자 : 홍윤지 | 호스팅제공자 : (주)아임웹</p>
+          <p style={{ margin: 0 }}>대표번호 070-4517-9400</p>
+          <p style={{ margin: 0 }}>문의 : contact@ourdongne.com</p>
+          <p style={{ margin: '18px 0 0' }}>2026 주식회사 우리동네사람들 . All rights reserved.</p>
+          <p style={{ margin: 0 }}>Copyright ⓒ 2026 우리동네재테크 All rights reserved.</p>
         </div>
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 700, opacity: 0.5, marginBottom: 12, letterSpacing: 1 }}>CONTACT</div>
-          <a href="https://www.youtube.com/" style={{ display: 'block', color: ds.bg, textDecoration: 'none', fontSize: 13, opacity: 0.8, marginBottom: 8 }}>유튜브 채널</a>
-          <a href="https://pf.kakao.com/" style={{ display: 'block', color: ds.bg, textDecoration: 'none', fontSize: 13, opacity: 0.8, marginBottom: 8 }}>카카오 채널</a>
-          <a href="refund.html" style={{ display: 'block', color: ds.bg, textDecoration: 'none', fontSize: 13, opacity: 0.8, marginBottom: 8 }}>환불 규정</a>
-        </div>
-      </div>
-      <div style={{ paddingTop: 24, fontSize: 12, opacity: 0.5, display: 'flex', justifyContent: 'space-between' }}>
-        <span>© 2026 우리동네재테크 · 주식회사 우리동네사람들</span>
-        <span>{(window.CONTENT.versions.find(v => v.id === version) || {}).displayName || ds.name}</span>
       </div>
     </footer>
   );
