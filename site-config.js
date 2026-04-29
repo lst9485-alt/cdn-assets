@@ -184,6 +184,33 @@
         ]
       },
       {
+        id: 'homepage-preview',
+        hubTitle: '홈페이지 (시안)',
+        dashedTop: true,
+        nav: {
+          type: 'single',
+          label: '홈페이지 시안',
+          href: 'homepage/main-page-test2.html',
+          activeMatch: ['main-page-test2.html'],
+          hidden: true
+        },
+        sidebar: {},
+        items: [
+          {
+            id: 'main-page-test2',
+            title: '메인 페이지 (시안 v2)',
+            description: 'WBF 톤 절제 + 브랜드 컬러 적용',
+            href: 'homepage/main-page-test2.html',
+            badgeText: 'WIP',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['main-page-test2.html'],
+            hubVisible: true
+          }
+        ]
+      },
+      {
         id: 'process',
         hubTitle: '프로세스 도식화',
         nav: {

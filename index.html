@@ -13,6 +13,7 @@
         h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 4px; }
         .subtitle { color: #64748B; font-size: 14px; }
         .section { margin-bottom: 24px; }
+        .section.dashed-top { border-top: 2px dashed #CBD5E1; padding-top: 28px; margin-top: 32px; }
         .section-title { font-size: 13px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
         .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
         .item { background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; text-decoration: none; color: #1A1A1A; display: flex; align-items: center; gap: 12px; transition: all 0.15s; min-height: 64px; }
@@ -55,8 +56,9 @@
         if (!items.length) {
             return '';
         }
+        var sectionClass = section.dashedTop ? 'section dashed-top' : 'section';
         return ''
-            + '<div class="section">'
+            + '<div class="' + sectionClass + '">'
             + '<div class="section-title">' + esc(section.hubTitle) + '</div>'
             + '<div class="grid">' + items.map(renderItem).join('') + '</div>'
             + '</div>';

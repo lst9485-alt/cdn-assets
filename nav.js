@@ -48,6 +48,7 @@
 
   function renderSection(section) {
     var navConfig = section.nav || {};
+    if (navConfig.hidden) return '';
     var active = isActive(navConfig.activeMatch) ? ' active' : '';
 
     if (navConfig.type === 'dropdown') {
