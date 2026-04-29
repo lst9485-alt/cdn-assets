@@ -76,7 +76,7 @@
 	  .contract-img { display:block; border-radius: 14px; border: 1px solid rgba(255,255,255,0.14); filter: contrast(1.05); }
 	  .home-line-art { color: rgba(120, 82, 42, 0.07); }
 	  .hero-growth-line { color: rgba(255, 107, 0, 0.15); }
-	  .contract-proof-card { background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 22px 44px rgba(0,0,0,0.20); }
+	  .contract-proof-card { background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)); border: 2px solid rgba(255,255,255,0.18); box-shadow: 0 22px 44px rgba(0,0,0,0.20); }
 	  .contract-proof-card.is-buy { background: linear-gradient(180deg, rgba(127,29,29,0.42), rgba(69,10,10,0.24)); border-color: rgba(239,68,68,0.92); box-shadow: 0 24px 54px rgba(127,29,29,0.36); }
 	  .contract-proof-card.is-sell { background: linear-gradient(180deg, rgba(30,64,175,0.38), rgba(15,23,42,0.18)); border-color: rgba(59,130,246,0.92); box-shadow: 0 24px 54px rgba(30,64,175,0.34); }
 	  .package-card-icon { opacity: 0.78; }
@@ -161,7 +161,9 @@
 	  .v3-method-card:first-child { border-left: 0; }
 	  .editorial-chart-card { background:#fff; border:1px solid rgba(18,24,38,0.10); border-radius:18px; overflow:hidden; box-shadow:0 18px 46px rgba(15,23,42,0.08); }
 	  .editorial-review { border:1px solid rgba(18,24,38,0.14); border-radius:14px; background:#fff; box-shadow:5px 5px 0 #121826; }
-	  .difference-badge { background:#fff; border:2px solid #fecaca; box-shadow:0 18px 42px rgba(220,38,38,0.10); color:#121826; }
+	  .difference-badge { background:#fff; border:3px solid #fecaca; box-shadow:0 18px 42px rgba(220,38,38,0.12); color:#121826; isolation:isolate; }
+      .difference-badge::before { content:''; position:absolute; inset:-22px; z-index:-1; background:linear-gradient(135deg,#ff6b00,#ef4444); opacity:.13; clip-path:polygon(50% 0,58% 25%,80% 10%,75% 35%,100% 38%,78% 52%,96% 74%,68% 68%,60% 100%,48% 74%,25% 92%,30% 64%,0 66%,22% 48%,4% 28%,32% 32%); filter:blur(.2px); }
+      .difference-badge::after { content:''; position:absolute; right:34px; bottom:-14px; width:28px; height:28px; background:#fff; border-right:3px solid #fecaca; border-bottom:3px solid #fecaca; transform:rotate(45deg); border-bottom-right-radius:6px; }
 	  .difference-badge .difference-number { color:#dc2626; }
 	  .future-choice-card { background:#fff; border:1px solid rgba(18,24,38,0.12); border-radius:20px; box-shadow:0 18px 42px rgba(15,23,42,0.10); }
 	  .future-result-card { border-radius:18px; border:1px solid rgba(18,24,38,0.10); background:#fff; box-shadow:0 12px 28px rgba(15,23,42,0.08); }
@@ -186,7 +188,8 @@
 	  .story-proof-card { border:2px solid #121826; border-radius:14px; background:#fff; box-shadow:5px 5px 0 #121826; padding:22px; }
 	  .recommend-card { background:rgba(255,255,255,0.92); border:1px solid rgba(255,255,255,0.55); color:#121826; }
 	  .recommend-card p:last-child { color:#5b6475; }
-	  .story-quote { display:inline-block; border-left:4px solid #ff6b5b; background:rgba(255,255,255,0.08); padding:14px 18px; color:#f8fafc; border-radius:0 14px 14px 0; }
+	  .story-quote { display:block; max-width:560px; margin:0 auto; border-left:5px solid #ff6b5b; background:rgba(255,255,255,0.11); padding:16px 20px; color:#f8fafc; border-radius:0 14px 14px 0; box-shadow:0 10px 26px rgba(0,0,0,.18); text-align:left; }
+      .story-quote-meta { display:block; margin-top:8px; color:#cbd5e1; font-size:13px; font-weight:800; font-style:normal; }
 	  .recommend-badge { display:inline-flex; align-items:center; gap:8px; background:#dc2626; color:#fff; font-size:1rem; font-weight:900; padding:9px 18px; border-radius:999px; box-shadow:0 12px 28px rgba(220,38,38,0.26); }
 	  .map-region-chip { border:2px solid #1A2B47; border-radius:999px; background:#fff; color:#1A2B47; padding:6px 12px; font-size:12px; font-weight:900; }
 	  .consult-gain-icon { display:grid; place-items:center; width:48px; height:48px; border-radius:16px; background:#fff1e7; color:#ff6b00; font-size:26px; font-weight:900; box-shadow:0 10px 24px rgba(255,107,0,0.16); animation: moneyPop 1.8s ease-in-out infinite; }
@@ -562,10 +565,10 @@
               <p class="text-base word-keep">똑똑한 갈아타기 하고 싶은 분</p>
             </div>
           </div>
-        </div>
-        <div class="mt-8 text-center">
-          <p class="story-quote text-base italic word-keep">"혼자 고민하던 기준이 숫자로 정리됐습니다" — 강*희 님</p>
-        </div>
+	        </div>
+	        <div class="mt-8 text-center">
+	          <p class="story-quote text-base italic word-keep">"혼자 고민하던 기준이 숫자로 정리됐습니다"<span class="story-quote-meta">강*희 님 · 서울 노원 30대 · 생애최초 내집마련</span></p>
+	        </div>
       </div>
     </div>
     </div><!-- 자극 dark bg 닫기 -->
@@ -831,15 +834,15 @@
         <div class="v3-metric-card"><strong>25%</strong><span>매수 보류 비율</span><em>+ 필요한 말만</em></div>
         <div class="v3-metric-card"><strong>90일</strong><span>코칭 후 케어</span><em>+ 카톡 무제한</em></div>
       </div>
-      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
-        <div class="testimonial-sticker bg-[#4ecdc4] px-6 py-5 text-white">
-          <p class="text-sm font-black">최*윤님 · 서울 용산 30대</p>
-          <p class="mt-2 text-lg font-display font-black leading-7 word-keep">"상담 리포트 덕분에 부부가 같은 기준으로 이야기할 수 있었습니다."</p>
-        </div>
-        <div class="testimonial-sticker bg-[#f4c430] px-6 py-5 text-[#121826]">
-          <p class="text-sm font-black">박*준님 · 경기 안양 40대</p>
-          <p class="mt-2 text-lg font-display font-black leading-7 word-keep">"체크리스트를 보고 계약 전에 놓친 부분을 다시 확인했습니다."</p>
-        </div>
+	      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
+	        <div class="testimonial-sticker bg-[#ff6b5b] px-6 py-5 text-white">
+	          <p class="text-sm font-black">최*윤님 · 서울 용산 30대</p>
+	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep">"상담 리포트 덕분에 부부가 같은 기준으로 이야기할 수 있었습니다."</p>
+	        </div>
+	        <div class="testimonial-sticker bg-[#e9ddff] px-6 py-5 text-[#121826]">
+	          <p class="text-sm font-black">박*준님 · 경기 안양 40대</p>
+	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep">"체크리스트를 보고 계약 전에 놓친 부분을 다시 확인했습니다."</p>
+	        </div>
       </div>
     </div>
   </section>
@@ -897,15 +900,15 @@
 	          <div class="flex gap-4 rounded-2xl bg-[#fff8e7] p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#6b8cae] font-black text-white">임</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"혼자 검색하던 시간이 줄고 비교 기준이 생겼습니다"</p><p class="mt-2 text-sm text-gray-500">포항 40대 임*석 · 투자</p></div></div>
 	        </div>
 	      </div>
-	      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
-	        <div class="testimonial-sticker bg-[#4ecdc4] px-6 py-5 text-white">
-	          <p class="text-sm font-black">정*민님 · 남양주 30대</p>
-	          <p class="mt-2 text-lg font-display font-black word-keep">"매물 보러 가기 전 카톡으로 한 번 더 점검받을 수 있어 안심됐습니다."</p>
-	        </div>
-	        <div class="testimonial-sticker bg-[#f4c430] px-6 py-5 text-[#121826]">
-	          <p class="text-sm font-black">서*아님 · 부천 30대</p>
-	          <p class="mt-2 text-lg font-display font-black word-keep">"대출 조건이 바뀌었을 때도 바로 물어볼 곳이 있어서 좋았습니다."</p>
-	        </div>
+		      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
+		        <div class="testimonial-sticker bg-[#dff7ef] px-6 py-5 text-[#121826]">
+		          <p class="text-sm font-black">정*민님 · 남양주 30대</p>
+		          <p class="mt-2 text-lg font-display font-black word-keep">"매물 보러 가기 전 카톡으로 한 번 더 점검받을 수 있어 안심됐습니다."</p>
+		        </div>
+		        <div class="testimonial-sticker bg-[#dbeafe] px-6 py-5 text-[#121826]">
+		          <p class="text-sm font-black">서*아님 · 부천 30대</p>
+		          <p class="mt-2 text-lg font-display font-black word-keep">"대출 조건이 바뀌었을 때도 바로 물어볼 곳이 있어서 좋았습니다."</p>
+		        </div>
 	      </div>
 	    </div>
 	  </section>
