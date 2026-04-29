@@ -197,6 +197,18 @@
         sidebar: {},
         items: [
           {
+            id: 'homepage-drafts-v3-v8',
+            title: '홈페이지 시안 v3~v8',
+            description: '6개 디자인 방향 비교 인덱스',
+            href: 'homepage/index.html',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['homepage/index.html'],
+            hubVisible: true
+          },
+          {
             id: 'main-page-test2',
             title: '메인 페이지 (시안 v2)',
             description: 'WBF 톤 절제 + 브랜드 컬러 적용',
