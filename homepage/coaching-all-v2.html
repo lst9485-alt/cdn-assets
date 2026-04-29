@@ -69,17 +69,17 @@
     100% { opacity:1; transform:translateY(0) rotate(0deg); }
   }
   @keyframes heroFadeUp { 0%{opacity:0;transform:translateY(40px)} 100%{opacity:1;transform:translateY(0)} }
-  .hero-word { opacity:0; animation: heroDrop 0.8s cubic-bezier(.34,1.56,.64,1) forwards; }
+  .hero-word { opacity:0; animation: heroDrop 0.72s cubic-bezier(.2,.9,.2,1.1) forwards; will-change: transform, opacity; }
   .hero-main { opacity:0; animation: heroFadeUp 0.8s ease forwards; }
   .hero-cta { opacity:0; animation: heroFadeUp 0.8s ease forwards; }
   .hero-scroll { opacity:0; animation: heroFadeUp 0.6s ease forwards; }
 	  .contract-img { border-radius: 14px; border: 1px solid rgba(255,255,255,0.14); }
-	  .home-line-art { color: rgba(120, 82, 42, 0.08); }
-	  .hero-growth-line { color: rgba(255, 107, 0, 0.07); }
+	  .home-line-art { color: rgba(120, 82, 42, 0.07); }
+	  .hero-growth-line { color: rgba(255, 107, 0, 0.15); }
 	  .contract-proof-card { background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.14); box-shadow: 0 22px 44px rgba(0,0,0,0.24); }
-	  .contract-proof-card.is-buy { border-color: rgba(248,113,113,0.45); box-shadow: 0 22px 44px rgba(127,29,29,0.26); }
-	  .contract-proof-card.is-sell { border-color: rgba(125,211,252,0.42); box-shadow: 0 22px 44px rgba(8,47,73,0.28); }
-	  .package-card-icon { opacity: 0.32; }
+	  .contract-proof-card.is-buy { border-color: rgba(239,68,68,0.54); box-shadow: 0 22px 44px rgba(127,29,29,0.26); }
+	  .contract-proof-card.is-sell { border-color: rgba(59,130,246,0.48); box-shadow: 0 22px 44px rgba(8,47,73,0.28); }
+	  .package-card-icon { opacity: 0.78; }
   /* 동그란 체크박스 */
   .cb-round { -webkit-appearance:none; appearance:none; width:22px; height:22px; border:2px solid #d1d5db; border-radius:50%; background:#fff; cursor:pointer; position:relative; flex-shrink:0; transition: all 0.2s; }
   .cb-round:checked { background:#FF6B00; border-color:#FF6B00; }
@@ -117,8 +117,8 @@
   }
   /* Wavy underline animation */
   @keyframes wavyDraw { 0%{width:0} 100%{width:100%} }
-  .wavy-red { text-decoration: underline wavy #dc2626; text-underline-offset: 6px; text-decoration-thickness: 3px; }
-  .wavy-blue { text-decoration: underline wavy #0055FF; text-underline-offset: 6px; text-decoration-thickness: 3px; }
+  .price-strike { display:inline-flex; align-items:flex-end; gap:2px; color:#9ca3af; text-decoration:line-through; text-decoration-thickness:2px; white-space:nowrap; }
+  .price-strike .won { font-size:0.72em; transform:translateY(0.22em); display:inline-block; }
   /* Shake effect */
   @keyframes shake { 0%,100%{transform:translateX(0)} 10%,30%,50%,70%,90%{transform:translateX(-4px)} 20%,40%,60%,80%{transform:translateX(4px)} }
   .shake-once.revealed { animation: shake 0.8s ease; }
@@ -181,9 +181,9 @@
 	        <path d="M222 354v-92h76v92M146 166l114-92 114 92" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
 	        <path d="M158 354h204" stroke="currentColor" stroke-width="12" stroke-linecap="round"/>
 	      </svg>
-	      <svg class="hero-growth-line absolute right-6 top-20 w-[520px] max-w-[74vw] blur-[0.4px]" viewBox="0 0 520 260" fill="none">
-	        <path d="M44 194 C120 170 164 158 226 120 C282 86 328 82 388 52 L452 22" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
-	        <path d="M414 18 L460 18 L460 64" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+	      <svg class="hero-growth-line absolute right-2 top-24 w-[560px] max-w-[78vw]" viewBox="0 0 560 280" fill="none">
+	        <path d="M48 212 C128 188 178 174 242 134 C304 96 354 86 424 52 L500 20" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+	        <path d="M460 18 L508 18 L508 66" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
 	      </svg>
 	      <svg class="absolute -left-24 bottom-16 w-[360px] max-w-[56vw] opacity-60" viewBox="0 0 360 260" fill="none">
 	        <path d="M42 150 180 45l138 105M78 142v92h204v-92M150 234v-62h60v62" stroke="currentColor" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
@@ -205,10 +205,10 @@
     </div>
     <div class="relative w-full max-w-3xl mx-auto mb-10 px-4 z-10" style="height:220px;">
       <div class="hero-word absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:10px;left:5%;animation-delay:0s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">생애최초</span></div>
-      <div class="hero-word absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:5px;right:8%;animation-delay:.2s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">갈아타기</span></div>
-      <div class="hero-word absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:85px;left:12%;animation-delay:.4s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">대출</span></div>
-      <div class="hero-word absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:90px;right:12%;animation-delay:.6s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">매매</span></div>
-      <div class="hero-word absolute border-2 border-brand-orange rounded-xl px-5 py-3 bg-brand-orange/20 backdrop-blur-sm shadow-lg" style="top:160px;left:22%;animation-delay:.8s"><span class="text-2xl md:text-3xl font-display font-black text-brand-orange">지금 사도 될까?</span></div>
+      <div class="hero-word absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:5px;right:8%;animation-delay:.24s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">갈아타기</span></div>
+      <div class="hero-word absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:85px;left:12%;animation-delay:.48s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">대출</span></div>
+      <div class="hero-word absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:90px;right:12%;animation-delay:.84s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">매매</span></div>
+      <div class="hero-word absolute border-2 border-brand-orange rounded-xl px-5 py-3 bg-brand-orange/20 backdrop-blur-sm shadow-lg" style="top:160px;left:22%;animation-delay:1.16s"><span class="text-2xl md:text-3xl font-display font-black text-brand-orange">지금 사도 될까?</span></div>
     </div>
     <div class="relative z-10 text-center px-6 hero-main" style="animation-delay:0.3s">
 	      <p class="text-[#7a5f45] text-lg md:text-xl mb-6 word-keep"><span aria-hidden="true">🏠</span> 후회 없는 내 집 마련을 위한 1:1 점검</p>
@@ -275,9 +275,9 @@
           <!-- 2026년 수직 점선 -->
 	          <line x1="590" y1="30" x2="590" y2="340" stroke="#FF6B00" stroke-width="2" stroke-dasharray="7,5" class="chart-arrow"/>
           <!-- 분당 (빨강) -->
-	          <polyline class="chart-line" points="60,231 140,247 192,231 280,154 380,60 450,107 520,76 590,60" fill="none" stroke="#dc2626" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+	          <path class="chart-line" d="M60 231 L140 247 L192 231 C260 176 314 126 380 60 L450 107 L520 76 L590 60" fill="none" stroke="#dc2626" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
           <!-- 일산 (파랑) -->
-	          <polyline class="chart-line" points="60,185 140,216 192,231 280,200 380,154 450,216 520,247 590,247" fill="none" stroke="#0055FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+	          <path class="chart-line" d="M60 185 L140 216 L192 231 C260 210 322 184 380 154 L450 216 L520 247 L590 247" fill="none" stroke="#0055FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
           <!-- 교차점 동그라미 (가운데 점 없음) -->
 	          <circle cx="192" cy="231" r="11" fill="#fff7ed" stroke="#FF6B00" stroke-width="3" class="chart-arrow"/>
           <!-- 2006년 시작점 라벨 -->
@@ -287,13 +287,13 @@
 	          <text x="92" y="274" text-anchor="middle" fill="#dc2626" font-size="15" font-weight="900" class="chart-arrow">7억</text>
           <!-- 끝점 라벨 -->
 	          <circle cx="590" cy="60" r="7" fill="#dc2626" class="chart-arrow"/>
-	          <rect x="502" y="10" width="76" height="46" rx="10" fill="white" stroke="#fee2e2" class="chart-arrow"/>
-	          <text x="540" y="29" text-anchor="middle" fill="#dc2626" font-size="13" font-weight="900" class="chart-arrow">폭등 ↑</text>
-	          <text x="540" y="49" text-anchor="middle" fill="#dc2626" font-size="18" font-weight="900" class="chart-arrow">19억</text>
+	          <rect x="500" y="10" width="82" height="50" rx="12" fill="white" stroke="#fee2e2" class="chart-arrow"/>
+	          <text x="541" y="31" text-anchor="middle" fill="#dc2626" font-size="13" font-weight="900" class="chart-arrow">폭등 ↑</text>
+	          <text x="541" y="52" text-anchor="middle" fill="#dc2626" font-size="18" font-weight="900" class="chart-arrow">19억</text>
 	          <circle cx="590" cy="247" r="7" fill="#0055FF" class="chart-arrow"/>
-	          <rect x="500" y="270" width="76" height="46" rx="10" fill="white" stroke="#dbeafe" class="chart-arrow"/>
-	          <text x="538" y="290" text-anchor="middle" fill="#0055FF" font-size="18" font-weight="900" class="chart-arrow">6억</text>
-	          <text x="538" y="309" text-anchor="middle" fill="#0055FF" font-size="13" font-weight="900" class="chart-arrow">하락 ↓</text>
+	          <rect x="500" y="255" width="82" height="50" rx="12" fill="white" stroke="#dbeafe" class="chart-arrow"/>
+	          <text x="541" y="276" text-anchor="middle" fill="#0055FF" font-size="18" font-weight="900" class="chart-arrow">6억</text>
+	          <text x="541" y="296" text-anchor="middle" fill="#0055FF" font-size="13" font-weight="900" class="chart-arrow">하락 ↓</text>
           <!-- 흰 배경 패딩으로 라인과 분리 -->
           <!-- 빨강 화살표 (우상향, 블록형) -->
 	          <g class="chart-arrow" style="animation: bobUp 2s ease infinite"><g transform="translate(334,122) rotate(-45)">
@@ -308,41 +308,44 @@
         </svg>
       </div>
       <div class="text-center mb-16" data-reveal="scale">
-        <p class="text-2xl md:text-3xl font-display font-black word-keep mb-3"><span class="text-red-600">7억 분당</span>은 → <span class="text-red-600 font-black wavy-red">19억</span>이 됐고,</p>
-        <p class="text-2xl md:text-3xl font-display font-black word-keep mb-8"><span class="text-brand-blue">10억 일산</span>은 → <span class="text-brand-blue font-black wavy-blue">6억</span>이 됐습니다</p>
-        <div class="inline-block bg-gradient-to-r from-brand-orange to-red-500 text-white px-8 sm:px-12 py-6 rounded-2xl shadow-2xl shadow-orange-500/30 transform hover:scale-105 transition-transform">
-          <p class="text-3xl md:text-4xl font-display font-black">무려 <span class="text-5xl md:text-6xl">13억</span> 차이<span class="text-2xl ml-2">💥</span></p>
+        <p class="text-2xl md:text-3xl font-display font-black word-keep mb-3"><span class="text-red-600">7억 분당</span>은 → <span class="text-red-600 font-black">19억</span>이 됐고,</p>
+        <p class="text-2xl md:text-3xl font-display font-black word-keep mb-8"><span class="text-brand-blue">10억 일산</span>은 → <span class="text-brand-blue font-black">6억</span>이 됐습니다</p>
+        <div class="relative inline-flex items-center justify-center bg-brand-dark text-white px-9 sm:px-14 py-7 rounded-[2rem] shadow-2xl shadow-red-500/20 ring-4 ring-red-500/10 transform hover:scale-105 transition-transform">
+          <iconify-icon icon="solar:danger-triangle-bold-duotone" class="mr-3 text-4xl text-brand-orange"></iconify-icon>
+          <p class="text-3xl md:text-4xl font-display font-black">무려 <span class="text-5xl md:text-6xl text-brand-orange">13억</span> 차이</p>
         </div>
       </div>
-      <div class="text-center mb-16" data-reveal>
-        <p class="text-xl md:text-2xl text-gray-600 word-keep leading-relaxed mb-8"><span class="text-brand-blue font-bold">의사 강씨</span>는 고소득임에도<br><span class="text-red-600 font-bold">김과장</span>과 갈수록 격차가 벌어졌습니다</p>
-        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-snug">지금 이 순간에도<br><span class="text-brand-orange">똑같은 일</span>이 생기고 있습니다</p>
+      <div class="text-center mb-20" data-reveal>
+        <p class="text-xl md:text-2xl text-gray-600 word-keep leading-relaxed mb-10"><span class="text-brand-blue font-bold">의사 강씨</span>는 고소득임에도<br><span class="text-red-600 font-bold">김과장</span>과 갈수록 격차가 벌어졌습니다</p>
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-[1.28]">지금 이 순간에도<br><span class="text-brand-orange">똑같은 일</span>이 생기고 있습니다</p>
       </div>
-	      <div class="bg-white rounded-2xl p-5 md:p-8 mt-10 mb-10 shadow-lg shadow-slate-200/60 border border-gray-200 max-w-2xl mx-auto" data-reveal>
-        <p class="text-center text-sm text-gray-500 mb-4 font-bold">지금 당신의 선택은?</p>
-        <svg viewBox="0 0 400 200" class="w-full">
-          <rect x="0" y="0" width="120" height="200" fill="#f9fafb" opacity="0.5"/>
-          <line x1="40" y1="170" x2="380" y2="170" stroke="#e5e7eb" stroke-width="1"/>
-          <text x="120" y="190" text-anchor="middle" fill="#9ca3af" font-size="12" font-weight="bold">2026</text>
-          <text x="250" y="190" text-anchor="middle" fill="#9ca3af" font-size="12">2028</text>
-          <text x="380" y="190" text-anchor="middle" fill="#9ca3af" font-size="12">2030</text>
-          <circle cx="120" cy="100" r="8" fill="none" stroke="#FF6B00" stroke-width="2.5"/>
-          <line x1="120" y1="20" x2="120" y2="170" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="6,4"/>
-          <path d="M120,100 Q250,30 380,20" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="8,6"/>
-	          <rect x="214" y="11" width="158" height="28" rx="10" fill="white" stroke="#fee2e2"/>
-	          <text x="293" y="30" text-anchor="middle" fill="#dc2626" font-size="13" font-weight="900">잘 고르면 자산이 남고</text>
-          <path d="M120,100 Q250,150 380,165" fill="none" stroke="#0055FF" stroke-width="3" stroke-dasharray="8,6"/>
-	          <rect x="196" y="143" width="178" height="28" rx="10" fill="white" stroke="#dbeafe"/>
-	          <text x="285" y="162" text-anchor="middle" fill="#0055FF" font-size="13" font-weight="900">잘못 고르면 손실이 남습니다</text>
-          <text x="120" y="130" text-anchor="middle" fill="#FF6B00" font-size="11" font-weight="bold">지금</text>
+	      <div class="bg-white rounded-2xl p-5 md:p-8 mt-14 mb-16 shadow-lg shadow-slate-200/60 border border-gray-200 max-w-2xl mx-auto" data-reveal>
+        <p class="text-center text-sm text-gray-500 mb-5 font-bold">지금이 선택의 순간입니다</p>
+        <svg viewBox="0 0 420 230" class="w-full" aria-label="2026년 이후 선택에 따라 갈라지는 결과">
+          <rect x="20" y="22" width="112" height="154" rx="16" fill="#f3f4f6" opacity="0.6"/>
+          <line x1="34" y1="176" x2="390" y2="176" stroke="#e5e7eb" stroke-width="1.2"/>
+          <line x1="132" y1="28" x2="132" y2="176" stroke="#FF6B00" stroke-width="1.8" stroke-dasharray="6,6"/>
+          <path d="M34 120 C62 108 92 112 132 105" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="7,7" stroke-linecap="round"/>
+          <path d="M132 105 C205 72 268 50 384 38" fill="none" stroke="#dc2626" stroke-width="4" stroke-dasharray="8,7" stroke-linecap="round"/>
+          <path d="M132 105 C205 132 274 158 384 170" fill="none" stroke="#0055FF" stroke-width="4" stroke-dasharray="8,7" stroke-linecap="round"/>
+          <circle cx="132" cy="105" r="11" fill="#fff7ed" stroke="#FF6B00" stroke-width="3"/>
+          <rect x="82" y="86" width="43" height="26" rx="9" fill="#fff7ed" stroke="#fed7aa"/>
+          <text x="103.5" y="104" text-anchor="middle" fill="#FF6B00" font-size="12" font-weight="900">지금</text>
+          <rect x="232" y="28" width="142" height="31" rx="12" fill="white" stroke="#fee2e2"/>
+          <text x="303" y="49" text-anchor="middle" fill="#dc2626" font-size="13" font-weight="900">잘 고르면 자산이 남고</text>
+          <rect x="224" y="152" width="160" height="31" rx="12" fill="white" stroke="#dbeafe"/>
+          <text x="304" y="173" text-anchor="middle" fill="#0055FF" font-size="13" font-weight="900">잘못 고르면 손실이 남습니다</text>
+          <text x="132" y="204" text-anchor="middle" fill="#9ca3af" font-size="14" font-weight="900">2026</text>
+          <text x="258" y="204" text-anchor="middle" fill="#9ca3af" font-size="13">2028</text>
+          <text x="384" y="204" text-anchor="middle" fill="#9ca3af" font-size="13">2030</text>
         </svg>
       </div>
-	      <div class="chat-stack max-w-md mx-auto space-y-4 mb-14" data-stagger>
-	        <div class="bubble-real-l px-6 py-4 w-[82%] md:w-[360px]"><p class="text-[17px] md:text-xl word-keep font-bold text-gray-800">"지금 이 단지, 사도 괜찮을까요?"</p></div>
-	        <div class="bubble-real-r px-6 py-4 w-[84%] md:w-[380px] ml-auto"><p class="text-[17px] md:text-xl word-keep text-gray-800">"비슷한 후보 중에<br><span class="font-black text-brand-orange">어디가 더 나은 선택일까요?</span>"</p></div>
-	        <div class="bubble-real-l px-6 py-4 w-[82%] md:w-[360px]"><p class="text-[17px] md:text-xl word-keep font-medium text-gray-800">"대출 5억을 끼고 들어가도<br>버틸 수 있을까요?"</p></div>
-	        <div class="bubble-real-r px-6 py-4 w-[84%] md:w-[380px] ml-auto"><p class="text-[17px] md:text-xl word-keep text-gray-800">"예산이 애매해서<br><span class="font-black text-brand-orange">지금 사야 할지 모르겠어요</span>"</p></div>
-	        <div class="bubble-real-l px-6 py-4 w-[82%] md:w-[360px]"><p class="text-[17px] md:text-xl word-keep font-medium text-gray-800">"혼자 판단하기엔<br>금액이 너무 커서 불안해요"</p></div>
+	      <div class="chat-stack max-w-2xl mx-auto space-y-5 mb-16" data-stagger>
+	        <div class="bubble-real-l px-7 py-5 w-[72%] md:w-[360px]"><p class="text-lg md:text-xl word-keep font-bold text-gray-800">"지금 여기 사도 될까요?"</p></div>
+	        <div class="bubble-real-r px-7 py-5 w-[76%] md:w-[390px] ml-auto"><p class="text-lg md:text-xl word-keep text-gray-800">"고민하고 있는 단지중에<br><span class="font-black text-brand-orange">어디가 더 많이 오를까요?</span>"</p></div>
+	        <div class="bubble-real-l px-7 py-5 w-[72%] md:w-[360px]"><p class="text-lg md:text-xl word-keep font-medium text-gray-800">"5억 대출해서 사는게<br>정말 맞을까요?"</p></div>
+	        <div class="bubble-real-r px-7 py-5 w-[76%] md:w-[390px] ml-auto"><p class="text-lg md:text-xl word-keep text-gray-800">돈이 조금 애매해서<br>"<span class="font-black text-brand-orange">지금 사야 될지 고민돼요</span>"</p></div>
+	        <div class="bubble-real-l px-7 py-5 w-[72%] md:w-[360px]"><p class="text-lg md:text-xl word-keep font-medium text-gray-800">"지금 이런 상황에서<br>사도 될지 모르겠어요"</p></div>
 	      </div>
       <div class="text-center" data-reveal>
         <p class="text-xl md:text-2xl font-display font-bold word-keep text-gray-700">평범한 직장인도, 전문직도<br><span class="text-brand-dark font-black">똑같은 고민</span>을 합니다</p>
@@ -383,13 +386,12 @@
         <!-- 매수 -->
 	        <div class="contract-proof-card is-buy mb-6 max-w-[420px] mx-auto rounded-3xl overflow-hidden p-4">
 	          <div class="mb-3 flex items-center justify-between">
-	            <p class="rounded-full bg-red-500/20 px-3 py-1 text-sm font-black text-red-100">매수 계약서 · 비싸게 산 선택</p>
-	            <p class="text-sm font-bold text-white/55">2018</p>
+	            <p class="rounded-full bg-red-500/20 px-3 py-1 text-sm font-black text-red-100">매수 계약서</p>
 	          </div>
 	          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-buy.png" alt="수명산 아파트 매수 계약서" class="contract-img w-full" loading="lazy" decoding="async">
-	          <div class="mt-4 rounded-2xl bg-red-500/16 px-5 py-4 text-center ring-1 ring-red-400/30">
-	            <p class="text-sm font-bold text-red-200">매수가</p>
-	            <p class="text-4xl md:text-5xl font-display font-black text-white">9억 5천</p>
+	          <div class="mt-4 rounded-2xl bg-red-500/20 px-5 py-4 text-center ring-1 ring-red-400/40">
+	            <p class="text-sm font-bold text-red-100">매수가</p>
+	            <p class="text-4xl md:text-5xl font-display font-black text-red-50">9억 5천</p>
 	          </div>
 	        </div>
         <!-- 화살표 -->
@@ -399,17 +401,16 @@
         <!-- 매도 -->
 	        <div class="contract-proof-card is-sell mb-8 max-w-[420px] mx-auto rounded-3xl overflow-hidden p-4">
 	          <div class="mb-3 flex items-center justify-between">
-	            <p class="rounded-full bg-sky-500/22 px-3 py-1 text-sm font-black text-sky-100">매도 계약서 · 낮게 판 결과</p>
-	            <p class="text-sm font-bold text-white/55">2018</p>
+	            <p class="rounded-full bg-blue-500/22 px-3 py-1 text-sm font-black text-blue-100">매도 계약서</p>
 	          </div>
 	          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-sell.png" alt="수명산 아파트 매도 계약서" class="contract-img w-full" loading="lazy" decoding="async">
-	          <div class="mt-4 rounded-2xl bg-sky-500/16 px-5 py-4 text-center ring-1 ring-sky-400/30">
-	            <p class="text-sm font-bold text-sky-100">매도가</p>
-	            <p class="text-4xl md:text-5xl font-display font-black text-white">8억 2천</p>
+	          <div class="mt-4 rounded-2xl bg-blue-500/18 px-5 py-4 text-center ring-1 ring-blue-400/35">
+	            <p class="text-sm font-bold text-blue-100">매도가</p>
+	            <p class="text-4xl md:text-5xl font-display font-black text-blue-50">8억 2천</p>
 	          </div>
 	        </div>
         <div class="text-center">
-          <p class="text-4xl md:text-5xl lg:text-6xl font-display font-black text-red-400 mb-4 wavy-red">-201,613,492원</p>
+          <p class="text-4xl md:text-5xl lg:text-6xl font-display font-black text-red-500 mb-4">-201,613,492원</p>
           <p class="text-lg md:text-xl text-gray-300 font-medium word-keep mb-6">1억 3천 손실 + 세금 + 인테리어 + 복비 등</p>
 	          <div class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-2xl pulse-attention shadow-lg shadow-red-900/30"><p class="text-2xl md:text-3xl font-display font-black">총 2억 손실</p><iconify-icon icon="solar:round-arrow-down-bold-duotone" class="text-3xl text-red-100"></iconify-icon></div>
 	        </div>
@@ -425,16 +426,16 @@
 	        <p class="text-xl md:text-2xl text-gray-200 word-keep mt-4 font-medium">문제는, 이 실수가 특별한 일이 아니라는 겁니다</p>
 	      </div>
 	      <div class="mt-16 grid grid-cols-1 gap-4 md:grid-cols-3" data-stagger>
-	        <div class="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
-	          <p class="text-sm leading-6 text-gray-200 word-keep">"부동산 상담은 처음이었는데, 예산 안에서 가능한 선택지가 정리됐습니다."</p>
+	        <div class="rounded-2xl border border-white/15 bg-white/[0.10] p-5">
+	          <p class="text-sm leading-6 text-white word-keep">"부동산 상담은 처음이었는데, 예산 안에서 가능한 선택지가 정리됐습니다."</p>
 	          <p class="mt-4 text-xs font-bold text-gray-400">30대 맞벌이 부부 · 서울 송파 · 김*지 님</p>
 	        </div>
-	        <div class="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
-	          <p class="text-sm leading-6 text-gray-200 word-keep">"생애 첫 매매라 막막했는데, 뭘 먼저 봐야 하는지 알게 됐습니다."</p>
+	        <div class="rounded-2xl border border-white/15 bg-white/[0.10] p-5">
+	          <p class="text-sm leading-6 text-white word-keep">"생애 첫 매매라 막막했는데, 뭘 먼저 봐야 하는지 알게 됐습니다."</p>
 	          <p class="mt-4 text-xs font-bold text-gray-400">생애최초 매수 준비 · 용인 · 한*솔</p>
 	        </div>
-	        <div class="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
-	          <p class="text-sm leading-6 text-gray-200 word-keep">"상담 후에도 카톡으로 물어볼 수 있어서 실제로 움직일 때 안심됐습니다."</p>
+	        <div class="rounded-2xl border border-white/15 bg-white/[0.10] p-5">
+	          <p class="text-sm leading-6 text-white word-keep">"상담 후에도 카톡으로 물어볼 수 있어서 실제로 움직일 때 안심됐습니다."</p>
 	          <p class="mt-4 text-xs font-bold text-gray-400">내집마련+투자 · 파주 · 조*민</p>
 	        </div>
 	      </div>
@@ -567,33 +568,32 @@
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">04 컨설턴트</span>
 
     <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
-	      <div class="text-center mb-12" data-reveal>
-	        <p class="text-brand-orange font-display font-black text-xl mb-4">컨설턴트</p>
-	        <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight word-keep">제가 직접 겪은 실패와<br><span class="text-red-600">실전 사례를 바탕으로</span><br>판단 기준을 잡아드립니다</h2>
-	      </div>
-	      <!-- 자기 소개 -->
-	      <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-gray-100 mb-10 max-w-5xl mx-auto" data-reveal>
-	        <div class="flex flex-col gap-6 md:flex-row md:items-center">
-	          <div class="flex items-center gap-4 rounded-2xl border border-brand-orange/15 bg-orange-50 px-5 py-4 md:min-w-[300px]">
-	            <div class="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-white shadow-md shadow-orange-200">
-	              <iconify-icon icon="solar:user-id-bold" class="text-4xl"></iconify-icon>
-	            </div>
-	            <div>
-	              <h3 class="text-3xl font-display font-black leading-none text-brand-dark">우재</h3>
-	              <p class="mt-2 text-sm font-bold text-gray-500">우리동네 재테크</p>
-	            </div>
-	          </div>
-	          <div class="grid flex-1 gap-3 text-left text-sm md:grid-cols-2">
-	            <p class="rounded-2xl bg-gray-50 px-4 py-3 font-bold text-gray-700 word-keep">증권투자 관련 법인 대표이사</p>
-	            <p class="rounded-2xl bg-gray-50 px-4 py-3 font-bold text-gray-700 word-keep">전국구 실전 부동산투자자</p>
-	            <p class="rounded-2xl bg-gray-50 px-4 py-3 font-bold text-gray-700 word-keep">최근 8개월 아파트 매매 5건</p>
-	            <p class="rounded-2xl bg-gray-50 px-4 py-3 font-bold text-gray-700 word-keep">서울 핵심 입지 실거래 경험 보유</p>
-	          </div>
-	        </div>
-	        <div class="mt-6 rounded-2xl border border-brand-orange/20 bg-[#fff8ef] px-5 py-4">
-	          <p class="text-lg md:text-xl word-keep text-brand-dark"><span class="text-red-600 font-black">10년간 쌓아온</span> 실전 투자 기준을 내 상황에 맞게 풀어드립니다.</p>
-	        </div>
-	      </div>
+      <div class="text-center mb-14" data-reveal>
+        <p class="text-6xl md:text-7xl text-gray-300 font-display font-black leading-none mb-2">"</p>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight word-keep">긴말 없이<br><span class="text-red-600">실제 제 투자사례로</span><br>보여드립니다</h2>
+        <p class="text-6xl md:text-7xl text-gray-300 font-display font-black leading-none mt-2">"</p>
+      </div>
+      <!-- 자기 소개 -->
+      <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 mb-10 max-w-2xl mx-auto" data-reveal>
+        <div class="mb-7 flex items-center justify-center">
+          <div class="flex items-center gap-4 rounded-2xl border border-brand-orange/20 bg-orange-50 px-6 py-4">
+            <div class="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-white shadow-md shadow-orange-200">
+              <iconify-icon icon="solar:user-id-bold" class="text-4xl"></iconify-icon>
+            </div>
+            <div class="text-left">
+              <h3 class="text-3xl font-display font-black leading-none text-brand-dark">우재</h3>
+              <p class="mt-2 text-sm font-bold text-gray-500">우리동네 재테크</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-3 text-left md:grid-cols-2 mb-7">
+          <p class="rounded-2xl bg-gray-50 px-4 py-3 font-bold text-gray-700 word-keep">증권투자 관련 법인 대표이사</p>
+          <p class="rounded-2xl bg-gray-50 px-4 py-3 font-bold text-gray-700 word-keep">전국구 실전 부동산투자자</p>
+          <p class="rounded-2xl bg-gray-50 px-4 py-3 font-bold text-gray-700 word-keep">최근 8개월간 아파트매매만 <span class="text-brand-orange">5건</span></p>
+          <p class="rounded-2xl bg-gray-50 px-4 py-3 font-bold text-gray-700 word-keep">서울 핵심 입지 실거래 경험 보유</p>
+        </div>
+        <p class="text-lg md:text-xl text-center word-keep"><span class="text-red-600 font-bold">10년간 쌓아온</span> 모든 투자 노하우를<br>통째로 오픈해 드리겠습니다</p>
+      </div>
       <!-- 실적 카드 + 이미지 (모자이크 처리) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-stretch" data-reveal>
         <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
@@ -650,13 +650,13 @@
           <p class="text-sm text-gray-500 word-keep">투자 업계 경력</p>
         </div>
         <div class="bg-white rounded-2xl p-5 text-center shadow-md border border-gray-100">
-          <p class="text-3xl font-display font-black text-brand-dark mb-1">100건+</p>
+          <p class="text-3xl font-display font-black text-brand-dark mb-1">100건++</p>
           <p class="text-sm text-gray-500 word-keep">1:1 상담 (만족도 99%)</p>
         </div>
       </div>
       <!-- 차별화 -->
       <div class="text-center" data-reveal>
-	        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-tight">제 경험을 기준으로,<br><span class="text-red-600">당신의 상황에 맞는 결정</span>을 함께 점검하겠습니다</p>
+	        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-tight"><span class="text-red-600">최선의 결과</span>로<br>보답드리겠습니다</p>
       </div>
     </div>
   </section>
@@ -707,20 +707,13 @@
         <p class="mt-4 text-gray-500 word-keep">한 번의 상담으로 끝나지 않도록, 진단부터 상담 후 실행까지 필요한 자료와 지원을 함께 제공합니다.</p>
       </div>
       <div class="rounded-xl border border-[#ffd7a8] bg-[linear-gradient(180deg,#fffaf2_0%,#ffffff_100%)] p-5 shadow-[0_24px_60px_rgba(255,107,0,0.10)] md:p-6" data-reveal>
-	        <div class="mb-6 rounded-2xl border border-brand-orange/20 bg-[#fff8ef] px-6 py-5 shadow-sm">
-	          <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-	            <div>
-	              <p class="inline-flex items-center rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-black tracking-[0.12em] text-brand-orange">포함 구성</p>
-	              <p class="mt-3 text-2xl font-display font-black word-keep text-brand-dark">신청하시면 이런 도움을 함께 받습니다</p>
-	              <p class="mt-2 text-sm text-gray-500 word-keep">상담 전에는 고민을 정리하고, 상담 후에는 바로 움직일 수 있게 남겨드립니다.</p>
-	            </div>
-	            <div class="grid grid-cols-2 gap-2 text-center text-xs font-black text-brand-orange md:min-w-[260px]">
-	              <span class="rounded-xl bg-white px-3 py-2 shadow-sm">50분 코칭</span>
-	              <span class="rounded-xl bg-white px-3 py-2 shadow-sm">90일 케어</span>
-	              <span class="rounded-xl bg-white px-3 py-2 shadow-sm">자료 3종</span>
-	              <span class="rounded-xl bg-white px-3 py-2 shadow-sm">부부동반</span>
-	            </div>
+	        <div class="mb-6 rounded-2xl bg-brand-dark px-6 py-7 text-center text-white shadow-xl shadow-slate-900/15">
+	          <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange text-white shadow-md">
+	            <iconify-icon icon="solar:case-round-minimalistic-bold-duotone" class="text-[30px]"></iconify-icon>
 	          </div>
+	          <p class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-black tracking-[0.12em] text-brand-orange">기본 제공 패키지</p>
+	          <p class="mt-3 text-2xl font-display font-black word-keep">코칭 신청 시, 아래 8가지가 함께 제공됩니다</p>
+	          <p class="mt-2 text-sm text-white/70 word-keep">상담 전 정리부터 상담 후 실행까지 필요한 기본 패키지입니다.</p>
 	        </div>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2" data-stagger>
           <div class="rounded-lg border border-[#ffd7a8] bg-white p-6 shadow-[0_10px_24px_rgba(15,23,42,0.05)]" data-reveal>
@@ -828,29 +821,50 @@
 
     <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
       <div class="text-center mb-14" data-reveal>
-        <p class="text-4xl mb-4">🏷️</p>
-        <h2 class="text-4xl md:text-5xl font-display font-black tracking-tight leading-tight word-keep">코칭 안내</h2>
+        <p class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-black text-brand-orange shadow-sm"><iconify-icon icon="solar:tag-price-bold-duotone" class="text-xl"></iconify-icon>가격 및 상담방식</p>
+        <h2 class="mt-5 text-4xl md:text-5xl font-display font-black tracking-tight leading-tight word-keep"><span class="text-red-600">돈버는 내집마련</span><br class="sm:hidden"> 코칭B 런칭이벤트</h2>
       </div>
 	      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5" data-reveal>
-        <div class="bg-white rounded-2xl p-7 md:p-8 border-2 border-brand-orange relative shadow-lg">
-          <span class="absolute -top-3 left-6 bg-brand-orange text-white text-xs font-bold px-4 py-1 rounded-full">오픈기념 20% 할인</span>
-          <h3 class="text-2xl font-display font-black mb-4 text-brand-orange">코칭 A</h3>
-          <div class="flex items-baseline gap-2 mb-6"><span class="text-4xl md:text-5xl font-display font-black text-brand-dark">400,000</span><span class="text-gray-500 text-lg">원</span><span class="text-red-500 text-sm ml-2">🔥</span><span class="text-sm text-gray-400 line-through ml-2">500,000원</span></div>
+        <div class="bg-white rounded-3xl p-7 md:p-8 border-2 border-red-500 relative shadow-xl shadow-red-100/60">
+          <span class="absolute -top-4 left-7 bg-red-500 text-white text-xs font-black px-5 py-2 rounded-full">코칭A가격</span>
+          <div class="mb-5 text-center">
+            <h3 class="inline-flex bg-red-500 px-8 py-3 text-3xl font-display font-black text-white">코칭 A</h3>
+          </div>
+          <div class="mb-6 flex flex-wrap items-end justify-center gap-3">
+            <span class="rounded-full bg-brand-orange px-3 py-1 text-sm font-black text-white">20% 할인</span>
+            <span class="price-strike text-xl font-black">500,000<span class="won">원</span></span>
+            <span class="text-4xl md:text-5xl font-display font-black text-red-600">400,000원</span>
+          </div>
+          <div class="mb-6 flex flex-col gap-3 rounded-2xl bg-red-50 px-5 py-4 sm:flex-row sm:items-center">
+            <span class="rounded-full bg-red-500 px-3 py-1 text-sm font-black text-white">상담방식</span>
+            <p class="text-lg font-display font-black text-brand-dark">1:1 상담 + 무제한 질의응답(카톡)</p>
+          </div>
 	          <ul class="space-y-3 text-base">
-	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>온라인 화상회의 약 50분</li>
-	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>코칭 후 최대 90일간 질의응답</li>
-	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>부부동반 가능</li>
-	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>하루 1명만 진행</li>
-	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>상담 리포트 + 자산관리시트 + 체크리스트 PDF</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-red-500 text-xl flex-shrink-0"></iconify-icon>온라인 화상회의 약 50분</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-red-500 text-xl flex-shrink-0"></iconify-icon>코칭 후 최대 90일간 질의응답</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-red-500 text-xl flex-shrink-0"></iconify-icon>부부동반 가능</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-red-500 text-xl flex-shrink-0"></iconify-icon>하루 1명만 진행</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-red-500 text-xl flex-shrink-0"></iconify-icon>상담 리포트 + 자산관리시트 + 체크리스트 PDF</li>
 	          </ul>
 	        </div>
-        <div class="bg-white/80 rounded-2xl p-7 md:p-8 border border-gray-200">
-          <h3 class="text-2xl font-display font-black mb-4 text-brand-dark">코칭 B</h3>
-          <div class="flex items-baseline gap-2 mb-2"><span class="text-4xl md:text-5xl font-display font-black text-brand-dark">960,000</span><span class="text-gray-500 text-lg">원</span><span class="text-sm text-gray-400 line-through ml-2">1,200,000원</span></div>
-          <p class="text-sm text-brand-orange font-bold mb-6">20% 할인 · <span class="text-sm font-bold">매월 선착순 2명</span></p>
+        <div class="bg-white rounded-3xl p-7 md:p-8 border-2 border-brand-blue/80 relative shadow-xl shadow-blue-100/60">
+          <span class="absolute -top-4 left-7 bg-brand-blue text-white text-xs font-black px-5 py-2 rounded-full">코칭B가격</span>
+          <div class="mb-5 text-center">
+            <h3 class="inline-flex bg-brand-blue px-8 py-3 text-3xl font-display font-black text-white">코칭 B</h3>
+          </div>
+          <div class="mb-4 flex flex-wrap items-end justify-center gap-3">
+            <span class="rounded-full bg-brand-blue px-3 py-1 text-sm font-black text-white">20% 할인</span>
+            <span class="price-strike text-xl font-black">1,200,000<span class="won">원</span></span>
+            <span class="text-4xl md:text-5xl font-display font-black text-brand-blue">960,000원</span>
+          </div>
+          <div class="mb-6 flex flex-col gap-3 rounded-2xl bg-blue-50 px-5 py-4 sm:flex-row sm:items-center">
+            <span class="rounded-full bg-brand-blue px-3 py-1 text-sm font-black text-white">상담방식</span>
+            <p class="text-lg font-display font-black text-brand-dark">코칭A + 동행임장 1회</p>
+          </div>
 	          <ul class="space-y-3 text-base text-gray-600">
-	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>코칭 A 전체 포함</li>
-	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon><span class="font-bold text-brand-dark">+ 동행임장 1회</span></li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-blue text-xl flex-shrink-0"></iconify-icon>코칭 A 전체 포함</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-blue text-xl flex-shrink-0"></iconify-icon><span class="font-bold text-brand-dark">+ 동행임장 1회</span></li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-blue text-xl flex-shrink-0"></iconify-icon><span class="font-bold text-brand-dark">매월 선착순 2명만 진행</span></li>
 	          </ul>
 	        </div>
 	      </div>
@@ -861,12 +875,12 @@
         <p class="text-base md:text-lg text-gray-600 word-keep">믿고 함께해주신 분들께 드리는<br class="sm:hidden"> <span class="font-bold underline underline-offset-4 decoration-2">감사 혜택</span>입니다</p>
         <p class="text-base md:text-lg text-gray-600 word-keep mt-2">퀄리티 유지를 위해 <span class="font-bold">가격이 지속적으로 인상</span>됩니다</p>
       </div>
-	      <div class="rounded-3xl border border-brand-orange/20 bg-white p-8 md:p-12 text-center shadow-lg shadow-orange-100/70" data-reveal="scale">
-		        <p class="text-xl md:text-2xl text-brand-orange word-keep mb-6 font-display font-black">사고 후회하지 말고, 사기 전에</p>
-		        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black text-brand-dark word-keep mb-8 leading-[1.22]">내 예산에 맞는<br>최고의 내집마련을<br><span class="text-brand-orange">구체적으로</span> 정리해드립니다</p>
-		        <div class="w-16 h-0.5 bg-brand-orange/25 mx-auto mb-6"></div>
-	        <p class="text-gray-500 text-base word-keep italic">"수억의 수업비를 내기 전에 먼저 점검받길 잘했습니다"</p>
-		        <p class="text-gray-400 text-sm mt-2">— 30대 맞벌이 부부 · 송파 · 김*지 님</p>
+	      <div class="rounded-3xl border border-white/10 bg-[#171717] p-8 md:p-12 text-center shadow-2xl shadow-slate-900/20" data-reveal="scale">
+		        <p class="text-xl md:text-2xl text-white word-keep mb-6 font-display font-black">사고 후회하지 말고, 사기 전에!</p>
+		        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black text-white word-keep mb-8 leading-[1.24]">내 예산에 맞는 최고의 내집마련<br><span class="text-brand-orange">구체적으로</span> 알려드립니다!</p>
+		        <div class="w-16 h-0.5 bg-white/25 mx-auto mb-6"></div>
+	        <p class="text-gray-300 text-base word-keep italic">"수억의 수업비를 내기 전에 선생님을 먼저 만났다면 얼마나 좋았을까"</p>
+		        <p class="text-gray-500 text-sm mt-2">— 실제 코칭 후기</p>
 	      </div>
     </div>
   </section>
@@ -944,28 +958,29 @@
   <section data-section="cta" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">09 CTA</span>
     <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-8 text-center">
-	      <div class="mb-16" data-reveal>
-	        <p class="text-2xl md:text-3xl font-display font-black word-keep text-brand-orange mb-6">혼자 결정하기 불안하다면</p>
-	        <p class="text-4xl md:text-5xl lg:text-6xl font-display font-black word-keep leading-tight text-brand-dark">사기 전 마지막 점검을<br><span class="text-brand-orange">받아보세요</span></p>
-	      </div>
-	      <div class="mb-12 rounded-3xl border border-brand-orange/20 bg-white px-6 py-8 shadow-lg shadow-orange-100/60" data-reveal="scale">
-	        <iconify-icon icon="solar:home-smile-bold-duotone" class="mb-6 text-6xl text-brand-orange"></iconify-icon>
-	        <p class="text-2xl md:text-3xl font-display font-black word-keep text-brand-dark mb-5">사고 나서 후회하기보다,<br>사기 전에 기준을 잡는 코칭입니다</p>
-	        <p class="text-lg md:text-xl text-gray-600 word-keep leading-relaxed">예산, 대출, 지역, 단지, 계약 전 체크까지 내 상황 기준으로 정리해드립니다.</p>
-	      </div>
+      <div class="mb-20" data-reveal>
+        <p class="text-2xl md:text-3xl font-display font-black word-keep text-red-600 mb-6">혼자 스트레스 받지 마세요!</p>
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-tight"><span class="text-red-600">최고의 코칭</span>을<br>약속드리겠습니다</p>
+      </div>
+      <div class="mb-16" data-reveal="scale">
+        <div class="mb-8 flex justify-center"><iconify-icon icon="solar:home-smile-bold-duotone" class="text-7xl text-brand-orange"></iconify-icon></div>
+        <p class="text-2xl md:text-3xl font-display font-black word-keep text-brand-dark mb-6">지금도 조용히 '집'으로<br>인생이 바뀐 분들이 많습니다</p>
+        <p class="text-lg text-gray-500 word-keep mb-3">후회없는 내집마련 하시기 바랍니다</p>
+        <p class="text-sm text-gray-400 word-keep">(매주 수많은 분들이 함께 결과를 내고 있습니다)</p>
+      </div>
 	      <div data-reveal>
 	        <button class="scroll-to-form bg-brand-orange text-white px-10 sm:px-16 py-6 sm:py-7 text-2xl md:text-3xl font-display font-black rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-transform glow-pulse mb-6">코칭 신청하기 <iconify-icon icon="solar:arrow-right-bold" class="align-middle"></iconify-icon></button>
-	        <p class="text-base md:text-lg text-gray-600 mt-4 word-keep font-bold">퀄리티 유지를 위해 하루 최대 1명만 진행합니다</p>
+		        <p class="text-brand-orange text-xl md:text-2xl font-display font-black word-keep pulse-attention">아래 신청서에서 바로 접수할 수 있습니다</p>
+		        <div class="mt-5 mb-7 inline-flex h-20 w-20 items-center justify-center rounded-full bg-brand-orange text-white shadow-2xl shadow-orange-300/70 animate-bounce ring-8 ring-brand-orange/10">
+		          <iconify-icon icon="solar:double-alt-arrow-down-bold-duotone" class="text-4xl"></iconify-icon>
+		        </div>
+	        <p class="text-base md:text-lg text-gray-600 mt-2 word-keep font-bold">퀄리티 유지를 위해 하루 최대 1명만 진행합니다</p>
 	        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-sm md:text-base text-gray-700 mb-6 mt-6">
 	          <span class="flex items-center gap-1.5 rounded-full bg-white px-4 py-2 shadow-sm"><iconify-icon icon="solar:clock-circle-linear"></iconify-icon> 하루 1명</span>
 	          <span class="flex items-center gap-1.5 rounded-full bg-white px-4 py-2 shadow-sm"><iconify-icon icon="solar:videocamera-record-linear"></iconify-icon> 온라인 상담</span>
 	          <span class="flex items-center gap-1.5 rounded-full bg-white px-4 py-2 shadow-sm"><iconify-icon icon="solar:shield-check-linear"></iconify-icon> 최대 90일 케어</span>
 	          <span class="flex items-center gap-1.5 rounded-full bg-white px-4 py-2 shadow-sm"><iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon> 부부동반 가능</span>
 	        </div>
-		        <p class="text-brand-orange text-xl md:text-2xl font-display font-black word-keep pulse-attention">아래 신청서에서 바로 접수할 수 있습니다</p>
-		        <div class="mt-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-brand-orange text-white shadow-xl shadow-orange-200 animate-bounce">
-		          <iconify-icon icon="solar:double-alt-arrow-down-bold-duotone" class="text-4xl"></iconify-icon>
-		        </div>
 	      </div>
     </div>
   </section>
