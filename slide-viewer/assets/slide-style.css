@@ -1022,7 +1022,14 @@
     animation: none;
   }
 
-  .bubble { animation: bubble-enter-pop 0.82s cubic-bezier(0.18, 0.9, 0.2, 1.25) both, bubble-active-shake 1.7s ease-in-out 0.82s infinite; }
+  .bubble {
+    animation-name: bubble-enter-right, bubble-sway-x;
+    animation-duration: 0.9s, 3.2s;
+    animation-timing-function: cubic-bezier(0.18, 0.9, 0.2, 1.12), ease-in-out;
+    animation-delay: 0s, 0.9s;
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: both, none;
+  }
   .card { animation: float-y 4s ease-in-out infinite; }
   .icon-flow-icon { animation: float-y 3s ease-in-out infinite; }
   .bar-track { animation: none; }
@@ -1063,17 +1070,16 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }
   }
-  @keyframes bubble-enter-pop {
-    0% { opacity: 0; transform: translateX(180px) scale(0.82) rotate(2deg); }
-    62% { opacity: 1; transform: translateX(-8px) scale(1.08) rotate(-1deg); }
+  @keyframes bubble-enter-right {
+    0% { opacity: 0; transform: translateX(360px) scale(0.92) rotate(1deg); }
+    66% { opacity: 1; transform: translateX(-28px) scale(1.03) rotate(-0.4deg); }
     100% { opacity: 1; transform: translateX(0) scale(1) rotate(0); }
   }
-  @keyframes bubble-active-shake {
-    0%, 100% { transform: translateX(0) rotate(0deg); }
-    18% { transform: translateX(-16px) rotate(-1.1deg); }
-    36% { transform: translateX(14px) rotate(1deg); }
-    54% { transform: translateX(-10px) rotate(-0.7deg); }
-    72% { transform: translateX(8px) rotate(0.6deg); }
+  @keyframes bubble-sway-x {
+    0%, 100% { margin-left: 0; }
+    25% { margin-left: -34px; }
+    50% { margin-left: 28px; }
+    75% { margin-left: -18px; }
   }
   @keyframes count-bounce {
     0%   { transform: scale(1); }
@@ -2551,6 +2557,14 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
   .fs-num .fs-type { display:block; font-size:9px; font-weight:600; opacity:0.7; }
   @keyframes step0-enter { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
   .slide.active .step-layer[data-step="0"] > * { animation: step0-enter 1s ease-out both; }
+  .slide.active .step-layer[data-step="0"] > .bubble {
+    animation-name: bubble-enter-right, bubble-sway-x;
+    animation-duration: 0.9s, 3.2s;
+    animation-timing-function: cubic-bezier(0.18, 0.9, 0.2, 1.12), ease-in-out;
+    animation-delay: 0s, 0.9s;
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: both, none;
+  }
   .slide.active .step-layer[data-step="0"] > :nth-child(1) { animation-delay:0s; }
   .slide.active .step-layer[data-step="0"] > :nth-child(2) { animation-delay:0.2s; }
   .slide.active .step-layer[data-step="0"] > :nth-child(3) { animation-delay:0.3s; }
@@ -2561,6 +2575,7 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
   .slide.active .step-layer[data-step="0"] > :nth-child(8) { animation-delay:0.8s; }
   .slide.active .step-layer[data-step="0"] > :nth-child(9) { animation-delay:0.9s; }
   .slide.active .step-layer[data-step="0"] > :nth-child(10) { animation-delay:1.0s; }
+  .slide.active .step-layer[data-step="0"] > .bubble { animation-delay: 0s, 0.9s; }
 
   /* ── Variant badge (기본 표시, 프레젠테이션 모드에서만 숨김) ── */
   .slide[data-display-label]::after {
@@ -3617,5 +3632,10 @@ body.runtime-notes-hidden #runtime-notes-dock { display: none; }
   .mod-M18 .sc-item:nth-child(2) .sc-num { animation-delay: 0.4s; }
   .mod-M18 .sc-item:nth-child(3) .sc-num { animation-delay: 0.8s; }
   .mod-M19 .bubble {
-    animation: bubble-enter-pop 0.82s cubic-bezier(0.18, 0.9, 0.2, 1.25) both, bubble-active-shake 1.7s ease-in-out 0.82s infinite;
+    animation-name: bubble-enter-right, bubble-sway-x;
+    animation-duration: 0.9s, 3.2s;
+    animation-timing-function: cubic-bezier(0.18, 0.9, 0.2, 1.12), ease-in-out;
+    animation-delay: 0s, 0.9s;
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: both, none;
   }
