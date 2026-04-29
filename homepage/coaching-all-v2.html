@@ -150,6 +150,12 @@
   }
   .v2-page .chart-line { stroke-dashoffset: 0 !important; }
   .v2-page .chart-arrow { opacity: 1 !important; }
+  @keyframes v2Fall {
+    0% { opacity: 0; transform: translateY(-42px) rotate(-5deg); }
+    70% { opacity: 1; transform: translateY(6px) rotate(1deg); }
+    100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  }
+  .v2-fall { opacity: 0; animation: v2Fall .75s cubic-bezier(.34,1.56,.64,1) forwards; }
 </style>
 </head>
 <body class="v2-page text-brand-dark font-sans">
@@ -168,13 +174,6 @@
     <button type="button" data-nav-target="faq">11 FAQ</button>
   </nav>
 
-  <!-- ===== 코칭 정보 ===== -->
-  <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-8 py-8">
-    <h3 class="text-xl font-bold text-brand-dark mb-2">코칭 정보</h3>
-    <p class="text-base text-gray-500">코칭 지원 기간 &nbsp; <span class="text-brand-dark font-bold underline underline-offset-4">상담일로부터 '최대 90일'</span></p>
-    <h3 class="text-xl font-bold text-brand-dark mt-6 mb-2">설명</h3>
-  </div>
-
   <!-- ===== 01 히어로 ===== -->
   <section data-section="hero" class="max-w-4xl mx-auto relative min-h-[82dvh] overflow-hidden bg-[#f7f3eb] v2-noise">
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">01 히어로</span>
@@ -192,8 +191,8 @@
           사도 될까요?
         </h1>
         <p class="mt-6 max-w-xl text-xl md:text-2xl font-bold leading-snug text-[#4f463d] word-keep">
-          대출, 지역, 단지, 타이밍까지<br class="hidden sm:block">
-          혼자 흔들리던 결정을 한 번에 정리합니다.
+          후회없는 최고의 내집마련<br class="hidden sm:block">
+          1:1 코칭으로 확신을 잡아드립니다.
         </p>
         <div class="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div class="v2-card rounded-2xl px-4 py-4"><p class="text-2xl font-display font-black">50분</p><p class="mt-1 text-xs font-bold text-gray-500">온라인 코칭</p></div>
@@ -206,10 +205,17 @@
             코칭 신청하기
             <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white/18"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
           </button>
-          <p class="text-sm font-bold text-gray-500 word-keep">신청 후 결제 안내를 확인하고, 입금·결제 확인 뒤 사전질문지를 보내드립니다.</p>
+          <p class="text-sm font-bold text-gray-500 word-keep">사고 후회 말고, 확신 갖고 후회없이 결정하세요.</p>
         </div>
       </div>
       <div class="hero-word relative min-h-[500px]" style="animation-delay:0.25s">
+        <div class="absolute inset-x-0 top-0 z-20 h-24 md:-top-8">
+          <span class="v2-fall absolute left-0 top-2 rounded-xl border border-white/70 bg-white/90 px-4 py-2 font-display font-black shadow-md" style="animation-delay:0s">생애최초</span>
+          <span class="v2-fall absolute right-8 top-0 rounded-xl border border-white/70 bg-white/90 px-4 py-2 font-display font-black shadow-md" style="animation-delay:.04s">갈아타기</span>
+          <span class="v2-fall absolute left-24 top-12 rounded-xl border border-white/70 bg-white/90 px-4 py-2 font-display font-black shadow-md" style="animation-delay:.08s">대출</span>
+          <span class="v2-fall absolute right-0 top-12 rounded-xl border border-white/70 bg-white/90 px-4 py-2 font-display font-black shadow-md" style="animation-delay:.12s">매매</span>
+          <span class="v2-fall absolute left-2 top-[5.5rem] rounded-xl border border-brand-orange bg-brand-orange/10 px-4 py-2 font-display font-black text-brand-orange shadow-md" style="animation-delay:.16s">지금 사도 될까?</span>
+        </div>
         <div class="absolute left-0 top-5 w-[88%] rounded-[2rem] bg-[#15120f] p-5 text-white v2-soft-shadow md:left-6">
           <div class="rounded-[1.55rem] border border-white/10 bg-white/[0.04] p-6">
             <p class="mb-4 text-sm font-bold text-brand-orange">오늘의 판단</p>
@@ -238,87 +244,220 @@
 
   
 <!-- ===== 02 스토리 후킹 ===== -->
-  <section data-section="story-hook" class="max-w-4xl mx-auto bg-[#fbfaf7] py-20 md:py-28 relative overflow-hidden">
+  <section data-section="story-hook" class="max-w-4xl mx-auto bg-white py-16 md:py-24 relative">
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">02 스토리 후킹</span>
-    <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-brand-orange/10 to-transparent"></div>
-    <div class="relative max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
-      <div class="mb-14 grid gap-8 md:grid-cols-[.9fr_1.1fr] md:items-end" data-reveal>
-        <div>
-          <p class="v2-pill inline-flex px-4 py-2 text-sm font-black">같은 돈, 다른 결과</p>
-          <h2 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight word-keep">집값은<br>소득 순서대로<br>오르지 않았습니다</h2>
-        </div>
-        <p class="text-lg md:text-xl text-gray-600 leading-relaxed word-keep">2006년, 더 비싸고 좋아 보이던 선택이 20년 뒤에는 오히려 뒤처졌습니다. 문제는 과거 이야기가 아니라, 지금도 같은 선택지가 우리 앞에 있다는 점입니다.</p>
+
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+      <div class="text-center mb-10" data-reveal>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight word-keep">분당과 일산,<br class="md:hidden"> 어디를 사야 될까요?</h2>
+        <p class="text-lg md:text-xl text-gray-500 mt-6 word-keep leading-relaxed">2006년, 중소기업 <span class="text-red-600 font-bold">김과장</span>은 <span class="text-red-600 font-bold">분당</span>을,<br>고소득 <span class="text-brand-blue font-bold">의사 강씨</span>는 <span class="text-brand-blue font-bold">일산</span>을 선택했습니다</p>
       </div>
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-2" data-stagger>
-        <div class="v2-card rounded-[1.7rem] p-6 md:p-7">
-          <div class="flex items-center justify-between"><p class="text-sm font-bold text-gray-400">2006년 선택</p><span class="rounded-full bg-red-50 px-3 py-1 text-sm font-black text-red-600">분당</span></div>
-          <p class="mt-5 text-xl font-bold word-keep">중소기업 김과장</p>
-          <p class="mt-2 text-5xl font-display font-black text-red-600">7억</p>
-          <div class="mt-6 h-2 rounded-full bg-red-100"><div class="h-2 w-[76%] rounded-full bg-red-500"></div></div>
-          <p class="mt-4 text-sm text-gray-500 word-keep">당시에는 더 싼 선택처럼 보였습니다.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14" data-reveal>
+        <div class="bg-white rounded-2xl p-7 text-center shadow-md border border-gray-100">
+          <p class="text-sm text-gray-400 mb-2">2006년</p>
+          <p class="text-lg font-semibold mb-2 word-keep">중소기업 <span class="text-red-600 font-bold">김과장</span></p>
+          <p class="text-4xl md:text-5xl font-display font-black text-red-600">분당</p>
+          <p class="text-gray-500 mt-2 text-lg">매매가 <span class="font-bold">7억</span></p>
         </div>
-        <div class="v2-card rounded-[1.7rem] p-6 md:p-7">
-          <div class="flex items-center justify-between"><p class="text-sm font-bold text-gray-400">2006년 선택</p><span class="rounded-full bg-blue-50 px-3 py-1 text-sm font-black text-brand-blue">일산</span></div>
-          <p class="mt-5 text-xl font-bold word-keep">고소득 의사 강씨</p>
-          <p class="mt-2 text-5xl font-display font-black text-brand-blue">10억</p>
-          <div class="mt-6 h-2 rounded-full bg-blue-100"><div class="h-2 w-full rounded-full bg-brand-blue"></div></div>
-          <p class="mt-4 text-sm text-gray-500 word-keep">당시에는 더 안정적인 선택처럼 보였습니다.</p>
+        <div class="bg-white rounded-2xl p-7 text-center shadow-md border border-gray-100">
+          <p class="text-sm text-gray-400 mb-2">2006년</p>
+          <p class="text-lg font-semibold mb-2 word-keep">고소득 <span class="text-brand-blue font-bold">의사 강씨</span></p>
+          <p class="text-4xl md:text-5xl font-display font-black text-brand-blue">일산</p>
+          <p class="text-gray-500 mt-2 text-lg">매매가 <span class="font-bold">10억</span></p>
         </div>
       </div>
-      <div class="mt-10 rounded-[2rem] bg-white p-5 md:p-8 v2-soft-shadow" data-reveal id="chartContainer">
-        <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
-          <div class="flex items-center gap-5 text-sm font-bold"><span class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-red-600"></span>분당</span><span class="flex items-center gap-2"><span class="h-3 w-3 rounded-full bg-brand-blue"></span>일산</span></div>
-          <p class="text-sm font-bold text-gray-400">단위: 억원</p>
+      <!-- 서스펜스 질문 -->
+      <div class="text-center mb-14" data-reveal="scale">
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep">어떻게<br>됐을까요?</p>
+      </div>
+      <!-- SVG 차트 -->
+      <div class="bg-gray-50 rounded-2xl p-5 md:p-8 mb-10 shadow-sm border border-gray-100" data-reveal id="chartContainer">
+        <div class="flex items-center gap-6 mb-4 text-sm font-medium">
+          <span class="flex items-center gap-2 text-base"><span class="w-3.5 h-3.5 rounded-full bg-red-600"></span> 분당 (김과장)</span>
+          <span class="flex items-center gap-2 text-base"><span class="w-3.5 h-3.5 rounded-full bg-brand-blue"></span> 일산 (의사 강씨)</span>
         </div>
-        <svg viewBox="0 0 620 340" class="w-full" aria-label="분당과 일산 가격 흐름 비교">
-          <line x1="56" y1="28" x2="56" y2="280" stroke="#e5e7eb"/><line x1="56" y1="280" x2="590" y2="280" stroke="#e5e7eb"/>
-          <line x1="56" y1="220" x2="590" y2="220" stroke="#f1f5f9"/><line x1="56" y1="160" x2="590" y2="160" stroke="#f1f5f9"/><line x1="56" y1="100" x2="590" y2="100" stroke="#f1f5f9"/>
-          <text x="56" y="306" text-anchor="middle" fill="#94a3b8" font-size="13">2006</text><text x="190" y="306" text-anchor="middle" fill="#94a3b8" font-size="13">2011</text><text x="324" y="306" text-anchor="middle" fill="#94a3b8" font-size="13">2016</text><text x="456" y="306" text-anchor="middle" fill="#94a3b8" font-size="13">2021</text><text x="590" y="306" text-anchor="middle" fill="#94a3b8" font-size="13">2026</text>
-          <polyline class="chart-line" points="56,206 138,222 190,206 280,144 382,68 452,115 520,86 590,68" fill="none" stroke="#dc2626" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <polyline class="chart-line" points="56,170 138,198 190,206 280,184 382,146 452,198 520,226 590,226" fill="none" stroke="#0055FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="190" y1="42" x2="190" y2="280" stroke="#FF6B00" stroke-dasharray="6 5" class="chart-arrow"/><circle cx="190" cy="206" r="10" fill="white" stroke="#FF6B00" stroke-width="3" class="chart-arrow"/>
-          <circle cx="590" cy="68" r="7" fill="#dc2626" class="chart-arrow"/><circle cx="590" cy="226" r="7" fill="#0055FF" class="chart-arrow"/>
-          <text x="545" y="50" fill="#dc2626" font-size="18" font-weight="900" class="chart-arrow">19억</text><text x="548" y="254" fill="#0055FF" font-size="18" font-weight="900" class="chart-arrow">6억</text>
-          <text x="72" y="158" fill="#0055FF" font-size="16" font-weight="900" class="chart-arrow">10억</text><text x="72" y="228" fill="#dc2626" font-size="16" font-weight="900" class="chart-arrow">7억</text>
+        <svg viewBox="0 0 620 400" class="w-full" aria-label="분당과 일산 아파트 시세 비교 차트">
+          <line x1="60" y1="30" x2="60" y2="340" stroke="#e5e7eb" stroke-width="1"/><line x1="60" y1="340" x2="590" y2="340" stroke="#e5e7eb" stroke-width="1"/>
+          <text x="50" y="340" text-anchor="end" fill="#9ca3af" font-size="12">0</text><text x="50" y="278" text-anchor="end" fill="#9ca3af" font-size="12">4억</text><text x="50" y="216" text-anchor="end" fill="#9ca3af" font-size="12">8억</text><text x="50" y="154" text-anchor="end" fill="#9ca3af" font-size="12">12억</text><text x="50" y="92" text-anchor="end" fill="#9ca3af" font-size="12">16억</text><text x="50" y="40" text-anchor="end" fill="#9ca3af" font-size="12">20억</text>
+          <text x="60" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2006</text><text x="192" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2011</text><text x="325" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2016</text><text x="458" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2021</text><text x="590" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2026</text>
+          <line x1="60" y1="278" x2="590" y2="278" stroke="#f3f4f6"/><line x1="60" y1="216" x2="590" y2="216" stroke="#f3f4f6"/><line x1="60" y1="154" x2="590" y2="154" stroke="#f3f4f6"/><line x1="60" y1="92" x2="590" y2="92" stroke="#f3f4f6"/>
+          <!-- 2011년 수직 점선 -->
+          <line x1="192" y1="30" x2="192" y2="340" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="6,4" class="chart-arrow"/>
+          <!-- 2026년 수직 점선 -->
+          <line x1="590" y1="30" x2="590" y2="340" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="6,4" class="chart-arrow"/>
+          <!-- 분당 (빨강) -->
+          <polyline class="chart-line" points="60,231 140,247 192,231 280,154 380,60 450,107 520,76 590,60" fill="none" stroke="#dc2626" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- 일산 (파랑) -->
+          <polyline class="chart-line" points="60,185 140,216 192,231 280,200 380,154 450,216 520,247 590,247" fill="none" stroke="#0055FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- 교차점 동그라미 (가운데 점 없음) -->
+          <circle cx="192" cy="231" r="10" fill="none" stroke="#FF6B00" stroke-width="2.5" class="chart-arrow"/>
+          <!-- 2006년 시작점 라벨 -->
+          <text x="70" y="175" fill="#0055FF" font-size="14" font-weight="bold" class="chart-arrow">10억</text>
+          <text x="70" y="260" fill="#dc2626" font-size="14" font-weight="bold" class="chart-arrow">7억</text>
+          <!-- 끝점 라벨 -->
+          <circle cx="590" cy="60" r="6" fill="#dc2626" class="chart-arrow"/><text x="555" y="48" fill="#dc2626" font-size="15" font-weight="bold" class="chart-arrow">19억</text><text x="555" y="32" fill="#dc2626" font-size="13" font-weight="bold" class="chart-arrow">폭등 ↑</text>
+          <circle cx="590" cy="247" r="6" fill="#0055FF" class="chart-arrow"/><text x="555" y="270" fill="#0055FF" font-size="15" font-weight="bold" class="chart-arrow">6억</text><text x="555" y="286" fill="#0055FF" font-size="13" font-weight="bold" class="chart-arrow">하락 ↓</text>
+          <!-- 흰 배경 패딩으로 라인과 분리 -->
+          <!-- 빨강 화살표 (우상향, 블록형) -->
+          <g class="chart-arrow" style="animation: bobUp 2s ease infinite"><g transform="translate(320,120) rotate(-45)">
+            <rect x="-32" y="-10" width="44" height="20" rx="5" fill="white" opacity="0.9"/>
+            <rect x="-30" y="-8" width="40" height="16" rx="4" fill="#dc2626"/>
+            <polygon points="10,-16 32,0 10,16" fill="#dc2626" stroke="#dc2626" stroke-width="2" stroke-linejoin="round"/>
+          </g></g>
+          <!-- 파랑 화살표 (우하향, 블록형) -->
+          <g class="chart-arrow" style="animation: bobDown 2s ease infinite"><g transform="translate(340,255) rotate(30)">
+            <rect x="-32" y="-10" width="44" height="20" rx="5" fill="white" opacity="0.9"/>
+            <rect x="-30" y="-8" width="40" height="16" rx="4" fill="#0055FF"/>
+            <polygon points="10,-16 32,0 10,16" fill="#0055FF" stroke="#0055FF" stroke-width="2" stroke-linejoin="round"/>
+          </g></g>
         </svg>
       </div>
-      <div class="mt-12 grid gap-6 md:grid-cols-[1fr_.7fr] md:items-center" data-reveal>
-        <div class="rounded-[2rem] bg-brand-dark p-7 text-white md:p-9">
-          <p class="text-sm font-black text-brand-orange">결과</p>
-          <p class="mt-4 text-3xl md:text-4xl font-display font-black leading-tight word-keep">분당은 19억,<br>일산은 6억.</p>
-          <p class="mt-5 text-lg text-white/70 word-keep">출발점은 3억 차이였지만, 결과는 13억 차이였습니다.</p>
-        </div>
-        <div class="rounded-[2rem] border border-brand-orange/20 bg-white p-7 text-center shadow-lg">
-          <p class="text-sm font-bold text-gray-400">오늘의 질문</p>
-          <p class="mt-3 text-2xl font-display font-black word-keep">지금 내가 보는 단지는<br><span class="text-brand-orange">어느 쪽에 가까울까요?</span></p>
+      <div class="text-center mb-16" data-reveal="scale">
+        <p class="text-2xl md:text-3xl font-display font-black word-keep mb-3"><span class="text-red-600">7억 분당</span>은 → <span class="text-red-600 font-black wavy-red">19억</span>이 됐고,</p>
+        <p class="text-2xl md:text-3xl font-display font-black word-keep mb-8"><span class="text-brand-blue">10억 일산</span>은 → <span class="text-brand-blue font-black wavy-blue">6억</span>이 됐습니다</p>
+        <div class="inline-block bg-gradient-to-r from-brand-orange to-red-500 text-white px-8 sm:px-12 py-6 rounded-2xl shadow-2xl shadow-orange-500/30 transform hover:scale-105 transition-transform">
+          <p class="text-3xl md:text-4xl font-display font-black">무려 <span class="text-5xl md:text-6xl">13억</span> 차이<span class="text-2xl ml-2">💥</span></p>
         </div>
       </div>
-      <div class="mt-16 max-w-2xl mx-auto space-y-4" data-stagger>
-        <div class="bubble-real-l px-6 py-4 w-fit max-w-[88%]"><p class="font-bold word-keep">지금 여기 사도 될까요?</p></div>
-        <div class="bubble-real-r px-6 py-4 w-fit max-w-[88%] ml-auto"><p class="word-keep">제 예산이면 어디까지 봐야 할까요?</p></div>
-        <div class="bubble-real-l px-6 py-4 w-fit max-w-[88%]"><p class="word-keep">대출 5억까지 받아도 괜찮을까요?</p></div>
-        <div class="bubble-real-r px-6 py-4 w-fit max-w-[88%] ml-auto"><p class="font-bold text-brand-orange word-keep">사도 되는지보다, 무엇을 피해야 하는지가 먼저입니다.</p></div>
+      <div class="text-center mb-16" data-reveal>
+        <p class="text-xl md:text-2xl text-gray-600 word-keep leading-relaxed mb-8"><span class="text-brand-blue font-bold">의사 강씨</span>는 고소득임에도<br><span class="text-red-600 font-bold">김과장</span>과 갈수록 격차가 벌어졌습니다</p>
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-snug">지금 이 순간에도<br><span class="text-brand-orange">똑같은 일</span>이 생기고 있습니다</p>
       </div>
-      <div class="mt-20 rounded-[2rem] bg-[#14110f] p-7 text-white md:p-10" data-reveal>
-        <div class="grid gap-8 md:grid-cols-[.9fr_1.1fr] md:items-center">
-          <div>
-            <p class="text-sm font-black text-brand-orange">실제 제 이야기입니다</p>
-            <h3 class="mt-4 text-3xl md:text-4xl font-display font-black leading-tight word-keep">혼자 결정한 첫 집에서<br>평생 모은 돈을 잃었습니다</h3>
-            <p class="mt-5 text-white/70 leading-relaxed word-keep">나름 공부했고, 주변에서도 괜찮다고 했습니다. 하지만 매수와 매도 사이에서 손실, 세금, 인테리어, 복비까지 합쳐 약 2억을 날렸습니다.</p>
-          </div>
-          <div class="grid gap-4">
-            <div class="rounded-2xl bg-white p-4 text-brand-dark"><p class="text-sm font-bold text-gray-400">매수</p><p class="text-4xl font-display font-black text-red-600">9억 5천</p></div>
-            <div class="flex justify-center"><iconify-icon icon="solar:arrow-down-bold" class="text-3xl text-brand-orange"></iconify-icon></div>
-            <div class="rounded-2xl bg-white p-4 text-brand-dark"><p class="text-sm font-bold text-gray-400">매도</p><p class="text-4xl font-display font-black text-brand-blue">8억 2천</p></div>
-          </div>
-        </div>
+      <div class="bg-gray-50 rounded-2xl p-5 md:p-8 mt-10 mb-10 shadow-sm border border-gray-100 max-w-2xl mx-auto" data-reveal>
+        <p class="text-center text-sm text-gray-500 mb-4 font-bold">지금 당신의 선택은?</p>
+        <svg viewBox="0 0 400 200" class="w-full">
+          <rect x="0" y="0" width="120" height="200" fill="#f9fafb" opacity="0.5"/>
+          <line x1="40" y1="170" x2="380" y2="170" stroke="#e5e7eb" stroke-width="1"/>
+          <text x="120" y="190" text-anchor="middle" fill="#9ca3af" font-size="12" font-weight="bold">2026</text>
+          <text x="250" y="190" text-anchor="middle" fill="#9ca3af" font-size="12">2028</text>
+          <text x="380" y="190" text-anchor="middle" fill="#9ca3af" font-size="12">2030</text>
+          <circle cx="120" cy="100" r="8" fill="none" stroke="#FF6B00" stroke-width="2.5"/>
+          <line x1="120" y1="20" x2="120" y2="170" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <path d="M120,100 Q250,30 380,20" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="8,6"/>
+          <text x="360" y="15" fill="#dc2626" font-size="13" font-weight="bold">잘 사면? ↑</text>
+          <path d="M120,100 Q250,150 380,165" fill="none" stroke="#0055FF" stroke-width="3" stroke-dasharray="8,6"/>
+          <text x="340" y="163" fill="#0055FF" font-size="13" font-weight="bold">잘못 사면? ↓</text>
+          <text x="120" y="130" text-anchor="middle" fill="#FF6B00" font-size="11" font-weight="bold">지금</text>
+        </svg>
       </div>
-      <div class="mt-12 grid gap-4 md:grid-cols-3" data-stagger>
-        <div class="v2-card rounded-2xl p-6"><p class="text-brand-orange font-display font-black">01</p><p class="mt-2 font-bold word-keep">더 오를 지역과 단지가 궁금한 분</p></div>
-        <div class="v2-card rounded-2xl p-6"><p class="text-brand-orange font-display font-black">02</p><p class="mt-2 font-bold word-keep">대출과 예산 때문에 결정이 흔들리는 분</p></div>
-        <div class="v2-card rounded-2xl p-6"><p class="text-brand-orange font-display font-black">03</p><p class="mt-2 font-bold word-keep">실거주와 자산 가치를 같이 보고 싶은 분</p></div>
+      <div class="max-w-md mx-auto space-y-4 mb-14" data-stagger>
+        <div class="bubble-real-l px-6 py-4 w-fit max-w-[85%] shadow-md"><p class="text-base md:text-lg word-keep font-medium">"지금 여기 사도 될까요?"</p></div>
+        <div class="bubble-real-r px-6 py-4 w-fit max-w-[85%] ml-auto shadow-md"><p class="text-base md:text-lg word-keep">"고민하고 있는 단지중에<br><span class="font-bold text-brand-orange">어디가 더 많이 오를까요?</span>"</p></div>
+        <div class="bubble-real-l px-6 py-4 w-fit max-w-[85%] shadow-md"><p class="text-base md:text-lg word-keep">"5억 대출해서 사는게<br>정말 맞을까요?"</p></div>
+        <div class="bubble-real-r px-6 py-4 w-fit max-w-[85%] ml-auto shadow-md"><p class="text-base md:text-lg word-keep">돈이 조금 애매해서<br>"<span class="font-bold text-brand-orange">지금 사야 될지 고민돼요</span>"</p></div>
+        <div class="bubble-real-l px-6 py-4 w-fit max-w-[85%] shadow-md"><p class="text-base md:text-lg word-keep">"지금 이런 상황에서<br>사도 될지 모르겠어요"</p></div>
+      </div>
+      <div class="text-center" data-reveal>
+        <p class="text-xl md:text-2xl font-display font-bold word-keep text-gray-700">평범한 직장인도, 전문직도<br><span class="text-brand-dark font-black">똑같은 고민</span>을 합니다</p>
+      </div>
+      <!-- 극적 전환 -->
+      <div class="text-center mt-20" data-reveal>
+        <p class="text-5xl md:text-6xl text-brand-dark tracking-[0.3em] font-black">
+          <span style="animation: dotFade1 2s ease infinite">•</span>
+          <span style="animation: dotFade2 2s ease infinite">•</span>
+          <span style="animation: dotFade3 2s ease infinite">•</span>
+        </p>
       </div>
     </div>
+    <!-- ===== 자극 (02에 합침) ===== -->
+    <div class="bg-brand-dark text-white py-32 md:py-44 mt-20 -mx-4 sm:-mx-6 lg:-mx-8 px-6 sm:px-8 lg:px-8 rounded-t-[3rem]">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-10" data-reveal="scale">
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep"><span class="bg-white text-brand-dark px-5 py-2 inline-block">"지금 여기<br class="md:hidden"> 사도 될까요?"</span></p>
+      </div>
+      <div class="text-center mb-16" data-reveal>
+        <div class="inline-block bg-blue-600 text-white px-8 py-6 rounded-2xl mb-4">
+          <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black tracking-tight leading-tight word-keep">잘못 사면,<br>10년이상 후회합니다</p>
+        </div>
+      </div>
+      <div class="bg-white/[0.03] border border-white/10 rounded-3xl p-7 md:p-10 mb-20" data-reveal="left">
+        <div class="flex justify-center mb-8"><div class="w-0.5 h-16 bg-gray-600"></div></div>
+        <p class="text-brand-orange font-display font-bold text-lg mb-6">실제 제 이야기입니다</p>
+        <p class="text-2xl md:text-3xl font-display font-black leading-snug word-keep mb-8">열심히 돈을 모아 집을 샀습니다</p>
+        <div class="space-y-4 mb-8" data-stagger>
+          <p class="text-lg md:text-xl text-gray-300 word-keep">처음 사는 집이었습니다</p>
+          <p class="text-lg md:text-xl text-gray-300 word-keep">나름 공부도 했고, 좋은 선택이라고 확신했습니다</p>
+          <p class="text-lg md:text-xl text-gray-300 word-keep">주변에서도 괜찮다고 했습니다</p>
+          <p class="text-lg md:text-xl text-gray-400 word-keep font-bold">혼자 결정해도 된다고 생각했습니다</p>
+        </div>
+        <div class="flex justify-center my-6"><div class="w-0.5 h-12 bg-gray-600"></div></div>
+        <p class="text-5xl md:text-6xl font-display font-black my-10 word-keep text-center">하지만</p>
+        <div class="flex justify-center my-6"><div class="w-0.5 h-12 bg-gray-600"></div></div>
+        <!-- 매수 -->
+        <div class="mb-6 max-w-[380px] mx-auto">
+          <div class="bg-red-600 rounded-t-2xl px-4 py-2 text-center">
+            <p class="text-white font-bold text-sm">매수 계약서</p>
+          </div>
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-buy.png" alt="수명산 아파트 매수 계약서" class="w-full rounded-none" loading="lazy" decoding="async">
+          <div class="bg-red-600 rounded-b-2xl p-5 text-center">
+            <p class="text-4xl md:text-5xl font-display font-black text-white">9억 5천</p>
+          </div>
+        </div>
+        <!-- 화살표 -->
+        <div class="text-center my-4">
+          <iconify-icon icon="solar:arrow-down-bold" class="text-4xl text-gray-400"></iconify-icon>
+        </div>
+        <!-- 매도 -->
+        <div class="mb-8 max-w-[380px] mx-auto">
+          <div class="bg-blue-600 rounded-t-2xl px-4 py-2 text-center">
+            <p class="text-white font-bold text-sm">매도 계약서</p>
+          </div>
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-sell.png" alt="수명산 아파트 매도 계약서" class="w-full rounded-none" loading="lazy" decoding="async">
+          <div class="bg-blue-600 rounded-b-2xl p-5 text-center">
+            <p class="text-4xl md:text-5xl font-display font-black text-white">8억 2천</p>
+          </div>
+        </div>
+        <div class="text-center">
+          <p class="text-4xl md:text-5xl lg:text-6xl font-display font-black text-red-400 mb-4 wavy-red">-201,613,492원</p>
+          <p class="text-lg md:text-xl text-gray-300 font-medium word-keep mb-6">1억 3천 손실 + 세금 + 인테리어 + 복비 등</p>
+          <div class="inline-block bg-red-600 text-white px-8 py-4 rounded-2xl pulse-attention shadow-lg shadow-red-900/30"><p class="text-2xl md:text-3xl font-display font-black">총 2억 손실</p></div>
+        </div>
+      </div>
+      <div class="text-center space-y-12 shake-once" data-reveal>
+        <div class="text-center mb-4"><span class="text-6xl">📉</span></div>
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep text-red-400 leading-snug">평생 모은 2억을<br>날렸습니다</p>
+        <p class="text-2xl md:text-3xl font-display font-bold word-keep text-gray-300 leading-relaxed">혼자 결정해도 된다고 생각했습니다</p>
+        <p class="text-3xl md:text-4xl font-display font-black word-keep">결과는</p>
+        <div class="inline-block bg-red-600 text-white px-6 py-3 rounded-xl mt-4 pulse-attention">
+          <p class="text-3xl md:text-4xl font-display font-black">💥 처참한 실패</p>
+        </div>
+        <p class="text-xl md:text-2xl text-gray-200 word-keep mt-4 font-medium">제 주변에도 이런 고민하는 사람들이 많습니다</p>
+      </div>
+      <!-- 추천 대상 -->
+      <div class="mt-20 max-w-2xl mx-auto" data-reveal>
+        <div class="text-center mb-10">
+          <span class="inline-block bg-red-600 text-white text-base font-black px-6 py-2 rounded-full mb-5 shadow-lg">추천</span>
+          <p class="text-4xl md:text-5xl font-display font-black text-white word-keep leading-tight">이런 분들께<br><span class="text-red-400">추천</span>드립니다!</p>
+        </div>
+        <div class="space-y-4" data-stagger>
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 flex items-start gap-5 border border-white/20 hover:bg-white/15 transition-colors">
+            <span class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0 shadow-md">01</span>
+            <div>
+              <p class="text-white font-bold text-lg word-keep mb-1">"지금 여기 사도 될까?"</p>
+              <p class="text-gray-300 text-base word-keep">더 많이 오르는 지역과 단지가 궁금하신 분</p>
+            </div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 flex items-start gap-5 border border-white/20 hover:bg-white/15 transition-colors">
+            <span class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0 shadow-md">02</span>
+            <div>
+              <p class="text-white font-bold text-lg word-keep mb-1">잠깐의 결정이 10년을 좌우합니다</p>
+              <p class="text-gray-300 text-base word-keep">현명한 내집마련을 하고 싶은 분</p>
+            </div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 flex items-start gap-5 border border-white/20 hover:bg-white/15 transition-colors">
+            <span class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0 shadow-md">03</span>
+            <div>
+              <p class="text-white font-bold text-lg word-keep mb-1">실거주와 자산 가치를 동시에</p>
+              <p class="text-gray-300 text-base word-keep">똑똑한 갈아타기 하고 싶은 분</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 text-center">
+          <p class="text-gray-400 text-base italic word-keep">"반신반의했는데, 코칭 후 확신이 생겼습니다" — 윤*아 님</p>
+        </div>
+      </div>
+    </div>
+    </div><!-- 자극 dark bg 닫기 -->
   </section>
 
   <!-- ===== 03 코칭 커리큘럼 ===== -->
@@ -410,47 +549,99 @@
 
   
 <!-- ===== 04 컨설턴트 소개 ===== -->
-  <section data-section="consultant" class="max-w-4xl mx-auto bg-[#f7f3eb] py-20 md:py-28 relative overflow-hidden">
+  <section data-section="consultant" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">04 컨설턴트</span>
+
     <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
-      <div class="grid gap-10 md:grid-cols-[.9fr_1.1fr] md:items-start" data-reveal>
-        <div>
-          <p class="v2-pill inline-flex px-4 py-2 text-sm font-black">컨설턴트 우재</p>
-          <h2 class="mt-6 text-4xl md:text-5xl font-display font-black leading-tight tracking-tight word-keep">말보다<br>실제 매수와<br>결과로 보겠습니다</h2>
-          <p class="mt-6 text-lg text-gray-600 leading-relaxed word-keep">증권투자 관련 법인 대표이자, 전국 단위로 직접 매수·보유·매도까지 경험한 실전 투자자입니다. 코칭에서는 멋진 말보다 의사결정 기준과 숫자를 먼저 봅니다.</p>
-          <div class="mt-8 grid grid-cols-2 gap-3">
-            <div class="v2-card rounded-2xl p-5"><p class="text-3xl font-display font-black">10년+</p><p class="text-sm font-bold text-gray-500">투자 업계 경력</p></div>
-            <div class="v2-card rounded-2xl p-5"><p class="text-3xl font-display font-black">117건+</p><p class="text-sm font-bold text-gray-500">상담 실전 데이터</p></div>
+      <div class="text-center mb-14" data-reveal>
+        <p class="text-6xl md:text-7xl text-gray-300 font-display font-black leading-none mb-2">"</p>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight word-keep">긴말 없이<br><span class="text-red-600">실제 제 투자사례로</span><br>보여드립니다</h2>
+        <p class="text-6xl md:text-7xl text-gray-300 font-display font-black leading-none mt-2">"</p>
+      </div>
+      <!-- 자기 소개 -->
+      <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 mb-10 max-w-md mx-auto" data-reveal>
+        <div class="mb-7 rounded-2xl bg-[#151515] px-5 py-4 text-white shadow-[0_18px_42px_rgba(10,10,10,.18)]">
+          <div class="flex items-center gap-4">
+            <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-white">
+              <iconify-icon icon="solar:user-id-bold" class="text-4xl"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="text-3xl font-display font-black leading-none">우재</h3>
+              <p class="mt-2 text-sm font-bold text-white/70">우리동네 재테크</p>
+            </div>
           </div>
         </div>
-        <div class="rounded-[2rem] bg-brand-dark p-5 text-white v2-soft-shadow">
-          <div class="rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-6">
-            <div class="flex items-center gap-4 border-b border-white/10 pb-5">
-              <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-orange text-white"><iconify-icon icon="solar:user-id-bold" class="text-4xl"></iconify-icon></div>
-              <div><p class="text-2xl font-display font-black">우재</p><p class="text-sm text-white/60">우리동네 재테크</p></div>
+        <div class="text-left max-w-md mx-auto space-y-3 mb-6">
+          <p class="flex items-center gap-3 text-base"><span class="w-2 h-2 bg-brand-dark rounded-full flex-shrink-0"></span> 증권투자 관련 법인 대표이사</p>
+          <p class="flex items-center gap-3 text-base"><span class="w-2 h-2 bg-brand-dark rounded-full flex-shrink-0"></span> 전국구 실전 부동산투자자</p>
+          <p class="flex items-center gap-3 text-base"><span class="w-2 h-2 bg-brand-dark rounded-full flex-shrink-0"></span> 최근 8개월간 아파트매매만 <span class="font-bold">5건</span> <span class="text-gray-400 text-sm">(작성시점 기준)</span></p>
+          <p class="flex items-center gap-3 text-base"><span class="w-2 h-2 bg-brand-dark rounded-full flex-shrink-0"></span> 포트폴리오: 강남3구+압여목성 2채+@</p>
+        </div>
+        <p class="text-center text-lg md:text-xl word-keep"><span class="text-red-600 font-bold">10년간 쌓아온</span> 모든 투자 노하우를<br>통째로 오픈해 드리겠습니다</p>
+      </div>
+      <!-- 실적 카드 + 이미지 (모자이크 처리) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-stretch" data-reveal>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/mokdong-buy.png" alt="목동신시가지 매수 계약서" class="w-full h-[200px] object-cover" loading="lazy" decoding="async">
+          <div class="p-6 text-center flex-1">
+            <p class="text-sm text-gray-400 mb-2">24년 12월 매수 · 재건축 · 서울</p>
+            <div class="flex items-center justify-center gap-3 mb-2">
+              <span class="text-xl font-bold text-gray-400">15.1억</span>
+              <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-2xl"></iconify-icon>
+              <span class="text-3xl font-display font-black text-brand-dark">25억</span>
             </div>
-            <div class="mt-6 space-y-4 text-base font-bold word-keep">
-              <p class="flex gap-3"><iconify-icon icon="solar:case-round-bold" class="mt-1 text-brand-orange"></iconify-icon>증권투자 관련 법인 대표이사</p>
-              <p class="flex gap-3"><iconify-icon icon="solar:buildings-3-bold" class="mt-1 text-brand-orange"></iconify-icon>최근 8개월간 아파트 매매 5건</p>
-              <p class="flex gap-3"><iconify-icon icon="solar:map-point-bold" class="mt-1 text-brand-orange"></iconify-icon>강남3구, 압여목성, 재건축 중심 포트폴리오</p>
+            <div class="inline-block bg-red-50 text-red-600 px-4 py-2 rounded-xl"><p class="text-xl font-display font-black">+9.9억 상승 ↑</p></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/garak-buy.png" alt="가락쌍용 매수 계약서" class="w-full h-[200px] object-cover" loading="lazy" decoding="async">
+          <div class="p-6 text-center flex-1">
+            <p class="text-sm text-gray-400 mb-2">24년 9월 매수 · 아파트 · 송파구</p>
+            <div class="flex items-center justify-center gap-3 mb-2">
+              <span class="text-xl font-bold text-gray-400">11.4억</span>
+              <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-2xl"></iconify-icon>
+              <span class="text-3xl font-display font-black text-brand-dark">19.8억</span>
+            </div>
+            <div class="inline-block bg-red-50 text-red-600 px-4 py-2 rounded-xl"><p class="text-xl font-display font-black">+8.4억 상승 ↑</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mb-10" data-reveal="scale">
+        <div class="inline-block bg-gradient-to-r from-red-600 to-red-500 text-white px-10 py-6 rounded-2xl shadow-2xl shadow-red-500/30">
+          <div class="flex items-center gap-4">
+            <iconify-icon icon="solar:fire-bold" class="text-4xl text-yellow-300"></iconify-icon>
+            <div>
+              <p class="text-base font-bold text-white">8개월 만에</p>
+              <p class="text-3xl md:text-4xl font-display font-black"><span class="text-yellow-300">+18.3억</span> 상승</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2" data-reveal>
-        <div class="overflow-hidden rounded-[1.7rem] bg-white v2-soft-shadow">
-          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/mokdong-buy.png" alt="목동신시가지 매수 계약서" class="h-[210px] w-full object-cover" loading="eager" decoding="async">
-          <div class="p-6"><p class="text-sm font-bold text-gray-400">24년 12월 매수 · 재건축 · 서울</p><div class="mt-3 flex items-end gap-3"><span class="text-2xl font-bold text-gray-400">15.1억</span><iconify-icon icon="solar:arrow-right-linear" class="text-2xl text-brand-orange"></iconify-icon><span class="text-4xl font-display font-black">25억</span></div><p class="mt-3 inline-flex rounded-full bg-red-50 px-4 py-2 font-display font-black text-red-600">+9.9억 상승</p></div>
+      <!-- 추가 실적 이미지 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10" data-reveal>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/landing-0.png" alt="최근 추가거래 총5건" class="w-full hover:scale-[1.02] transition-transform" loading="lazy" decoding="async">
+          <div class="p-4 text-center"><p class="text-sm text-gray-500 font-medium">최근 8개월간 아파트매매 5건</p></div>
         </div>
-        <div class="overflow-hidden rounded-[1.7rem] bg-white v2-soft-shadow">
-          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/garak-buy.png" alt="가락쌍용 매수 계약서" class="h-[210px] w-full object-cover" loading="eager" decoding="async">
-          <div class="p-6"><p class="text-sm font-bold text-gray-400">24년 9월 매수 · 아파트 · 송파구</p><div class="mt-3 flex items-end gap-3"><span class="text-2xl font-bold text-gray-400">11.4억</span><iconify-icon icon="solar:arrow-right-linear" class="text-2xl text-brand-orange"></iconify-icon><span class="text-4xl font-display font-black">19.8억</span></div><p class="mt-3 inline-flex rounded-full bg-red-50 px-4 py-2 font-display font-black text-red-600">+8.4억 상승</p></div>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/landing-3.png" alt="실제 매매 계약서 일부" class="w-full hover:scale-[1.02] transition-transform" loading="lazy" decoding="async">
+          <div class="p-4 text-center"><p class="text-sm text-gray-500 font-medium">실제 매매 계약서 일부</p></div>
         </div>
       </div>
-      <div class="mt-8 rounded-[2rem] bg-white p-7 text-center v2-soft-shadow" data-reveal="scale">
-        <p class="text-sm font-black text-gray-400">최근 8개월 기준</p>
-        <p class="mt-2 text-4xl md:text-5xl font-display font-black word-keep"><span class="text-brand-orange">+18.3억</span> 상승 사례</p>
-        <p class="mt-3 text-gray-500 word-keep">코칭에서는 이 결과를 자랑하는 데서 끝내지 않고, 어떤 기준으로 피하고 골랐는지 풀어드립니다.</p>
+      <!-- 경력 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10" data-reveal>
+        <div class="bg-white rounded-2xl p-5 text-center shadow-md border border-gray-100">
+          <p class="text-3xl font-display font-black text-brand-dark mb-1">10년+</p>
+          <p class="text-sm text-gray-500 word-keep">투자 업계 경력</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 text-center shadow-md border border-gray-100">
+          <p class="text-3xl font-display font-black text-brand-dark mb-1">100건+</p>
+          <p class="text-sm text-gray-500 word-keep">1:1 상담 (만족도 99%)</p>
+        </div>
+      </div>
+      <!-- 차별화 -->
+      <div class="text-center" data-reveal>
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-tight"><span class="text-red-600">최고의 코칭</span>을<br>약속드리겠습니다!</p>
       </div>
     </div>
   </section>
@@ -491,77 +682,242 @@
 
   
 <!-- ===== 8항목 패키지 ===== -->
-  <section data-section="package" class="max-w-4xl mx-auto bg-white py-20 md:py-28 relative">
+  <section data-section="package" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">06 패키지</span>
     <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
-      <div class="mb-12 grid gap-6 md:grid-cols-[.85fr_1.15fr] md:items-end" data-reveal>
-        <div><p class="v2-pill inline-flex px-4 py-2 text-sm font-black">ALL INCLUDED</p><h2 class="mt-6 text-4xl md:text-5xl font-display font-black leading-tight word-keep">신청하면<br>8가지가 같이 옵니다</h2></div>
-        <p class="text-lg text-gray-600 leading-relaxed word-keep">상담만 하고 끝나는 구조가 아닙니다. 상담 전 정리, 당일 판단, 상담 후 실행까지 이어지도록 필요한 자료와 후속 질문을 묶었습니다.</p>
+      <div class="text-center mb-14" data-reveal>
+        <div class="mb-4 flex items-center justify-center">
+          <p class="text-brand-orange font-display font-black text-2xl">코칭 패키지</p>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-black text-brand-dark word-keep">코칭 신청 시 함께 제공되는 8가지</h2>
+        <p class="mt-4 text-gray-500 word-keep">한 번의 상담으로 끝나지 않도록, 진단부터 상담 후 실행까지 필요한 자료와 지원을 함께 제공합니다.</p>
       </div>
-      <div class="grid gap-4 md:grid-cols-4" data-stagger>
-        <div class="md:col-span-2 md:row-span-2 rounded-[2rem] bg-brand-dark p-7 text-white"><iconify-icon icon="solar:wallet-money-bold" class="text-4xl text-brand-orange"></iconify-icon><p class="mt-6 text-3xl font-display font-black word-keep">예산·대출 분석</p><p class="mt-3 text-white/65 word-keep">내 자금 범위와 대출 가능선을 먼저 정리합니다.</p></div>
-        <div class="v2-card rounded-[1.5rem] p-5"><p class="font-display font-black text-brand-orange">02</p><p class="mt-2 font-bold word-keep">1:1 질의응답</p></div>
-        <div class="v2-card rounded-[1.5rem] p-5"><p class="font-display font-black text-brand-orange">03</p><p class="mt-2 font-bold word-keep">맞춤 단지 선정</p></div>
-        <div class="v2-card rounded-[1.5rem] p-5"><p class="font-display font-black text-brand-orange">04</p><p class="mt-2 font-bold word-keep">포트폴리오 점검</p></div>
-        <div class="v2-card rounded-[1.5rem] p-5"><p class="font-display font-black text-brand-orange">05</p><p class="mt-2 font-bold word-keep">자산관리시트</p></div>
-        <div class="v2-card rounded-[1.5rem] p-5"><p class="font-display font-black text-brand-orange">06</p><p class="mt-2 font-bold word-keep">올인원 체크리스트</p></div>
-        <div class="v2-card rounded-[1.5rem] p-5"><p class="font-display font-black text-brand-orange">07</p><p class="mt-2 font-bold word-keep">상담 리포트</p></div>
-        <div class="md:col-span-2 rounded-[1.5rem] border border-brand-orange/20 bg-[#fff7ed] p-5"><p class="font-display font-black text-brand-orange">08</p><p class="mt-2 text-xl font-display font-black word-keep">액션플랜 제공</p><p class="mt-2 text-sm text-gray-600 word-keep">상담 후 바로 실행할 다음 행동 순서를 정리합니다.</p></div>
-      </div>
-    </div>
-  </section>
-
-  
-<!-- ===== 07 상품/가격 ===== -->
-  <section data-section="pricing" class="max-w-4xl mx-auto bg-[#f7f3eb] py-20 md:py-28 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">07 상품/가격</span>
-    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
-      <div class="text-center mb-12" data-reveal><p class="v2-pill inline-flex px-4 py-2 text-sm font-black">상품 안내</p><h2 class="mt-6 text-4xl md:text-5xl font-display font-black word-keep">40만원이 아깝지 않도록<br>결정 전후를 같이 봅니다</h2></div>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-[1.12fr_.88fr]" data-reveal>
-        <div class="relative rounded-[2rem] bg-white p-7 md:p-9 v2-soft-shadow border-2 border-brand-orange">
-          <span class="absolute -top-4 left-7 rounded-full bg-brand-orange px-4 py-2 text-sm font-black text-white">추천</span>
-          <p class="text-2xl font-display font-black text-brand-orange">코칭 A</p>
-          <div class="mt-5 flex flex-wrap items-end gap-3"><p class="text-5xl md:text-6xl font-display font-black">400,000</p><p class="pb-2 text-xl font-bold text-gray-500">원</p><p class="pb-2 text-sm text-gray-400 line-through">500,000원</p></div>
-          <div class="mt-7 grid gap-3 md:grid-cols-2">
-            <p class="flex gap-2 font-bold word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>온라인 화상회의 약 50분</p>
-            <p class="flex gap-2 font-bold word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>코칭 후 최대 90일 질의응답</p>
-            <p class="flex gap-2 font-bold word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>부부동반 가능</p>
-            <p class="flex gap-2 font-bold word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>리포트·시트·체크리스트 포함</p>
+      <div class="rounded-xl border border-[#ffd7a8] bg-[linear-gradient(180deg,#fffaf2_0%,#ffffff_100%)] p-5 shadow-[0_24px_60px_rgba(255,107,0,0.10)] md:p-6" data-reveal>
+        <div class="mb-6 rounded-lg bg-brand-dark px-6 py-5 text-white shadow-lg">
+          <div class="flex items-start gap-4">
+            <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-md bg-brand-orange text-white shadow-md">
+              <iconify-icon icon="solar:gift-bold-duotone" class="text-[26px]"></iconify-icon>
+            </div>
+            <div>
+              <p class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-bold tracking-[0.12em] text-brand-orange">ALL INCLUDED</p>
+              <p class="mt-3 text-2xl font-display font-black word-keep">코칭 신청 시, 아래 8가지 코칭 패키지가 함께 제공됩니다</p>
+              <p class="mt-2 text-sm text-white/70 word-keep">상담 전 정리부터 상담 후 실행까지 필요한 기본 패키지입니다.</p>
+            </div>
           </div>
         </div>
-        <div class="rounded-[2rem] bg-brand-dark p-7 text-white md:p-8">
-          <p class="text-2xl font-display font-black">코칭 B</p>
-          <p class="mt-4 text-4xl font-display font-black">960,000원</p>
-          <p class="mt-2 text-sm font-bold text-brand-orange">코칭 A 전체 + 동행임장 1회</p>
-          <div class="mt-6 rounded-2xl bg-white/8 p-5"><p class="text-sm text-white/60">운영 안내</p><p class="mt-2 font-bold word-keep">코칭 B는 일정 여유가 있을 때만 소수로 진행합니다. 기본 선택은 코칭 A입니다.</p></div>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2" data-stagger>
+          <div class="rounded-lg border border-[#ffd7a8] bg-white p-6 shadow-[0_10px_24px_rgba(15,23,42,0.05)]" data-reveal>
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-md bg-brand-orange/12 text-brand-orange">
+                <iconify-icon icon="solar:wallet-money-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="inline-flex h-9 min-w-[52px] items-center justify-center rounded-md border border-brand-orange/20 bg-brand-orange/5 px-3 text-base font-black tracking-[0.18em] text-brand-orange">01</span>
+            </div>
+            <p class="text-xl font-display font-black text-brand-dark word-keep">예산·대출 분석</p>
+            <p class="mt-2 text-sm leading-6 text-gray-500 word-keep">내 자금 범위와 대출 가능선을 먼저 정리합니다.</p>
+          </div>
+          <div class="rounded-lg border border-[#ffd7a8] bg-white p-6 shadow-[0_10px_24px_rgba(15,23,42,0.05)]" data-reveal>
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-md bg-brand-orange/12 text-brand-orange">
+                <iconify-icon icon="solar:chat-round-dots-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="inline-flex h-9 min-w-[52px] items-center justify-center rounded-md border border-brand-orange/20 bg-brand-orange/5 px-3 text-base font-black tracking-[0.18em] text-brand-orange">02</span>
+            </div>
+            <p class="text-xl font-display font-black text-brand-dark word-keep">1:1 질의응답</p>
+            <p class="mt-2 text-sm leading-6 text-gray-500 word-keep">코칭 후 90일 동안 결정 과정에서 생기는 질문을 이어서 받습니다.</p>
+          </div>
+          <div class="rounded-lg border border-[#ffd7a8] bg-white p-6 shadow-[0_10px_24px_rgba(15,23,42,0.05)]" data-reveal>
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-md bg-brand-orange/12 text-brand-orange">
+                <iconify-icon icon="solar:map-point-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="inline-flex h-9 min-w-[52px] items-center justify-center rounded-md border border-brand-orange/20 bg-brand-orange/5 px-3 text-base font-black tracking-[0.18em] text-brand-orange">03</span>
+            </div>
+            <p class="text-xl font-display font-black text-brand-dark word-keep">맞춤 단지 선정</p>
+            <p class="mt-2 text-sm leading-6 text-gray-500 word-keep">예산과 우선순위에 맞는 지역·단지 후보를 압축합니다.</p>
+          </div>
+          <div class="rounded-lg border border-[#ffd7a8] bg-white p-6 shadow-[0_10px_24px_rgba(15,23,42,0.05)]" data-reveal>
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-md bg-brand-orange/12 text-brand-orange">
+                <iconify-icon icon="solar:pie-chart-2-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="inline-flex h-9 min-w-[52px] items-center justify-center rounded-md border border-brand-orange/20 bg-brand-orange/5 px-3 text-base font-black tracking-[0.18em] text-brand-orange">04</span>
+            </div>
+            <p class="text-xl font-display font-black text-brand-dark word-keep">포트폴리오 점검</p>
+            <p class="mt-2 text-sm leading-6 text-gray-500 word-keep">집 구매가 전체 자산 계획 안에서 맞는지 함께 봅니다.</p>
+          </div>
+          <div class="rounded-lg border border-[#ffd7a8] bg-white p-6 shadow-[0_10px_24px_rgba(15,23,42,0.05)]" data-reveal>
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-md bg-brand-orange/12 text-brand-orange">
+                <iconify-icon icon="solar:document-text-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="inline-flex h-9 min-w-[52px] items-center justify-center rounded-md border border-brand-orange/20 bg-brand-orange/5 px-3 text-base font-black tracking-[0.18em] text-brand-orange">05</span>
+            </div>
+            <p class="text-xl font-display font-black text-brand-dark word-keep">자산관리시트</p>
+            <p class="mt-2 text-sm leading-6 text-gray-500 word-keep">상담 내용을 숫자로 바로 정리할 수 있는 시트를 제공합니다.</p>
+          </div>
+          <div class="rounded-lg border border-[#ffd7a8] bg-white p-6 shadow-[0_10px_24px_rgba(15,23,42,0.05)]" data-reveal>
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-md bg-brand-orange/12 text-brand-orange">
+                <iconify-icon icon="solar:checklist-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="inline-flex h-9 min-w-[52px] items-center justify-center rounded-md border border-brand-orange/20 bg-brand-orange/5 px-3 text-base font-black tracking-[0.18em] text-brand-orange">06</span>
+            </div>
+            <p class="text-xl font-display font-black text-brand-dark word-keep">올인원 체크리스트</p>
+            <p class="mt-2 text-sm leading-6 text-gray-500 word-keep">방문·계약·잔금까지 놓치기 쉬운 항목을 정리합니다.</p>
+          </div>
+          <div class="rounded-lg border border-[#ffd7a8] bg-white p-6 shadow-[0_10px_24px_rgba(15,23,42,0.05)]" data-reveal>
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-md bg-brand-orange/12 text-brand-orange">
+                <iconify-icon icon="solar:file-text-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="inline-flex h-9 min-w-[52px] items-center justify-center rounded-md border border-brand-orange/20 bg-brand-orange/5 px-3 text-base font-black tracking-[0.18em] text-brand-orange">07</span>
+            </div>
+            <p class="text-xl font-display font-black text-brand-dark word-keep">상담 리포트</p>
+            <p class="mt-2 text-sm leading-6 text-gray-500 word-keep">상담 핵심 결론과 판단 기준을 문서로 남겨드립니다.</p>
+          </div>
+          <div class="rounded-lg border border-[#ffd7a8] bg-white p-6 shadow-[0_10px_24px_rgba(15,23,42,0.05)]" data-reveal>
+            <div class="mb-4 flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-md bg-brand-orange/12 text-brand-orange">
+                <iconify-icon icon="solar:target-bold" class="text-2xl"></iconify-icon>
+              </div>
+              <span class="inline-flex h-9 min-w-[52px] items-center justify-center rounded-md border border-brand-orange/20 bg-brand-orange/5 px-3 text-base font-black tracking-[0.18em] text-brand-orange">08</span>
+            </div>
+            <p class="text-xl font-display font-black text-brand-dark word-keep">액션플랜 제공</p>
+            <p class="mt-2 text-sm leading-6 text-gray-500 word-keep">상담 후 바로 실행할 다음 행동 순서를 정리합니다.</p>
+          </div>
+        </div>
+        <div class="mt-6 rounded-lg border border-brand-orange/20 bg-[#fff8ef] px-5 py-4 shadow-sm md:px-6">
+          <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-md bg-brand-orange text-white">
+                <iconify-icon icon="solar:gift-bold-duotone" class="text-[26px]"></iconify-icon>
+              </div>
+              <div>
+                <p class="text-base font-display font-black text-brand-dark word-keep">8가지 코칭 패키지는 기본으로 함께 제공됩니다.</p>
+              </div>
+            </div>
+            <div class="text-sm font-bold text-brand-orange">기본 제공 8종</div>
+          </div>
         </div>
       </div>
-      <div class="mt-8 rounded-[2rem] bg-white p-7 text-center v2-soft-shadow" data-reveal><p class="text-2xl md:text-3xl font-display font-black word-keep">수억짜리 결정을 앞두고 있다면,<br><span class="text-brand-orange">기준을 먼저 사는 비용</span>입니다.</p><p class="mt-3 text-gray-500 word-keep">좋은 말보다, 내 예산에서 가능한 선택지를 좁히는 데 집중합니다.</p></div>
-    </div>
-  </section>
-
-  
-<!-- ===== 신청 후 진행 순서 + 꼭 확인해주세요 ===== -->
-  <section data-section="coaching-steps" class="max-w-4xl mx-auto bg-white py-20 md:py-28 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">08 투자코칭 순서</span>
-    <div class="max-w-3xl mx-auto px-6 sm:px-8 lg:px-8">
-      <div class="text-center mb-12" data-reveal><p class="v2-pill inline-flex px-4 py-2 text-sm font-black">신청 후 흐름</p><h2 class="mt-6 text-3xl md:text-4xl font-display font-black word-keep">결제 확인 후 질문지,<br>질문지 후 일정 선택입니다</h2></div>
-      <div class="space-y-3" data-stagger>
-        <div class="v2-card rounded-2xl p-5 flex gap-4"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-orange text-white font-black">01</span><div><p class="font-bold word-keep">코칭 신청</p><p class="text-sm text-gray-500">짧은 신청폼으로 먼저 접수합니다.</p></div></div>
-        <div class="v2-card rounded-2xl p-5 flex gap-4"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-orange text-white font-black">02</span><div><p class="font-bold word-keep">카드결제 또는 계좌이체 선택</p><p class="text-sm text-gray-500">신청 완료 화면에서 결제 방법을 확인합니다.</p></div></div>
-        <div class="v2-card rounded-2xl p-5 flex gap-4"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-orange text-white font-black">03</span><div><p class="font-bold word-keep">결제·입금 확인 후 12시간 내 카카오톡 안내</p><p class="text-sm text-gray-500">운영자가 확인 후 사전질문지 안내를 보냅니다.</p></div></div>
-        <div class="v2-card rounded-2xl p-5 flex gap-4"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-orange text-white font-black">04</span><div><p class="font-bold word-keep">사전질문지 작성</p><p class="text-sm text-gray-500">예산, 대출, 후보 단지, 고민 지점을 정리합니다.</p></div></div>
-        <div class="v2-card rounded-2xl p-5 flex gap-4"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-orange text-white font-black">05</span><div><p class="font-bold word-keep">일정 선택</p><p class="text-sm text-gray-500">일정은 최대 4주 단위로 열리며, 매주 최대 3명만 진행합니다.</p></div></div>
-        <div class="v2-card rounded-2xl p-5 flex gap-4"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-orange text-white font-black">06</span><div><p class="font-bold word-keep">Google Meet 1:1 코칭 약 50분</p><p class="text-sm text-gray-500">배우자 동반 가능합니다.</p></div></div>
-        <div class="v2-card rounded-2xl p-5 flex gap-4"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-orange text-white font-black">07</span><div><p class="font-bold word-keep">상담 리포트 및 자료 수령</p><p class="text-sm text-gray-500">상담 결론과 실행 자료를 정리해드립니다.</p></div></div>
-        <div class="v2-card rounded-2xl p-5 flex gap-4"><span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-orange text-white font-black">08</span><div><p class="font-bold word-keep">코칭 후 90일 카톡 질의응답</p><p class="text-sm text-gray-500">실행 중 생기는 질문을 이어서 확인합니다.</p></div></div>
       </div>
-      <div class="mt-8 rounded-[1.5rem] border border-gray-200 bg-gray-50 p-6" data-reveal><h3 class="font-display text-xl font-black word-keep">꼭 확인해주세요</h3><ul class="mt-4 space-y-3 text-sm text-gray-600 leading-relaxed"><li>일정 확정 후에는 변경이 어려우니 신중하게 선택해주세요.</li><li>변경·취소는 환불규정에 따라 안내드립니다.</li><li>코칭은 최선의 의사결정을 돕는 과정이며, 최종 결정과 책임은 본인에게 있습니다.</li></ul></div>
     </div>
   </section>
 
-  
-<!-- ===== 09 CTA ===== -->
+  <!-- ===== 07 상품/가격 ===== -->
+  <section data-section="pricing" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">07 상품/가격</span>
+
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+      <div class="text-center mb-14" data-reveal>
+        <p class="text-4xl mb-4">🏷️</p>
+        <h2 class="text-4xl md:text-5xl font-display font-black tracking-tight leading-tight word-keep">코칭 안내</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12" data-reveal>
+        <div class="bg-white rounded-2xl p-7 md:p-8 border-2 border-brand-orange relative shadow-lg">
+          <span class="absolute -top-3 left-6 bg-brand-orange text-white text-xs font-bold px-4 py-1 rounded-full">오픈기념 20% 할인</span>
+          <h3 class="text-2xl font-display font-black mb-4 text-brand-orange">코칭 A</h3>
+          <div class="flex items-baseline gap-2 mb-6"><span class="text-4xl md:text-5xl font-display font-black text-brand-dark">400,000</span><span class="text-gray-500 text-lg">원</span><span class="text-red-500 text-sm ml-2">🔥</span><span class="text-sm text-gray-400 line-through ml-2">500,000원</span></div>
+          <ul class="space-y-3 text-base">
+            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> · 온라인 화상회의 약 50분</li>
+            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> · 코칭 후 최대 90일간 질의응답</li>
+            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> · 부부동반 가능</li>
+            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> · 하루 1명만 진행</li>
+            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> · 상담 리포트 + 자산관리시트 + 체크리스트 PDF</li>
+          </ul>
+        </div>
+        <div class="bg-white/80 rounded-2xl p-7 md:p-8 border border-gray-200">
+          <h3 class="text-2xl font-display font-black mb-4 text-brand-dark">코칭 B</h3>
+          <div class="flex items-baseline gap-2 mb-2"><span class="text-4xl md:text-5xl font-display font-black text-brand-dark">960,000</span><span class="text-gray-500 text-lg">원</span><span class="text-sm text-gray-400 line-through ml-2">1,200,000원</span></div>
+          <p class="text-sm text-brand-orange font-bold mb-6">20% 할인 · <span class="text-sm font-bold">매월 선착순 2명</span></p>
+          <ul class="space-y-3 text-base text-gray-600">
+            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> · 코칭 A 전체 포함</li>
+            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon> · <span class="font-bold text-brand-dark">+ 동행임장 1회</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center text-sm text-gray-500 space-y-1 mb-10" data-reveal>
+        <p>코칭A와 B는 동행임장 1회 제외, <span class="font-bold">모두 동일</span>합니다</p>
+      </div>
+      <div class="text-center mb-10" data-reveal>
+        <p class="text-base md:text-lg text-gray-600 word-keep">믿고 함께해주신 분들께 드리는<br class="sm:hidden"> <span class="font-bold underline underline-offset-4 decoration-2">감사 혜택</span>입니다</p>
+        <p class="text-base md:text-lg text-gray-600 word-keep mt-2">퀄리티 유지를 위해 <span class="font-bold">가격이 지속적으로 인상</span>됩니다</p>
+      </div>
+      <div class="bg-brand-dark rounded-2xl p-8 md:p-12 text-center" data-reveal="scale">
+        <p class="text-xl md:text-2xl text-gray-300 word-keep mb-4 font-medium">사고 후회하지 말고, 사기 전에!</p>
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black text-white word-keep mb-6 leading-tight">내 예산에 맞는 최고의 내집마련<br><span class="text-brand-orange">구체적으로</span> 알려드립니다!</p>
+        <div class="w-16 h-0.5 bg-white/20 mx-auto mb-6"></div>
+        <p class="text-gray-400 text-base word-keep italic">"수억의 수업비를 내기 전에 선생님을 먼저 만났다면 얼마나 좋았을까"</p>
+        <p class="text-gray-500 text-sm mt-2">— 실제 코칭 후기</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 신청 후 진행 순서 + 꼭 확인해주세요 ===== -->
+  <section data-section="coaching-steps" class="max-w-4xl mx-auto bg-gray-100 py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">08 투자코칭 순서</span>
+    <div class="max-w-2xl mx-auto px-6 sm:px-8 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-display font-black text-center text-brand-dark mb-12 word-keep" data-reveal>신청 후 진행 순서</h2>
+      <div class="space-y-4" data-reveal>
+        <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
+          <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">01</span>
+          <div>
+            <p class="font-bold text-brand-dark word-keep">코칭 신청 및 접수</p>
+            <p class="text-gray-400 text-sm mt-1">신청자 본인 정보로 접수해주시면 안내가 가장 정확합니다.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
+          <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">02</span>
+          <div>
+            <p class="font-bold text-brand-dark word-keep">카드결제 또는 계좌이체 선택</p>
+            <p class="text-gray-500 text-sm mt-1">신청 완료 화면에서 결제 방법을 확인하고 결제·입금을 진행합니다.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
+          <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">03</span>
+          <div>
+            <p class="font-bold text-brand-dark word-keep">결제·입금 확인 후 사전 질문지 작성</p>
+            <p class="text-gray-500 text-sm mt-1">확인 후 12시간 내 카카오톡으로 사전질문지 안내를 드립니다.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
+          <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">04</span>
+          <div>
+            <p class="font-bold text-brand-dark word-keep">일정 선택</p>
+            <p class="text-gray-500 text-sm mt-1">사전질문지 작성 후 가능한 일정을 신중하게 선택합니다.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
+          <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">05</span>
+          <div>
+            <p class="font-bold text-brand-dark word-keep">온라인 1:1 코칭 진행</p>
+            <p class="font-bold word-keep"><span class="text-red-500">Google Meet 기준 약 50분</span></p>
+            <p class="text-gray-500 text-sm mt-1">배우자 동반 가능합니다.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm">
+          <span class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-700 text-white text-sm font-black rounded-xl">06</span>
+          <div>
+            <p class="font-bold text-brand-dark word-keep">상담 리포트 및 90일 질의응답</p>
+            <p class="text-gray-500 text-sm mt-1">상담 내용을 정리하고 실행 과정의 질문을 이어서 확인합니다.</p>
+          </div>
+        </div>
+      </div>
+      <!-- 꼭 확인해주세요 -->
+      <div class="mt-10 bg-gray-50 border border-gray-200 rounded-2xl p-8 md:p-10" data-reveal>
+        <h3 class="text-xl md:text-2xl font-display font-black text-brand-dark mb-6 word-keep">꼭 확인해주세요!</h3>
+        <ul class="space-y-4 text-gray-600 text-sm leading-relaxed">
+          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>일정 선택 완료 후에는 일정 변경이 불가합니다.</li>
+          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>환불은 환불 정책에 따라 진행됩니다.</li>
+          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>코칭 일정은 최대 4주 단위로 오픈되며, 퀄리티 유지를 위해 매주 최대 3명만 진행합니다.</li>
+          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>코칭은 최선의 의사결정을 돕기 위한 과정이며, 최종 결정 및 책임은 본인에게 있음을 안내드립니다.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 09 CTA ===== -->
   <section data-section="cta" class="max-w-4xl mx-auto bg-[#15120f] py-20 md:py-28 relative overflow-hidden">
     <span class="absolute top-2 left-2 bg-white/20 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">09 CTA</span>
     <div class="absolute -right-20 top-10 h-64 w-64 rounded-full bg-brand-orange/20 blur-3xl"></div>
@@ -576,16 +932,101 @@
 
   
 <!-- ===== 10 상담 신청 폼 ===== -->
-  <section id="apply-form" data-section="apply-form" class="max-w-4xl mx-auto bg-[#f7f3eb] py-20 md:py-28 relative">
+  <section id="apply-form" data-section="apply-form" class="max-w-4xl mx-auto bg-gradient-to-b from-brand-beige to-white py-16 md:py-24 relative">
     <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">10 상담 신청 폼</span>
     <div class="max-w-2xl mx-auto px-6 sm:px-8 lg:px-8">
-      <div class="text-center mb-10" data-reveal><p class="v2-pill inline-flex px-4 py-2 text-sm font-black">짧은 신청폼</p><h2 class="mt-6 text-3xl md:text-4xl font-display font-black text-brand-dark word-keep">먼저 신청만 접수해주세요</h2><p class="mt-3 text-gray-500 word-keep">결제 방법은 제출 후 안내 화면에서 선택합니다.</p></div>
-      <div id="consultForm" class="space-y-7 rounded-[2rem] bg-white p-7 md:p-9 v2-soft-shadow" data-reveal>
-        <div><label class="block text-brand-dark font-bold mb-2">1. 성함 <span class="text-brand-orange">*</span></label><input type="text" id="f-name" required placeholder="이름을 입력해주세요" class="w-full px-4 py-4 rounded-2xl bg-gray-50 border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange focus:bg-white transition"></div>
-        <div><label class="block text-brand-dark font-bold mb-2">2. 휴대폰 번호 <span class="text-brand-orange">*</span></label><input type="tel" id="f-phone" required placeholder="010-0000-0000" inputmode="numeric" class="w-full px-4 py-4 rounded-2xl bg-gray-50 border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange focus:bg-white transition"></div>
-        <div id="f-purpose-wrap"><label class="block text-brand-dark font-bold mb-3">3. 신청 목적 (중복 가능) <span class="text-brand-orange">*</span></label><div class="grid gap-2 sm:grid-cols-3"><label class="flex items-center gap-3 rounded-2xl bg-gray-50 px-4 py-3 text-brand-dark cursor-pointer"><input type="checkbox" name="purpose" value="내집마련" class="cb-square"> 내집마련</label><label class="flex items-center gap-3 rounded-2xl bg-gray-50 px-4 py-3 text-brand-dark cursor-pointer"><input type="checkbox" name="purpose" value="투자" class="cb-square"> 투자</label><label class="flex items-center gap-3 rounded-2xl bg-gray-50 px-4 py-3 text-brand-dark cursor-pointer"><input type="checkbox" name="purpose" value="기타" class="cb-square"> 기타</label></div><input type="text" id="f-memo" placeholder="고민 중인 지역, 단지, 예산을 짧게 적어주세요" class="w-full mt-3 px-4 py-4 rounded-2xl bg-gray-50 border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange focus:bg-white transition"></div>
-        <div><label class="block text-brand-dark font-bold mb-3">4. 개인정보 수집 동의 <span class="text-brand-orange">*</span></label><div class="bg-gray-50 border border-gray-200 rounded-2xl p-5 text-gray-500 text-sm leading-relaxed mb-3"><p>수집 항목: 성함, 휴대폰 번호, 신청 목적</p><p>이용 목적: 코칭 신청 접수와 결제 안내, 상담 진행 안내</p><p>보유 기간: 목적 달성 시까지 또는 관련 법령에 따른 보관 기간</p></div><label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="checkbox" id="f-privacy" required class="cb-round"> 동의합니다</label></div>
-        <div class="pt-2"><button type="button" id="submitBtn" class="v2-link-btn w-full rounded-full bg-brand-orange px-8 py-5 text-xl font-display font-black text-white">신청 접수하기</button><p id="form-status" class="text-center text-sm mt-4 hidden"></p></div>
+      <h2 class="text-3xl md:text-4xl font-display font-black text-center text-brand-dark mb-4" data-reveal>🎁 상담 신청</h2>
+      <p class="text-center text-gray-500 mb-12" data-reveal>아래 정보를 입력하고 제출해주세요</p>
+
+      <div id="consultForm" class="space-y-8 bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-10" data-reveal>
+        <!-- 1. 성함 -->
+        <div>
+          <label class="block text-brand-dark font-bold mb-2">1. 성함 <span class="text-brand-orange">*</span></label>
+          <input type="text" id="f-name" required placeholder="이름을 입력해주세요" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange focus:bg-white transition">
+        </div>
+
+        <!-- 2. 휴대폰 번호 -->
+        <div>
+          <label class="block text-brand-dark font-bold mb-2">2. 휴대폰 번호 <span class="text-brand-orange">*</span></label>
+          <input type="tel" id="f-phone" required placeholder="010-0000-0000" inputmode="numeric" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange focus:bg-white transition">
+        </div>
+
+        <!-- 3. 이메일 -->
+        <div>
+          <label class="block text-brand-dark font-bold mb-2">3. 이메일</label>
+          <input type="email" id="f-email" placeholder="이메일 주소를 입력해주세요" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange focus:bg-white transition">
+        </div>
+
+        <!-- 4. 신청 목적 -->
+        <div id="f-purpose-wrap">
+          <label class="block text-brand-dark font-bold mb-3">4. 신청 목적 (중복가능) <span class="text-brand-orange">*</span></label>
+          <div class="space-y-2">
+            <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="checkbox" name="purpose" value="내집마련" class="cb-square"> 내집마련</label>
+            <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="checkbox" name="purpose" value="투자" class="cb-square"> 투자</label>
+            <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="checkbox" name="purpose" value="기타" class="cb-square"> 기타</label>
+          </div>
+          <input type="text" id="f-memo" placeholder="기타 의견을 입력해주세요" class="w-full mt-3 px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange focus:bg-white transition">
+        </div>
+
+        <!-- 5. 결제 안내 -->
+        <div id="f-deposit-wrap">
+          <label class="block text-brand-dark font-bold mb-3">5. 결제 안내</label>
+          <div class="bg-orange-50 border border-orange-200 rounded-xl p-5 mb-4">
+            <p class="text-gray-600 text-sm mb-3">신청 접수 후 완료 화면에서 카드결제 또는 계좌이체 방법을 선택할 수 있습니다.</p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="radio" name="coaching" value="A" checked class="radio-round"><span class="bg-brand-orange text-white text-xs font-bold px-2 py-0.5 rounded">1</span> 코칭 A : 40만 원</label>
+              <label class="flex items-center gap-3 text-gray-400 cursor-pointer"><input type="radio" name="coaching" value="B" disabled class="radio-round"><span class="bg-gray-300 text-gray-500 text-xs font-bold px-2 py-0.5 rounded">2</span> 코칭 B : 96만 원 <span class="text-xs text-red-400 font-bold ml-1">4,5월 마감</span></label>
+            </div>
+            <p class="text-gray-400 text-sm mt-3">결제·입금 확인 후 12시간 내 카카오톡으로 사전질문지 안내를 드립니다.</p>
+          </div>
+        </div>
+
+        <!-- 6. 현금영수증 / 세금계산서 -->
+        <div>
+          <label class="block text-brand-dark font-bold mb-3">6. 현금영수증 / 세금계산서</label>
+          <div class="space-y-2 mb-4">
+            <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="radio" name="receipt" value="현금영수증" class="radio-round"> 현금영수증</label>
+            <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="radio" name="receipt" value="세금계산서" class="radio-round"> 세금계산서</label>
+            <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="radio" name="receipt" value="필요없음" checked class="radio-round"> 필요없음 (증빙 발행 안함)</label>
+          </div>
+          <!-- 현금영수증 조건 분기 -->
+          <div id="receipt-cash" class="hidden space-y-3 bg-gray-50 border border-gray-200 rounded-xl p-5">
+            <label class="flex items-center gap-3 text-brand-dark cursor-pointer mb-2"><input type="checkbox" id="f-receipt-same" class="cb-round" checked> 휴대폰번호와 동일</label>
+            <input type="tel" id="f-receipt-number" placeholder="발급번호 (숫자만)" inputmode="numeric" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange transition disabled:opacity-50" disabled>
+          </div>
+          <!-- 세금계산서 조건 분기 -->
+          <div id="receipt-tax" class="hidden space-y-3 bg-gray-50 border border-gray-200 rounded-xl p-5">
+            <input type="text" id="f-biz-name" placeholder="상호명" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange transition">
+            <input type="tel" id="f-biz-reg-no" placeholder="사업자등록번호 (숫자만)" inputmode="numeric" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange transition">
+            <input type="email" id="f-biz-email" placeholder="세금계산서 수신 이메일" class="w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange transition">
+            <div>
+              <p class="text-gray-600 text-sm mb-2">사업자등록증 첨부</p>
+              <label class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white border border-gray-200 text-gray-400 cursor-pointer hover:border-brand-orange transition">
+                <iconify-icon icon="solar:upload-minimalistic-linear" class="text-xl"></iconify-icon>
+                <span id="file-label">파일 선택 (PDF, JPG, PNG)</span>
+                <input type="file" id="f-biz-file" accept=".pdf,.jpg,.jpeg,.png" class="hidden">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. 개인정보 수집 동의 -->
+        <div>
+          <label class="block text-brand-dark font-bold mb-3">7. 개인정보 수집 동의 <span class="text-brand-orange">*</span></label>
+          <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-gray-500 text-sm leading-relaxed mb-3">
+            <p>1. 개인정보의 수집 이용 목적: 연락처 수집</p>
+            <p>2. 수집하는 개인정보의 항목: 성함, 휴대폰 번호, 이메일</p>
+            <p>3. 개인정보의 보유 및 이용 기간: 개인정보의 수집·이용 목적 달성시까지, 또는 고객이 자신의 개인정보제공의 동의를 철회한 때. 단, 관련 법령의 규정에 의하여 개인정보를 보유할 필요가 있는 경우, 해당 법령에서 정한 기간까지.</p>
+            <p>4. 본 이벤트 참여 고객은 개인정보 수집, 활용에 대하여 동의를 거부할 권리가 있으며, 비동의 시 신청이 정상적으로 접수 되지 않습니다. 동의하시는 경우, 체크박스를 클릭해주세요.</p>
+          </div>
+          <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="checkbox" id="f-privacy" required class="cb-round"> 동의</label>
+        </div>
+
+        <!-- 제출 버튼 -->
+        <div class="pt-4">
+          <button type="button" id="submitBtn" class="w-full bg-brand-orange text-white py-5 text-xl font-display font-black rounded-2xl hover:scale-[1.01] active:scale-[0.99] transition-transform shadow-lg shadow-orange-200/50">제출하기 →</button>
+          <p id="form-status" class="text-center text-sm mt-4 hidden"></p>
+        </div>
       </div>
     </div>
   </section>
@@ -651,6 +1092,46 @@
     if (v.length > 7) el.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
     else if (v.length > 3) el.value = v.slice(0,3) + '-' + v.slice(3);
     else el.value = v;
+    // 현금영수증 번호 실시간 동기화
+    syncReceiptPhone();
+  }
+
+  // 전화번호 변경 시 현금영수증 동기화
+  function syncReceiptPhone() {
+    var sameCheck = document.getElementById('f-receipt-same');
+    if (sameCheck && sameCheck.checked) {
+      document.getElementById('f-receipt-number').value = document.getElementById('f-phone').value.replace(/[^0-9]/g, '');
+    }
+  }
+
+  // 증빙 조건 분기
+  function toggleReceipt() {
+    var val = document.querySelector('input[name="receipt"]:checked').value;
+    document.getElementById('receipt-cash').classList.toggle('hidden', val !== '현금영수증');
+    document.getElementById('receipt-tax').classList.toggle('hidden', val !== '세금계산서');
+    if (val === '현금영수증') {
+      var sameCheck = document.getElementById('f-receipt-same');
+      sameCheck.checked = true;
+      toggleReceiptSame();
+    }
+    if (val === '세금계산서') {
+      var email = document.getElementById('f-email').value;
+      var bizEmail = document.getElementById('f-biz-email');
+      if (!bizEmail.value && email) bizEmail.value = email;
+    }
+  }
+
+  // 휴대폰번호와 동일 체크박스
+  function toggleReceiptSame() {
+    var same = document.getElementById('f-receipt-same').checked;
+    var input = document.getElementById('f-receipt-number');
+    if (same) {
+      input.value = document.getElementById('f-phone').value.replace(/[^0-9]/g, '');
+      input.disabled = true;
+    } else {
+      input.disabled = false;
+      input.focus();
+    }
   }
 
   // 기타의견 입력 시 자동으로 "기타" 체크
@@ -664,50 +1145,90 @@
     });
   });
 
+  function updateFileLabel(input) {
+    document.getElementById('file-label').textContent = input.files[0] ? input.files[0].name : '파일 선택 (PDF, JPG, PNG)';
+  }
+
   // 폼 제출
   function submitForm() {
     var name = document.getElementById('f-name').value.trim();
     var phone = document.getElementById('f-phone').value.replace(/[^0-9]/g, '');
+    var email = document.getElementById('f-email').value.trim();
     var purposes = Array.from(document.querySelectorAll('input[name="purpose"]:checked')).map(function(c){return c.value});
     var memo = document.getElementById('f-memo').value.trim();
+    var coaching = document.querySelector('input[name="coaching"]:checked');
+    var receipt = document.querySelector('input[name="receipt"]:checked').value;
     var privacy = document.getElementById('f-privacy').checked;
 
+    // 검증 (순서대로)
     if (!name) return showStatus('성함을 입력해주세요', 'error', 'f-name');
     if (!phone || phone.length < 10) return showStatus('올바른 휴대폰 번호를 입력해주세요', 'error', 'f-phone');
     if (purposes.length === 0) return showStatus('신청 목적을 최소 1개 선택해주세요', 'error', 'f-purpose-wrap');
     if (!privacy) return showStatus('개인정보 수집 동의가 필요합니다', 'error', 'f-privacy');
 
+    var amount = coaching ? (coaching.value === 'B' ? 96 : 40) : 40;
     var params = new URLSearchParams(window.location.search);
+    var utm = params.get('utm_campaign') || '';
+
     var payload = {
       key: FORM_CONFIG.webhookKey,
-      name: name,
-      phone: phone,
-      email: '',
-      purpose: purposes.join(','),
-      memo: memo,
-      amount: 40,
-      depositor: '',
-      utm: params.get('utm_campaign') || '',
-      receiptType: '결제 후 확인'
+      name: name, phone: phone, email: email,
+      purpose: purposes.join(','), memo: memo,
+      amount: amount, depositor: '',
+      utm: utm, receiptType: receipt
     };
+
+    if (receipt === '현금영수증') {
+      var sameCheck = document.getElementById('f-receipt-same');
+      payload.bizRegNo = (sameCheck && sameCheck.checked) ? phone : document.getElementById('f-receipt-number').value.replace(/[^0-9]/g, '');
+    }
+    if (receipt === '세금계산서') {
+      payload.bizRegNo = document.getElementById('f-biz-reg-no').value.replace(/[^0-9]/g, '');
+      payload.memo = (memo ? memo + ' | ' : '') + '상호: ' + document.getElementById('f-biz-name').value.trim() + ' | 세금계산서 이메일: ' + document.getElementById('f-biz-email').value.trim();
+    }
 
     var btn = document.getElementById('submitBtn');
     btn.disabled = true;
-    btn.textContent = '접수 중...';
+    btn.textContent = '제출 중...';
     btn.classList.add('opacity-70');
-    sendPayload(payload);
+
+    var fileInput = document.getElementById('f-biz-file');
+    if (receipt === '세금계산서' && fileInput && fileInput.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        payload.bizRegFile = { name: fileInput.files[0].name, type: fileInput.files[0].type, data: reader.result.split(',')[1] };
+        sendPayload(payload);
+      };
+      reader.readAsDataURL(fileInput.files[0]);
+    } else {
+      sendPayload(payload);
+    }
+  }
+
+  function resetConsultForm() {
+    var form = document.getElementById('consultForm');
+    if (!form) return;
+    Array.from(form.querySelectorAll('input')).forEach(function(input) {
+      if (input.type === 'checkbox' || input.type === 'radio') input.checked = input.defaultChecked;
+      else if (input.type !== 'file') input.value = '';
+    });
+    var fileInput = document.getElementById('f-biz-file');
+    if (fileInput) fileInput.value = '';
   }
 
   function sendPayload(payload) {
     if (V2_PREVIEW_MODE || !FORM_CONFIG.scriptUrl) {
+      resetConsultForm();
+      document.getElementById('receipt-cash').classList.add('hidden');
+      document.getElementById('receipt-tax').classList.add('hidden');
+      document.getElementById('file-label').textContent = '파일 선택 (PDF, JPG, PNG)';
       document.getElementById('successModal').classList.remove('hidden');
       var btn = document.getElementById('submitBtn');
       btn.disabled = false;
-      btn.textContent = '신청 접수하기';
+      btn.textContent = '제출하기 →';
       btn.classList.remove('opacity-70');
       return;
     }
-
     fetch(FORM_CONFIG.scriptUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
@@ -716,19 +1237,22 @@
     .then(function(res) { return res.json(); })
     .then(function(data) {
       if (data.success) {
-        document.getElementById('consultForm').reset();
+        resetConsultForm();
+        document.getElementById('receipt-cash').classList.add('hidden');
+        document.getElementById('receipt-tax').classList.add('hidden');
+        document.getElementById('file-label').textContent = '파일 선택 (PDF, JPG, PNG)';
         document.getElementById('successModal').classList.remove('hidden');
       } else {
-        showStatus(data.message || '제출 중 오류가 발생했습니다. 다시 시도해주세요.', 'error');
+        showStatus(data.error || '제출에 실패했습니다. 다시 시도해주세요.', 'error', 'submitBtn');
       }
     })
     .catch(function() {
-      showStatus('제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'error');
+      showStatus('네트워크 오류가 발생했습니다. 다시 시도해주세요.', 'error', 'submitBtn');
     })
     .finally(function() {
       var btn = document.getElementById('submitBtn');
       btn.disabled = false;
-      btn.textContent = '신청 접수하기';
+      btn.textContent = '제출하기 →';
       btn.classList.remove('opacity-70');
     });
   }
