@@ -122,6 +122,18 @@
             hubVisible: true
           },
           {
+            id: 'main-page-preview',
+            title: '메인 페이지 (시안 v2)',
+            description: 'v2와 v3~v8 시안 비교',
+            href: 'homepage/index.html',
+            badgeText: 'WIP',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['homepage/index.html', 'main-page-test2.html'],
+            hubVisible: true
+          },
+          {
             id: 'curriculum-page',
             title: '커리큘럼 페이지',
             description: '전체 커리큘럼 한눈에 보기',
@@ -131,7 +143,7 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['curriculum.html'],
-            hubVisible: true
+            hubVisible: false
           },
           {
             id: 'landing-page',
@@ -143,7 +155,7 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['coaching-all.html'],
-            hubVisible: true
+            hubVisible: false
           },
           {
             id: 'lecture-allinone',
@@ -155,7 +167,7 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['lecture-allinone.html'],
-            hubVisible: true
+            hubVisible: false
           },
           {
             id: 'lecture-bookclub',
@@ -167,7 +179,7 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['lecture-bookclub.html'],
-            hubVisible: true
+            hubVisible: false
           },
           {
             id: 'refund-policy',
@@ -179,7 +191,7 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['refund-policy.html'],
-            hubVisible: true
+            hubVisible: false
           }
         ]
       },
@@ -206,7 +218,7 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['homepage/index.html'],
-            hubVisible: true
+            hubVisible: false
           },
           {
             id: 'main-page-test2',
@@ -218,7 +230,7 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['main-page-test2.html'],
-            hubVisible: true
+            hubVisible: false
           }
         ]
       },
