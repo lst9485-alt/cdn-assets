@@ -95,11 +95,11 @@ window.CONTENT = {
     { id: "refund", file: "refund.html", label: "환불규정" }
   ],
   versions: [
-    { id: "v1", label: "Editorial" },
-    { id: "v2", label: "Sticker" },
-    { id: "v3", label: "Data" },
-    { id: "v4", label: "Map" },
-    { id: "v5", label: "Chat" },
-    { id: "v6", label: "Zine" }
+    { id: "v1", displayId: "v3", displayName: "메인 페이지 시안 v3", label: "Editorial" },
+    { id: "v2", displayId: "v4", displayName: "메인 페이지 시안 v4", label: "Sticker" },
+    { id: "v3", displayId: "v5", displayName: "메인 페이지 시안 v5", label: "Data" },
+    { id: "v4", displayId: "v6", displayName: "메인 페이지 시안 v6", label: "Map" },
+    { id: "v5", displayId: "v7", displayName: "메인 페이지 시안 v7", label: "Chat" },
+    { id: "v6", displayId: "v8", displayName: "메인 페이지 시안 v8", label: "Zine" }
   ]
 };

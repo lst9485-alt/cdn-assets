@@ -23,11 +23,14 @@ const VersionSwitcher = ({ version, page }) => {
             borderRadius: 999, textDecoration: 'none',
             fontWeight: 700, fontSize: 12
           }}>
-            {v.id.toUpperCase()} · {v.label}
+            {(v.displayId || v.id).toUpperCase()} · {v.label}
           </a>
         ))}
       </div>
-      <a href="../index.html" style={{ color: ds.bg, textDecoration: 'none', opacity: 0.7, fontSize: 12 }}>← 인덱스</a>
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+        <a href="../index.html" style={{ color: ds.bg, textDecoration: 'none', opacity: 0.75, fontSize: 12 }}>← 시안 목록</a>
+        <a href="../../../index.html" style={{ color: ds.bg, textDecoration: 'none', opacity: 0.75, fontSize: 12 }}>대시보드</a>
+      </div>
     </div>
   );
 };
@@ -92,7 +95,7 @@ const PageFooter = ({ version }) => {
       </div>
       <div style={{ paddingTop: 24, fontSize: 12, opacity: 0.5, display: 'flex', justifyContent: 'space-between' }}>
         <span>© 2026 우리동네재테크 · 주식회사 우리동네사람들</span>
-        <span>Version: {ds.name}</span>
+        <span>{(window.CONTENT.versions.find(v => v.id === version) || {}).displayName || ds.name}</span>
       </div>
     </footer>
   );
