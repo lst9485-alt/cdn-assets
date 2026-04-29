@@ -158,6 +158,18 @@
             hubVisible: false
           },
           {
+            id: 'landing-page-v2',
+            title: '1:1 코칭 v2',
+            description: '2026-04-29 업데이트 · 상세페이지 개선안',
+            href: 'homepage/coaching-all-v2.html',
+            badgeText: 'V2',
+            badgeTone: 'live',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['coaching-all-v2.html'],
+            hubVisible: true
+          },
+          {
             id: 'lecture-allinone',
             title: '올인원 강의 페이지',
             description: '내집마련 올인원 VOD · 20만원',
