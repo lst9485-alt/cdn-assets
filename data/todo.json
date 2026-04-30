@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-30T06:00:02.813013+09:00",
+  "updated": "2026-05-01T06:00:01.596566+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -501,6 +501,37 @@
             },
             {
               "text": "8-18. Telegram 실행 버튼 설계 — `오늘 주문 걸기` 버튼 또는 명령이 MacroDroid/Hermes/OpenClaw 중 어느 경로로 실행될지 확정",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "title": "자체사이트 GA4/Clarity 추적 코드 적용 (4/30~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "9-1. 자체사이트 공통 `<head>`에 GA4 + Clarity 코드 삽입",
+              "done": false
+            },
+            {
+              "text": "9-2. 아임웹 결제/완료 페이지에도 같은 GA4 코드 삽입 가능한지 확인",
+              "done": false
+            },
+            {
+              "text": "9-3. GA4에서 자체사이트 도메인과 아임웹 결제 도메인 크로스 도메인 설정",
+              "done": false
+            },
+            {
+              "text": "9-4. GA4 실시간 보고서에서 `page_view`, `section_view` 수집 확인",
+              "done": false
+            },
+            {
+              "text": "9-5. Clarity 대시보드/레코딩에서 세션 수집 확인",
+              "done": false
+            },
+            {
+              "text": "9-6. 임시로 푸시해서 확인한 페이지가 있으면 대시보드 `임시 테스트` 섹션에서 제거",
               "done": false
             }
           ]
