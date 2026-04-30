@@ -252,6 +252,7 @@
 	    --trust-paper: #fbfaf7;
 	    --trust-band: #f2ede5;
 	    --trust-accent: #b75c35;
+	    --trust-accent-strong: #ff6b00;
 	    background: var(--trust-paper) !important;
 	    color: var(--trust-ink) !important;
 	    overflow-x: hidden;
@@ -283,9 +284,32 @@
 	    align-items: center;
 	    padding: 72px 28px 64px;
 	    background:
-	      linear-gradient(135deg, rgba(255,255,255,0.88), rgba(242,237,229,0.92)),
-	      radial-gradient(circle at 88% 18%, rgba(183,92,53,0.10), transparent 30%);
+	      radial-gradient(circle at 18% 20%, rgba(255,107,0,0.10), transparent 28%),
+	      linear-gradient(135deg, rgba(255,255,255,0.90), rgba(242,237,229,0.93)),
+	      radial-gradient(circle at 88% 18%, rgba(183,92,53,0.14), transparent 30%);
 	    border: 1px solid var(--trust-line);
+	  }
+	  .trust-hero::before {
+	    content: '';
+	    position: absolute;
+	    right: 34px;
+	    top: 38px;
+	    width: 170px;
+	    height: 170px;
+	    border: 1px solid rgba(183,92,53,0.20);
+	    border-radius: 999px;
+	    background: rgba(255,107,0,0.06);
+	    pointer-events: none;
+	  }
+	  .trust-hero::after {
+	    content: '';
+	    position: absolute;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    height: 8px;
+	    background: linear-gradient(90deg, var(--trust-accent-strong), rgba(183,92,53,0.16), transparent);
+	    pointer-events: none;
 	  }
 	  .trust-hero-grid {
 	    display: grid;
@@ -338,9 +362,9 @@
 	    transition: transform .2s ease, background .2s ease;
 	  }
 	  .trust-primary {
-	    background: var(--trust-ink);
+	    background: var(--trust-accent-strong);
 	    color: #fff;
-	    box-shadow: 0 14px 34px rgba(29,27,24,0.16);
+	    box-shadow: 0 16px 36px rgba(255,107,0,0.20);
 	  }
 	  .trust-secondary {
 	    border: 1px solid var(--trust-line);
@@ -350,10 +374,36 @@
 	  .trust-primary:hover,
 	  .trust-secondary:hover { transform: translateY(-1px); }
 	  .trust-proof-card {
-	    background: rgba(255,255,255,0.78);
+	    position: relative;
+	    background: rgba(255,255,255,0.86);
 	    border: 1px solid var(--trust-line);
 	    box-shadow: 0 28px 80px rgba(81,62,42,0.10);
 	    padding: 26px;
+	  }
+	  .trust-report-head {
+	    display: flex;
+	    justify-content: space-between;
+	    gap: 12px;
+	    align-items: center;
+	    margin-bottom: 18px;
+	    padding-bottom: 16px;
+	    border-bottom: 1px solid var(--trust-line);
+	  }
+	  .trust-report-title {
+	    margin: 0;
+	    color: var(--trust-ink);
+	    font-size: 20px;
+	    font-weight: 900;
+	    line-height: 1.25;
+	  }
+	  .trust-report-badge {
+	    border-radius: 999px;
+	    background: rgba(255,107,0,0.10);
+	    color: var(--trust-accent);
+	    padding: 6px 10px;
+	    font-size: 12px;
+	    font-weight: 900;
+	    white-space: nowrap;
 	  }
 	  .trust-proof-title {
 	    margin: 0 0 16px;
@@ -378,6 +428,56 @@
 	    color: var(--trust-muted);
 	    line-height: 1.55;
 	    word-break: keep-all;
+	  }
+	  .trust-report-grid {
+	    display: grid;
+	    grid-template-columns: 1fr 1fr;
+	    gap: 10px;
+	    margin: 18px 0 4px;
+	  }
+	  .trust-report-box {
+	    border: 1px solid #eadfd3;
+	    background: #fbf7f1;
+	    padding: 12px;
+	  }
+	  .trust-report-box span {
+	    display: block;
+	    margin-bottom: 6px;
+	    color: var(--trust-muted);
+	    font-size: 12px;
+	    font-weight: 800;
+	  }
+	  .trust-report-box strong {
+	    color: var(--trust-ink);
+	    font-size: 18px;
+	    line-height: 1.2;
+	  }
+	  .trust-score {
+	    margin-top: 14px;
+	    padding: 14px;
+	    background: #211f1c;
+	    color: #fff;
+	  }
+	  .trust-score-top {
+	    display: flex;
+	    justify-content: space-between;
+	    gap: 12px;
+	    align-items: center;
+	    margin-bottom: 10px;
+	    font-size: 13px;
+	    font-weight: 800;
+	  }
+	  .trust-score-bar {
+	    height: 9px;
+	    border-radius: 999px;
+	    background: rgba(255,255,255,0.14);
+	    overflow: hidden;
+	  }
+	  .trust-score-bar span {
+	    display: block;
+	    width: 78%;
+	    height: 100%;
+	    background: var(--trust-accent-strong);
 	  }
 	  .trust-checklist {
 	    display: grid;
@@ -454,6 +554,9 @@
 		    .trust-proof-card {
 		      padding: 20px;
 		    }
+		    .trust-report-grid {
+		      grid-template-columns: 1fr;
+		    }
 		    .trust-metric {
 		      grid-template-columns: 1fr;
 		      gap: 6px;
@@ -506,7 +609,19 @@
 	        </div>
 	      </div>
 	      <aside class="trust-proof-card">
-	        <p class="trust-proof-title">상담 전 확인하는 핵심 지표</p>
+	        <div class="trust-report-head">
+	          <p class="trust-report-title">상담 리포트<br>미리보기</p>
+	          <span class="trust-report-badge">90일 점검</span>
+	        </div>
+	        <div class="trust-report-grid">
+	          <div class="trust-report-box"><span>예산 범위</span><strong>대출 포함<br>상한선 정리</strong></div>
+	          <div class="trust-report-box"><span>후보 비교</span><strong>지역·단지<br>우선순위</strong></div>
+	        </div>
+	        <div class="trust-score">
+	          <div class="trust-score-top"><span>실행 준비도</span><strong>78%</strong></div>
+	          <div class="trust-score-bar"><span></span></div>
+	        </div>
+	        <p class="trust-proof-title mt-5">상담 전 확인하는 핵심 지표</p>
 	        <div class="trust-metric">
 	          <strong>100건+</strong>
 	          <span>실제 상담 경험 기반의 상황별 판단 사례</span>
