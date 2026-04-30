@@ -53,7 +53,7 @@
 
     function renderSection(section) {
         var items = section.items.filter(function(item) { return item.hubVisible; });
-        if (!items.length) {
+        if (!items.length && !section.alwaysVisible) {
             return '';
         }
         var sectionClass = section.dashedTop ? 'section dashed-top' : 'section';

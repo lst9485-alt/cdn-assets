@@ -450,6 +450,7 @@
         id: 'temp',
         hubTitle: '임시 테스트',
         dashedTop: true,
+        alwaysVisible: true,
         nav: {
           type: 'single',
           label: '임시',
@@ -460,20 +461,7 @@
         sidebar: {
           title: '임시 테스트'
         },
-        items: [
-          {
-            id: 'temp-index',
-            title: '임시 보관함',
-            description: '테스트 페이지 모음 · 안 쓰면 삭제',
-            href: 'temp/',
-            badgeText: 'TEMP',
-            badgeTone: 'soon',
-            iconKey: 'tool',
-            sidebarType: 'root',
-            activeMatch: ['/temp'],
-            hubVisible: true
-          }
-        ]
+        items: []
       }
     ]
   };
