@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>내집마련 1:1 코칭 신뢰형 테스트 — 우리동네 재테크</title>
+  <meta name="robots" content="noindex,nofollow">
+<!-- 아임웹 환경설정 → HEAD 코드 삽입 -->
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    important: true,
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+          display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+        },
+        colors: {
+          brand: { orange: '#FF6B00', beige: '#F5F0E8', dark: '#0a0a0a', blue: '#0055FF' }
+        }
+      }
+    }
+  }
+</script>
+<!-- Pretendard + GmarketSans -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+<!-- Iconify -->
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+<!-- 랜딩 스타일 -->
+<style>
+  html { font-size: 16px !important; overflow-x: hidden; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; overflow-x: hidden; }
+  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+  [data-reveal] { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1); }
+  [data-reveal="left"] { transform: translateX(-60px); }
+  [data-reveal="right"] { transform: translateX(60px); }
+  [data-reveal="scale"] { transform: scale(0.9); }
+  [data-reveal].revealed { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+  [data-stagger] > * { opacity: 0; transform: translateY(24px) scale(0.9); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  [data-stagger].revealed > *:nth-child(1) { transition-delay: 0s; }
+  [data-stagger].revealed > *:nth-child(2) { transition-delay: 0.12s; }
+  [data-stagger].revealed > *:nth-child(3) { transition-delay: 0.24s; }
+  [data-stagger].revealed > *:nth-child(4) { transition-delay: 0.36s; }
+  [data-stagger].revealed > *:nth-child(5) { transition-delay: 0.48s; }
+  [data-stagger].revealed > *:nth-child(6) { transition-delay: 0.6s; }
+  [data-stagger].revealed > *:nth-child(7) { transition-delay: 0.72s; }
+  [data-stagger].revealed > *:nth-child(8) { transition-delay: 0.84s; }
+  [data-stagger].revealed > * { opacity: 1; transform: translateY(0) scale(1); }
+	  .chart-line { stroke-dasharray: 1200; stroke-dashoffset: 1200; transition: stroke-dashoffset 2.2s ease; }
+	  .chart-line.animated { stroke-dashoffset: 0; }
+	  .chart-arrow { opacity: 0; transition: opacity 0.35s ease 0.35s; }
+	  .chart-arrow.animated { opacity: 1; }
+
+  @keyframes bobUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+  @keyframes bobDown { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+  @keyframes glowPulse { 0%,100%{box-shadow:0 0 20px rgba(255,107,0,.3)} 50%{box-shadow:0 0 40px rgba(255,107,0,.6)} }
+  .glow-pulse { animation: glowPulse 2.5s ease infinite; }
+  @keyframes pulseAttention { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+  .pulse-attention { animation: pulseAttention 1.5s ease infinite; }
+  .star { color: #FFB800; }
+  .hl-orange { background: linear-gradient(transparent 60%, rgba(255,107,0,0.15) 60%); }
+  @keyframes heroDrop {
+    0% { opacity:0; transform:translateY(-80px) rotate(-8deg); }
+    60% { opacity:1; transform:translateY(10px) rotate(2deg); }
+    80% { transform:translateY(-5px) rotate(-1deg); }
+    100% { opacity:1; transform:translateY(0) rotate(0deg); }
+  }
+  @keyframes heroFadeUp { 0%{opacity:0;transform:translateY(40px)} 100%{opacity:1;transform:translateY(0)} }
+  .hero-word { opacity:0; animation: heroDrop 0.72s cubic-bezier(.2,.9,.2,1.1) forwards; will-change: transform, opacity; }
+  .hero-main { opacity:0; animation: heroFadeUp 0.8s ease forwards; }
+  .hero-cta { opacity:0; animation: heroFadeUp 0.8s ease forwards; }
+  .hero-scroll { opacity:0; animation: heroFadeUp 0.6s ease forwards; }
+	  .contract-img { display:block; border-radius: 14px; border: 1px solid rgba(255,255,255,0.14); filter: contrast(1.05); }
+	  .home-line-art { color: rgba(120, 82, 42, 0.07); }
+	  .hero-growth-line { color: rgba(255, 107, 0, 0.15); }
+	  .contract-proof-card { background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)); border: 2px solid rgba(255,255,255,0.18); box-shadow: 0 22px 44px rgba(0,0,0,0.20); }
+	  .contract-proof-card.is-buy { background: linear-gradient(180deg, rgba(127,29,29,0.42), rgba(69,10,10,0.24)); border-color: rgba(248,113,113,0.98); box-shadow: 0 24px 54px rgba(127,29,29,0.36); }
+	  .contract-proof-card.is-sell { background: linear-gradient(180deg, rgba(30,64,175,0.38), rgba(15,23,42,0.18)); border-color: rgba(96,165,250,0.98); box-shadow: 0 24px 54px rgba(30,64,175,0.34); }
+      .contract-price-box { box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+      .contract-price-box.is-buy { background: linear-gradient(180deg, #4b1717, #2f0a0a); border-color: rgba(248,113,113,0.98); }
+      .contract-price-box.is-sell { background: linear-gradient(180deg, #172b68, #111827); border-color: rgba(96,165,250,0.98); }
+	  .package-card-icon { opacity: 0.78; }
+  /* 동그란 체크박스 */
+  .cb-round { -webkit-appearance:none; appearance:none; width:22px; height:22px; border:2px solid #d1d5db; border-radius:50%; background:#fff; cursor:pointer; position:relative; flex-shrink:0; transition: all 0.2s; }
+  .cb-round:checked { background:#FF6B00; border-color:#FF6B00; }
+  .cb-round:checked::after { content:''; position:absolute; top:3px; left:6px; width:6px; height:10px; border:solid #fff; border-width:0 2.5px 2.5px 0; transform:rotate(45deg); }
+  /* 동그란 라디오 */
+  .radio-round { -webkit-appearance:none; appearance:none; width:22px; height:22px; border:2px solid #d1d5db; border-radius:50%; background:#fff; cursor:pointer; position:relative; flex-shrink:0; transition: all 0.2s; }
+  .radio-round:checked { border-color:#FF6B00; }
+  .radio-round:checked::after { content:''; position:absolute; top:4px; left:4px; width:10px; height:10px; border-radius:50%; background:#FF6B00; }
+  .radio-round:disabled { opacity:0.4; cursor:not-allowed; }
+  /* 네모 체크박스 (오렌지) */
+  .cb-square { -webkit-appearance:none; appearance:none; width:22px; height:22px; border:2px solid #d1d5db; border-radius:6px; background:#fff; cursor:pointer; position:relative; flex-shrink:0; transition: all 0.2s; }
+  .cb-square:checked { background:#FF6B00; border-color:#FF6B00; }
+  .cb-square:checked::after { content:''; position:absolute; top:3px; left:6px; width:6px; height:10px; border:solid #fff; border-width:0 2.5px 2.5px 0; transform:rotate(45deg); }
+  @keyframes marqueeFirstLeft { 0%{transform:translate3d(0,0,0)} 100%{transform:translate3d(-100%,0,0)} }
+  @keyframes marqueeSecondLeft { 0%{transform:translate3d(100%,0,0)} 100%{transform:translate3d(0,0,0)} }
+  @keyframes marqueeFirstRight { 0%{transform:translate3d(0,0,0)} 100%{transform:translate3d(100%,0,0)} }
+  @keyframes marqueeSecondRight { 0%{transform:translate3d(-100%,0,0)} 100%{transform:translate3d(0,0,0)} }
+  .marquee-row { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .marquee-left, .marquee-right { position: relative; gap: 0 !important; width: 100%; min-width: 0; height: 250px; overflow: hidden; overflow: clip; backface-visibility: hidden; transform: translate3d(0,0,0); animation: none !important; contain: layout paint style; }
+  .marquee-set { position: absolute; inset: 0 auto auto 0; display: flex; flex: 0 0 auto; gap: 1.25rem; padding-right: 1.25rem; backface-visibility: hidden; transform: translate3d(0,0,0); animation-play-state: paused; }
+  .review-card { width: 300px !important; flex: 0 0 300px !important; contain: layout paint style; box-shadow: 0 8px 18px rgba(15,23,42,0.10) !important; }
+  .review-stars { color: #FFB800; font-size: 13px; line-height: 1; letter-spacing: 1px; }
+  @media (min-width: 768px) {
+    .review-card { width: 360px !important; flex-basis: 360px !important; }
+  }
+  .marquee-left .marquee-set:first-child { animation: marqueeFirstLeft 135s linear infinite; }
+  .marquee-left .marquee-set[aria-hidden="true"] { animation: marqueeSecondLeft 135s linear infinite; }
+  .marquee-right .marquee-set:first-child { animation: marqueeFirstRight 135s linear infinite; }
+  .marquee-right .marquee-set[aria-hidden="true"] { animation: marqueeSecondRight 135s linear infinite; }
+  .marquee-left.is-running .marquee-set, .marquee-right.is-running .marquee-set { animation-play-state: running; }
+  .marquee-left:hover .marquee-set, .marquee-right:hover .marquee-set { animation-play-state: paused !important; }
+  .dashboard-section-nav { position: fixed; right: 18px; top: 50%; z-index: 80; display: flex; flex-direction: column; gap: 8px; box-sizing: border-box; transform: translateY(-50%); }
+  .dashboard-section-nav button { width: 156px; border: 1px solid rgba(15, 23, 42, 0.12); border-radius: 999px; background: rgba(255,255,255,0.92); box-shadow: 0 10px 30px rgba(15,23,42,0.12); color: #111827; font-size: 14px; font-weight: 800; line-height: 1.25; padding: 11px 14px; backdrop-filter: blur(12px); transition: all 0.18s ease; }
+  .dashboard-section-nav button:hover { border-color: #FF6B00; color: #FF6B00; transform: translateX(-2px); }
+  section[data-section] > span.absolute.top-2.left-2 { top: 12px !important; left: 12px !important; font-size: 14px !important; line-height: 1.2 !important; padding: 5px 9px !important; border-radius: 7px !important; }
+  @media (max-width: 768px) {
+    .dashboard-section-nav { left: 0; right: 0; top: auto; bottom: 0; flex-direction: row; gap: 6px; max-width: 100vw; overflow-x: auto; padding: 8px 10px max(8px, env(safe-area-inset-bottom)); transform: none; background: rgba(255,255,255,0.92); border-top: 1px solid rgba(15,23,42,0.08); }
+    .dashboard-section-nav button { width: auto; min-width: 88px; box-shadow: none; padding: 10px 12px; font-size: 13px; line-height: 1.2; }
+  }
+  /* Wavy underline animation */
+  @keyframes wavyDraw { 0%{width:0} 100%{width:100%} }
+  .price-strike { display:inline-flex; align-items:flex-end; gap:2px; color:#9ca3af; text-decoration:line-through; text-decoration-thickness:2px; white-space:nowrap; }
+  .price-strike .won { font-size:0.72em; transform:translateY(0.22em); display:inline-block; }
+  /* Shake effect */
+  @keyframes shake { 0%,100%{transform:translateX(0)} 10%,30%,50%,70%,90%{transform:translateX(-4px)} 20%,40%,60%,80%{transform:translateX(4px)} }
+  .shake-once.revealed { animation: shake 0.8s ease; }
+  /* Red underline decoration */
+  .underline-red { text-decoration: underline; text-decoration-color: #dc2626; text-underline-offset: 4px; text-decoration-thickness: 3px; }
+  /* Typing dots */
+  @keyframes dotFade1 { 0%,30%{opacity:0} 33%,100%{opacity:1} }
+  @keyframes dotFade2 { 0%,50%{opacity:0} 53%,100%{opacity:1} }
+  @keyframes dotFade3 { 0%,70%{opacity:0} 73%,100%{opacity:1} }
+  /* Speech bubble with tail */
+	  .bubble-real-l { background: #ffffff; border: 2px solid #d9dee7; border-radius: 22px; position:relative; box-shadow: 0 16px 34px rgba(15,23,42,0.13); }
+	  .bubble-real-l::before { content:''; position:absolute; bottom:6px; left:-10px; width:0; height:0; border:10px solid transparent; border-right-color:#d9dee7; border-left:0; }
+	  .bubble-real-l::after { content:''; position:absolute; bottom:8px; left:-7px; width:0; height:0; border:8px solid transparent; border-right-color:#ffffff; border-left:0; }
+	  .bubble-real-r { background: #FFF4E8; border: 2px solid #FF6B00; border-radius: 22px; position:relative; box-shadow: 0 16px 34px rgba(255,107,0,0.18); }
+	  .bubble-real-r::before { content:''; position:absolute; bottom:6px; right:-10px; width:0; height:0; border:10px solid transparent; border-left-color:#FF6B00; border-right:0; }
+	  .bubble-real-r::after { content:''; position:absolute; bottom:8px; right:-7px; width:0; height:0; border:8px solid transparent; border-left-color:#FFF4E8; border-right:0; }
+	  .chat-stack > * { transform-origin: bottom; }
+	  .chat-stack.revealed > * { animation: chatPop 0.5s cubic-bezier(.2,.9,.2,1.15) both; }
+	  .chat-stack.revealed > *:nth-child(1) { animation-delay: 0s; }
+	  .chat-stack.revealed > *:nth-child(2) { animation-delay: 0.12s; }
+	  .chat-stack.revealed > *:nth-child(3) { animation-delay: 0.24s; }
+	  .chat-stack.revealed > *:nth-child(4) { animation-delay: 0.36s; }
+	  .chat-stack.revealed > *:nth-child(5) { animation-delay: 0.48s; }
+	  @keyframes chatPop { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  /* Card hover lift */
+  .card-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .card-lift:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
+  .v3-ink { color: #121826; }
+  .v3-paper { background: #fbf7ef; }
+  .v3-card { border: 1px solid rgba(18,24,38,0.08); box-shadow: 0 18px 45px rgba(18,24,38,0.08); }
+  .v3-metric-card { background: #fff; border: 1px solid rgba(18,24,38,0.08); border-radius: 12px; padding: 20px 22px; box-shadow: 0 14px 34px rgba(18,24,38,0.06); }
+  .v3-metric-card strong { display: block; font-size: clamp(1.65rem, 4vw, 2.4rem); line-height: 1; letter-spacing: -0.03em; color: #121826; }
+  .v3-metric-card span { display: block; margin-top: 8px; font-size: 0.82rem; color: #5b6475; }
+	  .v3-metric-card em { display: block; margin-top: 10px; font-style: normal; font-size: 0.74rem; font-weight: 900; color: #0f9f7a; }
+	  .v3-method-card { border-left: 1px solid rgba(255,255,255,0.1); padding: 28px 26px; }
+	  .v3-method-card:first-child { border-left: 0; }
+	  .editorial-chart-card { background:#fff; border:1px solid rgba(18,24,38,0.10); border-radius:18px; overflow:hidden; box-shadow:0 18px 46px rgba(15,23,42,0.08); }
+	  .editorial-review { border:1px solid rgba(18,24,38,0.14); border-radius:14px; background:#fff; box-shadow:5px 5px 0 #121826; }
+	  .difference-badge { background:linear-gradient(135deg,#ff5a1f 0%,#ef3b3b 100%); border:0; box-shadow:0 22px 46px rgba(239,59,59,0.25); color:#fff; isolation:isolate; }
+      .difference-badge .danger-icon { color:#fff3e6; filter:drop-shadow(0 4px 8px rgba(127,29,29,.22)); }
+	  .difference-badge .difference-number { color:#fff; }
+	  .future-choice-card { background:#fff; border:1px solid rgba(18,24,38,0.12); border-radius:20px; box-shadow:0 18px 42px rgba(15,23,42,0.10); }
+	  .future-result-card { border-radius:18px; border:1px solid rgba(18,24,38,0.10); background:#fff; box-shadow:0 12px 28px rgba(15,23,42,0.08); }
+	  .future-result-card.good { border-color:#fecaca; }
+	  .future-result-card.bad { border-color:#bfdbfe; }
+      .story-chart-report { border:1px solid rgba(18,24,38,.12); border-radius:18px; background:#fff; overflow:hidden; box-shadow:0 18px 46px rgba(15,23,42,.08); }
+      .story-chart-body { display:grid; grid-template-columns:minmax(0,1fr) 250px; border-top:1px solid rgba(18,24,38,.08); }
+      .story-chart-side { border-left:1px solid rgba(18,24,38,.08); background:#fafafa; }
+      .story-chart-report .chart-line { stroke-dasharray:none; stroke-dashoffset:0; transition:none; }
+      .future-split { position:relative; display:grid; grid-template-columns:1fr 96px 1fr; align-items:center; gap:18px; }
+      .future-split-node { width:86px; height:86px; border-radius:999px; border:3px solid #ff6b00; background:#fff7ed; display:grid; place-items:center; font-weight:900; color:#ff6b00; box-shadow:0 14px 28px rgba(255,107,0,.14); }
+      .future-split-line { position:absolute; left:50%; top:50%; width:1px; height:74%; background:#e5e7eb; transform:translate(-50%,-50%); z-index:0; }
+      .future-choice-pill { display:inline-flex; align-items:center; gap:7px; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:900; }
+      @media (max-width: 767px) {
+        .story-chart-body { grid-template-columns:1fr; }
+        .story-chart-side { border-left:0; border-top:1px solid rgba(18,24,38,.08); }
+        .future-split { grid-template-columns:1fr; }
+        .future-split-line { display:none; }
+        .future-split-node { margin:0 auto; }
+      }
+	  .story-proof-wrap { background:#e8f4ee; border-radius:28px; padding:22px; }
+	  .story-proof-card { border:2px solid #121826; border-radius:14px; background:#fff; box-shadow:5px 5px 0 #121826; padding:22px; }
+	  .recommend-card { background:rgba(255,255,255,0.92); border:1px solid rgba(255,255,255,0.55); color:#121826; }
+	  .recommend-card p:last-child { color:#5b6475; }
+	  .story-quote { display:block; max-width:560px; margin:0 auto; border-left:5px solid #ff6b5b; background:rgba(255,255,255,0.11); padding:16px 20px; color:#f8fafc; border-radius:0 14px 14px 0; box-shadow:0 10px 26px rgba(0,0,0,.18); text-align:left; }
+      .story-quote-meta { display:block; margin-top:8px; color:#cbd5e1; font-size:13px; font-weight:800; font-style:normal; }
+      .story-consequence-box { border:1px solid rgba(18,24,38,.10); border-radius:22px; background:#fff; box-shadow:0 16px 38px rgba(15,23,42,.08); }
+      .story-dark-quote { border-left:5px solid #ff6b5b; border-radius:0 14px 14px 0; background:#242424; color:#fff; box-shadow:0 16px 34px rgba(0,0,0,.22); }
+      .story-dark-quote .quote-meta { display:block; margin-top:14px; color:#cbd5e1; font-size:14px; font-weight:900; }
+	  .recommend-badge { display:inline-flex; align-items:center; gap:8px; background:#dc2626; color:#fff; font-size:1rem; font-weight:900; padding:9px 18px; border-radius:999px; box-shadow:0 12px 28px rgba(220,38,38,0.26); }
+	  .map-region-chip { border:2px solid #1A2B47; border-radius:999px; background:#fff; color:#1A2B47; padding:6px 12px; font-size:12px; font-weight:900; }
+	  .consult-gain-icon { display:grid; place-items:center; width:48px; height:48px; border:2px solid #dc2626; border-radius:16px; background:#fff7ed; color:#dc2626; font-size:28px; font-weight:900; box-shadow:0 10px 24px rgba(220,38,38,0.14); animation: moneyPop 1.8s ease-in-out infinite; }
+      .consult-gain-icon iconify-icon { font-size:28px; }
+	  @keyframes moneyPop { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-3px) scale(1.04)} }
+	  .money-sparkles { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+	  .money-sparkles span { position:absolute; color:#dc2626; font-weight:900; opacity:.18; animation: moneyFloat 3.4s ease-in-out infinite; }
+	  .money-sparkles span:nth-child(1){left:18%; top:12%; animation-delay:0s}
+	  .money-sparkles span:nth-child(2){right:20%; top:18%; animation-delay:.6s}
+	  .money-sparkles span:nth-child(3){left:28%; bottom:2%; animation-delay:1.1s}
+	  @keyframes moneyFloat { 0%,100%{transform:translateY(0); opacity:.12} 50%{transform:translateY(-10px); opacity:.32} }
+	  .review-star-row .star { color:#fbbf24; animation: starTwinkle 1.8s ease-in-out infinite; filter:drop-shadow(0 0 8px rgba(251,191,36,.22)); }
+	  .review-star-row .star:nth-child(2){animation-delay:.14s}.review-star-row .star:nth-child(3){animation-delay:.28s}.review-star-row .star:nth-child(4){animation-delay:.42s}.review-star-row .star:nth-child(5){animation-delay:.56s}
+	  @keyframes starTwinkle { 0%,100%{transform:translateY(0) scale(1); opacity:.82} 50%{transform:translateY(-3px) scale(1.12); opacity:1} }
+	  .soft-dark { background: linear-gradient(180deg, #171717 0%, #202020 50%, #171717 100%); }
+	  .proof-review-card { border:1px solid rgba(255,255,255,0.16); border-radius:18px; background:rgba(255,255,255,0.08); }
+	  .testimonial-sticker { border:1px solid rgba(18,24,38,0.12); border-radius:16px; box-shadow:5px 5px 0 #121826, 0 16px 34px rgba(18,24,38,0.10); transform:rotate(-0.35deg); }
+	  .testimonial-sticker:nth-child(even) { transform:rotate(0.35deg); }
+	  .region-rail { display:flex; gap:8px; overflow:hidden; justify-content:center; }
+	  .region-rail-inner { display:flex; flex-wrap:nowrap; gap:8px; width:max-content; }
+	  .region-pill { flex:0 0 auto; border:2px solid #121826; border-radius:999px; padding:7px 15px; font-size:13px; font-weight:900; color:#121826; background:#fff8e7; }
+	  .region-pill:nth-child(4n+2) { background:#f4c430; }
+	  .region-pill:nth-child(4n+3) { background:#4ecdc4; }
+	  .region-pill:nth-child(4n+4) { background:#ffd3cc; }
+	  .region-pill-solid { display:inline-flex; align-items:center; justify-content:center; min-height:34px; border:1px solid rgba(255,255,255,0.16); border-radius:999px; background:#f5f0e8; color:#121826; padding:7px 15px; font-size:13px; font-weight:900; white-space:nowrap; }
+	  .region-pill-solid.capital { background:#fff8e7; border-color:rgba(255,107,91,0.62); box-shadow:0 0 0 1px rgba(255,107,91,0.18) inset; }
+      .kakao-channel-pill { display:inline-flex; align-items:center; min-height:44px; border-radius:999px; background:#FEE500; color:#111; padding:5px 6px 5px 18px; box-shadow:0 12px 24px rgba(0,0,0,.18); transition:transform .18s ease, box-shadow .18s ease; }
+      .kakao-channel-pill:hover { transform:translateY(-2px); box-shadow:0 16px 30px rgba(0,0,0,.24); }
+      .kakao-channel-pill .ch { display:grid; place-items:center; width:30px; height:30px; border-radius:999px; background:#111; color:#FEE500; font-size:12px; font-weight:900; margin:0 10px; }
+      .kakao-channel-pill .id { display:inline-flex; align-items:center; gap:12px; min-height:34px; border-radius:999px; background:#fffdf2; padding:0 5px 0 16px; font-weight:900; }
+      .kakao-channel-pill .plus { display:grid; place-items:center; width:26px; height:26px; border-radius:999px; background:#111; color:#fff; font-size:20px; line-height:1; }
+	  .package-postit { position:relative; border-radius:8px; border:1px solid rgba(18,24,38,0.10); box-shadow:0 14px 30px rgba(18,24,38,0.10); transform:rotate(-1deg); }
+	  .package-postit:nth-child(even) { transform:rotate(1deg); }
+	  .package-postit::before { content:''; position:absolute; top:-10px; left:50%; width:22px; height:22px; margin-left:-11px; border-radius:999px; background:#f4c430; box-shadow:0 4px 10px rgba(18,24,38,0.18); }
+	  .package-postit:nth-child(3n+2)::before { background:#4ecdc4; }
+	  .package-postit:nth-child(3n)::before { background:#ff6b5b; }
+	  .neighborhood-map svg { width:100%; height:auto; }
+	  .sticky-coaching-cta { position:fixed; left:50%; bottom:22px; z-index:90; width:min(860px, calc(100vw - 40px)); max-width:860px; border-radius:8px; background:#2d2d2d; box-shadow:0 14px 36px rgba(15,23,42,0.28); transform:translate3d(-50%, 24px, 0); opacity:0; pointer-events:none; transition:opacity .22s ease, transform .22s ease; }
+	  .sticky-coaching-cta.is-visible { opacity:1; pointer-events:auto; transform:translate3d(-50%, 0, 0); }
+	  .cta-down-arrow { width:64px; height:74px; margin:30px auto 0; transform:translateY(8px); }
+	  .cta-down-arrow svg { display:block; width:100%; height:100%; overflow:visible; }
+	  .cta-down-arrow .arrow-main { fill:none; stroke:#dc2626; stroke-width:7; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 4px 8px rgba(220,38,38,.18)); }
+	  .cta-down-arrow .arrow-echo { fill:none; stroke:#f4b3ad; stroke-width:6; stroke-linecap:round; stroke-linejoin:round; opacity:.72; }
+	  .v3-route-line { position: absolute; left: 11%; right: 11%; top: 31px; height: 4px; background: #121826; border-radius: 999px; }
+  .v3-route-dot { width: 62px; height: 62px; border-radius: 999px; display: grid; place-items: center; border: 3px solid #121826; box-shadow: 5px 5px 0 #121826; font-weight: 900; }
+  .v3-chat-phone { background: #122039; border: 14px solid #122039; border-radius: 38px; box-shadow: 0 28px 60px rgba(18,24,38,0.22); overflow: hidden; }
+  .v3-chat-screen { background: #a9bdd6; border-radius: 24px; padding: 22px 18px 26px; }
+  .v3-chat-bubble { max-width: 78%; border-radius: 18px; padding: 14px 18px; font-weight: 800; line-height: 1.55; box-shadow: 0 10px 26px rgba(18,24,38,0.08); }
+	  .v3-chat-user { margin-left: auto; background: #ffe126; color: #182033; }
+	  .v3-chat-coach { background: #fff; color: #182033; }
+	  .trust-preview {
+	    --trust-ink: #1d1b18;
+	    --trust-muted: #6d665d;
+	    --trust-line: #ded6cb;
+	    --trust-paper: #fbfaf7;
+	    --trust-band: #f2ede5;
+	    --trust-accent: #b75c35;
+	    background: var(--trust-paper) !important;
+	    color: var(--trust-ink) !important;
+	    overflow-x: hidden;
+	  }
+	  .trust-preview * { min-width: 0; }
+	  .trust-preview .font-display { font-family: 'Pretendard', system-ui, sans-serif !important; }
+	  .trust-preview .glow-pulse,
+	  .trust-preview .pulse-attention,
+	  .trust-preview .shake-once.revealed {
+	    animation: none !important;
+	  }
+	  .trust-preview .sticky-coaching-cta {
+	    width: min(760px, calc(100vw - 40px));
+	    border: 1px solid rgba(255,255,255,0.14);
+	    border-radius: 999px;
+	    background: #1f1d1a;
+	    box-shadow: 0 18px 48px rgba(29,27,24,0.18);
+	  }
+	  .trust-preview .dashboard-section-nav button:hover {
+	    border-color: var(--trust-accent);
+	    color: var(--trust-accent);
+	  }
+	  .trust-hero {
+	    width: 100%;
+	    max-width: min(1024px, 100vw);
+	    margin: 0 auto;
+	    min-height: min(860px, calc(100dvh - 40px));
+	    display: grid;
+	    align-items: center;
+	    padding: 72px 28px 64px;
+	    background:
+	      linear-gradient(135deg, rgba(255,255,255,0.88), rgba(242,237,229,0.92)),
+	      radial-gradient(circle at 88% 18%, rgba(183,92,53,0.10), transparent 30%);
+	    border: 1px solid var(--trust-line);
+	  }
+	  .trust-hero-grid {
+	    display: grid;
+	    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+	    gap: 42px;
+	    align-items: center;
+	  }
+	  .trust-eyebrow {
+	    display: inline-flex;
+	    align-items: center;
+	    border-radius: 999px;
+	    background: #efe3d8;
+	    color: var(--trust-accent);
+	    padding: 8px 13px;
+	    font-size: 13px;
+	    font-weight: 900;
+	  }
+	  .trust-hero h1 {
+	    margin: 20px 0 18px;
+	    max-width: 620px;
+	    color: var(--trust-ink);
+	    font-size: clamp(40px, 5vw, 70px);
+	    line-height: 1.12;
+	    letter-spacing: 0;
+	    word-break: keep-all;
+	  }
+	  .trust-hero-copy {
+	    max-width: 560px;
+	    color: var(--trust-muted);
+	    font-size: 18px;
+	    line-height: 1.75;
+	    word-break: keep-all;
+	    overflow-wrap: break-word;
+	  }
+	  .trust-hero-actions {
+	    display: flex;
+	    flex-wrap: wrap;
+	    gap: 12px;
+	    margin-top: 28px;
+	  }
+	  .trust-primary,
+	  .trust-secondary {
+	    display: inline-flex;
+	    align-items: center;
+	    justify-content: center;
+	    min-height: 52px;
+	    border-radius: 999px;
+	    padding: 0 22px;
+	    font-weight: 900;
+	    transition: transform .2s ease, background .2s ease;
+	  }
+	  .trust-primary {
+	    background: var(--trust-ink);
+	    color: #fff;
+	    box-shadow: 0 14px 34px rgba(29,27,24,0.16);
+	  }
+	  .trust-secondary {
+	    border: 1px solid var(--trust-line);
+	    background: rgba(255,255,255,0.72);
+	    color: var(--trust-ink);
+	  }
+	  .trust-primary:hover,
+	  .trust-secondary:hover { transform: translateY(-1px); }
+	  .trust-proof-card {
+	    background: rgba(255,255,255,0.78);
+	    border: 1px solid var(--trust-line);
+	    box-shadow: 0 28px 80px rgba(81,62,42,0.10);
+	    padding: 26px;
+	  }
+	  .trust-proof-title {
+	    margin: 0 0 16px;
+	    color: var(--trust-muted);
+	    font-size: 15px;
+	    font-weight: 700;
+	  }
+	  .trust-metric {
+	    display: grid;
+	    grid-template-columns: 92px 1fr;
+	    gap: 18px;
+	    align-items: baseline;
+	    padding: 18px 0;
+	    border-top: 1px solid var(--trust-line);
+	  }
+	  .trust-metric strong {
+	    color: var(--trust-ink);
+	    font-size: 28px;
+	    line-height: 1.05;
+	  }
+	  .trust-metric span {
+	    color: var(--trust-muted);
+	    line-height: 1.55;
+	    word-break: keep-all;
+	  }
+	  .trust-checklist {
+	    display: grid;
+	    gap: 10px;
+	    margin-top: 20px;
+	  }
+	  .trust-check {
+	    display: flex;
+	    gap: 10px;
+	    align-items: flex-start;
+	    padding: 12px 14px;
+	    background: #f6f1ea;
+	    color: var(--trust-ink);
+	    font-size: 14px;
+	    line-height: 1.5;
+	  }
+	  .trust-check b { color: var(--trust-accent); }
+	  .trust-preview .text-brand-orange { color: var(--trust-accent) !important; }
+	  .trust-preview .bg-brand-orange { background: var(--trust-accent) !important; }
+	  .trust-preview .border-brand-orange { border-color: var(--trust-accent) !important; }
+	  .trust-preview .shadow-red-900\/30,
+	  .trust-preview .shadow-red-100\/60,
+	  .trust-preview .shadow-lg {
+	    box-shadow: 0 18px 50px rgba(81,62,42,0.10) !important;
+	  }
+	  .trust-preview .soft-dark,
+	  .trust-preview .bg-brand-dark {
+	    background: #211f1c !important;
+	  }
+	  .trust-preview .difference-badge,
+	  .trust-preview .bg-red-600 {
+	    background: #8f3f2d !important;
+	  }
+		  @media (max-width: 767px) {
+		    .v3-method-card { border-left: 0; border-top: 1px solid rgba(255,255,255,0.1); padding: 24px 0; }
+		    .v3-method-card:first-child { border-top: 0; }
+		    .v3-route-line { display: none; }
+		    .region-rail { justify-content:flex-start; overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling:touch; }
+		    .sticky-coaching-cta { left:12px; right:12px; bottom:76px; width:auto; transform:translate3d(0, 24px, 0); }
+		    .sticky-coaching-cta.is-visible { transform:translate3d(0, 0, 0); }
+		    .trust-preview .sticky-coaching-cta {
+		      border-radius: 22px;
+		      bottom: 74px;
+		    }
+		    .trust-hero {
+		      width: 100%;
+		      max-width: 100vw;
+		      min-height: auto;
+		      padding: 44px 20px 52px;
+		      border-left: 0;
+		      border-right: 0;
+		    }
+		    .trust-hero-grid {
+		      grid-template-columns: 1fr;
+		      gap: 28px;
+		    }
+		    .trust-hero h1 {
+		      font-size: 42px;
+		      line-height: 1.15;
+		    }
+		    .trust-hero-copy {
+		      max-width: 100%;
+		      font-size: 16px;
+		      word-break: normal;
+		      overflow-wrap: anywhere;
+		    }
+		    .trust-hero-actions {
+		      flex-direction: column;
+		    }
+		    .trust-primary,
+		    .trust-secondary {
+		      width: 100%;
+		    }
+		    .trust-proof-card {
+		      padding: 20px;
+		    }
+		    .trust-metric {
+		      grid-template-columns: 1fr;
+		      gap: 6px;
+		    }
+		  }
+</style>
+</head>
+<body class="trust-preview bg-white text-brand-dark font-sans">
+
+  <div id="stickyCoachingCta" class="sticky-coaching-cta px-5 py-4 text-white md:px-8" aria-hidden="true">
+    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <p class="text-base font-black word-keep md:text-lg">내 상황에 맞는 매수 기준을 먼저 정리해 보세요.</p>
+      <button type="button" class="scroll-to-form shrink-0 rounded-full bg-white px-7 py-3 text-sm font-black text-[#1d1b18] transition hover:bg-[#f2ede5]">상담 기준 확인</button>
+    </div>
+  </div>
+
+  <nav class="dashboard-section-nav" aria-label="대시보드 섹션 이동">
+    <button type="button" data-nav-target="hero">01 히어로</button>
+    <button type="button" data-nav-target="story-hook">02 스토리 후킹</button>
+    <button type="button" data-nav-target="curriculum">03 코칭 커리큘럼</button>
+    <button type="button" data-nav-target="consultant">04 컨설턴트</button>
+    <button type="button" data-nav-target="reviews">05 후기</button>
+    <button type="button" data-nav-target="package">06 패키지</button>
+    <button type="button" data-nav-target="qna-support">06-1 카톡질문</button>
+    <button type="button" data-nav-target="pricing">07 상품/가격</button>
+    <button type="button" data-nav-target="coaching-steps">08 투자코칭 순서</button>
+    <button type="button" data-nav-target="cta">09 CTA</button>
+    <button type="button" data-nav-target="apply-form">10 상담 신청 폼</button>
+    <button type="button" data-nav-target="faq">11 FAQ</button>
+  </nav>
+
+  <!-- ===== 코칭 정보 ===== -->
+  <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-8 py-8">
+    <h3 class="text-xl font-bold text-brand-dark mb-2">코칭 정보</h3>
+    <p class="text-base text-gray-500">코칭 지원 기간 &nbsp; <span class="text-brand-dark font-bold underline underline-offset-4">상담일로부터 '최대 90일'</span></p>
+    <h3 class="text-xl font-bold text-brand-dark mt-6 mb-2">설명</h3>
+  </div>
+
+  <!-- ===== 01 히어로 ===== -->
+	  <section data-section="hero" class="trust-hero relative overflow-hidden">
+	    <span class="absolute top-3 left-3 bg-black/55 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">01 히어로</span>
+	    <div class="trust-hero-grid relative z-10">
+	      <div>
+	        <span class="trust-eyebrow">우리동네 부동산 코칭</span>
+	        <h1 class="font-black">집을 사기 전,<br>숫자와 순서를 먼저 정리합니다.</h1>
+	        <p class="trust-hero-copy"><span class="block">매수 가능 금액, 대출 부담, 갈아타기 시점을 정리합니다.</span><span class="block">감으로 결정하기 전에 내 기준부터 확인하세요.</span></p>
+	        <div class="trust-hero-actions">
+	          <button class="scroll-to-form trust-primary">내 상황 점검 신청</button>
+	          <button class="scroll-to-form trust-secondary">상담 과정 보기</button>
+	        </div>
+	      </div>
+	      <aside class="trust-proof-card">
+	        <p class="trust-proof-title">상담 전 확인하는 핵심 지표</p>
+	        <div class="trust-metric">
+	          <strong>100건+</strong>
+	          <span>실제 상담 경험 기반의 상황별 판단 사례</span>
+	        </div>
+	        <div class="trust-metric">
+	          <strong>4.97</strong>
+	          <span>코칭 후기 기반 만족도 / 5점 만점</span>
+	        </div>
+	        <div class="trust-metric">
+	          <strong>90일</strong>
+	          <span>상담 후 실행 과정에서 다시 확인할 수 있는 기간</span>
+	        </div>
+	        <div class="trust-checklist">
+	          <div class="trust-check"><b>1</b><span>예산과 대출 범위를 먼저 분리합니다.</span></div>
+	          <div class="trust-check"><b>2</b><span>후보 지역과 단지를 같은 기준으로 비교합니다.</span></div>
+	          <div class="trust-check"><b>3</b><span>이번 달에 확인할 매물, 대출, 계약 조건을 정합니다.</span></div>
+	        </div>
+	      </aside>
+	    </div>
+	  </section>
+
+	  <!-- ===== 02 스토리 후킹 ===== -->
+  <section data-section="story-hook" class="max-w-4xl mx-auto bg-white py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">02 스토리 후킹</span>
+
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+      <div class="text-center mb-10" data-reveal>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight word-keep">분당과 일산,<br class="md:hidden"> 어디를 사야 될까요?</h2>
+        <p class="text-lg md:text-xl text-gray-500 mt-6 word-keep leading-relaxed">2006년, 중소기업 <span class="text-red-600 font-bold">김과장</span>은 <span class="text-red-600 font-bold">분당</span>을,<br>고소득 <span class="text-brand-blue font-bold">의사 강씨</span>는 <span class="text-brand-blue font-bold">일산</span>을 선택했습니다</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14" data-reveal>
+        <div class="bg-white rounded-2xl p-7 text-center shadow-md border border-gray-100">
+          <p class="text-sm text-gray-400 mb-2">2006년</p>
+          <p class="text-lg font-semibold mb-2 word-keep">중소기업 <span class="text-red-600 font-bold">김과장</span></p>
+          <p class="text-4xl md:text-5xl font-display font-black text-red-600">분당</p>
+          <p class="text-gray-500 mt-2 text-lg">매매가 <span class="font-bold">7억</span></p>
+        </div>
+        <div class="bg-white rounded-2xl p-7 text-center shadow-md border border-gray-100">
+          <p class="text-sm text-gray-400 mb-2">2006년</p>
+          <p class="text-lg font-semibold mb-2 word-keep">고소득 <span class="text-brand-blue font-bold">의사 강씨</span></p>
+          <p class="text-4xl md:text-5xl font-display font-black text-brand-blue">일산</p>
+          <p class="text-gray-500 mt-2 text-lg">매매가 <span class="font-bold">10억</span></p>
+        </div>
+      </div>
+      <!-- 서스펜스 질문 -->
+      <div class="text-center mb-14" data-reveal="scale">
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep">어떻게<br>됐을까요?</p>
+      </div>
+	      <!-- v2형 비교 차트 -->
+	      <div class="bg-white rounded-2xl p-5 md:p-8 mb-10 shadow-lg shadow-slate-200/60 border border-gray-200" data-reveal id="chartContainer">
+	        <div class="flex items-center gap-6 mb-4 text-sm font-medium">
+	          <span class="flex items-center gap-2 text-base"><span class="w-3.5 h-3.5 rounded-full bg-red-600"></span> 분당 (김과장)</span>
+	          <span class="flex items-center gap-2 text-base"><span class="w-3.5 h-3.5 rounded-full bg-brand-blue"></span> 일산 (의사 강씨)</span>
+	        </div>
+	        <svg viewBox="0 0 620 400" class="w-full" aria-label="분당과 일산 아파트 시세 비교 차트">
+	          <line x1="60" y1="30" x2="60" y2="340" stroke="#e5e7eb" stroke-width="1"/><line x1="60" y1="340" x2="590" y2="340" stroke="#e5e7eb" stroke-width="1"/>
+	          <text x="50" y="340" text-anchor="end" fill="#9ca3af" font-size="12">0</text><text x="50" y="278" text-anchor="end" fill="#9ca3af" font-size="12">4억</text><text x="50" y="216" text-anchor="end" fill="#9ca3af" font-size="12">8억</text><text x="50" y="154" text-anchor="end" fill="#9ca3af" font-size="12">12억</text><text x="50" y="92" text-anchor="end" fill="#9ca3af" font-size="12">16억</text><text x="50" y="40" text-anchor="end" fill="#9ca3af" font-size="12">20억</text>
+	          <text x="60" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2006</text><text x="192" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2011</text><text x="325" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2016</text><text x="458" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2021</text><text x="590" y="365" text-anchor="middle" fill="#9ca3af" font-size="12">2026</text>
+	          <line x1="60" y1="278" x2="590" y2="278" stroke="#f3f4f6"/><line x1="60" y1="216" x2="590" y2="216" stroke="#f3f4f6"/><line x1="60" y1="154" x2="590" y2="154" stroke="#f3f4f6"/><line x1="60" y1="92" x2="590" y2="92" stroke="#f3f4f6"/>
+	          <line x1="192" y1="30" x2="192" y2="340" stroke="#FF6B00" stroke-width="2" stroke-dasharray="7,5" class="chart-arrow"/>
+	          <line x1="590" y1="30" x2="590" y2="340" stroke="#FF6B00" stroke-width="2" stroke-dasharray="7,5" class="chart-arrow"/>
+	          <path class="chart-line" d="M60 231 L140 247 L192 231 C260 176 314 126 380 60 L450 107 L520 76 L590 60" fill="none" stroke="#dc2626" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+	          <path class="chart-line" d="M60 185 L140 216 L192 231 C260 210 322 184 380 154 L450 216 L520 247 L590 247" fill="none" stroke="#0055FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+	          <circle cx="192" cy="231" r="11" fill="#fff7ed" stroke="#FF6B00" stroke-width="3" class="chart-arrow"/>
+	          <rect x="72" y="148" width="44" height="25" rx="8" fill="white" stroke="#dbeafe" class="chart-arrow"/>
+	          <text x="94" y="166" text-anchor="middle" fill="#0055FF" font-size="15" font-weight="900" class="chart-arrow">10억</text>
+	          <rect x="72" y="256" width="40" height="25" rx="8" fill="white" stroke="#fee2e2" class="chart-arrow"/>
+	          <text x="92" y="274" text-anchor="middle" fill="#dc2626" font-size="15" font-weight="900" class="chart-arrow">7억</text>
+	          <circle cx="590" cy="60" r="7" fill="#dc2626" class="chart-arrow"/>
+	          <rect x="500" y="10" width="82" height="50" rx="12" fill="white" stroke="#fee2e2" class="chart-arrow"/>
+	          <text x="541" y="31" text-anchor="middle" fill="#dc2626" font-size="13" font-weight="900" class="chart-arrow">폭등 ↑</text>
+	          <text x="541" y="52" text-anchor="middle" fill="#dc2626" font-size="18" font-weight="900" class="chart-arrow">19억</text>
+	          <circle cx="590" cy="247" r="7" fill="#0055FF" class="chart-arrow"/>
+	          <rect x="500" y="255" width="82" height="50" rx="12" fill="white" stroke="#dbeafe" class="chart-arrow"/>
+	          <text x="541" y="276" text-anchor="middle" fill="#0055FF" font-size="18" font-weight="900" class="chart-arrow">6억</text>
+	          <text x="541" y="296" text-anchor="middle" fill="#0055FF" font-size="13" font-weight="900" class="chart-arrow">하락 ↓</text>
+	        </svg>
+	      </div>
+      <div class="text-center mb-16" data-reveal="scale">
+        <p class="text-2xl md:text-3xl font-display font-black word-keep mb-3"><span class="text-red-600">7억 분당</span>은 → <span class="text-red-600 font-black">19억</span>이 됐고,</p>
+        <p class="text-2xl md:text-3xl font-display font-black word-keep mb-8"><span class="text-brand-blue">10억 일산</span>은 → <span class="text-brand-blue font-black">6억</span>이 됐습니다</p>
+        <div class="difference-badge relative inline-flex items-center justify-center px-9 sm:px-14 py-7 rounded-[2rem] transform hover:scale-105 transition-transform">
+          <iconify-icon icon="solar:danger-triangle-bold-duotone" class="danger-icon mr-3 text-4xl"></iconify-icon>
+          <p class="text-3xl md:text-4xl font-display font-black">무려 <span class="difference-number text-5xl md:text-6xl">13억</span> 차이</p>
+        </div>
+        <div class="mx-auto mt-6 max-w-xl rounded-2xl border-2 border-red-100 bg-red-50 px-6 py-5 shadow-lg shadow-red-100/60">
+          <p class="text-lg md:text-xl font-display font-black text-brand-dark word-keep">같은 예산이어도, 기준이 다르면 결과가 갈립니다</p>
+          <p class="mt-2 text-sm md:text-base font-bold text-gray-600 word-keep">입지, 대출, 매도 가능성까지 보고 결정해야 하는 이유입니다.</p>
+        </div>
+      </div>
+      <div class="story-consequence-box mx-auto mb-20 max-w-2xl px-6 py-8 text-center md:px-10" data-reveal>
+        <p class="text-xl md:text-2xl text-gray-600 word-keep leading-relaxed mb-8"><span class="text-brand-blue font-bold">의사 강씨</span>는 고소득임에도<br><span class="text-red-600 font-bold">김과장</span>과 갈수록 격차가 벌어졌습니다</p>
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-[1.28]">지금 이 순간에도<br><span class="text-brand-orange">똑같은 일</span>이 생기고 있습니다</p>
+      </div>
+		      <div class="bg-white rounded-2xl p-5 md:p-8 mt-14 mb-16 shadow-lg shadow-slate-200/60 border border-gray-200 max-w-2xl mx-auto" data-reveal>
+	        <p class="text-center text-2xl md:text-3xl font-display font-black text-brand-dark mb-6 word-keep">지금이 선택의 순간입니다!</p>
+	        <svg viewBox="0 0 420 230" class="w-full" aria-label="2026년 이후 선택에 따라 갈라지는 결과">
+	          <defs>
+	            <marker id="futureArrowRed" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+	              <path d="M0,0 L12,6 L0,12 Z" fill="#dc2626"/>
+	            </marker>
+	            <marker id="futureArrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+	              <path d="M0,0 L12,6 L0,12 Z" fill="#0055FF"/>
+	            </marker>
+	          </defs>
+	          <rect x="20" y="22" width="112" height="154" rx="16" fill="#f3f4f6" opacity="0.6"/>
+	          <line x1="34" y1="176" x2="390" y2="176" stroke="#e5e7eb" stroke-width="1.2"/>
+	          <line x1="132" y1="28" x2="132" y2="176" stroke="#FF6B00" stroke-width="1.8" stroke-dasharray="6,6"/>
+	          <path d="M34 120 C62 108 92 112 132 105" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="7,7" stroke-linecap="round"/>
+	          <path d="M132 105 C178 82 220 66 268 55" fill="none" stroke="#dc2626" stroke-width="4" stroke-dasharray="8,7" stroke-linecap="round" marker-end="url(#futureArrowRed)"/>
+	          <path d="M132 105 C176 126 218 142 262 151" fill="none" stroke="#0055FF" stroke-width="4" stroke-dasharray="8,7" stroke-linecap="round" marker-end="url(#futureArrowBlue)"/>
+	          <circle cx="132" cy="105" r="9" fill="#fff7ed" stroke="#FF6B00" stroke-width="3"/>
+	          <rect x="72" y="74" width="45" height="28" rx="9" fill="#fff7ed" stroke="#fed7aa"/>
+	          <text x="94.5" y="93" text-anchor="middle" fill="#FF6B00" font-size="13" font-weight="900">지금</text>
+	          <rect x="238" y="14" width="128" height="34" rx="13" fill="white" stroke="#fee2e2"/>
+	          <text x="302" y="37" text-anchor="middle" fill="#dc2626" font-size="15" font-weight="900">잘 고르면 자산+</text>
+	          <rect x="232" y="125" width="144" height="34" rx="13" fill="white" stroke="#dbeafe"/>
+	          <text x="304" y="148" text-anchor="middle" fill="#0055FF" font-size="15" font-weight="900">잘못 고르면 손실-</text>
+	          <text x="132" y="204" text-anchor="middle" fill="#9ca3af" font-size="14" font-weight="900">2026</text>
+	          <text x="258" y="204" text-anchor="middle" fill="#9ca3af" font-size="13">2028</text>
+	          <text x="384" y="204" text-anchor="middle" fill="#9ca3af" font-size="13">2030</text>
+	        </svg>
+	      </div>
+	      <div class="chat-stack max-w-2xl mx-auto space-y-5 mb-16" data-stagger>
+	        <div class="bubble-real-l px-7 py-5 w-[72%] md:w-[360px]"><p class="text-lg md:text-xl word-keep font-bold text-gray-800">"지금 여기 사도 될까요?"</p></div>
+	        <div class="bubble-real-r px-7 py-5 w-[76%] md:w-[390px] ml-auto"><p class="text-lg md:text-xl word-keep text-gray-800">"고민하고 있는 단지중에<br><span class="font-black text-brand-orange">어디가 더 많이 오를까요?</span>"</p></div>
+	        <div class="bubble-real-l px-7 py-5 w-[72%] md:w-[360px]"><p class="text-lg md:text-xl word-keep font-medium text-gray-800">"5억 대출해서 사는게<br>정말 맞을까요?"</p></div>
+	        <div class="bubble-real-r px-7 py-5 w-[76%] md:w-[390px] ml-auto"><p class="text-lg md:text-xl word-keep text-gray-800">돈이 조금 애매해서<br>"<span class="font-black text-brand-orange">지금 사야 될지 고민돼요</span>"</p></div>
+	        <div class="bubble-real-l px-7 py-5 w-[72%] md:w-[360px]"><p class="text-lg md:text-xl word-keep font-medium text-gray-800">"지금 이런 상황에서<br>사도 될지 모르겠어요"</p></div>
+	      </div>
+      <div class="text-center" data-reveal>
+        <p class="text-xl md:text-2xl font-display font-bold word-keep text-gray-700">평범한 직장인도, 전문직도<br><span class="text-brand-dark font-black">똑같은 고민</span>을 합니다</p>
+      </div>
+      <!-- 극적 전환 -->
+      <div class="text-center mt-20" data-reveal>
+        <p class="text-5xl md:text-6xl text-brand-dark tracking-[0.3em] font-black">
+          <span style="animation: dotFade1 2s ease infinite">•</span>
+          <span style="animation: dotFade2 2s ease infinite">•</span>
+          <span style="animation: dotFade3 2s ease infinite">•</span>
+        </p>
+      </div>
+    </div>
+    <!-- ===== 자극 (02에 합침) ===== -->
+    <div class="bg-brand-dark text-white py-32 md:py-44 mt-20 -mx-4 sm:-mx-6 lg:-mx-8 px-6 sm:px-8 lg:px-8 rounded-t-[3rem]">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-10" data-reveal="scale">
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep"><span class="bg-white text-brand-dark px-5 py-2 inline-block">"지금 여기<br class="md:hidden"> 사도 될까요?"</span></p>
+      </div>
+      <div class="text-center mb-16" data-reveal>
+        <div class="inline-block bg-blue-600 text-white px-8 py-6 rounded-2xl mb-4">
+          <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black tracking-tight leading-tight word-keep">잘못 사면,<br>10년이상 후회합니다</p>
+        </div>
+      </div>
+      <div class="bg-white/[0.03] border border-white/10 rounded-3xl p-7 md:p-10 mb-20" data-reveal="left">
+        <div class="flex justify-center mb-8"><div class="w-0.5 h-16 bg-gray-600"></div></div>
+        <p class="text-brand-orange font-display font-bold text-lg mb-6">실제 제 이야기입니다</p>
+        <p class="text-2xl md:text-3xl font-display font-black leading-snug word-keep mb-8">열심히 돈을 모아 집을 샀습니다</p>
+        <div class="space-y-4 mb-8" data-stagger>
+          <p class="text-lg md:text-xl text-gray-300 word-keep">처음 사는 집이었습니다</p>
+          <p class="text-lg md:text-xl text-gray-300 word-keep">나름 공부도 했고, 좋은 선택이라고 확신했습니다</p>
+          <p class="text-lg md:text-xl text-gray-300 word-keep">주변에서도 괜찮다고 했습니다</p>
+          <p class="text-lg md:text-xl text-gray-400 word-keep font-bold">혼자 결정해도 된다고 생각했습니다</p>
+        </div>
+        <div class="flex justify-center my-6"><div class="w-0.5 h-12 bg-gray-600"></div></div>
+        <p class="text-5xl md:text-6xl font-display font-black my-10 word-keep text-center">하지만</p>
+        <div class="flex justify-center my-6"><div class="w-0.5 h-12 bg-gray-600"></div></div>
+        <!-- 매수 -->
+	        <div class="contract-proof-card is-buy mb-6 max-w-[420px] mx-auto rounded-3xl overflow-hidden p-4">
+	          <div class="mb-3 flex items-center justify-between">
+	            <p class="rounded-full bg-red-600/75 px-3 py-1 text-sm font-black text-white">매수 계약서</p>
+	          </div>
+	          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-buy.png" alt="수명산 아파트 매수 계약서" class="contract-img w-full" loading="lazy" decoding="async">
+		          <div class="contract-price-box is-buy mt-4 rounded-2xl border px-5 py-4 text-center">
+	            <p class="text-sm font-bold text-red-100">매수가</p>
+	            <p class="text-4xl md:text-5xl font-display font-black text-red-50">9억 5천</p>
+	          </div>
+	        </div>
+        <!-- 화살표 -->
+        <div class="text-center my-4">
+          <iconify-icon icon="solar:arrow-down-bold" class="text-4xl text-gray-400"></iconify-icon>
+        </div>
+        <!-- 매도 -->
+	        <div class="contract-proof-card is-sell mb-8 max-w-[420px] mx-auto rounded-3xl overflow-hidden p-4">
+	          <div class="mb-3 flex items-center justify-between">
+	            <p class="rounded-full bg-blue-600/75 px-3 py-1 text-sm font-black text-white">매도 계약서</p>
+	          </div>
+	          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-sell.png" alt="수명산 아파트 매도 계약서" class="contract-img w-full" loading="lazy" decoding="async">
+		          <div class="contract-price-box is-sell mt-4 rounded-2xl border px-5 py-4 text-center">
+	            <p class="text-sm font-bold text-blue-100">매도가</p>
+	            <p class="text-4xl md:text-5xl font-display font-black text-blue-50">8억 2천</p>
+	          </div>
+	        </div>
+        <div class="text-center">
+          <p class="text-4xl md:text-5xl lg:text-6xl font-display font-black text-red-500 mb-4">-201,613,492원</p>
+          <p class="text-lg md:text-xl text-gray-300 font-medium word-keep mb-6">1억 3천 손실 + 세금 + 인테리어 + 복비 등</p>
+	          <div class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-2xl pulse-attention shadow-lg shadow-red-900/30"><p class="text-2xl md:text-3xl font-display font-black">총 2억 손실</p><iconify-icon icon="solar:round-arrow-down-bold-duotone" class="text-3xl text-red-100"></iconify-icon></div>
+	        </div>
+      </div>
+      <div class="text-center space-y-12 shake-once" data-reveal>
+	        <div class="text-center mb-4"><iconify-icon icon="solar:chart-2-bold-duotone" class="text-6xl text-red-400"></iconify-icon></div>
+        <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep text-red-400 leading-snug">평생 모은 2억을<br>날렸습니다</p>
+        <p class="text-2xl md:text-3xl font-display font-bold word-keep text-gray-300 leading-relaxed">혼자 결정해도 된다고 생각했습니다</p>
+        <p class="text-3xl md:text-4xl font-display font-black word-keep">결과는</p>
+        <div class="inline-block bg-red-600 text-white px-6 py-3 rounded-xl mt-4 pulse-attention">
+	          <p class="text-3xl md:text-4xl font-display font-black">처참한 실패</p>
+        </div>
+	        <p class="text-xl md:text-2xl text-gray-200 word-keep mt-4 font-medium">문제는, 이 실수가 특별한 일이 아니라는 겁니다</p>
+	      </div>
+			      <div class="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2" data-stagger>
+			        <div class="story-dark-quote p-7 md:p-8">
+			          <p class="text-xl md:text-2xl font-display font-black leading-snug word-keep">"상담 리포트 덕분에 부부가 같은 기준으로 이야기할 수 있었습니다."</p>
+			          <span class="quote-meta">최*윤님 · 서울 용산 30대 · 내집마련</span>
+			        </div>
+			        <div class="story-dark-quote p-7 md:p-8">
+			          <p class="text-xl md:text-2xl font-display font-black leading-snug word-keep">"체크리스트를 보고 계약 전에 놓친 부분을 다시 확인했습니다."</p>
+			          <span class="quote-meta">박*준님 · 경기 안양 40대 · 갈아타기</span>
+			        </div>
+			      </div>
+      <!-- 추천 대상 -->
+      <div class="mt-20 max-w-2xl mx-auto" data-reveal>
+        <div class="text-center mb-10">
+          <span class="recommend-badge mb-5"><iconify-icon icon="solar:like-bold" class="text-xl"></iconify-icon>추천</span>
+          <p class="text-4xl md:text-5xl font-display font-black text-white word-keep leading-tight">이런 분들께<br><span class="text-red-400">추천</span>드립니다!</p>
+        </div>
+        <div class="space-y-4" data-stagger>
+          <div class="recommend-card rounded-2xl p-6 flex items-start gap-5 transition-colors">
+            <span class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0 shadow-md">01</span>
+            <div>
+              <p class="font-bold text-lg word-keep mb-1">"지금 여기 사도 될까?"</p>
+              <p class="text-base word-keep">더 많이 오르는 지역과 단지가 궁금하신 분</p>
+            </div>
+          </div>
+          <div class="recommend-card rounded-2xl p-6 flex items-start gap-5 transition-colors">
+            <span class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0 shadow-md">02</span>
+            <div>
+              <p class="font-bold text-lg word-keep mb-1">잠깐의 결정이 10년을 좌우합니다</p>
+              <p class="text-base word-keep">현명한 내집마련을 하고 싶은 분</p>
+            </div>
+          </div>
+          <div class="recommend-card rounded-2xl p-6 flex items-start gap-5 transition-colors">
+            <span class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0 shadow-md">03</span>
+            <div>
+              <p class="font-bold text-lg word-keep mb-1">실거주와 자산 가치를 동시에</p>
+              <p class="text-base word-keep">똑똑한 갈아타기 하고 싶은 분</p>
+            </div>
+          </div>
+	        </div>
+	        <div class="mt-8 text-center">
+	          <p class="story-quote text-base italic word-keep">"혼자 고민하던 기준이 숫자로 정리됐습니다"<span class="story-quote-meta">강*희 님 · 서울 노원 30대 · 생애최초 내집마련</span></p>
+	        </div>
+      </div>
+    </div>
+    </div><!-- 자극 dark bg 닫기 -->
+  </section>
+
+  <!-- ===== 03 코칭 커리큘럼 ===== -->
+  <section data-section="curriculum" class="max-w-4xl mx-auto bg-[#101725] py-16 md:py-24 relative text-white">
+    <span class="absolute top-2 left-2 bg-white/20 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">03 코칭 커리큘럼</span>
+
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+      <div class="neighborhood-map mb-12 rounded-[2rem] bg-[#e8f4ee] p-6 text-[#1A2B47] md:p-8" data-reveal>
+        <div class="grid gap-7 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+          <div>
+            <span class="inline-block rotate-[-1deg] border-2 border-[#1A2B47] bg-[#F4C430] px-3 py-1 text-xs font-black">동네 친구처럼 편하게</span>
+            <p class="mt-5 text-5xl md:text-6xl font-display font-black leading-none word-keep">어디에<br><span class="bg-[#ff6b5b] px-2 text-white">집</span>을<br>살까요?</p>
+            <p class="mt-5 text-sm leading-6 text-[#1A2B47]/75 word-keep">서울·경기·인천부터 지방까지, 내 예산에 맞는 동네를 같이 좁혀드립니다.</p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="map-region-chip">서울 강남</span><span class="map-region-chip">송파</span><span class="map-region-chip">마포</span><span class="map-region-chip">노원</span><span class="map-region-chip">강서</span><span class="map-region-chip">분당</span><span class="map-region-chip">판교</span><span class="map-region-chip">수원</span><span class="map-region-chip">안양</span><span class="map-region-chip">김포</span><span class="map-region-chip">인천</span><span class="map-region-chip">천안</span><span class="map-region-chip">청주</span><span class="map-region-chip">포항</span>
+            </div>
+          </div>
+          <svg viewBox="0 0 480 360" role="img" aria-label="동네 후보를 비교하는 지도 일러스트">
+            <path d="M10 180 Q240 138 470 196" stroke="#fff8e7" stroke-width="34" fill="none"/><path d="M250 0 Q212 176 270 360" stroke="#fff8e7" stroke-width="28" fill="none"/>
+            <path d="M10 180 Q240 138 470 196" stroke="#1A2B47" stroke-width="2" stroke-dasharray="6 6" fill="none"/><path d="M250 0 Q212 176 270 360" stroke="#1A2B47" stroke-width="2" stroke-dasharray="6 6" fill="none"/>
+            <circle cx="130" cy="92" r="50" fill="#9adbbd"/><text x="130" y="98" text-anchor="middle" font-size="14" font-weight="900" fill="#1A2B47">공원</text>
+            <g><rect x="330" y="46" width="38" height="58" fill="#ff6b5b" stroke="#1A2B47" stroke-width="2"/><rect x="378" y="28" width="38" height="76" fill="#f4c430" stroke="#1A2B47" stroke-width="2"/><rect x="426" y="62" width="32" height="42" fill="#4ecdc4" stroke="#1A2B47" stroke-width="2"/><text x="390" y="22" text-anchor="middle" font-size="13" font-weight="900" fill="#1A2B47">강남구</text></g>
+            <g><rect x="72" y="260" width="38" height="48" fill="#4ecdc4" stroke="#1A2B47" stroke-width="2"/><rect x="122" y="238" width="38" height="70" fill="#ff6b5b" stroke="#1A2B47" stroke-width="2"/><rect x="172" y="270" width="34" height="38" fill="#f4c430" stroke="#1A2B47" stroke-width="2"/><text x="142" y="334" text-anchor="middle" font-size="13" font-weight="900" fill="#1A2B47">송파구</text></g>
+            <g transform="translate(238 166)"><circle r="34" fill="#1A2B47"/><circle r="52" fill="none" stroke="#1A2B47" stroke-width="2" stroke-dasharray="5 5" opacity=".35"/><circle cx="0" cy="-6" r="11" fill="#ff6b5b"/><circle cx="0" cy="-6" r="4" fill="#fff"/><path d="M0 8 L-9 -8 H9 Z" fill="#ff6b5b"/></g>
+            <text x="238" y="240" text-anchor="middle" font-size="13" font-weight="900" fill="#1A2B47">YOU ARE HERE</text>
+          </svg>
+        </div>
+      </div>
+      <div class="mb-10 md:mb-14" data-reveal>
+        <p class="text-xs font-black uppercase text-white/45">Methodology</p>
+        <h2 class="mt-3 text-4xl md:text-5xl font-display font-black leading-tight word-keep">50분 안에,<br>기준과 다음 행동을 명확히.</h2>
+        <p class="mt-5 max-w-2xl text-base md:text-lg leading-relaxed text-white/65 word-keep">사전질문지를 바탕으로 현재 상황을 진단하고, 후보를 좁힌 뒤, 코칭 후 바로 움직일 수 있는 실행 순서까지 정리합니다.</p>
+      </div>
+
+      <div class="grid gap-0 rounded-3xl border border-white/10 bg-white/[0.03] p-6 md:grid-cols-3 md:p-0" data-reveal>
+        <div class="v3-method-card"><p class="text-xs font-black text-[#F4C430]">STEP 01</p><h3 class="mt-4 text-xl font-display font-black word-keep">현재 상황 진단</h3><p class="mt-4 text-sm leading-7 text-white/68 word-keep">예산·대출, 가족 우선순위, 지금 사도 되는지 1차 판단까지 사전 질문지를 바탕으로 같이 점검합니다.</p></div>
+        <div class="v3-method-card"><p class="text-xs font-black text-[#F4C430]">STEP 02</p><h3 class="mt-4 text-xl font-display font-black word-keep">후보 지역·단지 압축</h3><p class="mt-4 text-sm leading-7 text-white/68 word-keep">지역과 단지 후보를 무작정 넓히지 않고, 실제로 비교할 기준과 현장 확인 포인트까지 함께 정리합니다.</p></div>
+        <div class="v3-method-card"><p class="text-xs font-black text-[#F4C430]">STEP 03</p><h3 class="mt-4 text-xl font-display font-black word-keep">실행 플랜 + 90일</h3><p class="mt-4 text-sm leading-7 text-white/68 word-keep">살지 보류할지 결론, 당장 해야 할 일, 이후 질문이 생겼을 때 확인할 기준까지 남겨드립니다.</p></div>
+      </div>
+
+      <div class="mt-10 rounded-[2rem] bg-[#f5f0e8] p-5 text-brand-dark md:p-8" data-reveal>
+        <div class="max-w-3xl mx-auto space-y-6">
+          <div class="relative pl-14">
+            <div class="absolute left-5 top-0 bottom-0 w-px bg-brand-orange/25"></div>
+            <div class="absolute left-0 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-brand-orange text-white font-display font-black shadow-md">1</div>
+            <div class="rounded-3xl border border-gray-200 bg-white p-6 shadow-md md:p-8">
+              <p class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep"><iconify-icon icon="solar:wallet-money-bold"></iconify-icon>현재 상황 진단</p>
+              <h3 class="mt-3 text-2xl font-display font-black text-brand-dark word-keep">예산과 우선순위를 먼저 정리합니다</h3>
+              <p class="mt-4 text-gray-500 word-keep mb-5">예산·대출, 거주 우선순위, 지금 사도 되는지 1차 판단까지 사전 질문지를 바탕으로 같이 점검합니다.</p>
+              <div class="grid gap-3 text-sm text-gray-700 md:grid-cols-3">
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>기본 정보와 우선순위 확인</span></div>
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>재무 상황과 대출 범위 점검</span></div>
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>사전 질문 기반 쟁점 정리</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="relative pl-14">
+            <div class="absolute left-5 top-0 bottom-0 w-px bg-brand-orange/25"></div>
+            <div class="absolute left-0 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-brand-orange text-white font-display font-black shadow-md">2</div>
+            <div class="rounded-3xl border border-gray-200 bg-white p-6 shadow-md md:p-8">
+              <p class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep"><iconify-icon icon="solar:map-point-bold"></iconify-icon>후보 지역·단지 압축</p>
+              <h3 class="mt-3 text-2xl font-display font-black text-brand-dark word-keep">내 예산에 맞는 후보를 좁히고 비교 기준을 세웁니다</h3>
+              <p class="mt-4 text-gray-500 word-keep mb-5">지역과 단지 후보를 무작정 넓히지 않고, 실제로 비교할 기준과 현장 확인 포인트까지 함께 정리합니다.</p>
+              <div class="grid gap-3 text-sm text-gray-700 md:grid-cols-2">
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>예산 체크</span></div>
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>지역·단지 선정 기준</span></div>
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>입지와 현장 확인 포인트</span></div>
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>방문·계약 시 체크 포인트</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="relative pl-14">
+            <div class="absolute left-0 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-brand-orange text-white font-display font-black shadow-md">3</div>
+            <div class="rounded-3xl border border-gray-200 bg-white p-6 shadow-md md:p-8">
+              <p class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep"><iconify-icon icon="solar:checklist-minimalistic-bold"></iconify-icon>실행 플랜 및 90일 지원</p>
+              <h3 class="mt-3 text-2xl font-display font-black text-brand-dark word-keep">코칭 후 바로 움직일 수 있게 마무리합니다</h3>
+              <p class="mt-4 text-gray-500 word-keep mb-5">살지 보류할지 결론, 당장 해야 할 일, 이후 질문이 생겼을 때 확인할 기준까지 남겨드립니다.</p>
+              <div class="grid gap-3 text-sm text-gray-700 md:grid-cols-2">
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>액션플랜과 일정 정리</span></div>
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>살지 / 보류할지 결론 정리</span></div>
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>필요 시 이후 자산 계획 방향 정리</span></div>
+                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>코칭 후 90일 질의응답</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-3xl border border-brand-orange/20 bg-white px-6 py-5 text-center shadow-md md:px-8">
+            <p class="text-2xl font-display font-black text-brand-dark word-keep">혼자 고민하던 걸 <span class="text-brand-orange">판단 기준</span>으로 바꿔드립니다</p>
+            <p class="mt-2 text-gray-500 word-keep">진단부터 실행까지 한 번에 정리하고, 코칭 후 최대 90일 동안 질문을 이어갈 수 있습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 04 컨설턴트 소개 ===== -->
+  <section data-section="consultant" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">04 컨설턴트</span>
+
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+      <div class="text-center mb-14" data-reveal>
+        <p class="text-6xl md:text-7xl text-gray-300 font-display font-black leading-none mb-2">"</p>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight word-keep">긴말 없이<br><span class="text-red-600">실제 제 투자사례로</span><br>보여드립니다</h2>
+        <p class="text-6xl md:text-7xl text-gray-300 font-display font-black leading-none mt-2">"</p>
+      </div>
+      <!-- 자기 소개 -->
+      <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 mb-10 max-w-2xl mx-auto" data-reveal>
+        <div class="mb-7 flex items-center justify-center">
+          <div class="flex items-center gap-4 rounded-2xl bg-orange-50 px-6 py-4">
+            <div class="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-white shadow-lg shadow-orange-200">
+              <iconify-icon icon="solar:user-id-bold" class="text-4xl"></iconify-icon>
+            </div>
+            <div class="text-left">
+              <h3 class="text-3xl font-display font-black leading-none text-brand-dark">우재</h3>
+              <p class="mt-2 text-sm font-bold text-gray-500">우리동네 재테크</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 text-left mb-7">
+          <ul class="space-y-4 text-base text-brand-dark">
+            <li class="flex gap-3 word-keep"><span class="text-xl leading-5 text-black">•</span><span>증권투자 관련 법인 대표이사</span></li>
+            <li class="flex gap-3 word-keep"><span class="text-xl leading-5 text-black">•</span><span>전국구 실전 부동산투자자</span></li>
+            <li class="flex gap-3 word-keep"><span class="text-xl leading-5 text-black">•</span><span>최근 8개월간 아파트매매만 <strong class="mx-2">5건</strong> <span class="text-sm text-gray-400">(작성시점 기준)</span></span></li>
+            <li class="flex gap-3 word-keep"><span class="text-xl leading-5 text-black">•</span><span>포트폴리오: 강남3구+압여목성 2채+@</span></li>
+          </ul>
+        </div>
+        <p class="text-lg md:text-xl text-center word-keep"><span class="text-red-600 font-bold">10년간 쌓아온</span> 모든 투자 노하우를<br>통째로 오픈해 드리겠습니다</p>
+      </div>
+      <!-- 실적 카드 + 이미지 (모자이크 처리) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-stretch" data-reveal>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/mokdong-buy.png" alt="목동신시가지 매수 계약서" class="w-full h-[200px] object-cover" loading="lazy" decoding="async">
+          <div class="p-6 text-center flex-1">
+            <p class="text-sm text-gray-400 mb-2">24년 12월 매수 · 재건축 · 서울</p>
+            <div class="flex items-center justify-center gap-3 mb-2">
+              <span class="text-xl font-bold text-gray-400">15.1억</span>
+              <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-2xl"></iconify-icon>
+              <span class="text-3xl font-display font-black text-brand-dark">25억</span>
+            </div>
+            <div class="inline-block bg-red-50 text-red-600 px-4 py-2 rounded-xl"><p class="text-xl font-display font-black">+9.9억 상승 ↑</p></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/garak-buy.png" alt="가락쌍용 매수 계약서" class="w-full h-[200px] object-cover" loading="lazy" decoding="async">
+          <div class="p-6 text-center flex-1">
+            <p class="text-sm text-gray-400 mb-2">24년 9월 매수 · 아파트 · 송파구</p>
+            <div class="flex items-center justify-center gap-3 mb-2">
+              <span class="text-xl font-bold text-gray-400">11.4억</span>
+              <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-2xl"></iconify-icon>
+              <span class="text-3xl font-display font-black text-brand-dark">19.8억</span>
+            </div>
+            <div class="inline-block bg-red-50 text-red-600 px-4 py-2 rounded-xl"><p class="text-xl font-display font-black">+8.4억 상승 ↑</p></div>
+          </div>
+        </div>
+      </div>
+	      <div class="text-center mb-10" data-reveal="scale">
+		        <div class="inline-block rounded-3xl border-2 border-red-300 bg-white px-10 py-6 text-brand-dark shadow-lg shadow-red-100/70">
+		          <div class="flex items-center gap-4">
+			            <span class="consult-gain-icon"><iconify-icon icon="solar:banknote-2-bold-duotone"></iconify-icon></span>
+	            <div>
+	              <p class="text-base font-bold text-gray-500">8개월 만에</p>
+	              <p class="text-3xl md:text-4xl font-display font-black"><span class="text-red-600">+18.3억</span> 상승</p>
+	            </div>
+	          </div>
+	        </div>
+      </div>
+      <!-- 추가 실적 이미지 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10" data-reveal>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/landing-0.png" alt="최근 추가거래 총5건" class="w-full hover:scale-[1.02] transition-transform" loading="lazy" decoding="async">
+          <div class="p-4 text-center"><p class="text-sm text-gray-500 font-medium">최근 8개월간 아파트매매 5건</p></div>
+        </div>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/landing-3.png" alt="실제 매매 계약서 일부" class="w-full hover:scale-[1.02] transition-transform" loading="lazy" decoding="async">
+          <div class="p-4 text-center"><p class="text-sm text-gray-500 font-medium">실제 매매 계약서 일부</p></div>
+        </div>
+      </div>
+      <!-- 경력 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10" data-reveal>
+        <div class="bg-white rounded-2xl p-5 text-center shadow-md border border-gray-100">
+          <p class="text-3xl font-display font-black text-brand-dark mb-1">10년+</p>
+          <p class="text-sm text-gray-500 word-keep">투자 업계 경력</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 text-center shadow-md border border-gray-100">
+          <p class="text-3xl font-display font-black text-brand-dark mb-1">100건++</p>
+          <p class="text-sm text-gray-500 word-keep">1:1 상담 (만족도 99%)</p>
+        </div>
+      </div>
+      <!-- 차별화 -->
+	      <div class="relative text-center" data-reveal>
+            <div class="money-sparkles" aria-hidden="true"><span>₩</span><span>+₩</span><span>₩</span></div>
+		        <p class="relative text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-tight"><span class="text-red-600">최선의 결과</span>로<br>보답드리겠습니다</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 05 후기 ===== -->
+  <section data-section="reviews" class="max-w-4xl mx-auto bg-brand-dark py-16 md:py-24 relative overflow-hidden">
+    <span class="absolute top-2 left-2 bg-white/20 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">05 후기</span>
+
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+      <!-- 만족도 헤더 -->
+      <div class="text-center mb-14" data-reveal>
+	        <div class="review-star-row flex items-center justify-center gap-1 mb-3">
+          <iconify-icon icon="solar:star-bold" class="star text-3xl"></iconify-icon>
+          <iconify-icon icon="solar:star-bold" class="star text-3xl"></iconify-icon>
+          <iconify-icon icon="solar:star-bold" class="star text-3xl"></iconify-icon>
+          <iconify-icon icon="solar:star-bold" class="star text-3xl"></iconify-icon>
+          <iconify-icon icon="solar:star-bold" class="star text-3xl"></iconify-icon>
+        </div>
+        <p class="text-4xl md:text-5xl font-display font-black mb-2 text-white">만족도 4.97 / 5.0</p>
+        <p class="text-lg text-gray-400 font-bold word-keep">실제 코칭 후기</p>
+      </div>
+      <div class="mb-10 space-y-3" data-reveal>
+        <div class="flex flex-wrap justify-center gap-2">
+	          <span class="region-pill-solid capital">서울</span><span class="region-pill-solid capital">인천</span><span class="region-pill-solid capital">경기</span><span class="region-pill-solid">부산</span><span class="region-pill-solid">대구</span><span class="region-pill-solid">대전</span><span class="region-pill-solid">울산</span><span class="region-pill-solid">광주</span>
+        </div>
+        <div class="flex flex-wrap justify-center gap-2">
+	          <span class="region-pill-solid">부산</span><span class="region-pill-solid">대구</span><span class="region-pill-solid">대전</span><span class="region-pill-solid">울산</span><span class="region-pill-solid">광주</span><span class="region-pill-solid">천안</span><span class="region-pill-solid">청주</span><span class="region-pill-solid">전주</span><span class="region-pill-solid">포항</span><span class="region-pill-solid">...</span>
+        </div>
+      </div>
+      <!-- 마키 Row 1 -->
+      <div class="overflow-hidden mb-5 marquee-row">
+        <div class="flex gap-5 marquee-left">
+          <!-- 1 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산 구입이라는 큰 의사결정을 하는 데 전문가의 도움을 받아서 나쁠 건 없다는 생각이 들어서 신청했습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"부동산 상담은 우재님이 처음이었는데 너무 만족스러웠습니다!"</span></p><p class="text-sm text-gray-500">서울 송파 30대 · 내집마련 · 맞벌이 · 박*현님</p></div><!-- 3 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">상담 시간이 오바되었는데도 전혀 내색없이 마지막까지 성심성의껏 상담 해주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"남편이 의심이 많은데 너무 만족해서 주말에 바로 부동산 보고 왔네요"</span></p><p class="text-sm text-gray-500">인천 40대 · 내집마련 · 부부 · 오*미님</p></div><!-- 5 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부린이로써 모르는 부분까지 자세하게 알려주셔서 유익했습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"앞으로 어떻게 해야 할지 자세하게 알려주셨습니다"</span></p><p class="text-sm text-gray-500">분당 20대 · 내집마련 · 사회초년생 · 원*호님</p></div><!-- 27 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">가족을 생각하며 막연히 자산을 늘리고 싶었는데 무엇부터 해야 할지 현실적인 방향을 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"할 수 있다는 자신감이 생겼습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 내집마련 · 결혼예정 · 안*지님</p></div><!-- 7 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">갈피를 못 잡던 와중에 유익한 답변을 해주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"생애 첫 매매인데 어떻게 접근해야 될지 갈피가 잡혔습니다"</span></p><p class="text-sm text-gray-500">용인 30대 · 내집마련 · 생애최초 · 한*솔님</p></div><!-- 9 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">저희 둘만 고민했을 때보다 시야가 더 트인것 같아서 도움이 많이 되었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"알려주신 방향을 따라가도록 잘 참고하겠습니다"</span></p><p class="text-sm text-gray-500">청주 30대 · 내집마련 · 맞벌이 · 장*영님</p></div><!-- 11 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">상담비가 아깝지 않을 정도로 알찬 정보를 주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"돈 아깝지 않은 상담이었습니다"</span></p><p class="text-sm text-gray-500">일산 30대 · 내집마련+투자 · 맞벌이 · 송*연님</p></div><!-- 13 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">내 예산에서 가능한 선택지를 명확하게 정리해주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"예산에 맞는 최적의 지역을 추천받았습니다"</span></p><p class="text-sm text-gray-500">전주 30대 · 내집마련 · 신혼부부 · 김*영님</p></div><!-- 29 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산을 잘 모르는 저희 부부에게 친절하게 설명해주셔서 첫 결정에 대한 불안이 줄었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"처음인데도 이해하기 쉽게 잡아주셨습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 내집마련 · 부부 · 최*지님</p></div><!-- 15 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">위험한 매물을 피할 수 있었습니다. 진짜 감사합니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"상담 하나로 수천만원을 아꼈습니다"</span></p><p class="text-sm text-gray-500">창원 30대 · 내집마련 · 직장인 · 양*혁님</p></div><!-- 17 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">상담 끝나고도 카톡으로 계속 물어볼 수 있어서 안심됩니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"90일 질의응답이 진짜 큽니다"</span></p><p class="text-sm text-gray-500">파주 30대 · 내집마련+투자 · 맞벌이 · 조*민님</p></div><!-- 19 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">상담 후 받은 액션플랜대로 움직이니까 결과가 나왔습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"로드맵이 너무 명확해서 바로 실행했습니다"</span></p><p class="text-sm text-gray-500">춘천 30대 · 내집마련+투자 · 직장인 · 문*준님</p></div><!-- 21 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산뿐 아니라 전체 자산 배분까지 조언해주셔서 좋았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"포트폴리오 리밸런싱까지 해주셨습니다"</span></p><p class="text-sm text-gray-500">서울 성북 30대 · 투자 · 직장인 · 임*훈님</p></div><!-- 31 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">상담 시간이 지나도 끝까지 정리해주셔서 배우자와 바로 매물을 보러 갈 만큼 확신이 생겼습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"배우자도 바로 만족한 상담이었습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 내집마련+투자 · 신혼부부 · 송*인님</p></div><!-- 23 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">막연했던 내집마련이 구체적인 계획으로 바뀌었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"상담 전후로 완전히 다른 사람이 됐습니다"</span></p><p class="text-sm text-gray-500">광주 30대 · 내집마련 · 싱글 · 홍*빈님</p></div><!-- 25 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">젊은 나이에 큰 돈을 모았지만 주택매매에 대해 짧았던 생각을 넓혀주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"1시간 상담으로 투자 방향이 완전히 바뀌었습니다"</span></p><p class="text-sm text-gray-500">서울 관악 20대 · 내집마련+투자 · 직장인 · 김*성님</p></div>
+          <!-- 복제: 1 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산 구입이라는 큰 의사결정을 하는 데 전문가의 도움을 받아서 나쁠 건 없다는 생각이 들어서 신청했습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"부동산 상담은 우재님이 처음이었는데 너무 만족스러웠습니다!"</span></p><p class="text-sm text-gray-500">서울 송파 30대 · 내집마련 · 맞벌이 · 박*현님</p></div><!-- 복제: 3 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">상담 시간이 오바되었는데도 전혀 내색없이 마지막까지 성심성의껏 상담 해주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"남편이 의심이 많은데 너무 만족해서 주말에 바로 부동산 보고 왔네요"</span></p><p class="text-sm text-gray-500">인천 40대 · 내집마련 · 부부 · 오*미님</p></div><!-- 복제: 5 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부린이로써 모르는 부분까지 자세하게 알려주셔서 유익했습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"앞으로 어떻게 해야 할지 자세하게 알려주셨습니다"</span></p><p class="text-sm text-gray-500">분당 20대 · 내집마련 · 사회초년생 · 원*호님</p></div><!-- 복제: 27 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">가족을 생각하며 막연히 자산을 늘리고 싶었는데 무엇부터 해야 할지 현실적인 방향을 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"할 수 있다는 자신감이 생겼습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 내집마련 · 결혼예정 · 안*지님</p></div><!-- 복제: 7 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">갈피를 못 잡던 와중에 유익한 답변을 해주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"생애 첫 매매인데 어떻게 접근해야 될지 갈피가 잡혔습니다"</span></p><p class="text-sm text-gray-500">용인 30대 · 내집마련 · 생애최초 · 한*솔님</p></div><!-- 복제: 9 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">저희 둘만 고민했을 때보다 시야가 더 트인것 같아서 도움이 많이 되었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"알려주신 방향을 따라가도록 잘 참고하겠습니다"</span></p><p class="text-sm text-gray-500">청주 30대 · 내집마련 · 맞벌이 · 장*영님</p></div><!-- 복제: 11 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">상담비가 아깝지 않을 정도로 알찬 정보를 주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"돈 아깝지 않은 상담이었습니다"</span></p><p class="text-sm text-gray-500">일산 30대 · 내집마련+투자 · 맞벌이 · 송*연님</p></div><!-- 복제: 13 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">내 예산에서 가능한 선택지를 명확하게 정리해주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"예산에 맞는 최적의 지역을 추천받았습니다"</span></p><p class="text-sm text-gray-500">전주 30대 · 내집마련 · 신혼부부 · 김*영님</p></div><!-- 복제: 29 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산을 잘 모르는 저희 부부에게 친절하게 설명해주셔서 첫 결정에 대한 불안이 줄었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"처음인데도 이해하기 쉽게 잡아주셨습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 내집마련 · 부부 · 최*지님</p></div><!-- 복제: 15 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">위험한 매물을 피할 수 있었습니다. 진짜 감사합니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"상담 하나로 수천만원을 아꼈습니다"</span></p><p class="text-sm text-gray-500">창원 30대 · 내집마련 · 직장인 · 양*혁님</p></div><!-- 복제: 17 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">상담 끝나고도 카톡으로 계속 물어볼 수 있어서 안심됩니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"90일 질의응답이 진짜 큽니다"</span></p><p class="text-sm text-gray-500">파주 30대 · 내집마련+투자 · 맞벌이 · 조*민님</p></div><!-- 복제: 19 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">상담 후 받은 액션플랜대로 움직이니까 결과가 나왔습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"로드맵이 너무 명확해서 바로 실행했습니다"</span></p><p class="text-sm text-gray-500">춘천 30대 · 내집마련+투자 · 직장인 · 문*준님</p></div><!-- 복제: 21 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산뿐 아니라 전체 자산 배분까지 조언해주셔서 좋았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"포트폴리오 리밸런싱까지 해주셨습니다"</span></p><p class="text-sm text-gray-500">서울 성북 30대 · 투자 · 직장인 · 임*훈님</p></div><!-- 복제: 31 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">상담 시간이 지나도 끝까지 정리해주셔서 배우자와 바로 매물을 보러 갈 만큼 확신이 생겼습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"배우자도 바로 만족한 상담이었습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 내집마련+투자 · 신혼부부 · 송*인님</p></div><!-- 복제: 23 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">막연했던 내집마련이 구체적인 계획으로 바뀌었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"상담 전후로 완전히 다른 사람이 됐습니다"</span></p><p class="text-sm text-gray-500">광주 30대 · 내집마련 · 싱글 · 홍*빈님</p></div><!-- 복제: 25 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">젊은 나이에 큰 돈을 모았지만 주택매매에 대해 짧았던 생각을 넓혀주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange ">"1시간 상담으로 투자 방향이 완전히 바뀌었습니다"</span></p><p class="text-sm text-gray-500">서울 관악 20대 · 내집마련+투자 · 직장인 · 김*성님</p></div>
+        </div>
+      </div>
+            <!-- 마키 Row 2 -->
+      <div class="overflow-hidden marquee-row">
+        <div class="flex gap-5 marquee-right">
+          <!-- 2 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">약속된 시간보다 한참 지나서까지 하나라도 더 알려주려고 계속 설명해주시는 모습에서 진짜 열정적인 분이구나 느꼈습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"현실적으로 선택할 수 있는 방향을 구체적으로 제안해주셨습니다"</span></p><p class="text-sm text-gray-500">수원 30대 · 내집마련+투자 · 직장인 · 이*수님</p></div><!-- 4 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">기대 이상의 세심한 상담이었습니다. 덕분에 남편이랑 앞으로의 투자 방향성을 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"기대 이상의 세심한 상담이었습니다"</span></p><p class="text-sm text-gray-500">서울 마포 30대 · 투자 · 신혼부부 · 안*정님</p></div><!-- 28 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">저희 부부의 투자 마인드부터 바뀌었습니다. 무엇을 공부하고 준비해야 하는지까지 정리돼 바로 움직일 수 있었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"부부가 같은 방향을 보게 됐습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 내집마련+투자 · 신혼부부 · 김*민님</p></div><!-- 6 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">반신반의하며 상담을 신청했는데 명확한 투자 방향을 잡을 수 있었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"솔직히 반신반의했는데, 코칭 후 확신이 생겼습니다"</span></p><p class="text-sm text-gray-500">부산 30대 · 내집마련 · 싱글 · 윤*아님</p></div><!-- 8 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">투자는 하고싶은데 앞이 깜깜해서 코칭 신청했는데 기대 이상이었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"가이드 주신대로 열심히 해보겠습니다"</span></p><p class="text-sm text-gray-500">서울 강남 30대 · 투자 · 직장인 · 권*우님</p></div><!-- 10 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">구체적인 단지까지 추천해주셔서 바로 매물 보러 다녔습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"상담 후 바로 행동에 옮길 수 있었습니다"</span></p><p class="text-sm text-gray-500">천안 40대 · 갈아타기 · 부부 · 서*진님</p></div><!-- 12 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">혼자 공부하면서 놓치고 있던 부분을 정확하게 짚어주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"투자 방향성이 완전히 달라졌습니다"</span></p><p class="text-sm text-gray-500">대전 30대 · 투자 · 직장인 · 강*원님</p></div><!-- 14 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">지금 사야 하는지 기다려야 하는지 명확한 답을 주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"매수 타이밍까지 잡아주셔서 감사합니다"</span></p><p class="text-sm text-gray-500">세종 40대 · 투자 · 자영업 · 신*경님</p></div><!-- 16 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부부가 함께 상담받으니 의사결정이 훨씬 빨라졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"남편과 함께 들었는데 둘 다 만족했습니다"</span></p><p class="text-sm text-gray-500">서울 강서 30대 · 내집마련 · 부부동반 · 유*리님</p></div><!-- 30 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">결혼을 앞두고 집과 투자 방향을 같이 고민했는데 현실적으로 가능한 선택지가 정리됐습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"앞으로의 투자 방향성이 잡혔습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 내집마련+투자 · 결혼예정 · 권*주님</p></div><!-- 18 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산 용어도 모르는 상태에서 시작했는데 하나하나 쉽게 알려주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"초보자 눈높이에 맞춰 설명해주셨습니다"</span></p><p class="text-sm text-gray-500">대구 20대 · 내집마련 · 사회초년생 · 최*은님</p></div><!-- 20 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">유튜브에서만 보다가 실제 상담받으니 확실히 다릅니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"다른 상담과는 차원이 다릅니다"</span></p><p class="text-sm text-gray-500">부산 40대 · 투자 · 자영업 · 배*선님</p></div><!-- 22 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">1년 뒤 계획이었는데 지금이 적기라는 조언 덕분에 좋은 매물 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"내집마련 타이밍을 정확히 잡았습니다"</span></p><p class="text-sm text-gray-500">평택 30대 · 내집마련 · 신혼부부 · 정*희님</p></div><!-- 24 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">진심으로 도와주고 싶어하시는 마음이 느껴졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"왠지 친한 지인처럼 상담해주셨습니다"</span></p><p class="text-sm text-gray-500">울산 30대 · 내집마련+투자 · 맞벌이 · 노*정님</p></div><!-- 32 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">혼자 고민할 때는 흔들렸는데 카톡 상담까지 남아 있어 실행하면서 다시 물어볼 수 있다는 점이 안심됐습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"상담 후에도 이어지는 점이 든든했습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 투자 · 부부 · 원*희님</p></div><!-- 26 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산의 ㅂ자도 모르는 초심자였는데 유튜브 보고 상담 신청했습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"유튜브 보고 신청했는데 기대 이상이었습니다"</span></p><p class="text-sm text-gray-500">경기 30대 · 내집마련 · 생애최초 · 황*석님</p></div>
+          <!-- 복제: 2 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">약속된 시간보다 한참 지나서까지 하나라도 더 알려주려고 계속 설명해주시는 모습에서 진짜 열정적인 분이구나 느꼈습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"현실적으로 선택할 수 있는 방향을 구체적으로 제안해주셨습니다"</span></p><p class="text-sm text-gray-500">수원 30대 · 내집마련+투자 · 직장인 · 이*수님</p></div><!-- 복제: 4 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">기대 이상의 세심한 상담이었습니다. 덕분에 남편이랑 앞으로의 투자 방향성을 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"기대 이상의 세심한 상담이었습니다"</span></p><p class="text-sm text-gray-500">서울 마포 30대 · 투자 · 신혼부부 · 안*정님</p></div><!-- 복제: 28 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">저희 부부의 투자 마인드부터 바뀌었습니다. 무엇을 공부하고 준비해야 하는지까지 정리돼 바로 움직일 수 있었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"부부가 같은 방향을 보게 됐습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 내집마련+투자 · 신혼부부 · 김*민님</p></div><!-- 복제: 6 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">반신반의하며 상담을 신청했는데 명확한 투자 방향을 잡을 수 있었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"솔직히 반신반의했는데, 코칭 후 확신이 생겼습니다"</span></p><p class="text-sm text-gray-500">부산 30대 · 내집마련 · 싱글 · 윤*아님</p></div><!-- 복제: 8 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">투자는 하고싶은데 앞이 깜깜해서 코칭 신청했는데 기대 이상이었습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"가이드 주신대로 열심히 해보겠습니다"</span></p><p class="text-sm text-gray-500">서울 강남 30대 · 투자 · 직장인 · 권*우님</p></div><!-- 복제: 10 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">구체적인 단지까지 추천해주셔서 바로 매물 보러 다녔습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"상담 후 바로 행동에 옮길 수 있었습니다"</span></p><p class="text-sm text-gray-500">천안 40대 · 갈아타기 · 부부 · 서*진님</p></div><!-- 복제: 12 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">혼자 공부하면서 놓치고 있던 부분을 정확하게 짚어주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"투자 방향성이 완전히 달라졌습니다"</span></p><p class="text-sm text-gray-500">대전 30대 · 투자 · 직장인 · 강*원님</p></div><!-- 복제: 14 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">지금 사야 하는지 기다려야 하는지 명확한 답을 주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"매수 타이밍까지 잡아주셔서 감사합니다"</span></p><p class="text-sm text-gray-500">세종 40대 · 투자 · 자영업 · 신*경님</p></div><!-- 복제: 16 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부부가 함께 상담받으니 의사결정이 훨씬 빨라졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"남편과 함께 들었는데 둘 다 만족했습니다"</span></p><p class="text-sm text-gray-500">서울 강서 30대 · 내집마련 · 부부동반 · 유*리님</p></div><!-- 복제: 30 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">결혼을 앞두고 집과 투자 방향을 같이 고민했는데 현실적으로 가능한 선택지가 정리됐습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"앞으로의 투자 방향성이 잡혔습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 내집마련+투자 · 결혼예정 · 권*주님</p></div><!-- 복제: 18 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산 용어도 모르는 상태에서 시작했는데 하나하나 쉽게 알려주셨습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"초보자 눈높이에 맞춰 설명해주셨습니다"</span></p><p class="text-sm text-gray-500">대구 20대 · 내집마련 · 사회초년생 · 최*은님</p></div><!-- 복제: 20 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">유튜브에서만 보다가 실제 상담받으니 확실히 다릅니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"다른 상담과는 차원이 다릅니다"</span></p><p class="text-sm text-gray-500">부산 40대 · 투자 · 자영업 · 배*선님</p></div><!-- 복제: 22 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">1년 뒤 계획이었는데 지금이 적기라는 조언 덕분에 좋은 매물 잡았습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"내집마련 타이밍을 정확히 잡았습니다"</span></p><p class="text-sm text-gray-500">평택 30대 · 내집마련 · 신혼부부 · 정*희님</p></div><!-- 복제: 24 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">진심으로 도와주고 싶어하시는 마음이 느껴졌습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"왠지 친한 지인처럼 상담해주셨습니다"</span></p><p class="text-sm text-gray-500">울산 30대 · 내집마련+투자 · 맞벌이 · 노*정님</p></div><!-- 복제: 32 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">혼자 고민할 때는 흔들렸는데 카톡 상담까지 남아 있어 실행하면서 다시 물어볼 수 있다는 점이 안심됐습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"상담 후에도 이어지는 점이 든든했습니다"</span></p><p class="text-sm text-gray-500">수도권 30대 · 투자 · 부부 · 원*희님</p></div><!-- 복제: 26 --><div class="review-card w-[300px] md:w-[360px] flex-shrink-0 min-h-[220px] bg-white shadow-md rounded-2xl p-6"><div class="review-stars mb-3" aria-label="5점">★★★★★</div><p class="text-sm text-gray-700 leading-relaxed mb-3 word-keep">부동산의 ㅂ자도 모르는 초심자였는데 유튜브 보고 상담 신청했습니다</p><p class="font-bold word-keep leading-snug text-sm mb-3"><span class="hl-orange text-brand-orange">"유튜브 보고 신청했는데 기대 이상이었습니다"</span></p><p class="text-sm text-gray-500">경기 30대 · 내집마련 · 생애최초 · 황*석님</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 8항목 패키지 ===== -->
+  <section data-section="package" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative overflow-hidden">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">06 패키지</span>
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+      <div class="text-center mb-14" data-reveal>
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-4 py-2 text-brand-orange"><iconify-icon icon="solar:case-round-minimalistic-bold-duotone" class="text-xl"></iconify-icon><p class="font-display font-black text-lg">코칭 패키지</p></div>
+        <h2 class="mt-4 text-4xl md:text-5xl font-display font-black text-brand-dark word-keep">코칭 신청 시 함께 제공되는 8가지</h2>
+        <p class="mt-4 text-gray-500 word-keep">상담 전 정리부터 상담 후 실행까지, 필요한 자료와 지원을 함께 제공합니다.</p>
+      </div>
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2" data-stagger>
+        <div class="package-postit bg-[#fff8e7] p-6"><iconify-icon icon="solar:wallet-money-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">예산·대출 분석</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">내 자금 범위와 대출 가능선을 먼저 정리합니다.</p></div>
+        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:chat-round-dots-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">1:1 질의응답</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 후 90일 동안 결정 과정의 질문을 이어서 받습니다.</p></div>
+        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:map-point-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">맞춤 단지 선정</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">예산과 우선순위에 맞는 지역·단지 후보를 압축합니다.</p></div>
+        <div class="package-postit bg-[#fffaf2] p-6"><iconify-icon icon="solar:chart-2-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">포트폴리오 점검</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">집 구매가 전체 자산 계획 안에서 맞는지 함께 봅니다.</p></div>
+        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:document-text-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">자산관리시트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">상담 내용을 숫자로 바로 정리할 수 있는 시트를 제공합니다.</p></div>
+        <div class="package-postit bg-[#fff8e7] p-6"><iconify-icon icon="solar:checklist-minimalistic-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">올인원 체크리스트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">방문·계약·잔금까지 놓치기 쉬운 항목을 정리합니다.</p></div>
+        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:clipboard-list-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">상담 리포트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">상담 핵심 결론과 판단 기준을 문서로 남겨드립니다.</p></div>
+        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:target-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">액션플랜 제공</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">상담 후 바로 실행할 다음 행동 순서를 정리합니다.</p></div>
+      </div>
+      <div class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4" data-reveal>
+        <div class="v3-metric-card"><strong>100++</strong><span>1:1 상담</span><em>+ 12년 경험</em></div>
+        <div class="v3-metric-card"><strong>4.97</strong><span>만족도 / 5.0</span><em>+ 실제 후기 기반</em></div>
+        <div class="v3-metric-card"><strong>25%</strong><span>매수 보류 비율</span><em>+ 필요한 말만</em></div>
+        <div class="v3-metric-card"><strong>90일</strong><span>코칭 후 케어</span><em>+ 카톡 무제한</em></div>
+      </div>
+	      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
+	        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
+	          <p class="text-sm font-black">최*윤님 · 서울 용산 30대</p>
+	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep">"상담 리포트 덕분에 부부가 같은 기준으로 이야기할 수 있었습니다."</p>
+	        </div>
+	        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
+	          <p class="text-sm font-black">박*준님 · 경기 안양 40대</p>
+	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep">"체크리스트를 보고 계약 전에 놓친 부분을 다시 확인했습니다."</p>
+	        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 06-1 90일 카톡 질의응답 ===== -->
+  <section data-section="qna-support" class="max-w-4xl mx-auto bg-[#f7ecd8] py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">06-1 카톡질문</span>
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+	      <div class="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <div data-reveal>
+          <p class="text-brand-orange font-display font-black text-sm tracking-[0.18em] uppercase">90 Days Q&A</p>
+          <h2 class="mt-4 text-4xl md:text-5xl font-display font-black leading-tight tracking-tight text-brand-dark word-keep">상담 끝나고도,<br>계속 물어볼 수 있게.</h2>
+          <p class="mt-5 text-gray-600 leading-relaxed word-keep">집은 상담 당일에 끝나는 문제가 아닙니다. 매물 비교, 대출 조건, 계약 전 체크처럼 실행 중 생기는 질문은 최대 90일 동안 카카오톡으로 이어갑니다.</p>
+          <div class="mt-7 grid grid-cols-2 gap-3 text-sm font-bold text-brand-dark">
+            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">매물 비교</div>
+            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">계약 전 체크</div>
+            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">대출 조건 질문</div>
+            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">실행 순서 점검</div>
+          </div>
+        </div>
+        <div class="v3-chat-phone" data-reveal="right" aria-label="90일 카카오톡 질의응답 예시">
+          <div class="flex items-center justify-between px-5 py-4 text-white">
+            <div class="font-display font-black">← 우재</div>
+            <div class="text-sm font-bold text-white/70">● 온라인</div>
+          </div>
+          <div class="v3-chat-screen space-y-4">
+            <p class="text-center text-xs font-bold text-slate-500">2026년 4월 28일</p>
+            <div class="v3-chat-bubble v3-chat-user">안녕하세요! 분당쪽 매물 보고 있는데 지금 사도 될까요?</div>
+            <div class="v3-chat-bubble v3-chat-coach">안녕하세요 :) 어떤 단지 보고 계셨어요?</div>
+            <div class="v3-chat-bubble v3-chat-user">정자동 OO마을이요. 12억 정도예요</div>
+            <div class="v3-chat-bubble v3-chat-coach">예산이랑 대출 어떻게 잡으셨어요? 사전 질문지 기준으로 같이 볼게요.</div>
+            <div class="v3-chat-bubble v3-chat-coach">
+              <span class="text-brand-orange">사전 질문지</span><br>
+              예산·대출·우선순위 1분 체크
+            </div>
+          </div>
+	        </div>
+	      </div>
+	      <div class="mt-16" data-reveal>
+	        <p class="text-brand-orange font-display font-black text-sm uppercase">How it works</p>
+	        <h3 class="mt-3 text-4xl md:text-5xl font-display font-black leading-tight text-brand-dark word-keep">이렇게 진행됩니다</h3>
+	        <div class="mt-8 grid gap-5 md:grid-cols-2">
+	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-red-500">STEP 01 · 신청</p><div class="v3-chat-bubble v3-chat-user">상담 신청합니다!</div><div class="v3-chat-bubble v3-chat-coach mt-3">네 안녕하세요 :) 사전질문지 12시간 내로 보내드려요.</div></div>
+	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-[#18aaa1]">STEP 02 · 진단</p><div class="v3-chat-bubble v3-chat-coach">예산이랑 대출, 우선순위 같이 정리해볼게요.</div><div class="v3-chat-bubble v3-chat-user mt-3">네 부탁드려요!</div></div>
+	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-[#d19a00]">STEP 03 · 코칭</p><div class="v3-chat-bubble v3-chat-coach">구글미트 입장해주세요. 50분 화상 코칭 시작합니다.</div><div class="v3-chat-bubble v3-chat-user mt-3">들어갑니다 :)</div></div>
+	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-brand-dark">STEP 04 · 90일 케어</p><div class="v3-chat-bubble v3-chat-user">계약하기 전에 한 번만 더 봐주세요!</div><div class="v3-chat-bubble v3-chat-coach mt-3">물론이죠 :) 계약서 보내주세요.</div></div>
+	        </div>
+	      </div>
+	      <div class="mt-14 bg-white rounded-3xl p-6 md:p-8" data-reveal>
+	        <h3 class="text-3xl md:text-4xl font-display font-black text-brand-dark word-keep">실제 후기 <span class="text-brand-orange">4.97/5.0</span></h3>
+	        <div class="mt-6 grid gap-3 md:grid-cols-2">
+	          <div class="flex gap-4 rounded-2xl bg-[#f0f8ff] p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#ff6b5b] font-black text-white">민</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"계약서 보기 전에 확인할 포인트가 정리됐습니다"</p><p class="mt-2 text-sm text-gray-500">서울 서초 30대 민*재 · 맞벌이</p></div></div>
+	          <div class="flex gap-4 rounded-2xl bg-[#fff8e7] p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#4ecdc4] font-black text-white">한</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"대출 한도가 바뀐 뒤에도 방향을 다시 잡았습니다"</p><p class="mt-2 text-sm text-gray-500">성남 40대 한*주 · 갈아타기</p></div></div>
+	          <div class="flex gap-4 rounded-2xl bg-[#f0f8ff] p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#f4c430] font-black text-white">배</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"실행 순서가 정리돼서 바로 움직였습니다"</p><p class="mt-2 text-sm text-gray-500">구미 30대 배*린 · 내집마련</p></div></div>
+	          <div class="flex gap-4 rounded-2xl bg-[#fff8e7] p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#6b8cae] font-black text-white">임</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"혼자 검색하던 시간이 줄고 비교 기준이 생겼습니다"</p><p class="mt-2 text-sm text-gray-500">포항 40대 임*석 · 투자</p></div></div>
+	        </div>
+	      </div>
+		      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
+		        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
+		          <p class="text-sm font-black">정*민님 · 남양주 30대</p>
+		          <p class="mt-2 text-lg font-display font-black word-keep">"매물 보러 가기 전 카톡으로 한 번 더 점검받을 수 있어 안심됐습니다."</p>
+		        </div>
+		        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
+		          <p class="text-sm font-black">서*아님 · 부천 30대</p>
+		          <p class="mt-2 text-lg font-display font-black word-keep">"대출 조건이 바뀌었을 때도 바로 물어볼 곳이 있어서 좋았습니다."</p>
+		        </div>
+	      </div>
+	    </div>
+	  </section>
+
+  <!-- ===== 07 상품/가격 ===== -->
+  <section data-section="pricing" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">07 상품/가격</span>
+
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+      <div class="text-center mb-14" data-reveal>
+        <div class="mb-4 flex justify-center"><iconify-icon icon="solar:tag-price-bold-duotone" class="text-4xl text-brand-orange"></iconify-icon></div>
+        <h2 class="text-4xl md:text-5xl font-display font-black tracking-tight leading-tight word-keep">코칭 안내</h2>
+      </div>
+	      <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 mb-6" data-reveal>
+        <div class="relative flex h-full flex-col rounded-[18px] border-2 border-brand-orange bg-white p-7 md:p-9 shadow-[0_18px_42px_rgba(255,107,0,0.10)]">
+          <span class="absolute -top-4 left-7 rounded-full bg-brand-orange px-5 py-1.5 text-sm font-bold text-white">오픈기념 20% 할인</span>
+          <div class="mb-5 flex min-h-[44px] items-center justify-between gap-3">
+            <h3 class="text-2xl md:text-3xl font-bold text-brand-orange">코칭 A</h3>
+          </div>
+          <div class="mb-8">
+            <div class="flex flex-wrap items-end gap-x-5 gap-y-2">
+              <p class="text-5xl md:text-[56px] font-bold tracking-tight text-black">400,000 <span class="text-base font-medium text-gray-600">원</span></p>
+              <span class="price-strike text-base font-semibold">500,000<span class="won">원</span></span>
+            </div>
+          </div>
+          <div class="mb-7 flex min-h-[72px] flex-col gap-3 rounded-2xl bg-orange-50 px-5 py-4 sm:flex-row sm:items-center">
+            <span class="shrink-0 rounded-full bg-brand-orange px-3 py-1 text-sm font-bold text-white">상담방식</span>
+            <p class="text-lg font-bold text-brand-dark word-keep">1:1 상담 + 무제한 질의응답(카톡)</p>
+          </div>
+	          <ul class="space-y-3 text-base leading-relaxed">
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>온라인 화상회의 약 50분</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>코칭 후 최대 90일간 질의응답</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>부부동반 가능</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>하루 1명만 진행</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>상담 리포트 + 자산관리시트 + 체크리스트 PDF</li>
+	          </ul>
+	        </div>
+        <div class="flex h-full flex-col rounded-[18px] border border-gray-200 bg-white p-7 md:p-9 shadow-[0_18px_42px_rgba(15,23,42,0.06)]">
+          <div class="mb-5 flex min-h-[44px] items-center justify-between gap-3">
+            <h3 class="text-2xl md:text-3xl font-bold text-brand-dark">코칭 B</h3>
+          </div>
+          <div class="mb-4">
+            <div class="flex flex-wrap items-end gap-x-5 gap-y-2">
+              <p class="text-5xl md:text-[56px] font-bold tracking-tight text-black">960,000 <span class="text-base font-medium text-gray-600">원</span></p>
+              <span class="price-strike text-base font-semibold">1,200,000<span class="won">원</span></span>
+            </div>
+            <p class="mt-3 text-sm font-bold text-brand-orange">오픈기념 20% 할인</p>
+          </div>
+          <div class="mb-7 flex min-h-[72px] flex-col gap-3 rounded-2xl bg-gray-50 px-5 py-4 sm:flex-row sm:items-center">
+            <span class="shrink-0 rounded-full bg-gray-700 px-3 py-1 text-sm font-bold text-white">상담방식</span>
+            <p class="text-lg font-bold text-brand-dark word-keep">코칭 A + 동행임장 1회</p>
+          </div>
+	          <ul class="space-y-3 text-base leading-relaxed text-gray-600">
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-gray-500 text-xl flex-shrink-0"></iconify-icon>코칭 A 전체 포함</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-gray-500 text-xl flex-shrink-0"></iconify-icon><span class="font-bold text-brand-dark">+ 동행임장 1회</span></li>
+	          </ul>
+	        </div>
+	      </div>
+	      <div class="mb-8 text-center" data-reveal>
+	        <p class="inline-flex items-center justify-center rounded-full border border-brand-orange/25 bg-white px-5 py-2 text-sm font-bold text-gray-700 shadow-sm word-keep">코칭 A와 B는 <span class="mx-1 text-brand-orange">동행임장 1회 제외</span> 모두 동일합니다</p>
+	      </div>
+      <div class="text-center mb-10" data-reveal>
+        <p class="text-base md:text-lg text-gray-600 word-keep">믿고 함께해주신 분들께 드리는<br class="sm:hidden"> <span class="font-bold underline underline-offset-4 decoration-2">감사 혜택</span>입니다</p>
+        <p class="text-base md:text-lg text-gray-600 word-keep mt-2">퀄리티 유지를 위해 <span class="font-bold">가격이 지속적으로 인상</span>됩니다</p>
+      </div>
+	      <div class="rounded-3xl border border-white/15 bg-[#2b2b2b] p-8 md:p-12 text-center shadow-xl shadow-slate-900/10" data-reveal="scale">
+		        <p class="text-xl md:text-2xl text-white word-keep mb-6 font-display font-black">사고 후회하지 말고, 사기 전에!</p>
+		        <p class="text-3xl md:text-[38px] lg:text-[44px] font-display font-black text-white word-keep mb-8 leading-[1.28]">내 예산에 맞는 최고의 내집마련<br><span class="text-brand-orange">구체적으로</span> 알려드립니다!</p>
+		        <div class="w-16 h-0.5 bg-white/25 mx-auto mb-6"></div>
+	        <p class="text-gray-300 text-base word-keep italic">"혼자 판단하기 전에 기준을 먼저 잡은 게 가장 컸습니다"</p>
+		        <p class="text-gray-500 text-sm mt-2">— 서울 성동 30대 이*나 님 · 실제 코칭 후기</p>
+	      </div>
+    </div>
+  </section>
+
+  <!-- ===== 신청 후 진행 순서 + 꼭 확인해주세요 ===== -->
+  <section data-section="coaching-steps" class="max-w-4xl mx-auto bg-[#e8f4ee] py-16 md:py-24 relative overflow-hidden">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">08 투자코칭 순서</span>
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+      <div class="text-center mb-14" data-reveal>
+        <p class="text-brand-orange font-display font-black text-sm tracking-[0.18em] uppercase">Route Map</p>
+        <h2 class="mt-3 text-3xl md:text-5xl font-display font-black text-brand-dark word-keep">상담까지 가는 길</h2>
+        <p class="mt-4 text-gray-600 word-keep">신청만으로 일정이 확정되지 않습니다. 결제 확인 후 사전질문지와 일정 안내를 보내드립니다.</p>
+      </div>
+      <div class="relative grid gap-5 md:grid-cols-5" data-reveal>
+        <div class="v3-route-line"></div>
+        <div class="relative rounded-2xl border-2 border-brand-dark bg-white p-5 shadow-[5px_5px_0_#121826]">
+          <div class="v3-route-dot bg-[#F4C430]">1</div>
+          <p class="mt-5 font-display font-black text-brand-dark word-keep">신청 접수</p>
+          <p class="mt-2 text-sm text-gray-600 word-keep">성함, 연락처, 상담 목적만 남깁니다.</p>
+        </div>
+        <div class="relative rounded-2xl border-2 border-brand-dark bg-white p-5 shadow-[5px_5px_0_#121826]">
+          <div class="v3-route-dot bg-[#4ECDC4]">2</div>
+          <p class="mt-5 font-display font-black text-brand-dark word-keep">신청 확정</p>
+          <p class="mt-2 text-sm text-gray-600 word-keep">계좌이체를 기본으로, 카드결제는 보조로 안내합니다.</p>
+        </div>
+        <div class="relative rounded-2xl border-2 border-brand-dark bg-white p-5 shadow-[5px_5px_0_#121826]">
+          <div class="v3-route-dot bg-[#FF6B5B] text-white">3</div>
+          <p class="mt-5 font-display font-black text-brand-dark word-keep">사전질문지</p>
+          <p class="mt-2 text-sm text-gray-600 word-keep">결제 확인 후 12시간 내 카카오톡으로 발송합니다.</p>
+        </div>
+        <div class="relative rounded-2xl border-2 border-brand-dark bg-white p-5 shadow-[5px_5px_0_#121826]">
+          <div class="v3-route-dot bg-[#FFF8E7]">4</div>
+          <p class="mt-5 font-display font-black text-brand-dark word-keep">일정 선택</p>
+          <p class="mt-2 text-sm text-gray-600 word-keep">질문지 확인 후 가능한 시간대를 안내합니다.</p>
+        </div>
+        <div class="relative rounded-2xl border-2 border-brand-dark bg-white p-5 shadow-[5px_5px_0_#121826]">
+          <div class="v3-route-dot bg-brand-orange text-white">5</div>
+          <p class="mt-5 font-display font-black text-brand-dark word-keep">1:1 코칭</p>
+          <p class="mt-2 text-sm text-gray-600 word-keep">50분 코칭 후 리포트와 90일 질문으로 이어갑니다.</p>
+        </div>
+      </div>
+      <!-- 꼭 확인해주세요 -->
+      <div class="mt-10 bg-white/75 border border-brand-dark/10 rounded-2xl p-8 md:p-10" data-reveal>
+        <h3 class="text-xl md:text-2xl font-display font-black text-brand-dark mb-6 word-keep">꼭 확인해주세요!</h3>
+        <ul class="space-y-4 text-gray-600 text-sm leading-relaxed">
+	          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>환불은 환불 정책에 따라 진행됩니다.</li>
+          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>코칭 일정은 최대 4주 단위로 오픈되며, 퀄리티 유지를 위해 소수로 진행합니다.</li>
+          <li class="flex gap-2 word-keep"><span class="text-gray-400 flex-shrink-0">•</span>코칭은 최선의 의사결정을 돕기 위한 과정이며, 최종 결정 및 책임은 본인에게 있음을 안내드립니다.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 09 CTA ===== -->
+  <section data-section="cta" class="max-w-4xl mx-auto bg-brand-beige pt-16 pb-32 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">09 CTA</span>
+    <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-8 text-center">
+	      <div class="relative mb-20" data-reveal>
+            <div class="money-sparkles" aria-hidden="true"><span>₩</span><span>+₩</span><span>₩</span></div>
+	        <p class="text-2xl md:text-3xl font-display font-black word-keep text-red-600 mb-6">혼자 스트레스 받지 마세요!</p>
+	        <p class="relative text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-tight"><span class="text-red-600">최선의 결과</span>로<br>보답드리겠습니다</p>
+	      </div>
+      <div class="mb-16" data-reveal="scale">
+        <div class="text-6xl md:text-7xl mb-8">🏠</div>
+        <p class="text-2xl md:text-3xl font-display font-black word-keep text-brand-dark mb-6">지금도 조용히 '집'으로<br>인생이 바뀐 분들이 많습니다</p>
+        <p class="text-lg text-gray-500 word-keep mb-3">💰 후회없는 내집마련 하시기 바랍니다</p>
+        <p class="text-sm text-gray-400 word-keep">(매주 수많은 분들이 함께 결과를 내고 있습니다)</p>
+      </div>
+	      <div data-reveal>
+	        <button class="scroll-to-form bg-brand-orange text-white px-10 sm:px-16 py-6 sm:py-8 text-xl sm:text-2xl md:text-3xl font-display font-black rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-transform glow-pulse mb-8">지금 바로 신청하세요 <iconify-icon icon="solar:arrow-right-bold" class="align-middle"></iconify-icon></button>
+	        <p class="text-sm text-gray-500 mt-4 word-keep">*퀄리티 유지를 위해 하루 최대 1명만 진행합니다</p>
+	        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-gray-500 mb-6 mt-6">
+	          <span class="flex items-center gap-1.5"><iconify-icon icon="solar:clock-circle-linear"></iconify-icon> 하루 1명 한정</span>
+	          <span class="flex items-center gap-1.5"><iconify-icon icon="solar:videocamera-record-linear"></iconify-icon> 온라인 상담</span>
+	          <span class="flex items-center gap-1.5"><iconify-icon icon="solar:shield-check-linear"></iconify-icon> 최대 90일 케어</span>
+	          <span class="flex items-center gap-1.5"><iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon> 부부동반 가능</span>
+	        </div>
+	        <p class="text-red-600 text-xl md:text-2xl font-display font-black word-keep pulse-attention">지금 바로 신청하세요</p>
+		        <div class="cta-down-arrow animate-bounce" aria-hidden="true">
+                  <svg viewBox="0 0 64 74" focusable="false">
+                    <path class="arrow-main" d="M32 6V45M14 29L32 47L50 29"/>
+                    <path class="arrow-echo" d="M18 48L32 62L46 48"/>
+                  </svg>
+		        </div>
+	      </div>
+    </div>
+  </section>
+
+  <!-- ===== 10 상담 신청 폼 ===== -->
+  <section id="apply-form" data-section="apply-form" class="max-w-4xl mx-auto bg-gradient-to-b from-brand-beige to-white py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">10 상담 신청 폼</span>
+    <div class="max-w-2xl mx-auto px-6 sm:px-8 lg:px-8">
+	      <h2 class="text-3xl md:text-4xl font-display font-black text-center text-brand-dark mb-4" data-reveal>상담 신청</h2>
+	      <p class="text-center text-gray-500 mb-12 word-keep" data-reveal>신청서를 제출하면 결제 방법 선택 화면이 이어집니다</p>
+
+      <div id="consultForm" class="space-y-8 bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-10" data-reveal>
+        <!-- 1. 성함 -->
+        <div>
+          <label class="block text-brand-dark font-bold mb-2">1. 성함 <span class="text-brand-orange">*</span></label>
+          <input type="text" id="f-name" required placeholder="이름을 입력해주세요" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange focus:bg-white transition">
+        </div>
+
+        <!-- 2. 휴대폰 번호 -->
+        <div>
+          <label class="block text-brand-dark font-bold mb-2">2. 휴대폰 번호 <span class="text-brand-orange">*</span></label>
+          <input type="tel" id="f-phone" required placeholder="010-0000-0000" inputmode="numeric" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-brand-dark placeholder-gray-400 focus:outline-none focus:border-brand-orange focus:bg-white transition">
+        </div>
+
+        <!-- 3. 상담 목적 -->
+        <div id="f-purpose-wrap">
+          <label class="block text-brand-dark font-bold mb-3">3. 상담 목적 <span class="text-brand-orange">*</span></label>
+          <div class="grid gap-2 sm:grid-cols-3">
+            <label class="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-brand-dark cursor-pointer"><input type="radio" name="purpose" value="내집마련" class="radio-round"> 내집마련</label>
+            <label class="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-brand-dark cursor-pointer"><input type="radio" name="purpose" value="투자·매도 고민" class="radio-round"> 투자·매도 고민</label>
+            <label class="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-brand-dark cursor-pointer"><input type="radio" name="purpose" value="기타" class="radio-round"> 기타</label>
+          </div>
+          <input type="hidden" id="f-memo" value="">
+        </div>
+
+        <!-- 결제 안내 -->
+        <div id="f-deposit-wrap">
+          <label class="block text-brand-dark font-bold mb-3">결제 안내</label>
+          <div class="bg-orange-50 border border-orange-200 rounded-xl p-5 mb-4">
+            <p class="text-gray-700 text-sm font-bold word-keep">신청서를 제출하면 완료 화면에서 신청 확정 방법을 안내합니다.</p>
+            <p class="text-gray-500 text-sm mt-2 word-keep">현재는 계좌이체를 기본으로 안내하고, 카드결제는 가능한 카드사에 한해 보조 옵션으로 제공합니다. 결제·입금 확인 후 12시간 내 카카오톡으로 사전질문지를 안내드립니다.</p>
+          </div>
+        </div>
+
+        <!-- 4. 개인정보 수집 동의 -->
+        <div>
+          <label class="block text-brand-dark font-bold mb-3">4. 개인정보 수집 동의 <span class="text-brand-orange">*</span></label>
+	          <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 text-gray-500 text-sm leading-relaxed mb-3">
+	            <p>1. 개인정보의 수집 이용 목적: 연락처 수집</p>
+	            <p>2. 수집하는 개인정보의 항목: 성함, 휴대폰 번호, 신청 목적</p>
+            <p>3. 개인정보의 보유 및 이용 기간: 개인정보의 수집·이용 목적 달성시까지, 또는 고객이 자신의 개인정보제공의 동의를 철회한 때. 단, 관련 법령의 규정에 의하여 개인정보를 보유할 필요가 있는 경우, 해당 법령에서 정한 기간까지.</p>
+            <p>4. 본 이벤트 참여 고객은 개인정보 수집, 활용에 대하여 동의를 거부할 권리가 있으며, 비동의 시 신청이 정상적으로 접수 되지 않습니다. 동의하시는 경우, 체크박스를 클릭해주세요.</p>
+          </div>
+          <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="checkbox" id="f-privacy" required class="cb-round"> 동의</label>
+        </div>
+
+        <!-- 제출 버튼 -->
+        <div class="pt-4">
+          <button type="button" id="submitBtn" class="w-full bg-brand-orange text-white py-5 text-xl font-display font-black rounded-2xl hover:scale-[1.01] active:scale-[0.99] transition-transform shadow-lg shadow-orange-200/50">제출하기 →</button>
+          <p id="form-status" class="text-center text-sm mt-4 hidden"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 11 FAQ ===== -->
+  <section data-section="faq" class="max-w-4xl mx-auto bg-white py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">11 FAQ</span>
+    <div class="max-w-3xl mx-auto px-6 sm:px-8 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-display font-black text-center mb-12 word-keep" data-reveal>자주 묻는 질문</h2>
+      <div class="space-y-3" data-reveal id="faq-list">
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭을 통해 어떤 도움을 받을 수 있나요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">신청자의 예산, 대출 한도, 생활 패턴을 분석하여 맞춤형 내집마련 로드맵을 제시합니다.<br><br>• 예산·대출 분석 → 실현 가능한 자금 계획<br>• 지역·단지 선정 → 가장 적합한 추천지 제공<br>• 매물 비교·검토 → 어떤 물건이 더 나은지 판단 기준 제시<br>• 매수 의사결정 지원 → 사야 하는지, 말아야 하는지 명확한 답변<br>• 코칭 후 <strong>최대 90일간 질의응답</strong><br><br>실제 신청자 중 약 25%에게는 <strong>"지금 매수하지 마세요"</strong>라고 말씀드립니다.</div></details>
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭 신청은 언제 하는 게 좋을까요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep"><strong>내집마련을 고민하기 시작했을 때</strong>가 가장 좋은 타이밍입니다.<br><br>• 예산이 적어도, 아직 구체적 계획이 없어도 상관없습니다<br>• 초기에 방향을 잡아야 시행착오가 줄어듭니다<br>• 매수 직전뿐 아니라, 1~2년 뒤 계획인 분들도 많이 코칭을 받으십니다</div></details>
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 지금 사는 게 맞는지 잘 모르겠어요.</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">실제 신청자 중 <strong>약 25%는 "매수하지 말라"고</strong> 말씀드립니다.<br><br>"사세요/사지 마세요"로 끝나는 게 아니라, 어떤 상황이든 <strong>다음 단계가 명확해지도록</strong> 도와드립니다.</div></details>
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 특정 지역, 아파트를 추천해 주시나요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">물론입니다. <strong>예산과 상황에 맞는 지역·단지를 함께 분석합니다.</strong><br><br>다만, 무조건 내집마련이나 아파트 매수만 고집하지는 않습니다. 때로는 "지금은 ETF에 집중하고, 1년 후 매수하세요"라는 답변을 드리기도 합니다.</div></details>
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 자산이 적어도 코칭이 가능할까요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep"><strong>자산 5천만원 미만</strong>으로 코칭을 받으시는 분들도 많습니다. 자금이 적을수록 <strong>초기 방향 설정이 더 중요</strong>합니다.</div></details>
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭 A와 B의 차이는 무엇인가요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep"><strong>동행임장 1회 제외, 모두 동일</strong>합니다.<br><br>• 코칭 A (400,000원): 온라인 화상 코칭 약 50분 + 최대 90일 질의응답 + 상담 리포트 + 자산관리시트 + 체크리스트 PDF<br>• 코칭 B (960,000원): 코칭 A 전체 + 동행임장 1회</div></details>
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭은 어떻게 진행되나요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">1. 신청서 제출<br>2. 신청 완료 화면에서 카드결제 또는 계좌이체 선택<br>3. 결제·입금 확인 후 12시간 내 사전질문지 안내<br>4. 사전질문지 작성<br>5. 카카오톡으로 코칭 일정 확정<br>6. <strong>Google Meet 온라인 1:1 코칭 약 50분</strong> (부부동반 가능)<br>7. 상담 리포트 및 자료 수령<br>8. 코칭 후 최대 90일 카카오톡 질의응답<br><br>코칭은 퀄리티 유지를 위해 소수로 진행합니다.</div></details>
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭을 꼭 받아야 하나요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">아닙니다. 유튜브 영상만으로도 충분히 공부하실 수 있습니다.<br><br>다만, 영상은 일반적인 내용이고 코칭은 "내 상황"에 맞춘 답변입니다. <strong>잘못된 선택 한 번이 수천만~수억 차이</strong>를 만들기 때문에, 중요한 결정 앞에서 전문가 의견을 듣는 것을 추천드립니다.</div></details>
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 코칭 이후에도 도움을 받을 수 있나요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">네. 코칭 후 <strong>최대 90일간</strong> 카카오톡으로 <strong>물건비교, 계약, 질의응답을 무제한</strong> 지원합니다.</div></details>
+        <details class="group border border-gray-200 rounded-xl"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep">Q. 혼자 준비할 때와 어떤 차이가 있을까요?</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-600 text-sm leading-relaxed word-keep">혼자 준비하면 <strong>"내가 모르는 걸 모릅니다."</strong><br><br>• 검색으로 찾은 정보는 편향되어 있을 수 있습니다<br>• 부동산 중개사는 거래 성사가 목적이라 객관적이지 않을 수 있습니다<br><br>"혼자 많이 고민하고 시행착오도 많았습니다. 선생님 덕분에 무엇을 먼저 해야할지 보이는 것 같습니다." — 실제 후기</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 환불규정 (폼 아래) -->
+  <section class="max-w-4xl mx-auto bg-white py-12">
+    <div class="max-w-2xl mx-auto px-6 sm:px-8 lg:px-8">
+      <details class="group border border-gray-200 rounded-xl bg-gray-50"><summary class="flex items-center justify-between px-6 py-5 cursor-pointer hover:bg-gray-50 transition-colors rounded-xl"><span class="font-bold word-keep text-gray-600">환불규정</span><span class="text-2xl text-gray-500 font-bold leading-none group-open:hidden">+</span><span class="text-2xl text-brand-orange font-bold leading-none hidden group-open:inline">−</span></summary><div class="px-6 pb-5 text-gray-500 text-sm leading-relaxed word-keep">• 결제 당일: 전액 환불<br>• 일정 확정 후 코칭일로부터 7일 전까지는 한정기간 및 코칭신청이 가능한 특성상, 아래와 같은 항목들을 위약금으로 차감합니다. (결제 금액의 50%)<br>&nbsp;&nbsp;- 코칭일 7일 전까지: 위약금(결제 금액의 50%) 공제 후 환불<br>&nbsp;&nbsp;- 코칭일 6일 전~당일: 환불금액 없음<br>&nbsp;&nbsp;- 코칭일 불참: 환불금액 없음<br>• 위약금 사유: 프로그램 운영비용, 코칭 사항에 대한 검토·준비 비용, 코칭 참여인원 미확보<br><br>환불 요청: contact@ourdongne.com 또는 카카오톡 채널로 문의</div></details>
+    </div>
+  </section>
+
+  <!-- ===== 하단 대기 신청 안내 ===== -->
+  <section class="max-w-4xl mx-auto bg-[#262626] px-6 py-14 text-center text-white relative">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-2xl md:text-3xl font-display font-black word-keep">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
+	      <button class="scroll-to-form mt-8 inline-flex items-center justify-center rounded-2xl bg-white px-8 py-4 shadow-lg transition-transform hover:scale-[1.02]">
+	        <span class="mr-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange text-white shadow-md"><iconify-icon icon="solar:user-id-bold" class="text-3xl"></iconify-icon></span>
+	        <span class="text-left"><span class="block text-sm font-bold text-gray-500">우리동네재테크</span><span class="block text-2xl md:text-3xl font-display font-black text-brand-dark">대기신청하기</span></span>
+	      </button>
+	      <div class="mt-5 flex justify-center">
+	        <a href="http://pf.kakao.com/_mcxnjX/friend" target="_blank" rel="noopener" class="kakao-channel-pill" aria-label="우리동네재테크 카카오톡 채널 추가하기">
+	          <span class="text-sm font-black">카카오톡 채널추가</span>
+	          <span class="ch">Ch</span>
+	          <span class="id"><span>우리동네재테크</span><span class="plus">+</span></span>
+	        </a>
+	      </div>
+	      <p class="mt-5 text-sm text-gray-300 word-keep">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
+    </div>
+  </section>
+
+  <!-- 서비스 고지 -->
+  <div class="max-w-4xl mx-auto px-6 sm:px-8 pb-12">
+    <p class="text-center text-gray-400 text-xs leading-relaxed">본 서비스는 내집마련 전략에 대한 정보 제공 목적의 컨설팅이며, 특정 매물의 매수·매도 추천 및 거래 알선을 하지 않습니다. 최종 투자 판단과 책임은 본인에게 있습니다.</p>
+  </div>
+
+  <!-- 완료 팝업 -->
+  <div id="successModal" class="fixed inset-0 bg-black/55 backdrop-blur-sm z-[9999] flex items-center justify-center hidden px-4">
+    <div class="bg-white rounded-3xl p-7 md:p-9 max-w-lg w-full text-left shadow-2xl">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p class="text-sm font-black text-brand-orange">신청 접수 완료</p>
+          <h3 class="mt-2 text-2xl md:text-3xl font-display font-black text-brand-dark word-keep">신청이 접수되었습니다.<br>아래에서 결제 방법을 선택해주세요.</h3>
+        </div>
+        <button id="closeModal" class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-xl font-black text-gray-500">×</button>
+      </div>
+      <p class="mt-4 text-gray-500 leading-relaxed word-keep">결제·입금 확인 후 12시간 내 카카오톡으로 사전질문지 안내를 보내드립니다.</p>
+      <div class="mt-6 grid gap-3">
+        <div class="rounded-2xl border-2 border-brand-orange bg-orange-50 p-5">
+          <p class="font-display font-black text-brand-dark">계좌이체로 신청 확정하기</p>
+          <p class="mt-2 text-sm text-gray-600">주식회사 우리동네사람들 · 하나은행 125-910032-26304</p>
+          <p class="mt-2 text-sm text-gray-500 word-keep">입금자명은 신청자명과 동일하게 보내주세요. 다르면 카카오톡으로 알려주세요.</p>
+        </div>
+        <a href="https://lst9485-alt.github.io/cdn-assets/homepage/coaching-payment-guide-v3.html" class="rounded-2xl border border-gray-200 bg-white px-5 py-4 font-display font-black text-brand-dark text-center">카드결제 안내 보기 <span class="block mt-1 text-xs font-bold text-gray-400">일부 카드사만 지원될 수 있습니다</span></a>
+        <p class="text-center text-xs text-gray-400 word-keep">현금영수증·세금계산서가 필요하시면 결제 안내 후 카카오톡으로 말씀해주세요.</p>
+      </div>
+	    </div>
+  </div>
+
+<script>
+// 아임웹 설정 → SEO → 공통 코드 삽입 → Footer Code
+  // ===== 폼 설정 (수정은 여기서만) =====
+  var FORM_CONFIG = {
+    scriptUrl: '',
+    webhookKey: ''
+  };
+  var V3_PREVIEW_MODE = true;
+
+  // 전화번호 자동 포맷 (010-1234-5678)
+	  function formatPhone(el) {
+	    var v = el.value.replace(/[^0-9]/g, '');
+	    if (v.length > 11) v = v.slice(0, 11);
+	    if (v.length > 7) el.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+	    else if (v.length > 3) el.value = v.slice(0,3) + '-' + v.slice(3);
+	    else el.value = v;
+	  }
+
+  // 기타의견 입력 시 자동으로 "기타" 체크
+  document.addEventListener('DOMContentLoaded', function() {
+    var memo = document.getElementById('f-memo');
+    if (memo) memo.addEventListener('input', function() {
+      if (memo.value.trim()) {
+        var cb = document.querySelector('input[name="purpose"][value="기타"]');
+        if (cb && !cb.checked) cb.checked = true;
+      }
+    });
+  });
+
+	  // 폼 제출
+	  function submitForm() {
+	    var name = document.getElementById('f-name').value.trim();
+	    var phone = document.getElementById('f-phone').value.replace(/[^0-9]/g, '');
+	    var purposes = Array.from(document.querySelectorAll('input[name="purpose"]:checked')).map(function(c){return c.value});
+	    var memo = document.getElementById('f-memo').value.trim();
+    var privacy = document.getElementById('f-privacy').checked;
+
+    // 검증 (순서대로)
+    if (!name) return showStatus('성함을 입력해주세요', 'error', 'f-name');
+    if (!phone || phone.length < 10) return showStatus('올바른 휴대폰 번호를 입력해주세요', 'error', 'f-phone');
+    if (purposes.length === 0) return showStatus('신청 목적을 최소 1개 선택해주세요', 'error', 'f-purpose-wrap');
+    if (!privacy) return showStatus('개인정보 수집 동의가 필요합니다', 'error', 'f-privacy');
+
+    var amount = 40;
+    var params = new URLSearchParams(window.location.search);
+    var utm = params.get('utm_campaign') || '';
+
+	    var payload = {
+	      key: FORM_CONFIG.webhookKey,
+	      name: name, phone: phone, email: '',
+	      purpose: purposes.join(','), memo: memo,
+	      amount: amount, depositor: '',
+	      utm: utm, receiptType: '결제 후 안내'
+	    };
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '제출 중...';
+    btn.classList.add('opacity-70');
+
+	    sendPayload(payload);
+	  }
+
+  function resetConsultForm() {
+    var form = document.getElementById('consultForm');
+    if (!form) return;
+    Array.from(form.querySelectorAll('input')).forEach(function(input) {
+      if (input.type === 'checkbox' || input.type === 'radio') input.checked = input.defaultChecked;
+      else if (input.type !== 'file') input.value = '';
+    });
+	  }
+
+	  function finishPreviewSubmit() {
+	    resetConsultForm();
+	    document.getElementById('successModal').classList.remove('hidden');
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = false;
+    btn.textContent = '제출하기 →';
+    btn.classList.remove('opacity-70');
+  }
+
+  function sendPayload(payload) {
+    if (V3_PREVIEW_MODE || !FORM_CONFIG.scriptUrl) {
+      finishPreviewSubmit();
+      return;
+    }
+    fetch(FORM_CONFIG.scriptUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+	      if (data.success) {
+	        resetConsultForm();
+	        document.getElementById('successModal').classList.remove('hidden');
+      } else {
+        showStatus(data.error || '제출에 실패했습니다. 다시 시도해주세요.', 'error', 'submitBtn');
+      }
+    })
+    .catch(function() {
+      showStatus('네트워크 오류가 발생했습니다. 다시 시도해주세요.', 'error', 'submitBtn');
+    })
+    .finally(function() {
+      var btn = document.getElementById('submitBtn');
+      btn.disabled = false;
+      btn.textContent = '제출하기 →';
+      btn.classList.remove('opacity-70');
+    });
+  }
+
+  function showStatus(msg, type, fieldId) {
+    var el = document.getElementById('form-status');
+    el.textContent = msg;
+    el.className = 'text-center text-sm mt-4 ' + (type === 'error' ? 'text-red-500 font-bold' : 'text-green-500');
+    el.classList.remove('hidden');
+    if (type === 'error' && fieldId) {
+      var field = document.getElementById(fieldId);
+      if (field) field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else if (type === 'error') {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  function initReviewMarquees() {
+    var tracks = document.querySelectorAll('.marquee-left, .marquee-right');
+    tracks.forEach(function(track) {
+      track.classList.remove('gap-5');
+      track.style.setProperty('gap', '0px', 'important');
+      if (track.dataset.marqueeReady === 'true') {
+        return;
+      }
+      var cards = Array.prototype.slice.call(track.children).filter(function(el) {
+        return el.classList && el.classList.contains('review-card');
+      });
+      var half = cards.length / 2;
+      if (!cards.length || half % 1 !== 0) return;
+      var firstSet = document.createElement('div');
+      var secondSet = document.createElement('div');
+      firstSet.className = 'marquee-set';
+      secondSet.className = 'marquee-set';
+      secondSet.setAttribute('aria-hidden', 'true');
+      cards.forEach(function(card, index) {
+        (index < half ? firstSet : secondSet).appendChild(card);
+      });
+      track.appendChild(firstSet);
+      track.appendChild(secondSet);
+      track.dataset.marqueeReady = 'true';
+    });
+    var started = false;
+    var start = function() {
+      if (started) return;
+      started = true;
+      tracks.forEach(function(track) {
+        if (track.dataset.marqueeReady === 'true') track.classList.add('is-running');
+      });
+    };
+    var startAfterPaint = function() {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(start);
+      });
+    };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(startAfterPaint);
+    }
+    setTimeout(startAfterPaint, 800);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initReviewMarquees();
+	    var phoneInput = document.getElementById('f-phone');
+	    if (phoneInput) phoneInput.addEventListener('input', function() { formatPhone(phoneInput); });
+	    var submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) submitBtn.addEventListener('click', submitForm);
+    var closeModal = document.getElementById('closeModal');
+    if (closeModal) closeModal.addEventListener('click', function() {
+      document.getElementById('successModal').classList.add('hidden');
+    });
+    document.querySelectorAll('.scroll-to-form').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var formSection = document.getElementById('apply-form');
+        if (formSection) formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    var stickyCta = document.getElementById('stickyCoachingCta');
+    var curriculumSection = document.querySelector('[data-section="curriculum"]');
+    var coachingStepsSection = document.querySelector('[data-section="coaching-steps"]');
+    function updateStickyCta() {
+      if (!stickyCta || !curriculumSection || !coachingStepsSection) return;
+      var y = window.scrollY || window.pageYOffset || 0;
+      var start = curriculumSection.offsetTop + Math.max(260, curriculumSection.offsetHeight * 0.72);
+      var end = coachingStepsSection.offsetTop + coachingStepsSection.offsetHeight - window.innerHeight * 0.25;
+      var visible = y >= start && y <= end;
+      stickyCta.classList.toggle('is-visible', visible);
+      stickyCta.setAttribute('aria-hidden', visible ? 'false' : 'true');
+    }
+    updateStickyCta();
+    window.addEventListener('scroll', updateStickyCta, { passive: true });
+    window.addEventListener('resize', updateStickyCta);
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
+    document.querySelectorAll('[data-nav-target]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var target = document.querySelector('[data-section="' + btn.dataset.navTarget + '"]');
+        if (target) target.scrollIntoView({ block: 'start' });
+      });
+    });
+    var chartObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.querySelectorAll('.chart-line,.chart-arrow').forEach(function(l){l.classList.add('animated')}); chartObs.unobserve(e.target); } });
+    }, { threshold: 0.3 });
+    var c = document.getElementById('chartContainer'); if (c) chartObs.observe(c);
+    var secObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting && e.target.dataset.section && typeof gtag==='function') gtag('event','section_view',{section_name:e.target.dataset.section}); });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('[data-section]').forEach(function(el) { secObs.observe(el); });
+    // Hero animation replay
+    var heroSection = document.querySelector('[data-section="hero"]');
+    if (heroSection) {
+      var heroObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          var words = e.target.querySelectorAll('.hero-word,.hero-main,.hero-cta,.hero-scroll');
+          if (e.isIntersecting) {
+            words.forEach(function(w) { w.style.animation = 'none'; w.offsetHeight; w.style.animation = ''; });
+          }
+        });
+      }, { threshold: 0.3 });
+      heroObs.observe(heroSection);
+    }
+  });
+  </script>
+</body>
+</html>
