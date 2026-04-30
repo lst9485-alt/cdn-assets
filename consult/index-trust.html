@@ -7,19 +7,21 @@
     <title>내집마련 코칭 - 상담 리포트 테스트</title>
     <style>
         :root {
-            --primary-navy: #102033;
-            --primary-blue: #226A8F;
-            --primary-dark-blue: #174D6A;
-            --primary-light: #EAF4F7;
-            --success-green: #2F7D62;
-            --warning-yellow: #C9862B;
-            --youtube-red: #B93832;
-            --text-primary: #141A1F;
-            --text-secondary: #56616B;
-            --text-tertiary: #8A95A0;
+            --primary-navy: #172338;
+            --primary-blue: #277C91;
+            --primary-dark-blue: #1F6072;
+            --primary-light: #EAF5F4;
+            --accent-warm: #D9893D;
+            --accent-soft: #FFF3E5;
+            --accent-green: #6C8B72;
+            --accent-green-soft: #EFF5EF;
+            --youtube-red: #B94A42;
+            --text-primary: #171B22;
+            --text-secondary: #59626E;
+            --text-tertiary: #8994A0;
             --surface: #FFFFFF;
-            --bg-gray: #F5F6F7;
-            --border-color: #DDE3E8;
+            --bg-gray: #F7F4EF;
+            --border-color: #E4E0D8;
             --shadow-sm: 0 2px 8px rgba(16, 32, 51, 0.05);
             --shadow-md: 0 10px 24px rgba(16, 32, 51, 0.08);
             --shadow-lg: 0 18px 42px rgba(16, 32, 51, 0.10);
@@ -49,9 +51,9 @@
         }
 
         .header {
-            background: var(--primary-navy);
+            background: linear-gradient(135deg, #172338 0%, #214457 58%, #6E5639 100%);
             color: white;
-            padding: 26px 34px;
+            padding: 28px 34px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -65,17 +67,44 @@
         .content { padding: 42px 40px 46px; }
 
         .intro-section { margin-bottom: 30px; }
-        .eyebrow { color: var(--primary-blue); font-size: 13px; font-weight: 800; margin-bottom: 10px; }
+        .eyebrow { color: var(--accent-warm); font-size: 13px; font-weight: 800; margin-bottom: 10px; }
         .intro-text { font-size: 31px; font-weight: 800; line-height: 1.32; margin-bottom: 10px; }
         .intro-text .highlight { color: var(--primary-blue); }
         .intro-subtext { max-width: 640px; font-size: 16px; color: var(--text-secondary); }
 
+        .flow-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 22px;
+            max-width: 740px;
+        }
+        .flow-chip {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 14px;
+            background: #FFFDF9;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .flow-chip strong {
+            display: block;
+            color: var(--text-primary);
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+        .flow-chip:nth-child(1) { border-top: 3px solid var(--primary-blue); }
+        .flow-chip:nth-child(2) { border-top: 3px solid var(--accent-warm); }
+        .flow-chip:nth-child(3) { border-top: 3px solid var(--accent-green); }
+
         .summary-panel {
-            background: #FAFBFC;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F1 100%);
             border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 24px;
             margin-bottom: 24px;
+            border-left: 5px solid var(--accent-warm);
         }
 
         .summary-panel h3 {
@@ -102,8 +131,8 @@
         .info-input::placeholder { color: #C5C9CE; }
 
         .benefit-card {
-            background: #F3F7F8;
-            border: 1px solid #CFE0E6;
+            background: linear-gradient(135deg, #EFF7F5 0%, #F7F3EA 100%);
+            border: 1px solid #D2E2DD;
             border-radius: 10px;
             padding: 24px;
             display: flex; align-items: center; justify-content: space-between;
@@ -116,12 +145,12 @@
         .btn-benefit {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
             padding: 15px 22px;
-            background: var(--primary-blue);
+            background: var(--accent-warm);
             color: white; text-decoration: none; font-size: 18px; font-weight: 700;
             border-radius: 8px;
             transition: all 0.2s ease; white-space: nowrap;
         }
-        .btn-benefit:hover { background: var(--primary-dark-blue); transform: translateY(-1px); }
+        .btn-benefit:hover { background: #B86D2E; transform: translateY(-1px); }
 
         .notice-banner {
             background: #FFF8EC;
@@ -152,12 +181,28 @@
             transition: all 0.2s ease; position: relative; overflow: hidden;
         }
         .resource-card:hover { border-color: var(--primary-blue); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 4px;
+            background: var(--primary-blue);
+        }
+        .resource-card:nth-child(2)::before { background: var(--accent-warm); }
+        .resource-card:nth-child(3)::before { background: var(--accent-green); }
+        .resource-card:nth-child(4)::before { background: #7B6E9B; }
 
         .resource-icon-box {
             width: 44px; height: 44px; background: var(--primary-light);
             border-radius: 8px; display: flex; align-items: center; justify-content: center;
             margin-bottom: 16px; transition: all 0.2s ease;
         }
+        .resource-card:nth-child(2) .resource-icon-box { background: var(--accent-soft); }
+        .resource-card:nth-child(2) .resource-icon-box svg { fill: var(--accent-warm); }
+        .resource-card:nth-child(3) .resource-icon-box { background: var(--accent-green-soft); }
+        .resource-card:nth-child(3) .resource-icon-box svg { fill: var(--accent-green); }
+        .resource-card:nth-child(4) .resource-icon-box { background: #F1EFF8; }
+        .resource-card:nth-child(4) .resource-icon-box svg { fill: #7B6E9B; }
         .resource-card:hover .resource-icon-box { background: var(--primary-blue); }
         .resource-icon-box svg { width: 24px; height: 24px; fill: var(--primary-blue); transition: fill 0.2s ease; }
         .resource-card:hover .resource-icon-box svg { fill: white; }
@@ -194,6 +239,7 @@
             .header-logo { width: 56px; height: 56px; }
             .content { padding: 30px 18px; }
             .intro-text { font-size: 25px; }
+            .flow-row { grid-template-columns: 1fr; }
             .info-grid { grid-template-columns: 1fr; }
             .benefit-card { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px 20px; }
             .btn-benefit { width: 100%; justify-content: center; }
@@ -218,6 +264,11 @@
                 <div class="eyebrow">CONSULTING REPORT</div>
                 <h2 class="intro-text"><span class="highlight" id="introName">회원님</span>을 위한 상담 자료를 정리했습니다.</h2>
                 <p class="intro-subtext">상담에서 확인한 자산, 대출, 후보지, 실행 순서를 다시 볼 수 있도록 핵심 자료만 모았습니다.</p>
+                <div class="flow-row" aria-label="상담 자료 확인 순서">
+                    <div class="flow-chip"><strong>1. 현황 확인</strong>자산과 상담 기준</div>
+                    <div class="flow-chip"><strong>2. 가능 금액</strong>계산기와 시뮬레이션</div>
+                    <div class="flow-chip"><strong>3. 실행 정리</strong>리포트와 요약본</div>
+                </div>
             </div>
 
             <div class="summary-panel">
