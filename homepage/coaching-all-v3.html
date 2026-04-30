@@ -79,6 +79,9 @@
 	  .contract-proof-card { background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)); border: 2px solid rgba(255,255,255,0.18); box-shadow: 0 22px 44px rgba(0,0,0,0.20); }
 	  .contract-proof-card.is-buy { background: linear-gradient(180deg, rgba(127,29,29,0.42), rgba(69,10,10,0.24)); border-color: rgba(248,113,113,0.98); box-shadow: 0 24px 54px rgba(127,29,29,0.36); }
 	  .contract-proof-card.is-sell { background: linear-gradient(180deg, rgba(30,64,175,0.38), rgba(15,23,42,0.18)); border-color: rgba(96,165,250,0.98); box-shadow: 0 24px 54px rgba(30,64,175,0.34); }
+      .contract-price-box { box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+      .contract-price-box.is-buy { background: linear-gradient(180deg, rgba(127,29,29,0.42), rgba(69,10,10,0.24)); border-color: rgba(248,113,113,0.98); }
+      .contract-price-box.is-sell { background: linear-gradient(180deg, rgba(30,64,175,0.38), rgba(15,23,42,0.18)); border-color: rgba(96,165,250,0.98); }
 	  .package-card-icon { opacity: 0.78; }
   /* 동그란 체크박스 */
   .cb-round { -webkit-appearance:none; appearance:none; width:22px; height:22px; border:2px solid #d1d5db; border-radius:50%; background:#fff; cursor:pointer; position:relative; flex-shrink:0; transition: all 0.2s; }
@@ -205,8 +208,8 @@
 	  @keyframes starTwinkle { 0%,100%{transform:translateY(0) scale(1); opacity:.82} 50%{transform:translateY(-3px) scale(1.12); opacity:1} }
 	  .soft-dark { background: linear-gradient(180deg, #171717 0%, #202020 50%, #171717 100%); }
 	  .proof-review-card { border:1px solid rgba(255,255,255,0.16); border-radius:18px; background:rgba(255,255,255,0.08); }
-	  .testimonial-sticker { border:1px solid rgba(18,24,38,0.10); border-radius:14px; box-shadow:0 16px 34px rgba(18,24,38,0.12); transform:rotate(-0.7deg); }
-	  .testimonial-sticker:nth-child(even) { transform:rotate(0.7deg); }
+	  .testimonial-sticker { border:1px solid rgba(18,24,38,0.12); border-radius:16px; box-shadow:5px 5px 0 #121826, 0 16px 34px rgba(18,24,38,0.10); transform:rotate(-0.35deg); }
+	  .testimonial-sticker:nth-child(even) { transform:rotate(0.35deg); }
 	  .region-rail { display:flex; gap:8px; overflow:hidden; justify-content:center; }
 	  .region-rail-inner { display:flex; flex-wrap:nowrap; gap:8px; width:max-content; }
 	  .region-pill { flex:0 0 auto; border:2px solid #121826; border-radius:999px; padding:7px 15px; font-size:13px; font-weight:900; color:#121826; background:#fff8e7; }
@@ -405,13 +408,17 @@
           <iconify-icon icon="solar:danger-triangle-bold-duotone" class="danger-icon mr-3 text-4xl"></iconify-icon>
           <p class="text-3xl md:text-4xl font-display font-black">무려 <span class="difference-number text-5xl md:text-6xl">13억</span> 차이</p>
         </div>
+        <div class="mx-auto mt-6 max-w-xl rounded-2xl border-2 border-red-100 bg-red-50 px-6 py-5 shadow-lg shadow-red-100/60">
+          <p class="text-lg md:text-xl font-display font-black text-brand-dark word-keep">같은 예산이어도, 기준이 다르면 결과가 갈립니다</p>
+          <p class="mt-2 text-sm md:text-base font-bold text-gray-600 word-keep">입지, 대출, 매도 가능성까지 보고 결정해야 하는 이유입니다.</p>
+        </div>
       </div>
       <div class="text-center mb-20" data-reveal>
         <p class="text-xl md:text-2xl text-gray-600 word-keep leading-relaxed mb-10"><span class="text-brand-blue font-bold">의사 강씨</span>는 고소득임에도<br><span class="text-red-600 font-bold">김과장</span>과 갈수록 격차가 벌어졌습니다</p>
         <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-[1.28]">지금 이 순간에도<br><span class="text-brand-orange">똑같은 일</span>이 생기고 있습니다</p>
       </div>
 		      <div class="bg-white rounded-2xl p-5 md:p-8 mt-14 mb-16 shadow-lg shadow-slate-200/60 border border-gray-200 max-w-2xl mx-auto" data-reveal>
-	        <p class="text-center text-sm text-gray-500 mb-5 font-bold">지금이 선택의 순간입니다</p>
+	        <p class="text-center text-2xl md:text-3xl font-display font-black text-brand-dark mb-6 word-keep">지금이 선택의 순간입니다!</p>
 	        <svg viewBox="0 0 420 230" class="w-full" aria-label="2026년 이후 선택에 따라 갈라지는 결과">
 	          <rect x="20" y="22" width="112" height="154" rx="16" fill="#f3f4f6" opacity="0.6"/>
 	          <line x1="34" y1="176" x2="390" y2="176" stroke="#e5e7eb" stroke-width="1.2"/>
@@ -419,13 +426,13 @@
 	          <path d="M34 120 C62 108 92 112 132 105" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="7,7" stroke-linecap="round"/>
 	          <path d="M132 105 C205 72 268 50 384 38" fill="none" stroke="#dc2626" stroke-width="4" stroke-dasharray="8,7" stroke-linecap="round"/>
 	          <path d="M132 105 C205 132 274 158 384 170" fill="none" stroke="#0055FF" stroke-width="4" stroke-dasharray="8,7" stroke-linecap="round"/>
-	          <circle cx="132" cy="105" r="11" fill="#fff7ed" stroke="#FF6B00" stroke-width="3"/>
-	          <rect x="82" y="86" width="43" height="26" rx="9" fill="#fff7ed" stroke="#fed7aa"/>
-	          <text x="103.5" y="104" text-anchor="middle" fill="#FF6B00" font-size="12" font-weight="900">지금</text>
-	          <rect x="232" y="28" width="142" height="31" rx="12" fill="white" stroke="#fee2e2"/>
-	          <text x="303" y="49" text-anchor="middle" fill="#dc2626" font-size="13" font-weight="900">잘 고르면 자산이 남고</text>
-	          <rect x="224" y="152" width="160" height="31" rx="12" fill="white" stroke="#dbeafe"/>
-	          <text x="304" y="173" text-anchor="middle" fill="#0055FF" font-size="13" font-weight="900">잘못 고르면 손실이 남습니다</text>
+	          <circle cx="132" cy="105" r="9" fill="#fff7ed" stroke="#FF6B00" stroke-width="3"/>
+	          <rect x="72" y="74" width="45" height="28" rx="9" fill="#fff7ed" stroke="#fed7aa"/>
+	          <text x="94.5" y="93" text-anchor="middle" fill="#FF6B00" font-size="13" font-weight="900">지금</text>
+	          <rect x="238" y="22" width="128" height="34" rx="13" fill="white" stroke="#fee2e2"/>
+	          <text x="302" y="45" text-anchor="middle" fill="#dc2626" font-size="15" font-weight="900">잘 고르면 자산+</text>
+	          <rect x="232" y="137" width="144" height="34" rx="13" fill="white" stroke="#dbeafe"/>
+	          <text x="304" y="160" text-anchor="middle" fill="#0055FF" font-size="15" font-weight="900">잘못 고르면 손실-</text>
 	          <text x="132" y="204" text-anchor="middle" fill="#9ca3af" font-size="14" font-weight="900">2026</text>
 	          <text x="258" y="204" text-anchor="middle" fill="#9ca3af" font-size="13">2028</text>
 	          <text x="384" y="204" text-anchor="middle" fill="#9ca3af" font-size="13">2030</text>
@@ -480,7 +487,7 @@
 	            <p class="rounded-full bg-red-600/75 px-3 py-1 text-sm font-black text-white">매수 계약서</p>
 	          </div>
 	          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-buy.png" alt="수명산 아파트 매수 계약서" class="contract-img w-full" loading="lazy" decoding="async">
-		          <div class="mt-4 rounded-2xl border border-red-400/70 bg-red-950/45 px-5 py-4 text-center">
+		          <div class="contract-price-box is-buy mt-4 rounded-2xl border px-5 py-4 text-center">
 	            <p class="text-sm font-bold text-red-100">매수가</p>
 	            <p class="text-4xl md:text-5xl font-display font-black text-red-50">9억 5천</p>
 	          </div>
@@ -495,7 +502,7 @@
 	            <p class="rounded-full bg-blue-600/75 px-3 py-1 text-sm font-black text-white">매도 계약서</p>
 	          </div>
 	          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-sell.png" alt="수명산 아파트 매도 계약서" class="contract-img w-full" loading="lazy" decoding="async">
-		          <div class="mt-4 rounded-2xl border border-blue-400/70 bg-blue-950/45 px-5 py-4 text-center">
+		          <div class="contract-price-box is-sell mt-4 rounded-2xl border px-5 py-4 text-center">
 	            <p class="text-sm font-bold text-blue-100">매도가</p>
 	            <p class="text-4xl md:text-5xl font-display font-black text-blue-50">8억 2천</p>
 	          </div>
@@ -517,11 +524,11 @@
 	        <p class="text-xl md:text-2xl text-gray-200 word-keep mt-4 font-medium">문제는, 이 실수가 특별한 일이 아니라는 겁니다</p>
 	      </div>
 		      <div class="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2" data-stagger>
-		        <div class="testimonial-sticker bg-[#38c5be] p-7 text-white md:p-8">
+		        <div class="testimonial-sticker bg-white p-7 text-brand-dark md:p-8">
 		          <p class="text-sm font-black word-keep">최*윤님 · 서울 용산 30대</p>
 		          <p class="mt-4 text-xl md:text-2xl font-display font-black leading-snug word-keep">"상담 리포트 덕분에 부부가 같은 기준으로 이야기할 수 있었습니다."</p>
 		        </div>
-		        <div class="testimonial-sticker bg-[#f4c430] p-7 text-brand-dark md:p-8">
+		        <div class="testimonial-sticker bg-white p-7 text-brand-dark md:p-8">
 		          <p class="text-sm font-black word-keep">박*준님 · 경기 안양 40대</p>
 		          <p class="mt-4 text-xl md:text-2xl font-display font-black leading-snug word-keep">"체크리스트를 보고 계약 전에 놓친 부분을 다시 확인했습니다."</p>
 		        </div>
@@ -824,11 +831,11 @@
         <div class="v3-metric-card"><strong>90일</strong><span>코칭 후 케어</span><em>+ 카톡 무제한</em></div>
       </div>
 	      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
-	        <div class="testimonial-sticker bg-[#ff6b5b] px-6 py-5 text-white">
+	        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
 	          <p class="text-sm font-black">최*윤님 · 서울 용산 30대</p>
 	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep">"상담 리포트 덕분에 부부가 같은 기준으로 이야기할 수 있었습니다."</p>
 	        </div>
-	        <div class="testimonial-sticker bg-[#e9ddff] px-6 py-5 text-[#121826]">
+	        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
 	          <p class="text-sm font-black">박*준님 · 경기 안양 40대</p>
 	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep">"체크리스트를 보고 계약 전에 놓친 부분을 다시 확인했습니다."</p>
 	        </div>
@@ -890,11 +897,11 @@
 	        </div>
 	      </div>
 		      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
-		        <div class="testimonial-sticker bg-[#dff7ef] px-6 py-5 text-[#121826]">
+		        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
 		          <p class="text-sm font-black">정*민님 · 남양주 30대</p>
 		          <p class="mt-2 text-lg font-display font-black word-keep">"매물 보러 가기 전 카톡으로 한 번 더 점검받을 수 있어 안심됐습니다."</p>
 		        </div>
-		        <div class="testimonial-sticker bg-[#dbeafe] px-6 py-5 text-[#121826]">
+		        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
 		          <p class="text-sm font-black">서*아님 · 부천 30대</p>
 		          <p class="mt-2 text-lg font-display font-black word-keep">"대출 조건이 바뀌었을 때도 바로 물어볼 곳이 있어서 좋았습니다."</p>
 		        </div>
