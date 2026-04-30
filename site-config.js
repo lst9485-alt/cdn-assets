@@ -461,7 +461,20 @@
         sidebar: {
           title: '임시 테스트'
         },
-        items: []
+        items: [
+          {
+            id: 'consult-trust-test',
+            title: '상담 리포트 테스트',
+            description: '깔끔한 신뢰형 상담 자료 페이지',
+            href: 'consult/index-trust.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['index-trust.html'],
+            hubVisible: true
+          }
+        ]
       }
     ]
   };
