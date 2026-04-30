@@ -18,16 +18,22 @@
       --old-blue: #0055ff;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      min-width: 0;
+    }
+
     body {
       margin: 0;
       font-family: Pretendard, system-ui, -apple-system, sans-serif;
       color: var(--ink);
       background: #e9e3da;
       word-break: keep-all;
+      overflow-x: hidden;
     }
 
     .wrap {
+      width: 100%;
       max-width: 1280px;
       margin: 0 auto;
       padding: 42px 22px 56px;
@@ -54,15 +60,19 @@
       color: #4f4a44;
       font-size: 16px;
       line-height: 1.65;
+      overflow-wrap: break-word;
     }
 
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 18px;
+      min-width: 0;
     }
 
     .panel {
+      width: 100%;
+      max-width: 100%;
       min-height: 720px;
       overflow: hidden;
       border: 1px solid rgba(20, 20, 20, 0.16);
@@ -134,6 +144,7 @@
       color: rgba(255, 255, 255, 0.78);
       font-size: 18px;
       line-height: 1.75;
+      overflow-wrap: break-word;
     }
 
     .old-actions {
@@ -194,6 +205,7 @@
       border-radius: 24px;
       background: linear-gradient(135deg, rgba(0, 85, 255, 0.3), rgba(255, 107, 0, 0.26));
       border: 1px solid rgba(255, 255, 255, 0.16);
+      overflow-wrap: break-word;
     }
 
     .new {
@@ -206,8 +218,8 @@
 
     .new-hero {
       display: grid;
-      grid-template-columns: 1.06fr 0.94fr;
-      gap: 26px;
+      grid-template-columns: 1fr;
+      gap: 24px;
       padding: 52px 34px 34px;
       align-items: end;
     }
@@ -224,9 +236,12 @@
 
     .new h2 {
       margin: 18px 0 18px;
-      font-size: clamp(34px, 5vw, 58px);
-      line-height: 1.08;
+      max-width: 560px;
+      font-size: clamp(34px, 4vw, 50px);
+      line-height: 1.14;
       letter-spacing: 0;
+      word-break: keep-all;
+      overflow-wrap: normal;
     }
 
     .new-copy {
@@ -234,6 +249,7 @@
       color: var(--muted);
       font-size: 17px;
       line-height: 1.75;
+      overflow-wrap: break-word;
     }
 
     .new-proof {
@@ -268,6 +284,7 @@
       font-size: 14px;
       line-height: 1.45;
       text-align: right;
+      overflow-wrap: break-word;
     }
 
     .new-section {
@@ -323,6 +340,7 @@
       color: var(--muted);
       font-size: 14px;
       line-height: 1.55;
+      overflow-wrap: break-word;
     }
 
     .new-cta {
@@ -391,6 +409,46 @@
       .panel { min-height: auto; }
       .old-card-grid { grid-template-columns: 1fr; }
       .new-cta { align-items: flex-start; flex-direction: column; }
+      .label {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+      .metric {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+      .metric span {
+        max-width: none;
+        text-align: left;
+      }
+      .old-hero,
+      .old-card-grid,
+      .new-hero,
+      .new-section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .old-band,
+      .new-cta {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+      .old h2,
+      .new h2 {
+        font-size: 34px;
+      }
+      .summary,
+      .old-copy,
+      .old-band,
+      .new-copy,
+      .metric span,
+      .step p,
+      .new-cta p,
+      .note li {
+        word-break: normal;
+        overflow-wrap: anywhere;
+      }
     }
   </style>
 </head>
