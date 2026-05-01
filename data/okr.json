@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-01T06:00:07.226557+09:00",
+  "updated": "2026-05-02T06:00:08.964437+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 355,
-    "done": 325,
-    "overdue": 12,
+    "total": 359,
+    "done": 330,
+    "overdue": 10,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,43 +56,28 @@
         "overdue": true
       },
       {
-        "title": "랜딩수정",
-        "date": "2026-04-29T10:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-04-30T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주간계획 수정",
-        "date": "2026-04-30T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-04-30T10:45:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-04-30T12:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "원씽복기",
         "date": "2026-04-30T14:00:00.000+09:00",
         "overdue": true
       },
       {
+        "title": "자료수집&도입부",
+        "date": "2026-05-01T11:45:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-05-01T14:00:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "원고",
-        "date": "2026-05-01T12:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-05-01T16:15:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "원고완성",
-        "date": "2026-05-01T16:30:00.000+09:00",
+        "date": "2026-05-02T12:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -171,6 +156,16 @@
         "overdue": false
       },
       {
+        "title": "급여&자산체크",
+        "date": "2026-05-08",
+        "overdue": false
+      },
+      {
+        "title": "PPT완료",
+        "date": "2026-05-08",
+        "overdue": false
+      },
+      {
         "title": "11주차",
         "date": "2026-05-08T19:00:00.000+09:00",
         "overdue": false
@@ -178,14 +173,26 @@
     ],
     "schedule": [
       {
-        "title": "원고",
+        "title": "원고완성",
         "time": "12:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고완성",
-        "time": "16:30",
+        "title": "PPT완료",
+        "time": "14:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "랜딩 수정",
+        "time": "19:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "crm구조",
+        "time": "20:15",
         "allDay": false,
         "done": false
       }
@@ -216,14 +223,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 9,
-      "rate": "32%",
+      "done": 10,
+      "rate": "36%",
       "days": [
-        {
-          "date": "2026-04-25",
-          "done": 1,
-          "total": 4
-        },
         {
           "date": "2026-04-26",
           "done": 2,
@@ -246,11 +248,16 @@
         },
         {
           "date": "2026-04-30",
-          "done": 1,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-05-01",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-05-02",
           "done": 0,
           "total": 4
         }

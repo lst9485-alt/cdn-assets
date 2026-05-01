@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-01T06:00:01.841928+09:00",
+  "updated": "2026-05-02T06:00:01.645270+09:00",
   "projects": [
     {
       "name": "yt-slide 미결 이슈_2026-04-29",
@@ -14,8 +14,8 @@
       "type": "folder",
       "app": "homepage",
       "modified": "2026-04-29",
-      "status": "v3.5 섹션 재배치 + UI/UX 개선. 서버 백엔드(Apps Script doPost) 배포 완료 (v24). 대시보드 배포본이 운영/검수 정본이며, 아임웹 삽입은 v3.4 기준 — v3.5 아직 미반영",
-      "next": "코칭 랜딩 v3 시안 확인 — `coaching-all-v3.html`에서 v2 구조 유지 + 지표 카드 + 다크 methodology + 지도 진행순서 + 카톡 QA 섹션 확인"
+      "status": "v3.5 섹션 재배치 + UI/UX 개선. 서버 백엔드(Apps Script doPost) 배포 완료 (v24). 아임웹 삽입은 v3.4 기준 — v3.5 아직 미반영",
+      "next": "코칭 랜딩 v3.5 아임웹 반영 — PG 심사 통과 후 코칭 재공개 시 함께"
     },
     {
       "name": "상담 CRM",
@@ -28,10 +28,10 @@
     {
       "name": "라오어 무한매수법",
       "type": "file",
-      "app": null,
+      "app": "n8n/workflows/05 무한매수",
       "modified": "2026-04-28",
-      "status": null,
-      "next": null
+      "status": "설계 완료, 구현 대기. Day 1 (2026-04-25 새벽, 사용자 수동 체결 확인) 결과 대기 중.",
+      "next": "`feat/05-mumae` 브랜치 생성"
     },
     {
       "name": "경쟁채널 모니터링 시스템",
