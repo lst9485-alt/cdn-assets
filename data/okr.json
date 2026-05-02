@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-02T06:00:08.964437+09:00",
+  "updated": "2026-05-03T06:00:14.221484+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 359,
+    "total": 362,
     "done": 330,
-    "overdue": 10,
+    "overdue": 16,
     "pending": [
       {
         "title": "전자책 작성",
@@ -76,24 +76,34 @@
         "overdue": true
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-05-02T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "원고완성",
         "date": "2026-05-02T12:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-05-02T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "PPT완료",
         "date": "2026-05-02T14:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "랜딩 수정",
         "date": "2026-05-02T19:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "crm구조",
         "date": "2026-05-02T20:15:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "촬영&편집&업로드",
@@ -169,30 +179,17 @@
         "title": "11주차",
         "date": "2026-05-08T19:00:00.000+09:00",
         "overdue": false
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "date": "2026-05-09",
+        "overdue": false
       }
     ],
     "schedule": [
       {
-        "title": "원고완성",
-        "time": "12:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "PPT완료",
-        "time": "14:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "랜딩 수정",
-        "time": "19:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "crm구조",
-        "time": "20:15",
+        "title": "촬영&편집&업로드",
+        "time": "10:30",
         "allDay": false,
         "done": false
       }
@@ -223,14 +220,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 10,
-      "rate": "36%",
+      "done": 11,
+      "rate": "39%",
       "days": [
-        {
-          "date": "2026-04-26",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-04-27",
           "done": 1,
@@ -253,11 +245,16 @@
         },
         {
           "date": "2026-05-01",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-05-02",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-05-03",
           "done": 0,
           "total": 4
         }

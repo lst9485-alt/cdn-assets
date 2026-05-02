@@ -1,6 +1,14 @@
 {
-  "updated": "2026-05-02T06:00:01.645270+09:00",
+  "updated": "2026-05-03T06:00:01.350948+09:00",
   "projects": [
+    {
+      "name": "라오어 무한매수법",
+      "type": "file",
+      "app": "n8n/workflows/05 무한매수",
+      "modified": "2026-05-02",
+      "status": "원격 n8n workflow `bjWvcublAnDdd5k3` (`05 무한매수`) 활성화 확인.",
+      "next": null
+    },
     {
       "name": "yt-slide 미결 이슈_2026-04-29",
       "type": "file",
@@ -24,14 +32,6 @@
       "modified": "2026-04-29",
       "status": null,
       "next": null
-    },
-    {
-      "name": "라오어 무한매수법",
-      "type": "file",
-      "app": "n8n/workflows/05 무한매수",
-      "modified": "2026-04-28",
-      "status": "설계 완료, 구현 대기. Day 1 (2026-04-25 새벽, 사용자 수동 체결 확인) 결과 대기 중.",
-      "next": "`feat/05-mumae` 브랜치 생성"
     },
     {
       "name": "경쟁채널 모니터링 시스템",
