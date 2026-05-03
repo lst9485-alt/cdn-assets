@@ -642,8 +642,8 @@
   }
 
   function bindSlideJumpRatioToggle(button, nav, panel) {
-    if (!button || !nav || !panel || button.dataset.bound === '1') return;
-    button.dataset.bound = '1';
+    if (!button || !nav || !panel || button.__sjBound) return;
+    button.__sjBound = true;
     button.addEventListener('click', (e) => {
       e.stopPropagation();
       const open = nav.classList.toggle('ratio-open');
@@ -653,8 +653,8 @@
   }
 
   function bindSlideJumpToggle(button, nav) {
-    if (!button || !nav || button.dataset.bound === '1') return;
-    button.dataset.bound = '1';
+    if (!button || !nav || button.__sjBound) return;
+    button.__sjBound = true;
     button.addEventListener('click', (e) => {
       e.stopPropagation();
       const collapsed = nav.classList.toggle('collapsed');
@@ -664,8 +664,8 @@
   }
 
   function bindSlideJumpSearch(search, grid) {
-    if (!search || !grid || search.dataset.bound === '1') return;
-    search.dataset.bound = '1';
+    if (!search || !grid || search.__sjBound) return;
+    search.__sjBound = true;
     search.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter') return;
       const q = (search.value || '').trim().toLowerCase();
@@ -701,6 +701,9 @@
       toggle.textContent = '›';
       nav.appendChild(toggle);
     }
+    // Saved/generated HTML can preserve data-bound markers without live listeners.
+    // Clear them before binding so runtime hydration reliably reattaches handlers.
+    delete toggle.dataset.bound;
     bindSlideJumpToggle(toggle, nav);
     toggle.textContent = nav.classList.contains('collapsed') ? '‹' : '›';
     if (!ratioToggle) {
@@ -716,6 +719,7 @@
       ratioPanel.className = 'sj-ratio-panel';
       ratioToggle.insertAdjacentElement('afterend', ratioPanel);
     }
+    delete ratioToggle.dataset.bound;
     bindSlideJumpRatioToggle(ratioToggle, nav, ratioPanel);
     ratioToggle.classList.toggle('active', nav.classList.contains('ratio-open'));
     renderSlideJumpTypeRatio(ratioPanel);
@@ -739,6 +743,7 @@
       notes.className = 'sj-notes';
       nav.appendChild(notes);
     }
+    if (search) delete search.dataset.bound;
     bindSlideJumpSearch(search, grid);
     grid.innerHTML = '';
     const basePgs = getVisibleBasePageGroups();
@@ -5024,6 +5029,10 @@
     if (clone.id === 'filmstrip') {
       const inner = clone.querySelector('#filmstrip-inner');
       if (inner) inner.innerHTML = '';
+    }
+
+    if (clone.id === 'slide-jump-nav') {
+      clone.querySelectorAll('[data-bound]').forEach(node => node.removeAttribute('data-bound'));
     }
 
     return clone;
@@ -10774,43 +10783,67 @@ setTimeout(() => {
   if (nxt) nxt.focus();
   else document.body.focus();
 }, 0);
-document.addEventListener('keydown', ev => {
+
+function isPresenterHotkey(ev, code) {
+  if (!ev) return false;
+  const key = String(ev.key || '').toLowerCase();
+  return key === code.toLowerCase() || ev.code === ('Key' + code.toUpperCase());
+}
+
+function markPresenterEventHandled(ev) {
+  if (!ev) return;
+  try {
+    ev.__presenterHandled = true;
+  } catch (_) {}
+}
+
+function handlePresenterKeydown(ev) {
+  if (ev && ev.__presenterHandled) return;
   const ae = document.activeElement;
-  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'z') {
+  if ((ev.ctrlKey || ev.metaKey) && isPresenterHotkey(ev, 'z')) {
+    markPresenterEventHandled(ev);
     ev.preventDefault();
     undoPresenterInk();
     return;
   }
-  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 's') {
+  if ((ev.ctrlKey || ev.metaKey) && isPresenterHotkey(ev, 's')) {
+    markPresenterEventHandled(ev);
     ev.preventDefault();
     flushNotes('manual');
     return;
   }
-  if (ev.key.toLowerCase() === 'f') {
+  if (isPresenterHotkey(ev, 'f')) {
+    markPresenterEventHandled(ev);
     ev.preventDefault();
     if (presenterNotesDirty) flushNotes('manual');
     togglePresenterNotesHidden();
     return;
   }
   if (ae && ae.id === 'pres-notes-input') return;
-  if (ev.key.toLowerCase() === 'r') {
+  if (isPresenterHotkey(ev, 'r')) {
+    markPresenterEventHandled(ev);
     ev.preventDefault();
     setInkMode(inkMode === 'draw' ? 'off' : 'draw');
     return;
   }
-  if (ev.key.toLowerCase() === 'e') {
+  if (isPresenterHotkey(ev, 'e')) {
+    markPresenterEventHandled(ev);
     ev.preventDefault();
     setInkMode(inkMode === 'erase' ? 'off' : 'erase');
     return;
   }
   if (ev.key === 'Escape' && inkMode !== 'off') {
+    markPresenterEventHandled(ev);
     ev.preventDefault();
     setInkMode('off');
     return;
   }
-  if (ev.key === 'ArrowRight') { ev.preventDefault(); postNav('next'); }
-  if (ev.key === 'ArrowLeft') { ev.preventDefault(); postNav('prev'); }
-});
+  if (ev.key === 'ArrowRight') { markPresenterEventHandled(ev); ev.preventDefault(); postNav('next'); }
+  if (ev.key === 'ArrowLeft') { markPresenterEventHandled(ev); ev.preventDefault(); postNav('prev'); }
+}
+window.addEventListener('keydown', handlePresenterKeydown, true);
+document.addEventListener('keydown', handlePresenterKeydown, true);
+if (document.body) document.body.addEventListener('keydown', handlePresenterKeydown, true);
 if (ch) ch.postMessage({ type: 'ready' });
 try {
   if (window.opener && !window.opener.closed && typeof window.opener.__getPresenterSyncPayload === 'function') {
