@@ -4622,6 +4622,61 @@
     overview.dataset.open === '1' ? closeOverview() : openOverview();
   }
 
+  function isShortcutEditableTarget(target) {
+    return !!(target && typeof target.closest === 'function' && target.closest('input, textarea, [contenteditable="true"]'));
+  }
+
+  function handleWindowShortcutFallback(e) {
+    if (e.defaultPrevented) return;
+    if (isShortcutEditableTarget(e.target)) return;
+
+    const helpVisible = !!document.getElementById('help')?.classList.contains('visible');
+
+    if (e.altKey && e.code === 'Digit1' && editMode) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      toggleLayerPanel();
+      return;
+    }
+    if (e.code === 'KeyE') {
+      if (helpVisible) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (overview.dataset.open === '1') closeOverview();
+      toggleEditMode();
+      return;
+    }
+    if (e.code === 'KeyM' && editMode && !isEditing) {
+      if (overview.dataset.open === '1' || helpVisible) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (modulePicker && modulePicker.dataset.open === '1') closeModulePicker();
+      else openModulePicker();
+      return;
+    }
+    if (e.code === 'KeyO') {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      toggleOverview();
+      return;
+    }
+    if (e.key === 'Escape') {
+      if (modulePicker && modulePicker.dataset.open === '1') {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        closeModulePicker();
+        return;
+      }
+      if (overview.dataset.open === '1') {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        closeOverview();
+      }
+    }
+  }
+
+  window.addEventListener('keydown', handleWindowShortcutFallback, true);
+
   window.addEventListener('resize', () => {
     // scale은 CSS 고정 — resize 시 재계산 불필요
   });
