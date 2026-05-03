@@ -9033,6 +9033,15 @@
     return rows.sort((a, b) => b.clickNum - a.clickNum);
   }
 
+  function groupTypeLabel(members) {
+    const types = [...new Set((members || [])
+      .map(entry => entry && entry.el ? getElType(entry.el) : '')
+      .filter(Boolean))];
+    if (!types.length) return '';
+    if (types.length === 1) return types[0];
+    return types.slice(0, 2).join('+');
+  }
+
   function appendAnimationSummaryItem(list, row) {
     const item = document.createElement('div');
     item.className = 'layer-item' + (row.el && selectedEls.includes(row.el) ? ' lyr-selected' : '');
@@ -9316,9 +9325,10 @@
         }
       } else if (row.type === 'group') {
         const isExpanded = expandedGroups.has(row.gid);
+        const typeLabel = groupTypeLabel(row.members);
         const grpRow = document.createElement('div');
         grpRow.className = 'layer-item-group';
-        grpRow.innerHTML = `<span class="layer-handle">⠿</span><span class="grp-name">[${escHTML(row.gid.toUpperCase())}] 그룹</span><span class="layer-step-badge">S${row.step}</span><span class="grp-arrow">${isExpanded ? '▲' : '▽'}</span>`;
+        grpRow.innerHTML = `<span class="layer-handle">⠿</span><span class="grp-name">[${escHTML(row.gid.toUpperCase())}] 그룹</span>${typeLabel ? `<span class="layer-badge">${escHTML(typeLabel)}</span>` : ''}<span class="layer-step-badge">S${row.step}</span><span class="grp-arrow">${isExpanded ? '▲' : '▽'}</span>`;
         grpRow._gid = row.gid;
         grpRow._step = row.step;
         grpRow.addEventListener('click', () => {
