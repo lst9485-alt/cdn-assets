@@ -1671,6 +1671,36 @@
   }
   .ov-num .ov-type { display: block; font-size: 11px; font-weight: 600; opacity: 0.7; }
   .ov-item.current .ov-num { color: var(--editor-accent); }
+  .ov-toolbar {
+    grid-column: 1 / -1;
+    position: sticky;
+    top: 0;
+    z-index: 70;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 6px;
+    padding: 4px 0 8px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.96), rgba(0,0,0,0.78));
+  }
+  .ov-global-toggle {
+    border: none;
+    border-radius: 14px;
+    padding: 6px 12px;
+    background: rgba(0,0,0,0.72);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  .ov-global-toggle:hover { background: rgba(0,0,0,0.9); }
+  .ov-notes-mode-toggle.active {
+    background: var(--editor-accent);
+    color: #111;
+  }
+  .ov-notes-mode-toggle.active:hover { background: #ffd83d; }
   .type-meta-chips {
     position: absolute;
     left: 7px;
@@ -1712,6 +1742,46 @@
     font-size: 8px;
     line-height: 16px;
     font-weight: 800;
+  }
+  .ov-item.ov-note-target {
+    border-color: #4A90D9;
+    box-shadow: 0 0 0 3px rgba(74,144,217,0.38);
+  }
+  .ov-notes-panel {
+    position: fixed;
+    left: clamp(16px, calc(100vw - 480px), 1120px);
+    right: auto;
+    top: 58px;
+    z-index: 8060;
+    width: min(470px, calc(100vw - 32px));
+    max-height: calc(100vh - 92px);
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 18px;
+    border-radius: 16px;
+    background: rgba(18,18,18,0.94);
+    color: #fff;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.38);
+    pointer-events: auto;
+  }
+  .ov-notes-panel.visible { display: flex; }
+  .ov-notes-title {
+    font-size: 17px;
+    font-weight: 900;
+    color: #fff;
+  }
+  .ov-notes-hint {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.58);
+  }
+  .ov-notes-body {
+    overflow: auto;
+    max-height: calc(100vh - 178px);
+    white-space: pre-wrap;
+    font-size: 15px;
+    line-height: 1.75;
   }
 
   /* ── Overview 인라인 확장: 종이 겹침 + 토글 ── */

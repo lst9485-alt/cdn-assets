@@ -4077,6 +4077,77 @@
 
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
   let expandedOverviewGroups = new Set();  // 확장된 page-group(string) 집합 — overview 전용
+  let overviewNoteSlideIdx = -1;
+  let overviewNotesClickMode = false;
+
+  function overviewVariantGroups() {
+    const set = new Set();
+    slides.forEach(s => {
+      if (s.dataset.pageGroup && s.dataset.variant && s.dataset.variant !== "0") {
+        set.add(String(s.dataset.pageGroup));
+      }
+    });
+    return set;
+  }
+
+  function overviewAllGroupsExpanded(groupSet = overviewVariantGroups()) {
+    return groupSet.size > 0 && [...groupSet].every(pg => expandedOverviewGroups.has(pg));
+  }
+
+  function toggleOverviewExpansionAll() {
+    const groupSet = overviewVariantGroups();
+    if (groupSet.size === 0) return;
+    const allExpanded = overviewAllGroupsExpanded(groupSet);
+    if (allExpanded) {
+      groupSet.forEach(pg => expandedOverviewGroups.delete(pg));
+    } else {
+      groupSet.forEach(pg => expandedOverviewGroups.add(pg));
+    }
+    buildOverview();
+  }
+
+  function toggleOverviewNotesMode() {
+    overviewNotesClickMode = !overviewNotesClickMode;
+    if (!overviewNotesClickMode) hideOverviewNotesPanel();
+    buildOverview();
+  }
+
+  function ensureOverviewNotesPanel() {
+    let panel = document.getElementById('ov-notes-panel');
+    if (panel) return panel;
+    panel = document.createElement('aside');
+    panel.id = 'ov-notes-panel';
+    panel.className = 'ov-notes-panel';
+    panel.innerHTML = `
+      <div class="ov-notes-title">발표자 노트</div>
+      <div class="ov-notes-hint">대본 보기 켜짐: 썸네일 클릭 시 미리보기</div>
+      <div class="ov-notes-body">대본 없음</div>
+    `;
+    overview.appendChild(panel);
+    return panel;
+  }
+
+  function hideOverviewNotesPanel() {
+    const panel = document.getElementById('ov-notes-panel');
+    if (panel) panel.classList.remove('visible');
+    overviewNoteSlideIdx = -1;
+    if (ovGrid) ovGrid.querySelectorAll('.ov-note-target').forEach(el => el.classList.remove('ov-note-target'));
+  }
+
+  function showOverviewNotesForSlide(slide, slideIdx, item) {
+    const panel = ensureOverviewNotesPanel();
+    const label = slide?.dataset?.displayNumber || (slideIdx + 1);
+    const type = slide?.dataset?.type || '';
+    const notes = (slide?.dataset?.notes || '').trim() || '대본 없음';
+    const title = panel.querySelector('.ov-notes-title');
+    const body = panel.querySelector('.ov-notes-body');
+    if (title) title.textContent = `${label}${type ? ' · ' + type : ''}`;
+    if (body) body.textContent = notes;
+    panel.classList.add('visible');
+    overviewNoteSlideIdx = slideIdx;
+    ovGrid.querySelectorAll('.ov-note-target').forEach(el => el.classList.remove('ov-note-target'));
+    if (item) item.classList.add('ov-note-target');
+  }
 
   function deleteOverviewSlideAt(idx) {
     if (!(document.body && document.body.dataset.generated === 'true')) {
@@ -4108,6 +4179,7 @@
     }
     currentStep = 0;
     currentOrder = 0;
+    hideOverviewNotesPanel();
     buildFilmstrip();
     buildOverview();
     if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
@@ -4189,6 +4261,34 @@
     slides.forEach(s => {
       if (!s.dataset.variant || s.dataset.variant === "0") pgsWithBase.add(s.dataset.pageGroup);
     });
+
+    const variantGroupSet = overviewVariantGroups();
+    if (variantGroupSet.size > 0) {
+      const toolbar = document.createElement('div');
+      toolbar.className = 'ov-toolbar';
+      const allExpanded = overviewAllGroupsExpanded(variantGroupSet);
+      const toggleAllBtn = document.createElement('button');
+      toggleAllBtn.type = 'button';
+      toggleAllBtn.className = 'ov-global-toggle';
+      toggleAllBtn.textContent = allExpanded ? '전체 접기 (1)' : '전체 펼치기 (1)';
+      toggleAllBtn.title = '단축키 1';
+      toggleAllBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleOverviewExpansionAll();
+      });
+      toolbar.appendChild(toggleAllBtn);
+      const notesModeBtn = document.createElement('button');
+      notesModeBtn.type = 'button';
+      notesModeBtn.className = 'ov-global-toggle ov-notes-mode-toggle' + (overviewNotesClickMode ? ' active' : '');
+      notesModeBtn.textContent = '대본 보기 (2)';
+      notesModeBtn.title = '단축키 2 · 켜면 썸네일 클릭 시 슬라이드로 들어가지 않고 발표자 노트만 보여줍니다.';
+      notesModeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleOverviewNotesMode();
+      });
+      toolbar.appendChild(notesModeBtn);
+      ovGrid.appendChild(toolbar);
+    }
 
     const bucketCounts = {};
     const catCounts = {};
@@ -4325,6 +4425,10 @@
       item.addEventListener('click', (e) => {
         if (ovDragItem) return;
         e.stopPropagation();
+        if (overviewNotesClickMode || e.altKey || e.metaKey) {
+          showOverviewNotesForSlide(slide, slideIdx, item);
+          return;
+        }
         closeOverview();
         goToSlide(slideIdx);
       });
