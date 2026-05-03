@@ -3240,6 +3240,16 @@
       toggleLayerPanel();
       return;
     }
+    if (!e.altKey && !e.metaKey && !e.ctrlKey && overview.dataset.open === '1' && e.code === 'Digit1') {
+      e.preventDefault();
+      toggleOverviewExpansionAll();
+      return;
+    }
+    if (!e.altKey && !e.metaKey && !e.ctrlKey && overview.dataset.open === '1' && e.code === 'Digit2') {
+      e.preventDefault();
+      toggleOverviewNotesMode();
+      return;
+    }
     // E키 (도움말 닫힌 상태에서만 / 오버뷰 열려있으면 먼저 닫고 토글)
     if (e.code === 'KeyE') {
       if (document.getElementById('help').classList.contains('visible')) return;
@@ -4636,6 +4646,18 @@
       e.preventDefault();
       e.stopImmediatePropagation();
       toggleLayerPanel();
+      return;
+    }
+    if (!e.altKey && !e.metaKey && !e.ctrlKey && overview.dataset.open === '1' && e.code === 'Digit1') {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      toggleOverviewExpansionAll();
+      return;
+    }
+    if (!e.altKey && !e.metaKey && !e.ctrlKey && overview.dataset.open === '1' && e.code === 'Digit2') {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      toggleOverviewNotesMode();
       return;
     }
     if (e.code === 'KeyE') {

@@ -4099,7 +4099,10 @@
     if (itemsRow) {
       itemsRow.style.display = 'flex';
       itemsRow.style.alignItems = 'center';
+      itemsRow.style.justifyContent = 'flex-start';
       itemsRow.style.gap = '42px';
+      itemsRow.style.width = '1480px';
+      itemsRow.style.left = '220px';
     }
     if (textArea) {
       textArea.style.flex = '1 1 auto';
