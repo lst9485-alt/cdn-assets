@@ -37,7 +37,8 @@
 
   // Space 키 상태 추적
   document.addEventListener('keydown', e => {
-    if (e.target && e.target.closest('input, textarea, [contenteditable="true"]')) return;
+    const targetEl = (e.target && typeof e.target.closest === 'function') ? e.target : null;
+    if (targetEl && targetEl.closest('input, textarea, [contenteditable="true"]')) return;
     if (e.code === 'Space' && editMode && !isEditing) { spaceHeld = true; e.preventDefault(); }
   });
   document.addEventListener('keyup', e => {
@@ -49,7 +50,8 @@
     if (!editMode) return;
     const canPan = e.button === 1 || (e.button === 0 && spaceHeld);
     if (!canPan) return;
-    if (e.target.closest('#toolbar, #layer-panel, #filmstrip')) return;
+    const targetEl = (e.target && typeof e.target.closest === 'function') ? e.target : null;
+    if (targetEl && targetEl.closest('#toolbar, #layer-panel, #filmstrip')) return;
     isPanning = true;
     panStartX = e.clientX; panStartY = e.clientY;
     panAnchorX = panX; panAnchorY = panY;
@@ -3064,7 +3066,8 @@
   }
 
   document.addEventListener('keydown', e => {
-    if (e.target && e.target.closest('input, textarea, [contenteditable="true"]')) return;
+    const targetEl = (e.target && typeof e.target.closest === 'function') ? e.target : null;
+    if (targetEl && targetEl.closest('input, textarea, [contenteditable="true"]')) return;
     // Ctrl+S: 저장 (텍스트 편집 중에도 허용)
     if ((e.ctrlKey || e.metaKey) && e.key === 's') {
       e.preventDefault();

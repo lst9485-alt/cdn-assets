@@ -4111,7 +4111,7 @@
     buildFilmstrip();
     buildOverview();
     if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
-    ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
+    saveToFile(false);
   }
 
   function duplicateOverviewSlideAt(idx) {
@@ -4135,7 +4135,7 @@
     buildFilmstrip();
     buildOverview();
     if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
-    ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
+    saveToFile(false);
     if (typeof showToast === 'function') showToast('슬라이드 복사 완료', 2000);
   }
 
@@ -4165,7 +4165,7 @@
     if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
     closeOverview();
     goToSlide(currentSlide);
-    ensureDirHandle().then(ok => { if (ok) saveToFile(true); });
+    saveToFile(false);
     if (typeof showToast === 'function') showToast('슬라이드 삽입 완료', 2000);
   }
 
