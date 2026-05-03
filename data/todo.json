@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-03T14:17:46.804664+09:00",
+  "updated": "2026-05-04T06:00:02.104100+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -225,6 +225,90 @@
               "done": false
             },
             {
+              "text": "2-1A. 2026-05-03 slide 기준본 확정 + 중복본 분류 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1B. 에디터 UI 회귀 복구 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1B1. slides-editor 런타임 smoke 고정 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1B2. 타입/스텝 표시 체감 회귀 점검 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1B3. 수정 가능 여부 회귀 점검 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1B4. 라이브 slides-editor 최종 회귀 점검 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1B5. overview 삭제 후 Ctrl+Z 복구 회귀 차단 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1B6. slides-editor 정적본/소스본 동기화 회귀 차단 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1B7. 발표자 팝업 F 숨김 + generated runtime smoke 안정화 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1C. generate 추천기-검사기 정합화 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1C1. selector blocker 3건 제거 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1D. slide2 기준 재생성 + 실전 검증 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1D1. 생성기 후속 품질 복구 — ICON 렌더 / Obsidian 출력 경로 / T18·T32·T34 보강 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1D2. 기획→선택기→생성기 end-to-end 점검 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1D3. 발표자 노트 원문 보존 회귀 차단 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1D4. manuscript 자동 skeleton 흐름 정상화 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1D5. snippets/build 재동기화 + 전체 회귀 측정 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1D6. 2026-05-03 전수조사 — 기획/선택기/생성기/에디터 분리 진단 (5/3)",
+              "done": true
+            },
+            {
+              "text": "2-1D7. 기획/원고 규칙 전수점검 + 타입별 입력 규격 재정의 (5/3)",
+              "done": false
+            },
+            {
+              "text": "2-1D8. 최근 archive 원고 실주행 전수검증 (5/4)",
+              "done": true
+            },
+            {
+              "text": "2-1E. 중복 slide(codex*) 정리 (5/3)",
+              "done": true
+            },
+            {
               "text": "2-2. cdn-assets 로컬 백업 브랜치·태그 삭제",
               "done": false
             },
@@ -422,6 +506,33 @@
             },
             {
               "text": "7-7. 우리 채널 즉시 적용 액션 1개 도출 → 실행",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "영상 제작 효과음·자막 자동화 후속 (5/3~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "8-1. yt-image-pop 새 패턴(--sfx 옵션, 기존 audio 보존) 다음 영상에서 실전 검증",
+              "done": false
+            },
+            {
+              "text": "8-2. 슬라이드 효과음 자동화 매칭 알고리즘 개선 — manuscript.md 🟡N 마커 → SRT 자막 정확 매칭(현재 직접 매칭률 20%, 보간 결과 부정확)",
+              "done": false
+            },
+            {
+              "text": "8-3. 자막 render_idx 일괄 변경 스크립트 (자막을 이미지보다 위에 표시) — yt-autocut에 옵션 추가 또는 별도 1줄 스크립트",
+              "done": false
+            },
+            {
+              "text": "8-4. 0503 프로젝트 폴더 정리 — `0503/`, `0503(2)/`, `0503(3)/`, `_backup_2026-05-03_231631/` 중 보존할 것 결정 후 삭제. 0503은 사용자 작업 본체, 나머지는 임시",
+              "done": false
+            },
+            {
+              "text": "8-5. `/tmp/add_sfx.py`, `/tmp/slide_sfx.py`, `/tmp/image_sfx.py`, `/tmp/image_sfx_add.py` 임시 스크립트 정리 (yt-image-pop에 통합 완료 후 제거)",
               "done": false
             }
           ]

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-03T14:17:51.786996+09:00",
+  "updated": "2026-05-04T06:00:09.392149+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -23,7 +23,7 @@
   "tasks": {
     "total": 361,
     "done": 333,
-    "overdue": 6,
+    "overdue": 12,
     "pending": [
       {
         "title": "전자책 작성",
@@ -58,32 +58,32 @@
       {
         "title": "P1~P3/목실감",
         "date": "2026-05-03T08:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원고완성",
         "date": "2026-05-03T09:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "PPT완료",
         "date": "2026-05-03T11:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원씽복기",
         "date": "2026-05-03T14:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-05-03T15:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "랜딩 수정",
         "date": "2026-05-03T19:45:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "메모정리",
@@ -168,38 +168,44 @@
     ],
     "schedule": [
       {
-        "title": "P1~P3/목실감",
-        "time": "08:30",
+        "title": "메모정리",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고완성",
-        "time": "09:30",
+        "title": "강의 기획",
+        "time": "09:45",
         "allDay": false,
         "done": false
       },
       {
-        "title": "PPT완료",
-        "time": "11:30",
+        "title": "연차취합",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원씽복기",
-        "time": "14:00",
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영&편집&업로드",
+        "title": "crm구조",
+        "time": "13:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
         "time": "15:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "랜딩 수정",
-        "time": "19:45",
         "allDay": false,
         "done": false
       }
@@ -207,7 +213,7 @@
   },
   "routines": {
     "total": 4,
-    "done_today": 1,
+    "done_today": 0,
     "items": [
       {
         "name": "원씽 완료",
@@ -215,7 +221,7 @@
       },
       {
         "name": "일일 계획",
-        "done": true
+        "done": false
       },
       {
         "name": "P2 완료",
@@ -226,34 +232,13 @@
         "done": false
       }
     ],
-    "priorities": [
-      {
-        "label": "원씽",
-        "title": "업로드",
-        "done": false
-      },
-      {
-        "label": "P2",
-        "title": "랜딩수정",
-        "done": false
-      },
-      {
-        "label": "P3",
-        "title": "비즈니스카톡",
-        "done": false
-      }
-    ],
-    "identity": "나는 오늘 6시전에 업로드하는 사람이다",
+    "priorities": [],
+    "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 12,
-      "rate": "43%",
+      "done": 11,
+      "rate": "39%",
       "days": [
-        {
-          "date": "2026-04-27",
-          "done": 1,
-          "total": 4
-        },
         {
           "date": "2026-04-28",
           "done": 2,
@@ -282,6 +267,11 @@
         {
           "date": "2026-05-03",
           "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-05-04",
+          "done": 0,
           "total": 4
         }
       ]
