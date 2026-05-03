@@ -9051,7 +9051,8 @@
     item._gid = row.gid || null;
     item._members = row.members || null;
     const label = row.gid ? `[${escHTML(row.gid.toUpperCase())}] 그룹` : escHTML(getElLabel(row.el));
-    const typeBadge = row.gid ? '' : `<span class="layer-badge">${escHTML(getElType(row.el))}</span>`;
+    const typeLabel = row.gid ? groupTypeLabel(row.members) : getElType(row.el);
+    const typeBadge = typeLabel ? `<span class="layer-badge">${escHTML(typeLabel)}</span>` : '';
     item.innerHTML = `<span class="layer-handle">⠿</span><span class="layer-label">${label}</span>${typeBadge}<span class="layer-step-badge">${row.clickNum}번째</span>`;
     item.addEventListener('click', () => {
       if (layerDragItem) return;
