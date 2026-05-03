@@ -6994,6 +6994,8 @@
   function restoreSnapshot(html) {
     document.getElementById('stage').innerHTML = html;
     slides = document.querySelectorAll('#stage > .slide');
+    currentSlide = Math.max(0, Math.min(currentSlide, Math.max(0, slides.length - 1)));
+    if (typeof rebuildSlidesByKey === 'function') rebuildSlidesByKey();
     document.querySelectorAll('.edit-selected, .edit-group-selected, .group-entered-parent, .child-selected, .child-action-target').forEach(el => { el.classList.remove('edit-selected', 'edit-group-selected', 'group-entered-parent', 'child-selected', 'child-action-target'); });
     document.body.classList.remove('individual-mode');
     selectedEl = null;
@@ -7018,9 +7020,12 @@
       s.classList.toggle('active', i === currentSlide);
       s.classList.remove('leave-left', 'enter-from-left');
     });
-    showStep(slides[currentSlide], currentStep);
+    if (slides[currentSlide]) showStep(slides[currentSlide], currentStep);
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
     buildFilmstrip();
+    if (document.getElementById('overview')?.dataset.open === '1' && typeof buildOverview === 'function') buildOverview();
+    if (typeof setSlideJumpNotesForSlide === 'function' && slides[currentSlide]) setSlideJumpNotesForSlide(slides[currentSlide]);
+    if (typeof setRuntimeNotesForSlide === 'function' && slides[currentSlide]) setRuntimeNotesForSlide(slides[currentSlide]);
   }
 
   function doUndo() {
