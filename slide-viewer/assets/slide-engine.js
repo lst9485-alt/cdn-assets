@@ -1804,7 +1804,7 @@
   let resizeMultiInitRects = null;
   let groupCounter = 0;
   let individualMode = false;
-  let layerActiveTab = 'animation'; // 'animation' | 'position'
+  let layerActiveTab = 'position'; // 'animation' | 'position'
   let expandedGroups = new Set();
   // ── 드래그 선택 박스 ──
   let selectBoxActive = false;
@@ -3325,6 +3325,10 @@
       buildLayerPanel();
     });
   });
+
+  if (document.getElementById('layer-panel')?.classList.contains('visible')) {
+    buildLayerPanel();
+  }
 
   // ── 정렬 컨텍스트 메뉴 ──
   const alignMenu = document.getElementById('align-menu');
