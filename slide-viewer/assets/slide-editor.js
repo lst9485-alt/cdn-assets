@@ -605,10 +605,59 @@
     setSlideJumpNotesText(getSlideScriptPreview(slide));
   }
 
+  function slideJumpTypeRatioRows() {
+    const counts = {};
+    const basePgs = getVisibleBasePageGroups();
+    basePgs.forEach(pg => {
+      const baseSlide = [...slides].find(s => s.dataset.pageGroup === pg && (s.dataset.variant === '0' || !s.dataset.variant));
+      if (!baseSlide) return;
+      const type = baseSlide.dataset.type || '미분류';
+      counts[type] = (counts[type] || 0) + 1;
+    });
+    const total = Math.max(1, Object.values(counts).reduce((sum, count) => sum + count, 0));
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'))
+      .map(([type, count]) => ({ type, count, pct: Math.round((count / total) * 100) }));
+  }
+
+  function renderSlideJumpTypeRatio(panel) {
+    if (!panel) return;
+    panel.innerHTML = '';
+    const rows = slideJumpTypeRatioRows();
+    const title = document.createElement('div');
+    title.className = 'sj-ratio-title';
+    title.textContent = `타입 비율 ${rows.reduce((sum, row) => sum + row.count, 0)}장`;
+    panel.appendChild(title);
+    rows.forEach(row => {
+      const item = document.createElement('div');
+      item.className = 'sj-ratio-item';
+      const name = document.createElement('span');
+      name.textContent = row.type;
+      const value = document.createElement('b');
+      value.textContent = `${row.count}장 · ${row.pct}%`;
+      item.appendChild(name);
+      item.appendChild(value);
+      panel.appendChild(item);
+    });
+  }
+
+  function bindSlideJumpRatioToggle(button, nav, panel) {
+    if (!button || !nav || !panel || button.dataset.bound === '1') return;
+    button.dataset.bound = '1';
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = nav.classList.toggle('ratio-open');
+      button.classList.toggle('active', open);
+      renderSlideJumpTypeRatio(panel);
+    });
+  }
+
   function buildSlideJumpNav() {
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
     let toggle = nav.querySelector('.sj-toggle');
+    let ratioToggle = nav.querySelector('.sj-ratio-toggle');
+    let ratioPanel = nav.querySelector('.sj-ratio-panel');
     let toolbar = nav.querySelector('.sj-toolbar');
     let search = nav.querySelector('.sj-search');
     let grid = nav.querySelector('.sj-grid');
@@ -627,6 +676,22 @@
       });
       nav.appendChild(toggle);
     }
+    if (!ratioToggle) {
+      ratioToggle = document.createElement('button');
+      ratioToggle.className = 'sj-ratio-toggle';
+      ratioToggle.type = 'button';
+      ratioToggle.textContent = '비율';
+      ratioToggle.title = '타입별 사용 비율';
+      toggle.insertAdjacentElement('afterend', ratioToggle);
+    }
+    if (!ratioPanel) {
+      ratioPanel = document.createElement('div');
+      ratioPanel.className = 'sj-ratio-panel';
+      ratioToggle.insertAdjacentElement('afterend', ratioPanel);
+    }
+    bindSlideJumpRatioToggle(ratioToggle, nav, ratioPanel);
+    ratioToggle.classList.toggle('active', nav.classList.contains('ratio-open'));
+    renderSlideJumpTypeRatio(ratioPanel);
     if (!toolbar && !isGeneratedDeck()) {
       toolbar = document.createElement('div');
       toolbar.className = 'sj-toolbar';
@@ -704,6 +769,7 @@
     const active = grid.querySelector('.sj-item.active');
     if (active) active.scrollIntoView({ block: 'nearest' });
     if (notes) setSlideJumpNotesForSlide(slides[currentSlide]);
+    renderSlideJumpTypeRatio(ratioPanel);
   }
 
   function updateSlideJumpNav() {
@@ -720,6 +786,7 @@
     const active = grid.querySelector('.sj-item.active');
     if (active) active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     setSlideJumpNotesForSlide(slides[currentSlide]);
+    renderSlideJumpTypeRatio(nav.querySelector('.sj-ratio-panel'));
   }
 
   function reorderSlide(fromIdx, toIdx) {
@@ -4165,6 +4232,39 @@
     if (item) item.classList.add('ov-note-target');
   }
 
+  function overviewTypeRatioEl() {
+    const firstByGroup = new Map();
+    slides.forEach((slide, idx) => {
+      const pg = slide.dataset.pageGroup || String(idx + 1);
+      if (!firstByGroup.has(pg) || slide.dataset.variant === '0' || !slide.dataset.variant) {
+        firstByGroup.set(pg, slide);
+      }
+    });
+    const counts = {};
+    firstByGroup.forEach(slide => {
+      const type = slide.dataset.type || '미분류';
+      counts[type] = (counts[type] || 0) + 1;
+    });
+    const total = Math.max(1, firstByGroup.size);
+    const wrap = document.createElement('div');
+    wrap.className = 'ov-type-ratio';
+    const head = document.createElement('div');
+    head.className = 'ov-type-ratio-head';
+    head.textContent = `타입 비율 ${total}장`;
+    wrap.appendChild(head);
+    Object.entries(counts)
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'))
+      .slice(0, 8)
+      .forEach(([type, count]) => {
+        const item = document.createElement('div');
+        item.className = 'ov-type-ratio-item';
+        const pct = Math.round((count / total) * 100);
+        item.innerHTML = `<span>${type}</span><b>${count}장 · ${pct}%</b>`;
+        wrap.appendChild(item);
+      });
+    return wrap;
+  }
+
   function deleteOverviewSlideAt(idx) {
     if (!(document.body && document.body.dataset.generated === 'true')) {
       if (typeof showToast === 'function') showToast('에디터에서는 슬라이드 삭제를 막았습니다.');
@@ -4304,6 +4404,9 @@
       });
       toolbar.appendChild(notesModeBtn);
       ovGrid.appendChild(toolbar);
+    }
+    if (isEditor) {
+      ovGrid.appendChild(overviewTypeRatioEl());
     }
 
     const bucketCounts = {};
