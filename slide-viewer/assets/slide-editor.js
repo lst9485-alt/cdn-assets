@@ -248,6 +248,9 @@
     if (typeof insertFilmstripCategoryDividers === 'function') {
       insertFilmstripCategoryDividers();
     }
+    if (typeof syncTypeMetaChips === 'function') {
+      syncTypeMetaChips();
+    }
     scrollFilmstripToCurrent();
     buildSlideJumpNav();
   }
@@ -4547,6 +4550,9 @@
       }
     });
     // scale은 CSS 고정 (240/1920) — JS 계산 불필요
+    if (typeof syncTypeMetaChips === 'function') {
+      syncTypeMetaChips();
+    }
   }
 
   // ── 슬라이드 우클릭 메뉴 ──
@@ -8773,7 +8779,7 @@
   }
 
   function syncTypeMetaChips() {
-    if (!Array.isArray(slides) || !slides.length) return;
+    if (!slides || typeof slides.length !== 'number' || !slides.length) return;
     document.querySelectorAll('#overview-grid .ov-item').forEach(item => {
       const slide = slides[item._slideIdx];
       if (!slide) return;
@@ -9271,6 +9277,9 @@
   wrapTypeMetaBuilder('buildFilmstrip');
   wrapTypeMetaBuilder('buildOverview');
   setTimeout(syncTypeMetaChips, 0);
+  setTimeout(() => {
+    if (typeof buildFilmstrip === 'function') buildFilmstrip();
+  }, 0);
 
   // ── 정렬 컨텍스트 메뉴 ──
   const alignMenu = document.getElementById('align-menu');
