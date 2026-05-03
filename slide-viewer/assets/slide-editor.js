@@ -9035,7 +9035,10 @@
 
   function groupTypeLabel(members) {
     const types = [...new Set((members || [])
-      .map(entry => entry && entry.el ? getElType(entry.el) : '')
+      .map(entry => {
+        const el = entry && entry.el ? entry.el : entry;
+        return el ? getElType(el) : '';
+      })
       .filter(Boolean))];
     if (!types.length) return '';
     if (types.length === 1) return types[0];
