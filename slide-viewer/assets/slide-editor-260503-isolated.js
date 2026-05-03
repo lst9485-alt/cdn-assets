@@ -191,7 +191,6 @@
       const fsInner = document.createElement('div');
       fsInner.className = 'fs-inner';
       const clone = slide.cloneNode(true);
-      patchIconTextPreviewClone(clone);
       clone.style.cssText = 'position:relative;width:1920px;height:1080px;opacity:1;transform:none;pointer-events:none;';
       applyStepState(clone, getSteps(slide) - 1);
       fsInner.appendChild(clone);
@@ -4079,58 +4078,6 @@
   let ovDragItem = null, ovDragFromIdx = -1, ovDragGhost = null, ovDragDropIdx = -1;
   let expandedOverviewGroups = new Set();  // 확장된 page-group(string) 집합 — overview 전용
 
-  function patchIconTextPreviewClone(clone) {
-    if (!(clone && clone.dataset && clone.dataset.type === '아이콘+텍스트')) return;
-    const layer = clone.querySelector('.step-layer');
-    const iconBox = clone.querySelector('.emoji-icon');
-    const itemsRow = clone.querySelector('.items-row');
-    const textArea = clone.querySelector('.text-area');
-    if (!layer || !iconBox) return;
-    const bgEl = layer.querySelector(':scope > .slide-el:first-child');
-    const bgImg = bgEl && bgEl.querySelector('img');
-    if (bgEl) bgEl.style.display = 'none';
-    if (!bgImg) return;
-    let iconImg = iconBox.querySelector('.isolated-icon-image');
-    if (!iconImg) {
-      iconImg = bgImg.cloneNode(true);
-      iconImg.className = 'isolated-icon-image';
-      iconBox.appendChild(iconImg);
-    }
-    if (itemsRow) {
-      itemsRow.style.display = 'flex';
-      itemsRow.style.alignItems = 'center';
-      itemsRow.style.justifyContent = 'flex-start';
-      itemsRow.style.gap = '42px';
-      itemsRow.style.width = '1480px';
-      itemsRow.style.left = '220px';
-    }
-    if (textArea) {
-      textArea.style.flex = '1 1 auto';
-      textArea.style.width = '960px';
-    }
-    iconBox.style.position = 'relative';
-    iconBox.style.width = '300px';
-    iconBox.style.height = '300px';
-    iconBox.style.flex = '0 0 300px';
-    iconBox.style.minWidth = '300px';
-    iconBox.style.maxWidth = '300px';
-    iconBox.style.display = 'flex';
-    iconBox.style.alignItems = 'center';
-    iconBox.style.justifyContent = 'center';
-    iconBox.style.overflow = 'hidden';
-    iconBox.style.borderRadius = '50%';
-    iconBox.style.clipPath = 'circle(50%)';
-    iconImg.style.position = 'absolute';
-    iconImg.style.inset = '52px';
-    iconImg.style.width = 'calc(100% - 104px)';
-    iconImg.style.height = 'calc(100% - 104px)';
-    iconImg.style.objectFit = 'contain';
-    iconImg.style.pointerEvents = 'none';
-    iconImg.style.display = 'block';
-    iconImg.style.visibility = 'visible';
-    iconImg.style.opacity = '1';
-  }
-
   function deleteOverviewSlideAt(idx) {
     if (!(document.body && document.body.dataset.generated === 'true')) {
       if (typeof showToast === 'function') showToast('에디터에서는 슬라이드 삭제를 막았습니다.');
@@ -4320,7 +4267,6 @@
       const thumb = document.createElement('div');
       thumb.className = 'ov-thumb';
       const clone = slide.cloneNode(true);
-      patchIconTextPreviewClone(clone);
       clone.className = 'slide';
       clone.style.cssText = 'position:relative; width:1920px; height:1080px; opacity:1; transform:none; pointer-events:none;';
       applyStepState(clone, getSteps(slide) - 1);
@@ -9765,7 +9711,6 @@
 
   function slidePreviewHTML(slide, step) {
     const clone = slide.cloneNode(true);
-    patchIconTextPreviewClone(clone);
     clone.style.cssText = 'position:relative; width:1920px; height:1080px; opacity:1; transform:none; pointer-events:none;';
     clone.querySelectorAll('.edit-selected, .edit-group-selected').forEach(el => { el.classList.remove('edit-selected'); el.classList.remove('edit-group-selected'); });
     applyStepState(clone, step);

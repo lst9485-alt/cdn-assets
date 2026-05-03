@@ -652,6 +652,37 @@
     });
   }
 
+  function bindSlideJumpToggle(button, nav) {
+    if (!button || !nav || button.dataset.bound === '1') return;
+    button.dataset.bound = '1';
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const collapsed = nav.classList.toggle('collapsed');
+      document.body.classList.toggle('sjn-collapsed', collapsed);
+      button.textContent = collapsed ? '‹' : '›';
+    });
+  }
+
+  function bindSlideJumpSearch(search, grid) {
+    if (!search || !grid || search.dataset.bound === '1') return;
+    search.dataset.bound = '1';
+    search.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      const q = (search.value || '').trim().toLowerCase();
+      if (!q) return;
+      const first = [...grid.querySelectorAll('.sj-item')].find(item => item.style.display !== 'none');
+      if (!first) return;
+      first.click();
+    });
+    search.addEventListener('input', () => {
+      const q = (search.value || '').trim().toLowerCase();
+      grid.querySelectorAll('.sj-item').forEach(item => {
+        const hay = ((item.dataset.search || '') + ' ' + (item.textContent || '')).toLowerCase();
+        item.style.display = !q || hay.includes(q) ? '' : 'none';
+      });
+    });
+  }
+
   function buildSlideJumpNav() {
     const nav = document.getElementById('slide-jump-nav');
     if (!nav) return;
@@ -668,14 +699,10 @@
       toggle.type = 'button';
       toggle.title = '접기/펴기';
       toggle.textContent = '›';
-      toggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const collapsed = nav.classList.toggle('collapsed');
-        document.body.classList.toggle('sjn-collapsed', collapsed);
-        toggle.textContent = collapsed ? '‹' : '›';
-      });
       nav.appendChild(toggle);
     }
+    bindSlideJumpToggle(toggle, nav);
+    toggle.textContent = nav.classList.contains('collapsed') ? '‹' : '›';
     if (!ratioToggle) {
       ratioToggle = document.createElement('button');
       ratioToggle.className = 'sj-ratio-toggle';
@@ -699,21 +726,6 @@
       search.className = 'sj-search';
       search.type = 'text';
       search.placeholder = '번호 / T번호 / 타입';
-      search.addEventListener('keydown', (e) => {
-        if (e.key !== 'Enter') return;
-        const q = (search.value || '').trim().toLowerCase();
-        if (!q) return;
-        const first = [...grid.querySelectorAll('.sj-item')].find(item => item.style.display !== 'none');
-        if (!first) return;
-        first.click();
-      });
-      search.addEventListener('input', () => {
-        const q = (search.value || '').trim().toLowerCase();
-        grid.querySelectorAll('.sj-item').forEach(item => {
-          const hay = ((item.dataset.search || '') + ' ' + (item.textContent || '')).toLowerCase();
-          item.style.display = !q || hay.includes(q) ? '' : 'none';
-        });
-      });
       toolbar.appendChild(search);
       nav.appendChild(toolbar);
     }
@@ -727,6 +739,7 @@
       notes.className = 'sj-notes';
       nav.appendChild(notes);
     }
+    bindSlideJumpSearch(search, grid);
     grid.innerHTML = '';
     const basePgs = getVisibleBasePageGroups();
     const sortedPgs = [...basePgs].sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
