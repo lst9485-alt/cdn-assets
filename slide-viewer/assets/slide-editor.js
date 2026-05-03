@@ -5613,7 +5613,7 @@
   let layoutDetachCounter = 0;
   let groupCounter = 0;
   let individualMode = false;
-  let layerActiveTab = 'position'; // 'animation' | 'position'
+  let layerActiveTab = 'animation'; // 'animation' | 'position'
   let expandedGroups = new Set();
   // ── 드래그 선택 박스 ──
   let selectBoxActive = false;
