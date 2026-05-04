@@ -106,7 +106,8 @@
     if (!Number.isFinite(parsedVariant) || parsedVariant <= 0) {
       return `T${tnum}`;
     }
-    return `T${tnum}-${parsedVariant + 1}`;
+    const variantLabel = String.fromCharCode(64 + parsedVariant);
+    return `T${tnum}-${variantLabel}`;
   }
 
   // 같은 page-group의 base와 variants가 DOM에서 인접 배치되어 있다는 불변식에 의존
@@ -200,7 +201,8 @@
       const num = document.createElement('div');
       num.className = 'fs-num';
       if (pg) {
-        num.textContent = slide.dataset.displayNumber || (isVariant ? `T${pg}-${parseInt(variant) + 1}` : `T${pg}`);
+        const variantLabel = String.fromCharCode(64 + parseInt(variant || '0', 10));
+        num.textContent = slide.dataset.displayNumber || (isVariant ? `T${pg}-${variantLabel}` : `T${pg}`);
         const colorSeed = parseInt(slide.dataset.displayGroupIndex || pg, 10);
         item.setAttribute('data-group-color', Number.isFinite(colorSeed) ? colorSeed % 4 : 0);
       } else {
@@ -4524,7 +4526,8 @@
       const num = document.createElement('div');
       num.className = 'ov-num';
       if (pg) {
-        num.textContent = slide.dataset.displayNumber || (isVariant ? `T${pg}-${parseInt(variant) + 1}` : `T${pg}`);
+        const variantLabel = String.fromCharCode(64 + parseInt(variant || '0', 10));
+        num.textContent = slide.dataset.displayNumber || (isVariant ? `T${pg}-${variantLabel}` : `T${pg}`);
       } else {
         num.textContent = `${slideIdx + 1}`;
       }
