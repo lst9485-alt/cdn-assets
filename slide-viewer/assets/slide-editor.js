@@ -3890,25 +3890,37 @@
   // 오버뷰
   const overview = document.getElementById('overview');
   const ovGrid = document.getElementById('overview-grid');
-  const ovBackdrop = document.getElementById('overview-backdrop');
+  function ensureOverviewBackdrop() {
+    let el = document.getElementById('overview-backdrop');
+    if (el) return el;
+    el = document.createElement('div');
+    el.id = 'overview-backdrop';
+    document.body.appendChild(el);
+    return el;
+  }
+  const ovBackdrop = ensureOverviewBackdrop();
 
   function openOverview() {
     buildOverview();
     document.documentElement.classList.add('overview-open');
     document.body.classList.add('overview-open');
-    ovBackdrop.classList.add('visible');
-    overview.classList.add('visible');
-    overview.dataset.open = '1';
+    if (ovBackdrop) ovBackdrop.classList.add('visible');
+    if (overview) {
+      overview.classList.add('visible');
+      overview.dataset.open = '1';
+    }
     if (typeof buildSlideJumpNav === 'function') buildSlideJumpNav();
   }
 
   function closeOverview() {
     document.documentElement.classList.remove('overview-open');
     document.body.classList.remove('overview-open');
-    ovBackdrop.classList.remove('visible');
-    overview.classList.remove('visible');
-    delete overview.dataset.open;
-    ovGrid.innerHTML = '';
+    if (ovBackdrop) ovBackdrop.classList.remove('visible');
+    if (overview) {
+      overview.classList.remove('visible');
+      delete overview.dataset.open;
+    }
+    if (ovGrid) ovGrid.innerHTML = '';
     document.documentElement.focus();
   }
 
