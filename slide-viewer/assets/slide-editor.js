@@ -4818,6 +4818,18 @@
       toggleOverview();
       return;
     }
+    if (['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', ' '].includes(e.key)) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (editMode) {
+        if (['ArrowRight', 'ArrowDown'].includes(e.key)) goToSlide(currentSlide + 1);
+        if (['ArrowLeft', 'ArrowUp'].includes(e.key)) goToSlide(currentSlide - 1);
+      } else {
+        if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) goNext();
+        if (['ArrowLeft', 'ArrowUp'].includes(e.key)) goPrev();
+      }
+      return;
+    }
     if (e.key === 'Escape') {
       if (modulePicker && modulePicker.dataset.open === '1') {
         e.preventDefault();
