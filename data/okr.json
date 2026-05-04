@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-04T06:00:09.392149+09:00",
+  "updated": "2026-05-05T06:00:11.217889+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -8,22 +8,22 @@
       "rate": "🟢 70%"
     },
     {
-      "title": "홈페이지 가입 100명",
-      "target": 100,
+      "title": "구독자3만(3월30일 17,736명)",
+      "target": 12264,
       "current": 0,
       "rate": "🔴 0%"
     },
     {
-      "title": "구독자3만(3월30일 17,736명)",
-      "target": 12264,
+      "title": "홈페이지 가입 100명",
+      "target": 100,
       "current": 0,
       "rate": "🔴 0%"
     }
   ],
   "tasks": {
-    "total": 361,
-    "done": 333,
-    "overdue": 12,
+    "total": 369,
+    "done": 343,
+    "overdue": 10,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,73 +56,33 @@
         "overdue": true
       },
       {
-        "title": "P1~P3/목실감",
-        "date": "2026-05-03T08:30:00.000+09:00",
+        "title": "메모정리",
+        "date": "2026-05-04",
         "overdue": true
       },
       {
-        "title": "원고완성",
-        "date": "2026-05-03T09:30:00.000+09:00",
+        "title": "crm구조",
+        "date": "2026-05-04T12:00:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "PPT완료",
-        "date": "2026-05-03T11:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-05-03T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-05-03T15:00:00.000+09:00",
+        "title": "현금영수증&세금계산서 발행",
+        "date": "2026-05-04T15:00:00.000+09:00",
         "overdue": true
       },
       {
         "title": "랜딩 수정",
-        "date": "2026-05-03T19:45:00.000+09:00",
+        "date": "2026-05-04T16:00:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "메모정리",
-        "date": "2026-05-04",
-        "overdue": false
-      },
-      {
-        "title": "마케팅업체 정산",
-        "date": "2026-05-04T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의 기획",
-        "date": "2026-05-04T09:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "연차취합",
-        "date": "2026-05-04T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-05-04T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "crm구조",
-        "date": "2026-05-04T13:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "date": "2026-05-04T15:00:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "주제선정&썸네일&제목",
         "date": "2026-05-05",
+        "overdue": false
+      },
+      {
+        "title": "상담준비",
+        "date": "2026-05-05T13:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -136,6 +96,16 @@
         "overdue": false
       },
       {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-05-06T13:15:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의 기획",
+        "date": "2026-05-06T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원고완성",
         "date": "2026-05-07",
         "overdue": false
@@ -143,6 +113,11 @@
       {
         "title": "주간계획 수정",
         "date": "2026-05-07T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "5시 미용실커트",
+        "date": "2026-05-07T17:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -164,48 +139,33 @@
         "title": "촬영&편집&업로드",
         "date": "2026-05-09",
         "overdue": false
+      },
+      {
+        "title": "메모정리",
+        "date": "2026-05-11",
+        "overdue": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "date": "2026-05-11T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "date": "2026-05-11T10:00:00.000+09:00",
+        "overdue": false
       }
     ],
     "schedule": [
       {
-        "title": "메모정리",
+        "title": "주제선정&썸네일&제목",
         "time": "",
         "allDay": true,
         "done": false
       },
       {
-        "title": "마케팅업체 정산",
-        "time": "09:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의 기획",
-        "time": "09:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "연차취합",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "crm구조",
+        "title": "상담준비",
         "time": "13:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "time": "15:00",
         "allDay": false,
         "done": false
       }
@@ -240,11 +200,6 @@
       "rate": "39%",
       "days": [
         {
-          "date": "2026-04-28",
-          "done": 2,
-          "total": 4
-        },
-        {
           "date": "2026-04-29",
           "done": 2,
           "total": 4
@@ -266,11 +221,16 @@
         },
         {
           "date": "2026-05-03",
-          "done": 1,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-05-04",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-05-05",
           "done": 0,
           "total": 4
         }
@@ -280,8 +240,14 @@
   "sales": {
     "month": "2026-05",
     "month_label": "5월",
-    "total_amount": 0,
-    "total_count": 0,
-    "weekly": []
+    "total_amount": 40,
+    "total_count": 1,
+    "weekly": [
+      {
+        "week": "1주차",
+        "count": 1,
+        "amount": 40
+      }
+    ]
   }
 }

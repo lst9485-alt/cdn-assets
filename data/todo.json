@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-04T06:00:02.104100+09:00",
+  "updated": "2026-05-05T06:00:01.594417+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -298,7 +298,7 @@
             },
             {
               "text": "2-1D7. 기획/원고 규칙 전수점검 + 타입별 입력 규격 재정의 (5/3)",
-              "done": false
+              "done": true
             },
             {
               "text": "2-1D8. 최근 archive 원고 실주행 전수검증 (5/4)",
@@ -315,6 +315,38 @@
             {
               "text": "2-3. workspace 3개 backup/* 브랜치 삭제 (원격 포함)",
               "done": false
+            },
+            {
+              "text": "2-1D9. 실전 리허설 자동화 (5/4)",
+              "done": true
+            },
+            {
+              "text": "2-1D10. 공개 테스트본 실동작 재검증 + placeholder 오염 복구 (5/4)",
+              "done": true
+            },
+            {
+              "text": "2-1D11. O 키 overview 검정 화면 회귀 전수검사 (5/4)",
+              "done": true
+            },
+            {
+              "text": "2-1D12. archive rehearsal 도구 실전 기준 정정 (5/4)",
+              "done": true
+            },
+            {
+              "text": "2-1D13. 2026-05-03 실전 재기획 + 새 slide.md 재작성 (5/4)",
+              "done": true
+            },
+            {
+              "text": "2-1D14. 에디터 + 공개 deck 전수검증 실전판 (5/4)",
+              "done": true
+            },
+            {
+              "text": "2-1D15. 실전 재기획본 타입 편중/비교계열 배치 최종 점검 (5/5)",
+              "done": true
+            },
+            {
+              "text": "2-1D16. 편집기 단축키/버튼 전수감사 실전판 (5/5)",
+              "done": true
             }
           ]
         },
@@ -516,23 +548,23 @@
           "ref": null,
           "items": [
             {
-              "text": "8-1. yt-image-pop 새 패턴(--sfx 옵션, 기존 audio 보존) 다음 영상에서 실전 검증",
-              "done": false
+              "text": "8-2. **슬라이드 효과음 자동화 (5/4)** — yt-autocut에 swoosh 통합 (auto cut + swoosh). slide.md A 변형 발화 ↔ SRT 정규화 substring 매칭. 0503 검증 매칭률 97.4% (76/78). 사용자 부담 0. 코드: `Workspace/apps/youtube/yt-autocut/swoosh.py`",
+              "done": true
             },
             {
-              "text": "8-2. 슬라이드 효과음 자동화 매칭 알고리즘 개선 — manuscript.md 🟡N 마커 → SRT 자막 정확 매칭(현재 직접 매칭률 20%, 보간 결과 부정확)",
-              "done": false
+              "text": "8-3. **자막위로 자동화 (5/4)** — yt-image-pop에 자막위로 통합 (image-pop + 자막위로). 캡컷 z-order는 `tracks[]` 배열 순서. text를 video 뒤로 일괄 이동 + segment.track_render_index 갱신. 0503-test 검증 통과. 코드: `Workspace/apps/youtube/yt-image-pop/subtitle_top.py`",
+              "done": true
             },
             {
-              "text": "8-3. 자막 render_idx 일괄 변경 스크립트 (자막을 이미지보다 위에 표시) — yt-autocut에 옵션 추가 또는 별도 1줄 스크립트",
-              "done": false
+              "text": "8-4. 0503 프로젝트 폴더 정리 (5/4) — 캡컷 본체는 `0503(3)`. `0503/`, `0503(2)/`는 휴지통(`~/.Trash/0503-old-not-main-2026-05-04`, `~/.Trash/0503-2-temp-2026-05-04`)으로 이동. `_backup_2026-05-03_231631`는 본체 안 자체 백업이라 유지",
+              "done": true
             },
             {
-              "text": "8-4. 0503 프로젝트 폴더 정리 — `0503/`, `0503(2)/`, `0503(3)/`, `_backup_2026-05-03_231631/` 중 보존할 것 결정 후 삭제. 0503은 사용자 작업 본체, 나머지는 임시",
-              "done": false
+              "text": "8-5. yt-image-pop 통합된 임시 스크립트 정리 (5/4) — `/tmp/image_sfx.py`(0503(2) 구버전), `/tmp/image_sfx_add.py`(0503(3), --sfx로 통합됨) 휴지통으로. `/tmp/add_sfx.py`, `/tmp/slide_sfx.py`는 8-2 진행 시 참고용 보존, 8-2 완료 후 정리",
+              "done": true
             },
             {
-              "text": "8-5. `/tmp/add_sfx.py`, `/tmp/slide_sfx.py`, `/tmp/image_sfx.py`, `/tmp/image_sfx_add.py` 임시 스크립트 정리 (yt-image-pop에 통합 완료 후 제거)",
+              "text": "8-6. **다음 영상에서 실전 검증** (5/4 추가, 집가서 바로) — `auto cut + swoosh`, `image-pop + 자막위로` 둘 다 처음 통합 후 첫 실전. 체크 사항: (1) `/yt-autocut 영상명 SRT경로 --slide slide.md경로`로 실행해서 휙효과음 시점 정확도 확인, 매칭 실패 슬라이드 수 보고 (97.4% 기대), (2) 캡컷 이미지 배치 후 `/yt-image-pop 영상명` 실행, (3) 캡컷 GUI에서 자막이 이미지 위에 제대로 표시되는지 시각 확인. 문제 발견 시 yt-autocut/.context.md 또는 yt-image-pop/.context.md에 기록",
               "done": false
             }
           ]
