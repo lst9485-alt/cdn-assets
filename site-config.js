@@ -473,6 +473,66 @@
             sidebarType: 'root',
             activeMatch: ['index-trust.html'],
             hubVisible: true
+          },
+          {
+            id: 'slide-test-260405',
+            title: '260405 천안아산 테스트',
+            description: 'archive 원고 재생성본',
+            href: 'slide-viewer/260405-slides.html?_ghfresh=20260504093000',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['260405-slides.html'],
+            hubVisible: true
+          },
+          {
+            id: 'slide-test-260412',
+            title: '260412 집 사도 되나요 테스트',
+            description: 'archive 원고 재생성본',
+            href: 'slide-viewer/260412-slides.html?_ghfresh=20260504093000',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['260412-slides.html'],
+            hubVisible: true
+          },
+          {
+            id: 'slide-test-260419',
+            title: '260419 질문 자체가 틀렸습니다 테스트',
+            description: 'archive 원고 재생성본',
+            href: 'slide-viewer/260419-slides.html?_ghfresh=20260504093000',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['260419-slides.html'],
+            hubVisible: true
+          },
+          {
+            id: 'slide-test-260426',
+            title: '260426 가격통제의 비극 테스트',
+            description: 'archive 원고 재생성본',
+            href: 'slide-viewer/260426-slides.html?_ghfresh=20260504093000',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['260426-slides.html'],
+            hubVisible: true
+          },
+          {
+            id: 'slide-test-260503',
+            title: '260503 직장인 재테크 순서 테스트',
+            description: 'archive 원고 재생성본',
+            href: 'slide-viewer/260503-slides.html?_ghfresh=20260504093000',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['260503-slides.html'],
+            hubVisible: true
           }
         ]
       }
