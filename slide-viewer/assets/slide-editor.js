@@ -4373,37 +4373,56 @@
       if (!firstByGroup.has(pg) || slide.dataset.variant === '0' || !slide.dataset.variant) {
         firstByGroup.set(pg, slide);
       }
-      const allType = slide.dataset.type || '미분류';
-      allCounts[allType] = (allCounts[allType] || 0) + 1;
+      const meta = typeof typeMetaOfSlide === 'function' ? typeMetaOfSlide(slide) : null;
+      const tnum = typeof typeNumberOfMeta === 'function' ? typeNumberOfMeta(meta) : null;
+      const tcode = tnum ? `T${String(tnum).padStart(2, '0')}` : (slide.dataset.typeCode || 'T??');
+      allCounts[tcode] = (allCounts[tcode] || 0) + 1;
     });
     const total = Math.max(1, firstByGroup.size);
     const allTotal = Math.max(1, slides.length);
+    const stepCounts = { 1: 0, 2: 0, 3: 0, other: 0 };
+    firstByGroup.forEach(slide => {
+      const steps = parseInt(slide.dataset.steps || '1', 10);
+      if (steps === 1 || steps === 2 || steps === 3) stepCounts[steps] += 1;
+      else stepCounts.other += 1;
+    });
+    const allTypeCodes = Object.values(PG_TO_TYPE_META)
+      .map(meta => {
+        const n = typeof typeNumberOfMeta === 'function' ? typeNumberOfMeta(meta) : null;
+        return n ? `T${String(n).padStart(2, '0')}` : null;
+      })
+      .filter(Boolean)
+      .filter((code, idx, arr) => arr.indexOf(code) === idx);
+    allTypeCodes.forEach(code => {
+      if (typeof allCounts[code] !== 'number') allCounts[code] = 0;
+    });
     const wrap = document.createElement('div');
     wrap.className = 'ov-type-ratio';
     const head = document.createElement('div');
     head.className = 'ov-type-ratio-head';
-    head.textContent = `전체 타입 비율 ${allTotal}장`;
+    head.textContent = `전체 요약 · 타입 ${allTotal}장 · 베이스 ${total}장`;
     wrap.appendChild(head);
-    const formatBias = (entries, denom) => entries
-      .filter(([, count]) => ((count / denom) * 100) >= 10)
-      .map(([type, count]) => `${type} ${count}장 · ${Math.round((count / denom) * 100)}%`);
-    const allBias = formatBias(Object.entries(allCounts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko')), allTotal);
-    if (allBias.length) {
-      const biasBox = document.createElement('div');
-      biasBox.className = 'ov-type-ratio-item';
-      biasBox.innerHTML = `<span>전체 편중 타입</span><b>${allBias.join(' / ')}</b>`;
-      wrap.appendChild(biasBox);
-    }
-    Object.entries(allCounts)
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'))
-      .slice(0, 8)
-      .forEach(([type, count]) => {
-        const item = document.createElement('div');
-        item.className = 'ov-type-ratio-item';
-        const pct = Math.round((count / allTotal) * 100);
-        item.innerHTML = `<span>${type}</span><b>${count}장 · ${pct}%</b>`;
-        wrap.appendChild(item);
-      });
+    const stepItem = document.createElement('div');
+    stepItem.className = 'ov-type-ratio-item';
+    const stepParts = [
+      `1step ${stepCounts[1]}개 · ${Math.round((stepCounts[1] / total) * 100)}%`,
+      `2step ${stepCounts[2]}개 · ${Math.round((stepCounts[2] / total) * 100)}%`,
+      `3step ${stepCounts[3]}개 · ${Math.round((stepCounts[3] / total) * 100)}%`,
+    ];
+    if (stepCounts.other) stepParts.push(`기타 ${stepCounts.other}개 · ${Math.round((stepCounts.other / total) * 100)}%`);
+    stepItem.innerHTML = `<span>스텝 분포</span><b>${stepParts.join(' / ')}</b>`;
+    wrap.appendChild(stepItem);
+
+    const typeItem = document.createElement('div');
+    typeItem.className = 'ov-type-ratio-item ov-type-ratio-item-wide';
+    const sortedTypes = Object.entries(allCounts)
+      .sort((a, b) => {
+        if (b[1] !== a[1]) return b[1] - a[1];
+        return a[0].localeCompare(b[0], 'en');
+      })
+      .map(([code, count]) => `${code} ${count}장 · ${Math.round((count / allTotal) * 100)}%`);
+    typeItem.innerHTML = `<span>타입 분포</span><b>${sortedTypes.join(' / ')}</b>`;
+    wrap.appendChild(typeItem);
     return wrap;
   }
 

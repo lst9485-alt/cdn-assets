@@ -1738,6 +1738,9 @@
     border: 1px solid rgba(255,255,255,0.1);
     color: #fff;
   }
+  .ov-type-ratio-item.ov-type-ratio-item-wide {
+    grid-column: 1 / -1;
+  }
   .ov-type-ratio-item span {
     font-size: 12px;
     font-weight: 800;
