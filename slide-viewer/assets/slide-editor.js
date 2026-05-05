@@ -3171,6 +3171,21 @@
     if (document.getElementById('layer-panel').classList.contains('visible')) buildLayerPanel();
   }
 
+  function forwardPresenterNotesToggle() {
+    const popup = typeof getPresenterWindowRef === 'function' ? getPresenterWindowRef() : presenterWindow;
+    if (!((popup && !popup.closed) || presenterReady || window.__presenterPopupReady || window.__presenterPopupOpen)) {
+      return false;
+    }
+    try { if (popup && !popup.closed) popup.focus(); } catch (_) {}
+    try { presenterChannel.postMessage({ type: 'toggle-notes' }); } catch (_) {}
+    try {
+      if (typeof popup.__presenterToggleNotesHidden === 'function') {
+        popup.__presenterToggleNotesHidden();
+      }
+    } catch (_) {}
+    return true;
+  }
+
   document.addEventListener('keydown', e => {
     const targetEl = (e.target && typeof e.target.closest === 'function') ? e.target : null;
     if (targetEl && targetEl.closest('input, textarea, [contenteditable="true"]')) return;
@@ -3418,16 +3433,8 @@
       return;
     }
     if (e.code === 'KeyF') {
-      const popup = typeof getPresenterWindowRef === 'function' ? getPresenterWindowRef() : presenterWindow;
-      if ((popup && !popup.closed) || presenterReady || window.__presenterPopupReady || window.__presenterPopupOpen) {
+      if (forwardPresenterNotesToggle()) {
         e.preventDefault();
-        try { if (popup && !popup.closed) popup.focus(); } catch (_) {}
-        try { presenterChannel.postMessage({ type: 'toggle-notes' }); } catch (_) {}
-        try {
-          if (typeof popup.__presenterToggleNotesHidden === 'function') {
-            popup.__presenterToggleNotesHidden();
-          }
-        } catch (_) {}
         return;
       }
       if (!document.fullscreenElement) {
@@ -4845,6 +4852,18 @@
       e.preventDefault();
       e.stopImmediatePropagation();
       toggleOverview();
+      return;
+    }
+    if (e.code === 'KeyF') {
+      if (forwardPresenterNotesToggle()) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return;
+      }
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
       return;
     }
     if (['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', ' '].includes(e.key)) {
