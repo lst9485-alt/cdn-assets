@@ -4380,10 +4380,10 @@
     });
     const total = Math.max(1, firstByGroup.size);
     const allTotal = Math.max(1, slides.length);
-    const stepCounts = { 1: 0, 2: 0, 3: 0, other: 0 };
+    const stepCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, other: 0 };
     firstByGroup.forEach(slide => {
       const steps = parseInt(slide.dataset.steps || '1', 10);
-      if (steps === 1 || steps === 2 || steps === 3) stepCounts[steps] += 1;
+      if (steps >= 1 && steps <= 5) stepCounts[steps] += 1;
       else stepCounts.other += 1;
     });
     const allTypeCodes = Object.values(PG_TO_TYPE_META)
@@ -4402,27 +4402,81 @@
     head.className = 'ov-type-ratio-head';
     head.textContent = `전체 요약 · 타입 ${allTotal}장 · 베이스 ${total}장`;
     wrap.appendChild(head);
-    const stepItem = document.createElement('div');
-    stepItem.className = 'ov-type-ratio-item';
-    const stepParts = [
-      `1step ${stepCounts[1]}개 · ${Math.round((stepCounts[1] / total) * 100)}%`,
-      `2step ${stepCounts[2]}개 · ${Math.round((stepCounts[2] / total) * 100)}%`,
-      `3step ${stepCounts[3]}개 · ${Math.round((stepCounts[3] / total) * 100)}%`,
-    ];
-    if (stepCounts.other) stepParts.push(`기타 ${stepCounts.other}개 · ${Math.round((stepCounts.other / total) * 100)}%`);
-    stepItem.innerHTML = `<span>스텝 분포</span><b>${stepParts.join(' / ')}</b>`;
-    wrap.appendChild(stepItem);
+    const buildMetricTable = (title, headers, rows, { wide = false, open = false, summary = '' } = {}) => {
+      const section = document.createElement('div');
+      section.className = 'ov-type-ratio-item' + (wide ? ' ov-type-ratio-item-wide' : '');
+      const details = document.createElement('details');
+      details.className = 'ov-metric-section';
+      if (open) details.open = true;
+      const summaryEl = document.createElement('summary');
+      summaryEl.className = 'ov-metric-summary';
+      summaryEl.innerHTML = `<strong>${title}</strong>${summary ? `<em>${summary}</em>` : ''}`;
+      details.appendChild(summaryEl);
+      const table = document.createElement('table');
+      table.className = 'ov-metric-table';
+      const thead = document.createElement('thead');
+      const headTr = document.createElement('tr');
+      headers.forEach(text => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        headTr.appendChild(th);
+      });
+      thead.appendChild(headTr);
+      table.appendChild(thead);
+      const tbody = document.createElement('tbody');
+      rows.forEach(cols => {
+        const tr = document.createElement('tr');
+        cols.forEach((text, idx) => {
+          const cell = document.createElement(idx < headers.length && headers[idx] === 'T' ? 'th' : 'td');
+          cell.textContent = text;
+          tr.appendChild(cell);
+        });
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      details.appendChild(table);
+      section.appendChild(details);
+      return section;
+    };
 
-    const typeItem = document.createElement('div');
-    typeItem.className = 'ov-type-ratio-item ov-type-ratio-item-wide';
+    const stepRows = [
+      [
+        `1step`, `${stepCounts[1]}개`, `${Math.round((stepCounts[1] / total) * 100)}%`,
+        `2step`, `${stepCounts[2]}개`, `${Math.round((stepCounts[2] / total) * 100)}%`,
+        `3step`, `${stepCounts[3]}개`, `${Math.round((stepCounts[3] / total) * 100)}%`,
+      ],
+      [
+        `4step`, `${stepCounts[4]}개`, `${Math.round((stepCounts[4] / total) * 100)}%`,
+        `5step`, `${stepCounts[5]}개`, `${Math.round((stepCounts[5] / total) * 100)}%`,
+        `기타`, `${stepCounts.other}개`, `${Math.round((stepCounts.other / total) * 100)}%`,
+      ],
+    ];
+    wrap.appendChild(buildMetricTable('스텝 분포', ['step', '개수', '%', 'step', '개수', '%', 'step', '개수', '%'], stepRows, {
+      wide: true,
+      open: true,
+      summary: `1step ${stepCounts[1]}개 · 2step ${stepCounts[2]}개 · 3step ${stepCounts[3]}개`,
+    }));
+
     const sortedTypes = Object.entries(allCounts)
       .sort((a, b) => {
         if (b[1] !== a[1]) return b[1] - a[1];
         return a[0].localeCompare(b[0], 'en');
-      })
-      .map(([code, count]) => `${code} ${count}장 · ${Math.round((count / allTotal) * 100)}%`);
-    typeItem.innerHTML = `<span>타입 분포</span><b>${sortedTypes.join(' / ')}</b>`;
-    wrap.appendChild(typeItem);
+      });
+    const typeRows = [];
+    for (let i = 0; i < sortedTypes.length; i += 3) {
+      const slice = sortedTypes.slice(i, i + 3);
+      const row = [];
+      slice.forEach(([code, count]) => {
+        row.push(code, `${count}장`, `${Math.round((count / allTotal) * 100)}%`);
+      });
+      while (row.length < 9) row.push('');
+      typeRows.push(row);
+    }
+    wrap.appendChild(buildMetricTable('타입 분포', ['T', '개수', '%', 'T', '개수', '%', 'T', '개수', '%'], typeRows, {
+      wide: true,
+      open: false,
+      summary: `${sortedTypes.length}종 · 상위 ${sortedTypes[0]?.[0] || 'T00'} ${sortedTypes[0]?.[1] || 0}장`,
+    }));
     return wrap;
   }
 
