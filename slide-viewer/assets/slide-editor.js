@@ -310,6 +310,7 @@
 
   let runtimeNotesEditingSlide = -1;
   let runtimeNotesSuppressApply = false;
+  let runtimeNotesHidden = false;
 
   function ensureRuntimeNotesDock() {
     let dock = document.getElementById('runtime-notes-dock');
@@ -369,8 +370,25 @@
     }
 
     document.body.appendChild(dock);
+    document.body.classList.toggle('runtime-notes-hidden', runtimeNotesHidden);
     return dock;
   }
+
+  function setRuntimeNotesHidden(force) {
+    runtimeNotesHidden = typeof force === 'boolean' ? force : !runtimeNotesHidden;
+    document.body.classList.toggle('runtime-notes-hidden', runtimeNotesHidden);
+    const dock = document.getElementById('runtime-notes-dock');
+    if (dock && runtimeNotesHidden) {
+      dock.classList.remove('open');
+      const toggle = dock.querySelector('#runtime-notes-toggle');
+      const panel = dock.querySelector('#runtime-notes-panel');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      if (panel) panel.setAttribute('aria-hidden', 'true');
+    }
+    return { hidden: runtimeNotesHidden };
+  }
+
+  window.__setRuntimeNotesHidden = setRuntimeNotesHidden;
 
   function toggleRuntimeNotesPanel(forceOpen) {
     const dock = ensureRuntimeNotesDock();
@@ -3173,6 +3191,7 @@
 
   function forwardPresenterNotesToggle(options = {}) {
     const forceBroadcast = !!options.forceBroadcast;
+    const force = Object.prototype.hasOwnProperty.call(options, 'force') ? options.force : undefined;
     const popup = typeof getPresenterWindowRef === 'function' ? getPresenterWindowRef() : presenterWindow;
     const hasPresenterTarget = forceBroadcast || ((popup && !popup.closed) || presenterReady || window.__presenterPopupReady || window.__presenterPopupOpen);
     if (!hasPresenterTarget) {
@@ -3181,16 +3200,16 @@
     try { if (popup && !popup.closed) popup.focus(); } catch (_) {}
     try {
       if (popup && !popup.closed && typeof popup.__presenterToggleNotesHidden === 'function') {
-        popup.__presenterToggleNotesHidden();
+        popup.__presenterToggleNotesHidden(force);
         return true;
       }
     } catch (_) {}
     try {
       if (popup && !popup.closed && typeof popup.postMessage === 'function') {
-        popup.postMessage({ __slidePresenterToggleNotes: true }, '*');
+        popup.postMessage({ __slidePresenterToggleNotes: true, force }, '*');
       }
     } catch (_) {}
-    try { presenterChannel.postMessage({ type: 'toggle-notes' }); } catch (_) {}
+    try { presenterChannel.postMessage({ type: 'toggle-notes', hidden: force }); } catch (_) {}
     return true;
   }
 
@@ -3444,7 +3463,12 @@
       const isGeneratedDeck = document.body && document.body.dataset.generated === 'true';
       if (isGeneratedDeck) {
         e.preventDefault();
-        forwardPresenterNotesToggle({ forceBroadcast: true });
+        let nextHidden;
+        if (typeof window.__setRuntimeNotesHidden === 'function') {
+          const state = window.__setRuntimeNotesHidden();
+          nextHidden = !!state.hidden;
+        }
+        forwardPresenterNotesToggle({ forceBroadcast: true, force: nextHidden });
         return;
       }
       if (forwardPresenterNotesToggle()) {
@@ -4873,7 +4897,12 @@
       if (isGeneratedDeck) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        forwardPresenterNotesToggle({ forceBroadcast: true });
+        let nextHidden;
+        if (typeof window.__setRuntimeNotesHidden === 'function') {
+          const state = window.__setRuntimeNotesHidden();
+          nextHidden = !!state.hidden;
+        }
+        forwardPresenterNotesToggle({ forceBroadcast: true, force: nextHidden });
         return;
       }
       if (forwardPresenterNotesToggle()) {
@@ -10755,6 +10784,11 @@ function flushNotes(reason = 'manual') {
   window.__presenterToggleNotesHidden = force => {
     if (presenterNotesDirty) flushNotes('manual');
     togglePresenterNotesHidden(force);
+    try {
+      if (window.opener && !window.opener.closed && typeof window.opener.__setRuntimeNotesHidden === 'function') {
+        window.opener.__setRuntimeNotesHidden(presenterNotesHidden);
+      }
+    } catch (_) {}
     return {
       hidden: presenterNotesHidden,
       display: getComputedStyle(document.getElementById('pres-notes')).display,
@@ -10829,12 +10863,12 @@ window.__presenterReceiveNotesStatus = status => handleNotesStatus(status);
       const d = ev.data;
       if (d.type === 'sync') handleSyncPayload(d);
       if (d.type === 'notes-status') handleNotesStatus(d.status);
-      if (d.type === 'toggle-notes') window.__presenterToggleNotesHidden();
+      if (d.type === 'toggle-notes') window.__presenterToggleNotesHidden(typeof d.hidden === 'boolean' ? d.hidden : undefined);
     };
   }
 window.addEventListener('message', ev => {
   if (ev && ev.data && ev.data.__slidePresenterToggleNotes) {
-    window.__presenterToggleNotesHidden();
+    window.__presenterToggleNotesHidden(typeof ev.data.force === 'boolean' ? ev.data.force : undefined);
   }
 });
 document.getElementById('pres-btn-prev').addEventListener('click', () => postNav('prev'));
