@@ -3217,6 +3217,23 @@
     return true;
   }
 
+  window.__toggleGeneratedFullscreen = function () {
+    const isGeneratedDeck = document.body && document.body.dataset.generated === 'true';
+    if (!isGeneratedDeck) return false;
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+    return true;
+  };
+
+  window.addEventListener('message', ev => {
+    if (ev && ev.data && ev.data.__toggleGeneratedFullscreen) {
+      window.__toggleGeneratedFullscreen();
+    }
+  });
+
   document.addEventListener('keydown', e => {
     const targetEl = (e.target && typeof e.target.closest === 'function') ? e.target : null;
     if (targetEl && targetEl.closest('input, textarea, [contenteditable="true"]')) return;
@@ -3473,11 +3490,7 @@
           nextHidden = !!state.hidden;
         }
         forwardPresenterNotesToggle({ forceBroadcast: true, force: nextHidden });
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(() => {});
-        } else {
-          document.exitFullscreen().catch(() => {});
-        }
+        window.__toggleGeneratedFullscreen();
         return;
       }
       if (forwardPresenterNotesToggle()) {
@@ -4912,11 +4925,7 @@
           nextHidden = !!state.hidden;
         }
         forwardPresenterNotesToggle({ forceBroadcast: true, force: nextHidden });
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(() => {});
-        } else {
-          document.exitFullscreen().catch(() => {});
-        }
+        window.__toggleGeneratedFullscreen();
         return;
       }
       if (forwardPresenterNotesToggle()) {
@@ -11078,6 +11087,20 @@ function isPresenterHotkey(ev, code) {
   return key === code.toLowerCase() || ev.code === ('Key' + code.toUpperCase());
 }
 
+function requestOpenerGeneratedFullscreenToggle() {
+  try {
+    if (window.opener && !window.opener.closed && typeof window.opener.__toggleGeneratedFullscreen === 'function') {
+      window.opener.__toggleGeneratedFullscreen();
+      return;
+    }
+  } catch (_) {}
+  try {
+    if (window.opener && !window.opener.closed && typeof window.opener.postMessage === 'function') {
+      window.opener.postMessage({ __toggleGeneratedFullscreen: true }, '*');
+    }
+  } catch (_) {}
+}
+
 function markPresenterEventHandled(ev) {
   if (!ev) return;
   try {
@@ -11103,6 +11126,7 @@ function handlePresenterKeydown(ev) {
   if (isPresenterHotkey(ev, 'f')) {
     markPresenterEventHandled(ev);
     ev.preventDefault();
+    requestOpenerGeneratedFullscreenToggle();
     window.__presenterToggleNotesHidden();
     return;
   }
