@@ -3473,6 +3473,11 @@
           nextHidden = !!state.hidden;
         }
         forwardPresenterNotesToggle({ forceBroadcast: true, force: nextHidden });
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
         return;
       }
       if (forwardPresenterNotesToggle()) {
@@ -4907,6 +4912,11 @@
           nextHidden = !!state.hidden;
         }
         forwardPresenterNotesToggle({ forceBroadcast: true, force: nextHidden });
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
         return;
       }
       if (forwardPresenterNotesToggle()) {
