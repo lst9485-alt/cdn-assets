@@ -10961,7 +10961,11 @@ setPresenterNotesStatus('저장됨', 'saved');
     presenterWindow.document.close();
     presenterWindow.resizeTo(pw, ph);
     presenterWindow.moveTo(pl, pt);
-    setTimeout(() => syncPresenter(), 200);
+    try { presenterWindow.focus(); } catch (_) {}
+    setTimeout(() => {
+      try { presenterWindow.focus(); } catch (_) {}
+      syncPresenter();
+    }, 200);
   }
 
   // ── Drill-Down (compound 요소 내부 선택) ──
