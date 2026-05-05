@@ -371,12 +371,14 @@
 
     document.body.appendChild(dock);
     document.body.classList.toggle('runtime-notes-hidden', runtimeNotesHidden);
+    window.__runtimeNotesHidden = runtimeNotesHidden;
     return dock;
   }
 
   function setRuntimeNotesHidden(force) {
     runtimeNotesHidden = typeof force === 'boolean' ? force : !runtimeNotesHidden;
     document.body.classList.toggle('runtime-notes-hidden', runtimeNotesHidden);
+    window.__runtimeNotesHidden = runtimeNotesHidden;
     const dock = document.getElementById('runtime-notes-dock');
     if (dock && runtimeNotesHidden) {
       dock.classList.remove('open');
@@ -10510,6 +10512,7 @@ let eraseDragActive = false;
 let presenterNotesEditingSlide = -1;
 let presenterNotesDirty = false;
 let presenterNotesHidden = false;
+window.__presenterNotesHidden = presenterNotesHidden;
 let inkActionSeq = 1;
 let bridgeDeliverySeq = 1;
 setInterval(() => {
@@ -10800,6 +10803,7 @@ function flushNotes(reason = 'manual') {
 }
   function togglePresenterNotesHidden(force) {
     presenterNotesHidden = typeof force === 'boolean' ? force : !presenterNotesHidden;
+    window.__presenterNotesHidden = presenterNotesHidden;
     document.body.classList.toggle('pres-notes-hidden', presenterNotesHidden);
     if (presenterNotesHidden) setPresenterNotesStatus('원고 숨김 (F로 복귀)', 'hidden');
     else setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
