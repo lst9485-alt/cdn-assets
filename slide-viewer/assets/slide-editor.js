@@ -948,8 +948,24 @@
   const sessionId = crypto.randomUUID();
   const presenterChannel = new BroadcastChannel('slide-presenter-' + sessionId);
   let presenterWindow = null;
+  let presenterReady = false;
+  window.__presenterPopupRef = null;
+  window.__presenterPopupReady = false;
+  window.__presenterPopupOpen = false;
+  function getPresenterWindowRef() {
+    if (presenterWindow && presenterWindow.closed) presenterWindow = null;
+    if (window.__presenterPopupRef && window.__presenterPopupRef.closed) window.__presenterPopupRef = null;
+    if (!presenterWindow && window.__presenterPopupRef) presenterWindow = window.__presenterPopupRef;
+    return presenterWindow;
+  }
   window.addEventListener('beforeunload', () => {
-    if (presenterWindow && !presenterWindow.closed) presenterWindow.close();
+    const popup = getPresenterWindowRef();
+    if (popup && !popup.closed) popup.close();
+    presenterWindow = null;
+    presenterReady = false;
+    window.__presenterPopupRef = null;
+    window.__presenterPopupReady = false;
+    window.__presenterPopupOpen = false;
   });
 
   function bootstrapInitialSlideView() {
@@ -3402,6 +3418,18 @@
       return;
     }
     if (e.code === 'KeyF') {
+      const popup = typeof getPresenterWindowRef === 'function' ? getPresenterWindowRef() : presenterWindow;
+      if ((popup && !popup.closed) || presenterReady || window.__presenterPopupReady || window.__presenterPopupOpen) {
+        e.preventDefault();
+        try { if (popup && !popup.closed) popup.focus(); } catch (_) {}
+        try { presenterChannel.postMessage({ type: 'toggle-notes' }); } catch (_) {}
+        try {
+          if (typeof popup.__presenterToggleNotesHidden === 'function') {
+            popup.__presenterToggleNotesHidden();
+          }
+        } catch (_) {}
+        return;
+      }
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
       } else {
@@ -3410,8 +3438,9 @@
       return;
     }
     if (e.code === 'KeyP') {
-      if (presenterWindow && !presenterWindow.closed) {
-        presenterWindow.close(); presenterWindow = null; return;
+      const popup = typeof getPresenterWindowRef === 'function' ? getPresenterWindowRef() : presenterWindow;
+      if (popup && !popup.closed) {
+        popup.close(); presenterWindow = null; window.__presenterPopupRef = null; window.__presenterPopupOpen = false; return;
       }
       openPresenterView();
       return;
@@ -10114,22 +10143,24 @@
   }
 
   function syncPresenter() {
-    if (!presenterWindow || presenterWindow.closed) return;
+    const popup = typeof getPresenterWindowRef === 'function' ? getPresenterWindowRef() : presenterWindow;
+    if (!popup || popup.closed) return;
     const payload = buildPresenterSyncPayload();
     presenterChannel.postMessage(payload);
     try {
-      if (typeof presenterWindow.__presenterReceiveSync === 'function') {
-        presenterWindow.__presenterReceiveSync(payload);
+      if (typeof popup.__presenterReceiveSync === 'function') {
+        popup.__presenterReceiveSync(payload);
       }
     } catch (_) {}
   }
 
   function notifyPresenterNotesStatus(status) {
-    if (!presenterWindow || presenterWindow.closed) return;
+    const popup = typeof getPresenterWindowRef === 'function' ? getPresenterWindowRef() : presenterWindow;
+    if (!popup || popup.closed) return;
     presenterChannel.postMessage({ type: 'notes-status', status });
     try {
-      if (typeof presenterWindow.__presenterReceiveNotesStatus === 'function') {
-        presenterWindow.__presenterReceiveNotesStatus(status);
+      if (typeof popup.__presenterReceiveNotesStatus === 'function') {
+        popup.__presenterReceiveNotesStatus(status);
       }
     } catch (_) {}
   }
@@ -10195,7 +10226,20 @@
   refreshPresenterNotesBridge();
 
   presenterChannel.onmessage = e => {
-    if (e.data.type === 'ready') { syncPresenter(); return; }
+    if (e.data.type === 'ready') {
+      presenterReady = true;
+      window.__presenterPopupReady = true;
+      syncPresenter();
+      return;
+    }
+    if (e.data.type === 'closed') {
+      presenterReady = false;
+      window.__presenterPopupReady = false;
+      window.__presenterPopupOpen = false;
+      presenterWindow = null;
+      window.__presenterPopupRef = null;
+      return;
+    }
     if (e.data.type === 'nav') {
       if (e.data.action === 'next') goNext();
       else if (e.data.action === 'prev') goPrev();
@@ -10209,13 +10253,18 @@
   };
 
   function openPresenterView() {
-    if (presenterWindow && !presenterWindow.closed) { presenterWindow.close(); presenterWindow = null; return; }
+    const existing = typeof getPresenterWindowRef === 'function' ? getPresenterWindowRef() : presenterWindow;
+    if (existing && !existing.closed) { existing.close(); presenterWindow = null; presenterReady = false; window.__presenterPopupRef = null; window.__presenterPopupReady = false; window.__presenterPopupOpen = false; return; }
     refreshPresenterNotesBridge();
     const sw = screen.width, sh = screen.height;
     const pw = 960, ph = 700;
     const pl = Math.round((sw - pw) / 2), pt = Math.round((sh - ph) / 2);
     presenterWindow = window.open('', 'presenter', `width=${pw},height=${ph},left=${pl},top=${pt},resizable=yes`);
     if (!presenterWindow) return;
+    presenterReady = false;
+    window.__presenterPopupReady = false;
+    window.__presenterPopupOpen = true;
+    window.__presenterPopupRef = presenterWindow;
     const cssHref = new URL('./assets/slide-style.css', location.href).href;
     presenterWindow.document.write(`<!DOCTYPE html>
 <html lang="ko"><head>
@@ -10657,12 +10706,20 @@ function flushNotes(reason = 'manual') {
   setPresenterNotesStatus(reason === 'nav' ? '이동 전 저장 중…' : '저장 중…', 'saving');
   sendNotes(getPresenterNotesText(), true);
 }
-function togglePresenterNotesHidden(force) {
-  presenterNotesHidden = typeof force === 'boolean' ? force : !presenterNotesHidden;
-  document.body.classList.toggle('pres-notes-hidden', presenterNotesHidden);
-  if (presenterNotesHidden) setPresenterNotesStatus('원고 숨김 (F로 복귀)', 'hidden');
-  else setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
-}
+  function togglePresenterNotesHidden(force) {
+    presenterNotesHidden = typeof force === 'boolean' ? force : !presenterNotesHidden;
+    document.body.classList.toggle('pres-notes-hidden', presenterNotesHidden);
+    if (presenterNotesHidden) setPresenterNotesStatus('원고 숨김 (F로 복귀)', 'hidden');
+    else setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
+  }
+  window.__presenterToggleNotesHidden = force => {
+    if (presenterNotesDirty) flushNotes('manual');
+    togglePresenterNotesHidden(force);
+    return {
+      hidden: presenterNotesHidden,
+      display: getComputedStyle(document.getElementById('pres-notes')).display,
+    };
+  };
 function postNav(action) {
   if (presenterNotesDirty) flushNotes('nav');
   if (ch) ch.postMessage({ type: 'nav', action });
@@ -10727,13 +10784,14 @@ function handleNotesStatus(status) {
 }
 window.__presenterReceiveSync = payload => handleSyncPayload(payload);
 window.__presenterReceiveNotesStatus = status => handleNotesStatus(status);
-if (ch) {
-  ch.onmessage = ev => {
-    const d = ev.data;
-    if (d.type === 'sync') handleSyncPayload(d);
-    if (d.type === 'notes-status') handleNotesStatus(d.status);
-  };
-}
+  if (ch) {
+    ch.onmessage = ev => {
+      const d = ev.data;
+      if (d.type === 'sync') handleSyncPayload(d);
+      if (d.type === 'notes-status') handleNotesStatus(d.status);
+      if (d.type === 'toggle-notes') window.__presenterToggleNotesHidden();
+    };
+  }
 document.getElementById('pres-btn-prev').addEventListener('click', () => postNav('prev'));
 document.getElementById('pres-btn-next').addEventListener('click', () => postNav('next'));
 document.getElementById('pres-ink-pen').addEventListener('click', () => setInkMode(inkMode === 'draw' ? 'off' : 'draw'));
@@ -10874,8 +10932,14 @@ document.getElementById('pres-notes-input').addEventListener('blur', () => {
   presenterNotesEditingSlide = -1;
   flushNotes('manual');
 });
-window.addEventListener('pagehide', () => flushNotes('manual'));
-window.addEventListener('beforeunload', () => flushNotes('manual'));
+window.addEventListener('pagehide', () => {
+  flushNotes('manual');
+  if (ch) ch.postMessage({ type: 'closed' });
+});
+window.addEventListener('beforeunload', () => {
+  flushNotes('manual');
+  if (ch) ch.postMessage({ type: 'closed' });
+});
 // textarea 밖을 클릭하면 포커스 해제 (contenteditable는 자동 blur 안 되는 경우 있음)
 document.addEventListener('click', ev => {
   const notes = document.getElementById('pres-notes-input');
@@ -10963,6 +11027,7 @@ setPresenterNotesStatus('저장됨', 'saved');
     presenterWindow.moveTo(pl, pt);
     try { presenterWindow.focus(); } catch (_) {}
     setTimeout(() => {
+      window.__presenterPopupRef = presenterWindow;
       try { presenterWindow.focus(); } catch (_) {}
       syncPresenter();
     }, 200);
