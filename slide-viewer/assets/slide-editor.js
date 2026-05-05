@@ -4376,37 +4376,31 @@
       const allType = slide.dataset.type || '미분류';
       allCounts[allType] = (allCounts[allType] || 0) + 1;
     });
-    const aCounts = {};
-    firstByGroup.forEach(slide => {
-      const type = slide.dataset.type || '미분류';
-      aCounts[type] = (aCounts[type] || 0) + 1;
-    });
     const total = Math.max(1, firstByGroup.size);
     const allTotal = Math.max(1, slides.length);
     const wrap = document.createElement('div');
     wrap.className = 'ov-type-ratio';
     const head = document.createElement('div');
     head.className = 'ov-type-ratio-head';
-    head.textContent = `타입 비율 ${total}장`;
+    head.textContent = `전체 타입 비율 ${allTotal}장`;
     wrap.appendChild(head);
     const formatBias = (entries, denom) => entries
       .filter(([, count]) => ((count / denom) * 100) >= 10)
       .map(([type, count]) => `${type} ${count}장 · ${Math.round((count / denom) * 100)}%`);
     const allBias = formatBias(Object.entries(allCounts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko')), allTotal);
-    const aBias = formatBias(Object.entries(aCounts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko')), total);
-    if (allBias.length || aBias.length) {
+    if (allBias.length) {
       const biasBox = document.createElement('div');
       biasBox.className = 'ov-type-ratio-item';
-      biasBox.innerHTML = `<span>편중 타입</span><b>${(allBias.length ? `전체: ${allBias.join(' / ')}` : '전체: 없음')}${aBias.length ? `<br>A안: ${aBias.join(' / ')}` : ''}</b>`;
+      biasBox.innerHTML = `<span>전체 편중 타입</span><b>${allBias.join(' / ')}</b>`;
       wrap.appendChild(biasBox);
     }
-    Object.entries(aCounts)
+    Object.entries(allCounts)
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'))
       .slice(0, 8)
       .forEach(([type, count]) => {
         const item = document.createElement('div');
         item.className = 'ov-type-ratio-item';
-        const pct = Math.round((count / total) * 100);
+        const pct = Math.round((count / allTotal) * 100);
         item.innerHTML = `<span>${type}</span><b>${count}장 · ${pct}%</b>`;
         wrap.appendChild(item);
       });
