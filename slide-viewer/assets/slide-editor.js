@@ -389,6 +389,10 @@
   }
 
   window.__setRuntimeNotesHidden = setRuntimeNotesHidden;
+  window.addEventListener('message', ev => {
+    if (!ev || !ev.data || !Object.prototype.hasOwnProperty.call(ev.data, '__runtimeNotesHidden')) return;
+    setRuntimeNotesHidden(!!ev.data.__runtimeNotesHidden);
+  });
 
   function toggleRuntimeNotesPanel(forceOpen) {
     const dock = ensureRuntimeNotesDock();
@@ -10789,6 +10793,11 @@ function flushNotes(reason = 'manual') {
         window.opener.__setRuntimeNotesHidden(presenterNotesHidden);
       }
     } catch (_) {}
+    try {
+      if (window.opener && !window.opener.closed && typeof window.opener.postMessage === 'function') {
+        window.opener.postMessage({ __runtimeNotesHidden: presenterNotesHidden }, '*');
+      }
+    } catch (_) {}
     return {
       hidden: presenterNotesHidden,
       display: getComputedStyle(document.getElementById('pres-notes')).display,
@@ -11084,8 +11093,7 @@ function handlePresenterKeydown(ev) {
   if (isPresenterHotkey(ev, 'f')) {
     markPresenterEventHandled(ev);
     ev.preventDefault();
-    if (presenterNotesDirty) flushNotes('manual');
-    togglePresenterNotesHidden();
+    window.__presenterToggleNotesHidden();
     return;
   }
   if (ae && ae.id === 'pres-notes-input') return;
