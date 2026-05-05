@@ -10239,6 +10239,42 @@ html, body { width: 100%; height: 100vh; overflow: hidden; background: #1a1a1a !
 .slide-clone-wrap { position: absolute; top: 0; left: 0; transform-origin: top left; pointer-events: none; }
 .slide-clone-wrap * { transition: none !important; animation: none !important; }
 #pres-ink-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 12; pointer-events: none; touch-action: none; }
+#pres-ink-sparks { position:absolute; inset:0; z-index:13; overflow:hidden; pointer-events:none; }
+#pres-ink-cursor {
+  position:absolute;
+  z-index:14;
+  width:18px;
+  height:18px;
+  margin-left:-9px;
+  margin-top:-9px;
+  border-radius:999px;
+  border:2px solid rgba(255,255,255,0.92);
+  box-shadow:0 0 0 4px rgba(0,0,0,0.18);
+  opacity:0;
+  transform:scale(0.9);
+  transition:opacity 80ms linear, transform 80ms linear, border-color 80ms linear, background 80ms linear;
+  pointer-events:none;
+}
+#pres-ink-cursor.visible { opacity:0.92; transform:scale(1); }
+#pres-ink-cursor.cursor-present { background:rgba(255,255,255,0.2); border-color:rgba(255,255,255,0.92); }
+#pres-ink-cursor.cursor-draw { background:rgba(255,59,48,0.34); border-color:rgba(255,117,97,0.98); }
+#pres-ink-cursor.cursor-erase { width:42px; height:42px; margin-left:-21px; margin-top:-21px; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.92); box-shadow:0 0 0 1px rgba(0,0,0,0.14), 0 0 0 6px rgba(255,255,255,0.08); }
+.pres-ink-spark {
+  position:absolute;
+  width:10px;
+  height:10px;
+  margin-left:-5px;
+  margin-top:-5px;
+  border-radius:999px;
+  background: radial-gradient(circle, rgba(255,255,255,0.92) 0%, rgba(255,190,140,0.7) 34%, rgba(255,90,54,0) 72%);
+  opacity:0.65;
+  transform:translate(0, 0) scale(var(--spark-scale, 1));
+  animation: pres-ink-spark 0.52s ease-out forwards;
+}
+@keyframes pres-ink-spark {
+  from { opacity:0.68; transform:translate(0, 0) scale(var(--spark-scale, 1)); }
+  to { opacity:0; transform:translate(var(--spark-x, 0), var(--spark-y, -24px)) scale(0.08); }
+}
 #pres-current.annotate-draw #pres-ink-canvas,
 #pres-current.annotate-erase #pres-ink-canvas { pointer-events: auto; cursor: crosshair; }
 #pres-ink-toolbar { position: absolute; right: 24px; bottom: 24px; z-index: 18; display: flex; gap: 8px; padding: 10px; border-radius: 16px; background: rgba(15,15,15,0.9); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 14px 32px rgba(0,0,0,0.32); }
@@ -10277,6 +10313,8 @@ body.pres-notes-hidden #pres-notes { display:none; }
       <div class="slide-preview" id="pres-current">
         <div class="pres-scene" id="pres-current-scene"><\/div>
         <canvas id="pres-ink-canvas" width="1920" height="1080"><\/canvas>
+        <div id="pres-ink-sparks"><\/div>
+        <div id="pres-ink-cursor" aria-hidden="true"><\/div>
       <\/div>
       <div id="pres-ink-toolbar">
         <button id="pres-ink-pen" type="button" title="빨간 펜 (R)"><span class="pres-ink-dot"><\/span>펜<\/button>
@@ -10321,6 +10359,8 @@ const startTime = Date.now();
 const currentPreview = document.getElementById('pres-current');
 const inkCanvas = document.getElementById('pres-ink-canvas');
 const inkCtx = inkCanvas.getContext('2d');
+const inkCursor = document.getElementById('pres-ink-cursor');
+const inkSparks = document.getElementById('pres-ink-sparks');
 const inkActionsBySlide = new Map();
 let inkMode = 'off';
 let activeInkAction = null;
@@ -10466,6 +10506,31 @@ function redrawPresenterInk(transientAction = null) {
   inkCtx.clearRect(0, 0, PREVIEW_W, PREVIEW_H);
   getCurrentInkActions().forEach(action => renderInkAction(inkCtx, action));
   if (transientAction) renderInkAction(inkCtx, transientAction);
+  renderPresenterInkCursor();
+}
+function spawnPresenterInkSpark(point) {
+  if (!inkSparks || !point) return;
+  for (let i = 0; i < 4; i++) {
+    const spark = document.createElement('span');
+    spark.className = 'pres-ink-spark';
+    spark.style.left = point.x + 'px';
+    spark.style.top = point.y + 'px';
+    spark.style.setProperty('--spark-x', ((Math.random() - 0.5) * 54) + 'px');
+    spark.style.setProperty('--spark-y', ((Math.random() - 0.5) * 54) + 'px');
+    spark.style.setProperty('--spark-scale', (0.7 + Math.random() * 0.8).toFixed(2));
+    inkSparks.appendChild(spark);
+    setTimeout(() => spark.remove(), 520);
+  }
+}
+function renderPresenterInkCursor() {
+  if (!inkCursor) return;
+  const mode = getCursorMode();
+  const visible = !!hoverInkPoint && mode && mode !== 'off';
+  inkCursor.classList.remove('visible', 'cursor-present', 'cursor-draw', 'cursor-erase');
+  if (!visible) return;
+  inkCursor.classList.add('visible', 'cursor-' + mode);
+  inkCursor.style.left = hoverInkPoint.x + 'px';
+  inkCursor.style.top = hoverInkPoint.y + 'px';
 }
 function updateInkToolbar() {
   document.getElementById('pres-ink-pen').classList.toggle('active', inkMode === 'draw');
@@ -10480,6 +10545,7 @@ function setInkMode(nextMode) {
   currentPreview.classList.toggle('annotate-draw', nextMode === 'draw');
   currentPreview.classList.toggle('annotate-erase', nextMode === 'erase');
   updateInkToolbar();
+  renderPresenterInkCursor();
   scheduleInkBroadcast(true);
 }
 function getSparkPoint() {
@@ -10676,14 +10742,17 @@ document.getElementById('pres-ink-undo').addEventListener('click', undoPresenter
 document.getElementById('pres-ink-clear').addEventListener('click', clearPresenterInk);
 currentPreview.addEventListener('pointerenter', ev => {
   hoverInkPoint = getInkPoint(ev);
+  renderPresenterInkCursor();
   if (!activeInkAction) scheduleInkBroadcast(true);
 });
 currentPreview.addEventListener('pointermove', ev => {
   hoverInkPoint = getInkPoint(ev);
+  renderPresenterInkCursor();
   if (!activeInkAction) scheduleInkBroadcast(inkMode !== 'draw');
 });
 currentPreview.addEventListener('pointerleave', () => {
   hoverInkPoint = null;
+  renderPresenterInkCursor();
   if (!activeInkAction) scheduleInkBroadcast(true);
 });
 inkCanvas.addEventListener('pointerdown', ev => {
@@ -10694,6 +10763,8 @@ inkCanvas.addEventListener('pointerdown', ev => {
     eraseDragActive = true;
     inkCanvas.setPointerCapture(ev.pointerId);
     eraseActionsAtPoint(hoverInkPoint);
+    spawnPresenterInkSpark(hoverInkPoint);
+    renderPresenterInkCursor();
     scheduleInkBroadcast(true);
     return;
   }
@@ -10707,13 +10778,16 @@ inkCanvas.addEventListener('pointerdown', ev => {
   };
   inkCanvas.setPointerCapture(ev.pointerId);
   redrawPresenterInk(activeInkAction);
+  spawnPresenterInkSpark(hoverInkPoint);
   scheduleInkBroadcast();
 });
 inkCanvas.addEventListener('pointermove', ev => {
   const point = getInkPoint(ev);
   hoverInkPoint = point;
+  renderPresenterInkCursor();
   if (eraseDragActive) {
     eraseActionsAtPoint(point);
+    spawnPresenterInkSpark(point);
     scheduleInkBroadcast(true);
     return;
   }
@@ -10724,12 +10798,14 @@ inkCanvas.addEventListener('pointermove', ev => {
     activeInkAction.points.push(point);
   }
   redrawPresenterInk(activeInkAction);
+  spawnPresenterInkSpark(point);
   scheduleInkBroadcast();
 });
 inkCanvas.addEventListener('pointerup', ev => {
   if (eraseDragActive) {
     eraseDragActive = false;
     hoverInkPoint = getInkPoint(ev);
+    renderPresenterInkCursor();
     scheduleInkBroadcast(true);
     return;
   }
@@ -10744,6 +10820,7 @@ inkCanvas.addEventListener('pointercancel', () => {
 inkCanvas.addEventListener('lostpointercapture', () => {
   if (eraseDragActive) {
     eraseDragActive = false;
+    renderPresenterInkCursor();
     scheduleInkBroadcast(true);
     return;
   }
