@@ -4367,25 +4367,40 @@
 
   function overviewTypeRatioEl() {
     const firstByGroup = new Map();
+    const allCounts = {};
     slides.forEach((slide, idx) => {
       const pg = slide.dataset.pageGroup || String(idx + 1);
       if (!firstByGroup.has(pg) || slide.dataset.variant === '0' || !slide.dataset.variant) {
         firstByGroup.set(pg, slide);
       }
+      const allType = slide.dataset.type || '미분류';
+      allCounts[allType] = (allCounts[allType] || 0) + 1;
     });
-    const counts = {};
+    const aCounts = {};
     firstByGroup.forEach(slide => {
       const type = slide.dataset.type || '미분류';
-      counts[type] = (counts[type] || 0) + 1;
+      aCounts[type] = (aCounts[type] || 0) + 1;
     });
     const total = Math.max(1, firstByGroup.size);
+    const allTotal = Math.max(1, slides.length);
     const wrap = document.createElement('div');
     wrap.className = 'ov-type-ratio';
     const head = document.createElement('div');
     head.className = 'ov-type-ratio-head';
     head.textContent = `타입 비율 ${total}장`;
     wrap.appendChild(head);
-    Object.entries(counts)
+    const formatBias = (entries, denom) => entries
+      .filter(([, count]) => ((count / denom) * 100) >= 10)
+      .map(([type, count]) => `${type} ${count}장 · ${Math.round((count / denom) * 100)}%`);
+    const allBias = formatBias(Object.entries(allCounts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko')), allTotal);
+    const aBias = formatBias(Object.entries(aCounts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko')), total);
+    if (allBias.length || aBias.length) {
+      const biasBox = document.createElement('div');
+      biasBox.className = 'ov-type-ratio-item';
+      biasBox.innerHTML = `<span>편중 타입</span><b>${(allBias.length ? `전체: ${allBias.join(' / ')}` : '전체: 없음')}${aBias.length ? `<br>A안: ${aBias.join(' / ')}` : ''}</b>`;
+      wrap.appendChild(biasBox);
+    }
+    Object.entries(aCounts)
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'))
       .slice(0, 8)
       .forEach(([type, count]) => {
@@ -4538,9 +4553,7 @@
       toolbar.appendChild(notesModeBtn);
       ovGrid.appendChild(toolbar);
     }
-    if (isEditor) {
-      ovGrid.appendChild(overviewTypeRatioEl());
-    }
+    ovGrid.appendChild(overviewTypeRatioEl());
 
     const bucketCounts = {};
     const catCounts = {};
@@ -10694,7 +10707,9 @@ function setInkMode(nextMode) {
 }
 function getSparkPoint() {
   const points = activeInkAction?.points;
-  return points && points.length ? points[points.length - 1] : null;
+  if (points && points.length) return points[points.length - 1];
+  if (inkMode === 'draw' && hoverInkPoint) return hoverInkPoint;
+  return null;
 }
 function getCursorMode() {
   if (!hoverInkPoint) return 'off';
@@ -10720,6 +10735,14 @@ function postInkState() {
   } catch (_) {}
 }
 let inkBroadcastQueued = false;
+let lastHoverSparkAt = 0;
+function maybeSpawnHoverInkSpark(point) {
+  if (!point || inkMode !== 'draw') return;
+  const now = Date.now();
+  if (now - lastHoverSparkAt < 45) return;
+  lastHoverSparkAt = now;
+  spawnPresenterInkSpark(point);
+}
 function scheduleInkBroadcast(force = false) {
   if (force) {
     inkBroadcastQueued = false;
@@ -10801,20 +10824,25 @@ function flushNotes(reason = 'manual') {
   setPresenterNotesStatus(reason === 'nav' ? '이동 전 저장 중…' : '저장 중…', 'saving');
   sendNotes(getPresenterNotesText(), true);
 }
-  function ensurePresenterNotesVisible() {
-    presenterNotesHidden = false;
-    window.__presenterNotesHidden = false;
-    document.body.classList.remove('pres-notes-hidden');
-    setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
-  }
-  window.__presenterToggleNotesHidden = () => {
-    if (presenterNotesDirty) flushNotes('manual');
-    ensurePresenterNotesVisible();
-    return {
-      hidden: false,
-      display: getComputedStyle(document.getElementById('pres-notes')).display,
-    };
+function setPresenterNotesHidden(force) {
+  presenterNotesHidden = typeof force === 'boolean' ? force : !presenterNotesHidden;
+  window.__presenterNotesHidden = presenterNotesHidden;
+  document.body.classList.toggle('pres-notes-hidden', presenterNotesHidden);
+  setPresenterNotesStatus(
+    presenterNotesHidden
+      ? '원고 숨김 (F로 복귀)'
+      : (presenterNotesDirty ? '자동 저장 대기' : '저장됨'),
+    presenterNotesHidden ? 'hidden' : (presenterNotesDirty ? 'dirty' : 'saved')
+  );
+  return {
+    hidden: presenterNotesHidden,
+    display: getComputedStyle(document.getElementById('pres-notes')).display,
   };
+}
+window.__presenterToggleNotesHidden = (force) => {
+  if (presenterNotesDirty) flushNotes('manual');
+  return setPresenterNotesHidden(force);
+};
 function postNav(action) {
   if (presenterNotesDirty) flushNotes('nav');
   if (ch) ch.postMessage({ type: 'nav', action });
@@ -10906,6 +10934,7 @@ currentPreview.addEventListener('pointerenter', ev => {
 currentPreview.addEventListener('pointermove', ev => {
   hoverInkPoint = getInkPoint(ev);
   renderPresenterInkCursor();
+  maybeSpawnHoverInkSpark(hoverInkPoint);
   if (!activeInkAction) scheduleInkBroadcast(inkMode !== 'draw');
 });
 currentPreview.addEventListener('pointerleave', () => {
@@ -10943,6 +10972,11 @@ inkCanvas.addEventListener('pointermove', ev => {
   const point = getInkPoint(ev);
   hoverInkPoint = point;
   renderPresenterInkCursor();
+  if (!activeInkAction && !eraseDragActive) {
+    maybeSpawnHoverInkSpark(point);
+    scheduleInkBroadcast(inkMode === 'draw');
+    return;
+  }
   if (eraseDragActive) {
     eraseActionsAtPoint(point);
     spawnPresenterInkSpark(point);
@@ -11134,6 +11168,7 @@ function handlePresenterKeydown(ev) {
   if (isPresenterHotkey(ev, 'f')) {
     markPresenterEventHandled(ev);
     ev.preventDefault();
+    window.__presenterToggleNotesHidden();
     requestOpenerGeneratedFullscreenToggle();
     requestOpenerRuntimeNotesToggle();
     return;
