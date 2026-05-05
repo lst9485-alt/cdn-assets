@@ -526,7 +526,7 @@
             id: 'slide-test-260503',
             title: '260503 직장인 재테크 순서 테스트',
             description: 'archive 원고 실전 재기획본',
-            href: 'slide-viewer/260503-production-redo.html?_ghfresh=20260505221242',
+            href: 'slide-viewer/260503-production-redo.html?_ghfresh=20260505221701',
             badgeText: 'TEST',
             badgeTone: 'soon',
             iconKey: 'doc',

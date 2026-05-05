@@ -4458,12 +4458,20 @@
         if (b[1] !== a[1]) return b[1] - a[1];
         return a[0].localeCompare(b[0], 'en');
       });
-    const typeRows = sortedTypes.map(([code, count]) => [
-      code,
-      `${count}장`,
-      `${Math.round((count / allTotal) * 100)}%`,
-    ]);
-    wrap.appendChild(buildMetricTable('타입 분포', ['T', '개수', '%'], typeRows, {
+    const typeRows = [];
+    for (let i = 0; i < sortedTypes.length; i += 2) {
+      const left = sortedTypes[i];
+      const right = sortedTypes[i + 1];
+      typeRows.push([
+        left ? left[0] : '',
+        left ? `${left[1]}장` : '',
+        left ? `${Math.round((left[1] / allTotal) * 100)}%` : '',
+        right ? right[0] : '',
+        right ? `${right[1]}장` : '',
+        right ? `${Math.round((right[1] / allTotal) * 100)}%` : '',
+      ]);
+    }
+    wrap.appendChild(buildMetricTable('타입 분포', ['T', '개수', '%', 'T', '개수', '%'], typeRows, {
       wide: true,
       open: false,
       summary: `${sortedTypes.length}종 · 상위 ${sortedTypes[0]?.[0] || 'T00'} ${sortedTypes[0]?.[1] || 0}장`,
