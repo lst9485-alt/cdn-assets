@@ -3179,12 +3179,18 @@
       return false;
     }
     try { if (popup && !popup.closed) popup.focus(); } catch (_) {}
-    try { presenterChannel.postMessage({ type: 'toggle-notes' }); } catch (_) {}
     try {
-      if (typeof popup.__presenterToggleNotesHidden === 'function') {
+      if (popup && !popup.closed && typeof popup.__presenterToggleNotesHidden === 'function') {
         popup.__presenterToggleNotesHidden();
+        return true;
       }
     } catch (_) {}
+    try {
+      if (popup && !popup.closed && typeof popup.postMessage === 'function') {
+        popup.postMessage({ __slidePresenterToggleNotes: true }, '*');
+      }
+    } catch (_) {}
+    try { presenterChannel.postMessage({ type: 'toggle-notes' }); } catch (_) {}
     return true;
   }
 
@@ -10826,6 +10832,11 @@ window.__presenterReceiveNotesStatus = status => handleNotesStatus(status);
       if (d.type === 'toggle-notes') window.__presenterToggleNotesHidden();
     };
   }
+window.addEventListener('message', ev => {
+  if (ev && ev.data && ev.data.__slidePresenterToggleNotes) {
+    window.__presenterToggleNotesHidden();
+  }
+});
 document.getElementById('pres-btn-prev').addEventListener('click', () => postNav('prev'));
 document.getElementById('pres-btn-next').addEventListener('click', () => postNav('next'));
 document.getElementById('pres-ink-pen').addEventListener('click', () => setInkMode(inkMode === 'draw' ? 'off' : 'draw'));
