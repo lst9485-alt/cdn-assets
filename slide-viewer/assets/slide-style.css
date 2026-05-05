@@ -1704,7 +1704,7 @@
   .ov-type-ratio {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: minmax(260px, 1.3fr) repeat(4, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 10px;
     align-items: stretch;
     margin: 0 0 8px;
@@ -1718,13 +1718,16 @@
   .ov-type-ratio-head {
     display: flex;
     align-items: center;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 900;
     letter-spacing: -0.02em;
     color: #fff;
     padding: 8px 12px;
     border-radius: 12px;
     background: rgba(255,255,255,0.06);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .ov-type-ratio-item {
     display: flex;
@@ -1745,10 +1748,11 @@
   .ov-metric-summary {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 12px;
     cursor: pointer;
     list-style: none;
+    flex-wrap: nowrap;
   }
   .ov-metric-summary::-webkit-details-marker { display: none; }
   .ov-metric-summary strong {
@@ -1762,6 +1766,10 @@
     font-size: 12px;
     font-weight: 700;
     color: rgba(255,255,255,0.66);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
   }
   .ov-metric-table {
     width: 100%;

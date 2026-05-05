@@ -4440,21 +4440,17 @@
     };
 
     const stepRows = [
-      [
-        `1step`, `${stepCounts[1]}개`, `${Math.round((stepCounts[1] / total) * 100)}%`,
-        `2step`, `${stepCounts[2]}개`, `${Math.round((stepCounts[2] / total) * 100)}%`,
-        `3step`, `${stepCounts[3]}개`, `${Math.round((stepCounts[3] / total) * 100)}%`,
-      ],
-      [
-        `4step`, `${stepCounts[4]}개`, `${Math.round((stepCounts[4] / total) * 100)}%`,
-        `5step`, `${stepCounts[5]}개`, `${Math.round((stepCounts[5] / total) * 100)}%`,
-        `기타`, `${stepCounts.other}개`, `${Math.round((stepCounts.other / total) * 100)}%`,
-      ],
+      [`1step`, `${stepCounts[1]}개`, `${Math.round((stepCounts[1] / total) * 100)}%`],
+      [`2step`, `${stepCounts[2]}개`, `${Math.round((stepCounts[2] / total) * 100)}%`],
+      [`3step`, `${stepCounts[3]}개`, `${Math.round((stepCounts[3] / total) * 100)}%`],
+      [`4step`, `${stepCounts[4]}개`, `${Math.round((stepCounts[4] / total) * 100)}%`],
+      [`5step`, `${stepCounts[5]}개`, `${Math.round((stepCounts[5] / total) * 100)}%`],
+      [`기타`, `${stepCounts.other}개`, `${Math.round((stepCounts.other / total) * 100)}%`],
     ];
-    wrap.appendChild(buildMetricTable('스텝 분포', ['step', '개수', '%', 'step', '개수', '%', 'step', '개수', '%'], stepRows, {
+    wrap.appendChild(buildMetricTable('스텝 분포', ['step', '개수', '%'], stepRows, {
       wide: true,
-      open: true,
-      summary: `1step ${stepCounts[1]}개 · 2step ${stepCounts[2]}개 · 3step ${stepCounts[3]}개`,
+      open: false,
+      summary: `1step ${stepCounts[1]}개 ${Math.round((stepCounts[1] / total) * 100)}% / 2step ${stepCounts[2]}개 ${Math.round((stepCounts[2] / total) * 100)}% / 3step ${stepCounts[3]}개 ${Math.round((stepCounts[3] / total) * 100)}% / 4step ${stepCounts[4]}개 ${Math.round((stepCounts[4] / total) * 100)}% / 5step ${stepCounts[5]}개 ${Math.round((stepCounts[5] / total) * 100)}% / 기타 ${stepCounts.other}개 ${Math.round((stepCounts.other / total) * 100)}%`,
     }));
 
     const sortedTypes = Object.entries(allCounts)
@@ -4462,17 +4458,12 @@
         if (b[1] !== a[1]) return b[1] - a[1];
         return a[0].localeCompare(b[0], 'en');
       });
-    const typeRows = [];
-    for (let i = 0; i < sortedTypes.length; i += 3) {
-      const slice = sortedTypes.slice(i, i + 3);
-      const row = [];
-      slice.forEach(([code, count]) => {
-        row.push(code, `${count}장`, `${Math.round((count / allTotal) * 100)}%`);
-      });
-      while (row.length < 9) row.push('');
-      typeRows.push(row);
-    }
-    wrap.appendChild(buildMetricTable('타입 분포', ['T', '개수', '%', 'T', '개수', '%', 'T', '개수', '%'], typeRows, {
+    const typeRows = sortedTypes.map(([code, count]) => [
+      code,
+      `${count}장`,
+      `${Math.round((count / allTotal) * 100)}%`,
+    ]);
+    wrap.appendChild(buildMetricTable('타입 분포', ['T', '개수', '%'], typeRows, {
       wide: true,
       open: false,
       summary: `${sortedTypes.length}종 · 상위 ${sortedTypes[0]?.[0] || 'T00'} ${sortedTypes[0]?.[1] || 0}장`,
