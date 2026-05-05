@@ -534,18 +534,6 @@
             activeMatch: ['260503-production-redo.html'],
             hubVisible: true
           },
-          {
-            id: 'slide-test-260503-redo',
-            title: '260503 실전 재기획 테스트',
-            description: 'manuscript 기준 재기획본',
-            href: 'slide-viewer/260503-production-redo.html?_ghfresh=20260504233000',
-            badgeText: 'TEST',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['260503-production-redo.html'],
-            hubVisible: true
-          }
         ]
       }
     ]
