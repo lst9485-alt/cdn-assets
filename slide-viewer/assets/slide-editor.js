@@ -10964,12 +10964,34 @@ document.addEventListener('click', ev => {
   const notes = document.getElementById('pres-notes-input');
   if (notes && !notes.contains(ev.target)) notes.blur();
 });
-// 창 로드 직후 기본 포커스를 버튼/바디로 강제 (notes가 자동 포커스 먹어서 화살표 먹히는 문제 방지)
-setTimeout(() => {
+function focusPresenterWindowSurface() {
+  try { window.focus(); } catch (_) {}
   const nxt = document.getElementById('pres-btn-next');
   if (nxt) nxt.focus();
   else document.body.focus();
+}
+const presenterFocusBootAt = Date.now();
+// 창 로드 직후 기본 포커스를 버튼/바디로 강제 (notes가 자동 포커스 먹어서 화살표 먹히는 문제 방지)
+setTimeout(() => {
+  focusPresenterWindowSurface();
 }, 0);
+// 팝업 직후 포커스가 부모 창으로 튀면 F/R 같은 단축키가 부모로 새므로 짧게 다시 잡아준다.
+const presenterFocusKick = setInterval(() => {
+  if (Date.now() - presenterFocusBootAt > 2500) {
+    clearInterval(presenterFocusKick);
+    return;
+  }
+  focusPresenterWindowSurface();
+}, 200);
+window.addEventListener('blur', () => {
+  if (Date.now() - presenterFocusBootAt > 5000) return;
+  setTimeout(() => {
+    focusPresenterWindowSurface();
+  }, 60);
+});
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') focusPresenterWindowSurface();
+});
 
 function isPresenterHotkey(ev, code) {
   if (!ev) return false;
