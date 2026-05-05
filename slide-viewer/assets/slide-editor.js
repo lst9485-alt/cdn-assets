@@ -3433,6 +3433,12 @@
       return;
     }
     if (e.code === 'KeyF') {
+      const isGeneratedDeck = document.body && document.body.dataset.generated === 'true';
+      if (isGeneratedDeck) {
+        e.preventDefault();
+        forwardPresenterNotesToggle();
+        return;
+      }
       if (forwardPresenterNotesToggle()) {
         e.preventDefault();
         return;
@@ -4855,6 +4861,13 @@
       return;
     }
     if (e.code === 'KeyF') {
+      const isGeneratedDeck = document.body && document.body.dataset.generated === 'true';
+      if (isGeneratedDeck) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        forwardPresenterNotesToggle();
+        return;
+      }
       if (forwardPresenterNotesToggle()) {
         e.preventDefault();
         e.stopImmediatePropagation();
