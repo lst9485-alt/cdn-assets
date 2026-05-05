@@ -392,8 +392,14 @@
 
   window.__setRuntimeNotesHidden = setRuntimeNotesHidden;
   window.addEventListener('message', ev => {
-    if (!ev || !ev.data || !Object.prototype.hasOwnProperty.call(ev.data, '__runtimeNotesHidden')) return;
-    setRuntimeNotesHidden(!!ev.data.__runtimeNotesHidden);
+    if (!ev || !ev.data) return;
+    if (Object.prototype.hasOwnProperty.call(ev.data, '__runtimeNotesHidden')) {
+      setRuntimeNotesHidden(!!ev.data.__runtimeNotesHidden);
+      return;
+    }
+    if (ev.data.__toggleRuntimeNotesHidden) {
+      setRuntimeNotesHidden();
+    }
   });
 
   function toggleRuntimeNotesPanel(forceOpen) {
@@ -3486,12 +3492,9 @@
       const isGeneratedDeck = document.body && document.body.dataset.generated === 'true';
       if (isGeneratedDeck) {
         e.preventDefault();
-        let nextHidden;
         if (typeof window.__setRuntimeNotesHidden === 'function') {
-          const state = window.__setRuntimeNotesHidden();
-          nextHidden = !!state.hidden;
+          window.__setRuntimeNotesHidden();
         }
-        forwardPresenterNotesToggle({ forceBroadcast: true, force: nextHidden });
         window.__toggleGeneratedFullscreen();
         return;
       }
@@ -4921,12 +4924,9 @@
       if (isGeneratedDeck) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        let nextHidden;
         if (typeof window.__setRuntimeNotesHidden === 'function') {
-          const state = window.__setRuntimeNotesHidden();
-          nextHidden = !!state.hidden;
+          window.__setRuntimeNotesHidden();
         }
-        forwardPresenterNotesToggle({ forceBroadcast: true, force: nextHidden });
         window.__toggleGeneratedFullscreen();
         return;
       }
@@ -10801,28 +10801,17 @@ function flushNotes(reason = 'manual') {
   setPresenterNotesStatus(reason === 'nav' ? '이동 전 저장 중…' : '저장 중…', 'saving');
   sendNotes(getPresenterNotesText(), true);
 }
-  function togglePresenterNotesHidden(force) {
-    presenterNotesHidden = typeof force === 'boolean' ? force : !presenterNotesHidden;
-    window.__presenterNotesHidden = presenterNotesHidden;
-    document.body.classList.toggle('pres-notes-hidden', presenterNotesHidden);
-    if (presenterNotesHidden) setPresenterNotesStatus('원고 숨김 (F로 복귀)', 'hidden');
-    else setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
+  function ensurePresenterNotesVisible() {
+    presenterNotesHidden = false;
+    window.__presenterNotesHidden = false;
+    document.body.classList.remove('pres-notes-hidden');
+    setPresenterNotesStatus(presenterNotesDirty ? '자동 저장 대기' : '저장됨', presenterNotesDirty ? 'dirty' : 'saved');
   }
-  window.__presenterToggleNotesHidden = force => {
+  window.__presenterToggleNotesHidden = () => {
     if (presenterNotesDirty) flushNotes('manual');
-    togglePresenterNotesHidden(force);
-    try {
-      if (window.opener && !window.opener.closed && typeof window.opener.__setRuntimeNotesHidden === 'function') {
-        window.opener.__setRuntimeNotesHidden(presenterNotesHidden);
-      }
-    } catch (_) {}
-    try {
-      if (window.opener && !window.opener.closed && typeof window.opener.postMessage === 'function') {
-        window.opener.postMessage({ __runtimeNotesHidden: presenterNotesHidden }, '*');
-      }
-    } catch (_) {}
+    ensurePresenterNotesVisible();
     return {
-      hidden: presenterNotesHidden,
+      hidden: false,
       display: getComputedStyle(document.getElementById('pres-notes')).display,
     };
   };
@@ -11105,6 +11094,21 @@ function requestOpenerGeneratedFullscreenToggle() {
   } catch (_) {}
 }
 
+function requestOpenerRuntimeNotesToggle() {
+  try {
+    if (window.opener && !window.opener.closed && typeof window.opener.__setRuntimeNotesHidden === 'function') {
+      const current = !!window.opener.__runtimeNotesHidden;
+      window.opener.__setRuntimeNotesHidden(!current);
+      return;
+    }
+  } catch (_) {}
+  try {
+    if (window.opener && !window.opener.closed && typeof window.opener.postMessage === 'function') {
+      window.opener.postMessage({ __toggleRuntimeNotesHidden: true }, '*');
+    }
+  } catch (_) {}
+}
+
 function markPresenterEventHandled(ev) {
   if (!ev) return;
   try {
@@ -11131,7 +11135,7 @@ function handlePresenterKeydown(ev) {
     markPresenterEventHandled(ev);
     ev.preventDefault();
     requestOpenerGeneratedFullscreenToggle();
-    window.__presenterToggleNotesHidden();
+    requestOpenerRuntimeNotesToggle();
     return;
   }
   if (ae && ae.id === 'pres-notes-input') return;
