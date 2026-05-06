@@ -22,14 +22,14 @@
       'background:#111111',
       'color:#8f8f8f',
       'font-family:Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif',
-      'padding:42px 24px 18px',
+      'padding:36px 24px 18px',
       'font-size:13px',
       'line-height:2'
     ].join(';');
 
     footer.innerHTML = [
       '<div style="max-width:1100px;margin:0 auto">',
-      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:36px 96px;align-items:start;margin-bottom:46px">',
+      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:24px 96px;align-items:start;margin-bottom:28px">',
       '    <div>',
       '      <strong style="display:block;font-size:18px;font-weight:800;color:#d4d4d4;letter-spacing:-0.02em">우리동네 재테크</strong>',
       '      <a href="https://www.youtube.com/@우리동네재테크" target="_blank" rel="noreferrer" style="display:inline-block;margin-top:8px;color:#7a7a7a;text-decoration:none;font-size:13px;font-weight:500">유튜브↖</a>',
