@@ -2621,11 +2621,60 @@
     });
   }
 
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // todo 2-22 — fitText 콘텐츠 길이 자동 조정 (opt-in 파일럿)
+  //
+  // 적용 대상: data-fit-text="true" 마크된 요소만.
+  //   현재 마킹 타입: T41 대질문 / T44 한줄강조 / T48 두줄전개 / T50 좌우2단비교
+  //   (generate-slides.py 후처리에서 마킹).
+  // 조건:
+  //   - SVG 텍스트 제외 (`closest('svg')` 가드)
+  //   - min font floor: data-fit-min 속성 또는 60px (가독성 보호)
+  //   - max: 인라인 style.fontSize 또는 computed font-size
+  //   - 1회 측정 후 고정 (data-fit-done="1" 마크). 반복 리플로우 금지.
+  // 롤백: HTML에서 data-fit-text 마크 제거 → 다음 빌드부터 비활성.
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  function fitTextEl(el) {
+    if (!el || el.dataset.fitDone === '1') return;
+    if (el.closest && el.closest('svg')) return;
+    const parent = el.parentElement;
+    if (!parent) return;
+    const inlineSize = parseFloat(el.style.fontSize);
+    const computedSize = parseFloat(getComputedStyle(el).fontSize) || 100;
+    const max = Number.isFinite(inlineSize) && inlineSize > 0 ? inlineSize : computedSize;
+    const minRaw = parseInt(el.dataset.fitMin || '60', 10);
+    const min = Number.isFinite(minRaw) && minRaw > 0 ? minRaw : 60;
+    let size = max;
+    el.style.fontSize = size + 'px';
+    let safety = 30;
+    while (size > min && safety-- > 0) {
+      const elWidth = el.scrollWidth;
+      const containerWidth = parent.clientWidth;
+      if (containerWidth <= 0) break;
+      if (elWidth <= containerWidth - 4) break;
+      size -= 4;
+      if (size < min) size = min;
+      el.style.fontSize = size + 'px';
+    }
+    el.dataset.fitDone = '1';
+  }
+
+  function runFitTextOnce(root) {
+    const scope = root || document;
+    scope.querySelectorAll('[data-fit-text="true"]:not([data-fit-done="1"])').forEach(fitTextEl);
+  }
+
+  if (typeof window !== 'undefined') {
+    window.fitTextEl = fitTextEl;
+    window.runFitTextOnce = runFitTextOnce;
+  }
+
   // 페이지 로드 후 자동 실행 (DOM 안정 대기 100ms)
   if (typeof document !== 'undefined') {
     const _initAnimations = () => setTimeout(() => {
       splitHandTyping(document);
       staggerFloatY(document);
+      runFitTextOnce(document);
     }, 100);
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', _initAnimations);
