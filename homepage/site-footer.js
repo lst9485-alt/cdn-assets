@@ -16,35 +16,56 @@
     var footer = document.createElement('footer');
     footer.setAttribute('data-homepage-footer', 'true');
     footer.style.cssText = [
-      'background:#2d2d2d',
-      'color:#fff',
+      'background:#111111',
+      'color:#8f8f8f',
       'font-family:Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif',
-      'padding:42px 24px 38px',
+      'padding:56px 24px 18px',
       'font-size:13px',
-      'line-height:1.85'
+      'line-height:2'
     ].join(';');
 
     footer.innerHTML = [
       '<div style="max-width:1100px;margin:0 auto">',
-      '  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 26px;margin-bottom:22px">',
-      '    <strong style="font-size:20px;font-weight:900;color:#fff">우리동네 재테크</strong>',
-      '    <a href="https://ourdongne.com/" style="color:#d1d5db;text-decoration:none;font-weight:700">우리동네 클래스</a>',
-      '    <a href="https://ourdongne.com/refund" style="color:#d1d5db;text-decoration:none;font-weight:700">환불규정</a>',
-      '    <a href="https://ourdongne.com/privacy" style="color:#d1d5db;text-decoration:none;font-weight:700">개인정보 처리방침</a>',
-      '    <a href="https://ourdongne.com/terms" style="color:#d1d5db;text-decoration:none;font-weight:700">이용약관</a>',
+      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:48px 96px;align-items:start;margin-bottom:72px">',
+      '    <div>',
+      '      <strong style="display:block;font-size:18px;font-weight:800;color:#d4d4d4;letter-spacing:-0.02em">우리동네 재테크</strong>',
+      '      <a href="https://www.youtube.com/@우리동네재테크" target="_blank" rel="noreferrer" style="display:inline-block;margin-top:8px;color:#7a7a7a;text-decoration:none;font-size:13px;font-weight:500">유튜브↖</a>',
+      '    </div>',
+      '    <div>',
+      '      <strong style="display:block;font-size:18px;font-weight:800;color:#d4d4d4;letter-spacing:-0.02em">우리동네 클래스</strong>',
+      '      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">',
+      '        <a href="lecture-allinone.html" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">내집마련 올인원</a>',
+      '        <a href="lecture-bookclub.html" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">독서모임</a>',
+      '        <a href="curriculum.html" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">커리큘럼</a>',
+      '        <a href="refund-policy.html" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">환불규정</a>',
+      '        <a href="https://ourdongne.com/privacy" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">개인정보 처리방침</a>',
+      '        <a href="https://ourdongne.com/terms" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">이용약관</a>',
+      '      </div>',
+      '    </div>',
       '  </div>',
-      '  <div style="color:#909090">',
+      '  <div style="color:#8a8a8a;font-size:13px;line-height:2.15">',
       '    <p style="margin:0">(주)우리동네사람들 | 대표자 : 홍윤지 | 소재지 : 당산로 92, 301-이3호(당산동1가, 호서빌딩)</p>',
       '    <p style="margin:0">사업자 등록번호 : 386-86-03832 | 통신판매신고번호 : 제 2026-서울영등포-0991 호</p>',
       '    <p style="margin:0">개인정보관리책임자 : 홍윤지 | 호스팅제공자 : (주)아임웹</p>',
       '    <p style="margin:0">대표번호 070-4517-9400</p>',
       '    <p style="margin:0">문의 : contact@ourdongne.com</p>',
-      '    <p style="margin:18px 0 0">2026 주식회사 우리동네사람들 . All rights reserved.</p>',
-      '    <p style="margin:0">Copyright ⓒ 2026 우리동네재테크 All rights reserved.</p>',
+      '    <p style="margin:6px 0 0">Ⓒ2026 주식회사 우리동네사람들. All rights reserved.</p>',
       '  </div>',
       '</div>'
     ].join('');
 
     document.body.appendChild(footer);
+
+    var style = document.createElement('style');
+    style.textContent = [
+      '@media (max-width: 768px) {',
+      '  footer[data-homepage-footer] [data-footer-grid="true"] {',
+      '    grid-template-columns: 1fr !important;',
+      '    gap: 32px !important;',
+      '    margin-bottom: 40px !important;',
+      '  }',
+      '}'
+    ].join('');
+    document.head.appendChild(style);
   });
 })();

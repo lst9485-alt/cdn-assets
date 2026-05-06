@@ -18,6 +18,8 @@
       {
         id: 'dashboard',
         hubTitle: '대시보드',
+        collapsible: true,
+        defaultOpen: true,
         nav: {
           type: 'dropdown',
           label: '대시보드',
@@ -99,6 +101,8 @@
       {
         id: 'homepage-section',
         hubTitle: '홈페이지',
+        collapsible: true,
+        defaultOpen: true,
         nav: {
           type: 'single',
           label: '홈페이지',
@@ -216,6 +220,30 @@
             sidebarType: 'root',
             activeMatch: ['lecture-bookclub.html'],
             hubVisible: true
+          },
+          {
+            id: 'common-header',
+            title: '공통 헤더',
+            description: '모든 페이지 상단 메뉴 관리',
+            href: 'homepage/common-header.html',
+            badgeText: '공통',
+            badgeTone: 'live',
+            iconKey: 'tool',
+            sidebarType: 'root',
+            activeMatch: ['common-header.html'],
+            hubVisible: true
+          },
+          {
+            id: 'common-footer',
+            title: '공통 푸터',
+            description: '모든 페이지 하단 정보 관리',
+            href: 'homepage/common-footer.html',
+            badgeText: '공통',
+            badgeTone: 'live',
+            iconKey: 'tool',
+            sidebarType: 'root',
+            activeMatch: ['common-footer.html'],
+            hubVisible: true
           }
         ]
       },
@@ -223,6 +251,8 @@
         id: 'homepage-preview',
         hubTitle: '홈페이지 (시안)',
         dashedTop: true,
+        collapsible: true,
+        defaultOpen: false,
         nav: {
           type: 'single',
           label: '홈페이지 시안',
@@ -261,6 +291,8 @@
       {
         id: 'process',
         hubTitle: '프로세스 도식화',
+        collapsible: true,
+        defaultOpen: true,
         nav: {
           type: 'dropdown',
           label: '프로세스',
@@ -370,6 +402,8 @@
       {
         id: 'consult',
         hubTitle: '상담 · 템플릿',
+        collapsible: true,
+        defaultOpen: true,
         nav: {
           type: 'single',
           label: '상담·템플릿',
@@ -421,6 +455,8 @@
       {
         id: 'tools',
         hubTitle: '도구 · 기타',
+        collapsible: true,
+        defaultOpen: true,
         nav: {
           type: 'single',
           label: '도구·기타',
