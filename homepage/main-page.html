@@ -85,7 +85,6 @@
   <a class="site-logo" href="main-page.html">우리동네재테크</a>
   <nav class="site-nav" aria-label="서비스 메뉴">
     <a href="coaching-all-v3.html">1:1 코칭</a>
-    <a href="lecture-allinone.html">올인원 강의</a>
     <a href="curriculum.html">커리큘럼</a>
     <a href="refund-policy.html">환불 규정</a>
   </nav>
@@ -158,20 +157,6 @@
         </div>
       </a>
 
-      <!-- 슬라이드 4: 온라인강의 -->
-      <a href="lecture-allinone.html" class="slide block">
-        <div class="relative h-[380px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
-          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-5.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
-          <div class="relative z-10 px-10 sm:px-16 max-w-xl">
-            <span class="glass-chip inline-flex items-center gap-2 text-white text-sm font-bold px-5 py-2 rounded-full mb-5">
-              <iconify-icon icon="solar:play-circle-bold" class="text-sm"></iconify-icon> 온라인강의
-            </span>
-            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-tight word-keep mb-5">내집마련 실전반<br>온라인 강의</h2>
-            <p class="text-white/70 text-base sm:text-lg word-keep">예산 계산부터 계약까지 한 번에 →</p>
-          </div>
-        </div>
-      </a>
     </div>
 
     <!-- 컨트롤: 좌하단 도트 + 우하단 화살표 -->
@@ -192,10 +177,6 @@
     <a href="coaching-all-v3.html" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
       <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-coaching.png" alt="1:1 코칭" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
       <span class="text-sm font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">1:1 코칭</span>
-    </a>
-    <a href="lecture-allinone.html" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
-      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-lecture.png" alt="올인원 강의" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
-      <span class="text-sm font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">올인원 강의</span>
     </a>
     <a href="curriculum.html" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
       <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-curriculum.png" alt="커리큘럼" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
@@ -270,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // slider
   var track = document.getElementById('sliderTrack');
   var dotsWrap = document.getElementById('sliderDots');
-  var total = 4, idx = 0, paused = false;
+  var total = 3, idx = 0, paused = false;
 
   // 도트 생성
   for (var i = 0; i < total; i++) {

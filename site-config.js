@@ -182,30 +182,6 @@
             hubVisible: true
           },
           {
-            id: 'lecture-allinone',
-            title: '올인원 강의 페이지',
-            description: '내집마련 올인원 VOD · 20만원',
-            href: 'homepage/lecture-allinone.html',
-            badgeText: 'NEW',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['lecture-allinone.html'],
-            hubVisible: true
-          },
-          {
-            id: 'lecture-bookclub',
-            title: '독서모임 페이지',
-            description: '내집마련 독서모임 · 월 1회',
-            href: 'homepage/lecture-bookclub.html',
-            badgeText: 'NEW',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['lecture-bookclub.html'],
-            hubVisible: false
-          },
-          {
             id: 'refund-policy',
             title: '환불규정 안내',
             description: 'VOD 강의 · 독서모임 환불 규정',
@@ -215,6 +191,30 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['refund-policy.html'],
+            hubVisible: true
+          },
+          {
+            id: 'lecture-allinone',
+            title: '올인원 강의 (예정)',
+            description: '내집마련 올인원 강의 준비 중',
+            href: 'homepage/lecture-allinone.html',
+            badgeText: '예정',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['lecture-allinone.html'],
+            hubVisible: true
+          },
+          {
+            id: 'lecture-bookclub',
+            title: '독서모임 (예정)',
+            description: '독서모임 페이지 준비 중',
+            href: 'homepage/lecture-bookclub.html',
+            badgeText: '예정',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['lecture-bookclub.html'],
             hubVisible: true
           }
         ]
@@ -464,6 +464,18 @@
           title: '임시 테스트'
         },
         items: [
+          {
+            id: 'homepage-coaching-v2-test',
+            title: '홈페이지 코칭 v2 테스트',
+            description: '기존 코칭 v2 임시 보관',
+            href: 'homepage/coaching-all-v2.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['coaching-all-v2.html'],
+            hubVisible: true
+          },
           {
             id: 'consult-trust-test',
             title: '상담 리포트 테스트',
