@@ -1093,7 +1093,7 @@
     49: 'title',    50: 'title',    51: 'title',    52: 'title',
     53: 'title',    54: 'title',    55: 'title',    56: 'title',
     57: 'title',    58: 'title',    59: 'title',    60: 'title',
-    61: 'title',
+    61: 'title',    62: 'title',    63: 'title',    64: 'title',
   };
 
   const PG_TO_CATEGORY = {
@@ -1113,7 +1113,8 @@
     48: '텍스트',      49: '아이콘+글',   50: '비교',        51: '아이콘+글',
     52: '비교',        53: '플로우',      54: '플로우',      55: '텍스트',
     56: '텍스트',      57: '텍스트',      58: '텍스트',      59: '텍스트',
-    60: '텍스트',      61: '텍스트',
+    60: '텍스트',      61: '텍스트',      62: '텍스트',      63: '비교',
+    64: '텍스트',
   };
 
   function bucketOfPageGroup(pg) {
@@ -9101,6 +9102,11 @@
     57: {"label":"T57 좌측바전개","schemaRequiredCount":2,"fillRange":[2,2],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
     58: {"label":"T58 인용형전개","schemaRequiredCount":2,"fillRange":[2,2],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
     59: {"label":"T59 카드형전개","schemaRequiredCount":2,"fillRange":[2,2],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    60: {"label":"T60 단계강조","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    61: {"label":"T61 결론펼침","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    62: {"label":"T62 경고해법","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    63: {"label":"T63 비교삼지선다","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    64: {"label":"T64 카운트다운강조","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
   };
 
   function typeMetaOfPageGroup(pg) {
