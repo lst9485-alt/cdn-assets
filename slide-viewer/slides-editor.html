@@ -5,7 +5,7 @@
 <title>slides-editor</title>
 <script>(function(){const name=location.pathname.split('/').pop().replace('.html','');const m=name.match(/(\d{4})(\d{2})(\d{2})/);document.title=m?`${m[1]}-${m[2]}-${m[3]}`:name;})()</script>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@900&amp;display=swap" rel="stylesheet"/>
-<link href="./assets/slide-style.css?v=20260506171442" rel="stylesheet"/>
+<link href="./assets/slide-style.css?v=20260506231947" rel="stylesheet"/>
 <style id="edit-badge-style">@keyframes editBadgeBlink{0%,100%{opacity:1}50%{opacity:0.3}}</style>
 <style id="slide-jump-nav-style">
 #slide-jump-nav{display:none;position:fixed;right:0;top:0;bottom:96px;width:260px;overflow-y:auto;overflow-x:hidden;z-index:8500;background:rgba(20,20,20,0.92);border-left:1px solid rgba(255,255,255,0.07);padding:0;box-sizing:border-box;flex-direction:column;scrollbar-width:none;transition:width 0.18s ease;}
@@ -2635,6 +2635,31 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="slide-el branch-result" data-type="선택경로" style="position:absolute; left:220px; top:684px; width:1480px; text-align:center; font-size:58px; font-weight:900; color:var(--color-accent); line-height:1.3; word-break:keep-all; overflow-wrap:anywhere;"><div class="branch-result-text">그 기준에 맞는 경로</div></div>
 </div>
 </div>
+<div class="slide" data-page-group="66" data-slide-id="T66_base" data-steps="3" data-type="인과3단" data-variant="0" id="T66_base" style="">
+<div class="step-layer" data-step="0">
+<div class="slide-el cause3-card cause3-cause" data-appear-step="0" data-type="원인" style="position:absolute; left:80px; top:280px; width:500px; height:520px; padding:48px 36px; border-radius:36px; background:rgba(231,76,60,0.10); border:5px solid rgba(231,76,60,0.32); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:24px;">
+<div style="font-size:60px; line-height:1; margin-bottom:8px;">⚠️</div>
+<div style="font-size:38px; font-weight:900; color:#c0392b; line-height:1.2;">원인</div>
+<div class="cause3-line" style="font-size:54px; font-weight:900; color:var(--color-text); line-height:1.3;">처음 발단</div>
+</div>
+<div class="slide-el cause3-arrow1" data-type="화살표1" style="position:absolute; left:600px; top:520px; width:100px; text-align:center; font-size:80px; font-weight:900; color:var(--color-text-sub); line-height:1;">→</div>
+</div>
+<div class="step-layer" data-step="1">
+<div class="slide-el cause3-card cause3-middle" data-appear-step="1" data-group="step2" data-type="중간" style="position:absolute; left:710px; top:280px; width:500px; height:520px; padding:48px 36px; border-radius:36px; background:rgba(243,156,18,0.10); border:5px solid rgba(243,156,18,0.36); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:24px;">
+<div style="font-size:60px; line-height:1; margin-bottom:8px;">🔥</div>
+<div style="font-size:38px; font-weight:900; color:#b9770e; line-height:1.2;">중간 결과</div>
+<div class="cause3-line" style="font-size:54px; font-weight:900; color:var(--color-text); line-height:1.3;">상황 악화</div>
+</div>
+<div class="slide-el cause3-arrow2" data-type="화살표2" style="position:absolute; left:1230px; top:520px; width:100px; text-align:center; font-size:80px; font-weight:900; color:var(--color-text-sub); line-height:1;">→</div>
+</div>
+<div class="step-layer" data-step="2">
+<div class="slide-el cause3-card cause3-effect" data-appear-step="2" data-group="step3" data-type="결과" style="position:absolute; left:1340px; top:280px; width:500px; height:520px; padding:48px 36px; border-radius:36px; background:rgba(46,204,113,0.10); border:5px solid rgba(46,204,113,0.36); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:24px;">
+<div style="font-size:60px; line-height:1; margin-bottom:8px;">✓</div>
+<div style="font-size:38px; font-weight:900; color:#1e8449; line-height:1.2;">최종 결과</div>
+<div class="cause3-line" style="font-size:54px; font-weight:900; color:var(--color-text); line-height:1.3;">최종 모습</div>
+</div>
+</div>
+</div>
 <div class="slide" data-page-group="17" data-slide-id="T17_base" data-steps="2" data-type="비교박스" data-variant="0" id="T17_base" style="">
 <div class="step-layer" data-step="0">
 <div class="text-area" style="position:absolute; left:120px; top:100px; width:1680px;">
@@ -3293,6 +3318,70 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 <div class="slide-el compare3-card compare3-c" data-appear-step="2" data-group="step3" data-type="옵션C" style="position:absolute; left:1280px; top:280px; width:520px; height:520px; padding:48px 36px; border-radius:36px; background:rgba(255,106,0,0.10); border:5px solid rgba(255,106,0,0.42); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
 <div style="font-size:120px; font-weight:900; color:var(--color-accent); line-height:1; margin-bottom:24px;">C</div>
 <div style="font-size:54px; font-weight:900; color:var(--color-text); line-height:1.3;">셋째 선택지</div>
+</div>
+</div>
+</div>
+<div class="slide" data-page-group="65" data-slide-id="T65_base" data-steps="3" data-type="시간3분할" data-variant="0" id="T65_base" style="">
+<div class="step-layer" data-step="0">
+<div class="slide-el time3-tag" data-type="라벨" style="position:absolute; left:200px; top:120px; width:1520px; text-align:center;">
+<span style="display:inline-block; padding:14px 36px; border-radius:999px; background:rgba(0,0,0,0.06); color:var(--color-text-sub); font-size:42px; font-weight:900; letter-spacing:0.04em;">시간 흐름 비교</span>
+</div>
+<div class="slide-el time3-card time3-past" data-appear-step="0" data-type="과거" style="position:absolute; left:110px; top:280px; width:500px; height:560px; padding:48px 36px; border-radius:36px; background:rgba(0,0,0,0.04); border:5px solid rgba(0,0,0,0.10); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:28px;">
+<div style="font-size:44px; font-weight:900; color:var(--color-text-sub); line-height:1.2;">과거</div>
+<div class="time3-line" style="font-size:60px; font-weight:900; color:var(--color-text-sub); line-height:1.24;">옛날에는 이랬다</div>
+</div>
+</div>
+<div class="step-layer" data-step="1">
+<div class="slide-el time3-card time3-now" data-appear-step="1" data-group="step2" data-type="현재" style="position:absolute; left:710px; top:280px; width:500px; height:560px; padding:48px 36px; border-radius:36px; background:rgba(0,0,0,0.06); border:5px solid rgba(0,0,0,0.18); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:28px;">
+<div style="font-size:44px; font-weight:900; color:var(--color-text); line-height:1.2;">현재</div>
+<div class="time3-line" style="font-size:60px; font-weight:900; color:var(--color-text); line-height:1.24;">지금은 이렇다</div>
+</div>
+</div>
+<div class="step-layer" data-step="2">
+<div class="slide-el time3-card time3-future" data-appear-step="2" data-group="step3" data-type="미래" style="position:absolute; left:1310px; top:260px; width:500px; height:580px; padding:48px 36px; border-radius:36px; background:rgba(255,106,0,0.10); border:5px solid rgba(255,106,0,0.42); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:28px;">
+<div style="font-size:44px; font-weight:900; color:var(--color-accent); line-height:1.2;">미래</div>
+<div class="time3-line" style="font-size:60px; font-weight:900; color:var(--color-accent); line-height:1.24;">앞으로는 이렇다</div>
+</div>
+</div>
+</div>
+<div class="slide" data-page-group="68" data-slide-id="T68_base" data-steps="3" data-type="선택결과" data-variant="0" id="T68_base" style="">
+<div class="step-layer" data-step="0">
+<div class="slide-el choice3-stack choice3-c1" data-appear-step="0" data-type="첫선택" style="position:absolute; left:80px; top:200px; width:560px; height:680px; display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; gap:18px;">
+<div class="choice3-cond" style="padding:32px 28px; border-radius:28px; background:rgba(0,0,0,0.06); border:4px solid rgba(0,0,0,0.14); text-align:center;">
+<div style="font-size:32px; font-weight:900; color:var(--color-text-sub); margin-bottom:8px; letter-spacing:0.04em;">조건</div>
+<div class="choice3-cond-line" style="font-size:46px; font-weight:900; color:var(--color-text); line-height:1.24;">첫째 조건</div>
+</div>
+<div style="text-align:center; font-size:54px; font-weight:900; color:var(--color-text-sub); line-height:1; padding:4px 0;">▼</div>
+<div class="choice3-act" style="padding:36px 28px; border-radius:28px; background:rgba(255,106,0,0.10); border:4px solid rgba(255,106,0,0.42); text-align:center;">
+<div style="font-size:32px; font-weight:900; color:var(--color-accent); margin-bottom:8px; letter-spacing:0.04em;">행동</div>
+<div class="choice3-act-line" style="font-size:50px; font-weight:900; color:var(--color-text); line-height:1.24;">첫째 행동</div>
+</div>
+</div>
+</div>
+<div class="step-layer" data-step="1">
+<div class="slide-el choice3-stack choice3-c2" data-appear-step="1" data-group="step2" data-type="둘째선택" style="position:absolute; left:680px; top:200px; width:560px; height:680px; display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; gap:18px;">
+<div class="choice3-cond" style="padding:32px 28px; border-radius:28px; background:rgba(0,0,0,0.06); border:4px solid rgba(0,0,0,0.14); text-align:center;">
+<div style="font-size:32px; font-weight:900; color:var(--color-text-sub); margin-bottom:8px; letter-spacing:0.04em;">조건</div>
+<div class="choice3-cond-line" style="font-size:46px; font-weight:900; color:var(--color-text); line-height:1.24;">둘째 조건</div>
+</div>
+<div style="text-align:center; font-size:54px; font-weight:900; color:var(--color-text-sub); line-height:1; padding:4px 0;">▼</div>
+<div class="choice3-act" style="padding:36px 28px; border-radius:28px; background:rgba(255,106,0,0.10); border:4px solid rgba(255,106,0,0.42); text-align:center;">
+<div style="font-size:32px; font-weight:900; color:var(--color-accent); margin-bottom:8px; letter-spacing:0.04em;">행동</div>
+<div class="choice3-act-line" style="font-size:50px; font-weight:900; color:var(--color-text); line-height:1.24;">둘째 행동</div>
+</div>
+</div>
+</div>
+<div class="step-layer" data-step="2">
+<div class="slide-el choice3-stack choice3-c3" data-appear-step="2" data-group="step3" data-type="셋째선택" style="position:absolute; left:1280px; top:200px; width:560px; height:680px; display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; gap:18px;">
+<div class="choice3-cond" style="padding:32px 28px; border-radius:28px; background:rgba(0,0,0,0.06); border:4px solid rgba(0,0,0,0.14); text-align:center;">
+<div style="font-size:32px; font-weight:900; color:var(--color-text-sub); margin-bottom:8px; letter-spacing:0.04em;">조건</div>
+<div class="choice3-cond-line" style="font-size:46px; font-weight:900; color:var(--color-text); line-height:1.24;">셋째 조건</div>
+</div>
+<div style="text-align:center; font-size:54px; font-weight:900; color:var(--color-text-sub); line-height:1; padding:4px 0;">▼</div>
+<div class="choice3-act" style="padding:36px 28px; border-radius:28px; background:rgba(255,106,0,0.10); border:4px solid rgba(255,106,0,0.42); text-align:center;">
+<div style="font-size:32px; font-weight:900; color:var(--color-accent); margin-bottom:8px; letter-spacing:0.04em;">행동</div>
+<div class="choice3-act-line" style="font-size:50px; font-weight:900; color:var(--color-text); line-height:1.24;">셋째 행동</div>
+</div>
 </div>
 </div>
 </div>
@@ -4009,7 +4098,7 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 </div>
 <div class="step-layer" data-step="1">
-<div class="slide-el quote-tail" data-type="전개" data-group="step2" style="position:absolute; left:280px; top:560px; width:1280px; font-size:42px; font-weight:800; color:var(--color-text-sub); line-height:1.48; padding-left:20px; border-left:8px solid var(--color-accent); word-break:keep-all; overflow-wrap:anywhere;">
+<div class="slide-el quote-tail" data-group="step2" data-type="전개" style="position:absolute; left:280px; top:560px; width:1280px; font-size:42px; font-weight:800; color:var(--color-text-sub); line-height:1.48; padding-left:20px; border-left:8px solid var(--color-accent); word-break:keep-all; overflow-wrap:anywhere;">
 <span class="quote-tail-text">인용형 설명</span>
 </div>
 </div>
@@ -4115,6 +4204,32 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 </div>
 <div class="slide-el countdown-line" data-appear-step="2" data-group="step3" data-type="본문3" style="position:absolute; left:1320px; top:700px; width:460px; text-align:center; padding:18px 16px;">
 <span class="hl" style="font-size:46px; line-height:1.32;">마지막 핵심을 마무리</span>
+</div>
+</div>
+</div>
+<div class="slide" data-page-group="67" data-slide-id="T67_base" data-steps="3" data-type="넘버드포인트" data-variant="0" id="T67_base" style="">
+<div class="step-layer" data-step="0">
+<div class="slide-el numpoint3-tag" data-type="라벨" style="position:absolute; left:200px; top:130px; width:1520px; text-align:center;">
+<span style="display:inline-block; padding:14px 36px; border-radius:999px; background:rgba(255,106,0,0.14); color:var(--color-accent); font-size:42px; font-weight:900; letter-spacing:0.04em;">꼭 알아야 할 셋</span>
+</div>
+<div class="slide-el numpoint3-card numpoint3-p1" data-appear-step="0" data-type="첫포인트" style="position:absolute; left:80px; top:290px; width:560px; height:540px; padding:44px 36px; border-radius:32px; background:#ffffff; border:4px solid rgba(0,0,0,0.10); display:flex; flex-direction:column; align-items:center; justify-content:flex-start; text-align:center; gap:20px; box-shadow:0 6px 20px rgba(0,0,0,0.06);">
+<div style="font-size:130px; font-weight:900; color:var(--color-accent); line-height:1; letter-spacing:-0.02em;">01</div>
+<div style="width:120px; height:5px; border-radius:999px; background:var(--color-accent); margin:8px 0 12px;"></div>
+<div class="numpoint3-line" style="font-size:48px; font-weight:900; color:var(--color-text); line-height:1.3;">첫째 포인트</div>
+</div>
+</div>
+<div class="step-layer" data-step="1">
+<div class="slide-el numpoint3-card numpoint3-p2" data-appear-step="1" data-group="step2" data-type="둘째포인트" style="position:absolute; left:680px; top:290px; width:560px; height:540px; padding:44px 36px; border-radius:32px; background:#ffffff; border:4px solid rgba(0,0,0,0.10); display:flex; flex-direction:column; align-items:center; justify-content:flex-start; text-align:center; gap:20px; box-shadow:0 6px 20px rgba(0,0,0,0.06);">
+<div style="font-size:130px; font-weight:900; color:var(--color-accent); line-height:1; letter-spacing:-0.02em;">02</div>
+<div style="width:120px; height:5px; border-radius:999px; background:var(--color-accent); margin:8px 0 12px;"></div>
+<div class="numpoint3-line" style="font-size:48px; font-weight:900; color:var(--color-text); line-height:1.3;">둘째 포인트</div>
+</div>
+</div>
+<div class="step-layer" data-step="2">
+<div class="slide-el numpoint3-card numpoint3-p3" data-appear-step="2" data-group="step3" data-type="셋째포인트" style="position:absolute; left:1280px; top:290px; width:560px; height:540px; padding:44px 36px; border-radius:32px; background:#ffffff; border:4px solid rgba(0,0,0,0.10); display:flex; flex-direction:column; align-items:center; justify-content:flex-start; text-align:center; gap:20px; box-shadow:0 6px 20px rgba(0,0,0,0.06);">
+<div style="font-size:130px; font-weight:900; color:var(--color-accent); line-height:1; letter-spacing:-0.02em;">03</div>
+<div style="width:120px; height:5px; border-radius:999px; background:var(--color-accent); margin:8px 0 12px;"></div>
+<div class="numpoint3-line" style="font-size:48px; font-weight:900; color:var(--color-text); line-height:1.3;">셋째 포인트</div>
 </div>
 </div>
 </div>
@@ -4495,6 +4610,19 @@ body.overview-open.sjn-collapsed #overview{padding-right:32px;}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- ── 위치 가이드 (G키) ── -->
 <!-- 제목 가이드 -->
 <div class="guide" data-count="title" style="left:120px; top:120px; width:1680px; height:150px;">
@@ -4699,6 +4827,6 @@ width: 680px;</span>
 <button class="fmt-btn" data-align="right" title="오른쪽 정렬">≡</button>
 </div>
 <div id="slide-jump-nav"></div>
-<script src="./assets/slide-editor.js?v=20260506232240"></script>
+<script src="./assets/slide-editor.js?v=20260506231947"></script>
 <div class="gs-crosshair-h" id="gs-crosshair-h" style="top: 195px; display: none;"></div><div class="gs-crosshair-v" id="gs-crosshair-v" style="left: 960px; display: none;"></div>
 <div id="filmstrip"><div id="filmstrip-inner"></div></div><div id="edit-mode-badge" style="position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 99999; background: rgb(230, 57, 70); color: rgb(255, 255, 255); padding: 6px 18px; border-radius: 8px; font-size: 14px; font-weight: 900; pointer-events: none; animation: 1.5s ease 0s infinite normal none running editBadgeBlink; display: none;">편집중 — 자동저장 30초</div></body></html>

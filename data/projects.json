@@ -1,36 +1,12 @@
 {
-  "updated": "2026-05-06T06:00:02.274887+09:00",
+  "updated": "2026-05-07T06:00:02.664365+09:00",
   "projects": [
-    {
-      "name": "2026-05-17-코스피vs아파트",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-05-06",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "상담 CRM",
-      "type": "file",
-      "app": null,
-      "modified": "2026-05-05",
-      "status": null,
-      "next": null
-    },
     {
       "name": "무한매수법",
       "type": "folder",
       "app": "n8n/workflows/05 무한매수",
       "modified": "2026-05-05",
       "status": "원격 n8n workflow `bjWvcublAnDdd5k3` (`05 무한매수`) 활성화 확인.",
-      "next": null
-    },
-    {
-      "name": "yt-slide 미결 이슈_2026-04-29",
-      "type": "file",
-      "app": "youtube/yt-slide",
-      "modified": "2026-04-29",
-      "status": null,
       "next": null
     },
     {
