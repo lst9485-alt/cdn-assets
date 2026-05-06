@@ -29,8 +29,8 @@
 
     footer.innerHTML = [
       '<div style="max-width:1100px;margin:0 auto">',
-      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:8px 64px;align-items:start;margin-bottom:0">',
-      '    <div style="margin-left:-12px">',
+      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:8px 44px;align-items:start;margin-bottom:0">',
+      '    <div style="margin-left:-18px">',
       '      <strong style="display:block;font-size:22px;font-weight:800;color:#f3f4f6;letter-spacing:-0.02em">우리동네 재테크</strong>',
       '      <a href="https://www.youtube.com/@우리동네재테크" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:6px;margin-top:6px;color:#ededed;text-decoration:none;font-size:14px;font-weight:600"><span>유튜브</span><span aria-hidden="true" style="display:inline-flex;align-items:center"><svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="17" height="12" rx="3" fill="#FF0000"/><path d="M7 3.5L11.5 6L7 8.5V3.5Z" fill="white"/></svg></span></a>',
       '      <div style="color:#888888;font-size:13px;line-height:2.15;margin-top:18px">',
@@ -42,10 +42,10 @@
       '        <p style="margin:6px 0 0">Ⓒ2026 주식회사 우리동네사람들. All rights reserved.</p>',
       '      </div>',
       '    </div>',
-      '    <div>',
+      '    <div style="margin-left:-8px">',
       '      <strong style="display:block;font-size:22px;font-weight:800;color:#f3f4f6;letter-spacing:-0.02em">우리동네 클래스</strong>',
       '      <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">',
-      '        <a href="' + new URL('coaching-all-v3.html', base).href + '" style="display:inline-flex;align-items:center;gap:6px;color:#ededed;text-decoration:none;font-size:14px;font-weight:600"><span aria-hidden="true">💬</span><span>1:1 코칭</span></a>',
+      '        <a href="' + new URL('coaching-all-v3.html', base).href + '" style="display:inline-flex;align-items:center;gap:6px;color:#ededed;text-decoration:none;font-size:14px;font-weight:600"><span aria-hidden="true">🏠</span><span>1:1 코칭</span></a>',
       '        <a href="' + new URL('curriculum.html', base).href + '" style="color:#ededed;text-decoration:none;font-size:14px;font-weight:600">커리큘럼</a>',
       '        <a href="' + new URL('refund-policy.html', base).href + '" style="color:#ededed;text-decoration:none;font-size:14px;font-weight:600">환불규정</a>',
       '        <a href="' + new URL('privacy-policy.html', base).href + '" style="color:#ededed;text-decoration:none;font-size:14px;font-weight:600">개인정보 처리방침</a>',
