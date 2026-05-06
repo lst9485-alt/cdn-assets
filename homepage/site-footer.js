@@ -22,21 +22,21 @@
       'background:#111111',
       'color:#8f8f8f',
       'font-family:Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif',
-      'padding:20px 24px 14px',
+      'padding:8px 24px 12px',
       'font-size:13px',
       'line-height:2'
     ].join(';');
 
     footer.innerHTML = [
       '<div style="max-width:1100px;margin:0 auto">',
-      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:16px 96px;align-items:start;margin-bottom:10px">',
+      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:8px 96px;align-items:start;margin-bottom:2px">',
       '    <div>',
       '      <strong style="display:block;font-size:18px;font-weight:800;color:#d4d4d4;letter-spacing:-0.02em">우리동네 재테크</strong>',
-      '      <a href="https://www.youtube.com/@우리동네재테크" target="_blank" rel="noreferrer" style="display:inline-block;margin-top:8px;color:#7a7a7a;text-decoration:none;font-size:13px;font-weight:500">유튜브↖</a>',
+      '      <a href="https://www.youtube.com/@우리동네재테크" target="_blank" rel="noreferrer" style="display:inline-block;margin-top:4px;color:#7a7a7a;text-decoration:none;font-size:13px;font-weight:500">유튜브↖</a>',
       '    </div>',
       '    <div>',
       '      <strong style="display:block;font-size:18px;font-weight:800;color:#d4d4d4;letter-spacing:-0.02em">우리동네 클래스</strong>',
-      '      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">',
+      '      <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">',
       '        <a href="' + new URL('coaching-all-v3.html', base).href + '" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">1:1 코칭</a>',
       '        <a href="' + new URL('curriculum.html', base).href + '" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">커리큘럼</a>',
       '        <a href="' + new URL('refund-policy.html', base).href + '" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">환불규정</a>',
@@ -63,8 +63,8 @@
       '@media (max-width: 768px) {',
       '  footer[data-homepage-footer] [data-footer-grid="true"] {',
       '    grid-template-columns: 1fr !important;',
-      '    gap: 32px !important;',
-      '    margin-bottom: 40px !important;',
+      '    gap: 18px !important;',
+      '    margin-bottom: 12px !important;',
       '  }',
       '}'
     ].join('');
