@@ -451,6 +451,8 @@
         hubTitle: '임시 테스트',
         dashedTop: true,
         alwaysVisible: true,
+        collapsible: true,
+        defaultOpen: false,
         nav: {
           type: 'single',
           label: '임시',
@@ -532,6 +534,18 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['260503-production-redo.html'],
+            hubVisible: true
+          },
+          {
+            id: 'slide-test-260517',
+            title: '260517 코스피 vs 아파트 테스트',
+            description: 'archive 원고 자율 재기획본 · 64장',
+            href: 'slide-viewer/260517-slides.html?_ghfresh=20260506102100',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['260517-slides.html'],
             hubVisible: true
           },
         ]
