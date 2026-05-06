@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>새 페이지 템플릿</title>
+  <style>
+    body { margin: 0; font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #f5f5f5; color: #111827; }
+    main { max-width: 960px; margin: 0 auto; padding: 120px 24px 80px; }
+    .stack { display: grid; gap: 20px; }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 28px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06); }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 0 0 10px; font-size: 20px; }
+    p { margin: 0; line-height: 1.8; color: #6b7280; }
+    .lead { margin-top: 8px; }
+    pre { margin: 16px 0 0; padding: 18px; border-radius: 16px; background: #111827; color: #f9fafb; overflow: auto; font-size: 14px; line-height: 1.7; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .chip { display: inline-flex; align-items: center; margin-bottom: 12px; border-radius: 999px; background: #fff7ed; color: #ea580c; padding: 6px 12px; font-size: 12px; font-weight: 800; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="stack">
+      <section class="card">
+        <span class="chip">기억할 것 1개</span>
+        <h1>새 페이지 템플릿</h1>
+        <p class="lead">앞으로는 새 페이지 만들 때 공통 추적코드, 헤더, 푸터를 따로 기억할 필요 없습니다. 아래에서 필요한 템플릿만 복사하면 됩니다.</p>
+      </section>
+
+      <section class="card">
+        <h2>1. 일반 페이지</h2>
+        <p>메인, 코칭, 커리큘럼처럼 상단 헤더와 하단 푸터가 같이 필요한 페이지입니다.</p>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;페이지 제목&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  페이지 본문
+
+  &lt;script src="homepage-shell.js?v=d5608a0"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </section>
+
+      <section class="card">
+        <h2>2. 결제용 단독 페이지</h2>
+        <p>카드결제 안내처럼 헤더/푸터는 없이, GA4와 Clarity만 붙이고 싶은 페이지입니다.</p>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;결제용 페이지 제목&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  페이지 본문
+
+  &lt;script src="homepage-shell.js?v=d5608a0" data-header="false" data-footer="false"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </section>
+
+      <section class="card">
+        <h2>3. 실제 동작</h2>
+        <p><code>homepage-shell.js</code> 가 공통으로 세 가지를 처리합니다. GA4/Clarity 추적, 공통 헤더, 공통 푸터입니다. 결제용 페이지는 옵션으로 헤더/푸터만 끌 수 있습니다.</p>
+      </section>
+    </div>
+  </main>
+  <script src="homepage-shell.js?v=d5608a0"></script>
+</body>
+</html>

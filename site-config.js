@@ -244,6 +244,18 @@
             sidebarType: 'root',
             activeMatch: ['common-footer.html'],
             hubVisible: true
+          },
+          {
+            id: 'page-template',
+            title: '새 페이지 템플릿',
+            description: '일반 페이지 / 결제용 페이지 복붙용',
+            href: 'homepage/page-template.html',
+            badgeText: '공통',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['page-template.html'],
+            hubVisible: true
           }
         ]
       },
