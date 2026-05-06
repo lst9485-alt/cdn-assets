@@ -22,7 +22,7 @@
       'background:#111111',
       'color:#9a9a9a',
       'font-family:Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif',
-      'padding:0 24px 12px',
+      'padding:12px 24px 12px',
       'font-size:13px',
       'line-height:2'
     ].join(';');
