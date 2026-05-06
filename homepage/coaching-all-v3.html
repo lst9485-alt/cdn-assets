@@ -257,6 +257,19 @@
 	  .neighborhood-map svg { width:100%; height:auto; }
 	  .sticky-coaching-cta { position:fixed; left:50%; bottom:22px; z-index:90; width:min(860px, calc(100vw - 40px)); max-width:860px; border-radius:8px; background:#2d2d2d; box-shadow:0 14px 36px rgba(15,23,42,0.28); transform:translate3d(-50%, 24px, 0); opacity:0; pointer-events:none; transition:opacity .22s ease, transform .22s ease; }
 	  .sticky-coaching-cta.is-visible { opacity:1; pointer-events:auto; transform:translate3d(-50%, 0, 0); }
+	  .floating-cta-badge { position:absolute; top:-18px; right:24px; display:inline-flex; align-items:center; gap:6px; border-radius:999px; background:#111827; color:#fff; padding:7px 12px; font-size:11px; font-weight:900; letter-spacing:-0.01em; box-shadow:0 10px 24px rgba(15,23,42,.18); }
+	  .floating-cta-badge::after { content:''; position:absolute; left:50%; bottom:-6px; width:12px; height:12px; background:#111827; transform:translateX(-50%) rotate(45deg); border-radius:2px; }
+	  .submit-float-badge { display:inline-flex; align-items:center; gap:6px; margin-bottom:10px; border-radius:999px; background:#1f2937; color:#fff; padding:7px 12px; font-size:11px; font-weight:900; letter-spacing:-0.01em; box-shadow:0 10px 24px rgba(15,23,42,.14); }
+	  .pricing-choice-card { display:flex; align-items:flex-start; gap:14px; border:1px solid #f3c79b; border-radius:18px; background:#fff; padding:16px 18px; transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease; }
+	  .pricing-choice-card.is-selected { border-color:#ff6b00; box-shadow:0 12px 28px rgba(255,107,0,.12); }
+	  .pricing-choice-card.is-disabled { border-color:#e5e7eb; background:#f9fafb; opacity:.78; }
+	  .pricing-choice-radio { width:24px; height:24px; border-radius:999px; border:2px solid #d1d5db; display:grid; place-items:center; flex-shrink:0; margin-top:2px; background:#fff; }
+	  .pricing-choice-card.is-selected .pricing-choice-radio { border-color:#ff6b00; }
+	  .pricing-choice-card.is-selected .pricing-choice-radio::after { content:''; width:10px; height:10px; border-radius:999px; background:#ff6b00; }
+	  .pricing-choice-card.is-disabled .pricing-choice-radio { border-color:#d1d5db; background:#f3f4f6; }
+	  .pricing-choice-index { display:inline-flex; align-items:center; justify-content:center; min-width:22px; height:22px; border-radius:8px; padding:0 7px; font-size:12px; font-weight:900; }
+	  .pricing-choice-note { display:inline-flex; align-items:center; gap:6px; border-radius:999px; background:#fff7ed; color:#ea580c; padding:5px 10px; font-size:12px; font-weight:800; }
+	  .pricing-choice-deadline { display:inline-flex; align-items:center; gap:6px; border-radius:999px; background:#fee2e2; color:#dc2626; padding:5px 10px; font-size:12px; font-weight:900; }
 	  .cta-down-arrow { width:64px; height:74px; margin:30px auto 0; transform:translateY(8px); }
 	  .cta-down-arrow svg { display:block; width:100%; height:100%; overflow:visible; }
 	  .cta-down-arrow .arrow-main { fill:none; stroke:#dc2626; stroke-width:7; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 4px 8px rgba(220,38,38,.18)); }
@@ -280,10 +293,11 @@
 </head>
 <body class="bg-white text-brand-dark font-sans">
 
-  <div id="stickyCoachingCta" class="sticky-coaching-cta px-5 py-4 text-white md:px-8" aria-hidden="true">
-    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-      <p class="text-base font-display font-black word-keep md:text-xl">내집마련 1:1 코칭, 지금 신청하세요!</p>
-      <button type="button" class="scroll-to-form shrink-0 rounded-lg bg-[#ff4b4b] px-7 py-3 text-sm font-black text-white shadow-lg transition hover:bg-[#e63838]">대기신청</button>
+		  <div id="stickyCoachingCta" class="sticky-coaching-cta px-5 py-4 text-white md:px-8" aria-hidden="true">
+	    <span class="floating-cta-badge" aria-hidden="true">⏳ 접수 여유 있을 때 선점</span>
+	    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+	      <p class="text-base font-display font-black word-keep md:text-xl">내집마련 1:1 코칭, 지금 신청하세요!</p>
+	      <button type="button" class="scroll-to-form shrink-0 rounded-lg bg-[#ff4b4b] px-7 py-3 text-sm font-black text-white shadow-lg transition hover:bg-[#e63838]">대기신청</button>
     </div>
   </div>
 
@@ -1145,17 +1159,47 @@
         </div>
 
         <!-- 4. 결제 안내 -->
-        <div id="f-deposit-wrap">
-          <label class="block text-brand-dark font-bold mb-3">4. 결제 안내</label>
-          <div class="bg-orange-50 border border-orange-200 rounded-xl p-5 mb-4">
-            <p class="text-gray-600 text-sm mb-3">신청서를 제출하면 완료 화면에서 카드결제 또는 계좌이체 방법을 선택할 수 있습니다.</p>
-            <div class="space-y-2">
-              <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="radio" name="coaching" value="A" checked class="radio-round"><span class="bg-brand-orange text-white text-xs font-bold px-2 py-0.5 rounded">1</span> 코칭 A : 40만 원</label>
-              <label class="flex items-center gap-3 text-gray-400 cursor-pointer"><input type="radio" name="coaching" value="B" disabled class="radio-round"><span class="bg-gray-300 text-gray-500 text-xs font-bold px-2 py-0.5 rounded">2</span> 코칭 B : 96만 원 <span class="text-xs text-red-400 font-bold ml-1">4,5월 마감</span></label>
-            </div>
-            <p class="text-gray-400 text-sm mt-3">결제·입금 확인 후 12시간 내 카카오톡으로 사전질문지를 안내드립니다.</p>
-          </div>
-        </div>
+	        <div id="f-deposit-wrap">
+	          <label class="block text-brand-dark font-bold mb-3">4. 결제 안내</label>
+	          <div class="bg-orange-50 border border-orange-200 rounded-xl p-5 mb-4">
+	            <div class="rounded-2xl bg-white/70 border border-orange-100 px-4 py-3 mb-4">
+	              <p class="text-brand-dark text-sm font-bold word-keep">신청서를 제출하면 완료 화면에서 <span class="text-brand-orange">카드결제 또는 계좌이체</span> 방법을 바로 선택할 수 있습니다.</p>
+	            </div>
+	            <div class="space-y-3">
+	              <label class="pricing-choice-card is-selected text-brand-dark cursor-pointer">
+	                <input type="radio" name="coaching" value="A" checked class="sr-only">
+	                <span class="pricing-choice-radio" aria-hidden="true"></span>
+	                <div class="min-w-0 flex-1">
+	                  <div class="flex flex-wrap items-center gap-2">
+	                    <span class="pricing-choice-index bg-brand-orange text-white">1</span>
+	                    <span class="text-lg font-black">코칭 A</span>
+	                    <span class="text-lg font-black text-brand-dark">40만 원</span>
+	                  </div>
+	                  <p class="mt-2 text-sm text-gray-600 word-keep">온라인 1:1 화상 코칭 약 50분 + 최대 90일 카카오톡 질의응답</p>
+	                </div>
+	              </label>
+	              <label class="pricing-choice-card is-disabled text-gray-500 cursor-not-allowed">
+	                <input type="radio" name="coaching" value="B" disabled class="sr-only">
+	                <span class="pricing-choice-radio" aria-hidden="true"></span>
+	                <div class="min-w-0 flex-1">
+	                  <div class="flex flex-wrap items-center gap-2">
+	                    <span class="pricing-choice-index bg-gray-300 text-gray-600">2</span>
+	                    <span class="text-lg font-black text-gray-500">코칭 B</span>
+	                    <span class="text-lg font-black text-gray-500">96만 원</span>
+	                    <span class="pricing-choice-deadline">4·5월 마감</span>
+	                  </div>
+	                  <p class="mt-2 text-sm text-gray-500 word-keep">동행임장 1회가 포함된 옵션입니다. 현재는 신청을 받고 있지 않습니다.</p>
+	                </div>
+	              </label>
+	            </div>
+	            <div class="mt-4 flex flex-wrap gap-2">
+	              <span class="pricing-choice-note">💳 카드결제 가능</span>
+	              <span class="pricing-choice-note">🏦 계좌이체 가능</span>
+	              <span class="pricing-choice-note">🧾 현금영수증 가능</span>
+	            </div>
+	            <p class="text-brand-dark text-sm font-semibold mt-4 word-keep">결제·입금 확인 후 12시간 내 카카오톡으로 사전질문지를 안내드립니다.</p>
+	          </div>
+	        </div>
 
         <!-- 5. 개인정보 수집 동의 -->
         <div>
@@ -1170,10 +1214,11 @@
         </div>
 
         <!-- 제출 버튼 -->
-        <div class="pt-4">
-          <button type="button" id="submitBtn" class="w-full bg-brand-orange text-white py-5 text-xl font-display font-black rounded-2xl hover:scale-[1.01] active:scale-[0.99] transition-transform shadow-lg shadow-orange-200/50">제출하기 →</button>
-          <p id="form-status" class="text-center text-sm mt-4 hidden"></p>
-        </div>
+	        <div class="pt-4 text-center">
+	          <div class="submit-float-badge" aria-hidden="true">선착순 한정 · 카드/계좌 모두 가능</div>
+	          <button type="button" id="submitBtn" class="w-full bg-brand-orange text-white py-5 text-xl font-display font-black rounded-2xl hover:scale-[1.01] active:scale-[0.99] transition-transform shadow-lg shadow-orange-200/50">제출하기 →</button>
+	          <p id="form-status" class="text-center text-sm mt-4 hidden"></p>
+	        </div>
       </div>
     </div>
   </section>
@@ -1220,8 +1265,11 @@
         </div>
         <button id="closeModal" class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-xl font-black text-gray-500">×</button>
       </div>
-      <p class="mt-4 text-gray-500 leading-relaxed word-keep">결제·입금 확인 후 12시간 내 카카오톡으로 사전질문지 안내를 보내드립니다.</p>
-      <div class="mt-6 grid gap-3">
+	      <div class="mt-4 rounded-2xl bg-orange-50 border border-orange-100 px-4 py-4">
+	        <p class="text-brand-dark text-sm font-bold leading-relaxed word-keep">신청서를 제출하면 완료 화면에서 카드결제 또는 계좌이체 방법을 선택할 수 있습니다.</p>
+	        <p class="mt-2 text-sm text-gray-700 leading-relaxed word-keep">결제·입금 확인 후 12시간 내 카카오톡으로 사전질문지 안내를 보내드립니다.</p>
+	      </div>
+	      <div class="mt-6 grid gap-3">
         <a href="https://lst9485-alt.github.io/cdn-assets/homepage/coaching-payment-guide-v3.html" class="rounded-2xl border border-brand-orange/25 bg-brand-orange px-5 py-4 font-display font-black text-white text-center">카드결제 링크 바로가기</a>
         <div class="rounded-2xl border border-gray-200 bg-gray-50 p-5">
           <p class="font-display font-black text-brand-dark">계좌이체 안내</p>
@@ -1230,7 +1278,7 @@
         </div>
         <div class="rounded-2xl border border-gray-200 bg-gray-50 p-5">
           <p class="font-display font-black text-brand-dark">현금영수증 안내</p>
-          <p class="mt-2 text-sm text-gray-600 word-keep">현금영수증 발급번호는 제출하신 휴대폰 번호 기준으로 발행합니다.</p>
+	          <p class="mt-2 text-sm text-gray-700 word-keep">현금영수증 발급번호는 제출하신 휴대폰 번호 기준으로 발행합니다.</p>
           <p class="mt-2 text-sm text-gray-500 word-keep">다른 번호나 세금계산서가 필요하시면 결제 후 카카오톡으로 알려주세요.</p>
         </div>
       </div>
