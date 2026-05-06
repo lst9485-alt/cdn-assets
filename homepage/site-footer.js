@@ -1,4 +1,7 @@
 (function () {
+  var script = document.currentScript;
+  var base = script ? new URL('.', script.src).href : './';
+
   function ready(fn) {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', fn, { once: true });
@@ -19,14 +22,14 @@
       'background:#111111',
       'color:#8f8f8f',
       'font-family:Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif',
-      'padding:56px 24px 18px',
+      'padding:42px 24px 18px',
       'font-size:13px',
       'line-height:2'
     ].join(';');
 
     footer.innerHTML = [
       '<div style="max-width:1100px;margin:0 auto">',
-      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:48px 96px;align-items:start;margin-bottom:72px">',
+      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:36px 96px;align-items:start;margin-bottom:46px">',
       '    <div>',
       '      <strong style="display:block;font-size:18px;font-weight:800;color:#d4d4d4;letter-spacing:-0.02em">우리동네 재테크</strong>',
       '      <a href="https://www.youtube.com/@우리동네재테크" target="_blank" rel="noreferrer" style="display:inline-block;margin-top:8px;color:#7a7a7a;text-decoration:none;font-size:13px;font-weight:500">유튜브↖</a>',
@@ -34,10 +37,9 @@
       '    <div>',
       '      <strong style="display:block;font-size:18px;font-weight:800;color:#d4d4d4;letter-spacing:-0.02em">우리동네 클래스</strong>',
       '      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">',
-      '        <a href="lecture-allinone.html" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">내집마련 올인원</a>',
-      '        <a href="lecture-bookclub.html" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">독서모임</a>',
-      '        <a href="curriculum.html" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">커리큘럼</a>',
-      '        <a href="refund-policy.html" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">환불규정</a>',
+      '        <a href="' + new URL('coaching-all-v3.html', base).href + '" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">1:1 코칭</a>',
+      '        <a href="' + new URL('curriculum.html', base).href + '" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">커리큘럼</a>',
+      '        <a href="' + new URL('refund-policy.html', base).href + '" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">환불규정</a>',
       '        <a href="https://ourdongne.com/privacy" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">개인정보 처리방침</a>',
       '        <a href="https://ourdongne.com/terms" style="color:#9a9a9a;text-decoration:none;font-size:13px;font-weight:500">이용약관</a>',
       '      </div>',

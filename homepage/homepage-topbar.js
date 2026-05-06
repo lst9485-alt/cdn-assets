@@ -24,19 +24,20 @@
       'z-index:9000',
       'background:#fff',
       'border-bottom:1px solid #e5e7eb',
-      'font-family:Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif'
+      'font-family:Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif',
+      'box-shadow:0 1px 0 rgba(15,23,42,0.03)'
     ].join(';');
 
     bar.innerHTML = [
-      '<div style="max-width:1160px;margin:0 auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:24px">',
-      '  <a href="' + new URL('main-page.html', base).href + '" style="color:#0a0a0a;font-family:GmarketSans,Pretendard,sans-serif;font-size:26px;font-weight:900;letter-spacing:-.02em;text-decoration:none;white-space:nowrap">우리동네재테크</a>',
-      '  <nav style="display:flex;align-items:center;justify-content:center;gap:30px;flex:1;overflow-x:auto">',
-      '    <a href="' + new URL('coaching-all-v3.html', base).href + '" style="color:#0a0a0a;font-size:14px;font-weight:800;text-decoration:none;white-space:nowrap">1:1 코칭</a>',
-      '    <a href="' + new URL('lecture-allinone.html', base).href + '" style="color:#0a0a0a;font-size:14px;font-weight:800;text-decoration:none;white-space:nowrap">올인원 강의</a>',
-      '    <a href="' + new URL('curriculum.html', base).href + '" style="color:#0a0a0a;font-size:14px;font-weight:800;text-decoration:none;white-space:nowrap">커리큘럼</a>',
-      '    <a href="' + new URL('refund-policy.html', base).href + '" style="color:#0a0a0a;font-size:14px;font-weight:800;text-decoration:none;white-space:nowrap">환불 규정</a>',
+      '<div style="max-width:1160px;margin:0 auto;padding:20px 20px;display:flex;align-items:center;justify-content:space-between;gap:28px">',
+      '  <a href="' + new URL('main-page.html', base).href + '" style="color:#0a0a0a;font-family:GmarketSans,Pretendard,sans-serif;font-size:28px;font-weight:900;letter-spacing:-.02em;text-decoration:none;white-space:nowrap">우리동네재테크</a>',
+      '  <nav style="display:flex;align-items:center;justify-content:center;gap:34px;flex:1;overflow-x:auto">',
+      '    <a href="' + new URL('coaching-all-v3.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">1:1 코칭</a>',
+      '    <a href="' + new URL('lecture-allinone.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">올인원 강의</a>',
+      '    <a href="' + new URL('curriculum.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">커리큘럼</a>',
+      '    <a href="' + new URL('refund-policy.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">환불 규정</a>',
       '  </nav>',
-      '  <a href="#" style="color:#0a0a0a;font-size:14px;font-weight:800;text-decoration:none;white-space:nowrap">로그인</a>',
+      '  <a href="#" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">로그인</a>',
       '</div>'
     ].join('');
 
