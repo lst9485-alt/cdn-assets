@@ -1092,7 +1092,8 @@
     45: 'title',    46: 'title',    47: 'title',    48: 'title',
     49: 'title',    50: 'title',    51: 'title',    52: 'title',
     53: 'title',    54: 'title',    55: 'title',    56: 'title',
-    57: 'title',    58: 'title',    59: 'title',
+    57: 'title',    58: 'title',    59: 'title',    60: 'title',
+    61: 'title',
   };
 
   const PG_TO_CATEGORY = {
@@ -1112,6 +1113,7 @@
     48: '텍스트',      49: '아이콘+글',   50: '비교',        51: '아이콘+글',
     52: '비교',        53: '플로우',      54: '플로우',      55: '텍스트',
     56: '텍스트',      57: '텍스트',      58: '텍스트',      59: '텍스트',
+    60: '텍스트',      61: '텍스트',
   };
 
   function bucketOfPageGroup(pg) {
