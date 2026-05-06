@@ -112,13 +112,13 @@
           {
             id: 'main-page',
             title: '메인 페이지',
-            description: '원본과 v2~v8 시안 비교',
-            href: 'homepage/index.html',
+            description: '우리동네재테크 운영 메인',
+            href: 'homepage/main-page.html',
             badgeText: 'NEW',
             badgeTone: 'live',
             iconKey: 'web',
             sidebarType: 'root',
-            activeMatch: ['homepage/index.html', 'main-page.html', 'main-page-test2.html'],
+            activeMatch: ['main-page.html'],
             hubVisible: true
           },
           {
@@ -143,7 +143,7 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['curriculum.html'],
-            hubVisible: false
+            hubVisible: true
           },
           {
             id: 'landing-page',
@@ -167,12 +167,12 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['coaching-all-v2.html'],
-            hubVisible: true
+            hubVisible: false
           },
           {
             id: 'landing-page-v3',
-            title: '1:1 코칭 v3',
-            description: '2026-04-29 업데이트 · 상세페이지 최신안',
+            title: '1:1 코칭 페이지',
+            description: '내집마련 1:1 코칭 신청 페이지',
             href: 'homepage/coaching-all-v3.html',
             badgeText: 'V3',
             badgeTone: 'live',
@@ -191,7 +191,7 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['lecture-allinone.html'],
-            hubVisible: false
+            hubVisible: true
           },
           {
             id: 'lecture-bookclub',
@@ -215,7 +215,7 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['refund-policy.html'],
-            hubVisible: false
+            hubVisible: true
           }
         ]
       },
