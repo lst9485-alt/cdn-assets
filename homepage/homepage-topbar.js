@@ -33,7 +33,6 @@
       '  <a href="' + new URL('main-page.html', base).href + '" style="color:#0a0a0a;font-family:GmarketSans,Pretendard,sans-serif;font-size:28px;font-weight:900;letter-spacing:-.02em;text-decoration:none;white-space:nowrap">우리동네재테크</a>',
       '  <nav style="display:flex;align-items:center;justify-content:center;gap:34px;flex:1;overflow-x:auto">',
       '    <a href="' + new URL('coaching-all-v3.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">1:1 코칭</a>',
-      '    <a href="' + new URL('lecture-allinone.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">올인원 강의</a>',
       '    <a href="' + new URL('curriculum.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">커리큘럼</a>',
       '    <a href="' + new URL('refund-policy.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">환불 규정</a>',
       '  </nav>',
