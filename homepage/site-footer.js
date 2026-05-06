@@ -29,8 +29,8 @@
 
     footer.innerHTML = [
       '<div style="max-width:1100px;margin:0 auto">',
-      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:8px 96px;align-items:start;margin-bottom:0">',
-      '    <div>',
+      '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);gap:8px 80px;align-items:start;margin-bottom:0">',
+      '    <div style="margin-left:-6px">',
       '      <strong style="display:block;font-size:22px;font-weight:800;color:#f3f4f6;letter-spacing:-0.02em">우리동네 재테크</strong>',
       '      <a href="https://www.youtube.com/@우리동네재테크" target="_blank" rel="noreferrer" style="display:inline-block;margin-top:6px;color:#ededed;text-decoration:none;font-size:14px;font-weight:600">유튜브↖</a>',
       '      <div style="color:#888888;font-size:13px;line-height:2.15;margin-top:18px">',
