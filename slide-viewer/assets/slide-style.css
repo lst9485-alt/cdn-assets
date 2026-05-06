@@ -349,6 +349,8 @@
     text-align: center; white-space: nowrap;
   }
   .flow-box.accent { background: var(--color-accent); border: none; color: #fff; }
+  /* T15 다이어그램: 핵심(주황) 박스가 SVG line보다 위로 올라오게 */
+  .slide[data-page-group="15"] .flow-box.accent { position: relative; z-index: 3; }
   .flow-arrow { font-size: 44px; color: var(--color-text-faint); font-weight: 400; }
 
   /* ── 아이콘 아이템 ── */
