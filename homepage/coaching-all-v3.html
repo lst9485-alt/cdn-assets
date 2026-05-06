@@ -257,19 +257,12 @@
 	  .neighborhood-map svg { width:100%; height:auto; }
 	  .sticky-coaching-cta { position:fixed; left:50%; bottom:22px; z-index:90; width:min(860px, calc(100vw - 40px)); max-width:860px; border-radius:8px; background:#2d2d2d; box-shadow:0 14px 36px rgba(15,23,42,0.28); transform:translate3d(-50%, 24px, 0); opacity:0; pointer-events:none; transition:opacity .22s ease, transform .22s ease; }
 	  .sticky-coaching-cta.is-visible { opacity:1; pointer-events:auto; transform:translate3d(-50%, 0, 0); }
-	  .floating-cta-badge { position:absolute; top:-18px; right:24px; display:inline-flex; align-items:center; gap:6px; border-radius:999px; background:#111827; color:#fff; padding:7px 12px; font-size:11px; font-weight:900; letter-spacing:-0.01em; box-shadow:0 10px 24px rgba(15,23,42,.18); }
-	  .floating-cta-badge::after { content:''; position:absolute; left:50%; bottom:-6px; width:12px; height:12px; background:#111827; transform:translateX(-50%) rotate(45deg); border-radius:2px; }
-	  .submit-float-badge { display:inline-flex; align-items:center; gap:6px; margin-bottom:10px; border-radius:999px; background:#1f2937; color:#fff; padding:7px 12px; font-size:11px; font-weight:900; letter-spacing:-0.01em; box-shadow:0 10px 24px rgba(15,23,42,.14); }
-	  .pricing-choice-card { display:flex; align-items:flex-start; gap:14px; border:1px solid #f3c79b; border-radius:18px; background:#fff; padding:16px 18px; transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease; }
-	  .pricing-choice-card.is-selected { border-color:#ff6b00; box-shadow:0 12px 28px rgba(255,107,0,.12); }
-	  .pricing-choice-card.is-disabled { border-color:#e5e7eb; background:#f9fafb; opacity:.78; }
-	  .pricing-choice-radio { width:24px; height:24px; border-radius:999px; border:2px solid #d1d5db; display:grid; place-items:center; flex-shrink:0; margin-top:2px; background:#fff; }
-	  .pricing-choice-card.is-selected .pricing-choice-radio { border-color:#ff6b00; }
-	  .pricing-choice-card.is-selected .pricing-choice-radio::after { content:''; width:10px; height:10px; border-radius:999px; background:#ff6b00; }
-	  .pricing-choice-card.is-disabled .pricing-choice-radio { border-color:#d1d5db; background:#f3f4f6; }
+	  .pricing-choice-row { display:flex; align-items:flex-start; gap:12px; border:1px solid #f1d0ab; border-radius:16px; background:#fff; padding:14px 16px; }
+	  .pricing-choice-row.is-selected { border-color:#ff6b00; background:#fffaf5; }
+	  .pricing-choice-row.is-disabled { border-color:#e5e7eb; background:#f9fafb; }
 	  .pricing-choice-index { display:inline-flex; align-items:center; justify-content:center; min-width:22px; height:22px; border-radius:8px; padding:0 7px; font-size:12px; font-weight:900; }
-	  .pricing-choice-note { display:inline-flex; align-items:center; gap:6px; border-radius:999px; background:#fff7ed; color:#ea580c; padding:5px 10px; font-size:12px; font-weight:800; }
-	  .pricing-choice-deadline { display:inline-flex; align-items:center; gap:6px; border-radius:999px; background:#fee2e2; color:#dc2626; padding:5px 10px; font-size:12px; font-weight:900; }
+	  .pricing-choice-deadline { display:inline-flex; align-items:center; border-radius:999px; background:#fee2e2; color:#dc2626; padding:4px 9px; font-size:12px; font-weight:900; }
+	  .pricing-choice-note { display:inline-flex; align-items:center; border-radius:999px; background:#ffffff; color:#8a4b08; padding:5px 10px; font-size:12px; font-weight:800; border:1px solid #f3d8b8; }
 	  .cta-down-arrow { width:64px; height:74px; margin:30px auto 0; transform:translateY(8px); }
 	  .cta-down-arrow svg { display:block; width:100%; height:100%; overflow:visible; }
 	  .cta-down-arrow .arrow-main { fill:none; stroke:#dc2626; stroke-width:7; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 4px 8px rgba(220,38,38,.18)); }
@@ -294,11 +287,13 @@
 <body class="bg-white text-brand-dark font-sans">
 
 		  <div id="stickyCoachingCta" class="sticky-coaching-cta px-5 py-4 text-white md:px-8" aria-hidden="true">
-	    <span class="floating-cta-badge" aria-hidden="true">⏳ 접수 여유 있을 때 선점</span>
 	    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 	      <p class="text-base font-display font-black word-keep md:text-xl">내집마련 1:1 코칭, 지금 신청하세요!</p>
-	      <button type="button" class="scroll-to-form shrink-0 rounded-lg bg-[#ff4b4b] px-7 py-3 text-sm font-black text-white shadow-lg transition hover:bg-[#e63838]">대기신청</button>
-    </div>
+	      <div class="flex flex-col items-end gap-2">
+	        <span class="inline-flex rounded-md bg-[#171717] px-3 py-1 text-[11px] font-black text-white shadow-md">선착순 한정</span>
+	        <button type="button" class="scroll-to-form shrink-0 rounded-lg bg-[#ff4b4b] px-7 py-3 text-sm font-black text-white shadow-lg transition hover:bg-[#e63838]">대기신청</button>
+	      </div>
+	    </div>
   </div>
 
   <nav class="dashboard-section-nav" aria-label="대시보드 섹션 이동">
@@ -1166,9 +1161,8 @@
 	              <p class="text-brand-dark text-sm font-bold word-keep">신청서를 제출하면 완료 화면에서 <span class="text-brand-orange">카드결제 또는 계좌이체</span> 방법을 바로 선택할 수 있습니다.</p>
 	            </div>
 	            <div class="space-y-3">
-	              <label class="pricing-choice-card is-selected text-brand-dark cursor-pointer">
-	                <input type="radio" name="coaching" value="A" checked class="sr-only">
-	                <span class="pricing-choice-radio" aria-hidden="true"></span>
+	              <label class="pricing-choice-row is-selected text-brand-dark cursor-pointer">
+	                <input type="radio" name="coaching" value="A" checked class="mt-1 h-5 w-5 accent-orange-500">
 	                <div class="min-w-0 flex-1">
 	                  <div class="flex flex-wrap items-center gap-2">
 	                    <span class="pricing-choice-index bg-brand-orange text-white">1</span>
@@ -1178,9 +1172,9 @@
 	                  <p class="mt-2 text-sm text-gray-600 word-keep">온라인 1:1 화상 코칭 약 50분 + 최대 90일 카카오톡 질의응답</p>
 	                </div>
 	              </label>
-	              <label class="pricing-choice-card is-disabled text-gray-500 cursor-not-allowed">
+	              <label class="pricing-choice-row is-disabled text-gray-500 cursor-not-allowed">
 	                <input type="radio" name="coaching" value="B" disabled class="sr-only">
-	                <span class="pricing-choice-radio" aria-hidden="true"></span>
+	                <span class="mt-1 h-5 w-5 rounded-full border border-gray-300 bg-gray-100"></span>
 	                <div class="min-w-0 flex-1">
 	                  <div class="flex flex-wrap items-center gap-2">
 	                    <span class="pricing-choice-index bg-gray-300 text-gray-600">2</span>
@@ -1215,7 +1209,7 @@
 
         <!-- 제출 버튼 -->
 	        <div class="pt-4 text-center">
-	          <div class="submit-float-badge" aria-hidden="true">선착순 한정 · 카드/계좌 모두 가능</div>
+	          <p class="mb-3 text-sm font-semibold text-gray-500 word-keep">선착순 한정 · 카드/계좌이체 모두 가능합니다</p>
 	          <button type="button" id="submitBtn" class="w-full bg-brand-orange text-white py-5 text-xl font-display font-black rounded-2xl hover:scale-[1.01] active:scale-[0.99] transition-transform shadow-lg shadow-orange-200/50">제출하기 →</button>
 	          <p id="form-status" class="text-center text-sm mt-4 hidden"></p>
 	        </div>
