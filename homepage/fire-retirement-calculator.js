@@ -242,15 +242,6 @@
     var labels = result.rows.map(function (row) { return 'Y' + row.year; });
     var datasets = [
       {
-        label: '현재자산 ' + formatMoney(result.config.currentAssets),
-        data: result.rows.map(function () { return Math.round(result.config.currentAssets); }),
-        borderColor: '#2f80ed',
-        backgroundColor: '#2f80ed',
-        borderWidth: 2,
-        pointRadius: 2,
-        tension: .18
-      },
-      {
         label: '저축누적 ' + formatMoney(result.config.monthlySavings) + '/월',
         data: result.rows.map(function (row) {
           return Math.round(result.config.currentAssets + result.annualSavings * row.year);
@@ -259,8 +250,9 @@
         backgroundColor: 'rgba(91,45,240,.08)',
         borderWidth: 2,
         pointRadius: 2,
-        tension: .18,
-        fill: true
+        pointHoverRadius: 4,
+        tension: .2,
+        fill: false
       },
       {
         label: '투자성장 ' + result.config.annualReturn.toFixed(1).replace(/\.0$/, '') + '%/년',
@@ -269,8 +261,9 @@
         backgroundColor: 'rgba(90,113,24,.08)',
         borderWidth: 2,
         pointRadius: 2,
-        tension: .18,
-        fill: true
+        pointHoverRadius: 4,
+        tension: .2,
+        fill: false
       },
       {
         label: '목표',
@@ -312,7 +305,7 @@
               filter: legendFilter,
               usePointStyle: true,
               boxWidth: 8,
-              padding: 28,
+              padding: 22,
               font: { weight: 700 }
             }
           },
@@ -341,18 +334,11 @@
 
   function getCompactRows(result) {
     if (tableExpanded) return result.rows;
-    var keep = new Set([0]);
+    var keep = new Set();
     var lastIndex = result.rows.length - 1;
-    for (var i = 1; i <= Math.min(5, lastIndex); i += 1) keep.add(i);
-    [findRetirementIndex(result), result.rows.findIndex(function (row) {
-      return row.coveredRatio != null && row.coveredRatio >= 1;
-    }), lastIndex].forEach(function (index) {
-      if (index < 0) return;
-      for (var offset = -2; offset <= 2; offset += 1) {
-        var candidate = index + offset;
-        if (candidate >= 0 && candidate <= lastIndex) keep.add(candidate);
-      }
-    });
+    for (var i = 0; i <= lastIndex; i += 1) {
+      if (i === 0 || i === 1 || i % 5 === 0 || i === lastIndex) keep.add(i);
+    }
     return result.rows.filter(function (_, index) { return keep.has(index); });
   }
 
@@ -360,7 +346,7 @@
     var rows = getCompactRows(result);
     var toggle = qs('toggleRows');
     if (toggle) {
-      toggle.textContent = tableExpanded ? '핵심 연도만 보기' : '전체 연도 보기';
+      toggle.textContent = tableExpanded ? '5년 단위 보기' : '전체 연도 보기';
       toggle.hidden = result.rows.length <= rows.length;
     }
     qs('projectionTable').innerHTML = rows.map(function (row) {
