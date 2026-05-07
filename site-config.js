@@ -301,6 +301,65 @@
         ]
       },
       {
+        id: 'consult',
+        hubTitle: '상담',
+        collapsible: true,
+        defaultOpen: true,
+        nav: {
+          type: 'single',
+          label: '상담',
+          href: 'consult/',
+          activeMatch: ['/consult']
+        },
+        sidebar: {
+          title: '상담'
+        },
+        items: [
+          {
+            id: 'consult-root',
+            title: '회원 맞춤 페이지',
+            description: 'URL 파라미터로 회원별 자료',
+            href: 'consult/',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['/consult'],
+            hubVisible: true
+          },
+          {
+            id: 'consult-prep',
+            title: '상담 준비 자료',
+            description: '재무 현황 시각화 (Chart.js)',
+            href: 'consult/prep.html',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['prep.html'],
+            hubVisible: true
+          }
+        ]
+      },
+      {
+        id: 'templates',
+        hubTitle: '템플릿',
+        alwaysVisible: true,
+        collapsible: true,
+        defaultOpen: true,
+        nav: {
+          type: 'single',
+          label: '템플릿',
+          href: 'templates/',
+          activeMatch: ['/templates'],
+          hidden: true
+        },
+        sidebar: {
+          title: '템플릿'
+        },
+        items: []
+      },
+      {
         id: 'process',
         hubTitle: '프로세스 도식화',
         collapsible: true,
@@ -412,77 +471,6 @@
         ]
       },
       {
-        id: 'consult',
-        hubTitle: '상담',
-        collapsible: true,
-        defaultOpen: true,
-        nav: {
-          type: 'single',
-          label: '상담',
-          href: 'consult/',
-          activeMatch: ['/consult']
-        },
-        sidebar: {
-          title: '상담'
-        },
-        items: [
-          {
-            id: 'consult-root',
-            title: '회원 맞춤 페이지',
-            description: 'URL 파라미터로 회원별 자료',
-            href: 'consult/',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['/consult'],
-            hubVisible: true
-          },
-          {
-            id: 'consult-prep',
-            title: '상담 준비 자료',
-            description: '재무 현황 시각화 (Chart.js)',
-            href: 'consult/prep.html',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['prep.html'],
-            hubVisible: true
-          },
-          {
-            id: 'slide-viewer',
-            title: '슬라이드 템플릿',
-            description: '기본 36종 + 베리언츠 95장',
-            href: './slide-viewer/',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['slide-viewer'],
-            hubVisible: true
-          }
-        ]
-      },
-      {
-        id: 'templates',
-        hubTitle: '템플릿',
-        alwaysVisible: true,
-        collapsible: true,
-        defaultOpen: true,
-        nav: {
-          type: 'single',
-          label: '템플릿',
-          href: 'templates/',
-          activeMatch: ['/templates'],
-          hidden: true
-        },
-        sidebar: {
-          title: '템플릿'
-        },
-        items: []
-      },
-      {
         id: 'tools',
         hubTitle: '도구 · 기타',
         collapsible: true,
@@ -508,6 +496,18 @@
             navVisible: true,
             sidebarType: 'root',
             activeMatch: ['yt-bulk-editor'],
+            hubVisible: true
+          },
+          {
+            id: 'slide-viewer',
+            title: '슬라이드 템플릿',
+            description: '기본 36종 + 베리언츠 95장',
+            href: './slide-viewer/',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['slide-viewer'],
             hubVisible: true
           }
         ]
