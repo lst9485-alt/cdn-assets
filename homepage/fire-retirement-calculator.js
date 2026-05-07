@@ -11,7 +11,7 @@
   var DEFAULTS = {
     currentAge: 35,
     currentAssets: 0,
-    annualIncome: 5000,
+    monthlySavings: 200,
     annualExpenses: 2600,
     annualReturn: 5,
     withdrawalRate: 4
@@ -19,9 +19,9 @@
 
   var chart = null;
   var toastTimer = null;
-  var chartMode = 'assets';
   var tableExpanded = false;
   var lastResult = null;
+  var projectionView = 'chart';
   var goalLabelPlugin = {
     id: 'goalLabel',
     afterDatasetsDraw: function (chart, args, options) {
@@ -91,7 +91,10 @@
     var cfg = Object.assign({}, DEFAULTS, raw || {});
     cfg.currentAge = Math.max(10, Math.min(99, Math.round(toNumber(cfg.currentAge, DEFAULTS.currentAge))));
     cfg.currentAssets = Math.max(0, toNumber(cfg.currentAssets, DEFAULTS.currentAssets));
-    cfg.annualIncome = Math.max(0, toNumber(cfg.annualIncome, DEFAULTS.annualIncome));
+    cfg.monthlySavings = Math.max(0, toNumber(
+      cfg.monthlySavings,
+      raw && raw.annualIncome != null ? Math.max(0, toNumber(raw.annualIncome, 0) - toNumber(raw.annualExpenses, DEFAULTS.annualExpenses)) / 12 : DEFAULTS.monthlySavings
+    ));
     cfg.annualExpenses = Math.max(0, toNumber(cfg.annualExpenses, DEFAULTS.annualExpenses));
     cfg.annualReturn = Math.max(-30, Math.min(50, toNumber(cfg.annualReturn, DEFAULTS.annualReturn)));
     cfg.withdrawalRate = Math.max(0.1, Math.min(20, toNumber(cfg.withdrawalRate, DEFAULTS.withdrawalRate)));
@@ -100,8 +103,7 @@
 
   function calculateFire(rawConfig) {
     var cfg = normalizeConfig(rawConfig);
-    var savings = Math.max(0, cfg.annualIncome - cfg.annualExpenses);
-    var savingsRate = cfg.annualIncome > 0 ? savings / cfg.annualIncome : 0;
+    var savings = cfg.monthlySavings * 12;
     var returnRate = cfg.annualReturn / 100;
     var targetNetworth = cfg.annualExpenses / (cfg.withdrawalRate / 100);
     var roiTargetNetworth = returnRate > 0 ? cfg.annualExpenses / returnRate : Infinity;
@@ -129,7 +131,7 @@
       rows.push({
         year: year,
         age: cfg.currentAge + year,
-        income: independent ? null : cfg.annualIncome,
+        income: independent ? null : savings,
         expenses: independent ? null : cfg.annualExpenses,
         roi: roi,
         coveredRatio: coveredRatio,
@@ -145,7 +147,7 @@
       config: cfg,
       rows: rows,
       annualSavings: savings,
-      savingsRate: savingsRate,
+      savingsRate: 0,
       targetNetworth: targetNetworth,
       roiTargetNetworth: roiTargetNetworth,
       retirementYear: retirementYear,
@@ -158,7 +160,7 @@
     return normalizeConfig({
       currentAge: qs('currentAge').value,
       currentAssets: qs('currentAssets').value,
-      annualIncome: qs('annualIncome').value,
+      monthlySavings: qs('monthlySavings').value,
       annualExpenses: qs('annualExpenses').value,
       annualReturn: qs('annualReturn').value,
       withdrawalRate: qs('withdrawalRate').value
@@ -169,7 +171,7 @@
     cfg = normalizeConfig(cfg);
     qs('currentAge').value = cfg.currentAge;
     qs('currentAssets').value = formatInput(cfg.currentAssets);
-    qs('annualIncome').value = formatInput(cfg.annualIncome);
+    qs('monthlySavings').value = formatInput(cfg.monthlySavings);
     qs('annualExpenses').value = formatInput(cfg.annualExpenses);
     qs('annualReturn').value = cfg.annualReturn;
     qs('withdrawalRate').value = cfg.withdrawalRate;
@@ -189,11 +191,11 @@
     setText('retirementAge', ageText);
     setText('retirementSub', result.retirementYear == null ? '현재 조건으로는 오래 걸립니다' : '지금부터 ' + result.retirementYear + '년 뒤');
     setText('annualSavings', formatMoney(result.annualSavings));
-    setText('savingRate', '저축률 ' + formatPercent(result.savingsRate, 1));
+    setText('savingRate', '월 저축액 ' + formatMoney(result.config.monthlySavings));
     setText('roiCoverAge', findRoiCoverText(result));
     setText('withdrawalPreview', result.config.withdrawalRate + '%');
     setText('returnPreview', result.config.annualReturn + '%');
-    setText('monthlySavingsPreview', '월 ' + formatMoney(result.annualSavings / 12));
+    setText('returnInlinePreview', result.config.annualReturn + '%');
 
     var insight = qs('insightCard');
     if (result.retirementYear == null) {
@@ -216,143 +218,75 @@
     });
   }
 
-  function getChartMeta(mode) {
-    if (mode === 'cover') return { kicker: '지출 커버율', title: '투자수익이 지출을 얼마나 덮는지' };
-    if (mode === 'flow') return { kicker: '연간흐름', title: '저축액과 투자수익 비교' };
+  function getChartMeta() {
     return { kicker: '여정', title: '나의 FIRE 예상 경로' };
   }
 
-  function setChartMode(mode) {
-    chartMode = mode || 'assets';
-    document.querySelectorAll('[data-chart-mode]').forEach(function (button) {
-      var active = button.dataset.chartMode === chartMode;
+  function setProjectionView(view) {
+    projectionView = view || 'chart';
+    var card = qs('projectionCard');
+    if (card) card.classList.toggle('is-table', projectionView === 'table');
+    document.querySelectorAll('[data-projection-view]').forEach(function (button) {
+      var active = button.dataset.projectionView === projectionView;
       button.classList.toggle('active', active);
       button.setAttribute('aria-selected', active ? 'true' : 'false');
     });
-    if (lastResult) renderChart(lastResult);
   }
 
   function renderChart(result) {
     if (typeof Chart === 'undefined') return;
-    var meta = getChartMeta(chartMode);
+    var meta = getChartMeta();
     setText('chartKicker', meta.kicker);
     setText('chartTitle', meta.title);
 
     var labels = result.rows.map(function (row) { return 'Y' + row.year; });
-    var datasets;
-    var yTick;
-    var yMax;
-    var tooltipLabel;
-    var legendFilter;
-
-    if (chartMode === 'cover') {
-      datasets = [
-        {
-          label: '투자수익 지출 커버',
-          data: result.rows.map(function (row) {
-            return row.coveredRatio == null ? null : Math.round(row.coveredRatio * 100);
-          }),
-          borderColor: '#0f9f6e',
-          backgroundColor: 'rgba(15,159,110,.12)',
-          borderWidth: 3,
-          pointRadius: 0,
-          tension: .24,
-          fill: true
-        },
-        {
-          label: '경제적 독립 기준',
-          data: result.rows.map(function () { return 100; }),
-          borderColor: '#0a0a0a',
-          borderDash: [6, 6],
-          borderWidth: 2,
-          pointRadius: 0
-        }
-      ];
-      yTick = function (value) { return value + '%'; };
-      yMax = 130;
-      tooltipLabel = function (ctx) {
-        return ctx.dataset.label + ': ' + Math.round(ctx.parsed.y) + '%';
-      };
-    } else if (chartMode === 'flow') {
-      datasets = [
-        {
-          type: 'bar',
-          label: '연저축액',
-          data: result.rows.map(function (row) { return row.income == null ? null : Math.round(result.annualSavings); }),
-          backgroundColor: 'rgba(255,107,0,.42)',
-          borderRadius: 3
-        },
-        {
-          type: 'bar',
-          label: '투자수익',
-          data: result.rows.map(function (row) { return row.roi == null ? null : Math.round(row.roi); }),
-          backgroundColor: 'rgba(0,85,255,.32)',
-          borderRadius: 3
-        },
-        {
-          type: 'line',
-          label: '순자산 증가',
-          data: result.rows.map(function (row) { return row.change == null ? null : Math.round(row.change); }),
-          borderColor: '#0a0a0a',
-          borderWidth: 2,
-          pointRadius: 0,
-          tension: .24
-        }
-      ];
-      yTick = function (value) { return formatMoney(value).replace('원', ''); };
-      tooltipLabel = function (ctx) {
-        return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y);
-      };
-    } else {
-      var monthlySavings = result.annualSavings / 12;
-      datasets = [
-        {
-          label: '현재자산 ' + formatMoney(result.config.currentAssets),
-          data: result.rows.map(function () { return Math.round(result.config.currentAssets); }),
-          borderColor: '#2f80ed',
-          backgroundColor: '#2f80ed',
-          borderWidth: 2,
-          pointRadius: 2,
-          tension: .18
-        },
-        {
-          label: '저축누적 ' + formatMoney(monthlySavings) + '/월',
-          data: result.rows.map(function (row) {
-            return Math.round(result.config.currentAssets + result.annualSavings * row.year);
-          }),
-          borderColor: '#5b2df0',
-          backgroundColor: 'rgba(91,45,240,.08)',
-          borderWidth: 2,
-          pointRadius: 2,
-          tension: .18,
-          fill: true
-        },
-        {
-          label: '투자성장 ' + result.config.annualReturn.toFixed(1).replace(/\.0$/, '') + '%/년',
-          data: result.rows.map(function (row) { return Math.round(row.networth); }),
-          borderColor: '#5a7118',
-          backgroundColor: 'rgba(90,113,24,.08)',
-          borderWidth: 2,
-          pointRadius: 2,
-          tension: .18,
-          fill: true
-        },
-        {
-          label: '목표',
-          data: result.rows.map(function () { return Math.round(result.targetNetworth); }),
-          borderColor: '#197a54',
-          borderDash: [3, 3],
-          borderWidth: 2,
-          pointRadius: 0,
-          fill: false
-        }
-      ];
-      yTick = function (value) { return formatMoney(value).replace('원', ''); };
-      tooltipLabel = function (ctx) {
-        return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y);
-      };
-      legendFilter = function (item) { return item.text !== '목표'; };
-    }
+    var datasets = [
+      {
+        label: '현재자산 ' + formatMoney(result.config.currentAssets),
+        data: result.rows.map(function () { return Math.round(result.config.currentAssets); }),
+        borderColor: '#2f80ed',
+        backgroundColor: '#2f80ed',
+        borderWidth: 2,
+        pointRadius: 2,
+        tension: .18
+      },
+      {
+        label: '저축누적 ' + formatMoney(result.config.monthlySavings) + '/월',
+        data: result.rows.map(function (row) {
+          return Math.round(result.config.currentAssets + result.annualSavings * row.year);
+        }),
+        borderColor: '#5b2df0',
+        backgroundColor: 'rgba(91,45,240,.08)',
+        borderWidth: 2,
+        pointRadius: 2,
+        tension: .18,
+        fill: true
+      },
+      {
+        label: '투자성장 ' + result.config.annualReturn.toFixed(1).replace(/\.0$/, '') + '%/년',
+        data: result.rows.map(function (row) { return Math.round(row.networth); }),
+        borderColor: '#5a7118',
+        backgroundColor: 'rgba(90,113,24,.08)',
+        borderWidth: 2,
+        pointRadius: 2,
+        tension: .18,
+        fill: true
+      },
+      {
+        label: '목표',
+        data: result.rows.map(function () { return Math.round(result.targetNetworth); }),
+        borderColor: '#197a54',
+        borderDash: [3, 3],
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: false
+      }
+    ];
+    var yTick = function (value) { return formatMoney(value).replace('원', ''); };
+    var tooltipLabel = function (ctx) {
+      return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y);
+    };
+    var legendFilter = function (item) { return item.text !== '목표'; };
 
     if (chart) chart.destroy();
     chart = new Chart(qs('projectionChart'), {
@@ -361,7 +295,7 @@
         labels: labels,
         datasets: datasets
       },
-      plugins: chartMode === 'assets' ? [goalLabelPlugin] : [],
+      plugins: [goalLabelPlugin],
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -390,14 +324,13 @@
         },
         scales: {
           x: {
-            title: { display: chartMode === 'assets', text: '오늘부터 지난 연수', color: '#605b83', font: { weight: 700 } },
+            title: { display: true, text: '오늘부터 지난 연수', color: '#605b83', font: { weight: 700 } },
             grid: { display: false },
             ticks: { maxRotation: 0, maxTicksLimit: 9, color: '#605b83' }
           },
           y: {
             position: 'right',
             beginAtZero: true,
-            suggestedMax: yMax,
             grid: { color: 'rgba(23,19,57,.08)' },
             ticks: { callback: yTick, color: '#605b83' }
           }
@@ -531,12 +464,12 @@
       tableExpanded = !tableExpanded;
       if (lastResult) renderTable(lastResult);
     });
-    document.querySelectorAll('[data-chart-mode]').forEach(function (button) {
+    document.querySelectorAll('[data-projection-view]').forEach(function (button) {
       button.addEventListener('click', function () {
-        setChartMode(button.dataset.chartMode);
+        setProjectionView(button.dataset.projectionView);
       });
     });
-    setChartMode('assets');
+    setProjectionView('chart');
     update();
   }
 

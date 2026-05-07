@@ -9,7 +9,7 @@
   --green: #197a54;
   --olive: #5a7118;
   --blue: #2f80ed;
-  --shadow: 0 28px 70px rgba(23, 19, 57, .11);
+  --shadow: 0 20px 48px rgba(23, 19, 57, .075);
 }
 
 * {
@@ -43,7 +43,7 @@ a {
 }
 
 .fire-page {
-  max-width: 1120px;
+  max-width: 1040px;
   margin: 0 auto;
   padding: 36px 20px 96px;
 }
@@ -52,7 +52,7 @@ a {
   display: grid;
   justify-items: center;
   gap: 14px;
-  padding: 32px 0 78px;
+  padding: 18px 0 56px;
   text-align: center;
 }
 
@@ -64,10 +64,11 @@ a {
 }
 
 .hero h1 {
-  margin: 54px 0 0;
-  font-family: "GmarketSans", Pretendard, sans-serif;
-  font-size: clamp(48px, 7vw, 78px);
-  line-height: 1;
+  margin: 34px 0 0;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(46px, 6vw, 66px);
+  font-weight: 520;
+  line-height: 1.05;
   letter-spacing: 0;
 }
 
@@ -107,7 +108,7 @@ a {
 .input-card {
   border: 1px solid rgba(91, 45, 240, .08);
   border-radius: 8px;
-  padding: 38px 26px;
+  padding: 32px 24px;
   background: var(--card);
   box-shadow: var(--shadow);
 }
@@ -126,8 +127,8 @@ a {
 }
 
 .input-card h2 {
-  margin: 8px 0 28px;
-  font-size: 24px;
+  margin: 8px 0 24px;
+  font-size: 23px;
   line-height: 1.2;
   text-align: center;
 }
@@ -137,7 +138,7 @@ a {
   grid-template-columns: 112px minmax(0, 1fr);
   align-items: center;
   gap: 16px;
-  margin-top: 16px;
+  margin-top: 14px;
 }
 
 .ly-field > span {
@@ -148,7 +149,7 @@ a {
 
 .value-box {
   position: relative;
-  min-height: 44px;
+  min-height: 42px;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: #fff;
@@ -156,7 +157,7 @@ a {
 
 .value-box input {
   width: 100%;
-  height: 44px;
+  height: 42px;
   border: 0;
   outline: 0;
   padding: 0 56px 0 14px;
@@ -223,8 +224,8 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  margin-top: 34px;
-  padding-top: 24px;
+  margin-top: 22px;
+  padding-top: 20px;
   border-top: 1px solid var(--line);
 }
 
@@ -241,7 +242,56 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-top: 24px;
+  margin-top: 20px;
+}
+
+.strategy-list {
+  display: grid;
+  gap: 22px;
+  margin-top: 12px;
+}
+
+.strategy-row {
+  display: grid;
+  grid-template-columns: 98px 72px minmax(0, 1fr) 42px;
+  align-items: center;
+  gap: 12px;
+}
+
+.strategy-row strong,
+.strategy-row span,
+.strategy-row b {
+  font-size: 13px;
+}
+
+.strategy-row strong {
+  font-weight: 850;
+}
+
+.strategy-row span {
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.strategy-row b {
+  text-align: right;
+}
+
+.strategy-track {
+  height: 3px;
+  border-radius: 999px;
+  background: #e5e2f5;
+}
+
+.strategy-track i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--purple);
+}
+
+.return-field {
+  margin-top: 16px;
 }
 
 .primary-button,
@@ -270,9 +320,9 @@ a {
 .result-strip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 34px 0 0;
+  margin: 28px 0 0;
   border-radius: 8px 8px 0 0;
-  padding: 34px 52px 26px;
+  padding: 24px 48px 18px;
   background: #f1f0ff;
 }
 
@@ -291,7 +341,7 @@ a {
   display: block;
   margin-top: 8px;
   font-family: "GmarketSans", Pretendard, sans-serif;
-  font-size: clamp(30px, 4vw, 48px);
+  font-size: clamp(28px, 3.4vw, 40px);
   line-height: 1;
   letter-spacing: 0;
 }
@@ -303,14 +353,14 @@ a {
 }
 
 .projection-shell {
-  padding: 22px 54px 48px;
+  padding: 18px 48px 42px;
   border-radius: 0 0 8px 8px;
   background: #f1f0ff;
 }
 
 .projection-card {
   border-radius: 8px;
-  padding: 42px 44px 34px;
+  padding: 34px 38px 28px;
   background: #fff;
   box-shadow: var(--shadow);
 }
@@ -325,8 +375,8 @@ a {
 }
 
 .projection-card h2 {
-  margin: 10px 0 26px;
-  font-size: 25px;
+  margin: 8px 0 20px;
+  font-size: 24px;
   line-height: 1.2;
   text-align: center;
 }
@@ -335,7 +385,7 @@ a {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .chart-tabs button {
@@ -356,7 +406,7 @@ a {
 
 .chart-wrap {
   position: relative;
-  height: 430px;
+  height: 365px;
 }
 
 .chart-foot {
@@ -384,7 +434,16 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin: 32px 0 10px;
+  margin: 0 0 10px;
+}
+
+.projection-card:not(.is-table) .table-panel {
+  display: none;
+}
+
+.projection-card.is-table .chart-wrap,
+.projection-card.is-table .chart-foot {
+  display: none;
 }
 
 .table-title span {
@@ -604,7 +663,7 @@ tr.is-covered td {
   }
 
   .input-card {
-    padding: 30px 18px;
+    padding: 28px 18px;
   }
 
   .ly-field,
@@ -615,6 +674,10 @@ tr.is-covered td {
 
   .slider-field strong {
     margin-top: -4px;
+  }
+
+  .button-row {
+    grid-template-columns: 1fr;
   }
 
   .result-strip {
@@ -628,11 +691,11 @@ tr.is-covered td {
   }
 
   .projection-card {
-    padding: 34px 18px 24px;
+    padding: 30px 18px 22px;
   }
 
   .chart-wrap {
-    height: 330px;
+    height: 300px;
   }
 
   .chart-foot,

@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260507d">
+  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260507e">
 </head>
 <body>
   <main class="fire-page">
@@ -44,9 +44,9 @@
             </label>
 
             <label class="ly-field">
-              <span>연소득</span>
+              <span>월 저축액</span>
               <div class="value-box">
-                <input id="annualIncome" type="text" inputmode="decimal" value="5000">
+                <input id="monthlySavings" type="text" inputmode="decimal" value="200">
                 <em>만원</em>
               </div>
             </label>
@@ -87,9 +87,35 @@
           <span class="card-kicker">계획</span>
           <h2>나의 투자 전략</h2>
 
-          <label class="ly-field slider-field">
-            <span>연 투자수익률</span>
-            <strong id="returnPreview">5%</strong>
+          <div class="strategy-list" aria-label="투자 구성 예시">
+            <div class="strategy-row">
+              <strong>성장자산</strong>
+              <span>비중 70%</span>
+              <div class="strategy-track"><i style="width:70%"></i></div>
+              <b>6%</b>
+            </div>
+            <div class="strategy-row">
+              <strong>안정자산</strong>
+              <span>비중 20%</span>
+              <div class="strategy-track"><i style="width:20%"></i></div>
+              <b>4%</b>
+            </div>
+            <div class="strategy-row">
+              <strong>현금</strong>
+              <span>비중 10%</span>
+              <div class="strategy-track"><i style="width:10%"></i></div>
+              <b>0%</b>
+            </div>
+          </div>
+
+          <div class="plan-note">
+            <strong>전체 예상 수익률</strong>
+            <span id="returnPreview">5%</span>
+          </div>
+
+          <label class="ly-field slider-field return-field">
+            <span>직접 조정</span>
+            <strong id="returnInlinePreview">5%</strong>
             <input id="annualReturnRange" type="range" min="-5" max="15" step="0.1" value="5">
             <div class="value-box compact">
               <input id="annualReturn" type="number" step="0.1" value="5">
@@ -97,12 +123,7 @@
             </div>
           </label>
 
-          <div class="plan-note">
-            <strong>월 저축 예상액</strong>
-            <span id="monthlySavingsPreview">월 0만원</span>
-          </div>
-
-          <p class="fine-print">연저축액은 연소득에서 연지출을 뺀 금액으로 계산합니다.</p>
+          <p class="fine-print">위 자산 비중은 이해를 돕기 위한 예시입니다. 실제 계산은 직접 조정한 전체 예상 수익률을 사용합니다.</p>
 
           <div class="button-row">
             <button type="button" class="primary-button" id="copyShare">공유 링크</button>
@@ -123,21 +144,20 @@
           <p id="retirementSub">계산 중</p>
         </article>
         <article>
-          <span>연 저축액</span>
+          <span>연간 저축액</span>
           <strong id="annualSavings">0원</strong>
-          <p id="savingRate">저축률 -</p>
+          <p id="savingRate">월 저축액 -</p>
         </article>
       </section>
 
       <section class="projection-shell">
-        <div class="projection-card">
+        <div class="projection-card" id="projectionCard">
           <span id="chartKicker">여정</span>
           <h2 id="chartTitle">나의 FIRE 예상 경로</h2>
 
-          <div class="chart-tabs" role="tablist" aria-label="차트 보기 선택">
-            <button type="button" class="active" data-chart-mode="assets">자산</button>
-            <button type="button" data-chart-mode="cover">커버율</button>
-            <button type="button" data-chart-mode="flow">연간흐름</button>
+          <div class="chart-tabs" role="tablist" aria-label="결과 보기 선택">
+            <button type="button" class="active" data-projection-view="chart">차트</button>
+            <button type="button" data-projection-view="table">표</button>
           </div>
 
           <div class="chart-wrap" id="chartView">
@@ -149,29 +169,31 @@
             <button type="button" class="secondary-button share-bottom" id="copyShareTop">공유</button>
           </div>
 
-          <div class="table-title">
-            <div>
-              <span>연도별 상세표</span>
-              <strong>투자수익이 지출을 100% 덮는 시점이 경제적 독립 기준입니다. 단위: 만원</strong>
+          <div class="table-panel" id="tablePanel">
+            <div class="table-title">
+              <div>
+                <span>연도별 상세표</span>
+                <strong>투자수익이 지출을 100% 덮는 시점이 경제적 독립 기준입니다. 단위: 만원</strong>
+              </div>
+              <button class="secondary-button table-toggle" type="button" id="toggleRows">전체 연도 보기</button>
             </div>
-            <button class="secondary-button table-toggle" type="button" id="toggleRows">전체 연도 보기</button>
-          </div>
 
-          <div class="table-wrap" id="tableView">
-            <table>
-              <thead>
-                <tr>
-                  <th>연차</th>
-                  <th>연소득</th>
-                  <th>연지출</th>
-                  <th>투자수익</th>
-                  <th>투자수익 지출 커버</th>
-                  <th>순자산 증가</th>
-                  <th>순자산</th>
-                </tr>
-              </thead>
-              <tbody id="projectionTable"></tbody>
-            </table>
+            <div class="table-wrap" id="tableView">
+              <table>
+                <thead>
+                  <tr>
+                    <th>연차</th>
+                    <th>연저축</th>
+                    <th>연지출</th>
+                    <th>투자수익</th>
+                    <th>투자수익 지출 커버</th>
+                    <th>순자산 증가</th>
+                    <th>순자산</th>
+                  </tr>
+                </thead>
+                <tbody id="projectionTable"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -179,7 +201,7 @@
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="fire-retirement-calculator.js?v=20260507d"></script>
+  <script src="fire-retirement-calculator.js?v=20260507e"></script>
   <script src="homepage-shell.js?v=20260506d"></script>
 </body>
 </html>
