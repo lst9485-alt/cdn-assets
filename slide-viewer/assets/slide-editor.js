@@ -7744,6 +7744,10 @@
     '.person-role', '.person-desc', '.blog-counter', '.blog-meta', '.term-en', '.term-desc', // T39~T43
     '.step-title', '.reveal-line1', '.reveal-line2', '.two-step-title', '.two-step-desc', '.point-title', '.point-desc', '.vertical-line1', '.vertical-line2', '.left-rail-title', '.left-rail-desc', '.quote-tail', // T49~T59
     '.reveal-band-text', '.left-rail-desc-text', '.quote-tail-text', '.step-card-body', '.postit-num', '.branch-root-text', '.branch-result-text', // T56~T59
+    '.time3-tag', '.time3-line', '.time3-card', // T65 시간3분할 (세션 91)
+    '.cause3-line', '.cause3-card', // T66 인과3단 (세션 91)
+    '.numpoint3-tag', '.numpoint3-line', '.numpoint3-card', // T67 넘버드포인트 (세션 91)
+    '.choice3-cond-line', '.choice3-act-line', '.choice3-cond', '.choice3-act', '.choice3-stack', // T68 선택결과 (세션 91)
     '.chapter-flow-arrow', '.slide-caption', '.img-placeholder', // fallback 의존 축소
   ].join(', ');
 
@@ -9158,6 +9162,10 @@
     62: {"label":"T62 경고해법","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
     63: {"label":"T63 비교삼지선다","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
     64: {"label":"T64 카운트다운강조","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    65: {"label":"T65 시간3분할","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    66: {"label":"T66 인과3단","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    67: {"label":"T67 넘버드포인트","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    68: {"label":"T68 선택결과","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
   };
 
   function typeMetaOfPageGroup(pg) {
