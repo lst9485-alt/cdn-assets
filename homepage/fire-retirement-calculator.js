@@ -22,6 +22,37 @@
   var chartMode = 'assets';
   var tableExpanded = false;
   var lastResult = null;
+  var goalLabelPlugin = {
+    id: 'goalLabel',
+    afterDatasetsDraw: function (chart, args, options) {
+      if (!options || !options.text) return;
+      var y = chart.scales.y.getPixelForValue(options.value);
+      var x = chart.chartArea.left + 22;
+      var ctx = chart.ctx;
+      var text = options.text;
+      ctx.save();
+      ctx.font = '700 12px Pretendard, sans-serif';
+      var width = ctx.measureText(text).width + 20;
+      var height = 26;
+      var radius = 13;
+      var top = y - height / 2;
+      ctx.fillStyle = '#197a54';
+      ctx.beginPath();
+      ctx.moveTo(x + radius, top);
+      ctx.lineTo(x + width - radius, top);
+      ctx.quadraticCurveTo(x + width, top, x + width, top + radius);
+      ctx.lineTo(x + width, top + height - radius);
+      ctx.quadraticCurveTo(x + width, top + height, x + width - radius, top + height);
+      ctx.lineTo(x + radius, top + height);
+      ctx.quadraticCurveTo(x, top + height, x, top + height - radius);
+      ctx.lineTo(x, top + radius);
+      ctx.quadraticCurveTo(x, top, x + radius, top);
+      ctx.fill();
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(text, x + 10, y + 4);
+      ctx.restore();
+    }
+  };
 
   function qs(id) {
     return document.getElementById(id);
@@ -142,6 +173,8 @@
     qs('annualExpenses').value = formatInput(cfg.annualExpenses);
     qs('annualReturn').value = cfg.annualReturn;
     qs('withdrawalRate').value = cfg.withdrawalRate;
+    if (qs('annualReturnRange')) qs('annualReturnRange').value = cfg.annualReturn;
+    if (qs('withdrawalRange')) qs('withdrawalRange').value = cfg.withdrawalRate;
   }
 
   function setText(id, value) {
@@ -157,10 +190,10 @@
     setText('retirementSub', result.retirementYear == null ? '현재 조건으로는 오래 걸립니다' : '지금부터 ' + result.retirementYear + '년 뒤');
     setText('annualSavings', formatMoney(result.annualSavings));
     setText('savingRate', '저축률 ' + formatPercent(result.savingsRate, 1));
-    setText('passiveIncome', '월 ' + formatMoney(result.monthlyPassiveIncome));
-    setText('passiveIncomeSub', '인출률 기준 예상 현금흐름');
     setText('roiCoverAge', findRoiCoverText(result));
-    setText('roiCoverSub', '투자수익이 연지출을 덮는 시점');
+    setText('withdrawalPreview', result.config.withdrawalRate + '%');
+    setText('returnPreview', result.config.annualReturn + '%');
+    setText('monthlySavingsPreview', '월 ' + formatMoney(result.annualSavings / 12));
 
     var insight = qs('insightCard');
     if (result.retirementYear == null) {
@@ -186,7 +219,7 @@
   function getChartMeta(mode) {
     if (mode === 'cover') return { kicker: '지출 커버율', title: '투자수익이 지출을 얼마나 덮는지' };
     if (mode === 'flow') return { kicker: '연간흐름', title: '저축액과 투자수익 비교' };
-    return { kicker: '자산 추이', title: '은퇴 시뮬레이션' };
+    return { kicker: '여정', title: '나의 FIRE 예상 경로' };
   }
 
   function setChartMode(mode) {
@@ -205,11 +238,12 @@
     setText('chartKicker', meta.kicker);
     setText('chartTitle', meta.title);
 
-    var labels = result.rows.map(function (row) { return row.year + '년'; });
+    var labels = result.rows.map(function (row) { return 'Y' + row.year; });
     var datasets;
     var yTick;
     var yMax;
     var tooltipLabel;
+    var legendFilter;
 
     if (chartMode === 'cover') {
       datasets = [
@@ -270,30 +304,54 @@
         return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y);
       };
     } else {
+      var monthlySavings = result.annualSavings / 12;
       datasets = [
         {
-          label: '순자산',
-          data: result.rows.map(function (row) { return Math.round(row.networth); }),
-          borderColor: '#ff6b00',
-          backgroundColor: 'rgba(255,107,0,.12)',
-          borderWidth: 3,
-          pointRadius: 0,
-          tension: .24,
+          label: '현재자산 ' + formatMoney(result.config.currentAssets),
+          data: result.rows.map(function () { return Math.round(result.config.currentAssets); }),
+          borderColor: '#2f80ed',
+          backgroundColor: '#2f80ed',
+          borderWidth: 2,
+          pointRadius: 2,
+          tension: .18
+        },
+        {
+          label: '저축누적 ' + formatMoney(monthlySavings) + '/월',
+          data: result.rows.map(function (row) {
+            return Math.round(result.config.currentAssets + result.annualSavings * row.year);
+          }),
+          borderColor: '#5b2df0',
+          backgroundColor: 'rgba(91,45,240,.08)',
+          borderWidth: 2,
+          pointRadius: 2,
+          tension: .18,
           fill: true
         },
         {
-          label: '목표 은퇴자산',
-          data: result.rows.map(function () { return Math.round(result.targetNetworth); }),
-          borderColor: '#0a0a0a',
-          borderDash: [6, 6],
+          label: '투자성장 ' + result.config.annualReturn.toFixed(1).replace(/\.0$/, '') + '%/년',
+          data: result.rows.map(function (row) { return Math.round(row.networth); }),
+          borderColor: '#5a7118',
+          backgroundColor: 'rgba(90,113,24,.08)',
           borderWidth: 2,
-          pointRadius: 0
+          pointRadius: 2,
+          tension: .18,
+          fill: true
+        },
+        {
+          label: '목표',
+          data: result.rows.map(function () { return Math.round(result.targetNetworth); }),
+          borderColor: '#197a54',
+          borderDash: [3, 3],
+          borderWidth: 2,
+          pointRadius: 0,
+          fill: false
         }
       ];
       yTick = function (value) { return formatMoney(value).replace('원', ''); };
       tooltipLabel = function (ctx) {
         return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y);
       };
+      legendFilter = function (item) { return item.text !== '목표'; };
     }
 
     if (chart) chart.destroy();
@@ -303,12 +361,27 @@
         labels: labels,
         datasets: datasets
       },
+      plugins: chartMode === 'assets' ? [goalLabelPlugin] : [],
       options: {
         responsive: true,
         maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
         plugins: {
-          legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 12, font: { weight: 700 } } },
+          goalLabel: {
+            value: result.targetNetworth,
+            text: '목표: ' + formatMoney(result.targetNetworth)
+          },
+          legend: {
+            position: 'bottom',
+            align: 'start',
+            labels: {
+              filter: legendFilter,
+              usePointStyle: true,
+              boxWidth: 8,
+              padding: 28,
+              font: { weight: 700 }
+            }
+          },
           tooltip: {
             callbacks: {
               label: tooltipLabel
@@ -316,12 +389,17 @@
           }
         },
         scales: {
-          x: { grid: { display: false }, ticks: { maxRotation: 0, maxTicksLimit: 8 } },
+          x: {
+            title: { display: chartMode === 'assets', text: '오늘부터 지난 연수', color: '#605b83', font: { weight: 700 } },
+            grid: { display: false },
+            ticks: { maxRotation: 0, maxTicksLimit: 9, color: '#605b83' }
+          },
           y: {
+            position: 'right',
             beginAtZero: true,
             suggestedMax: yMax,
-            grid: { color: 'rgba(10,10,10,.08)' },
-            ticks: { callback: yTick }
+            grid: { color: 'rgba(23,19,57,.08)' },
+            ticks: { callback: yTick, color: '#605b83' }
           }
         }
       }
@@ -417,10 +495,27 @@
     renderTable(result);
   }
 
+  function syncRangeControl(rangeId, numberId) {
+    var range = qs(rangeId);
+    var number = qs(numberId);
+    if (!range || !number) return;
+    range.addEventListener('input', function () {
+      number.value = range.value;
+    });
+    number.addEventListener('input', function () {
+      var value = toNumber(number.value, toNumber(range.value, 0));
+      var min = toNumber(range.min, value);
+      var max = toNumber(range.max, value);
+      range.value = Math.max(min, Math.min(max, value));
+    });
+  }
+
   function initApp() {
     if (!qs('inputForm')) return;
     var params = new URLSearchParams(window.location.search);
     writeConfigToDom(decodeShareData(params.get('data')) || DEFAULTS);
+    syncRangeControl('annualReturnRange', 'annualReturn');
+    syncRangeControl('withdrawalRange', 'withdrawalRate');
     document.querySelectorAll('#inputForm input').forEach(function (el) {
       el.addEventListener('input', update);
       el.addEventListener('change', update);
