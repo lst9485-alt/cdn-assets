@@ -1095,9 +1095,6 @@
     57: 'title',    58: 'title',    59: 'title',    60: 'title',
     61: 'title',    62: 'title',    63: 'title',    64: 'title',
     65: 'title',    66: 'title',    67: 'title',    68: 'title',
-    69: 'title',    70: 'title',    71: 'title',    72: 'title',
-    73: 'title',    74: 'title',    75: 'title',    76: 'title',
-    77: 'title',
   };
 
   const PG_TO_CATEGORY = {
@@ -1119,9 +1116,7 @@
     56: '텍스트',      57: '텍스트',      58: '텍스트',      59: '텍스트',
     60: '텍스트',      61: '텍스트',      62: '텍스트',      63: '비교',
     64: '텍스트',      65: '비교',        66: '플로우',      67: '텍스트',
-    68: '비교',        69: '텍스트',
-    70: '텍스트',      71: '텍스트',      72: '비교',        73: '텍스트',
-    74: '플로우',      75: '텍스트',      76: '텍스트',      77: '비교',
+    68: '비교',
   };
 
   function bucketOfPageGroup(pg) {
@@ -9180,15 +9175,6 @@
     66: {"label":"T66 인과3단","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
     67: {"label":"T67 넘버드포인트","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
     68: {"label":"T68 선택결과","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
-    69: {"label":"T69 단계강조4단","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
-    70: {"label":"T70 단계강조5단","schemaRequiredCount":5,"fillRange":[5,5],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
-    71: {"label":"T71 결론펼침4근거","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
-    72: {"label":"T72 비교사지선다","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
-    73: {"label":"T73 카운트다운강조4","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
-    74: {"label":"T74 인과4단","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
-    75: {"label":"T75 넘버드포인트4","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
-    76: {"label":"T76 넘버드포인트5","schemaRequiredCount":5,"fillRange":[5,5],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
-    77: {"label":"T77 선택결과4","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
   };
 
   function typeMetaOfPageGroup(pg) {
