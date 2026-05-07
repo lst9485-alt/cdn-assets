@@ -16,6 +16,10 @@
     annualReturn: 5,
     withdrawalRate: 4
   };
+  var ANNUAL_RETURN_MIN = -5;
+  var ANNUAL_RETURN_MAX = 15;
+  var WITHDRAWAL_MIN = 0.5;
+  var WITHDRAWAL_MAX = 10;
 
   var chart = null;
   var toastTimer = null;
@@ -60,7 +64,29 @@
 
   function toNumber(value, fallback) {
     if (fallback == null) fallback = 0;
-    var cleaned = String(value == null ? '' : value).replace(/,/g, '').trim();
+    var cleaned = String(value == null ? '' : value).replace(/,/g, '').replace(/\s/g, '').trim();
+    if (cleaned === '') return fallback;
+    if (cleaned.indexOf('억') !== -1) {
+      var total = 0;
+      var eok = cleaned.match(/(-?\d+(?:\.\d+)?)억/);
+      var cheonAfterEok = cleaned.match(/억(-?\d+(?:\.\d+)?)천/);
+      var man = cleaned.match(/억(?:-?\d+(?:\.\d+)?천)?(-?\d+(?:\.\d+)?)(?:만|만원)?/);
+      if (eok) total += Number(eok[1]) * 10000;
+      if (cheonAfterEok) total += Number(cheonAfterEok[1]) * 1000;
+      if (man) total += Number(man[1]);
+      return isFinite(total) ? total : fallback;
+    }
+    if (cleaned.indexOf('천') !== -1) {
+      var cheon = cleaned.match(/(-?\d+(?:\.\d+)?)천/);
+      var remainder = cleaned.match(/천(-?\d+(?:\.\d+)?)(?:만|만원)?/);
+      var manwonTotal = 0;
+      if (cheon) manwonTotal += Number(cheon[1]) * 1000;
+      if (remainder) manwonTotal += Number(remainder[1]);
+      return isFinite(manwonTotal) ? manwonTotal : fallback;
+    }
+    if (cleaned.indexOf('만') !== -1) {
+      cleaned = cleaned.replace(/만원|만/g, '');
+    }
     var parsed = Number(cleaned);
     return isFinite(parsed) ? parsed : fallback;
   }
@@ -73,7 +99,6 @@
     var sign = manwon < 0 ? '-' : '';
     var n = Math.abs(manwon);
     if (n >= 10000) return sign + (n / 10000).toFixed(1).replace(/\.0$/, '') + '억원';
-    if (n >= 1000) return sign + Math.round(n / 1000) + '천만원';
     return sign + Math.round(n).toLocaleString('ko-KR') + '만원';
   }
 
@@ -96,8 +121,8 @@
       raw && raw.annualIncome != null ? Math.max(0, toNumber(raw.annualIncome, 0) - toNumber(raw.annualExpenses, DEFAULTS.annualExpenses)) / 12 : DEFAULTS.monthlySavings
     ));
     cfg.annualExpenses = Math.max(0, toNumber(cfg.annualExpenses, DEFAULTS.annualExpenses));
-    cfg.annualReturn = Math.max(-30, Math.min(50, toNumber(cfg.annualReturn, DEFAULTS.annualReturn)));
-    cfg.withdrawalRate = Math.max(0.1, Math.min(20, toNumber(cfg.withdrawalRate, DEFAULTS.withdrawalRate)));
+    cfg.annualReturn = Math.max(ANNUAL_RETURN_MIN, Math.min(ANNUAL_RETURN_MAX, toNumber(cfg.annualReturn, DEFAULTS.annualReturn)));
+    cfg.withdrawalRate = Math.max(WITHDRAWAL_MIN, Math.min(WITHDRAWAL_MAX, toNumber(cfg.withdrawalRate, DEFAULTS.withdrawalRate)));
     return cfg;
   }
 
@@ -106,7 +131,6 @@
     var savings = cfg.monthlySavings * 12;
     var returnRate = cfg.annualReturn / 100;
     var targetNetworth = cfg.annualExpenses / (cfg.withdrawalRate / 100);
-    var roiTargetNetworth = returnRate > 0 ? cfg.annualExpenses / returnRate : Infinity;
     var networth = cfg.currentAssets;
     var rows = [{
       year: 0,
@@ -121,26 +145,25 @@
     }];
     var retirementYear = networth >= targetNetworth ? 0 : null;
 
-    for (var year = 1; year <= 80; year += 1) {
+    for (var year = 1; retirementYear !== 0 && year <= 80; year += 1) {
       var roi = (networth + savings / 2) * returnRate;
       var change = savings + roi;
-      networth = Math.max(0, networth + change);
+      networth = networth + change;
       var coveredRatio = cfg.annualExpenses > 0 ? roi / cfg.annualExpenses : 1;
       var independent = networth >= targetNetworth;
       if (retirementYear == null && independent) retirementYear = year;
       rows.push({
         year: year,
         age: cfg.currentAge + year,
-        income: independent ? null : savings,
-        expenses: independent ? null : cfg.annualExpenses,
+        income: savings,
+        expenses: cfg.annualExpenses,
         roi: roi,
         coveredRatio: coveredRatio,
         change: change,
         networth: networth,
         independent: independent
       });
-      if (year > 12 && coveredRatio >= 1.25 && independent && year % 5 === 0) break;
-      if (year >= 60 && retirementYear != null) break;
+      if (independent) break;
     }
 
     return {
@@ -149,7 +172,6 @@
       annualSavings: savings,
       savingsRate: 0,
       targetNetworth: targetNetworth,
-      roiTargetNetworth: roiTargetNetworth,
       retirementYear: retirementYear,
       retirementAge: retirementYear == null ? null : cfg.currentAge + retirementYear,
       monthlyPassiveIncome: targetNetworth * (cfg.withdrawalRate / 100) / 12
@@ -185,14 +207,13 @@
   }
 
   function renderSummary(result) {
-    var ageText = result.retirementAge == null ? '80년 초과' : result.retirementAge + '세';
+    var ageText = result.retirementAge == null ? '도달 어려움' : result.retirementAge + '세';
     setText('fireTarget', formatMoney(result.targetNetworth));
-    setText('targetSub', '연지출 ÷ 인출률 ' + result.config.withdrawalRate + '%');
+    setText('targetSub', '연지출 ' + formatMoney(result.config.annualExpenses) + ' ÷ 인출률 ' + result.config.withdrawalRate + '%');
     setText('retirementAge', ageText);
-    setText('retirementSub', result.retirementYear == null ? '현재 조건으로는 오래 걸립니다' : '지금부터 ' + result.retirementYear + '년 뒤');
+    setText('retirementSub', result.retirementYear == null ? '80년 안에 목표 미도달' : result.retirementYear === 0 ? '현재 자산으로 목표 도달' : '지금부터 ' + result.retirementYear + '년 뒤');
     setText('annualSavings', formatMoney(result.annualSavings));
     setText('savingRate', '월 저축액 ' + formatMoney(result.config.monthlySavings));
-    setText('roiCoverAge', findRoiCoverText(result));
     setText('withdrawalPreview', result.config.withdrawalRate + '%');
     setText('returnPreview', result.config.annualReturn + '%');
     setText('returnInlinePreview', result.config.annualReturn + '%');
@@ -200,16 +221,13 @@
     var insight = qs('insightCard');
     if (result.retirementYear == null) {
       insight.textContent = '현재 조건으로는 목표 은퇴자산에 도달하기 어렵습니다. 연지출을 줄이거나 저축률을 높이면 은퇴 시점이 크게 당겨집니다.';
+    } else if (result.retirementYear === 0) {
+      insight.textContent = '현재 보유자산이 이미 목표 은퇴자산 이상입니다. 표는 현재 시점의 목표 달성 상태를 보여줍니다.';
+    } else if (result.config.annualReturn < result.config.withdrawalRate) {
+      insight.textContent = '현재 조건이면 ' + result.retirementAge + '세에 목표 은퇴자산에 도달합니다. 인출률 기준은 투자수익만 쓰는 계산이 아니라 원금 일부 인출을 포함합니다.';
     } else {
-      insight.textContent = '현재 조건이면 ' + result.retirementAge + '세에 목표 은퇴자산에 도달합니다. 아래 표에서 매년 투자수익이 지출의 몇 퍼센트를 커버하는지 확인할 수 있습니다.';
+      insight.textContent = '현재 조건이면 ' + result.retirementAge + '세에 목표 은퇴자산에 도달합니다. 표 탭에서 매년 투자수익과 연지출의 비율을 확인할 수 있습니다.';
     }
-  }
-
-  function findRoiCoverText(result) {
-    var row = result.rows.find(function (item) {
-      return item.coveredRatio != null && item.coveredRatio >= 1;
-    });
-    return row ? row.age + '세' : '80년 초과';
   }
 
   function findRetirementIndex(result) {
@@ -239,10 +257,10 @@
     setText('chartKicker', meta.kicker);
     setText('chartTitle', meta.title);
 
-    var labels = result.rows.map(function (row) { return 'Y' + row.year; });
+    var labels = result.rows.map(function (row) { return row.year + '년'; });
     var datasets = [
       {
-        label: '저축누적 ' + formatMoney(result.config.monthlySavings) + '/월',
+        label: '저축만 했을 때 ' + formatMoney(result.config.monthlySavings) + '/월',
         data: result.rows.map(function (row) {
           return Math.round(result.config.currentAssets + result.annualSavings * row.year);
         }),
@@ -317,7 +335,7 @@
         },
         scales: {
           x: {
-            title: { display: true, text: '오늘부터 지난 연수', color: '#605b83', font: { weight: 700 } },
+            title: { display: true, text: '지금부터 경과 연수', color: '#605b83', font: { weight: 700 } },
             grid: { display: false },
             ticks: { maxRotation: 0, maxTicksLimit: 9, color: '#605b83' }
           },
@@ -334,8 +352,9 @@
 
   function getCompactRows(result) {
     if (tableExpanded) return result.rows;
-    return result.rows.filter(function (row) {
-      return row.year === 0 || row.year === 1 || row.year % 5 === 0;
+    var lastIndex = result.rows.length - 1;
+    return result.rows.filter(function (row, index) {
+      return row.year === 0 || row.year === 1 || row.year % 5 === 0 || index === lastIndex;
     });
   }
 
@@ -343,18 +362,18 @@
     var rows = getCompactRows(result);
     var toggle = qs('toggleRows');
     if (toggle) {
-      toggle.textContent = tableExpanded ? '5년 단위 보기' : '전체 연도 보기';
+      toggle.textContent = tableExpanded ? '요약 보기' : '전체 연도 보기';
       toggle.hidden = result.rows.length <= rows.length;
     }
     qs('projectionTable').innerHTML = rows.map(function (row) {
-      var covered = row.coveredRatio == null ? null : Math.max(0, row.coveredRatio);
-      var barWidth = covered == null ? 0 : Math.min(100, covered / 1.25 * 100);
-      var coveredText = covered == null ? '-' : covered >= 1.25 ? '125%+' : formatPercent(covered);
+      var covered = row.coveredRatio == null ? null : row.coveredRatio;
+      var barWidth = covered == null ? 0 : Math.max(0, Math.min(100, covered / 1.25 * 100));
+      var coveredText = covered == null ? '-' : formatPercent(covered);
       var rowClass = row.independent ? ' class="is-independent"' : covered >= 1 ? ' class="is-covered"' : '';
       var barClass = covered >= 1 ? ' cover-bar is-covered' : ' cover-bar';
       var title = covered == null ? '' : ' title="' + formatPercent(covered, 1) + '"';
       return '<tr' + rowClass + '>' +
-        '<td>' + row.year + '</td>' +
+        '<td>' + (row.year === 0 ? '현재' : row.year) + '</td>' +
         '<td>' + formatTableMoney(row.income) + '</td>' +
         '<td>' + formatTableMoney(row.expenses) + '</td>' +
         '<td>' + formatTableMoney(row.roi) + '</td>' +
@@ -422,8 +441,16 @@
       var value = toNumber(number.value, toNumber(range.value, 0));
       var min = toNumber(range.min, value);
       var max = toNumber(range.max, value);
-      range.value = Math.max(min, Math.min(max, value));
+      var bounded = Math.max(min, Math.min(max, value));
+      range.value = bounded;
+      if (value !== bounded) number.value = bounded;
     });
+  }
+
+  function normalizeVisibleInput(id, value) {
+    var el = qs(id);
+    if (!el) return;
+    el.value = formatInput(value);
   }
 
   function initApp() {
@@ -435,6 +462,13 @@
     document.querySelectorAll('#inputForm input').forEach(function (el) {
       el.addEventListener('input', update);
       el.addEventListener('change', update);
+    });
+    ['currentAssets', 'monthlySavings', 'annualExpenses'].forEach(function (id) {
+      qs(id).addEventListener('change', function () {
+        var cfg = readConfigFromDom();
+        normalizeVisibleInput(id, cfg[id]);
+        update();
+      });
     });
     qs('resetInputs').addEventListener('click', function () {
       writeConfigToDom(DEFAULTS);
