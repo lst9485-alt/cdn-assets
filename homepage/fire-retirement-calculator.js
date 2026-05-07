@@ -139,7 +139,7 @@
         networth: networth,
         independent: independent
       });
-      if (year > 12 && coveredRatio >= 1.25 && independent) break;
+      if (year > 12 && coveredRatio >= 1.25 && independent && year % 5 === 0) break;
       if (year >= 60 && retirementYear != null) break;
     }
 
@@ -334,12 +334,9 @@
 
   function getCompactRows(result) {
     if (tableExpanded) return result.rows;
-    var keep = new Set();
-    var lastIndex = result.rows.length - 1;
-    for (var i = 0; i <= lastIndex; i += 1) {
-      if (i === 0 || i === 1 || i % 5 === 0 || i === lastIndex) keep.add(i);
-    }
-    return result.rows.filter(function (_, index) { return keep.has(index); });
+    return result.rows.filter(function (row) {
+      return row.year === 0 || row.year === 1 || row.year % 5 === 0;
+    });
   }
 
   function renderTable(result) {

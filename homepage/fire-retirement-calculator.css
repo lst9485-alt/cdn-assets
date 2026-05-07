@@ -163,6 +163,7 @@ a {
   padding: 0 56px 0 14px;
   color: var(--ink);
   background: transparent;
+  font-size: 15px;
   font-weight: 760;
 }
 
@@ -482,10 +483,10 @@ table {
 
 th,
 td {
-  padding: 8px;
+  padding: 9px 8px;
   border-bottom: 1px solid var(--line);
   text-align: right;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 th:first-child,
@@ -545,6 +546,7 @@ tr.is-covered td {
 
 .cover-cell span {
   color: var(--ink);
+  font-size: 13px;
   font-weight: 850;
 }
 
