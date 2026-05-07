@@ -125,7 +125,7 @@
           {
             id: 'fire-retirement-calculator',
             title: '은퇴계산기',
-            description: 'FIRE 목표 · 낙원계산기 · 확률 시뮬레이션',
+            description: 'FIRE 목표금액 · 예상 은퇴시점 · 연도별 상세표',
             href: 'homepage/fire-retirement-calculator.html',
             badgeText: 'NEW',
             badgeTone: 'live',
