@@ -413,17 +413,17 @@
       },
       {
         id: 'consult',
-        hubTitle: '상담 · 템플릿',
+        hubTitle: '상담',
         collapsible: true,
         defaultOpen: true,
         nav: {
           type: 'single',
-          label: '상담·템플릿',
+          label: '상담',
           href: 'consult/',
           activeMatch: ['/consult']
         },
         sidebar: {
-          title: '상담·템플릿'
+          title: '상담'
         },
         items: [
           {
@@ -465,6 +465,24 @@
         ]
       },
       {
+        id: 'templates',
+        hubTitle: '템플릿',
+        alwaysVisible: true,
+        collapsible: true,
+        defaultOpen: true,
+        nav: {
+          type: 'single',
+          label: '템플릿',
+          href: 'templates/',
+          activeMatch: ['/templates'],
+          hidden: true
+        },
+        sidebar: {
+          title: '템플릿'
+        },
+        items: []
+      },
+      {
         id: 'tools',
         hubTitle: '도구 · 기타',
         collapsible: true,
@@ -493,6 +511,25 @@
             hubVisible: true
           }
         ]
+      },
+      {
+        id: 'archive',
+        hubTitle: '아카이브',
+        dashedTop: true,
+        alwaysVisible: true,
+        collapsible: true,
+        defaultOpen: false,
+        nav: {
+          type: 'single',
+          label: '아카이브',
+          href: 'archive/',
+          activeMatch: ['/archive'],
+          hidden: true
+        },
+        sidebar: {
+          title: '아카이브'
+        },
+        items: []
       },
       {
         id: 'temp',
