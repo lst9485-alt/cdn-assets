@@ -530,7 +530,7 @@
         dashedTop: true,
         alwaysVisible: true,
         collapsible: true,
-        defaultOpen: false,
+        defaultOpen: true,
         nav: {
           type: 'single',
           label: '아카이브',
@@ -541,7 +541,20 @@
         sidebar: {
           title: '아카이브'
         },
-        items: []
+        items: [
+          {
+            id: 'woori-motion-bug-260507',
+            title: '브랜드 버그 콘셉트 보드',
+            description: '우측상단 모션 그래픽 후보 18개',
+            href: 'archive/woori-motion-bug-260507/',
+            badgeText: '260507',
+            badgeTone: 'live',
+            iconKey: 'branding',
+            sidebarType: 'root',
+            activeMatch: ['woori-motion-bug-260507'],
+            hubVisible: true
+          }
+        ]
       },
       {
         id: 'temp',
