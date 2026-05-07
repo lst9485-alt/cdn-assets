@@ -123,6 +123,18 @@
             hubVisible: true
           },
           {
+            id: 'fire-retirement-calculator',
+            title: '은퇴계산기',
+            description: 'FIRE 목표 · 낙원계산기 · 확률 시뮬레이션',
+            href: 'homepage/fire-retirement-calculator.html',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'money',
+            sidebarType: 'root',
+            activeMatch: ['fire-retirement-calculator.html'],
+            hubVisible: true
+          },
+          {
             id: 'landing-page',
             title: '1:1 코칭 랜딩페이지',
             description: '상세페이지 v3.5 미리보기',

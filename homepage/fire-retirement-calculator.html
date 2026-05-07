@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>은퇴계산기 - 우리동네재테크</title>
+  <meta name="description" content="FIRE, 낙원계산기, 저축률, 몬테카를로 시뮬레이션을 한 번에 보는 한국형 은퇴계산기">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260507a">
+</head>
+<body>
+  <main class="fire-page">
+    <section class="hero">
+      <div class="hero-copy">
+        <a class="back-link" href="main-page.html">우리동네재테크</a>
+        <p class="eyebrow">KOREAN FIRE RETIREMENT CALCULATOR</p>
+        <h1>은퇴까지 몇 년 남았는지<br>숫자로 바로 확인하세요.</h1>
+        <p class="hero-lead">Lightyear식 FIRE 목표, 낙원계산기식 은퇴 후 월수입, Networthify식 저축률, Engaging Data식 확률 시뮬레이션을 한국 원화 기준으로 합쳤습니다.</p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#calculator">계산 시작</a>
+          <button class="ghost-button" type="button" id="copyShareTop">공유 링크</button>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="기본 결과 미리보기">
+        <div class="panel-label">FIRE 목표금액</div>
+        <div class="hero-number" id="heroTarget">0원</div>
+        <div class="hero-grid">
+          <div>
+            <span>예상 은퇴</span>
+            <strong id="heroAge">-</strong>
+          </div>
+          <div>
+            <span>저축률</span>
+            <strong id="heroSavingRate">-</strong>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="calculator-shell" id="calculator">
+      <form class="input-panel" id="inputForm">
+        <div class="panel-heading">
+          <span>Today</span>
+          <h2>현재 상황</h2>
+        </div>
+
+        <div class="field-grid two">
+          <label class="field">
+            <span>현재 나이</span>
+            <input id="currentAge" type="number" min="10" max="99" step="1" value="35">
+            <em>세</em>
+          </label>
+          <label class="field">
+            <span>현재 보유자산</span>
+            <input id="currentAssets" type="text" inputmode="decimal" value="10000">
+            <em>만원</em>
+          </label>
+          <label class="field">
+            <span>월 저축액</span>
+            <input id="monthlySaving" type="text" inputmode="decimal" value="250">
+            <em>만원</em>
+          </label>
+          <label class="field">
+            <span>저축 증가율</span>
+            <input id="savingGrowthRate" type="number" step="0.1" value="2">
+            <em>%/년</em>
+          </label>
+          <label class="field">
+            <span>연소득</span>
+            <input id="annualIncome" type="text" inputmode="decimal" value="7000">
+            <em>만원</em>
+          </label>
+          <label class="field">
+            <span>현재 연지출</span>
+            <input id="annualExpenses" type="text" inputmode="decimal" value="4000">
+            <em>만원</em>
+          </label>
+        </div>
+
+        <div class="panel-heading later">
+          <span>Later</span>
+          <h2>은퇴 목표</h2>
+        </div>
+        <div class="segmented" role="tablist" aria-label="목표 산정 방식">
+          <button type="button" class="seg active" data-mode="withdrawal">인출률 기준</button>
+          <button type="button" class="seg" data-mode="life">기대수명 기준</button>
+        </div>
+
+        <div class="field-grid two">
+          <label class="field">
+            <span>은퇴 후 연지출</span>
+            <input id="retirementSpending" type="text" inputmode="decimal" value="4800">
+            <em>만원</em>
+          </label>
+          <label class="field mode-withdrawal">
+            <span>인출률</span>
+            <input id="withdrawalRate" type="number" step="0.1" value="4">
+            <em>%</em>
+          </label>
+          <label class="field mode-life hidden">
+            <span>기대수명</span>
+            <input id="lifeExpectancy" type="number" min="50" max="120" step="1" value="90">
+            <em>세</em>
+          </label>
+          <label class="field">
+            <span>물가상승률</span>
+            <input id="inflationRate" type="number" step="0.1" value="2.5">
+            <em>%</em>
+          </label>
+          <label class="field">
+            <span>목표 은퇴기간</span>
+            <input id="paradiseYears" type="number" min="0" max="80" step="1" value="15">
+            <em>년 후</em>
+          </label>
+          <label class="field">
+            <span>세금 적용</span>
+            <select id="taxMode">
+              <option value="none">세전 수익률</option>
+              <option value="korea" selected>이자·배당세 15.4%</option>
+              <option value="custom">직접 입력</option>
+            </select>
+          </label>
+          <label class="field" id="customTaxWrap">
+            <span>직접 세율</span>
+            <input id="customTaxRate" type="number" min="0" max="60" step="0.1" value="15.4">
+            <em>%</em>
+          </label>
+        </div>
+
+        <div class="panel-heading later">
+          <span>The plan</span>
+          <h2>투자 전략</h2>
+        </div>
+        <div class="portfolio-grid">
+          <div class="asset-box">
+            <strong>주식 / ETF</strong>
+            <label>비중 <input id="stockAllocation" type="number" min="0" max="100" step="1" value="70"><em>%</em></label>
+            <label>수익률 <input id="stockReturn" type="number" step="0.1" value="8"><em>%</em></label>
+            <label>변동성 <input id="stockVolatility" type="number" step="0.1" value="18"><em>%</em></label>
+          </div>
+          <div class="asset-box">
+            <strong>예금 / 채권</strong>
+            <label>비중 <input id="bondAllocation" type="number" min="0" max="100" step="1" value="20"><em>%</em></label>
+            <label>수익률 <input id="bondReturn" type="number" step="0.1" value="3.5"><em>%</em></label>
+            <label>변동성 <input id="bondVolatility" type="number" step="0.1" value="6"><em>%</em></label>
+          </div>
+          <div class="asset-box">
+            <strong>현금</strong>
+            <label>비중 <input id="cashAllocation" type="number" min="0" max="100" step="1" value="10"><em>%</em></label>
+            <label>수익률 <input id="cashReturn" type="number" step="0.1" value="1.5"><em>%</em></label>
+            <label>변동성 <input id="cashVolatility" type="number" step="0.1" value="1"><em>%</em></label>
+          </div>
+        </div>
+        <div class="allocation-warning" id="allocationWarning" hidden>자산 비중 합계가 100%가 아닙니다. 계산은 입력 비중을 100%로 환산해서 진행합니다.</div>
+
+        <details class="advanced" open>
+          <summary>고급 시뮬레이션</summary>
+          <div class="field-grid two compact">
+            <label class="field">
+              <span>수익률 모드</span>
+              <select id="simulationMode">
+                <option value="fixed" selected>고정 수익률</option>
+                <option value="montecarlo">몬테카를로</option>
+                <option value="historical">과거 수익률 사이클</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>기준 표시</span>
+              <select id="basisMode">
+                <option value="real" selected>오늘 돈 기준</option>
+                <option value="nominal">명목 금액 기준</option>
+              </select>
+            </label>
+          </div>
+          <div class="streams-head">
+            <div>
+              <strong>추가 수입 / 지출</strong>
+              <p>연금, 부업, 자녀교육비, 대출상환처럼 특정 나이에만 생기는 현금흐름을 넣습니다.</p>
+            </div>
+            <button type="button" class="small-button" id="addStream">항목 추가</button>
+          </div>
+          <div class="streams" id="streams"></div>
+        </details>
+
+        <div class="button-row">
+          <button type="button" class="primary-button" id="copyShare">공유 링크 복사</button>
+          <button type="button" class="secondary-button" id="resetInputs">기본값 복원</button>
+        </div>
+      </form>
+
+      <section class="result-panel" aria-live="polite">
+        <div class="summary-card target">
+          <span>Your FIRE target</span>
+          <strong id="fireTarget">0원</strong>
+          <p id="targetSub">인출률 4% 기준</p>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <span>은퇴 가능 나이</span>
+            <strong id="retirementAge">-</strong>
+            <p id="retirementSub">계산 중</p>
+          </div>
+          <div class="summary-card">
+            <span>연 저축액</span>
+            <strong id="annualSavings">0원</strong>
+            <p id="savingRate">저축률 -</p>
+          </div>
+          <div class="summary-card">
+            <span>낙원계산기 결과</span>
+            <strong id="paradiseAssets">0원</strong>
+            <p id="paradiseIncome">은퇴 후 월수입 -</p>
+          </div>
+          <div class="summary-card">
+            <span>가중 기대수익률</span>
+            <strong id="effectiveReturn">0%</strong>
+            <p id="returnSub">세후·실질 반영</p>
+          </div>
+        </div>
+
+        <div class="insight-card" id="insightCard"></div>
+
+        <div class="journey">
+          <div class="journey-head">
+            <div>
+              <span>The journey ahead</span>
+              <h2>FIRE projection</h2>
+            </div>
+            <div class="chart-tabs">
+              <button type="button" class="active" data-view="chart">Chart</button>
+              <button type="button" data-view="table">Table</button>
+            </div>
+          </div>
+          <div class="chart-wrap" id="chartView">
+            <canvas id="projectionChart"></canvas>
+          </div>
+          <div class="table-wrap hidden" id="tableView">
+            <table>
+              <thead>
+                <tr>
+                  <th>나이</th>
+                  <th>연 저축</th>
+                  <th>투자 성장</th>
+                  <th>연말 자산</th>
+                  <th>목표금액</th>
+                  <th>부족/초과</th>
+                </tr>
+              </thead>
+              <tbody id="projectionTable"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="support-grid">
+          <section class="mini-chart">
+            <div class="mini-head">
+              <span>Networthify view</span>
+              <h3>저축률별 은퇴 시점</h3>
+            </div>
+            <canvas id="savingsRateChart"></canvas>
+          </section>
+          <section class="assumptions">
+            <h3>계산 가정</h3>
+            <ul>
+              <li>모든 금액 입력은 만원 단위입니다.</li>
+              <li>오늘 돈 기준은 수익률에서 물가상승률을 뺀 실질 수익률로 계산합니다.</li>
+              <li>세금 적용 시 양수 수익률에만 선택 세율을 반영합니다.</li>
+              <li>예측은 투자 조언이 아니며 실제 수익률, 세금, 수수료, 연금 제도에 따라 달라질 수 있습니다.</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="fire-retirement-calculator.js?v=20260507a"></script>
+  <script src="homepage-shell.js?v=20260506d"></script>
+</body>
+</html>
