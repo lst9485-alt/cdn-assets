@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archive | CDN Assets</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1115;
+      --panel: #171a20;
+      --line: rgba(255,255,255,.13);
+      --text: #f4f1eb;
+      --muted: rgba(244,241,235,.62);
+      --accent: #ff8345;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+
+    main {
+      width: min(100%, 960px);
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 36px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .list {
+      display: grid;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    a {
+      display: block;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      border-color: rgba(255,131,69,.56);
+    }
+
+    strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    em {
+      color: var(--accent);
+      font-style: normal;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Archive</h1>
+    <p>CDN assets archive for drafts, previews, and reference boards.</p>
+
+    <section class="list" aria-label="archive items">
+      <a href="./woori-motion-bug-260507/">
+        <strong>우리동네 재테크 브랜드 버그 콘셉트 보드 <em>260507</em></strong>
+        <span>Claude와 서브에이전트 의견을 합친 우측상단 모션 그래픽 후보 18개.</span>
+      </a>
+    </section>
+  </main>
+</body>
+</html>
