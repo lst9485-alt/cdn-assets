@@ -42,19 +42,6 @@
             activeMatch: ['telegram-cron.html']
           },
           {
-            id: 'dashboard-main',
-            title: '투두 · 프로젝트 · OKR',
-            description: '크론잡 자동 갱신 (매일 06시)',
-            href: 'dashboard/',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'dash',
-            hubVisible: true,
-            navVisible: true,
-            sidebarType: 'root',
-            activeMatch: ['dashboard']
-          },
-          {
             id: 'business',
             title: '사업현황',
             sidebarLabel: '사업현황',
@@ -81,20 +68,6 @@
             navVisible: true,
             sidebarType: 'root',
             activeMatch: ['branding.html']
-          },
-          {
-            id: 'competitors',
-            title: '경쟁채널',
-            sidebarLabel: '경쟁채널',
-            description: '유튜브 신규 · 급상승 모니터링',
-            href: 'dashboard/competitors.html',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'yt',
-            hubVisible: true,
-            navVisible: true,
-            sidebarType: 'root',
-            activeMatch: ['competitors.html']
           }
         ]
       },
@@ -485,6 +458,33 @@
           title: '도구·기타'
         },
         items: [
+          {
+            id: 'dashboard-main',
+            title: '투두 · 프로젝트 · OKR',
+            description: '크론잡 자동 갱신 (매일 06시)',
+            href: 'dashboard/',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'dash',
+            hubVisible: true,
+            navVisible: true,
+            sidebarType: 'root',
+            activeMatch: ['dashboard']
+          },
+          {
+            id: 'competitors',
+            title: '경쟁채널',
+            sidebarLabel: '경쟁채널',
+            description: '유튜브 신규 · 급상승 모니터링',
+            href: 'dashboard/competitors.html',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'yt',
+            hubVisible: true,
+            navVisible: true,
+            sidebarType: 'root',
+            activeMatch: ['competitors.html']
+          },
           {
             id: 'yt-bulk-editor',
             title: 'YT 일괄 편집기',
