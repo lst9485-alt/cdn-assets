@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260507b">
+  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260507c">
 </head>
 <body>
   <main class="fire-page">
@@ -16,27 +16,13 @@
       <div class="hero-copy">
         <a class="back-link" href="main-page.html">우리동네재테크</a>
         <p class="eyebrow">한국형 은퇴계산기</p>
-        <h1>은퇴까지 몇 년 남았는지<br>숫자로 바로 확인하세요.</h1>
-        <p class="hero-lead">목표 은퇴자산, 은퇴 후 월수입, 저축률, 투자수익의 지출 커버율을 한국 원화 기준으로 한 번에 계산합니다.</p>
+        <h1>은퇴 가능 시점을 바로 계산하세요.</h1>
+        <p class="hero-lead">연소득, 연지출, 현재 자산, 투자수익률만 넣으면 목표 은퇴자산과 예상 은퇴 나이를 한국 원화 기준으로 보여줍니다.</p>
         <div class="hero-actions">
           <a class="primary-link" href="#calculator">계산 시작</a>
           <button class="ghost-button" type="button" id="copyShareTop">공유 링크</button>
         </div>
       </div>
-      <aside class="hero-panel" aria-label="기본 결과 미리보기">
-        <div class="panel-label">목표 은퇴자산</div>
-        <div class="hero-number" id="heroTarget">0원</div>
-        <div class="hero-grid">
-          <div>
-            <span>예상 은퇴</span>
-            <strong id="heroAge">-</strong>
-          </div>
-          <div>
-            <span>저축률</span>
-            <strong id="heroSavingRate">-</strong>
-          </div>
-        </div>
-      </aside>
     </section>
 
     <section class="calculator-shell" id="calculator">
@@ -46,40 +32,55 @@
           <h2>입력값</h2>
         </div>
 
-        <div class="field-grid two">
-          <label class="field">
-            <span>현재 나이</span>
-            <input id="currentAge" type="number" min="10" max="99" step="1" value="35">
-            <em>세</em>
-          </label>
-          <label class="field">
-            <span>현재 보유자산</span>
-            <input id="currentAssets" type="text" inputmode="decimal" value="10000">
-            <em>만원</em>
-          </label>
-          <label class="field">
-            <span>연소득</span>
-            <input id="annualIncome" type="text" inputmode="decimal" value="5000">
-            <em>만원</em>
-          </label>
-          <label class="field">
-            <span>연지출</span>
-            <input id="annualExpenses" type="text" inputmode="decimal" value="2600">
-            <em>만원</em>
-          </label>
-          <label class="field">
-            <span>연 투자수익률</span>
-            <input id="annualReturn" type="number" step="0.1" value="5">
-            <em>%</em>
-          </label>
-          <label class="field">
-            <span>인출률</span>
-            <input id="withdrawalRate" type="number" step="0.1" value="4">
-            <em>%</em>
-          </label>
+        <div class="field-section">
+          <div class="section-label">기본 정보</div>
+          <div class="field-grid two">
+            <label class="field">
+              <span>현재 나이</span>
+              <input id="currentAge" type="number" min="10" max="99" step="1" value="35">
+              <em>세</em>
+            </label>
+            <label class="field">
+              <span>현재 보유자산</span>
+              <input id="currentAssets" type="text" inputmode="decimal" value="10000">
+              <em>만원</em>
+            </label>
+          </div>
         </div>
 
-        <p class="simple-note">연저축액은 `연소득 - 연지출`로 자동 계산합니다. 표는 투자수익이 지출을 얼마나 덮는지 보여줍니다.</p>
+        <div class="field-section">
+          <div class="section-label">현금흐름</div>
+          <div class="field-grid two">
+            <label class="field">
+              <span>연소득</span>
+              <input id="annualIncome" type="text" inputmode="decimal" value="5000">
+              <em>만원</em>
+            </label>
+            <label class="field">
+              <span>연지출</span>
+              <input id="annualExpenses" type="text" inputmode="decimal" value="2600">
+              <em>만원</em>
+            </label>
+          </div>
+        </div>
+
+        <div class="field-section">
+          <div class="section-label">계산 가정</div>
+          <div class="field-grid two">
+            <label class="field">
+              <span>연 투자수익률</span>
+              <input id="annualReturn" type="number" step="0.1" value="5">
+              <em>%</em>
+            </label>
+            <label class="field">
+              <span>인출률</span>
+              <input id="withdrawalRate" type="number" step="0.1" value="4">
+              <em>%</em>
+            </label>
+          </div>
+        </div>
+
+        <p class="simple-note">연저축액은 연소득에서 연지출을 뺀 금액으로 자동 계산합니다.</p>
 
         <div class="button-row">
           <button type="button" class="primary-button" id="copyShare">공유 링크 복사</button>
@@ -88,17 +89,19 @@
       </form>
 
       <section class="result-panel" aria-live="polite">
-        <div class="summary-card target">
-          <span>목표 은퇴자산</span>
-          <strong id="fireTarget">0원</strong>
-          <p id="targetSub">인출률 4% 기준</p>
-        </div>
-        <div class="summary-grid">
-          <div class="summary-card">
+        <div class="result-hero-card">
+          <div class="result-main">
             <span>은퇴 가능 나이</span>
             <strong id="retirementAge">-</strong>
             <p id="retirementSub">계산 중</p>
           </div>
+          <div class="result-target">
+            <span>목표 은퇴자산</span>
+            <strong id="fireTarget">0원</strong>
+            <p id="targetSub">인출률 4% 기준</p>
+          </div>
+        </div>
+        <div class="summary-grid">
           <div class="summary-card">
             <span>연 저축액</span>
             <strong id="annualSavings">0원</strong>
@@ -121,16 +124,24 @@
         <div class="journey">
           <div class="journey-head">
             <div>
-              <span>자산 추이</span>
-              <h2>은퇴 시뮬레이션</h2>
+              <span id="chartKicker">자산 추이</span>
+              <h2 id="chartTitle">은퇴 시뮬레이션</h2>
+            </div>
+            <div class="chart-tabs" role="tablist" aria-label="차트 보기 선택">
+              <button type="button" class="active" data-chart-mode="assets">자산</button>
+              <button type="button" data-chart-mode="cover">커버율</button>
+              <button type="button" data-chart-mode="flow">연간흐름</button>
             </div>
           </div>
           <div class="chart-wrap" id="chartView">
             <canvas id="projectionChart"></canvas>
           </div>
           <div class="table-title">
-            <span>연도별 상세표</span>
-            <strong>투자수익이 지출을 100% 덮는 시점이 경제적 독립 기준입니다.</strong>
+            <div>
+              <span>연도별 상세표</span>
+              <strong>투자수익이 지출을 100% 덮는 시점이 경제적 독립 기준입니다. 단위: 만원</strong>
+            </div>
+            <button class="small-button" type="button" id="toggleRows">전체 연도 보기</button>
           </div>
           <div class="table-wrap" id="tableView">
             <table>
@@ -154,7 +165,7 @@
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="fire-retirement-calculator.js?v=20260507b"></script>
+  <script src="fire-retirement-calculator.js?v=20260507c"></script>
   <script src="homepage-shell.js?v=20260506d"></script>
 </body>
 </html>

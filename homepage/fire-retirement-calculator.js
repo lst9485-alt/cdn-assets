@@ -19,6 +19,9 @@
 
   var chart = null;
   var toastTimer = null;
+  var chartMode = 'assets';
+  var tableExpanded = false;
+  var lastResult = null;
 
   function qs(id) {
     return document.getElementById(id);
@@ -148,9 +151,6 @@
 
   function renderSummary(result) {
     var ageText = result.retirementAge == null ? '80년 초과' : result.retirementAge + '세';
-    setText('heroTarget', formatMoney(result.targetNetworth));
-    setText('heroAge', ageText);
-    setText('heroSavingRate', formatPercent(result.savingsRate));
     setText('fireTarget', formatMoney(result.targetNetworth));
     setText('targetSub', '연지출 ÷ 인출률 ' + result.config.withdrawalRate + '%');
     setText('retirementAge', ageText);
@@ -177,36 +177,131 @@
     return row ? row.age + '세' : '80년 초과';
   }
 
+  function findRetirementIndex(result) {
+    return result.rows.findIndex(function (row) {
+      return row.year === result.retirementYear;
+    });
+  }
+
+  function getChartMeta(mode) {
+    if (mode === 'cover') return { kicker: '지출 커버율', title: '투자수익이 지출을 얼마나 덮는지' };
+    if (mode === 'flow') return { kicker: '연간흐름', title: '저축액과 투자수익 비교' };
+    return { kicker: '자산 추이', title: '은퇴 시뮬레이션' };
+  }
+
+  function setChartMode(mode) {
+    chartMode = mode || 'assets';
+    document.querySelectorAll('[data-chart-mode]').forEach(function (button) {
+      var active = button.dataset.chartMode === chartMode;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    if (lastResult) renderChart(lastResult);
+  }
+
   function renderChart(result) {
     if (typeof Chart === 'undefined') return;
+    var meta = getChartMeta(chartMode);
+    setText('chartKicker', meta.kicker);
+    setText('chartTitle', meta.title);
+
     var labels = result.rows.map(function (row) { return row.year + '년'; });
-    var networth = result.rows.map(function (row) { return Math.round(row.networth); });
-    var target = result.rows.map(function () { return Math.round(result.targetNetworth); });
+    var datasets;
+    var yTick;
+    var yMax;
+    var tooltipLabel;
+
+    if (chartMode === 'cover') {
+      datasets = [
+        {
+          label: '투자수익 지출 커버',
+          data: result.rows.map(function (row) {
+            return row.coveredRatio == null ? null : Math.round(row.coveredRatio * 100);
+          }),
+          borderColor: '#0f9f6e',
+          backgroundColor: 'rgba(15,159,110,.12)',
+          borderWidth: 3,
+          pointRadius: 0,
+          tension: .24,
+          fill: true
+        },
+        {
+          label: '경제적 독립 기준',
+          data: result.rows.map(function () { return 100; }),
+          borderColor: '#0a0a0a',
+          borderDash: [6, 6],
+          borderWidth: 2,
+          pointRadius: 0
+        }
+      ];
+      yTick = function (value) { return value + '%'; };
+      yMax = 130;
+      tooltipLabel = function (ctx) {
+        return ctx.dataset.label + ': ' + Math.round(ctx.parsed.y) + '%';
+      };
+    } else if (chartMode === 'flow') {
+      datasets = [
+        {
+          type: 'bar',
+          label: '연저축액',
+          data: result.rows.map(function (row) { return row.income == null ? null : Math.round(result.annualSavings); }),
+          backgroundColor: 'rgba(255,107,0,.42)',
+          borderRadius: 3
+        },
+        {
+          type: 'bar',
+          label: '투자수익',
+          data: result.rows.map(function (row) { return row.roi == null ? null : Math.round(row.roi); }),
+          backgroundColor: 'rgba(0,85,255,.32)',
+          borderRadius: 3
+        },
+        {
+          type: 'line',
+          label: '순자산 증가',
+          data: result.rows.map(function (row) { return row.change == null ? null : Math.round(row.change); }),
+          borderColor: '#0a0a0a',
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: .24
+        }
+      ];
+      yTick = function (value) { return formatMoney(value).replace('원', ''); };
+      tooltipLabel = function (ctx) {
+        return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y);
+      };
+    } else {
+      datasets = [
+        {
+          label: '순자산',
+          data: result.rows.map(function (row) { return Math.round(row.networth); }),
+          borderColor: '#ff6b00',
+          backgroundColor: 'rgba(255,107,0,.12)',
+          borderWidth: 3,
+          pointRadius: 0,
+          tension: .24,
+          fill: true
+        },
+        {
+          label: '목표 은퇴자산',
+          data: result.rows.map(function () { return Math.round(result.targetNetworth); }),
+          borderColor: '#0a0a0a',
+          borderDash: [6, 6],
+          borderWidth: 2,
+          pointRadius: 0
+        }
+      ];
+      yTick = function (value) { return formatMoney(value).replace('원', ''); };
+      tooltipLabel = function (ctx) {
+        return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y);
+      };
+    }
+
     if (chart) chart.destroy();
     chart = new Chart(qs('projectionChart'), {
       type: 'line',
       data: {
         labels: labels,
-        datasets: [
-          {
-            label: '순자산',
-            data: networth,
-            borderColor: '#ff6b00',
-            backgroundColor: 'rgba(255,107,0,.12)',
-            borderWidth: 3,
-            pointRadius: 0,
-            tension: .24,
-            fill: true
-          },
-          {
-            label: '목표 은퇴자산',
-            data: target,
-            borderColor: '#0a0a0a',
-            borderDash: [6, 6],
-            borderWidth: 2,
-            pointRadius: 0
-          }
-        ]
+        datasets: datasets
       },
       options: {
         responsive: true,
@@ -216,9 +311,7 @@
           legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 12, font: { weight: 700 } } },
           tooltip: {
             callbacks: {
-              label: function (ctx) {
-                return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y);
-              }
+              label: tooltipLabel
             }
           }
         },
@@ -226,25 +319,52 @@
           x: { grid: { display: false }, ticks: { maxRotation: 0, maxTicksLimit: 8 } },
           y: {
             beginAtZero: true,
+            suggestedMax: yMax,
             grid: { color: 'rgba(10,10,10,.08)' },
-            ticks: { callback: function (value) { return formatMoney(value).replace('원', ''); } }
+            ticks: { callback: yTick }
           }
         }
       }
     });
   }
 
+  function getCompactRows(result) {
+    if (tableExpanded) return result.rows;
+    var keep = new Set([0]);
+    var lastIndex = result.rows.length - 1;
+    for (var i = 1; i <= Math.min(5, lastIndex); i += 1) keep.add(i);
+    [findRetirementIndex(result), result.rows.findIndex(function (row) {
+      return row.coveredRatio != null && row.coveredRatio >= 1;
+    }), lastIndex].forEach(function (index) {
+      if (index < 0) return;
+      for (var offset = -2; offset <= 2; offset += 1) {
+        var candidate = index + offset;
+        if (candidate >= 0 && candidate <= lastIndex) keep.add(candidate);
+      }
+    });
+    return result.rows.filter(function (_, index) { return keep.has(index); });
+  }
+
   function renderTable(result) {
-    qs('projectionTable').innerHTML = result.rows.map(function (row) {
+    var rows = getCompactRows(result);
+    var toggle = qs('toggleRows');
+    if (toggle) {
+      toggle.textContent = tableExpanded ? '핵심 연도만 보기' : '전체 연도 보기';
+      toggle.hidden = result.rows.length <= rows.length;
+    }
+    qs('projectionTable').innerHTML = rows.map(function (row) {
       var covered = row.coveredRatio == null ? null : Math.max(0, row.coveredRatio);
-      var barWidth = covered == null ? 0 : Math.min(100, covered * 100);
-      var coveredText = covered == null ? '-' : formatPercent(covered);
-      return '<tr' + (row.independent ? ' class="is-independent"' : '') + '>' +
+      var barWidth = covered == null ? 0 : Math.min(100, covered / 1.25 * 100);
+      var coveredText = covered == null ? '-' : covered >= 1.25 ? '125%+' : formatPercent(covered);
+      var rowClass = row.independent ? ' class="is-independent"' : covered >= 1 ? ' class="is-covered"' : '';
+      var barClass = covered >= 1 ? ' cover-bar is-covered' : ' cover-bar';
+      var title = covered == null ? '' : ' title="' + formatPercent(covered, 1) + '"';
+      return '<tr' + rowClass + '>' +
         '<td>' + row.year + '</td>' +
         '<td>' + formatTableMoney(row.income) + '</td>' +
         '<td>' + formatTableMoney(row.expenses) + '</td>' +
         '<td>' + formatTableMoney(row.roi) + '</td>' +
-        '<td><div class="cover-cell"><span>' + coveredText + '</span><div class="cover-bar"><i style="width:' + barWidth + '%"></i></div></div></td>' +
+        '<td><div class="cover-cell"><span' + title + '>' + coveredText + '</span><div class="' + barClass + '"><i style="width:' + barWidth + '%"></i></div></div></td>' +
         '<td>' + formatTableMoney(row.change) + '</td>' +
         '<td>' + formatTableMoney(row.networth) + '</td>' +
         '</tr>';
@@ -291,6 +411,7 @@
 
   function update() {
     var result = calculateFire(readConfigFromDom());
+    lastResult = result;
     renderSummary(result);
     renderChart(result);
     renderTable(result);
@@ -310,7 +431,17 @@
       showToast('기본값으로 복원했습니다.');
     });
     qs('copyShare').addEventListener('click', copyShareLink);
-    qs('copyShareTop').addEventListener('click', copyShareLink);
+    if (qs('copyShareTop')) qs('copyShareTop').addEventListener('click', copyShareLink);
+    if (qs('toggleRows')) qs('toggleRows').addEventListener('click', function () {
+      tableExpanded = !tableExpanded;
+      if (lastResult) renderTable(lastResult);
+    });
+    document.querySelectorAll('[data-chart-mode]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        setChartMode(button.dataset.chartMode);
+      });
+    });
+    setChartMode('assets');
     update();
   }
 
