@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-07T06:00:02.287493+09:00",
+  "updated": "2026-05-08T06:00:01.526692+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -41,55 +41,63 @@
         },
         {
           "id": 2,
-          "title": "슬라이드 템플릿 메타 점검 후속",
+          "title": "홈페이지 수정&자체사이트 GA4/Clarity 추적 코드 적용 (4/30~)",
           "ref": null,
           "items": [
             {
-              "text": "2-9. 2026-05-17-코스피vs아파트 영상 후속 검수 — 시각/톤 검수. URL: https://lst9485-alt.github.io/cdn-assets/slide-viewer/260517-slides.html",
-              "done": true
-            },
-            {
-              "text": "2-14-1. (5/6 완료) merge_chunks 번호 점프 자동 감지 — `detect_numbering_mode()` 추가",
-              "done": true
-            },
-            {
-              "text": "2-19-1. (5/6 완료) SlidePlan chapter-badge T21/T27/T38 분열 — VariantPlan.sub_variant 필드 + check_max_chars 매핑",
-              "done": true
-            },
-            {
-              "text": "2-20. (5/6 완료) **검사기 한도 캘리브레이션** — T48/T55/T56/T57/T58/T59 + T42(split-compare)/T30(branch-flow)/T24(versus-emoji) base + T50/T54 라벨 한도 상향(영상 260517 실측 기준). archive 영상 verify-md skip 정책 (경로+frontmatter 하이브리드 + `--skip-archive` 플래그). 영상 260517 31건 → 11건(진성) → archive skip으로 0건. 잔존 진성 결함은 fitText로 후속 처리.",
-              "done": true
-            },
-            {
-              "text": "2-22. (5/6 완료) **콘텐츠 길이 자동 조정 시스템** (코덱스 안 채택 — fitText opt-in 파일럿) — T41/T44/T48/T50 4타입 핵심 슬롯에 `data-fit-text=\"true\"` 마크. animations.js fitTextEl + DOMContentLoaded 자동 init. 차트 SVG 제외 / min 60px floor / 1회 측정 / 마크 제거로 즉시 롤백. 코덱스 권장: clamp 단독은 vw 기반 발표자 모드 회귀 위험.",
-              "done": true
-            },
-            {
-              "text": "2-21. (5/6 완료) **BC 텍스트 cap + STEP1 풀 동기화** — `select_templates.py` _pair_key 정렬에 visual_category=\"텍스트\" 비율 cap (45%, 짧은 chunk 비활성) 추가, `_text_only_over_cap` 모듈 함수 분리. `plan_builder.py` STEP1_NONTEXT_POOL 정적 dict(4종) → type-compile-config 동적 빌드(7종, T02/T20/T42 자동 보강, T35 SKIP). pytest 1166 통과. 영상 260517 시뮬: 그림없음 streak 0건, BC 텍스트 비율 0%.",
-              "done": true
-            },
-            {
-              "text": "2-21-A. (5/6 보류 결정) 라우터 weak streak penalty — 영상 3편(260517/260503/260426) 검증에서 BC 텍스트 cap + STEP1 풀 동기화만으로 그림없음 streak 0건 / 5장+ 연속 0건 확인. 라우터 변경 ROI 낮음 + 골든셋 Top-1 회귀 위험 → 보류.",
-              "done": true
-            },
-            {
-              "text": "2-23. (5/6 완료) **step=3 신규 4종 T65~T68 추가** — 외부 조사(reveal.js/Slidev/もふもふ不動産/PAS) + 내부 manuscript 분석 후 시간3분할/인과3단/넘버드포인트/선택결과 4종 디자인. 9단계 풀 코스(HTML+CSS+regenerate-snippets+type-compile-config+generate-slides 파서+SKILL.md+edit-events 화이트리스트+카테고리 매핑+테스트 갱신) 완료. pytest 1166→1168 통과. 영상 5/3 엔드투엔드 generate 성공 (234 슬라이드, all checks passed, 신규 4종 5번 활용, placeholder 잔존 0). cdn-assets push 완료(`413b0df`).",
-              "done": true
-            },
-            {
-              "text": "2-24. **라우터 가중치 튜닝 — step=3 비율 상승** — 신규 T67(visual=텍스트)이 A슬롯에서도 더 자주 선택되도록 라우터 scoring 조정. 영상 4/26 측정에서 step=3 비율 변화 미미(4.1% → 4.1%) 확인. 골든셋 Top-1/Top-3 회귀 측정 필수. 시작: \"투두 2-24 이어서 — 라우터 _diversity_penalty 또는 scoring 가중치 튜닝, step=3 비율 상승 목표\"",
+              "text": "2-1. 자체사이트 공통 `<head>`에 GA4 + Clarity 코드 삽입",
               "done": false
             },
             {
-              "text": "2-25. **T65~T68 fitText opt-in 마킹 검토** — `template/generate-slides.py` `_mark_fit_text()`에 T65/T66/T67/T68 핵심 텍스트 슬롯(time3-line, cause3-line, numpoint3-line, choice3-cond-line/act-line) 마킹 추가 검토. 현재 max_chars 검사로 차단 충분이지만 사후 폰트 자동 축소 안전망. 우선순위 낮음, 영상에서 한도 초과 발생 시 검토. 시작: \"투두 2-25 이어서 — yt-slide T65~T68 fitText 마킹 추가\"",
+              "text": "2-2. 아임웹 결제/완료 페이지에도 같은 GA4 코드 삽입 가능한지 확인",
               "done": false
             },
             {
-              "text": "2-26. **T65~T68 variants 확장** — 현재 base 4종만, variants 0개. 영상 시뮬에서 활용 빈도 낮은 원인 일부. 각 타입 1~2개 변형 추가 (sub_variant 또는 색상/레이아웃 변주). 우선순위 낮음, 신규 영상에서 콘텐츠 다양성 부족 시 진행. 시작: \"투두 2-26 이어서 — yt-slide T65~T68 각 1~2개 variants 추가, slides-editor.html 같은 page-group base 옆 삽입\"",
+              "text": "2-3. GA4에서 자체사이트 도메인과 아임웹 결제 도메인 크로스 도메인 설정",
               "done": false
             },
             {
-              "text": "2-27. **T68 4-5 parts fallback 모니터링** — rv 후 추가한 부분 데이터 fallback (`len(parts) in (4, 5)`). select-templates는 7 parts 표준이지만 수동 작성 / 부분 데이터 케이스 대비 안전망. 실 영상에서 4-5 parts 케이스 발생 빈도 추적. 발생 시 select-templates 또는 manuscript 단계 검사 추가 검토. 우선순위 매우 낮음(이론적 안전망).",
+              "text": "2-4. GA4 실시간 보고서에서 `page_view`, `section_view` 수집 확인",
+              "done": false
+            },
+            {
+              "text": "2-5. Clarity 대시보드/레코딩에서 세션 수집 확인",
+              "done": false
+            },
+            {
+              "text": "2-6. 임시로 푸시해서 확인한 페이지가 있으면 대시보드 `임시 테스트` 섹션에서 제거",
+              "done": false
+            },
+            {
+              "text": "2-7. 코칭페이지 후기 섹션 보강 — 후기 유형 태그/대표 후기 고정 노출/기존 아임웹 후기 구성 참고해서 신뢰 섹션 정리",
+              "done": false
+            },
+            {
+              "text": "2-8. 코칭페이지 하단 CTA/증거 섹션 정리 — 기존 아임웹처럼 환불규정 아래 CTA, 카카오 채널, 안내문 구조 기준으로 복원·정리",
+              "done": false
+            },
+            {
+              "text": "2-9. 코칭페이지 섹션별 문구/전환 흐름 재정비 — 01~11 섹션 검토 기준으로 중복 문구, 여백, CTA 카피, 신청 전 요약 정보 정리",
+              "done": false
+            },
+            {
+              "text": "2-10. 코칭페이지 가격/신청 흐름 통일 — A/B 상품 상태, 상담신청/대기신청 라벨, 폼 비활성 상태 한 기준으로 맞추기",
+              "done": false
+            },
+            {
+              "text": "2-11. 코칭페이지 히어로/스토리 압축 — 첫 화면 키워드 카드 축소, 헤드라인 문구 정리, 스토리 섹션 감정선 길이 줄이기",
+              "done": false
+            },
+            {
+              "text": "2-12. 코칭페이지 FAQ/환불영역 정리 — FAQ 개수 축소, 환불 핵심 1줄 요약 추가, 하단 공백/폭 정리",
+              "done": false
+            },
+            {
+              "text": "2-13. 코칭페이지 신청폼 마찰 줄이기 — 신청 직전 요약 카드, 기타 입력 조건부 노출, 결제 안내 문구 단순화",
+              "done": false
+            },
+            {
+              "text": "자료실? 커뮤니티? 신설. 영상으로 관련 자료배포.",
               "done": false
             }
           ]
@@ -292,102 +300,55 @@
           "ref": "라오어 무한매수법",
           "items": [
             {
-              "text": "8-1. 깃허브 조사 — 키워드: `infinite buying`, `라오어`, `value rebalancing`, `TQQQ backtest`, `leveraged ETF DCA backtest`, `VWAP TWAP backtest`. **awesome-quant·awesome-systematic-trading 리스트, vectorbt/backtrader/zipline-reloaded 플러그인 생태계, 한국 블로거 깃허브 포크까지** 훑기 (primary 레포만 보면 판단 뒤집힘)",
+              "text": "8-1. 깃허브 조사 2차 — 1차 후보 외에 `infinite buying`, `라오어`, `value rebalancing`, `value averaging`, `TQQQ backtest`, `leveraged ETF DCA backtest`, `VWAP TWAP backtest`, `awesome-quant`, `awesome-systematic-trading`, `vectorbt`, `backtrader`, `zipline-reloaded`, 한국 블로거 포크까지 훑기",
               "done": false
             },
             {
-              "text": "8-2. 후보 3~5개 비교표 — 라이선스 / 활성도 / 한국 사용 사례 / 무한매수법·VR 적용 가능성 / 데이터 소스(yfinance·Polygon 등) / 시각화 수준",
+              "text": "8-2. 후보 3~5개 비교표 작성 — 라이선스 / 최근 업데이트 / 언어·프레임워크 / 한국 사용 사례 / 무한매수법 적용 가능성 / VR 적용 가능성 / 데이터 소스(yfinance·Polygon 등) / 시각화 수준 / Streamlit 이전 난이도",
               "done": false
             },
             {
-              "text": "8-3. 채택 결정 → `Workspace/apps/laoer-backtest/` (또는 더 적합한 이름) 폴더 생성 + `.context.md`",
+              "text": "8-3. 채택 결정 — 기본안: `Streamlit + Python 엔진`, GitHub Pages 대시보드는 바로가기 버튼. 프로젝트명은 `workspace/apps/laoer-backtest/` 또는 `workspace/apps/infinite-vr-backtest/` 중 결정",
               "done": false
             },
             {
-              "text": "8-4. 백테스트 환경 셋업 — Python venv + 데이터 소스(TQQQ/SOXL/QQQ 일봉, 분봉 필요시), 라오어 카페 본문 80개 정본 룰 추출",
+              "text": "8-4. 프로젝트 폴더 생성 + `.context.md` — 목표, 참고 repo, 채택 구조, 검증 기준, 배포 방식(Streamlit Cloud + dashboard link) 기록",
               "done": false
             },
             {
-              "text": "8-5. 무한매수법 V1 구현·검증 — 라오어 카페 본문 백테스트 수치(예: 글 38945 G=10 → 2.98배)와 일치하는지 비교",
+              "text": "8-5. 백테스트 환경 셋업 — Python venv, `streamlit`, `pandas`, `yfinance`, `plotly`, 테스트 도구, 데이터 캐시 구조(TQQQ/SOXL/QQQ/QLD 일봉, 필요시 분봉)",
               "done": false
             },
             {
-              "text": "8-6. 무한매수법 V2/V2.1 추가 (RSI 진입 조건, 보수적 매도 룰)",
+              "text": "8-6. 입력 UI 설계 — 종목, 기간, 시작금, 적립금, 수수료, 세금, 슬리피지, G값, 밴드, 회차, 전략 버전, 현금풀, 리밸런싱 주기, 실전/근사 모드 토글을 쉽게 바꾸게 만들기",
               "done": false
             },
             {
-              "text": "8-7. VR 5.0 기본공식 구현 — V/Pool/G 갱신 공식 (`다음V = 현재V + Pool/G + 적립금`), 적립/거치/인출 모드 + 사이클당 한도(75/50/25%)",
+              "text": "8-7. VR 5.0 기본공식 먼저 구현 — V/Pool/G 갱신 공식 (`다음V = 현재V + Pool/G + 적립금`), G=10/20/40, 밴드 ±5/10/15/20%, 적립식/거치식/인출식, 사이클당 한도(75/50/25%)",
               "done": false
             },
             {
-              "text": "8-8. VR 5.0 실력공식 추가 — 하락장 V 하향 로직",
+              "text": "8-8. VR 검증 — 카페 글 38945(G값), 38947(밴드폭), 3596/51823(운영 사례) 기준으로 결과가 방향성·수치상 맞는지 비교",
               "done": false
             },
             {
-              "text": "8-9. 결과 리포트 — 수익률 그래프, 최대낙폭(MDD), 평균 현금비중, 사이클 횟수, 라오어 본인 운영(글 3596 등)과 비교",
+              "text": "8-9. 무한매수법 V1/V2/V2.1 구현 — LOC평단매수, LOC큰수매수, 40회 사이클, 쿼터매도, 영혼법, RSI 진입 조건, 보수적 매도 룰",
               "done": false
             },
             {
-              "text": "8-10. (선택) 시뮬레이션 모드 — 실투자 전 가상 자금 5000달러로 2~4주 연습",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 9,
-          "title": "자체사이트 GA4/Clarity 추적 코드 적용 (4/30~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "9-1. 자체사이트 공통 `<head>`에 GA4 + Clarity 코드 삽입",
+              "text": "8-10. 무한매수법 검증 — 라오어 카페 본문/운영 사례와 비교. 단, 프리장/애프터장 체결 차이 때문에 결과 명칭은 “완벽 백테스트”가 아니라 “근사 시뮬레이션”으로 표시",
               "done": false
             },
             {
-              "text": "9-2. 아임웹 결제/완료 페이지에도 같은 GA4 코드 삽입 가능한지 확인",
+              "text": "8-11. 결과 리포트 — 수익률 그래프, MDD, 현금 소진 시점, 평균 현금비중, 사이클 횟수, 매매 로그, 연도별 수익률, 파라미터별 민감도 표",
               "done": false
             },
             {
-              "text": "9-3. GA4에서 자체사이트 도메인과 아임웹 결제 도메인 크로스 도메인 설정",
+              "text": "8-12. 배포 — Streamlit Cloud 무료 배포, GitHub repo push, 기존 `https://lst9485-alt.github.io/cdn-assets/` 대시보드에 “무한매수법·VR 백테스트” 바로가기 추가",
               "done": false
             },
             {
-              "text": "9-4. GA4 실시간 보고서에서 `page_view`, `section_view` 수집 확인",
-              "done": false
-            },
-            {
-              "text": "9-5. Clarity 대시보드/레코딩에서 세션 수집 확인",
-              "done": false
-            },
-            {
-              "text": "9-6. 임시로 푸시해서 확인한 페이지가 있으면 대시보드 `임시 테스트` 섹션에서 제거",
-              "done": false
-            },
-            {
-              "text": "9-7. 코칭페이지 후기 섹션 보강 — 후기 유형 태그/대표 후기 고정 노출/기존 아임웹 후기 구성 참고해서 신뢰 섹션 정리",
-              "done": false
-            },
-            {
-              "text": "9-8. 코칭페이지 하단 CTA/증거 섹션 정리 — 기존 아임웹처럼 환불규정 아래 CTA, 카카오 채널, 안내문 구조 기준으로 복원·정리",
-              "done": false
-            },
-            {
-              "text": "9-9. 코칭페이지 섹션별 문구/전환 흐름 재정비 — 01~11 섹션 검토 기준으로 중복 문구, 여백, CTA 카피, 신청 전 요약 정보 정리",
-              "done": false
-            },
-            {
-              "text": "9-10. 코칭페이지 가격/신청 흐름 통일 — A/B 상품 상태, 상담신청/대기신청 라벨, 폼 비활성 상태 한 기준으로 맞추기",
-              "done": false
-            },
-            {
-              "text": "9-11. 코칭페이지 히어로/스토리 압축 — 첫 화면 키워드 카드 축소, 헤드라인 문구 정리, 스토리 섹션 감정선 길이 줄이기",
-              "done": false
-            },
-            {
-              "text": "9-12. 코칭페이지 FAQ/환불영역 정리 — FAQ 개수 축소, 환불 핵심 1줄 요약 추가, 하단 공백/폭 정리",
-              "done": false
-            },
-            {
-              "text": "9-13. 코칭페이지 신청폼 마찰 줄이기 — 신청 직전 요약 카드, 기타 입력 조건부 노출, 결제 안내 문구 단순화",
+              "text": "8-13. (선택) 실전 연습 모드 — 실투자 전 가상 자금 5000달러로 2~4주 연습, 매일 주문표/체결 기록만 입력하는 모드",
               "done": false
             }
           ]
@@ -461,6 +422,107 @@
             },
             {
               "text": "12-8. 구글 비즈니스 프로필 070 반영 검증 — 1주일 후 다른 갤럭시 폰으로 본인 번호 전화 테스트",
+              "done": false
+            },
+            {
+              "text": "회원 맞춤페이지 개선 -> 저축/복리계산기 등 추가.-",
+              "done": false
+            },
+            {
+              "text": "https://toss.im/tossfeed/calculator/dsr",
+              "done": false
+            },
+            {
+              "text": "https://www.moneynestlab.com/investment 등 참고.",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "title": "SOXL 시트 텔레그램 자동화 연결 (5/7~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "13-1. `mumae.env`에 SOXL 시트 URL 추가 (TQQQ 항목 그대로 유지) — 새 키 예: `MUMAE_SHEET_URL_SOXL`, `MUMAE_SHEET_ID_SOXL`, `MUMAE_SHEET_GID_MAIN_SOXL`",
+              "done": false
+            },
+            {
+              "text": "13-2. SOXL 시트에서 GAS Web App 새로 배포 — 시트 안 `확장 프로그램 > Apps Script`. 새 URL/토큰 받기",
+              "done": false
+            },
+            {
+              "text": "13-3. n8n 워크플로 `bjWvcublAnDdd5k3` 라우터에 종목 선택 단계 추가 (`[정정] → 종목 선택 → 정정 종류`). `sd.sessions[chatId]` 키를 `chatId+ticker`로 분리",
+              "done": false
+            },
+            {
+              "text": "13-4. 22:25 주문표 자동 재전송 노드 종목별 분기 (TQQQ + SOXL 각각 호출)",
+              "done": false
+            },
+            {
+              "text": "13-5. 08:00 자동 반영 노드 종목별 분기 (SOXL 일봉 따로 조회)",
+              "done": false
+            },
+            {
+              "text": "13-6. `reconcile_fill_log.py` 종목 인자화 + nightwatch `mumae-fill-log.sh` cron 종목별 호출 추가",
+              "done": false
+            },
+            {
+              "text": "13-7. 모의 단위 시험 (SOXL 시트로 텔레그램 흐름 한 번 끝까지)",
+              "done": false
+            },
+            {
+              "text": "13-8. 실 운영 시작: SOXL 첫 사이클 소액 ($1,000~) 1회 완주 후 시드 확대",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "title": "유튜브 우측상단 브랜드 버그 모션 정리 (5/7~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "14-1. 현재 18개 후보 중 버릴 것/남길 것 표시 — 후보 자체는 아카이브에 보관, 최종 로고로 쓰지 않음",
+              "done": false
+            },
+            {
+              "text": "14-2. 새 방향 5개 제작 — `우리동네 재테크` 워드마크 중심, 동네 좌표/주소 라벨/기준선/브리핑 시그널 중 1개만 결합",
+              "done": false
+            },
+            {
+              "text": "14-3. 실제 영상 우측상단 크기에서 6~8초 반복 모션으로 확인 — 움직임은 잘 보이되 화면 방해 최소화",
+              "done": false
+            },
+            {
+              "text": "14-4. 마음에 드는 1~2개만 투명 배경 WebM/MOV 출력 방식까지 정리",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "title": "은퇴계산기 최종 UX 다듬기 (5/7~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "15-1. 실제 사용자 입력 흐름 재점검 — 현재나이/보유자산/월저축/연지출/수익률/인출률을 바꿔보며 헷갈리는 문구·레이아웃 찾기",
+              "done": false
+            },
+            {
+              "text": "15-2. Lightyear 참고와 시각 비교 — 차트 카드, 입력 카드, 결과 스트립, 표 밀도 기준으로 더 닮게 다듬기",
+              "done": false
+            },
+            {
+              "text": "15-3. 모바일 표/차트 가독성 개선 — 표 가로 스크롤, 상단 고정 네비 겹침, 숫자 크기 확인",
+              "done": false
+            },
+            {
+              "text": "15-4. 계산 회귀 테스트 고정 — 기본값, 저축 0원, 수익률 0%/-5%/3%, 이미 목표 도달, 한국식 금액 입력 검산",
+              "done": false
+            },
+            {
+              "text": "15-5. 최종 배포 후 공개 URL에서 캐시 버전과 화면 반영 확인",
               "done": false
             }
           ]

@@ -1,12 +1,12 @@
 {
-  "updated": "2026-05-07T06:00:02.664365+09:00",
+  "updated": "2026-05-08T06:00:01.902519+09:00",
   "projects": [
     {
       "name": "무한매수법",
       "type": "folder",
       "app": "n8n/workflows/05 무한매수",
-      "modified": "2026-05-05",
-      "status": "원격 n8n workflow `bjWvcublAnDdd5k3` (`05 무한매수`) 활성화 확인.",
+      "modified": "2026-05-07",
+      "status": "TQQQ 40분할: 운영 중 (시트 ID `161bOsH0OO5Sggf_0lI7_r1axpXPXQa8uWyQf-K63CVM`).",
       "next": null
     },
     {

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-07T06:00:16.875141+09:00",
+  "updated": "2026-05-08T06:00:09.524671+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 379,
-    "done": 352,
-    "overdue": 8,
+    "total": 383,
+    "done": 356,
+    "overdue": 12,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,48 +61,38 @@
         "overdue": true
       },
       {
-        "title": "랜딩 수정",
-        "date": "2026-05-06T19:00:00.000+09:00",
+        "title": "주간계획 수정",
+        "date": "2026-05-07T08:30:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "주간계획 수정",
-        "date": "2026-05-07T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "찬규입사",
-        "date": "2026-05-07T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "주제선정&썸네일&제목",
-        "date": "2026-05-07T11:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-05-07T14:15:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "자료수집&도입부",
-        "date": "2026-05-07T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
-        "date": "2026-05-07T15:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-05-07T15:15:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "5시 미용실커트",
         "date": "2026-05-07T17:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
-        "title": "원고완성",
-        "date": "2026-05-07T19:00:00.000+09:00",
-        "overdue": false
+        "title": "원고",
+        "date": "2026-05-07T20:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "급여&자산체크",
         "date": "2026-05-08T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고완성",
+        "date": "2026-05-08T10:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -117,7 +107,7 @@
       },
       {
         "title": "촬영&편집&업로드",
-        "date": "2026-05-09",
+        "date": "2026-05-08T19:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -159,47 +149,45 @@
         "title": "콘텐츠 관리시트",
         "date": "2026-05-13T12:00:00.000+09:00",
         "overdue": false
+      },
+      {
+        "title": "원고완성",
+        "date": "2026-05-14",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-05-14T08:30:00.000+09:00",
+        "overdue": false
       }
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "찬규입사",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "time": "13:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "원고",
-        "time": "15:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "5시 미용실커트",
-        "time": "17:00",
+        "title": "급여&자산체크",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "원고완성",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원고",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "PPT완료",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "촬영&편집&업로드",
         "time": "19:00",
         "allDay": false,
         "done": false
@@ -230,56 +218,25 @@
     "priorities": [],
     "identity": null,
     "weekly_stats": {
-      "total": 28,
-      "done": 9,
-      "rate": "32%",
-      "days": [
-        {
-          "date": "2026-05-01",
-          "done": 3,
-          "total": 4
-        },
-        {
-          "date": "2026-05-02",
-          "done": 1,
-          "total": 4
-        },
-        {
-          "date": "2026-05-03",
-          "done": 2,
-          "total": 4
-        },
-        {
-          "date": "2026-05-04",
-          "done": 1,
-          "total": 4
-        },
-        {
-          "date": "2026-05-05",
-          "done": 1,
-          "total": 4
-        },
-        {
-          "date": "2026-05-06",
-          "done": 1,
-          "total": 4
-        },
-        {
-          "date": "2026-05-07",
-          "done": 0,
-          "total": 4
-        }
-      ]
+      "total": 0,
+      "done": 0,
+      "rate": "0%",
+      "days": []
     }
   },
   "sales": {
     "month": "2026-05",
     "month_label": "5월",
-    "total_amount": 40,
-    "total_count": 1,
+    "total_amount": 80,
+    "total_count": 2,
     "weekly": [
       {
         "week": "1주차",
+        "count": 1,
+        "amount": 40
+      },
+      {
+        "week": "2주차",
         "count": 1,
         "amount": 40
       }
