@@ -1095,6 +1095,9 @@
     57: 'title',    58: 'title',    59: 'title',    60: 'title',
     61: 'title',    62: 'title',    63: 'title',    64: 'title',
     65: 'title',    66: 'title',    67: 'title',    68: 'title',
+    69: 'title',    70: 'title',    71: 'title',    72: 'title',
+    73: 'title',    74: 'title',    75: 'title',    76: 'title',
+    77: 'title',
   };
 
   const PG_TO_CATEGORY = {
@@ -1116,7 +1119,9 @@
     56: '텍스트',      57: '텍스트',      58: '텍스트',      59: '텍스트',
     60: '텍스트',      61: '텍스트',      62: '텍스트',      63: '비교',
     64: '텍스트',      65: '비교',        66: '플로우',      67: '텍스트',
-    68: '비교',
+    68: '비교',        69: '텍스트',
+    70: '텍스트',      71: '텍스트',      72: '비교',        73: '텍스트',
+    74: '플로우',      75: '텍스트',      76: '텍스트',      77: '비교',
   };
 
   function bucketOfPageGroup(pg) {
@@ -7744,6 +7749,15 @@
     '.person-role', '.person-desc', '.blog-counter', '.blog-meta', '.term-en', '.term-desc', // T39~T43
     '.step-title', '.reveal-line1', '.reveal-line2', '.two-step-title', '.two-step-desc', '.point-title', '.point-desc', '.vertical-line1', '.vertical-line2', '.left-rail-title', '.left-rail-desc', '.quote-tail', // T49~T59
     '.reveal-band-text', '.left-rail-desc-text', '.quote-tail-text', '.step-card-body', '.postit-num', '.branch-root-text', '.branch-result-text', // T56~T59
+    '.step4-line1', '.step4-line2', '.step4-line3', '.step4-line4', // T69 단계강조4단 (세션 93)
+    '.step5-line1', '.step5-line2', '.step5-line3', '.step5-line4', '.step5-line5', // T70
+    '.conclusion4-reason1', '.conclusion4-reason2', '.conclusion4-reason3', // T71
+    '.compare4-card', '.compare4-line', // T72
+    '.countdown4-tag', '.countdown4-line', '.countdown4-num', // T73
+    '.cause4-card', '.cause4-line', // T74
+    '.numpoint4-tag', '.numpoint4-line', '.numpoint4-card', // T75
+    '.numpoint5-tag', '.numpoint5-line', '.numpoint5-card', // T76
+    '.choice4-cond-line', '.choice4-act-line', '.choice4-cond', '.choice4-act', '.choice4-stack', // T77
     '.time3-tag', '.time3-line', '.time3-card', // T65 시간3분할 (세션 91)
     '.cause3-line', '.cause3-card', // T66 인과3단 (세션 91)
     '.numpoint3-tag', '.numpoint3-line', '.numpoint3-card', // T67 넘버드포인트 (세션 91)
@@ -9166,6 +9180,15 @@
     66: {"label":"T66 인과3단","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
     67: {"label":"T67 넘버드포인트","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
     68: {"label":"T68 선택결과","schemaRequiredCount":3,"fillRange":[3,3],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    69: {"label":"T69 단계강조4단","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    70: {"label":"T70 단계강조5단","schemaRequiredCount":5,"fillRange":[5,5],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    71: {"label":"T71 결론펼침4근거","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    72: {"label":"T72 비교사지선다","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    73: {"label":"T73 카운트다운강조4","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    74: {"label":"T74 인과4단","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    75: {"label":"T75 넘버드포인트4","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    76: {"label":"T76 넘버드포인트5","schemaRequiredCount":5,"fillRange":[5,5],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
+    77: {"label":"T77 선택결과4","schemaRequiredCount":4,"fillRange":[4,4],"itemsRange":null,"displaySteps":null,"usageScope":null,"media":{"image":false,"imageRequired":false,"emoji":false}},
   };
 
   function typeMetaOfPageGroup(pg) {
