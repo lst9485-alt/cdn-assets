@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-08T06:00:01.526692+09:00",
+  "updated": "2026-05-09T06:00:01.858892+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -14,27 +14,11 @@
               "done": true
             },
             {
-              "text": "1-2. **5/9 8시 UH_5037 자동 발송 검증** — 사장님 카톡 도착 + Meet 링크 정상 (meet.google.com/nhx-jwxg-ojj)",
+              "text": "1-2. 알리고 SMS 발송 내역 주기 확인 — 매주 1회 후속 SMS 4종 (3/30/90/180일) 정상 발송 점검",
               "done": false
             },
             {
-              "text": "1-3. **5/10 7시쯤 UH_5038 자동 발송 검증** — 5번 카톡 + Meet 링크 포함",
-              "done": false
-            },
-            {
-              "text": "1-4. **5/10 9:50 10분 전 텔레그램 알림 검증** — 우리동네봇 도착",
-              "done": false
-            },
-            {
-              "text": "1-5. **5/10 상담 시 Gemini 자동 회의록 작동 확인** — 1대1 자동 활성화 여부. 안 되면 매번 수동 클릭",
-              "done": false
-            },
-            {
-              "text": "1-6. 알리고 SMS 발송 내역 주기 확인 — 매주 1회 후속 SMS 4종 (3/30/90/180일) 정상 발송 점검",
-              "done": false
-            },
-            {
-              "text": "1-7. (선택) 매칭 실패 알림 정리 — `06_상담후처리.gs:617-625` importTasksToSheet 캘린더↔시트 C열 이름 매칭 알림. Calendly 직접 예약 시 매번 알림. phone 매칭 전환 또는 알림 제거 검토",
+              "text": "1-3. (선택) 매칭 실패 알림 정리 — `06_상담후처리.gs:617-625` importTasksToSheet 캘린더↔시트 C열 이름 매칭 알림. Calendly 직접 예약 시 매번 알림. phone 매칭 전환 또는 알림 제거 검토",
               "done": false
             }
           ]
@@ -439,45 +423,6 @@
           ]
         },
         {
-          "id": 13,
-          "title": "SOXL 시트 텔레그램 자동화 연결 (5/7~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "13-1. `mumae.env`에 SOXL 시트 URL 추가 (TQQQ 항목 그대로 유지) — 새 키 예: `MUMAE_SHEET_URL_SOXL`, `MUMAE_SHEET_ID_SOXL`, `MUMAE_SHEET_GID_MAIN_SOXL`",
-              "done": false
-            },
-            {
-              "text": "13-2. SOXL 시트에서 GAS Web App 새로 배포 — 시트 안 `확장 프로그램 > Apps Script`. 새 URL/토큰 받기",
-              "done": false
-            },
-            {
-              "text": "13-3. n8n 워크플로 `bjWvcublAnDdd5k3` 라우터에 종목 선택 단계 추가 (`[정정] → 종목 선택 → 정정 종류`). `sd.sessions[chatId]` 키를 `chatId+ticker`로 분리",
-              "done": false
-            },
-            {
-              "text": "13-4. 22:25 주문표 자동 재전송 노드 종목별 분기 (TQQQ + SOXL 각각 호출)",
-              "done": false
-            },
-            {
-              "text": "13-5. 08:00 자동 반영 노드 종목별 분기 (SOXL 일봉 따로 조회)",
-              "done": false
-            },
-            {
-              "text": "13-6. `reconcile_fill_log.py` 종목 인자화 + nightwatch `mumae-fill-log.sh` cron 종목별 호출 추가",
-              "done": false
-            },
-            {
-              "text": "13-7. 모의 단위 시험 (SOXL 시트로 텔레그램 흐름 한 번 끝까지)",
-              "done": false
-            },
-            {
-              "text": "13-8. 실 운영 시작: SOXL 첫 사이클 소액 ($1,000~) 1회 완주 후 시드 확대",
-              "done": false
-            }
-          ]
-        },
-        {
           "id": 14,
           "title": "유튜브 우측상단 브랜드 버그 모션 정리 (5/7~)",
           "ref": null,
@@ -523,6 +468,34 @@
             },
             {
               "text": "15-5. 최종 배포 후 공개 URL에서 캐시 버전과 화면 반영 확인",
+              "done": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "노트북",
+      "categories": [
+        {
+          "id": 16,
+          "title": "옵시디언 북마크 복원 (5/8~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "16-1. 노트북에서 옵시디언 종료",
+              "done": false
+            },
+            {
+              "text": "16-2. 노트북 vault 경로 확인 (예: `/Users/lst/.../Obsidian/.obsidian/`)",
+              "done": false
+            },
+            {
+              "text": "16-3. 맥미니에서 scp로 복사: `scp /Users/yunjitaegi/HQ/Obsidian/.obsidian/bookmarks.json notebook:<vault경로>/.obsidian/bookmarks.json`",
+              "done": false
+            },
+            {
+              "text": "16-4. 노트북 옵시디언 다시 열고 북마크 23개 표시 확인",
               "done": false
             }
           ]
