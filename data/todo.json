@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-09T06:00:01.858892+09:00",
+  "updated": "2026-05-10T06:00:01.630197+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -20,454 +20,485 @@
             {
               "text": "1-3. (선택) 매칭 실패 알림 정리 — `06_상담후처리.gs:617-625` importTasksToSheet 캘린더↔시트 C열 이름 매칭 알림. Calendly 직접 예약 시 매번 알림. phone 매칭 전환 또는 알림 제거 검토",
               "done": false
+            },
+            {
+              "text": "1-4. **117명 풀스캔 → 1명 처리 함수 분리** (5/9 완료) — `updateOneCustomer(name, dateStr)` 신규 + `checkNewDashboards`가 1건이면 1명 처리 호출. 풀스캔 본체 0줄 변경. 7~15분 → 5초 단축. .context.md 참조",
+              "done": true
             }
           ]
         },
         {
           "id": 2,
-          "title": "홈페이지 수정&자체사이트 GA4/Clarity 추적 코드 적용 (4/30~)",
-          "ref": null,
+          "title": "원소스 멀티유즈 콘텐츠 시스템 셋업 (4/25~)",
+          "ref": "원소스 멀티유즈",
           "items": [
             {
-              "text": "2-1. 자체사이트 공통 `<head>`에 GA4 + Clarity 코드 삽입",
+              "text": "2-1. 첫 주제 선정 — [[주제 풀]] 6개 카테고리에서 1주차 주제 1개 확정",
               "done": false
             },
             {
-              "text": "2-2. 아임웹 결제/완료 페이지에도 같은 GA4 코드 삽입 가능한지 확인",
+              "text": "2-2. L3 롱폼 원고 초안 작성 (유튜브 or 네이버 블로그 중 주력 채널 1개)",
               "done": false
             },
             {
-              "text": "2-3. GA4에서 자체사이트 도메인과 아임웹 결제 도메인 크로스 도메인 설정",
+              "text": "2-3. L3 → L2 카드뉴스·블로그 미드폼 파생 1세트",
               "done": false
             },
             {
-              "text": "2-4. GA4 실시간 보고서에서 `page_view`, `section_view` 수집 확인",
+              "text": "2-4. L3 → L1 숏폼 1-2개 컷 편집",
               "done": false
             },
             {
-              "text": "2-5. Clarity 대시보드/레코딩에서 세션 수집 확인",
+              "text": "2-5. 성공포맷 분석 1회차 — 타 분야 인기 콘텐츠 1개 구조 해체 기록",
               "done": false
             },
             {
-              "text": "2-6. 임시로 푸시해서 확인한 페이지가 있으면 대시보드 `임시 테스트` 섹션에서 제거",
+              "text": "2-6. 내 영상 제목 30개 훈련 1회차 완료",
               "done": false
             },
             {
-              "text": "2-7. 코칭페이지 후기 섹션 보강 — 후기 유형 태그/대표 후기 고정 노출/기존 아임웹 후기 구성 참고해서 신뢰 섹션 정리",
+              "text": "2-7. 1주 사이클 회고 → [[SNS 포맷]]·[[주제 풀]] 가이드 보완",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "경쟁채널/콘텐츠 모니터링 시스템 (4/16~)",
+          "ref": "경쟁채널 모니터링 시스템",
+          "items": [
+            {
+              "text": "3-2-1. 채널 1군/2군 설정 파일 확정 (4/27) — `config/channels.yaml`",
+              "done": true
+            },
+            {
+              "text": "3-2-2. 유튜브 수집 파이프라인 MVP 구축 (4/27) — YouTube Data API v3 우선",
+              "done": true
+            },
+            {
+              "text": "3-2-4. 데이터 저장소 구축 (4/27) — SQLite + 최신/일자별 dashboard JSON",
+              "done": true
+            },
+            {
+              "text": "3-3-1. 리포트 포맷 MVP 설계 (4/27) — 신규/잘된 영상/핵심 지표",
+              "done": true
+            },
+            {
+              "text": "3-3-2. 출력 위치 MVP 확정 (4/27) — GitHub Pages 대시보드 + Telegram 요약",
+              "done": true
+            },
+            {
+              "text": "3-4-1. 크론잡 등록 (4/27) — 매일 07:10",
+              "done": true
+            },
+            {
+              "text": "3-4-2. Telegram 알림 연결 (4/27)",
+              "done": true
+            },
+            {
+              "text": "3-4-3. 수동 실행 옵션 마련 (4/27) — `python3 -m competitor_monitor run`",
+              "done": true
+            },
+            {
+              "text": "3-1-1. 고스타 모니터링 시스템 심화 조사 — n8n, Huginn, RSSHub, changedetection.io, Grafana, Uptime Kuma, ntfy, Apprise 등 스타 많은 프로젝트를 “도입/구조 차용/제외” 매트릭스로 정리",
               "done": false
             },
             {
-              "text": "2-8. 코칭페이지 하단 CTA/증거 섹션 정리 — 기존 아임웹처럼 환불규정 아래 CTA, 카카오 채널, 안내문 구조 기준으로 복원·정리",
+              "text": "3-1-2. n8n으로 맡길 범위 결정 — 수집까지 맡길지, Python 수집기는 유지하고 알림/오케스트레이션만 맡길지 비교",
               "done": false
             },
             {
-              "text": "2-9. 코칭페이지 섹션별 문구/전환 흐름 재정비 — 01~11 섹션 검토 기준으로 중복 문구, 여백, CTA 카피, 신청 전 요약 정보 정리",
+              "text": "3-1-3. YouTube Data API v3 쿼터/수집 안정성 재점검 — uploads playlist vs search, 일일 quota, 실패 재시도, API key만으로 충분한지",
               "done": false
             },
             {
-              "text": "2-10. 코칭페이지 가격/신청 흐름 통일 — A/B 상품 상태, 상담신청/대기신청 라벨, 폼 비활성 상태 한 기준으로 맞추기",
+              "text": "3-1-4. yt-dlp/scrapetube 폴백 PoC — API 장애 또는 quota 초과 시 신규 영상/기본 메타데이터만 보강 가능한지 확인",
               "done": false
             },
             {
-              "text": "2-11. 코칭페이지 히어로/스토리 압축 — 첫 화면 키워드 카드 축소, 헤드라인 문구 정리, 스토리 섹션 감정선 길이 줄이기",
+              "text": "3-2-3. 전일 스냅샷 2~3일 누적 후 24시간 증가 TOP 안정화 확인",
               "done": false
             },
             {
-              "text": "2-12. 코칭페이지 FAQ/환불영역 정리 — FAQ 개수 축소, 환불 핵심 1줄 요약 추가, 하단 공백/폭 정리",
+              "text": "3-2-5. 7일 스냅샷 누적 후 주간 급상승 TOP 안정화 확인",
               "done": false
             },
             {
-              "text": "2-13. 코칭페이지 신청폼 마찰 줄이기 — 신청 직전 요약 카드, 기타 입력 조건부 노출, 결제 안내 문구 단순화",
+              "text": "3-2-6. 대시보드 운영 상태 카드 추가 — 마지막 실행, 성공/실패, 수집 영상 수, Telegram 발송 여부",
               "done": false
             },
             {
-              "text": "자료실? 커뮤니티? 신설. 영상으로 관련 자료배포.",
+              "text": "3-2-7. Telegram 요약 문구 축약 (5/2) — 잘된 영상 4개 + 스테디셀러 3개 (쇼츠/미드폼/검색어) + 사진 갤러리 4+3 album. 채널 25개로 확대(1군 8/2군 17). 5/3 cron 후 쇼츠/미드폼 정상 동작 확인 필요",
+              "done": true
+            },
+            {
+              "text": "3-3-3. 네이버 블로그 수집 PoC — RSS 동작, 본문 파싱, 공감/댓글/이웃 수 대안, robots.txt 확인",
+              "done": false
+            },
+            {
+              "text": "3-3-4. 블로그 1군 후보 조사 — 네이버 부동산 파워블로거 10명+ 목록 + 이웃 수/일 발행량/최근 인기글",
+              "done": false
+            },
+            {
+              "text": "3-3-5. RSSHub 기반 뉴스/블로그/커뮤니티 소스 확장 가능성 확인",
+              "done": false
+            },
+            {
+              "text": "3-3-6. changedetection.io식 웹 변경 감지 대상 후보 정리 — RSS 없는 페이지, 강의/커뮤니티/뉴스 페이지",
+              "done": false
+            },
+            {
+              "text": "3-4-4. yt01-topic에서 최근 히트작 후보를 로컬 DB/JSON으로 조회하는 방식 설계",
+              "done": false
+            },
+            {
+              "text": "3-4-5. 제목/자막/설명 검색용 SQLite FTS 또는 yt-fts류 구조 검토",
+              "done": false
+            },
+            {
+              "text": "3-4-6. 주제 선정 리포트에 “최근 2주 히트작 + 최근 3개월 TOP + 채널 평균대비 TOP” 연결",
               "done": false
             }
           ]
         },
         {
           "id": 4,
-          "title": "원소스 멀티유즈 콘텐츠 시스템 셋업 (4/25~)",
-          "ref": "원소스 멀티유즈",
+          "title": "해외 유튜브 벤치마킹 조사 (4/27~) — 1차 조사 완료, 의사결정 대기",
+          "ref": null,
           "items": [
             {
-              "text": "4-1. 첫 주제 선정 — [[주제 풀]] 6개 카테고리에서 1주차 주제 1개 확정",
+              "text": "4-1. 1차 조사 (ETF + 부동산 + GitHub) (4/27)",
+              "done": true
+            },
+            {
+              "text": "4-2. 2차 조사 (초보자/개성/무출연 추가) (4/27)",
+              "done": true
+            },
+            {
+              "text": "4-3. 사용자 의사결정: TOP 7 중 가장 깊게 분석할 채널 1~2개 선택",
               "done": false
             },
             {
-              "text": "4-2. L3 롱폼 원고 초안 작성 (유튜브 or 네이버 블로그 중 주력 채널 1개)",
+              "text": "4-4. 선택한 채널 영상 5편 정밀 분석 (썸네일·구조·코멘트)",
               "done": false
             },
             {
-              "text": "4-3. L3 → L2 카드뉴스·블로그 미드폼 파생 1세트",
+              "text": "4-5. BiggerPockets 사업구조·퍼널만 별도 분석 (콘텐츠 톤 제외)",
               "done": false
             },
             {
-              "text": "4-4. L3 → L1 숏폼 1-2개 컷 편집",
+              "text": "4-6. 마스코트 캐릭터 도입 의사결정 (両学長 모델)",
               "done": false
             },
             {
-              "text": "4-5. 성공포맷 분석 1회차 — 타 분야 인기 콘텐츠 1개 구조 해체 기록",
-              "done": false
-            },
-            {
-              "text": "4-6. 내 영상 제목 30개 훈련 1회차 완료",
-              "done": false
-            },
-            {
-              "text": "4-7. 1주 사이클 회고 → [[SNS 포맷]]·[[주제 풀]] 가이드 보완",
+              "text": "4-7. 우리 채널 즉시 적용 액션 1개 도출 → 실행",
               "done": false
             }
           ]
         },
         {
           "id": 5,
-          "title": "경쟁채널/콘텐츠 모니터링 시스템 (4/16~)",
-          "ref": "경쟁채널 모니터링 시스템",
+          "title": "무한매수법·VR 백테스트 툴 (5/5~)",
+          "ref": "라오어 무한매수법",
           "items": [
             {
-              "text": "5-2-1. 채널 1군/2군 설정 파일 확정 (4/27) — `config/channels.yaml`",
-              "done": true
-            },
-            {
-              "text": "5-2-2. 유튜브 수집 파이프라인 MVP 구축 (4/27) — YouTube Data API v3 우선",
-              "done": true
-            },
-            {
-              "text": "5-2-4. 데이터 저장소 구축 (4/27) — SQLite + 최신/일자별 dashboard JSON",
-              "done": true
-            },
-            {
-              "text": "5-3-1. 리포트 포맷 MVP 설계 (4/27) — 신규/잘된 영상/핵심 지표",
-              "done": true
-            },
-            {
-              "text": "5-3-2. 출력 위치 MVP 확정 (4/27) — GitHub Pages 대시보드 + Telegram 요약",
-              "done": true
-            },
-            {
-              "text": "5-4-1. 크론잡 등록 (4/27) — 매일 07:10",
-              "done": true
-            },
-            {
-              "text": "5-4-2. Telegram 알림 연결 (4/27)",
-              "done": true
-            },
-            {
-              "text": "5-4-3. 수동 실행 옵션 마련 (4/27) — `python3 -m competitor_monitor run`",
-              "done": true
-            },
-            {
-              "text": "5-1-1. 고스타 모니터링 시스템 심화 조사 — n8n, Huginn, RSSHub, changedetection.io, Grafana, Uptime Kuma, ntfy, Apprise 등 스타 많은 프로젝트를 “도입/구조 차용/제외” 매트릭스로 정리",
+              "text": "5-1. 깃허브 조사 2차 — 1차 후보 외에 `infinite buying`, `라오어`, `value rebalancing`, `value averaging`, `TQQQ backtest`, `leveraged ETF DCA backtest`, `VWAP TWAP backtest`, `awesome-quant`, `awesome-systematic-trading`, `vectorbt`, `backtrader`, `zipline-reloaded`, 한국 블로거 포크까지 훑기",
               "done": false
             },
             {
-              "text": "5-1-2. n8n으로 맡길 범위 결정 — 수집까지 맡길지, Python 수집기는 유지하고 알림/오케스트레이션만 맡길지 비교",
+              "text": "5-2. 후보 3~5개 비교표 작성 — 라이선스 / 최근 업데이트 / 언어·프레임워크 / 한국 사용 사례 / 무한매수법 적용 가능성 / VR 적용 가능성 / 데이터 소스(yfinance·Polygon 등) / 시각화 수준 / Streamlit 이전 난이도",
               "done": false
             },
             {
-              "text": "5-1-3. YouTube Data API v3 쿼터/수집 안정성 재점검 — uploads playlist vs search, 일일 quota, 실패 재시도, API key만으로 충분한지",
+              "text": "5-3. 채택 결정 — 기본안: `Streamlit + Python 엔진`, GitHub Pages 대시보드는 바로가기 버튼. 프로젝트명은 `workspace/apps/laoer-backtest/` 또는 `workspace/apps/infinite-vr-backtest/` 중 결정",
               "done": false
             },
             {
-              "text": "5-1-4. yt-dlp/scrapetube 폴백 PoC — API 장애 또는 quota 초과 시 신규 영상/기본 메타데이터만 보강 가능한지 확인",
+              "text": "5-4. 프로젝트 폴더 생성 + `.context.md` — 목표, 참고 repo, 채택 구조, 검증 기준, 배포 방식(Streamlit Cloud + dashboard link) 기록",
               "done": false
             },
             {
-              "text": "5-2-3. 전일 스냅샷 2~3일 누적 후 24시간 증가 TOP 안정화 확인",
+              "text": "5-5. 백테스트 환경 셋업 — Python venv, `streamlit`, `pandas`, `yfinance`, `plotly`, 테스트 도구, 데이터 캐시 구조(TQQQ/SOXL/QQQ/QLD 일봉, 필요시 분봉)",
               "done": false
             },
             {
-              "text": "5-2-5. 7일 스냅샷 누적 후 주간 급상승 TOP 안정화 확인",
+              "text": "5-6. 입력 UI 설계 — 종목, 기간, 시작금, 적립금, 수수료, 세금, 슬리피지, G값, 밴드, 회차, 전략 버전, 현금풀, 리밸런싱 주기, 실전/근사 모드 토글을 쉽게 바꾸게 만들기",
               "done": false
             },
             {
-              "text": "5-2-6. 대시보드 운영 상태 카드 추가 — 마지막 실행, 성공/실패, 수집 영상 수, Telegram 발송 여부",
+              "text": "5-7. VR 5.0 기본공식 먼저 구현 — V/Pool/G 갱신 공식 (`다음V = 현재V + Pool/G + 적립금`), G=10/20/40, 밴드 ±5/10/15/20%, 적립식/거치식/인출식, 사이클당 한도(75/50/25%)",
               "done": false
             },
             {
-              "text": "5-2-7. Telegram 요약 문구 축약 (5/2) — 잘된 영상 4개 + 스테디셀러 3개 (쇼츠/미드폼/검색어) + 사진 갤러리 4+3 album. 채널 25개로 확대(1군 8/2군 17). 5/3 cron 후 쇼츠/미드폼 정상 동작 확인 필요",
-              "done": true
-            },
-            {
-              "text": "5-3-3. 네이버 블로그 수집 PoC — RSS 동작, 본문 파싱, 공감/댓글/이웃 수 대안, robots.txt 확인",
+              "text": "5-8. VR 검증 — 카페 글 38945(G값), 38947(밴드폭), 3596/51823(운영 사례) 기준으로 결과가 방향성·수치상 맞는지 비교",
               "done": false
             },
             {
-              "text": "5-3-4. 블로그 1군 후보 조사 — 네이버 부동산 파워블로거 10명+ 목록 + 이웃 수/일 발행량/최근 인기글",
+              "text": "5-9. 무한매수법 V1/V2/V2.1 구현 — LOC평단매수, LOC큰수매수, 40회 사이클, 쿼터매도, 영혼법, RSI 진입 조건, 보수적 매도 룰",
               "done": false
             },
             {
-              "text": "5-3-5. RSSHub 기반 뉴스/블로그/커뮤니티 소스 확장 가능성 확인",
+              "text": "5-10. 무한매수법 검증 — 라오어 카페 본문/운영 사례와 비교. 단, 프리장/애프터장 체결 차이 때문에 결과 명칭은 “완벽 백테스트”가 아니라 “근사 시뮬레이션”으로 표시",
               "done": false
             },
             {
-              "text": "5-3-6. changedetection.io식 웹 변경 감지 대상 후보 정리 — RSS 없는 페이지, 강의/커뮤니티/뉴스 페이지",
+              "text": "5-11. 결과 리포트 — 수익률 그래프, MDD, 현금 소진 시점, 평균 현금비중, 사이클 횟수, 매매 로그, 연도별 수익률, 파라미터별 민감도 표",
               "done": false
             },
             {
-              "text": "5-4-4. yt01-topic에서 최근 히트작 후보를 로컬 DB/JSON으로 조회하는 방식 설계",
+              "text": "5-12. 배포 — Streamlit Cloud 무료 배포, GitHub repo push, 기존 `https://lst9485-alt.github.io/cdn-assets/` 대시보드에 “무한매수법·VR 백테스트” 바로가기 추가",
               "done": false
             },
             {
-              "text": "5-4-5. 제목/자막/설명 검색용 SQLite FTS 또는 yt-fts류 구조 검토",
-              "done": false
-            },
-            {
-              "text": "5-4-6. 주제 선정 리포트에 “최근 2주 히트작 + 최근 3개월 TOP + 채널 평균대비 TOP” 연결",
+              "text": "5-13. (선택) 실전 연습 모드 — 실투자 전 가상 자금 5000달러로 2~4주 연습, 매일 주문표/체결 기록만 입력하는 모드",
               "done": false
             }
           ]
         },
         {
           "id": 6,
-          "title": "유튜브 제작 GitHub 오픈소스·스킬 조사 (4/27~) — 1차 조사 완료, 채택 결정 대기",
+          "title": "홈페이지 수정&자체사이트 GA4/Clarity 추적 코드 적용 (4/30~)",
           "ref": null,
           "items": [
             {
-              "text": "6-1. 4개 카테고리 후보 리스트업 + 분류 (4/27) — 노트 참조",
-              "done": true
-            },
-            {
-              "text": "6-2. 사용자 결정: TOP 5 중 우선 채택할 도구 1~2개 선택",
+              "text": "6-1. 자체사이트 공통 `<head>`에 GA4 + Clarity 코드 삽입",
               "done": false
             },
             {
-              "text": "6-3. nova-youtube-agent 코드 깊이 분석 → yt01-topic v3.0 설계 베이스 검토 (투두 5번과 연계)",
+              "text": "6-2. 아임웹 결제/완료 페이지에도 같은 GA4 코드 삽입 가능한지 확인",
               "done": false
             },
             {
-              "text": "6-4. youtube-comment-downloader PoC: 우리 채널 코멘트 → 다음 주제 발굴 시도",
+              "text": "6-3. GA4에서 자체사이트 도메인과 아임웹 결제 도메인 크로스 도메인 설정",
+              "done": false
+            },
+            {
+              "text": "6-4. GA4 실시간 보고서에서 `page_view`, `section_view` 수집 확인",
+              "done": false
+            },
+            {
+              "text": "6-5. Clarity 대시보드/레코딩에서 세션 수집 확인",
+              "done": false
+            },
+            {
+              "text": "6-6. 임시로 푸시해서 확인한 페이지가 있으면 대시보드 `임시 테스트` 섹션에서 제거",
+              "done": false
+            },
+            {
+              "text": "6-7. 코칭페이지 후기 섹션 보강 — 후기 유형 태그/대표 후기 고정 노출/기존 아임웹 후기 구성 참고해서 신뢰 섹션 정리",
+              "done": false
+            },
+            {
+              "text": "6-8. 코칭페이지 하단 CTA/증거 섹션 정리 — 기존 아임웹처럼 환불규정 아래 CTA, 카카오 채널, 안내문 구조 기준으로 복원·정리",
+              "done": false
+            },
+            {
+              "text": "6-9. 코칭페이지 섹션별 문구/전환 흐름 재정비 — 01~11 섹션 검토 기준으로 중복 문구, 여백, CTA 카피, 신청 전 요약 정보 정리",
+              "done": false
+            },
+            {
+              "text": "6-10. 코칭페이지 가격/신청 흐름 통일 — A/B 상품 상태, 상담신청/대기신청 라벨, 폼 비활성 상태 한 기준으로 맞추기",
+              "done": false
+            },
+            {
+              "text": "6-11. 코칭페이지 히어로/스토리 압축 — 첫 화면 키워드 카드 축소, 헤드라인 문구 정리, 스토리 섹션 감정선 길이 줄이기",
+              "done": false
+            },
+            {
+              "text": "6-12. 코칭페이지 FAQ/환불영역 정리 — FAQ 개수 축소, 환불 핵심 1줄 요약 추가, 하단 공백/폭 정리",
+              "done": false
+            },
+            {
+              "text": "6-13. 코칭페이지 신청폼 마찰 줄이기 — 신청 직전 요약 카드, 기타 입력 조건부 노출, 결제 안내 문구 단순화",
+              "done": false
+            },
+            {
+              "text": "6-14. 자료실? 커뮤니티? 신설. 영상으로 관련 자료배포.",
               "done": false
             }
           ]
         },
         {
           "id": 7,
-          "title": "해외 유튜브 벤치마킹 조사 (4/27~) — 1차 조사 완료, 의사결정 대기",
+          "title": "proof-issue 이름 매칭 강화 검토 (5/6~)",
           "ref": null,
           "items": [
             {
-              "text": "7-1. 1차 조사 (ETF + 부동산 + GitHub) (4/27)",
-              "done": true
-            },
-            {
-              "text": "7-2. 2차 조사 (초보자/개성/무출연 추가) (4/27)",
-              "done": true
-            },
-            {
-              "text": "7-3. 사용자 의사결정: TOP 7 중 가장 깊게 분석할 채널 1~2개 선택",
+              "text": "7-1. 첫 월요일 운영 결과 점검 — mismatch/extra 빈도 확인",
               "done": false
             },
             {
-              "text": "7-4. 선택한 채널 영상 5편 정밀 분석 (썸네일·구조·코멘트)",
+              "text": "7-2. 양식 메모 vs 화면 메모 형식 비교 (양식: \"{name} ({date})\", 화면: \"{name} 회원\" 같이 다른 패턴)",
               "done": false
             },
             {
-              "text": "7-5. BiggerPockets 사업구조·퍼널만 별도 분석 (콘텐츠 톤 제외)",
-              "done": false
-            },
-            {
-              "text": "7-6. 마스코트 캐릭터 도입 의사결정 (両学長 모델)",
-              "done": false
-            },
-            {
-              "text": "7-7. 우리 채널 즉시 적용 액션 1개 도출 → 실행",
+              "text": "7-3. 부작용 있으면 토큰 분리 매칭 도입 검토 (parse_paste.py:105)",
               "done": false
             }
           ]
         },
         {
           "id": 8,
-          "title": "무한매수법·VR 백테스트 툴 (5/5~)",
-          "ref": "라오어 무한매수법",
+          "title": "노션 자료 옵시디언 이전 (5/6~)",
+          "ref": null,
           "items": [
             {
-              "text": "8-1. 깃허브 조사 2차 — 1차 후보 외에 `infinite buying`, `라오어`, `value rebalancing`, `value averaging`, `TQQQ backtest`, `leveraged ETF DCA backtest`, `VWAP TWAP backtest`, `awesome-quant`, `awesome-systematic-trading`, `vectorbt`, `backtrader`, `zipline-reloaded`, 한국 블로거 포크까지 훑기",
+              "text": "8-1. 노션 -> 옵시디언으로 옮기기. 브랜드정본등 옵시디언으로.",
               "done": false
             },
             {
-              "text": "8-2. 후보 3~5개 비교표 작성 — 라이선스 / 최근 업데이트 / 언어·프레임워크 / 한국 사용 사례 / 무한매수법 적용 가능성 / VR 적용 가능성 / 데이터 소스(yfinance·Polygon 등) / 시각화 수준 / Streamlit 이전 난이도",
+              "text": "8-2. 콘텐츠관리 등(투두, CRM?? 글쎄)",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "title": "콘텐츠&템플릿 제작 (5/6~)",
+          "ref": "상담 CRM",
+          "items": [
+            {
+              "text": "9-1-1. 상담 템플릿 분할 → 회원 맞춤 대시보드에 표준 부분 + 개별 맞춤 부분 분리 구성",
               "done": false
             },
             {
-              "text": "8-3. 채택 결정 — 기본안: `Streamlit + Python 엔진`, GitHub Pages 대시보드는 바로가기 버튼. 프로젝트명은 `workspace/apps/laoer-backtest/` 또는 `workspace/apps/infinite-vr-backtest/` 중 결정",
+              "text": "9-1-2. 내집마련 가이드북 노션 페이지 제작 → 3일차(UH_6784) 선물 발송",
               "done": false
             },
             {
-              "text": "8-4. 프로젝트 폴더 생성 + `.context.md` — 목표, 참고 repo, 채택 구조, 검증 기준, 배포 방식(Streamlit Cloud + dashboard link) 기록",
+              "text": "9-1-3. 상담 하루 전 자료 (읽을거리 + 3분 강의) 제작 → UH_5037 추가",
               "done": false
             },
             {
-              "text": "8-5. 백테스트 환경 셋업 — Python venv, `streamlit`, `pandas`, `yfinance`, `plotly`, 테스트 도구, 데이터 캐시 구조(TQQQ/SOXL/QQQ/QLD 일봉, 필요시 분봉)",
+              "text": "9-1-4. 30일차 읽을거리 제작 → UH_6785 추가",
               "done": false
             },
             {
-              "text": "8-6. 입력 UI 설계 — 종목, 기간, 시작금, 적립금, 수수료, 세금, 슬리피지, G값, 밴드, 회차, 전략 버전, 현금풀, 리밸런싱 주기, 실전/근사 모드 토글을 쉽게 바꾸게 만들기",
+              "text": "9-1-5. 90일차 읽을거리 제작 → UH_6786 추가",
               "done": false
             },
             {
-              "text": "8-7. VR 5.0 기본공식 먼저 구현 — V/Pool/G 갱신 공식 (`다음V = 현재V + Pool/G + 적립금`), G=10/20/40, 밴드 ±5/10/15/20%, 적립식/거치식/인출식, 사이클당 한도(75/50/25%)",
+              "text": "9-1-6. 180일차 읽을거리 제작 → UH_6787 추가",
               "done": false
             },
             {
-              "text": "8-8. VR 검증 — 카페 글 38945(G값), 38947(밴드폭), 3596/51823(운영 사례) 기준으로 결과가 방향성·수치상 맞는지 비교",
+              "text": "9-1-7. 4건 알림톡 발송 코드 전환 — sendAligoMessages SMS → sendAlimtalk + UH_5040~5043 → UH_6784~6787 매핑 (검수 통과 후)",
               "done": false
             },
             {
-              "text": "8-9. 무한매수법 V1/V2/V2.1 구현 — LOC평단매수, LOC큰수매수, 40회 사이클, 쿼터매도, 영혼법, RSI 진입 조건, 보수적 매도 룰",
+              "text": "9-1-8. 구글 비즈니스 프로필 070 반영 검증 — 1주일 후 다른 갤럭시 폰으로 본인 번호 전화 테스트",
               "done": false
             },
             {
-              "text": "8-10. 무한매수법 검증 — 라오어 카페 본문/운영 사례와 비교. 단, 프리장/애프터장 체결 차이 때문에 결과 명칭은 “완벽 백테스트”가 아니라 “근사 시뮬레이션”으로 표시",
+              "text": "9-1-9. 회원 맞춤페이지 개선 → 저축/복리계산기 등 추가",
               "done": false
             },
             {
-              "text": "8-11. 결과 리포트 — 수익률 그래프, MDD, 현금 소진 시점, 평균 현금비중, 사이클 횟수, 매매 로그, 연도별 수익률, 파라미터별 민감도 표",
+              "text": "9-2-1. 실제 사용자 입력 흐름 재점검 — 현재나이/보유자산/월저축/연지출/수익률/인출률을 바꿔보며 헷갈리는 문구·레이아웃 찾기",
               "done": false
             },
             {
-              "text": "8-12. 배포 — Streamlit Cloud 무료 배포, GitHub repo push, 기존 `https://lst9485-alt.github.io/cdn-assets/` 대시보드에 “무한매수법·VR 백테스트” 바로가기 추가",
+              "text": "9-2-2. Lightyear 참고와 시각 비교 — 차트 카드, 입력 카드, 결과 스트립, 표 밀도 기준으로 더 닮게 다듬기",
               "done": false
             },
             {
-              "text": "8-13. (선택) 실전 연습 모드 — 실투자 전 가상 자금 5000달러로 2~4주 연습, 매일 주문표/체결 기록만 입력하는 모드",
+              "text": "9-2-3. 모바일 표/차트 가독성 개선 — 표 가로 스크롤, 상단 고정 네비 겹침, 숫자 크기 확인",
+              "done": false
+            },
+            {
+              "text": "9-2-4. 계산 회귀 테스트 고정 — 기본값, 저축 0원, 수익률 0%/-5%/3%, 이미 목표 도달, 한국식 금액 입력 검산",
+              "done": false
+            },
+            {
+              "text": "9-2-5. 최종 배포 후 공개 URL에서 캐시 버전과 화면 반영 확인",
               "done": false
             }
           ]
         },
         {
           "id": 10,
-          "title": "proof-issue 이름 매칭 강화 검토 (5/6~)",
+          "title": "유튜브 제작 GitHub 오픈소스·스킬 조사 (4/27~) — 1차 조사 완료, 채택 결정 대기",
           "ref": null,
           "items": [
             {
-              "text": "10-1. 첫 월요일 운영 결과 점검 — mismatch/extra 빈도 확인",
+              "text": "10-1. 4개 카테고리 후보 리스트업 + 분류 (4/27) — 노트 참조",
+              "done": true
+            },
+            {
+              "text": "10-2. 사용자 결정: TOP 5 중 우선 채택할 도구 1~2개 선택",
               "done": false
             },
             {
-              "text": "10-2. 양식 메모 vs 화면 메모 형식 비교 (양식: \"{name} ({date})\", 화면: \"{name} 회원\" 같이 다른 패턴)",
+              "text": "10-3. nova-youtube-agent 코드 깊이 분석 → yt01-topic v3.0 설계 베이스 검토 (투두 3번과 연계)",
               "done": false
             },
             {
-              "text": "10-3. 부작용 있으면 토큰 분리 매칭 도입 검토 (parse_paste.py:105)",
+              "text": "10-4. youtube-comment-downloader PoC: 우리 채널 코멘트 → 다음 주제 발굴 시도",
               "done": false
             }
           ]
         },
         {
           "id": 11,
-          "title": "노션 자료 옵시디언 이전 (5/6~)",
+          "title": "유튜브 우측상단 브랜드 버그 모션 정리 (5/7~)",
           "ref": null,
           "items": [
             {
-              "text": "11-1. 노션 -> 옵시디언으로 옮기기. 브랜드정본등 옵시디언으로.",
+              "text": "11-1. 현재 18개 후보 중 버릴 것/남길 것 표시 — 후보 자체는 아카이브에 보관, 최종 로고로 쓰지 않음",
               "done": false
             },
             {
-              "text": "11-2. 콘텐츠관리 등(투두, CRM?? 글쎄)",
+              "text": "11-2. 새 방향 5개 제작 — `우리동네 재테크` 워드마크 중심, 동네 좌표/주소 라벨/기준선/브리핑 시그널 중 1개만 결합",
+              "done": false
+            },
+            {
+              "text": "11-3. 실제 영상 우측상단 크기에서 6~8초 반복 모션으로 확인 — 움직임은 잘 보이되 화면 방해 최소화",
+              "done": false
+            },
+            {
+              "text": "11-4. 마음에 드는 1~2개만 투명 배경 WebM/MOV 출력 방식까지 정리",
               "done": false
             }
           ]
         },
         {
-          "id": 12,
-          "title": "회원 맞춤 콘텐츠 제작 (5/6~)",
-          "ref": "상담 CRM",
+          "id": 13,
+          "title": "n8n 반복태스크 정상 작동 확인 후 옛 컨테이너 완전 제거 (5/9~)",
+          "ref": null,
           "items": [
             {
-              "text": "12-1. 상담 템플릿 분할 → 회원 맞춤 대시보드에 표준 부분 + 개별 맞춤 부분 분리 구성",
+              "text": "13-1. 5/10 08:30 KST 이후 실행 결과 확인: `source /Users/yunjitaegi/HQ/Workspace/config/secrets/services/n8n.env && curl -s -H \"X-N8N-API-KEY: $N8N_API_KEY\" \"https://macmini.tailfbe8a6.ts.net/api/v1/executions?workflowId=vd5eFeo1gckWsAR2&limit=3\"` (success 1건만 떠야 정상)",
               "done": false
             },
             {
-              "text": "12-2. 내집마련 가이드북 노션 페이지 제작 → 3일차(UH_6784) 선물 발송",
+              "text": "13-2. 노션 5/10 태스크 정상 생성됐는지 직접 확인",
               "done": false
             },
             {
-              "text": "12-3. 상담 하루 전 자료 (읽을거리 + 3분 강의) 제작 → UH_5037 추가",
-              "done": false
-            },
-            {
-              "text": "12-4. 30일차 읽을거리 제작 → UH_6785 추가",
-              "done": false
-            },
-            {
-              "text": "12-5. 90일차 읽을거리 제작 → UH_6786 추가",
-              "done": false
-            },
-            {
-              "text": "12-6. 180일차 읽을거리 제작 → UH_6787 추가",
-              "done": false
-            },
-            {
-              "text": "12-7. 4건 알림톡 발송 코드 전환 — sendAligoMessages SMS → sendAlimtalk + UH_5040~5043 → UH_6784~6787 매핑 (검수 통과 후)",
-              "done": false
-            },
-            {
-              "text": "12-8. 구글 비즈니스 프로필 070 반영 검증 — 1주일 후 다른 갤럭시 폰으로 본인 번호 전화 테스트",
-              "done": false
-            },
-            {
-              "text": "회원 맞춤페이지 개선 -> 저축/복리계산기 등 추가.-",
-              "done": false
-            },
-            {
-              "text": "https://toss.im/tossfeed/calculator/dsr",
-              "done": false
-            },
-            {
-              "text": "https://www.moneynestlab.com/investment 등 참고.",
+              "text": "13-3. 정상 확인되면 `docker rm n8n-n8n-1` 실행",
               "done": false
             }
           ]
         },
         {
           "id": 14,
-          "title": "유튜브 우측상단 브랜드 버그 모션 정리 (5/7~)",
+          "title": "2026-05-10 영상 [내자료] 보완 리서치 (5/10~)",
           "ref": null,
           "items": [
             {
-              "text": "14-1. 현재 18개 후보 중 버릴 것/남길 것 표시 — 후보 자체는 아카이브에 보관, 최종 로고로 쓰지 않음",
+              "text": "14-1. `Obsidian/5. Memo/1. 임시메모` + `2. 문헌메모` + `2. 멘트.md` Grep으로 키워드 매칭 (\"10억\", \"운\", \"잘못\", \"불가능\", \"현실\", \"방법\")",
               "done": false
             },
             {
-              "text": "14-2. 새 방향 5개 제작 — `우리동네 재테크` 워드마크 중심, 동네 좌표/주소 라벨/기준선/브리핑 시그널 중 1개만 결합",
+              "text": "14-2. Notion DB curl로 \"10억\" 키워드 과거 영상 검색 (`workspace/config/secrets/services/notion.env`)",
               "done": false
             },
             {
-              "text": "14-3. 실제 영상 우측상단 크기에서 6~8초 반복 모션으로 확인 — 움직임은 잘 보이되 화면 방해 최소화",
+              "text": "14-3. plan.md `### [내자료]` 카드 8개 → 12~15개로 확장",
               "done": false
             },
             {
-              "text": "14-4. 마음에 드는 1~2개만 투명 배경 WebM/MOV 출력 방식까지 정리",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 15,
-          "title": "은퇴계산기 최종 UX 다듬기 (5/7~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "15-1. 실제 사용자 입력 흐름 재점검 — 현재나이/보유자산/월저축/연지출/수익률/인출률을 바꿔보며 헷갈리는 문구·레이아웃 찾기",
-              "done": false
-            },
-            {
-              "text": "15-2. Lightyear 참고와 시각 비교 — 차트 카드, 입력 카드, 결과 스트립, 표 밀도 기준으로 더 닮게 다듬기",
-              "done": false
-            },
-            {
-              "text": "15-3. 모바일 표/차트 가독성 개선 — 표 가로 스크롤, 상단 고정 네비 겹침, 숫자 크기 확인",
-              "done": false
-            },
-            {
-              "text": "15-4. 계산 회귀 테스트 고정 — 기본값, 저축 0원, 수익률 0%/-5%/3%, 이미 목표 도달, 한국식 금액 입력 검산",
-              "done": false
-            },
-            {
-              "text": "15-5. 최종 배포 후 공개 URL에서 캐시 버전과 화면 반영 확인",
+              "text": "14-4. plan.md 헤더 표기 \"영구메모만 (정본 위반)\" → 정상 표기로 정정",
               "done": false
             }
           ]
@@ -478,24 +509,24 @@
       "name": "노트북",
       "categories": [
         {
-          "id": 16,
+          "id": 12,
           "title": "옵시디언 북마크 복원 (5/8~)",
           "ref": null,
           "items": [
             {
-              "text": "16-1. 노트북에서 옵시디언 종료",
+              "text": "12-1. 노트북에서 옵시디언 종료",
               "done": false
             },
             {
-              "text": "16-2. 노트북 vault 경로 확인 (예: `/Users/lst/.../Obsidian/.obsidian/`)",
+              "text": "12-2. 노트북 vault 경로 확인 (예: `/Users/lst/.../Obsidian/.obsidian/`)",
               "done": false
             },
             {
-              "text": "16-3. 맥미니에서 scp로 복사: `scp /Users/yunjitaegi/HQ/Obsidian/.obsidian/bookmarks.json notebook:<vault경로>/.obsidian/bookmarks.json`",
+              "text": "12-3. 맥미니에서 scp로 복사: `scp /Users/yunjitaegi/HQ/Obsidian/.obsidian/bookmarks.json notebook:<vault경로>/.obsidian/bookmarks.json`",
               "done": false
             },
             {
-              "text": "16-4. 노트북 옵시디언 다시 열고 북마크 23개 표시 확인",
+              "text": "12-4. 노트북 옵시디언 다시 열고 북마크 23개 표시 확인",
               "done": false
             }
           ]
