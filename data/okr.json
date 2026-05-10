@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-10T06:00:09.161210+09:00",
+  "updated": "2026-05-10T11:15:24.767431+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 391,
-    "done": 365,
-    "overdue": 10,
+    "total": 393,
+    "done": 368,
+    "overdue": 6,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,43 +56,23 @@
         "overdue": true
       },
       {
-        "title": "P1~P3/목실감",
-        "date": "2026-05-09T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "도입부",
-        "date": "2026-05-09T10:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "원고",
-        "date": "2026-05-09T17:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-05-09T20:00:00.000+09:00",
-        "overdue": true
+        "date": "2026-05-10T09:00:00.000+09:00",
+        "overdue": false
       },
       {
         "title": "PPT완료",
-        "date": "2026-05-10T07:30:00.000+09:00",
+        "date": "2026-05-10T12:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "date": "2026-05-10T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "랜딩수정",
+        "title": "원씽복기",
         "date": "2026-05-10T14:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "date": "2026-05-10T17:30:00.000+09:00",
+        "title": "촬영&편집&업로드",
+        "date": "2026-05-10T15:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -106,13 +86,28 @@
         "overdue": false
       },
       {
+        "title": "카톡 비즈니스 문구변경",
+        "date": "2026-05-11T09:45:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "현금영수증&세금계산서 발행",
         "date": "2026-05-11T10:00:00.000+09:00",
         "overdue": false
       },
       {
+        "title": "랜딩수정",
+        "date": "2026-05-11T10:45:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "강의 기획",
-        "date": "2026-05-11T11:30:00.000+09:00",
+        "date": "2026-05-11T13:15:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-05-11T15:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -158,26 +153,32 @@
     ],
     "schedule": [
       {
+        "title": "P1~P3/목실감",
+        "time": "08:30",
+        "allDay": false,
+        "done": true
+      },
+      {
+        "title": "원고",
+        "time": "09:00",
+        "allDay": false,
+        "done": false
+      },
+      {
         "title": "PPT완료",
-        "time": "07:30",
+        "time": "12:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "랜딩수정",
+        "title": "원씽복기",
         "time": "14:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "time": "17:30",
+        "title": "촬영&편집&업로드",
+        "time": "15:30",
         "allDay": false,
         "done": false
       }

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-10T06:00:01.630197+09:00",
+  "updated": "2026-05-10T11:15:19.105371+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -499,6 +499,29 @@
             },
             {
               "text": "14-4. plan.md 헤더 표기 \"영구메모만 (정본 위반)\" → 정상 표기로 정정",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "title": "Notion Routine 반복 템플릿 복구 확인 (5/10~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "15-1. 2026-05-11 오전 3시 이후 Routine DB에 `26-05-11` 페이지 자동 생성됐는지 확인",
+              "done": false
+            },
+            {
+              "text": "15-2. 자동 생성 성공하면 이 투두 삭제하고 Notion 새 템플릿 유지",
+              "done": false
+            },
+            {
+              "text": "15-3. 자동 생성 실패하면 Notion 반복 템플릿 포기 → n8n 또는 cron으로 Routine 일일 생성기 구현",
+              "done": false
+            },
+            {
+              "text": "15-4. 루틴 누락 시 모닝플래너 Telegram 경고가 오는지 확인",
               "done": false
             }
           ]
