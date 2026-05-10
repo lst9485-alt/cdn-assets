@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-10T11:15:19.105371+09:00",
+  "updated": "2026-05-11T06:00:01.796160+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -462,46 +462,10 @@
           ]
         },
         {
-          "id": 13,
-          "title": "n8n 반복태스크 정상 작동 확인 후 옛 컨테이너 완전 제거 (5/9~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "13-1. 5/10 08:30 KST 이후 실행 결과 확인: `source /Users/yunjitaegi/HQ/Workspace/config/secrets/services/n8n.env && curl -s -H \"X-N8N-API-KEY: $N8N_API_KEY\" \"https://macmini.tailfbe8a6.ts.net/api/v1/executions?workflowId=vd5eFeo1gckWsAR2&limit=3\"` (success 1건만 떠야 정상)",
-              "done": false
-            },
-            {
-              "text": "13-2. 노션 5/10 태스크 정상 생성됐는지 직접 확인",
-              "done": false
-            },
-            {
-              "text": "13-3. 정상 확인되면 `docker rm n8n-n8n-1` 실행",
-              "done": false
-            }
-          ]
-        },
-        {
           "id": 14,
-          "title": "2026-05-10 영상 [내자료] 보완 리서치 (5/10~)",
+          "title": "이렇게 산다, 성장일지 옵시디언에 정리.",
           "ref": null,
-          "items": [
-            {
-              "text": "14-1. `Obsidian/5. Memo/1. 임시메모` + `2. 문헌메모` + `2. 멘트.md` Grep으로 키워드 매칭 (\"10억\", \"운\", \"잘못\", \"불가능\", \"현실\", \"방법\")",
-              "done": false
-            },
-            {
-              "text": "14-2. Notion DB curl로 \"10억\" 키워드 과거 영상 검색 (`workspace/config/secrets/services/notion.env`)",
-              "done": false
-            },
-            {
-              "text": "14-3. plan.md `### [내자료]` 카드 8개 → 12~15개로 확장",
-              "done": false
-            },
-            {
-              "text": "14-4. plan.md 헤더 표기 \"영구메모만 (정본 위반)\" → 정상 표기로 정정",
-              "done": false
-            }
-          ]
+          "items": []
         },
         {
           "id": 15,
@@ -522,6 +486,17 @@
             },
             {
               "text": "15-4. 루틴 누락 시 모닝플래너 Telegram 경고가 오는지 확인",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "title": "plan 파일 43개 백업 (5/11)",
+          "ref": null,
+          "items": [
+            {
+              "text": "16-1. (선택) `/tmp/plans-backup-260511/` 8시간 후 검토 — 살릴 게 있는지 확인 후 정리",
               "done": false
             }
           ]

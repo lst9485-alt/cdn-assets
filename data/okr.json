@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-10T11:15:24.767431+09:00",
+  "updated": "2026-05-11T06:00:07.817385+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,8 +21,8 @@
     }
   ],
   "tasks": {
-    "total": 393,
-    "done": 368,
+    "total": 398,
+    "done": 372,
     "overdue": 6,
     "pending": [
       {
@@ -56,26 +56,6 @@
         "overdue": true
       },
       {
-        "title": "원고",
-        "date": "2026-05-10T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PPT완료",
-        "date": "2026-05-10T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-05-10T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-05-10T15:30:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "메모정리",
         "date": "2026-05-11",
         "overdue": false
@@ -97,22 +77,17 @@
       },
       {
         "title": "랜딩수정",
-        "date": "2026-05-11T10:45:00.000+09:00",
+        "date": "2026-05-11T11:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "강의 기획",
-        "date": "2026-05-11T13:15:00.000+09:00",
+        "title": "홈페이지 오픈준비",
+        "date": "2026-05-11T13:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
         "date": "2026-05-11T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-05-12",
         "overdue": false
       },
       {
@@ -121,8 +96,23 @@
         "overdue": false
       },
       {
+        "title": "강의 기획",
+        "date": "2026-05-12T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-05-12T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-05-13T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "자료수집&도입부",
-        "date": "2026-05-13",
+        "date": "2026-05-13T11:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -131,8 +121,8 @@
         "overdue": false
       },
       {
-        "title": "원고완성",
-        "date": "2026-05-14",
+        "title": "원고",
+        "date": "2026-05-13T12:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -141,8 +131,23 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-05-14T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ppt",
+        "date": "2026-05-14T13:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "회복자상담",
+        "date": "2026-05-14T16:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "PPT완료",
-        "date": "2026-05-15",
+        "date": "2026-05-15T09:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -153,32 +158,44 @@
     ],
     "schedule": [
       {
-        "title": "P1~P3/목실감",
-        "time": "08:30",
-        "allDay": false,
-        "done": true
+        "title": "메모정리",
+        "time": "",
+        "allDay": true,
+        "done": false
       },
       {
-        "title": "원고",
+        "title": "마케팅업체 정산",
         "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "PPT완료",
-        "time": "12:00",
+        "title": "카톡 비즈니스 문구변경",
+        "time": "09:45",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원씽복기",
-        "time": "14:00",
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "time": "15:30",
+        "title": "랜딩수정",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "홈페이지 오픈준비",
+        "time": "13:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
+        "time": "15:00",
         "allDay": false,
         "done": false
       }
@@ -208,10 +225,46 @@
     "priorities": [],
     "identity": null,
     "weekly_stats": {
-      "total": 0,
-      "done": 0,
-      "rate": "0%",
-      "days": []
+      "total": 28,
+      "done": 13,
+      "rate": "46%",
+      "days": [
+        {
+          "date": "2026-05-05",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-05-06",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-05-07",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-05-08",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-05-09",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-05-10",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-05-11",
+          "done": 0,
+          "total": 4
+        }
+      ]
     }
   },
   "sales": {
