@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-11T06:00:01.796160+09:00",
+  "updated": "2026-05-12T06:00:01.675562+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -19,6 +19,10 @@
             },
             {
               "text": "1-3. (선택) 매칭 실패 알림 정리 — `06_상담후처리.gs:617-625` importTasksToSheet 캘린더↔시트 C열 이름 매칭 알림. Calendly 직접 예약 시 매번 알림. phone 매칭 전환 또는 알림 제거 검토",
+              "done": false
+            },
+            {
+              "text": "1-5. **알림톡 UH_6784~6787 3차 재제출 결과 확인 (5/11 제출, ~5/16 이후)** — 카카오 비즈니스 센터 검수 결과 확인. 통과 시 9-1-7 코드 전환 진행. 반려 시 SMS 유지 최종 결정. 본문/답변글 정본: `Obsidian/4. Archive/1. Project/상담 CRM.md` #7~#10",
               "done": false
             },
             {
@@ -347,7 +351,15 @@
               "done": false
             },
             {
+              "text": "노션역할 축소. 일부만 남기기.",
+              "done": false
+            },
+            {
               "text": "8-2. 콘텐츠관리 등(투두, CRM?? 글쎄)",
+              "done": false
+            },
+            {
+              "text": "8-3. brand-context 정본을 옵시디언으로 전환 — 현재 노션이 정본, `Workspace/config/brand-context/`가 사본. 수정할 때마다 `/profile sync` 부담. 정본 옮기면 sync 단방향(옵시디언→노션) 또는 노션 폐지 가능",
               "done": false
             }
           ]
@@ -406,8 +418,8 @@
               "done": false
             },
             {
-              "text": "9-2-4. 계산 회귀 테스트 고정 — 기본값, 저축 0원, 수익률 0%/-5%/3%, 이미 목표 도달, 한국식 금액 입력 검산",
-              "done": false
+              "text": "9-2-4. 계산 회귀 테스트 고정 — 기본값, 저축 0원, 수익률 0%/-5%/3%, 이미 목표 도달, 한국식 금액 입력 검산 (5/11)",
+              "done": true
             },
             {
               "text": "9-2-5. 최종 배포 후 공개 URL에서 캐시 버전과 화면 반영 확인",
@@ -466,37 +478,35 @@
           "title": "이렇게 산다, 성장일지 옵시디언에 정리.",
           "ref": null,
           "items": []
-        },
+        }
+      ]
+    },
+    {
+      "name": "맥미니",
+      "categories": [
         {
-          "id": 15,
-          "title": "Notion Routine 반복 템플릿 복구 확인 (5/10~)",
+          "id": 1,
+          "title": "맥미니 Parsec 잠금화면 비번 입력 문제 해결 (5/11~) — 맥미니 직접",
           "ref": null,
           "items": [
             {
-              "text": "15-1. 2026-05-11 오전 3시 이후 Routine DB에 `26-05-11` 페이지 자동 생성됐는지 확인",
+              "text": "17-1. 직접 키보드 꽂아 잠금화면 비번 입력 테스트 — 직접도 안 되면 macOS 26.3.1 버그, 직접만 되면 Parsec 문제 (원인 판별)",
               "done": false
             },
             {
-              "text": "15-2. 자동 생성 성공하면 이 투두 삭제하고 Notion 새 템플릿 유지",
+              "text": "17-2. 시스템 설정 → 잠금 화면 → \"디스플레이 꺼진 후 암호 요구\" → \"끄지 않음\" (5/11 완료 — `com.apple.screensaver askForPassword=0`, `askForPasswordDelay=0` 적용)",
+              "done": true
+            },
+            {
+              "text": "17-3. 시스템 설정 → 개인정보 보호 및 보안 → Parsec 권한 ON 확인: 손쉬운 사용 / 화면 기록 및 시스템 오디오 녹음 / 마이크",
               "done": false
             },
             {
-              "text": "15-3. 자동 생성 실패하면 Notion 반복 템플릿 포기 → n8n 또는 cron으로 Routine 일일 생성기 구현",
+              "text": "17-4. Parsec 최신 업데이트 확인 (현재 150.101.1 → 150-103a 이상)",
               "done": false
             },
             {
-              "text": "15-4. 루틴 누락 시 모닝플래너 Telegram 경고가 오는지 확인",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 16,
-          "title": "plan 파일 43개 백업 (5/11)",
-          "ref": null,
-          "items": [
-            {
-              "text": "16-1. (선택) `/tmp/plans-backup-260511/` 8시간 후 검토 — 살릴 게 있는지 확인 후 정리",
+              "text": "17-5. 그래도 안 되면 Parsec 잠금화면 별도 설치판 설치 — https://support.parsec.app/hc/en-us/articles/32381618319124-Access-Login-Screen-on-macOS",
               "done": false
             }
           ]
@@ -507,7 +517,7 @@
       "name": "노트북",
       "categories": [
         {
-          "id": 12,
+          "id": 1,
           "title": "옵시디언 북마크 복원 (5/8~)",
           "ref": null,
           "items": [

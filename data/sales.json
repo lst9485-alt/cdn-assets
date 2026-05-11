@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-11T15:12:57.031139+09:00",
+  "updated": "2026-05-12T06:00:21.624333+09:00",
   "summary": {
     "current_month": 800000,
     "current_month_label": "2026-05",
@@ -631,22 +631,22 @@
       "revenue": 1600000
     },
     {
-      "utm": "yt_068_daejeon",
-      "count": 2,
-      "revenue": 800000
-    },
-    {
       "utm": "yt_070",
       "count": 2,
       "revenue": 800000
     },
     {
-      "utm": "yt_069",
+      "utm": "yt_068_daejeon",
+      "count": 2,
+      "revenue": 800000
+    },
+    {
+      "utm": "yt_021_030",
       "count": 1,
       "revenue": 400000
     },
     {
-      "utm": "yt_021_030",
+      "utm": "yt_069",
       "count": 1,
       "revenue": 400000
     }
