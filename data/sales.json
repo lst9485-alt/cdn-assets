@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-11T06:00:18.191062+09:00",
+  "updated": "2026-05-11T15:12:57.031139+09:00",
   "summary": {
     "current_month": 800000,
     "current_month_label": "2026-05",
@@ -81,31 +81,6 @@
     }
   ],
   "weekly": [
-    {
-      "week_start": "2025-10-08",
-      "revenue": 2400000,
-      "customers": 9
-    },
-    {
-      "week_start": "2025-10-15",
-      "revenue": 1500000,
-      "customers": 5
-    },
-    {
-      "week_start": "2025-10-22",
-      "revenue": 900000,
-      "customers": 3
-    },
-    {
-      "week_start": "2025-10-29",
-      "revenue": 1550000,
-      "customers": 5
-    },
-    {
-      "week_start": "2025-11-05",
-      "revenue": 1050000,
-      "customers": 3
-    },
     {
       "week_start": "2025-11-12",
       "revenue": 350000,
@@ -210,6 +185,31 @@
       "week_start": "2026-03-30",
       "revenue": 800000,
       "customers": 2
+    },
+    {
+      "week_start": "2026-04-06",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-04-13",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-04-20",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-04-27",
+      "revenue": 400000,
+      "customers": 1
+    },
+    {
+      "week_start": "2026-05-04",
+      "revenue": 400000,
+      "customers": 1
     }
   ],
   "weekly_history": [
@@ -587,6 +587,31 @@
       "week_start": "2026-03-30",
       "revenue": 800000,
       "customers": 2
+    },
+    {
+      "week_start": "2026-04-06",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-04-13",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-04-20",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-04-27",
+      "revenue": 400000,
+      "customers": 1
+    },
+    {
+      "week_start": "2026-05-04",
+      "revenue": 400000,
+      "customers": 1
     }
   ],
   "by_utm": [
