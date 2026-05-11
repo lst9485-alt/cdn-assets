@@ -167,10 +167,11 @@
     var currentData = null;
     var currentView = 'period';
     var roomFilters = {};
-    var roomOrder = { system: 0, reminder: 1, customer: 2, memo: 3, custom: 99 };
+    var roomOrder = { system: 0, marketing: 1, reminder: 2, customer: 3, memo: 4, custom: 99 };
 
     var roomLabels = {
-        system: { bot: '시스템/알림 봇', env: '무한매수·인프라·경쟁채널' },
+        system: { bot: '시스템/알림 봇', env: '무한매수·인프라' },
+        marketing: { bot: '마케팅봇', env: '경쟁채널·콘텐츠 기획' },
         reminder: { bot: '리마인더봇', env: '태스크·루틴·n8n 상태' },
         customer: { bot: '우리동네봇', env: '상담·SMS 처리' },
         memo: { bot: '메모봇', env: '메모 저장·대기 리마인더' },

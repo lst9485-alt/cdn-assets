@@ -1,7 +1,7 @@
 {
-  "updated": "2026-04-28",
+  "updated": "2026-05-11",
   "summary": {
-    "telegramRooms": 5,
+    "telegramRooms": 6,
     "telegramSenders": 16,
     "nonTelegramCronJobs": 4,
     "nonTelegramWebhooks": 1,
@@ -20,7 +20,7 @@
       "name": "알림봇",
       "bot": "wooridongne_noti_bot",
       "sourceEnv": "TELEGRAM_SYSTEM_CHAT_ID",
-      "role": "크론잡 결과, 시스템 점검, 주간 운영 브리핑, 유튜브/경쟁채널 리포트",
+      "role": "크론잡 결과, 시스템 점검, 주간 운영 브리핑, 무한매수",
       "cadence": "매일 08:00 / 매주 일 07:00 / 매주 월 03:00, 10:00 / 조건부",
       "volume": "높음",
       "items": [
@@ -71,18 +71,6 @@
           ]
         },
         {
-          "name": "competitor-monitor",
-          "runtime": "nightwatch shell + Python",
-          "trigger": "매일 07:10",
-          "purpose": "경쟁 YouTube 채널 모니터링",
-          "content": "신규/급상승 영상 수집, 대시보드 갱신, 상세 리포트",
-          "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:93",
-            "workspace/tools/scripts/nightwatch/competitor-monitor.sh:56",
-            "workspace/apps/youtube/yt-competitor-monitor/competitor_monitor/report.py:180"
-          ]
-        },
-        {
           "name": "mumae",
           "runtime": "n8n",
           "trigger": "평일 08:00, 22:25 / webhook",
@@ -92,6 +80,29 @@
             "workspace/apps/n8n/workflows/05 무한매수/workflow.json:7",
             "workspace/apps/n8n/workflows/05 무한매수/workflow.json:176",
             "workspace/apps/n8n/workflows/05 무한매수/workflow.json:228"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "marketing",
+      "name": "마케팅봇",
+      "bot": "woori0608_marketing_bot",
+      "sourceEnv": "TELEGRAM_MARKETING_CHAT_ID",
+      "role": "마케팅·콘텐츠 기획 보조 알림",
+      "cadence": "매일 07:10",
+      "volume": "중간",
+      "items": [
+        {
+          "name": "competitor-monitor",
+          "runtime": "nightwatch shell + Python",
+          "trigger": "매일 07:10",
+          "purpose": "경쟁 YouTube 채널 모니터링",
+          "content": "신규/급상승 영상 수집, 대시보드 갱신, 상세 리포트",
+          "evidence": [
+            "workspace/tools/scripts/nightwatch/jobs.json:93",
+            "workspace/tools/scripts/nightwatch/competitor-monitor.sh:56",
+            "workspace/apps/youtube/yt-competitor-monitor/competitor_monitor/report.py:180"
           ]
         }
       ]
