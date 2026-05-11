@@ -20,8 +20,8 @@
       "name": "알림봇",
       "bot": "wooridongne_noti_bot",
       "sourceEnv": "TELEGRAM_SYSTEM_CHAT_ID",
-      "role": "크론잡 결과, 시스템 점검, 주간 운영 브리핑, 무한매수",
-      "cadence": "매일 08:00 / 매주 일 07:00 / 매주 월 03:00, 10:00 / 조건부",
+      "role": "크론잡 결과, 시스템 점검, 주간 운영 브리핑, 무한매수, 시장 리포트",
+      "cadence": "매일 07:20, 08:00 / 매주 일 07:00 / 매주 월 03:00, 10:00 / 조건부",
       "volume": "높음",
       "items": [
         {
@@ -56,6 +56,18 @@
           "evidence": [
             "workspace/tools/scripts/nightwatch/jobs.json:57",
             "workspace/tools/scripts/nightwatch/daily-check-infra.sh:51"
+          ]
+        },
+        {
+          "name": "market-daily-report",
+          "runtime": "nightwatch shell",
+          "trigger": "매일 07:20",
+          "purpose": "시장 리포트",
+          "content": "BTC/ETH 글로벌·업비트 가격, 김프, 코인 공포탐욕지수, 환율. 화~토는 미국시장 포함",
+          "evidence": [
+            "workspace/tools/scripts/nightwatch/jobs.json:93",
+            "workspace/tools/scripts/nightwatch/market-daily-report.sh:50",
+            "workspace/tools/scripts/nightwatch/market-daily-report.config.json:4"
           ]
         },
         {
