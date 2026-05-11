@@ -167,6 +167,7 @@
     var currentData = null;
     var currentView = 'period';
     var roomFilters = {};
+    // ⚠️ 방 추가 시: roomOrder + roomLabels + telegram-cron-inventory.json rooms[].id 세 곳 키 모두 동기화 필수
     var roomOrder = { system: 0, marketing: 1, reminder: 2, customer: 3, memo: 4, custom: 99 };
 
     var roomLabels = {
