@@ -96,7 +96,8 @@
             iconKey: 'tool',
             sidebarType: 'root',
             activeMatch: ['common-header.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '공통'
           },
           {
             id: 'common-footer',
@@ -108,7 +109,8 @@
             iconKey: 'tool',
             sidebarType: 'root',
             activeMatch: ['common-footer.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '공통'
           },
           {
             id: 'page-template',
@@ -120,7 +122,8 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['page-template.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '공통'
           },
           {
             id: 'landing-page-v3',
@@ -132,7 +135,8 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['coaching-all-v3.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '자체사이트'
           },
           {
             id: 'landing-page-v2',
@@ -144,7 +148,8 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['coaching-all-v2.html'],
-            hubVisible: false
+            hubVisible: false,
+            groupLabel: '자체사이트'
           },
           {
             id: 'landing-page',
@@ -156,7 +161,8 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['coaching-all.html'],
-            hubVisible: false
+            hubVisible: false,
+            groupLabel: '자체사이트'
           },
           {
             id: 'main-page',
@@ -168,7 +174,8 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['main-page.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '자체사이트'
           },
           {
             id: 'main-page-preview',
@@ -180,7 +187,8 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['homepage/index.html', 'main-page-test2.html'],
-            hubVisible: false
+            hubVisible: false,
+            groupLabel: '자체사이트'
           },
           {
             id: 'coaching-payment',
@@ -192,7 +200,8 @@
             iconKey: 'money',
             sidebarType: 'root',
             activeMatch: ['coaching-payment.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '자체사이트'
           },
           {
             id: 'coaching-payment-guide-v3',
@@ -204,7 +213,8 @@
             iconKey: 'money',
             sidebarType: 'root',
             activeMatch: ['coaching-payment-guide-v3.html'],
-            hubVisible: false
+            hubVisible: false,
+            groupLabel: '자체사이트'
           },
           {
             id: 'curriculum-page',
@@ -216,7 +226,8 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['curriculum.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '자체사이트'
           },
           {
             id: 'lecture-allinone',
@@ -228,7 +239,8 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['lecture-allinone.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '자체사이트'
           },
           {
             id: 'lecture-bookclub',
@@ -240,7 +252,8 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['lecture-bookclub.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '자체사이트'
           },
           {
             id: 'fire-retirement-calculator',
@@ -252,7 +265,8 @@
             iconKey: 'money',
             sidebarType: 'root',
             activeMatch: ['fire-retirement-calculator.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '자체사이트'
           },
           {
             id: 'refund-policy',
@@ -264,7 +278,19 @@
             iconKey: 'doc',
             sidebarType: 'root',
             activeMatch: ['refund-policy.html'],
-            hubVisible: true
+            hubVisible: true,
+            groupLabel: '자체사이트'
+          },
+          {
+            id: 'imweb-coaching',
+            title: '1:1 코칭 (아임웹)',
+            description: '카드결제용 상품 페이지 (idx=17)',
+            href: 'https://ourdongne.com/',
+            badgeText: '외부',
+            badgeTone: 'soon',
+            iconKey: 'money',
+            hubVisible: true,
+            groupLabel: '아임웹'
           }
         ]
       },

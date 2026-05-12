@@ -20,6 +20,8 @@
         details.section > summary.section-title::before { content: '▶'; font-size: 10px; color: #94A3B8; transition: transform 0.15s; }
         details.section[open] > summary.section-title::before { transform: rotate(90deg); }
         .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+        .group-label { font-size: 11px; font-weight: 700; color: #94A3B8; letter-spacing: 0.5px; padding: 14px 0 6px; text-transform: uppercase; }
+        .group-label:first-child { padding-top: 4px; }
         .item { background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; text-decoration: none; color: #1A1A1A; display: flex; align-items: center; gap: 12px; transition: all 0.15s; min-height: 64px; }
         .item:hover { border-color: #0077C8; }
         .item-icon { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
@@ -61,19 +63,42 @@
             return '';
         }
         var sectionClass = section.dashedTop ? 'section dashed-top' : 'section';
+        var body = renderBody(items);
         if (section.collapsible) {
             var openAttr = section.defaultOpen ? ' open' : '';
             return ''
                 + '<details class="' + sectionClass + '"' + openAttr + '>'
                 + '<summary class="section-title">' + esc(section.hubTitle) + '</summary>'
-                + '<div class="grid">' + items.map(renderItem).join('') + '</div>'
+                + body
                 + '</details>';
         }
         return ''
             + '<div class="' + sectionClass + '">'
             + '<div class="section-title">' + esc(section.hubTitle) + '</div>'
-            + '<div class="grid">' + items.map(renderItem).join('') + '</div>'
+            + body
             + '</div>';
+    }
+
+    function renderBody(items) {
+        var hasGroups = items.some(function(item) { return item.groupLabel; });
+        if (!hasGroups) {
+            return '<div class="grid">' + items.map(renderItem).join('') + '</div>';
+        }
+        var groupOrder = [];
+        var groupMap = {};
+        items.forEach(function(item) {
+            var label = item.groupLabel || '기타';
+            if (!groupMap[label]) {
+                groupMap[label] = [];
+                groupOrder.push(label);
+            }
+            groupMap[label].push(item);
+        });
+        return groupOrder.map(function(label) {
+            return ''
+                + '<div class="group-label">' + esc(label) + '</div>'
+                + '<div class="grid">' + groupMap[label].map(renderItem).join('') + '</div>';
+        }).join('');
     }
 
     function renderItem(item) {
