@@ -29,12 +29,12 @@
         items: [
           {
             id: 'telegram-cron',
-            title: '텔레그램 · 크론 알림',
-            sidebarLabel: '텔레그램·크론',
-            description: '방별 주기 · 목적 · 발송원 전수조사',
+            title: '크론 · 알림 요일표',
+            sidebarLabel: '크론·알림',
+            description: '요일/시간별 · 텔레그램 방별 운영 현황',
             href: 'dashboard/telegram-cron.html',
-            badgeText: 'NEW',
-            badgeTone: 'live',
+            badgeText: '정리중',
+            badgeTone: 'warn',
             iconKey: 'tg',
             hubVisible: true,
             navVisible: true,
