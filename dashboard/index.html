@@ -97,11 +97,11 @@
                 <a class="ops-alert-link" href="telegram-cron.html">전체 요일표 보기 →</a>
             </div>
             <div class="ops-stats">
-                <span class="ops-stat ok">정상 8</span>
-                <span class="ops-stat warn">정리 필요 0</span>
-                <span class="ops-stat off">꺼짐 5</span>
+                <span class="ops-stat ok" id="cron-ok">정상 8</span>
+                <span class="ops-stat warn" id="cron-warn">정리 필요 0</span>
+                <span class="ops-stat off" id="cron-off">꺼짐 5</span>
             </div>
-            <div class="ops-grid">
+            <div class="ops-grid" id="cron-items">
                 <div class="ops-item"><b>월 10:00 · 주간 건강검진</b><span>알림봇 · 기존 crontab 줄로 정상 실행</span></div>
                 <div class="ops-item"><b>정리 필요 없음</b><span>현재 크론/알림 기준 0개</span></div>
                 <div class="ops-item"><b>매일 07:10 · 경쟁채널</b><span>마케팅봇 · 정상</span></div>
@@ -133,6 +133,31 @@
         </div>
     </div>
 <script>
+
+// ── 크론/텔레그램 알림 요약 ──
+(function() {
+    var okEl = document.getElementById('cron-ok');
+    var warnEl = document.getElementById('cron-warn');
+    var offEl = document.getElementById('cron-off');
+    var itemsEl = document.getElementById('cron-items');
+    if (!okEl || !warnEl || !offEl || !itemsEl) return;
+    fetch('../data/cron-summary.json')
+        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function(data) {
+            var s = data.summary || {};
+            okEl.textContent = '정상 ' + (s['정상'] || 0);
+            warnEl.textContent = '정리 필요 ' + (s['정리 필요'] || 0);
+            offEl.textContent = '꺼짐 ' + (s['꺼짐'] || 0);
+            var list = data.important || [];
+            if (!list.length) return;
+            itemsEl.innerHTML = list.slice(0,4).map(function(item) {
+                var cls = item.status === '정리 필요' ? ' warn' : '';
+                return '<div class="ops-item' + cls + '"><b>' + escCron(item.day + ' ' + item.time + ' · ' + item.title) + '</b><span>' + escCron(item.room + ' · ' + item.status) + '</span></div>';
+            }).join('');
+        }).catch(function() { /* 고정값 유지 */ });
+    function escCron(s) { var e = document.createElement('span'); e.textContent = s || ''; return e.innerHTML; }
+})();
+
 // ── 투두 ──
 (function() {
     var container = document.getElementById('todo-content');
