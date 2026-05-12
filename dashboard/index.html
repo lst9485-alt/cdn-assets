@@ -66,6 +66,23 @@
         .okr-kr-fill { height: 100%; background: #0077C8; border-radius: 3px; }
         .okr-kr-detail { font-size: 12px; color: #94A3B8; margin-top: 3px; }
 
+
+        .ops-alert { background:white; border:1px solid #E2E8F0; border-radius:14px; padding:16px; margin-bottom:16px; }
+        .ops-alert-head { display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:10px; }
+        .ops-alert-title { font-size:15px; font-weight:800; color:#051C2C; }
+        .ops-alert-link { font-size:12px; color:#0077C8; text-decoration:none; font-weight:700; }
+        .ops-stats { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+        .ops-stat { background:#F8FAFC; border-radius:999px; padding:5px 10px; font-size:12px; font-weight:700; color:#475569; }
+        .ops-stat.ok { color:#166534; background:#ECFDF3; }
+        .ops-stat.warn { color:#B45309; background:#FFFBEB; }
+        .ops-stat.off { color:#64748B; background:#F1F5F9; }
+        .ops-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+        .ops-item { border:1px solid #E2E8F0; border-radius:10px; padding:9px 10px; font-size:13px; }
+        .ops-item b { display:block; color:#1E293B; }
+        .ops-item span { color:#64748B; font-size:12px; }
+        .ops-item.warn { border-color:#FBBF24; background:#FFFBEB; }
+        @media (max-width: 900px) { .ops-grid { grid-template-columns:1fr; } }
+
         @media (max-width: 900px) { .columns { grid-template-columns: 1fr; } .column { max-height: none; } }
     </style>
 </head>
@@ -73,6 +90,24 @@
     <div class="page">
         <a href="../" class="back">&larr; 메인</a>
         <h1>📊 대시보드</h1>
+
+        <section class="ops-alert">
+            <div class="ops-alert-head">
+                <div class="ops-alert-title">🦞 크론 · 텔레그램 알림</div>
+                <a class="ops-alert-link" href="telegram-cron.html">전체 요일표 보기 →</a>
+            </div>
+            <div class="ops-stats">
+                <span class="ops-stat ok">정상 7</span>
+                <span class="ops-stat warn">정리 필요 2</span>
+                <span class="ops-stat off">꺼짐 4</span>
+            </div>
+            <div class="ops-grid">
+                <div class="ops-item warn"><b>월 10:00 · 건강검진</b><span>알림봇 · 살릴 항목, crontab 등록 필요</span></div>
+                <div class="ops-item warn"><b>월 10:00 · 주간 운영 브리핑</b><span>알림봇 · 파일 없음, crontab 제거 필요</span></div>
+                <div class="ops-item"><b>매일 07:10 · 경쟁채널</b><span>마케팅봇 · 정상</span></div>
+                <div class="ops-item"><b>매일 07:20/08:00 · 시장/점검</b><span>알림봇 · 정상</span></div>
+            </div>
+        </section>
 
         <div class="columns">
             <!-- 투두리스트 -->
