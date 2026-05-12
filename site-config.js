@@ -146,7 +146,6 @@
             badgeText: 'V2',
             badgeTone: 'live',
             iconKey: 'web',
-            sidebarType: 'root',
             activeMatch: ['coaching-all-v2.html'],
             hubVisible: false,
             groupLabel: '자체사이트'
@@ -159,7 +158,6 @@
             badgeText: 'LIVE',
             badgeTone: 'live',
             iconKey: 'web',
-            sidebarType: 'root',
             activeMatch: ['coaching-all.html'],
             hubVisible: false,
             groupLabel: '자체사이트'
