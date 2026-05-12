@@ -36,7 +36,6 @@
       '    <a href="' + new URL('curriculum.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">커리큘럼</a>',
       '    <a href="' + new URL('refund-policy.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">환불 규정</a>',
       '  </nav>',
-      '  <a href="#" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">로그인</a>',
       '</div>'
     ].join('');
 
