@@ -285,7 +285,7 @@
             id: 'imweb-coaching',
             title: '1:1 코칭 (아임웹)',
             description: '카드결제용 상품 페이지 (idx=17)',
-            href: 'https://ourdongne.com/',
+            href: 'https://ourdongne.com/counsel/?idx=17',
             badgeText: '외부',
             badgeTone: 'soon',
             iconKey: 'money',
