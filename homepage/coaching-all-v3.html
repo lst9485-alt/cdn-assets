@@ -3,8 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>내집마련 1:1 코칭 v3 — 우리동네 재테크</title>
+  <title>확신 갖고 후회없이! 최고의 내집마련 1:1코칭ㅣ우리동네 재테크</title>
   <meta name="robots" content="noindex,nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="확신 갖고 후회없이! 최고의 내집마련 1:1코칭ㅣ우리동네 재테크">
+  <meta property="og:description" content="내 예산에 딱 맞는 내집마련 방법 · 1:1 맞춤 코칭 · 90일 카톡 케어">
+  <meta property="og:image" content="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-1.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://lst9485-alt.github.io/cdn-assets/homepage/coaching-all-v3.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="확신 갖고 후회없이! 최고의 내집마련 1:1코칭ㅣ우리동네 재테크">
+  <meta name="twitter:description" content="내 예산에 딱 맞는 내집마련 방법 · 1:1 맞춤 코칭 · 90일 카톡 케어">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-1.jpg">
 <!-- 아임웹 환경설정 → HEAD 코드 삽입 -->
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -255,7 +266,7 @@
 	  .package-postit:nth-child(3n+2)::before { background:#4ecdc4; }
 	  .package-postit:nth-child(3n)::before { background:#ff6b5b; }
 	  .neighborhood-map svg { width:100%; height:auto; }
-	  .sticky-coaching-cta { position:fixed; left:50%; bottom:22px; z-index:90; width:min(860px, calc(100vw - 40px)); max-width:860px; border-radius:8px; background:#2d2d2d; box-shadow:0 14px 36px rgba(15,23,42,0.28); transform:translate3d(-50%, 24px, 0); opacity:0; pointer-events:none; transition:opacity .22s ease, transform .22s ease; overflow:visible; }
+	  .sticky-coaching-cta { position:fixed; left:50%; bottom:0; z-index:90; width:min(860px, calc(100vw - 40px)); max-width:860px; border-radius:12px 12px 0 0; background:#2d2d2d; box-shadow:0 -8px 32px rgba(15,23,42,0.22); transform:translate3d(-50%, 24px, 0); opacity:0; pointer-events:none; transition:opacity .22s ease, transform .22s ease; overflow:visible; }
 	  .sticky-coaching-cta.is-visible { opacity:1; pointer-events:auto; transform:translate3d(-50%, 0, 0); }
 	  @keyframes ctaFloat { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(-4px); } }
 	  .cta-floating-badge { position:absolute; left:50%; bottom:calc(100% + 10px); transform:translateX(-50%); display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; border-radius:6px; background:#ffffff; color:#111111; padding:6px 10px; font-size:11px; font-weight:900; line-height:1; box-shadow:0 10px 20px rgba(15,23,42,0.18); animation:ctaFloat 2.2s ease-in-out infinite; }
@@ -282,7 +293,7 @@
 	    .v3-method-card:first-child { border-top: 0; }
 	    .v3-route-line { display: none; }
 	    .region-rail { justify-content:flex-start; overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling:touch; }
-	    .sticky-coaching-cta { left:12px; right:12px; bottom:76px; width:auto; transform:translate3d(0, 24px, 0); }
+	    .sticky-coaching-cta { left:0; right:0; bottom:0; width:auto; max-width:none; border-radius:0; transform:translate3d(0, 24px, 0); padding-bottom: max(12px, env(safe-area-inset-bottom)); }
 	    .sticky-coaching-cta.is-visible { transform:translate3d(0, 0, 0); }
 	  }
 </style>
