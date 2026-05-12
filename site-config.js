@@ -139,30 +139,6 @@
             groupLabel: '자체사이트'
           },
           {
-            id: 'landing-page-v2',
-            title: '1:1 코칭 v2',
-            description: '2026-04-29 업데이트 · 상세페이지 개선안',
-            href: 'homepage/coaching-all-v2.html',
-            badgeText: 'V2',
-            badgeTone: 'live',
-            iconKey: 'web',
-            activeMatch: ['coaching-all-v2.html'],
-            hubVisible: false,
-            groupLabel: '자체사이트'
-          },
-          {
-            id: 'landing-page',
-            title: '1:1 코칭 랜딩페이지',
-            description: '상세페이지 v3.5 미리보기',
-            href: 'homepage/coaching-all.html',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'web',
-            activeMatch: ['coaching-all.html'],
-            hubVisible: false,
-            groupLabel: '자체사이트'
-          },
-          {
             id: 'main-page',
             title: '메인 페이지',
             description: '우리동네재테크 운영 메인',
@@ -173,19 +149,6 @@
             sidebarType: 'root',
             activeMatch: ['main-page.html'],
             hubVisible: true,
-            groupLabel: '자체사이트'
-          },
-          {
-            id: 'main-page-preview',
-            title: '메인 페이지 (시안 v2)',
-            description: 'v2와 v3~v8 시안 비교',
-            href: 'homepage/index.html',
-            badgeText: 'WIP',
-            badgeTone: 'soon',
-            iconKey: 'web',
-            sidebarType: 'root',
-            activeMatch: ['homepage/index.html', 'main-page-test2.html'],
-            hubVisible: false,
             groupLabel: '자체사이트'
           },
           {
@@ -289,47 +252,6 @@
             iconKey: 'money',
             hubVisible: true,
             groupLabel: '아임웹'
-          }
-        ]
-      },
-      {
-        id: 'homepage-preview',
-        hubTitle: '홈페이지 (시안)',
-        dashedTop: true,
-        collapsible: true,
-        defaultOpen: false,
-        nav: {
-          type: 'single',
-          label: '홈페이지 시안',
-          href: 'homepage/main-page-test2.html',
-          activeMatch: ['main-page-test2.html'],
-          hidden: true
-        },
-        sidebar: {},
-        items: [
-          {
-            id: 'homepage-drafts-v3-v8',
-            title: '홈페이지 시안 v3~v8',
-            description: '6개 디자인 방향 비교 인덱스',
-            href: 'homepage/index.html',
-            badgeText: 'NEW',
-            badgeTone: 'live',
-            iconKey: 'web',
-            sidebarType: 'root',
-            activeMatch: ['homepage/index.html'],
-            hubVisible: false
-          },
-          {
-            id: 'main-page-test2',
-            title: '메인 페이지 (시안 v2)',
-            description: 'WBF 톤 절제 + 브랜드 컬러 적용',
-            href: 'homepage/main-page-test2.html',
-            badgeText: 'WIP',
-            badgeTone: 'soon',
-            iconKey: 'web',
-            sidebarType: 'root',
-            activeMatch: ['main-page-test2.html'],
-            hubVisible: false
           }
         ]
       },
