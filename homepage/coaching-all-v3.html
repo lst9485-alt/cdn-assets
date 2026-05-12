@@ -32,7 +32,8 @@
 <!-- 랜딩 스타일 -->
 <style>
   html { font-size: 16px !important; overflow-x: hidden; }
-  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; overflow-x: hidden; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; overflow-x: hidden; padding-bottom: 140px; }
+  @media (max-width: 768px) { body { padding-bottom: 200px; } }
   .word-keep { word-break: keep-all; overflow-wrap: break-word; }
   [data-reveal] { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1); }
   [data-reveal="left"] { transform: translateX(-60px); }
@@ -294,17 +295,14 @@
       <div class="flex flex-col gap-1">
         <p class="text-sm font-display font-black md:text-base">내집마련 1:1 코칭</p>
         <p class="text-xs text-white/75 md:text-sm">
-          <span class="font-bold text-white">₩400,000부터</span>
+          <span class="font-bold text-white">₩400,000</span>
           <span class="mx-1 text-white/40">·</span>
-          <span class="text-yellow-400">★</span> 4.97 (74)
+          <span class="text-yellow-400">★</span> 4.97 (174)
           <span class="mx-1 text-white/40">·</span>
           90일 케어
         </p>
       </div>
-      <div class="relative flex flex-col items-end">
-        <span class="cta-floating-badge">🔥 매주 3명 한정</span>
-        <button type="button" class="scroll-to-form shrink-0 rounded-lg bg-[#ff4b4b] px-7 py-3 text-sm font-black text-white shadow-lg transition hover:bg-[#e63838]">상담 신청하기</button>
-      </div>
+      <button type="button" class="scroll-to-form shrink-0 rounded-lg bg-[#ff4b4b] px-7 py-3 text-sm font-black text-white shadow-lg transition hover:bg-[#e63838]">상담 신청하기</button>
     </div>
   </div>
 
