@@ -95,6 +95,194 @@
 
   <div class="stripe"></div>
 
+  <!-- ============== D-강화안 ============== -->
+  <div class="mb-3">
+    <span class="inline-block bg-red-100 text-red-700 text-xs font-black px-2 py-1 rounded">D-강화안</span>
+    <h2 class="text-xl md:text-2xl font-black mt-2">색·임팩트 부스트</h2>
+    <p class="text-gray-600 text-sm mt-1">진한 그라데이션 + 초대형 숫자 + 폭발/추락 효과</p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3 relative">
+    <!-- 분당 카드 (폭등) -->
+    <div class="rounded-2xl p-6 shadow-xl border-2 border-red-500 relative overflow-hidden" style="background: linear-gradient(135deg, #fff5f5 0%, #ffe4e4 60%, #ffd0d0 100%);">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="w-3 h-3 rounded-full bg-red-600"></span>
+        <span class="text-xs font-black text-red-700">분당 (김과장)</span>
+      </div>
+      <div class="text-sm text-gray-500 mb-1">7억</div>
+      <div class="flex items-baseline gap-2 mb-2">
+        <span class="text-5xl font-black text-red-600 leading-none">19억</span>
+        <iconify-icon icon="solar:arrow-up-bold" class="text-3xl text-red-600"></iconify-icon>
+      </div>
+      <div class="inline-block bg-red-600 text-white text-sm font-black px-3 py-1.5 rounded-full shadow">+ 12억 폭등</div>
+      <svg viewBox="0 0 200 50" class="w-full h-10 mt-3">
+        <defs>
+          <linearGradient id="redFillX" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#dc2626" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="redGlow"><feGaussianBlur stdDeviation="2"/></filter>
+        </defs>
+        <path d="M0 40 L40 42 L70 38 C100 28 130 14 170 4 L200 2 L200 50 L0 50 Z" fill="url(#redFillX)"/>
+        <path d="M0 40 L40 42 L70 38 C100 28 130 14 170 4 L200 2" fill="none" stroke="#dc2626" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="200" cy="2" r="6" fill="#dc2626" filter="url(#redGlow)"/>
+        <circle cx="200" cy="2" r="4" fill="#fff"/>
+        <circle cx="200" cy="2" r="2.5" fill="#dc2626"/>
+      </svg>
+    </div>
+
+    <!-- 일산 카드 (하락) -->
+    <div class="rounded-2xl p-6 shadow-xl border-2 border-blue-500 relative overflow-hidden" style="background: linear-gradient(135deg, #f0f6ff 0%, #d8e6ff 60%, #b8d0ff 100%);">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="w-3 h-3 rounded-full bg-brand-blue"></span>
+        <span class="text-xs font-black text-brand-blue">일산 (의사 강씨)</span>
+      </div>
+      <div class="text-sm text-gray-500 mb-1">10억</div>
+      <div class="flex items-baseline gap-2 mb-2">
+        <span class="text-5xl font-black text-brand-blue leading-none">6억</span>
+        <iconify-icon icon="solar:arrow-down-bold" class="text-3xl text-brand-blue"></iconify-icon>
+      </div>
+      <div class="inline-block bg-brand-blue text-white text-sm font-black px-3 py-1.5 rounded-full shadow">- 4억 하락</div>
+      <svg viewBox="0 0 200 50" class="w-full h-10 mt-3">
+        <defs>
+          <linearGradient id="blueFillX" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#0055FF" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#0055FF" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="blueGlow"><feGaussianBlur stdDeviation="2"/></filter>
+        </defs>
+        <path d="M0 12 L40 22 L70 26 C100 20 130 22 170 40 L200 46 L200 50 L0 50 Z" fill="url(#blueFillX)"/>
+        <path d="M0 12 L40 22 L70 26 C100 20 130 22 170 40 L200 46" fill="none" stroke="#0055FF" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="200" cy="46" r="6" fill="#0055FF" filter="url(#blueGlow)"/>
+        <circle cx="200" cy="46" r="4" fill="#fff"/>
+        <circle cx="200" cy="46" r="2.5" fill="#0055FF"/>
+      </svg>
+    </div>
+
+    <!-- VS 배지 (가운데, 데스크탑만) -->
+    <div class="hidden sm:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg items-center justify-center border-2 border-orange-500 font-black text-orange-600 text-sm">VS</div>
+  </div>
+
+  <div class="bg-gradient-to-r from-red-500 via-orange-500 to-blue-500 rounded-2xl p-1 mb-3">
+    <div class="bg-white rounded-xl px-5 py-5 text-center">
+      <p class="text-xs text-gray-500 mb-1 font-bold">20년 후 결과</p>
+      <p class="text-3xl md:text-4xl font-black">
+        <span class="text-red-600">+12억</span>
+        <span class="text-gray-400 mx-2">vs</span>
+        <span class="text-brand-blue">-4억</span>
+      </p>
+      <p class="text-lg md:text-xl font-black text-orange-600 mt-1">= <span class="text-3xl md:text-4xl">16억</span> 격차</p>
+    </div>
+  </div>
+
+  <div class="stripe"></div>
+
+  <!-- ============== D+F 결합안 ============== -->
+  <div class="mb-3">
+    <span class="inline-block bg-red-100 text-red-700 text-xs font-black px-2 py-1 rounded">D+F 결합</span>
+    <h2 class="text-xl md:text-2xl font-black mt-2">큰 숫자 + 면적 차트</h2>
+    <p class="text-gray-600 text-sm mt-1">위에 임팩트 카드 + 아래 시간 흐름 차트 둘 다 살림</p>
+  </div>
+
+  <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-5 mb-3">
+    <!-- 상단: 큰 숫자 -->
+    <div class="grid grid-cols-2 gap-3 mb-4">
+      <div class="text-center bg-red-50 rounded-xl py-4 border border-red-100">
+        <div class="text-xs font-bold text-red-700 mb-1">분당 (김과장)</div>
+        <div class="text-sm text-gray-400">7억 →</div>
+        <div class="text-3xl md:text-4xl font-black text-red-600">19억</div>
+        <div class="text-xs font-black text-red-600 mt-1">+12억 ↑</div>
+      </div>
+      <div class="text-center bg-blue-50 rounded-xl py-4 border border-blue-100">
+        <div class="text-xs font-bold text-brand-blue mb-1">일산 (의사 강씨)</div>
+        <div class="text-sm text-gray-400">10억 →</div>
+        <div class="text-3xl md:text-4xl font-black text-brand-blue">6억</div>
+        <div class="text-xs font-black text-brand-blue mt-1">-4억 ↓</div>
+      </div>
+    </div>
+    <!-- 하단: 면적 차트 미니 -->
+    <svg viewBox="0 0 620 280" class="w-full">
+      <defs>
+        <linearGradient id="rA2" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#dc2626" stop-opacity="0.3"/><stop offset="100%" stop-color="#dc2626" stop-opacity="0"/></linearGradient>
+        <linearGradient id="bA2" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#0055FF" stop-opacity="0.25"/><stop offset="100%" stop-color="#0055FF" stop-opacity="0"/></linearGradient>
+      </defs>
+      <line x1="40" y1="20" x2="40" y2="240" stroke="#e5e7eb"/>
+      <line x1="40" y1="240" x2="600" y2="240" stroke="#e5e7eb"/>
+      <text x="40" y="260" text-anchor="middle" fill="#9ca3af" font-size="14">2006</text>
+      <text x="320" y="260" text-anchor="middle" fill="#9ca3af" font-size="14">2016</text>
+      <text x="600" y="260" text-anchor="middle" fill="#9ca3af" font-size="14">2026</text>
+      <path d="M40 162 L130 174 L180 162 C260 122 310 88 380 40 L460 76 L530 54 L600 40 L600 240 L40 240 Z" fill="url(#rA2)"/>
+      <path d="M40 130 L130 152 L180 162 C260 146 322 130 380 110 L460 152 L530 174 L600 174 L600 240 L40 240 Z" fill="url(#bA2)"/>
+      <path d="M40 162 L130 174 L180 162 C260 122 310 88 380 40 L460 76 L530 54 L600 40" fill="none" stroke="#dc2626" stroke-width="4" stroke-linecap="round"/>
+      <path d="M40 130 L130 152 L180 162 C260 146 322 130 380 110 L460 152 L530 174 L600 174" fill="none" stroke="#0055FF" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="600" cy="40" r="6" fill="#dc2626"/>
+      <circle cx="600" cy="174" r="6" fill="#0055FF"/>
+    </svg>
+  </div>
+
+  <div class="stripe"></div>
+
+  <!-- ============== G안 영화 포스터 풍 ============== -->
+  <div class="mb-3">
+    <span class="inline-block bg-red-100 text-red-700 text-xs font-black px-2 py-1 rounded">G안</span>
+    <h2 class="text-xl md:text-2xl font-black mt-2">영화 포스터 풍 (가장 극적)</h2>
+    <p class="text-gray-600 text-sm mt-1">V자 갈라짐 + 다크 배경 + 폭발/침몰 효과</p>
+  </div>
+
+  <div class="rounded-2xl p-7 md:p-10 mb-3 relative overflow-hidden shadow-2xl" style="background: radial-gradient(ellipse at center, #1a1f3a 0%, #0a0d1a 100%);">
+    <!-- 가운데 텍스트 -->
+    <div class="text-center mb-6 relative z-10">
+      <p class="text-xs font-bold text-gray-400 tracking-widest">SAME START, DIFFERENT END</p>
+      <p class="text-2xl md:text-3xl font-black text-white mt-1">2006 → 2026, 20년 후</p>
+    </div>
+
+    <svg viewBox="0 0 620 360" class="w-full">
+      <defs>
+        <radialGradient id="redExplode" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff4444" stop-opacity="1"/><stop offset="100%" stop-color="#dc2626" stop-opacity="0"/></radialGradient>
+        <radialGradient id="blueSink" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#3388ff" stop-opacity="1"/><stop offset="100%" stop-color="#0055FF" stop-opacity="0"/></radialGradient>
+        <linearGradient id="redLine" x1="0" x2="1" y1="0" y2="0"><stop offset="0%" stop-color="#ff8888"/><stop offset="100%" stop-color="#ff2222"/></linearGradient>
+        <linearGradient id="blueLine" x1="0" x2="1" y1="0" y2="0"><stop offset="0%" stop-color="#88aaff"/><stop offset="100%" stop-color="#1144ff"/></linearGradient>
+        <filter id="explodeGlow"><feGaussianBlur stdDeviation="10"/></filter>
+      </defs>
+
+      <!-- 가운데 충돌점 (2011) -->
+      <line x1="310" y1="30" x2="310" y2="340" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.5"/>
+      <text x="310" y="22" text-anchor="middle" fill="#FF6B00" font-size="13" font-weight="900">갈라짐 시작 · 2011</text>
+
+      <!-- 분당 라인 (위로 폭발) -->
+      <path d="M50 195 L170 205 L310 195 Q420 130 500 70 L580 40" fill="none" stroke="url(#redLine)" stroke-width="6" stroke-linecap="round"/>
+      <!-- 폭발 효과 -->
+      <circle cx="580" cy="40" r="40" fill="url(#redExplode)" filter="url(#explodeGlow)"/>
+      <circle cx="580" cy="40" r="10" fill="#fff"/>
+      <circle cx="580" cy="40" r="6" fill="#dc2626"/>
+
+      <!-- 일산 라인 (아래로 침몰) -->
+      <path d="M50 170 L170 188 L310 195 Q420 215 500 250 L580 290" fill="none" stroke="url(#blueLine)" stroke-width="6" stroke-linecap="round"/>
+      <!-- 침몰 효과 -->
+      <circle cx="580" cy="290" r="32" fill="url(#blueSink)" filter="url(#explodeGlow)" opacity="0.7"/>
+      <circle cx="580" cy="290" r="8" fill="#fff"/>
+      <circle cx="580" cy="290" r="5" fill="#0055FF"/>
+
+      <!-- 라벨: 분당 결과 -->
+      <rect x="450" y="2" width="160" height="34" rx="17" fill="#dc2626"/>
+      <text x="530" y="25" text-anchor="middle" fill="white" font-size="17" font-weight="900">분당 19억 ↑</text>
+
+      <!-- 라벨: 일산 결과 -->
+      <rect x="450" y="318" width="160" height="34" rx="17" fill="#0055FF"/>
+      <text x="530" y="341" text-anchor="middle" fill="white" font-size="17" font-weight="900">일산 6억 ↓</text>
+
+      <!-- 시작점 라벨 -->
+      <rect x="6" y="160" width="50" height="22" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)"/>
+      <text x="31" y="176" text-anchor="middle" fill="white" font-size="13" font-weight="700">시작</text>
+    </svg>
+
+    <div class="text-center mt-4 relative z-10">
+      <div class="inline-block bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-black shadow-lg">⚡ 같은 출발, 16억 차이</div>
+    </div>
+  </div>
+
+  <div class="stripe"></div>
+
   <!-- ============== E안 ============== -->
   <div class="mb-3">
     <span class="inline-block bg-orange-100 text-orange-700 text-xs font-black px-2 py-1 rounded">E안</span>
