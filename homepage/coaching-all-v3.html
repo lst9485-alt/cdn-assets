@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function(){
+  var ua = (navigator.userAgent || '').toLowerCase();
+  if (ua.indexOf('kakaotalk') === -1) return;
+  document.documentElement.innerHTML = '<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body style="margin:0;font-family:-apple-system,BlinkMacSystemFont,\u0027Pretendard\u0027,system-ui,sans-serif"><div style="position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px;text-align:center"><div style="font-size:22px;font-weight:900;color:#111;margin-bottom:12px">우리동네재테크</div><div style="font-size:15px;color:#666;line-height:1.6">외부 브라우저로 이동 중입니다...<br>잠시만 기다려주세요</div></div></body>';
+  setTimeout(function(){
+    try { location.href = "kakaotalk://web/openExternal?url=" + encodeURIComponent(window.location.href); }
+    catch(e) { console.error(e); }
+  }, 50);
+})();
+</script>
   <title>확신 갖고 후회없이! 최고의 내집마련 1:1코칭ㅣ우리동네 재테크</title>
   <meta name="robots" content="noindex,nofollow">
   <meta property="og:type" content="website">
