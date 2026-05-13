@@ -634,32 +634,19 @@
         <div class="flex justify-center my-6"><div class="w-0.5 h-12 bg-gray-600"></div></div>
         <p class="text-5xl md:text-6xl font-display font-black my-10 word-keep text-center">하지만</p>
         <div class="flex justify-center my-6"><div class="w-0.5 h-12 bg-gray-600"></div></div>
-        <!-- 매수 -->
-	        <div class="contract-proof-card is-buy mb-6 max-w-[420px] mx-auto rounded-3xl overflow-hidden p-4">
-	          <div class="mb-3 flex items-center justify-between">
-	            <p class="rounded-full bg-red-600/75 px-3 py-1 text-sm font-black text-white">매수 계약서</p>
-	          </div>
-	          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-buy.png" alt="수명산 아파트 매수 계약서" class="contract-img w-full" loading="lazy" decoding="async">
-		          <div class="contract-price-box is-buy mt-4 rounded-2xl border px-5 py-4 text-center">
-	            <p class="text-sm font-bold text-red-100">매수가</p>
-	            <p class="text-4xl md:text-5xl font-display font-black text-red-50">9억 5천</p>
-	          </div>
-	        </div>
-        <!-- 화살표 -->
-        <div class="text-center my-4">
-          <iconify-icon icon="solar:arrow-down-bold" class="text-4xl text-gray-400"></iconify-icon>
+        <!-- 매수/매도 폴라로이드 (흑백 + 도장) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10 px-4">
+          <div class="relative bg-white p-3 pb-5 rounded-sm shadow-2xl rotate-[-2deg] mx-auto" style="max-width:300px">
+            <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-buy.png" alt="매수 계약서" class="w-full grayscale" loading="lazy" decoding="async">
+            <div class="absolute top-6 right-6 rotate-[-14deg] border-[3px] border-red-500 text-red-500 font-display font-black px-3 py-1 rounded bg-white/95 shadow-md text-base md:text-lg tracking-tight">매수 9.5억</div>
+            <p class="text-center mt-3 text-sm font-bold text-gray-700">서울특별시 강서구</p>
+          </div>
+          <div class="relative bg-white p-3 pb-5 rounded-sm shadow-2xl rotate-[2deg] mx-auto" style="max-width:300px">
+            <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-sell.png" alt="매도 계약서" class="w-full grayscale" loading="lazy" decoding="async">
+            <div class="absolute top-6 right-6 rotate-[10deg] border-[3px] border-blue-600 text-blue-600 font-display font-black px-3 py-1 rounded bg-white/95 shadow-md text-base md:text-lg tracking-tight">매도 8.2억</div>
+            <p class="text-center mt-3 text-sm font-bold text-gray-700">서울특별시 강서구</p>
+          </div>
         </div>
-        <!-- 매도 -->
-	        <div class="contract-proof-card is-sell mb-8 max-w-[420px] mx-auto rounded-3xl overflow-hidden p-4">
-	          <div class="mb-3 flex items-center justify-between">
-	            <p class="rounded-full bg-blue-600/75 px-3 py-1 text-sm font-black text-white">매도 계약서</p>
-	          </div>
-	          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-sell.png" alt="수명산 아파트 매도 계약서" class="contract-img w-full" loading="lazy" decoding="async">
-		          <div class="contract-price-box is-sell mt-4 rounded-2xl border px-5 py-4 text-center">
-	            <p class="text-sm font-bold text-blue-100">매도가</p>
-	            <p class="text-4xl md:text-5xl font-display font-black text-blue-50">8억 2천</p>
-	          </div>
-	        </div>
         <div class="text-center">
           <p class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black text-red-500 mb-4 word-keep">-201,613,492원</p>
           <p class="text-lg md:text-xl text-gray-300 font-medium word-keep mb-6">1억 3천 손실 + 세금 + 인테리어 + 복비 등</p>
@@ -671,7 +658,7 @@
         <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep text-red-400 leading-snug">평생 모은 2억을<br>날렸습니다</p>
         <p class="text-2xl md:text-3xl font-display font-bold word-keep text-gray-300 leading-relaxed">혼자 결정해도 된다고 생각했습니다</p>
         <p class="text-3xl md:text-4xl font-display font-black word-keep">결과는, <span class="text-red-500">처참한 실패.</span></p>
-        <p class="text-xl md:text-2xl text-gray-200 word-keep mt-4 font-medium">문제는, 이 실수가 특별한 일이 아니라는 겁니다</p>
+        <p class="text-xl md:text-2xl text-gray-200 word-keep mt-4 font-medium">문제는 이런 일은 누구에게나 일어납니다</p>
       </div>
       <!-- 추천 대상 -->
       <div class="mt-20 max-w-2xl mx-auto" data-reveal>
