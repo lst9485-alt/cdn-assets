@@ -83,6 +83,8 @@
   .glow-pulse { animation: glowPulse 2.5s ease infinite; }
   @keyframes pulseAttention { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
   .pulse-attention { animation: pulseAttention 1.5s ease infinite; }
+  @keyframes heartBeat { 0%,100%{transform:scale(1)} 14%{transform:scale(1.06)} 28%{transform:scale(1)} 42%{transform:scale(1.05)} 56%,100%{transform:scale(1)} }
+  .heart-beat { animation: heartBeat 1.6s ease-in-out infinite; }
   .star { color: #FFB800; }
   .hl-orange { background: linear-gradient(transparent 60%, rgba(255,107,0,0.15) 60%); }
   @keyframes heroDrop {
@@ -505,7 +507,7 @@
         </div>
       </div>
       <!-- 서스펜스 질문 -->
-      <div class="text-center mb-8" data-reveal="scale">
+      <div class="text-center mb-12" data-reveal="scale">
         <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep">어떻게<br>됐을까요?</p>
       </div>
       <!-- 극적 전환 (서스펜스) -->
@@ -517,7 +519,7 @@
         </p>
       </div>
       <!-- D안 비교 카드 (흰 배경 + 컬러 테두리 + 가파른 그래프) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6" data-reveal>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12" data-reveal>
         <!-- 분당 (폭등) -->
         <div class="bg-white rounded-2xl p-6 md:p-7 shadow-md border-2 border-red-500">
           <div class="flex items-center gap-2 mb-3">
@@ -579,7 +581,7 @@
       <div class="text-center mb-16" data-reveal="scale">
         <p class="text-3xl md:text-4xl font-display font-black word-keep mb-3"><span class="text-red-600">7억 분당</span>은 → <span class="text-red-600 font-black">19억</span>이 됐고,</p>
         <p class="text-3xl md:text-4xl font-display font-black word-keep mb-8"><span class="text-brand-blue">10억 일산</span>은 → <span class="text-brand-blue font-black">6억</span>이 됐습니다</p>
-        <div class="difference-badge relative inline-flex items-center justify-center px-9 sm:px-14 py-7 rounded-[2rem] transform hover:scale-105 transition-transform">
+        <div class="difference-badge heart-beat relative inline-flex items-center justify-center px-9 sm:px-14 py-7 rounded-[2rem]">
           <iconify-icon icon="solar:danger-triangle-bold-duotone" class="danger-icon mr-3 text-4xl"></iconify-icon>
           <p class="text-3xl md:text-4xl font-display font-black">무려 <span class="difference-number text-5xl md:text-6xl">13억</span> 차이</p>
         </div>
@@ -607,7 +609,7 @@
         <div class="bg-white rounded-2xl p-6 md:p-7 shadow-md border border-gray-200 relative">
           <span class="absolute top-3 left-5 text-5xl text-orange-300 font-display font-black leading-none">"</span>
           <p class="text-lg md:text-xl font-bold text-gray-800 pl-7 pt-3 word-keep">돈이 조금 애매해서<br><span class="text-brand-orange">지금 사야 될지 고민돼요.</span></p>
-          <p class="text-xs md:text-sm text-gray-500 mt-3 pl-7">정** · 30대 · 종잣돈 부족</p>
+          <p class="text-xs md:text-sm text-gray-500 mt-3 pl-7">정** · 30대 · 신혼부부</p>
         </div>
       </div>
       <div class="text-center" data-reveal>
