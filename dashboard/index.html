@@ -1,394 +1,104 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <title>대시보드 - 운영 대시보드</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1E293B; line-height: 1.6; }
-        .page { max-width: 1200px; margin: 0 auto; padding: 32px 20px; }
-        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 16px; }
-        .back:hover { color: #0077C8; }
-        h1 { font-size: 22px; font-weight: 800; color: #051C2C; margin-bottom: 20px; }
-
-        /* ── 3열 레이아웃 ── */
-        .columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: start; }
-        .column { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px; max-height: calc(100vh - 140px); overflow-y: auto; }
-        .column::-webkit-scrollbar { width: 4px; }
-        .column::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 2px; }
-        .col-header { font-size: 15px; font-weight: 700; color: #051C2C; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
-        .col-header .count { font-size: 13px; font-weight: 600; color: #64748B; }
-
-        /* ── 공용 ── */
-        .progress-bar { height: 4px; background: #E2E8F0; border-radius: 2px; overflow: hidden; margin-bottom: 14px; }
-        .progress-fill { height: 100%; background: #0077C8; border-radius: 2px; }
-        .updated { font-size: 11px; color: #94A3B8; margin-top: 12px; }
-        .error { background: #F8FAFC; border: 1px dashed #CBD5E1; border-radius: 8px; padding: 16px; text-align: center; color: #94A3B8; font-size: 14px; }
-
-        /* ── 접기/펼치기 공용 ── */
-        .fold { margin-bottom: 8px; }
-        .fold summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 6px; padding: 8px 10px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; font-size: 14px; font-weight: 600; color: #1E293B; transition: all 0.15s; }
-        .fold summary::-webkit-details-marker { display: none; }
-        .fold summary::before { content: "▸"; font-size: 11px; color: #94A3B8; transition: transform 0.15s; }
-        .fold[open] summary::before { transform: rotate(90deg); }
-        .fold[open] summary { background: #E8F3FF; border-color: #0077C8; }
-        .fold summary:hover { border-color: #0077C8; }
-        .fold-body { padding: 8px 10px 4px; }
-        .fold summary .fold-count { font-size: 12px; color: #94A3B8; margin-left: auto; }
-
-        /* ── 투두 ── */
-        .todo-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: #0077C8; color: white; border-radius: 4px; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-right: 4px; }
-        .todo-item { display: flex; align-items: flex-start; gap: 6px; padding: 3px 0; font-size: 14px; color: #475569; }
-        .todo-item input { margin-top: 4px; pointer-events: none; accent-color: #0077C8; }
-        .todo-item.done { color: #B0B8C4; text-decoration: line-through; }
-
-        /* ── 프로젝트 ── */
-        .proj-icon { flex-shrink: 0; font-size: 14px; }
-        .proj-app { font-size: 12px; color: #64748B; }
-        .proj-status { font-size: 13px; color: #64748B; padding: 2px 0; }
-        .proj-next { font-size: 13px; color: #0077C8; }
-        .proj-date { font-size: 11px; color: #94A3B8; margin-left: auto; }
-
-        /* ── OKR ── */
-        .okr-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
-        .okr-stat { background: #F8FAFC; border-radius: 8px; padding: 12px; text-align: center; }
-        .okr-stat-label { font-size: 12px; color: #64748B; }
-        .okr-stat-value { font-size: 22px; font-weight: 800; color: #051C2C; }
-        .okr-stat-sub { font-size: 12px; color: #94A3B8; }
-        .okr-stat-warn { color: #DC2626; }
-        .okr-kr { margin-bottom: 12px; }
-        .okr-kr-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-        .okr-kr-title { font-size: 14px; font-weight: 600; color: #1E293B; }
-        .okr-kr-rate { font-size: 13px; font-weight: 700; color: #0077C8; }
-        .okr-kr-bar { height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden; }
-        .okr-kr-fill { height: 100%; background: #0077C8; border-radius: 3px; }
-        .okr-kr-detail { font-size: 12px; color: #94A3B8; margin-top: 3px; }
-
-
-        .ops-alert { background:white; border:1px solid #E2E8F0; border-radius:14px; padding:16px; margin-bottom:16px; }
-        .ops-alert-head { display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:10px; }
-        .ops-alert-title { font-size:15px; font-weight:800; color:#051C2C; }
-        .ops-alert-link { font-size:12px; color:#0077C8; text-decoration:none; font-weight:700; }
-        .ops-stats { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
-        .ops-stat { background:#F8FAFC; border-radius:999px; padding:5px 10px; font-size:12px; font-weight:700; color:#475569; }
-        .ops-stat.ok { color:#166534; background:#ECFDF3; }
-        .ops-stat.warn { color:#B45309; background:#FFFBEB; }
-        .ops-stat.off { color:#64748B; background:#F1F5F9; }
-        .ops-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
-        .ops-item { border:1px solid #E2E8F0; border-radius:10px; padding:9px 10px; font-size:13px; }
-        .ops-item b { display:block; color:#1E293B; }
-        .ops-item span { color:#64748B; font-size:12px; }
-        .ops-item.warn { border-color:#FBBF24; background:#FFFBEB; }
-        @media (max-width: 900px) { .ops-grid { grid-template-columns:1fr; } }
-
-        @media (max-width: 900px) { .columns { grid-template-columns: 1fr; } .column { max-height: none; } }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <title>자동화 알림 요약표</title>
+  <style>
+    *{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Pretendard",system-ui,sans-serif;background:#f6f8fb;color:#17202a;margin:0;line-height:1.5}main{max-width:1180px;margin:0 auto;padding:28px 18px 48px}a{color:#2563eb;text-decoration:none}h1{font-size:26px;margin:8px 0 4px;color:#051C2C}.desc{color:#667085;margin:0 0 16px}.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-end}.stamp{font-size:12px;color:#94a3b8;text-align:right}.summary{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:18px 0}.sum{background:white;border-radius:14px;padding:14px 16px;box-shadow:0 1px 4px #0001;border:1px solid #e5eaf0}.sum span{display:block;color:#667085;font-size:12px;font-weight:800}.sum b{font-size:28px;color:#111827}.okc{color:#15803d!important}.warnc{color:#b45309!important}.offc{color:#64748b!important}.note{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:13px 15px;margin:14px 0;color:#9a3412;font-size:14px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.chip{border:1px solid #dbe3ee;background:white;border-radius:999px;padding:7px 12px;font-weight:800;color:#475569;cursor:pointer}.chip.active{background:#051c2c;color:white;border-color:#051c2c}section{margin-top:22px}h2{font-size:18px;margin:0 0 10px;color:#051C2C}.table-wrap{background:white;border-radius:16px;box-shadow:0 1px 4px #0001;border:1px solid #e5eaf0;overflow:hidden}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:11px 12px;border-bottom:1px solid #eef2f7;text-align:left;vertical-align:top}th{background:#f8fafc;color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.03em}tr:last-child td{border-bottom:0}.time{white-space:nowrap;font-weight:900;color:#051C2C}.type{white-space:nowrap}.badge{display:inline-block;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:900}.ok{background:#ecfdf3;color:#166534}.off{background:#f1f5f9;color:#64748b}.warn{background:#fffbeb;color:#b45309}.bad{background:#fef2f2;color:#b91c1c}.muted{display:block;color:#94a3b8;font-size:12px;margin-top:2px}details summary{cursor:pointer;color:#2563eb;font-weight:800}.rooms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.room{background:white;border:1px solid #e5eaf0;border-radius:14px;padding:14px;box-shadow:0 1px 4px #0001}.room-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.room h3{margin:0;font-size:16px}.room p{color:#667085;font-size:13px;margin:8px 0 0}.actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:16px}.btn{background:white;border:1px solid #dbe3ee;border-radius:13px;padding:11px;text-align:center;font-weight:900;color:#17202a;cursor:pointer}.btn.lock{background:#fff7ed;color:#9a3412}.hidden{display:none!important}@media(max-width:900px){.top{display:block}.stamp{text-align:left;margin-top:6px}.summary{grid-template-columns:repeat(2,1fr)}.rooms,.actions{grid-template-columns:1fr}table{font-size:12px}th,td{padding:9px 8px}}@media(max-width:560px){.summary{grid-template-columns:1fr}.hide-mobile{display:none}}
+  </style>
 </head>
 <body>
-    <div class="page">
-        <a href="../" class="back">&larr; 메인</a>
-        <h1>📊 대시보드</h1>
+<main>
+  <div class="top"><div><a href="../">← 메인</a><h1>🦞 자동화 알림 요약표</h1><p class="desc">Cron · n8n · Telegram을 요일/상태 중심으로 보는 운영표</p></div><div class="stamp" id="updated">데이터 로딩 중</div></div>
 
-        <section class="ops-alert">
-            <div class="ops-alert-head">
-                <div class="ops-alert-title">🦞 크론 · 텔레그램 알림</div>
-                <a class="ops-alert-link" href="telegram-cron.html">전체 요일표 보기 →</a>
-            </div>
-            <div class="ops-stats">
-                <span class="ops-stat ok" id="cron-ok">정상 8</span>
-                <span class="ops-stat warn" id="cron-warn">정리 필요 0</span>
-                <span class="ops-stat off" id="cron-off">꺼짐 5</span>
-            </div>
-            <div class="ops-grid" id="cron-items">
-                <div class="ops-item"><b>월 10:00 · 주간 건강검진</b><span>알림봇 · 기존 crontab 줄로 정상 실행</span></div>
-                <div class="ops-item"><b>정리 필요 없음</b><span>현재 크론/알림 기준 0개</span></div>
-                <div class="ops-item"><b>매일 07:10 · 경쟁채널</b><span>마케팅봇 · 정상</span></div>
-                <div class="ops-item"><b>매일 07:20/08:00 · 시장/점검</b><span>알림봇 · 정상</span></div>
-            </div>
-        </section>
+  <div class="summary">
+    <div class="sum"><span>Cron 정상</span><b class="okc" id="cron-ok">—</b></div>
+    <div class="sum"><span>Cron 정리</span><b class="warnc" id="cron-warn">—</b></div>
+    <div class="sum"><span>Cron 꺼짐</span><b class="offc" id="cron-off">—</b></div>
+    <div class="sum"><span>n8n 활성</span><b class="okc" id="n8n-active">—</b></div>
+    <div class="sum"><span>n8n 꺼짐</span><b class="offc" id="n8n-off">—</b></div>
+    <div class="sum"><span>Telegram 방</span><b id="tg-rooms">—</b></div>
+  </div>
 
-        <div class="columns">
-            <!-- 투두리스트 -->
-            <div class="column" id="col-todo">
-                <div class="col-header">✅ 투두리스트 <span class="count" id="todo-count">—</span></div>
-                <div id="todo"></div>
-                <div id="todo-content"><div class="error">로딩 중...</div></div>
-            </div>
+  <div class="note"><b>원칙:</b> 이 화면은 보기/요약/복사용입니다. 실제 ON/OFF, 발송, 삭제, 재시작은 승인 단계 붙인 뒤 실행합니다.</div>
 
-            <!-- 프로젝트 -->
-            <div class="column" id="col-proj">
-                <div class="col-header">📁 프로젝트 <span class="count" id="proj-count">—</span></div>
-                <div id="projects"></div>
-                <div id="projects-content"><div class="error">로딩 중...</div></div>
-            </div>
+  <div class="toolbar">
+    <button class="chip active" data-filter="all">전체</button>
+    <button class="chip" data-filter="problem">정리/꺼짐만</button>
+    <button class="chip" data-filter="cron">Cron</button>
+    <button class="chip" data-filter="n8n">n8n</button>
+    <button class="chip" data-filter="telegram">Telegram</button>
+  </div>
 
-            <!-- OKR -->
-            <div class="column" id="col-okr">
-                <div class="col-header">🎯 OKR · 태스크 <span class="count" id="okr-count"></span></div>
-                <div id="okr"></div>
-                <div id="okr-content"><div class="error">로딩 중...</div></div>
-            </div>
-        </div>
-    </div>
+  <section>
+    <h2>요일·시간별 자동화</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>요일/시간</th><th>종류</th><th>작업 / 도착지</th><th class="hide-mobile">설명</th><th>상태</th><th class="hide-mobile">원문</th></tr></thead>
+      <tbody id="automation-rows"><tr><td colspan="6">로딩 중...</td></tr></tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>꺼짐 / 보류 항목</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>종류</th><th>작업</th><th>도착지/분류</th><th class="hide-mobile">설명</th><th>상태</th></tr></thead>
+      <tbody id="off-rows"><tr><td colspan="5">로딩 중...</td></tr></tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Telegram 방별 요약</h2>
+    <div class="rooms" id="telegram-rooms"><div class="room"><p>로딩 중...</p></div></div>
+  </section>
+
+  <section>
+    <h2>n8n 카테고리 요약</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>카테고리</th><th>활성/전체</th><th>트리거</th><th>상태</th></tr></thead>
+      <tbody id="n8n-rows"><tr><td colspan="4">로딩 중...</td></tr></tbody>
+    </table></div>
+  </section>
+
+  <div class="actions">
+    <a class="btn" href="./telegram-cron.html">기존 Cron 상세표</a>
+    <a class="btn" href="../process/n8n.html">n8n 문서</a>
+    <button class="btn" id="refresh">데이터 새로고침</button>
+    <button class="btn" data-copy="dashboard">대시보드 갱신 명령 복사</button>
+    <button class="btn" data-copy="cron">Cron 요약 명령 복사</button>
+    <a class="btn" href="../data/workflows.json">n8n JSON</a>
+    <a class="btn" href="https://macmini.tailfbe8a6.ts.net/">OpenClaw Control</a>
+    <button class="btn lock" disabled>실제 ON/OFF 잠금</button>
+  </div>
+</main>
 <script>
-
-// ── 크론/텔레그램 알림 요약 ──
-(function() {
-    var okEl = document.getElementById('cron-ok');
-    var warnEl = document.getElementById('cron-warn');
-    var offEl = document.getElementById('cron-off');
-    var itemsEl = document.getElementById('cron-items');
-    if (!okEl || !warnEl || !offEl || !itemsEl) return;
-    fetch('../data/cron-summary.json')
-        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
-        .then(function(data) {
-            var s = data.summary || {};
-            okEl.textContent = '정상 ' + (s['정상'] || 0);
-            warnEl.textContent = '정리 필요 ' + (s['정리 필요'] || 0);
-            offEl.textContent = '꺼짐 ' + (s['꺼짐'] || 0);
-            var list = data.important || [];
-            if (!list.length) return;
-            itemsEl.innerHTML = list.slice(0,4).map(function(item) {
-                var cls = item.status === '정리 필요' ? ' warn' : '';
-                return '<div class="ops-item' + cls + '"><b>' + escCron(item.day + ' ' + item.time + ' · ' + item.title) + '</b><span>' + escCron(item.room + ' · ' + item.status) + '</span></div>';
-            }).join('');
-        }).catch(function() { /* 고정값 유지 */ });
-    function escCron(s) { var e = document.createElement('span'); e.textContent = s || ''; return e.innerHTML; }
-})();
-
-// ── 투두 ──
-(function() {
-    var container = document.getElementById('todo-content');
-    var countEl = document.getElementById('todo-count');
-
-    fetch('../data/todo.json')
-        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
-        .then(render).catch(function() { container.innerHTML = '<div class="error">로드 실패</div>'; });
-
-    function render(data) {
-        var total = 0, done = 0;
-        data.sections.forEach(function(s) { s.categories.forEach(function(c) {
-            total += c.items.length; c.items.forEach(function(i) { if (i.done) done++; });
-        }); });
-        var pct = total > 0 ? Math.round(done / total * 100) : 0;
-        countEl.textContent = (total - done) + '개 남음';
-
-        var html = '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%"></div></div>';
-        data.sections.forEach(function(s) { s.categories.forEach(function(cat) {
-            var catDone = cat.items.filter(function(i){return i.done;}).length;
-            var catPending = cat.items.length - catDone;
-            html += '<details class="fold"><summary><span class="todo-num">' + cat.id + '</span>' + esc(cat.title) + '<span class="fold-count">' + catPending + '개</span></summary><div class="fold-body">';
-            cat.items.forEach(function(item) {
-                html += '<div class="todo-item' + (item.done ? ' done' : '') + '"><input type="checkbox"' + (item.done ? ' checked' : '') + '><span>' + esc(item.text) + '</span></div>';
-            });
-            html += '</div></details>';
-        }); });
-        html += '<div class="updated">' + fmtDate(data.updated) + '</div>';
-        container.innerHTML = html;
-    }
-    function esc(s) { var e = document.createElement('span'); e.textContent = s; return e.innerHTML; }
-    function fmtDate(iso) { var d = new Date(iso); return d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}); }
-})();
-
-// ── 프로젝트 ──
-(function() {
-    var container = document.getElementById('projects-content');
-    var countEl = document.getElementById('proj-count');
-
-    fetch('../data/projects.json')
-        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
-        .then(render).catch(function() { container.innerHTML = '<div class="error">로드 실패</div>'; });
-
-    function render(data) {
-        var p = data.projects;
-        countEl.textContent = p.length + '개 진행 중';
-        var html = '';
-        p.forEach(function(proj) {
-            var folderSvg = '<svg width="16" height="16" viewBox="0 0 16 16" style="vertical-align:-2px"><path d="M1 3.5A1.5 1.5 0 012.5 2h3.172a1.5 1.5 0 011.06.44L7.94 3.644a.5.5 0 00.354.147H13.5A1.5 1.5 0 0115 5.29V12.5A1.5 1.5 0 0113.5 14h-11A1.5 1.5 0 011 12.5z" fill="#F59E0B"/></svg>';
-            var fileSvg = '<svg width="16" height="16" viewBox="0 0 16 16" style="vertical-align:-2px"><rect x="3" y="1" width="10" height="14" rx="1.5" fill="#E2E8F0"/><rect x="5" y="4" width="6" height="1" rx=".5" fill="#94A3B8"/><rect x="5" y="6.5" width="6" height="1" rx=".5" fill="#94A3B8"/><rect x="5" y="9" width="4" height="1" rx=".5" fill="#94A3B8"/></svg>';
-            var icon = proj.type === 'folder' ? folderSvg : fileSvg;
-            var hasDetail = proj.status || proj.next;
-            var dateStr = proj.modified ? fmtShortDate(proj.modified) : '';
-            if (hasDetail) {
-                html += '<details class="fold"><summary><span class="proj-icon">' + icon + '</span> ' + esc(proj.name);
-                if (proj.app) html += ' <span class="proj-app">' + esc(proj.app) + '</span>';
-                if (dateStr) html += '<span class="proj-date">' + dateStr + '</span>';
-                html += '</summary><div class="fold-body">';
-                if (proj.status) html += '<div class="proj-status">' + esc(proj.status) + '</div>';
-                if (proj.next) html += '<div class="proj-next">→ ' + esc(proj.next) + '</div>';
-                html += '</div></details>';
-            } else {
-                html += '<details class="fold"><summary><span class="proj-icon">' + icon + '</span> ' + esc(proj.name);
-                if (proj.app) html += ' <span class="proj-app">' + esc(proj.app) + '</span>';
-                if (dateStr) html += '<span class="proj-date">' + dateStr + '</span>';
-                html += '</summary></details>';
-            }
-        });
-        html += '<div class="updated">' + fmtDate(data.updated) + '</div>';
-        container.innerHTML = html;
-    }
-    function esc(s) { var e = document.createElement('span'); e.textContent = s; return e.innerHTML; }
-    function fmtDate(iso) { var d = new Date(iso); return d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}); }
-    function fmtShortDate(dateStr) { var d = new Date(dateStr); return (d.getMonth()+1) + '/' + d.getDate(); }
-})();
-
-// ── OKR ──
-(function() {
-    var container = document.getElementById('okr-content');
-    var countEl = document.getElementById('okr-count');
-
-    fetch('../data/okr.json')
-        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
-        .then(render).catch(function() { container.innerHTML = '<div class="error">로드 실패</div>'; });
-
-    function render(data) {
-        var t = data.tasks || {}, r = data.routines || {}, okr = data.okr || [];
-        var days = ['일','월','화','수','목','금','토'];
-        var now = new Date();
-        countEl.textContent = (now.getMonth()+1) + '/' + now.getDate() + '(' + days[now.getDay()] + ')';
-
-        var pending = (t.total||0) - (t.done||0);
-        var html = '';
-
-        // 나는 누구인가
-        if (r.identity) {
-            html += '<div style="background:#F0F4FF;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px;font-weight:600;color:#334155;text-align:center">' + esc(r.identity) + '</div>';
-        }
-
-        // 원씽/P2/P3 태스크
-        var priorities = r.priorities || [];
-        if (priorities.length > 0) {
-            html += '<div style="margin-bottom:12px">';
-            priorities.forEach(function(p) {
-                var labelColor = p.label === '원씽' ? '#DC2626' : '#64748B';
-                var cls = p.done ? 'todo-item done' : 'todo-item';
-                html += '<div class="' + cls + '" style="padding:4px 0"><input type="checkbox"' + (p.done ? ' checked' : '') + '>';
-                html += '<span style="font-size:11px;font-weight:700;color:' + labelColor + ';background:' + (p.label === '원씽' ? '#FEF2F2' : '#F1F5F9') + ';padding:1px 5px;border-radius:4px;margin-right:4px">' + esc(p.label) + '</span>';
-                html += '<span>' + esc(p.title) + '</span></div>';
-            });
-            html += '</div>';
-        }
-
-        // 미완료 태스크 (접기/펼치기)
-        html += '<details class="fold" style="margin-bottom:12px"><summary>미완료 태스크 <strong>' + pending + '개</strong>';
-        if (t.overdue > 0) html += ' · <span class="okr-stat-warn">지연 ' + t.overdue + '</span>';
-        html += '</summary><div class="fold-body" style="font-size:13px;color:#64748B">';
-        var pendingItems = t.pending || [];
-        pendingItems.forEach(function(item) {
-            var dateLabel = '';
-            if (item.date) {
-                var d = new Date(item.date);
-                dateLabel = (d.getMonth()+1) + '/' + d.getDate();
-            }
-            html += '<div style="padding:2px 0;display:flex;gap:6px">';
-            if (item.overdue) html += '<span style="color:#DC2626;font-size:11px;flex-shrink:0">' + dateLabel + '</span>';
-            else html += '<span style="color:#94A3B8;font-size:11px;flex-shrink:0">' + dateLabel + '</span>';
-            html += '<span>' + esc(item.title) + '</span></div>';
-        });
-        if (pendingItems.length === 0) html += '<div style="color:#94A3B8">없음</div>';
-        html += '</div></details>';
-
-        // 오늘 루틴 + 오늘 스케줄 (2열)
-        html += '<div style="display:flex;gap:12px;margin-bottom:16px">';
-
-        // 왼쪽: 오늘 루틴
-        html += '<div style="flex:1">';
-        html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:6px">오늘 루틴</div>';
-        var items = r.items || [];
-        items.forEach(function(item) {
-            var cls = item.done ? 'todo-item done' : 'todo-item';
-            html += '<div class="' + cls + '"><input type="checkbox"' + (item.done ? ' checked' : '') + '><span>' + esc(item.name) + '</span></div>';
-        });
-        html += '</div>';
-
-        // 오른쪽: 오늘 스케줄 (Notion 태스크 DB 기반)
-        html += '<div style="flex:1">';
-        html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:6px">오늘 스케줄</div>';
-        var schedule = (t.schedule) || [];
-        if (schedule.length > 0) {
-            schedule.forEach(function(ev) {
-                var cls = ev.done ? ' style="text-decoration:line-through;color:#B0B8C4"' : '';
-                html += '<div style="font-size:12px;color:#475569;padding:2px 0"' + cls + '>';
-                if (ev.allDay) {
-                    html += '<span style="font-size:11px;color:#94A3B8;margin-right:4px">종일</span>';
-                } else if (ev.time) {
-                    html += '<span style="font-size:11px;color:#94A3B8;margin-right:4px">' + esc(ev.time) + '</span>';
-                }
-                html += esc(ev.title) + '</div>';
-            });
-        } else {
-            html += '<div style="font-size:12px;color:#94A3B8">오늘 일정 없음</div>';
-        }
-        html += '</div>';
-
-        html += '</div>';
-
-        // 이번달 매출 요약 (okr.json sales — Notion 상담일지 기준)
-        var sales = data.sales;
-        if (sales) {
-            html += '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px">';
-            html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
-            html += '<div style="font-size:13px;font-weight:700;color:#475569">' + esc(sales.month_label) + ' 매출</div>';
-            html += '<div style="font-size:20px;font-weight:800;color:#051C2C">' + sales.total_amount + '만원</div>';
-            html += '</div>';
-            // 주간별 테이블
-            if (sales.weekly && sales.weekly.length > 0) {
-                html += '<div style="display:flex;gap:6px">';
-                sales.weekly.forEach(function(w) {
-                    html += '<div style="flex:1;background:white;border:1px solid #E2E8F0;border-radius:6px;padding:8px;text-align:center">';
-                    html += '<div style="font-size:11px;color:#94A3B8">' + esc(w.week) + '</div>';
-                    html += '<div style="font-size:15px;font-weight:700;color:#051C2C">' + w.amount + '만</div>';
-                    html += '<div style="font-size:11px;color:#64748B">' + w.count + '명</div>';
-                    html += '</div>';
-                });
-                html += '</div>';
-            }
-            html += '</div>';
-        }
-
-        // 이번주 루틴 통계
-        var ws = r.weekly_stats;
-        if (ws && ws.days && ws.days.length > 0) {
-            html += '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px">';
-            html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:8px">이번주 루틴 <span style="font-weight:600;color:#0077C8">' + esc(ws.rate) + '</span></div>';
-            html += '<div style="display:flex;gap:4px;align-items:flex-end;height:40px">';
-            ws.days.forEach(function(day) {
-                var pct = day.total > 0 ? Math.round(day.done / day.total * 100) : 0;
-                var h = Math.max(4, Math.round(pct * 36 / 100));
-                var color = pct === 100 ? '#0077C8' : pct >= 50 ? '#94A3B8' : '#E2E8F0';
-                var d = new Date(day.date);
-                var dayNames = ['일','월','화','수','목','금','토'];
-                var label = dayNames[d.getDay()];
-                html += '<div style="flex:1;text-align:center"><div style="background:' + color + ';height:' + h + 'px;border-radius:2px;margin:0 auto;width:100%"></div><div style="font-size:9px;color:#94A3B8;margin-top:2px">' + label + '</div></div>';
-            });
-            html += '</div></div>';
-        }
-
-        // OKR Key Results — 별도 박스
-        if (okr.length > 0) {
-            html += '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px">';
-            html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:8px">OKR Key Results</div>';
-            okr.forEach(function(kr) {
-                var pct = 0;
-                if (kr.rate) { var m = String(kr.rate).match(/([\d.]+)/); if (m) pct = Math.max(0, Math.min(parseFloat(m[1]), 100)); }
-                html += '<div class="okr-kr"><div class="okr-kr-header"><span class="okr-kr-title">' + esc(kr.title) + '</span><span class="okr-kr-rate">' + esc(kr.rate||'0%') + '</span></div>';
-                html += '<div class="okr-kr-bar"><div class="okr-kr-fill" style="width:' + Math.min(pct,100) + '%"></div></div>';
-                if (kr.target != null && kr.current != null) html += '<div class="okr-kr-detail">현재 ' + kr.current + ' / 목표 ' + kr.target + '</div>';
-                html += '</div>';
-            });
-            html += '</div>';
-        }
-        html += '<div class="updated">' + fmtDate(data.updated) + '</div>';
-        container.innerHTML = html;
-    }
-    function esc(s) { var e = document.createElement('span'); e.textContent = s; return e.innerHTML; }
-    function fmtDate(iso) { var d = new Date(iso); return d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}); }
+(function(){
+  var state={cron:null,workflows:null};
+  loadAll();
+  document.getElementById('refresh').addEventListener('click',loadAll);
+  document.querySelector('.toolbar').addEventListener('click',function(e){if(!e.target.matches('.chip'))return;document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('active')});e.target.classList.add('active');filter(e.target.dataset.filter);});
+  document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var cmd=b.dataset.copy==='dashboard'?'/Users/yunjitaegi/HQ/workspace/tools/scripts/nightwatch/dashboard-data.sh':'python3 /Users/yunjitaegi/HQ/workspace/tools/scripts/nightwatch/parse-cron-summary.py';if(navigator.clipboard)navigator.clipboard.writeText(cmd);var old=b.textContent;b.textContent='복사됨';setTimeout(function(){b.textContent=old},1200);});});
+  function loadAll(){Promise.allSettled([fetchJson('../data/cron-summary.json').then(function(d){state.cron=d}),fetchJson('../data/workflows.json').then(function(d){state.workflows=d})]).then(renderAll);}
+  function fetchJson(url){return fetch(url+'?t='+Date.now()).then(function(r){if(!r.ok)throw new Error(url);return r.json();});}
+  function renderAll(){renderCron();renderN8n();renderTelegram();renderOff();var dates=[state.cron&&state.cron.updated,state.workflows&&state.workflows.updated].filter(Boolean).sort();document.getElementById('updated').textContent=dates.length?'최근 갱신: '+fmt(dates.pop()):'일부 데이터 로드 실패';filter(document.querySelector('.chip.active').dataset.filter);}
+  function renderCron(){var d=state.cron||{},s=d.summary||{},items=d.items||[];set('cron-ok',s['정상']||0);set('cron-warn',s['정리 필요']||0);set('cron-off',s['꺼짐']||0);var rows=items.filter(function(i){return i.status!=='꺼짐'}).map(function(i){return row({kind:'Cron',tags:'cron '+(i.status==='정상'?'ok':'problem'),time:(i.day||'')+' '+(i.time||''),title:i.title||i.name,dest:i.room||'',desc:i.description||'',status:i.status||'',raw:i.cron||i.script||''});});document.getElementById('automation-rows').innerHTML=rows.join('')||'<tr><td colspan="6">Cron 항목 없음</td></tr>';}
+  function renderN8n(){var d=state.workflows||{},w=d.workflows||[],active=w.filter(function(x){return x.active}).length;set('n8n-active',active);set('n8n-off',w.length-active);var map={};w.forEach(function(x){var k=x.category||'기타';map[k]=map[k]||{total:0,active:0,triggers:{}};map[k].total++;if(x.active)map[k].active++;(x.triggers||[]).forEach(function(t){map[k].triggers[t]=(map[k].triggers[t]||0)+1});});document.getElementById('n8n-rows').innerHTML=Object.keys(map).sort().map(function(k){var c=map[k],off=c.total-c.active,status=off?off+'개 꺼짐':'정상';return '<tr data-tags="n8n '+(off?'problem':'ok')+'"><td><b>'+esc(k)+'</b></td><td>'+c.active+'/'+c.total+'</td><td>'+esc(Object.keys(c.triggers).join(', ')||'trigger 없음')+'</td><td>'+badge(status,off?'warn':'ok')+'</td></tr>';}).join('')||'<tr><td colspan="4">n8n 항목 없음</td></tr>';}
+  function renderTelegram(){var items=(state.cron&&state.cron.items)||[],rooms={};items.forEach(function(i){var r=i.room||'기타';rooms[r]=rooms[r]||{total:0,ok:0,off:0,warn:0,titles:[]};rooms[r].total++;if(i.status==='정상')rooms[r].ok++;else if(i.status==='꺼짐')rooms[r].off++;else rooms[r].warn++;if(rooms[r].titles.length<3)rooms[r].titles.push(i.title||i.name);});var names=Object.keys(rooms).sort();set('tg-rooms',names.length);document.getElementById('telegram-rooms').innerHTML=names.map(function(r){var c=rooms[r];return '<article class="room" data-tags="telegram '+((c.off||c.warn)?'problem':'ok')+'"><div class="room-head"><h3>'+esc(r)+'</h3>'+badge(c.warn?c.warn+' 정리':(c.off?c.off+' 꺼짐':'정상'),c.warn?'bad':(c.off?'warn':'ok'))+'</div><p>'+c.total+'개 알림 · 정상 '+c.ok+' · 꺼짐 '+c.off+'</p><p>'+esc(c.titles.join(' · '))+'</p></article>';}).join('')||'<div class="room"><p>Telegram 항목 없음</p></div>';}
+  function renderOff(){
+    var cronItems=((state.cron&&state.cron.items)||[]).filter(function(i){return i.status==='꺼짐'}).map(function(i){
+      return '<tr data-tags="problem cron"><td>Cron</td><td><b>'+esc(i.title||i.name)+'</b></td><td>'+esc(i.room||'')+'</td><td class="hide-mobile">'+esc(i.description||'')+'</td><td>'+badge('꺼짐','off')+'</td></tr>';
+    });
+    var workflows=((state.workflows&&state.workflows.workflows)||[]).filter(function(w){return !w.active}).map(function(w){
+      return '<tr data-tags="problem n8n"><td>n8n</td><td><b>'+esc(w.name)+'</b></td><td>'+esc(w.category||'')+'</td><td class="hide-mobile">'+esc((w.triggers||[]).join(', ')||'trigger 없음')+'</td><td>'+badge('꺼짐','off')+'</td></tr>';
+    });
+    document.getElementById('off-rows').innerHTML=cronItems.concat(workflows).join('')||'<tr><td colspan="5">꺼진 항목 없음</td></tr>';
+  }
+  function row(o){return '<tr data-tags="'+o.tags+'"><td class="time">'+esc(o.time)+'</td><td class="type">'+esc(o.kind)+'</td><td><b>'+esc(o.title)+'</b><span class="muted">'+esc(o.dest)+'</span></td><td class="hide-mobile">'+esc(o.desc)+'</td><td>'+badge(o.status,o.status==='정상'?'ok':(o.status==='꺼짐'?'off':'bad'))+'</td><td class="hide-mobile"><details><summary>원문</summary><code>'+esc(o.raw)+'</code></details></td></tr>'}
+  function filter(f){document.querySelectorAll('[data-tags]').forEach(function(el){var tags=(el.dataset.tags||'').split(/\s+/);var show=f==='all'||tags.indexOf(f)!==-1||(f==='problem'&&tags.indexOf('problem')!==-1);el.classList.toggle('hidden',!show);});}
+  function badge(text,tone){return '<span class="badge '+tone+'">'+esc(text)+'</span>'}function set(id,v){document.getElementById(id).textContent=v}function esc(v){var e=document.createElement('span');e.textContent=v||'';return e.innerHTML}function fmt(iso){var d=new Date(iso);return d.toLocaleDateString('ko-KR')+' '+d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})}
 })();
 </script>
 <script src="../nav.js"></script>
-<script src="../footer.js"></script>
-<script src="../sidebar.js"></script>
 </body>
 </html>
