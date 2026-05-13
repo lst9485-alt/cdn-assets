@@ -224,6 +224,118 @@
     </ul>
   </div>
 
+  <!-- ====================================================
+       채팅 버블 시안 1 / 2 / 3
+  ===================================================== -->
+  <div style="border-top: 4px double #cbd5e1; margin: 80px 0 40px;"></div>
+
+  <h1 class="text-2xl md:text-3xl font-black mb-2">말풍선 시안 비교</h1>
+  <p class="text-gray-600 mb-10 text-sm md:text-base">현재 디자인 (선 흐림 + 꼬리 깨짐) → 어떻게 바꿀까. 1 / 2 / 3 세 안.</p>
+
+  <!-- ====== 1안: 현재 메신저 스타일 다듬기 ====== -->
+  <div class="mb-3">
+    <span class="inline-block bg-orange-100 text-orange-700 text-xs font-black px-2 py-1 rounded">1안</span>
+    <h2 class="text-xl md:text-2xl font-black mt-2">현재 메신저 스타일 다듬기</h2>
+    <p class="text-gray-600 text-sm mt-1">컨셉 유지 + 테두리 진하게 + 꼬리 SVG로 깔끔하게</p>
+  </div>
+
+  <style>
+    .bub1-l { background:#fff; border:1.5px solid #94a3b8; border-radius:20px; position:relative; box-shadow:0 8px 22px rgba(15,23,42,0.08); padding:18px 22px; }
+    .bub1-l-tail { position:absolute; bottom:8px; left:-9px; }
+    .bub1-r { background:#FFE9D2; border:1.5px solid #FF6B00; border-radius:20px; position:relative; box-shadow:0 8px 22px rgba(255,107,0,0.14); padding:18px 22px; }
+    .bub1-r-tail { position:absolute; bottom:8px; right:-9px; }
+  </style>
+
+  <div class="bg-white p-6 rounded-2xl border border-gray-200 mb-3 space-y-4">
+    <div class="bub1-l w-[78%]">
+      <svg class="bub1-l-tail" width="10" height="14" viewBox="0 0 10 14"><path d="M10 0 L10 14 L1 9 Q-1 7 1 5 Z" fill="#fff" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <p class="text-base md:text-lg font-bold text-gray-800">"곧 결혼 예정인데..<br>지금 여기 사도 될까요?"</p>
+    </div>
+    <div class="bub1-r w-[78%] ml-auto">
+      <svg class="bub1-r-tail" width="10" height="14" viewBox="0 0 10 14"><path d="M0 0 L0 14 L9 9 Q11 7 9 5 Z" fill="#FFE9D2" stroke="#FF6B00" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <p class="text-base md:text-lg text-gray-800">"내집마련이 처음이라,<br><span class="font-black text-orange-600">어떤 집을 사야하는지 모르겠어요.</span>"</p>
+    </div>
+    <div class="bub1-l w-[78%]">
+      <svg class="bub1-l-tail" width="10" height="14" viewBox="0 0 10 14"><path d="M10 0 L10 14 L1 9 Q-1 7 1 5 Z" fill="#fff" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <p class="text-base md:text-lg font-medium text-gray-800">"제 종잣돈이나 직장 등 고려해서<br>4억 대출해서 사는 게 정말 맞을까요?"</p>
+    </div>
+  </div>
+
+  <div style="border-top: 1px dashed #d1d5db; margin: 64px 0 32px;"></div>
+
+  <!-- ====== 2안: 카톡 채팅창 컨셉 ====== -->
+  <div class="mb-3">
+    <span class="inline-block bg-orange-100 text-orange-700 text-xs font-black px-2 py-1 rounded">2안</span>
+    <h2 class="text-xl md:text-2xl font-black mt-2">카톡 채팅창 컨셉 확실히</h2>
+    <p class="text-gray-600 text-sm mt-1">옅은 회색·푸른 배경 + 흰/노란 카톡 버블 — "실제 카톡으로 이런 고민 한다"</p>
+  </div>
+
+  <style>
+    .kakao-screen { background:#a9bdd6; border-radius:24px; padding:22px 16px; }
+    .kakao-l { background:#fff; border-radius:14px; padding:13px 16px; max-width:76%; box-shadow:0 1px 2px rgba(0,0,0,0.05); position:relative; }
+    .kakao-l::before { content:''; position:absolute; top:0; left:-6px; width:12px; height:14px; background:#fff; border-top-left-radius:14px 8px; clip-path:polygon(50% 0, 100% 0, 100% 100%); }
+    .kakao-r { background:#FFE85C; border-radius:14px; padding:13px 16px; max-width:76%; margin-left:auto; box-shadow:0 1px 2px rgba(0,0,0,0.05); position:relative; }
+    .kakao-r::before { content:''; position:absolute; top:0; right:-6px; width:12px; height:14px; background:#FFE85C; border-top-right-radius:14px 8px; clip-path:polygon(0 0, 50% 0, 0 100%); }
+    .kakao-name { font-size:11px; color:#5b6b80; margin:0 0 4px 4px; font-weight:700; }
+  </style>
+
+  <div class="kakao-screen mb-3 space-y-4">
+    <div>
+      <p class="kakao-name">김** · 30대 신혼</p>
+      <div class="kakao-l">
+        <p class="text-sm md:text-base font-medium text-gray-800 leading-snug">곧 결혼 예정인데..<br>지금 여기 사도 될까요?</p>
+      </div>
+    </div>
+    <div>
+      <div class="kakao-r">
+        <p class="text-sm md:text-base font-medium text-gray-800 leading-snug">내집마련이 처음이라,<br><b>어떤 집을 사야하는지 모르겠어요.</b></p>
+      </div>
+      <p class="kakao-name text-right" style="margin:4px 4px 0 0">박** · 40대 갈아타기</p>
+    </div>
+    <div>
+      <p class="kakao-name">이** · 30대 직장인</p>
+      <div class="kakao-l">
+        <p class="text-sm md:text-base font-medium text-gray-800 leading-snug">제 종잣돈이나 직장 등 고려해서<br>4억 대출해서 사는 게 정말 맞을까요?</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top: 1px dashed #d1d5db; margin: 64px 0 32px;"></div>
+
+  <!-- ====== 3안: 강조 카드 (큰 따옴표) ====== -->
+  <div class="mb-3">
+    <span class="inline-block bg-orange-100 text-orange-700 text-xs font-black px-2 py-1 rounded">3안</span>
+    <h2 class="text-xl md:text-2xl font-black mt-2">강조 카드 (큰 따옴표 + 화자 라벨)</h2>
+    <p class="text-gray-600 text-sm mt-1">메신저 컨셉 제거. 후기 카드와 톤 통일. 마케팅 랜딩답고 정돈됨.</p>
+  </div>
+
+  <div class="space-y-4 mb-3">
+    <div class="bg-white rounded-2xl p-7 shadow-md border border-gray-200 relative">
+      <span class="absolute top-3 left-5 text-5xl text-orange-300 font-display font-black leading-none">"</span>
+      <p class="text-lg md:text-xl font-bold text-gray-800 pl-7 pt-3">곧 결혼 예정인데..<br>지금 여기 사도 될까요?</p>
+      <p class="text-xs md:text-sm text-gray-500 mt-3 pl-7">김** · 30대 · 결혼 준비 중</p>
+    </div>
+    <div class="bg-white rounded-2xl p-7 shadow-md border border-gray-200 relative">
+      <span class="absolute top-3 left-5 text-5xl text-orange-300 font-display font-black leading-none">"</span>
+      <p class="text-lg md:text-xl font-bold text-gray-800 pl-7 pt-3">내집마련이 처음이라,<br><span class="text-orange-600">어떤 집을 사야하는지 모르겠어요.</span></p>
+      <p class="text-xs md:text-sm text-gray-500 mt-3 pl-7">박** · 40대 · 첫 내집마련</p>
+    </div>
+    <div class="bg-white rounded-2xl p-7 shadow-md border border-gray-200 relative">
+      <span class="absolute top-3 left-5 text-5xl text-orange-300 font-display font-black leading-none">"</span>
+      <p class="text-lg md:text-xl font-bold text-gray-800 pl-7 pt-3">제 종잣돈이나 직장 등 고려해서<br>4억 대출해서 사는 게 정말 맞을까요?</p>
+      <p class="text-xs md:text-sm text-gray-500 mt-3 pl-7">이** · 30대 · 직장인</p>
+    </div>
+  </div>
+
+  <div class="mt-12 p-5 bg-amber-50 border border-amber-200 rounded-xl">
+    <p class="font-black text-amber-900 mb-2">비교 포인트</p>
+    <ul class="text-sm text-amber-900 leading-relaxed list-disc pl-5 space-y-1">
+      <li><b>1안</b>: 현재와 같은 메신저 컨셉. 선·꼬리만 깔끔 (작은 개선)</li>
+      <li><b>2안</b>: 진짜 카톡 화면 같은 컨셉. 캐주얼한 인상, "실제 카톡 고민" 메시지 강함</li>
+      <li><b>3안</b>: 메신저 컨셉 빼고 후기 카드 톤. 마케팅 랜딩 일관성 강함, 진지한 인상</li>
+    </ul>
+  </div>
+
 </div>
 
 </body>
