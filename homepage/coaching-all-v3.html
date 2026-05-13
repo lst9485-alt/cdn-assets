@@ -516,36 +516,73 @@
           <span class="block" style="animation: dotFade3 2s ease infinite">•</span>
         </p>
       </div>
-	      <!-- v2형 비교 차트 -->
-	      <div class="bg-white rounded-2xl p-5 md:p-8 mb-10 shadow-lg shadow-slate-200/60 border border-gray-200" data-reveal id="chartContainer">
-	        <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-5 text-base md:text-lg font-medium">
-	          <span class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-red-600"></span> 분당 (김과장)</span>
-	          <span class="flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-brand-blue"></span> 일산 (의사 강씨)</span>
-	        </div>
-	        <svg viewBox="0 0 620 400" class="w-full" aria-label="분당과 일산 아파트 시세 비교 차트">
-	          <line x1="60" y1="30" x2="60" y2="340" stroke="#e5e7eb" stroke-width="1"/><line x1="60" y1="340" x2="590" y2="340" stroke="#e5e7eb" stroke-width="1"/>
-	          <text x="50" y="340" text-anchor="end" fill="#9ca3af" font-size="16">0</text><text x="50" y="278" text-anchor="end" fill="#9ca3af" font-size="16">4억</text><text x="50" y="216" text-anchor="end" fill="#9ca3af" font-size="16">8억</text><text x="50" y="154" text-anchor="end" fill="#9ca3af" font-size="16">12억</text><text x="50" y="92" text-anchor="end" fill="#9ca3af" font-size="16">16억</text><text x="50" y="40" text-anchor="end" fill="#9ca3af" font-size="16">20억</text>
-	          <text x="60" y="368" text-anchor="middle" fill="#9ca3af" font-size="16">2006</text><text x="192" y="368" text-anchor="middle" fill="#9ca3af" font-size="16">2011</text><text x="325" y="368" text-anchor="middle" fill="#9ca3af" font-size="16">2016</text><text x="458" y="368" text-anchor="middle" fill="#9ca3af" font-size="16">2021</text><text x="590" y="368" text-anchor="middle" fill="#9ca3af" font-size="16">2026</text>
-	          <line x1="60" y1="278" x2="590" y2="278" stroke="#f3f4f6"/><line x1="60" y1="216" x2="590" y2="216" stroke="#f3f4f6"/><line x1="60" y1="154" x2="590" y2="154" stroke="#f3f4f6"/><line x1="60" y1="92" x2="590" y2="92" stroke="#f3f4f6"/>
-	          <line x1="192" y1="30" x2="192" y2="340" stroke="#FF6B00" stroke-width="2" stroke-dasharray="7,5" class="chart-arrow"/>
-	          <line x1="590" y1="30" x2="590" y2="340" stroke="#FF6B00" stroke-width="2" stroke-dasharray="7,5" class="chart-arrow"/>
-	          <path class="chart-line" d="M60 231 L140 247 L192 231 C260 176 314 126 380 60 L450 107 L520 76 L590 60" fill="none" stroke="#dc2626" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-	          <path class="chart-line" d="M60 185 L140 216 L192 231 C260 210 322 184 380 154 L450 216 L520 247 L590 247" fill="none" stroke="#0055FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-	          <circle cx="192" cy="231" r="11" fill="#fff7ed" stroke="#FF6B00" stroke-width="3" class="chart-arrow"/>
-	          <rect x="64" y="142" width="60" height="32" rx="9" fill="white" stroke="#dbeafe" class="chart-arrow"/>
-	          <text x="94" y="165" text-anchor="middle" fill="#0055FF" font-size="20" font-weight="900" class="chart-arrow">10억</text>
-	          <rect x="62" y="250" width="58" height="32" rx="9" fill="white" stroke="#fee2e2" class="chart-arrow"/>
-	          <text x="91" y="273" text-anchor="middle" fill="#dc2626" font-size="20" font-weight="900" class="chart-arrow">7억</text>
-	          <circle cx="590" cy="60" r="7" fill="#dc2626" class="chart-arrow"/>
-	          <rect x="486" y="2" width="110" height="64" rx="13" fill="white" stroke="#fee2e2" class="chart-arrow"/>
-	          <text x="541" y="27" text-anchor="middle" fill="#dc2626" font-size="17" font-weight="900" class="chart-arrow">폭등 ↑</text>
-	          <text x="541" y="55" text-anchor="middle" fill="#dc2626" font-size="24" font-weight="900" class="chart-arrow">19억</text>
-	          <circle cx="590" cy="247" r="7" fill="#0055FF" class="chart-arrow"/>
-	          <rect x="486" y="248" width="110" height="64" rx="13" fill="white" stroke="#dbeafe" class="chart-arrow"/>
-	          <text x="541" y="278" text-anchor="middle" fill="#0055FF" font-size="24" font-weight="900" class="chart-arrow">6억</text>
-	          <text x="541" y="304" text-anchor="middle" fill="#0055FF" font-size="17" font-weight="900" class="chart-arrow">하락 ↓</text>
-	        </svg>
-	      </div>
+      <!-- D+G 결합 비교 카드 -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 relative" data-reveal>
+        <!-- 분당 (폭등) -->
+        <div class="rounded-2xl p-6 md:p-7 shadow-xl border-2 border-red-500 relative overflow-hidden" style="background: linear-gradient(135deg, #fff5f5 0%, #ffe4e4 60%, #ffd0d0 100%);">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-3 h-3 rounded-full bg-red-600"></span>
+            <span class="text-xs md:text-sm font-black text-red-700">분당 (김과장)</span>
+          </div>
+          <div class="text-sm md:text-base text-gray-500 mb-1">7억</div>
+          <div class="flex items-baseline gap-2 mb-3">
+            <span class="text-5xl md:text-6xl font-display font-black text-red-600 leading-none">19억</span>
+            <iconify-icon icon="solar:arrow-up-bold" class="text-3xl md:text-4xl text-red-600"></iconify-icon>
+          </div>
+          <div class="inline-block bg-red-600 text-white text-xs md:text-sm font-black px-3 py-1.5 rounded-full shadow">+ 12억 폭등</div>
+          <svg viewBox="0 0 200 60" class="w-full h-12 md:h-14 mt-4">
+            <defs>
+              <linearGradient id="redArea1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#dc2626" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
+              </linearGradient>
+              <filter id="redGlow1"><feGaussianBlur stdDeviation="2.5"/></filter>
+            </defs>
+            <path d="M0 52 L50 50 L100 48 Q130 30 160 14 L200 4 L200 60 L0 60 Z" fill="url(#redArea1)"/>
+            <path d="M0 52 L50 50 L100 48 Q130 30 160 14 L200 4" fill="none" stroke="#dc2626" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="200" cy="4" r="8" fill="#dc2626" filter="url(#redGlow1)" opacity="0.6"/>
+            <circle cx="200" cy="4" r="5" fill="#fff"/>
+            <circle cx="200" cy="4" r="3" fill="#dc2626"/>
+          </svg>
+          <div class="flex justify-between text-xs text-gray-400 mt-1">
+            <span>2006</span><span>2026</span>
+          </div>
+        </div>
+
+        <!-- 일산 (하락) -->
+        <div class="rounded-2xl p-6 md:p-7 shadow-xl border-2 border-blue-500 relative overflow-hidden" style="background: linear-gradient(135deg, #f0f6ff 0%, #d8e6ff 60%, #b8d0ff 100%);">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-3 h-3 rounded-full bg-brand-blue"></span>
+            <span class="text-xs md:text-sm font-black text-brand-blue">일산 (의사 강씨)</span>
+          </div>
+          <div class="text-sm md:text-base text-gray-500 mb-1">10억</div>
+          <div class="flex items-baseline gap-2 mb-3">
+            <span class="text-5xl md:text-6xl font-display font-black text-brand-blue leading-none">6억</span>
+            <iconify-icon icon="solar:arrow-down-bold" class="text-3xl md:text-4xl text-brand-blue"></iconify-icon>
+          </div>
+          <div class="inline-block bg-brand-blue text-white text-xs md:text-sm font-black px-3 py-1.5 rounded-full shadow">- 4억 하락</div>
+          <svg viewBox="0 0 200 60" class="w-full h-12 md:h-14 mt-4">
+            <defs>
+              <linearGradient id="blueArea1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#0055FF" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#0055FF" stop-opacity="0"/>
+              </linearGradient>
+              <filter id="blueGlow1"><feGaussianBlur stdDeviation="2.5"/></filter>
+            </defs>
+            <path d="M0 14 L50 18 L100 22 Q130 32 160 48 L200 56 L200 60 L0 60 Z" fill="url(#blueArea1)"/>
+            <path d="M0 14 L50 18 L100 22 Q130 32 160 48 L200 56" fill="none" stroke="#0055FF" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="200" cy="56" r="8" fill="#0055FF" filter="url(#blueGlow1)" opacity="0.6"/>
+            <circle cx="200" cy="56" r="5" fill="#fff"/>
+            <circle cx="200" cy="56" r="3" fill="#0055FF"/>
+          </svg>
+          <div class="flex justify-between text-xs text-gray-400 mt-1">
+            <span>2006</span><span>2026</span>
+          </div>
+        </div>
+
+        <!-- VS 배지 (데스크탑만) -->
+        <div class="hidden sm:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full bg-white shadow-2xl items-center justify-center border-[3px] border-orange-500 font-display font-black text-orange-600 text-base">VS</div>
+      </div>
       <div class="text-center mb-16" data-reveal="scale">
         <p class="text-3xl md:text-4xl font-display font-black word-keep mb-3"><span class="text-red-600">7억 분당</span>은 → <span class="text-red-600 font-black">19억</span>이 됐고,</p>
         <p class="text-3xl md:text-4xl font-display font-black word-keep mb-8"><span class="text-brand-blue">10억 일산</span>은 → <span class="text-brand-blue font-black">6억</span>이 됐습니다</p>
@@ -558,13 +595,28 @@
         <p class="text-2xl md:text-3xl text-gray-600 word-keep leading-relaxed mb-8"><span class="text-brand-blue font-bold">의사 강씨</span>는 고소득임에도<br><span class="text-red-600 font-bold">김과장</span>과 갈수록 격차가 벌어졌습니다</p>
         <p class="text-3xl md:text-4xl lg:text-5xl font-display font-black word-keep leading-[1.28]">지금 이 순간에도<br><span class="text-brand-orange">똑같은 일</span>이 생기고 있습니다</p>
       </div>
-	      <div class="chat-stack max-w-2xl mx-auto space-y-5 mb-16" data-stagger>
-	        <div class="bubble-real-l px-7 py-5 w-[72%] md:w-[360px]"><p class="text-xl md:text-2xl word-keep font-bold text-gray-800">"곧 결혼 예정인데..<br>지금 여기 사도 될까요?"</p></div>
-	        <div class="bubble-real-r px-7 py-5 w-[76%] md:w-[390px] ml-auto"><p class="text-xl md:text-2xl word-keep text-gray-800">"내집마련이 처음이라,<br><span class="font-black text-brand-orange">어떤 집을 사야하는지 모르겠어요.</span>"</p></div>
-	        <div class="bubble-real-l px-7 py-5 w-[72%] md:w-[360px]"><p class="text-xl md:text-2xl word-keep font-medium text-gray-800">"제 종잣돈이나 직장 등 고려해서<br>4억 대출해서 사는 게 정말 맞을까요?"</p></div>
-	        <div class="bubble-real-r px-7 py-5 w-[76%] md:w-[390px] ml-auto"><p class="text-xl md:text-2xl word-keep text-gray-800">돈이 조금 애매해서<br>"<span class="font-black text-brand-orange">지금 사야 될지 고민돼요</span>"</p></div>
-	        <div class="bubble-real-l px-7 py-5 w-[72%] md:w-[360px]"><p class="text-xl md:text-2xl word-keep font-medium text-gray-800">"지금 이런 상황에서<br>사도 될지 모르겠어요"</p></div>
-	      </div>
+      <div class="max-w-2xl mx-auto space-y-4 mb-16" data-stagger>
+        <div class="bg-white rounded-2xl p-6 md:p-7 shadow-md border border-gray-200 relative">
+          <span class="absolute top-3 left-5 text-5xl text-orange-300 font-display font-black leading-none">"</span>
+          <p class="text-lg md:text-xl font-bold text-gray-800 pl-7 pt-3 word-keep">곧 결혼 예정인데..<br>지금 여기 사도 될까요?</p>
+          <p class="text-xs md:text-sm text-gray-500 mt-3 pl-7">김** · 30대 · 결혼 준비 중</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 md:p-7 shadow-md border border-gray-200 relative">
+          <span class="absolute top-3 left-5 text-5xl text-orange-300 font-display font-black leading-none">"</span>
+          <p class="text-lg md:text-xl font-bold text-gray-800 pl-7 pt-3 word-keep">내집마련이 처음이라,<br><span class="text-brand-orange">어떤 집을 사야하는지 모르겠어요.</span></p>
+          <p class="text-xs md:text-sm text-gray-500 mt-3 pl-7">박** · 40대 · 첫 내집마련</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 md:p-7 shadow-md border border-gray-200 relative">
+          <span class="absolute top-3 left-5 text-5xl text-orange-300 font-display font-black leading-none">"</span>
+          <p class="text-lg md:text-xl font-bold text-gray-800 pl-7 pt-3 word-keep">제 종잣돈이나 직장 등 고려해서<br>4억 대출해서 사는 게 정말 맞을까요?</p>
+          <p class="text-xs md:text-sm text-gray-500 mt-3 pl-7">이** · 30대 · 직장인</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 md:p-7 shadow-md border border-gray-200 relative">
+          <span class="absolute top-3 left-5 text-5xl text-orange-300 font-display font-black leading-none">"</span>
+          <p class="text-lg md:text-xl font-bold text-gray-800 pl-7 pt-3 word-keep">돈이 조금 애매해서<br><span class="text-brand-orange">지금 사야 될지 고민돼요.</span></p>
+          <p class="text-xs md:text-sm text-gray-500 mt-3 pl-7">정** · 30대 · 종잣돈 부족</p>
+        </div>
+      </div>
       <div class="text-center" data-reveal>
         <p class="text-2xl md:text-3xl font-display font-bold word-keep text-gray-700">평범한 직장인도, 전문직도<br><span class="text-brand-dark font-black">똑같은 고민</span>을 합니다</p>
       </div>
