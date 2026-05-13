@@ -157,5 +157,197 @@
 
 </div>
 
+<!-- ============================================================
+     매수/매도 계약서 디자인 옵션 (6개)
+============================================================ -->
+<div class="max-w-4xl mx-auto px-5 pt-16">
+  <span class="label">계약서 옵션</span>
+  <h2 class="text-xl md:text-2xl font-black mt-2 mb-2">매수/매도 계약서 디자인 시안</h2>
+  <p class="text-gray-600 mb-8 text-sm">현재 디자인이 마음에 안 들면 아래 6안 중 선택. 모두 다크 배경 위에 띄움.</p>
+</div>
+
+<style>
+  .opt-wrap { background:#101725; border-radius:24px; padding:36px 24px; margin-bottom:36px; }
+  .opt-title { display:flex; align-items:baseline; gap:10px; padding:0 24px 8px; }
+  .opt-title b { font-size:18px; }
+  .opt-title small { color:#666; font-size:13px; }
+</style>
+
+<div class="max-w-4xl mx-auto px-5">
+
+  <!-- ===== 옵션 A: 사진 + 가격 오버레이 ===== -->
+  <div class="opt-title"><b>A. 사진 + 가격 오버레이</b> <small>사진 위에 어둡게 가린 후 큰 가격 표시</small></div>
+  <div class="opt-wrap">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="relative rounded-2xl overflow-hidden shadow-lg">
+        <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-buy.png" class="w-full" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+          <span class="inline-block bg-red-600 text-xs font-black px-2 py-1 rounded mb-2">매수</span>
+          <p class="text-3xl md:text-4xl font-display font-black">9억 5천</p>
+        </div>
+      </div>
+      <div class="relative rounded-2xl overflow-hidden shadow-lg">
+        <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-sell.png" class="w-full" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+          <span class="inline-block bg-blue-600 text-xs font-black px-2 py-1 rounded mb-2">매도</span>
+          <p class="text-3xl md:text-4xl font-display font-black">8억 2천</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 옵션 B: 사진 작게 + 가격 메인 박스 ===== -->
+  <div class="opt-title"><b>B. 가격이 메인, 사진은 썸네일</b> <small>가격을 큰 박스로, 사진은 옆에 작게 (참조용)</small></div>
+  <div class="opt-wrap">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="bg-[#1a2336] rounded-2xl p-5 flex items-center gap-4 border border-red-900/30">
+        <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-buy.png" class="w-20 h-20 object-cover rounded-lg flex-shrink-0 opacity-80" loading="lazy">
+        <div class="text-white">
+          <p class="text-xs text-red-300 font-bold mb-1">매수 계약서</p>
+          <p class="text-3xl md:text-4xl font-display font-black text-red-100 leading-none">9억 5천</p>
+          <p class="text-xs text-gray-400 mt-2">2010년</p>
+        </div>
+      </div>
+      <div class="bg-[#1a2336] rounded-2xl p-5 flex items-center gap-4 border border-blue-900/30">
+        <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-sell.png" class="w-20 h-20 object-cover rounded-lg flex-shrink-0 opacity-80" loading="lazy">
+        <div class="text-white">
+          <p class="text-xs text-blue-300 font-bold mb-1">매도 계약서</p>
+          <p class="text-3xl md:text-4xl font-display font-black text-blue-100 leading-none">8억 2천</p>
+          <p class="text-xs text-gray-400 mt-2">2018년</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 옵션 C: 텍스트만 (사진 없음) ===== -->
+  <div class="opt-title"><b>C. 텍스트만 (가장 깔끔)</b> <small>사진 빼고 가격·화살표만. 진정성↓ 깔끔함↑</small></div>
+  <div class="opt-wrap">
+    <div class="bg-[#1a2336] rounded-2xl p-8 text-center border border-white/5">
+      <div class="flex items-center justify-center gap-6 md:gap-12">
+        <div>
+          <p class="text-xs text-red-300 font-bold mb-2">매수 (2010)</p>
+          <p class="text-4xl md:text-5xl font-display font-black text-red-100">9억 5천</p>
+        </div>
+        <iconify-icon icon="solar:arrow-right-bold" class="text-4xl text-gray-500"></iconify-icon>
+        <div>
+          <p class="text-xs text-blue-300 font-bold mb-2">매도 (2018)</p>
+          <p class="text-4xl md:text-5xl font-display font-black text-blue-100">8억 2천</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 옵션 D: 흑백 사진 + 도장 효과 ===== -->
+  <div class="opt-title"><b>D. 흑백 사진 + 빨간 도장</b> <small>다큐멘터리·기록 느낌</small></div>
+  <div class="opt-wrap">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="relative rounded-2xl overflow-hidden">
+        <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-buy.png" class="w-full grayscale" loading="lazy">
+        <div class="absolute top-3 right-3 rotate-[-12deg] border-[3px] border-red-500 text-red-500 font-black px-3 py-1.5 rounded text-base md:text-lg bg-white/95 shadow-lg">매수 9.5억</div>
+      </div>
+      <div class="relative rounded-2xl overflow-hidden">
+        <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-sell.png" class="w-full grayscale" loading="lazy">
+        <div class="absolute top-3 right-3 rotate-[-12deg] border-[3px] border-blue-500 text-blue-500 font-black px-3 py-1.5 rounded text-base md:text-lg bg-white/95 shadow-lg">매도 8.2억</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 옵션 G: 폴라로이드 풍 ===== -->
+  <div class="opt-title"><b>G. 폴라로이드 풍</b> <small>흰 테두리 + 살짝 기울임 + 손으로 적은 듯한 라벨</small></div>
+  <div class="opt-wrap">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 px-4">
+      <div class="bg-white p-3 pb-6 rounded-sm shadow-2xl rotate-[-2deg] mx-auto" style="max-width:280px">
+        <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-buy.png" class="w-full" loading="lazy">
+        <p class="text-center mt-3 text-base font-bold text-gray-800" style="font-family: 'Pretendard', sans-serif">매수 · 9억 5천</p>
+      </div>
+      <div class="bg-white p-3 pb-6 rounded-sm shadow-2xl rotate-[2deg] mx-auto" style="max-width:280px">
+        <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/sumyeongsan-sell.png" class="w-full" loading="lazy">
+        <p class="text-center mt-3 text-base font-bold text-gray-800">매도 · 8억 2천</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 옵션 H: 숫자 다이어그램 (사진 없음, 막대) ===== -->
+  <div class="opt-title"><b>H. 가격 막대 다이어그램</b> <small>막대 길이로 가격 직관 비교. 한눈에 차이 보임.</small></div>
+  <div class="opt-wrap">
+    <div class="bg-[#1a2336] rounded-2xl p-7 md:p-10 border border-white/5">
+      <div class="space-y-5">
+        <div>
+          <div class="flex items-baseline justify-between mb-2 text-white">
+            <span class="text-xs text-red-300 font-bold">매수 (2010)</span>
+            <span class="text-2xl md:text-3xl font-display font-black text-red-100">9억 5천</span>
+          </div>
+          <div class="h-4 rounded-full bg-white/5 overflow-hidden">
+            <div class="h-full bg-red-500 rounded-full" style="width:95%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-baseline justify-between mb-2 text-white">
+            <span class="text-xs text-blue-300 font-bold">매도 (2018)</span>
+            <span class="text-2xl md:text-3xl font-display font-black text-blue-100">8억 2천</span>
+          </div>
+          <div class="h-4 rounded-full bg-white/5 overflow-hidden">
+            <div class="h-full bg-blue-500 rounded-full" style="width:82%"></div>
+          </div>
+        </div>
+        <div class="pt-3 border-t border-white/10 text-center">
+          <p class="text-xs text-gray-400 mb-1">차액</p>
+          <p class="text-2xl md:text-3xl font-display font-black text-red-300">-1억 3천</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 옵션 F: 타임라인 ===== -->
+  <div class="opt-title"><b>F. 타임라인</b> <small>가로 시간축으로 매수→보유→매도 흐름</small></div>
+  <div class="opt-wrap">
+    <div class="bg-[#1a2336] rounded-2xl p-7 md:p-10 border border-white/5 text-white">
+      <div class="relative">
+        <div class="absolute top-7 left-0 right-0 h-1 bg-gray-700"></div>
+        <div class="absolute top-7 left-0 h-1 bg-gradient-to-r from-red-500 to-blue-500" style="width:100%"></div>
+        <div class="relative flex justify-between">
+          <div class="text-center">
+            <div class="w-14 h-14 rounded-full bg-red-600 border-4 border-[#1a2336] mx-auto flex items-center justify-center mb-3">
+              <iconify-icon icon="solar:home-bold" class="text-2xl text-white"></iconify-icon>
+            </div>
+            <p class="text-xs text-red-300 font-bold">매수 · 2010</p>
+            <p class="text-xl md:text-2xl font-display font-black mt-1">9억 5천</p>
+          </div>
+          <div class="text-center">
+            <div class="w-14 h-14 rounded-full bg-gray-700 border-4 border-[#1a2336] mx-auto flex items-center justify-center mb-3">
+              <iconify-icon icon="solar:clock-circle-bold" class="text-2xl text-gray-400"></iconify-icon>
+            </div>
+            <p class="text-xs text-gray-400 font-bold">8년 보유</p>
+            <p class="text-sm text-gray-400 mt-1">실거주</p>
+          </div>
+          <div class="text-center">
+            <div class="w-14 h-14 rounded-full bg-blue-600 border-4 border-[#1a2336] mx-auto flex items-center justify-center mb-3">
+              <iconify-icon icon="solar:dollar-bold" class="text-2xl text-white"></iconify-icon>
+            </div>
+            <p class="text-xs text-blue-300 font-bold">매도 · 2018</p>
+            <p class="text-xl md:text-2xl font-display font-black mt-1">8억 2천</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note mt-8">
+    <p class="font-black mb-2">옵션 비교</p>
+    <ul class="list-disc pl-5 space-y-1">
+      <li><b>A</b>: 사진 + 가격 오버레이 — 진정성 + 가독성 둘 다. 영화 포스터 풍.</li>
+      <li><b>B</b>: 가격이 메인, 사진은 썸네일 — 정보 가독성 최우선.</li>
+      <li><b>C</b>: 텍스트만 — 가장 깔끔. 단 계약서 진정성 사라짐.</li>
+      <li><b>D</b>: 흑백 + 빨간 도장 — 다큐멘터리·기록물 느낌.</li>
+      <li><b>G</b>: 폴라로이드 풍 — 따뜻하고 개인적인 톤. 진정성 강함.</li>
+      <li><b>H</b>: 가격 막대 — 차이를 한눈에. 사진 없어도 손실 직관적.</li>
+      <li><b>F</b>: 타임라인 — 시간 흐름 + 보유 기간까지. 정보량 많음.</li>
+    </ul>
+  </div>
+
+</div>
+
 </body>
 </html>
