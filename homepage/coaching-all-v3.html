@@ -46,13 +46,26 @@
     }
   }
 </script>
-<!-- Pretendard + GmarketSans -->
+<!-- Pretendard + self-hosted GmarketSans -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
 <!-- Iconify -->
 <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
 <!-- 랜딩 스타일 -->
 <style>
+  @font-face {
+    font-family: 'GmarketSans';
+    src: url('./fonts/GmarketSansBold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'GmarketSans';
+    src: url('./fonts/GmarketSansBold.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
   html { font-size: 16px !important; overflow-x: hidden; }
   body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; overflow-x: hidden; padding-bottom: 140px; }
   @media (max-width: 768px) { body { padding-bottom: 140px; } }
