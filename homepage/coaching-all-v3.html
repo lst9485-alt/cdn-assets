@@ -94,6 +94,7 @@
     100% { opacity:1; transform:translateY(0) rotate(0deg); }
   }
   @keyframes heroFadeUp { 0%{opacity:0;transform:translateY(40px)} 100%{opacity:1;transform:translateY(0)} }
+  @keyframes budgetFadeIn { 0%{opacity:0;transform:translateY(15px)} 100%{opacity:1;transform:translateY(0)} }
   .hero-word { opacity:0; animation: heroDrop 0.72s cubic-bezier(.2,.9,.2,1.1) forwards; will-change: transform, opacity; }
   .hero-main { opacity:0; animation: heroFadeUp 0.8s ease forwards; }
   .hero-cta { opacity:0; animation: heroFadeUp 0.8s ease forwards; }
@@ -104,7 +105,8 @@
   .soft-nudge-delay { animation: softNudge 1.4s ease-in-out infinite; animation-delay: 0.18s; }
   .soft-nudge-x { animation: softNudgeX 1.4s ease-in-out infinite; }
   .soft-nudge-x-delay { animation: softNudgeX 1.4s ease-in-out infinite; animation-delay: 0.18s; }
-  .hero-word-center { left: 50%; width: 140px; margin-left: -70px; text-align: center; animation: heroFadeUp 0.8s ease forwards; }
+  .hero-word-center { left: 50%; width: 140px; margin-left: -70px; text-align: center; }
+  .hero-word.hero-word-center { animation: budgetFadeIn 0.8s ease forwards !important; }
   .hero-word-edge-left { left: 4%; }
   .hero-word-edge-right { right: 4%; }
   @media (min-width: 768px) {
