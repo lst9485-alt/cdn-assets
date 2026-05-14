@@ -32,6 +32,8 @@
     .prose-body p { font-size: 1.0625rem; line-height: 1.85; color: #1f2937; margin: 0; }
     .prose-body p + p { margin-top: 1.25rem; }
     .prose-body strong { color: #0a0a0a; font-weight: 700; }
+
+    /* 손실 회복률 표 */
     .loss-table { width: 100%; border-collapse: collapse; }
     .loss-table th, .loss-table td { border: 1px solid #d1d5db; padding: 12px 16px; text-align: center; font-weight: 700; }
     .loss-table thead th { background: #e5e7eb; color: #0a0a0a; font-size: 1rem; }
@@ -39,15 +41,30 @@
     .loss-table tbody td.col-loss { color: #1d4ed8; font-size: 1.0625rem; }
     .loss-table tbody td.col-need { color: #dc2626; font-size: 1.0625rem; }
     .loss-table tbody tr.row-emphasis { background: #fff7ed; }
-    [data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
-    [data-reveal].revealed { opacity: 1; transform: translateY(0); }
+
+    /* 순환 구조 흐름도 */
+    .cycle-step { background: white; border: 2px solid #FF6B00; border-radius: 18px; padding: 18px 14px; text-align: center; position: relative; }
+    .cycle-step .num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: #FF6B00; color: white; font-weight: 800; font-size: 0.875rem; margin-bottom: 8px; }
+    .cycle-step .title { font-weight: 800; color: #0a0a0a; font-size: 0.95rem; line-height: 1.4; }
+    .cycle-step .desc { color: #6b7280; font-size: 0.8125rem; margin-top: 4px; line-height: 1.5; }
+    .cycle-arrow { display: flex; align-items: center; justify-content: center; color: #FF6B00; font-weight: 800; }
+    @media (min-width: 768px) {
+      .cycle-grid { display: grid; grid-template-columns: 1fr 32px 1fr 32px 1fr 32px 1fr; align-items: stretch; gap: 0; }
+      .cycle-arrow-mobile { display: none; }
+    }
+    @media (max-width: 767px) {
+      .cycle-grid { display: flex; flex-direction: column; gap: 0; }
+      .cycle-arrow-pc { display: none; }
+      .cycle-arrow { padding: 6px 0; transform: rotate(90deg); }
+    }
+    .cycle-restart { background: #FFF7ED; color: #FF6B00; font-weight: 800; padding: 10px 18px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 0.875rem; border: 1px solid #FFD7A8; }
   </style>
 </head>
 <body class="bg-white">
 
 <!-- Hero -->
 <section class="bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f0f1e] text-white">
-  <div class="max-w-3xl mx-auto px-6 sm:px-8 pt-24 pb-20 text-center" data-reveal>
+  <div class="max-w-3xl mx-auto px-6 sm:px-8 pt-24 pb-20 text-center">
     <span class="inline-block bg-brand-orange/15 text-brand-orange text-xs font-bold px-3 py-1.5 rounded-full mb-6 tracking-wider">투자 철학</span>
     <h1 class="font-display font-black text-4xl sm:text-5xl leading-tight word-keep mb-5">
       분산하지 마세요.<br>
@@ -70,7 +87,7 @@
 
     <p>여기까지는 우리가 여기저기서 흔히 듣던 이야기입니다.<br>지금부터 제가 드릴 이야기는 조금 다릅니다.</p>
 
-    <div class="border-l-4 border-brand-orange bg-orange-50/40 pl-5 pr-5 py-5 my-8 rounded-r-xl" data-reveal>
+    <div class="border-l-4 border-brand-orange bg-orange-50/40 pl-5 pr-5 py-5 my-8 rounded-r-xl">
       <p class="text-lg font-bold text-brand-dark !leading-relaxed">저는 <strong>분산투자가 더 위험하다</strong>고 생각합니다. 돈을 벌려면 몰빵을 해야 합니다. 단, 잃지 않는 자산에 투자를 해야겠죠.</p>
       <p class="text-lg font-bold text-brand-dark !leading-relaxed mt-3">돈을 벌려면 몰빵을 해야 합니다. 단, 잃지않는 자산에 투자를 해야겠죠.</p>
     </div>
@@ -90,7 +107,7 @@
     <p>몰빵에는 두 가지 전제가 있습니다.</p>
 
     <!-- 두 전제 카드 -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8" data-reveal>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
       <div class="bg-brand-orange/5 border-2 border-brand-orange rounded-2xl p-6">
         <div class="text-brand-orange text-xs font-bold tracking-wider mb-2">전제 1</div>
         <p class="text-brand-dark text-lg font-bold leading-snug word-keep">내가 잘 아는 분야여야 합니다.</p>
@@ -103,8 +120,8 @@
 
     <p>손실은 한 번 나면 회복이 어렵습니다. 50% 잃으면 100% 수익을 내야 본전입니다.</p>
 
-    <!-- 손실 회복률 표 (풀 10행) -->
-    <div class="my-8 overflow-x-auto" data-reveal>
+    <!-- 손실 회복률 표 -->
+    <div class="my-8 overflow-x-auto">
       <table class="loss-table">
         <thead>
           <tr>
@@ -136,7 +153,7 @@
     <p>집은 두 가지 면에서 다른 자산과 다릅니다.</p>
 
     <!-- 집의 두 차이 카드 -->
-    <div class="space-y-4 my-8" data-reveal>
+    <div class="space-y-4 my-8">
       <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
         <div class="flex items-start gap-4">
           <div class="flex-shrink-0 w-10 h-10 bg-brand-orange/10 text-brand-orange rounded-full flex items-center justify-center font-bold">1</div>
@@ -162,7 +179,7 @@
     <p>제가 드리는 메시지는 단순합니다.</p>
 
     <!-- 마지막 메시지 박스 -->
-    <div class="bg-brand-beige rounded-3xl p-8 sm:p-10 my-8 text-center" data-reveal>
+    <div class="bg-brand-beige rounded-3xl p-8 sm:p-10 my-8 text-center">
       <p class="text-xl sm:text-2xl font-display font-bold text-brand-dark leading-relaxed word-keep">
         분산하지 마세요.<br>
         잃지 않는 자산에 <span class="text-brand-orange">레버리지까지 써서 몰빵</span>하세요.<br>
@@ -170,23 +187,55 @@
       </p>
     </div>
 
+    <!-- ETF→집→ETF 순환 구조 -->
+    <div class="my-14">
+      <h2 class="text-2xl sm:text-3xl font-display font-bold text-brand-dark text-center mb-3 word-keep">그리고 끝이 아닙니다</h2>
+      <p class="text-center text-gray-600 mb-8 word-keep">ETF로 시작해, 집으로 갈아타며 자산을 키웁니다.</p>
+
+      <div class="cycle-grid">
+
+        <div class="cycle-step">
+          <div class="num">1</div>
+          <div class="title">ETF로 시드 모으기</div>
+          <div class="desc">월급으로 ETF에 꾸준히 적립</div>
+        </div>
+        <div class="cycle-arrow cycle-arrow-pc">→</div>
+        <div class="cycle-arrow cycle-arrow-mobile">→</div>
+
+        <div class="cycle-step">
+          <div class="num">2</div>
+          <div class="title">내집마련</div>
+          <div class="desc">레버리지 써서 첫 집 매수</div>
+        </div>
+        <div class="cycle-arrow cycle-arrow-pc">→</div>
+        <div class="cycle-arrow cycle-arrow-mobile">→</div>
+
+        <div class="cycle-step">
+          <div class="num">3</div>
+          <div class="title">다시 ETF</div>
+          <div class="desc">집은 보유, ETF로 다음 시드</div>
+        </div>
+        <div class="cycle-arrow cycle-arrow-pc">→</div>
+        <div class="cycle-arrow cycle-arrow-mobile">→</div>
+
+        <div class="cycle-step">
+          <div class="num">4</div>
+          <div class="title">갈아타기</div>
+          <div class="desc">더 좋은 집으로 업그레이드</div>
+        </div>
+
+      </div>
+
+      <div class="text-center">
+        <span class="cycle-restart">↻&nbsp;&nbsp;그리고 다시 ETF로</span>
+      </div>
+    </div>
+
     <p class="text-center text-gray-600 mt-10">이게 우리동네재테크가 약속하는 <strong>'잃지 않는 투자'</strong>이고,<br>직장인 내집마련 로드맵의 출발점입니다.</p>
 
   </article>
 
 </main>
-
-<script>
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('revealed');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
-  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
-</script>
 
 <script src="homepage-shell.js?v=d5608a0"></script>
 </body>
