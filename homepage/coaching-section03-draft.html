@@ -222,10 +222,119 @@
       background: #ffffff;
     }
 
+    .report-panel {
+      background:
+        radial-gradient(circle at 100% 0%, rgba(255, 107, 0, 0.16), transparent 34%),
+        linear-gradient(135deg, #ffffff 0%, #fff8ed 100%);
+      border: 1px solid rgba(26, 43, 71, 0.08);
+      box-shadow: 0 26px 72px rgba(26, 43, 71, 0.10);
+    }
+
+    .report-sheet {
+      background: #ffffff;
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      box-shadow: 0 24px 64px rgba(26, 43, 71, 0.14);
+    }
+
+    .report-row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 14px;
+      align-items: center;
+      border-radius: 18px;
+      background: #f5f0e8;
+      padding: 13px 15px;
+      color: #1A2B47;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .roadmap-panel {
+      background:
+        linear-gradient(180deg, #fffaf4 0%, #ffffff 100%);
+      border: 1px solid rgba(26, 43, 71, 0.08);
+      box-shadow: 0 26px 72px rgba(26, 43, 71, 0.08);
+    }
+
+    .roadmap-line {
+      position: absolute;
+      left: 26px;
+      top: 34px;
+      bottom: 34px;
+      width: 2px;
+      background: linear-gradient(180deg, #FF6B00, rgba(255, 107, 0, 0.12));
+    }
+
+    .roadmap-dot {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: #FF6B00;
+      color: #fff;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 21px;
+      font-weight: 900;
+      box-shadow: 0 14px 32px rgba(255, 107, 0, 0.22);
+    }
+
+    .roadmap-step {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 20px;
+      position: relative;
+    }
+
+    .check-panel {
+      background:
+        radial-gradient(circle at 12% 0%, rgba(255, 107, 0, 0.13), transparent 32%),
+        linear-gradient(135deg, #151f32 0%, #0A0A0A 100%);
+      box-shadow: 0 30px 80px rgba(10, 10, 10, 0.20);
+    }
+
+    .check-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 18px;
+      color: #ffffff;
+    }
+
+    .check-mark {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: #FF6B00;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .sticky-note {
+      border: 2px solid #1A2B47;
+      background: #ffdf32;
+      box-shadow: 6px 6px 0 rgba(26, 43, 71, 0.12);
+      transform: rotate(-2deg);
+    }
+
     @media (max-width: 640px) {
       .flow-message {
         max-width: 88%;
         font-size: 15px;
+      }
+
+      .roadmap-step {
+        gap: 14px;
+      }
+
+      .roadmap-line {
+        left: 24px;
       }
     }
 
@@ -597,6 +706,187 @@
                 <div class="flow-message coach">물론이죠 :) 계약서 보내주세요.</div>
               </div>
             </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-14 md:mt-16">
+        <div class="mb-5">
+          <span class="draft-label">D안 대안 · 리포트형</span>
+        </div>
+
+        <div class="report-panel reveal rounded-[36px] p-7 md:p-10">
+          <div class="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
+            <div>
+              <p class="text-sm font-black uppercase tracking-[0.16em] text-brand-orange">WHAT YOU GET</p>
+              <h2 class="mt-3 font-display text-4xl font-black leading-tight text-brand-dark word-keep md:text-5xl">
+                상담 후에는<br>
+                판단 자료가 남습니다
+              </h2>
+              <p class="mt-5 max-w-md text-base leading-relaxed text-gray-600 word-keep">
+                말로만 끝나는 코칭이 아니라, 예산선·후보지·계약 전 체크까지 다시 볼 수 있게 정리합니다.
+              </p>
+              <div class="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                <div class="rounded-[24px] bg-white p-5 shadow-sm">
+                  <p class="text-sm font-black text-brand-orange">이득 01</p>
+                  <p class="mt-2 text-lg font-black text-brand-dark word-keep">부부가 같은 기준으로 결정합니다</p>
+                </div>
+                <div class="rounded-[24px] bg-white p-5 shadow-sm">
+                  <p class="text-sm font-black text-brand-orange">이득 02</p>
+                  <p class="mt-2 text-lg font-black text-brand-dark word-keep">중개사 말에 흔들릴 일이 줄어듭니다</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="report-sheet rounded-[34px] p-6 md:p-8">
+              <div class="mb-6 flex items-center justify-between border-b border-gray-200 pb-5">
+                <div>
+                  <p class="text-sm font-black text-gray-400">COACHING REPORT</p>
+                  <p class="mt-1 font-display text-2xl font-black text-brand-dark">내집마련 판단표</p>
+                </div>
+                <span class="rounded-full bg-brand-orange px-4 py-2 text-sm font-black text-white">상담 후 발송</span>
+              </div>
+              <div class="space-y-3">
+                <div class="report-row"><span class="text-brand-orange">예산선</span><span>감당 가능한 가격과 대출 한도</span></div>
+                <div class="report-row"><span class="text-brand-orange">후보지</span><span>볼 만한 지역·단지 우선순위</span></div>
+                <div class="report-row"><span class="text-brand-orange">판단</span><span>지금 살지, 보류할지 결론과 근거</span></div>
+                <div class="report-row"><span class="text-brand-orange">실행</span><span>방문·협상·계약 전 체크리스트</span></div>
+              </div>
+              <div class="mt-6 rounded-[24px] bg-brand-dark p-5 text-white">
+                <p class="text-sm font-black text-white/55">90일 카톡 Q&A 포함</p>
+                <p class="mt-2 text-xl font-black word-keep">자료를 보면서 실행 중 생기는 질문까지 이어서 봅니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-14 md:mt-16">
+        <div class="mb-5">
+          <span class="draft-label">E안 대안 · 타임라인형</span>
+        </div>
+
+        <div class="roadmap-panel reveal rounded-[36px] p-7 md:p-10">
+          <div class="mb-9 grid gap-4 md:grid-cols-[0.85fr_1.15fr] md:items-end">
+            <div>
+              <p class="text-sm font-black uppercase tracking-[0.16em] text-brand-orange">ROADMAP</p>
+              <h2 class="mt-3 font-display text-4xl font-black leading-tight text-brand-dark word-keep md:text-5xl">
+                고민이 결정으로<br>바뀌는 순서
+              </h2>
+            </div>
+            <p class="max-w-xl text-base leading-relaxed text-gray-600 word-keep">
+              고객 입장에서는 “뭘 받는지”가 보여야 안심합니다. 그래서 각 단계마다 남는 자료와 이득을 같이 보여주는 버전입니다.
+            </p>
+          </div>
+
+          <div class="relative space-y-6">
+            <div class="roadmap-line hidden md:block"></div>
+            <article class="roadmap-step">
+              <div class="roadmap-dot">1</div>
+              <div class="rounded-[28px] border border-gray-200 bg-white p-6">
+                <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <p class="text-sm font-black text-brand-orange">사전 질문지</p>
+                    <h3 class="mt-2 font-display text-2xl font-black text-brand-dark word-keep">상황을 먼저 숫자로 정리합니다</h3>
+                  </div>
+                  <div class="material-chip md:min-w-[230px]"><iconify-icon icon="solar:wallet-money-bold"></iconify-icon>예산·대출 정리표</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="roadmap-step">
+              <div class="roadmap-dot">2</div>
+              <div class="rounded-[28px] border border-gray-200 bg-white p-6">
+                <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <p class="text-sm font-black text-brand-orange">후보 압축</p>
+                    <h3 class="mt-2 font-display text-2xl font-black text-brand-dark word-keep">볼 만한 지역과 단지를 좁힙니다</h3>
+                  </div>
+                  <div class="material-chip md:min-w-[230px]"><iconify-icon icon="solar:map-point-bold"></iconify-icon>후보 단지 리스트</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="roadmap-step">
+              <div class="roadmap-dot">3</div>
+              <div class="rounded-[28px] border border-gray-200 bg-white p-6">
+                <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <p class="text-sm font-black text-brand-orange">결론 정리</p>
+                    <h3 class="mt-2 font-display text-2xl font-black text-brand-dark word-keep">살지·보류할지 판단을 남깁니다</h3>
+                  </div>
+                  <div class="material-chip md:min-w-[230px]"><iconify-icon icon="solar:target-bold"></iconify-icon>매수 판단 근거</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="roadmap-step">
+              <div class="roadmap-dot">4</div>
+              <div class="rounded-[28px] border border-brand-orange/30 bg-brand-dark p-6 text-white">
+                <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <p class="text-sm font-black text-brand-orange">90일 케어</p>
+                    <h3 class="mt-2 font-display text-2xl font-black word-keep">실행 중 생기는 질문을 이어갑니다</h3>
+                  </div>
+                  <div class="material-chip bg-white/10 text-white md:min-w-[230px]"><iconify-icon icon="solar:chat-round-dots-bold"></iconify-icon>카톡 Q&A</div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-14 md:mt-16">
+        <div class="mb-5">
+          <span class="draft-label">F안 대안 · 체크리스트형</span>
+        </div>
+
+        <div class="check-panel reveal overflow-hidden rounded-[36px] p-7 text-white md:p-10">
+          <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p class="text-sm font-black uppercase tracking-[0.16em] text-brand-orange">DECISION CHECK</p>
+              <h2 class="mt-3 font-display text-4xl font-black leading-tight word-keep md:text-5xl">
+                코칭에서 확인하는<br>
+                결정 체크리스트
+              </h2>
+              <p class="mt-5 max-w-md text-base leading-relaxed text-white/68 word-keep">
+                예쁜 설명보다 “내가 뭘 판단하게 되는지”가 더 중요할 때 쓰는 버전입니다.
+              </p>
+              <div class="sticky-note mt-8 inline-block px-5 py-4 text-brand-ink">
+                <p class="font-display text-xl font-black word-keep">목표: 무리한 매수는 피하고,<br>살 수 있는 좋은 집은 놓치지 않기</p>
+              </div>
+            </div>
+
+            <div class="grid gap-3">
+              <div class="check-item">
+                <span class="check-mark">✓</span>
+                <div>
+                  <p class="text-lg font-black word-keep">내 예산으로 가능한 가격인가?</p>
+                  <p class="mt-1 text-sm leading-relaxed text-white/58">대출·현금흐름·잔금 여력을 같이 봅니다.</p>
+                </div>
+              </div>
+              <div class="check-item">
+                <span class="check-mark">✓</span>
+                <div>
+                  <p class="text-lg font-black word-keep">이 지역과 단지를 볼 이유가 있는가?</p>
+                  <p class="mt-1 text-sm leading-relaxed text-white/58">입지, 가격, 대체 후보를 같은 기준으로 비교합니다.</p>
+                </div>
+              </div>
+              <div class="check-item">
+                <span class="check-mark">✓</span>
+                <div>
+                  <p class="text-lg font-black word-keep">지금 사도 되는 조건인가?</p>
+                  <p class="mt-1 text-sm leading-relaxed text-white/58">사야 하는 상황과 기다려야 하는 상황을 나눕니다.</p>
+                </div>
+              </div>
+              <div class="check-item">
+                <span class="check-mark">✓</span>
+                <div>
+                  <p class="text-lg font-black word-keep">계약 전 무엇을 확인해야 하는가?</p>
+                  <p class="mt-1 text-sm leading-relaxed text-white/58">협상, 계약서, 잔금 전 체크 포인트를 남깁니다.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
