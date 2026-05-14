@@ -191,6 +191,44 @@
       font-weight: 900;
     }
 
+    .chat-flow-card {
+      min-height: 210px;
+      border: 1px solid rgba(26, 43, 71, 0.07);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(255, 107, 0, 0.06), transparent 35%),
+        #ffffff;
+      box-shadow: 0 18px 50px rgba(26, 43, 71, 0.06);
+    }
+
+    .flow-message {
+      max-width: 78%;
+      border-radius: 18px;
+      padding: 14px 18px;
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.5;
+      color: #111827;
+      box-shadow: 0 14px 34px rgba(26, 43, 71, 0.08);
+    }
+
+    .flow-message.user {
+      margin-left: auto;
+      background: #ffdf32;
+      border-top-right-radius: 8px;
+    }
+
+    .flow-message.coach {
+      margin-right: auto;
+      background: #ffffff;
+    }
+
+    @media (max-width: 640px) {
+      .flow-message {
+        max-width: 88%;
+        font-size: 15px;
+      }
+    }
+
     .marker-line {
       background: linear-gradient(90deg, rgba(255, 107, 0, 0), rgba(255, 107, 0, 0.55), rgba(255, 107, 0, 0));
     }
@@ -510,6 +548,56 @@
               </div>
             </div>
           </article>
+        </div>
+      </div>
+
+      <div class="mt-14 md:mt-16">
+        <div class="mb-5">
+          <span class="draft-label">C안 대안 · 대화형 진행순서</span>
+        </div>
+
+        <div class="reveal rounded-[36px] bg-white p-7 shadow-soft md:p-10">
+          <div class="mb-8">
+            <p class="text-sm font-black uppercase tracking-[0.16em] text-brand-orange">HOW IT WORKS</p>
+            <h2 class="mt-3 font-display text-4xl font-black leading-tight text-brand-dark word-keep md:text-6xl">
+              신청 → 코칭 → 90일 케어,<br class="hidden md:block">
+              흐름은 이렇습니다
+            </h2>
+          </div>
+
+          <div class="grid gap-5 md:grid-cols-2">
+            <article class="chat-flow-card rounded-[28px] p-6">
+              <p class="mb-5 text-sm font-black text-red-500">STEP 01 · 신청</p>
+              <div class="space-y-3">
+                <div class="flow-message user">코칭 신청합니다!</div>
+                <div class="flow-message coach">네 안녕하세요 :) 사전질문지 즉시 보내드려요.</div>
+              </div>
+            </article>
+
+            <article class="chat-flow-card rounded-[28px] p-6">
+              <p class="mb-5 text-sm font-black text-[#009b96]">STEP 02 · 진단</p>
+              <div class="space-y-3">
+                <div class="flow-message coach">예산이랑 대출, 우선순위 같이 정리해볼게요.</div>
+                <div class="flow-message user">네 부탁드려요!</div>
+              </div>
+            </article>
+
+            <article class="chat-flow-card rounded-[28px] p-6">
+              <p class="mb-5 text-sm font-black text-[#d58c00]">STEP 03 · 코칭</p>
+              <div class="space-y-3">
+                <div class="flow-message coach">자료 보면서 50분 코칭 시작합니다.</div>
+                <div class="flow-message user">들어갑니다 :)</div>
+              </div>
+            </article>
+
+            <article class="chat-flow-card rounded-[28px] p-6">
+              <p class="mb-5 text-sm font-black text-brand-dark">STEP 04 · 90일 케어</p>
+              <div class="space-y-3">
+                <div class="flow-message user">계약하기 전에 한 번만 더 봐주세요!</div>
+                <div class="flow-message coach">물론이죠 :) 계약서 보내주세요.</div>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
 
