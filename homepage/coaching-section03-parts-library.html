@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 파트별 옵션 라이브러리 | 우리동네 재테크</title>
+  <meta name="robots" content="noindex,nofollow">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      important: true,
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['GmarketSans', 'Pretendard', 'sans-serif']
+          },
+          colors: {
+            brand: { orange: '#FF6B00', beige: '#F5F0E8', dark: '#0A0A0A', ink: '#1A2B47' }
+          },
+          boxShadow: {
+            soft: '0 24px 70px rgba(26, 43, 71, 0.10)',
+            lift: '0 18px 42px rgba(26, 43, 71, 0.12)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <style>
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      margin: 0;
+      background: #fdf9ed;
+      color: #0A0A0A;
+      font-family: Pretendard, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+
+    /* 라이브러리 전용 스타일 */
+    .lib-section { padding: 56px 0; border-bottom: 1px dashed rgba(26,43,71,0.18); }
+    .lib-section:last-of-type { border-bottom: 0; }
+    .lib-section-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #1A2B47;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 14px;
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+    }
+    .option-frame {
+      border: 2px dashed rgba(255, 107, 0, 0.30);
+      border-radius: 24px;
+      background: #ffffff;
+      padding: 20px;
+      position: relative;
+    }
+    .option-label {
+      position: absolute;
+      top: -14px;
+      left: 20px;
+      background: #FF6B00;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+
+    /* === 진행 3단계 - 공통 === */
+    .step-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 107, 0, 0.10);
+      color: #FF6B00;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .check-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #F5F0E8;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 13px;
+      color: #404040;
+    }
+
+    /* === 진행 옵션 A: 타임라인 === */
+    .timeline-card {
+      position: relative;
+      border-radius: 22px;
+      background: #fff;
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      box-shadow: 0 14px 30px rgba(26, 43, 71, 0.06);
+      padding: 24px;
+    }
+    .timeline-num {
+      position: absolute;
+      left: -22px;
+      top: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FF6B00;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      box-shadow: 0 6px 18px rgba(255, 107, 0, 0.30);
+    }
+    @media (max-width: 768px) {
+      .timeline-num { position: static; margin-bottom: 12px; }
+    }
+
+    /* === 진행 옵션 B: STEP 챗봇 카드 === */
+    .step-chat-card {
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 14px 30px rgba(26, 43, 71, 0.07);
+      padding: 24px;
+      border: 1px solid rgba(26, 43, 71, 0.06);
+    }
+    .v3-chat-bubble {
+      max-width: 88%;
+      border-radius: 16px;
+      padding: 12px 16px;
+      font-weight: 700;
+      line-height: 1.55;
+      font-size: 14px;
+      box-shadow: 0 6px 16px rgba(18,24,38,0.06);
+    }
+    .v3-chat-user { margin-left: auto; background: #ffe126; color: #182033; }
+    .v3-chat-coach { background: #fff; color: #182033; border: 1px solid #f0ece3; }
+
+    /* === 진행 옵션 C: 가로 3카드 === */
+    .flow-card {
+      border-radius: 22px;
+      background: #fff;
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      box-shadow: 0 12px 28px rgba(26, 43, 71, 0.06);
+      padding: 22px;
+    }
+    .flow-num {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 2.6rem;
+      line-height: 1;
+      color: #FF6B00;
+    }
+
+    /* === 자료 옵션 A: 칩 (step 안 부속) === */
+    .deliv-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 107, 0, 0.10);
+      color: #0A0A0A;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* === 자료 옵션 B: 4그리드 카드 === */
+    .deliv-grid-card {
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid rgba(26, 43, 71, 0.08);
+      padding: 18px;
+      box-shadow: 0 8px 20px rgba(26, 43, 71, 0.05);
+    }
+
+    /* === 자료 옵션 C: 행 리스트 === */
+    .deliv-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid rgba(26, 43, 71, 0.08);
+    }
+
+    /* === 90일 옵션 A: 큰 V3 카톡 박스 === */
+    .v3-chat-phone-big { background: #122039; border: 12px solid #122039; border-radius: 32px; box-shadow: 0 24px 50px rgba(18,24,38,0.22); overflow: hidden; }
+    .v3-chat-screen-big { background: #a9bdd6; border-radius: 20px; padding: 18px 16px 22px; }
+
+    /* === 신뢰 지표 옵션 A: 현재 카드 === */
+    .metric-card-a { background: #fff; border: 1px solid rgba(18,24,38,0.08); border-radius: 12px; padding: 18px 20px; box-shadow: 0 12px 28px rgba(18,24,38,0.06); }
+    .metric-card-a strong { display: block; font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1; letter-spacing: -0.03em; color: #121826; font-weight: 900; }
+    .metric-card-a span { display: block; margin-top: 8px; font-size: 0.82rem; color: #5b6475; }
+    .metric-card-a em { display: block; margin-top: 10px; font-style: normal; font-size: 0.74rem; font-weight: 900; color: #0f9f7a; }
+
+    /* === 신뢰 지표 옵션 B: 가로 분할 (구분선) === */
+    .metric-row-b {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 18px 38px rgba(18,24,38,0.07);
+      overflow: hidden;
+    }
+    .metric-row-b > div {
+      padding: 28px 24px;
+      border-right: 1px solid rgba(26, 43, 71, 0.08);
+      text-align: center;
+    }
+    .metric-row-b > div:last-child { border-right: 0; }
+    .metric-row-b strong {
+      display: block;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #FF6B00;
+      font-weight: 900;
+    }
+    .metric-row-b span { display: block; margin-top: 10px; font-size: 0.82rem; color: #5b6475; font-weight: 700; }
+    @media (max-width: 768px) {
+      .metric-row-b { grid-template-columns: repeat(2, 1fr); }
+      .metric-row-b > div:nth-child(2) { border-right: 0; }
+      .metric-row-b > div:nth-child(1), .metric-row-b > div:nth-child(2) { border-bottom: 1px solid rgba(26,43,71,0.08); }
+    }
+
+    /* === 신뢰 지표 옵션 C: 인포그래픽 (아이콘 + 큰 숫자) === */
+    .metric-info-c {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px 22px;
+      border: 1px solid rgba(26, 43, 71, 0.08);
+      box-shadow: 0 10px 24px rgba(18, 24, 38, 0.05);
+    }
+    .metric-info-c .icon-wrap {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      border-radius: 14px;
+      background: rgba(255, 107, 0, 0.10);
+      color: #FF6B00;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+    }
+    .metric-info-c .num {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      line-height: 1;
+      color: #0A0A0A;
+    }
+    .metric-info-c .label { font-size: 13px; color: #5b6475; margin-top: 4px; font-weight: 700; }
+
+    /* === 신뢰 지표 옵션 D: 다크 톤 (브랜드 강조) === */
+    .metric-dark {
+      background: linear-gradient(135deg, #1A2B47 0%, #2a3d5e 100%);
+      border-radius: 20px;
+      padding: 32px 24px;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 20px 42px rgba(26, 43, 71, 0.30);
+    }
+    .metric-dark strong {
+      display: block;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      line-height: 1;
+      color: #FF6B00;
+      font-weight: 900;
+    }
+    .metric-dark span { display: block; margin-top: 10px; font-size: 0.85rem; color: rgba(255,255,255,0.78); font-weight: 700; }
+
+    /* TOC 네비 */
+    .toc-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(253, 249, 237, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(26, 43, 71, 0.10);
+    }
+    .toc-nav a {
+      display: inline-block;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1A2B47;
+    }
+    .toc-nav a:hover { color: #FF6B00; }
+  </style>
+</head>
+<body>
+  <!-- TOC 네비 -->
+  <nav class="toc-nav">
+    <div class="mx-auto max-w-6xl px-4 py-2 flex flex-wrap gap-2 items-center">
+      <span class="text-xs font-black text-brand-orange mr-2">파트별 옵션</span>
+      <a href="#part-flow">1. 진행 3단계</a>
+      <a href="#part-deliverables">2. 자료(산출물)</a>
+      <a href="#part-care">3. 90일 케어</a>
+      <a href="#part-metrics">4. 신뢰 지표 ⚠</a>
+    </div>
+  </nav>
+
+  <main class="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
+
+    <!-- 페이지 헤더 -->
+    <header class="mb-10">
+      <p class="text-sm font-black uppercase text-brand-orange">03 코칭 내용 시안 · 파트별 옵션</p>
+      <h1 class="mt-3 font-display text-3xl md:text-4xl font-black leading-tight text-brand-dark word-keep">
+        파트마다 옵션을 비교해 보세요
+      </h1>
+      <p class="mt-4 text-gray-600 word-keep">
+        각 영역에 두세 개씩 옵션이 있습니다. 마음에 드는 조합을 골라주시면 본 시안에 합쳐드리겠습니다.
+      </p>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- 1. 진행 3단계 -->
+    <!-- ============================================ -->
+    <section id="part-flow" class="lib-section">
+      <div class="mb-8">
+        <span class="lib-section-title">
+          <iconify-icon icon="solar:list-bold"></iconify-icon> 1. 진행 3단계 표시 방식
+        </span>
+        <p class="mt-4 text-gray-600 word-keep">
+          코칭 안에서 무엇을 하는지(진단 → 후보 압축 → 실행) 보여주는 영역. 세 가지 형태 비교.
+        </p>
+      </div>
+
+      <!-- 옵션 A: 타임라인 세로 -->
+      <div class="option-frame mb-10">
+        <span class="option-label">진행 · 옵션 A · 타임라인 세로</span>
+        <div class="mt-4 pl-6 space-y-6 md:pl-8">
+          <div class="timeline-card">
+            <span class="timeline-num">1</span>
+            <p class="step-pill"><iconify-icon icon="solar:wallet-money-bold"></iconify-icon>현재 상황 진단</p>
+            <h3 class="mt-3 font-display text-xl font-black text-brand-dark word-keep">예산·대출과 우선순위를 한 장에 정리합니다</h3>
+            <p class="mt-3 text-sm text-gray-600 leading-relaxed word-keep">사전 질문지로 예산·대출 한도와 거주 조건을 같이 점검하고, 지금 사도 되는지 1차 결론까지 함께 내립니다.</p>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-num">2</span>
+            <p class="step-pill"><iconify-icon icon="solar:map-point-bold"></iconify-icon>후보 지역·단지 압축</p>
+            <h3 class="mt-3 font-display text-xl font-black text-brand-dark word-keep">후보 단지와 비교 기준표를 만듭니다</h3>
+            <p class="mt-3 text-sm text-gray-600 leading-relaxed word-keep">예산에 맞는 지역·단지를 좁히고, 단지마다 같은 잣대로 비교할 수 있게 기준표까지 같이 만듭니다.</p>
+          </div>
+          <div class="timeline-card">
+            <span class="timeline-num">3</span>
+            <p class="step-pill"><iconify-icon icon="solar:checklist-minimalistic-bold"></iconify-icon>실행 플랜 및 90일 지원</p>
+            <h3 class="mt-3 font-display text-xl font-black text-brand-dark word-keep">살지 보류할지 결론과 액션플랜까지 정리합니다</h3>
+            <p class="mt-3 text-sm text-gray-600 leading-relaxed word-keep">코칭 후 바로 움직일 수 있게 결론과 다음 행동을 정리해드리고, 90일간 후속 질문을 이어서 답해드립니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 옵션 B: STEP 챗봇 카드 -->
+      <div class="option-frame mb-10">
+        <span class="option-label">진행 · 옵션 B · 챗봇 카드 (이미지 12 스타일)</span>
+        <div class="mt-4 grid gap-5 md:grid-cols-3">
+          <div class="step-chat-card">
+            <p class="mb-4 text-sm font-black text-red-500">STEP 01 · 현재 상황 진단</p>
+            <div class="v3-chat-bubble v3-chat-coach">예산이랑 대출, 우선순위 같이 정리해볼게요.</div>
+            <div class="v3-chat-bubble v3-chat-user mt-3">네 부탁드려요!</div>
+          </div>
+          <div class="step-chat-card">
+            <p class="mb-4 text-sm font-black text-[#18aaa1]">STEP 02 · 후보 압축</p>
+            <div class="v3-chat-bubble v3-chat-user">어느 단지가 좋을까요?</div>
+            <div class="v3-chat-bubble v3-chat-coach mt-3">예산에 맞춰 후보 좁히고 비교 기준 만들어드릴게요.</div>
+          </div>
+          <div class="step-chat-card">
+            <p class="mb-4 text-sm font-black text-[#d19a00]">STEP 03 · 실행 플랜</p>
+            <div class="v3-chat-bubble v3-chat-coach">살지 보류할지 결론이랑 액션플랜 정리해드릴게요.</div>
+            <div class="v3-chat-bubble v3-chat-user mt-3">감사합니다 :)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 옵션 C: 가로 3카드 -->
+      <div class="option-frame mb-10">
+        <span class="option-label">진행 · 옵션 C · 가로 3카드 (미니멀)</span>
+        <div class="mt-4 grid gap-5 md:grid-cols-3">
+          <div class="flow-card">
+            <span class="flow-num">1</span>
+            <p class="mt-3 step-pill">현재 상황 진단</p>
+            <h3 class="mt-3 font-display text-lg font-black text-brand-dark word-keep">예산·대출과 우선순위 정리</h3>
+            <p class="mt-3 text-sm text-gray-600 word-keep">지금 사도 되는지 1차 결론까지 함께.</p>
+          </div>
+          <div class="flow-card">
+            <span class="flow-num">2</span>
+            <p class="mt-3 step-pill">후보 압축</p>
+            <h3 class="mt-3 font-display text-lg font-black text-brand-dark word-keep">단지 후보와 비교 기준표</h3>
+            <p class="mt-3 text-sm text-gray-600 word-keep">같은 잣대로 비교할 수 있게 기준표까지.</p>
+          </div>
+          <div class="flow-card">
+            <span class="flow-num">3</span>
+            <p class="mt-3 step-pill">실행 + 90일</p>
+            <h3 class="mt-3 font-display text-lg font-black text-brand-dark word-keep">결론·액션플랜·90일 케어</h3>
+            <p class="mt-3 text-sm text-gray-600 word-keep">코칭 후 바로 움직일 수 있게.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 2. 자료(산출물) -->
+    <!-- ============================================ -->
+    <section id="part-deliverables" class="lib-section">
+      <div class="mb-8">
+        <span class="lib-section-title">
+          <iconify-icon icon="solar:document-text-bold"></iconify-icon> 2. 자료(산출물) 표시 방식
+        </span>
+        <p class="mt-4 text-gray-600 word-keep">
+          자산관리시트·체크리스트·코칭 리포트·액션플랜 — 코칭에서 받게 되는 자료를 어떻게 보여줄지.
+        </p>
+      </div>
+
+      <!-- 옵션 A: 진행 단계 안 칩 부속 -->
+      <div class="option-frame mb-10">
+        <span class="option-label">자료 · 옵션 A · 진행 단계 안 칩 부속</span>
+        <p class="mt-4 mb-3 text-xs text-gray-500">예시: STEP 1 카드 하단에 칩으로 부속</p>
+        <div class="timeline-card max-w-2xl">
+          <p class="step-pill"><iconify-icon icon="solar:wallet-money-bold"></iconify-icon>현재 상황 진단</p>
+          <h3 class="mt-3 font-display text-xl font-black text-brand-dark word-keep">예산·대출과 우선순위를 한 장에 정리합니다</h3>
+          <div class="mt-5 pt-5 border-t border-brand-orange/15">
+            <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">이 단계에서 받게 되는 자료</p>
+            <span class="deliv-chip"><iconify-icon icon="solar:document-text-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>자산관리시트</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 옵션 B: 별도 4그리드 카드 -->
+      <div class="option-frame mb-10">
+        <span class="option-label">자료 · 옵션 B · 별도 4그리드 카드</span>
+        <div class="mt-4 grid gap-4 grid-cols-2 md:grid-cols-4">
+          <div class="deliv-grid-card">
+            <iconify-icon icon="solar:document-text-bold-duotone" class="text-3xl text-brand-orange"></iconify-icon>
+            <p class="mt-3 font-display font-black text-brand-dark word-keep">자산관리시트</p>
+            <p class="mt-1 text-xs text-gray-600 word-keep">숫자로 바로 정리</p>
+          </div>
+          <div class="deliv-grid-card">
+            <iconify-icon icon="solar:checklist-minimalistic-bold-duotone" class="text-3xl text-brand-orange"></iconify-icon>
+            <p class="mt-3 font-display font-black text-brand-dark word-keep">올인원 체크리스트</p>
+            <p class="mt-1 text-xs text-gray-600 word-keep">방문·계약·잔금 항목</p>
+          </div>
+          <div class="deliv-grid-card">
+            <iconify-icon icon="solar:clipboard-list-bold-duotone" class="text-3xl text-brand-orange"></iconify-icon>
+            <p class="mt-3 font-display font-black text-brand-dark word-keep">코칭 리포트</p>
+            <p class="mt-1 text-xs text-gray-600 word-keep">결론과 판단 기준</p>
+          </div>
+          <div class="deliv-grid-card">
+            <iconify-icon icon="solar:target-bold-duotone" class="text-3xl text-brand-orange"></iconify-icon>
+            <p class="mt-3 font-display font-black text-brand-dark word-keep">액션플랜</p>
+            <p class="mt-1 text-xs text-gray-600 word-keep">다음 행동 순서</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 옵션 C: 행 리스트 -->
+      <div class="option-frame mb-10">
+        <span class="option-label">자료 · 옵션 C · 행 리스트</span>
+        <div class="mt-4 grid gap-3 md:grid-cols-2">
+          <div class="deliv-row">
+            <iconify-icon icon="solar:document-text-bold-duotone" class="text-3xl text-brand-orange flex-shrink-0"></iconify-icon>
+            <div>
+              <p class="font-display font-black text-brand-dark">자산관리시트</p>
+              <p class="text-sm text-gray-600">코칭 내용을 숫자로 바로 정리</p>
+            </div>
+          </div>
+          <div class="deliv-row">
+            <iconify-icon icon="solar:checklist-minimalistic-bold-duotone" class="text-3xl text-brand-orange flex-shrink-0"></iconify-icon>
+            <div>
+              <p class="font-display font-black text-brand-dark">올인원 체크리스트</p>
+              <p class="text-sm text-gray-600">방문·계약·잔금까지</p>
+            </div>
+          </div>
+          <div class="deliv-row">
+            <iconify-icon icon="solar:clipboard-list-bold-duotone" class="text-3xl text-brand-orange flex-shrink-0"></iconify-icon>
+            <div>
+              <p class="font-display font-black text-brand-dark">코칭 리포트</p>
+              <p class="text-sm text-gray-600">핵심 결론과 판단 기준 문서</p>
+            </div>
+          </div>
+          <div class="deliv-row">
+            <iconify-icon icon="solar:target-bold-duotone" class="text-3xl text-brand-orange flex-shrink-0"></iconify-icon>
+            <div>
+              <p class="font-display font-black text-brand-dark">액션플랜</p>
+              <p class="text-sm text-gray-600">코칭 후 다음 행동 순서</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 3. 90일 케어 -->
+    <!-- ============================================ -->
+    <section id="part-care" class="lib-section">
+      <div class="mb-8">
+        <span class="lib-section-title">
+          <iconify-icon icon="solar:chat-round-dots-bold"></iconify-icon> 3. 90일 케어 영역
+        </span>
+        <p class="mt-4 text-gray-600 word-keep">
+          코칭 후 90일 카톡 케어를 강조하는 방식.
+        </p>
+      </div>
+
+      <!-- 옵션 A: 큰 V3 카톡 박스 -->
+      <div class="option-frame mb-10">
+        <span class="option-label">90일 · 옵션 A · 큰 V3 카톡 박스</span>
+        <div class="mt-4 rounded-[28px] border border-brand-orange/20 bg-white shadow-soft p-6 md:p-8">
+          <div class="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+            <div>
+              <p class="text-brand-orange font-display font-black text-sm tracking-[0.18em] uppercase">90 Days Care</p>
+              <h3 class="mt-3 font-display text-2xl md:text-3xl font-black leading-tight text-brand-dark word-keep">
+                코칭이 끝나도,<br>90일은 같이 갑니다
+              </h3>
+              <p class="mt-4 text-gray-600 leading-relaxed word-keep">
+                매물 비교, 대출 조건, 계약 전 체크처럼 실행 중 생기는 질문은 90일 동안 카카오톡으로 이어갑니다.
+              </p>
+              <div class="mt-6 grid grid-cols-2 gap-3 text-sm font-bold text-brand-dark">
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">매물 비교</div>
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">계약 전 체크</div>
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">대출 조건 질문</div>
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">실행 순서 점검</div>
+              </div>
+            </div>
+            <div class="v3-chat-phone-big">
+              <div class="flex items-center justify-between px-5 py-4 text-white">
+                <div class="font-display font-black">← 우재</div>
+                <div class="text-sm font-bold text-white/70">● 온라인</div>
+              </div>
+              <div class="v3-chat-screen-big space-y-3">
+                <p class="text-center text-xs font-bold text-slate-500">2026년 4월 28일</p>
+                <div class="v3-chat-bubble v3-chat-user">분당쪽 매물 보고 있는데 지금 사도 될까요?</div>
+                <div class="v3-chat-bubble v3-chat-coach">어떤 단지 보고 계셨어요?</div>
+                <div class="v3-chat-bubble v3-chat-user">정자동 OO마을이요. 12억 정도예요</div>
+                <div class="v3-chat-bubble v3-chat-coach">예산·대출 어떻게 잡으셨어요? 사전 질문지 기준으로 같이 볼게요.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 옵션 B: STEP 카드 한 줄 (가벼움) -->
+      <div class="option-frame mb-10">
+        <span class="option-label">90일 · 옵션 B · STEP 카드 한 줄 (가벼움)</span>
+        <div class="mt-4 step-chat-card max-w-2xl">
+          <p class="mb-4 text-sm font-black text-brand-dark">STEP 04 · 90일 케어</p>
+          <div class="v3-chat-bubble v3-chat-user">계약하기 전에 한 번만 더 봐주세요!</div>
+          <div class="v3-chat-bubble v3-chat-coach mt-3">물론이죠 :) 계약서 보내주세요.</div>
+          <div class="mt-5 pt-5 border-t border-brand-orange/15">
+            <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">코칭 후 90일, 카톡으로</p>
+            <div class="flex flex-wrap gap-2 text-sm font-bold">
+              <span class="rounded-2xl bg-brand-beige px-4 py-2">매물 비교</span>
+              <span class="rounded-2xl bg-brand-beige px-4 py-2">계약 전 체크</span>
+              <span class="rounded-2xl bg-brand-beige px-4 py-2">대출 조건</span>
+              <span class="rounded-2xl bg-brand-beige px-4 py-2">실행 순서</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 옵션 C: 작은 박스 + 칩만 (압축) -->
+      <div class="option-frame mb-10">
+        <span class="option-label">90일 · 옵션 C · 작은 박스 (압축)</span>
+        <div class="mt-4 rounded-2xl border border-brand-orange/30 bg-gradient-to-br from-orange-50 to-white p-6 md:p-7 max-w-3xl">
+          <div class="flex items-start gap-4">
+            <div class="grid h-12 w-12 flex-shrink-0 place-items-center rounded-2xl bg-brand-orange text-white text-2xl">
+              <iconify-icon icon="solar:chat-round-dots-bold-duotone"></iconify-icon>
+            </div>
+            <div>
+              <p class="font-display text-xl font-black text-brand-dark word-keep">코칭 후 90일, 카톡 케어가 함께 갑니다</p>
+              <p class="mt-2 text-sm text-gray-600 word-keep">매물 비교, 대출 조건, 계약 전 체크 — 실행 중 생기는 질문을 카톡으로 이어갑니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- 4. 신뢰 지표 -->
+    <!-- ============================================ -->
+    <section id="part-metrics" class="lib-section">
+      <div class="mb-8">
+        <span class="lib-section-title" style="background: #dc2626;">
+          <iconify-icon icon="solar:danger-bold"></iconify-icon> 4. 신뢰 지표 (사용자 별로라 함)
+        </span>
+        <p class="mt-4 text-gray-600 word-keep">
+          150건+ / 4.97 / 25% / 90일 지표를 어떻게 보여줄지. 현재(A)는 별로라고 하셔서 대안 3개 추가.
+        </p>
+      </div>
+
+      <!-- 옵션 A: 현재 (카드 4개) -->
+      <div class="option-frame mb-10">
+        <span class="option-label" style="background: #6b7280;">지표 · 옵션 A · 현재 (별로)</span>
+        <div class="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
+          <div class="metric-card-a"><strong>150건+</strong><span>1:1 코칭</span><em>+ 10년 경험</em></div>
+          <div class="metric-card-a"><strong>4.97</strong><span>만족도 / 5.0</span><em>+ 실제 후기 기반</em></div>
+          <div class="metric-card-a"><strong>25%</strong><span>매수 보류 비율</span><em>+ 필요한 말만</em></div>
+          <div class="metric-card-a"><strong>90일</strong><span>코칭 후 케어</span><em>+ 카톡 무제한</em></div>
+        </div>
+      </div>
+
+      <!-- 옵션 B: 가로 분할 (구분선) -->
+      <div class="option-frame mb-10">
+        <span class="option-label">지표 · 옵션 B · 가로 분할 (구분선)</span>
+        <div class="mt-4 metric-row-b">
+          <div><strong>150건+</strong><span>1:1 코칭 · 10년 경험</span></div>
+          <div><strong>4.97</strong><span>만족도 / 5.0</span></div>
+          <div><strong>25%</strong><span>매수 보류 비율</span></div>
+          <div><strong>90일</strong><span>코칭 후 케어</span></div>
+        </div>
+      </div>
+
+      <!-- 옵션 C: 인포그래픽 (아이콘 + 숫자) -->
+      <div class="option-frame mb-10">
+        <span class="option-label">지표 · 옵션 C · 아이콘 + 숫자 (인포그래픽)</span>
+        <div class="mt-4 grid gap-3 md:grid-cols-2">
+          <div class="metric-info-c">
+            <div class="icon-wrap"><iconify-icon icon="solar:case-round-minimalistic-bold-duotone"></iconify-icon></div>
+            <div>
+              <p class="num">150건+</p>
+              <p class="label">1:1 코칭 · 10년 경험</p>
+            </div>
+          </div>
+          <div class="metric-info-c">
+            <div class="icon-wrap"><iconify-icon icon="solar:star-bold-duotone"></iconify-icon></div>
+            <div>
+              <p class="num">4.97 <span class="text-base text-gray-400 font-bold">/ 5.0</span></p>
+              <p class="label">만족도 · 실제 후기 기반</p>
+            </div>
+          </div>
+          <div class="metric-info-c">
+            <div class="icon-wrap"><iconify-icon icon="solar:hand-stars-bold-duotone"></iconify-icon></div>
+            <div>
+              <p class="num">25%</p>
+              <p class="label">"지금 사지 마세요" 비율</p>
+            </div>
+          </div>
+          <div class="metric-info-c">
+            <div class="icon-wrap"><iconify-icon icon="solar:chat-round-dots-bold-duotone"></iconify-icon></div>
+            <div>
+              <p class="num">90일</p>
+              <p class="label">코칭 후 카톡 무제한</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 옵션 D: 다크 톤 (브랜드 강조) -->
+      <div class="option-frame mb-10">
+        <span class="option-label">지표 · 옵션 D · 다크 톤 (강조)</span>
+        <div class="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
+          <div class="metric-dark"><strong>150건+</strong><span>1:1 코칭</span></div>
+          <div class="metric-dark"><strong>4.97</strong><span>만족도 / 5.0</span></div>
+          <div class="metric-dark"><strong>25%</strong><span>매수 보류 비율</span></div>
+          <div class="metric-dark"><strong>90일</strong><span>코칭 후 케어</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 안내 -->
+    <div class="mt-12 rounded-3xl bg-white border border-brand-orange/20 p-6 md:p-8 shadow-soft">
+      <p class="font-display text-xl font-black text-brand-dark word-keep">📝 어떻게 고르나요?</p>
+      <p class="mt-3 text-gray-600 leading-relaxed word-keep">
+        "진행은 옵션 B, 자료는 옵션 A, 90일은 옵션 A, 지표는 옵션 C" 식으로 알려주시면 본 시안에 합쳐서 새 버전을 만들어드립니다.
+      </p>
+    </div>
+
+  </main>
+</body>
+</html>
