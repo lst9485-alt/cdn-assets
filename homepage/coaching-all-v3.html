@@ -99,15 +99,18 @@
   .hero-cta { opacity:0; animation: heroFadeUp 0.8s ease forwards; }
   .hero-scroll { opacity:0; animation: heroFadeUp 0.6s ease forwards; }
   @keyframes softNudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+  @keyframes softNudgeX { 0%,100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
   .soft-nudge { animation: softNudge 1.4s ease-in-out infinite; }
   .soft-nudge-delay { animation: softNudge 1.4s ease-in-out infinite; animation-delay: 0.18s; }
+  .soft-nudge-x { animation: softNudgeX 1.4s ease-in-out infinite; }
+  .soft-nudge-x-delay { animation: softNudgeX 1.4s ease-in-out infinite; animation-delay: 0.18s; }
   .hero-word-center { left: 50%; width: 140px; margin-left: -70px; text-align: center; }
-  .hero-word-edge-left { left: 2%; }
-  .hero-word-edge-right { right: 2%; }
+  .hero-word-edge-left { left: 4%; }
+  .hero-word-edge-right { right: 4%; }
   @media (min-width: 768px) {
     .hero-word-center { width: 160px; margin-left: -80px; }
-    .hero-word-edge-left { left: 9%; }
-    .hero-word-edge-right { right: 9%; }
+    .hero-word-edge-left { left: 14%; }
+    .hero-word-edge-right { right: 14%; }
   }
 	  .contract-img { display:block; border-radius: 14px; border: 1px solid rgba(255,255,255,0.14); filter: contrast(1.05); }
 	  .home-line-art { color: rgba(120, 82, 42, 0.07); }
@@ -388,8 +391,8 @@
       <div class="w-8 bg-[#6b4a32]/30" style="height:85px"></div>
     </div>
     <div class="relative w-full max-w-3xl mx-auto mb-10 px-4 z-10" style="height:150px;">
-      <div class="hero-word absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:10px;left:5%;animation-delay:0s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">생애최초</span></div>
-      <div class="hero-word absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:5px;right:8%;animation-delay:.24s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">갈아타기</span></div>
+      <div class="hero-word hero-word-edge-left absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:10px;animation-delay:0s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">생애최초</span></div>
+      <div class="hero-word hero-word-edge-right absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:5px;animation-delay:.24s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">갈아타기</span></div>
       <div class="hero-word hero-word-edge-left absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:85px;animation-delay:.48s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">대출</span></div>
       <div class="hero-word hero-word-edge-right absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:90px;animation-delay:.84s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">매매</span></div>
       <div class="hero-word hero-word-center absolute border-2 border-brand-orange rounded-xl px-5 py-3 bg-brand-orange/20 backdrop-blur-sm shadow-lg" style="top:88px;animation-delay:1.16s"><span class="text-2xl md:text-3xl font-display font-black text-brand-orange">내 예산</span></div>
@@ -416,7 +419,10 @@
       </div>
       <button type="button" class="scroll-to-form inline-flex items-center justify-center gap-3 rounded-2xl bg-brand-orange text-white px-8 py-4 shadow-lg transition-transform hover:scale-[1.02] font-display font-black text-lg md:text-xl">
         대기신청 하기
-        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-xl soft-nudge"></iconify-icon>
+        <span class="inline-flex items-center -space-x-2 leading-none">
+          <iconify-icon icon="solar:alt-arrow-right-linear" class="text-xl soft-nudge-x"></iconify-icon>
+          <iconify-icon icon="solar:alt-arrow-right-linear" class="text-xl soft-nudge-x-delay"></iconify-icon>
+        </span>
       </button>
     </div>
     <div class="absolute bottom-4 left-1/2 -translate-x-1/2 hero-scroll z-10" style="animation-delay:1.5s">
