@@ -558,6 +558,18 @@
         },
         items: [
           {
+            id: 'coaching-section03-draft',
+            title: '코칭 03 섹션 시안',
+            description: 'A~F 변형안 · 지도형/보드형/대화형/리포트형/타임라인형/체크리스트형',
+            href: 'homepage/coaching-section03-draft.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['coaching-section03-draft.html'],
+            hubVisible: true
+          },
+          {
             id: 'consult-trust-test',
             title: '상담 리포트 테스트',
             description: '색감을 정리한 상담 자료 페이지',
