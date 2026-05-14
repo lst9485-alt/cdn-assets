@@ -105,8 +105,7 @@
   .soft-nudge-delay { animation: softNudge 1.4s ease-in-out infinite; animation-delay: 0.18s; }
   .soft-nudge-x { animation: softNudgeX 1.4s ease-in-out infinite; }
   .soft-nudge-x-delay { animation: softNudgeX 1.4s ease-in-out infinite; animation-delay: 0.18s; }
-  .hero-word-center { left: 50%; width: 140px; margin-left: -70px; text-align: center; }
-  .hero-word.hero-word-center { animation: budgetFadeIn 1.0s ease 1.16s forwards !important; transform: none !important; }
+  .hero-word-center { position: absolute; left: 50%; width: 140px; margin-left: -70px; text-align: center; opacity: 0; animation: budgetFadeIn 1.0s ease 1.16s forwards; }
   .hero-word-edge-left { left: 4%; }
   .hero-word-edge-right { right: 4%; }
   @media (min-width: 768px) {
@@ -397,7 +396,7 @@
       <div class="hero-word hero-word-edge-right absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:5px;animation-delay:.24s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">갈아타기</span></div>
       <div class="hero-word hero-word-edge-left absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:85px;animation-delay:.48s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">대출</span></div>
       <div class="hero-word hero-word-edge-right absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:90px;animation-delay:.84s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">매매</span></div>
-      <div class="hero-word hero-word-center absolute border-2 border-brand-orange rounded-xl px-5 py-3 bg-brand-orange/20 backdrop-blur-sm shadow-lg" style="top:88px"><span class="text-2xl md:text-3xl font-display font-black text-brand-orange">내 예산</span></div>
+      <div class="hero-word-center border-2 border-brand-orange rounded-xl px-5 py-3 bg-brand-orange/20 backdrop-blur-sm shadow-lg" style="top:88px"><span class="text-2xl md:text-3xl font-display font-black text-brand-orange">내 예산</span></div>
     </div>
     <div class="relative z-10 text-center px-6 hero-main" style="animation-delay:0.3s">
 	      <p class="text-[#7a5f45] text-lg md:text-xl mb-6 word-keep"><span aria-hidden="true">🏠</span> 확신갖고 후회없이, 내집마련 고민 끝!</p>
