@@ -152,6 +152,19 @@
             groupLabel: '자체사이트'
           },
           {
+            id: 'investment-philosophy',
+            title: '투자 철학',
+            description: '분산보다 잃지 않는 자산에 몰빵 — 우리동네재테크의 결론',
+            href: 'homepage/investment-philosophy.html',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['investment-philosophy.html'],
+            hubVisible: true,
+            groupLabel: '자체사이트'
+          },
+          {
             id: 'coaching-payment',
             title: '카드결제 페이지',
             description: '신청 완료자 전용 카드결제 페이지 (정본)',
