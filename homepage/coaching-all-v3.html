@@ -359,17 +359,17 @@
 
   <nav class="dashboard-section-nav" aria-label="대시보드 섹션 이동">
     <button type="button" data-nav-target="hero">01 히어로</button>
-    <button type="button" data-nav-target="story-hook">02 스토리 후킹</button>
-    <button type="button" data-nav-target="curriculum">03 코칭 커리큘럼</button>
+    <button type="button" data-nav-target="story-hook">02 문제인식</button>
+    <button type="button" data-nav-target="curriculum">03 코칭 내용</button>
+    <button type="button" data-nav-target="package">03-1 패키지</button>
+    <button type="button" data-nav-target="qna-support">03-2 카톡질문</button>
     <button type="button" data-nav-target="consultant">04 컨설턴트</button>
     <button type="button" data-nav-target="reviews">05 후기</button>
-    <button type="button" data-nav-target="package">06 패키지</button>
-    <button type="button" data-nav-target="qna-support">06-1 카톡질문</button>
-    <button type="button" data-nav-target="pricing">07 상품/가격</button>
-    <button type="button" data-nav-target="coaching-steps">08 투자코칭 순서</button>
-    <button type="button" data-nav-target="cta">09 CTA</button>
-    <button type="button" data-nav-target="apply-form">10 상담 신청 폼</button>
-    <button type="button" data-nav-target="faq">11 FAQ</button>
+    <button type="button" data-nav-target="pricing">06 상품/가격</button>
+    <button type="button" data-nav-target="coaching-steps">07 투자코칭 순서</button>
+    <button type="button" data-nav-target="cta">08 CTA</button>
+    <button type="button" data-nav-target="apply-form">09 상담 신청 폼</button>
+    <button type="button" data-nav-target="faq">10 FAQ</button>
   </nav>
 
   <!-- ===== 01 히어로 ===== -->
@@ -526,9 +526,9 @@
     </script>
   </section>
 
-	  <!-- ===== 02 스토리 후킹 ===== -->
+	  <!-- ===== 02 문제인식 ===== -->
   <section data-section="story-hook" class="max-w-4xl mx-auto bg-white pt-16 md:pt-24 pb-0 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">02 스토리 후킹</span>
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">02 문제인식</span>
 
     <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
       <div class="text-center mb-10" data-reveal>
@@ -740,9 +740,9 @@
     </div>
   </section>
 
-  <!-- ===== 03 코칭 커리큘럼 ===== -->
+  <!-- ===== 03 코칭 내용 ===== -->
   <section data-section="curriculum" class="max-w-4xl mx-auto bg-[#fdf9ed] pt-4 md:pt-6 pb-16 md:pb-24 relative text-brand-dark">
-    <span class="absolute top-2 left-2 bg-black/45 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">03 코칭 커리큘럼</span>
+    <span class="absolute top-2 left-2 bg-black/45 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">03 코칭 내용</span>
 
     <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
       <div class="neighborhood-map mb-12 rounded-[2rem] bg-brand-beige p-6 text-[#1A2B47] md:p-8" data-reveal>
@@ -846,6 +846,113 @@
       </div>
     </div>
   </section>
+
+  <!-- ===== 03-1 패키지 ===== -->
+  <section data-section="package" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative overflow-hidden">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">03-1 패키지</span>
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+      <div class="text-center mb-14" data-reveal>
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-4 py-2 text-brand-orange"><iconify-icon icon="solar:case-round-minimalistic-bold-duotone" class="text-xl"></iconify-icon><p class="font-display font-black text-lg">코칭 패키지</p></div>
+        <h2 class="mt-4 text-4xl md:text-5xl font-display font-black text-brand-dark word-keep">코칭 신청 시 함께 제공되는 8가지</h2>
+        <p class="mt-4 text-gray-500 word-keep">코칭 전 정리부터 코칭 후 실행까지, 필요한 자료와 지원을 함께 제공합니다.</p>
+      </div>
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2" data-stagger>
+        <div class="package-postit bg-[#fff8e7] p-6"><iconify-icon icon="solar:wallet-money-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">예산·대출 분석</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">내 자금 범위와 대출 가능선을 먼저 정리합니다.</p></div>
+        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:chat-round-dots-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">1:1 질의응답</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 후 90일 동안 결정 과정의 질문을 이어서 받습니다.</p></div>
+        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:map-point-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">맞춤 단지 선정</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">예산과 우선순위에 맞는 지역·단지 후보를 압축합니다.</p></div>
+        <div class="package-postit bg-[#fffaf2] p-6"><iconify-icon icon="solar:chart-2-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">포트폴리오 점검</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">집 구매가 전체 자산 계획 안에서 맞는지 함께 봅니다.</p></div>
+        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:document-text-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">자산관리시트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 내용을 숫자로 바로 정리할 수 있는 시트를 제공합니다.</p></div>
+        <div class="package-postit bg-[#fff8e7] p-6"><iconify-icon icon="solar:checklist-minimalistic-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">올인원 체크리스트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">방문·계약·잔금까지 놓치기 쉬운 항목을 정리합니다.</p></div>
+        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:clipboard-list-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">코칭 리포트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 핵심 결론과 판단 기준을 문서로 남겨드립니다.</p></div>
+        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:target-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">액션플랜 제공</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 후 바로 실행할 다음 행동 순서를 정리합니다.</p></div>
+      </div>
+      <div class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4" data-reveal>
+        <div class="v3-metric-card"><strong>150건+</strong><span>1:1 코칭</span><em>+ 10년 경험</em></div>
+        <div class="v3-metric-card"><strong>4.97</strong><span>만족도 / 5.0</span><em>+ 실제 후기 기반</em></div>
+        <div class="v3-metric-card"><strong>25%</strong><span>매수 보류 비율</span><em>+ 필요한 말만</em></div>
+        <div class="v3-metric-card"><strong>90일</strong><span>코칭 후 케어</span><em>+ 카톡 무제한</em></div>
+      </div>
+	      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
+	        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark cursor-pointer hover:shadow-lg transition-shadow review-card-clickable">
+	          <p class="text-sm font-black">권*서님 · 전북 전주시 20대</p>
+	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep review-body line-clamp-3">"귀한 경험들로 알려주신 내용을 저렴한 비용으로 들어도 되나 싶을 정도입니다. 좋은 시야로 좋은 아파트 잘 살 것 같아 든든해졌습니다. 주변에도 많이 추천할 예정입니다. 앞으로도 조언을 구하며 알아볼 게 많지만, 선생님 덕분에 좋은 시야로 좋은 아파트 잘 살 것 같아 든든해졌습니다."</p>
+	          <span class="review-more inline-block mt-2 text-xs font-bold text-brand-orange">더보기 ›</span>
+	        </div>
+	        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark cursor-pointer hover:shadow-lg transition-shadow review-card-clickable">
+	          <p class="text-sm font-black">장*훈님 · 인천 송도 30대</p>
+	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep review-body line-clamp-3">"솔직히 PPT까지 준비를 해서 상담해주실 줄 몰랐습니다. 처음에는 상담료가 조금 부담도 되었는데, 상담을 받고 나니 아깝다는 생각이 1도 안 들 만큼 귀중한 시간이었습니다. 저처럼 부동산을 잘 모르는 사람이 시행착오를 겪지 않도록 도움을 주셔서 정말 감사합니다."</p>
+	          <span class="review-more inline-block mt-2 text-xs font-bold text-brand-orange">더보기 ›</span>
+	        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 03-2 카톡질문 ===== -->
+  <section data-section="qna-support" class="max-w-4xl mx-auto bg-white py-16 md:py-24 relative">
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">03-2 카톡질문</span>
+    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
+	      <div class="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <div data-reveal>
+          <p class="text-brand-orange font-display font-black text-sm tracking-[0.18em] uppercase">90 Days Q&A</p>
+          <h2 class="mt-4 text-4xl md:text-5xl font-display font-black leading-tight tracking-tight text-brand-dark word-keep">상담 한 번으로<br>끝내지 않습니다.</h2>
+          <p class="mt-5 text-gray-600 leading-relaxed word-keep">내집마련은 상담 당일에 끝나는 문제가 아닙니다. 매물 비교, 대출 조건, 계약 전 체크처럼 실행 중 생기는 질문은 90일 동안 카카오톡으로 이어갑니다.</p>
+          <div class="mt-7 grid grid-cols-2 gap-3 text-sm font-bold text-brand-dark">
+            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">매물 비교</div>
+            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">계약 전 체크</div>
+            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">대출 조건 질문</div>
+            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">실행 순서 점검</div>
+          </div>
+        </div>
+        <div class="v3-chat-phone" data-reveal="right" aria-label="90일 카카오톡 질의응답 예시">
+          <div class="flex items-center justify-between px-5 py-4 text-white">
+            <div class="font-display font-black">← 우재</div>
+            <div class="text-sm font-bold text-white/70">● 온라인</div>
+          </div>
+          <div class="v3-chat-screen space-y-4">
+            <p class="text-center text-xs font-bold text-slate-500">2026년 4월 28일</p>
+            <div class="v3-chat-bubble v3-chat-user">안녕하세요! 분당쪽 매물 보고 있는데 지금 사도 될까요?</div>
+            <div class="v3-chat-bubble v3-chat-coach">안녕하세요 :) 어떤 단지 보고 계셨어요?</div>
+            <div class="v3-chat-bubble v3-chat-user">정자동 OO마을이요. 12억 정도예요</div>
+            <div class="v3-chat-bubble v3-chat-coach">예산이랑 대출 어떻게 잡으셨어요? 사전 질문지 기준으로 같이 볼게요.</div>
+            <div class="v3-chat-bubble v3-chat-coach">
+              <span class="text-brand-orange">사전 질문지</span><br>
+              예산·대출·우선순위 1분 체크
+            </div>
+          </div>
+	        </div>
+	      </div>
+	      <div class="mt-16" data-reveal>
+	        <p class="text-brand-orange font-display font-black text-sm uppercase">How it works</p>
+	        <h3 class="mt-3 text-4xl md:text-5xl font-display font-black leading-tight text-brand-dark word-keep">신청 → 코칭 → 90일 케어, 흐름은 이렇습니다</h3>
+	        <div class="mt-8 grid gap-5 md:grid-cols-2">
+	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-red-500">STEP 01 · 신청</p><div class="v3-chat-bubble v3-chat-user">코칭 신청합니다!</div><div class="v3-chat-bubble v3-chat-coach mt-3">네 안녕하세요 :) 사전질문지 즉시 보내드려요.</div></div>
+	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-[#18aaa1]">STEP 02 · 진단</p><div class="v3-chat-bubble v3-chat-coach">예산이랑 대출, 우선순위 같이 정리해볼게요.</div><div class="v3-chat-bubble v3-chat-user mt-3">네 부탁드려요!</div></div>
+	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-[#d19a00]">STEP 03 · 코칭</p><div class="v3-chat-bubble v3-chat-coach">구글미트 입장해주세요. 50분 화상 코칭 시작합니다.</div><div class="v3-chat-bubble v3-chat-user mt-3">들어갑니다 :)</div></div>
+	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-brand-dark">STEP 04 · 90일 케어</p><div class="v3-chat-bubble v3-chat-user">계약하기 전에 한 번만 더 봐주세요!</div><div class="v3-chat-bubble v3-chat-coach mt-3">물론이죠 :) 계약서 보내주세요.</div></div>
+	        </div>
+	      </div>
+	      <div class="mt-14 bg-white rounded-3xl p-6 md:p-8" data-reveal>
+	        <h3 class="text-3xl md:text-4xl font-display font-black text-brand-dark word-keep">실제 후기 <span class="text-brand-orange">4.97/5.0</span></h3>
+	        <div class="mt-6 grid gap-3 md:grid-cols-2">
+	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#ff6b5b] font-black text-white">민</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"계약서 보기 전에 확인할 포인트가 정리됐습니다"</p><p class="mt-2 text-sm text-gray-500">서울 서초 30대 민*재 · 맞벌이</p></div></div>
+	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#4ecdc4] font-black text-white">한</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"대출 한도가 바뀐 뒤에도 방향을 다시 잡았습니다"</p><p class="mt-2 text-sm text-gray-500">성남 40대 한*주 · 갈아타기</p></div></div>
+	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#f4c430] font-black text-white">배</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"실행 순서가 정리돼서 바로 움직였습니다"</p><p class="mt-2 text-sm text-gray-500">구미 30대 배*린 · 내집마련</p></div></div>
+	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#6b8cae] font-black text-white">임</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"혼자 검색하던 시간이 줄고 비교 기준이 생겼습니다"</p><p class="mt-2 text-sm text-gray-500">포항 40대 임*석 · 투자</p></div></div>
+	        </div>
+	      </div>
+		      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
+		        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
+		          <p class="text-sm font-black">정*민님 · 남양주 30대</p>
+		          <p class="mt-2 text-lg font-display font-black word-keep">"매물 보러 가기 전 카톡으로 한 번 더 점검받을 수 있어 안심됐습니다."</p>
+		        </div>
+		        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
+		          <p class="text-sm font-black">서*아님 · 부천 30대</p>
+		          <p class="mt-2 text-lg font-display font-black word-keep">"대출 조건이 바뀌었을 때도 바로 물어볼 곳이 있어서 좋았습니다."</p>
+		        </div>
+	      </div>
+	    </div>
+	  </section>
+
 
   <!-- ===== 04 컨설턴트 소개 ===== -->
   <section data-section="consultant" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
@@ -993,115 +1100,9 @@
     </div>
   </section>
 
-  <!-- ===== 8항목 패키지 ===== -->
-  <section data-section="package" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative overflow-hidden">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">06 패키지</span>
-    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
-      <div class="text-center mb-14" data-reveal>
-        <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-4 py-2 text-brand-orange"><iconify-icon icon="solar:case-round-minimalistic-bold-duotone" class="text-xl"></iconify-icon><p class="font-display font-black text-lg">코칭 패키지</p></div>
-        <h2 class="mt-4 text-4xl md:text-5xl font-display font-black text-brand-dark word-keep">코칭 신청 시 함께 제공되는 8가지</h2>
-        <p class="mt-4 text-gray-500 word-keep">코칭 전 정리부터 코칭 후 실행까지, 필요한 자료와 지원을 함께 제공합니다.</p>
-      </div>
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-2" data-stagger>
-        <div class="package-postit bg-[#fff8e7] p-6"><iconify-icon icon="solar:wallet-money-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">예산·대출 분석</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">내 자금 범위와 대출 가능선을 먼저 정리합니다.</p></div>
-        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:chat-round-dots-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">1:1 질의응답</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 후 90일 동안 결정 과정의 질문을 이어서 받습니다.</p></div>
-        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:map-point-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">맞춤 단지 선정</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">예산과 우선순위에 맞는 지역·단지 후보를 압축합니다.</p></div>
-        <div class="package-postit bg-[#fffaf2] p-6"><iconify-icon icon="solar:chart-2-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">포트폴리오 점검</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">집 구매가 전체 자산 계획 안에서 맞는지 함께 봅니다.</p></div>
-        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:document-text-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">자산관리시트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 내용을 숫자로 바로 정리할 수 있는 시트를 제공합니다.</p></div>
-        <div class="package-postit bg-[#fff8e7] p-6"><iconify-icon icon="solar:checklist-minimalistic-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">올인원 체크리스트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">방문·계약·잔금까지 놓치기 쉬운 항목을 정리합니다.</p></div>
-        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:clipboard-list-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">코칭 리포트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 핵심 결론과 판단 기준을 문서로 남겨드립니다.</p></div>
-        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:target-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">액션플랜 제공</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 후 바로 실행할 다음 행동 순서를 정리합니다.</p></div>
-      </div>
-      <div class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4" data-reveal>
-        <div class="v3-metric-card"><strong>150건+</strong><span>1:1 코칭</span><em>+ 10년 경험</em></div>
-        <div class="v3-metric-card"><strong>4.97</strong><span>만족도 / 5.0</span><em>+ 실제 후기 기반</em></div>
-        <div class="v3-metric-card"><strong>25%</strong><span>매수 보류 비율</span><em>+ 필요한 말만</em></div>
-        <div class="v3-metric-card"><strong>90일</strong><span>코칭 후 케어</span><em>+ 카톡 무제한</em></div>
-      </div>
-	      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
-	        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark cursor-pointer hover:shadow-lg transition-shadow review-card-clickable">
-	          <p class="text-sm font-black">권*서님 · 전북 전주시 20대</p>
-	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep review-body line-clamp-3">"귀한 경험들로 알려주신 내용을 저렴한 비용으로 들어도 되나 싶을 정도입니다. 좋은 시야로 좋은 아파트 잘 살 것 같아 든든해졌습니다. 주변에도 많이 추천할 예정입니다. 앞으로도 조언을 구하며 알아볼 게 많지만, 선생님 덕분에 좋은 시야로 좋은 아파트 잘 살 것 같아 든든해졌습니다."</p>
-	          <span class="review-more inline-block mt-2 text-xs font-bold text-brand-orange">더보기 ›</span>
-	        </div>
-	        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark cursor-pointer hover:shadow-lg transition-shadow review-card-clickable">
-	          <p class="text-sm font-black">장*훈님 · 인천 송도 30대</p>
-	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep review-body line-clamp-3">"솔직히 PPT까지 준비를 해서 상담해주실 줄 몰랐습니다. 처음에는 상담료가 조금 부담도 되었는데, 상담을 받고 나니 아깝다는 생각이 1도 안 들 만큼 귀중한 시간이었습니다. 저처럼 부동산을 잘 모르는 사람이 시행착오를 겪지 않도록 도움을 주셔서 정말 감사합니다."</p>
-	          <span class="review-more inline-block mt-2 text-xs font-bold text-brand-orange">더보기 ›</span>
-	        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 06-1 90일 카톡 질의응답 ===== -->
-  <section data-section="qna-support" class="max-w-4xl mx-auto bg-white py-16 md:py-24 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">06-1 카톡질문</span>
-    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
-	      <div class="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
-        <div data-reveal>
-          <p class="text-brand-orange font-display font-black text-sm tracking-[0.18em] uppercase">90 Days Q&A</p>
-          <h2 class="mt-4 text-4xl md:text-5xl font-display font-black leading-tight tracking-tight text-brand-dark word-keep">상담 한 번으로<br>끝내지 않습니다.</h2>
-          <p class="mt-5 text-gray-600 leading-relaxed word-keep">내집마련은 상담 당일에 끝나는 문제가 아닙니다. 매물 비교, 대출 조건, 계약 전 체크처럼 실행 중 생기는 질문은 90일 동안 카카오톡으로 이어갑니다.</p>
-          <div class="mt-7 grid grid-cols-2 gap-3 text-sm font-bold text-brand-dark">
-            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">매물 비교</div>
-            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">계약 전 체크</div>
-            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">대출 조건 질문</div>
-            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">실행 순서 점검</div>
-          </div>
-        </div>
-        <div class="v3-chat-phone" data-reveal="right" aria-label="90일 카카오톡 질의응답 예시">
-          <div class="flex items-center justify-between px-5 py-4 text-white">
-            <div class="font-display font-black">← 우재</div>
-            <div class="text-sm font-bold text-white/70">● 온라인</div>
-          </div>
-          <div class="v3-chat-screen space-y-4">
-            <p class="text-center text-xs font-bold text-slate-500">2026년 4월 28일</p>
-            <div class="v3-chat-bubble v3-chat-user">안녕하세요! 분당쪽 매물 보고 있는데 지금 사도 될까요?</div>
-            <div class="v3-chat-bubble v3-chat-coach">안녕하세요 :) 어떤 단지 보고 계셨어요?</div>
-            <div class="v3-chat-bubble v3-chat-user">정자동 OO마을이요. 12억 정도예요</div>
-            <div class="v3-chat-bubble v3-chat-coach">예산이랑 대출 어떻게 잡으셨어요? 사전 질문지 기준으로 같이 볼게요.</div>
-            <div class="v3-chat-bubble v3-chat-coach">
-              <span class="text-brand-orange">사전 질문지</span><br>
-              예산·대출·우선순위 1분 체크
-            </div>
-          </div>
-	        </div>
-	      </div>
-	      <div class="mt-16" data-reveal>
-	        <p class="text-brand-orange font-display font-black text-sm uppercase">How it works</p>
-	        <h3 class="mt-3 text-4xl md:text-5xl font-display font-black leading-tight text-brand-dark word-keep">신청 → 코칭 → 90일 케어, 흐름은 이렇습니다</h3>
-	        <div class="mt-8 grid gap-5 md:grid-cols-2">
-	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-red-500">STEP 01 · 신청</p><div class="v3-chat-bubble v3-chat-user">코칭 신청합니다!</div><div class="v3-chat-bubble v3-chat-coach mt-3">네 안녕하세요 :) 사전질문지 즉시 보내드려요.</div></div>
-	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-[#18aaa1]">STEP 02 · 진단</p><div class="v3-chat-bubble v3-chat-coach">예산이랑 대출, 우선순위 같이 정리해볼게요.</div><div class="v3-chat-bubble v3-chat-user mt-3">네 부탁드려요!</div></div>
-	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-[#d19a00]">STEP 03 · 코칭</p><div class="v3-chat-bubble v3-chat-coach">구글미트 입장해주세요. 50분 화상 코칭 시작합니다.</div><div class="v3-chat-bubble v3-chat-user mt-3">들어갑니다 :)</div></div>
-	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-brand-dark">STEP 04 · 90일 케어</p><div class="v3-chat-bubble v3-chat-user">계약하기 전에 한 번만 더 봐주세요!</div><div class="v3-chat-bubble v3-chat-coach mt-3">물론이죠 :) 계약서 보내주세요.</div></div>
-	        </div>
-	      </div>
-	      <div class="mt-14 bg-white rounded-3xl p-6 md:p-8" data-reveal>
-	        <h3 class="text-3xl md:text-4xl font-display font-black text-brand-dark word-keep">실제 후기 <span class="text-brand-orange">4.97/5.0</span></h3>
-	        <div class="mt-6 grid gap-3 md:grid-cols-2">
-	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#ff6b5b] font-black text-white">민</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"계약서 보기 전에 확인할 포인트가 정리됐습니다"</p><p class="mt-2 text-sm text-gray-500">서울 서초 30대 민*재 · 맞벌이</p></div></div>
-	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#4ecdc4] font-black text-white">한</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"대출 한도가 바뀐 뒤에도 방향을 다시 잡았습니다"</p><p class="mt-2 text-sm text-gray-500">성남 40대 한*주 · 갈아타기</p></div></div>
-	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#f4c430] font-black text-white">배</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"실행 순서가 정리돼서 바로 움직였습니다"</p><p class="mt-2 text-sm text-gray-500">구미 30대 배*린 · 내집마련</p></div></div>
-	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#6b8cae] font-black text-white">임</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"혼자 검색하던 시간이 줄고 비교 기준이 생겼습니다"</p><p class="mt-2 text-sm text-gray-500">포항 40대 임*석 · 투자</p></div></div>
-	        </div>
-	      </div>
-		      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
-		        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
-		          <p class="text-sm font-black">정*민님 · 남양주 30대</p>
-		          <p class="mt-2 text-lg font-display font-black word-keep">"매물 보러 가기 전 카톡으로 한 번 더 점검받을 수 있어 안심됐습니다."</p>
-		        </div>
-		        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
-		          <p class="text-sm font-black">서*아님 · 부천 30대</p>
-		          <p class="mt-2 text-lg font-display font-black word-keep">"대출 조건이 바뀌었을 때도 바로 물어볼 곳이 있어서 좋았습니다."</p>
-		        </div>
-	      </div>
-	    </div>
-	  </section>
-
-  <!-- ===== 07 상품/가격 ===== -->
+  <!-- ===== 06 상품/가격 ===== -->
   <section data-section="pricing" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">07 상품/가격</span>
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">06 상품/가격</span>
 
     <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
       <div class="text-center mb-14" data-reveal>
@@ -1177,7 +1178,7 @@
 
   <!-- ===== 신청 후 진행 순서 + 꼭 확인해주세요 ===== -->
   <section data-section="coaching-steps" class="max-w-4xl mx-auto bg-gray-100 py-16 md:py-24 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">08 투자코칭 순서</span>
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">07 투자코칭 순서</span>
     <div class="max-w-2xl mx-auto px-6 sm:px-8 lg:px-8">
       <h2 class="text-3xl md:text-4xl font-display font-black text-center text-brand-dark mb-12 word-keep" data-reveal>신청 후 진행 순서</h2>
       <div class="space-y-4" data-reveal>
@@ -1243,9 +1244,9 @@
     </div>
   </section>
 
-  <!-- ===== 09 CTA ===== -->
+  <!-- ===== 08 CTA ===== -->
   <section data-section="cta" class="max-w-4xl mx-auto bg-brand-beige pt-16 pb-32 md:py-24 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">09 CTA</span>
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">08 CTA</span>
     <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-8 text-center">
 	      <div class="relative mb-20" data-reveal>
             <div class="money-sparkles" aria-hidden="true"><span>₩</span><span>+₩</span><span>₩</span></div>
@@ -1278,9 +1279,9 @@
     </div>
   </section>
 
-  <!-- ===== 10 상담 신청 폼 ===== -->
+  <!-- ===== 09 상담 신청 폼 ===== -->
   <section id="apply-form" data-section="apply-form" class="max-w-4xl mx-auto bg-gradient-to-b from-brand-beige to-white pt-8 pb-14 md:pt-12 md:pb-20 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">10 상담 신청 폼</span>
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">09 상담 신청 폼</span>
     <div class="max-w-2xl mx-auto px-6 sm:px-8 lg:px-8">
 	      <h2 class="text-3xl md:text-4xl font-display font-black text-center text-brand-dark mb-4" data-reveal>코칭 신청</h2>
 	      <p class="text-center text-gray-500 mb-12 word-keep" data-reveal>신청서를 제출하면 결제 방법 선택 화면이 이어집니다</p>
@@ -1343,9 +1344,9 @@
     </div>
   </section>
 
-  <!-- ===== 11 FAQ ===== -->
+  <!-- ===== 10 FAQ ===== -->
   <section data-section="faq" class="max-w-4xl mx-auto bg-white pt-8 pb-12 md:pt-12 md:pb-16 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">11 FAQ</span>
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">10 FAQ</span>
     <div class="max-w-3xl mx-auto px-6 sm:px-8 lg:px-8">
       <h2 class="text-3xl md:text-4xl font-display font-black text-center mb-12 word-keep" data-reveal>자주 묻는 질문</h2>
       <div class="space-y-3" data-reveal id="faq-list">
