@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-14T06:00:03.679828+09:00",
+  "updated": "2026-05-15T06:00:03.888579+09:00",
   "sections": [
     {
       "name": "Common (어디서든 가능)",
@@ -323,6 +323,10 @@
             {
               "text": "6-15. **1:1 코칭 랜딩 페이지 속도 최적화** (디자인 확정 후) — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축. 모바일 데이터·랜선 환경 모두 체감 느림 호소 있음 (2026-05-13)",
               "done": false
+            },
+            {
+              "text": "6-16. 투자 철학 페이지(`investment-philosophy.html`) 수정 (2026-05-14)",
+              "done": false
             }
           ]
         },
@@ -364,6 +368,58 @@
             },
             {
               "text": "8-3. brand-context 정본을 옵시디언으로 전환 — 현재 노션이 정본, `Workspace/config/brand-context/`가 사본. 수정할 때마다 `/profile sync` 부담. 정본 옮기면 sync 단방향(옵시디언→노션) 또는 노션 폐지 가능",
+              "done": false
+            },
+            {
+              "text": "8-3-1. 옵시디언 5개 노트 frontmatter + `> [!info]` 콜아웃 장식 제거 (`Obsidian/2. Area/00_브랜딩/01~05*.md`)",
+              "done": false
+            },
+            {
+              "text": "8-3-2. 옵시디언 노트 상단 메타 \"정본=노션\" → \"정본=옵시디언, 노션/workspace는 사본\"으로 정정",
+              "done": false
+            },
+            {
+              "text": "8-3-3. 스킬 9개 경로 일괄 변경 `Workspace/config/brand-context/` → `Obsidian/2. Area/00_브랜딩/`. 대상: homepage, consult, yt01-topic, yt02-thumbnail, yt03-research, yt04-intro, yt05-manuscript, yt06-revision, yt09-upload, profile, _yt-references 3개(prerequisites/writing-core/writing-techniques)",
+              "done": false
+            },
+            {
+              "text": "8-3-4. `_yt-references/prerequisites.md`는 이미 옵시디언 경로 명시 — 다른 곳도 같은 형식으로 통일",
+              "done": false
+            },
+            {
+              "text": "8-3-5. profile-sync.py / profile-pull.py 방향 재설계 — 옵시디언이 정본 → 노션/workspace는 단방향 push 대상. pull 스크립트는 폐지 또는 검토용으로만",
+              "done": false
+            },
+            {
+              "text": "8-3-6. homepage 스킬 한 번 실제 실행해서 brand-context 자동 로드 정상인지 테스트 (frontmatter/콜아웃 제거 후 호환 확인)",
+              "done": false
+            },
+            {
+              "text": "8-3-7. 통과하면 `Workspace/config/brand-context/` 폴더 archive 또는 `Workspace/config/_archive/brand-context-260514/`로 이동 (삭제 X)",
+              "done": false
+            },
+            {
+              "text": "8-3-8. `Obsidian/CLAUDE.md` \"2. Area: 서브: 00_브랜딩(정본=brand-context)\" 줄 수정 → \"정본=이 폴더\"",
+              "done": false
+            },
+            {
+              "text": "8-3-9. 노션 01~05 페이지 상단에 \"사본 — 정본은 옵시디언\" 표시 또는 페이지 폐지",
+              "done": false
+            },
+            {
+              "text": "8-3-10. `Workspace/config/skills-source/profile/data/profile.md` + `Workspace/apps/homepage/.context.md`도 brand-context 박힌 곳 → 옵시디언 경로로 변경 (위 8-3-3 일괄에 포함)",
+              "done": false
+            },
+            {
+              "text": "8-3-11. `content-sheet/SKILL.md`는 \"brand-context 참조하지 말 것\" 명시 — **수정 대상 아님**. 그대로 둠",
+              "done": false
+            },
+            {
+              "text": "8-3-12. `manage-skills/SKILL.md`는 homepage 설명에 단순 언급만 — 본문 의미는 그대로, 경로만 일괄 치환 시 자동 처리됨",
+              "done": false
+            },
+            {
+              "text": "8-3-13. profile-sync.py는 옵시디언 → 노션 단방향으로 재설계, profile-pull.py는 **폐지** (노션→workspace 의미 없어짐). 둘 다 폐지하고 옵시디언에서만 관리하는 옵션도 검토",
               "done": false
             }
           ]
