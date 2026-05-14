@@ -97,14 +97,44 @@
 
     .section-card,
     .mini-card,
-    .flow-card {
+    .flow-card,
+    .decision-step {
       transition: transform 0.35s cubic-bezier(.16, 1, .3, 1), box-shadow 0.35s cubic-bezier(.16, 1, .3, 1), border-color 0.35s ease;
     }
 
     .mini-card:hover,
-    .flow-card:hover {
+    .flow-card:hover,
+    .decision-step:hover {
       transform: translateY(-2px);
       border-color: rgba(255, 107, 0, 0.35);
+    }
+
+    .decision-board {
+      background:
+        radial-gradient(circle at 100% 0%, rgba(255, 107, 0, 0.28), transparent 34%),
+        linear-gradient(135deg, #111827 0%, #1A2B47 100%);
+      box-shadow: 0 28px 76px rgba(26, 43, 71, 0.20);
+    }
+
+    .decision-flow {
+      background:
+        linear-gradient(90deg, rgba(255, 107, 0, 0.10), rgba(255, 255, 255, 0.88) 30%, rgba(255, 255, 255, 0.88) 70%, rgba(26, 43, 71, 0.10)),
+        rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      box-shadow: 0 24px 70px rgba(26, 43, 71, 0.10);
+    }
+
+    .decision-step {
+      min-height: 310px;
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    }
+
+    .decision-step.dark {
+      background: #0A0A0A;
+      border-color: rgba(255, 107, 0, 0.45);
+      box-shadow: 0 20px 46px rgba(10, 10, 10, 0.18);
     }
 
     .marker-line {
@@ -181,7 +211,7 @@
       </div>
     </div>
     <section class="mx-auto max-w-6xl px-5 pb-20 pt-8 sm:px-6 md:pb-28 lg:px-8">
-      <div class="mb-10 grid gap-7 md:mb-14 md:grid-cols-[0.95fr_1.05fr] md:items-end">
+      <div class="mb-8 grid gap-7 md:mb-10 md:grid-cols-[0.95fr_1.05fr] md:items-center">
         <div class="reveal">
           <div class="inline-flex items-center gap-2 rounded-full border border-brand-orange/20 bg-white/70 px-4 py-2 text-sm font-black text-brand-orange shadow-sm">
             <iconify-icon icon="solar:clipboard-list-bold-duotone" class="text-lg"></iconify-icon>
@@ -196,90 +226,106 @@
           </p>
         </div>
 
-        <div class="reveal rounded-[28px] border border-brand-ink/10 bg-white/75 p-5 shadow-soft backdrop-blur md:p-6" style="transition-delay: 90ms">
-          <div class="flex items-start gap-4">
-            <div class="grid h-12 w-12 flex-shrink-0 place-items-center rounded-2xl bg-brand-orange text-2xl text-white">
-              <iconify-icon icon="solar:target-bold"></iconify-icon>
+        <div class="decision-board reveal rounded-[32px] p-5 text-white md:p-6" style="transition-delay: 90ms">
+          <div class="mb-5 flex items-center justify-between">
+            <p class="text-sm font-black text-white/58">상담 전후 차이</p>
+            <span class="rounded-full bg-brand-orange px-3 py-1 text-xs font-black text-white">판단 기준화</span>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div class="rounded-[24px] bg-white/10 p-5 ring-1 ring-white/10">
+              <p class="mb-4 text-sm font-black text-white/60">상담 전</p>
+              <div class="space-y-3 text-base font-black leading-snug word-keep">
+                <p>지금 사도 될까?</p>
+                <p>어느 동네를 봐야 하지?</p>
+                <p>대출이 무리 아닐까?</p>
+              </div>
             </div>
-            <div>
-              <p class="text-sm font-black text-brand-dark word-keep">이 섹션의 역할</p>
-              <p class="mt-2 text-base leading-relaxed text-gray-600 word-keep">
-                절차 설명이 아니라, 상담 안에서 무엇을 판단해주는지 보여주는 구간입니다. 신청·결제·일정 조율은 뒤의 진행순서에서 따로 설명합니다.
-              </p>
+            <div class="rounded-[24px] bg-white p-5 text-brand-dark shadow-lift">
+              <p class="mb-4 text-sm font-black text-brand-orange">상담 후</p>
+              <div class="space-y-3 text-base font-black leading-snug word-keep">
+                <p>가능한 가격선</p>
+                <p>후보 지역·단지</p>
+                <p>매수·보류 결론</p>
+              </div>
             </div>
+          </div>
+          <div class="mt-4 rounded-[22px] bg-brand-orange px-5 py-4 text-center text-lg font-black word-keep">
+            혼자 검색하던 고민을, 실행 가능한 순서로 정리합니다
           </div>
         </div>
       </div>
 
-      <div class="grid gap-5 md:grid-cols-3">
-        <article class="flow-card reveal rounded-[28px] border border-brand-ink/10 bg-white p-6 shadow-lift md:p-7">
-          <div class="mb-6 flex items-center justify-between">
-            <span class="font-display text-5xl font-black text-brand-orange">1</span>
-            <span class="rounded-full bg-brand-beige px-3 py-1 text-xs font-black text-brand-ink">현재 상황</span>
-          </div>
-          <h2 class="font-display text-2xl font-black leading-snug text-brand-dark word-keep">
-            예산과 대출부터<br>현실적으로 봅니다
-          </h2>
-          <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
-            지금 가진 돈, 가능한 대출, 가족의 우선순위를 먼저 정리합니다. 여기서 무리한 선택인지, 움직여도 되는 조건인지 1차 판단이 나옵니다.
-          </p>
-          <div class="mt-6 space-y-2 text-sm font-bold text-gray-700">
-            <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3">
-              <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
-              예산·대출 가능선
+      <div class="decision-flow reveal rounded-[36px] p-4 md:p-6">
+        <div class="grid gap-4 md:grid-cols-3">
+          <article class="decision-step rounded-[28px] p-6 md:p-7">
+            <div class="mb-8 flex items-center justify-between">
+              <span class="grid h-14 w-14 place-items-center rounded-2xl bg-brand-orange font-display text-3xl font-black text-white">1</span>
+              <span class="rounded-full bg-brand-beige px-3 py-1 text-xs font-black text-brand-ink">현재 상황</span>
             </div>
-            <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3">
-              <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
-              거주 조건과 우선순위
+            <h2 class="font-display text-2xl font-black leading-snug text-brand-dark word-keep">
+              예산과 대출부터<br>현실적으로 봅니다
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+              지금 가진 돈, 가능한 대출, 가족의 우선순위를 먼저 정리합니다. 여기서 무리한 선택인지, 움직여도 되는 조건인지 1차 판단이 나옵니다.
+            </p>
+            <div class="mt-6 space-y-2 text-sm font-bold text-gray-700">
+              <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3">
+                <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
+                예산·대출 가능선
+              </div>
+              <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3">
+                <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
+                거주 조건과 우선순위
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="flow-card reveal rounded-[28px] border border-brand-ink/10 bg-white p-6 shadow-lift md:p-7" style="transition-delay: 90ms">
-          <div class="mb-6 flex items-center justify-between">
-            <span class="font-display text-5xl font-black text-brand-orange">2</span>
-            <span class="rounded-full bg-brand-beige px-3 py-1 text-xs font-black text-brand-ink">후보 압축</span>
-          </div>
-          <h2 class="font-display text-2xl font-black leading-snug text-brand-dark word-keep">
-            지역과 단지를<br>비교 기준으로 좁힙니다
-          </h2>
-          <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
-            막연히 좋은 동네를 찾는 게 아니라, 내 예산 안에서 더 나은 선택지를 비교합니다. 단지별 장단점과 확인할 포인트를 같이 정리합니다.
-          </p>
-          <div class="mt-6 space-y-2 text-sm font-bold text-gray-700">
-            <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3">
-              <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
-              후보 지역·단지 리스트
+          <article class="decision-step rounded-[28px] p-6 md:p-7" style="transition-delay: 90ms">
+            <div class="mb-8 flex items-center justify-between">
+              <span class="grid h-14 w-14 place-items-center rounded-2xl bg-brand-orange font-display text-3xl font-black text-white">2</span>
+              <span class="rounded-full bg-brand-beige px-3 py-1 text-xs font-black text-brand-ink">후보 압축</span>
             </div>
-            <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3">
-              <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
-              매물 비교 기준
+            <h2 class="font-display text-2xl font-black leading-snug text-brand-dark word-keep">
+              지역과 단지를<br>비교 기준으로 좁힙니다
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+              막연히 좋은 동네를 찾는 게 아니라, 내 예산 안에서 더 나은 선택지를 비교합니다. 단지별 장단점과 확인할 포인트를 같이 정리합니다.
+            </p>
+            <div class="mt-6 space-y-2 text-sm font-bold text-gray-700">
+              <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3">
+                <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
+                후보 지역·단지 리스트
+              </div>
+              <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3">
+                <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
+                매물 비교 기준
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="flow-card reveal rounded-[28px] border border-brand-orange/30 bg-brand-dark p-6 text-white shadow-lift md:p-7" style="transition-delay: 180ms">
-          <div class="mb-6 flex items-center justify-between">
-            <span class="font-display text-5xl font-black text-brand-orange">3</span>
-            <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/80">실행 판단</span>
-          </div>
-          <h2 class="font-display text-2xl font-black leading-snug word-keep">
-            살지, 보류할지<br>다음 행동까지 정합니다
-          </h2>
-          <p class="mt-4 text-base leading-relaxed text-white/72 word-keep">
-            좋은 말만 하는 상담이 아니라, 지금 사도 되는지 아닌지를 함께 판단합니다. 계약 전 확인할 것과 다음 순서까지 남깁니다.
-          </p>
-          <div class="mt-6 space-y-2 text-sm font-bold text-white/88">
-            <div class="flex items-center gap-2 rounded-2xl bg-white/10 px-4 py-3">
-              <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
-              매수·보류 판단
+          <article class="decision-step dark rounded-[28px] p-6 text-white md:p-7" style="transition-delay: 180ms">
+            <div class="mb-8 flex items-center justify-between">
+              <span class="grid h-14 w-14 place-items-center rounded-2xl bg-brand-orange font-display text-3xl font-black text-white">3</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-black text-white/80">실행 판단</span>
             </div>
-            <div class="flex items-center gap-2 rounded-2xl bg-white/10 px-4 py-3">
-              <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
-              계약 전 체크와 다음 행동
+            <h2 class="font-display text-2xl font-black leading-snug word-keep">
+              살지, 보류할지<br>다음 행동까지 정합니다
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-white/72 word-keep">
+              좋은 말만 하는 상담이 아니라, 지금 사도 되는지 아닌지를 함께 판단합니다. 계약 전 확인할 것과 다음 순서까지 남깁니다.
+            </p>
+            <div class="mt-6 space-y-2 text-sm font-bold text-white/88">
+              <div class="flex items-center gap-2 rounded-2xl bg-white/10 px-4 py-3">
+                <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
+                매수·보류 판단
+              </div>
+              <div class="flex items-center gap-2 rounded-2xl bg-white/10 px-4 py-3">
+                <iconify-icon icon="solar:check-circle-bold" class="text-brand-orange"></iconify-icon>
+                계약 전 체크와 다음 행동
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </div>
       </div>
 
       <div class="my-12 h-px w-full marker-line md:my-16"></div>
@@ -288,7 +334,7 @@
         <div class="section-card reveal rounded-[32px] p-6 md:p-8">
           <div class="mb-7 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p class="text-sm font-black uppercase tracking-[0.16em] text-brand-orange">What we cover</p>
+              <p class="text-sm font-black uppercase tracking-[0.16em] text-brand-orange">상담 범위</p>
               <h2 class="mt-3 font-display text-3xl font-black leading-tight text-brand-dark word-keep md:text-4xl">
                 상담에서 함께<br class="hidden sm:block"> 정리하는 5가지
               </h2>
@@ -378,7 +424,7 @@
       <div class="reveal mt-8 rounded-[32px] border border-brand-orange/20 bg-white p-6 shadow-soft md:mt-10 md:p-8">
         <div class="grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-center">
           <div>
-            <p class="text-sm font-black uppercase tracking-[0.16em] text-brand-orange">Section close</p>
+            <p class="text-sm font-black uppercase tracking-[0.16em] text-brand-orange">정리</p>
             <h2 class="mt-3 font-display text-3xl font-black leading-tight text-brand-dark word-keep md:text-4xl">
               막연한 고민을<br>판단 기준으로 바꿉니다
             </h2>
