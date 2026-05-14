@@ -67,7 +67,7 @@
 <script>
 (function() {
     var container = document.getElementById('wf-content');
-    fetch('../data/workflows.json')
+    fetch('../data/workflows.json?v=' + Date.now())
         .then(function(r) { if (!r.ok) throw 0; return r.json(); })
         .then(render)
         .catch(function() { container.innerHTML = '<div style="text-align:center;color:#94A3B8;padding:32px">로드 실패</div>'; });
