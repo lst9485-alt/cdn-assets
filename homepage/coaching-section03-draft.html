@@ -111,28 +111,76 @@
       background: linear-gradient(90deg, rgba(255, 107, 0, 0), rgba(255, 107, 0, 0.55), rgba(255, 107, 0, 0));
     }
 
-    .phone-frame {
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 24px 70px rgba(10, 10, 10, 0.18);
+    .kakao-frame {
+      border: 14px solid #111827;
+      background: #111827;
+      box-shadow: 0 28px 76px rgba(17, 24, 39, 0.22);
     }
 
-    .chat-bubble {
-      max-width: 88%;
+    .kakao-screen {
+      background: #9fb4cc;
+      min-height: 520px;
+    }
+
+    .kakao-bubble {
+      max-width: 76%;
       border-radius: 18px;
-      padding: 12px 14px;
-      font-size: 14px;
+      padding: 14px 17px;
+      font-size: 15px;
+      font-weight: 800;
       line-height: 1.55;
+      letter-spacing: -0.01em;
+      color: #111827;
+      box-shadow: 0 8px 22px rgba(17, 24, 39, 0.05);
+    }
+
+    .kakao-bubble.user {
+      margin-left: auto;
+      background: #ffdf32;
+      border-top-right-radius: 8px;
+    }
+
+    .kakao-bubble.coach {
+      margin-right: auto;
+      background: #ffffff;
+      border-top-left-radius: 8px;
+    }
+
+    .kakao-card {
+      max-width: 76%;
+      border-radius: 18px;
+      background: #ffffff;
+      padding: 14px 17px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: #111827;
     }
 
     @media (max-width: 640px) {
-      .chat-bubble {
-        font-size: 13px;
+      .kakao-frame {
+        border-width: 12px;
+      }
+
+      .kakao-screen {
+        min-height: 500px;
+      }
+
+      .kakao-bubble,
+      .kakao-card {
+        max-width: 86%;
+        font-size: 14px;
       }
     }
   </style>
 </head>
 <body>
   <main class="draft-shell min-h-[100dvh] pt-24 md:pt-28">
-    <section class="mx-auto max-w-6xl px-5 pb-20 pt-12 sm:px-6 md:pb-28 lg:px-8">
+    <div class="mx-auto max-w-6xl px-5 pt-8 sm:px-6 lg:px-8">
+      <div class="inline-flex items-center rounded-full bg-brand-dark px-4 py-2 text-sm font-black text-white shadow-lift">
+        코덱스버전
+      </div>
+    </div>
+    <section class="mx-auto max-w-6xl px-5 pb-20 pt-8 sm:px-6 md:pb-28 lg:px-8">
       <div class="mb-10 grid gap-7 md:mb-14 md:grid-cols-[0.95fr_1.05fr] md:items-end">
         <div class="reveal">
           <div class="inline-flex items-center gap-2 rounded-full border border-brand-orange/20 bg-white/70 px-4 py-2 text-sm font-black text-brand-orange shadow-sm">
@@ -279,31 +327,35 @@
           </div>
         </div>
 
-        <aside class="reveal rounded-[32px] bg-brand-ink p-5 text-white shadow-soft md:p-6" style="transition-delay: 120ms">
-          <div class="phone-frame overflow-hidden rounded-[28px] bg-[#111827]">
-            <div class="flex items-center justify-between border-b border-white/10 px-5 py-4">
-              <div>
-                <p class="text-xs font-bold text-white/45">90일 Q&A</p>
-                <p class="font-black">우재 코칭</p>
+        <aside class="reveal rounded-[32px] bg-brand-ink p-4 text-white shadow-soft md:p-5" style="transition-delay: 120ms">
+          <div class="kakao-frame overflow-hidden rounded-[32px]">
+            <div class="flex items-center justify-between px-5 py-5 text-white">
+              <div class="flex items-center gap-1.5">
+                <iconify-icon icon="solar:arrow-left-linear" class="text-lg"></iconify-icon>
+                <p class="text-xl font-black">우재</p>
               </div>
-              <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-300">
-                <span class="h-2 w-2 rounded-full bg-emerald-300"></span>
-                상담 후 질문 가능
+              <div class="flex items-center gap-1.5 text-sm font-bold text-white/75">
+                <span class="h-2.5 w-2.5 rounded-full bg-white/70"></span>
+                온라인
               </div>
             </div>
-            <div class="space-y-3 bg-[#f3f4f6] px-4 py-5 text-brand-dark">
-              <p class="text-center text-xs font-bold text-gray-400">코칭 이후</p>
-              <div class="chat-bubble ml-auto bg-brand-orange text-white">
-                오늘 본 매물 계약해도 괜찮을까요? 가격은 조금 깎을 수 있을 것 같습니다.
+            <div class="kakao-screen space-y-4 rounded-t-[24px] px-5 py-6">
+              <p class="text-center text-sm font-black text-[#5f7082]">2026년 4월 28일</p>
+              <div class="kakao-bubble user">
+                안녕하세요! 분당쪽 매물 보고 있는데 지금 사도 될까요?
               </div>
-              <div class="chat-bubble bg-white shadow-sm">
-                계약 전이면 먼저 세 가지를 확인해보세요. 최근 실거래, 대출 실행 조건, 수리비 반영 가격입니다.
+              <div class="kakao-bubble coach">
+                안녕하세요 :) 어떤 단지 보고 계셨어요?
               </div>
-              <div class="chat-bubble ml-auto bg-brand-orange text-white">
-                그럼 이 가격이면 무리한 선택은 아닌가요?
+              <div class="kakao-bubble user">
+                정자동 OO마을이요. 12억 정도예요
               </div>
-              <div class="chat-bubble bg-white shadow-sm">
-                지금 예산 기준에서는 가능합니다. 다만 잔금 전 현금 여유가 줄어드니 협상 기준가는 따로 잡는 게 좋습니다.
+              <div class="kakao-bubble coach">
+                예산이랑 대출 어떻게 잡으셨어요? 사전 질문지 기준으로 같이 볼게요.
+              </div>
+              <div class="kakao-card">
+                <p class="font-black text-brand-orange">사전 질문지</p>
+                <p class="mt-1 font-black">예산·대출·우선순위 1분 체크</p>
               </div>
             </div>
           </div>
