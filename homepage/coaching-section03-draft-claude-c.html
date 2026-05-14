@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 코칭 섹션 시안 (클로드 C · 미니멀) | 우리동네 재테크</title>
+  <meta name="robots" content="noindex,nofollow">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      important: true,
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['GmarketSans', 'Pretendard', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              orange: '#FF6B00', beige: '#F5F0E8', dark: '#0A0A0A', ink: '#1A2B47'
+            }
+          },
+          boxShadow: {
+            soft: '0 24px 70px rgba(26, 43, 71, 0.10)',
+            lift: '0 18px 42px rgba(26, 43, 71, 0.12)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <style>
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      margin: 0;
+      background: #fdf9ed;
+      color: #0A0A0A;
+      font-family: Pretendard, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+
+    .draft-shell {
+      background:
+        radial-gradient(circle at 16% 12%, rgba(255, 107, 0, 0.10), transparent 40%),
+        linear-gradient(180deg, #ffffff 0%, #fdf9ed 60%);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(.16, 1, .3, 1), transform 0.7s cubic-bezier(.16, 1, .3, 1);
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    .version-tag {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #FF6B00;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      box-shadow: 0 8px 24px rgba(255, 107, 0, 0.35);
+      z-index: 100;
+    }
+
+    .flow-card {
+      position: relative;
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      box-shadow: 0 14px 34px rgba(26, 43, 71, 0.06);
+      padding: 26px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .flow-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 107, 0, 0.30);
+    }
+    .flow-number {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 3rem;
+      line-height: 1;
+      color: #FF6B00;
+    }
+
+    .deliver-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid rgba(26, 43, 71, 0.08);
+    }
+
+    /* V3 카톡 (원본 스타일) */
+    .v3-chat-phone { background: #122039; border: 14px solid #122039; border-radius: 38px; box-shadow: 0 28px 60px rgba(18,24,38,0.22); overflow: hidden; }
+    .v3-chat-screen { background: #a9bdd6; border-radius: 24px; padding: 22px 18px 26px; }
+    .v3-chat-bubble { max-width: 78%; border-radius: 18px; padding: 14px 18px; font-weight: 800; line-height: 1.55; box-shadow: 0 10px 26px rgba(18,24,38,0.08); }
+    .v3-chat-user { margin-left: auto; background: #ffe126; color: #182033; }
+    .v3-chat-coach { background: #fff; color: #182033; }
+  </style>
+</head>
+<body>
+  <div class="version-tag">CLAUDE 버전 C · 미니멀</div>
+
+  <main class="draft-shell min-h-[100dvh] pt-24 md:pt-28">
+    <section class="mx-auto max-w-5xl px-5 pb-20 sm:px-6 md:pb-28 lg:px-8">
+
+      <!-- 시안 라벨 -->
+      <div class="mb-8 reveal">
+        <div class="inline-flex items-center gap-2 rounded-full border border-brand-orange/20 bg-white/80 px-4 py-2 text-sm font-black text-brand-orange shadow-sm">
+          <iconify-icon icon="solar:layers-bold-duotone" class="text-lg"></iconify-icon>
+          03 코칭 내용 시안 · 클로드 C
+        </div>
+      </div>
+
+      <!-- 헤더 -->
+      <div class="mb-12 md:mb-16 reveal">
+        <p class="text-sm font-black uppercase text-brand-orange">코칭 진행 방식</p>
+        <h1 class="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-brand-dark word-keep md:text-5xl">
+          코칭은 이렇게 진행됩니다
+        </h1>
+        <p class="mt-5 max-w-2xl text-lg leading-relaxed text-gray-700 word-keep">
+          3단계로 정리하고, 자료로 남기고, 90일은 카톡으로 이어갑니다.
+        </p>
+      </div>
+
+      <!-- 진행 3카드 가로 -->
+      <div class="grid gap-5 md:grid-cols-3">
+        <div class="flow-card reveal">
+          <span class="flow-number">1</span>
+          <p class="mt-3 inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-bold text-brand-orange">현재 상황 진단</p>
+          <h2 class="mt-3 font-display text-xl font-black leading-snug text-brand-dark word-keep">
+            예산·대출과 우선순위를 정리합니다
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-gray-600 word-keep">
+            사전 질문지로 예산·대출 한도와 거주 조건을 같이 점검하고, 지금 사도 되는지 1차 결론을 내립니다.
+          </p>
+        </div>
+        <div class="flow-card reveal" style="transition-delay:80ms">
+          <span class="flow-number">2</span>
+          <p class="mt-3 inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-bold text-brand-orange">후보 지역·단지 압축</p>
+          <h2 class="mt-3 font-display text-xl font-black leading-snug text-brand-dark word-keep">
+            후보 단지와 비교 기준표를 만듭니다
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-gray-600 word-keep">
+            예산에 맞는 지역·단지를 좁히고, 같은 잣대로 비교할 수 있게 기준표까지 함께 만듭니다.
+          </p>
+        </div>
+        <div class="flow-card reveal" style="transition-delay:160ms">
+          <span class="flow-number">3</span>
+          <p class="mt-3 inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-bold text-brand-orange">실행 플랜·90일 지원</p>
+          <h2 class="mt-3 font-display text-xl font-black leading-snug text-brand-dark word-keep">
+            결론과 액션플랜까지 정리합니다
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-gray-600 word-keep">
+            코칭 후 바로 움직일 수 있게 결론과 다음 행동을 정리하고, 90일간 후속 질문을 이어갑니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- 함께 드리는 자료 -->
+      <div class="mt-16 md:mt-20 reveal">
+        <p class="text-sm font-black uppercase text-brand-orange">What you get</p>
+        <h2 class="mt-3 font-display text-3xl md:text-4xl font-black leading-tight text-brand-dark word-keep">
+          함께 드리는 자료 4종
+        </h2>
+        <div class="mt-7 grid gap-3 md:grid-cols-2">
+          <div class="deliver-row">
+            <iconify-icon icon="solar:document-text-bold-duotone" class="text-3xl text-brand-orange flex-shrink-0"></iconify-icon>
+            <div>
+              <p class="font-display font-black text-brand-dark word-keep">자산관리시트</p>
+              <p class="mt-1 text-sm text-gray-600 word-keep">코칭 내용을 숫자로 바로 정리할 수 있는 시트</p>
+            </div>
+          </div>
+          <div class="deliver-row">
+            <iconify-icon icon="solar:checklist-minimalistic-bold-duotone" class="text-3xl text-brand-orange flex-shrink-0"></iconify-icon>
+            <div>
+              <p class="font-display font-black text-brand-dark word-keep">올인원 체크리스트</p>
+              <p class="mt-1 text-sm text-gray-600 word-keep">방문·계약·잔금까지 놓치기 쉬운 항목 정리</p>
+            </div>
+          </div>
+          <div class="deliver-row">
+            <iconify-icon icon="solar:clipboard-list-bold-duotone" class="text-3xl text-brand-orange flex-shrink-0"></iconify-icon>
+            <div>
+              <p class="font-display font-black text-brand-dark word-keep">코칭 리포트</p>
+              <p class="mt-1 text-sm text-gray-600 word-keep">코칭 핵심 결론과 판단 기준을 문서로</p>
+            </div>
+          </div>
+          <div class="deliver-row">
+            <iconify-icon icon="solar:target-bold-duotone" class="text-3xl text-brand-orange flex-shrink-0"></iconify-icon>
+            <div>
+              <p class="font-display font-black text-brand-dark word-keep">액션플랜</p>
+              <p class="mt-1 text-sm text-gray-600 word-keep">코칭 후 바로 실행할 다음 행동 순서</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 90일 케어 박스 -->
+      <div class="mt-16 md:mt-20 reveal">
+        <div class="rounded-[32px] border border-brand-orange/20 bg-white shadow-soft p-6 md:p-10">
+          <div class="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+            <div>
+              <p class="text-brand-orange font-display font-black text-sm tracking-[0.18em] uppercase">90 Days Care</p>
+              <h3 class="mt-3 font-display text-3xl md:text-4xl font-black leading-tight text-brand-dark word-keep">
+                코칭이 끝나도,<br>90일은 같이 갑니다
+              </h3>
+              <p class="mt-4 text-gray-600 leading-relaxed word-keep">
+                매물 비교, 대출 조건, 계약 전 체크처럼 실행 중 생기는 질문은 90일 동안 카카오톡으로 이어갑니다.
+              </p>
+              <div class="mt-6 grid grid-cols-2 gap-3 text-sm font-bold text-brand-dark">
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">매물 비교</div>
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">계약 전 체크</div>
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">대출 조건 질문</div>
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">실행 순서 점검</div>
+              </div>
+            </div>
+            <div class="v3-chat-phone" aria-label="90일 카카오톡 질의응답 예시">
+              <div class="flex items-center justify-between px-5 py-4 text-white">
+                <div class="font-display font-black">← 우재</div>
+                <div class="text-sm font-bold text-white/70">● 온라인</div>
+              </div>
+              <div class="v3-chat-screen space-y-4">
+                <p class="text-center text-xs font-bold text-slate-500">2026년 4월 28일</p>
+                <div class="v3-chat-bubble v3-chat-user">분당쪽 매물 보고 있는데 지금 사도 될까요?</div>
+                <div class="v3-chat-bubble v3-chat-coach">어떤 단지 보고 계셨어요? 사전 질문지 기준으로 같이 볼게요.</div>
+                <div class="v3-chat-bubble v3-chat-user">정자동 OO마을이요. 12억 정도예요</div>
+                <div class="v3-chat-bubble v3-chat-coach">예산·대출 어떻게 잡으셨어요? 최근 실거래도 같이 봐드릴게요.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 클로징 -->
+      <div class="mt-10 md:mt-12 reveal">
+        <div class="rounded-[28px] border border-brand-orange/20 bg-white px-6 py-6 text-center shadow-soft md:px-10 md:py-8">
+          <p class="font-display text-2xl md:text-3xl font-black text-brand-dark word-keep">
+            막연한 고민이 <span class="text-brand-orange">판단 기준</span>으로 바뀝니다
+          </p>
+          <p class="mt-3 text-gray-500 word-keep">
+            진단부터 실행까지 한 번에 정리하고, 코칭 후 최대 90일 동안 카톡으로 질문을 이어갈 수 있습니다.
+          </p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var targets = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+      targets.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+</body>
+</html>
