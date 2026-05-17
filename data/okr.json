@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-17T06:00:11.792874+09:00",
+  "updated": "2026-05-17T21:35:22.205359+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 428,
-    "done": 402,
-    "overdue": 12,
+    "total": 429,
+    "done": 407,
+    "overdue": 6,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,53 +56,8 @@
         "overdue": true
       },
       {
-        "title": "메모정리",
-        "date": "2026-05-11",
-        "overdue": true
-      },
-      {
-        "title": "원고",
-        "date": "2026-05-15T16:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-05-16T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "ppt",
-        "date": "2026-05-16T15:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "아이패드확인",
-        "date": "2026-05-16T17:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-05-16T17:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "홈페이지 오픈준비",
-        "date": "2026-05-17T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의 기획",
-        "date": "2026-05-17T11:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "date": "2026-05-17T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
-        "date": "2026-05-17T17:00:00.000+09:00",
+        "title": "업로드",
+        "date": "2026-05-17T09:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -116,6 +71,11 @@
         "overdue": false
       },
       {
+        "title": "랜딩수정",
+        "date": "2026-05-18T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "현금영수증&세금계산서 발행",
         "date": "2026-05-18T10:00:00.000+09:00",
         "overdue": false
@@ -123,6 +83,11 @@
       {
         "title": "주제선정&썸네일&제목",
         "date": "2026-05-19",
+        "overdue": false
+      },
+      {
+        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
+        "date": "2026-05-19T12:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -136,6 +101,16 @@
         "overdue": false
       },
       {
+        "title": "강의 기획",
+        "date": "2026-05-20T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "마이크테스트",
+        "date": "2026-05-20T19:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원고완성",
         "date": "2026-05-21",
         "overdue": false
@@ -143,6 +118,11 @@
       {
         "title": "주간계획 수정",
         "date": "2026-05-21T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-05-21T12:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -158,26 +138,14 @@
     ],
     "schedule": [
       {
-        "title": "홈페이지 오픈준비",
-        "time": "09:00",
+        "title": "P1~P3/목실감",
+        "time": "08:30",
         "allDay": false,
-        "done": false
+        "done": true
       },
       {
-        "title": "강의 기획",
-        "time": "11:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "time": "14:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
-        "time": "17:00",
+        "title": "업로드",
+        "time": "09:30",
         "allDay": false,
         "done": false
       }
@@ -185,15 +153,15 @@
   },
   "routines": {
     "total": 4,
-    "done_today": 0,
+    "done_today": 3,
     "items": [
       {
         "name": "원씽 완료",
-        "done": false
+        "done": true
       },
       {
         "name": "일일 계획",
-        "done": false
+        "done": true
       },
       {
         "name": "P2 완료",
@@ -201,15 +169,31 @@
       },
       {
         "name": "P3 완료",
-        "done": false
+        "done": true
       }
     ],
-    "priorities": [],
+    "priorities": [
+      {
+        "label": "원씽",
+        "title": "업로드",
+        "done": true
+      },
+      {
+        "label": "P2",
+        "title": "독서",
+        "done": false
+      },
+      {
+        "label": "P3",
+        "title": "랜딩수정",
+        "done": true
+      }
+    ],
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 11,
-      "rate": "39%",
+      "done": 17,
+      "rate": "61%",
       "days": [
         {
           "date": "2026-05-11",
@@ -238,12 +222,12 @@
         },
         {
           "date": "2026-05-16",
-          "done": 0,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-05-17",
-          "done": 0,
+          "done": 3,
           "total": 4
         }
       ]
