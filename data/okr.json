@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-17T21:35:22.205359+09:00",
+  "updated": "2026-05-18T06:00:13.805961+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -23,7 +23,7 @@
   "tasks": {
     "total": 429,
     "done": 407,
-    "overdue": 6,
+    "overdue": 7,
     "pending": [
       {
         "title": "전자책 작성",
@@ -58,7 +58,7 @@
       {
         "title": "업로드",
         "date": "2026-05-17T09:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "메모정리",
@@ -138,14 +138,26 @@
     ],
     "schedule": [
       {
-        "title": "P1~P3/목실감",
-        "time": "08:30",
-        "allDay": false,
-        "done": true
+        "title": "메모정리",
+        "time": "",
+        "allDay": true,
+        "done": false
       },
       {
-        "title": "업로드",
+        "title": "마케팅업체 정산",
+        "time": "09:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "랜딩수정",
         "time": "09:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
         "allDay": false,
         "done": false
       }
@@ -153,15 +165,15 @@
   },
   "routines": {
     "total": 4,
-    "done_today": 3,
+    "done_today": 0,
     "items": [
       {
         "name": "원씽 완료",
-        "done": true
+        "done": false
       },
       {
         "name": "일일 계획",
-        "done": true
+        "done": false
       },
       {
         "name": "P2 완료",
@@ -169,37 +181,16 @@
       },
       {
         "name": "P3 완료",
-        "done": true
-      }
-    ],
-    "priorities": [
-      {
-        "label": "원씽",
-        "title": "업로드",
-        "done": true
-      },
-      {
-        "label": "P2",
-        "title": "독서",
         "done": false
-      },
-      {
-        "label": "P3",
-        "title": "랜딩수정",
-        "done": true
       }
     ],
+    "priorities": [],
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 17,
-      "rate": "61%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-05-11",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-05-12",
           "done": 3,
@@ -228,6 +219,11 @@
         {
           "date": "2026-05-17",
           "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-05-18",
+          "done": 0,
           "total": 4
         }
       ]
