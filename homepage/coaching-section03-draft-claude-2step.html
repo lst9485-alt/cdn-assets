@@ -178,10 +178,10 @@
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 56%;
-      height: 16px;
+      width: 38%;
+      height: 10px;
       background: #0A0A0A;
-      border-radius: 0 0 12px 12px;
+      border-radius: 0 0 10px 10px;
       z-index: 10;
     }
     .form-phone-screen {
@@ -216,6 +216,49 @@
       color: #FF6B00;
       font-weight: 900;
     }
+
+    /* 사전 질문지 작성 가이드 박스 */
+    .form-guide {
+      margin-top: 16px;
+      background: #FFFAF2;
+      border: 1.5px solid rgba(255, 107, 0, 0.18);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+    .form-guide-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      color: #FF6B00;
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+    .form-guide ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .form-guide li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 5px 0;
+      font-size: 13.5px;
+      color: #1f2937;
+      font-weight: 600;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    .form-guide li iconify-icon {
+      color: #FF6B00;
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .form-guide li strong { color: #FF6B00; font-weight: 900; }
 
     /* 정리표 미니 일러스트 */
     .data-sheet {
@@ -678,6 +721,14 @@
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
                   <div class="flex flex-wrap gap-2">
                     <span class="deliverable-chip"><iconify-icon icon="solar:document-text-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>사전 질문지 작성</span>
+                  </div>
+                  <div class="form-guide">
+                    <div class="form-guide-title"><iconify-icon icon="solar:lightbulb-bold-duotone"></iconify-icon>작성 가이드</div>
+                    <ul>
+                      <li><iconify-icon icon="solar:clock-circle-bold"></iconify-icon><span>약 <strong>10분</strong> 소요</span></li>
+                      <li><iconify-icon icon="solar:list-check-bold"></iconify-icon><span><strong>30개 항목</strong> (필수 + 선택)</span></li>
+                      <li><iconify-icon icon="solar:check-circle-bold"></iconify-icon><span>구체적으로 작성할수록 정확한 코칭이 가능합니다</span></li>
+                    </ul>
                   </div>
                 </div>
               </div>
