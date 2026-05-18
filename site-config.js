@@ -570,6 +570,18 @@
             hubVisible: true
           },
           {
+            id: 'coaching-section03-draft-codex-revised',
+            title: '코칭 03 코덱스 수정본',
+            description: '03~03-2 · 세로 타임라인 + 오른쪽 정리표',
+            href: 'homepage/coaching-section03-draft-codex-revised.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['coaching-section03-draft-codex-revised.html'],
+            hubVisible: true
+          },
+          {
             id: 'consult-trust-test',
             title: '상담 리포트 테스트',
             description: '색감을 정리한 상담 자료 페이지',

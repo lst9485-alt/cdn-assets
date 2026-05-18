@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 코칭 섹션 수정본 | 우리동네 재테크</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="내집마련 1:1 코칭 랜딩페이지 03~03-2 코덱스 수정본">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      important: true,
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['GmarketSans', 'Pretendard', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              orange: '#FF6B00',
+              beige: '#F5F0E8',
+              dark: '#0A0A0A',
+              ink: '#1A2B47'
+            }
+          },
+          boxShadow: {
+            soft: '0 24px 70px rgba(26, 43, 71, 0.10)',
+            lift: '0 18px 42px rgba(26, 43, 71, 0.12)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <style>
+    @font-face {
+      font-family: 'GmarketSans';
+      src: url('./fonts/GmarketSansBold.woff2') format('woff2');
+      font-weight: 700 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      margin: 0;
+      background: #fdf9ed;
+      color: #0A0A0A;
+      font-family: Pretendard, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+    .balance { text-wrap: balance; }
+
+    .draft-shell {
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255, 107, 0, 0.13), transparent 32%),
+        radial-gradient(circle at 90% 18%, rgba(26, 43, 71, 0.10), transparent 30%),
+        linear-gradient(180deg, #fffaf0 0%, #fdf9ed 40%, #f5f0e8 100%);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(.16, 1, .3, 1), transform 0.7s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .draft-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: rgba(10, 10, 10, 0.90);
+      color: #fff;
+      padding: 8px 13px;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 14px 34px rgba(10, 10, 10, 0.14);
+    }
+
+    .hero-card {
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      background:
+        radial-gradient(circle at 92% 8%, rgba(255, 107, 0, 0.12), transparent 34%),
+        rgba(255, 255, 255, 0.90);
+      box-shadow: 0 28px 90px rgba(26, 43, 71, 0.10);
+    }
+
+    .timeline-panel {
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 24px 72px rgba(26, 43, 71, 0.09);
+    }
+
+    .timeline-list { position: relative; }
+
+    .timeline-list::before {
+      content: "";
+      position: absolute;
+      left: 27px;
+      top: 34px;
+      bottom: 34px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(255, 107, 0, 0.75), rgba(26, 43, 71, 0.15));
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 18px;
+      padding: 0 0 26px;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-index {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 20px;
+      background: #FF6B00;
+      color: #fff;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: 0 14px 30px rgba(255, 107, 0, 0.24);
+    }
+
+    .timeline-content {
+      border: 1px solid rgba(26, 43, 71, 0.08);
+      border-radius: 28px;
+      background: #fff;
+      padding: 24px;
+      box-shadow: 0 14px 36px rgba(26, 43, 71, 0.06);
+    }
+
+    .timeline-content.featured {
+      border-color: rgba(255, 107, 0, 0.28);
+      background:
+        linear-gradient(135deg, rgba(255, 107, 0, 0.08), rgba(255, 255, 255, 0.98) 40%),
+        #fff;
+    }
+
+    .summary-board {
+      position: sticky;
+      top: 24px;
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      background: #1A2B47;
+      box-shadow: 0 28px 76px rgba(26, 43, 71, 0.20);
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 12px;
+      align-items: start;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 14px;
+    }
+
+    .summary-row strong {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .summary-row span {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .material-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 16px;
+      background: #f5f0e8;
+      padding: 12px 14px;
+      color: #1A2B47;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .report-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: max-content;
+      max-width: 100%;
+      border-radius: 999px;
+      background: rgba(255, 107, 0, 0.10);
+      padding: 8px 12px;
+      color: #FF6B00;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .report-table {
+      border: 1px solid rgba(26, 43, 71, 0.09);
+      background: #fff;
+      box-shadow: 0 22px 64px rgba(26, 43, 71, 0.08);
+    }
+
+    .report-table-row {
+      display: grid;
+      grid-template-columns: 0.72fr 1fr 1fr;
+      gap: 14px;
+      align-items: center;
+      border-bottom: 1px solid rgba(26, 43, 71, 0.08);
+      padding: 16px 18px;
+    }
+
+    .report-table-row:last-child { border-bottom: 0; }
+
+    .care-strip {
+      background:
+        radial-gradient(circle at 92% 12%, rgba(255, 107, 0, 0.24), transparent 34%),
+        linear-gradient(135deg, #111827 0%, #1A2B47 100%);
+      box-shadow: 0 28px 76px rgba(26, 43, 71, 0.18);
+    }
+
+    @media (max-width: 1024px) {
+      .summary-board { position: static; }
+    }
+
+    @media (max-width: 760px) {
+      .timeline-list::before { left: 22px; }
+      .timeline-item { grid-template-columns: 46px 1fr; gap: 14px; }
+      .timeline-index { width: 46px; height: 46px; border-radius: 16px; font-size: 18px; }
+      .timeline-content { padding: 20px; }
+      .report-table-row { grid-template-columns: 1fr; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="draft-shell min-h-[100dvh] pt-24 md:pt-28">
+    <div class="mx-auto max-w-6xl px-5 pt-8 sm:px-6 lg:px-8">
+      <div class="inline-flex items-center rounded-full bg-brand-dark px-4 py-2 text-sm font-black text-white shadow-lift">
+        코덱스 수정본
+      </div>
+    </div>
+
+    <section class="mx-auto max-w-6xl px-5 pb-20 pt-8 sm:px-6 md:pb-28 lg:px-8">
+      <div class="hero-card reveal mb-8 overflow-hidden rounded-[38px] p-7 md:mb-10 md:p-10">
+        <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-brand-orange/20 bg-white/80 px-4 py-2 text-sm font-black text-brand-orange shadow-sm">
+              <iconify-icon icon="solar:clipboard-list-bold-duotone" class="text-lg"></iconify-icon>
+              03 코칭 내용 시안
+            </div>
+            <h1 class="mt-5 font-display text-4xl font-black leading-tight tracking-tight text-brand-dark balance word-keep md:text-5xl lg:text-6xl">
+              코칭은 이렇게<br class="hidden sm:block">
+              진행됩니다
+            </h1>
+            <p class="mt-5 max-w-[48rem] text-lg leading-relaxed text-gray-700 word-keep md:text-xl">
+              정보를 더 얹는 시간이 아니라, 내 조건에서 가능한 선택지와 리스크를 좁히고 실행 순서를 남기는 시간입니다.
+            </p>
+          </div>
+
+          <div class="rounded-[30px] bg-brand-ink p-5 text-white shadow-lift">
+            <div class="grid gap-3 sm:grid-cols-3">
+              <div class="rounded-[22px] bg-white/10 p-4">
+                <p class="text-sm font-black text-white/58">상담 전</p>
+                <p class="mt-3 text-xl font-black leading-snug word-keep">정보는 많은데 선택지가 안 보임</p>
+              </div>
+              <div class="rounded-[22px] bg-white/10 p-4">
+                <p class="text-sm font-black text-brand-orange">상담 중</p>
+                <p class="mt-3 text-xl font-black leading-snug word-keep">조건 기준으로 선택지와 리스크 정리</p>
+              </div>
+              <div class="rounded-[22px] bg-white p-4 text-brand-dark">
+                <p class="text-sm font-black text-brand-orange">상담 후</p>
+                <p class="mt-3 text-xl font-black leading-snug word-keep">지금 할 일과 보류할 일이 명확해짐</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid gap-6 lg:grid-cols-[1fr_390px] lg:items-start">
+        <div class="timeline-panel reveal rounded-[36px] p-5 md:p-8">
+          <div class="mb-8">
+            <p class="text-sm font-black uppercase tracking-[0.16em] text-brand-orange">COACHING FLOW</p>
+            <h2 class="mt-3 font-display text-3xl font-black leading-tight text-brand-dark word-keep md:text-5xl">
+              상담 전부터 상담 후까지,<br class="hidden md:block">
+              번호가 이어지는 흐름
+            </h2>
+            <p class="mt-4 max-w-2xl text-base leading-relaxed text-gray-600 word-keep">
+              A옵션의 세로 타임라인을 기본으로 두고, 각 단계 오른쪽에는 실제로 정리되는 자료를 붙였습니다.
+            </p>
+          </div>
+
+          <div class="timeline-list">
+            <article class="timeline-item">
+              <div class="timeline-index">01</div>
+              <div class="timeline-content">
+                <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p class="text-sm font-black text-brand-orange">상담 전 · 사전 질문지</p>
+                    <h3 class="mt-2 font-display text-2xl font-black leading-snug text-brand-dark word-keep">예산과 조건을 먼저 한 장에 모읍니다</h3>
+                  </div>
+                  <span class="report-chip"><iconify-icon icon="solar:document-text-bold"></iconify-icon>사전 정리표</span>
+                </div>
+                <p class="text-base leading-relaxed text-gray-600 word-keep">
+                  현금, 대출 가능선, 가족의 우선순위, 희망 지역을 먼저 받습니다. 코칭 시간에는 기본 정보 확인보다 판단에 시간을 씁니다.
+                </p>
+                <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div class="material-chip"><iconify-icon icon="solar:wallet-money-bold"></iconify-icon>예산·대출 가능선</div>
+                  <div class="material-chip"><iconify-icon icon="solar:home-angle-bold"></iconify-icon>거주 조건 우선순위</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-index">02</div>
+              <div class="timeline-content featured">
+                <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p class="text-sm font-black text-brand-orange">상담 중 · 선택지 압축</p>
+                    <h3 class="mt-2 font-display text-2xl font-black leading-snug text-brand-dark word-keep">내 조건 기준으로 지역과 단지를 좁힙니다</h3>
+                  </div>
+                  <span class="report-chip"><iconify-icon icon="solar:map-point-bold"></iconify-icon>후보 비교표</span>
+                </div>
+                <p class="text-base leading-relaxed text-gray-600 word-keep">
+                  막연히 좋은 동네를 찾는 게 아니라, 예산 안에서 볼 만한 후보를 같은 기준으로 비교합니다. 입지, 가격, 리스크, 보류 조건을 같이 봅니다.
+                </p>
+                <div class="mt-5 rounded-[24px] bg-brand-beige p-5">
+                  <div class="grid gap-4 sm:grid-cols-3">
+                    <div>
+                      <p class="text-xs font-black text-gray-500">A안</p>
+                      <p class="mt-1 font-black text-brand-dark word-keep">예산 안정</p>
+                    </div>
+                    <div>
+                      <p class="text-xs font-black text-gray-500">B안</p>
+                      <p class="mt-1 font-black text-brand-dark word-keep">입지 우선</p>
+                    </div>
+                    <div>
+                      <p class="text-xs font-black text-gray-500">C안</p>
+                      <p class="mt-1 font-black text-brand-dark word-keep">보류 기준</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-index">03</div>
+              <div class="timeline-content">
+                <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p class="text-sm font-black text-brand-orange">상담 후 · 실행 계획</p>
+                    <h3 class="mt-2 font-display text-2xl font-black leading-snug text-brand-dark word-keep">지금 할 일과 보류할 일을 나눕니다</h3>
+                  </div>
+                  <span class="report-chip"><iconify-icon icon="solar:target-bold"></iconify-icon>액션 플랜</span>
+                </div>
+                <p class="text-base leading-relaxed text-gray-600 word-keep">
+                  사야 하는 조건, 기다려야 하는 조건, 계약 전 다시 확인할 항목을 남깁니다. 코칭이 끝난 뒤에도 바로 움직일 수 있게 정리합니다.
+                </p>
+                <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div class="material-chip"><iconify-icon icon="solar:checklist-minimalistic-bold"></iconify-icon>계약 전 체크리스트</div>
+                  <div class="material-chip"><iconify-icon icon="solar:chat-round-dots-bold"></iconify-icon>90일 카톡 질문</div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <aside class="summary-board reveal rounded-[36px] p-5 text-white md:p-6" style="transition-delay: 120ms">
+          <div class="mb-5 flex items-center justify-between">
+            <div>
+              <p class="text-sm font-black text-white/55">정리표 미리보기</p>
+              <h3 class="mt-2 font-display text-2xl font-black word-keep">코칭 후 남는 것</h3>
+            </div>
+            <span class="grid h-12 w-12 place-items-center rounded-2xl bg-brand-orange text-2xl">
+              <iconify-icon icon="solar:check-circle-bold"></iconify-icon>
+            </span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="summary-row"><strong>예산선</strong><span>감당 가능한 매수가, 대출 한도, 월 상환 부담</span></div>
+            <div class="summary-row"><strong>선택지</strong><span>볼 만한 지역·단지, 버릴 후보, 추가 확인 후보</span></div>
+            <div class="summary-row"><strong>리스크</strong><span>무리한 조건, 계약 전 확인할 항목, 보류 기준</span></div>
+            <div class="summary-row"><strong>다음 행동</strong><span>방문 순서, 협상 기준, 90일 카톡 질문 범위</span></div>
+          </div>
+
+          <div class="mt-5 rounded-[24px] bg-white p-5 text-brand-dark">
+            <p class="text-sm font-black text-brand-orange">한 줄 결론</p>
+            <p class="mt-2 text-xl font-black leading-snug word-keep">
+              “이 조건이면 지금 움직이고, 이 조건이면 기다립니다.”
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div class="reveal">
+          <div class="mb-5">
+            <span class="draft-label">03-1 패키지 · 받을 자료</span>
+          </div>
+          <div class="report-table overflow-hidden rounded-[34px]">
+            <div class="report-table-row bg-brand-beige/70 text-sm font-black text-brand-dark">
+              <span>자료</span>
+              <span>정리되는 내용</span>
+              <span>고객이 얻는 판단</span>
+            </div>
+            <div class="report-table-row">
+              <span class="report-chip"><iconify-icon icon="solar:wallet-money-bold"></iconify-icon>예산표</span>
+              <span class="text-sm leading-relaxed text-gray-600 word-keep">현금, 대출, 월 상환 부담</span>
+              <span class="font-black text-brand-dark word-keep">무리하지 않는 가격선</span>
+            </div>
+            <div class="report-table-row">
+              <span class="report-chip"><iconify-icon icon="solar:map-point-bold"></iconify-icon>후보표</span>
+              <span class="text-sm leading-relaxed text-gray-600 word-keep">지역·단지별 장단점</span>
+              <span class="font-black text-brand-dark word-keep">볼 후보와 버릴 후보</span>
+            </div>
+            <div class="report-table-row">
+              <span class="report-chip"><iconify-icon icon="solar:document-add-bold"></iconify-icon>체크표</span>
+              <span class="text-sm leading-relaxed text-gray-600 word-keep">방문·협상·계약 전 확인 항목</span>
+              <span class="font-black text-brand-dark word-keep">계약 전 실수 방지</span>
+            </div>
+            <div class="report-table-row">
+              <span class="report-chip"><iconify-icon icon="solar:target-bold"></iconify-icon>액션플랜</span>
+              <span class="text-sm leading-relaxed text-gray-600 word-keep">지금 할 일, 보류할 일, 다음 질문</span>
+              <span class="font-black text-brand-dark word-keep">상담 후 실행 순서</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="care-strip reveal rounded-[34px] p-6 text-white md:p-8" style="transition-delay: 120ms">
+          <div class="mb-7">
+            <span class="draft-label bg-white text-brand-dark">03-2 카톡 질문 · 90일 케어</span>
+            <h2 class="mt-5 font-display text-3xl font-black leading-tight word-keep md:text-4xl">
+              코칭 후에도<br>
+              질문은 이어집니다
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-white/70 word-keep">
+              실제 매물을 보거나 계약 직전이 되면 질문이 다시 생깁니다. 그래서 코칭 후 90일 동안 카톡으로 확인할 수 있게 둡니다.
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <div class="rounded-[24px] bg-white/10 p-4">
+              <p class="text-sm font-black text-brand-orange">매물 비교</p>
+              <p class="mt-2 font-black leading-snug word-keep">“이 단지와 저 단지 중 어디를 먼저 볼까요?”</p>
+            </div>
+            <div class="rounded-[24px] bg-white/10 p-4">
+              <p class="text-sm font-black text-brand-orange">대출 조건</p>
+              <p class="mt-2 font-black leading-snug word-keep">“금리가 바뀌었는데 이 가격선 유지해도 될까요?”</p>
+            </div>
+            <div class="rounded-[24px] bg-white/10 p-4">
+              <p class="text-sm font-black text-brand-orange">계약 전 체크</p>
+              <p class="mt-2 font-black leading-snug word-keep">“계약서 보내드리면 위험한 부분만 봐주실 수 있나요?”</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal mt-8 rounded-[32px] border border-brand-orange/20 bg-white p-6 shadow-soft md:mt-10 md:p-8">
+        <div class="grid gap-6 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+          <div>
+            <p class="text-sm font-black uppercase tracking-[0.16em] text-brand-orange">정리</p>
+            <h2 class="mt-3 font-display text-3xl font-black leading-tight text-brand-dark word-keep md:text-4xl">
+              정보가 아니라<br>판단 기준이 남아야 합니다
+            </h2>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-3">
+            <div class="rounded-3xl bg-brand-beige p-5">
+              <p class="font-black text-brand-dark word-keep">상담 전</p>
+              <p class="mt-2 text-sm leading-relaxed text-gray-600 word-keep">조건과 질문을 모읍니다</p>
+            </div>
+            <div class="rounded-3xl bg-brand-beige p-5">
+              <p class="font-black text-brand-dark word-keep">상담 중</p>
+              <p class="mt-2 text-sm leading-relaxed text-gray-600 word-keep">선택지와 리스크를 좁힙니다</p>
+            </div>
+            <div class="rounded-3xl bg-brand-beige p-5">
+              <p class="font-black text-brand-dark word-keep">상담 후</p>
+              <p class="mt-2 text-sm leading-relaxed text-gray-600 word-keep">실행 순서와 질문 창구가 남습니다</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var targets = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+      targets.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+  <script src="homepage-shell.js?v=d5608a0"></script>
+</body>
+</html>
