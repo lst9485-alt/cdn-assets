@@ -108,10 +108,17 @@
     .timeline-line {
       position: absolute;
       left: 49px;
-      top: 100%;
-      width: 2px;
+      top: calc(100% + 1px);
+      width: 3px;
       height: 32px;
-      background: linear-gradient(180deg, rgba(255,107,0,0.45), rgba(255,107,0,0));
+      background-image: linear-gradient(180deg, #FF6B00 50%, transparent 50%);
+      background-size: 3px 10px;
+      background-repeat: repeat-y;
+      transform: translateX(-50%);
+      margin-left: 1.5px;
+    }
+    @media (min-width: 768px) {
+      .timeline-line { height: 40px; }
     }
 
     .deliverable-chip {
@@ -668,7 +675,7 @@
                   질문지 기반으로<br>내 상태를 객관적으로 진단
                 </h2>
                 <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
-                  자산·소득·대출 한도·매수 시점·거주 조건을 사전 질문지로 정리합니다. 혼자 헤매던 게 한눈에 보입니다.
+                  자산·소득·대출 한도·매수 시점·거주 조건까지 한눈에 정리되어, 혼자 헤매던 부분이 명확해집니다.
                 </p>
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
                   <p class="text-xs font-black uppercase tracking-wider text-brand-orange mb-3">사전에 작성 · 상담에 활용</p>
@@ -685,7 +692,7 @@
                     <img class="form-phone-scroll" src="images/questionnaire-mobile.jpg" alt="사전 질문지 30개 항목 미리보기" loading="lazy">
                   </div>
                 </div>
-                <p class="form-phone-caption">실제 사전 질문지 · <span class="accent">30개 항목 · 코칭 자료로 그대로 활용</span></p>
+                <p class="form-phone-caption">실제 사전 질문지 · <span class="accent">당일 상담에 그대로 활용</span></p>
               </div>
 
             </div>
