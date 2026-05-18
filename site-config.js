@@ -306,6 +306,26 @@
             sidebarType: 'root',
             activeMatch: ['prep.html'],
             hubVisible: true
+          },
+          {
+            id: 'consult-ppt-template',
+            title: '상담 리포트 원본 PPT',
+            description: '회원별 자동 생성 28페이지 템플릿 (구글 슬라이드)',
+            href: 'https://docs.google.com/presentation/d/1ELi2NxglmzNXga8q0-ztn_AVRisZnQjM-aztyrNF7RE/edit',
+            badgeText: '외부',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            hubVisible: true
+          },
+          {
+            id: 'consult-asset-planner',
+            title: '자산 관리 & 매수 플래너',
+            description: '회원 제공 실행 시트 6탭 (자산·지역·단지·방문·매수)',
+            href: 'https://docs.google.com/spreadsheets/d/1B419dWEt3iooHRjZE9e8a7nh0iJaFLfGwqMFM3PsOsA/edit',
+            badgeText: '외부',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            hubVisible: true
           }
         ]
       },
