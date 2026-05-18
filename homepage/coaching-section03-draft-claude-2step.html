@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 코칭 섹션 시안 (2단계 + 정리표) | 우리동네 재테크</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="내집마련 1:1 코칭 랜딩페이지 03 섹션 시안 - 클로드 버전">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      important: true,
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['GmarketSans', 'Pretendard', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              orange: '#FF6B00',
+              beige: '#F5F0E8',
+              dark: '#0A0A0A',
+              ink: '#1A2B47'
+            }
+          },
+          boxShadow: {
+            soft: '0 24px 70px rgba(26, 43, 71, 0.10)',
+            lift: '0 18px 42px rgba(26, 43, 71, 0.12)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <style>
+    @font-face {
+      font-family: 'GmarketSans';
+      src: url('./fonts/GmarketSansBold.woff2') format('woff2');
+      font-weight: 700 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      margin: 0;
+      background: #fdf9ed;
+      color: #0A0A0A;
+      font-family: Pretendard, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+    .draft-shell {
+      background:
+        radial-gradient(circle at 16% 12%, rgba(255, 107, 0, 0.14), transparent 34%),
+        radial-gradient(circle at 88% 22%, rgba(26, 43, 71, 0.10), transparent 28%),
+        linear-gradient(180deg, #fffaf0 0%, #fdf9ed 38%, #f5f0e8 100%);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(.16, 1, .3, 1), transform 0.7s cubic-bezier(.16, 1, .3, 1);
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    .version-tag {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #FF6B00;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      box-shadow: 0 8px 24px rgba(255, 107, 0, 0.35);
+      z-index: 100;
+    }
+
+    .step-card {
+      position: relative;
+      border-radius: 28px;
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      background: #fff;
+      box-shadow: 0 18px 42px rgba(26, 43, 71, 0.08);
+      padding: 28px 28px 24px;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FF6B00;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      box-shadow: 0 6px 18px rgba(255, 107, 0, 0.30);
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 49px;
+      top: 100%;
+      width: 2px;
+      height: 32px;
+      background: linear-gradient(180deg, rgba(255,107,0,0.45), rgba(255,107,0,0));
+    }
+
+    .deliverable-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 107, 0, 0.10);
+      color: #0A0A0A;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .check-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #F5F0E8;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #404040;
+    }
+
+    /* V3 카톡 스타일 (본 페이지 원본) */
+    .v3-chat-phone { background: #122039; border: 14px solid #122039; border-radius: 38px; box-shadow: 0 28px 60px rgba(18,24,38,0.22); overflow: hidden; }
+    .v3-chat-screen { background: #a9bdd6; border-radius: 24px; padding: 22px 18px 26px; }
+    .v3-chat-bubble { max-width: 78%; border-radius: 18px; padding: 14px 18px; font-weight: 800; line-height: 1.55; box-shadow: 0 10px 26px rgba(18,24,38,0.08); }
+    .v3-chat-user { margin-left: auto; background: #ffe126; color: #182033; }
+    .v3-chat-coach { background: #fff; color: #182033; }
+
+    /* V3 지도 + 지역 칩 */
+    .neighborhood-map svg { width:100%; height:auto; }
+    .map-region-chip { border:2px solid #1A2B47; border-radius:999px; background:#fff; color:#1A2B47; padding:6px 12px; font-size:14px; font-weight:900; }
+
+    /* V3 지표 카드 */
+    .v3-metric-card { background: #fff; border: 1px solid rgba(18,24,38,0.08); border-radius: 12px; padding: 20px 22px; box-shadow: 0 14px 34px rgba(18,24,38,0.06); }
+    .v3-metric-card strong { display: block; font-size: clamp(1.65rem, 4vw, 2.4rem); line-height: 1; letter-spacing: -0.03em; color: #121826; }
+    .v3-metric-card span { display: block; margin-top: 8px; font-size: 0.82rem; color: #5b6475; }
+    .v3-metric-card em { display: block; margin-top: 10px; font-style: normal; font-size: 0.74rem; font-weight: 900; color: #0f9f7a; }
+
+    /* 정리표 미니 일러스트 */
+    .data-sheet {
+      position: relative;
+      background: linear-gradient(180deg, #FFF8F0 0%, #FFFAF5 100%);
+      border: 1.5px solid rgba(255, 107, 0, 0.22);
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 16px 36px rgba(255, 107, 0, 0.08);
+    }
+    .data-sheet::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(255, 107, 0, 0.025) 14px 15px);
+      pointer-events: none;
+    }
+    .data-sheet-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 12px;
+      border-bottom: 1.5px dashed rgba(255, 107, 0, 0.28);
+      margin-bottom: 12px;
+    }
+    .data-sheet-header iconify-icon {
+      font-size: 22px;
+      color: #FF6B00;
+    }
+    .data-sheet-header .title {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      color: #0A0A0A;
+      flex: 1;
+    }
+    .data-sheet-header .badge {
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #FF6B00;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 4px;
+      border-bottom: 1px solid rgba(26, 43, 71, 0.06);
+      font-size: 13px;
+    }
+    .data-row:last-child { border-bottom: none; }
+    .data-row .label {
+      color: #6b7280;
+      font-weight: 700;
+    }
+    .data-row .value {
+      color: #0A0A0A;
+      font-weight: 900;
+      font-family: Pretendard, sans-serif;
+    }
+    .data-row .value-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 107, 0, 0.12);
+      color: #FF6B00;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+    .data-sheet-footer {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1.5px dashed rgba(255, 107, 0, 0.28);
+      font-size: 11px;
+      color: #9ca3af;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-line { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="version-tag">CLAUDE · 2단계 + 정리표</div>
+
+  <main class="draft-shell min-h-[100dvh] pt-24 md:pt-28">
+    <section class="mx-auto max-w-5xl px-5 pb-20 sm:px-6 md:pb-28 lg:px-8">
+
+      <!-- 시안 라벨 -->
+      <div class="mb-8 reveal">
+        <div class="inline-flex items-center gap-2 rounded-full border border-brand-orange/20 bg-white/80 px-4 py-2 text-sm font-black text-brand-orange shadow-sm">
+          <iconify-icon icon="solar:clipboard-list-bold-duotone" class="text-lg"></iconify-icon>
+          03 코칭 내용 시안 · 2단계 + 정리표
+        </div>
+      </div>
+
+      <!-- 지도 도입 박스 -->
+      <div class="neighborhood-map mb-12 rounded-[2rem] bg-brand-beige p-6 text-[#1A2B47] md:p-8 reveal">
+        <div class="grid gap-7 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+          <div>
+            <span class="inline-block rotate-[-1deg] border-2 border-[#1A2B47] bg-[#F4C430] px-3 py-1 text-xs font-black">나한테 딱 맞는 집 구하기</span>
+            <p class="mt-5 text-5xl md:text-6xl font-display font-black leading-none word-keep">어디에<br><span class="bg-[#ff6b5b] px-2 text-white">집</span>을<br>살까요?</p>
+            <p class="mt-5 text-base leading-7 text-[#1A2B47]/75 word-keep">서울·경기·인천부터 광역시·중소도시까지,<br>내 예산에 맞는 동네와 아파트를 알려드립니다.</p>
+            <div class="mt-5 space-y-3">
+              <div>
+                <p class="text-xs font-black uppercase tracking-wider text-[#1A2B47]/65 mb-2">수도권</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="map-region-chip">서울</span><span class="map-region-chip">송파</span><span class="map-region-chip">마포</span><span class="map-region-chip">노원</span><span class="map-region-chip">강서</span><span class="map-region-chip">성남</span><span class="map-region-chip">수원</span><span class="map-region-chip">안양</span><span class="map-region-chip">인천</span><span class="map-region-chip">...</span>
+                </div>
+              </div>
+              <div>
+                <p class="text-xs font-black uppercase tracking-wider text-[#1A2B47]/65 mb-2">광역시·인구 30만↑ 도시</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="map-region-chip">부산</span><span class="map-region-chip">대구</span><span class="map-region-chip">대전</span><span class="map-region-chip">광주</span><span class="map-region-chip">울산</span><span class="map-region-chip">창원</span><span class="map-region-chip">청주</span><span class="map-region-chip">천안</span><span class="map-region-chip">전주</span><span class="map-region-chip">포항</span><span class="map-region-chip">김해</span><span class="map-region-chip">...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <svg viewBox="0 -22 480 382" role="img" aria-label="동네 후보를 비교하는 지도 일러스트">
+            <path d="M10 180 Q240 138 470 196" stroke="#fff8e7" stroke-width="34" fill="none"/><path d="M250 0 Q212 176 270 360" stroke="#fff8e7" stroke-width="28" fill="none"/>
+            <path d="M10 180 Q240 138 470 196" stroke="#1A2B47" stroke-width="2" stroke-dasharray="6 6" fill="none"/><path d="M250 0 Q212 176 270 360" stroke="#1A2B47" stroke-width="2" stroke-dasharray="6 6" fill="none"/>
+            <circle cx="130" cy="92" r="50" fill="#9adbbd"/><text x="130" y="98" text-anchor="middle" font-size="16" font-weight="900" fill="#1A2B47">공원</text>
+            <g transform="translate(12 -24)"><rect x="330" y="46" width="38" height="58" fill="#ff6b5b" stroke="#1A2B47" stroke-width="2"/><rect x="378" y="28" width="38" height="76" fill="#f4c430" stroke="#1A2B47" stroke-width="2"/><rect x="426" y="62" width="32" height="42" fill="#4ecdc4" stroke="#1A2B47" stroke-width="2"/><text x="390" y="22" text-anchor="middle" font-size="15" font-weight="900" fill="#1A2B47">A아파트</text></g>
+            <g><rect x="72" y="260" width="38" height="48" fill="#4ecdc4" stroke="#1A2B47" stroke-width="2"/><rect x="122" y="238" width="38" height="70" fill="#ff6b5b" stroke="#1A2B47" stroke-width="2"/><rect x="172" y="270" width="34" height="38" fill="#f4c430" stroke="#1A2B47" stroke-width="2"/><text x="142" y="334" text-anchor="middle" font-size="15" font-weight="900" fill="#1A2B47">B아파트</text></g>
+            <g transform="translate(238 166)"><circle r="34" fill="#1A2B47"/><circle r="52" fill="none" stroke="#1A2B47" stroke-width="2" stroke-dasharray="5 5" opacity=".35"/><circle cx="0" cy="-6" r="11" fill="#ff6b5b"/><circle cx="0" cy="-6" r="4" fill="#fff"/><path d="M0 8 L-9 -8 H9 Z" fill="#ff6b5b"/></g>
+            <rect x="200" y="228" width="76" height="20" rx="10" fill="#fff" stroke="#1A2B47" stroke-width="1.5"/>
+            <text x="238" y="242" text-anchor="middle" font-size="13" font-weight="900" fill="#1A2B47">바로 여기!</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 헤더 -->
+      <div class="mb-12 md:mb-16 reveal">
+        <p class="text-sm font-black uppercase text-brand-orange">코칭 진행 방식</p>
+        <h1 class="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-brand-dark word-keep md:text-5xl lg:text-6xl">
+          코칭은 이렇게 진행됩니다
+        </h1>
+        <p class="mt-5 max-w-2xl text-lg leading-relaxed text-gray-700 word-keep md:text-xl">
+          단계마다 받게 되는 정리표가 손에 남고,<br>
+          코칭이 끝나도 90일은 카톡으로 이어집니다.
+        </p>
+      </div>
+
+      <!-- 진행 2단계 (timeline + 정리표) -->
+      <div class="space-y-8 md:space-y-10">
+
+        <!-- step 1 -->
+        <div class="reveal">
+          <div class="step-card">
+            <div class="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:gap-10">
+
+              <div>
+                <div class="flex items-center gap-3 flex-wrap mb-4">
+                  <span class="step-number">1</span>
+                  <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep">
+                    <iconify-icon icon="solar:wallet-money-bold"></iconify-icon>진단 · 후보 압축
+                  </span>
+                </div>
+                <h2 class="font-display text-2xl md:text-3xl font-black leading-snug text-brand-dark word-keep">
+                  예산·대출과 후보 단지를<br>한 장에 정리합니다
+                </h2>
+                <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+                  사전 질문지로 예산·대출 한도와 거주 조건을 점검하고, 그 안에서 볼 만한 지역·단지를 추려 비교 기준표까지 같이 만듭니다.
+                </p>
+                <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div class="check-chip"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon>예산·대출 한도 정리</div>
+                  <div class="check-chip"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon>거주 우선순위 정리</div>
+                  <div class="check-chip"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon>예산 맞춤 후보 단지</div>
+                  <div class="check-chip"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon>단지 비교 기준표</div>
+                </div>
+                <div class="mt-5 pt-5 border-t border-brand-orange/15">
+                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">이 단계에서 받게 되는 자료</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="deliverable-chip"><iconify-icon icon="solar:document-text-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>자산관리시트</span>
+                    <span class="deliverable-chip"><iconify-icon icon="solar:checklist-minimalistic-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>후보 단지 비교표</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 정리표 미니 일러스트 -->
+              <div class="md:self-center">
+                <div class="data-sheet">
+                  <div class="data-sheet-header">
+                    <iconify-icon icon="solar:document-text-bold-duotone"></iconify-icon>
+                    <span class="title">자산관리시트</span>
+                    <span class="badge">예시</span>
+                  </div>
+                  <div class="data-row"><span class="label">총 예산</span><span class="value">5억 2,000만</span></div>
+                  <div class="data-row"><span class="label">대출 한도</span><span class="value">3억 1,000만</span></div>
+                  <div class="data-row"><span class="label">월 상환 가능</span><span class="value">180만 원</span></div>
+                  <div class="data-row"><span class="label">거주 우선순위</span><span class="value-tag">직장·학군</span></div>
+                  <div class="data-row"><span class="label">매수 타이밍</span><span class="value-tag">2026 Q3</span></div>
+                  <div class="data-sheet-footer">+ 후보 단지 비교표 1장</div>
+                </div>
+              </div>
+
+            </div>
+            <div class="timeline-line"></div>
+          </div>
+        </div>
+
+        <!-- step 2 -->
+        <div class="reveal" style="transition-delay:80ms">
+          <div class="step-card">
+            <div class="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:gap-10">
+
+              <div>
+                <div class="flex items-center gap-3 flex-wrap mb-4">
+                  <span class="step-number">2</span>
+                  <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep">
+                    <iconify-icon icon="solar:target-bold"></iconify-icon>결론 · 실행 + 90일 케어
+                  </span>
+                </div>
+                <h2 class="font-display text-2xl md:text-3xl font-black leading-snug text-brand-dark word-keep">
+                  살지·보류 결론과<br>다음 행동까지 정리합니다
+                </h2>
+                <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+                  코칭이 끝나도 바로 움직일 수 있게 결론·근거·일정을 정리해드리고, 90일간 후속 질문은 카톡으로 이어서 답해드립니다.
+                </p>
+                <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div class="check-chip"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon>살지·보류 결론과 근거</div>
+                  <div class="check-chip"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon>액션플랜과 일정표</div>
+                  <div class="check-chip"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon>이후 자산 계획 방향</div>
+                  <div class="check-chip"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon>90일 카톡 질의응답</div>
+                </div>
+                <div class="mt-5 pt-5 border-t border-brand-orange/15">
+                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">이 단계에서 받게 되는 자료</p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="deliverable-chip"><iconify-icon icon="solar:clipboard-list-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>코칭 리포트</span>
+                    <span class="deliverable-chip"><iconify-icon icon="solar:target-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>액션플랜</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 정리표 미니 일러스트 -->
+              <div class="md:self-center">
+                <div class="data-sheet">
+                  <div class="data-sheet-header">
+                    <iconify-icon icon="solar:clipboard-list-bold-duotone"></iconify-icon>
+                    <span class="title">코칭 리포트</span>
+                    <span class="badge">예시</span>
+                  </div>
+                  <div class="data-row"><span class="label">매수 판단</span><span class="value-tag" style="background:rgba(16,185,129,0.14);color:#059669;">매수 OK</span></div>
+                  <div class="data-row"><span class="label">추천 단지</span><span class="value">송파 OO 25평</span></div>
+                  <div class="data-row"><span class="label">매수가 상한</span><span class="value">11억 8,000만</span></div>
+                  <div class="data-row"><span class="label">실행 시점</span><span class="value">2026 Q3</span></div>
+                  <div class="data-row"><span class="label">90일 케어</span><span class="value-tag">카톡 무제한</span></div>
+                  <div class="data-sheet-footer">+ 액션플랜 1장</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 90일 케어 박스 -->
+      <div class="mt-12 md:mt-16 reveal">
+        <div class="rounded-[32px] border border-brand-orange/20 bg-white shadow-soft p-6 md:p-10">
+          <div class="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+            <div>
+              <p class="text-brand-orange font-display font-black text-sm tracking-[0.18em] uppercase">90 Days Care</p>
+              <h3 class="mt-3 font-display text-3xl md:text-4xl font-black leading-tight text-brand-dark word-keep">
+                코칭이 끝나도,<br>90일은 같이 갑니다
+              </h3>
+              <p class="mt-4 text-gray-600 leading-relaxed word-keep">
+                매물 비교, 대출 조건, 계약 전 체크처럼 실행 중 생기는 질문은 90일 동안 카카오톡으로 이어갑니다.
+              </p>
+              <div class="mt-6 grid grid-cols-2 gap-3 text-sm font-bold text-brand-dark">
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">매물 비교</div>
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">계약 전 체크</div>
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">대출 조건 질문</div>
+                <div class="rounded-2xl bg-brand-beige px-4 py-3">실행 순서 점검</div>
+              </div>
+            </div>
+            <div class="v3-chat-phone" aria-label="90일 카카오톡 질의응답 예시">
+              <div class="flex items-center justify-between px-5 py-4 text-white">
+                <div class="font-display font-black">← 우재</div>
+                <div class="text-sm font-bold text-white/70">● 온라인</div>
+              </div>
+              <div class="v3-chat-screen space-y-4">
+                <p class="text-center text-xs font-bold text-slate-500">2026년 4월 28일</p>
+                <div class="v3-chat-bubble v3-chat-user">안녕하세요! 분당쪽 매물 보고 있는데 지금 사도 될까요?</div>
+                <div class="v3-chat-bubble v3-chat-coach">안녕하세요 :) 어떤 단지 보고 계셨어요?</div>
+                <div class="v3-chat-bubble v3-chat-user">정자동 OO마을이요. 12억 정도예요</div>
+                <div class="v3-chat-bubble v3-chat-coach">예산이랑 대출 어떻게 잡으셨어요? 사전 질문지 기준으로 같이 볼게요.</div>
+                <div class="v3-chat-bubble v3-chat-coach">
+                  <span class="text-brand-orange">사전 질문지</span><br>
+                  예산·대출·우선순위 1분 체크
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 신뢰 지표 -->
+      <div class="mt-10 md:mt-12 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4 reveal">
+        <div class="v3-metric-card"><strong>150건+</strong><span>1:1 코칭</span><em>+ 10년 경험</em></div>
+        <div class="v3-metric-card"><strong>4.97</strong><span>만족도 / 5.0</span><em>+ 실제 후기 기반</em></div>
+        <div class="v3-metric-card"><strong>25%</strong><span>매수 보류 비율</span><em>+ 필요한 말만</em></div>
+        <div class="v3-metric-card"><strong>90일</strong><span>코칭 후 케어</span><em>+ 카톡 무제한</em></div>
+      </div>
+
+      <!-- 클로징 -->
+      <div class="mt-10 md:mt-12 reveal">
+        <div class="rounded-[28px] border border-brand-orange/20 bg-white px-6 py-6 text-center shadow-soft md:px-10 md:py-8">
+          <p class="font-display text-2xl md:text-3xl font-black text-brand-dark word-keep">
+            2단계가 끝나면, 막연한 고민이 <span class="text-brand-orange">판단 기준</span>으로 바뀝니다
+          </p>
+          <p class="mt-3 text-gray-500 word-keep">
+            진단부터 실행까지 한 번에 정리하고, 코칭 후 최대 90일 동안 카톡으로 질문을 이어갈 수 있습니다.
+          </p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var targets = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12 });
+      targets.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+</body>
+</html>
