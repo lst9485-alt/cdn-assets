@@ -204,13 +204,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 9px 4px;
-      border-bottom: 1px solid rgba(26, 43, 71, 0.06);
-      font-size: 13px;
+      padding: 10px 4px;
+      border-bottom: 1px solid rgba(26, 43, 71, 0.08);
+      font-size: 14px;
     }
     .data-row:last-child { border-bottom: none; }
     .data-row .label {
-      color: #6b7280;
+      color: #4b5563;
       font-weight: 700;
     }
     .data-row .value {
@@ -222,19 +222,19 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      background: rgba(255, 107, 0, 0.12);
+      background: rgba(255, 107, 0, 0.14);
       color: #FF6B00;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 999px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 900;
     }
     .data-sheet-footer {
       margin-top: 12px;
       padding-top: 10px;
       border-top: 1.5px dashed rgba(255, 107, 0, 0.28);
-      font-size: 11px;
-      color: #9ca3af;
+      font-size: 12px;
+      color: #6b7280;
       text-align: right;
       font-weight: 700;
     }
@@ -279,22 +279,20 @@
     .resource-mini .title {
       font-family: GmarketSans, Pretendard, sans-serif;
       font-weight: 900;
-      font-size: 13.5px;
+      font-size: 15px;
       color: #0A0A0A;
       line-height: 1.35;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       word-break: keep-all;
     }
     .resource-mini .desc {
-      font-size: 11.5px;
-      color: #6b7280;
-      line-height: 1.5;
+      font-size: 13px;
+      color: #4b5563;
+      line-height: 1.55;
+      font-weight: 500;
       word-break: keep-all;
     }
-    .resource-mini.r-blue { --accent: #0077C8; --accent-bg: rgba(0,119,200,0.10); }
-    .resource-mini.r-orange { --accent: #FF6B00; --accent-bg: rgba(255,107,0,0.10); }
-    .resource-mini.r-green { --accent: #059669; --accent-bg: rgba(5,150,105,0.10); }
-    .resource-mini.r-purple { --accent: #7C3AED; --accent-bg: rgba(124,58,237,0.10); }
+    /* 단일 오렌지 톤으로 통일 (--accent 기본값 사용) */
 
     /* 카톡 Q&A 미니 (V3 chat 응용) */
     .qa-chat-mini {
@@ -340,11 +338,11 @@
     .qa-bubble {
       max-width: 82%;
       border-radius: 16px;
-      padding: 10px 13px;
-      font-size: 12.5px;
+      padding: 11px 14px;
+      font-size: 13.5px;
       font-weight: 700;
-      line-height: 1.5;
-      margin-bottom: 8px;
+      line-height: 1.55;
+      margin-bottom: 9px;
       color: #182033;
       word-break: keep-all;
     }
@@ -415,14 +413,15 @@
     .roadmap-6 .step .name {
       font-family: GmarketSans, Pretendard, sans-serif;
       font-weight: 900;
-      font-size: 13.5px;
+      font-size: 15px;
       color: #0A0A0A;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
     .roadmap-6 .step .desc {
-      font-size: 11px;
-      color: #6b7280;
+      font-size: 12.5px;
+      color: #4b5563;
       line-height: 1.45;
+      font-weight: 500;
       word-break: keep-all;
     }
     .roadmap-6 .focus-tag {
@@ -431,8 +430,8 @@
       border: 1.5px dashed rgba(255, 107, 0, 0.45);
       color: #0A0A0A;
       border-radius: 12px;
-      padding: 10px 14px;
-      font-size: 12px;
+      padding: 12px 16px;
+      font-size: 13.5px;
       font-weight: 700;
       text-align: center;
       margin-top: 4px;
@@ -440,13 +439,13 @@
     }
     .roadmap-6 .focus-tag strong { color: #FF6B00; font-weight: 900; }
 
-    /* 갈아타기 로드맵 (PPT 슬라이드 25) — 글자·디자인 강화 */
+    /* 갈아타기 로드맵 (PPT 슬라이드 25) — 오렌지 톤 */
     .growth-path {
-      background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
-      border: 1.5px solid rgba(5, 150, 105, 0.22);
+      background: linear-gradient(135deg, #FFF8F0 0%, #FFEFE0 100%);
+      border: 1.5px solid rgba(255, 107, 0, 0.22);
       border-radius: 24px;
       padding: 24px 22px;
-      box-shadow: 0 20px 48px rgba(5, 150, 105, 0.14);
+      box-shadow: 0 20px 48px rgba(255, 107, 0, 0.14);
     }
     .growth-path h4 {
       font-family: GmarketSans, Pretendard, sans-serif;
@@ -459,7 +458,7 @@
       gap: 10px;
       word-break: keep-all;
     }
-    .growth-path h4 iconify-icon { color: #059669; font-size: 26px; }
+    .growth-path h4 iconify-icon { color: #FF6B00; font-size: 26px; }
     .growth-row {
       display: flex;
       align-items: stretch;
@@ -469,23 +468,23 @@
     .growth-node {
       flex: 1;
       background: #fff;
-      border: 2px solid rgba(5, 150, 105, 0.30);
+      border: 2px solid rgba(255, 107, 0, 0.30);
       border-radius: 14px;
       padding: 14px 10px;
       text-align: center;
-      box-shadow: 0 8px 18px rgba(5, 150, 105, 0.10);
+      box-shadow: 0 8px 18px rgba(255, 107, 0, 0.10);
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
     .growth-node.is-end {
-      background: linear-gradient(135deg, #059669 0%, #047857 100%);
-      border-color: #047857;
+      background: linear-gradient(135deg, #FF6B00 0%, #E55A00 100%);
+      border-color: #E55A00;
       color: #fff;
     }
     .growth-node .label {
       font-size: 11px;
-      color: #059669;
+      color: #FF6B00;
       font-weight: 900;
       letter-spacing: 0.06em;
       margin-bottom: 6px;
@@ -503,7 +502,7 @@
     .growth-arrow {
       display: grid;
       place-items: center;
-      color: #059669;
+      color: #FF6B00;
       font-size: 24px;
       font-weight: 900;
     }
@@ -511,7 +510,7 @@
       margin-top: 14px;
       padding: 14px 16px;
       background: #fff;
-      border: 1.5px solid rgba(5, 150, 105, 0.22);
+      border: 1.5px solid rgba(255, 107, 0, 0.22);
       border-radius: 12px;
       font-size: 13px;
       color: #1f2937;
@@ -519,7 +518,7 @@
       line-height: 1.6;
       word-break: keep-all;
     }
-    .growth-note strong { color: #059669; font-weight: 900; }
+    .growth-note strong { color: #FF6B00; font-weight: 900; }
     @media (max-width: 480px) {
       .growth-node .name { font-size: 13px; }
       .growth-arrow { font-size: 20px; }
@@ -615,7 +614,7 @@
                   자산·소득·대출 한도·매수 시점·거주 조건을 사전 질문지로 정리합니다. 혼자 헤매던 게 한눈에 보입니다.
                 </p>
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
-                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">사전에 작성 · 상담에 활용</p>
+                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange mb-3">사전에 작성 · 상담에 활용</p>
                   <div class="flex flex-wrap gap-2">
                     <span class="deliverable-chip"><iconify-icon icon="solar:document-text-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>30개 항목 사전 질문지</span>
                   </div>
@@ -664,7 +663,7 @@
                   Google Meet 50분 1:1로 매수 판단·후보 단지·대출 구조를 정리합니다. 코칭이 끝나면 본인 상황에 맞춰 작성된 자료 4종을 받습니다.
                 </p>
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
-                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">상담 후 받게 되는 자료</p>
+                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange mb-3">상담 후 받게 되는 자료</p>
                   <div class="flex flex-wrap gap-2">
                     <span class="deliverable-chip"><iconify-icon icon="solar:folder-with-files-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>맞춤 자료 4종</span>
                   </div>
@@ -674,22 +673,22 @@
               <!-- 자료 4종 미니 카드 2x2 -->
               <div class="md:self-center">
                 <div class="resource-grid">
-                  <div class="resource-mini r-orange">
+                  <div class="resource-mini">
                     <div class="icon-box"><iconify-icon icon="solar:chart-square-bold"></iconify-icon></div>
                     <div class="title">자산 관리 &amp;<br>매수 플래너</div>
                     <div class="desc">자산·지역·단지·방문·매수까지 실행하는 시트 6탭</div>
                   </div>
-                  <div class="resource-mini r-blue">
+                  <div class="resource-mini">
                     <div class="icon-box"><iconify-icon icon="solar:calculator-bold"></iconify-icon></div>
                     <div class="title">재무 계산기</div>
                     <div class="desc">매수 가능 금액·월 상환·갈아타기 시뮬레이션</div>
                   </div>
-                  <div class="resource-mini r-purple">
+                  <div class="resource-mini">
                     <div class="icon-box"><iconify-icon icon="solar:presentation-graph-bold"></iconify-icon></div>
                     <div class="title">상담 리포트</div>
                     <div class="desc">개인 상황 기반 28페이지 코칭 PPT</div>
                   </div>
-                  <div class="resource-mini r-green">
+                  <div class="resource-mini">
                     <div class="icon-box"><iconify-icon icon="solar:document-text-bold"></iconify-icon></div>
                     <div class="title">솔루션 실행<br>요약본</div>
                     <div class="desc">상담 스크립트·핵심 인사이트·실천 과제 한 장</div>
@@ -721,7 +720,7 @@
                   내집마련 6단계 로드맵에서 <span class="font-bold text-brand-orange">"지금 어디에 집중할지"</span> 같이 정합니다. 막연한 고민이 다음 행동으로 바뀝니다.
                 </p>
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
-                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">상담에서 같이 정리하는 것</p>
+                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange mb-3">상담에서 같이 정리하는 것</p>
                   <div class="flex flex-wrap gap-2">
                     <span class="deliverable-chip"><iconify-icon icon="solar:map-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>현재 집중 단계</span>
                     <span class="deliverable-chip"><iconify-icon icon="solar:calendar-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>다음 행동·일정</span>
@@ -766,7 +765,7 @@
                   내집마련에서 끝이 아니라 <span class="font-bold text-brand-orange">자산 축적 · 상급지 갈아타기</span>까지 같이 그립니다. 상담 후 최대 6개월 카톡으로 막힐 때마다 답해드립니다.
                 </p>
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
-                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">코칭 이후 케어</p>
+                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange mb-3">코칭 이후 케어</p>
                   <div class="flex flex-wrap gap-2">
                     <span class="deliverable-chip" style="background:rgba(16,185,129,0.10);color:#059669;"><iconify-icon icon="solar:chat-round-dots-bold-duotone" class="text-lg" style="color:#059669;"></iconify-icon>최대 6개월 카톡 케어</span>
                   </div>
