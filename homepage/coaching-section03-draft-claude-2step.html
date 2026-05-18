@@ -108,14 +108,12 @@
     .timeline-line {
       position: absolute;
       left: 49px;
-      top: calc(100% + 1px);
-      width: 3px;
+      top: 100%;
+      width: 2px;
       height: 32px;
-      background-image: linear-gradient(180deg, #FF6B00 50%, transparent 50%);
-      background-size: 3px 10px;
-      background-repeat: repeat-y;
+      background: linear-gradient(180deg, rgba(255,107,0,0.55), rgba(255,107,0,0));
       transform: translateX(-50%);
-      margin-left: 1.5px;
+      margin-left: 1px;
     }
     @media (min-width: 768px) {
       .timeline-line { height: 40px; }
@@ -680,7 +678,7 @@
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
                   <p class="text-xs font-black uppercase tracking-wider text-brand-orange mb-3">사전에 작성 · 상담에 활용</p>
                   <div class="flex flex-wrap gap-2">
-                    <span class="deliverable-chip"><iconify-icon icon="solar:document-text-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>30개 항목 사전 질문지</span>
+                    <span class="deliverable-chip"><iconify-icon icon="solar:document-text-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>사전 질문지 작성</span>
                   </div>
                 </div>
               </div>
@@ -692,7 +690,7 @@
                     <img class="form-phone-scroll" src="images/questionnaire-mobile.jpg" alt="사전 질문지 30개 항목 미리보기" loading="lazy">
                   </div>
                 </div>
-                <p class="form-phone-caption">실제 사전 질문지 · <span class="accent">당일 상담에 그대로 활용</span></p>
+                <p class="form-phone-caption">사전 질문지</p>
               </div>
 
             </div>
