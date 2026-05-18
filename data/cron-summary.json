@@ -1,7 +1,7 @@
 {
-  "updated": "2026-05-18T06:00:34.547021+09:00",
+  "updated": "2026-05-19T06:00:43.120063+09:00",
   "summary": {
-    "정상": 8,
+    "정상": 9,
     "정리 필요": 0,
     "꺼짐": 5
   },
@@ -228,6 +228,20 @@
       "time": "07:20",
       "status": "정상",
       "script": "market-daily-report.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "ip-audit-refresh",
+      "title": "ip-audit-refresh",
+      "room": "확인 필요",
+      "description": "회사 IP 감사 테이블 자동 갱신 — ip_audit_match 재생성",
+      "cron": "17 * * * *",
+      "day": "매일",
+      "time": "*:17",
+      "status": "정상",
+      "script": "ip-audit-refresh.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
