@@ -361,130 +361,169 @@
       font-weight: 900;
     }
 
-    /* 6단계 로드맵 인포그래픽 (PPT 슬라이드 14) */
+    /* 6단계 로드맵 인포그래픽 (PPT 슬라이드 14) — 밝은 톤 */
     .roadmap-6 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      background: linear-gradient(135deg, #1A2B47 0%, #0A0A0A 100%);
+      background: linear-gradient(180deg, #FFFAF2 0%, #FFF4E6 100%);
+      border: 1.5px solid rgba(255, 107, 0, 0.22);
       border-radius: 22px;
       padding: 18px;
       position: relative;
-      box-shadow: 0 18px 42px rgba(26, 43, 71, 0.18);
+      box-shadow: 0 18px 42px rgba(255, 107, 0, 0.10);
     }
     .roadmap-6 .step {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      border-radius: 12px;
-      padding: 12px 10px;
+      background: #fff;
+      border: 1.5px solid rgba(255, 107, 0, 0.18);
+      border-radius: 14px;
+      padding: 14px 10px 12px;
       text-align: center;
       position: relative;
+      box-shadow: 0 6px 14px rgba(255, 107, 0, 0.06);
+    }
+    .roadmap-6 .step.is-now {
+      background: #FFF4E6;
+      border-color: #FF6B00;
+      box-shadow: 0 10px 24px rgba(255, 107, 0, 0.18);
+    }
+    .roadmap-6 .step.is-now::after {
+      content: '진행 중';
+      position: absolute;
+      top: -9px; left: 50%;
+      transform: translateX(-50%);
+      background: #FF6B00;
+      color: #fff;
+      font-size: 9.5px;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
     }
     .roadmap-6 .step .num {
       display: inline-block;
-      width: 22px; height: 22px;
+      width: 26px; height: 26px;
       background: #FF6B00;
       color: #fff;
       border-radius: 50%;
       font-family: GmarketSans, Pretendard, sans-serif;
       font-weight: 900;
-      font-size: 12px;
-      line-height: 22px;
-      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 26px;
+      margin-bottom: 8px;
     }
     .roadmap-6 .step .name {
       font-family: GmarketSans, Pretendard, sans-serif;
       font-weight: 900;
-      font-size: 12.5px;
-      color: #fff;
+      font-size: 13.5px;
+      color: #0A0A0A;
       margin-bottom: 4px;
     }
     .roadmap-6 .step .desc {
-      font-size: 10.5px;
-      color: rgba(255, 255, 255, 0.62);
+      font-size: 11px;
+      color: #6b7280;
       line-height: 1.45;
       word-break: keep-all;
     }
-    .roadmap-6 .now-tag {
+    .roadmap-6 .focus-tag {
       grid-column: 1 / -1;
-      background: rgba(255, 107, 0, 0.14);
-      border: 1px dashed rgba(255, 107, 0, 0.5);
-      color: #FFB780;
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 11px;
-      font-weight: 800;
+      background: #fff;
+      border: 1.5px dashed rgba(255, 107, 0, 0.45);
+      color: #0A0A0A;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 700;
       text-align: center;
       margin-top: 4px;
+      line-height: 1.5;
     }
-    .roadmap-6 .now-tag strong { color: #FF6B00; }
+    .roadmap-6 .focus-tag strong { color: #FF6B00; font-weight: 900; }
 
-    /* 갈아타기 로드맵 (PPT 슬라이드 25) */
+    /* 갈아타기 로드맵 (PPT 슬라이드 25) — 글자·디자인 강화 */
     .growth-path {
-      background: linear-gradient(135deg, #FFF8F0 0%, #FFEFE0 100%);
-      border: 1.5px solid rgba(255, 107, 0, 0.22);
-      border-radius: 22px;
-      padding: 20px 18px;
-      box-shadow: 0 18px 42px rgba(255, 107, 0, 0.10);
+      background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+      border: 1.5px solid rgba(5, 150, 105, 0.22);
+      border-radius: 24px;
+      padding: 24px 22px;
+      box-shadow: 0 20px 48px rgba(5, 150, 105, 0.14);
     }
     .growth-path h4 {
       font-family: GmarketSans, Pretendard, sans-serif;
       font-weight: 900;
-      font-size: 14px;
+      font-size: 17px;
       color: #0A0A0A;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      word-break: keep-all;
     }
-    .growth-path h4 iconify-icon { color: #FF6B00; font-size: 20px; }
+    .growth-path h4 iconify-icon { color: #059669; font-size: 26px; }
     .growth-row {
       display: flex;
-      align-items: center;
+      align-items: stretch;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
     .growth-node {
       flex: 1;
       background: #fff;
-      border: 1.5px solid rgba(255, 107, 0, 0.28);
-      border-radius: 12px;
-      padding: 10px 8px;
+      border: 2px solid rgba(5, 150, 105, 0.30);
+      border-radius: 14px;
+      padding: 14px 10px;
       text-align: center;
-      box-shadow: 0 6px 14px rgba(255, 107, 0, 0.08);
+      box-shadow: 0 8px 18px rgba(5, 150, 105, 0.10);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .growth-node.is-end {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      border-color: #047857;
+      color: #fff;
     }
     .growth-node .label {
-      font-size: 10px;
-      color: #FF6B00;
+      font-size: 11px;
+      color: #059669;
       font-weight: 900;
-      letter-spacing: 0.04em;
-      margin-bottom: 3px;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
     }
+    .growth-node.is-end .label { color: rgba(255,255,255,0.85); }
     .growth-node .name {
       font-family: GmarketSans, Pretendard, sans-serif;
       font-weight: 900;
-      font-size: 12px;
+      font-size: 15px;
       color: #0A0A0A;
       line-height: 1.3;
       word-break: keep-all;
     }
+    .growth-node.is-end .name { color: #fff; }
     .growth-arrow {
-      color: #FF6B00;
-      font-size: 18px;
+      display: grid;
+      place-items: center;
+      color: #059669;
+      font-size: 24px;
       font-weight: 900;
     }
     .growth-note {
-      margin-top: 12px;
-      padding: 10px 12px;
-      background: rgba(255, 107, 0, 0.08);
-      border-radius: 10px;
-      font-size: 11.5px;
-      color: #6b7280;
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1.5px solid rgba(5, 150, 105, 0.22);
+      border-radius: 12px;
+      font-size: 13px;
+      color: #1f2937;
       font-weight: 700;
-      line-height: 1.5;
+      line-height: 1.6;
       word-break: keep-all;
     }
-    .growth-note strong { color: #FF6B00; }
+    .growth-note strong { color: #059669; font-weight: 900; }
+    @media (max-width: 480px) {
+      .growth-node .name { font-size: 13px; }
+      .growth-arrow { font-size: 20px; }
+    }
 
     @media (max-width: 768px) {
       .timeline-line { display: none; }
@@ -578,7 +617,7 @@
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
                   <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">사전에 작성 · 상담에 활용</p>
                   <div class="flex flex-wrap gap-2">
-                    <span class="deliverable-chip"><iconify-icon icon="solar:document-text-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>사전 질문지 (15문항)</span>
+                    <span class="deliverable-chip"><iconify-icon icon="solar:document-text-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>30개 항목 사전 질문지</span>
                   </div>
                 </div>
               </div>
@@ -619,15 +658,15 @@
                   </span>
                 </div>
                 <h2 class="font-display text-2xl md:text-3xl font-black leading-snug text-brand-dark word-keep">
-                  상급지 갈아타기까지 고려해<br>지금 내 최선의 선택을 찾습니다
+                  지금 사도 될지부터<br>갈아타기까지 같이 그립니다
                 </h2>
                 <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
-                  Google Meet 50분 1:1로 매수 판단·후보 단지·대출 구조까지 같이 설계하고, 끝나면 본인 데이터로 채워진 자료 4종을 받습니다.
+                  Google Meet 50분 1:1로 매수 판단·후보 단지·대출 구조를 정리합니다. 코칭이 끝나면 본인 상황에 맞춰 작성된 자료 4종을 받습니다.
                 </p>
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
-                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">상담 후 받게 되는 맞춤 자료</p>
+                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">상담 후 받게 되는 자료</p>
                   <div class="flex flex-wrap gap-2">
-                    <span class="deliverable-chip"><iconify-icon icon="solar:folder-with-files-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>자료 4종 (개인 데이터 채움)</span>
+                    <span class="deliverable-chip"><iconify-icon icon="solar:folder-with-files-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>맞춤 자료 4종</span>
                   </div>
                 </div>
               </div>
@@ -679,13 +718,13 @@
                   상담 후 스스로 실행할<br>구체적 가이드까지
                 </h2>
                 <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
-                  내집마련 6단계 로드맵으로 "지금 어디에 집중해야 하는지" 명확하게 짚어드립니다. 다음 행동·데드라인까지 정리합니다.
+                  내집마련 6단계 로드맵에서 <span class="font-bold text-brand-orange">"지금 어디에 집중할지"</span> 같이 정합니다. 막연한 고민이 다음 행동으로 바뀝니다.
                 </p>
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
-                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">상담 후 실행 자료</p>
+                  <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">상담에서 같이 정리하는 것</p>
                   <div class="flex flex-wrap gap-2">
-                    <span class="deliverable-chip"><iconify-icon icon="solar:map-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>1주일 내 할 일</span>
-                    <span class="deliverable-chip"><iconify-icon icon="solar:checklist-minimalistic-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>매월 자산관리·시세 트래킹</span>
+                    <span class="deliverable-chip"><iconify-icon icon="solar:map-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>현재 집중 단계</span>
+                    <span class="deliverable-chip"><iconify-icon icon="solar:calendar-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>다음 행동·일정</span>
                   </div>
                 </div>
               </div>
@@ -694,12 +733,12 @@
               <div class="md:self-center">
                 <div class="roadmap-6">
                   <div class="step"><span class="num">1</span><div class="name">예산체크</div><div class="desc">종잣돈·대출 한도로 예산 확정</div></div>
-                  <div class="step"><span class="num">2</span><div class="name">매매방법</div><div class="desc">일반매매·청약·재개발 선정</div></div>
-                  <div class="step"><span class="num">3</span><div class="name">지역·단지</div><div class="desc">교통·환경·학군·호재 평가</div></div>
+                  <div class="step"><span class="num">2</span><div class="name">매매방법</div><div class="desc">일반매매·청약·재개발</div></div>
+                  <div class="step is-now"><span class="num">3</span><div class="name">지역·단지</div><div class="desc">교통·환경·학군·호재</div></div>
                   <div class="step"><span class="num">4</span><div class="name">부동산방문</div><div class="desc">단지 내 부동산 전부 방문</div></div>
                   <div class="step"><span class="num">5</span><div class="name">계약</div><div class="desc">2개↑ 물건 가격협상</div></div>
                   <div class="step"><span class="num">6</span><div class="name">잔금·입주</div><div class="desc">취등록세·대출·인테리어</div></div>
-                  <div class="now-tag">"지금은 <strong>3단계</strong>에 집중하고, 완료되는 대로 다음으로." <span style="opacity:0.7">— 데드라인 함께 설정</span></div>
+                  <div class="focus-tag">예시: 지금 <strong>3단계 지역·단지</strong> 에 집중. 완료되면 바로 4단계로.</div>
                 </div>
               </div>
 
@@ -724,13 +763,12 @@
                   매수 이후 자산을 키울<br>구체적인 방법까지
                 </h2>
                 <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
-                  내집마련에서 끝이 아니라 <span class="font-bold text-brand-orange">자산 축적 · 상급지 갈아타기</span>까지 같이 그립니다. 상담 후 3개월(후기 작성 시 6개월) 카톡으로 막힐 때마다 답해드립니다.
+                  내집마련에서 끝이 아니라 <span class="font-bold text-brand-orange">자산 축적 · 상급지 갈아타기</span>까지 같이 그립니다. 상담 후 최대 6개월 카톡으로 막힐 때마다 답해드립니다.
                 </p>
                 <div class="mt-5 pt-5 border-t border-brand-orange/15">
                   <p class="text-xs font-black uppercase tracking-wider text-brand-orange/70 mb-3">코칭 이후 케어</p>
                   <div class="flex flex-wrap gap-2">
-                    <span class="deliverable-chip"><iconify-icon icon="solar:chat-round-dots-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>3개월 카톡 Q&amp;A</span>
-                    <span class="deliverable-chip" style="background:rgba(16,185,129,0.10);color:#059669;"><iconify-icon icon="solar:star-bold-duotone" class="text-lg" style="color:#059669;"></iconify-icon>후기 작성 시 6개월</span>
+                    <span class="deliverable-chip" style="background:rgba(16,185,129,0.10);color:#059669;"><iconify-icon icon="solar:chat-round-dots-bold-duotone" class="text-lg" style="color:#059669;"></iconify-icon>최대 6개월 카톡 케어</span>
                   </div>
                 </div>
               </div>
@@ -744,10 +782,10 @@
                     <span class="growth-arrow">→</span>
                     <div class="growth-node"><div class="label">STEP 2</div><div class="name">자산 축적</div></div>
                     <span class="growth-arrow">→</span>
-                    <div class="growth-node"><div class="label">STEP 3</div><div class="name">상급지 이동</div></div>
+                    <div class="growth-node is-end"><div class="label">STEP 3</div><div class="name">상급지 이동</div></div>
                   </div>
                   <div class="growth-note">
-                    <strong>★</strong> 갈아타기는 시장 보합/하락기 전에 선제적으로 준비. 매수 성공 이후에 멈추지 않고 <strong>자산을 키우는 구체적인 방법</strong>까지 알려드립니다.
+                    <strong>★</strong> 갈아타기는 시장 보합·하락기 전에 선제적으로 준비. 매수 성공 이후에 멈추지 않고 <strong>자산을 키우는 구체적인 방법</strong>까지 알려드립니다.
                   </div>
                 </div>
               </div>
