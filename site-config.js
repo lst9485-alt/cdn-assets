@@ -297,8 +297,8 @@
           },
           {
             id: 'consult-prep',
-            title: '상담 준비 자료',
-            description: '재무 현황 시각화 (Chart.js)',
+            title: '재무 계산기',
+            description: '매수가·월상환·갈아타기 시뮬레이션',
             href: 'consult/prep.html',
             badgeText: 'LIVE',
             badgeTone: 'live',
@@ -309,8 +309,8 @@
           },
           {
             id: 'consult-ppt-template',
-            title: '상담 리포트 원본 PPT',
-            description: '회원별 자동 생성 28페이지 템플릿 (구글 슬라이드)',
+            title: '상담 리포트 PPT',
+            description: '회원별 28페이지 자동 생성 템플릿',
             href: 'https://docs.google.com/presentation/d/1ELi2NxglmzNXga8q0-ztn_AVRisZnQjM-aztyrNF7RE/edit',
             badgeText: '외부',
             badgeTone: 'soon',
@@ -319,8 +319,8 @@
           },
           {
             id: 'consult-asset-planner',
-            title: '자산 관리 & 매수 플래너',
-            description: '회원 제공 실행 시트 6탭 (자산·지역·단지·방문·매수)',
+            title: '자산·매수 플래너',
+            description: '회원 제공 실행 시트 6탭',
             href: 'https://docs.google.com/spreadsheets/d/1B419dWEt3iooHRjZE9e8a7nh0iJaFLfGwqMFM3PsOsA/edit',
             badgeText: '외부',
             badgeTone: 'soon',
