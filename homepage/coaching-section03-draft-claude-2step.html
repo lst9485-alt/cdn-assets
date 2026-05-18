@@ -155,6 +155,63 @@
     .v3-metric-card span { display: block; margin-top: 8px; font-size: 0.82rem; color: #5b6475; }
     .v3-metric-card em { display: block; margin-top: 10px; font-style: normal; font-size: 0.74rem; font-weight: 900; color: #0f9f7a; }
 
+    /* 사전질문지 폰 mockup + 자동 스크롤 */
+    .form-phone {
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto;
+      background: #0A0A0A;
+      border: 12px solid #0A0A0A;
+      border-radius: 38px;
+      box-shadow: 0 28px 60px rgba(10, 10, 10, 0.22);
+      overflow: hidden;
+      position: relative;
+    }
+    .form-phone::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 18px;
+      background: #0A0A0A;
+      border-radius: 0 0 14px 14px;
+      z-index: 10;
+    }
+    .form-phone-screen {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    .form-phone-scroll {
+      width: 100%;
+      display: block;
+      animation: form-scroll 30s cubic-bezier(.4, 0, .4, 1) infinite;
+    }
+    @keyframes form-scroll {
+      0%, 8% { transform: translateY(0); }
+      92%, 100% { transform: translateY(calc(-100% + 480px)); }
+    }
+    .form-phone:hover .form-phone-scroll {
+      animation-play-state: paused;
+    }
+    .form-phone-caption {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: #6b7280;
+      letter-spacing: 0.02em;
+    }
+    .form-phone-caption .accent {
+      color: #FF6B00;
+      font-weight: 900;
+    }
+
     /* 정리표 미니 일러스트 */
     .data-sheet {
       position: relative;
@@ -621,22 +678,14 @@
                 </div>
               </div>
 
-              <!-- 정리표 미니: 사전 질문지 정리 -->
+              <!-- 사전 질문지 폰 mockup (자동 스크롤) -->
               <div class="md:self-center">
-                <div class="data-sheet">
-                  <div class="data-sheet-header">
-                    <iconify-icon icon="solar:document-text-bold-duotone"></iconify-icon>
-                    <span class="title">사전 질문지 정리</span>
-                    <span class="badge">예시</span>
+                <div class="form-phone" aria-label="사전 질문지 미리보기">
+                  <div class="form-phone-screen">
+                    <img class="form-phone-scroll" src="images/questionnaire-mobile.jpg" alt="사전 질문지 30개 항목 미리보기" loading="lazy">
                   </div>
-                  <div class="data-row"><span class="label">매수 시점</span><span class="value-tag">3~6개월 내</span></div>
-                  <div class="data-row"><span class="label">보유 현금</span><span class="value">8,500만</span></div>
-                  <div class="data-row"><span class="label">총 예산 (대출제외)</span><span class="value">5억 2,000만</span></div>
-                  <div class="data-row"><span class="label">생각하는 대출금액</span><span class="value">3억</span></div>
-                  <div class="data-row"><span class="label">연소득 (세후)</span><span class="value">6,800만</span></div>
-                  <div class="data-row"><span class="label">관심 지역 1순위</span><span class="value-tag">송파</span></div>
-                  <div class="data-sheet-footer">+ 가족구성·투자 성향·5~10년 계획 포함</div>
                 </div>
+                <p class="form-phone-caption">실제 사전 질문지 · <span class="accent">상담 전 10분 작성</span></p>
               </div>
 
             </div>
