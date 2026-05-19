@@ -726,6 +726,20 @@
             sidebarType: 'root',
             activeMatch: ['coaching-consultant-options.html'],
             hubVisible: true
+          },
+          {
+            id: 'archive-coaching-consultant-codex-options',
+            archiveNo: 'A014',
+            modifiedDate: '2026-05-19',
+            title: '코칭 04 컨설턴트 소개 Codex 새 시안',
+            description: '기존 Claude 시안과 분리한 Codex 신규 3안 · 동네 전문가형/증거 보드형/판단 스토리형',
+            href: 'homepage/coaching-consultant-codex-options.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['coaching-consultant-codex-options.html'],
+            hubVisible: true
           }
         ]
       },

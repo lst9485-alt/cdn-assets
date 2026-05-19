@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>컨설턴트 소개 Codex 새 시안 3개 | 우리동네 재테크</title>
+  <meta name="description" content="내집마련 1:1 코칭 컨설턴트 소개 섹션 Codex 신규 시안 3개">
+  <meta name="robots" content="noindex,nofollow">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <script>
+    tailwind.config = {
+      important: true,
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            display: ['GmarketSans', 'Pretendard', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    @font-face {
+      font-family: GmarketSans;
+      src: url('./fonts/GmarketSansBold.woff2') format('woff2');
+      font-weight: 700 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      --orange: #FF6B00;
+      --beige: #F5F0E8;
+      --ink: #0A0A0A;
+      --muted: rgba(10, 10, 10, .58);
+      --line: rgba(10, 10, 10, .1);
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: #f8f3ea;
+      color: var(--ink);
+      font-family: Pretendard, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img { display: block; max-width: 100%; }
+    [data-homepage-topbar] nav { display: none !important; }
+    [data-homepage-topbar] > div { justify-content: flex-start !important; }
+    .font-display { font-family: GmarketSans, Pretendard, sans-serif; }
+    .keep { word-break: keep-all; overflow-wrap: anywhere; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .hero {
+      padding: 128px 0 64px;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,107,0,.16), transparent 28rem),
+        linear-gradient(180deg, #fff7ed, #f8f3ea);
+      border-bottom: 1px solid var(--line);
+    }
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      box-shadow: 0 16px 36px rgba(26,43,71,.08);
+    }
+    .hero h1 {
+      margin: 24px 0 0;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p {
+      margin: 22px 0 0;
+      max-width: 680px;
+      color: rgba(10,10,10,.62);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+    .nav-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+    .nav-pills a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: #111827;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 900;
+      transition: transform .42s var(--ease), border-color .42s var(--ease);
+    }
+    .nav-pills a:hover { transform: translateY(-2px); border-color: rgba(255,107,0,.42); }
+    .option { padding: 70px 0; }
+    .option-head {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+    .no {
+      display: grid;
+      place-items: center;
+      width: 78px;
+      height: 78px;
+      border-radius: 24px;
+      background: var(--ink);
+      color: #fff;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      box-shadow: 0 20px 48px rgba(10,10,10,.18);
+    }
+    .option-head h2 {
+      margin: 4px 0 0;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+    .option-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .stage {
+      border-radius: 32px;
+      border: 1px solid var(--line);
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(26,43,71,.10);
+    }
+    .stage-inner { padding: 46px; }
+    .eyebrow {
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+    .avatar {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #ff812e, #ff5b00);
+      color: #fff;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      box-shadow: 0 18px 36px rgba(255,107,0,.24);
+    }
+    .metric {
+      padding: 20px;
+      border-radius: 22px;
+      background: #fff7ed;
+      border: 1px solid rgba(255,107,0,.16);
+    }
+    .metric strong {
+      display: block;
+      color: var(--orange);
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(10,10,10,.58);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .deal {
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: #fff;
+      transition: transform .42s var(--ease), box-shadow .42s var(--ease);
+    }
+    .deal:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 48px rgba(26,43,71,.13);
+    }
+    .deal img { width: 100%; height: 176px; object-fit: cover; }
+    .deal-body { padding: 19px; }
+    .deal-loc {
+      margin: 0;
+      color: rgba(10,10,10,.52);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+    .price {
+      display: flex;
+      align-items: end;
+      gap: 8px;
+      margin-top: 10px;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+    }
+    .price .from { color: rgba(10,10,10,.34); font-size: 16px; }
+    .price .to { color: var(--ink); font-size: 28px; line-height: 1; }
+    .gain {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 13px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #fff0e5;
+      color: #bd4300;
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .a-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .a-profile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 30px;
+      min-height: 520px;
+      padding: 34px;
+      border-radius: 28px;
+      background: #f8f3ea;
+    }
+    .a-profile h3,
+    .c-story h3 {
+      margin: 26px 0 0;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: clamp(34px, 4.4vw, 54px);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+    }
+    .a-profile h3 span,
+    .c-story h3 span { color: var(--orange); }
+    .a-profile p,
+    .c-story p {
+      color: rgba(10,10,10,.66);
+      line-height: 1.78;
+    }
+    .a-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .a-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: rgba(10,10,10,.74);
+      font-size: 15px;
+      line-height: 1.65;
+      font-weight: 700;
+    }
+    .a-list iconify-icon { margin-top: 3px; color: var(--orange); font-size: 18px; }
+    .a-right {
+      display: grid;
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+    .deal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 24px;
+      border-radius: 26px;
+      background: var(--ink);
+      color: #fff;
+    }
+    .total strong {
+      display: block;
+      margin-top: 4px;
+      color: #ffb074;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 34px;
+      line-height: 1;
+    }
+    .b-stage {
+      background:
+        radial-gradient(circle at 84% 12%, rgba(255,107,0,.14), transparent 24rem),
+        #111;
+      color: #fff;
+    }
+    .b-grid {
+      display: grid;
+      grid-template-columns: 1.04fr .96fr;
+      gap: 32px;
+    }
+    .b-panel {
+      padding: 34px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+    }
+    .b-panel h3 {
+      margin: 22px 0 0;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: clamp(34px, 4.8vw, 56px);
+      line-height: 1.16;
+      letter-spacing: -0.03em;
+    }
+    .b-panel p {
+      margin: 18px 0 0;
+      color: rgba(255,255,255,.66);
+      line-height: 1.78;
+    }
+    .b-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .b-metric {
+      min-height: 126px;
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.11);
+    }
+    .b-metric strong {
+      display: block;
+      color: #ffb074;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .b-metric span {
+      display: block;
+      margin-top: 9px;
+      color: rgba(255,255,255,.58);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+    .b-proof {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .b-proof-card {
+      overflow: hidden;
+      border-radius: 26px;
+      background: #fff;
+      color: var(--ink);
+    }
+    .b-proof-card img { width: 100%; height: 220px; object-fit: cover; }
+    .b-proof-card div { padding: 22px; }
+    .b-proof-card h4 {
+      margin: 0;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+    .c-grid {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 28px;
+    }
+    .c-story {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 500px;
+      padding: 34px;
+      border-radius: 28px;
+      background: #fffaf3;
+      border: 1px solid rgba(10,10,10,.08);
+    }
+    .quote {
+      margin: 28px 0 0;
+      padding: 22px;
+      border-left: 4px solid var(--orange);
+      border-radius: 18px;
+      background: #fff;
+      color: rgba(10,10,10,.72);
+      line-height: 1.8;
+      font-weight: 700;
+    }
+    .steps {
+      display: grid;
+      gap: 14px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 18px;
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: #fff;
+      transition: transform .42s var(--ease), box-shadow .42s var(--ease);
+    }
+    .step:hover { transform: translateX(4px); box-shadow: 0 18px 42px rgba(26,43,71,.1); }
+    .step time {
+      color: var(--orange);
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+    }
+    .step h4 {
+      margin: 0;
+      font-size: 19px;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+    .step p {
+      margin: 8px 0 0;
+      color: rgba(10,10,10,.58);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .fade {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    .fade.on {
+      animation: fadeUp .72s var(--ease) forwards;
+      animation-delay: calc(var(--i, 0) * 70ms);
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 900px) {
+      .a-grid, .b-grid, .c-grid { grid-template-columns: 1fr; }
+      .a-profile, .c-story { min-height: auto; }
+    }
+    @media (max-width: 560px) {
+      [data-homepage-topbar] > div { padding: 14px 12px; }
+      [data-homepage-topbar] a:first-child { font-size: 24px; }
+      .wrap { width: calc(100% - 24px); }
+      .hero { padding: 104px 0 48px; }
+      .hero h1 { font-size: 40px; }
+      .hero p,
+      .option-head p,
+      .a-profile p,
+      .b-panel p,
+      .c-story p,
+      .step p {
+        font-size: 15px;
+        word-break: normal;
+        overflow-wrap: anywhere;
+      }
+      .option { padding: 46px 0; }
+      .option-head { grid-template-columns: 1fr; gap: 14px; }
+      .no { width: 64px; height: 64px; border-radius: 20px; }
+      .stage { border-radius: 24px; }
+      .stage-inner { padding: 20px; }
+      .a-profile, .b-panel, .c-story { padding: 24px; border-radius: 22px; }
+      .a-profile h3, .b-panel h3, .c-story h3 {
+        font-size: 31px;
+        line-height: 1.28;
+      }
+      .deal-grid, .b-metrics { grid-template-columns: 1fr; }
+      .total { align-items: flex-start; flex-direction: column; }
+      .step { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <div class="wrap">
+        <span class="label"><iconify-icon icon="solar:pen-new-square-bold-duotone"></iconify-icon>CODEX NEW DRAFT</span>
+        <h1 class="keep">컨설턴트 소개<br><span>새 시안 3개</span></h1>
+        <p class="keep">기존 Claude 시안 파일과 분리해서 새로 만든 Codex 시안입니다. 목표는 덜 투박하게, 덜 자랑처럼, 그래도 신뢰 근거는 선명하게 보여주는 것입니다.</p>
+        <nav class="nav-pills" aria-label="시안 바로가기">
+          <a href="#draft-a"><iconify-icon icon="solar:user-check-rounded-bold-duotone"></iconify-icon>A 동네 전문가형</a>
+          <a href="#draft-b"><iconify-icon icon="solar:chart-square-bold-duotone"></iconify-icon>B 증거 보드형</a>
+          <a href="#draft-c"><iconify-icon icon="solar:route-bold-duotone"></iconify-icon>C 판단 스토리형</a>
+        </nav>
+      </div>
+    </header>
+
+    <section id="draft-a" class="option">
+      <div class="wrap">
+        <div class="option-head">
+          <span class="no">A</span>
+          <div>
+            <p class="eyebrow">LOCAL EXPERT</p>
+            <h2 class="keep">동네 전문가형</h2>
+            <p class="keep">사람의 인상을 먼저 만들고, 투자 사례는 뒤에서 받쳐주는 시안입니다. 기존보다 덜 세고 더 편안합니다.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-inner">
+            <div class="a-grid">
+              <article class="a-profile fade" style="--i:0">
+                <div>
+                  <span class="eyebrow">우리동네 재테크 · 우재</span>
+                  <h3 class="keep">처음 집 사는 결정,<br>같이 보되 결론은<br><span>분명하게</span> 드립니다.</h3>
+                  <p class="keep">코칭에서는 일반론보다 예산, 대출, 가족 상황, 후보 단지를 같이 놓고 판단합니다.</p>
+                </div>
+                <div>
+                  <div class="flex items-center gap-4">
+                    <div class="avatar">우재</div>
+                    <div>
+                      <p class="m-0 font-display text-2xl font-black">우재</p>
+                      <p class="m-0 mt-1 text-sm font-bold text-black/45">증권투자 법인 대표 · 실전 부동산 투자자</p>
+                    </div>
+                  </div>
+                  <ul class="a-list mt-6">
+                    <li class="keep"><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon>투자 업계 10년+ 경력</li>
+                    <li class="keep"><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon>최근 8개월 아파트 매매 5건</li>
+                    <li class="keep"><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon>1:1 코칭 150건+ · 만족도 99%</li>
+                  </ul>
+                </div>
+              </article>
+              <div class="a-right">
+                <div class="deal-grid">
+                  <article class="deal fade" style="--i:1">
+                    <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/mokdong-buy.png" alt="목동신시가지 매수 계약서 일부" loading="lazy" decoding="async">
+                    <div class="deal-body">
+                      <p class="deal-loc keep">목동신시가지 · 24년 12월 매수 · 재건축</p>
+                      <div class="price"><span class="from">15.1억</span><iconify-icon icon="solar:arrow-right-bold" class="text-[#FF6B00]"></iconify-icon><span class="to">25억</span></div>
+                      <span class="gain">+9.9억</span>
+                    </div>
+                  </article>
+                  <article class="deal fade" style="--i:2">
+                    <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/garak-buy.png" alt="가락쌍용 매수 계약서 일부" loading="lazy" decoding="async">
+                    <div class="deal-body">
+                      <p class="deal-loc keep">가락쌍용 · 24년 9월 매수 · 송파구</p>
+                      <div class="price"><span class="from">11.4억</span><iconify-icon icon="solar:arrow-right-bold" class="text-[#FF6B00]"></iconify-icon><span class="to">19.8억</span></div>
+                      <span class="gain">+8.4억</span>
+                    </div>
+                  </article>
+                </div>
+                <div class="total fade" style="--i:3">
+                  <div>
+                    <p class="m-0 text-sm font-bold text-white/58">최근 8개월 대표 실적 합계</p>
+                    <strong>+18.3억 상승</strong>
+                  </div>
+                  <iconify-icon icon="solar:graph-up-bold-duotone" class="text-4xl text-[#ffb074]"></iconify-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="draft-b" class="option">
+      <div class="wrap">
+        <div class="option-head">
+          <span class="no">B</span>
+          <div>
+            <p class="eyebrow">EVIDENCE BOARD</p>
+            <h2 class="keep">증거 보드형</h2>
+            <p class="keep">감성보다 검증을 먼저 보여주는 시안입니다. 방문자가 "믿을 만한 사람인가"를 빠르게 판단하게 합니다.</p>
+          </div>
+        </div>
+        <div class="stage b-stage">
+          <div class="stage-inner">
+            <div class="b-grid">
+              <article class="b-panel fade" style="--i:0">
+                <span class="eyebrow text-[#ffb074]">검증 가능한 숫자</span>
+                <h3 class="keep">말보다 먼저<br>자료와 숫자로<br>확인하세요.</h3>
+                <p class="keep">큰 결정을 맡기려면 조언자의 말투보다 실제 경험, 누적 상담, 최근 시장 감각이 먼저 보여야 합니다.</p>
+                <div class="b-metrics">
+                  <div class="b-metric"><strong>10년+</strong><span>투자 업계 경력</span></div>
+                  <div class="b-metric"><strong>150건+</strong><span>1:1 코칭 누적</span></div>
+                  <div class="b-metric"><strong>99%</strong><span>코칭 만족도</span></div>
+                  <div class="b-metric"><strong>+18.3억</strong><span>최근 대표 실적 합계</span></div>
+                </div>
+              </article>
+              <aside class="b-proof fade" style="--i:1">
+                <div class="b-proof-card">
+                  <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/landing-3.png" alt="실제 매매 계약서 일부" loading="lazy" decoding="async">
+                  <div>
+                    <p class="m-0 text-xs font-black tracking-[.14em] text-[#FF6B00]">DOCUMENTED CASE</p>
+                    <h4 class="keep mt-2">실제 매매 계약서 일부</h4>
+                    <p class="keep mt-3 text-sm leading-relaxed text-black/55">강남3구와 압여목성 포트폴리오를 직접 운영하며, 지금도 시장에서 매수하고 있습니다.</p>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="draft-c" class="option">
+      <div class="wrap">
+        <div class="option-head">
+          <span class="no">C</span>
+          <div>
+            <p class="eyebrow">DECISION STORY</p>
+            <h2 class="keep">판단 스토리형</h2>
+            <p class="keep">운영자 자랑처럼 보이지 않게, 왜 코칭이 필요한지부터 설명하는 시안입니다. 브랜드 톤에는 이 안이 가장 자연스럽습니다.</p>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-inner">
+            <div class="c-grid">
+              <article class="c-story fade" style="--i:0">
+                <div>
+                  <span class="eyebrow">상담이 필요한 이유</span>
+                  <h3 class="keep">정보가 부족해서가 아니라,<br><span>판단 기준</span>이 없어서 막힙니다.</h3>
+                  <p class="keep">지금 사도 되는지, 어느 단지를 봐야 하는지, 대출을 어디까지 써도 되는지. 결국 필요한 건 내 상황에 맞는 결론입니다.</p>
+                </div>
+                <div class="quote keep">"듣기 좋은 일반론보다 지금 필요한 판단을 드립니다. 살지, 보류할지, 무엇부터 확인할지까지 정리합니다."</div>
+              </article>
+              <div class="steps">
+                <article class="step fade" style="--i:1">
+                  <time>01</time>
+                  <div>
+                    <h4 class="keep">직접 겪은 실수에서 시작했습니다</h4>
+                    <p class="keep">좋은 집이라고 믿고 샀지만 손실도 겪었습니다. 그래서 코칭은 "사도 되는 이유"보다 "틀리면 어디서 틀리는지"부터 봅니다.</p>
+                  </div>
+                </article>
+                <article class="step fade" style="--i:2">
+                  <time>02</time>
+                  <div>
+                    <h4 class="keep">지금도 시장에서 직접 매수합니다</h4>
+                    <p class="keep">목동신시가지, 가락쌍용 등 최근 거래 경험을 바탕으로 타이밍, 예산, 후보 단지 판단을 현실적으로 봅니다.</p>
+                  </div>
+                </article>
+                <article class="step fade" style="--i:3">
+                  <time>03</time>
+                  <div>
+                    <h4 class="keep">결론을 흐리지 않습니다</h4>
+                    <p class="keep">사도 되는지, 보류해야 하는지, 먼저 확인할 조건은 무엇인지까지 분명하게 정리합니다.</p>
+                  </div>
+                </article>
+                <div class="deal-grid">
+                  <div class="metric fade" style="--i:4"><strong>5건</strong><span>최근 8개월 아파트 매매</span></div>
+                  <div class="metric fade" style="--i:5"><strong>+18.3억</strong><span>대표 실적 합계</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('on');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.fade').forEach((el) => observer.observe(el));
+  </script>
+  <script src="homepage-shell.js?v=d5608a0"></script>
+</body>
+</html>
