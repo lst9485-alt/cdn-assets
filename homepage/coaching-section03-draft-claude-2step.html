@@ -570,6 +570,14 @@
       line-height: 1;
       color: #FF6B00;
     }
+    .review-badge-num-sub {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #0A0A0A;
+      vertical-align: middle;
+    }
     .review-badge-stars {
       color: #fbbf24;
       font-size: 22px;
@@ -1001,16 +1009,15 @@
       <div class="mt-10 md:mt-12 grid gap-4 md:grid-cols-2 reveal">
         <div class="metric-review-badge">
           <div>
-            <p class="review-badge-num">4.97</p>
+            <p class="review-badge-num">4.97<span class="review-badge-num-sub">/ 5.0 (만점)</span></p>
             <p class="review-badge-stars">★★★★★</p>
-            <p class="review-badge-meta">만족도 / 5.0 · 실제 후기 기반</p>
+            <p class="review-badge-meta">만족도(실제 후기)</p>
           </div>
         </div>
         <div class="metric-review-badge">
           <div>
-            <p class="review-badge-num">150+</p>
-            <p class="mt-1 text-sm font-bold text-brand-dark">건의 1:1 코칭</p>
-            <p class="review-badge-meta">10년 경험 · 부동산 실전 투자자</p>
+            <p class="review-badge-num">150+<span class="review-badge-num-sub">건 이상 코칭</span></p>
+            <p class="review-badge-meta">투자 경력 10년 이상·실전 투자자</p>
           </div>
         </div>
       </div>
