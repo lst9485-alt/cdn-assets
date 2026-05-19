@@ -552,7 +552,7 @@
             title: '브랜드 버그 콘셉트 보드',
             description: '우측상단 모션 그래픽 후보 18개',
             href: 'archive/woori-motion-bug-260507/',
-            badgeText: '260507',
+            badgeText: 'REF',
             badgeTone: 'live',
             iconKey: 'branding',
             sidebarType: 'root',
@@ -719,7 +719,7 @@
         id: 'temp',
         hubTitle: '임시 테스트',
         dashedTop: true,
-        alwaysVisible: true,
+        alwaysVisible: false,
         collapsible: true,
         defaultOpen: false,
         nav: {
@@ -732,116 +732,7 @@
         sidebar: {
           title: '임시 테스트'
         },
-        items: [
-          {
-            id: 'coaching-section03-draft',
-            title: '코칭 03 섹션 시안',
-            description: 'A~F 변형안 · 지도형/보드형/대화형/리포트형/타임라인형/체크리스트형',
-            href: 'homepage/coaching-section03-draft.html',
-            badgeText: 'TEST',
-            badgeTone: 'soon',
-            iconKey: 'web',
-            sidebarType: 'root',
-            activeMatch: ['coaching-section03-draft.html'],
-            hubVisible: true
-          },
-          {
-            id: 'coaching-section03-draft-codex-revised',
-            title: '코칭 03 코덱스 수정본',
-            description: '03~03-2 · 세로 타임라인 + 오른쪽 정리표',
-            href: 'homepage/coaching-section03-draft-codex-revised.html',
-            badgeText: 'TEST',
-            badgeTone: 'soon',
-            iconKey: 'web',
-            sidebarType: 'root',
-            activeMatch: ['coaching-section03-draft-codex-revised.html'],
-            hubVisible: true
-          },
-          {
-            id: 'consult-trust-test',
-            title: '상담 리포트 테스트',
-            description: '색감을 정리한 상담 자료 페이지',
-            href: 'consult/index-trust.html',
-            badgeText: 'TEST',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['index-trust.html'],
-            hubVisible: true
-          },
-          {
-            id: 'slide-test-260405',
-            title: '260405 천안아산 테스트',
-            description: 'archive 원고 재생성본',
-            href: 'slide-viewer/260405-slides.html?_ghfresh=20260504093000',
-            badgeText: 'TEST',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['260405-slides.html'],
-            hubVisible: true
-          },
-          {
-            id: 'slide-test-260412',
-            title: '260412 집 사도 되나요 테스트',
-            description: 'archive 원고 재생성본',
-            href: 'slide-viewer/260412-slides.html?_ghfresh=20260504093000',
-            badgeText: 'TEST',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['260412-slides.html'],
-            hubVisible: true
-          },
-          {
-            id: 'slide-test-260419',
-            title: '260419 질문 자체가 틀렸습니다 테스트',
-            description: 'archive 원고 실전 재기획본',
-            href: 'slide-viewer/260419-production-redo.html?_ghfresh=20260505210453',
-            badgeText: 'TEST',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['260419-production-redo.html'],
-            hubVisible: true
-          },
-          {
-            id: 'slide-test-260426',
-            title: '260426 가격통제의 비극 테스트',
-            description: 'archive 원고 실전 재기획본',
-            href: 'slide-viewer/260426-production-redo.html?_ghfresh=20260505210453',
-            badgeText: 'TEST',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['260426-production-redo.html'],
-            hubVisible: true
-          },
-          {
-            id: 'slide-test-260503',
-            title: '260503 직장인 재테크 순서 테스트',
-            description: 'archive 원고 실전 재기획본',
-            href: 'slide-viewer/260503-production-redo.html?_ghfresh=20260505221701',
-            badgeText: 'TEST',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['260503-production-redo.html'],
-            hubVisible: true
-          },
-          {
-            id: 'slide-test-260517',
-            title: '260517 코스피 vs 아파트 테스트',
-            description: 'archive 원고 자율 재기획본 · 64장',
-            href: 'slide-viewer/260517-slides.html?_ghfresh=20260506102100',
-            badgeText: 'TEST',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['260517-slides.html'],
-            hubVisible: true
-          },
-        ]
+        items: []
       }
     ]
   };
