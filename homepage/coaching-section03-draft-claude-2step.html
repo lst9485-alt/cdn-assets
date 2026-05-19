@@ -808,11 +808,52 @@
                 </div>
               </div>
 
-              <!-- 자료 4종 실제 화면 데모 GIF -->
+              <!-- 자료 4종 실제 화면 데모 (두 영상 토글 + 부드러운 높이 전환) -->
               <div class="md:self-start">
-                <img src="images/step3-resources-demo.gif" alt="자료 4종 실제 화면 데모" loading="lazy"
-                     style="width:100%;max-width:540px;height:auto;display:block;margin:0 auto;">
+                <div class="demo-frame" aria-label="자료 4종 실제 화면 데모">
+                  <div class="demo-clip" id="step3DemoClip">
+                    <img id="step3DemoImg" src="images/step3-sheet.gif" alt="자료 4종 실제 화면 데모" loading="lazy">
+                  </div>
+                </div>
               </div>
+              <style>
+                .demo-frame { width: 100%; max-width: 540px; margin: 0 auto; min-height: 518px; display: flex; align-items: center; justify-content: center; }
+                .demo-clip { width: 100%; height: 269px; overflow: hidden; transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+                .demo-clip.tall { height: 518px; }
+                .demo-clip img { width: 100%; height: 100%; object-fit: contain; display: block; }
+                @media (max-width: 600px) {
+                  .demo-frame { min-height: 0; aspect-ratio: 540 / 518; }
+                  .demo-clip { height: calc(100% * 269 / 518); }
+                  .demo-clip.tall { height: 100%; }
+                }
+              </style>
+              <script>
+                (function(){
+                  var clip = document.getElementById('step3DemoClip');
+                  var img = document.getElementById('step3DemoImg');
+                  var SHEET = 'images/step3-sheet.gif';
+                  var DATA = 'images/step3-data.gif';
+                  var SHEET_MS = 5400;
+                  var DATA_MS = 6400;
+                  var state = 0; // 0: sheet, 1: data
+                  function tick() {
+                    if (state === 0) {
+                      clip.classList.add('tall');
+                      setTimeout(function(){
+                        img.src = DATA + '?t=' + Date.now();
+                        state = 1;
+                        setTimeout(tick, DATA_MS);
+                      }, 600);
+                    } else {
+                      img.src = SHEET + '?t=' + Date.now();
+                      clip.classList.remove('tall');
+                      state = 0;
+                      setTimeout(tick, SHEET_MS);
+                    }
+                  }
+                  setTimeout(tick, SHEET_MS);
+                })();
+              </script>
 
             </div>
             <div class="timeline-line"></div>
