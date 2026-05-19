@@ -712,6 +712,20 @@
             sidebarType: 'root',
             activeMatch: ['260517-slides.html'],
             hubVisible: true
+          },
+          {
+            id: 'archive-coaching-consultant-options',
+            archiveNo: 'A013',
+            modifiedDate: '2026-05-19',
+            title: '코칭 04 컨설턴트 소개 시안',
+            description: '컨설턴트 소개 섹션 A~C 변형안 · 편안한 전문가형/매거진 인터뷰형/실전 스토리형',
+            href: 'homepage/coaching-consultant-options.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['coaching-consultant-options.html'],
+            hubVisible: true
           }
         ]
       },
