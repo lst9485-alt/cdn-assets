@@ -136,7 +136,7 @@
             sidebarType: 'root',
             activeMatch: ['coaching-all-v3.html'],
             hubVisible: true,
-            groupLabel: '자체사이트'
+            groupLabel: '상품/랜딩'
           },
           {
             id: 'main-page',
@@ -149,7 +149,7 @@
             sidebarType: 'root',
             activeMatch: ['main-page.html'],
             hubVisible: true,
-            groupLabel: '자체사이트'
+            groupLabel: '메인'
           },
           {
             id: 'investment-philosophy',
@@ -162,7 +162,7 @@
             sidebarType: 'root',
             activeMatch: ['investment-philosophy.html'],
             hubVisible: true,
-            groupLabel: '자체사이트'
+            groupLabel: '콘텐츠'
           },
           {
             id: 'coaching-payment',
@@ -175,7 +175,7 @@
             sidebarType: 'root',
             activeMatch: ['coaching-payment.html'],
             hubVisible: true,
-            groupLabel: '자체사이트'
+            groupLabel: '결제'
           },
           {
             id: 'coaching-payment-guide-v3',
@@ -188,7 +188,7 @@
             sidebarType: 'root',
             activeMatch: ['coaching-payment-guide-v3.html'],
             hubVisible: false,
-            groupLabel: '자체사이트'
+            groupLabel: '결제'
           },
           {
             id: 'curriculum-page',
@@ -201,7 +201,7 @@
             sidebarType: 'root',
             activeMatch: ['curriculum.html'],
             hubVisible: true,
-            groupLabel: '자체사이트'
+            groupLabel: '콘텐츠'
           },
           {
             id: 'lecture-allinone',
@@ -214,7 +214,7 @@
             sidebarType: 'root',
             activeMatch: ['lecture-allinone.html'],
             hubVisible: true,
-            groupLabel: '자체사이트'
+            groupLabel: '강의'
           },
           {
             id: 'lecture-bookclub',
@@ -227,7 +227,7 @@
             sidebarType: 'root',
             activeMatch: ['lecture-bookclub.html'],
             hubVisible: true,
-            groupLabel: '자체사이트'
+            groupLabel: '강의'
           },
           {
             id: 'fire-retirement-calculator',
@@ -240,7 +240,7 @@
             sidebarType: 'root',
             activeMatch: ['fire-retirement-calculator.html'],
             hubVisible: true,
-            groupLabel: '자체사이트'
+            groupLabel: '도구'
           },
           {
             id: 'refund-policy',
@@ -253,7 +253,7 @@
             sidebarType: 'root',
             activeMatch: ['refund-policy.html'],
             hubVisible: true,
-            groupLabel: '자체사이트'
+            groupLabel: '정책'
           },
           {
             id: 'imweb-coaching',
@@ -264,7 +264,7 @@
             badgeTone: 'soon',
             iconKey: 'money',
             hubVisible: true,
-            groupLabel: '아임웹'
+            groupLabel: '외부/아임웹'
           }
         ]
       },
