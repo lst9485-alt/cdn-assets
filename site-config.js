@@ -136,7 +136,7 @@
             sidebarType: 'root',
             activeMatch: ['coaching-all-v3.html'],
             hubVisible: true,
-            groupLabel: '상품/랜딩'
+            groupLabel: '상품'
           },
           {
             id: 'main-page',
@@ -149,7 +149,7 @@
             sidebarType: 'root',
             activeMatch: ['main-page.html'],
             hubVisible: true,
-            groupLabel: '메인'
+            groupLabel: '공통'
           },
           {
             id: 'investment-philosophy',
@@ -162,7 +162,7 @@
             sidebarType: 'root',
             activeMatch: ['investment-philosophy.html'],
             hubVisible: true,
-            groupLabel: '콘텐츠'
+            groupLabel: '브랜드'
           },
           {
             id: 'coaching-payment',
@@ -201,7 +201,7 @@
             sidebarType: 'root',
             activeMatch: ['curriculum.html'],
             hubVisible: true,
-            groupLabel: '콘텐츠'
+            groupLabel: '상품'
           },
           {
             id: 'lecture-allinone',
@@ -214,7 +214,7 @@
             sidebarType: 'root',
             activeMatch: ['lecture-allinone.html'],
             hubVisible: true,
-            groupLabel: '강의'
+            groupLabel: '상품'
           },
           {
             id: 'lecture-bookclub',
@@ -227,7 +227,7 @@
             sidebarType: 'root',
             activeMatch: ['lecture-bookclub.html'],
             hubVisible: true,
-            groupLabel: '강의'
+            groupLabel: '상품'
           },
           {
             id: 'fire-retirement-calculator',
@@ -240,7 +240,7 @@
             sidebarType: 'root',
             activeMatch: ['fire-retirement-calculator.html'],
             hubVisible: true,
-            groupLabel: '도구'
+            groupLabel: '템플릿'
           },
           {
             id: 'refund-policy',
