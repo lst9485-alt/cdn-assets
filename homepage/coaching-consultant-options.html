@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04 컨설턴트 소개 — 시안 옵션 비교 | 우리동네 재테크</title>
+  <meta name="robots" content="noindex,nofollow">
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      important: true,
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['"GmarketSans"', 'Pretendard', 'sans-serif']
+          },
+          colors: {
+            brand: { orange: '#FF6B00', beige: '#FFFAF2', dark: '#1A2B47', ink: '#0a0a0a', blue: '#0055FF' }
+          },
+          boxShadow: {
+            soft: '0 24px 70px rgba(26, 43, 71, 0.10)',
+            lift: '0 18px 42px rgba(26, 43, 71, 0.12)'
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Pretendard -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <style>
+    @font-face {
+      font-family: 'GmarketSans';
+      src: url('./fonts/GmarketSansBold.woff2') format('woff2');
+      font-weight: 700 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      margin: 0;
+      background: #f6f1e6;
+      color: #1A2B47;
+      font-family: Pretendard, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+
+    /* === 라이브러리 프레임 === */
+    .lib-section { padding: 64px 0 80px; border-bottom: 1px dashed rgba(26,43,71,0.22); }
+    .lib-section:last-of-type { border-bottom: 0; }
+    .option-frame {
+      border: 2px dashed rgba(255, 107, 0, 0.30);
+      border-radius: 28px;
+      background: #ffffff;
+      padding: 24px;
+      position: relative;
+    }
+    .option-label {
+      position: absolute;
+      top: -16px;
+      left: 24px;
+      background: #FF6B00;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+    .toc-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid rgba(26,43,71,0.12);
+      font-size: 13px;
+      font-weight: 700;
+      color: #1A2B47;
+      text-decoration: none;
+      transition: all 0.18s ease;
+    }
+    .toc-pill:hover { background: #FF6B00; color: #fff; border-color: #FF6B00; }
+
+    /* === 시안 A — 미니멀 === */
+    .a-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 36px;
+      border: 1px solid rgba(26,43,71,0.08);
+      box-shadow: 0 14px 36px rgba(26,43,71,0.06);
+    }
+    .a-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FF8A33 0%, #FF6B00 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'GmarketSans', Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      box-shadow: 0 10px 24px rgba(255,107,0,0.25);
+    }
+    .a-bio-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(26,43,71,0.06);
+    }
+    .a-bio-row:last-child { border-bottom: 0; }
+    .a-bio-row .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #FF6B00;
+      flex-shrink: 0;
+    }
+    .a-result {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid rgba(26,43,71,0.08);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .a-result:hover { transform: translateY(-2px); }
+    .a-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #FFF1E5 0%, #FFE0CC 100%);
+      color: #B84400;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    /* === 시안 B — 신뢰 지표 === */
+    .b-stat {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 28px 20px;
+      text-align: center;
+      border: 1px solid rgba(26,43,71,0.06);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .b-stat:hover { transform: translateY(-3px); box-shadow: 0 18px 42px rgba(255,107,0,0.12); }
+    .b-stat .num {
+      font-family: 'GmarketSans', Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 40px;
+      line-height: 1;
+      background: linear-gradient(135deg, #FF6B00 0%, #FF8A33 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .b-stat .label {
+      font-size: 13px;
+      color: #6B7280;
+      font-weight: 600;
+    }
+    .b-stat .accent {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      opacity: 0.08;
+      font-size: 48px;
+      color: #FF6B00;
+    }
+    .b-profile {
+      background: #1A2B47;
+      color: #fff;
+      border-radius: 22px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .b-initial {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: #FF6B00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'GmarketSans', Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .b-closing {
+      text-align: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #FFF8F0 0%, #FFEDD5 100%);
+      border-radius: 20px;
+      border: 1px solid rgba(255,107,0,0.15);
+    }
+
+    /* === 시안 C — 스토리 === */
+    .c-wrap {
+      background: linear-gradient(180deg, #1A2B47 0%, #0F1A2E 100%);
+      color: #fff;
+      border-radius: 28px;
+      padding: 48px 36px;
+    }
+    .c-eyebrow {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255,107,0,0.15);
+      color: #FFB380;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .c-headline {
+      font-family: 'GmarketSans', Pretendard, sans-serif;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+    .c-headline .hl {
+      background: linear-gradient(120deg, transparent 60%, rgba(255,107,0,0.35) 60%);
+    }
+    .c-profile-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(8px);
+    }
+    .c-profile-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FF8A33 0%, #FF6B00 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'GmarketSans', Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 32px;
+      color: #fff;
+    }
+    .c-story-p {
+      color: rgba(255,255,255,0.82);
+      font-size: 16px;
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+    .c-story-p strong { color: #FFB380; font-weight: 800; }
+    .c-result {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 22px;
+    }
+    .c-result .from { color: rgba(255,255,255,0.5); font-size: 16px; font-weight: 700; }
+    .c-result .to { color: #fff; font-size: 24px; font-weight: 900; font-family: 'GmarketSans', Pretendard, sans-serif; }
+    .c-result .gain {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255,107,0,0.18);
+      color: #FFB380;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .c-reason {
+      background: rgba(255,107,0,0.08);
+      border-left: 3px solid #FF6B00;
+      padding: 18px 22px;
+      border-radius: 8px;
+      margin-top: 28px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.7;
+    }
+    .c-closing {
+      margin-top: 32px;
+      text-align: center;
+      font-family: 'GmarketSans', Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      line-height: 1.5;
+    }
+    .c-closing .hl {
+      background: linear-gradient(120deg, transparent 60%, rgba(255,107,0,0.45) 60%);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 페이지 안내 ===== -->
+  <header class="max-w-5xl mx-auto px-6 pt-12 pb-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="text-xs font-bold text-brand-orange tracking-widest">DRAFT · OPTIONS</span>
+      <span class="h-px flex-1 bg-brand-dark/15"></span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-display font-black text-brand-dark mb-3">04 컨설턴트 소개 — 시안 3개</h1>
+    <p class="text-base text-brand-dark/70 leading-relaxed word-keep">
+      현재 v3의 컨설턴트 섹션이 빡빡하고 따옴표·빨강·박스 중첩이 부담스러워 새로 정리했습니다.
+      아래 시안 3개 중 골라주세요. 사실 데이터(약력·매수가·매도가)는 그대로입니다.
+    </p>
+    <div class="flex flex-wrap gap-2 mt-5">
+      <a href="#opt-a" class="toc-pill"><span class="w-2 h-2 rounded-full bg-brand-orange"></span>시안 A · 미니멀 자기소개형</a>
+      <a href="#opt-b" class="toc-pill"><span class="w-2 h-2 rounded-full bg-brand-orange"></span>시안 B · 신뢰 지표형</a>
+      <a href="#opt-c" class="toc-pill"><span class="w-2 h-2 rounded-full bg-brand-orange"></span>시안 C · 스토리형</a>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- ===== 시안 A — 미니멀 자기소개형 ============================ -->
+  <!-- ============================================================ -->
+  <section id="opt-a" class="lib-section">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="option-frame">
+        <span class="option-label">시안 A · 미니멀 자기소개형</span>
+
+        <div class="bg-brand-beige rounded-2xl px-6 py-16 md:py-20">
+          <div class="max-w-3xl mx-auto">
+
+            <!-- 헤드 -->
+            <div class="text-center mb-12">
+              <p class="text-sm font-bold text-brand-orange tracking-widest mb-3">CONSULTANT</p>
+              <h2 class="text-3xl md:text-4xl font-display font-black tracking-tight text-brand-dark word-keep">10년 실전, <span class="text-brand-orange">우재</span>입니다</h2>
+            </div>
+
+            <!-- 프로필 카드 -->
+            <div class="a-card mb-8">
+              <div class="flex items-center gap-5 mb-7">
+                <div class="a-avatar">우재</div>
+                <div>
+                  <h3 class="text-2xl font-display font-black text-brand-dark leading-none">우재</h3>
+                  <p class="text-sm font-semibold text-gray-500 mt-2">우리동네 재테크</p>
+                </div>
+              </div>
+              <div class="border-t border-gray-100 pt-4">
+                <div class="a-bio-row"><span class="dot"></span><span class="text-sm md:text-base text-brand-dark">증권투자 관련 법인 대표이사</span></div>
+                <div class="a-bio-row"><span class="dot"></span><span class="text-sm md:text-base text-brand-dark">전국구 실전 부동산 투자자 · 경력 10년+</span></div>
+                <div class="a-bio-row"><span class="dot"></span><span class="text-sm md:text-base text-brand-dark word-keep">최근 8개월간 아파트 매매 <strong>5건</strong> <span class="text-xs text-gray-400">(작성시점 기준)</span></span></div>
+                <div class="a-bio-row"><span class="dot"></span><span class="text-sm md:text-base text-brand-dark word-keep">포트폴리오: 강남3구 + 압여목성 2채 + α</span></div>
+              </div>
+            </div>
+
+            <!-- 실적 카드 2개 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div class="a-result">
+                <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/mokdong-buy.png" alt="목동신시가지 매수 계약서" class="w-full h-[160px] object-cover" loading="lazy" decoding="async">
+                <div class="p-5">
+                  <p class="text-xs text-gray-400 mb-2">목동신시가지 · 24년 12월 매수 · 재건축</p>
+                  <div class="flex items-end gap-2 mb-3">
+                    <span class="text-base font-bold text-gray-400">15.1억</span>
+                    <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-lg mb-0.5"></iconify-icon>
+                    <span class="text-2xl font-display font-black text-brand-dark">25억</span>
+                  </div>
+                  <span class="a-badge">+9.9억 ↑</span>
+                </div>
+              </div>
+              <div class="a-result">
+                <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/garak-buy.png" alt="가락쌍용 매수 계약서" class="w-full h-[160px] object-cover" loading="lazy" decoding="async">
+                <div class="p-5">
+                  <p class="text-xs text-gray-400 mb-2">가락쌍용 · 24년 9월 매수 · 송파구</p>
+                  <div class="flex items-end gap-2 mb-3">
+                    <span class="text-base font-bold text-gray-400">11.4억</span>
+                    <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-lg mb-0.5"></iconify-icon>
+                    <span class="text-2xl font-display font-black text-brand-dark">19.8억</span>
+                  </div>
+                  <span class="a-badge">+8.4억 ↑</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 합계 배지 -->
+            <div class="text-center mb-10">
+              <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-white border border-brand-orange/30">
+                <iconify-icon icon="solar:graph-up-bold" class="text-brand-orange text-xl"></iconify-icon>
+                <span class="text-sm font-bold text-brand-dark">8개월 합계</span>
+                <span class="text-xl font-display font-black text-brand-orange">+18.3억</span>
+              </div>
+            </div>
+
+            <!-- 클로징 -->
+            <p class="text-center text-lg md:text-xl font-display font-black text-brand-dark word-keep">
+              내 상황도 같이 짚어드립니다
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== 시안 B — 신뢰 지표형 ================================== -->
+  <!-- ============================================================ -->
+  <section id="opt-b" class="lib-section">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="option-frame">
+        <span class="option-label">시안 B · 신뢰 지표형</span>
+
+        <div class="bg-brand-beige rounded-2xl px-6 py-16 md:py-20">
+          <div class="max-w-4xl mx-auto">
+
+            <!-- 헤드 (수치) -->
+            <div class="text-center mb-12">
+              <p class="text-sm font-bold text-brand-orange tracking-widest mb-3">BY THE NUMBERS</p>
+              <h2 class="text-3xl md:text-5xl font-display font-black tracking-tight text-brand-dark word-keep">
+                <span class="text-brand-orange">10년</span> · <span class="text-brand-orange">150건</span> · <span class="text-brand-orange">+18.3억</span>
+              </h2>
+              <p class="mt-4 text-base text-brand-dark/70 word-keep">수치로 검증된 실전 코칭</p>
+            </div>
+
+            <!-- 숫자 카드 4개 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
+              <div class="b-stat">
+                <iconify-icon icon="solar:calendar-bold" class="accent"></iconify-icon>
+                <p class="num">10년+</p>
+                <p class="label">투자 업계 경력</p>
+              </div>
+              <div class="b-stat">
+                <iconify-icon icon="solar:users-group-rounded-bold" class="accent"></iconify-icon>
+                <p class="num">150건+</p>
+                <p class="label">1:1 코칭 누적</p>
+              </div>
+              <div class="b-stat">
+                <iconify-icon icon="solar:medal-star-bold" class="accent"></iconify-icon>
+                <p class="num">99%</p>
+                <p class="label">코칭 만족도</p>
+              </div>
+              <div class="b-stat">
+                <iconify-icon icon="solar:graph-up-bold" class="accent"></iconify-icon>
+                <p class="num">+18.3억</p>
+                <p class="label">8개월 실적 합계</p>
+              </div>
+            </div>
+
+            <!-- 자기소개 (다크 카드) -->
+            <div class="b-profile mb-8">
+              <div class="b-initial">우재</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-display font-black mb-1">우재 <span class="text-sm font-semibold text-white/60">· 우리동네 재테크</span></h3>
+                <p class="text-sm text-white/80 word-keep">증권투자 법인 대표 · 전국구 실전 부동산 투자자 · 강남3구 + 압여목성 2채 + α</p>
+              </div>
+            </div>
+
+            <!-- 대표 실적 이미지 1개 (목동) -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-soft mb-8 border border-gray-100">
+              <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/mokdong-buy.png" alt="목동신시가지 매수 계약서" class="w-full h-[240px] object-cover" loading="lazy" decoding="async">
+              <div class="p-6">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                  <div>
+                    <p class="text-xs text-gray-400 mb-2">대표 실적 · 목동신시가지 · 24년 12월 매수 · 재건축</p>
+                    <div class="flex items-end gap-2">
+                      <span class="text-base font-bold text-gray-400">15.1억</span>
+                      <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-xl mb-0.5"></iconify-icon>
+                      <span class="text-3xl font-display font-black text-brand-dark">25억</span>
+                    </div>
+                  </div>
+                  <div class="px-5 py-3 rounded-2xl bg-orange-50">
+                    <p class="text-2xl font-display font-black text-brand-orange">+9.9억 ↑</p>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-400 mt-4 word-keep">· 가락쌍용(송파구) 11.4억 → 19.8억 · 8개월 합계 +18.3억</p>
+              </div>
+            </div>
+
+            <!-- 클로징 -->
+            <div class="b-closing">
+              <p class="text-lg md:text-xl font-display font-black text-brand-dark word-keep">
+                감으로 추천 안 합니다. <br class="md:hidden">
+                <span class="text-brand-orange">수치로 검증된 코칭</span>
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ===== 시안 C — 스토리형 ===================================== -->
+  <!-- ============================================================ -->
+  <section id="opt-c" class="lib-section">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="option-frame">
+        <span class="option-label">시안 C · 스토리형</span>
+
+        <div class="bg-brand-beige rounded-2xl px-6 py-16 md:py-20">
+          <div class="max-w-4xl mx-auto">
+
+            <div class="c-wrap">
+
+              <!-- 헤드 -->
+              <div class="mb-10">
+                <span class="c-eyebrow">CONSULTANT STORY</span>
+                <h2 class="c-headline text-3xl md:text-4xl text-white word-keep">
+                  왜 <span class="hl">1:1 코칭</span>을 시작했나
+                </h2>
+              </div>
+
+              <!-- 스토리 + 프로필 -->
+              <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-10">
+
+                <!-- 좌측 스토리 -->
+                <div class="md:col-span-3">
+                  <p class="c-story-p word-keep">
+                    증권투자 법인을 운영하면서 <strong>10년+ 부동산 실전 투자</strong>를 함께 해왔습니다.
+                    강남3구, 압여목성을 포함해 직접 매수·운영한 포트폴리오가 쌓이면서 주변 지인 상담이 늘었고,
+                    그 흐름이 자연스럽게 <strong>1:1 코칭 150건+</strong>으로 이어졌습니다.
+                  </p>
+                  <p class="c-story-p word-keep">
+                    공통적으로 듣는 말은 <strong>"정보는 많은데 내 상황엔 뭐가 맞는지 모르겠다"</strong>는 것이었습니다.
+                    그래서 일반 강의가 아니라 <strong>한 사람의 예산·소득·가족 상황을 같이 짚어주는 방식</strong>으로
+                    코칭을 정리하게 됐습니다.
+                  </p>
+                </div>
+
+                <!-- 우측 프로필 -->
+                <div class="md:col-span-2">
+                  <div class="c-profile-card">
+                    <div class="flex items-center gap-4 mb-5">
+                      <div class="c-profile-photo">우재</div>
+                      <div>
+                        <h3 class="text-xl font-display font-black text-white leading-none">우재</h3>
+                        <p class="text-xs text-white/60 mt-2">우리동네 재테크</p>
+                      </div>
+                    </div>
+                    <ul class="space-y-2 text-sm text-white/80">
+                      <li class="flex gap-2 word-keep"><span class="text-brand-orange">·</span><span>증권투자 법인 대표</span></li>
+                      <li class="flex gap-2 word-keep"><span class="text-brand-orange">·</span><span>전국구 실전 부동산 투자자</span></li>
+                      <li class="flex gap-2 word-keep"><span class="text-brand-orange">·</span><span>8개월간 아파트 매매 5건</span></li>
+                      <li class="flex gap-2 word-keep"><span class="text-brand-orange">·</span><span>강남3구 + 압여목성 2채 + α</span></li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- 실적 카드 2개 -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                <div class="c-result">
+                  <p class="text-xs text-white/50 mb-3">목동신시가지 · 24년 12월 매수 · 재건축</p>
+                  <div class="flex items-end gap-3">
+                    <span class="from">15.1억</span>
+                    <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-lg mb-1"></iconify-icon>
+                    <span class="to">25억</span>
+                  </div>
+                  <span class="gain">+9.9억 ↑</span>
+                </div>
+                <div class="c-result">
+                  <p class="text-xs text-white/50 mb-3">가락쌍용 · 24년 9월 매수 · 송파구</p>
+                  <div class="flex items-end gap-3">
+                    <span class="from">11.4억</span>
+                    <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-lg mb-1"></iconify-icon>
+                    <span class="to">19.8억</span>
+                  </div>
+                  <span class="gain">+8.4억 ↑</span>
+                </div>
+              </div>
+
+              <!-- 이게 가능한 이유 -->
+              <div class="c-reason word-keep">
+                <strong class="text-white">이게 가능한 이유.</strong>
+                포트폴리오 운영을 직접 하고 있어서 <strong class="text-white">매수 타이밍·자금 흐름·세금까지 실시간 감각</strong>이 살아있습니다.
+                책과 강의에서 멈춘 정보가 아니라, 지금도 굴리고 있는 실전 데이터입니다.
+              </div>
+
+              <!-- 합계 + 클로징 -->
+              <div class="text-center mt-8">
+                <p class="text-sm text-white/60 mb-1">8개월 합계</p>
+                <p class="text-3xl md:text-4xl font-display font-black text-brand-orange">+18.3억 상승</p>
+              </div>
+
+              <p class="c-closing word-keep">
+                막연한 정보 대신<br>
+                <span class="hl">실전 경험을 드립니다</span>
+              </p>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 푸터 안내 ===== -->
+  <footer class="max-w-5xl mx-auto px-6 py-10 text-center">
+    <p class="text-sm text-brand-dark/60 word-keep">시안 선택 후 v3에 반영합니다. 부분 조합(예: A 헤드 + B 숫자 카드)도 가능합니다.</p>
+  </footer>
+
+</body>
+</html>
