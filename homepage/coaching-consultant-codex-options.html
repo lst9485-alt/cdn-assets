@@ -32,8 +32,9 @@
     }
     :root {
       --orange: #FF6B00;
-      --beige: #F5F0E8;
       --ink: #0A0A0A;
+      --paper: #F7F1E7;
+      --cream: #FFF9F0;
       --muted: rgba(10, 10, 10, .58);
       --line: rgba(10, 10, 10, .1);
       --ease: cubic-bezier(.16, 1, .3, 1);
@@ -43,53 +44,95 @@
     body {
       margin: 0;
       overflow-x: hidden;
-      background: #f8f3ea;
+      background: var(--paper);
       color: var(--ink);
       font-family: Pretendard, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 60;
+      opacity: .035;
+      background-image:
+        linear-gradient(rgba(10,10,10,.26) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10,10,10,.18) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: linear-gradient(to bottom, black, transparent 70%);
     }
     img { display: block; max-width: 100%; }
     [data-homepage-topbar] nav { display: none !important; }
     [data-homepage-topbar] > div { justify-content: flex-start !important; }
     .font-display { font-family: GmarketSans, Pretendard, sans-serif; }
     .keep { word-break: keep-all; overflow-wrap: anywhere; }
-    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
     .hero {
-      padding: 128px 0 64px;
+      min-height: 640px;
+      padding: 128px 0 70px;
+      display: flex;
+      align-items: center;
       background:
-        radial-gradient(circle at 12% 8%, rgba(255,107,0,.16), transparent 28rem),
-        linear-gradient(180deg, #fff7ed, #f8f3ea);
-      border-bottom: 1px solid var(--line);
+        radial-gradient(circle at 12% 14%, rgba(255,107,0,.18), transparent 28rem),
+        linear-gradient(180deg, #fff7ed 0%, #f7f1e7 100%);
+      border-bottom: 1px solid rgba(10,10,10,.08);
     }
-    .label {
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 44px;
+      align-items: end;
+    }
+    .pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 13px;
-      border-radius: 999px;
-      background: #fff;
       border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.82);
+      padding: 8px 13px;
       color: var(--orange);
       font-size: 12px;
       font-weight: 900;
       letter-spacing: .12em;
-      box-shadow: 0 16px 36px rgba(26,43,71,.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
     }
+    h1, h2, h3, h4, p { margin-top: 0; }
     .hero h1 {
       margin: 24px 0 0;
       font-family: GmarketSans, Pretendard, sans-serif;
-      font-size: clamp(42px, 7vw, 76px);
-      line-height: 1.06;
-      letter-spacing: -0.03em;
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
     }
     .hero h1 span { color: var(--orange); }
-    .hero p {
+    .hero-copy {
       margin: 22px 0 0;
-      max-width: 680px;
+      max-width: 690px;
       color: rgba(10,10,10,.62);
       font-size: 18px;
       line-height: 1.75;
+    }
+    .ref-card {
+      border: 1px solid rgba(10,10,10,.09);
+      border-radius: 30px;
+      background: rgba(255,255,255,.72);
+      padding: 24px;
+      box-shadow: 0 28px 74px rgba(26,43,71,.10);
+    }
+    .ref-card strong {
+      display: block;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 24px;
+      line-height: 1.25;
+    }
+    .ref-card p {
+      margin: 12px 0 0;
+      color: rgba(10,10,10,.58);
+      font-size: 14px;
+      line-height: 1.72;
     }
     .nav-pills {
       display: flex;
@@ -110,108 +153,90 @@
       text-decoration: none;
       font-size: 14px;
       font-weight: 900;
-      transition: transform .42s var(--ease), border-color .42s var(--ease);
+      transition: transform .42s var(--ease), border-color .42s var(--ease), color .42s var(--ease);
     }
-    .nav-pills a:hover { transform: translateY(-2px); border-color: rgba(255,107,0,.42); }
-    .option { padding: 70px 0; }
+    .nav-pills a:hover { transform: translateY(-2px); border-color: rgba(255,107,0,.42); color: var(--orange); }
+    .option { padding: 76px 0; }
     .option-head {
       display: grid;
-      grid-template-columns: 78px 1fr;
+      grid-template-columns: 82px minmax(0, 1fr);
       gap: 24px;
       align-items: end;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
     .no {
       display: grid;
       place-items: center;
-      width: 78px;
-      height: 78px;
-      border-radius: 24px;
+      width: 82px;
+      height: 82px;
+      border-radius: 26px;
       background: var(--ink);
       color: #fff;
       font-family: GmarketSans, Pretendard, sans-serif;
-      font-size: 24px;
+      font-size: 25px;
       font-weight: 900;
-      box-shadow: 0 20px 48px rgba(10,10,10,.18);
+      box-shadow: 0 24px 54px rgba(10,10,10,.20);
     }
-    .option-head h2 {
-      margin: 4px 0 0;
-      font-family: GmarketSans, Pretendard, sans-serif;
-      font-size: clamp(32px, 5vw, 52px);
-      line-height: 1.12;
-      letter-spacing: -0.03em;
-    }
-    .option-head p {
-      margin: 8px 0 0;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .stage {
-      border-radius: 32px;
-      border: 1px solid var(--line);
-      background: #fff;
-      overflow: hidden;
-      box-shadow: 0 28px 80px rgba(26,43,71,.10);
-    }
-    .stage-inner { padding: 46px; }
     .eyebrow {
       color: var(--orange);
       font-size: 12px;
       font-weight: 900;
       letter-spacing: .14em;
+      text-transform: uppercase;
     }
+    .option-head h2 {
+      margin: 6px 0 0;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+    }
+    .option-head p {
+      margin: 10px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+    .stage {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: #fff;
+      box-shadow: 0 34px 92px rgba(26,43,71,.11);
+    }
+    .stage-inner { padding: 48px; }
     .avatar {
       display: grid;
       place-items: center;
       flex: none;
-      width: 72px;
-      height: 72px;
-      border-radius: 22px;
+      width: 76px;
+      height: 76px;
+      border-radius: 24px;
       background: linear-gradient(145deg, #ff812e, #ff5b00);
       color: #fff;
       font-family: GmarketSans, Pretendard, sans-serif;
-      font-size: 24px;
+      font-size: 25px;
       font-weight: 900;
       box-shadow: 0 18px 36px rgba(255,107,0,.24);
     }
-    .metric {
-      padding: 20px;
-      border-radius: 22px;
-      background: #fff7ed;
-      border: 1px solid rgba(255,107,0,.16);
-    }
-    .metric strong {
-      display: block;
-      color: var(--orange);
-      font-family: GmarketSans, Pretendard, sans-serif;
-      font-size: 28px;
-      line-height: 1;
-    }
-    .metric span {
-      display: block;
-      margin-top: 8px;
-      color: rgba(10,10,10,.58);
-      font-size: 13px;
-      font-weight: 800;
-    }
     .deal {
       overflow: hidden;
-      border-radius: 24px;
       border: 1px solid var(--line);
+      border-radius: 26px;
       background: #fff;
       transition: transform .42s var(--ease), box-shadow .42s var(--ease);
     }
     .deal:hover {
       transform: translateY(-4px);
-      box-shadow: 0 20px 48px rgba(26,43,71,.13);
+      box-shadow: 0 22px 52px rgba(26,43,71,.13);
     }
-    .deal img { width: 100%; height: 176px; object-fit: cover; }
-    .deal-body { padding: 19px; }
+    .deal img { width: 100%; height: 186px; object-fit: cover; }
+    .deal-body { padding: 20px; }
     .deal-loc {
       margin: 0;
       color: rgba(10,10,10,.52);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 850;
       line-height: 1.55;
     }
     .price {
@@ -223,11 +248,11 @@
       font-weight: 900;
     }
     .price .from { color: rgba(10,10,10,.34); font-size: 16px; }
-    .price .to { color: var(--ink); font-size: 28px; line-height: 1; }
+    .price .to { color: var(--ink); font-size: 29px; line-height: 1; }
     .gain {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       margin-top: 13px;
       padding: 7px 12px;
       border-radius: 999px;
@@ -236,57 +261,60 @@
       font-size: 13px;
       font-weight: 900;
     }
-    .a-grid {
+    .editorial {
       display: grid;
-      grid-template-columns: .9fr 1.1fr;
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
       gap: 28px;
       align-items: stretch;
     }
-    .a-profile {
+    .editorial-left {
+      position: relative;
+      min-height: 560px;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(255,250,243,.92), rgba(247,241,231,.9)),
+        var(--cream);
+      padding: 38px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 30px;
-      min-height: 520px;
-      padding: 34px;
-      border-radius: 28px;
-      background: #f8f3ea;
     }
-    .a-profile h3,
-    .c-story h3 {
-      margin: 26px 0 0;
+    .editorial-left h3 {
+      margin: 28px 0 0;
       font-family: GmarketSans, Pretendard, sans-serif;
-      font-size: clamp(34px, 4.4vw, 54px);
-      line-height: 1.18;
-      letter-spacing: -0.03em;
+      font-size: clamp(39px, 4.8vw, 62px);
+      line-height: 1.13;
+      letter-spacing: -0.04em;
     }
-    .a-profile h3 span,
-    .c-story h3 span { color: var(--orange); }
-    .a-profile p,
-    .c-story p {
-      color: rgba(10,10,10,.66);
+    .editorial-left h3 span { color: var(--orange); }
+    .editorial-left p {
+      margin: 20px 0 0;
+      color: rgba(10,10,10,.65);
+      font-size: 16px;
       line-height: 1.78;
     }
-    .a-list {
-      display: grid;
-      gap: 12px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .a-list li {
+    .profile-line {
       display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      color: rgba(10,10,10,.74);
-      font-size: 15px;
-      line-height: 1.65;
-      font-weight: 700;
+      align-items: center;
+      gap: 16px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(10,10,10,.09);
     }
-    .a-list iconify-icon { margin-top: 3px; color: var(--orange); font-size: 18px; }
-    .a-right {
+    .profile-line strong {
+      display: block;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 25px;
+      line-height: 1.1;
+    }
+    .profile-line span {
+      display: block;
+      margin-top: 5px;
+      color: rgba(10,10,10,.48);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .editorial-right {
       display: grid;
-      grid-template-rows: auto auto;
       gap: 16px;
     }
     .deal-grid {
@@ -294,17 +322,18 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
-    .total {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .total-bar {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       gap: 18px;
-      padding: 24px;
-      border-radius: 26px;
+      align-items: center;
+      border-radius: 28px;
       background: var(--ink);
       color: #fff;
+      padding: 25px;
     }
-    .total strong {
+    .total-bar iconify-icon { color: #ffb074; font-size: 38px; }
+    .total-bar strong {
       display: block;
       margin-top: 4px;
       color: #ffb074;
@@ -312,107 +341,127 @@
       font-size: 34px;
       line-height: 1;
     }
-    .b-stage {
+    .dossier {
       background:
-        radial-gradient(circle at 84% 12%, rgba(255,107,0,.14), transparent 24rem),
-        #111;
+        radial-gradient(circle at 82% 10%, rgba(255,107,0,.14), transparent 24rem),
+        #101010;
       color: #fff;
     }
-    .b-grid {
+    .dossier-grid {
       display: grid;
-      grid-template-columns: 1.04fr .96fr;
-      gap: 32px;
+      grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr);
+      gap: 30px;
+      align-items: stretch;
     }
-    .b-panel {
-      padding: 34px;
-      border-radius: 28px;
-      background: rgba(255,255,255,.06);
+    .dossier-main {
+      padding: 36px;
+      border-radius: 30px;
+      background: rgba(255,255,255,.065);
       border: 1px solid rgba(255,255,255,.12);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
     }
-    .b-panel h3 {
-      margin: 22px 0 0;
+    .dossier-main h3 {
+      margin: 24px 0 0;
       font-family: GmarketSans, Pretendard, sans-serif;
-      font-size: clamp(34px, 4.8vw, 56px);
-      line-height: 1.16;
-      letter-spacing: -0.03em;
+      font-size: clamp(40px, 5vw, 62px);
+      line-height: 1.14;
+      letter-spacing: -0.04em;
     }
-    .b-panel p {
-      margin: 18px 0 0;
+    .dossier-main p {
+      margin: 20px 0 0;
+      max-width: 560px;
       color: rgba(255,255,255,.66);
-      line-height: 1.78;
+      line-height: 1.8;
     }
-    .b-metrics {
+    .metrics {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 28px;
+      gap: 13px;
+      margin-top: 30px;
     }
-    .b-metric {
-      min-height: 126px;
-      padding: 20px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.07);
+    .metric {
+      min-height: 128px;
+      padding: 21px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.075);
       border: 1px solid rgba(255,255,255,.11);
     }
-    .b-metric strong {
+    .metric strong {
       display: block;
       color: #ffb074;
       font-family: GmarketSans, Pretendard, sans-serif;
-      font-size: 28px;
+      font-size: 30px;
       line-height: 1;
     }
-    .b-metric span {
+    .metric span {
       display: block;
       margin-top: 9px;
-      color: rgba(255,255,255,.58);
+      color: rgba(255,255,255,.60);
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 850;
       line-height: 1.45;
     }
-    .b-proof {
-      display: flex;
-      flex-direction: column;
+    .dossier-proof {
+      display: grid;
       gap: 16px;
     }
-    .b-proof-card {
+    .paper-card {
       overflow: hidden;
-      border-radius: 26px;
+      border-radius: 28px;
       background: #fff;
       color: var(--ink);
     }
-    .b-proof-card img { width: 100%; height: 220px; object-fit: cover; }
-    .b-proof-card div { padding: 22px; }
-    .b-proof-card h4 {
-      margin: 0;
+    .paper-card img { width: 100%; height: 238px; object-fit: cover; }
+    .paper-card div { padding: 24px; }
+    .paper-card h4 {
+      margin: 6px 0 0;
       font-family: GmarketSans, Pretendard, sans-serif;
-      font-size: 25px;
-      line-height: 1.25;
+      font-size: 28px;
+      line-height: 1.22;
     }
-    .c-grid {
+    .paper-card p {
+      margin: 12px 0 0;
+      color: rgba(10,10,10,.56);
+      font-size: 14px;
+      line-height: 1.72;
+    }
+    .note {
       display: grid;
-      grid-template-columns: .92fr 1.08fr;
-      gap: 28px;
+      grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
+      gap: 30px;
+      align-items: stretch;
     }
-    .c-story {
+    .note-left {
+      min-height: 540px;
+      padding: 38px;
+      border-radius: 30px;
+      background: #fffaf3;
+      border: 1px solid rgba(10,10,10,.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 500px;
-      padding: 34px;
-      border-radius: 28px;
-      background: #fffaf3;
-      border: 1px solid rgba(10,10,10,.08);
+    }
+    .note-left h3 {
+      margin: 24px 0 0;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: clamp(38px, 4.6vw, 58px);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+    }
+    .note-left h3 span { color: var(--orange); }
+    .note-left p {
+      margin: 18px 0 0;
+      color: rgba(10,10,10,.66);
+      line-height: 1.8;
     }
     .quote {
-      margin: 28px 0 0;
       padding: 22px;
       border-left: 4px solid var(--orange);
       border-radius: 18px;
       background: #fff;
       color: rgba(10,10,10,.72);
+      font-weight: 780;
       line-height: 1.8;
-      font-weight: 700;
     }
     .steps {
       display: grid;
@@ -420,15 +469,15 @@
     }
     .step {
       display: grid;
-      grid-template-columns: 72px 1fr;
+      grid-template-columns: 76px 1fr;
       gap: 18px;
-      padding: 22px;
-      border-radius: 24px;
+      padding: 23px;
       border: 1px solid var(--line);
+      border-radius: 25px;
       background: #fff;
       transition: transform .42s var(--ease), box-shadow .42s var(--ease);
     }
-    .step:hover { transform: translateX(4px); box-shadow: 0 18px 42px rgba(26,43,71,.1); }
+    .step:hover { transform: translateX(4px); box-shadow: 0 18px 42px rgba(26,43,71,.10); }
     .step time {
       color: var(--orange);
       font-family: GmarketSans, Pretendard, sans-serif;
@@ -445,51 +494,92 @@
       margin: 8px 0 0;
       color: rgba(10,10,10,.58);
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.72;
     }
-    .fade {
-      opacity: 0;
-      transform: translateY(18px);
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
+    .mini {
+      padding: 22px;
+      border-radius: 24px;
+      background: var(--ink);
+      color: #fff;
+    }
+    .mini strong {
+      display: block;
+      color: #ffb074;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 27px;
+      line-height: 1;
+    }
+    .mini span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+      font-weight: 850;
+    }
+    .fade { opacity: 0; transform: translateY(18px); }
     .fade.on {
       animation: fadeUp .72s var(--ease) forwards;
       animation-delay: calc(var(--i, 0) * 70ms);
     }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @media (max-width: 900px) {
-      .a-grid, .b-grid, .c-grid { grid-template-columns: 1fr; }
-      .a-profile, .c-story { min-height: auto; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 940px) {
+      .hero-grid,
+      .editorial,
+      .dossier-grid,
+      .note {
+        grid-template-columns: 1fr;
+      }
+      .editorial-left,
+      .note-left { min-height: auto; }
     }
     @media (max-width: 560px) {
-      [data-homepage-topbar] > div { padding: 14px 12px; }
-      [data-homepage-topbar] a:first-child { font-size: 24px; }
+      [data-homepage-topbar] > div { padding: 14px 12px !important; }
+      [data-homepage-topbar] a:first-child { font-size: 24px !important; }
       .wrap { width: calc(100% - 24px); }
-      .hero { padding: 104px 0 48px; }
-      .hero h1 { font-size: 40px; }
-      .hero p,
+      .hero { min-height: auto; padding: 104px 0 54px; }
+      .hero h1 { font-size: 42px; }
+      .hero-copy,
       .option-head p,
-      .a-profile p,
-      .b-panel p,
-      .c-story p,
+      .editorial-left p,
+      .dossier-main p,
+      .note-left p,
       .step p {
         font-size: 15px;
         word-break: normal;
         overflow-wrap: anywhere;
       }
-      .option { padding: 46px 0; }
+      .ref-card { padding: 20px; border-radius: 24px; }
+      .option { padding: 48px 0; }
       .option-head { grid-template-columns: 1fr; gap: 14px; }
-      .no { width: 64px; height: 64px; border-radius: 20px; }
-      .stage { border-radius: 24px; }
+      .no { width: 66px; height: 66px; border-radius: 21px; }
+      .stage { border-radius: 25px; }
       .stage-inner { padding: 20px; }
-      .a-profile, .b-panel, .c-story { padding: 24px; border-radius: 22px; }
-      .a-profile h3, .b-panel h3, .c-story h3 {
-        font-size: 31px;
-        line-height: 1.28;
+      .editorial-left,
+      .dossier-main,
+      .note-left {
+        padding: 24px;
+        border-radius: 23px;
       }
-      .deal-grid, .b-metrics { grid-template-columns: 1fr; }
-      .total { align-items: flex-start; flex-direction: column; }
+      .editorial-left h3,
+      .dossier-main h3,
+      .note-left h3 {
+        font-size: 32px;
+        line-height: 1.26;
+      }
+      .deal-grid,
+      .metrics,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+      .total-bar {
+        grid-template-columns: auto 1fr;
+      }
+      .total-bar strong { font-size: 30px; }
       .step { grid-template-columns: 1fr; }
     }
   </style>
@@ -497,15 +587,22 @@
 <body>
   <main>
     <header class="hero">
-      <div class="wrap">
-        <span class="label"><iconify-icon icon="solar:pen-new-square-bold-duotone"></iconify-icon>CODEX NEW DRAFT</span>
-        <h1 class="keep">컨설턴트 소개<br><span>새 시안 3개</span></h1>
-        <p class="keep">기존 Claude 시안 파일과 분리해서 새로 만든 Codex 시안입니다. 목표는 덜 투박하게, 덜 자랑처럼, 그래도 신뢰 근거는 선명하게 보여주는 것입니다.</p>
-        <nav class="nav-pills" aria-label="시안 바로가기">
-          <a href="#draft-a"><iconify-icon icon="solar:user-check-rounded-bold-duotone"></iconify-icon>A 동네 전문가형</a>
-          <a href="#draft-b"><iconify-icon icon="solar:chart-square-bold-duotone"></iconify-icon>B 증거 보드형</a>
-          <a href="#draft-c"><iconify-icon icon="solar:route-bold-duotone"></iconify-icon>C 판단 스토리형</a>
-        </nav>
+      <div class="wrap hero-grid">
+        <div>
+          <span class="pill"><iconify-icon icon="solar:pen-new-square-bold-duotone"></iconify-icon>CODEX NEW DRAFT</span>
+          <h1 class="keep">컨설턴트 소개<br><span>새 시안 3개</span></h1>
+          <p class="hero-copy keep">레퍼런스에서 가져온 방향은 단순합니다. 코칭 페이지는 이력이 아니라 "이 사람이 내 결정을 같이 봐도 되는 사람인가"를 먼저 납득시켜야 합니다.</p>
+          <nav class="nav-pills" aria-label="시안 바로가기">
+            <a href="#draft-a"><iconify-icon icon="solar:user-check-rounded-bold-duotone"></iconify-icon>A 에디토리얼형</a>
+            <a href="#draft-b"><iconify-icon icon="solar:chart-square-bold-duotone"></iconify-icon>B 증거 보드형</a>
+            <a href="#draft-c"><iconify-icon icon="solar:route-bold-duotone"></iconify-icon>C 상담 노트형</a>
+          </nav>
+        </div>
+        <aside class="ref-card">
+          <span class="eyebrow">REFERENCE LOGIC</span>
+          <strong class="keep mt-3">연결감 → 증거 → 판단 기준</strong>
+          <p class="keep">프로필을 크게 세우기보다, 실제 사례와 "어떻게 판단하는 사람인지"를 한 화면에 묶었습니다.</p>
+        </aside>
       </div>
     </header>
 
@@ -514,36 +611,29 @@
         <div class="option-head">
           <span class="no">A</span>
           <div>
-            <p class="eyebrow">LOCAL EXPERT</p>
-            <h2 class="keep">동네 전문가형</h2>
-            <p class="keep">사람의 인상을 먼저 만들고, 투자 사례는 뒤에서 받쳐주는 시안입니다. 기존보다 덜 세고 더 편안합니다.</p>
+            <p class="eyebrow">Editorial Authority</p>
+            <h2 class="keep">에디토리얼형</h2>
+            <p class="keep">잡지 인터뷰처럼 사람의 톤을 먼저 보여주고, 오른쪽에서 계약서 이미지가 신뢰를 받쳐주는 구조입니다.</p>
           </div>
         </div>
         <div class="stage">
           <div class="stage-inner">
-            <div class="a-grid">
-              <article class="a-profile fade" style="--i:0">
+            <div class="editorial">
+              <article class="editorial-left fade" style="--i:0">
                 <div>
                   <span class="eyebrow">우리동네 재테크 · 우재</span>
-                  <h3 class="keep">처음 집 사는 결정,<br>같이 보되 결론은<br><span>분명하게</span> 드립니다.</h3>
-                  <p class="keep">코칭에서는 일반론보다 예산, 대출, 가족 상황, 후보 단지를 같이 놓고 판단합니다.</p>
+                  <h3 class="keep">처음 집 사는 결정,<br>같이 보되<br><span>결론은 분명하게</span></h3>
+                  <p class="keep">예산, 대출, 가족 상황, 후보 단지를 한 번에 놓고 봅니다. 듣기 좋은 일반론보다 지금 필요한 판단을 드리는 쪽에 가깝습니다.</p>
                 </div>
-                <div>
-                  <div class="flex items-center gap-4">
-                    <div class="avatar">우재</div>
-                    <div>
-                      <p class="m-0 font-display text-2xl font-black">우재</p>
-                      <p class="m-0 mt-1 text-sm font-bold text-black/45">증권투자 법인 대표 · 실전 부동산 투자자</p>
-                    </div>
+                <div class="profile-line">
+                  <div class="avatar">우재</div>
+                  <div>
+                    <strong>우재</strong>
+                    <span>증권투자 법인 대표 · 실전 부동산 투자자</span>
                   </div>
-                  <ul class="a-list mt-6">
-                    <li class="keep"><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon>투자 업계 10년+ 경력</li>
-                    <li class="keep"><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon>최근 8개월 아파트 매매 5건</li>
-                    <li class="keep"><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon>1:1 코칭 150건+ · 만족도 99%</li>
-                  </ul>
                 </div>
               </article>
-              <div class="a-right">
+              <div class="editorial-right">
                 <div class="deal-grid">
                   <article class="deal fade" style="--i:1">
                     <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/mokdong-buy.png" alt="목동신시가지 매수 계약서 일부" loading="lazy" decoding="async">
@@ -562,12 +652,13 @@
                     </div>
                   </article>
                 </div>
-                <div class="total fade" style="--i:3">
+                <div class="total-bar fade" style="--i:3">
+                  <iconify-icon icon="solar:banknote-2-bold-duotone"></iconify-icon>
                   <div>
-                    <p class="m-0 text-sm font-bold text-white/58">최근 8개월 대표 실적 합계</p>
+                    <p class="m-0 text-sm font-bold text-white/60">최근 8개월 대표 실적 합계</p>
                     <strong>+18.3억 상승</strong>
                   </div>
-                  <iconify-icon icon="solar:graph-up-bold-duotone" class="text-4xl text-[#ffb074]"></iconify-icon>
+                  <p class="m-0 text-right text-sm font-bold text-white/50 keep">코칭 150건+<br>만족도 99%</p>
                 </div>
               </div>
             </div>
@@ -581,32 +672,32 @@
         <div class="option-head">
           <span class="no">B</span>
           <div>
-            <p class="eyebrow">EVIDENCE BOARD</p>
+            <p class="eyebrow">Proof Dossier</p>
             <h2 class="keep">증거 보드형</h2>
-            <p class="keep">감성보다 검증을 먼저 보여주는 시안입니다. 방문자가 "믿을 만한 사람인가"를 빠르게 판단하게 합니다.</p>
+            <p class="keep">프리미엄 코칭 페이지에서 많이 쓰는 "권위 카드 + 증거 자료" 구조입니다. 신뢰 근거를 가장 빠르게 전달합니다.</p>
           </div>
         </div>
-        <div class="stage b-stage">
+        <div class="stage dossier">
           <div class="stage-inner">
-            <div class="b-grid">
-              <article class="b-panel fade" style="--i:0">
-                <span class="eyebrow text-[#ffb074]">검증 가능한 숫자</span>
+            <div class="dossier-grid">
+              <article class="dossier-main fade" style="--i:0">
+                <span class="eyebrow text-[#ffb074]">Verified by Case</span>
                 <h3 class="keep">말보다 먼저<br>자료와 숫자로<br>확인하세요.</h3>
                 <p class="keep">큰 결정을 맡기려면 조언자의 말투보다 실제 경험, 누적 상담, 최근 시장 감각이 먼저 보여야 합니다.</p>
-                <div class="b-metrics">
-                  <div class="b-metric"><strong>10년+</strong><span>투자 업계 경력</span></div>
-                  <div class="b-metric"><strong>150건+</strong><span>1:1 코칭 누적</span></div>
-                  <div class="b-metric"><strong>99%</strong><span>코칭 만족도</span></div>
-                  <div class="b-metric"><strong>+18.3억</strong><span>최근 대표 실적 합계</span></div>
+                <div class="metrics">
+                  <div class="metric"><strong>10년+</strong><span>투자 업계 경력</span></div>
+                  <div class="metric"><strong>150건+</strong><span>1:1 코칭 누적</span></div>
+                  <div class="metric"><strong>99%</strong><span>코칭 만족도</span></div>
+                  <div class="metric"><strong>+18.3억</strong><span>대표 실적 합계</span></div>
                 </div>
               </article>
-              <aside class="b-proof fade" style="--i:1">
-                <div class="b-proof-card">
+              <aside class="dossier-proof fade" style="--i:1">
+                <div class="paper-card">
                   <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/landing-3.png" alt="실제 매매 계약서 일부" loading="lazy" decoding="async">
                   <div>
-                    <p class="m-0 text-xs font-black tracking-[.14em] text-[#FF6B00]">DOCUMENTED CASE</p>
-                    <h4 class="keep mt-2">실제 매매 계약서 일부</h4>
-                    <p class="keep mt-3 text-sm leading-relaxed text-black/55">강남3구와 압여목성 포트폴리오를 직접 운영하며, 지금도 시장에서 매수하고 있습니다.</p>
+                    <span class="eyebrow">Documented Case</span>
+                    <h4 class="keep">실제 매매 계약서 일부</h4>
+                    <p class="keep">강남3구와 압여목성 포트폴리오를 직접 운영하며, 지금도 시장에서 매수하고 있습니다.</p>
                   </div>
                 </div>
               </aside>
@@ -621,15 +712,15 @@
         <div class="option-head">
           <span class="no">C</span>
           <div>
-            <p class="eyebrow">DECISION STORY</p>
-            <h2 class="keep">판단 스토리형</h2>
-            <p class="keep">운영자 자랑처럼 보이지 않게, 왜 코칭이 필요한지부터 설명하는 시안입니다. 브랜드 톤에는 이 안이 가장 자연스럽습니다.</p>
+            <p class="eyebrow">Decision Note</p>
+            <h2 class="keep">상담 노트형</h2>
+            <p class="keep">운영자 자랑처럼 보이지 않게, "왜 코칭이 필요한지"에서 시작합니다. 브랜드 톤에는 이 안이 가장 자연스럽습니다.</p>
           </div>
         </div>
         <div class="stage">
           <div class="stage-inner">
-            <div class="c-grid">
-              <article class="c-story fade" style="--i:0">
+            <div class="note">
+              <article class="note-left fade" style="--i:0">
                 <div>
                   <span class="eyebrow">상담이 필요한 이유</span>
                   <h3 class="keep">정보가 부족해서가 아니라,<br><span>판단 기준</span>이 없어서 막힙니다.</h3>
@@ -659,9 +750,9 @@
                     <p class="keep">사도 되는지, 보류해야 하는지, 먼저 확인할 조건은 무엇인지까지 분명하게 정리합니다.</p>
                   </div>
                 </article>
-                <div class="deal-grid">
-                  <div class="metric fade" style="--i:4"><strong>5건</strong><span>최근 8개월 아파트 매매</span></div>
-                  <div class="metric fade" style="--i:5"><strong>+18.3억</strong><span>대표 실적 합계</span></div>
+                <div class="mini-grid">
+                  <div class="mini fade" style="--i:4"><strong>5건</strong><span>최근 8개월 아파트 매매</span></div>
+                  <div class="mini fade" style="--i:5"><strong>+18.3억</strong><span>대표 실적 합계</span></div>
                 </div>
               </div>
             </div>
