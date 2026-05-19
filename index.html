@@ -26,6 +26,9 @@
         .item:hover { border-color: #0077C8; }
         .item-icon { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
         .item-body { flex: 1; min-width: 0; }
+        .item-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; margin-bottom: 5px; }
+        .archive-chip { display: inline-flex; align-items: center; width: fit-content; border-radius: 999px; padding: 1px 6px; background: #0F172A; color: #FFFFFF; font-size: 10px; font-weight: 800; line-height: 1.4; }
+        .modified-date { color: #94A3B8; font-size: 11px; font-weight: 650; line-height: 1.2; }
         .item-title { font-size: 14px; font-weight: 700; color: #051C2C; }
         .item-desc { font-size: 12px; color: #94A3B8; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .badge { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 8px; flex-shrink: 0; }
@@ -104,10 +107,18 @@
     function renderItem(item) {
         var icon = site.icons[item.iconKey] || '';
         var badgeClass = item.badgeTone === 'soon' ? 'badge-soon' : 'badge-live';
+        var meta = '';
+        if (item.archiveNo || item.modifiedDate) {
+            meta = '<div class="item-meta">'
+                + (item.archiveNo ? '<span class="archive-chip">' + esc(item.archiveNo) + '</span>' : '')
+                + (item.modifiedDate ? '<span class="modified-date">최종수정 ' + esc(item.modifiedDate) + '</span>' : '')
+                + '</div>';
+        }
         return ''
             + '<a href="' + (item.href.indexOf('http') === 0 ? item.href : './' + item.href) + '" class="item">'
             + '<div class="item-icon">' + icon + '</div>'
             + '<div class="item-body">'
+            + meta
             + '<span class="item-title">' + esc(item.title) + '</span>'
             + '<div class="item-desc">' + esc(item.description || '') + '</div>'
             + '</div>'
