@@ -197,6 +197,9 @@
 
     function sortSheetItems(items, sectionId) {
         var state = sheetSort[sectionId];
+        if (!state && sectionId === 'archive') {
+            state = { key: 'modifiedDate', dir: 'desc' };
+        }
         if (!state || !state.key) {
             return items;
         }
