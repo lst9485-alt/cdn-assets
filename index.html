@@ -46,18 +46,22 @@
         .sheet-cell:first-child { border-left: 0; }
         .sheet-no { justify-content: center; }
         .sheet-no .archive-chip { font-size: 9px; }
+        .sheet-group { color: #64748B; font-weight: 750; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sheet-date { color: #8090AA; font-weight: 700; }
         .sheet-title { color: #051C2C; font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sheet-desc { color: #8090AA; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sheet-status { justify-content: center; }
         .sheet-go { justify-content: center; color: #B8C3D1; font-size: 15px; }
+        .generic-sheet .sheet-row { grid-template-columns: 112px minmax(160px, 1.1fr) minmax(220px, 1.6fr) 70px 28px; }
 
         @media (max-width: 1200px) { .hub { padding-right: 20px; } }
         @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 760px) {
             .sheet-row { grid-template-columns: 62px 92px minmax(130px, 1fr) 56px 24px; }
+            .generic-sheet .sheet-row { grid-template-columns: 92px minmax(130px, 1fr) 56px 24px; }
             .sheet-desc { display: none; }
             .sheet-cell.desc-col { display: none; }
+            .sheet-cell.group-col { display: flex; }
         }
         @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
     </style>
@@ -120,41 +124,39 @@
     }
 
     function renderBody(items, section) {
-        if (section.id === 'archive' || section.id === 'temp') {
-            return renderSheet(items, section.id);
-        }
-        var hasGroups = items.some(function(item) { return item.groupLabel; });
-        if (!hasGroups) {
-            return '<div class="grid">' + items.map(renderItem).join('') + '</div>';
-        }
-        var groupOrder = [];
-        var groupMap = {};
-        items.forEach(function(item) {
-            var label = item.groupLabel || '기타';
-            if (!groupMap[label]) {
-                groupMap[label] = [];
-                groupOrder.push(label);
-            }
-            groupMap[label].push(item);
-        });
-        return groupOrder.map(function(label) {
-            return ''
-                + '<div class="group-label">' + esc(label) + '</div>'
-                + '<div class="grid">' + groupMap[label].map(renderItem).join('') + '</div>';
-        }).join('');
+        return renderSheet(items, section.id);
     }
 
     function renderSheet(items, sectionId) {
-        var head = ''
+        var isArchive = items.some(function(item) { return item.archiveNo || item.modifiedDate; });
+        var head = isArchive ? renderArchiveHead(sectionId) : renderGenericHead(sectionId);
+        var className = isArchive ? 'sheet archive-sheet' : 'sheet generic-sheet';
+        return '<div class="' + className + '">' + head + sortSheetItems(items, sectionId).map(function(item) {
+            return isArchive ? renderArchiveSheetItem(item) : renderGenericSheetItem(item);
+        }).join('') + '</div>';
+    }
+
+    function renderArchiveHead(sectionId) {
+        return ''
             + '<div class="sheet-row sheet-head">'
             + '<div class="sheet-cell sheet-no" data-sheet-sort="archiveNo" data-section-id="' + esc(sectionId) + '">번호</div>'
             + '<div class="sheet-cell" data-sheet-sort="modifiedDate" data-section-id="' + esc(sectionId) + '">수정일</div>'
             + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">제목</div>'
-            + '<div class="sheet-cell desc-col">설명</div>'
+            + '<div class="sheet-cell desc-col" data-sheet-sort="description" data-section-id="' + esc(sectionId) + '">설명</div>'
             + '<div class="sheet-cell sheet-status" data-sheet-sort="badgeText" data-section-id="' + esc(sectionId) + '">상태</div>'
             + '<div class="sheet-cell sheet-go"></div>'
             + '</div>';
-        return '<div class="sheet">' + head + sortSheetItems(items, sectionId).map(renderSheetItem).join('') + '</div>';
+    }
+
+    function renderGenericHead(sectionId) {
+        return ''
+            + '<div class="sheet-row sheet-head">'
+            + '<div class="sheet-cell group-col" data-sheet-sort="groupLabel" data-section-id="' + esc(sectionId) + '">구분</div>'
+            + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">이름</div>'
+            + '<div class="sheet-cell desc-col" data-sheet-sort="description" data-section-id="' + esc(sectionId) + '">설명</div>'
+            + '<div class="sheet-cell sheet-status" data-sheet-sort="badgeText" data-section-id="' + esc(sectionId) + '">상태</div>'
+            + '<div class="sheet-cell sheet-go"></div>'
+            + '</div>';
     }
 
     function sortSheetItems(items, sectionId) {
@@ -170,7 +172,7 @@
         });
     }
 
-    function renderSheetItem(item) {
+    function renderArchiveSheetItem(item) {
         var badgeClass = item.badgeTone === 'soon' ? 'badge-soon' : 'badge-live';
         var href = item.href.indexOf('http') === 0 ? item.href : './' + item.href;
         return ''
@@ -184,27 +186,17 @@
             + '</a>';
     }
 
-    function renderItem(item) {
-        var icon = site.icons[item.iconKey] || '';
+    function renderGenericSheetItem(item) {
         var badgeClass = item.badgeTone === 'soon' ? 'badge-soon' : 'badge-live';
-        var side = '';
-        if (item.archiveNo || item.modifiedDate) {
-            side = '<div class="archive-meta">'
-                + (item.archiveNo ? '<span class="archive-chip">' + esc(item.archiveNo) + '</span>' : '')
-                + (item.modifiedDate ? '<span class="date-chip">' + esc(item.modifiedDate) + '</span>' : '')
-                + '</div>';
-        } else {
-            side = '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>';
-        }
+        var href = item.href.indexOf('http') === 0 ? item.href : './' + item.href;
+        var group = item.groupLabel || item.sidebarLabel || '기타';
         return ''
-            + '<a href="' + (item.href.indexOf('http') === 0 ? item.href : './' + item.href) + '" class="item">'
-            + '<div class="item-icon">' + icon + '</div>'
-            + '<div class="item-body">'
-            + '<span class="item-title">' + esc(item.title) + '</span>'
-            + '<div class="item-desc">' + esc(item.description || '') + '</div>'
-            + '</div>'
-            + side
-            + '<span class="arrow">›</span>'
+            + '<a href="' + href + '" class="sheet-row" target="_blank" rel="noopener">'
+            + '<div class="sheet-cell sheet-group group-col">' + esc(group) + '</div>'
+            + '<div class="sheet-cell sheet-title">' + esc(item.title) + '</div>'
+            + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
+            + '<div class="sheet-cell sheet-status"><span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span></div>'
+            + '<div class="sheet-cell sheet-go">›</div>'
             + '</a>';
     }
 
