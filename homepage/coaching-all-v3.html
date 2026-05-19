@@ -260,6 +260,9 @@
       .story-dark-quote .quote-meta::before { content:'●'; color:#ff8f9a; margin-right:7px; font-size:9px; vertical-align:1px; }
 	  .recommend-badge { display:inline-flex; align-items:center; gap:8px; background:#FF6B00; color:#fff; font-size:1rem; font-weight:900; padding:9px 18px; border-radius:999px; box-shadow:0 12px 28px rgba(255,107,0,0.26); }
 	  .map-region-chip { border:2px solid #1A2B47; border-radius:999px; background:#fff; color:#1A2B47; padding:6px 12px; font-size:14px; font-weight:900; }
+    /* ===== 컨설턴트 합계 배지 (미니멀) ===== */
+    .gain-badge { background: linear-gradient(135deg, #FFF4E6 0%, #FFE4C7 100%); border: 1px solid rgba(255, 107, 0, 0.25); box-shadow: 0 8px 24px rgba(255, 107, 0, 0.08); }
+
     /* ===== 컨설턴트 자기소개 (시안 A에서) ===== */
     .consultant-namecard { background: #fff; border-radius: 24px; padding: 28px; border: 1px solid rgba(10,10,10,0.08); box-shadow: 0 14px 36px rgba(26,43,71,0.06); max-width: 640px; margin: 0 auto; }
     .consultant-avatar { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 24px; background: linear-gradient(145deg, #ff7f24, #ff5b00); color: #fff; font-family: GmarketSans, Pretendard, sans-serif; font-size: 24px; font-weight: 900; box-shadow: 0 18px 36px rgba(255,107,0,0.25); flex-shrink: 0; }
@@ -1823,16 +1826,13 @@
           </div>
         </div>
       </div>
-	      <div class="text-center mb-10" data-reveal="scale">
-		        <div class="inline-block rounded-3xl border-2 border-red-300 bg-white px-10 py-6 text-brand-dark shadow-lg shadow-red-100/70">
-		          <div class="flex items-center gap-4">
-			            <span class="consult-gain-icon"><iconify-icon icon="solar:banknote-2-bold-duotone"></iconify-icon></span>
-	            <div>
-	              <p class="text-base font-bold text-gray-500">8개월 만에</p>
-	              <p class="text-3xl md:text-4xl font-display font-black"><span class="text-red-600">+18.3억</span> 상승</p>
-	            </div>
-	          </div>
-	        </div>
+      <div class="text-center mb-10" data-reveal="scale">
+        <div class="gain-badge inline-flex items-center gap-3 rounded-full px-6 py-3">
+          <iconify-icon icon="solar:graph-up-bold" class="text-2xl text-brand-orange"></iconify-icon>
+          <p class="text-lg md:text-xl font-display font-black text-brand-dark">
+            8개월만에 <span class="text-brand-orange">+18.3억</span> 상승
+          </p>
+        </div>
       </div>
       <!-- 추가 실적 이미지 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10" data-reveal>
