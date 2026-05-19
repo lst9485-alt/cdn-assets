@@ -552,6 +552,47 @@
       padding: 24px 22px;
       box-shadow: 0 20px 48px rgba(255, 107, 0, 0.14);
     }
+    .care-chat-card {
+      background:
+        radial-gradient(circle at 100% 0%, rgba(255, 107, 0, 0.06), transparent 40%),
+        #ffffff;
+      border: 1px solid rgba(26, 43, 71, 0.07);
+      border-radius: 22px;
+      padding: 18px 20px 20px;
+      box-shadow: 0 14px 36px rgba(26, 43, 71, 0.06);
+    }
+    .care-chat-card + .care-chat-card { margin-top: 12px; }
+    .care-chat-label {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 12.5px;
+      color: #FF6B00;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+    .care-chat-msg {
+      max-width: 86%;
+      border-radius: 16px;
+      padding: 10px 14px;
+      font-size: 14.5px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: #111827;
+      box-shadow: 0 8px 18px rgba(26, 43, 71, 0.05);
+      word-break: keep-all;
+    }
+    .care-chat-msg + .care-chat-msg { margin-top: 8px; }
+    .care-chat-msg.user {
+      margin-left: auto;
+      background: #FFE126;
+      border-top-right-radius: 6px;
+    }
+    .care-chat-msg.coach {
+      margin-right: auto;
+      background: #ffffff;
+      border: 1px solid rgba(26, 43, 71, 0.06);
+      border-top-left-radius: 6px;
+    }
     .growth-path h4 {
       font-family: GmarketSans, Pretendard, sans-serif;
       font-weight: 900;
@@ -889,21 +930,23 @@
                 </div>
               </div>
 
-              <!-- 중장기 갈아타기 로드맵 (PPT 슬라이드 25) -->
+              <!-- 코칭 후 카톡 케어 카드 -->
               <div class="md:self-center">
-                <div class="growth-path">
-                  <h4><iconify-icon icon="solar:graph-up-bold-duotone"></iconify-icon>중장기 자산 성장 로드맵</h4>
-                  <div class="growth-row">
-                    <div class="growth-node"><div class="label">STEP 1</div><div class="name">내집마련</div></div>
-                    <span class="growth-arrow">→</span>
-                    <div class="growth-node"><div class="label">STEP 2</div><div class="name">자산 축적</div></div>
-                    <span class="growth-arrow">→</span>
-                    <div class="growth-node is-end"><div class="label">STEP 3</div><div class="name">상급지 이동</div></div>
-                  </div>
-                  <div class="growth-note">
-                    <strong>★</strong> 갈아타기는 시장 보합·하락기 전에 선제적으로 준비. 매수 성공 이후에 멈추지 않고 <strong>자산을 키우는 구체적인 방법</strong>까지 알려드립니다.
-                  </div>
-                </div>
+                <article class="care-chat-card">
+                  <p class="care-chat-label">계약 직전 · 점검</p>
+                  <div class="care-chat-msg user">계약하기 전에 한 번만 더 봐주세요!</div>
+                  <div class="care-chat-msg coach">물론이죠 :) 계약서 보내주세요.</div>
+                </article>
+                <article class="care-chat-card">
+                  <p class="care-chat-label">매수 후 · 자산 관리</p>
+                  <div class="care-chat-msg coach">시세 변동 같이 봐드릴게요. 자산 시트 어떻게 적용하면 좋을지도요.</div>
+                  <div class="care-chat-msg user">감사합니다 :)</div>
+                </article>
+                <article class="care-chat-card">
+                  <p class="care-chat-label">갈아타기 · 검토</p>
+                  <div class="care-chat-msg user">다음 단지로 갈아타도 될까요?</div>
+                  <div class="care-chat-msg coach">자산·시세 같이 보고 시점 정해봐요.</div>
+                </article>
               </div>
 
             </div>
