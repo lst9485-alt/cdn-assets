@@ -337,6 +337,732 @@
 	    .sticky-coaching-cta { left:0; right:0; bottom:0; width:auto; max-width:none; border-radius:0; transform:translate3d(0, 24px, 0); padding-bottom: max(12px, env(safe-area-inset-bottom)); }
 	    .sticky-coaching-cta.is-visible { transform:translate3d(0, 0, 0); }
 	  }
+
+  /* ===== 2step 통합 CSS (coaching-section03-draft-claude-2step.html) ===== */
+    @font-face {
+      font-family: 'GmarketSans';
+      src: url('./fonts/GmarketSansBold.woff2') format('woff2');
+      font-weight: 700 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      margin: 0;
+      background: #fdf9ed;
+      color: #0A0A0A;
+      font-family: Pretendard, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+    .draft-shell {
+      background:
+        radial-gradient(circle at 16% 12%, rgba(255, 107, 0, 0.14), transparent 34%),
+        radial-gradient(circle at 88% 22%, rgba(26, 43, 71, 0.10), transparent 28%),
+        linear-gradient(180deg, #fffaf0 0%, #fdf9ed 38%, #f5f0e8 100%);
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(.16, 1, .3, 1), transform 0.7s cubic-bezier(.16, 1, .3, 1);
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    .version-tag {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #FF6B00;
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      box-shadow: 0 8px 24px rgba(255, 107, 0, 0.35);
+      z-index: 100;
+    }
+
+    .step-card {
+      position: relative;
+      border-radius: 28px;
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      background: #fff;
+      box-shadow: 0 18px 42px rgba(26, 43, 71, 0.08);
+      padding: 28px 28px 24px;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #FF6B00;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      box-shadow: 0 6px 18px rgba(255, 107, 0, 0.30);
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 49px;
+      top: 100%;
+      width: 2px;
+      height: 32px;
+      background: #FF6B00;
+      transform: translateX(-50%);
+      margin-left: 1px;
+    }
+    @media (min-width: 768px) {
+      .timeline-line { height: 40px; }
+    }
+
+    .deliverable-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 107, 0, 0.10);
+      color: #0A0A0A;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .check-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #F5F0E8;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #404040;
+    }
+
+    /* V3 카톡 스타일 (본 페이지 원본) */
+    .v3-chat-phone { background: #122039; border: 14px solid #122039; border-radius: 38px; box-shadow: 0 28px 60px rgba(18,24,38,0.22); overflow: hidden; }
+    .v3-chat-screen { background: #a9bdd6; border-radius: 24px; padding: 22px 18px 26px; }
+    .v3-chat-bubble { max-width: 78%; border-radius: 18px; padding: 14px 18px; font-weight: 800; line-height: 1.55; box-shadow: 0 10px 26px rgba(18,24,38,0.08); }
+    .v3-chat-user { margin-left: auto; background: #ffe126; color: #182033; }
+    .v3-chat-coach { background: #fff; color: #182033; }
+
+    /* V3 지도 + 지역 칩 */
+    .neighborhood-map svg { width:100%; height:auto; }
+    .map-region-chip { border:2px solid #1A2B47; border-radius:999px; background:#fff; color:#1A2B47; padding:6px 12px; font-size:14px; font-weight:900; }
+
+    /* V3 지표 카드 */
+    .v3-metric-card { background: #fff; border: 1px solid rgba(18,24,38,0.08); border-radius: 12px; padding: 20px 22px; box-shadow: 0 14px 34px rgba(18,24,38,0.06); }
+    .v3-metric-card strong { display: block; font-size: clamp(1.65rem, 4vw, 2.4rem); line-height: 1; letter-spacing: -0.03em; color: #121826; }
+    .v3-metric-card span { display: block; margin-top: 8px; font-size: 0.82rem; color: #5b6475; }
+    .v3-metric-card em { display: block; margin-top: 10px; font-style: normal; font-size: 0.74rem; font-weight: 900; color: #0f9f7a; }
+
+    /* 사전질문지 폰 mockup + 자동 스크롤 */
+    .form-phone {
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      background: #0A0A0A;
+      border: 7px solid #0A0A0A;
+      border-radius: 22px;
+      box-shadow: 0 16px 38px rgba(10, 10, 10, 0.18);
+      overflow: hidden;
+      position: relative;
+    }
+    .form-phone::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22%;
+      height: 4px;
+      background: #0A0A0A;
+      border-radius: 0 0 6px 6px;
+      z-index: 10;
+    }
+    .form-phone-screen {
+      position: relative;
+      width: 100%;
+      height: 260px;
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .form-phone-scroll {
+      width: 100%;
+      display: block;
+      animation: form-scroll 12s cubic-bezier(.4, 0, .4, 1) infinite;
+    }
+    @keyframes form-scroll {
+      0%, 6% { transform: translateY(0); }
+      94%, 100% { transform: translateY(calc(-100% + 260px)); }
+    }
+    .form-phone:hover .form-phone-scroll {
+      animation-play-state: paused;
+    }
+    .form-phone-caption {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: #6b7280;
+      letter-spacing: 0.02em;
+    }
+    .form-phone-caption .accent {
+      color: #FF6B00;
+      font-weight: 900;
+    }
+
+    /* 사전 질문지 작성 가이드 박스 */
+    .form-guide {
+      margin-top: 16px;
+      background: #FFFAF2;
+      border: 1.5px solid rgba(255, 107, 0, 0.18);
+      border-radius: 16px;
+      padding: 16px 18px;
+    }
+    .form-guide-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      color: #FF6B00;
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+    .form-guide ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .form-guide li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 5px 0;
+      font-size: 13.5px;
+      color: #1f2937;
+      font-weight: 600;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    .form-guide li iconify-icon {
+      color: #FF6B00;
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .form-guide li strong { color: #FF6B00; font-weight: 900; }
+
+    /* 정리표 미니 일러스트 */
+    .data-sheet {
+      position: relative;
+      background: linear-gradient(180deg, #FFF8F0 0%, #FFFAF5 100%);
+      border: 1.5px solid rgba(255, 107, 0, 0.22);
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 16px 36px rgba(255, 107, 0, 0.08);
+    }
+    .data-sheet::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(255, 107, 0, 0.025) 14px 15px);
+      pointer-events: none;
+    }
+    .data-sheet-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 12px;
+      border-bottom: 1.5px dashed rgba(255, 107, 0, 0.28);
+      margin-bottom: 12px;
+    }
+    .data-sheet-header iconify-icon {
+      font-size: 22px;
+      color: #FF6B00;
+    }
+    .data-sheet-header .title {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      color: #0A0A0A;
+      flex: 1;
+    }
+    .data-sheet-header .badge {
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #FF6B00;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 4px;
+      border-bottom: 1px solid rgba(26, 43, 71, 0.08);
+      font-size: 14px;
+    }
+    .data-row:last-child { border-bottom: none; }
+    .data-row .label {
+      color: #4b5563;
+      font-weight: 700;
+    }
+    .data-row .value {
+      color: #0A0A0A;
+      font-weight: 900;
+      font-family: Pretendard, sans-serif;
+    }
+    .data-row .value-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 107, 0, 0.14);
+      color: #FF6B00;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .data-sheet-footer {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1.5px dashed rgba(255, 107, 0, 0.28);
+      font-size: 12px;
+      color: #6b7280;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    /* 자료 4종 미니 카드 (consult 페이지 톤) */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .resource-mini {
+      background: #fff;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 16px 14px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    .resource-mini::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent, #FF6B00);
+    }
+    .resource-mini:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(26, 43, 71, 0.10);
+    }
+    .resource-mini .icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-bg, rgba(255,107,0,0.10));
+      color: var(--accent, #FF6B00);
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .resource-mini .title {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      color: #0A0A0A;
+      line-height: 1.35;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+    .resource-mini .desc {
+      font-size: 13px;
+      color: #4b5563;
+      line-height: 1.55;
+      font-weight: 500;
+      word-break: keep-all;
+    }
+    /* 단일 오렌지 톤으로 통일 (--accent 기본값 사용) */
+
+    /* 카톡 Q&A 미니 (V3 chat 응용) */
+    .qa-chat-mini {
+      background: #a9bdd6;
+      border-radius: 22px;
+      padding: 18px 14px 16px;
+      box-shadow: 0 16px 40px rgba(18,24,38,0.18);
+    }
+    .qa-chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding: 0 4px;
+    }
+    .qa-chat-header .name {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      color: #fff;
+    }
+    .qa-chat-header .status {
+      font-size: 11px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.78);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .qa-chat-header .status::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+    }
+    .qa-chat-day {
+      text-align: center;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #475569;
+      margin: 0 0 10px;
+    }
+    .qa-bubble {
+      max-width: 82%;
+      border-radius: 16px;
+      padding: 11px 14px;
+      font-size: 13.5px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin-bottom: 9px;
+      color: #182033;
+      word-break: keep-all;
+    }
+    .qa-bubble.coach {
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(18,24,38,0.08);
+    }
+    .qa-bubble.user {
+      background: #ffe126;
+      margin-left: auto;
+    }
+    .qa-bubble .accent {
+      color: #FF6B00;
+      font-weight: 900;
+    }
+
+    /* 6단계 로드맵 인포그래픽 (PPT 슬라이드 14) — 밝은 톤 */
+    .roadmap-6 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      background: linear-gradient(180deg, #FFFAF2 0%, #FFF4E6 100%);
+      border: 1.5px solid rgba(255, 107, 0, 0.22);
+      border-radius: 22px;
+      padding: 18px;
+      position: relative;
+      box-shadow: 0 18px 42px rgba(255, 107, 0, 0.10);
+    }
+    .roadmap-6 .step {
+      background: #fff;
+      border: 1.5px solid rgba(255, 107, 0, 0.18);
+      border-radius: 14px;
+      padding: 14px 10px 12px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 6px 14px rgba(255, 107, 0, 0.06);
+    }
+    .roadmap-6 .step.is-now {
+      background: #FFF4E6;
+      border-color: #FF6B00;
+      box-shadow: 0 10px 24px rgba(255, 107, 0, 0.18);
+    }
+    .roadmap-6 .step.is-now::after {
+      content: '진행 중';
+      position: absolute;
+      top: -9px; left: 50%;
+      transform: translateX(-50%);
+      background: #FF6B00;
+      color: #fff;
+      font-size: 9.5px;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+    .roadmap-6 .step .num {
+      display: inline-block;
+      width: 26px; height: 26px;
+      background: #FF6B00;
+      color: #fff;
+      border-radius: 50%;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      line-height: 26px;
+      margin-bottom: 8px;
+    }
+    .roadmap-6 .step .name {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      color: #0A0A0A;
+      margin-bottom: 5px;
+    }
+    .roadmap-6 .step .desc {
+      font-size: 12.5px;
+      color: #4b5563;
+      line-height: 1.45;
+      font-weight: 500;
+      word-break: keep-all;
+    }
+    .roadmap-6 .focus-tag {
+      grid-column: 1 / -1;
+      background: #fff;
+      border: 1.5px dashed rgba(255, 107, 0, 0.45);
+      color: #0A0A0A;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+    .roadmap-6 .focus-tag strong { color: #FF6B00; font-weight: 900; }
+
+    /* 갈아타기 로드맵 (PPT 슬라이드 25) — 오렌지 톤 */
+    .growth-path {
+      background: linear-gradient(135deg, #FFF8F0 0%, #FFEFE0 100%);
+      border: 1.5px solid rgba(255, 107, 0, 0.22);
+      border-radius: 24px;
+      padding: 24px 22px;
+      box-shadow: 0 20px 48px rgba(255, 107, 0, 0.14);
+    }
+    /* ===== 실제 후기 카드 (coaching-all-v3에서 가져옴) ===== */
+    .review-stars { color: #ff5f57; font-size: 13px; line-height: 1; letter-spacing: 1px; font-weight: 900; }
+    .trusted-review-card { border: 2px solid #12213a; border-radius: 10px; background: #fff; color: #121826; box-shadow: 5px 5px 0 #12213a; }
+    .trusted-review-card > div:last-child > p:nth-of-type(1) { color: #121826; }
+    .trusted-review-card > div:last-child > p:last-child { border-top: 1px dashed #9aa4b2; padding-top: 12px; color: #6b7280; font-size: 13px; font-weight: 800; }
+    .trusted-review-card > div:last-child > p:last-child::before { content: '●'; color: #ff8f9a; margin-right: 7px; font-size: 9px; vertical-align: 1px; }
+    .testimonial-sticker { border: 2px solid #12213a; border-radius: 10px; background: #fff; color: #121826; box-shadow: 5px 5px 0 #12213a; }
+    .testimonial-sticker::before { content: '★★★★★'; display: block; color: #ff5f57; font-weight: 900; letter-spacing: 1px; margin-bottom: 10px; }
+    .testimonial-sticker p:first-of-type { color: #6b7280; font-size: 13px; }
+    .testimonial-sticker p:first-of-type::before { content: '●'; color: #ff8f9a; margin-right: 7px; font-size: 9px; vertical-align: 1px; }
+    .testimonial-sticker p:last-of-type { border-top: 1px dashed #9aa4b2; padding-top: 14px; margin-top: 14px; color: #121826; }
+
+    /* ===== 신뢰 지표 G: 별점 배지 ===== */
+    .metric-review-badge {
+      background: #fff;
+      border-radius: 20px;
+      border: 1px solid rgba(26, 43, 71, 0.10);
+      padding: 28px;
+      box-shadow: 0 14px 30px rgba(26, 43, 71, 0.07);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .review-badge-num {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 3.2rem;
+      line-height: 1;
+      color: #FF6B00;
+    }
+    .review-badge-num-sub {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #0A0A0A;
+      vertical-align: baseline;
+      transform: translateY(6px);
+    }
+    .review-badge-num-sub-lg {
+      display: inline-block;
+      margin-left: 10px;
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #0A0A0A;
+      vertical-align: baseline;
+      transform: translateY(4px);
+    }
+    .review-badge-stars {
+      color: #fbbf24;
+      font-size: 22px;
+      letter-spacing: 2px;
+    }
+    .review-badge-meta {
+      font-size: 13px;
+      color: #5b6475;
+      margin-top: 6px;
+    }
+
+    .care-chat-card {
+      background: #ABC1D1;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(26, 43, 71, 0.10);
+    }
+    .care-chat-card + .care-chat-card { margin-top: 14px; }
+    .care-chat-header {
+      background: rgba(255, 255, 255, 0.55);
+      padding: 10px 14px;
+      font-weight: 900;
+      font-size: 13px;
+      color: #1A2B47;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(26, 43, 71, 0.08);
+    }
+    .care-chat-header iconify-icon {
+      color: #3C1E1E;
+      font-size: 18px;
+    }
+    .care-chat-body { padding: 14px 14px 18px; }
+    .care-chat-divider-wrap { text-align: center; margin: 0 0 12px; }
+    .care-chat-divider-wrap:not(:first-child) { margin-top: 18px; }
+    .care-chat-divider {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: rgba(26, 43, 71, 0.65);
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 999px;
+      padding: 4px 12px;
+    }
+    .care-chat-msg {
+      max-width: 86%;
+      border-radius: 16px;
+      padding: 10px 14px;
+      font-size: 14.5px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: #111827;
+      box-shadow: 0 4px 10px rgba(26, 43, 71, 0.06);
+      word-break: keep-all;
+    }
+    .care-chat-msg + .care-chat-msg { margin-top: 8px; }
+    .care-chat-msg.user {
+      margin-left: auto;
+      background: #FFE126;
+      border-top-right-radius: 6px;
+    }
+    .care-chat-msg.coach {
+      margin-right: auto;
+      background: #ffffff;
+      border-top-left-radius: 6px;
+    }
+    .growth-path h4 {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 17px;
+      color: #0A0A0A;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      word-break: keep-all;
+    }
+    .growth-path h4 iconify-icon { color: #FF6B00; font-size: 26px; }
+    .growth-row {
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .growth-node {
+      flex: 1;
+      background: #fff;
+      border: 2px solid rgba(255, 107, 0, 0.30);
+      border-radius: 14px;
+      padding: 14px 10px;
+      text-align: center;
+      box-shadow: 0 8px 18px rgba(255, 107, 0, 0.10);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .growth-node.is-end {
+      background: linear-gradient(135deg, #FF6B00 0%, #E55A00 100%);
+      border-color: #E55A00;
+      color: #fff;
+    }
+    .growth-node .label {
+      font-size: 11px;
+      color: #FF6B00;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .growth-node.is-end .label { color: rgba(255,255,255,0.85); }
+    .growth-node .name {
+      font-family: GmarketSans, Pretendard, sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      color: #0A0A0A;
+      line-height: 1.3;
+      word-break: keep-all;
+    }
+    .growth-node.is-end .name { color: #fff; }
+    .growth-arrow {
+      display: grid;
+      place-items: center;
+      color: #FF6B00;
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .growth-note {
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1.5px solid rgba(255, 107, 0, 0.22);
+      border-radius: 12px;
+      font-size: 13px;
+      color: #1f2937;
+      font-weight: 700;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+    .growth-note strong { color: #FF6B00; font-weight: 900; }
+    @media (max-width: 480px) {
+      .growth-node .name { font-size: 13px; }
+      .growth-arrow { font-size: 20px; }
+    }
+
+    @media (max-width: 768px) {
+      .timeline-line { display: none; }
+      .resource-grid { gap: 10px; }
+      .roadmap-6 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+  /* ===== 2step 인라인 CSS (step3 demo frame) ===== */
+                .demo-caption { text-align: center; font-size: 12px; font-weight: 700; color: #94a3b8; letter-spacing: 0.5px; margin: 8px 0 0; text-transform: uppercase; }
+                .deliverable-chips-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+                .deliverable-chips-2x2 .deliverable-chip { width: 100%; box-sizing: border-box; }
+                .demo-frame { width: 100%; max-width: 540px; margin: 0 auto; aspect-ratio: 540 / 518; display: flex; align-items: center; justify-content: center; }
+                .demo-clip { width: 100%; height: 0; padding-top: 77.78%; position: relative; overflow: hidden; transition: padding-top 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 12px; box-shadow: 0 6px 22px rgba(15,23,42,0.10); }
+                .demo-clip.tall { padding-top: 95.93%; }
+                .demo-clip img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 </style>
 </head>
 <body class="bg-white text-brand-dark font-sans">
@@ -740,218 +1466,255 @@
     </div>
   </section>
 
-  <!-- ===== 03 코칭 내용 ===== -->
+  <!-- ===== 03 코칭 내용 (2step 통합) ===== -->
   <section data-section="curriculum" class="max-w-4xl mx-auto bg-[#fdf9ed] pt-4 md:pt-6 pb-16 md:pb-24 relative text-brand-dark">
     <span class="absolute top-2 left-2 bg-black/45 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">03 코칭 내용</span>
 
     <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
-      <div class="neighborhood-map mb-12 rounded-[2rem] bg-brand-beige p-6 text-[#1A2B47] md:p-8" data-reveal>
-        <div class="grid gap-7 md:grid-cols-[0.9fr_1.1fr] md:items-center">
-          <div>
-            <span class="inline-block rotate-[-1deg] border-2 border-[#1A2B47] bg-[#F4C430] px-3 py-1 text-xs font-black">나한테 딱 맞는 집 구하기</span>
-            <p class="mt-5 text-5xl md:text-6xl font-display font-black leading-none word-keep">어디에<br><span class="bg-[#ff6b5b] px-2 text-white">집</span>을<br>살까요?</p>
-            <p class="mt-5 text-base leading-7 text-[#1A2B47]/75 word-keep">서울·경기·인천부터 광역시·중소도시까지,<br>내 예산에 맞는 동네와 아파트를 알려드립니다.</p>
-            <div class="mt-5 space-y-3">
-              <div>
-                <p class="text-xs font-black uppercase tracking-wider text-[#1A2B47]/65 mb-2">수도권</p>
-                <div class="flex flex-wrap gap-2">
-                  <span class="map-region-chip">서울</span><span class="map-region-chip">송파</span><span class="map-region-chip">마포</span><span class="map-region-chip">노원</span><span class="map-region-chip">강서</span><span class="map-region-chip">성남</span><span class="map-region-chip">수원</span><span class="map-region-chip">안양</span><span class="map-region-chip">인천</span><span class="map-region-chip">...</span>
-                </div>
-              </div>
-              <div>
-                <p class="text-xs font-black uppercase tracking-wider text-[#1A2B47]/65 mb-2">광역시·인구 30만↑ 도시</p>
-                <div class="flex flex-wrap gap-2">
-                  <span class="map-region-chip">부산</span><span class="map-region-chip">대구</span><span class="map-region-chip">대전</span><span class="map-region-chip">광주</span><span class="map-region-chip">울산</span><span class="map-region-chip">창원</span><span class="map-region-chip">청주</span><span class="map-region-chip">천안</span><span class="map-region-chip">전주</span><span class="map-region-chip">포항</span><span class="map-region-chip">김해</span><span class="map-region-chip">...</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <svg viewBox="0 -22 480 382" role="img" aria-label="동네 후보를 비교하는 지도 일러스트">
-            <path d="M10 180 Q240 138 470 196" stroke="#fff8e7" stroke-width="34" fill="none"/><path d="M250 0 Q212 176 270 360" stroke="#fff8e7" stroke-width="28" fill="none"/>
-            <path d="M10 180 Q240 138 470 196" stroke="#1A2B47" stroke-width="2" stroke-dasharray="6 6" fill="none"/><path d="M250 0 Q212 176 270 360" stroke="#1A2B47" stroke-width="2" stroke-dasharray="6 6" fill="none"/>
-            <circle cx="130" cy="92" r="50" fill="#9adbbd"/><text x="130" y="98" text-anchor="middle" font-size="16" font-weight="900" fill="#1A2B47">공원</text>
-            <g transform="translate(12 -24)"><rect x="330" y="46" width="38" height="58" fill="#ff6b5b" stroke="#1A2B47" stroke-width="2"/><rect x="378" y="28" width="38" height="76" fill="#f4c430" stroke="#1A2B47" stroke-width="2"/><rect x="426" y="62" width="32" height="42" fill="#4ecdc4" stroke="#1A2B47" stroke-width="2"/><text x="390" y="22" text-anchor="middle" font-size="15" font-weight="900" fill="#1A2B47">A아파트</text></g>
-            <g><rect x="72" y="260" width="38" height="48" fill="#4ecdc4" stroke="#1A2B47" stroke-width="2"/><rect x="122" y="238" width="38" height="70" fill="#ff6b5b" stroke="#1A2B47" stroke-width="2"/><rect x="172" y="270" width="34" height="38" fill="#f4c430" stroke="#1A2B47" stroke-width="2"/><text x="142" y="334" text-anchor="middle" font-size="15" font-weight="900" fill="#1A2B47">B아파트</text></g>
-            <g transform="translate(238 166)"><circle r="34" fill="#1A2B47"/><circle r="52" fill="none" stroke="#1A2B47" stroke-width="2" stroke-dasharray="5 5" opacity=".35"/><circle cx="0" cy="-6" r="11" fill="#ff6b5b"/><circle cx="0" cy="-6" r="4" fill="#fff"/><path d="M0 8 L-9 -8 H9 Z" fill="#ff6b5b"/></g>
-            <rect x="200" y="228" width="76" height="20" rx="10" fill="#fff" stroke="#1A2B47" stroke-width="1.5"/>
-            <text x="238" y="242" text-anchor="middle" font-size="13" font-weight="900" fill="#1A2B47">바로 여기!</text>
-          </svg>
-        </div>
-      </div>
-      <div class="mb-10 md:mb-14" data-reveal>
-        <p class="text-sm font-black uppercase text-brand-orange">코칭 진행 방식</p>
-        <h2 class="mt-3 text-4xl md:text-5xl font-display font-black leading-tight word-keep text-brand-dark">코칭은 이렇게 진행됩니다</h2>
-        <p class="mt-5 max-w-2xl text-base md:text-lg leading-relaxed text-gray-600 word-keep">예산·대출 정리부터 후보 압축, 실행 플랜까지<br>3단계로 함께 정리해드립니다.</p>
+
+      <!-- 헤더 -->
+      <div class="mb-12 md:mb-16" data-reveal>
+        <p class="text-base font-black uppercase text-brand-orange">코칭 내용</p>
+        <h1 class="mt-3 font-display text-4xl font-black leading-tight tracking-tight text-brand-dark word-keep md:text-5xl lg:text-6xl">
+          코칭은 이렇게 진행됩니다
+        </h1>
+        <p class="mt-5 max-w-2xl text-lg leading-relaxed text-gray-700 word-keep md:text-xl">
+          예산·대출부터 매매 방법, 지역·단지 선정, 협상·계약, 입주와<br>
+          이후 로드맵까지 한 번에 정리해드립니다.
+        </p>
       </div>
 
-      <div class="rounded-[2rem] bg-[#f5f0e8] p-5 text-brand-dark md:p-8" data-reveal>
-        <div class="max-w-3xl mx-auto space-y-6">
-          <div class="relative md:pl-14">
-            <div class="hidden md:block absolute left-5 top-0 bottom-0 w-px bg-brand-orange/25"></div>
-            <div class="hidden md:flex absolute left-0 top-5 h-10 w-10 items-center justify-center rounded-full bg-brand-orange text-white font-display font-black shadow-md">1</div>
-            <div class="rounded-3xl border border-gray-200 bg-white p-6 shadow-md md:p-8">
-              <div class="flex items-center gap-3 flex-wrap">
-                <span class="md:hidden flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-brand-orange text-white font-display font-black shadow-sm">1</span>
-                <p class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep"><iconify-icon icon="solar:wallet-money-bold"></iconify-icon>현재 상황 진단</p>
-              </div>
-              <h3 class="mt-3 text-2xl font-display font-black text-brand-dark word-keep">예산·대출과 우선순위를 한 장에 정리합니다</h3>
-              <p class="mt-4 text-gray-500 word-keep mb-5">사전 질문지로 예산·대출 한도와 거주 조건을 같이 점검하고, 지금 사도 되는지 1차 결론까지 함께 내립니다.</p>
-              <div class="grid gap-3 text-sm text-gray-700 md:grid-cols-3">
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>예산·대출 한도 정리표</span></div>
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>거주 우선순위 정리표</span></div>
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>지금 사도 되는지 1차 판단</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="relative md:pl-14">
-            <div class="hidden md:block absolute left-5 top-0 bottom-0 w-px bg-brand-orange/25"></div>
-            <div class="hidden md:flex absolute left-0 top-5 h-10 w-10 items-center justify-center rounded-full bg-brand-orange text-white font-display font-black shadow-md">2</div>
-            <div class="rounded-3xl border border-gray-200 bg-white p-6 shadow-md md:p-8">
-              <div class="flex items-center gap-3 flex-wrap">
-                <span class="md:hidden flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-brand-orange text-white font-display font-black shadow-sm">2</span>
-                <p class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep"><iconify-icon icon="solar:map-point-bold"></iconify-icon>후보 지역·단지 압축</p>
-              </div>
-              <h3 class="mt-3 text-2xl font-display font-black text-brand-dark word-keep">후보 단지와 비교 기준표를 만듭니다</h3>
-              <p class="mt-4 text-gray-500 word-keep mb-5">예산에 맞는 지역·단지를 좁히고, 단지마다 같은 잣대로 비교할 수 있게 기준표까지 같이 만듭니다.</p>
-              <div class="grid gap-3 text-sm text-gray-700 md:grid-cols-2">
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>예산 맞춤 후보 리스트</span></div>
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>단지 비교 기준표</span></div>
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>입지·현장 확인 체크리스트</span></div>
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>방문·계약 체크 포인트</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="relative md:pl-14">
-            <div class="hidden md:flex absolute left-0 top-5 h-10 w-10 items-center justify-center rounded-full bg-brand-orange text-white font-display font-black shadow-md">3</div>
-            <div class="rounded-3xl border border-gray-200 bg-white p-6 shadow-md md:p-8">
-              <div class="flex items-center gap-3 flex-wrap">
-                <span class="md:hidden flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-brand-orange text-white font-display font-black shadow-sm">3</span>
-                <p class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep"><iconify-icon icon="solar:checklist-minimalistic-bold"></iconify-icon>실행 플랜 및 90일 지원</p>
-              </div>
-              <h3 class="mt-3 text-2xl font-display font-black text-brand-dark word-keep">살지 보류할지 결론과 액션플랜까지 정리합니다</h3>
-              <p class="mt-4 text-gray-500 word-keep mb-5">코칭 후 바로 움직일 수 있게 결론과 다음 행동을 정리해드리고, 90일간 후속 질문을 이어서 답해드립니다.</p>
-              <div class="grid gap-3 text-sm text-gray-700 md:grid-cols-2">
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>살지·보류 결론과 근거</span></div>
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>액션플랜과 일정표</span></div>
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>이후 자산 계획 방향</span></div>
-                <div class="flex items-center gap-2 rounded-2xl bg-brand-beige px-4 py-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-lg flex-shrink-0"></iconify-icon><span>90일 카톡 질의응답</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="rounded-3xl border border-brand-orange/20 bg-white px-6 py-5 text-center shadow-md md:px-8">
-            <p class="text-2xl font-display font-black text-brand-dark word-keep">3단계가 끝나면, 막연한 고민이 <span class="text-brand-orange">판단 기준</span>으로 바뀝니다</p>
-            <p class="mt-2 text-gray-500 word-keep">진단부터 실행까지 한 번에 정리하고, 코칭 후 최대 90일 동안 카톡으로 질문을 이어갈 수 있습니다.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      <!-- 진행 4단계 (timeline + 정리표) -->
+      <div class="space-y-8 md:space-y-10">
 
-  <!-- ===== 03-1 패키지 ===== -->
-  <section data-section="package" class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 relative overflow-hidden">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">03-1 패키지</span>
-    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
-      <div class="text-center mb-14" data-reveal>
-        <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-4 py-2 text-brand-orange"><iconify-icon icon="solar:case-round-minimalistic-bold-duotone" class="text-xl"></iconify-icon><p class="font-display font-black text-lg">코칭 패키지</p></div>
-        <h2 class="mt-4 text-4xl md:text-5xl font-display font-black text-brand-dark word-keep">코칭 신청 시 함께 제공되는 8가지</h2>
-        <p class="mt-4 text-gray-500 word-keep">코칭 전 정리부터 코칭 후 실행까지, 필요한 자료와 지원을 함께 제공합니다.</p>
-      </div>
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-2" data-stagger>
-        <div class="package-postit bg-[#fff8e7] p-6"><iconify-icon icon="solar:wallet-money-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">예산·대출 분석</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">내 자금 범위와 대출 가능선을 먼저 정리합니다.</p></div>
-        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:chat-round-dots-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">1:1 질의응답</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 후 90일 동안 결정 과정의 질문을 이어서 받습니다.</p></div>
-        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:map-point-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">맞춤 단지 선정</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">예산과 우선순위에 맞는 지역·단지 후보를 압축합니다.</p></div>
-        <div class="package-postit bg-[#fffaf2] p-6"><iconify-icon icon="solar:chart-2-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">포트폴리오 점검</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">집 구매가 전체 자산 계획 안에서 맞는지 함께 봅니다.</p></div>
-        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:document-text-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">자산관리시트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 내용을 숫자로 바로 정리할 수 있는 시트를 제공합니다.</p></div>
-        <div class="package-postit bg-[#fff8e7] p-6"><iconify-icon icon="solar:checklist-minimalistic-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">올인원 체크리스트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">방문·계약·잔금까지 놓치기 쉬운 항목을 정리합니다.</p></div>
-        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:clipboard-list-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">코칭 리포트</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 핵심 결론과 판단 기준을 문서로 남겨드립니다.</p></div>
-        <div class="package-postit bg-white p-6"><iconify-icon icon="solar:target-bold-duotone" class="mb-5 block text-4xl text-brand-orange"></iconify-icon><p class="text-xl font-display font-black text-brand-dark word-keep">액션플랜 제공</p><p class="mt-2 text-sm leading-6 text-gray-600 word-keep">코칭 후 바로 실행할 다음 행동 순서를 정리합니다.</p></div>
-      </div>
-      <div class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4" data-reveal>
-        <div class="v3-metric-card"><strong>150건+</strong><span>1:1 코칭</span><em>+ 10년 경험</em></div>
-        <div class="v3-metric-card"><strong>4.97</strong><span>만족도 / 5.0</span><em>+ 실제 후기 기반</em></div>
-        <div class="v3-metric-card"><strong>25%</strong><span>매수 보류 비율</span><em>+ 필요한 말만</em></div>
-        <div class="v3-metric-card"><strong>90일</strong><span>코칭 후 케어</span><em>+ 카톡 무제한</em></div>
-      </div>
-	      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
-	        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark cursor-pointer hover:shadow-lg transition-shadow review-card-clickable">
-	          <p class="text-sm font-black">권*서님 · 전북 전주시 20대</p>
-	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep review-body line-clamp-3">"귀한 경험들로 알려주신 내용을 저렴한 비용으로 들어도 되나 싶을 정도입니다. 좋은 시야로 좋은 아파트 잘 살 것 같아 든든해졌습니다. 주변에도 많이 추천할 예정입니다. 앞으로도 조언을 구하며 알아볼 게 많지만, 선생님 덕분에 좋은 시야로 좋은 아파트 잘 살 것 같아 든든해졌습니다."</p>
-	          <span class="review-more inline-block mt-2 text-xs font-bold text-brand-orange">더보기 ›</span>
-	        </div>
-	        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark cursor-pointer hover:shadow-lg transition-shadow review-card-clickable">
-	          <p class="text-sm font-black">장*훈님 · 인천 송도 30대</p>
-	          <p class="mt-2 text-lg font-display font-black leading-7 word-keep review-body line-clamp-3">"솔직히 PPT까지 준비를 해서 상담해주실 줄 몰랐습니다. 처음에는 상담료가 조금 부담도 되었는데, 상담을 받고 나니 아깝다는 생각이 1도 안 들 만큼 귀중한 시간이었습니다. 저처럼 부동산을 잘 모르는 사람이 시행착오를 겪지 않도록 도움을 주셔서 정말 감사합니다."</p>
-	          <span class="review-more inline-block mt-2 text-xs font-bold text-brand-orange">더보기 ›</span>
-	        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 03-2 카톡질문 ===== -->
-  <section data-section="qna-support" class="max-w-4xl mx-auto bg-white py-16 md:py-24 relative">
-    <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">03-2 카톡질문</span>
-    <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-8">
-	      <div class="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <!-- step 1: 현재 상황 진단 -->
         <div data-reveal>
-          <p class="text-brand-orange font-display font-black text-sm tracking-[0.18em] uppercase">90 Days Q&A</p>
-          <h2 class="mt-4 text-4xl md:text-5xl font-display font-black leading-tight tracking-tight text-brand-dark word-keep">상담 한 번으로<br>끝내지 않습니다.</h2>
-          <p class="mt-5 text-gray-600 leading-relaxed word-keep">내집마련은 상담 당일에 끝나는 문제가 아닙니다. 매물 비교, 대출 조건, 계약 전 체크처럼 실행 중 생기는 질문은 90일 동안 카카오톡으로 이어갑니다.</p>
-          <div class="mt-7 grid grid-cols-2 gap-3 text-sm font-bold text-brand-dark">
-            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">매물 비교</div>
-            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">계약 전 체크</div>
-            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">대출 조건 질문</div>
-            <div class="rounded-2xl bg-white px-4 py-3 shadow-sm">실행 순서 점검</div>
+          <div class="step-card">
+            <div class="grid gap-8 md:grid-cols-[1.05fr_0.95fr] md:gap-10">
+
+              <div>
+                <div class="flex items-center gap-3 flex-wrap mb-4">
+                  <span class="step-number">1</span>
+                  <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep">
+                    <iconify-icon icon="solar:wallet-money-bold"></iconify-icon>정확한 현황 파악
+                  </span>
+                </div>
+                <h2 class="font-display text-2xl md:text-3xl font-black leading-snug text-brand-dark word-keep">
+                  현재 내 상황을 객관적으로 분석합니다.
+                </h2>
+                <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+                  예산, 대출, 관심 지역, 매수 시점 등 사전 질문지를 통해 체계적으로 점검합니다.
+                </p>
+                <div class="mt-5 pt-5 border-t border-brand-orange/15">
+                  <div class="flex flex-wrap gap-2">
+                    <span class="deliverable-chip"><iconify-icon icon="solar:document-text-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>사전 질문지 작성</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 사전 질문지 폰 mockup (자동 스크롤) -->
+              <div class="md:self-start">
+                <div class="form-phone" aria-label="사전 질문지 미리보기">
+                  <div class="form-phone-screen">
+                    <img class="form-phone-scroll" src="images/questionnaire-mobile.jpg" alt="사전 질문지 30개 항목 미리보기" loading="lazy">
+                  </div>
+                </div>
+                <p class="form-phone-caption">사전 질문지</p>
+              </div>
+
+            </div>
+            <div class="timeline-line"></div>
           </div>
         </div>
-        <div class="v3-chat-phone" data-reveal="right" aria-label="90일 카카오톡 질의응답 예시">
-          <div class="flex items-center justify-between px-5 py-4 text-white">
-            <div class="font-display font-black">← 우재</div>
-            <div class="text-sm font-bold text-white/70">● 온라인</div>
+
+        <!-- step 2: 전략·실행 설계 (자료 4종) -->
+        <div data-reveal style="transition-delay:80ms">
+          <div class="step-card">
+            <div class="grid gap-8 md:grid-cols-[1fr_1fr] md:gap-10">
+
+              <div>
+                <div class="flex items-center gap-3 flex-wrap mb-4">
+                  <span class="step-number">2</span>
+                  <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep">
+                    <iconify-icon icon="solar:target-bold"></iconify-icon>단계별 행동 정리
+                  </span>
+                </div>
+                <h2 class="font-display text-2xl md:text-3xl font-black leading-snug text-brand-dark word-keep">
+                  지금 뭘 해야 할지 단계별로 정리해드립니다.
+                </h2>
+                <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+                  예산 및 대출, 후보 단지, 매수 판단 등 내 상황에 맞춰 함께 정리합니다. 막연했던 고민이 명확한 결론으로 바뀝니다.
+                </p>
+                <div class="mt-5 pt-5 border-t border-brand-orange/15 hidden md:block">
+                  <div class="flex flex-wrap gap-2">
+                    <span class="deliverable-chip"><iconify-icon icon="solar:route-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>내집마련 6단계 로드맵</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6단계 로드맵 인포그래픽 (PPT 슬라이드 14) -->
+              <div class="md:self-start">
+                <div class="roadmap-6">
+                  <div class="step"><span class="num">1</span><div class="name">예산 확정</div><div class="desc">종잣돈·대출 체크</div></div>
+                  <div class="step"><span class="num">2</span><div class="name">매매 방법</div><div class="desc">일반매매·청약 등</div></div>
+                  <div class="step is-now"><span class="num">3</span><div class="name">지역·단지 선정</div><div class="desc">가격이 오를 곳</div></div>
+                  <div class="step"><span class="num">4</span><div class="name">부동산 방문</div><div class="desc">매수 플래너 활용</div></div>
+                  <div class="step"><span class="num">5</span><div class="name">계약</div><div class="desc">협상·등기부 확인</div></div>
+                  <div class="step"><span class="num">6</span><div class="name">잔금·입주</div><div class="desc">잔금·인테리어 등</div></div>
+                </div>
+                <div class="mt-4 flex flex-wrap gap-2 md:hidden">
+                  <span class="deliverable-chip"><iconify-icon icon="solar:route-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>내집마련 6단계 로드맵</span>
+                </div>
+              </div>
+
+            </div>
+            <div class="timeline-line"></div>
           </div>
-          <div class="v3-chat-screen space-y-4">
-            <p class="text-center text-xs font-bold text-slate-500">2026년 4월 28일</p>
-            <div class="v3-chat-bubble v3-chat-user">안녕하세요! 분당쪽 매물 보고 있는데 지금 사도 될까요?</div>
-            <div class="v3-chat-bubble v3-chat-coach">안녕하세요 :) 어떤 단지 보고 계셨어요?</div>
-            <div class="v3-chat-bubble v3-chat-user">정자동 OO마을이요. 12억 정도예요</div>
-            <div class="v3-chat-bubble v3-chat-coach">예산이랑 대출 어떻게 잡으셨어요? 사전 질문지 기준으로 같이 볼게요.</div>
-            <div class="v3-chat-bubble v3-chat-coach">
-              <span class="text-brand-orange">사전 질문지</span><br>
-              예산·대출·우선순위 1분 체크
+        </div>
+
+        <!-- step 3: 실행 로드맵 제시 (맞춤 자료 4종) -->
+        <div data-reveal style="transition-delay:160ms">
+          <div class="step-card">
+            <div class="grid gap-8 md:grid-cols-[1fr_1fr] md:gap-10">
+
+              <div>
+                <div class="flex items-center gap-3 flex-wrap mb-4">
+                  <span class="step-number">3</span>
+                  <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep">
+                    <iconify-icon icon="solar:checklist-minimalistic-bold"></iconify-icon>매수 판단의 근거
+                  </span>
+                </div>
+                <h2 class="font-display text-2xl md:text-3xl font-black leading-snug text-brand-dark word-keep">
+                  실제 매수부터 대출, 입주까지 구체적인 가이드를 제공합니다.
+                </h2>
+                <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+                  예산·매수 시점 등 코칭 결론을 자료로 정리해드립니다. 내집마련 이후에도 계속 활용할 수 있습니다.
+                </p>
+                <div class="mt-5 pt-5 border-t border-brand-orange/15">
+                  <div class="deliverable-chips-2x2">
+                    <span class="deliverable-chip"><iconify-icon icon="solar:chart-square-bold" class="text-brand-orange text-lg"></iconify-icon>자산 관리 &amp; 매수 플래너</span>
+                    <span class="deliverable-chip"><iconify-icon icon="solar:calculator-bold" class="text-brand-orange text-lg"></iconify-icon>재무 계산기</span>
+                    <span class="deliverable-chip"><iconify-icon icon="solar:presentation-graph-bold" class="text-brand-orange text-lg"></iconify-icon>상담 리포트</span>
+                    <span class="deliverable-chip"><iconify-icon icon="solar:document-text-bold" class="text-brand-orange text-lg"></iconify-icon>솔루션 실행 요약본</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 자료 4종 실제 화면 데모 (두 영상 토글 + 부드러운 높이 전환) -->
+              <div class="md:self-start">
+                <div class="demo-frame" aria-label="자료 4종 실제 화면 데모">
+                  <div class="demo-clip" id="step3DemoClip">
+                    <img id="step3DemoImg" src="images/step3-sheet.gif" alt="자료 4종 실제 화면 데모" loading="lazy">
+                  </div>
+                </div>
+                <p class="demo-caption">제공자료 일부</p>
+              </div>
+
+            </div>
+            <div class="timeline-line"></div>
+          </div>
+        </div>
+
+        <!-- step 4: 내 집 마련 이후 전략 + 카톡 Q&A -->
+        <div data-reveal style="transition-delay:240ms">
+          <div class="step-card">
+            <div class="grid gap-8 md:grid-cols-[1fr_1fr] md:gap-10">
+
+              <div>
+                <div class="flex items-center gap-3 flex-wrap mb-4">
+                  <span class="step-number">4</span>
+                  <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep">
+                    <iconify-icon icon="solar:graph-up-bold"></iconify-icon>코칭 이후
+                  </span>
+                </div>
+                <h2 class="font-display text-2xl md:text-3xl font-black leading-snug text-brand-dark word-keep">
+                  코칭이 끝나도 케어는 계속 됩니다.
+                </h2>
+                <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+                  단지 선정·대출·계약 등 궁금한 점은 언제든지 질의응답이 가능합니다.
+                </p>
+                <div class="mt-5 pt-5 border-t border-brand-orange/15">
+                  <div class="flex flex-wrap gap-2">
+                    <span class="deliverable-chip" style="background:#FEE500;color:#3C1E1E;"><iconify-icon icon="ri:kakao-talk-fill" class="text-lg" style="color:#3C1E1E;"></iconify-icon>최대 6개월 카톡 케어</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 코칭 후 카톡 케어 (실제 채팅창 mockup) -->
+              <div class="md:self-start">
+                <article class="care-chat-card">
+                  <div class="care-chat-header">
+                    <iconify-icon icon="ri:kakao-talk-fill"></iconify-icon>우리동네재테크
+                  </div>
+                  <div class="care-chat-body">
+                    <div class="care-chat-divider-wrap"><span class="care-chat-divider">지역·단지 선정</span></div>
+                    <div class="care-chat-msg user">A단지는 5.4억, B단지 5.2억인데 어디가 나을까요?</div>
+                    <div class="care-chat-msg coach">우리님 상황에서는 2천만원 차이면, A단지가 낫습니다.</div>
+
+                    <div class="care-chat-divider-wrap"><span class="care-chat-divider">계약 직전 · 점검</span></div>
+                    <div class="care-chat-msg user">C단지 5.3억에 계약하려는데, 고민되네요ㅠ</div>
+                    <div class="care-chat-msg coach">매수하셔도 괜찮습니다. 3년 정도 후에 7억 이상 되면 갈아타기 하시면 됩니다.</div>
+                  </div>
+                </article>
+              </div>
+
             </div>
           </div>
-	        </div>
-	      </div>
-	      <div class="mt-16" data-reveal>
-	        <p class="text-brand-orange font-display font-black text-sm uppercase">How it works</p>
-	        <h3 class="mt-3 text-4xl md:text-5xl font-display font-black leading-tight text-brand-dark word-keep">신청 → 코칭 → 90일 케어, 흐름은 이렇습니다</h3>
-	        <div class="mt-8 grid gap-5 md:grid-cols-2">
-	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-red-500">STEP 01 · 신청</p><div class="v3-chat-bubble v3-chat-user">코칭 신청합니다!</div><div class="v3-chat-bubble v3-chat-coach mt-3">네 안녕하세요 :) 사전질문지 즉시 보내드려요.</div></div>
-	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-[#18aaa1]">STEP 02 · 진단</p><div class="v3-chat-bubble v3-chat-coach">예산이랑 대출, 우선순위 같이 정리해볼게요.</div><div class="v3-chat-bubble v3-chat-user mt-3">네 부탁드려요!</div></div>
-	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-[#d19a00]">STEP 03 · 코칭</p><div class="v3-chat-bubble v3-chat-coach">구글미트 입장해주세요. 50분 화상 코칭 시작합니다.</div><div class="v3-chat-bubble v3-chat-user mt-3">들어갑니다 :)</div></div>
-	          <div class="rounded-2xl bg-white p-6 shadow-sm"><p class="mb-4 text-sm font-black text-brand-dark">STEP 04 · 90일 케어</p><div class="v3-chat-bubble v3-chat-user">계약하기 전에 한 번만 더 봐주세요!</div><div class="v3-chat-bubble v3-chat-coach mt-3">물론이죠 :) 계약서 보내주세요.</div></div>
-	        </div>
-	      </div>
-	      <div class="mt-14 bg-white rounded-3xl p-6 md:p-8" data-reveal>
-	        <h3 class="text-3xl md:text-4xl font-display font-black text-brand-dark word-keep">실제 후기 <span class="text-brand-orange">4.97/5.0</span></h3>
-	        <div class="mt-6 grid gap-3 md:grid-cols-2">
-	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#ff6b5b] font-black text-white">민</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"계약서 보기 전에 확인할 포인트가 정리됐습니다"</p><p class="mt-2 text-sm text-gray-500">서울 서초 30대 민*재 · 맞벌이</p></div></div>
-	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#4ecdc4] font-black text-white">한</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"대출 한도가 바뀐 뒤에도 방향을 다시 잡았습니다"</p><p class="mt-2 text-sm text-gray-500">성남 40대 한*주 · 갈아타기</p></div></div>
-	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#f4c430] font-black text-white">배</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"실행 순서가 정리돼서 바로 움직였습니다"</p><p class="mt-2 text-sm text-gray-500">구미 30대 배*린 · 내집마련</p></div></div>
-	          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#6b8cae] font-black text-white">임</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"혼자 검색하던 시간이 줄고 비교 기준이 생겼습니다"</p><p class="mt-2 text-sm text-gray-500">포항 40대 임*석 · 투자</p></div></div>
-	        </div>
-	      </div>
-		      <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
-		        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
-		          <p class="text-sm font-black">정*민님 · 남양주 30대</p>
-		          <p class="mt-2 text-lg font-display font-black word-keep">"매물 보러 가기 전 카톡으로 한 번 더 점검받을 수 있어 안심됐습니다."</p>
-		        </div>
-		        <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
-		          <p class="text-sm font-black">서*아님 · 부천 30대</p>
-		          <p class="mt-2 text-lg font-display font-black word-keep">"대출 조건이 바뀌었을 때도 바로 물어볼 곳이 있어서 좋았습니다."</p>
-		        </div>
-	      </div>
-	    </div>
-	  </section>
+        </div>
+      </div>
+
+      <!-- 신뢰 지표 (G 스타일 별점 배지, 2개) -->
+      <div class="mt-10 md:mt-12 grid gap-4 md:grid-cols-2" data-reveal>
+        <div class="metric-review-badge">
+          <div>
+            <p class="review-badge-num">4.97 / 5.0<span class="review-badge-num-sub">(만점)</span></p>
+            <p class="review-badge-stars">★★★★★</p>
+            <p class="review-badge-meta">만족도 · 실제 후기</p>
+          </div>
+        </div>
+        <div class="metric-review-badge">
+          <div>
+            <p class="review-badge-num">150+<span class="review-badge-num-sub-lg">건 이상 코칭</span></p>
+            <p class="review-badge-meta">투자경력 10년↑·실전 투자자</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 클로징 -->
+      <div class="mt-10 md:mt-12" data-reveal>
+        <div class="rounded-[28px] border border-brand-orange/20 bg-white px-6 py-6 text-center shadow-soft md:px-10 md:py-8">
+          <p class="font-display text-2xl md:text-3xl font-black text-brand-dark word-keep">
+            부동산은 <span class="text-brand-orange">전 재산</span>을 넣는 중요한 결정입니다.
+          </p>
+          <p class="mt-3 text-lg md:text-xl text-gray-600 word-keep">
+            한 번의 질문이 <span class="text-brand-orange font-bold">1억원 이상</span>의 차이를 만듭니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- 실제 후기 (v3에서 가져옴, 4.97/5.0 제거) -->
+      <div class="mt-14 bg-white rounded-3xl p-6 md:p-8" data-reveal>
+        <h3 class="text-3xl md:text-4xl font-display font-black text-brand-dark word-keep">실제 후기</h3>
+        <div class="mt-6 grid gap-3 md:grid-cols-2">
+          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#ff6b5b] font-black text-white">민</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"계약서 보기 전에 확인할 포인트가 정리됐습니다"</p><p class="mt-2 text-sm text-gray-500">서울 서초 30대 민*재 · 맞벌이</p></div></div>
+          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#4ecdc4] font-black text-white">한</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"대출 한도가 바뀐 뒤에도 방향을 다시 잡았습니다"</p><p class="mt-2 text-sm text-gray-500">성남 40대 한*주 · 갈아타기</p></div></div>
+          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#f4c430] font-black text-white">배</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"실행 순서가 정리돼서 바로 움직였습니다"</p><p class="mt-2 text-sm text-gray-500">구미 30대 배*린 · 내집마련</p></div></div>
+          <div class="trusted-review-card flex gap-4 p-5"><span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[#6b8cae] font-black text-white">임</span><div><div class="review-stars">★★★★★</div><p class="font-bold word-keep">"혼자 검색하던 시간이 줄고 비교 기준이 생겼습니다"</p><p class="mt-2 text-sm text-gray-500">포항 40대 임*석 · 투자</p></div></div>
+        </div>
+        <div class="mt-10 grid gap-4 md:grid-cols-2" data-reveal>
+          <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
+            <p class="text-sm font-black">정*민님 · 남양주 30대</p>
+            <p class="mt-2 text-lg font-display font-black word-keep">"매물 보러 가기 전 카톡으로 한 번 더 점검받을 수 있어 안심됐습니다."</p>
+          </div>
+          <div class="testimonial-sticker bg-white px-6 py-5 text-brand-dark">
+            <p class="text-sm font-black">서*아님 · 부천 30대</p>
+            <p class="mt-2 text-lg font-display font-black word-keep">"대출 조건이 바뀌었을 때도 바로 물어볼 곳이 있어서 좋았습니다."</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
 
   <!-- ===== 04 컨설턴트 소개 ===== -->
@@ -1656,6 +2419,34 @@
     }
   });
   </script>
+  <!-- ===== 2step demo toggle script (step3 sheet/data GIF cycle) ===== -->
+              <script>
+                (function(){
+                  var clip = document.getElementById('step3DemoClip');
+                  var img = document.getElementById('step3DemoImg');
+                  var SHEET = 'images/step3-sheet.gif';
+                  var DATA = 'images/step3-data.gif';
+                  var SHEET_MS = 5400;
+                  var DATA_MS = 6400;
+                  var state = 0; // 0: sheet, 1: data
+                  function tick() {
+                    if (state === 0) {
+                      clip.classList.add('tall');
+                      setTimeout(function(){
+                        img.src = DATA + '?t=' + Date.now();
+                        state = 1;
+                        setTimeout(tick, DATA_MS);
+                      }, 600);
+                    } else {
+                      img.src = SHEET + '?t=' + Date.now();
+                      clip.classList.remove('tall');
+                      state = 0;
+                      setTimeout(tick, SHEET_MS);
+                    }
+                  }
+                  setTimeout(tick, SHEET_MS);
+                })();
+              </script>
   <script src="homepage-shell.js?v=20260506d"></script>
 </body>
 </html>
