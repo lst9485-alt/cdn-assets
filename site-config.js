@@ -547,7 +547,7 @@
         items: [
           {
             id: 'woori-motion-bug-260507',
-            title: '브랜드 버그 콘셉트 보드',
+            title: 'A001 브랜드 버그 콘셉트 보드',
             description: '우측상단 모션 그래픽 후보 18개',
             href: 'archive/woori-motion-bug-260507/',
             badgeText: '260507',
@@ -555,6 +555,42 @@
             iconKey: 'branding',
             sidebarType: 'root',
             activeMatch: ['woori-motion-bug-260507'],
+            hubVisible: true
+          },
+          {
+            id: 'archive-coaching-section03-parts-library',
+            title: 'A002 코칭 03 파츠 라이브러리',
+            description: '코칭 03 섹션 구성 파츠 모음',
+            href: 'homepage/coaching-section03-parts-library.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['coaching-section03-parts-library.html'],
+            hubVisible: true
+          },
+          {
+            id: 'archive-coaching-section03-draft',
+            title: 'A003 코칭 03 섹션 시안',
+            description: 'A~F 변형안 · 지도형/보드형/대화형/리포트형/타임라인형/체크리스트형',
+            href: 'homepage/coaching-section03-draft.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['coaching-section03-draft.html'],
+            hubVisible: true
+          },
+          {
+            id: 'archive-coaching-section03-draft-claude-2step',
+            title: 'A004 코칭 03 Claude 2단계 시안',
+            description: '코칭 03 섹션 Claude 2-step 변형안',
+            href: 'homepage/coaching-section03-draft-claude-2step.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['coaching-section03-draft-claude-2step.html'],
             hubVisible: true
           }
         ]
