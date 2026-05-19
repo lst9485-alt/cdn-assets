@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-19T14:55:27.479515+09:00",
+  "updated": "2026-05-20T06:00:14.369836+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -22,8 +22,8 @@
   ],
   "tasks": {
     "total": 441,
-    "done": 414,
-    "overdue": 8,
+    "done": 417,
+    "overdue": 9,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,34 +56,19 @@
         "overdue": true
       },
       {
-        "title": "업로드",
-        "date": "2026-05-17T09:30:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "메모정리",
         "date": "2026-05-18",
         "overdue": true
       },
       {
-        "title": "랜딩",
-        "date": "2026-05-19T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "오픈클로세팅",
         "date": "2026-05-19T12:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-05-19T14:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "주제선정&썸네일&제목",
         "date": "2026-05-19T15:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "자료수집&도입부",
@@ -163,38 +148,32 @@
     ],
     "schedule": [
       {
-        "title": "P1~P3/목실감",
-        "time": "08:30",
-        "allDay": false,
-        "done": true
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "time": "09:00",
-        "allDay": false,
-        "done": true
-      },
-      {
-        "title": "랜딩",
-        "time": "10:30",
+        "title": "자료수집&도입부",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "오픈클로세팅",
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
         "time": "12:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원씽복기",
-        "time": "14:00",
+        "title": "원고",
+        "time": "16:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "주제선정&썸네일&제목",
-        "time": "15:00",
+        "title": "마이크테스트",
+        "time": "19:30",
         "allDay": false,
         "done": false
       }
@@ -221,34 +200,13 @@
         "done": false
       }
     ],
-    "priorities": [
-      {
-        "label": "원씽",
-        "title": "랜딩(~컨설턴트)",
-        "done": false
-      },
-      {
-        "label": "P2",
-        "title": "오픈클로세팅",
-        "done": false
-      },
-      {
-        "label": "P3",
-        "title": "~썸제",
-        "done": false
-      }
-    ],
+    "priorities": [],
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 16,
-      "rate": "57%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-05-13",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-05-14",
           "done": 2,
@@ -276,6 +234,11 @@
         },
         {
           "date": "2026-05-19",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-05-20",
           "done": 0,
           "total": 4
         }
