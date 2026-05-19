@@ -821,9 +821,9 @@
               </div>
               <style>
                 .demo-frame { width: 100%; max-width: 540px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
-                .demo-clip { width: 100%; height: 269px; overflow: hidden; transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 12px; box-shadow: 0 6px 22px rgba(15,23,42,0.10); }
-                .demo-clip.tall { height: 518px; }
-                .demo-clip img { width: 100%; height: 100%; object-fit: contain; display: block; }
+                .demo-clip { width: 100%; height: 0; padding-top: 49.81%; position: relative; overflow: hidden; transition: padding-top 0.6s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 12px; box-shadow: 0 6px 22px rgba(15,23,42,0.10); }
+                .demo-clip.tall { padding-top: 95.93%; }
+                .demo-clip img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
               </style>
               <script>
                 (function(){
