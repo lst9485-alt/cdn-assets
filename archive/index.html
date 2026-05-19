@@ -47,35 +47,70 @@
     }
 
     .list {
-      display: grid;
-      gap: 14px;
-      margin-top: 34px;
-    }
-
-    a {
-      display: block;
-      padding: 18px 20px;
+      overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 10px;
       background: var(--panel);
+      margin-top: 34px;
+    }
+
+    a,
+    .head {
+      display: grid;
+      grid-template-columns: 78px 112px minmax(180px, 1.1fr) minmax(220px, 1.5fr) 74px;
+      min-height: 38px;
+    }
+
+    a {
       color: inherit;
       text-decoration: none;
+      border-top: 1px solid var(--line);
+    }
+
+    a:first-child {
+      border-top: 0;
     }
 
     a:hover {
-      border-color: rgba(255,131,69,.56);
+      background: rgba(255,255,255,.04);
     }
 
-    strong {
-      display: block;
-      font-size: 18px;
-      line-height: 1.25;
+    .head {
+      min-height: 32px;
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .cell {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      padding: 8px 10px;
+      border-left: 1px solid var(--line);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .cell:first-child {
+      border-left: 0;
+      justify-content: center;
+    }
+
+    strong.cell {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .no {
       display: inline-flex;
       width: fit-content;
-      margin: 0 0 6px;
       padding: 2px 8px;
       border-radius: 999px;
       background: rgba(255,131,69,.16);
@@ -86,23 +121,36 @@
     }
 
     .date {
-      display: block;
-      margin: 0 0 8px;
       color: var(--muted);
       font-size: 12px;
       font-weight: 650;
     }
 
     span {
-      display: block;
-      margin-top: 6px;
       color: var(--muted);
-      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     em {
       color: var(--accent);
       font-style: normal;
+      display: inline-flex;
+      margin-left: auto;
+      border-radius: 999px;
+      padding: 1px 7px;
+      background: rgba(255,255,255,.08);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 760px) {
+      a,
+      .head { grid-template-columns: 66px 96px minmax(130px, 1fr) 62px; }
+      .desc {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -112,77 +160,96 @@
     <p>CDN assets archive for drafts, previews, and reference boards.</p>
 
     <section class="list" aria-label="archive items">
+      <div class="head">
+        <div class="cell">번호</div>
+        <div class="cell">수정일</div>
+        <div class="cell">제목</div>
+        <div class="cell desc">설명</div>
+        <div class="cell">상태</div>
+      </div>
       <a href="./woori-motion-bug-260507/">
-        <span class="no">A001</span>
-        <span class="date">최종수정 2026-05-07</span>
-        <strong>우리동네 재테크 브랜드 버그 콘셉트 보드 <em>260507</em></strong>
-        <span>Claude와 서브에이전트 의견을 합친 우측상단 모션 그래픽 후보 18개.</span>
+        <span class="cell"><span class="no">A001</span></span>
+        <span class="cell date">2026-05-07</span>
+        <strong class="cell">우리동네 재테크 브랜드 버그 콘셉트 보드</strong>
+        <span class="cell desc">Claude와 서브에이전트 의견을 합친 우측상단 모션 그래픽 후보 18개.</span>
+        <span class="cell"><em>260507</em></span>
       </a>
       <a href="../homepage/coaching-section03-parts-library.html">
-        <span class="no">A002</span>
-        <span class="date">최종수정 2026-05-14</span>
-        <strong>코칭 03 파츠 라이브러리 <em>TEST</em></strong>
-        <span>코칭 03 섹션 구성 파츠 모음.</span>
+        <span class="cell"><span class="no">A002</span></span>
+        <span class="cell date">2026-05-14</span>
+        <strong class="cell">코칭 03 파츠 라이브러리</strong>
+        <span class="cell desc">코칭 03 섹션 구성 파츠 모음.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
       <a href="../homepage/coaching-section03-draft.html">
-        <span class="no">A003</span>
-        <span class="date">최종수정 2026-05-14</span>
-        <strong>코칭 03 섹션 시안 <em>TEST</em></strong>
-        <span>A~F 변형안 · 지도형/보드형/대화형/리포트형/타임라인형/체크리스트형.</span>
+        <span class="cell"><span class="no">A003</span></span>
+        <span class="cell date">2026-05-14</span>
+        <strong class="cell">코칭 03 섹션 시안</strong>
+        <span class="cell desc">A~F 변형안 · 지도형/보드형/대화형/리포트형/타임라인형/체크리스트형.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
       <a href="../homepage/coaching-section03-draft-claude-2step.html">
-        <span class="no">A004</span>
-        <span class="date">최종수정 2026-05-19</span>
-        <strong>코칭 03 Claude 2단계 시안 <em>TEST</em></strong>
-        <span>코칭 03 섹션 Claude 2-step 변형안.</span>
+        <span class="cell"><span class="no">A004</span></span>
+        <span class="cell date">2026-05-19</span>
+        <strong class="cell">코칭 03 Claude 2단계 시안</strong>
+        <span class="cell desc">코칭 03 섹션 Claude 2-step 변형안.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
       <a href="../homepage/coaching-section03-draft-codex-revised.html">
-        <span class="no">A005</span>
-        <span class="date">최종수정 2026-05-18</span>
-        <strong>코칭 03 코덱스 수정본 <em>TEST</em></strong>
-        <span>03~03-2 · 세로 타임라인 + 오른쪽 정리표.</span>
+        <span class="cell"><span class="no">A005</span></span>
+        <span class="cell date">2026-05-18</span>
+        <strong class="cell">코칭 03 코덱스 수정본</strong>
+        <span class="cell desc">03~03-2 · 세로 타임라인 + 오른쪽 정리표.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
       <a href="../consult/index-trust.html">
-        <span class="no">A006</span>
-        <span class="date">최종수정 2026-04-30</span>
-        <strong>상담 리포트 테스트 <em>TEST</em></strong>
-        <span>색감을 정리한 상담 자료 페이지.</span>
+        <span class="cell"><span class="no">A006</span></span>
+        <span class="cell date">2026-04-30</span>
+        <strong class="cell">상담 리포트 테스트</strong>
+        <span class="cell desc">색감을 정리한 상담 자료 페이지.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
       <a href="../slide-viewer/260405-slides.html?_ghfresh=20260504093000">
-        <span class="no">A007</span>
-        <span class="date">최종수정 2026-05-07</span>
-        <strong>260405 천안아산 테스트 <em>TEST</em></strong>
-        <span>archive 원고 재생성본.</span>
+        <span class="cell"><span class="no">A007</span></span>
+        <span class="cell date">2026-05-07</span>
+        <strong class="cell">260405 천안아산 테스트</strong>
+        <span class="cell desc">archive 원고 재생성본.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
       <a href="../slide-viewer/260412-slides.html?_ghfresh=20260504093000">
-        <span class="no">A008</span>
-        <span class="date">최종수정 2026-05-07</span>
-        <strong>260412 집 사도 되나요 테스트 <em>TEST</em></strong>
-        <span>archive 원고 재생성본.</span>
+        <span class="cell"><span class="no">A008</span></span>
+        <span class="cell date">2026-05-07</span>
+        <strong class="cell">260412 집 사도 되나요 테스트</strong>
+        <span class="cell desc">archive 원고 재생성본.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
       <a href="../slide-viewer/260419-production-redo.html?_ghfresh=20260505210453">
-        <span class="no">A009</span>
-        <span class="date">최종수정 2026-05-05</span>
-        <strong>260419 질문 자체가 틀렸습니다 테스트 <em>TEST</em></strong>
-        <span>archive 원고 실전 재기획본.</span>
+        <span class="cell"><span class="no">A009</span></span>
+        <span class="cell date">2026-05-05</span>
+        <strong class="cell">260419 질문 자체가 틀렸습니다 테스트</strong>
+        <span class="cell desc">archive 원고 실전 재기획본.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
       <a href="../slide-viewer/260426-production-redo.html?_ghfresh=20260505210453">
-        <span class="no">A010</span>
-        <span class="date">최종수정 2026-05-05</span>
-        <strong>260426 가격통제의 비극 테스트 <em>TEST</em></strong>
-        <span>archive 원고 실전 재기획본.</span>
+        <span class="cell"><span class="no">A010</span></span>
+        <span class="cell date">2026-05-05</span>
+        <strong class="cell">260426 가격통제의 비극 테스트</strong>
+        <span class="cell desc">archive 원고 실전 재기획본.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
       <a href="../slide-viewer/260503-production-redo.html?_ghfresh=20260505221701">
-        <span class="no">A011</span>
-        <span class="date">최종수정 2026-05-05</span>
-        <strong>260503 직장인 재테크 순서 테스트 <em>TEST</em></strong>
-        <span>archive 원고 실전 재기획본.</span>
+        <span class="cell"><span class="no">A011</span></span>
+        <span class="cell date">2026-05-05</span>
+        <strong class="cell">260503 직장인 재테크 순서 테스트</strong>
+        <span class="cell desc">archive 원고 실전 재기획본.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
       <a href="../slide-viewer/260517-slides.html?_ghfresh=20260506102100">
-        <span class="no">A012</span>
-        <span class="date">최종수정 2026-05-07</span>
-        <strong>260517 코스피 vs 아파트 테스트 <em>TEST</em></strong>
-        <span>archive 원고 자율 재기획본 · 64장.</span>
+        <span class="cell"><span class="no">A012</span></span>
+        <span class="cell date">2026-05-07</span>
+        <strong class="cell">260517 코스피 vs 아파트 테스트</strong>
+        <span class="cell desc">archive 원고 자율 재기획본 · 64장.</span>
+        <span class="cell"><em>TEST</em></span>
       </a>
     </section>
   </main>

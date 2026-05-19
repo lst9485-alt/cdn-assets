@@ -35,9 +35,28 @@
         .archive-chip { display: inline-flex; align-items: center; width: fit-content; border-radius: 999px; padding: 1px 6px; background: #0F172A; color: #FFFFFF; font-size: 9px; font-weight: 800; line-height: 1.35; }
         .date-chip { display: inline-flex; align-items: center; width: fit-content; border-radius: 999px; padding: 1px 6px; background: #F1F5F9; color: #8090AA; font-size: 9px; font-weight: 700; line-height: 1.35; }
         .arrow { color: #CBD5E1; font-size: 16px; flex-shrink: 0; }
+        .sheet { overflow: hidden; border: 1px solid #D8E0EA; border-radius: 8px; background: #FFFFFF; }
+        .sheet-row { display: grid; grid-template-columns: 72px 106px minmax(150px, 1.1fr) minmax(160px, 1.4fr) 68px 28px; min-height: 34px; color: #1A1A1A; text-decoration: none; border-top: 1px solid #E8EEF5; }
+        .sheet-row:first-child { border-top: 0; }
+        .sheet-row:hover:not(.sheet-head) { background: #F8FBFF; }
+        .sheet-head { min-height: 30px; background: #F4F7FB; color: #64748B; font-size: 11px; font-weight: 800; letter-spacing: 0.02em; }
+        .sheet-cell { display: flex; align-items: center; min-width: 0; padding: 7px 9px; border-left: 1px solid #E8EEF5; font-size: 12px; line-height: 1.3; }
+        .sheet-cell:first-child { border-left: 0; }
+        .sheet-no { justify-content: center; }
+        .sheet-no .archive-chip { font-size: 9px; }
+        .sheet-date { color: #8090AA; font-weight: 700; }
+        .sheet-title { color: #051C2C; font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .sheet-desc { color: #8090AA; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .sheet-status { justify-content: center; }
+        .sheet-go { justify-content: center; color: #B8C3D1; font-size: 15px; }
 
         @media (max-width: 1200px) { .hub { padding-right: 20px; } }
         @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 760px) {
+            .sheet-row { grid-template-columns: 62px 92px minmax(130px, 1fr) 56px 24px; }
+            .sheet-desc { display: none; }
+            .sheet-cell.desc-col { display: none; }
+        }
         @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -66,7 +85,7 @@
             return '';
         }
         var sectionClass = section.dashedTop ? 'section dashed-top' : 'section';
-        var body = renderBody(items);
+        var body = renderBody(items, section);
         if (section.collapsible) {
             var openAttr = section.defaultOpen ? ' open' : '';
             return ''
@@ -82,7 +101,10 @@
             + '</div>';
     }
 
-    function renderBody(items) {
+    function renderBody(items, section) {
+        if (section.id === 'archive' || section.id === 'temp') {
+            return renderSheet(items);
+        }
         var hasGroups = items.some(function(item) { return item.groupLabel; });
         if (!hasGroups) {
             return '<div class="grid">' + items.map(renderItem).join('') + '</div>';
@@ -102,6 +124,33 @@
                 + '<div class="group-label">' + esc(label) + '</div>'
                 + '<div class="grid">' + groupMap[label].map(renderItem).join('') + '</div>';
         }).join('');
+    }
+
+    function renderSheet(items) {
+        var head = ''
+            + '<div class="sheet-row sheet-head">'
+            + '<div class="sheet-cell sheet-no">번호</div>'
+            + '<div class="sheet-cell">수정일</div>'
+            + '<div class="sheet-cell">제목</div>'
+            + '<div class="sheet-cell desc-col">설명</div>'
+            + '<div class="sheet-cell sheet-status">상태</div>'
+            + '<div class="sheet-cell sheet-go"></div>'
+            + '</div>';
+        return '<div class="sheet">' + head + items.map(renderSheetItem).join('') + '</div>';
+    }
+
+    function renderSheetItem(item) {
+        var badgeClass = item.badgeTone === 'soon' ? 'badge-soon' : 'badge-live';
+        var href = item.href.indexOf('http') === 0 ? item.href : './' + item.href;
+        return ''
+            + '<a href="' + href + '" class="sheet-row">'
+            + '<div class="sheet-cell sheet-no">' + (item.archiveNo ? '<span class="archive-chip">' + esc(item.archiveNo) + '</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>') + '</div>'
+            + '<div class="sheet-cell sheet-date">' + esc(item.modifiedDate || '-') + '</div>'
+            + '<div class="sheet-cell sheet-title">' + esc(item.title) + '</div>'
+            + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
+            + '<div class="sheet-cell sheet-status"><span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span></div>'
+            + '<div class="sheet-cell sheet-go">›</div>'
+            + '</a>';
     }
 
     function renderItem(item) {
