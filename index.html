@@ -45,7 +45,7 @@
         .date-chip { display: inline-flex; align-items: center; width: fit-content; border-radius: 999px; padding: 1px 6px; background: #F1F5F9; color: #8090AA; font-size: 9px; font-weight: 700; line-height: 1.35; }
         .arrow { color: #CBD5E1; font-size: 16px; flex-shrink: 0; }
         .sheet { overflow: hidden; border: 1px solid #D8E0EA; border-radius: 8px; background: #FFFFFF; }
-        .sheet-row { display: grid; grid-template-columns: 72px 106px minmax(150px, 1.1fr) minmax(160px, 1.4fr) 68px 28px; min-height: 34px; color: #1A1A1A; text-decoration: none; border-top: 1px solid #E8EEF5; }
+        .sheet-row { display: grid; grid-template-columns: 38px 72px 106px minmax(150px, 1.1fr) minmax(160px, 1.4fr) 68px 28px; min-height: 34px; color: #1A1A1A; text-decoration: none; border-top: 1px solid #E8EEF5; }
         .sheet-row:first-child { border-top: 0; }
         .sheet-row:hover:not(.sheet-head) { background: #F8FBFF; }
         .sheet-head { min-height: 30px; background: #F4F7FB; color: #64748B; font-size: 11px; font-weight: 800; letter-spacing: 0.02em; }
@@ -53,6 +53,10 @@
         .sheet-head .sheet-cell:hover { background: #EAF0F7; color: #334155; }
         .sheet-cell { display: flex; align-items: center; min-width: 0; padding: 7px 9px; border-left: 1px solid #E8EEF5; font-size: 12px; line-height: 1.3; }
         .sheet-cell:first-child { border-left: 0; }
+        .sheet-star { justify-content: center; padding-left: 5px; padding-right: 5px; }
+        .star-btn { width: 26px; height: 26px; border-radius: 999px; color: #CBD5E1; display: inline-flex; align-items: center; justify-content: center; font-size: 21px; line-height: 1; cursor: pointer; user-select: none; }
+        .star-btn:hover { background: #FFF7ED; color: #F59E0B; }
+        .star-btn.active { color: #F59E0B; text-shadow: 0 1px 0 rgba(146,64,14,.14); }
         .sheet-no { justify-content: center; }
         .sheet-no .archive-chip { font-size: 9px; }
         .sheet-group { color: #64748B; font-weight: 750; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -61,13 +65,13 @@
         .sheet-desc { color: #8090AA; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sheet-status { justify-content: center; }
         .sheet-go { justify-content: center; color: #B8C3D1; font-size: 15px; }
-        .generic-sheet .sheet-row { grid-template-columns: 112px minmax(160px, 1.1fr) minmax(220px, 1.6fr) 70px 28px; }
+        .generic-sheet .sheet-row { grid-template-columns: 38px 112px minmax(160px, 1.1fr) minmax(220px, 1.6fr) 70px 28px; }
 
         @media (max-width: 1200px) { .hub { padding-right: 20px; } }
         @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 760px) {
-            .sheet-row { grid-template-columns: 62px 92px minmax(130px, 1fr) 56px 24px; }
-            .generic-sheet .sheet-row { grid-template-columns: 92px minmax(130px, 1fr) 56px 24px; }
+            .sheet-row { grid-template-columns: 34px 62px 92px minmax(130px, 1fr) 56px 24px; }
+            .generic-sheet .sheet-row { grid-template-columns: 34px 92px minmax(130px, 1fr) 56px 24px; }
             .sheet-desc { display: none; }
             .sheet-cell.desc-col { display: none; }
             .sheet-cell.group-col { display: flex; }
@@ -93,8 +97,15 @@
     }
 
     var sheetSort = {};
+    var starred = loadStars();
     container.innerHTML = site.sections.map(renderSection).join('');
     container.addEventListener('click', function(event) {
+        var star = event.target.closest('[data-star-key]');
+        if (star) {
+            event.preventDefault();
+            toggleStar(star.getAttribute('data-star-key'));
+            return;
+        }
         var cell = event.target.closest('[data-sheet-sort]');
         if (!cell) {
             return;
@@ -162,6 +173,7 @@
     function renderArchiveHead(sectionId) {
         return ''
             + '<div class="sheet-row sheet-head">'
+            + '<div class="sheet-cell sheet-star">별</div>'
             + '<div class="sheet-cell sheet-no" data-sheet-sort="archiveNo" data-section-id="' + esc(sectionId) + '">번호</div>'
             + '<div class="sheet-cell" data-sheet-sort="modifiedDate" data-section-id="' + esc(sectionId) + '">수정일</div>'
             + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">제목</div>'
@@ -174,6 +186,7 @@
     function renderGenericHead(sectionId) {
         return ''
             + '<div class="sheet-row sheet-head">'
+            + '<div class="sheet-cell sheet-star">별</div>'
             + '<div class="sheet-cell group-col" data-sheet-sort="groupLabel" data-section-id="' + esc(sectionId) + '">구분</div>'
             + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">이름</div>'
             + '<div class="sheet-cell desc-col" data-sheet-sort="description" data-section-id="' + esc(sectionId) + '">설명</div>'
@@ -200,6 +213,7 @@
         var href = item.href.indexOf('http') === 0 ? item.href : './' + item.href;
         return ''
             + '<a href="' + href + '" class="sheet-row" target="_blank" rel="noopener">'
+            + starCell(item)
             + '<div class="sheet-cell sheet-no">' + (item.archiveNo ? '<span class="archive-chip">' + esc(item.archiveNo) + '</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>') + '</div>'
             + '<div class="sheet-cell sheet-date">' + esc(item.modifiedDate || '-') + '</div>'
             + '<div class="sheet-cell sheet-title">' + esc(item.title) + '</div>'
@@ -215,6 +229,7 @@
         var group = item.groupLabel || item.sidebarLabel || '기타';
         return ''
             + '<a href="' + href + '" class="sheet-row" target="_blank" rel="noopener">'
+            + starCell(item)
             + '<div class="sheet-cell sheet-group group-col">' + esc(group) + '</div>'
             + '<div class="sheet-cell sheet-title">' + esc(item.title) + '</div>'
             + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
@@ -223,10 +238,50 @@
             + '</a>';
     }
 
+    function starCell(item) {
+        var key = starKey(item);
+        var on = !!starred[key];
+        return '<div class="sheet-cell sheet-star"><span class="star-btn ' + (on ? 'active' : '') + '" role="button" tabindex="0" data-star-key="' + attr(key) + '" aria-label="' + (on ? '별표 해제' : '별표 표시') + '">' + (on ? '★' : '☆') + '</span></div>';
+    }
+
+    function toggleStar(key) {
+        if (starred[key]) {
+            delete starred[key];
+        } else {
+            starred[key] = true;
+        }
+        saveStars();
+        container.innerHTML = site.sections.map(renderSection).join('');
+    }
+
+    function loadStars() {
+        try {
+            return JSON.parse(localStorage.getItem('hubDashboardStars') || '{}') || {};
+        } catch (error) {
+            return {};
+        }
+    }
+
+    function saveStars() {
+        try {
+            localStorage.setItem('hubDashboardStars', JSON.stringify(starred));
+        } catch (error) {}
+    }
+
+    function starKey(item) {
+        return [item.href || '', item.title || '', item.groupLabel || item.sidebarLabel || ''].map(function(value) {
+            return String(value).trim().toLowerCase().replace(/\s+/g, ' ');
+        }).join('|');
+    }
+
     function esc(value) {
         var el = document.createElement('span');
         el.textContent = value;
         return el.innerHTML;
+    }
+
+    function attr(value) {
+        return esc(value).replace(/"/g, '&quot;');
     }
 })();
 </script>
