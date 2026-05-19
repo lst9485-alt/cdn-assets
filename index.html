@@ -45,7 +45,7 @@
         .date-chip { display: inline-flex; align-items: center; width: fit-content; border-radius: 999px; padding: 1px 6px; background: #F1F5F9; color: #8090AA; font-size: 9px; font-weight: 700; line-height: 1.35; }
         .arrow { color: #CBD5E1; font-size: 16px; flex-shrink: 0; }
         .sheet { overflow: hidden; border: 1px solid #D8E0EA; border-radius: 8px; background: #FFFFFF; }
-        .sheet-row { display: grid; grid-template-columns: 38px 72px 106px minmax(150px, 1.1fr) minmax(160px, 1.4fr) 68px 28px; min-height: 34px; color: #1A1A1A; text-decoration: none; border-top: 1px solid #E8EEF5; }
+        .sheet-row { display: grid; grid-template-columns: 38px 72px 106px minmax(150px, 1.1fr) minmax(160px, 1.4fr) 68px; min-height: 34px; color: #1A1A1A; text-decoration: none; border-top: 1px solid #E8EEF5; }
         .sheet-row:first-child { border-top: 0; }
         .sheet-row:hover:not(.sheet-head) { background: #F8FBFF; }
         .sheet-head { min-height: 30px; background: #F4F7FB; color: #64748B; font-size: 11px; font-weight: 800; letter-spacing: 0.02em; }
@@ -64,14 +64,13 @@
         .sheet-title { color: #051C2C; font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sheet-desc { color: #8090AA; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sheet-status { justify-content: center; }
-        .sheet-go { justify-content: center; color: #B8C3D1; font-size: 15px; }
-        .generic-sheet .sheet-row { grid-template-columns: 38px 112px minmax(160px, 1.1fr) minmax(220px, 1.6fr) 70px 28px; }
+        .generic-sheet .sheet-row { grid-template-columns: 38px 112px minmax(160px, 1.1fr) minmax(220px, 1.6fr) 70px; }
 
         @media (max-width: 1200px) { .hub { padding-right: 20px; } }
         @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 760px) {
-            .sheet-row { grid-template-columns: 34px 62px 92px minmax(130px, 1fr) 56px 24px; }
-            .generic-sheet .sheet-row { grid-template-columns: 34px 92px minmax(130px, 1fr) 56px 24px; }
+            .sheet-row { grid-template-columns: 34px 62px 92px minmax(130px, 1fr) 56px; }
+            .generic-sheet .sheet-row { grid-template-columns: 34px 92px minmax(130px, 1fr) 56px; }
             .sheet-desc { display: none; }
             .sheet-cell.desc-col { display: none; }
             .sheet-cell.group-col { display: flex; }
@@ -173,25 +172,23 @@
     function renderArchiveHead(sectionId) {
         return ''
             + '<div class="sheet-row sheet-head">'
-            + '<div class="sheet-cell sheet-star">별</div>'
+            + '<div class="sheet-cell sheet-star"></div>'
             + '<div class="sheet-cell sheet-no" data-sheet-sort="archiveNo" data-section-id="' + esc(sectionId) + '">번호</div>'
             + '<div class="sheet-cell" data-sheet-sort="modifiedDate" data-section-id="' + esc(sectionId) + '">수정일</div>'
             + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">제목</div>'
             + '<div class="sheet-cell desc-col" data-sheet-sort="description" data-section-id="' + esc(sectionId) + '">설명</div>'
             + '<div class="sheet-cell sheet-status" data-sheet-sort="badgeText" data-section-id="' + esc(sectionId) + '">상태</div>'
-            + '<div class="sheet-cell sheet-go"></div>'
             + '</div>';
     }
 
     function renderGenericHead(sectionId) {
         return ''
             + '<div class="sheet-row sheet-head">'
-            + '<div class="sheet-cell sheet-star">별</div>'
+            + '<div class="sheet-cell sheet-star"></div>'
             + '<div class="sheet-cell group-col" data-sheet-sort="groupLabel" data-section-id="' + esc(sectionId) + '">구분</div>'
             + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">이름</div>'
             + '<div class="sheet-cell desc-col" data-sheet-sort="description" data-section-id="' + esc(sectionId) + '">설명</div>'
             + '<div class="sheet-cell sheet-status" data-sheet-sort="badgeText" data-section-id="' + esc(sectionId) + '">상태</div>'
-            + '<div class="sheet-cell sheet-go"></div>'
             + '</div>';
     }
 
@@ -222,7 +219,6 @@
             + '<div class="sheet-cell sheet-title">' + esc(item.title) + '</div>'
             + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
             + '<div class="sheet-cell sheet-status"><span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span></div>'
-            + '<div class="sheet-cell sheet-go">›</div>'
             + '</a>';
     }
 
@@ -237,7 +233,6 @@
             + '<div class="sheet-cell sheet-title">' + esc(item.title) + '</div>'
             + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
             + '<div class="sheet-cell sheet-status"><span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span></div>'
-            + '<div class="sheet-cell sheet-go">›</div>'
             + '</a>';
     }
 
