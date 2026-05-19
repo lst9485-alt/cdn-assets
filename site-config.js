@@ -149,7 +149,7 @@
             sidebarType: 'root',
             activeMatch: ['main-page.html'],
             hubVisible: true,
-            groupLabel: '공통'
+            groupLabel: '기타'
           },
           {
             id: 'investment-philosophy',
@@ -162,7 +162,7 @@
             sidebarType: 'root',
             activeMatch: ['investment-philosophy.html'],
             hubVisible: true,
-            groupLabel: '브랜드'
+            groupLabel: '기타'
           },
           {
             id: 'coaching-payment',
@@ -201,7 +201,7 @@
             sidebarType: 'root',
             activeMatch: ['curriculum.html'],
             hubVisible: true,
-            groupLabel: '상품'
+            groupLabel: '기타'
           },
           {
             id: 'lecture-allinone',
@@ -253,7 +253,7 @@
             sidebarType: 'root',
             activeMatch: ['refund-policy.html'],
             hubVisible: true,
-            groupLabel: '정책'
+            groupLabel: '기타'
           },
           {
             id: 'imweb-coaching',
