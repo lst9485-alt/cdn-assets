@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-19T06:00:12.606581+09:00",
+  "updated": "2026-05-19T12:16:27.503463+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 435,
-    "done": 410,
-    "overdue": 10,
+    "total": 441,
+    "done": 413,
+    "overdue": 8,
     "pending": [
       {
         "title": "전자책 작성",
@@ -66,32 +66,32 @@
         "overdue": true
       },
       {
-        "title": "랜딩수정",
-        "date": "2026-05-18T11:00:00.000+09:00",
-        "overdue": true
+        "title": "체크남&링크, db기입",
+        "date": "2026-05-19T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "랜딩",
+        "date": "2026-05-19T10:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "오픈클로세팅",
+        "date": "2026-05-19T12:30:00.000+09:00",
+        "overdue": false
       },
       {
         "title": "원씽복기",
-        "date": "2026-05-18T14:00:00.000+09:00",
-        "overdue": true
+        "date": "2026-05-19T14:00:00.000+09:00",
+        "overdue": false
       },
       {
         "title": "주제선정&썸네일&제목",
-        "date": "2026-05-19T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-05-19T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
         "date": "2026-05-19T15:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "원고",
+        "title": "자료수집&도입부",
         "date": "2026-05-20T09:30:00.000+09:00",
         "overdue": false
       },
@@ -101,8 +101,13 @@
         "overdue": false
       },
       {
-        "title": "강의 기획",
-        "date": "2026-05-20T15:30:00.000+09:00",
+        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
+        "date": "2026-05-20T12:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고",
+        "date": "2026-05-20T16:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -121,13 +126,18 @@
         "overdue": false
       },
       {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "date": "2026-05-21T12:45:00.000+09:00",
+        "title": "PPT완료",
+        "date": "2026-05-22",
         "overdue": false
       },
       {
-        "title": "PPT완료",
-        "date": "2026-05-22",
+        "title": "강의 기획",
+        "date": "2026-05-22T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-05-22T14:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -149,23 +159,46 @@
         "title": "현금영수증&세금계산서 발행",
         "date": "2026-05-25T10:00:00.000+09:00",
         "overdue": false
+      },
+      {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-05-26",
+        "overdue": false
       }
     ],
     "schedule": [
       {
+        "title": "P1~P3/목실감",
+        "time": "08:30",
+        "allDay": false,
+        "done": true
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "time": "09:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "랜딩",
+        "time": "10:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "오픈클로세팅",
+        "time": "12:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원씽복기",
+        "time": "14:00",
+        "allDay": false,
+        "done": false
+      },
+      {
         "title": "주제선정&썸네일&제목",
-        "time": "09:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
         "time": "15:00",
         "allDay": false,
         "done": false
@@ -193,12 +226,28 @@
         "done": false
       }
     ],
-    "priorities": [],
+    "priorities": [
+      {
+        "label": "원씽",
+        "title": "랜딩(~컨설턴트)",
+        "done": false
+      },
+      {
+        "label": "P2",
+        "title": "오픈클로세팅",
+        "done": false
+      },
+      {
+        "label": "P3",
+        "title": "~썸제",
+        "done": false
+      }
+    ],
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 15,
-      "rate": "54%",
+      "done": 16,
+      "rate": "57%",
       "days": [
         {
           "date": "2026-05-13",
@@ -227,7 +276,7 @@
         },
         {
           "date": "2026-05-18",
-          "done": 3,
+          "done": 4,
           "total": 4
         },
         {

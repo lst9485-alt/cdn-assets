@@ -1,11 +1,11 @@
 {
-  "updated": "2026-05-19T06:00:04.168618+09:00",
+  "updated": "2026-05-19T12:16:18.171384+09:00",
   "projects": [
     {
       "name": "강의안",
       "type": "folder",
       "app": null,
-      "modified": "2026-05-18",
+      "modified": "2026-05-19",
       "status": null,
       "next": null
     },
