@@ -553,21 +553,38 @@
       box-shadow: 0 20px 48px rgba(255, 107, 0, 0.14);
     }
     .care-chat-card {
-      background:
-        radial-gradient(circle at 100% 0%, rgba(255, 107, 0, 0.06), transparent 40%),
-        #ffffff;
-      border: 1px solid rgba(26, 43, 71, 0.07);
-      border-radius: 22px;
-      padding: 18px 20px 20px;
-      box-shadow: 0 14px 36px rgba(26, 43, 71, 0.06);
+      background: #ABC1D1;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(26, 43, 71, 0.10);
     }
-    .care-chat-card + .care-chat-card { margin-top: 12px; }
-    .care-chat-label {
+    .care-chat-card + .care-chat-card { margin-top: 14px; }
+    .care-chat-header {
+      background: rgba(255, 255, 255, 0.55);
+      padding: 10px 14px;
       font-weight: 900;
-      font-size: 14px;
-      color: #FF6B00;
-      letter-spacing: 0.02em;
-      margin-bottom: 16px;
+      font-size: 13px;
+      color: #1A2B47;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid rgba(26, 43, 71, 0.08);
+    }
+    .care-chat-header iconify-icon {
+      color: #3C1E1E;
+      font-size: 18px;
+    }
+    .care-chat-body { padding: 14px 14px 18px; }
+    .care-chat-divider-wrap { text-align: center; margin: 0 0 12px; }
+    .care-chat-divider-wrap:not(:first-child) { margin-top: 18px; }
+    .care-chat-divider {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: rgba(26, 43, 71, 0.65);
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 999px;
+      padding: 4px 12px;
     }
     .care-chat-msg {
       max-width: 86%;
@@ -577,7 +594,7 @@
       font-weight: 700;
       line-height: 1.5;
       color: #111827;
-      box-shadow: 0 8px 18px rgba(26, 43, 71, 0.05);
+      box-shadow: 0 4px 10px rgba(26, 43, 71, 0.06);
       word-break: keep-all;
     }
     .care-chat-msg + .care-chat-msg { margin-top: 8px; }
@@ -589,7 +606,6 @@
     .care-chat-msg.coach {
       margin-right: auto;
       background: #ffffff;
-      border: 1px solid rgba(26, 43, 71, 0.06);
       border-top-left-radius: 6px;
     }
     .growth-path h4 {
@@ -909,7 +925,7 @@
           <div class="step-card">
             <div class="grid gap-8 md:grid-cols-[1fr_1fr] md:gap-10">
 
-              <div class="md:self-center">
+              <div>
                 <div class="flex items-center gap-3 flex-wrap mb-4">
                   <span class="step-number">4</span>
                   <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep">
@@ -929,17 +945,21 @@
                 </div>
               </div>
 
-              <!-- 코칭 후 카톡 케어 카드 -->
-              <div class="md:self-center">
+              <!-- 코칭 후 카톡 케어 (실제 채팅창 mockup) -->
+              <div class="md:self-start">
                 <article class="care-chat-card">
-                  <p class="care-chat-label">지역·단지 선정</p>
-                  <div class="care-chat-msg user">A단지는 5.4억, B단지 5.2억인데 어디가 나을까요?</div>
-                  <div class="care-chat-msg coach">~님 상황에서는 2천만원 차이면, A단지가 낫습니다.</div>
-                </article>
-                <article class="care-chat-card">
-                  <p class="care-chat-label">계약 직전 · 점검</p>
-                  <div class="care-chat-msg user">C단지 5.3억에 계약하려는데, 고민되네요ㅠ</div>
-                  <div class="care-chat-msg coach">매수하셔도 괜찮습니다. 3년 정도 후에 7억 이상 되면 갈아타기 하시면 됩니다.</div>
+                  <div class="care-chat-header">
+                    <iconify-icon icon="ri:kakao-talk-fill"></iconify-icon>우리동네재테크 코치
+                  </div>
+                  <div class="care-chat-body">
+                    <div class="care-chat-divider-wrap"><span class="care-chat-divider">지역·단지 선정</span></div>
+                    <div class="care-chat-msg user">A단지는 5.4억, B단지 5.2억인데 어디가 나을까요?</div>
+                    <div class="care-chat-msg coach">~님 상황에서는 2천만원 차이면, A단지가 낫습니다.</div>
+
+                    <div class="care-chat-divider-wrap"><span class="care-chat-divider">계약 직전 · 점검</span></div>
+                    <div class="care-chat-msg user">C단지 5.3억에 계약하려는데, 고민되네요ㅠ</div>
+                    <div class="care-chat-msg coach">매수하셔도 괜찮습니다. 3년 정도 후에 7억 이상 되면 갈아타기 하시면 됩니다.</div>
+                  </div>
                 </article>
               </div>
 
