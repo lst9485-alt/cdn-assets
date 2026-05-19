@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>코칭 +18.3억 합계 박스 시안 4개</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    important: true,
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+          display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+        },
+        colors: {
+          brand: { orange: '#FF6B00', beige: '#F5F0E8', dark: '#0a0a0a', blue: '#0055FF' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+<style>
+  @font-face {
+    font-family: 'GmarketSans';
+    src: url('./fonts/GmarketSansBold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'GmarketSans';
+    src: url('./fonts/GmarketSansBold.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  html { font-size: 16px; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-size: 17px; }
+  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+  .stage { background: #FFFAF2; }
+  .label-bar {
+    background: #0a0a0a;
+    color: #fff;
+  }
+
+  /* 시안 1 — 미니멀 배지 */
+  .opt1-badge {
+    background: linear-gradient(135deg, #FFF4E6 0%, #FFE4C7 100%);
+    border: 1px solid rgba(255, 107, 0, 0.25);
+    box-shadow: 0 8px 24px rgba(255, 107, 0, 0.08);
+  }
+
+  /* 시안 2 — 분할 정보형 */
+  .opt2-card {
+    background: #fff;
+    border: 1px solid rgba(10, 10, 10, 0.08);
+    box-shadow: 0 12px 28px rgba(10, 10, 10, 0.06);
+  }
+  .opt2-divider {
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(10, 10, 10, 0.12), transparent);
+  }
+  .opt2-sum {
+    background: linear-gradient(135deg, #FF6B00 0%, #FF8838 100%);
+    color: #fff;
+    box-shadow: 0 12px 28px rgba(255, 107, 0, 0.28);
+  }
+
+  /* 시안 3 — 그래프 라인형 */
+  .opt3-wrap {
+    background: #fff;
+    border: 1px solid rgba(10, 10, 10, 0.08);
+    box-shadow: 0 14px 32px rgba(10, 10, 10, 0.06);
+  }
+  .opt3-source {
+    background: #FFF7EE;
+    border: 1px dashed rgba(255, 107, 0, 0.4);
+    color: #0a0a0a;
+  }
+  .opt3-result {
+    background: #0a0a0a;
+    color: #fff;
+  }
+  .opt3-line {
+    stroke-dasharray: 6 6;
+  }
+
+  /* 시안 4 — 부드러운 강조 카드 */
+  .opt4-card {
+    background: #fff;
+    border: 2px solid #FF6B00;
+    box-shadow: 0 18px 40px rgba(255, 107, 0, 0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .opt4-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .opt4-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #FF8838, #FF6B00);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(255, 107, 0, 0.28);
+  }
+</style>
+</head>
+<body class="bg-white text-brand-dark font-sans">
+
+<div class="mx-auto max-w-3xl px-5 py-10 space-y-12">
+
+  <header class="text-center space-y-2">
+    <p class="text-sm font-bold text-brand-orange tracking-wider">A014 · 코칭 컨설턴트 영역</p>
+    <h1 class="text-3xl font-display font-black">+18.3억 합계 박스 시안 4개</h1>
+    <p class="text-sm text-gray-500 word-keep">v3 컨텍스트(베이지 배경 · 흰 카드 · 오렌지 톤)에서 4개 안을 비교합니다.<br>현재 빨강 톤이 강해 위 컨설턴트/매수 카드와 충돌하는 문제 해결안.</p>
+  </header>
+
+  <!-- 시안 1 ============================================== -->
+  <section class="space-y-3">
+    <div class="label-bar inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold">
+      <span class="text-brand-orange">01</span>
+      <span>미니멀 배지형</span>
+      <span class="text-gray-400 font-medium">· 한 줄 · 가장 가벼움</span>
+    </div>
+    <div class="stage rounded-3xl p-8 md:p-10">
+      <div class="text-center">
+        <div class="opt1-badge inline-flex items-center gap-3 rounded-full px-6 py-3">
+          <iconify-icon icon="solar:graph-up-bold" class="text-2xl text-brand-orange"></iconify-icon>
+          <p class="text-lg md:text-xl font-display font-black text-brand-dark">
+            8개월 <span class="text-brand-orange">+18.3억</span> 상승
+          </p>
+        </div>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 px-2 word-keep">캡션 한 줄로 압축해 위/아래 카드 사이를 가볍게 연결. 자극 없이 정보만 또렷.</p>
+  </section>
+
+  <!-- 시안 2 ============================================== -->
+  <section class="space-y-3">
+    <div class="label-bar inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold">
+      <span class="text-brand-orange">02</span>
+      <span>분할 정보형</span>
+      <span class="text-gray-400 font-medium">· 두 단지 + 합계 · 산출 근거 보임</span>
+    </div>
+    <div class="stage rounded-3xl p-8 md:p-10">
+      <div class="opt2-card mx-auto inline-flex items-stretch gap-6 rounded-3xl px-8 py-6">
+        <div class="flex flex-col justify-center text-left">
+          <p class="text-xs text-gray-400 mb-1">목동신시가지</p>
+          <p class="text-xl font-display font-black text-brand-dark">+9.9억</p>
+        </div>
+        <div class="opt2-divider"></div>
+        <div class="flex flex-col justify-center text-left">
+          <p class="text-xs text-gray-400 mb-1">가락쌍용</p>
+          <p class="text-xl font-display font-black text-brand-dark">+8.4억</p>
+        </div>
+        <div class="opt2-divider"></div>
+        <div class="opt2-sum flex flex-col justify-center items-start rounded-2xl px-5 py-3">
+          <p class="text-[11px] font-bold opacity-90">8개월 합계</p>
+          <p class="text-2xl md:text-3xl font-display font-black leading-none mt-1">+18.3억</p>
+        </div>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 px-2 word-keep">위 두 카드의 숫자가 어떻게 합쳐졌는지 한눈에. 오렌지는 합계 박스에만 집중.</p>
+  </section>
+
+  <!-- 시안 3 ============================================== -->
+  <section class="space-y-3">
+    <div class="label-bar inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold">
+      <span class="text-brand-orange">03</span>
+      <span>그래프 라인형</span>
+      <span class="text-gray-400 font-medium">· 시각적 합산 흐름</span>
+    </div>
+    <div class="stage rounded-3xl p-8 md:p-10">
+      <div class="opt3-wrap mx-auto max-w-2xl rounded-3xl px-6 py-7">
+        <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+          <!-- left: 두 출처 -->
+          <div class="space-y-2">
+            <div class="opt3-source rounded-xl px-3 py-2 text-center">
+              <p class="text-[11px] text-gray-500">목동</p>
+              <p class="text-lg font-display font-black">+9.9억</p>
+            </div>
+            <div class="opt3-source rounded-xl px-3 py-2 text-center">
+              <p class="text-[11px] text-gray-500">가락</p>
+              <p class="text-lg font-display font-black">+8.4억</p>
+            </div>
+          </div>
+          <!-- middle: SVG 화살표 -->
+          <svg width="68" height="120" viewBox="0 0 68 120" fill="none" aria-hidden="true">
+            <path class="opt3-line" d="M4 30 Q44 30 44 60" stroke="#FF6B00" stroke-width="2" fill="none"/>
+            <path class="opt3-line" d="M4 90 Q44 90 44 60" stroke="#FF6B00" stroke-width="2" fill="none"/>
+            <path d="M44 60 L60 60" stroke="#FF6B00" stroke-width="2"/>
+            <path d="M55 54 L64 60 L55 66" stroke="#FF6B00" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <!-- right: 결과 -->
+          <div class="opt3-result rounded-2xl px-4 py-5 text-center">
+            <p class="text-[11px] opacity-70 font-bold">8개월 합계</p>
+            <p class="text-3xl font-display font-black mt-1">+18.3억</p>
+            <p class="text-[11px] mt-1 opacity-70">상승</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 px-2 word-keep">두 단지가 한 숫자로 합쳐지는 흐름이 그림으로 보임. 인포그래픽 느낌.</p>
+  </section>
+
+  <!-- 시안 4 ============================================== -->
+  <section class="space-y-3">
+    <div class="label-bar inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold">
+      <span class="text-brand-orange">04</span>
+      <span>강조 카드 (오렌지 톤)</span>
+      <span class="text-gray-400 font-medium">· 현재 구조 유지 · 빨강 → 오렌지</span>
+    </div>
+    <div class="stage rounded-3xl p-8 md:p-10">
+      <div class="text-center">
+        <div class="opt4-card inline-block rounded-3xl px-10 py-6">
+          <div class="flex items-center gap-4 relative z-10">
+            <span class="opt4-icon">
+              <iconify-icon icon="solar:banknote-2-bold-duotone" class="text-2xl"></iconify-icon>
+            </span>
+            <div class="text-left">
+              <p class="text-sm font-bold text-gray-500">8개월 누적 실현</p>
+              <p class="text-3xl md:text-4xl font-display font-black">
+                <span class="text-brand-orange">+18.3억</span> <span class="text-brand-dark">상승</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500 px-2 word-keep">현재 박스 구조를 그대로 유지하되 빨강을 오렌지로 교체. 펄스 애니메이션 제거로 차분.</p>
+  </section>
+
+  <footer class="text-center text-xs text-gray-400 pt-6 border-t border-gray-200">
+    A014 · 2026-05-19 · v3 04 컨설턴트 영역
+  </footer>
+
+</div>
+
+</body>
+</html>
