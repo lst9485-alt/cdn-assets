@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-19T12:16:27.503463+09:00",
+  "updated": "2026-05-19T14:55:27.479515+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -22,7 +22,7 @@
   ],
   "tasks": {
     "total": 441,
-    "done": 413,
+    "done": 414,
     "overdue": 8,
     "pending": [
       {
@@ -64,11 +64,6 @@
         "title": "메모정리",
         "date": "2026-05-18",
         "overdue": true
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-05-19T09:00:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "랜딩",
@@ -177,7 +172,7 @@
         "title": "체크남&링크, db기입",
         "time": "09:00",
         "allDay": false,
-        "done": false
+        "done": true
       },
       {
         "title": "랜딩",
