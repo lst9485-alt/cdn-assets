@@ -260,6 +260,12 @@
       .story-dark-quote .quote-meta::before { content:'●'; color:#ff8f9a; margin-right:7px; font-size:9px; vertical-align:1px; }
 	  .recommend-badge { display:inline-flex; align-items:center; gap:8px; background:#FF6B00; color:#fff; font-size:1rem; font-weight:900; padding:9px 18px; border-radius:999px; box-shadow:0 12px 28px rgba(255,107,0,0.26); }
 	  .map-region-chip { border:2px solid #1A2B47; border-radius:999px; background:#fff; color:#1A2B47; padding:6px 12px; font-size:14px; font-weight:900; }
+    /* ===== 컨설턴트 자기소개 (시안 A에서) ===== */
+    .consultant-namecard { background: #fff; border-radius: 24px; padding: 28px; border: 1px solid rgba(10,10,10,0.08); box-shadow: 0 14px 36px rgba(26,43,71,0.06); max-width: 640px; margin: 0 auto; }
+    .consultant-avatar { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 24px; background: linear-gradient(145deg, #ff7f24, #ff5b00); color: #fff; font-family: GmarketSans, Pretendard, sans-serif; font-size: 24px; font-weight: 900; box-shadow: 0 18px 36px rgba(255,107,0,0.25); flex-shrink: 0; }
+    .consultant-list { display: grid; gap: 12px; margin-top: 24px; }
+    .consultant-list li { display: flex; gap: 10px; align-items: flex-start; color: rgba(10,10,10,0.74); font-size: 15px; line-height: 1.7; word-break: keep-all; list-style: none; }
+    .consultant-list iconify-icon { margin-top: 3px; color: #FF6B00; font-size: 18px; flex: none; }
 	  .consult-gain-icon { display:grid; place-items:center; width:48px; height:48px; border:2px solid #dc2626; border-radius:16px; background:#fff7ed; color:#dc2626; font-size:28px; font-weight:900; box-shadow:0 10px 24px rgba(220,38,38,0.14); animation: moneyPop 1.8s ease-in-out infinite; }
       .consult-gain-icon iconify-icon { font-size:28px; }
 	  @keyframes moneyPop { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-3px) scale(1.04)} }
@@ -1774,28 +1780,21 @@
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-tight word-keep">긴말 없이<br><span class="text-red-600">실제 제 투자사례로</span><br>보여드립니다</h2>
         <p class="text-6xl md:text-7xl text-gray-300 font-display font-black leading-none mt-2">"</p>
       </div>
-      <!-- 자기 소개 -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 mb-10 max-w-2xl mx-auto" data-reveal>
-        <div class="mb-7 flex items-center justify-center">
-          <div class="flex items-center gap-4 rounded-2xl bg-orange-50 px-6 py-4">
-            <div class="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-brand-orange text-white shadow-lg shadow-orange-200">
-              <iconify-icon icon="solar:user-id-bold" class="text-4xl"></iconify-icon>
-            </div>
-            <div class="text-left">
-              <h3 class="text-3xl font-display font-black leading-none text-brand-dark">우재</h3>
-              <p class="mt-2 text-sm font-bold text-gray-500">우리동네 재테크</p>
-            </div>
+      <!-- 자기 소개 (시안 A 형식) -->
+      <div class="consultant-namecard mb-10" data-reveal>
+        <div class="flex items-center gap-4">
+          <div class="consultant-avatar">우재</div>
+          <div>
+            <p class="font-display text-2xl font-black text-brand-dark">우재</p>
+            <p class="mt-1 text-sm font-bold text-gray-500 word-keep">증권투자 법인 대표 · 실전 부동산 투자자</p>
           </div>
         </div>
-        <div class="rounded-2xl border border-gray-200 bg-gray-50 px-6 py-5 text-left mb-7">
-          <ul class="space-y-4 text-base text-brand-dark">
-            <li class="flex gap-3 word-keep"><span class="text-xl leading-5 text-black">•</span><span>증권투자 관련 법인 대표이사</span></li>
-            <li class="flex gap-3 word-keep"><span class="text-xl leading-5 text-black">•</span><span>전국구 실전 부동산투자자</span></li>
-            <li class="flex gap-3 word-keep"><span class="text-xl leading-5 text-black">•</span><span>최근 8개월간 아파트매매만 <strong class="mx-2">5건</strong> <span class="text-sm text-gray-400">(작성시점 기준)</span></span></li>
-            <li class="flex gap-3 word-keep"><span class="text-xl leading-5 text-black">•</span><span>포트폴리오: 강남3구+압여목성 2채+@</span></li>
-          </ul>
-        </div>
-        <p class="text-lg md:text-xl text-center word-keep"><span class="text-red-600 font-bold">10년간 쌓아온</span> 모든 투자 노하우를<br>통째로 오픈해 드리겠습니다</p>
+        <ul class="consultant-list">
+          <li><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon><span>투자 업계 10년+ 경력</span></li>
+          <li><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon><span>최근 8개월간 아파트 매매 5건</span></li>
+          <li><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon><span>강남3구 + 압여목성 2채 + α 포트폴리오 운영</span></li>
+          <li><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon><span>1:1 코칭 150건+ · 만족도 99%</span></li>
+        </ul>
       </div>
       <!-- 실적 카드 + 이미지 (모자이크 처리) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-stretch" data-reveal>
