@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <title>운영 홈 초안</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #0F172A; line-height: 1.55; }
+    .page { max-width: 1120px; margin: 0 auto; padding: 28px 18px 48px; }
+    .top { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+    .back { color: #64748B; text-decoration: none; font-size: 13px; font-weight: 700; }
+    h1 { font-size: 24px; letter-spacing: -0.4px; color: #051C2C; margin-top: 6px; }
+    .sub { color: #64748B; font-size: 14px; margin-top: 3px; }
+    .stamp { font-size: 12px; color: #94A3B8; text-align: right; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+    .card { background: white; border: 1px solid #E2E8F0; border-radius: 16px; padding: 16px; box-shadow: 0 1px 2px rgba(15,23,42,0.03); }
+    .metric-label { font-size: 12px; color: #64748B; font-weight: 800; }
+    .metric-value { font-size: 28px; font-weight: 900; color: #051C2C; margin-top: 4px; }
+    .metric-sub { font-size: 12px; color: #94A3B8; margin-top: 2px; }
+    .section { margin-top: 18px; }
+    .section-title { font-size: 14px; font-weight: 900; color: #051C2C; margin-bottom: 10px; }
+    .actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .btn { display: block; background: white; border: 1px solid #E2E8F0; border-radius: 14px; padding: 14px 15px; text-decoration: none; color: #0F172A; transition: 0.15s ease; min-height: 82px; }
+    .btn:hover { border-color: #0077C8; transform: translateY(-1px); }
+    .btn strong { display: block; font-size: 14px; color: #051C2C; }
+    .btn span { display: block; font-size: 12px; color: #64748B; margin-top: 4px; }
+    .btn.primary { border-color: #BAE6FD; background: #F0F9FF; }
+    .btn.warn { border-color: #FED7AA; background: #FFF7ED; }
+    .lists { display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; }
+    .list { background: white; border: 1px solid #E2E8F0; border-radius: 16px; padding: 16px; }
+    .row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #F1F5F9; font-size: 13px; }
+    .row:first-of-type { border-top: 0; }
+    .row b { color: #1E293B; }
+    .row small { color: #64748B; text-align: right; }
+    .pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; }
+    .ok { background: #ECFDF3; color: #166534; }
+    .off { background: #F1F5F9; color: #64748B; }
+    .bad { background: #FEF2F2; color: #B91C1C; }
+    .note { margin-top: 14px; font-size: 12px; color: #64748B; background: #F1F5F9; border-radius: 12px; padding: 12px; }
+    @media (max-width: 900px) { .grid, .actions, .lists { grid-template-columns: 1fr; } .top { display: block; } .stamp { text-align: left; margin-top: 8px; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top">
+      <div>
+        <a class="back" href="../">← 메인</a>
+        <h1>🦞 운영 홈 초안</h1>
+        <p class="sub">자주 보는 상태와 바로가기를 한 화면에 모은 테스트 페이지</p>
+      </div>
+      <div class="stamp" id="updated">데이터 로딩 중</div>
+    </div>
+
+    <div class="grid">
+      <div class="card"><div class="metric-label">남은 todo</div><div class="metric-value" id="todo-pending">—</div><div class="metric-sub" id="todo-sub">todo-list.md 기준</div></div>
+      <div class="card"><div class="metric-label">프로젝트</div><div class="metric-value" id="project-count">—</div><div class="metric-sub">최근 프로젝트 폴더 기준</div></div>
+      <div class="card"><div class="metric-label">n8n 활성</div><div class="metric-value" id="workflow-active">—</div><div class="metric-sub" id="workflow-sub">workflow.json 기준</div></div>
+      <div class="card"><div class="metric-label">크론 정리 필요</div><div class="metric-value" id="cron-warn">—</div><div class="metric-sub" id="cron-sub">알림/자동점검 요약</div></div>
+    </div>
+
+    <section class="section">
+      <div class="section-title">바로가기</div>
+      <div class="actions">
+        <a class="btn primary" href="https://macmini.tailfbe8a6.ts.net/"><strong>OpenClaw Control</strong><span>집/회사 공통 Tailscale 주소</span></a>
+        <a class="btn" href="./index.html"><strong>운영 대시보드</strong><span>todo · 프로젝트 · OKR 3열 보기</span></a>
+        <a class="btn" href="./telegram-cron.html"><strong>Cron 작업표</strong><span>요일/시간별 알림 상태</span></a>
+        <a class="btn" href="../process/n8n.html"><strong>n8n 프로세스</strong><span>워크플로 구조 문서</span></a>
+        <a class="btn" href="../data/workflows.json"><strong>n8n 워크플로 JSON</strong><span>현재 수집된 workflow 상태</span></a>
+        <a class="btn warn" href="https://macmini.tailfbe8a6.ts.net/"><strong>수동 실행/수정은 OpenClaw에서</strong><span>외부 발송·설정 변경은 확인 후 진행</span></a>
+      </div>
+    </section>
+
+    <section class="section lists">
+      <div class="list">
+        <div class="section-title">n8n 워크플로 상태</div>
+        <div id="workflow-list"><div class="row"><b>로딩 중</b><small>—</small></div></div>
+      </div>
+      <div class="list">
+        <div class="section-title">운영 알림/다음 확인</div>
+        <div id="ops-list"><div class="row"><b>로딩 중</b><small>—</small></div></div>
+      </div>
+    </section>
+
+    <div class="note">
+      이 페이지는 초안이라 실제 n8n 실행 버튼은 아직 연결하지 않았어. 다음 단계에서 webhook/Telegram 승인 흐름을 붙이면 “버튼 클릭 → 점검 실행 → Telegram 결과”로 확장 가능.
+    </div>
+  </div>
+
+<script>
+(function() {
+  var latest = [];
+  Promise.allSettled([
+    load('../data/todo.json').then(renderTodo),
+    load('../data/projects.json').then(renderProjects),
+    load('../data/workflows.json').then(renderWorkflows),
+    load('../data/cron-summary.json').then(renderCron)
+  ]).then(function() {
+    var newest = latest.filter(Boolean).sort().pop();
+    document.getElementById('updated').textContent = newest ? '최근 갱신: ' + fmt(newest) : '일부 데이터 로드 실패';
+  });
+
+  function load(url) { return fetch(url).then(function(r) { if (!r.ok) throw new Error(url); return r.json(); }); }
+  function remember(data) { if (data && data.updated) latest.push(data.updated); }
+
+  function renderTodo(data) {
+    remember(data);
+    var total = 0, done = 0;
+    (data.sections || []).forEach(function(s) { (s.categories || []).forEach(function(c) { (c.items || []).forEach(function(i) { total++; if (i.done) done++; }); }); });
+    document.getElementById('todo-pending').textContent = Math.max(0, total - done);
+    document.getElementById('todo-sub').textContent = '전체 ' + total + ' · 완료 ' + done;
+  }
+
+  function renderProjects(data) {
+    remember(data);
+    var projects = data.projects || [];
+    document.getElementById('project-count').textContent = projects.length;
+  }
+
+  function renderWorkflows(data) {
+    remember(data);
+    var workflows = data.workflows || [];
+    var active = workflows.filter(function(w) { return w.active; }).length;
+    document.getElementById('workflow-active').textContent = active;
+    document.getElementById('workflow-sub').textContent = '전체 ' + workflows.length + ' · 꺼짐 ' + (workflows.length - active);
+    var byCategory = {};
+    workflows.forEach(function(w) {
+      var key = w.category || '기타';
+      if (!byCategory[key]) byCategory[key] = { total: 0, active: 0 };
+      byCategory[key].total++;
+      if (w.active) byCategory[key].active++;
+    });
+    document.getElementById('workflow-list').innerHTML = Object.keys(byCategory).sort().map(function(key) {
+      var c = byCategory[key];
+      var tone = c.active === 0 ? 'off' : (c.active === c.total ? 'ok' : 'bad');
+      return '<div class="row"><b>' + esc(key) + '</b><small><span class="pill ' + tone + '">' + c.active + '/' + c.total + ' active</span></small></div>';
+    }).join('') || '<div class="row"><b>워크플로 없음</b><small>—</small></div>';
+  }
+
+  function renderCron(data) {
+    remember(data);
+    var s = data.summary || {};
+    var warn = s['정리 필요'] || 0;
+    document.getElementById('cron-warn').textContent = warn;
+    document.getElementById('cron-sub').textContent = '정상 ' + (s['정상'] || 0) + ' · 꺼짐 ' + (s['꺼짐'] || 0);
+    var list = data.important || [];
+    document.getElementById('ops-list').innerHTML = list.slice(0, 6).map(function(item) {
+      var tone = item.status === '정상' ? 'ok' : (item.status === '꺼짐' ? 'off' : 'bad');
+      return '<div class="row"><b>' + esc((item.day || '') + ' ' + (item.time || '') + ' · ' + (item.title || '')) + '</b><small><span class="pill ' + tone + '">' + esc(item.status || '') + '</span></small></div>';
+    }).join('') || '<div class="row"><b>중요 알림 없음</b><small>—</small></div>';
+  }
+
+  function esc(value) { var el = document.createElement('span'); el.textContent = value || ''; return el.innerHTML; }
+  function fmt(iso) { var d = new Date(iso); return d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }); }
+})();
+</script>
+<script src="../nav.js"></script>
+</body>
+</html>

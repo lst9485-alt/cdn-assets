@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <title>대시보드 - 운영 대시보드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1E293B; line-height: 1.6; }
+        .page { max-width: 1200px; margin: 0 auto; padding: 32px 20px; }
+        .back { display: inline-block; color: #64748B; text-decoration: none; font-size: 14px; margin-bottom: 16px; }
+        .back:hover { color: #0077C8; }
+        h1 { font-size: 22px; font-weight: 800; color: #051C2C; margin-bottom: 20px; }
+
+        /* ── 3열 레이아웃 ── */
+        .columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: start; }
+        .column { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px; max-height: calc(100vh - 140px); overflow-y: auto; }
+        .column::-webkit-scrollbar { width: 4px; }
+        .column::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 2px; }
+        .col-header { font-size: 15px; font-weight: 700; color: #051C2C; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+        .col-header .count { font-size: 13px; font-weight: 600; color: #64748B; }
+
+        /* ── 공용 ── */
+        .progress-bar { height: 4px; background: #E2E8F0; border-radius: 2px; overflow: hidden; margin-bottom: 14px; }
+        .progress-fill { height: 100%; background: #0077C8; border-radius: 2px; }
+        .updated { font-size: 11px; color: #94A3B8; margin-top: 12px; }
+        .error { background: #F8FAFC; border: 1px dashed #CBD5E1; border-radius: 8px; padding: 16px; text-align: center; color: #94A3B8; font-size: 14px; }
+
+        /* ── 접기/펼치기 공용 ── */
+        .fold { margin-bottom: 8px; }
+        .fold summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 6px; padding: 8px 10px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; font-size: 14px; font-weight: 600; color: #1E293B; transition: all 0.15s; }
+        .fold summary::-webkit-details-marker { display: none; }
+        .fold summary::before { content: "▸"; font-size: 11px; color: #94A3B8; transition: transform 0.15s; }
+        .fold[open] summary::before { transform: rotate(90deg); }
+        .fold[open] summary { background: #E8F3FF; border-color: #0077C8; }
+        .fold summary:hover { border-color: #0077C8; }
+        .fold-body { padding: 8px 10px 4px; }
+        .fold summary .fold-count { font-size: 12px; color: #94A3B8; margin-left: auto; }
+
+        /* ── 투두 ── */
+        .todo-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: #0077C8; color: white; border-radius: 4px; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-right: 4px; }
+        .todo-item { display: flex; align-items: flex-start; gap: 6px; padding: 3px 0; font-size: 14px; color: #475569; }
+        .todo-item input { margin-top: 4px; pointer-events: none; accent-color: #0077C8; }
+        .todo-item.done { color: #B0B8C4; text-decoration: line-through; }
+
+        /* ── 프로젝트 ── */
+        .proj-icon { flex-shrink: 0; font-size: 14px; }
+        .proj-app { font-size: 12px; color: #64748B; }
+        .proj-status { font-size: 13px; color: #64748B; padding: 2px 0; }
+        .proj-next { font-size: 13px; color: #0077C8; }
+        .proj-date { font-size: 11px; color: #94A3B8; margin-left: auto; }
+
+        /* ── OKR ── */
+        .okr-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+        .okr-stat { background: #F8FAFC; border-radius: 8px; padding: 12px; text-align: center; }
+        .okr-stat-label { font-size: 12px; color: #64748B; }
+        .okr-stat-value { font-size: 22px; font-weight: 800; color: #051C2C; }
+        .okr-stat-sub { font-size: 12px; color: #94A3B8; }
+        .okr-stat-warn { color: #DC2626; }
+        .okr-kr { margin-bottom: 12px; }
+        .okr-kr-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+        .okr-kr-title { font-size: 14px; font-weight: 600; color: #1E293B; }
+        .okr-kr-rate { font-size: 13px; font-weight: 700; color: #0077C8; }
+        .okr-kr-bar { height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden; }
+        .okr-kr-fill { height: 100%; background: #0077C8; border-radius: 3px; }
+        .okr-kr-detail { font-size: 12px; color: #94A3B8; margin-top: 3px; }
+
+
+        .ops-alert { background:white; border:1px solid #E2E8F0; border-radius:14px; padding:16px; margin-bottom:16px; }
+        .ops-alert-head { display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:10px; }
+        .ops-alert-title { font-size:15px; font-weight:800; color:#051C2C; }
+        .ops-alert-link { font-size:12px; color:#0077C8; text-decoration:none; font-weight:700; }
+        .ops-stats { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+        .ops-stat { background:#F8FAFC; border-radius:999px; padding:5px 10px; font-size:12px; font-weight:700; color:#475569; }
+        .ops-stat.ok { color:#166534; background:#ECFDF3; }
+        .ops-stat.warn { color:#B45309; background:#FFFBEB; }
+        .ops-stat.off { color:#64748B; background:#F1F5F9; }
+        .ops-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+        .ops-item { border:1px solid #E2E8F0; border-radius:10px; padding:9px 10px; font-size:13px; }
+        .ops-item b { display:block; color:#1E293B; }
+        .ops-item span { color:#64748B; font-size:12px; }
+        .ops-item.warn { border-color:#FBBF24; background:#FFFBEB; }
+        @media (max-width: 900px) { .ops-grid { grid-template-columns:1fr; } }
+
+        @media (max-width: 900px) { .columns { grid-template-columns: 1fr; } .column { max-height: none; } }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../" class="back">&larr; 메인</a>
+        <h1>📊 대시보드</h1>
+
+        <section class="ops-alert">
+            <div class="ops-alert-head">
+                <div class="ops-alert-title">🦞 크론 · 텔레그램 알림</div>
+                <a class="ops-alert-link" href="telegram-cron.html">전체 요일표 보기 →</a>
+            </div>
+            <div class="ops-stats">
+                <span class="ops-stat ok" id="cron-ok">정상 8</span>
+                <span class="ops-stat warn" id="cron-warn">정리 필요 0</span>
+                <span class="ops-stat off" id="cron-off">꺼짐 5</span>
+            </div>
+            <div class="ops-grid" id="cron-items">
+                <div class="ops-item"><b>월 10:00 · 주간 건강검진</b><span>알림봇 · 기존 crontab 줄로 정상 실행</span></div>
+                <div class="ops-item"><b>정리 필요 없음</b><span>현재 크론/알림 기준 0개</span></div>
+                <div class="ops-item"><b>매일 07:10 · 경쟁채널</b><span>마케팅봇 · 정상</span></div>
+                <div class="ops-item"><b>매일 07:20/08:00 · 시장/점검</b><span>알림봇 · 정상</span></div>
+            </div>
+        </section>
+
+        <div class="columns">
+            <!-- 투두리스트 -->
+            <div class="column" id="col-todo">
+                <div class="col-header">✅ 투두리스트 <span class="count" id="todo-count">—</span></div>
+                <div id="todo"></div>
+                <div id="todo-content"><div class="error">로딩 중...</div></div>
+            </div>
+
+            <!-- 프로젝트 -->
+            <div class="column" id="col-proj">
+                <div class="col-header">📁 프로젝트 <span class="count" id="proj-count">—</span></div>
+                <div id="projects"></div>
+                <div id="projects-content"><div class="error">로딩 중...</div></div>
+            </div>
+
+            <!-- OKR -->
+            <div class="column" id="col-okr">
+                <div class="col-header">🎯 OKR · 태스크 <span class="count" id="okr-count"></span></div>
+                <div id="okr"></div>
+                <div id="okr-content"><div class="error">로딩 중...</div></div>
+            </div>
+        </div>
+    </div>
+<script>
+
+// ── 크론/텔레그램 알림 요약 ──
+(function() {
+    var okEl = document.getElementById('cron-ok');
+    var warnEl = document.getElementById('cron-warn');
+    var offEl = document.getElementById('cron-off');
+    var itemsEl = document.getElementById('cron-items');
+    if (!okEl || !warnEl || !offEl || !itemsEl) return;
+    fetch('../data/cron-summary.json')
+        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
+        .then(function(data) {
+            var s = data.summary || {};
+            okEl.textContent = '정상 ' + (s['정상'] || 0);
+            warnEl.textContent = '정리 필요 ' + (s['정리 필요'] || 0);
+            offEl.textContent = '꺼짐 ' + (s['꺼짐'] || 0);
+            var list = data.important || [];
+            if (!list.length) return;
+            itemsEl.innerHTML = list.slice(0,4).map(function(item) {
+                var cls = item.status === '정리 필요' ? ' warn' : '';
+                return '<div class="ops-item' + cls + '"><b>' + escCron(item.day + ' ' + item.time + ' · ' + item.title) + '</b><span>' + escCron(item.room + ' · ' + item.status) + '</span></div>';
+            }).join('');
+        }).catch(function() { /* 고정값 유지 */ });
+    function escCron(s) { var e = document.createElement('span'); e.textContent = s || ''; return e.innerHTML; }
+})();
+
+// ── 투두 ──
+(function() {
+    var container = document.getElementById('todo-content');
+    var countEl = document.getElementById('todo-count');
+
+    fetch('../data/todo.json')
+        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
+        .then(render).catch(function() { container.innerHTML = '<div class="error">로드 실패</div>'; });
+
+    function render(data) {
+        var total = 0, done = 0;
+        data.sections.forEach(function(s) { s.categories.forEach(function(c) {
+            total += c.items.length; c.items.forEach(function(i) { if (i.done) done++; });
+        }); });
+        var pct = total > 0 ? Math.round(done / total * 100) : 0;
+        countEl.textContent = (total - done) + '개 남음';
+
+        var html = '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%"></div></div>';
+        data.sections.forEach(function(s) { s.categories.forEach(function(cat) {
+            var catDone = cat.items.filter(function(i){return i.done;}).length;
+            var catPending = cat.items.length - catDone;
+            html += '<details class="fold"><summary><span class="todo-num">' + cat.id + '</span>' + esc(cat.title) + '<span class="fold-count">' + catPending + '개</span></summary><div class="fold-body">';
+            cat.items.forEach(function(item) {
+                html += '<div class="todo-item' + (item.done ? ' done' : '') + '"><input type="checkbox"' + (item.done ? ' checked' : '') + '><span>' + esc(item.text) + '</span></div>';
+            });
+            html += '</div></details>';
+        }); });
+        html += '<div class="updated">' + fmtDate(data.updated) + '</div>';
+        container.innerHTML = html;
+    }
+    function esc(s) { var e = document.createElement('span'); e.textContent = s; return e.innerHTML; }
+    function fmtDate(iso) { var d = new Date(iso); return d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}); }
+})();
+
+// ── 프로젝트 ──
+(function() {
+    var container = document.getElementById('projects-content');
+    var countEl = document.getElementById('proj-count');
+
+    fetch('../data/projects.json')
+        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
+        .then(render).catch(function() { container.innerHTML = '<div class="error">로드 실패</div>'; });
+
+    function render(data) {
+        var p = data.projects;
+        countEl.textContent = p.length + '개 진행 중';
+        var html = '';
+        p.forEach(function(proj) {
+            var folderSvg = '<svg width="16" height="16" viewBox="0 0 16 16" style="vertical-align:-2px"><path d="M1 3.5A1.5 1.5 0 012.5 2h3.172a1.5 1.5 0 011.06.44L7.94 3.644a.5.5 0 00.354.147H13.5A1.5 1.5 0 0115 5.29V12.5A1.5 1.5 0 0113.5 14h-11A1.5 1.5 0 011 12.5z" fill="#F59E0B"/></svg>';
+            var fileSvg = '<svg width="16" height="16" viewBox="0 0 16 16" style="vertical-align:-2px"><rect x="3" y="1" width="10" height="14" rx="1.5" fill="#E2E8F0"/><rect x="5" y="4" width="6" height="1" rx=".5" fill="#94A3B8"/><rect x="5" y="6.5" width="6" height="1" rx=".5" fill="#94A3B8"/><rect x="5" y="9" width="4" height="1" rx=".5" fill="#94A3B8"/></svg>';
+            var icon = proj.type === 'folder' ? folderSvg : fileSvg;
+            var hasDetail = proj.status || proj.next;
+            var dateStr = proj.modified ? fmtShortDate(proj.modified) : '';
+            if (hasDetail) {
+                html += '<details class="fold"><summary><span class="proj-icon">' + icon + '</span> ' + esc(proj.name);
+                if (proj.app) html += ' <span class="proj-app">' + esc(proj.app) + '</span>';
+                if (dateStr) html += '<span class="proj-date">' + dateStr + '</span>';
+                html += '</summary><div class="fold-body">';
+                if (proj.status) html += '<div class="proj-status">' + esc(proj.status) + '</div>';
+                if (proj.next) html += '<div class="proj-next">→ ' + esc(proj.next) + '</div>';
+                html += '</div></details>';
+            } else {
+                html += '<details class="fold"><summary><span class="proj-icon">' + icon + '</span> ' + esc(proj.name);
+                if (proj.app) html += ' <span class="proj-app">' + esc(proj.app) + '</span>';
+                if (dateStr) html += '<span class="proj-date">' + dateStr + '</span>';
+                html += '</summary></details>';
+            }
+        });
+        html += '<div class="updated">' + fmtDate(data.updated) + '</div>';
+        container.innerHTML = html;
+    }
+    function esc(s) { var e = document.createElement('span'); e.textContent = s; return e.innerHTML; }
+    function fmtDate(iso) { var d = new Date(iso); return d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}); }
+    function fmtShortDate(dateStr) { var d = new Date(dateStr); return (d.getMonth()+1) + '/' + d.getDate(); }
+})();
+
+// ── OKR ──
+(function() {
+    var container = document.getElementById('okr-content');
+    var countEl = document.getElementById('okr-count');
+
+    fetch('../data/okr.json')
+        .then(function(r) { if (!r.ok) throw 0; return r.json(); })
+        .then(render).catch(function() { container.innerHTML = '<div class="error">로드 실패</div>'; });
+
+    function render(data) {
+        var t = data.tasks || {}, r = data.routines || {}, okr = data.okr || [];
+        var days = ['일','월','화','수','목','금','토'];
+        var now = new Date();
+        countEl.textContent = (now.getMonth()+1) + '/' + now.getDate() + '(' + days[now.getDay()] + ')';
+
+        var pending = (t.total||0) - (t.done||0);
+        var html = '';
+
+        // 나는 누구인가
+        if (r.identity) {
+            html += '<div style="background:#F0F4FF;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px;font-weight:600;color:#334155;text-align:center">' + esc(r.identity) + '</div>';
+        }
+
+        // 원씽/P2/P3 태스크
+        var priorities = r.priorities || [];
+        if (priorities.length > 0) {
+            html += '<div style="margin-bottom:12px">';
+            priorities.forEach(function(p) {
+                var labelColor = p.label === '원씽' ? '#DC2626' : '#64748B';
+                var cls = p.done ? 'todo-item done' : 'todo-item';
+                html += '<div class="' + cls + '" style="padding:4px 0"><input type="checkbox"' + (p.done ? ' checked' : '') + '>';
+                html += '<span style="font-size:11px;font-weight:700;color:' + labelColor + ';background:' + (p.label === '원씽' ? '#FEF2F2' : '#F1F5F9') + ';padding:1px 5px;border-radius:4px;margin-right:4px">' + esc(p.label) + '</span>';
+                html += '<span>' + esc(p.title) + '</span></div>';
+            });
+            html += '</div>';
+        }
+
+        // 미완료 태스크 (접기/펼치기)
+        html += '<details class="fold" style="margin-bottom:12px"><summary>미완료 태스크 <strong>' + pending + '개</strong>';
+        if (t.overdue > 0) html += ' · <span class="okr-stat-warn">지연 ' + t.overdue + '</span>';
+        html += '</summary><div class="fold-body" style="font-size:13px;color:#64748B">';
+        var pendingItems = t.pending || [];
+        pendingItems.forEach(function(item) {
+            var dateLabel = '';
+            if (item.date) {
+                var d = new Date(item.date);
+                dateLabel = (d.getMonth()+1) + '/' + d.getDate();
+            }
+            html += '<div style="padding:2px 0;display:flex;gap:6px">';
+            if (item.overdue) html += '<span style="color:#DC2626;font-size:11px;flex-shrink:0">' + dateLabel + '</span>';
+            else html += '<span style="color:#94A3B8;font-size:11px;flex-shrink:0">' + dateLabel + '</span>';
+            html += '<span>' + esc(item.title) + '</span></div>';
+        });
+        if (pendingItems.length === 0) html += '<div style="color:#94A3B8">없음</div>';
+        html += '</div></details>';
+
+        // 오늘 루틴 + 오늘 스케줄 (2열)
+        html += '<div style="display:flex;gap:12px;margin-bottom:16px">';
+
+        // 왼쪽: 오늘 루틴
+        html += '<div style="flex:1">';
+        html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:6px">오늘 루틴</div>';
+        var items = r.items || [];
+        items.forEach(function(item) {
+            var cls = item.done ? 'todo-item done' : 'todo-item';
+            html += '<div class="' + cls + '"><input type="checkbox"' + (item.done ? ' checked' : '') + '><span>' + esc(item.name) + '</span></div>';
+        });
+        html += '</div>';
+
+        // 오른쪽: 오늘 스케줄 (Notion 태스크 DB 기반)
+        html += '<div style="flex:1">';
+        html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:6px">오늘 스케줄</div>';
+        var schedule = (t.schedule) || [];
+        if (schedule.length > 0) {
+            schedule.forEach(function(ev) {
+                var cls = ev.done ? ' style="text-decoration:line-through;color:#B0B8C4"' : '';
+                html += '<div style="font-size:12px;color:#475569;padding:2px 0"' + cls + '>';
+                if (ev.allDay) {
+                    html += '<span style="font-size:11px;color:#94A3B8;margin-right:4px">종일</span>';
+                } else if (ev.time) {
+                    html += '<span style="font-size:11px;color:#94A3B8;margin-right:4px">' + esc(ev.time) + '</span>';
+                }
+                html += esc(ev.title) + '</div>';
+            });
+        } else {
+            html += '<div style="font-size:12px;color:#94A3B8">오늘 일정 없음</div>';
+        }
+        html += '</div>';
+
+        html += '</div>';
+
+        // 이번달 매출 요약 (okr.json sales — Notion 상담일지 기준)
+        var sales = data.sales;
+        if (sales) {
+            html += '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px">';
+            html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
+            html += '<div style="font-size:13px;font-weight:700;color:#475569">' + esc(sales.month_label) + ' 매출</div>';
+            html += '<div style="font-size:20px;font-weight:800;color:#051C2C">' + sales.total_amount + '만원</div>';
+            html += '</div>';
+            // 주간별 테이블
+            if (sales.weekly && sales.weekly.length > 0) {
+                html += '<div style="display:flex;gap:6px">';
+                sales.weekly.forEach(function(w) {
+                    html += '<div style="flex:1;background:white;border:1px solid #E2E8F0;border-radius:6px;padding:8px;text-align:center">';
+                    html += '<div style="font-size:11px;color:#94A3B8">' + esc(w.week) + '</div>';
+                    html += '<div style="font-size:15px;font-weight:700;color:#051C2C">' + w.amount + '만</div>';
+                    html += '<div style="font-size:11px;color:#64748B">' + w.count + '명</div>';
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+            html += '</div>';
+        }
+
+        // 이번주 루틴 통계
+        var ws = r.weekly_stats;
+        if (ws && ws.days && ws.days.length > 0) {
+            html += '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px">';
+            html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:8px">이번주 루틴 <span style="font-weight:600;color:#0077C8">' + esc(ws.rate) + '</span></div>';
+            html += '<div style="display:flex;gap:4px;align-items:flex-end;height:40px">';
+            ws.days.forEach(function(day) {
+                var pct = day.total > 0 ? Math.round(day.done / day.total * 100) : 0;
+                var h = Math.max(4, Math.round(pct * 36 / 100));
+                var color = pct === 100 ? '#0077C8' : pct >= 50 ? '#94A3B8' : '#E2E8F0';
+                var d = new Date(day.date);
+                var dayNames = ['일','월','화','수','목','금','토'];
+                var label = dayNames[d.getDay()];
+                html += '<div style="flex:1;text-align:center"><div style="background:' + color + ';height:' + h + 'px;border-radius:2px;margin:0 auto;width:100%"></div><div style="font-size:9px;color:#94A3B8;margin-top:2px">' + label + '</div></div>';
+            });
+            html += '</div></div>';
+        }
+
+        // OKR Key Results — 별도 박스
+        if (okr.length > 0) {
+            html += '<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px;margin-bottom:8px">';
+            html += '<div style="font-size:13px;font-weight:700;color:#475569;margin-bottom:8px">OKR Key Results</div>';
+            okr.forEach(function(kr) {
+                var pct = 0;
+                if (kr.rate) { var m = String(kr.rate).match(/([\d.]+)/); if (m) pct = Math.max(0, Math.min(parseFloat(m[1]), 100)); }
+                html += '<div class="okr-kr"><div class="okr-kr-header"><span class="okr-kr-title">' + esc(kr.title) + '</span><span class="okr-kr-rate">' + esc(kr.rate||'0%') + '</span></div>';
+                html += '<div class="okr-kr-bar"><div class="okr-kr-fill" style="width:' + Math.min(pct,100) + '%"></div></div>';
+                if (kr.target != null && kr.current != null) html += '<div class="okr-kr-detail">현재 ' + kr.current + ' / 목표 ' + kr.target + '</div>';
+                html += '</div>';
+            });
+            html += '</div>';
+        }
+        html += '<div class="updated">' + fmtDate(data.updated) + '</div>';
+        container.innerHTML = html;
+    }
+    function esc(s) { var e = document.createElement('span'); e.textContent = s; return e.innerHTML; }
+    function fmtDate(iso) { var d = new Date(iso); return d.toLocaleDateString('ko-KR') + ' ' + d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}); }
+})();
+</script>
+<script src="../nav.js"></script>
+<script src="../footer.js"></script>
+<script src="../sidebar.js"></script>
+</body>
+</html>
