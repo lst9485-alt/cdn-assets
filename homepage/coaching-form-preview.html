@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>09 상담 신청 폼 시안 비교 (4안)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  body { font-family: 'Pretendard', system-ui, sans-serif; background:#f5f5f5; color:#1a1a1a; }
+  .brand-orange { color:#FF6B00; }
+  .bg-brand-orange { background:#FF6B00; }
+  .border-brand-orange { border-color:#FF6B00; }
+  .text-brand-dark { color:#1a1a1a; }
+
+  /* 시안 카드 공통 */
+  .preview-card { background:#fff; border-radius:24px; box-shadow:0 8px 24px rgba(0,0,0,0.04); padding:32px; }
+  .preview-label { display:inline-block; padding:6px 14px; border-radius:9999px; font-size:11px; font-weight:700; margin-bottom:20px; }
+  .label-current { background:#e5e7eb; color:#374151; }
+  .label-a { background:#dbeafe; color:#1d4ed8; }
+  .label-b { background:#dcfce7; color:#166534; }
+  .label-c { background:#fef3c7; color:#92400e; }
+  .label-d { background:#fce7f3; color:#9f1239; }
+  .label-recommend { background:#FF6B00; color:#fff; }
+
+  /* A안 — 라벨번호 제거 + 입력란 클린 */
+  .a-input { width:100%; padding:14px 16px; border-radius:12px; background:#f9fafb; border:1px solid #e5e7eb; transition:all 0.2s; }
+  .a-input:focus { outline:none; border-color:#FF6B00; background:#fff; }
+  .a-label { display:block; color:#1a1a1a; font-weight:700; margin-bottom:8px; font-size:15px; }
+
+  /* B안 — 카드 분리형 */
+  .b-section { background:#fff; border:1px solid #f3f4f6; border-radius:16px; padding:24px; margin-bottom:16px; }
+  .b-input { width:100%; padding:12px 14px; border-radius:10px; background:#fff; border:1px solid #d1d5db; transition:all 0.2s; }
+  .b-input:focus { outline:none; border-color:#FF6B00; }
+
+  /* C안 — 진행 단계 (번호 원) */
+  .c-step { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+  .c-num { width:32px; height:32px; flex-shrink:0; border-radius:50%; background:#FF6B00; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; }
+  .c-num-line { width:32px; flex-shrink:0; }
+  .c-input { width:100%; padding:13px 16px; border-radius:12px; background:#fff; border:1.5px solid #e5e7eb; transition:all 0.2s; }
+  .c-input:focus { outline:none; border-color:#FF6B00; }
+
+  /* D안 — 컴팩트 + 다크 강조 */
+  .d-card { background:#1a1a1a; border-radius:24px; padding:32px; color:#fff; }
+  .d-input { width:100%; padding:12px 14px; border-radius:10px; background:#2a2a2a; border:1px solid #404040; color:#fff; transition:all 0.2s; }
+  .d-input:focus { outline:none; border-color:#FF6B00; background:#222; }
+  .d-input::placeholder { color:#737373; }
+  .d-label { display:block; color:#e5e5e5; font-weight:600; margin-bottom:8px; font-size:13px; letter-spacing:0.02em; }
+
+  .cb-square { width:18px; height:18px; accent-color:#FF6B00; }
+  .radio-round { width:18px; height:18px; accent-color:#FF6B00; }
+</style>
+</head>
+<body class="p-6 md:p-10">
+
+<div class="max-w-7xl mx-auto">
+  <h1 class="text-3xl font-black mb-2">09 상담 신청 폼 시안 비교</h1>
+  <p class="text-gray-500 text-sm mb-2">현재 폼 + 4가지 시안. 가로 비교(데스크탑) · 세로 스크롤(모바일)</p>
+  <p class="text-gray-400 text-xs mb-10">— 시안 비교용 임시 페이지 (결정 후 삭제 예정) —</p>
+
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+
+    <!-- ============ 현재 ============ -->
+    <div class="preview-card">
+      <span class="preview-label label-current">현재</span>
+      <h2 class="text-2xl font-black text-center mb-2">코칭 신청</h2>
+      <p class="text-center text-gray-500 text-xs mb-6">신청서를 제출하면 결제 방법 선택 화면이 이어집니다</p>
+
+      <div class="space-y-6">
+        <div>
+          <label class="block text-brand-dark font-bold mb-2 text-sm">1. 성함 <span class="brand-orange">*</span></label>
+          <input type="text" placeholder="이름을 입력해주세요" class="w-full px-3 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm">
+        </div>
+        <div>
+          <label class="block text-brand-dark font-bold mb-2 text-sm">2. 휴대폰 번호 <span class="brand-orange">*</span></label>
+          <input type="tel" placeholder="010-0000-0000" class="w-full px-3 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm">
+        </div>
+        <div>
+          <label class="block text-brand-dark font-bold mb-2 text-sm">3. 신청 목적 (중복가능) <span class="brand-orange">*</span></label>
+          <div class="space-y-1.5 text-sm">
+            <label class="flex items-center gap-2"><input type="checkbox" class="cb-square"> 내집마련</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="cb-square"> 투자</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="cb-square"> 기타</label>
+          </div>
+        </div>
+        <div>
+          <label class="block text-brand-dark font-bold mb-2 text-sm">4. 결제 안내</label>
+          <div class="bg-orange-50 border border-orange-200 rounded-xl p-3 text-xs">
+            <p class="text-gray-600 mb-2">카드결제 · 계좌이체 모두 가능</p>
+            <label class="flex items-center gap-2 mb-1"><input type="radio" name="cur-pay" class="radio-round" checked> <span class="bg-brand-orange text-white text-[10px] px-1.5 rounded">1</span> 코칭 A 40만원</label>
+            <label class="flex items-center gap-2"><input type="radio" name="cur-pay" disabled class="radio-round"> <span class="bg-gray-300 text-gray-500 text-[10px] px-1.5 rounded">2</span> 코칭 B 96만원 (마감)</label>
+          </div>
+        </div>
+        <button class="w-full bg-brand-orange text-white py-3 text-base font-black rounded-2xl">코칭 대기신청</button>
+      </div>
+    </div>
+
+    <!-- ============ A안 — 모던 미니멀 ============ -->
+    <div class="preview-card" style="border:2px solid #3b82f6;">
+      <span class="preview-label label-a">A안 — 모던 미니멀</span>
+      <p class="text-xs text-gray-500 mb-4">라벨 번호 제거 · 입력란 간결 · 둥근 모서리</p>
+      <h2 class="text-2xl font-black text-center mb-2">코칭 신청</h2>
+      <p class="text-center text-gray-500 text-xs mb-6">제출 후 결제 방법을 선택합니다</p>
+
+      <div class="space-y-5">
+        <div>
+          <label class="a-label">성함</label>
+          <input type="text" placeholder="홍길동" class="a-input text-sm">
+        </div>
+        <div>
+          <label class="a-label">휴대폰 번호</label>
+          <input type="tel" placeholder="010-0000-0000" class="a-input text-sm">
+        </div>
+        <div>
+          <label class="a-label">신청 목적 <span class="text-gray-400 font-normal text-xs">중복 선택</span></label>
+          <div class="grid grid-cols-3 gap-2 text-xs">
+            <label class="flex items-center justify-center gap-1.5 py-2.5 border border-gray-200 rounded-lg cursor-pointer hover:border-brand-orange"><input type="checkbox" class="cb-square"> 내집마련</label>
+            <label class="flex items-center justify-center gap-1.5 py-2.5 border border-gray-200 rounded-lg cursor-pointer hover:border-brand-orange"><input type="checkbox" class="cb-square"> 투자</label>
+            <label class="flex items-center justify-center gap-1.5 py-2.5 border border-gray-200 rounded-lg cursor-pointer hover:border-brand-orange"><input type="checkbox" class="cb-square"> 기타</label>
+          </div>
+        </div>
+        <div>
+          <label class="a-label">상품 선택</label>
+          <div class="space-y-2">
+            <label class="flex items-center justify-between p-3 border-2 border-brand-orange rounded-xl bg-orange-50 cursor-pointer">
+              <span class="flex items-center gap-2 text-sm"><input type="radio" name="a-pay" class="radio-round" checked> <span class="font-bold">코칭 A</span></span>
+              <span class="font-bold text-sm">400,000원</span>
+            </label>
+            <label class="flex items-center justify-between p-3 border border-gray-200 rounded-xl bg-gray-50 opacity-50 text-sm">
+              <span class="flex items-center gap-2"><input type="radio" name="a-pay" disabled class="radio-round"> <span>코칭 B (마감)</span></span>
+              <span>960,000원</span>
+            </label>
+          </div>
+        </div>
+        <button class="w-full bg-brand-orange text-white py-3.5 text-base font-black rounded-xl">대기신청</button>
+      </div>
+    </div>
+
+    <!-- ============ B안 — 카드 분리형 ============ -->
+    <div class="preview-card" style="background:#f9fafb; border:2px solid #16a34a;">
+      <span class="preview-label label-b">B안 — 카드 분리형</span>
+      <p class="text-xs text-gray-500 mb-4">각 항목 카드로 분리 · 여백 넉넉</p>
+      <h2 class="text-2xl font-black text-center mb-2">코칭 신청</h2>
+      <p class="text-center text-gray-500 text-xs mb-6">제출 후 결제 방법을 선택합니다</p>
+
+      <div>
+        <div class="b-section">
+          <label class="block text-xs text-gray-500 font-medium mb-1">성함</label>
+          <input type="text" placeholder="홍길동" class="b-input text-sm">
+        </div>
+        <div class="b-section">
+          <label class="block text-xs text-gray-500 font-medium mb-1">휴대폰 번호</label>
+          <input type="tel" placeholder="010-0000-0000" class="b-input text-sm">
+        </div>
+        <div class="b-section">
+          <label class="block text-xs text-gray-500 font-medium mb-2">신청 목적</label>
+          <div class="space-y-1.5 text-sm">
+            <label class="flex items-center gap-2"><input type="checkbox" class="cb-square"> 내집마련</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="cb-square"> 투자</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="cb-square"> 기타</label>
+          </div>
+        </div>
+        <div class="b-section">
+          <label class="block text-xs text-gray-500 font-medium mb-2">상품</label>
+          <div class="space-y-1.5 text-sm">
+            <label class="flex items-center gap-2"><input type="radio" name="b-pay" class="radio-round" checked> 코칭 A · 400,000원</label>
+            <label class="flex items-center gap-2 opacity-50"><input type="radio" name="b-pay" disabled class="radio-round"> 코칭 B · 960,000원 (마감)</label>
+          </div>
+        </div>
+        <button class="w-full bg-brand-orange text-white py-3.5 text-base font-black rounded-2xl mt-3">대기신청</button>
+      </div>
+    </div>
+
+    <!-- ============ C안 — 단계 번호 강조 ============ -->
+    <div class="preview-card" style="border:3px solid #FF6B00;">
+      <span class="preview-label label-recommend">C안 — 번호 진행감 ★</span>
+      <p class="text-xs text-gray-500 mb-4">단계 번호 원형 강조 · 흐름 명확</p>
+      <h2 class="text-2xl font-black text-center mb-2">코칭 신청</h2>
+      <p class="text-center text-gray-500 text-xs mb-6">제출 후 결제 방법을 선택합니다</p>
+
+      <div class="space-y-5">
+        <div>
+          <div class="flex items-center gap-2 mb-2"><span class="c-num">1</span><label class="font-bold text-sm">성함</label></div>
+          <div style="padding-left:42px;"><input type="text" placeholder="홍길동" class="c-input text-sm"></div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 mb-2"><span class="c-num">2</span><label class="font-bold text-sm">휴대폰 번호</label></div>
+          <div style="padding-left:42px;"><input type="tel" placeholder="010-0000-0000" class="c-input text-sm"></div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 mb-2"><span class="c-num">3</span><label class="font-bold text-sm">신청 목적</label></div>
+          <div style="padding-left:42px;" class="space-y-1.5 text-sm">
+            <label class="flex items-center gap-2"><input type="checkbox" class="cb-square"> 내집마련</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="cb-square"> 투자</label>
+            <label class="flex items-center gap-2"><input type="checkbox" class="cb-square"> 기타</label>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 mb-2"><span class="c-num">4</span><label class="font-bold text-sm">상품 선택</label></div>
+          <div style="padding-left:42px;" class="space-y-1.5 text-sm">
+            <label class="flex items-center gap-2"><input type="radio" name="c-pay" class="radio-round" checked> 코칭 A · 400,000원</label>
+            <label class="flex items-center gap-2 opacity-50"><input type="radio" name="c-pay" disabled class="radio-round"> 코칭 B · 960,000원 (마감)</label>
+          </div>
+        </div>
+        <button class="w-full bg-brand-orange text-white py-3.5 text-base font-black rounded-2xl">대기신청</button>
+      </div>
+    </div>
+
+    <!-- ============ D안 — 다크 모던 ============ -->
+    <div class="d-card" style="border:2px solid #be185d;">
+      <span class="preview-label label-d" style="background:#fce7f3;">D안 — 다크 모던</span>
+      <p class="text-xs text-gray-400 mb-4">다크 배경 · 모던 톤 · 강조 색 부각</p>
+      <h2 class="text-2xl font-black text-center mb-2 text-white">코칭 신청</h2>
+      <p class="text-center text-gray-400 text-xs mb-6">제출 후 결제 방법을 선택합니다</p>
+
+      <div class="space-y-5">
+        <div>
+          <label class="d-label">성함</label>
+          <input type="text" placeholder="홍길동" class="d-input text-sm">
+        </div>
+        <div>
+          <label class="d-label">휴대폰 번호</label>
+          <input type="tel" placeholder="010-0000-0000" class="d-input text-sm">
+        </div>
+        <div>
+          <label class="d-label">신청 목적</label>
+          <div class="grid grid-cols-3 gap-2 text-xs text-white">
+            <label class="flex items-center justify-center gap-1.5 py-2 bg-[#2a2a2a] border border-[#404040] rounded-lg cursor-pointer"><input type="checkbox" class="cb-square"> 내집마련</label>
+            <label class="flex items-center justify-center gap-1.5 py-2 bg-[#2a2a2a] border border-[#404040] rounded-lg cursor-pointer"><input type="checkbox" class="cb-square"> 투자</label>
+            <label class="flex items-center justify-center gap-1.5 py-2 bg-[#2a2a2a] border border-[#404040] rounded-lg cursor-pointer"><input type="checkbox" class="cb-square"> 기타</label>
+          </div>
+        </div>
+        <div>
+          <label class="d-label">상품 선택</label>
+          <div class="space-y-2">
+            <label class="flex items-center justify-between p-3 bg-[#FF6B00] rounded-xl text-white cursor-pointer">
+              <span class="flex items-center gap-2 text-sm"><input type="radio" name="d-pay" class="radio-round" checked> <span class="font-bold">코칭 A</span></span>
+              <span class="font-bold text-sm">400,000원</span>
+            </label>
+            <label class="flex items-center justify-between p-3 bg-[#2a2a2a] rounded-xl text-gray-500 text-sm">
+              <span class="flex items-center gap-2"><input type="radio" name="d-pay" disabled class="radio-round"> 코칭 B (마감)</span>
+              <span>960,000원</span>
+            </label>
+          </div>
+        </div>
+        <button class="w-full bg-brand-orange text-white py-3.5 text-base font-black rounded-xl">대기신청</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 비교 표 -->
+  <div class="mt-16 preview-card">
+    <h3 class="text-xl font-bold mb-4">비교 요약</h3>
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-gray-200">
+          <th class="text-left py-3 pr-4 font-bold">시안</th>
+          <th class="text-left py-3 pr-4 font-bold">방향</th>
+          <th class="text-left py-3 font-bold">짚을 점</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-600">
+        <tr class="border-b border-gray-100">
+          <td class="py-3 pr-4 font-bold text-gray-700">현재</td>
+          <td class="py-3 pr-4">번호 라벨 · 회색 박스</td>
+          <td class="py-3">번호 "1. 성함" 1990년대 폼 느낌. 결제 안내 박스 색감 다소 평이</td>
+        </tr>
+        <tr class="border-b border-gray-100">
+          <td class="py-3 pr-4 font-bold text-blue-700">A</td>
+          <td class="py-3 pr-4">모던 미니멀</td>
+          <td class="py-3">라벨 번호 제거. 신청 목적·상품을 카드 형태로 — 가장 현대적</td>
+        </tr>
+        <tr class="border-b border-gray-100">
+          <td class="py-3 pr-4 font-bold text-green-700">B</td>
+          <td class="py-3 pr-4">카드 분리형</td>
+          <td class="py-3">각 항목이 독립 카드 — 가독성 ↑ 다만 세로로 길어짐</td>
+        </tr>
+        <tr class="border-b border-gray-100">
+          <td class="py-3 pr-4 font-bold" style="color:#FF6B00;">C ★</td>
+          <td class="py-3 pr-4">번호 원형 진행감</td>
+          <td class="py-3">단계감 명확 + 친근. 모바일에서도 흐름 잘 읽힘 — 추천</td>
+        </tr>
+        <tr>
+          <td class="py-3 pr-4 font-bold text-pink-700">D</td>
+          <td class="py-3 pr-4">다크 모던</td>
+          <td class="py-3">디자인 가장 튐. 페이지 전체와 톤 충돌 가능 (페이지는 밝은 베이지 톤)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="mt-6 text-sm text-gray-700"><strong>추천 = C안</strong>. 번호 표기는 유지하되 "1." 평문이 아닌 원형 칩으로 바꿔서 친근하고 모던. 폼 길이도 적정. 페이지 전체 톤(브랜드 오렌지)과도 잘 맞음.</p>
+  </div>
+
+</div>
+
+</body>
+</html>
