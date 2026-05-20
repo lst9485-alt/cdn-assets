@@ -2113,13 +2113,30 @@
         <!-- 4. 결제 안내 -->
 	        <div id="f-deposit-wrap">
 	          <label class="block text-brand-dark font-bold mb-3">4. 결제 안내</label>
-	          <div class="bg-orange-50 border border-orange-200 rounded-xl p-5 mb-4">
-	            <p class="text-gray-600 text-sm mb-3">카드결제 · 계좌이체 모두 가능합니다.</p>
-	            <div class="space-y-2">
-	              <label class="flex items-center gap-3 text-brand-dark cursor-pointer"><input type="radio" name="coaching" value="A" checked class="radio-round"><span class="bg-brand-orange text-white text-xs font-bold px-2 py-0.5 rounded">1</span> 코칭 A : 40만 원 <span class="text-xs text-brand-orange font-bold ml-1">대기 신청 가능</span></label>
-		              <label class="flex items-center gap-3 text-gray-400 cursor-pointer"><input type="radio" name="coaching" value="B" disabled class="radio-round"><span class="bg-gray-300 text-gray-500 text-xs font-bold px-2 py-0.5 rounded">2</span> 코칭 B : 96만 원 <span class="text-xs text-red-400 font-bold ml-1">현재 모집 마감</span></label>
-	            </div>
-	            <p class="text-gray-400 text-sm mt-3">신청서를 제출 즉시, 카카오톡으로 안내드립니다.</p>
+	          <div class="space-y-3 mb-4">
+	            <label class="block border-2 border-[#FF6B00] bg-orange-50 rounded-2xl p-5 cursor-pointer relative">
+	              <input type="radio" name="coaching" value="A" checked class="hidden">
+	              <div class="absolute top-4 right-4 w-7 h-7 rounded-full bg-[#FF6B00] flex items-center justify-center text-white">
+	                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+	              </div>
+	              <div class="flex items-baseline justify-between pr-10 mb-2">
+	                <span class="font-black text-lg text-brand-dark">코칭 A</span>
+	                <span class="font-black text-lg text-brand-dark">400,000원</span>
+	              </div>
+	              <span class="inline-block bg-[#FF6B00] text-white text-xs font-bold px-2.5 py-0.5 rounded-full">대기 신청 가능</span>
+	            </label>
+	            <label class="block border border-gray-200 bg-gray-50 rounded-2xl p-5 opacity-60 cursor-not-allowed">
+	              <input type="radio" name="coaching" value="B" disabled class="hidden">
+	              <div class="flex items-baseline justify-between mb-2">
+	                <span class="font-black text-lg text-gray-500">코칭 B</span>
+	                <span class="font-black text-lg text-gray-500">960,000원</span>
+	              </div>
+	              <span class="inline-block bg-gray-400 text-white text-xs font-bold px-2.5 py-0.5 rounded-full">현재 모집 마감</span>
+	            </label>
+	          </div>
+	          <div class="space-y-1.5 text-sm text-gray-500">
+	            <p>· 카드결제 · 계좌이체 모두 가능합니다</p>
+	            <p>· 신청 후 카카오톡으로 안내드립니다</p>
 	          </div>
 	        </div>
 
