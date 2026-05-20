@@ -740,6 +740,20 @@
             sidebarType: 'root',
             activeMatch: ['coaching-consultant-codex-options.html'],
             hubVisible: true
+          },
+          {
+            id: 'archive-coaching-payment-card-drafts',
+            archiveNo: 'A015',
+            modifiedDate: '2026-05-20',
+            title: '카드결제 안내 시안 4종',
+            description: '카톡 결제 안내용 카드결제/무통장 입금 화면 A~D 비교',
+            href: 'homepage/coaching-payment-card-drafts.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'money',
+            sidebarType: 'root',
+            activeMatch: ['coaching-payment-card-drafts.html'],
+            hubVisible: true
           }
         ]
       },
@@ -760,7 +774,20 @@
         sidebar: {
           title: '임시 테스트'
         },
-        items: []
+        items: [
+          {
+            id: 'temp-coaching-payment-card-drafts',
+            title: '카드결제 안내 시안 4종',
+            description: '카톡 결제 안내용 카드결제/무통장 입금 화면 A~D 비교',
+            href: 'homepage/coaching-payment-card-drafts.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'money',
+            sidebarType: 'root',
+            activeMatch: ['coaching-payment-card-drafts.html'],
+            hubVisible: true
+          }
+        ]
       }
     ]
   };
