@@ -102,13 +102,13 @@
   </div>
 </section>
 
-<!-- =================== 시안 A: A 단독 강조 =================== -->
+<!-- =================== 시안 A: B 앵커 유지 + A에 BEST + 가격 차이 시각화 =================== -->
 <div class="max-w-4xl mx-auto px-4">
   <div class="draft-label text-white text-center py-4 rounded-t-2xl font-display font-black text-xl">
-    시안 A — A 단독 강조 (B 카드 제거)
+    시안 A — A 강력 추천 + 가격 차이 시각화
   </div>
   <div class="bg-white border-x border-orange-200 px-6 py-3 text-sm text-gray-600 word-keep">
-    <b>변경:</b> B 카드 제거 → A 카드를 가운데 단독 표시. 결정 단순화로 전환율↑. B 정보는 한 줄로만 안내. 클로징 후기 교체.
+    <b>변경:</b> B 카드 앵커로 유지. A에 <b>BEST 추천</b> 라벨 + 카드 크기/강조 더 큼. 두 카드 사이 <b>가격 차이(+560,000원)</b> 시각화로 A의 합리성 부각.
   </div>
 </div>
 <section class="max-w-4xl mx-auto bg-brand-beige py-12 md:py-16 rounded-b-2xl mb-12">
@@ -117,18 +117,20 @@
       <div class="mb-4 flex justify-center"><iconify-icon icon="solar:tag-price-bold-duotone" class="text-4xl text-brand-orange"></iconify-icon></div>
       <h2 class="text-3xl md:text-4xl font-display font-black tracking-tight word-keep">코칭 안내</h2>
       <div class="mt-5 inline-flex items-center gap-2 bg-red-500 text-white px-4 py-1.5 rounded-full text-xs md:text-sm font-black shadow-md">
-        <span>🔥</span><span>이번 회차 모집 2자리 — 마감 시 4주 후 오픈</span>
+        <span>🔥</span><span>이번 회차 2자리 — 마감 시 4주 후 오픈</span>
       </div>
     </div>
-    <div class="max-w-2xl mx-auto mb-6">
-      <div class="relative flex flex-col rounded-[18px] border-2 border-brand-orange bg-white p-7 md:p-10 shadow-xl">
-        <span class="absolute -top-4 left-7 rounded-full bg-brand-orange px-5 py-1.5 text-sm font-bold text-white">오픈기념 20% 할인 (이번 회차만)</span>
+    <div class="grid grid-cols-1 items-stretch gap-5 md:grid-cols-5 mb-6 relative">
+      <!-- A 카드 (3/5 폭, BEST 강조) -->
+      <div class="md:col-span-3 relative flex h-full flex-col rounded-[20px] border-[3px] border-brand-orange bg-white p-7 md:p-10 shadow-[0_24px_60px_rgba(255,107,0,0.18)]">
+        <span class="absolute -top-4 left-7 rounded-full bg-brand-orange px-5 py-1.5 text-sm font-bold text-white">오픈기념 20% 할인</span>
+        <span class="absolute -top-4 right-7 rounded-full bg-red-600 px-4 py-1.5 text-xs font-black text-white shadow-md">⭐ BEST 추천</span>
         <h3 class="text-2xl md:text-3xl font-bold text-brand-orange mb-5">코칭 A</h3>
         <div class="mb-2 flex flex-wrap items-end gap-x-4">
-          <p class="text-5xl md:text-6xl font-bold text-black">400,000 <span class="text-base font-medium text-gray-600">원</span></p>
+          <p class="text-5xl md:text-[60px] font-bold text-black leading-none">400,000 <span class="text-base font-medium text-gray-600">원</span></p>
           <span class="price-strike text-base font-semibold">500,000<span class="won">원</span></span>
         </div>
-        <p class="text-sm text-gray-500 mb-6">*다음 회차부터 가격 인상 예정</p>
+        <p class="text-xs text-red-600 font-bold mb-6">*이 가격은 이번 회차만</p>
         <div class="mb-6 flex flex-col gap-2 rounded-2xl bg-orange-50 px-5 py-4">
           <span class="self-start rounded-full bg-brand-orange px-3 py-1 text-sm font-bold text-white">진행 방식</span>
           <p class="text-lg font-bold word-keep">1:1 코칭 + 6개월 질의응답</p>
@@ -137,12 +139,32 @@
           <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl"></iconify-icon>온라인 화상회의 약 50분 (부부동반 가능)</li>
           <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl"></iconify-icon>코칭 후 최대 6개월간 카톡 질의응답</li>
           <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl"></iconify-icon>코칭 리포트 + 자산관리시트 + 체크리스트 PDF</li>
-          <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl"></iconify-icon>매주 최대 2명만 진행 (퀄리티 유지)</li>
+          <li class="flex items-center gap-3"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl"></iconify-icon>매주 최대 2명만 진행</li>
+        </ul>
+      </div>
+      <!-- B 카드 (2/5 폭, 회색 앵커) -->
+      <div class="md:col-span-2 relative flex h-full flex-col rounded-[20px] border border-gray-300 bg-gray-50 p-6 md:p-7 opacity-85">
+        <span class="absolute -top-4 left-6 rounded-full bg-gray-700 px-4 py-1.5 text-xs font-bold text-white">다음 오픈 예정</span>
+        <h3 class="text-xl md:text-2xl font-bold text-gray-700 mb-4">코칭 B</h3>
+        <div class="mb-2 flex flex-wrap items-end gap-x-3">
+          <p class="text-3xl md:text-4xl font-bold text-gray-700">960,000 <span class="text-sm font-medium text-gray-500">원</span></p>
+        </div>
+        <span class="price-strike text-sm font-semibold mb-6">1,200,000<span class="won">원</span></span>
+        <div class="mb-5 rounded-xl bg-white border border-gray-200 px-4 py-3">
+          <p class="text-sm font-bold text-gray-700 word-keep">코칭 A + 동행임장 1회</p>
+        </div>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li class="flex items-start gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-gray-400 text-base mt-0.5"></iconify-icon>코칭 A 전체 포함</li>
+          <li class="flex items-start gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-gray-400 text-base mt-0.5"></iconify-icon>현장 동행임장 1회 (반나절)</li>
         </ul>
       </div>
     </div>
-    <div class="text-center mb-8">
-      <p class="inline-block rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 word-keep">동행임장이 포함된 <b>코칭 B</b>는 추후 오픈 예정입니다</p>
+    <!-- 가격 차이 시각화 -->
+    <div class="mb-8 flex justify-center">
+      <div class="inline-flex items-center gap-3 rounded-full bg-white border-2 border-dashed border-brand-orange/40 px-6 py-3 shadow-sm">
+        <iconify-icon icon="solar:info-circle-bold" class="text-brand-orange text-xl"></iconify-icon>
+        <p class="text-sm md:text-base font-bold text-gray-700 word-keep">동행임장 1회 추가 시 <span class="text-brand-orange">+560,000원</span> · 처음이면 <b>코칭 A로 충분</b></p>
+      </div>
     </div>
     <div class="rounded-3xl bg-[#2b2b2b] p-8 md:p-10 text-center">
       <p class="text-xl text-white word-keep mb-4 font-black">수억 수업비 들이고 후회하지 말고, 한 번에</p>
@@ -271,6 +293,119 @@
       <p class="text-gray-300 text-base word-keep italic">"수년 시행착오를 한 번에 줄여주셨습니다"</p>
       <p class="text-gray-500 text-sm mt-2">— 실제 코칭 후기</p>
     </div>
+  </div>
+</section>
+
+<!-- =================== 시안 D: 가치 우선 + VS 비교 (변화 큰 안) =================== -->
+<div class="max-w-4xl mx-auto px-4">
+  <div class="draft-label text-white text-center py-4 rounded-t-2xl font-display font-black text-xl">
+    시안 D — 가치 우선 패러다임 (변화 大)
+  </div>
+  <div class="bg-white border-x border-orange-200 px-6 py-3 text-sm text-gray-600 word-keep">
+    <b>변경:</b> 가격 카드 우선 X. <b>"혼자 결정 vs 코칭 후 결정" 비교 박스</b>로 시작 → 받는 것 5가지(가치 분해) → 마지막에 가격(A 메인 + B 앵커). 패러다임 자체가 다름.
+  </div>
+</div>
+<section class="max-w-4xl mx-auto bg-brand-beige py-12 md:py-16 rounded-b-2xl mb-12">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <!-- 헤더 -->
+    <div class="text-center mb-12">
+      <div class="mb-4 flex justify-center"><iconify-icon icon="solar:tag-price-bold-duotone" class="text-4xl text-brand-orange"></iconify-icon></div>
+      <h2 class="text-3xl md:text-4xl font-display font-black tracking-tight word-keep">코칭 안내</h2>
+      <p class="text-lg text-gray-600 mt-3 word-keep">가격을 보기 전에, 무엇이 달라지는지 먼저 확인하세요</p>
+    </div>
+
+    <!-- VS 비교 박스 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+      <div class="rounded-2xl bg-white border border-gray-200 p-6 md:p-7 relative">
+        <span class="absolute -top-3 left-6 rounded-full bg-gray-500 px-3 py-1 text-xs font-bold text-white">혼자 결정할 때</span>
+        <ul class="space-y-3 mt-3 text-base text-gray-600">
+          <li class="flex items-start gap-2"><iconify-icon icon="solar:close-circle-bold" class="text-gray-400 text-xl mt-0.5 shrink-0"></iconify-icon><span class="word-keep">유튜브·블로그·카페 정보 짜집기 (수개월)</span></li>
+          <li class="flex items-start gap-2"><iconify-icon icon="solar:close-circle-bold" class="text-gray-400 text-xl mt-0.5 shrink-0"></iconify-icon><span class="word-keep">"여기 사도 될까?" 끝없는 망설임</span></li>
+          <li class="flex items-start gap-2"><iconify-icon icon="solar:close-circle-bold" class="text-gray-400 text-xl mt-0.5 shrink-0"></iconify-icon><span class="word-keep">잘못된 매수 = <b>수억원 손실</b> 위험</span></li>
+        </ul>
+      </div>
+      <div class="rounded-2xl bg-orange-50 border-2 border-brand-orange p-6 md:p-7 relative shadow-lg">
+        <span class="absolute -top-3 left-6 rounded-full bg-brand-orange px-3 py-1 text-xs font-bold text-white">코칭 받고 결정할 때</span>
+        <ul class="space-y-3 mt-3 text-base text-gray-800">
+          <li class="flex items-start gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl mt-0.5 shrink-0"></iconify-icon><span class="word-keep">내 상황 맞춤 로드맵 <b>1회로 정리</b></span></li>
+          <li class="flex items-start gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl mt-0.5 shrink-0"></iconify-icon><span class="word-keep">실거래 전문가의 <b>확신 있는 방향</b></span></li>
+          <li class="flex items-start gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl mt-0.5 shrink-0"></iconify-icon><span class="word-keep">시행착오 단축 = <b>수년의 시간</b> 절약</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 가치 분해: 받는 것 -->
+    <div class="rounded-3xl bg-white p-7 md:p-10 mb-10 shadow-sm">
+      <p class="text-center text-sm font-bold text-brand-orange mb-2">코칭 A에 포함된 것</p>
+      <h3 class="text-2xl md:text-3xl font-display font-black text-center mb-8 word-keep">한 번 신청으로 받는 5가지</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-orange-50/50">
+          <div class="text-2xl shrink-0">💬</div>
+          <div>
+            <p class="font-bold text-brand-dark mb-1">1:1 화상 코칭 (약 50분)</p>
+            <p class="text-sm text-gray-600 word-keep">내 자산·목표에 맞춰 1:1 맞춤 (부부동반 가능)</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-orange-50/50">
+          <div class="text-2xl shrink-0">📱</div>
+          <div>
+            <p class="font-bold text-brand-dark mb-1">6개월 카톡 케어</p>
+            <p class="text-sm text-gray-600 word-keep">매수까지 막힐 때마다 카톡으로 질의응답</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-orange-50/50">
+          <div class="text-2xl shrink-0">📄</div>
+          <div>
+            <p class="font-bold text-brand-dark mb-1">코칭 리포트</p>
+            <p class="text-sm text-gray-600 word-keep">상담 후 정리본 PDF로 전달 (다시 볼 수 있음)</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-orange-50/50">
+          <div class="text-2xl shrink-0">📊</div>
+          <div>
+            <p class="font-bold text-brand-dark mb-1">자산관리시트 + 체크리스트</p>
+            <p class="text-sm text-gray-600 word-keep">예산·대출·매수 단계별 체크리스트 제공</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-orange-50/50 md:col-span-2">
+          <div class="text-2xl shrink-0">🎯</div>
+          <div>
+            <p class="font-bold text-brand-dark mb-1">매주 최대 2명만 진행 (퀄리티 유지)</p>
+            <p class="text-sm text-gray-600 word-keep">대량 상담 X. 한 분 한 분 깊이 들여다보기 위함</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 가격 박스 (가치 보여준 후에) -->
+    <div class="rounded-3xl bg-brand-dark p-7 md:p-10 mb-6 text-white">
+      <p class="text-center text-sm font-bold text-brand-orange mb-2">이 모든 게</p>
+      <div class="flex items-end justify-center gap-4 mb-3">
+        <p class="text-5xl md:text-6xl font-bold leading-none">400,000<span class="text-2xl ml-1">원</span></p>
+        <span class="price-strike text-base font-semibold mb-2" style="color:#9ca3af;">500,000<span class="won">원</span></span>
+      </div>
+      <p class="text-center text-sm text-orange-300 font-bold mb-6">🔥 오픈기념 20% 할인 · 이번 회차만</p>
+      <div class="flex justify-center">
+        <button class="bg-brand-orange hover:bg-orange-600 transition px-10 py-4 rounded-2xl font-display font-black text-xl shadow-lg">
+          코칭 A 대기신청 <iconify-icon icon="solar:arrow-right-bold" class="align-middle"></iconify-icon>
+        </button>
+      </div>
+      <!-- B 앵커 (작게) -->
+      <div class="mt-6 pt-6 border-t border-white/15 text-center">
+        <p class="text-sm text-gray-400 word-keep">
+          <span class="inline-block bg-white/10 px-2 py-0.5 rounded text-xs font-bold mr-2">추후 오픈</span>
+          코칭 B (코칭 A + 동행임장 1회) — <b class="text-gray-200">960,000원</b>
+        </p>
+      </div>
+    </div>
+
+    <!-- 후기 -->
+    <div class="text-center px-4">
+      <p class="text-gray-700 text-base md:text-lg word-keep italic">"수년의 시간과 수억의 수업비를 아낄 수 있었습니다"</p>
+      <p class="text-gray-500 text-sm mt-2">— 실제 코칭 후기</p>
+    </div>
+
   </div>
 </section>
 
