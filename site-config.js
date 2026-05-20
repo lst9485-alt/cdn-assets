@@ -179,15 +179,15 @@
           },
           {
             id: 'coaching-payment-guide-v3',
-            title: '카드결제 안내 v3',
-            description: '트러스트 페이지 보조 안내',
+            title: '결제 안내 카톡용',
+            description: '신청 직후 카톡으로 보내는 결제 안내 페이지',
             href: 'homepage/coaching-payment-guide-v3.html',
             badgeText: 'V3',
             badgeTone: 'live',
             iconKey: 'money',
             sidebarType: 'root',
             activeMatch: ['coaching-payment-guide-v3.html'],
-            hubVisible: false,
+            hubVisible: true,
             groupLabel: '결제'
           },
           {
