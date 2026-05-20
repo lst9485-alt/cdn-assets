@@ -121,6 +121,15 @@
   .hero-word-center { position: absolute; left: 50%; width: 140px; margin-left: -70px; text-align: center; opacity: 0; animation: budgetFadeIn 1.0s ease 1.16s forwards; }
   .hero-word-edge-left { left: 4%; }
   .hero-word-edge-right { right: 4%; }
+  .hero-word-stage { box-sizing: border-box; max-width: 100%; }
+  @media (max-width: 480px) {
+    .hero-word-stage { height: 132px !important; padding-left: 18px !important; padding-right: 18px !important; }
+    .hero-word, .hero-word-center { padding: 10px 14px !important; }
+    .hero-word span, .hero-word-center span { font-size: 1.35rem !important; line-height: 1.1 !important; }
+    .hero-word-edge-left { left: 18px; }
+    .hero-word-edge-right { right: 18px; }
+    .hero-word-center { width: 126px; margin-left: -63px; white-space: nowrap; }
+  }
   @media (min-width: 768px) {
     .hero-word-center { width: 160px; margin-left: -80px; }
     .hero-word-edge-left { left: 14%; }
@@ -172,10 +181,10 @@
   .marquee-right .marquee-set[aria-hidden="true"] { animation: marqueeSecondRight 135s linear infinite; }
   .marquee-left.is-running .marquee-set, .marquee-right.is-running .marquee-set { animation-play-state: running; }
   .marquee-left:hover .marquee-set, .marquee-right:hover .marquee-set { animation-play-state: paused !important; }
-  .dashboard-section-nav { position: fixed; right: 18px; top: 50%; z-index: 80; display: flex; flex-direction: column; gap: 8px; box-sizing: border-box; transform: translateY(-50%); }
+  .dashboard-section-nav { position: fixed; right: 18px; top: 50%; z-index: 80; display: none; flex-direction: column; gap: 8px; box-sizing: border-box; transform: translateY(-50%); }
   .dashboard-section-nav button { width: 156px; border: 1px solid rgba(15, 23, 42, 0.12); border-radius: 999px; background: rgba(255,255,255,0.92); box-shadow: 0 10px 30px rgba(15,23,42,0.12); color: #111827; font-size: 14px; font-weight: 800; line-height: 1.25; padding: 11px 14px; backdrop-filter: blur(12px); transition: all 0.18s ease; }
   .dashboard-section-nav button:hover { border-color: #FF6B00; color: #FF6B00; transform: translateX(-2px); }
-  section[data-section] > span.absolute.top-2.left-2 { top: 12px !important; left: 12px !important; font-size: 14px !important; line-height: 1.2 !important; padding: 5px 9px !important; border-radius: 7px !important; }
+  section[data-section] > span.absolute.top-2.left-2 { display: none !important; }
   @media (max-width: 768px) {
     .dashboard-section-nav { display: none !important; }
   }
@@ -1138,7 +1147,7 @@
       <div class="w-11 bg-[#6b4a32]/40" style="height:130px"></div>
       <div class="w-8 bg-[#6b4a32]/30" style="height:85px"></div>
     </div>
-    <div class="relative w-full max-w-3xl mx-auto mb-10 px-4 z-10" style="height:150px;">
+    <div class="hero-word-stage relative w-full max-w-3xl mx-auto mb-10 px-4 z-10" style="height:150px;">
       <div class="hero-word hero-word-edge-left absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:10px;animation-delay:0s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">생애최초</span></div>
       <div class="hero-word hero-word-edge-right absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:5px;animation-delay:.24s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">갈아타기</span></div>
       <div class="hero-word hero-word-edge-left absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:85px;animation-delay:.48s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">대출</span></div>
