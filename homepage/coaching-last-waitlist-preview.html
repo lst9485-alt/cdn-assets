@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>마지막 대기신청 영역 시안 비교 (4안)</title>
+<title>마지막 대기신청 영역 — 카톡 채널 배지 시안 비교 (4안)</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <style>
   body { font-family: 'Pretendard', system-ui, sans-serif; background:#f5f5f5; color:#1a1a1a; }
-  .brand-orange { color:#FF6B00; }
-  .bg-brand-orange { background:#FF6B00; }
   .preview-card { background:#fff; border-radius:24px; box-shadow:0 4px 16px rgba(0,0,0,0.04); padding:28px; }
   .preview-label { display:inline-block; padding:6px 14px; border-radius:9999px; font-size:11px; font-weight:700; margin-bottom:16px; }
   .label-current { background:#e5e7eb; color:#374151; }
@@ -18,105 +16,139 @@
   .label-b { background:#dcfce7; color:#166534; }
   .label-c { background:#fef3c7; color:#92400e; }
   .label-d { background:#fce7f3; color:#9f1239; }
-  /* 카카오 채널 배지 (원본 스타일 흉내) */
-  .kakao-channel-pill { display:inline-flex; align-items:center; gap:6px; background:#FEE500; color:#1a1a1a; padding:8px 14px; border-radius:9999px; font-weight:700; font-size:13px; }
-  .kakao-channel-pill .ch { background:#1a1a1a; color:#FEE500; width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11px; }
-  .kakao-channel-pill .id { background:#fff; padding:4px 10px; border-radius:9999px; display:inline-flex; align-items:center; gap:4px; }
-  .kakao-channel-pill .plus { background:#1a1a1a; color:#fff; width:16px; height:16px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11px; }
-  /* glow */
-  @keyframes glowR { 0%,100%{box-shadow:0 0 20px rgba(255,75,75,.3)} 50%{box-shadow:0 0 40px rgba(255,75,75,.6)} }
-  .glow-r { animation: glowR 2.5s ease infinite; }
+
+  /* === 원래 카톡 배지 (큰 알약형) === */
+  .kakao-pill-original { display:inline-flex; align-items:center; min-height:44px; border-radius:999px; background:#FEE500; color:#111; padding:5px 6px 5px 18px; box-shadow:0 12px 24px rgba(0,0,0,.18); }
+  .kakao-pill-original .ch { display:grid; place-items:center; width:30px; height:30px; border-radius:999px; background:#111; color:#FEE500; font-size:12px; font-weight:900; margin:0 10px; }
+  .kakao-pill-original .id { display:inline-flex; align-items:center; gap:12px; min-height:34px; border-radius:999px; background:#fffdf2; padding:0 5px 0 16px; font-weight:900; }
+  .kakao-pill-original .plus { display:grid; place-items:center; width:26px; height:26px; border-radius:999px; background:#111; color:#fff; font-size:20px; line-height:1; }
+
+  /* === A안 - 미니 알약 (사이즈만 줄임) === */
+  .kakao-a { display:inline-flex; align-items:center; gap:8px; background:#FEE500; color:#111; padding:8px 16px; border-radius:9999px; font-weight:700; font-size:13px; box-shadow:0 4px 12px rgba(0,0,0,.12); }
+  .kakao-a .icon { width:18px; height:18px; background:#111; color:#FEE500; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:10px; font-weight:900; }
+
+  /* === B안 - 다크 카드 (다크 섹션과 어울림) === */
+  .kakao-b { display:inline-flex; align-items:center; gap:10px; background:#fff; color:#1a1a1a; padding:10px 18px; border-radius:14px; font-weight:700; font-size:14px; box-shadow:0 4px 12px rgba(0,0,0,.2); }
+  .kakao-b .dot { width:22px; height:22px; background:#FEE500; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; }
+
+  /* === C안 - 텍스트 링크 (가장 미니멀) === */
+  .kakao-c { display:inline-flex; align-items:center; gap:6px; color:#FEE500; padding:6px 0; font-size:14px; font-weight:600; border-bottom:1px solid rgba(254,229,0,0.4); }
+
+  /* === D안 - 카톡 공식 SDK 스타일 (정사각 + 그림자) === */
+  .kakao-d { display:inline-flex; align-items:center; gap:0; background:#FEE500; color:#111; padding:0; border-radius:12px; overflow:hidden; box-shadow:0 6px 16px rgba(0,0,0,.18); font-weight:800; }
+  .kakao-d .icon-box { background:#FEE500; padding:10px 14px; display:flex; align-items:center; justify-content:center; }
+  .kakao-d .text-box { background:#fff; padding:10px 16px; font-size:13px; }
 </style>
 </head>
 <body class="p-6 md:p-10">
 
 <div class="max-w-3xl mx-auto">
 
-  <h1 class="text-3xl font-black mb-2">마지막 대기신청 영역 시안 비교</h1>
-  <p class="text-gray-500 text-sm mb-2">페이지 최하단 다크 섹션. 현재 + 4안 비교</p>
-  <p class="text-gray-400 text-xs mb-10">— 시안 비교용 임시 페이지 (결정 후 삭제 예정) —</p>
+  <h1 class="text-3xl font-black mb-2">마지막 대기신청 영역 — 카톡 채널 배지 시안</h1>
+  <p class="text-gray-500 text-sm mb-2">대기신청 빨강 버튼은 동일. <strong>카톡 채널 배지 디자인 4안</strong> 비교.</p>
+  <p class="text-gray-400 text-xs mb-10">— 시안 비교용 임시 페이지 —</p>
 
-  <!-- ============ 현재 (원래) ============ -->
+  <!-- ============ 원래 (현재 라이브) ============ -->
   <div class="preview-card mb-8">
-    <span class="preview-label label-current">원래(변경 전)</span>
-    <p class="text-xs text-gray-500 mb-4">흰 박스 + 주황 아이콘 박스 + 카톡 채널추가 배지 + 동의 안내</p>
-
-    <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
-      <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
-      <button class="mt-6 inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3 shadow-lg">
-        <span class="mr-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FF6B00] text-white shadow-md">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4 0-9 2-9 5v3h18v-3c0-3-5-5-9-5z"/></svg>
-        </span>
-        <span class="text-left">
-          <span class="block text-xs font-bold text-gray-500">우리동네재테크</span>
-          <span class="block text-xl font-display font-black text-[#1a1a1a]">대기신청</span>
-        </span>
-      </button>
-      <div class="mt-5 flex justify-center">
-        <span class="kakao-channel-pill">
-          카카오톡 채널추가 <span class="ch">Ch</span>
-          <span class="id">우리동네재테크<span class="plus">+</span></span>
-        </span>
-      </div>
-      <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
-    </div>
-  </div>
-
-  <!-- ============ A안 — 빨강 단순 (적용 중) ============ -->
-  <div class="preview-card mb-8" style="border:3px solid #FF6B00;">
-    <span class="preview-label label-recommend">A안 — 빨강 단순 (현재 적용 중)</span>
-    <p class="text-xs text-gray-500 mb-4">페이지 다른 대기신청 버튼과 톤 통일 · 카톡 배지 제거</p>
+    <span class="preview-label label-current">현재 (라이브)</span>
+    <p class="text-xs text-gray-500 mb-4">큰 노란 알약 + Ch 원 + 흰 박스 안 "우리동네재테크 +" — 살짝 무겁고 시각적으로 튐</p>
 
     <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
       <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
       <button class="mt-8 inline-flex items-center justify-center gap-2 bg-[#ff4b4b] text-white px-10 py-4 rounded-2xl shadow-lg text-lg font-display font-black">
         대기신청 →
       </button>
-      <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
-    </div>
-  </div>
-
-  <!-- ============ B안 — 흰 박스 유지 + 텍스트만 ============ -->
-  <div class="preview-card mb-8">
-    <span class="preview-label label-a">B안 — 흰 박스 유지 + 주황 박스 제거</span>
-    <p class="text-xs text-gray-500 mb-4">기존 디자인 유지하되 주황 정사각형만 삭제. 텍스트 중앙 정렬</p>
-
-    <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
-      <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
-      <button class="mt-8 inline-flex items-center justify-center rounded-2xl bg-white px-10 py-5 shadow-lg text-center">
-        <span>
-          <span class="block text-xs font-bold text-gray-500">우리동네재테크</span>
-          <span class="block text-2xl font-display font-black text-[#1a1a1a]">대기신청 →</span>
+      <div class="mt-5 flex justify-center">
+        <span class="kakao-pill-original">
+          <span class="text-sm font-black">카카오톡 채널추가</span>
+          <span class="ch">Ch</span>
+          <span class="id"><span>우리동네재테크</span><span class="plus">+</span></span>
         </span>
-      </button>
+      </div>
       <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
     </div>
   </div>
 
-  <!-- ============ C안 — 빨강 + 글로우 강조 ============ -->
-  <div class="preview-card mb-8">
-    <span class="preview-label label-c">C안 — 빨강 + 글로우 강조</span>
-    <p class="text-xs text-gray-500 mb-4">A안 + 글로우 펄스 효과 추가. 마지막 한 방 강조</p>
+  <!-- ============ A안 - 미니 알약 ============ -->
+  <div class="preview-card mb-8" style="border:3px solid #FF6B00;">
+    <span class="preview-label label-recommend">A안 — 미니 알약 ★ 추천</span>
+    <p class="text-xs text-gray-500 mb-4">노란 카카오 톤 유지 + 사이즈만 한 단계 축소. 가장 안전</p>
 
     <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
       <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
-      <button class="mt-8 inline-flex items-center justify-center gap-2 bg-[#ff4b4b] text-white px-10 py-4 rounded-2xl text-lg font-display font-black glow-r">
+      <button class="mt-8 inline-flex items-center justify-center gap-2 bg-[#ff4b4b] text-white px-10 py-4 rounded-2xl shadow-lg text-lg font-display font-black">
         대기신청 →
       </button>
+      <div class="mt-5 flex justify-center">
+        <a href="#" class="kakao-a">
+          <span class="icon">K</span>
+          <span>카카오톡 채널 추가</span>
+        </a>
+      </div>
       <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
     </div>
   </div>
 
-  <!-- ============ D안 — 가로 폭 풀 버튼 ============ -->
+  <!-- ============ B안 - 흰 카드 + 노란 포인트 ============ -->
   <div class="preview-card mb-8">
-    <span class="preview-label label-d">D안 — 가로 폭 풀 버튼</span>
-    <p class="text-xs text-gray-500 mb-4">버튼이 영역 가로 폭을 거의 다 차지. 모바일에서 자연스러움</p>
+    <span class="preview-label label-a">B안 — 흰 카드 + 노란 포인트</span>
+    <p class="text-xs text-gray-500 mb-4">흰 배경 카드 + 카톡 노란 아이콘만 강조. 다크 섹션과 콘트라스트 ↑</p>
 
     <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
       <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
-      <button class="mt-8 w-full max-w-md inline-flex items-center justify-center gap-2 bg-[#ff4b4b] text-white px-6 py-5 rounded-2xl shadow-lg text-xl font-display font-black">
+      <button class="mt-8 inline-flex items-center justify-center gap-2 bg-[#ff4b4b] text-white px-10 py-4 rounded-2xl shadow-lg text-lg font-display font-black">
         대기신청 →
       </button>
+      <div class="mt-5 flex justify-center">
+        <a href="#" class="kakao-b">
+          <span class="dot">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#111"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7-.2.6-.7 2.4-.8 2.8-.1.5.2.5.4.4.2-.1 2.6-1.8 3.6-2.4.7.1 1.4.2 2.1.2 5.5 0 10-3.5 10-7.7C22 6.5 17.5 3 12 3z"/></svg>
+          </span>
+          <span>카카오톡 채널 추가</span>
+        </a>
+      </div>
+      <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ C안 - 텍스트 링크 (미니멀) ============ -->
+  <div class="preview-card mb-8">
+    <span class="preview-label label-c">C안 — 텍스트 링크 (가장 미니멀)</span>
+    <p class="text-xs text-gray-500 mb-4">배지 없이 노란 텍스트 + 언더라인. 가장 가벼움</p>
+
+    <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
+      <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
+      <button class="mt-8 inline-flex items-center justify-center gap-2 bg-[#ff4b4b] text-white px-10 py-4 rounded-2xl shadow-lg text-lg font-display font-black">
+        대기신청 →
+      </button>
+      <div class="mt-5 flex justify-center">
+        <a href="#" class="kakao-c">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#FEE500"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7-.2.6-.7 2.4-.8 2.8-.1.5.2.5.4.4.2-.1 2.6-1.8 3.6-2.4.7.1 1.4.2 2.1.2 5.5 0 10-3.5 10-7.7C22 6.5 17.5 3 12 3z"/></svg>
+          <span>카카오톡 채널 추가하기</span>
+        </a>
+      </div>
+      <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ D안 - 2색 분할 (카톡 공식 SDK 스타일) ============ -->
+  <div class="preview-card mb-8">
+    <span class="preview-label label-d">D안 — 2색 분할 (카톡 SDK 스타일)</span>
+    <p class="text-xs text-gray-500 mb-4">왼쪽 노란 아이콘 박스 + 오른쪽 흰 텍스트 박스. 카카오 공식 디자인 가이드 톤</p>
+
+    <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
+      <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
+      <button class="mt-8 inline-flex items-center justify-center gap-2 bg-[#ff4b4b] text-white px-10 py-4 rounded-2xl shadow-lg text-lg font-display font-black">
+        대기신청 →
+      </button>
+      <div class="mt-5 flex justify-center">
+        <a href="#" class="kakao-d">
+          <span class="icon-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#111"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7-.2.6-.7 2.4-.8 2.8-.1.5.2.5.4.4.2-.1 2.6-1.8 3.6-2.4.7.1 1.4.2 2.1.2 5.5 0 10-3.5 10-7.7C22 6.5 17.5 3 12 3z"/></svg>
+          </span>
+          <span class="text-box">우리동네재테크 채널 추가</span>
+        </a>
+      </div>
       <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
     </div>
   </div>
@@ -128,39 +160,39 @@
       <thead>
         <tr class="border-b border-gray-200">
           <th class="text-left py-3 pr-4 font-bold">시안</th>
-          <th class="text-left py-3 pr-4 font-bold">방식</th>
+          <th class="text-left py-3 pr-4 font-bold">디자인</th>
           <th class="text-left py-3 font-bold">짚을 점</th>
         </tr>
       </thead>
       <tbody class="text-gray-600">
         <tr class="border-b border-gray-100">
-          <td class="py-3 pr-4 font-bold text-gray-700">원래</td>
-          <td class="py-3 pr-4">흰 박스 + 주황 아이콘 + 카톡 배지</td>
-          <td class="py-3">주황 박스 떠 보임 · 카톡 배지로 동선 분산</td>
+          <td class="py-3 pr-4 font-bold text-gray-700">현재</td>
+          <td class="py-3 pr-4">큰 노란 알약 + Ch 원 + 흰 박스</td>
+          <td class="py-3">사이즈가 큼. 다크 섹션에서 노랑이 튀어 무거움</td>
         </tr>
         <tr class="border-b border-gray-100">
-          <td class="py-3 pr-4 font-bold" style="color:#FF6B00;">A ★ 현재 적용</td>
-          <td class="py-3 pr-4">빨강 단순 버튼</td>
-          <td class="py-3">페이지 다른 대기신청 버튼과 톤 통일. 가장 깔끔</td>
+          <td class="py-3 pr-4 font-bold" style="color:#FF6B00;">A ★ 추천</td>
+          <td class="py-3 pr-4">미니 노란 알약</td>
+          <td class="py-3">카톡 톤 유지 + 사이즈만 줄임. 가장 안전한 변경</td>
         </tr>
         <tr class="border-b border-gray-100">
           <td class="py-3 pr-4 font-bold text-blue-700">B</td>
-          <td class="py-3 pr-4">흰 박스 유지 + 텍스트만</td>
-          <td class="py-3">기존 디자인 유지하면서 주황 박스만 제거. 차별 약함</td>
+          <td class="py-3 pr-4">흰 카드 + 노란 아이콘</td>
+          <td class="py-3">다크 섹션과 대비 좋음. 카톡 톤 약간 줄어듦</td>
         </tr>
         <tr class="border-b border-gray-100">
           <td class="py-3 pr-4 font-bold text-yellow-700">C</td>
-          <td class="py-3 pr-4">빨강 + 글로우 펄스</td>
-          <td class="py-3">시선 강함. 다만 08 CTA 제거된 후 페이지 다른 글로우 없음</td>
+          <td class="py-3 pr-4">노란 텍스트 링크</td>
+          <td class="py-3">가장 미니멀. 다만 클릭 영역 약함 → 전환률 ↓ 가능</td>
         </tr>
         <tr>
           <td class="py-3 pr-4 font-bold text-pink-700">D</td>
-          <td class="py-3 pr-4">가로 폭 풀</td>
-          <td class="py-3">모바일에서 자연스러움. 데스크탑에선 약간 과대</td>
+          <td class="py-3 pr-4">2색 분할 (SDK 스타일)</td>
+          <td class="py-3">카카오 공식 디자인 가이드. 인지도 ↑ 다만 약간 광고스러움</td>
         </tr>
       </tbody>
     </table>
-    <p class="mt-6 text-sm text-gray-700"><strong>현재 적용 = A안</strong>. 페이지 다른 빨간 대기신청 버튼들(히어로/sticky 박스)과 톤·디자인 통일. C안(글로우)이나 D안(가로 폭)으로 바꾸려면 결정 알려주세요.</p>
+    <p class="mt-6 text-sm text-gray-700"><strong>추천 = A안 (미니 알약)</strong>. 카카오 톤은 유지하되 사이즈만 줄여서 다크 섹션에서 무게감 ↓. 가장 안전한 변경.</p>
   </div>
 
 </div>
