@@ -1,114 +1,114 @@
 {
-  "updated": "2026-05-20T06:00:35.497883+09:00",
+  "updated": "2026-05-21T06:00:33.913135+09:00",
   "source_updated": {
-    "funnel": "2026-05-20T06:00:35.196144+09:00",
-    "sales": "2026-05-20T06:00:33.424144+09:00"
+    "funnel": "2026-05-21T06:00:33.615053+09:00",
+    "sales": "2026-05-21T06:00:31.956641+09:00"
   },
   "summary": {
-    "total_weeks": 81,
+    "total_weeks": 82,
     "first_week": "2024-10-30",
-    "last_week": "2026-05-11",
+    "last_week": "2026-05-18",
     "last_week_end": ""
   },
   "windows": {
     "8": {
       "label": "최근 8주",
       "weeks": 8,
-      "week_start": "2026-03-23",
+      "week_start": "2026-03-30",
       "week_end": "",
       "totals": {
-        "revenue": 2000000,
-        "paid_customers": 5,
-        "landing_visits": 824,
-        "key_views": 14003,
-        "pulling_views": 149624,
-        "total_views": 163627
+        "revenue": 1200000,
+        "paid_customers": 3,
+        "landing_visits": 738,
+        "key_views": 13743,
+        "pulling_views": 136642,
+        "total_views": 150385
       },
       "avg_rates": {
-        "interest_rate": 8.61,
-        "link_click_rate": 0.44,
-        "convert_rate": 0.48
+        "interest_rate": 8.72,
+        "link_click_rate": 0.43,
+        "convert_rate": 0.32
       },
       "avg_per_week": {
-        "revenue": 250000,
-        "paid_customers": 0.62,
-        "landing_visits": 103.0,
-        "total_views": 20453.38
+        "revenue": 150000,
+        "paid_customers": 0.38,
+        "landing_visits": 92.25,
+        "total_views": 18798.12
       }
     },
     "12": {
       "label": "최근 12주",
       "weeks": 12,
-      "week_start": "2026-02-25",
+      "week_start": "2026-03-04",
       "week_end": "",
       "totals": {
-        "revenue": 4000000,
-        "paid_customers": 10,
-        "landing_visits": 1273,
-        "key_views": 17077,
-        "pulling_views": 209622,
-        "total_views": 226699
+        "revenue": 3200000,
+        "paid_customers": 8,
+        "landing_visits": 1179,
+        "key_views": 16595,
+        "pulling_views": 207608,
+        "total_views": 224203
       },
       "avg_rates": {
-        "interest_rate": 7.43,
-        "link_click_rate": 0.53,
-        "convert_rate": 0.69
+        "interest_rate": 7.23,
+        "link_click_rate": 0.49,
+        "convert_rate": 0.58
       },
       "avg_per_week": {
-        "revenue": 333333,
-        "paid_customers": 0.83,
-        "landing_visits": 106.08,
-        "total_views": 18891.58
+        "revenue": 266667,
+        "paid_customers": 0.67,
+        "landing_visits": 98.25,
+        "total_views": 18683.58
       }
     },
     "26": {
       "label": "최근 26주",
       "weeks": 26,
-      "week_start": "2025-11-19",
+      "week_start": "2025-11-26",
       "week_end": "",
       "totals": {
-        "revenue": 20800000,
-        "paid_customers": 52,
-        "landing_visits": 3173,
-        "key_views": 34251,
-        "pulling_views": 647602,
-        "total_views": 681853
+        "revenue": 20400000,
+        "paid_customers": 51,
+        "landing_visits": 3121,
+        "key_views": 34029,
+        "pulling_views": 631699,
+        "total_views": 665728
       },
       "avg_rates": {
-        "interest_rate": 5.68,
+        "interest_rate": 5.73,
         "link_click_rate": 0.47,
-        "convert_rate": 1.43
+        "convert_rate": 1.4
       },
       "avg_per_week": {
-        "revenue": 800000,
-        "paid_customers": 2.0,
-        "landing_visits": 122.04,
-        "total_views": 26225.12
+        "revenue": 784615,
+        "paid_customers": 1.96,
+        "landing_visits": 120.04,
+        "total_views": 25604.92
       }
     },
     "all": {
       "label": "전체",
-      "weeks": 81,
+      "weeks": 82,
       "week_start": "2024-10-30",
       "week_end": "",
       "totals": {
         "revenue": 32650000,
         "paid_customers": 116,
-        "landing_visits": 5181,
-        "key_views": 80271,
-        "pulling_views": 1077839,
-        "total_views": 1158110
+        "landing_visits": 5245,
+        "key_views": 80842,
+        "pulling_views": 1092398,
+        "total_views": 1173240
       },
       "avg_rates": {
-        "interest_rate": 15.52,
-        "link_click_rate": 2.09,
-        "convert_rate": 2.6
+        "interest_rate": 15.38,
+        "link_click_rate": 2.07,
+        "convert_rate": 2.57
       },
       "avg_per_week": {
-        "revenue": 403086,
-        "paid_customers": 1.43,
+        "revenue": 398171,
+        "paid_customers": 1.41,
         "landing_visits": 63.96,
-        "total_views": 14297.65
+        "total_views": 14307.8
       }
     }
   },
@@ -1475,6 +1475,23 @@
     },
     {
       "week_start": "2026-05-11",
+      "week_end": "2026-05-17",
+      "revenue": 0,
+      "sales_revenue": 0,
+      "paid_customers": 0,
+      "sales_customers": 0,
+      "landing_visits": 64,
+      "key_views": 571,
+      "pulling_views": 14559,
+      "total_views": 15130,
+      "interest_rate": 3.92,
+      "link_click_rate": 0.42,
+      "convert_rate": 0.0,
+      "shorts_views": 496,
+      "subscriber_increase": 215
+    },
+    {
+      "week_start": "2026-05-18",
       "week_end": "",
       "revenue": 0,
       "sales_revenue": 0,
