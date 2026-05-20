@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마지막 대기신청 영역 시안 비교 (4안)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  body { font-family: 'Pretendard', system-ui, sans-serif; background:#f5f5f5; color:#1a1a1a; }
+  .brand-orange { color:#FF6B00; }
+  .bg-brand-orange { background:#FF6B00; }
+  .preview-card { background:#fff; border-radius:24px; box-shadow:0 4px 16px rgba(0,0,0,0.04); padding:28px; }
+  .preview-label { display:inline-block; padding:6px 14px; border-radius:9999px; font-size:11px; font-weight:700; margin-bottom:16px; }
+  .label-current { background:#e5e7eb; color:#374151; }
+  .label-recommend { background:#FF6B00; color:#fff; }
+  .label-a { background:#dbeafe; color:#1d4ed8; }
+  .label-b { background:#dcfce7; color:#166534; }
+  .label-c { background:#fef3c7; color:#92400e; }
+  .label-d { background:#fce7f3; color:#9f1239; }
+  /* 카카오 채널 배지 (원본 스타일 흉내) */
+  .kakao-channel-pill { display:inline-flex; align-items:center; gap:6px; background:#FEE500; color:#1a1a1a; padding:8px 14px; border-radius:9999px; font-weight:700; font-size:13px; }
+  .kakao-channel-pill .ch { background:#1a1a1a; color:#FEE500; width:24px; height:24px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11px; }
+  .kakao-channel-pill .id { background:#fff; padding:4px 10px; border-radius:9999px; display:inline-flex; align-items:center; gap:4px; }
+  .kakao-channel-pill .plus { background:#1a1a1a; color:#fff; width:16px; height:16px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11px; }
+  /* glow */
+  @keyframes glowR { 0%,100%{box-shadow:0 0 20px rgba(255,75,75,.3)} 50%{box-shadow:0 0 40px rgba(255,75,75,.6)} }
+  .glow-r { animation: glowR 2.5s ease infinite; }
+</style>
+</head>
+<body class="p-6 md:p-10">
+
+<div class="max-w-3xl mx-auto">
+
+  <h1 class="text-3xl font-black mb-2">마지막 대기신청 영역 시안 비교</h1>
+  <p class="text-gray-500 text-sm mb-2">페이지 최하단 다크 섹션. 현재 + 4안 비교</p>
+  <p class="text-gray-400 text-xs mb-10">— 시안 비교용 임시 페이지 (결정 후 삭제 예정) —</p>
+
+  <!-- ============ 현재 (원래) ============ -->
+  <div class="preview-card mb-8">
+    <span class="preview-label label-current">원래(변경 전)</span>
+    <p class="text-xs text-gray-500 mb-4">흰 박스 + 주황 아이콘 박스 + 카톡 채널추가 배지 + 동의 안내</p>
+
+    <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
+      <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
+      <button class="mt-6 inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3 shadow-lg">
+        <span class="mr-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FF6B00] text-white shadow-md">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4 0-9 2-9 5v3h18v-3c0-3-5-5-9-5z"/></svg>
+        </span>
+        <span class="text-left">
+          <span class="block text-xs font-bold text-gray-500">우리동네재테크</span>
+          <span class="block text-xl font-display font-black text-[#1a1a1a]">대기신청</span>
+        </span>
+      </button>
+      <div class="mt-5 flex justify-center">
+        <span class="kakao-channel-pill">
+          카카오톡 채널추가 <span class="ch">Ch</span>
+          <span class="id">우리동네재테크<span class="plus">+</span></span>
+        </span>
+      </div>
+      <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ A안 — 빨강 단순 (적용 중) ============ -->
+  <div class="preview-card mb-8" style="border:3px solid #FF6B00;">
+    <span class="preview-label label-recommend">A안 — 빨강 단순 (현재 적용 중)</span>
+    <p class="text-xs text-gray-500 mb-4">페이지 다른 대기신청 버튼과 톤 통일 · 카톡 배지 제거</p>
+
+    <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
+      <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
+      <button class="mt-8 inline-flex items-center justify-center gap-2 bg-[#ff4b4b] text-white px-10 py-4 rounded-2xl shadow-lg text-lg font-display font-black">
+        대기신청 →
+      </button>
+      <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ B안 — 흰 박스 유지 + 텍스트만 ============ -->
+  <div class="preview-card mb-8">
+    <span class="preview-label label-a">B안 — 흰 박스 유지 + 주황 박스 제거</span>
+    <p class="text-xs text-gray-500 mb-4">기존 디자인 유지하되 주황 정사각형만 삭제. 텍스트 중앙 정렬</p>
+
+    <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
+      <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
+      <button class="mt-8 inline-flex items-center justify-center rounded-2xl bg-white px-10 py-5 shadow-lg text-center">
+        <span>
+          <span class="block text-xs font-bold text-gray-500">우리동네재테크</span>
+          <span class="block text-2xl font-display font-black text-[#1a1a1a]">대기신청 →</span>
+        </span>
+      </button>
+      <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ C안 — 빨강 + 글로우 강조 ============ -->
+  <div class="preview-card mb-8">
+    <span class="preview-label label-c">C안 — 빨강 + 글로우 강조</span>
+    <p class="text-xs text-gray-500 mb-4">A안 + 글로우 펄스 효과 추가. 마지막 한 방 강조</p>
+
+    <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
+      <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
+      <button class="mt-8 inline-flex items-center justify-center gap-2 bg-[#ff4b4b] text-white px-10 py-4 rounded-2xl text-lg font-display font-black glow-r">
+        대기신청 →
+      </button>
+      <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ D안 — 가로 폭 풀 버튼 ============ -->
+  <div class="preview-card mb-8">
+    <span class="preview-label label-d">D안 — 가로 폭 풀 버튼</span>
+    <p class="text-xs text-gray-500 mb-4">버튼이 영역 가로 폭을 거의 다 차지. 모바일에서 자연스러움</p>
+
+    <div class="bg-[#262626] rounded-2xl px-6 py-12 text-center text-white">
+      <p class="text-xl md:text-2xl font-display font-black">대기 신청을 원하는 분들은 아래 버튼을 클릭해 주세요.</p>
+      <button class="mt-8 w-full max-w-md inline-flex items-center justify-center gap-2 bg-[#ff4b4b] text-white px-6 py-5 rounded-2xl shadow-lg text-xl font-display font-black">
+        대기신청 →
+      </button>
+      <p class="mt-5 text-xs text-gray-300">대기 신청 시 카카오톡 또는 문자메시지 안내 수신에 동의합니다.</p>
+    </div>
+  </div>
+
+  <!-- 비교 표 -->
+  <div class="preview-card">
+    <h3 class="text-xl font-bold mb-4">비교 요약</h3>
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-gray-200">
+          <th class="text-left py-3 pr-4 font-bold">시안</th>
+          <th class="text-left py-3 pr-4 font-bold">방식</th>
+          <th class="text-left py-3 font-bold">짚을 점</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-600">
+        <tr class="border-b border-gray-100">
+          <td class="py-3 pr-4 font-bold text-gray-700">원래</td>
+          <td class="py-3 pr-4">흰 박스 + 주황 아이콘 + 카톡 배지</td>
+          <td class="py-3">주황 박스 떠 보임 · 카톡 배지로 동선 분산</td>
+        </tr>
+        <tr class="border-b border-gray-100">
+          <td class="py-3 pr-4 font-bold" style="color:#FF6B00;">A ★ 현재 적용</td>
+          <td class="py-3 pr-4">빨강 단순 버튼</td>
+          <td class="py-3">페이지 다른 대기신청 버튼과 톤 통일. 가장 깔끔</td>
+        </tr>
+        <tr class="border-b border-gray-100">
+          <td class="py-3 pr-4 font-bold text-blue-700">B</td>
+          <td class="py-3 pr-4">흰 박스 유지 + 텍스트만</td>
+          <td class="py-3">기존 디자인 유지하면서 주황 박스만 제거. 차별 약함</td>
+        </tr>
+        <tr class="border-b border-gray-100">
+          <td class="py-3 pr-4 font-bold text-yellow-700">C</td>
+          <td class="py-3 pr-4">빨강 + 글로우 펄스</td>
+          <td class="py-3">시선 강함. 다만 08 CTA 제거된 후 페이지 다른 글로우 없음</td>
+        </tr>
+        <tr>
+          <td class="py-3 pr-4 font-bold text-pink-700">D</td>
+          <td class="py-3 pr-4">가로 폭 풀</td>
+          <td class="py-3">모바일에서 자연스러움. 데스크탑에선 약간 과대</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="mt-6 text-sm text-gray-700"><strong>현재 적용 = A안</strong>. 페이지 다른 빨간 대기신청 버튼들(히어로/sticky 박스)과 톤·디자인 통일. C안(글로우)이나 D안(가로 폭)으로 바꾸려면 결정 알려주세요.</p>
+  </div>
+
+</div>
+
+</body>
+</html>
