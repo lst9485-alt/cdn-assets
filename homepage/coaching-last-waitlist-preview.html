@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>마지막 영역 — 문의 채널 안내 시안 (4안)</title>
+<title>마지막 영역 시안 — 카톡 배지 그대로 + 구조만 변경 (4안)</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <style>
@@ -16,90 +16,90 @@
   .label-b { background:#dcfce7; color:#166534; }
   .label-c { background:#fef3c7; color:#92400e; }
   .label-d { background:#fce7f3; color:#9f1239; }
+
+  /* === 라이브 카톡 채널 배지 그대로 (수정 X) === */
+  .kakao-channel-pill { display:inline-flex; align-items:center; min-height:44px; border-radius:999px; background:#FEE500; color:#111; padding:5px 6px 5px 18px; box-shadow:0 12px 24px rgba(0,0,0,.18); transition:transform .18s ease, box-shadow .18s ease; }
+  .kakao-channel-pill:hover { transform:translateY(-2px); box-shadow:0 16px 30px rgba(0,0,0,.24); }
+  .kakao-channel-pill .ch { display:grid; place-items:center; width:30px; height:30px; border-radius:999px; background:#111; color:#FEE500; font-size:12px; font-weight:900; margin:0 10px; }
+  .kakao-channel-pill .id { display:inline-flex; align-items:center; gap:12px; min-height:34px; border-radius:999px; background:#fffdf2; padding:0 5px 0 16px; font-weight:900; }
+  .kakao-channel-pill .plus { display:grid; place-items:center; width:26px; height:26px; border-radius:999px; background:#111; color:#fff; font-size:20px; line-height:1; }
 </style>
 </head>
 <body class="p-6 md:p-10">
 
 <div class="max-w-3xl mx-auto">
 
-  <h1 class="text-3xl font-black mb-2">마지막 영역 — 문의 채널 안내 시안</h1>
-  <p class="text-gray-500 text-sm mb-2"><strong>대기신청 버튼 제거</strong> + "코칭 관련 문의는 아래 채널" 메시지로 전환. 디자인 4안.</p>
+  <h1 class="text-3xl font-black mb-2">마지막 영역 시안 — 구조 변경만</h1>
+  <p class="text-gray-500 text-sm mb-2">대기신청 버튼 제거 + 헤딩 변경. <strong>카톡 채널 배지는 라이브 그대로 유지</strong>.</p>
   <p class="text-gray-400 text-xs mb-10">— 시안 비교용 임시 페이지 —</p>
 
-  <!-- ============ A안 - 다크 + 큰 노란 카드 ============ -->
+  <!-- ============ A안 — 다크 + 한 줄 헤딩 ============ -->
   <div class="preview-card mb-8" style="border:3px solid #FF6B00;">
-    <span class="preview-label label-recommend">A안 — 다크 + 큰 노란 카톡 카드 ★ 추천</span>
-    <p class="text-xs text-gray-500 mb-4">다크 배경 유지 + 큰 노란 카드. 클릭 영역 넓고 카톡 인지도 ↑</p>
+    <span class="preview-label label-recommend">A안 — 다크 + 한 줄 헤딩 ★ 추천</span>
+    <p class="text-xs text-gray-500 mb-4">배경·카톡 배지 그대로. 대기신청 버튼만 제거 + 헤딩 1줄로 교체</p>
 
     <div class="bg-[#262626] rounded-2xl px-6 py-14 text-center text-white">
-      <p class="text-xl md:text-2xl font-display font-black mb-3">코칭 관련 문의가 있으신가요?</p>
-      <p class="text-sm text-gray-400 mb-8">아래 카카오톡 채널로 편하게 연락주세요</p>
-      <a href="#" class="inline-flex items-center justify-center gap-3 bg-[#FEE500] text-[#1a1a1a] px-8 py-4 rounded-2xl shadow-lg hover:scale-[1.02] transition">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7-.2.6-.7 2.4-.8 2.8-.1.5.2.5.4.4.2-.1 2.6-1.8 3.6-2.4.7.1 1.4.2 2.1.2 5.5 0 10-3.5 10-7.7C22 6.5 17.5 3 12 3z"/></svg>
-        <span class="font-black text-base">우리동네재테크 채널 이동</span>
-      </a>
-      <p class="mt-6 text-xs text-gray-400">상담 가능 시간 · 평일 10:00~18:00</p>
+      <p class="text-xl md:text-2xl font-display font-black">코칭 관련 문의는 아래 채널을 클릭해주세요.</p>
+      <div class="mt-8 flex justify-center">
+        <a href="#" class="kakao-channel-pill">
+          <span class="text-sm font-black">카카오톡 채널</span>
+          <span class="ch">Ch</span>
+          <span class="id"><span>우리동네재테크</span><span class="plus">+</span></span>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- ============ B안 - 라이트 베이지 + 카드형 ============ -->
+  <!-- ============ B안 — 다크 + 헤딩 + 부연 ============ -->
   <div class="preview-card mb-8">
-    <span class="preview-label label-a">B안 — 라이트 베이지 + 카드형</span>
-    <p class="text-xs text-gray-500 mb-4">베이지 배경(페이지 톤 통일) + 흰 카드. 차분·신뢰감</p>
+    <span class="preview-label label-a">B안 — 다크 + 헤딩 + 부연</span>
+    <p class="text-xs text-gray-500 mb-4">A안 + 부연 한 줄 ("평일 10:00~18:00 운영")</p>
+
+    <div class="bg-[#262626] rounded-2xl px-6 py-14 text-center text-white">
+      <p class="text-xl md:text-2xl font-display font-black">코칭 관련 문의는 아래 채널을 클릭해주세요.</p>
+      <p class="mt-3 text-sm text-gray-400">평일 10:00~18:00 운영</p>
+      <div class="mt-8 flex justify-center">
+        <a href="#" class="kakao-channel-pill">
+          <span class="text-sm font-black">카카오톡 채널</span>
+          <span class="ch">Ch</span>
+          <span class="id"><span>우리동네재테크</span><span class="plus">+</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ C안 — 라이트 베이지 톤 ============ -->
+  <div class="preview-card mb-8">
+    <span class="preview-label label-c">C안 — 라이트 베이지 톤</span>
+    <p class="text-xs text-gray-500 mb-4">다크 → 베이지 배경으로 변경. 차분한 마무리</p>
 
     <div class="bg-[#fdf9ed] rounded-2xl px-6 py-14 text-center">
-      <p class="text-xl md:text-2xl font-display font-black mb-3 text-[#1a1a1a]">코칭 관련 문의가 있으신가요?</p>
-      <p class="text-sm text-gray-500 mb-8">아래 카카오톡 채널로 편하게 연락주세요</p>
-      <a href="#" class="inline-flex items-center justify-center gap-3 bg-white border-2 border-[#1a1a1a]/10 px-8 py-4 rounded-2xl shadow-md hover:scale-[1.02] transition">
-        <span class="flex w-10 h-10 items-center justify-center bg-[#FEE500] rounded-xl">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7-.2.6-.7 2.4-.8 2.8-.1.5.2.5.4.4.2-.1 2.6-1.8 3.6-2.4.7.1 1.4.2 2.1.2 5.5 0 10-3.5 10-7.7C22 6.5 17.5 3 12 3z"/></svg>
-        </span>
-        <span class="text-left">
-          <span class="block text-xs font-bold text-gray-500">우리동네재테크</span>
-          <span class="block font-black text-[#1a1a1a]">카카오톡 채널</span>
-        </span>
-      </a>
-      <p class="mt-6 text-xs text-gray-400">상담 가능 시간 · 평일 10:00~18:00</p>
+      <p class="text-xl md:text-2xl font-display font-black text-[#1a1a1a]">코칭 관련 문의는 아래 채널을 클릭해주세요.</p>
+      <div class="mt-8 flex justify-center">
+        <a href="#" class="kakao-channel-pill">
+          <span class="text-sm font-black">카카오톡 채널</span>
+          <span class="ch">Ch</span>
+          <span class="id"><span>우리동네재테크</span><span class="plus">+</span></span>
+        </a>
+      </div>
     </div>
   </div>
 
-  <!-- ============ C안 - 다크 + 가로형 풀 카드 ============ -->
+  <!-- ============ D안 — 다크 + 두 줄 헤딩 강조 ============ -->
   <div class="preview-card mb-8">
-    <span class="preview-label label-c">C안 — 다크 + 가로형 풀 카드</span>
-    <p class="text-xs text-gray-500 mb-4">다크 배경 + 가로로 긴 카드. 모바일에서 자연스러움</p>
+    <span class="preview-label label-d">D안 — 다크 + 두 줄 헤딩</span>
+    <p class="text-xs text-gray-500 mb-4">헤딩을 두 줄로 분리해 임팩트 + 강조 색</p>
 
     <div class="bg-[#262626] rounded-2xl px-6 py-14 text-center text-white">
-      <p class="text-xl md:text-2xl font-display font-black mb-3">코칭 관련 문의는 아래 채널을 클릭해주세요</p>
-      <p class="text-sm text-gray-400 mb-8">평일 10:00~18:00 운영</p>
-      <a href="#" class="block w-full max-w-md mx-auto bg-[#FEE500] text-[#1a1a1a] px-6 py-5 rounded-2xl shadow-lg hover:scale-[1.01] transition">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <span class="flex w-10 h-10 items-center justify-center bg-white rounded-xl">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7-.2.6-.7 2.4-.8 2.8-.1.5.2.5.4.4.2-.1 2.6-1.8 3.6-2.4.7.1 1.4.2 2.1.2 5.5 0 10-3.5 10-7.7C22 6.5 17.5 3 12 3z"/></svg>
-            </span>
-            <span class="text-left">
-              <span class="block text-xs font-bold opacity-70">카카오톡 채널</span>
-              <span class="block font-black">우리동네재테크</span>
-            </span>
-          </div>
-          <span class="font-black text-2xl">→</span>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- ============ D안 - 라이트 + 미니멀 ============ -->
-  <div class="preview-card mb-8">
-    <span class="preview-label label-d">D안 — 라이트 + 미니멀</span>
-    <p class="text-xs text-gray-500 mb-4">흰 배경 + 작은 노란 배지. 가장 가볍고 깔끔</p>
-
-    <div class="bg-white rounded-2xl px-6 py-14 text-center border-t border-gray-100">
-      <p class="text-xl md:text-2xl font-display font-black mb-3 text-[#1a1a1a]">코칭 관련 문의가 있으신가요?</p>
-      <p class="text-sm text-gray-500 mb-8">카카오톡 채널로 편하게 문의주세요 · 평일 10:00~18:00</p>
-      <a href="#" class="inline-flex items-center gap-2 bg-[#FEE500] text-[#1a1a1a] px-6 py-3 rounded-full shadow-sm hover:scale-[1.02] transition font-bold text-sm">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.3 4.7 6.7-.2.6-.7 2.4-.8 2.8-.1.5.2.5.4.4.2-.1 2.6-1.8 3.6-2.4.7.1 1.4.2 2.1.2 5.5 0 10-3.5 10-7.7C22 6.5 17.5 3 12 3z"/></svg>
-        <span>우리동네재테크 채널</span>
-      </a>
+      <p class="text-xl md:text-2xl font-display font-black">코칭 관련 문의가 있으신가요?</p>
+      <p class="mt-2 text-xl md:text-2xl font-display font-black"><span class="text-[#FEE500]">카카오톡 채널</span>로 편하게 연락주세요</p>
+      <div class="mt-8 flex justify-center">
+        <a href="#" class="kakao-channel-pill">
+          <span class="text-sm font-black">카카오톡 채널</span>
+          <span class="ch">Ch</span>
+          <span class="id"><span>우리동네재테크</span><span class="plus">+</span></span>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -110,35 +110,34 @@
       <thead>
         <tr class="border-b border-gray-200">
           <th class="text-left py-3 pr-4 font-bold">시안</th>
-          <th class="text-left py-3 pr-4 font-bold">디자인</th>
+          <th class="text-left py-3 pr-4 font-bold">구성</th>
           <th class="text-left py-3 font-bold">짚을 점</th>
         </tr>
       </thead>
       <tbody class="text-gray-600">
         <tr class="border-b border-gray-100">
           <td class="py-3 pr-4 font-bold" style="color:#FF6B00;">A ★ 추천</td>
-          <td class="py-3 pr-4">다크 + 큰 노란 카드</td>
-          <td class="py-3">다크 톤 유지 + 카톡 인지도 ↑. 클릭 영역 넓음</td>
+          <td class="py-3 pr-4">다크 + 한 줄 헤딩</td>
+          <td class="py-3">가장 간결. 라이브에서 대기신청 버튼만 빼고 헤딩 교체</td>
         </tr>
         <tr class="border-b border-gray-100">
           <td class="py-3 pr-4 font-bold text-blue-700">B</td>
-          <td class="py-3 pr-4">라이트 베이지 + 흰 카드</td>
-          <td class="py-3">차분·신뢰. 베이지가 페이지 03~06과 톤 통일. 다크보다 부드러움</td>
+          <td class="py-3 pr-4">다크 + 헤딩 + 부연</td>
+          <td class="py-3">A + 운영시간 안내. 정보 명확. 줄 수 많아짐</td>
         </tr>
         <tr class="border-b border-gray-100">
           <td class="py-3 pr-4 font-bold text-yellow-700">C</td>
-          <td class="py-3 pr-4">다크 + 가로 풀 카드</td>
-          <td class="py-3">모바일에서 자연스러움 + 화살표(→) 클릭 유도 강함</td>
+          <td class="py-3 pr-4">라이트 베이지</td>
+          <td class="py-3">다크 → 베이지. 페이지 03·06과 톤 연결. 마무리 차분</td>
         </tr>
         <tr>
           <td class="py-3 pr-4 font-bold text-pink-700">D</td>
-          <td class="py-3 pr-4">라이트 + 미니멀 배지</td>
-          <td class="py-3">가장 가볍고 깔끔. 다만 마지막 영역 강조가 약함</td>
+          <td class="py-3 pr-4">다크 + 두 줄 헤딩</td>
+          <td class="py-3">"카카오톡 채널" 노란색 강조. 시선 명확</td>
         </tr>
       </tbody>
     </table>
-    <p class="mt-6 text-sm text-gray-700"><strong>추천 = A안 (다크 + 큰 노란 카드)</strong>. 02 자극 다크 + 05·08 다크 영역과 톤 연결되고, 큰 노란 카드가 카톡 톤 명확. 마지막 영역에 충분한 비주얼 임팩트.</p>
-    <p class="mt-3 text-sm text-gray-700"><strong>B안 (라이트)</strong>은 차분한 마무리를 원하면 적합. 다크 톤 부담스럽다면 B안 추천.</p>
+    <p class="mt-6 text-sm text-gray-700"><strong>모든 시안: 카톡 채널 배지 = 라이브 그대로</strong>. 헤딩과 배경만 변형.</p>
   </div>
 
 </div>
