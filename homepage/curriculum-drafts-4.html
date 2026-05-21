@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>커리큘럼 시안 4종 — 우리동네 재테크</title>
+  <title>커리큘럼 시안 8종 — 우리동네 재테크</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -44,6 +44,23 @@
     .orbit-card { min-height: 124px; }
     .matrix-card { min-height: 148px; }
     .timeline-card { min-height: 136px; }
+    .flow-card { min-height: 118px; }
+    .flow-stack > * + * { margin-top: 28px; }
+    .flow-link { position: relative; }
+    .flow-link::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -28px;
+      width: 2px;
+      height: 28px;
+      transform: translateX(-50%);
+      background: #cbd5e1;
+    }
+    .flow-link:last-child::after { display: none; }
+    .soft-dash { border: 1.5px dashed rgba(37, 99, 235, .36); }
+    .orange-dash { border: 1.5px dashed rgba(255, 107, 0, .40); }
+    .emerald-dash { border: 1.5px dashed rgba(16, 185, 129, .38); }
     .ladder-step { transform: translateY(calc(var(--rise) * -22px)); }
     .ladder-step::after {
       content: '';
@@ -88,8 +105,8 @@
         <iconify-icon icon="solar:map-arrow-right-bold" class="text-base"></iconify-icon>
         CURRICULUM DRAFTS
       </div>
-      <h1 class="font-display text-3xl sm:text-5xl font-black tracking-tight word-keep">커리큘럼 시안 4종</h1>
-      <p class="mt-4 max-w-3xl text-slate-500 word-keep">상품 나열이 아니라, 사용자가 지금 어디에 있고 다음에 무엇을 선택해야 하는지 보이도록 구성했습니다.</p>
+      <h1 class="font-display text-3xl sm:text-5xl font-black tracking-tight word-keep">커리큘럼 시안 8종</h1>
+      <p class="mt-4 max-w-3xl text-slate-500 word-keep">새 구조 4개와 기존 커리큘럼을 디벨롭한 4개를 함께 비교할 수 있게 구성했습니다.</p>
     </section>
 
     <section class="rounded-[30px] bg-white border border-slate-200 page-shadow p-5 sm:p-8 mb-12">
@@ -359,6 +376,172 @@
             </div>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="py-14 sm:py-16">
+      <div class="rounded-[30px] border border-slate-200 bg-white p-6 sm:p-8 page-shadow">
+        <p class="text-xs font-black text-brand-orange tracking-wide">EXISTING PAGE DEVELOPMENT</p>
+        <h2 class="font-display text-3xl sm:text-4xl font-black mt-3 word-keep">기존 커리큘럼 디벨롭 시안 4종</h2>
+        <p class="mt-4 max-w-3xl text-slate-500 word-keep">현재 운영 중인 3열 커리큘럼 구조는 유지하고, 색감·간격·카드 위계·상태 표현만 다르게 발전시킨 안입니다.</p>
+      </div>
+    </section>
+
+    <section class="rounded-[30px] bg-white border border-slate-200 page-shadow p-5 sm:p-8 mb-12">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-black">E안</span>
+          <h2 class="font-display text-3xl font-black mt-4 word-keep">기존형 미니멀 정리안</h2>
+        </div>
+        <p class="max-w-xl text-sm text-slate-500 word-keep">기존 3열 구조를 거의 유지하되, 선·여백·상태 배지만 정리한 가장 보수적인 개선안입니다.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="rounded-[26px] border border-orange-200 bg-orange-50/35 p-5">
+          <h3 class="font-display text-xl font-black text-brand-orange text-center mb-5">내집마련</h3>
+          <div class="flow-stack">
+            <div class="flow-link flow-card rounded-2xl bg-white border-2 border-orange-300 p-5 text-center mini-shadow">
+              <span class="rounded-full bg-brand-orange text-white text-xs font-black px-3 py-1">진행 중</span>
+              <h4 class="font-display text-lg font-black mt-3">내집마련 1:1 코칭</h4>
+              <p class="text-sm text-slate-500 mt-2">내 예산·상황에 맞는 맞춤 학습</p>
+            </div>
+            <div class="flow-link flow-card rounded-2xl bg-white orange-dash p-5 text-center">
+              <span class="rounded-full bg-orange-100 text-orange-700 text-xs font-black px-3 py-1">준비 중</span>
+              <h4 class="font-display text-lg font-black mt-3">내집마련 실전반</h4>
+              <p class="text-sm text-slate-500 mt-2">온라인 강의 + 실전 템플릿</p>
+            </div>
+            <div class="flow-link flow-card rounded-2xl bg-slate-50 border border-slate-200 p-5 text-center">
+              <span class="rounded-full bg-white text-slate-500 text-xs font-black px-3 py-1">추후 예정</span>
+              <h4 class="font-display text-lg font-black mt-3 text-slate-600">간단 이메일 코칭</h4>
+              <p class="text-sm text-slate-400 mt-2">빠르게 핵심만 + 방향 제시</p>
+            </div>
+          </div>
+        </article>
+        <article class="rounded-[26px] border border-blue-200 bg-blue-50/35 p-5">
+          <h3 class="font-display text-xl font-black text-brand-blue text-center mb-5">재테크</h3>
+          <div class="flow-stack">
+            <div class="flow-link flow-card rounded-2xl bg-white soft-dash p-5 text-center"><span class="rounded-full bg-blue-100 text-blue-700 text-xs font-black px-3 py-1">준비 중</span><h4 class="font-display text-lg font-black mt-3">전자책</h4><p class="text-sm text-slate-500 mt-2">재테크 기초 지식 정리</p></div>
+            <div class="flow-link flow-card rounded-2xl bg-white soft-dash p-5 text-center"><span class="rounded-full bg-blue-100 text-blue-700 text-xs font-black px-3 py-1">준비 중</span><h4 class="font-display text-lg font-black mt-3">독서모임</h4><p class="text-sm text-slate-500 mt-2">함께 읽고 함께 성장하는 시간</p></div>
+            <div class="flow-link flow-card rounded-2xl bg-white soft-dash p-5 text-center"><span class="rounded-full bg-blue-100 text-blue-700 text-xs font-black px-3 py-1">준비 중</span><h4 class="font-display text-lg font-black mt-3">재테크 기초반</h4><p class="text-sm text-slate-500 mt-2">부동산, 주식 등 기본기 학습</p></div>
+          </div>
+        </article>
+        <article class="rounded-[26px] border border-emerald-200 bg-emerald-50/35 p-5">
+          <h3 class="font-display text-xl font-black text-emerald-600 text-center mb-5">공통</h3>
+          <div class="flow-stack">
+            <div class="flow-link flow-card rounded-2xl bg-white emerald-dash p-5 text-center"><span class="rounded-full bg-emerald-100 text-emerald-700 text-xs font-black px-3 py-1">준비 중</span><h4 class="font-display text-lg font-black mt-3">무료 템플릿</h4><p class="text-sm text-slate-500 mt-2">내집마련 및 재테크 템플릿</p></div>
+            <div class="flow-link flow-card rounded-2xl bg-slate-50 border border-slate-200 p-5 text-center"><span class="rounded-full bg-white text-slate-500 text-xs font-black px-3 py-1">추후 예정</span><h4 class="font-display text-lg font-black mt-3 text-slate-600">무료 스터디</h4><p class="text-sm text-slate-400 mt-2">소규모 그룹 학습</p></div>
+            <div class="flow-link flow-card rounded-2xl bg-slate-50 border border-slate-200 p-5 text-center"><span class="rounded-full bg-white text-slate-500 text-xs font-black px-3 py-1">추후 예정</span><h4 class="font-display text-lg font-black mt-3 text-slate-600">임장</h4><p class="text-sm text-slate-400 mt-2">현장에서 직접 보고 배우기</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="rounded-[30px] bg-[#fffaf4] border border-orange-100 page-shadow p-5 sm:p-8 mb-12">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex rounded-full bg-brand-orange text-white px-3 py-1 text-xs font-black">F안</span>
+          <h2 class="font-display text-3xl font-black mt-4 word-keep">브랜드 컬러 강화안</h2>
+        </div>
+        <p class="max-w-xl text-sm text-slate-500 word-keep">기존 구조는 유지하면서 브랜드 오렌지를 중심색으로 쓰고, 재테크/공통은 보조색으로만 구분합니다.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <article class="rounded-[28px] bg-white border-2 border-brand-orange p-5 mini-shadow">
+          <div class="rounded-2xl bg-brand-orange text-white px-5 py-4 mb-5"><h3 class="font-display text-xl font-black">내집마련</h3><p class="text-sm text-white/75 mt-1">현재 전환 중심</p></div>
+          <div class="space-y-4">
+            <div class="rounded-2xl bg-orange-50 border border-orange-200 p-5"><span class="text-xs font-black text-brand-orange">진행 중</span><h4 class="font-display text-lg font-black mt-2">내집마련 1:1 코칭</h4><p class="text-sm text-slate-600 mt-2">신청 가능한 핵심 상품</p></div>
+            <div class="rounded-2xl bg-white border-2 border-dashed border-orange-300 p-5"><span class="text-xs font-black text-orange-700">준비 중</span><h4 class="font-display text-lg font-black mt-2">내집마련 실전반</h4><p class="text-sm text-slate-500 mt-2">강의 + 실전 템플릿</p></div>
+            <div class="rounded-2xl bg-slate-50 border border-slate-200 p-5"><span class="text-xs font-black text-slate-500">추후 예정</span><h4 class="font-display text-lg font-black mt-2 text-slate-600">간단 이메일 코칭</h4><p class="text-sm text-slate-400 mt-2">핵심만 빠르게 정리</p></div>
+          </div>
+        </article>
+        <article class="rounded-[28px] bg-white border border-orange-100 p-5">
+          <div class="rounded-2xl bg-blue-50 text-brand-blue px-5 py-4 mb-5"><h3 class="font-display text-xl font-black">재테크</h3><p class="text-sm text-blue-700/70 mt-1">기초 확장 라인</p></div>
+          <div class="space-y-4">
+            <div class="rounded-2xl bg-white border-2 border-dashed border-blue-200 p-5"><span class="text-xs font-black text-brand-blue">준비 중</span><h4 class="font-display text-lg font-black mt-2">전자책</h4><p class="text-sm text-slate-500 mt-2">기초 지식 정리</p></div>
+            <div class="rounded-2xl bg-white border-2 border-dashed border-blue-200 p-5"><span class="text-xs font-black text-brand-blue">준비 중</span><h4 class="font-display text-lg font-black mt-2">독서모임</h4><p class="text-sm text-slate-500 mt-2">함께 읽는 루틴</p></div>
+            <div class="rounded-2xl bg-white border-2 border-dashed border-blue-200 p-5"><span class="text-xs font-black text-brand-blue">준비 중</span><h4 class="font-display text-lg font-black mt-2">재테크 기초반</h4><p class="text-sm text-slate-500 mt-2">부동산·주식 기본기</p></div>
+          </div>
+        </article>
+        <article class="rounded-[28px] bg-white border border-orange-100 p-5">
+          <div class="rounded-2xl bg-emerald-50 text-emerald-600 px-5 py-4 mb-5"><h3 class="font-display text-xl font-black">공통</h3><p class="text-sm text-emerald-700/70 mt-1">무료 유입·보조</p></div>
+          <div class="space-y-4">
+            <div class="rounded-2xl bg-white border-2 border-dashed border-emerald-200 p-5"><span class="text-xs font-black text-emerald-600">준비 중</span><h4 class="font-display text-lg font-black mt-2">무료 템플릿</h4><p class="text-sm text-slate-500 mt-2">실행 자료</p></div>
+            <div class="rounded-2xl bg-slate-50 border border-slate-200 p-5"><span class="text-xs font-black text-slate-500">추후 예정</span><h4 class="font-display text-lg font-black mt-2 text-slate-600">무료 스터디</h4><p class="text-sm text-slate-400 mt-2">그룹 학습</p></div>
+            <div class="rounded-2xl bg-slate-50 border border-slate-200 p-5"><span class="text-xs font-black text-slate-500">추후 예정</span><h4 class="font-display text-lg font-black mt-2 text-slate-600">임장</h4><p class="text-sm text-slate-400 mt-2">현장 학습</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="rounded-[30px] bg-white border border-slate-200 page-shadow p-5 sm:p-8 mb-12">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex rounded-full bg-white border border-slate-300 text-slate-900 px-3 py-1 text-xs font-black">G안</span>
+          <h2 class="font-display text-3xl font-black mt-4 word-keep">프리미엄 화이트안</h2>
+        </div>
+        <p class="max-w-xl text-sm text-slate-500 word-keep">색 면적을 줄이고 흰 카드, 얇은 선, 상태 점으로 고급스럽게 정리한 안입니다.</p>
+      </div>
+      <div class="rounded-[28px] border border-slate-200 overflow-hidden">
+        <div class="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+          <article class="p-6">
+            <div class="flex items-center gap-3 mb-6"><span class="w-3 h-3 rounded-full bg-brand-orange"></span><h3 class="font-display text-2xl font-black">내집마련</h3></div>
+            <div class="space-y-3">
+              <div class="rounded-2xl border border-slate-200 p-5"><p class="text-xs font-black text-brand-orange">진행 중</p><h4 class="font-display text-lg font-black mt-2">내집마련 1:1 코칭</h4><p class="text-sm text-slate-500 mt-2">개인 맞춤 학습</p></div>
+              <div class="rounded-2xl border border-dashed border-slate-300 p-5"><p class="text-xs font-black text-slate-600">준비 중</p><h4 class="font-display text-lg font-black mt-2">내집마련 실전반</h4><p class="text-sm text-slate-500 mt-2">온라인 강의 + 템플릿</p></div>
+              <div class="rounded-2xl border border-slate-100 bg-slate-50 p-5"><p class="text-xs font-black text-slate-400">추후 예정</p><h4 class="font-display text-lg font-black mt-2 text-slate-500">간단 이메일 코칭</h4><p class="text-sm text-slate-400 mt-2">방향 제시</p></div>
+            </div>
+          </article>
+          <article class="p-6">
+            <div class="flex items-center gap-3 mb-6"><span class="w-3 h-3 rounded-full bg-brand-blue"></span><h3 class="font-display text-2xl font-black">재테크</h3></div>
+            <div class="space-y-3">
+              <div class="rounded-2xl border border-dashed border-slate-300 p-5"><p class="text-xs font-black text-brand-blue">준비 중</p><h4 class="font-display text-lg font-black mt-2">전자책</h4><p class="text-sm text-slate-500 mt-2">기초 지식 정리</p></div>
+              <div class="rounded-2xl border border-dashed border-slate-300 p-5"><p class="text-xs font-black text-brand-blue">준비 중</p><h4 class="font-display text-lg font-black mt-2">독서모임</h4><p class="text-sm text-slate-500 mt-2">함께 성장</p></div>
+              <div class="rounded-2xl border border-dashed border-slate-300 p-5"><p class="text-xs font-black text-brand-blue">준비 중</p><h4 class="font-display text-lg font-black mt-2">재테크 기초반</h4><p class="text-sm text-slate-500 mt-2">기본기 학습</p></div>
+            </div>
+          </article>
+          <article class="p-6">
+            <div class="flex items-center gap-3 mb-6"><span class="w-3 h-3 rounded-full bg-emerald-500"></span><h3 class="font-display text-2xl font-black">공통</h3></div>
+            <div class="space-y-3">
+              <div class="rounded-2xl border border-dashed border-slate-300 p-5"><p class="text-xs font-black text-emerald-600">준비 중</p><h4 class="font-display text-lg font-black mt-2">무료 템플릿</h4><p class="text-sm text-slate-500 mt-2">실행 도구</p></div>
+              <div class="rounded-2xl border border-slate-100 bg-slate-50 p-5"><p class="text-xs font-black text-slate-400">추후 예정</p><h4 class="font-display text-lg font-black mt-2 text-slate-500">무료 스터디</h4><p class="text-sm text-slate-400 mt-2">그룹 학습</p></div>
+              <div class="rounded-2xl border border-slate-100 bg-slate-50 p-5"><p class="text-xs font-black text-slate-400">추후 예정</p><h4 class="font-display text-lg font-black mt-2 text-slate-500">임장</h4><p class="text-sm text-slate-400 mt-2">현장 경험</p></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="rounded-[30px] bg-[#111827] text-white page-shadow p-5 sm:p-8">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex rounded-full bg-white/10 text-white px-3 py-1 text-xs font-black">H안</span>
+          <h2 class="font-display text-3xl font-black mt-4 word-keep">컴팩트 운영형</h2>
+        </div>
+        <p class="max-w-xl text-sm text-slate-300 word-keep">기존 정보를 더 촘촘하게 배치해 한 화면에서 전체 상품군을 빠르게 훑는 안입니다.</p>
+      </div>
+      <div class="grid lg:grid-cols-3 gap-5">
+        <article class="rounded-3xl bg-white/8 border border-white/10 p-5">
+          <h3 class="font-display text-xl font-black text-orange-200 mb-4">내집마련</h3>
+          <div class="space-y-3">
+            <div class="rounded-2xl bg-white text-brand-dark p-4"><div class="flex items-center justify-between gap-3"><h4 class="font-black">1:1 코칭</h4><span class="text-xs font-black text-brand-orange">진행 중</span></div><p class="text-sm text-slate-500 mt-1">개인 맞춤</p></div>
+            <div class="rounded-2xl bg-white/8 border border-white/10 p-4"><div class="flex items-center justify-between gap-3"><h4 class="font-black">실전반</h4><span class="text-xs font-black text-blue-200">준비 중</span></div><p class="text-sm text-slate-300 mt-1">강의 + 템플릿</p></div>
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-4"><div class="flex items-center justify-between gap-3"><h4 class="font-black text-slate-300">이메일 코칭</h4><span class="text-xs font-black text-slate-400">추후</span></div><p class="text-sm text-slate-400 mt-1">핵심 정리</p></div>
+          </div>
+        </article>
+        <article class="rounded-3xl bg-white/8 border border-white/10 p-5">
+          <h3 class="font-display text-xl font-black text-blue-200 mb-4">재테크</h3>
+          <div class="space-y-3">
+            <div class="rounded-2xl bg-white/8 border border-white/10 p-4"><div class="flex items-center justify-between gap-3"><h4 class="font-black">전자책</h4><span class="text-xs font-black text-blue-200">준비 중</span></div><p class="text-sm text-slate-300 mt-1">기초 지식</p></div>
+            <div class="rounded-2xl bg-white/8 border border-white/10 p-4"><div class="flex items-center justify-between gap-3"><h4 class="font-black">독서모임</h4><span class="text-xs font-black text-blue-200">준비 중</span></div><p class="text-sm text-slate-300 mt-1">함께 성장</p></div>
+            <div class="rounded-2xl bg-white/8 border border-white/10 p-4"><div class="flex items-center justify-between gap-3"><h4 class="font-black">재테크 기초반</h4><span class="text-xs font-black text-blue-200">준비 중</span></div><p class="text-sm text-slate-300 mt-1">부동산·주식 기본기</p></div>
+          </div>
+        </article>
+        <article class="rounded-3xl bg-white/8 border border-white/10 p-5">
+          <h3 class="font-display text-xl font-black text-emerald-200 mb-4">공통</h3>
+          <div class="space-y-3">
+            <div class="rounded-2xl bg-white/8 border border-white/10 p-4"><div class="flex items-center justify-between gap-3"><h4 class="font-black">무료 템플릿</h4><span class="text-xs font-black text-emerald-200">준비 중</span></div><p class="text-sm text-slate-300 mt-1">실행 자료</p></div>
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-4"><div class="flex items-center justify-between gap-3"><h4 class="font-black text-slate-300">무료 스터디</h4><span class="text-xs font-black text-slate-400">추후</span></div><p class="text-sm text-slate-400 mt-1">그룹 학습</p></div>
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-4"><div class="flex items-center justify-between gap-3"><h4 class="font-black text-slate-300">임장</h4><span class="text-xs font-black text-slate-400">추후</span></div><p class="text-sm text-slate-400 mt-1">현장 경험</p></div>
+          </div>
+        </article>
       </div>
     </section>
   </main>
