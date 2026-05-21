@@ -34,7 +34,7 @@
       '      <strong style="display:block;font-size:22px;font-weight:800;color:#f3f4f6;letter-spacing:-0.02em">우리동네 재테크</strong>',
       '      <a href="https://www.youtube.com/@우리동네재테크" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:6px;margin-top:6px;color:#ededed;text-decoration:none;font-size:14px;font-weight:600"><span>유튜브</span><span aria-hidden="true" style="display:inline-flex;align-items:center"><svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="17" height="12" rx="3" fill="#FF0000"/><path d="M7 3.5L11.5 6L7 8.5V3.5Z" fill="white"/></svg></span></a>',
       '      <div style="color:#888888;font-size:13px;line-height:2.15;margin-top:18px">',
-      '        <p style="margin:0">(주)우리동네사람들 | 대표자 : 홍윤지 | 소재지 : 당산로 92, 301-이3호(당산동1가, 호서빌딩)</p>',
+      '        <p style="margin:0">(주)우리동네사람들 | 대표자 : 홍윤지 | 서울특별시 당산로 92, 301-이3호(당산동1가, 호서빌딩)</p>',
       '        <p style="margin:0">사업자 등록번호 : 386-86-03832 | 통신판매신고번호 : 제 2026-서울영등포-0991 호</p>',
       '        <p style="margin:0">개인정보 보호책임자 : 홍윤지 | 호스팅제공자 : (주)아임웹</p>',
       '        <p style="margin:0">대표번호 070-4517-9400</p>',
