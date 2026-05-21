@@ -856,37 +856,33 @@
             sidebarType: 'root',
             activeMatch: ['coaching-payment-card-drafts.html'],
             hubVisible: true
-          }
-        ]
-      },
-      {
-        id: 'temp',
-        hubTitle: '임시 테스트',
-        dashedTop: true,
-        alwaysVisible: false,
-        collapsible: true,
-        defaultOpen: false,
-        nav: {
-          type: 'single',
-          label: '임시',
-          href: 'temp/',
-          activeMatch: ['/temp'],
-          hidden: true
-        },
-        sidebar: {
-          title: '임시 테스트'
-        },
-        items: [
+          },
           {
-            id: 'temp-coaching-payment-card-drafts',
-            title: '카드결제 안내 시안 4종',
-            description: '카톡 결제 안내용 카드결제/무통장 입금 화면 A~D 비교',
-            href: 'homepage/coaching-payment-card-drafts.html',
+            id: 'archive-coaching-alimtalk-receipt',
+            archiveNo: 'A016',
+            modifiedDate: '2026-05-21',
+            title: '알림톡 영수증 이미지 시안 A·B·C·D',
+            description: '1:1 코칭 신청 접수 알림톡용 영수증 카드 비교 (UL_1040 검수중, D안 채택)',
+            href: 'homepage/coaching-alimtalk-receipt.html',
             badgeText: 'TEST',
             badgeTone: 'soon',
             iconKey: 'money',
             sidebarType: 'root',
-            activeMatch: ['coaching-payment-card-drafts.html'],
+            activeMatch: ['coaching-alimtalk-receipt.html'],
+            hubVisible: true
+          },
+          {
+            id: 'archive-coaching-alimtalk-receipt-svg',
+            archiveNo: 'A017',
+            modifiedDate: '2026-05-21',
+            title: '알림톡 영수증 SVG zigzag 시안',
+            description: 'C안 베이스 + SVG로 진짜 깎인 노치 (비교용)',
+            href: 'homepage/coaching-alimtalk-receipt-svg.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'money',
+            sidebarType: 'root',
+            activeMatch: ['coaching-alimtalk-receipt-svg.html'],
             hubVisible: true
           }
         ]
