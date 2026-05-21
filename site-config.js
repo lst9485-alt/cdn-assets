@@ -269,6 +269,89 @@
         ]
       },
       {
+        id: 'pg-homepage',
+        hubTitle: 'PG 전용 이전본',
+        collapsible: true,
+        defaultOpen: true,
+        nav: {
+          type: 'single',
+          label: 'PG 전용',
+          href: 'homepage/pg-version/main-page.html',
+          activeMatch: ['/homepage/pg-version'],
+          hidden: true
+        },
+        sidebar: {
+          title: 'PG 전용 이전본'
+        },
+        items: [
+          {
+            id: 'pg-main-page',
+            title: 'PG 메인 페이지',
+            description: '이전 PG 결제 연결용 메인 페이지',
+            href: 'homepage/pg-version/main-page.html',
+            badgeText: 'PG',
+            badgeTone: 'live',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['pg-version/main-page.html'],
+            hubVisible: true,
+            groupLabel: 'PG'
+          },
+          {
+            id: 'pg-curriculum-page',
+            title: 'PG 커리큘럼 페이지',
+            description: '이전 PG 결제 연결용 커리큘럼 페이지',
+            href: 'homepage/pg-version/curriculum.html',
+            badgeText: 'PG',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['pg-version/curriculum.html'],
+            hubVisible: true,
+            groupLabel: 'PG'
+          },
+          {
+            id: 'pg-refund-policy',
+            title: 'PG 환불규정 안내',
+            description: '이전 PG 흐름에 맞춘 환불 규정 페이지',
+            href: 'homepage/pg-version/refund-policy.html',
+            badgeText: 'PG',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['pg-version/refund-policy.html'],
+            hubVisible: true,
+            groupLabel: 'PG'
+          },
+          {
+            id: 'pg-main-page-all',
+            title: 'PG 메인 페이지 전체본',
+            description: '이전 PG 메인 페이지 원본 전체 HTML',
+            href: 'homepage/pg-version/main-page-all.html',
+            badgeText: 'ALL',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['pg-version/main-page-all.html'],
+            hubVisible: true,
+            groupLabel: '원본'
+          },
+          {
+            id: 'pg-curriculum-all',
+            title: 'PG 커리큘럼 전체본',
+            description: '이전 PG 커리큘럼 원본 전체 HTML',
+            href: 'homepage/pg-version/curriculum-all.html',
+            badgeText: 'ALL',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['pg-version/curriculum-all.html'],
+            hubVisible: true,
+            groupLabel: '원본'
+          }
+        ]
+      },
+      {
         id: 'consult',
         hubTitle: '상담',
         collapsible: true,
