@@ -13,7 +13,6 @@
         fontFamily: {
           sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
           display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
-          mono: ['"JetBrains Mono"', '"Pretendard Variable"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
         },
         colors: {
           brand: { orange: '#FF6B00', blue: '#0055FF', dark: '#111111' }
@@ -24,7 +23,6 @@
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/index.min.css">
 <style>
   html, body { margin: 0; padding: 0; }
   body {
@@ -61,38 +59,36 @@
       radial-gradient(var(--notch) at 50% 0, transparent 98%, #000 100%) 50% 0/28px var(--notch) repeat-x,
       radial-gradient(var(--notch) at 50% 100%, transparent 98%, #000 100%) 50% 100%/28px var(--notch) repeat-x,
       linear-gradient(#000, #000);
-    -webkit-mask-composite: source-over;
     mask:
       radial-gradient(var(--notch) at 50% 0, transparent 98%, #000 100%) 50% 0/28px var(--notch) repeat-x,
       radial-gradient(var(--notch) at 50% 100%, transparent 98%, #000 100%) 50% 100%/28px var(--notch) repeat-x,
       linear-gradient(#000, #000);
-    padding: 36px 64px 32px;
+    padding: 40px 64px 36px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
   .receipt-head {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     gap: 24px;
   }
   .stamp {
     font-family: 'GmarketSans', Pretendard, sans-serif;
     font-weight: 900;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.32em;
     color: #0055FF;
     padding: 4px 10px;
     border: 2px solid #0055FF;
     border-radius: 4px;
   }
-  .meta {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-    font-size: 12px;
+  .brand {
+    font-family: 'GmarketSans', Pretendard, sans-serif;
+    font-weight: 900;
+    font-size: 14px;
     color: #6b7280;
-    text-align: right;
-    line-height: 1.6;
   }
   .word-keep { word-break: keep-all; overflow-wrap: break-word; }
   .row {
@@ -102,10 +98,6 @@
     gap: 24px;
   }
   .row dt { color: #6b7280; font-size: 14px; }
-  .row dd .num {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-    font-weight: 700;
-  }
   .dashed { border-top: 1.5px dashed #d1d5db; border-bottom: 1.5px dashed #d1d5db; }
 </style>
 </head>
@@ -115,12 +107,8 @@
     <div class="receipt-wrap">
       <div class="receipt" id="card-a">
         <div class="receipt-head">
-          <span class="stamp">RECEIPT</span>
-          <div class="meta">
-            우리동네재테크<br>
-            No. 2026-0521-001<br>
-            2026.05.21
-          </div>
+          <span class="stamp">영수증</span>
+          <p class="brand">우리동네재테크</p>
         </div>
         <h1 class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 64px;">신청 접수 완료</h1>
         <dl class="dashed py-5 space-y-3">
@@ -130,7 +118,7 @@
           </div>
           <div class="row">
             <dt>결제 금액</dt>
-            <dd class="font-display text-4xl font-black text-brand-blue"><span class="num">400,000</span> 원</dd>
+            <dd class="font-display text-4xl font-black text-brand-blue">400,000원</dd>
           </div>
         </dl>
       </div>
@@ -138,14 +126,10 @@
 
     <p class="label">B · 영수증 + 계좌</p>
     <div class="receipt-wrap">
-      <div class="receipt" id="card-b" style="padding: 32px 56px 28px;">
+      <div class="receipt" id="card-b" style="padding: 36px 56px 32px;">
         <div class="receipt-head">
-          <span class="stamp">RECEIPT</span>
-          <div class="meta">
-            우리동네재테크<br>
-            No. 2026-0521-001<br>
-            2026.05.21
-          </div>
+          <span class="stamp">영수증</span>
+          <p class="brand">우리동네재테크</p>
         </div>
         <h1 class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 48px;">신청 접수 완료</h1>
         <dl class="dashed py-4 space-y-2">
@@ -155,13 +139,13 @@
           </div>
           <div class="row">
             <dt>결제 금액</dt>
-            <dd class="font-display text-3xl font-black text-brand-blue"><span class="num">400,000</span> 원</dd>
+            <dd class="font-display text-3xl font-black text-brand-blue">400,000원</dd>
           </div>
         </dl>
-        <div class="row" style="align-items: baseline;">
-          <dt style="color:#6b7280; font-size:14px;">입금 계좌</dt>
+        <div class="row">
+          <dt>입금 계좌</dt>
           <div style="text-align:right;">
-            <p class="font-display text-xl font-black text-brand-dark"><span class="num">하나 125-910032-26304</span></p>
+            <p class="font-display text-xl font-black text-brand-dark">하나은행 125-910032-26304</p>
             <p style="font-size:12px; color:#6b7280; margin-top:2px;">예금주 · 주식회사 우리동네사람들</p>
           </div>
         </div>
