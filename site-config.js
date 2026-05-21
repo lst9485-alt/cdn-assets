@@ -900,6 +900,20 @@
             sidebarType: 'root',
             activeMatch: ['curriculum-drafts-4.html'],
             hubVisible: true
+          },
+          {
+            id: 'archive-curriculum-bottom-drafts-4',
+            archiveNo: 'A021',
+            modifiedDate: '2026-05-21',
+            title: '커리큘럼 하단 시안 4종',
+            description: '1:1 코칭 커리큘럼 + 하단 CTA 교체 시안 A~D',
+            href: 'homepage/curriculum-bottom-drafts-4.html',
+            badgeText: '홈페이지',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['curriculum-bottom-drafts-4.html'],
+            hubVisible: true
           }
         ]
       }
