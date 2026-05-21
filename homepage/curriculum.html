@@ -52,7 +52,7 @@
   .status-upcoming-orange { border: 1.5px dashed rgba(255,107,0,.40); background: white; }
   .status-upcoming-neutral { border: 1.5px dashed rgba(15,23,42,.32); background: white; }
   .status-idea { border: 1px solid #e2e8f0; background: #f8fafc; }
-  .kakao-channel-pill { display:inline-flex; align-items:center; min-height:40px; border-radius:999px; background:#FEE500; color:#111; padding:4px 5px 4px 15px; box-shadow:0 12px 24px rgba(15,23,42,.12); transition:transform .18s ease, box-shadow .18s ease; text-decoration:none; }
+  .kakao-channel-pill { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:40px; border-radius:999px; background:#FEE500; color:#111; padding:4px 15px; box-shadow:0 12px 24px rgba(15,23,42,.12); transition:transform .18s ease, box-shadow .18s ease; text-decoration:none; }
   .kakao-channel-pill:hover { transform:translateY(-2px); box-shadow:0 16px 30px rgba(15,23,42,.18); }
   .kakao-channel-pill .ch { display:grid; place-items:center; width:27px; height:27px; border-radius:999px; background:#111; color:#FEE500; font-size:11px; font-weight:900; margin:0 8px; }
   .kakao-channel-pill .id { display:inline-flex; align-items:center; gap:10px; min-height:30px; border-radius:999px; background:#fffdf2; padding:0 4px 0 13px; font-size:13px; font-weight:900; }
@@ -222,17 +222,16 @@
 <div class="px-6 sm:px-8 pb-12">
   <section data-section="curriculum-cta" class="max-w-4xl mx-auto bg-brand-dark rounded-3xl py-12 sm:py-16 px-8 text-center">
     <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
-    <h2 class="text-2xl sm:text-3xl font-display font-black text-white mb-3 word-keep">내집마련이 고민이라면?</h2>
-    <p class="text-gray-400 mb-6 word-keep">후회 없는 내집마련을 도와드립니다</p>
+    <h2 class="text-3xl sm:text-4xl font-display font-black text-white mb-3 word-keep">내집마련이 고민이라면?</h2>
+    <p class="text-lg text-gray-400 mb-6 word-keep">후회 없는 내집마련을 도와드립니다</p>
     <div class="flex flex-col items-center justify-center gap-5">
       <a href="coaching-all-v3.html" class="inline-flex items-center gap-2 bg-brand-orange text-white font-bold px-9 py-4 rounded-full text-xl hover:scale-[1.02] active:scale-[0.98]" style="transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);">
         1:1 코칭 신청하기
         <iconify-icon icon="solar:arrow-right-bold" class="text-xl"></iconify-icon>
       </a>
       <div class="text-center">
-        <p class="text-sm text-gray-300 mb-2 word-keep">신청 전 궁금한 점이 있다면</p>
         <a href="http://pf.kakao.com/_mcxnjX/friend" target="_blank" rel="noopener" class="kakao-channel-pill" aria-label="우리동네재테크 카카오톡 채널 추가하기">
-          <iconify-icon icon="ri:kakao-talk-fill" class="text-lg mr-1" style="color:#3C1E1E;"></iconify-icon>
+          <iconify-icon icon="ri:kakao-talk-fill" class="text-lg" style="color:#3C1E1E;"></iconify-icon>
           <span class="text-sm font-black">카톡으로 문의하기</span>
         </a>
       </div>
