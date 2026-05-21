@@ -43,7 +43,6 @@
       '      </div>',
       '    </div>',
       '    <div style="margin-left:-8px">',
-      '      <strong style="display:block;font-size:22px;font-weight:800;color:#f3f4f6;letter-spacing:-0.02em">우리동네 클래스</strong>',
       '      <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">',
       '        <a href="' + new URL('coaching-all-v3.html', base).href + '" style="display:inline-flex;align-items:center;gap:6px;color:#ededed;text-decoration:none;font-size:14px;font-weight:600"><span aria-hidden="true">🏠</span><span>1:1 코칭</span></a>',
       '        <a href="' + new URL('curriculum.html', base).href + '" style="color:#ededed;text-decoration:none;font-size:14px;font-weight:600">커리큘럼</a>',
