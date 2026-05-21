@@ -284,7 +284,7 @@
       var stage = document.querySelector('.stage');
       if (stage) stage.style.gap = '0';
       document.querySelectorAll('.label').forEach(function (el) { el.style.display = 'none'; });
-      ['a', 'b', 'c'].forEach(function (id) {
+      ['a', 'b', 'c', 'd'].forEach(function (id) {
         var el = document.getElementById('card-' + id);
         if (el && id !== wanted) el.closest('.receipt-wrap').style.display = 'none';
       });
