@@ -55,20 +55,25 @@
     background: #ffffff;
     box-sizing: border-box;
     position: relative;
-    --notch: 14px;
-    -webkit-mask:
-      radial-gradient(var(--notch) at 50% 0, transparent 98%, #000 100%) 50% 0/28px var(--notch) repeat-x,
-      radial-gradient(var(--notch) at 50% 100%, transparent 98%, #000 100%) 50% 100%/28px var(--notch) repeat-x,
-      linear-gradient(#000, #000);
-    mask:
-      radial-gradient(var(--notch) at 50% 0, transparent 98%, #000 100%) 50% 0/28px var(--notch) repeat-x,
-      radial-gradient(var(--notch) at 50% 100%, transparent 98%, #000 100%) 50% 100%/28px var(--notch) repeat-x,
-      linear-gradient(#000, #000);
     padding: 40px 64px 36px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
+  .receipt::before,
+  .receipt::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 14px;
+    pointer-events: none;
+    background-image: radial-gradient(circle 14px at 14px 7px, #eef3ff 12px, transparent 13px);
+    background-size: 28px 14px;
+    background-repeat: repeat-x;
+  }
+  .receipt::before { top: -7px; }
+  .receipt::after  { bottom: -7px; }
   .receipt-head {
     display: flex;
     align-items: center;
@@ -233,5 +238,20 @@
       </div>
     </div>
   </div>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var wanted = params.get('card');
+      if (!wanted) return;
+      document.body.style.padding = '0';
+      var stage = document.querySelector('.stage');
+      if (stage) stage.style.gap = '0';
+      document.querySelectorAll('.label').forEach(function (el) { el.style.display = 'none'; });
+      ['a', 'b', 'c'].forEach(function (id) {
+        var el = document.getElementById('card-' + id);
+        if (el && id !== wanted) el.closest('.receipt-wrap').style.display = 'none';
+      });
+    })();
+  </script>
 </body>
 </html>
