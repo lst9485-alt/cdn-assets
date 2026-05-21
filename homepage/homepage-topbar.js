@@ -29,19 +29,13 @@
     ].join(';');
 
     bar.innerHTML = [
-      '<div data-homepage-topbar-inner style="max-width:1160px;margin:0 auto;padding:18px 20px 14px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">',
+      '<div data-homepage-topbar-inner style="max-width:1160px;margin:0 auto;padding:20px 20px;display:flex;align-items:center;justify-content:space-between;gap:28px">',
       '  <a data-homepage-topbar-logo href="' + new URL('main-page.html', base).href + '" style="color:#0a0a0a;font-family:GmarketSans,Pretendard,sans-serif;font-size:28px;font-weight:900;letter-spacing:-.02em;text-decoration:none;white-space:nowrap">우리동네재테크</a>',
       '  <nav data-homepage-topbar-nav style="display:flex;align-items:center;justify-content:center;gap:34px;flex:1;overflow-x:auto">',
-      '    <a href="' + new URL('coaching-all-v3.html', base).href + '" style="color:#0a0a0a;font-size:17px;font-weight:800;text-decoration:none;white-space:nowrap">내집마련 1:1 코칭</a>',
-      '    <a href="' + new URL('curriculum.html', base).href + '" style="color:#0a0a0a;font-size:17px;font-weight:800;text-decoration:none;white-space:nowrap">커리큘럼</a>',
-      '    <a href="' + new URL('refund-policy.html', base).href + '" style="color:#0a0a0a;font-size:17px;font-weight:800;text-decoration:none;white-space:nowrap">환불 규정</a>',
+      '    <a href="' + new URL('coaching-all-v3.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">내집마련 1:1 코칭</a>',
+      '    <a href="' + new URL('curriculum.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">커리큘럼</a>',
+      '    <a href="' + new URL('refund-policy.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">환불 규정</a>',
       '  </nav>',
-      '  <div data-homepage-topbar-shortcuts style="width:100%;display:flex;align-items:center;gap:8px;overflow-x:auto;padding-top:2px">',
-      '    <span style="color:#9ca3af;font-size:13px;font-weight:800;white-space:nowrap">바로가기</span>',
-      '    <a href="' + new URL('coaching-all-v3.html', base).href + '" style="display:inline-flex;align-items:center;border:1px solid #fed7aa;background:#fff7ed;color:#c2410c;border-radius:999px;padding:7px 12px;font-size:14px;font-weight:900;text-decoration:none;white-space:nowrap">내집마련 1:1 코칭</a>',
-      '    <a href="' + new URL('curriculum.html', base).href + '" style="display:inline-flex;align-items:center;border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:7px 12px;font-size:14px;font-weight:900;text-decoration:none;white-space:nowrap">커리큘럼</a>',
-      '    <a href="' + new URL('refund-policy.html', base).href + '" style="display:inline-flex;align-items:center;border:1px solid #e5e7eb;background:#f9fafb;color:#374151;border-radius:999px;padding:7px 12px;font-size:14px;font-weight:900;text-decoration:none;white-space:nowrap">환불 규정</a>',
-      '  </div>',
       '</div>'
     ].join('');
 
@@ -67,14 +61,7 @@
       '    -webkit-overflow-scrolling: touch !important;',
       '  }',
       '  [data-homepage-topbar-nav] a {',
-      '    font-size: 15px !important;',
-      '  }',
-      '  [data-homepage-topbar-shortcuts] {',
-      '    padding-bottom: 2px !important;',
-      '  }',
-      '  [data-homepage-topbar-shortcuts] a {',
-      '    font-size: 13px !important;',
-      '    padding: 7px 11px !important;',
+      '    font-size: 14px !important;',
       '  }',
       '}'
     ].join('');
