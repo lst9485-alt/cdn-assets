@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커리큘럼 카톡 문의 CTA 시안 — 우리동네 재테크</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      important: true,
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+          },
+          colors: {
+            brand: { orange: '#FF6B00', dark: '#0a0a0a' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <style>
+    html { font-size: 16px !important; }
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; }
+    .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+    .page-shadow { box-shadow: 0 24px 70px rgba(15,23,42,.12); }
+    .cta-box { background:#0a0a0a; border-radius:28px; padding:42px 28px; text-align:center; color:#fff; }
+    .primary-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:#FF6B00; color:#fff; font-weight:900; padding:15px 32px; border-radius:999px; font-size:19px; text-decoration:none; }
+    .kakao-yellow { background:#FEE500; color:#3C1E1E; }
+  </style>
+</head>
+<body class="bg-[#f5f6f8] text-brand-dark">
+  <main class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+    <section class="mb-10">
+      <p class="text-xs font-black text-brand-orange tracking-wide">KAKAO CTA DRAFTS</p>
+      <h1 class="font-display text-3xl sm:text-5xl font-black mt-3 word-keep">카톡 문의 CTA 시안</h1>
+      <p class="mt-4 max-w-3xl text-gray-500 word-keep">커리큘럼 하단 검정 CTA 박스 안에서 `1:1 코칭 신청하기`를 주 CTA로 유지하고, 카톡 문의를 보조 CTA로 배치한 시안입니다.</p>
+    </section>
+
+    <div class="grid lg:grid-cols-2 gap-6">
+      <section class="rounded-[30px] bg-white border border-slate-200 p-5 page-shadow">
+        <p class="text-xs font-black text-brand-orange mb-3">A안 · 작은 노란 보조 버튼</p>
+        <div class="cta-box">
+          <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
+          <h2 class="text-2xl sm:text-3xl font-display font-black mb-3 word-keep">내집마련, 어디서부터 시작할지 모르겠다면?</h2>
+          <p class="text-gray-400 mb-7 word-keep">현재 상황에 맞는 맞춤 학습 방법을 안내해드립니다.</p>
+          <div class="flex flex-col items-center gap-5">
+            <a href="coaching-all-v3.html" class="primary-btn">1:1 코칭 신청하기 <iconify-icon icon="solar:arrow-right-bold"></iconify-icon></a>
+            <a href="http://pf.kakao.com/_mcxnjX/friend" class="inline-flex items-center gap-2 kakao-yellow rounded-full px-5 py-2.5 text-sm font-black no-underline">
+              <iconify-icon icon="ri:kakao-talk-fill" class="text-lg"></iconify-icon> 카톡으로 문의하기
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-[30px] bg-white border border-slate-200 p-5 page-shadow">
+        <p class="text-xs font-black text-brand-orange mb-3">B안 · 텍스트 링크형</p>
+        <div class="cta-box">
+          <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
+          <h2 class="text-2xl sm:text-3xl font-display font-black mb-3 word-keep">내집마련, 어디서부터 시작할지 모르겠다면?</h2>
+          <p class="text-gray-400 mb-7 word-keep">현재 상황에 맞는 맞춤 학습 방법을 안내해드립니다.</p>
+          <div class="flex flex-col items-center gap-5">
+            <a href="coaching-all-v3.html" class="primary-btn">1:1 코칭 신청하기 <iconify-icon icon="solar:arrow-right-bold"></iconify-icon></a>
+            <a href="http://pf.kakao.com/_mcxnjX/friend" class="inline-flex items-center gap-2 text-[#FEE500] text-sm font-black underline underline-offset-4 decoration-[#FEE500]/45 no-underline">
+              <iconify-icon icon="ri:kakao-talk-fill" class="text-lg"></iconify-icon> 카톡으로 문의하기 →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-[30px] bg-white border border-slate-200 p-5 page-shadow">
+        <p class="text-xs font-black text-brand-orange mb-3">C안 · 얇은 테두리 pill</p>
+        <div class="cta-box">
+          <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
+          <h2 class="text-2xl sm:text-3xl font-display font-black mb-3 word-keep">내집마련, 어디서부터 시작할지 모르겠다면?</h2>
+          <p class="text-gray-400 mb-7 word-keep">현재 상황에 맞는 맞춤 학습 방법을 안내해드립니다.</p>
+          <div class="flex flex-col items-center gap-5">
+            <a href="coaching-all-v3.html" class="primary-btn">1:1 코칭 신청하기 <iconify-icon icon="solar:arrow-right-bold"></iconify-icon></a>
+            <a href="http://pf.kakao.com/_mcxnjX/friend" class="inline-flex items-center gap-2 border border-[#FEE500]/45 text-[#FEE500] rounded-full px-5 py-2.5 text-sm font-black no-underline">
+              <span class="grid place-items-center w-6 h-6 rounded-full bg-[#FEE500] text-[#3C1E1E]"><iconify-icon icon="ri:kakao-talk-fill"></iconify-icon></span> 카톡으로 문의하기
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-[30px] bg-white border border-slate-200 p-5 page-shadow">
+        <p class="text-xs font-black text-brand-orange mb-3">D안 · 설명 문구 포함</p>
+        <div class="cta-box">
+          <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
+          <h2 class="text-2xl sm:text-3xl font-display font-black mb-3 word-keep">내집마련, 어디서부터 시작할지 모르겠다면?</h2>
+          <p class="text-gray-400 mb-7 word-keep">현재 상황에 맞는 맞춤 학습 방법을 안내해드립니다.</p>
+          <div class="flex flex-col items-center gap-5">
+            <a href="coaching-all-v3.html" class="primary-btn">1:1 코칭 신청하기 <iconify-icon icon="solar:arrow-right-bold"></iconify-icon></a>
+            <div class="text-center">
+              <p class="text-xs text-gray-500 mb-2">신청 전 궁금한 점이 있다면</p>
+              <a href="http://pf.kakao.com/_mcxnjX/friend" class="inline-flex items-center gap-2 kakao-yellow rounded-full px-5 py-2 text-sm font-black no-underline">
+                <iconify-icon icon="ri:kakao-talk-fill" class="text-lg"></iconify-icon> 카톡으로 문의하기
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-[30px] bg-white border border-slate-200 p-5 page-shadow">
+        <p class="text-xs font-black text-brand-orange mb-3">E안 · 좌측 아이콘 박스형</p>
+        <div class="cta-box">
+          <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
+          <h2 class="text-2xl sm:text-3xl font-display font-black mb-3 word-keep">내집마련, 어디서부터 시작할지 모르겠다면?</h2>
+          <p class="text-gray-400 mb-7 word-keep">현재 상황에 맞는 맞춤 학습 방법을 안내해드립니다.</p>
+          <div class="flex flex-col items-center gap-5">
+            <a href="coaching-all-v3.html" class="primary-btn">1:1 코칭 신청하기 <iconify-icon icon="solar:arrow-right-bold"></iconify-icon></a>
+            <a href="http://pf.kakao.com/_mcxnjX/friend" class="inline-flex items-center overflow-hidden rounded-full bg-white/10 border border-white/15 text-white text-sm font-black no-underline">
+              <span class="grid place-items-center w-11 h-10 kakao-yellow text-[#3C1E1E]"><iconify-icon icon="ri:kakao-talk-fill" class="text-xl"></iconify-icon></span>
+              <span class="px-4">카톡으로 문의하기</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-[30px] bg-white border border-slate-200 p-5 page-shadow">
+        <p class="text-xs font-black text-brand-orange mb-3">F안 · 가장 작은 보조칩</p>
+        <div class="cta-box">
+          <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
+          <h2 class="text-2xl sm:text-3xl font-display font-black mb-3 word-keep">내집마련, 어디서부터 시작할지 모르겠다면?</h2>
+          <p class="text-gray-400 mb-7 word-keep">현재 상황에 맞는 맞춤 학습 방법을 안내해드립니다.</p>
+          <div class="flex flex-col items-center gap-5">
+            <a href="coaching-all-v3.html" class="primary-btn">1:1 코칭 신청하기 <iconify-icon icon="solar:arrow-right-bold"></iconify-icon></a>
+            <a href="http://pf.kakao.com/_mcxnjX/friend" class="inline-flex items-center gap-1.5 rounded-full bg-white/8 border border-white/10 px-4 py-2 text-xs font-black text-gray-200 no-underline">
+              <iconify-icon icon="ri:kakao-talk-fill" class="text-[#FEE500] text-base"></iconify-icon> 카톡으로 문의하기
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="homepage-shell.js?v=20260506d"></script>
+</body>
+</html>

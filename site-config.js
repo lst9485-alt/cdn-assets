@@ -914,6 +914,20 @@
             sidebarType: 'root',
             activeMatch: ['curriculum-bottom-drafts-4.html'],
             hubVisible: true
+          },
+          {
+            id: 'archive-curriculum-kakao-cta-drafts',
+            archiveNo: 'A022',
+            modifiedDate: '2026-05-21',
+            title: '커리큘럼 카톡 문의 CTA 시안',
+            description: '하단 CTA의 카톡 문의 보조 버튼 6종 비교',
+            href: 'homepage/curriculum-kakao-cta-drafts.html',
+            badgeText: '홈페이지',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['curriculum-kakao-cta-drafts.html'],
+            hubVisible: true
           }
         ]
       }
