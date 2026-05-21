@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=800">
+<meta name="robots" content="noindex, nofollow">
+<title>알림톡 영수증 SVG zigzag 시안 — 우리동네 재테크</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+          display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+        },
+        colors: {
+          brand: { orange: '#FF6B00', blue: '#0055FF', dark: '#111111' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Pretendard, system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #eef3ff;
+    padding: 0;
+  }
+  .stage {
+    width: 800px;
+    height: 400px;
+    position: relative;
+  }
+  .receipt-svg-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 24px 60px rgba(0, 85, 255, .12));
+  }
+  .receipt-content {
+    position: absolute;
+    inset: 0;
+    padding: 40px 64px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  .receipt-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .stamp {
+    font-family: 'GmarketSans', Pretendard, sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.32em;
+    color: #0055FF;
+    padding: 4px 10px;
+    border: 2px solid #0055FF;
+    border-radius: 4px;
+  }
+  .brand {
+    font-family: 'GmarketSans', Pretendard, sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    color: #6b7280;
+  }
+  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+  .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .row dt { color: #6b7280; font-size: 14px; }
+  .dashed { border-top: 1.5px dashed #d1d5db; border-bottom: 1.5px dashed #d1d5db; }
+  .footer-info {
+    font-size: 11px;
+    color: #9ca3af;
+    line-height: 1.6;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <svg class="receipt-svg-bg" viewBox="0 0 800 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <mask id="notch-mask">
+          <rect width="800" height="400" fill="white"/>
+          <!-- 위 노치 (29개, cx = 14 + 28i, cy=0, r=14) -->
+          <g fill="black">
+            <circle cx="14" cy="0" r="14"/>
+            <circle cx="42" cy="0" r="14"/>
+            <circle cx="70" cy="0" r="14"/>
+            <circle cx="98" cy="0" r="14"/>
+            <circle cx="126" cy="0" r="14"/>
+            <circle cx="154" cy="0" r="14"/>
+            <circle cx="182" cy="0" r="14"/>
+            <circle cx="210" cy="0" r="14"/>
+            <circle cx="238" cy="0" r="14"/>
+            <circle cx="266" cy="0" r="14"/>
+            <circle cx="294" cy="0" r="14"/>
+            <circle cx="322" cy="0" r="14"/>
+            <circle cx="350" cy="0" r="14"/>
+            <circle cx="378" cy="0" r="14"/>
+            <circle cx="406" cy="0" r="14"/>
+            <circle cx="434" cy="0" r="14"/>
+            <circle cx="462" cy="0" r="14"/>
+            <circle cx="490" cy="0" r="14"/>
+            <circle cx="518" cy="0" r="14"/>
+            <circle cx="546" cy="0" r="14"/>
+            <circle cx="574" cy="0" r="14"/>
+            <circle cx="602" cy="0" r="14"/>
+            <circle cx="630" cy="0" r="14"/>
+            <circle cx="658" cy="0" r="14"/>
+            <circle cx="686" cy="0" r="14"/>
+            <circle cx="714" cy="0" r="14"/>
+            <circle cx="742" cy="0" r="14"/>
+            <circle cx="770" cy="0" r="14"/>
+            <circle cx="798" cy="0" r="14"/>
+            <!-- 아래 노치 -->
+            <circle cx="14" cy="400" r="14"/>
+            <circle cx="42" cy="400" r="14"/>
+            <circle cx="70" cy="400" r="14"/>
+            <circle cx="98" cy="400" r="14"/>
+            <circle cx="126" cy="400" r="14"/>
+            <circle cx="154" cy="400" r="14"/>
+            <circle cx="182" cy="400" r="14"/>
+            <circle cx="210" cy="400" r="14"/>
+            <circle cx="238" cy="400" r="14"/>
+            <circle cx="266" cy="400" r="14"/>
+            <circle cx="294" cy="400" r="14"/>
+            <circle cx="322" cy="400" r="14"/>
+            <circle cx="350" cy="400" r="14"/>
+            <circle cx="378" cy="400" r="14"/>
+            <circle cx="406" cy="400" r="14"/>
+            <circle cx="434" cy="400" r="14"/>
+            <circle cx="462" cy="400" r="14"/>
+            <circle cx="490" cy="400" r="14"/>
+            <circle cx="518" cy="400" r="14"/>
+            <circle cx="546" cy="400" r="14"/>
+            <circle cx="574" cy="400" r="14"/>
+            <circle cx="602" cy="400" r="14"/>
+            <circle cx="630" cy="400" r="14"/>
+            <circle cx="658" cy="400" r="14"/>
+            <circle cx="686" cy="400" r="14"/>
+            <circle cx="714" cy="400" r="14"/>
+            <circle cx="742" cy="400" r="14"/>
+            <circle cx="770" cy="400" r="14"/>
+            <circle cx="798" cy="400" r="14"/>
+          </g>
+        </mask>
+      </defs>
+      <rect width="800" height="400" fill="white" mask="url(#notch-mask)"/>
+    </svg>
+
+    <div class="receipt-content">
+      <div class="receipt-head">
+        <span class="stamp">영수증</span>
+        <p class="brand">우리동네재테크</p>
+      </div>
+
+      <h1 class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 44px;">신청 접수 완료</h1>
+
+      <dl class="dashed py-3 space-y-1.5" style="font-size:14px;">
+        <div class="row">
+          <dt>상품</dt>
+          <dd class="font-display font-black text-brand-dark" style="font-size:17px;">내집마련 1:1 코칭 A</dd>
+        </div>
+        <div class="row">
+          <dt>수강 기간</dt>
+          <dd class="font-display font-black text-brand-dark" style="font-size:15px;">최대 180일</dd>
+        </div>
+        <div class="row">
+          <dt>결제 금액</dt>
+          <dd class="font-display font-black text-brand-blue" style="font-size:28px;">400,000원</dd>
+        </div>
+      </dl>
+
+      <div class="row" style="margin-top:8px;">
+        <dt>입금 계좌</dt>
+        <div style="text-align:right;">
+          <p class="font-display font-black text-brand-dark" style="font-size:16px;">하나은행 125-910032-26304</p>
+          <p class="font-display" style="font-size:13px; font-weight:700; color:#374151; margin-top:3px;">주식회사 우리동네사람들</p>
+        </div>
+      </div>
+
+      <div class="footer-info">
+        <span>(주)우리동네사람들 · 사업자 386-86-03832</span>
+        <span>· 신청자 보관용 ·</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
