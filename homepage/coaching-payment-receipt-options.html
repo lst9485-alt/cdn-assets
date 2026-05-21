@@ -125,7 +125,7 @@
     border-radius: 16px;
     padding: 18px 20px;
   }
-  .pay-card-card { border: 1px solid #e5e7eb; background: #ffffff; }
+  .pay-card-card { border: 1px solid #ffd8b3; background: #fff8f0; }
   .pay-card-bank { border: 1px solid #dbe4ff; background: #f6f9ff; }
   .pay-card .head {
     display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px;
@@ -134,14 +134,17 @@
     font-family: 'GmarketSans', Pretendard, sans-serif;
     font-weight: 900;
     font-size: 17px;
-    color: #111111;
   }
+  .pay-card-card .head h4 { color: #b34900; }
+  .pay-card-bank .head h4 { color: #0a1638; }
   .pay-card .icon-box {
     width: 36px; height: 36px; border-radius: 10px;
     display: grid; place-items: center;
   }
-  .pay-card-card .icon-box { background: #fff7ee; color: #FF6B00; }
-  .pay-card-bank .icon-box { background: #ffffff; color: #1747d4; }
+  .pay-card-card .icon-box { background: #FF6B00; }
+  .pay-card-card .icon-box iconify-icon { color: #ffffff; }
+  .pay-card-bank .icon-box { background: #1747d4; }
+  .pay-card-bank .icon-box iconify-icon { color: #ffffff; }
   .blocked-cards {
     margin-top: 10px;
     border-radius: 12px;
@@ -274,13 +277,16 @@
         <div class="pay-grid">
           <div class="pay-card pay-card-bank">
             <div class="head">
-              <h4 style="color:#0a1638;">무통장 입금</h4>
+              <h4>무통장 입금</h4>
               <span class="icon-box">
                 <iconify-icon icon="solar:banknote-2-bold" width="20" height="20"></iconify-icon>
               </span>
             </div>
             <div class="bank-info">
-              <p class="b1">입금 계좌</p>
+              <p class="b1">
+                입금 계좌
+                <span style="display:inline-block; margin-left:6px; padding:3px 8px; border-radius:5px; background:#dbeafe; color:#1d4ed8; font-size:11px; font-weight:800; letter-spacing:0.02em;">현금영수증 발행</span>
+              </p>
               <p class="b2">
                 <span>하나 125-910032-26304</span>
                 <button type="button" class="copy-btn" data-copy="125-910032-26304" aria-label="계좌번호 복사">
@@ -290,6 +296,7 @@
               </p>
               <p class="b3">예금주: 주식회사 우리동네사람들</p>
             </div>
+            <p style="margin-top:10px; font-size:12px; color:#475569; font-weight:600; line-height:1.55;">입금자명은 <strong style="color:#0a1638; font-weight:900;">신청자명과 동일</strong>하게 보내주세요.</p>
           </div>
 
           <div class="pay-card pay-card-card">
@@ -312,7 +319,7 @@
             <p>(주)우리동네사람들 · 사업자등록번호 386-86-03832</p>
             <p>통신판매신고번호 제 2026-서울영등포-0991 호</p>
           </div>
-          <span>입금자명은 신청자명과 동일하게 보내주세요</span>
+          <span>신청자 보관용</span>
         </div>
       </div>
     </div>
