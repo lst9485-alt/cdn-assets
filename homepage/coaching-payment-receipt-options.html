@@ -212,6 +212,64 @@
   }
   .pay-button-sub strong { color: #b91c1c; font-weight: 900; }
 
+  /* ===== 시안 4·5: 무통장 메인 + 카드 서브 ===== */
+  .pay-bank-full {
+    margin-top: 16px;
+    border: 1px solid #dbe4ff;
+    background: #f6f9ff;
+    border-radius: 16px;
+    padding: 20px 22px;
+  }
+  .pay-bank-full h4 {
+    font-family: 'GmarketSans', Pretendard, sans-serif;
+    font-weight: 900;
+    font-size: 17px;
+    color: #0a1638;
+    margin-bottom: 12px;
+  }
+  .pay-bank-full .bank-info { margin-top: 0; padding: 12px 14px; }
+  .pay-bank-full .b2 { font-size: 20px; }
+  .pay-bank-full .note {
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: #475569;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+  .pay-bank-full .note strong { color: #0a1638; font-weight: 900; }
+
+  .card-cta-wrap {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-cta-wrap .pay-button { width: 100%; padding: 16px; font-size: 17px; box-shadow: 0 10px 26px rgba(23,71,212,.22); }
+  .card-cta-wrap .pay-button-sub { margin-top: 2px; }
+
+  .card-link-subtle {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 16px;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 10px;
+    color: #475569;
+    font-family: Pretendard, sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    background: #ffffff;
+    text-decoration: none;
+  }
+  .card-link-subtle:hover { border-color: #1747d4; background: #f6f9ff; }
+  .card-link-subtle .left { display: flex; align-items: center; gap: 8px; }
+  .card-link-subtle .left strong { color: #0a1638; font-weight: 900; }
+  .card-link-subtle .right { display: inline-flex; align-items: center; gap: 4px; color: #1747d4; font-weight: 900; }
+  .card-link-subtle .sub { display: block; font-size: 11.5px; color: #94a3b8; font-weight: 600; margin-top: 2px; }
+
   /* ===== 시안 3: 좌우 스타일 ===== */
   .side-wrap {
     width: 1240px;
@@ -440,6 +498,130 @@
             <p class="b3">예금주: 주식회사 우리동네사람들</p>
           </div>
           <p style="margin-top:8px; font-size:12.5px; color:#475569; font-weight:600; line-height:1.55;">입금자명은 <strong style="color:#0a1638; font-weight:900;">신청자명과 동일</strong>하게 보내주세요. 현금영수증·세금계산서는 결제 후 카톡으로 알려주세요.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 시안 4: 무통장 메인(풀폭) + 카드결제 큰 버튼 ===== -->
+    <p class="label">시안 4 · 무통장 메인 + 카드결제 큰 버튼 (서브)<span class="label-sub">현금이 메인, 카드결제는 영수증 안 큰 버튼으로 보조</span></p>
+    <div class="receipt-wrap">
+      <div class="receipt">
+        <div class="receipt-head">
+          <span class="stamp">신청 접수</span>
+          <p class="brand">우리동네재테크</p>
+        </div>
+        <h1 class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 40px; margin-top: 20px;">신청 접수 완료</h1>
+        <p class="mt-2 text-sm text-gray-500 font-medium">아래 안내대로 결제를 진행해주세요.</p>
+
+        <dl class="dashed py-3 space-y-1.5 mt-5" style="font-size:14px;">
+          <div class="row">
+            <dt>상품</dt>
+            <dd class="font-display font-black text-brand-dark" style="font-size:17px;">내집마련 1:1 코칭 A</dd>
+          </div>
+          <div class="row">
+            <dt>수강 기간</dt>
+            <dd class="font-display font-black text-brand-dark" style="font-size:15px;">최대 180일</dd>
+          </div>
+          <div class="row">
+            <dt>결제 금액</dt>
+            <dd class="font-display font-black text-brand-blue" style="font-size:28px;">400,000원</dd>
+          </div>
+        </dl>
+
+        <div class="pay-bank-full">
+          <h4>무통장 입금</h4>
+          <div class="bank-info">
+            <p class="b1">
+              입금 계좌
+              <span style="display:inline-block; margin-left:6px; padding:3px 8px; border-radius:5px; background:#dbeafe; color:#1d4ed8; font-size:11px; font-weight:800; letter-spacing:0.02em;">현금영수증 발행</span>
+            </p>
+            <p class="b2">
+              <span>하나 125-910032-26304</span>
+              <button type="button" class="copy-btn" data-copy="125-910032-26304" aria-label="계좌번호 복사">
+                <iconify-icon icon="solar:copy-linear"></iconify-icon>
+                복사
+              </button>
+            </p>
+            <p class="b3">예금주: 주식회사 우리동네사람들</p>
+          </div>
+          <p class="note">입금자명은 <strong>신청자명과 동일</strong>하게 보내주세요.</p>
+        </div>
+
+        <div class="card-cta-wrap">
+          <a href="https://ourdongne.com/coaching-pay" target="_blank" rel="noopener" class="pay-button">카드결제 하기</a>
+          <p class="pay-button-sub"><strong>BC · 삼성 · 현대카드</strong>는 결제 불가합니다</p>
+        </div>
+
+        <div class="footer-info" style="margin-top:18px;">
+          <div class="biz">
+            <p>(주)우리동네사람들 · 사업자등록번호 386-86-03832</p>
+            <p>통신판매신고번호 제 2026-서울영등포-0991 호</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 시안 5: 무통장 메인(풀폭) + 카드결제 보조 링크 ===== -->
+    <p class="label">시안 5 · 무통장 메인 + 카드결제 보조 링크<span class="label-sub">현금이 압도적, 카드결제는 한 줄 점선 링크로 최소화</span></p>
+    <div class="receipt-wrap">
+      <div class="receipt">
+        <div class="receipt-head">
+          <span class="stamp">신청 접수</span>
+          <p class="brand">우리동네재테크</p>
+        </div>
+        <h1 class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 40px; margin-top: 20px;">신청 접수 완료</h1>
+        <p class="mt-2 text-sm text-gray-500 font-medium">아래 안내대로 결제를 진행해주세요.</p>
+
+        <dl class="dashed py-3 space-y-1.5 mt-5" style="font-size:14px;">
+          <div class="row">
+            <dt>상품</dt>
+            <dd class="font-display font-black text-brand-dark" style="font-size:17px;">내집마련 1:1 코칭 A</dd>
+          </div>
+          <div class="row">
+            <dt>수강 기간</dt>
+            <dd class="font-display font-black text-brand-dark" style="font-size:15px;">최대 180일</dd>
+          </div>
+          <div class="row">
+            <dt>결제 금액</dt>
+            <dd class="font-display font-black text-brand-blue" style="font-size:28px;">400,000원</dd>
+          </div>
+        </dl>
+
+        <div class="pay-bank-full">
+          <h4>무통장 입금</h4>
+          <div class="bank-info">
+            <p class="b1">
+              입금 계좌
+              <span style="display:inline-block; margin-left:6px; padding:3px 8px; border-radius:5px; background:#dbeafe; color:#1d4ed8; font-size:11px; font-weight:800; letter-spacing:0.02em;">현금영수증 발행</span>
+            </p>
+            <p class="b2">
+              <span>하나 125-910032-26304</span>
+              <button type="button" class="copy-btn" data-copy="125-910032-26304" aria-label="계좌번호 복사">
+                <iconify-icon icon="solar:copy-linear"></iconify-icon>
+                복사
+              </button>
+            </p>
+            <p class="b3">예금주: 주식회사 우리동네사람들</p>
+          </div>
+          <p class="note">입금자명은 <strong>신청자명과 동일</strong>하게 보내주세요.</p>
+        </div>
+
+        <a href="https://ourdongne.com/coaching-pay" target="_blank" rel="noopener" class="card-link-subtle">
+          <span class="left">
+            <strong>카드결제도 가능합니다</strong>
+            <span class="sub">BC · 삼성 · 현대카드 제외</span>
+          </span>
+          <span class="right">
+            카드결제 하러가기
+            <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
+          </span>
+        </a>
+
+        <div class="footer-info" style="margin-top:18px;">
+          <div class="biz">
+            <p>(주)우리동네사람들 · 사업자등록번호 386-86-03832</p>
+            <p>통신판매신고번호 제 2026-서울영등포-0991 호</p>
+          </div>
         </div>
       </div>
     </div>
