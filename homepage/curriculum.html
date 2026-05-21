@@ -44,12 +44,14 @@
 
 <style>
   .flow-line { position: relative; }
-  .flow-line::after { content: ''; position: absolute; left: 50%; bottom: -28px; transform: translateX(-50%); width: 2px; height: 28px; background: #d1d5db; }
-  .flow-arrow { position: relative; }
-  .flow-arrow::before { content: ''; position: absolute; left: 50%; top: -8px; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid #d1d5db; }
-  .status-active { border: 2px solid #FF6B00; background: rgba(255,107,0,0.04); box-shadow: 0 4px 12px rgba(255,107,0,0.1); }
-  .status-upcoming { border: 2px dashed #9ca3af; background: white; }
-  .status-idea { border: 1px solid #e5e7eb; background: #f9fafb; }
+  .flow-line::after { content: ''; position: absolute; left: 50%; bottom: -28px; transform: translateX(-50%); width: 2px; height: 28px; background: #cbd5e1; }
+  .flow-line:last-child::after { display: none; }
+  .flow-card { min-height: 118px; }
+  .status-active { border: 2px solid #fb923c; background: white; box-shadow: 0 10px 28px rgba(15,23,42,0.08); }
+  .status-upcoming { border: 1.5px dashed rgba(37,99,235,.36); background: white; }
+  .status-upcoming-orange { border: 1.5px dashed rgba(255,107,0,.40); background: white; }
+  .status-upcoming-emerald { border: 1.5px dashed rgba(16,185,129,.38); background: white; }
+  .status-idea { border: 1px solid #e2e8f0; background: #f8fafc; }
 </style>
 
 <section data-section="curriculum-header" class="max-w-5xl mx-auto px-6 sm:px-8 pt-12 pb-8 text-center">
@@ -66,57 +68,57 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6">
 
     <div>
-      <div class="text-center mb-6"><h2 class="text-xl font-display font-bold text-brand-orange bg-brand-orange/10 rounded-2xl py-3 px-6 inline-block">🏠 내집마련</h2></div>
-      <div class="border-2 border-brand-orange rounded-3xl p-5 flex flex-col items-center gap-0">
+      <div class="text-center mb-5"><h2 class="text-xl font-display font-black text-brand-orange word-keep">🏠 내집마련</h2></div>
+      <div class="border border-orange-200 bg-orange-50/35 rounded-[26px] p-5 flex flex-col items-center gap-0">
         <div class="flow-line w-full">
-          <div class="status-upcoming rounded-2xl p-5 text-center">
-            <span class="inline-block bg-gray-200 text-gray-600 text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">준비 중</span>
+          <a href="coaching-all-v3.html" class="block status-active flow-card rounded-2xl p-5 text-center hover:shadow-lg" style="transition: box-shadow 0.3s ease; cursor: pointer;">
+            <span class="inline-block bg-brand-orange text-white text-xs font-black px-3 py-1 rounded-full mb-2">진행 중</span>
+            <p class="font-display font-black text-brand-dark text-lg word-keep">내집마련 1:1 코칭</p>
+            <p class="text-gray-500 text-sm mt-1 word-keep">내 예산·상황에 맞는 맞춤 학습</p>
+            <p class="text-brand-orange text-sm mt-3 font-black word-keep">내집마련 1:1 코칭 바로가기 →</p>
+          </a>
+        </div>
+        <div class="h-7"></div>
+        <div class="flow-line w-full">
+          <div class="status-upcoming-orange flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-orange-100 text-orange-700 text-xs font-black px-3 py-1 rounded-full mb-2">준비 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">내집마련 실전반</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">온라인 강의 + 실전 템플릿</p>
           </div>
         </div>
         <div class="h-7"></div>
-        <div class="flow-arrow flow-line w-full">
-          <div class="status-idea rounded-2xl p-5 text-center">
-            <span class="inline-block text-gray-400 text-xs font-medium px-2.5 py-0.5 rounded-full mb-2">추후 예정</span>
-            <p class="font-bold text-gray-400 text-lg word-keep">간단 이메일 코칭</p>
-            <p class="text-gray-300 text-sm mt-1 word-keep">빠르게 핵심만 + 방향 제시</p>
+        <div class="flow-line w-full">
+          <div class="status-idea flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-white text-gray-500 text-xs font-black px-3 py-1 rounded-full mb-2">추후 예정</span>
+            <p class="font-bold text-gray-600 text-lg word-keep">간단 이메일 코칭</p>
+            <p class="text-gray-400 text-sm mt-1 word-keep">빠르게 핵심만 + 방향 제시</p>
           </div>
-        </div>
-        <div class="h-7"></div>
-        <div class="flow-arrow w-full">
-          <a href="coaching-all-v3.html" class="block status-active rounded-2xl p-5 text-center hover:shadow-lg" style="transition: box-shadow 0.3s ease; cursor: pointer;">
-            <span class="inline-block bg-brand-orange text-white text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">진행 중</span>
-            <p class="font-bold text-brand-dark text-lg word-keep">내집마련 1:1 코칭</p>
-            <p class="text-gray-500 text-sm mt-1 word-keep">내 예산·상황에 맞는 맞춤 학습</p>
-            <p class="text-brand-orange text-xs mt-2 font-semibold">신청하기 →</p>
-          </a>
         </div>
       </div>
     </div>
 
     <div>
-      <div class="text-center mb-6"><h2 class="text-xl font-display font-bold text-brand-blue bg-blue-50 rounded-2xl py-3 px-6 inline-block">💰 재테크</h2></div>
-      <div class="border border-brand-blue/30 rounded-3xl p-5 flex flex-col items-center gap-0">
+      <div class="text-center mb-5"><h2 class="text-xl font-display font-black text-brand-blue word-keep">💰 재테크</h2></div>
+      <div class="border border-blue-200 bg-blue-50/35 rounded-[26px] p-5 flex flex-col items-center gap-0">
         <div class="flow-line w-full">
-          <div class="status-upcoming rounded-2xl p-5 text-center" style="border-color: #93a3bf;">
-            <span class="inline-block bg-brand-blue/10 text-brand-blue text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">준비 중</span>
+          <div class="status-upcoming flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-blue-100 text-blue-700 text-xs font-black px-3 py-1 rounded-full mb-2">준비 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">전자책</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">재테크 기초 지식 정리</p>
           </div>
         </div>
         <div class="h-7"></div>
-        <div class="flow-arrow flow-line w-full">
-          <div class="status-upcoming rounded-2xl p-5 text-center" style="border-color: #93a3bf;">
-            <span class="inline-block bg-brand-blue/10 text-brand-blue text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">준비 중</span>
+        <div class="flow-line w-full">
+          <div class="status-upcoming flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-blue-100 text-blue-700 text-xs font-black px-3 py-1 rounded-full mb-2">준비 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">독서모임</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">함께 읽고 함께 성장하는 시간</p>
           </div>
         </div>
         <div class="h-7"></div>
-        <div class="flow-arrow w-full">
-          <div class="status-upcoming rounded-2xl p-5 text-center" style="border-color: #93a3bf;">
-            <span class="inline-block bg-brand-blue/10 text-brand-blue text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">준비 중</span>
+        <div class="flow-line w-full">
+          <div class="status-upcoming flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-blue-100 text-blue-700 text-xs font-black px-3 py-1 rounded-full mb-2">준비 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">재테크 기초반</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">부동산, 주식 등 재테크 기본기 학습</p>
           </div>
@@ -125,29 +127,29 @@
     </div>
 
     <div>
-      <div class="text-center mb-6"><h2 class="text-xl font-display font-bold text-emerald-600 bg-emerald-50 rounded-2xl py-3 px-6 inline-block">📚 공통</h2></div>
-      <div class="border border-emerald-300/50 rounded-3xl p-5 flex flex-col items-center gap-0">
+      <div class="text-center mb-5"><h2 class="text-xl font-display font-black text-emerald-600 word-keep">📚 공통</h2></div>
+      <div class="border border-emerald-200 bg-emerald-50/35 rounded-[26px] p-5 flex flex-col items-center gap-0">
         <div class="flow-line w-full">
-          <div class="status-upcoming rounded-2xl p-5 text-center" style="border-color: #6ee7b7;">
-            <span class="inline-block bg-emerald-50 text-emerald-600 text-xs font-bold px-2.5 py-0.5 rounded-full mb-2">준비 중</span>
+          <div class="status-upcoming-emerald flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-emerald-100 text-emerald-700 text-xs font-black px-3 py-1 rounded-full mb-2">준비 중</span>
             <p class="font-bold text-brand-dark text-lg word-keep">무료 템플릿</p>
             <p class="text-gray-500 text-sm mt-1 word-keep">내집마련 및 재테크 템플릿</p>
           </div>
         </div>
         <div class="h-7"></div>
-        <div class="flow-arrow flow-line w-full">
-          <div class="status-idea rounded-2xl p-5 text-center">
-            <span class="inline-block text-gray-400 text-xs font-medium px-2.5 py-0.5 rounded-full mb-2">추후 예정</span>
-            <p class="font-bold text-gray-400 text-lg word-keep">무료 스터디</p>
-            <p class="text-gray-300 text-sm mt-1 word-keep">소규모 그룹 학습</p>
+        <div class="flow-line w-full">
+          <div class="status-idea flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-white text-gray-500 text-xs font-black px-3 py-1 rounded-full mb-2">추후 예정</span>
+            <p class="font-bold text-gray-600 text-lg word-keep">무료 스터디</p>
+            <p class="text-gray-400 text-sm mt-1 word-keep">소규모 그룹 학습</p>
           </div>
         </div>
         <div class="h-7"></div>
-        <div class="flow-arrow w-full">
-          <div class="status-idea rounded-2xl p-5 text-center">
-            <span class="inline-block text-gray-400 text-xs font-medium px-2.5 py-0.5 rounded-full mb-2">추후 예정</span>
-            <p class="font-bold text-gray-400 text-lg word-keep">임장 (+원데이특강)</p>
-            <p class="text-gray-300 text-sm mt-1 word-keep">현장에서 직접 보고 배우기</p>
+        <div class="flow-line w-full">
+          <div class="status-idea flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-white text-gray-500 text-xs font-black px-3 py-1 rounded-full mb-2">추후 예정</span>
+            <p class="font-bold text-gray-600 text-lg word-keep">임장 (+원데이특강)</p>
+            <p class="text-gray-400 text-sm mt-1 word-keep">현장에서 직접 보고 배우기</p>
           </div>
         </div>
       </div>
