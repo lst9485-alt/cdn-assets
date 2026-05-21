@@ -13,6 +13,7 @@
         fontFamily: {
           sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
           display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+          mono: ['"JetBrains Mono"', '"Pretendard Variable"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
         },
         colors: {
           brand: { orange: '#FF6B00', blue: '#0055FF', dark: '#111111' }
@@ -23,13 +24,14 @@
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/index.min.css">
 <style>
   html, body { margin: 0; padding: 0; }
   body {
     font-family: Pretendard, system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     background: #eef3ff;
-    padding: 40px 0;
+    padding: 48px 0;
   }
   .stage {
     display: flex;
@@ -44,67 +46,124 @@
     font-size: 14px;
     letter-spacing: 0.18em;
     color: #0055FF;
-    text-transform: uppercase;
   }
-  .alimtalk-card {
+  .receipt-wrap {
+    width: 800px;
+    filter: drop-shadow(0 24px 60px rgba(0, 85, 255, .12));
+  }
+  .receipt {
     width: 800px;
     height: 400px;
     background: #ffffff;
-    border-radius: 28px;
     box-sizing: border-box;
+    --notch: 14px;
+    -webkit-mask:
+      radial-gradient(var(--notch) at 50% 0, transparent 98%, #000 100%) 50% 0/28px var(--notch) repeat-x,
+      radial-gradient(var(--notch) at 50% 100%, transparent 98%, #000 100%) 50% 100%/28px var(--notch) repeat-x,
+      linear-gradient(#000, #000);
+    -webkit-mask-composite: source-over;
+    mask:
+      radial-gradient(var(--notch) at 50% 0, transparent 98%, #000 100%) 50% 0/28px var(--notch) repeat-x,
+      radial-gradient(var(--notch) at 50% 100%, transparent 98%, #000 100%) 50% 100%/28px var(--notch) repeat-x,
+      linear-gradient(#000, #000);
+    padding: 36px 64px 32px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 24px 80px rgba(0, 85, 255, .10);
   }
-  .card-a { padding: 56px 64px; }
-  .card-b { padding: 44px 56px; }
+  .receipt-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .stamp {
+    font-family: 'GmarketSans', Pretendard, sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 0.32em;
+    color: #0055FF;
+    padding: 4px 10px;
+    border: 2px solid #0055FF;
+    border-radius: 4px;
+  }
+  .meta {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    font-size: 12px;
+    color: #6b7280;
+    text-align: right;
+    line-height: 1.6;
+  }
   .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+  .row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .row dt { color: #6b7280; font-size: 14px; }
+  .row dd .num {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    font-weight: 700;
+  }
+  .dashed { border-top: 1.5px dashed #d1d5db; border-bottom: 1.5px dashed #d1d5db; }
 </style>
 </head>
 <body>
   <div class="stage">
     <p class="label">A · 영수증만</p>
-    <div class="alimtalk-card card-a" id="card-a">
-      <div>
-        <p class="font-display text-lg font-black text-brand-blue">우리동네재테크</p>
-        <h1 class="mt-3 font-display font-black leading-none text-brand-dark word-keep" style="font-size: 80px;">신청 접수 완료</h1>
+    <div class="receipt-wrap">
+      <div class="receipt" id="card-a">
+        <div class="receipt-head">
+          <span class="stamp">RECEIPT</span>
+          <div class="meta">
+            우리동네재테크<br>
+            No. 2026-0521-001<br>
+            2026.05.21
+          </div>
+        </div>
+        <h1 class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 64px;">신청 접수 완료</h1>
+        <dl class="dashed py-5 space-y-3">
+          <div class="row">
+            <dt>상품</dt>
+            <dd class="font-display text-2xl font-black text-brand-dark">내집마련 1:1 코칭 A</dd>
+          </div>
+          <div class="row">
+            <dt>결제 금액</dt>
+            <dd class="font-display text-4xl font-black text-brand-blue"><span class="num">400,000</span> 원</dd>
+          </div>
+        </dl>
       </div>
-      <dl class="border-t border-b border-dashed border-gray-300 py-5">
-        <div class="flex items-baseline justify-between gap-6">
-          <dt class="text-lg text-gray-500">상품</dt>
-          <dd class="font-display text-2xl font-black text-brand-dark">내집마련 1:1 코칭 A</dd>
-        </div>
-        <div class="mt-3 flex items-baseline justify-between gap-6">
-          <dt class="text-lg text-gray-500">결제 금액</dt>
-          <dd class="font-display text-4xl font-black text-brand-blue">400,000원</dd>
-        </div>
-      </dl>
     </div>
 
     <p class="label">B · 영수증 + 계좌</p>
-    <div class="alimtalk-card card-b" id="card-b">
-      <div>
-        <p class="font-display text-base font-black text-brand-blue">우리동네재테크</p>
-        <h1 class="mt-2 font-display font-black leading-none text-brand-dark word-keep" style="font-size: 56px;">신청 접수 완료</h1>
-      </div>
-
-      <dl class="border-t border-b border-dashed border-gray-300 py-4">
-        <div class="flex items-baseline justify-between gap-6">
-          <dt class="text-base text-gray-500">상품</dt>
-          <dd class="font-display text-xl font-black text-brand-dark">내집마련 1:1 코칭 A</dd>
+    <div class="receipt-wrap">
+      <div class="receipt" id="card-b" style="padding: 32px 56px 28px;">
+        <div class="receipt-head">
+          <span class="stamp">RECEIPT</span>
+          <div class="meta">
+            우리동네재테크<br>
+            No. 2026-0521-001<br>
+            2026.05.21
+          </div>
         </div>
-        <div class="mt-2 flex items-baseline justify-between gap-6">
-          <dt class="text-base text-gray-500">결제 금액</dt>
-          <dd class="font-display text-3xl font-black text-brand-blue">400,000원</dd>
-        </div>
-      </dl>
-
-      <div>
-        <p class="text-xs font-bold tracking-[0.18em] text-gray-400">무통장 입금 계좌</p>
-        <div class="mt-1 flex items-baseline justify-between gap-6">
-          <p class="font-display text-2xl font-black text-brand-dark">하나은행 125-910032-26304</p>
-          <p class="text-sm text-gray-500">예금주 · 주식회사 우리동네사람들</p>
+        <h1 class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 48px;">신청 접수 완료</h1>
+        <dl class="dashed py-4 space-y-2">
+          <div class="row">
+            <dt>상품</dt>
+            <dd class="font-display text-xl font-black text-brand-dark">내집마련 1:1 코칭 A</dd>
+          </div>
+          <div class="row">
+            <dt>결제 금액</dt>
+            <dd class="font-display text-3xl font-black text-brand-blue"><span class="num">400,000</span> 원</dd>
+          </div>
+        </dl>
+        <div class="row" style="align-items: baseline;">
+          <dt style="color:#6b7280; font-size:14px;">입금 계좌</dt>
+          <div style="text-align:right;">
+            <p class="font-display text-xl font-black text-brand-dark"><span class="num">하나 125-910032-26304</span></p>
+            <p style="font-size:12px; color:#6b7280; margin-top:2px;">예금주 · 주식회사 우리동네사람들</p>
+          </div>
         </div>
       </div>
     </div>
