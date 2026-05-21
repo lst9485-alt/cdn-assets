@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=800, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>알림톡 영수증 A — 우리동네 재테크</title>
+<title>알림톡 영수증 B (계좌 포함) — 우리동네 재테크</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -39,7 +39,7 @@
     height: 400px;
     background: #ffffff;
     border-radius: 28px;
-    padding: 56px 64px;
+    padding: 44px 56px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -52,19 +52,28 @@
 <body>
   <div class="alimtalk-card" id="card">
     <div>
-      <p class="font-display text-lg font-black text-brand-blue">우리동네재테크</p>
-      <h1 class="mt-3 font-display font-black leading-none text-brand-dark word-keep" style="font-size: 80px;">신청 접수 완료</h1>
+      <p class="font-display text-base font-black text-brand-blue">우리동네재테크</p>
+      <h1 class="mt-2 font-display font-black leading-none text-brand-dark word-keep" style="font-size: 56px;">신청 접수 완료</h1>
     </div>
-    <dl class="border-t border-b border-dashed border-gray-300 py-5">
+
+    <dl class="border-t border-b border-dashed border-gray-300 py-4">
       <div class="flex items-baseline justify-between gap-6">
-        <dt class="text-lg text-gray-500">상품</dt>
-        <dd class="font-display text-2xl font-black text-brand-dark">내집마련 1:1 코칭 A</dd>
+        <dt class="text-base text-gray-500">상품</dt>
+        <dd class="font-display text-xl font-black text-brand-dark">내집마련 1:1 코칭 A</dd>
       </div>
-      <div class="mt-3 flex items-baseline justify-between gap-6">
-        <dt class="text-lg text-gray-500">결제 금액</dt>
-        <dd class="font-display text-4xl font-black text-brand-blue">400,000원</dd>
+      <div class="mt-2 flex items-baseline justify-between gap-6">
+        <dt class="text-base text-gray-500">결제 금액</dt>
+        <dd class="font-display text-3xl font-black text-brand-blue">400,000원</dd>
       </div>
     </dl>
+
+    <div>
+      <p class="text-xs font-bold tracking-[0.18em] text-gray-400">무통장 입금 계좌</p>
+      <div class="mt-1 flex items-baseline justify-between gap-6">
+        <p class="font-display text-2xl font-black text-brand-dark">하나은행 125-910032-26304</p>
+        <p class="text-sm text-gray-500">예금주 · 주식회사 우리동네사람들</p>
+      </div>
+    </div>
   </div>
 </body>
 </html>
