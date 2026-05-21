@@ -1,164 +1,64 @@
 {
-  "updated": "2026-05-21T06:00:04.103154+09:00",
+  "updated": "2026-05-22T06:00:03.799927+09:00",
   "sections": [
     {
       "name": "프로젝트",
       "categories": [
         {
           "id": 1,
-          "title": "(높음) 랜딩페이지 수정 (5/15~)",
+          "title": "(높음) 1:1 코칭 랜딩 오픈 (5/15~)",
           "ref": null,
           "items": [
             {
-              "text": "1-1. 랜딩페이지 수정 범위 확정 — 코칭페이지/투자 철학 페이지/신청 흐름 중 오늘 먼저 고칠 화면 결정",
+              "text": "1-1. 결제 안내 시안 4종(A/B/C/D) 중 1개 선택 → 결제 안내 페이지 정본에 반영 + 고정 URL 운영. 원본 시안: `workspace/apps/dashboard/repo/homepage/coaching-alimtalk-receipt.html`",
               "done": false
             },
             {
-              "text": "1-2. 홈페이지 수정&자체사이트 GA4/Clarity 추적 코드 적용 — GA4 `G-L89MYRXFG3`, Clarity `w3oagjscnh`",
+              "text": "1-1a. **⚠️ 정본 분열 먼저 확정** — `coaching-payment.html`(홈페이지 노트 line 58 \"정본\" 표시, 4KB, 5/11) vs `coaching-payment-guide-v3.html`(todo-list 기존 참조, 6KB, 5/21) 둘 다 존재. 어느 게 결제 안내 정본인지 결정 후 다른 하나는 통폐합 또는 폐기. 둘 다 두려면 용도 명확히 분리 (예: 신청 완료 페이지 vs 결제 가이드)",
               "done": false
             },
             {
-              "text": "1-2-1. 자체사이트 공통 `<head>`에 GA4 + Clarity 코드 삽입",
+              "text": "1-1b. 정본 페이지에 영수증 그림(A/B/C/D 중 선택) + 계좌번호 복사 버튼 + 입금자명/금액 안내 반영",
               "done": false
             },
             {
-              "text": "1-2-2. 아임웹 결제/완료 페이지에도 같은 GA4 코드 삽입 가능한지 확인",
+              "text": "1-1c. CDN 푸시 + 공개 URL 점검 (workspace/CLAUDE.md \"대시보드 동기화\" 규칙)",
               "done": false
             },
             {
-              "text": "1-2-3. GA4에서 자체사이트 도메인과 아임웹 결제 도메인 크로스 도메인 설정",
+              "text": "1-2. (반려 5/21) 알림톡 UL_1040 폐기 + 텍스트 2종 신규 등록 — \"신청 접수됐어요\" / \"입금 확인됐어요\"만. 영수증·계좌·결제링크는 알림톡에서 전부 빼고 결제 안내 페이지(1-1)로 이동. **반려 사유**: 결제 유도 금지(PG 미등록) + 영수증 그림이 알림톡 이미지형 4종(로고/텍스트혼합/아이콘/배송) 안 맞음. BMS도 채널 친구 5만명 안 되면 비친구 발송 불가라 한계 동일",
               "done": false
             },
             {
-              "text": "1-2-4. GA4 실시간 보고서에서 `page_view`, `section_view` 수집 확인",
+              "text": "1-3. 알림톡 텍스트 2종 검수 통과 후 CRM 연결 — ALIMTALK_TEMPLATES에 신규 코드 2개 등록 + processNewApplication doPost에 sendAlimtalk 자동 호출 연결 + 입금 확인 시점 트리거 + 본인 번호 테스트 발송",
               "done": false
             },
             {
-              "text": "1-2-5. Clarity 대시보드/레코딩에서 세션 수집 확인",
+              "text": "1-4. 코칭페이지 가격/신청 흐름 통일 — A/B 상품 상태, 상담신청/대기신청 라벨, 폼 비활성 한 기준으로",
               "done": false
             },
             {
-              "text": "1-2-6. 임시로 푸시해서 확인한 페이지가 있으면 대시보드 `임시 테스트` 섹션에서 제거",
+              "text": "1-5. 코칭페이지 신청폼 마찰 줄이기 — 신청 직전 요약 카드, 기타 입력 조건부 노출, 결제 안내 문구 단순화",
               "done": false
             },
             {
-              "text": "1-2-7. 코칭페이지 후기 섹션 보강 — 후기 유형 태그/대표 후기 고정 노출/기존 아임웹 후기 구성 참고해서 신뢰 섹션 정리",
+              "text": "1-6. 1:1 코칭 랜딩 속도 최적화 — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축 (5/13~)",
               "done": false
             },
             {
-              "text": "1-2-8. 코칭페이지 하단 CTA/증거 섹션 정리 — 기존 아임웹처럼 환불규정 아래 CTA, 카카오 채널, 안내문 구조 기준으로 복원·정리",
+              "text": "1-7. 공개 URL 모바일/데스크톱 점검",
               "done": false
             },
             {
-              "text": "1-2-9. 코칭페이지 섹션별 문구/전환 흐름 재정비 — 01~11 섹션 검토 기준으로 중복 문구, 여백, CTA 카피, 신청 전 요약 정보 정리",
+              "text": "1-9. 투자 철학 페이지(`investment-philosophy.html`) 수정 (5/14~)",
               "done": false
             },
             {
-              "text": "1-2-10. 코칭페이지 가격/신청 흐름 통일 — A/B 상품 상태, 상담신청/대기신청 라벨, 폼 비활성 상태 한 기준으로 맞추기",
+              "text": "1-10. 자료실/커뮤니티 신설 — 영상 자료 배포",
               "done": false
             },
             {
-              "text": "1-2-11. 코칭페이지 히어로/스토리 압축 — 첫 화면 키워드 카드 축소, 헤드라인 문구 정리, 스토리 섹션 감정선 길이 줄이기",
-              "done": false
-            },
-            {
-              "text": "1-2-12. 코칭페이지 FAQ/환불영역 정리 — FAQ 개수 축소, 환불 핵심 1줄 요약 추가, 하단 공백/폭 정리",
-              "done": false
-            },
-            {
-              "text": "1-2-13. 코칭페이지 신청폼 마찰 줄이기 — 신청 직전 요약 카드, 기타 입력 조건부 노출, 결제 안내 문구 단순화",
-              "done": false
-            },
-            {
-              "text": "1-2-14. 자료실? 커뮤니티? 신설. 영상으로 관련 자료배포",
-              "done": false
-            },
-            {
-              "text": "1-2-15. **1:1 코칭 랜딩 페이지 속도 최적화** (디자인 확정 후) — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축. 모바일 데이터·랜선 환경 모두 체감 느림 호소 있음 (2026-05-13)",
-              "done": false
-            },
-            {
-              "text": "1-2-16. 투자 철학 페이지(`investment-philosophy.html`) 수정 (2026-05-14)",
-              "done": false
-            },
-            {
-              "text": "1-3. 화면 문구·섹션·CTA 수정 반영",
-              "done": false
-            },
-            {
-              "text": "1-4. 공개 URL에서 모바일/데스크톱 확인",
-              "done": false
-            },
-            {
-              "text": "1-5. 03 코칭내용 수정해야함(03 코칭내용, 03-1 패키키지, 03-2 카톡질문)",
-              "done": false
-            },
-            {
-              "text": "https://lst9485-alt.github.io/cdn-assets/homepage/coaching-section03-parts-library.html",
-              "done": false
-            },
-            {
-              "text": "https://lst9485-alt.github.io/cdn-assets/homepage/coaching-section03-draft.html",
-              "done": false
-            },
-            {
-              "text": "1-6. 04 컨설턴트",
-              "done": false
-            },
-            {
-              "text": "1-7. 05 후기",
-              "done": false
-            },
-            {
-              "text": "1-8. 06 상품/가격",
-              "done": false
-            },
-            {
-              "text": "1-9. 07 투자코칭 순서",
-              "done": false
-            },
-            {
-              "text": "1-10. 08 CTA",
-              "done": false
-            },
-            {
-              "text": "1-11. 09 상담 신청 폼",
-              "done": false
-            },
-            {
-              "text": "1-12. 10 FAQ",
-              "done": false
-            },
-            {
-              "text": "1-13. 랜딩 실제 접수 CRM 연결 — Apps Script `doPost` 공개 폼 표식 처리, Notion 생성, 중복 제출 방지 확인 (5/20)",
-              "done": true
-            },
-            {
-              "text": "1-14. 랜딩 테스트 신청 검증 — `랜딩테스트_삭제요청 / 01000009991` Notion 생성 확인, 금액 40 확인 (5/20)",
-              "done": true
-            },
-            {
-              "text": "1-15. 잘못된 사전질문지 자동 카톡 발송 제거 — 신청 직후 사전질문지 발송 흐름 차단, Apps Script 버전 35 생성 (5/20)",
-              "done": true
-            },
-            {
-              "text": "1-16. 결제 안내 카톡용 페이지 정리 — `coaching-payment-guide-v3.html`에 카드 불가/무통장 입금 안내 반영, 대시보드 노출 (5/20)",
-              "done": true
-            },
-            {
-              "text": "1-17. 카드결제 안내 시안 4종 제작 — `coaching-payment-card-drafts.html` A~D 비교안 생성, 대시보드 아카이브/임시 테스트 등록 (5/20)",
-              "done": true
-            },
-            {
-              "text": "1-18. 결제 안내 알림톡 템플릿 승인 신청 — 버튼명 `결제 안내 보기`, 링크 `https://lst9485-alt.github.io/cdn-assets/homepage/coaching-payment-guide-v3.html`, 문구는 신청 접수 후 결제 안내용으로 작성",
-              "done": false
-            },
-            {
-              "text": "1-19. 승인된 결제 알림톡 템플릿 코드 CRM 연결 — 승인 코드 수령 후 `ALIMTALK_TEMPLATES`에 등록하고 신청 직후 자동 발송 테스트",
-              "done": false
-            },
-            {
-              "text": "1-20. 최종 결제 안내 시안 선택 — 4개 시안 중 1개를 `coaching-payment-guide-v3.html` 정본으로 반영하고 공개 URL/대시보드/카톡 템플릿 링크 통일",
+              "text": "1-11. 아임웹 결제/완료 페이지 GA4 코드 삽입 — 결제 본문 교체랑 묶음",
               "done": false
             }
           ]
@@ -252,10 +152,6 @@
               "done": false
             },
             {
-              "text": "3-2-4. 계산 회귀 테스트 고정 — 기본값, 저축 0원, 수익률 0%/-5%/3%, 이미 목표 도달, 한국식 금액 입력 검산 (5/11)",
-              "done": true
-            },
-            {
               "text": "3-2-5. 최종 배포 후 공개 URL에서 캐시 버전과 화면 반영 확인",
               "done": false
             }
@@ -295,24 +191,12 @@
           "ref": null,
           "items": [
             {
-              "text": "1-1. **UH_6573 검수 통과 후 코드 통합** (5/6 완료) — UH_5035 → UH_6573 + 본문 새 버전 + Calendly 일회성 링크 자동 생성·주입. n8n 04-6 정규식도 5035→6573 동기화",
-              "done": true
-            },
-            {
               "text": "1-2. 알리고 SMS 발송 내역 주기 확인 — 매주 1회 후속 SMS 4종 (3/30/90/180일) 정상 발송 점검",
               "done": false
             },
             {
               "text": "1-3. (선택) 매칭 실패 알림 정리 — `06_상담후처리.gs:617-625` importTasksToSheet 캘린더↔시트 C열 이름 매칭 알림. Calendly 직접 예약 시 매번 알림. phone 매칭 전환 또는 알림 제거 검토",
               "done": false
-            },
-            {
-              "text": "1-4. **117명 풀스캔 → 1명 처리 함수 분리** (5/9 완료) — `updateOneCustomer(name, dateStr)` 신규 + `checkNewDashboards`가 1건이면 1명 처리 호출. 풀스캔 본체 0줄 변경. 7~15분 → 5초 단축. .context.md 참조",
-              "done": true
-            },
-            {
-              "text": "1-5. **알림톡 UH_6784~6787 5/12 검수 통과** ✅ — 다음: 6-1-2~6-1-6 노션 자료 페이지 골격 작업 후 6-1-7 코드 전환",
-              "done": true
             }
           ]
         },
@@ -433,14 +317,6 @@
           "ref": null,
           "items": [
             {
-              "text": "1-1. 1차 조사 (ETF + 부동산 + GitHub) (4/27)",
-              "done": true
-            },
-            {
-              "text": "1-2. 2차 조사 (초보자/개성/무출연 추가) (4/27)",
-              "done": true
-            },
-            {
               "text": "1-3. 사용자 의사결정: TOP 7 중 가장 깊게 분석할 채널 1~2개 선택",
               "done": false
             },
@@ -468,38 +344,6 @@
           "ref": "경쟁채널 모니터링 시스템",
           "items": [
             {
-              "text": "2-2-1. 채널 1군/2군 설정 파일 확정 (4/27) — `config/channels.yaml`",
-              "done": true
-            },
-            {
-              "text": "2-2-2. 유튜브 수집 파이프라인 MVP 구축 (4/27) — YouTube Data API v3 우선",
-              "done": true
-            },
-            {
-              "text": "2-2-4. 데이터 저장소 구축 (4/27) — SQLite + 최신/일자별 dashboard JSON",
-              "done": true
-            },
-            {
-              "text": "2-3-1. 리포트 포맷 MVP 설계 (4/27) — 신규/잘된 영상/핵심 지표",
-              "done": true
-            },
-            {
-              "text": "2-3-2. 출력 위치 MVP 확정 (4/27) — GitHub Pages 대시보드 + Telegram 요약",
-              "done": true
-            },
-            {
-              "text": "2-4-1. 크론잡 등록 (4/27) — 매일 07:10",
-              "done": true
-            },
-            {
-              "text": "2-4-2. Telegram 알림 연결 (4/27)",
-              "done": true
-            },
-            {
-              "text": "2-4-3. 수동 실행 옵션 마련 (4/27) — `python3 -m competitor_monitor run`",
-              "done": true
-            },
-            {
               "text": "2-1-1. 고스타 모니터링 시스템 심화 조사 — n8n, Huginn, RSSHub, changedetection.io, Grafana, Uptime Kuma, ntfy, Apprise 등 스타 많은 프로젝트를 “도입/구조 차용/제외” 매트릭스로 정리",
               "done": false
             },
@@ -526,10 +370,6 @@
             {
               "text": "2-2-6. 대시보드 운영 상태 카드 추가 — 마지막 실행, 성공/실패, 수집 영상 수, Telegram 발송 여부",
               "done": false
-            },
-            {
-              "text": "2-2-7. Telegram 요약 문구 축약 (5/2) — 잘된 영상 4개 + 스테디셀러 3개 (쇼츠/미드폼/검색어) + 사진 갤러리 4+3 album. 채널 25개로 확대(1군 8/2군 17). 5/3 cron 후 쇼츠/미드폼 정상 동작 확인 필요",
-              "done": true
             },
             {
               "text": "2-3-3. 네이버 블로그 수집 PoC — RSS 동작, 본문 파싱, 공감/댓글/이웃 수 대안, robots.txt 확인",
@@ -566,10 +406,6 @@
           "title": "(낮음) 유튜브 제작 GitHub 오픈소스·스킬 조사 (4/27~)",
           "ref": null,
           "items": [
-            {
-              "text": "3-1. 4개 카테고리 후보 리스트업 + 분류 (4/27) — 노트 참조",
-              "done": true
-            },
             {
               "text": "3-2. 사용자 결정: TOP 5 중 우선 채택할 도구 1~2개 선택",
               "done": false

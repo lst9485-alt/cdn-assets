@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-21T06:00:10.976916+09:00",
+  "updated": "2026-05-22T06:00:13.543103+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 447,
-    "done": 419,
-    "overdue": 14,
+    "total": 457,
+    "done": 425,
+    "overdue": 13,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,78 +61,88 @@
         "overdue": true
       },
       {
+        "title": "원고완성",
+        "date": "2026-05-21",
+        "overdue": true
+      },
+      {
         "title": "P1~P3/목실감",
-        "date": "2026-05-20T08:30:00.000+09:00",
+        "date": "2026-05-21T08:30:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "랜딩수정",
-        "date": "2026-05-20T10:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-05-20T12:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-05-20T13:00:00.000+09:00",
+        "title": "랜딩결제&카톡",
+        "date": "2026-05-21T09:30:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원씽복기",
-        "date": "2026-05-20T14:00:00.000+09:00",
+        "date": "2026-05-21T14:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-05-21T16:30:00.000+09:00",
         "overdue": true
       },
       {
         "title": "자료수집&도입부",
-        "date": "2026-05-20T15:00:00.000+09:00",
+        "date": "2026-05-21T19:00:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "마이크테스트",
-        "date": "2026-05-20T19:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-05-21",
-        "overdue": false
-      },
-      {
-        "title": "주간계획 수정",
-        "date": "2026-05-21T08:30:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "원고",
-        "date": "2026-05-21T09:30:00.000+09:00",
+        "date": "2026-05-22T09:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
-        "date": "2026-05-21T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PPT완료",
-        "date": "2026-05-22",
-        "overdue": false
-      },
-      {
-        "title": "강의 기획",
+        "title": "카톡검수 확인",
         "date": "2026-05-22T11:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "date": "2026-05-22T14:30:00.000+09:00",
+        "title": "코칭페이지 핸드폰 및 최종검수",
+        "date": "2026-05-22T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
+        "date": "2026-05-22T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "채널소개 변경",
+        "date": "2026-05-22T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고마감",
+        "date": "2026-05-22T16:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "PPT완료",
+        "date": "2026-05-22T18:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "마이크테스트",
+        "date": "2026-05-22T20:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-05-23",
+        "overdue": false
+      },
+      {
+        "title": "강의 기획",
+        "date": "2026-05-23T10:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-05-23T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -164,21 +174,19 @@
         "title": "콘텐츠 관리시트",
         "date": "2026-05-27T12:00:00.000+09:00",
         "overdue": false
-      }
-    ],
-    "schedule": [
+      },
       {
         "title": "원고완성",
-        "time": "",
-        "allDay": true,
-        "done": false
+        "date": "2026-05-28",
+        "overdue": false
       },
       {
         "title": "주간계획 수정",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
+        "date": "2026-05-28T08:30:00.000+09:00",
+        "overdue": false
+      }
+    ],
+    "schedule": [
       {
         "title": "원고",
         "time": "09:30",
@@ -186,8 +194,44 @@
         "done": false
       },
       {
+        "title": "카톡검수 확인",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "코칭페이지 핸드폰 및 최종검수",
+        "time": "12:00",
+        "allDay": false,
+        "done": false
+      },
+      {
         "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "채널소개 변경",
         "time": "15:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원고마감",
+        "time": "16:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "PPT완료",
+        "time": "18:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "마이크테스트",
+        "time": "20:00",
         "allDay": false,
         "done": false
       }
@@ -218,14 +262,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 17,
-      "rate": "61%",
+      "done": 19,
+      "rate": "68%",
       "days": [
-        {
-          "date": "2026-05-15",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-05-16",
           "done": 3,
@@ -248,11 +287,16 @@
         },
         {
           "date": "2026-05-20",
-          "done": 2,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-05-21",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-05-22",
           "done": 0,
           "total": 4
         }
