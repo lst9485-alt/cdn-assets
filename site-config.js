@@ -270,24 +270,24 @@
       },
       {
         id: 'pg-homepage',
-        hubTitle: 'PG 전용 이전본',
+        hubTitle: 'PG사 통과용',
         collapsible: true,
-        defaultOpen: true,
+        defaultOpen: false,
         nav: {
           type: 'single',
-          label: 'PG 전용',
+          label: 'PG사 통과용',
           href: 'homepage/pg-version/main-page.html',
           activeMatch: ['/homepage/pg-version'],
           hidden: true
         },
         sidebar: {
-          title: 'PG 전용 이전본'
+          title: 'PG사 통과용'
         },
         items: [
           {
             id: 'pg-main-page',
             title: 'PG 메인 페이지',
-            description: '이전 PG 결제 연결용 메인 페이지',
+            description: 'PG사 심사 통과용 메인 페이지',
             href: 'homepage/pg-version/main-page.html',
             badgeText: 'PG',
             badgeTone: 'live',
@@ -300,7 +300,7 @@
           {
             id: 'pg-curriculum-page',
             title: 'PG 커리큘럼 페이지',
-            description: '이전 PG 결제 연결용 커리큘럼 페이지',
+            description: 'PG사 심사 통과용 커리큘럼 페이지',
             href: 'homepage/pg-version/curriculum.html',
             badgeText: 'PG',
             badgeTone: 'live',
@@ -313,7 +313,7 @@
           {
             id: 'pg-refund-policy',
             title: 'PG 환불규정 안내',
-            description: '이전 PG 흐름에 맞춘 환불 규정 페이지',
+            description: 'PG사 심사 통과용 환불 규정 페이지',
             href: 'homepage/pg-version/refund-policy.html',
             badgeText: 'PG',
             badgeTone: 'live',
@@ -326,7 +326,7 @@
           {
             id: 'pg-main-page-all',
             title: 'PG 메인 페이지 전체본',
-            description: '이전 PG 메인 페이지 원본 전체 HTML',
+            description: 'PG사 심사 통과용 메인 페이지 원본 전체 HTML',
             href: 'homepage/pg-version/main-page-all.html',
             badgeText: 'ALL',
             badgeTone: 'soon',
@@ -339,7 +339,7 @@
           {
             id: 'pg-curriculum-all',
             title: 'PG 커리큘럼 전체본',
-            description: '이전 PG 커리큘럼 원본 전체 HTML',
+            description: 'PG사 심사 통과용 커리큘럼 원본 전체 HTML',
             href: 'homepage/pg-version/curriculum-all.html',
             badgeText: 'ALL',
             badgeTone: 'soon',
