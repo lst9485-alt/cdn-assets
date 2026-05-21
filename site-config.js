@@ -886,6 +886,20 @@
             sidebarType: 'root',
             activeMatch: ['counsel/?idx=17'],
             hubVisible: true
+          },
+          {
+            id: 'archive-curriculum-drafts-4',
+            archiveNo: 'A020',
+            modifiedDate: '2026-05-21',
+            title: '커리큘럼 시안 4종',
+            description: '계단식/노선도형/3트랙 운영보드/실행 타임라인 비교',
+            href: 'homepage/curriculum-drafts-4.html',
+            badgeText: '홈페이지',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['curriculum-drafts-4.html'],
+            hubVisible: true
           }
         ]
       }

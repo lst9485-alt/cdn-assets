@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커리큘럼 시안 4종 — 우리동네 재테크</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      important: true,
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+            display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+          },
+          colors: {
+            brand: { orange: '#FF6B00', beige: '#F5F0E8', dark: '#0a0a0a', blue: '#0055FF' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <style>
+    html { font-size: 16px !important; }
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; }
+    .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+    .soft-shadow { box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08); }
+    .stage-card { min-height: 128px; }
+    .step-riser { transform: translateY(calc(var(--step) * -18px)); }
+    .rail-line { background: linear-gradient(90deg, #FF6B00 0%, #FF6B00 35%, #94A3B8 35%, #94A3B8 100%); }
+    .map-node::before { content: ''; position: absolute; inset: -7px; border: 1px solid rgba(255, 107, 0, .18); border-radius: 999px; }
+    .metro-line { background: linear-gradient(180deg, #FF6B00 0%, #FF6B00 42%, #CBD5E1 42%, #CBD5E1 100%); }
+    .matrix-cell { min-height: 140px; }
+    .timeline-dot { box-shadow: 0 0 0 8px rgba(255, 107, 0, .08); }
+    @media (max-width: 768px) {
+      .step-riser { transform: none; }
+    }
+  </style>
+</head>
+<body class="bg-[#F7F8FA] text-[#111827]">
+  <main class="max-w-6xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+    <section class="mb-10">
+      <p class="text-sm font-bold text-brand-orange tracking-wide mb-3">CURRICULUM DRAFTS</p>
+      <h1 class="font-display text-3xl sm:text-5xl font-black tracking-tight word-keep">커리큘럼 시안 4종</h1>
+      <p class="mt-4 text-gray-500 word-keep">내집마련, 재테크, 공통 자료를 한눈에 비교하는 구성안입니다.</p>
+    </section>
+
+    <section class="bg-white rounded-[28px] border border-gray-200 soft-shadow p-6 sm:p-8 mb-10">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex bg-brand-orange text-white text-xs font-black rounded-full px-3 py-1 mb-3">A안</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-black word-keep">계단식 성장 로드맵</h2>
+        </div>
+        <p class="text-sm text-gray-500 word-keep">아래에서 위로 올라가는 구조라 단계 상승감이 강합니다.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4 md:items-end pt-4 md:pt-12">
+        <div class="stage-card step-riser bg-[#FFF7ED] border-2 border-brand-orange rounded-2xl p-5" style="--step:0">
+          <p class="text-xs font-black text-brand-orange mb-3">진행 중</p>
+          <h3 class="font-display text-xl font-black word-keep">1:1 코칭</h3>
+          <p class="text-sm text-gray-600 mt-2 word-keep">내 예산·상황 맞춤</p>
+        </div>
+        <div class="stage-card step-riser bg-white border-2 border-dashed border-gray-300 rounded-2xl p-5" style="--step:1">
+          <p class="text-xs font-black text-gray-500 mb-3">준비 중</p>
+          <h3 class="font-display text-xl font-black word-keep">실전반</h3>
+          <p class="text-sm text-gray-600 mt-2 word-keep">온라인 강의 + 템플릿</p>
+        </div>
+        <div class="stage-card step-riser bg-white border border-gray-200 rounded-2xl p-5" style="--step:2">
+          <p class="text-xs font-black text-gray-400 mb-3">추후 예정</p>
+          <h3 class="font-display text-xl font-black text-gray-500 word-keep">이메일 코칭</h3>
+          <p class="text-sm text-gray-400 mt-2 word-keep">핵심 정리 + 방향</p>
+        </div>
+        <div class="stage-card step-riser bg-[#EFF6FF] border-2 border-[#93C5FD] rounded-2xl p-5" style="--step:3">
+          <p class="text-xs font-black text-brand-blue mb-3">준비 중</p>
+          <h3 class="font-display text-xl font-black word-keep">재테크 기초반</h3>
+          <p class="text-sm text-gray-600 mt-2 word-keep">부동산·주식 기본기</p>
+        </div>
+        <div class="stage-card step-riser bg-[#ECFDF5] border-2 border-[#6EE7B7] rounded-2xl p-5" style="--step:4">
+          <p class="text-xs font-black text-emerald-600 mb-3">준비 중</p>
+          <h3 class="font-display text-xl font-black word-keep">무료 템플릿</h3>
+          <p class="text-sm text-gray-600 mt-2 word-keep">자료로 실행 보조</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-[28px] border border-gray-200 soft-shadow p-6 sm:p-8 mb-10">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex bg-brand-blue text-white text-xs font-black rounded-full px-3 py-1 mb-3">B안</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-black word-keep">노선도형 커리큘럼</h2>
+        </div>
+        <p class="text-sm text-gray-500 word-keep">상품군이 갈라졌다가 핵심 코칭으로 모이는 느낌입니다.</p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_72px_1fr] gap-6 items-stretch">
+        <div class="space-y-4">
+          <div class="relative bg-[#FFF7ED] border border-orange-200 rounded-2xl p-5">
+            <span class="absolute -left-1 top-5 map-node w-4 h-4 bg-brand-orange rounded-full"></span>
+            <p class="text-xs font-black text-brand-orange">내집마련 라인</p>
+            <h3 class="font-display text-xl font-black mt-2">실전반</h3>
+            <p class="text-sm text-gray-500 mt-1">온라인 강의 + 실전 템플릿</p>
+          </div>
+          <div class="relative bg-white border border-gray-200 rounded-2xl p-5">
+            <span class="absolute -left-1 top-5 w-4 h-4 bg-gray-300 rounded-full"></span>
+            <p class="text-xs font-black text-gray-400">보조 라인</p>
+            <h3 class="font-display text-xl font-black text-gray-500 mt-2">간단 이메일 코칭</h3>
+            <p class="text-sm text-gray-400 mt-1">빠르게 핵심만 + 방향 제시</p>
+          </div>
+        </div>
+        <div class="hidden lg:flex justify-center relative">
+          <div class="metro-line w-2 rounded-full"></div>
+          <div class="absolute top-[43%] w-11 h-11 rounded-full bg-brand-orange text-white flex items-center justify-center font-black">중심</div>
+        </div>
+        <div class="space-y-4">
+          <div class="bg-[#EFF6FF] border border-blue-200 rounded-2xl p-5">
+            <p class="text-xs font-black text-brand-blue">재테크 라인</p>
+            <h3 class="font-display text-xl font-black mt-2">전자책 · 독서모임</h3>
+            <p class="text-sm text-gray-500 mt-1">기초 지식과 습관 만들기</p>
+          </div>
+          <div class="bg-[#ECFDF5] border border-emerald-200 rounded-2xl p-5">
+            <p class="text-xs font-black text-emerald-600">공통 라인</p>
+            <h3 class="font-display text-xl font-black mt-2">무료 템플릿</h3>
+            <p class="text-sm text-gray-500 mt-1">내집마련·재테크 실행 도구</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 bg-[#111827] text-white rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <p class="text-xs font-black text-orange-300">현재 운영</p>
+          <h3 class="font-display text-2xl font-black mt-1">내집마련 1:1 코칭</h3>
+        </div>
+        <p class="text-sm text-gray-300 word-keep">모든 학습 라인이 결국 개인 상황 진단으로 연결됩니다.</p>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-[28px] border border-gray-200 soft-shadow p-6 sm:p-8 mb-10">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex bg-emerald-600 text-white text-xs font-black rounded-full px-3 py-1 mb-3">C안</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-black word-keep">3트랙 운영 보드</h2>
+        </div>
+        <p class="text-sm text-gray-500 word-keep">운영 상태를 빠르게 보고 관리하기 좋은 구조입니다.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="rounded-2xl bg-[#FFF7ED] border border-orange-200 p-5">
+          <p class="font-display text-xl font-black text-brand-orange mb-4">내집마련</p>
+          <div class="matrix-cell bg-white rounded-xl p-4 border-2 border-brand-orange mb-3">
+            <p class="text-xs font-black text-brand-orange">진행 중</p>
+            <h3 class="font-display text-lg font-black mt-2">1:1 코칭</h3>
+            <p class="text-sm text-gray-500 mt-1">개별 예산·지역·실행 계획</p>
+          </div>
+          <div class="matrix-cell bg-white rounded-xl p-4 border-2 border-dashed border-gray-300">
+            <p class="text-xs font-black text-gray-500">준비 중</p>
+            <h3 class="font-display text-lg font-black mt-2">실전반</h3>
+            <p class="text-sm text-gray-500 mt-1">강의와 실전 템플릿</p>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-[#EFF6FF] border border-blue-200 p-5">
+          <p class="font-display text-xl font-black text-brand-blue mb-4">재테크</p>
+          <div class="matrix-cell bg-white rounded-xl p-4 border-2 border-dashed border-blue-200 mb-3">
+            <p class="text-xs font-black text-brand-blue">준비 중</p>
+            <h3 class="font-display text-lg font-black mt-2">전자책</h3>
+            <p class="text-sm text-gray-500 mt-1">기초 지식 정리</p>
+          </div>
+          <div class="matrix-cell bg-white rounded-xl p-4 border border-gray-200">
+            <p class="text-xs font-black text-gray-400">준비 중</p>
+            <h3 class="font-display text-lg font-black text-gray-500 mt-2">기초반</h3>
+            <p class="text-sm text-gray-400 mt-1">부동산·주식 기본기</p>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-[#ECFDF5] border border-emerald-200 p-5">
+          <p class="font-display text-xl font-black text-emerald-600 mb-4">공통</p>
+          <div class="matrix-cell bg-white rounded-xl p-4 border-2 border-dashed border-emerald-200 mb-3">
+            <p class="text-xs font-black text-emerald-600">준비 중</p>
+            <h3 class="font-display text-lg font-black mt-2">무료 템플릿</h3>
+            <p class="text-sm text-gray-500 mt-1">실행 자료</p>
+          </div>
+          <div class="matrix-cell bg-white rounded-xl p-4 border border-gray-200">
+            <p class="text-xs font-black text-gray-400">추후 예정</p>
+            <h3 class="font-display text-lg font-black text-gray-500 mt-2">스터디 · 임장</h3>
+            <p class="text-sm text-gray-400 mt-1">함께 배우는 경험</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#111827] text-white rounded-[28px] soft-shadow p-6 sm:p-8">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+        <div>
+          <span class="inline-flex bg-white/10 text-white text-xs font-black rounded-full px-3 py-1 mb-3">D안</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-black word-keep">실행 중심 타임라인</h2>
+        </div>
+        <p class="text-sm text-gray-300 word-keep">학습보다 “무엇을 실행하게 되는지”가 먼저 보이는 구성입니다.</p>
+      </div>
+      <div class="relative">
+        <div class="hidden md:block absolute left-8 top-8 bottom-8 w-[2px] bg-white/15"></div>
+        <div class="space-y-5">
+          <div class="relative grid md:grid-cols-[80px_1fr] gap-4 items-start">
+            <div class="timeline-dot w-16 h-16 rounded-full bg-brand-orange text-white flex items-center justify-center font-black z-10">01</div>
+            <div class="bg-white text-[#111827] rounded-2xl p-6">
+              <p class="text-xs font-black text-brand-orange">현재 신청 가능</p>
+              <h3 class="font-display text-2xl font-black mt-2">내집마련 1:1 코칭</h3>
+              <p class="text-gray-500 mt-2 word-keep">지금 사도 되는지, 어디를 봐야 하는지 개인 상황에 맞춰 정리합니다.</p>
+            </div>
+          </div>
+          <div class="relative grid md:grid-cols-[80px_1fr] gap-4 items-start">
+            <div class="w-16 h-16 rounded-full bg-white/10 text-white flex items-center justify-center font-black z-10">02</div>
+            <div class="bg-white/8 border border-white/10 rounded-2xl p-6">
+              <p class="text-xs font-black text-orange-200">준비 중</p>
+              <h3 class="font-display text-2xl font-black mt-2">실전반 · 무료 템플릿</h3>
+              <p class="text-gray-300 mt-2 word-keep">혼자 복습하고 실행할 수 있는 강의와 자료를 엮습니다.</p>
+            </div>
+          </div>
+          <div class="relative grid md:grid-cols-[80px_1fr] gap-4 items-start">
+            <div class="w-16 h-16 rounded-full bg-white/10 text-white flex items-center justify-center font-black z-10">03</div>
+            <div class="bg-white/8 border border-white/10 rounded-2xl p-6">
+              <p class="text-xs font-black text-blue-200">준비 중</p>
+              <h3 class="font-display text-2xl font-black mt-2">전자책 · 독서모임 · 재테크 기초반</h3>
+              <p class="text-gray-300 mt-2 word-keep">내집마련 이후에도 이어지는 재테크 기본기를 쌓습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="homepage-shell.js?v=20260506d"></script>
+</body>
+</html>
