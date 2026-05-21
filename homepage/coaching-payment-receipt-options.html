@@ -155,8 +155,24 @@
   .blocked-cards strong { font-weight: 900; }
   .bank-info { margin-top: 10px; padding: 10px 12px; background: #ffffff; border-radius: 12px; }
   .bank-info .b1 { font-size: 12px; color: #9ca3af; font-weight: 700; }
-  .bank-info .b2 { font-family: 'GmarketSans', Pretendard, sans-serif; font-weight: 900; font-size: 18px; color: #0a1638; margin-top: 4px; }
+  .bank-info .b2 { font-family: 'GmarketSans', Pretendard, sans-serif; font-weight: 900; font-size: 18px; color: #0a1638; margin-top: 4px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
   .bank-info .b3 { font-size: 12.5px; color: #6b7280; font-weight: 700; margin-top: 4px; }
+  .copy-btn {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 5px 10px;
+    background: #0a1638; color: #ffffff;
+    border: 0; border-radius: 8px;
+    font-family: Pretendard, sans-serif;
+    font-size: 12px; font-weight: 800;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background .15s ease, transform .1s ease;
+    flex-shrink: 0;
+  }
+  .copy-btn:hover { background: #1747d4; }
+  .copy-btn:active { transform: scale(.96); }
+  .copy-btn.is-copied { background: #16a34a; }
+  .copy-btn iconify-icon { font-size: 13px; }
 
   /* ===== 시안 2: 큰 카드결제 버튼 (사용자 이미지 스타일) ===== */
   .pay-button-wrap {
@@ -256,6 +272,26 @@
 
         <!-- 결제 안내 부분 -->
         <div class="pay-grid">
+          <div class="pay-card pay-card-bank">
+            <div class="head">
+              <h4 style="color:#0a1638;">무통장 입금</h4>
+              <span class="icon-box">
+                <iconify-icon icon="solar:banknote-2-bold" width="20" height="20"></iconify-icon>
+              </span>
+            </div>
+            <div class="bank-info">
+              <p class="b1">입금 계좌</p>
+              <p class="b2">
+                <span>하나 125-910032-26304</span>
+                <button type="button" class="copy-btn" data-copy="125-910032-26304" aria-label="계좌번호 복사">
+                  <iconify-icon icon="solar:copy-linear"></iconify-icon>
+                  복사
+                </button>
+              </p>
+              <p class="b3">예금주: 주식회사 우리동네사람들</p>
+            </div>
+          </div>
+
           <div class="pay-card pay-card-card">
             <div class="head">
               <h4>카드결제</h4>
@@ -268,20 +304,6 @@
               <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
             </a>
             <p class="blocked-cards" style="margin-top:10px;"><strong>BC · 삼성 · 현대카드</strong>는 결제 불가, 다른 카드 또는 무통장으로</p>
-          </div>
-
-          <div class="pay-card pay-card-bank">
-            <div class="head">
-              <h4 style="color:#0a1638;">무통장 입금</h4>
-              <span class="icon-box">
-                <iconify-icon icon="solar:banknote-2-bold" width="20" height="20"></iconify-icon>
-              </span>
-            </div>
-            <div class="bank-info">
-              <p class="b1">입금 계좌</p>
-              <p class="b2">하나 125-910032-26304</p>
-              <p class="b3">예금주: 주식회사 우리동네사람들</p>
-            </div>
           </div>
         </div>
 
@@ -423,5 +445,34 @@
     </div>
 
   </div>
+  <script>
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.copy-btn');
+      if (!btn) return;
+      var text = btn.getAttribute('data-copy') || '';
+      var done = function () {
+        var orig = btn.innerHTML;
+        btn.classList.add('is-copied');
+        btn.innerHTML = '<iconify-icon icon="solar:check-circle-bold"></iconify-icon> 복사됨';
+        setTimeout(function () {
+          btn.classList.remove('is-copied');
+          btn.innerHTML = orig;
+        }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {
+          var ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); done(); } catch (err) {}
+          document.body.removeChild(ta);
+        });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (err) {}
+        document.body.removeChild(ta);
+      }
+    });
+  </script>
 </body>
 </html>
