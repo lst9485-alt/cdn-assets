@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-24T06:00:13.069299+09:00",
+  "updated": "2026-05-25T06:00:16.092750+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 464,
+    "total": 466,
     "done": 434,
-    "overdue": 11,
+    "overdue": 20,
     "pending": [
       {
         "title": "전자책 작성",
@@ -81,39 +81,49 @@
         "overdue": true
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-05-24T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "마이크테스트",
         "date": "2026-05-24T09:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "촬영",
         "date": "2026-05-24T10:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "편집&업로드",
         "date": "2026-05-24T11:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-05-24T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "랜딩 카드결제 수정",
         "date": "2026-05-24T14:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "코칭페이지 핸드폰 및 최종검수",
         "date": "2026-05-24T15:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "채널소개 변경",
         "date": "2026-05-24T16:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
         "date": "2026-05-24T17:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "메모정리",
@@ -178,44 +188,20 @@
     ],
     "schedule": [
       {
-        "title": "마이크테스트",
-        "time": "09:30",
+        "title": "메모정리",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영",
+        "title": "현금영수증&세금계산서 발행",
         "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "편집&업로드",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "랜딩 카드결제 수정",
-        "time": "14:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "코칭페이지 핸드폰 및 최종검수",
-        "time": "15:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "채널소개 변경",
-        "time": "16:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "랜딩교체(유튜브홈, 업로드스킬, 댓글전부 등)",
-        "time": "17:00",
         "allDay": false,
         "done": false
       }
@@ -246,14 +232,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 15,
-      "rate": "54%",
+      "done": 11,
+      "rate": "39%",
       "days": [
-        {
-          "date": "2026-05-18",
-          "done": 4,
-          "total": 4
-        },
         {
           "date": "2026-05-19",
           "done": 3,
@@ -281,6 +262,11 @@
         },
         {
           "date": "2026-05-24",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-05-25",
           "done": 0,
           "total": 4
         }
