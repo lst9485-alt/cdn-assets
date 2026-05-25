@@ -194,51 +194,45 @@
     color: #6b7280;
   }
 
-  /* ===== 시안 A: 한 줄 텍스트 ===== */
-  .applicant-line {
-    margin-top: 8px;
-    font-family: Pretendard, sans-serif;
-    font-size: 12.5px;
-    font-weight: 700;
-    color: #475569;
-    line-height: 1.5;
-  }
-  .applicant-line strong {
-    color: #0a1638;
-    font-weight: 900;
-  }
-  .applicant-line .sep {
-    display: inline-block;
-    margin: 0 6px;
-    color: #cbd5e1;
-  }
-
-  /* ===== 시안 B: 라벨 + 값 박스 ===== */
-  .applicant-box {
-    margin-top: 10px;
-    padding: 10px 12px;
+  /* ===== 시안 B-1: 헤더 아래 가로 풀폭 박스 ===== */
+  .applicant-bar {
+    margin-top: 14px;
+    padding: 10px 16px;
     background: #f8fafc;
     border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 4px 10px;
-    text-align: left;
-    min-width: 200px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
   }
-  .applicant-box dt {
+  .applicant-bar .ab-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    min-width: 0;
+  }
+  .applicant-bar .ab-label {
     font-size: 11px;
     font-weight: 800;
     color: #94a3b8;
     letter-spacing: 0.04em;
+    flex-shrink: 0;
   }
-  .applicant-box dd {
-    margin: 0;
+  .applicant-bar .ab-value {
     font-family: 'GmarketSans', Pretendard, sans-serif;
     font-weight: 900;
-    font-size: 13px;
+    font-size: 14px;
     color: #0a1638;
-    text-align: right;
+  }
+
+  /* ===== 시안 B-2: 본문 점선 박스 안 행 통합 ===== */
+  .row.applicant-row dd {
+    font-family: 'GmarketSans', Pretendard, sans-serif;
+    font-weight: 900;
+    color: #0a1638;
+    font-size: 15px;
   }
 
   .row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
@@ -353,8 +347,8 @@
     <p class="demo-sub">이름·연락처 넣고 시안을 골라 "신청하기"를 누르면 그 시안 결제 안내 팝업이 뜹니다.</p>
 
     <div class="variant-toggle" role="tablist" aria-label="시안 선택">
-      <button type="button" class="active" data-variant="A" role="tab">시안 A<span class="vt-sub">한 줄 표기</span></button>
-      <button type="button" data-variant="B" role="tab">시안 B<span class="vt-sub">라벨 박스</span></button>
+      <button type="button" class="active" data-variant="B1" role="tab">시안 B-1<span class="vt-sub">헤더 아래 가로 박스</span></button>
+      <button type="button" data-variant="B2" role="tab">시안 B-2<span class="vt-sub">본문 점선 박스 통합</span></button>
     </div>
 
     <form class="demo-form" id="demo-form">
@@ -377,36 +371,40 @@
   <!-- ===== 결제 안내 모달 ===== -->
   <div class="modal-overlay" id="payment-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-shell">
-      <span class="modal-tag" id="modal-tag">시안 A</span>
+      <span class="modal-tag" id="modal-tag">시안 B-1</span>
       <button type="button" class="modal-close" id="modal-close-btn" aria-label="닫기">×</button>
       <div class="receipt-wrap">
         <div class="receipt">
           <div class="receipt-head">
             <span class="stamp">주문결제</span>
-            <div class="head-right">
-              <p class="brand">우리동네재테크</p>
+            <p class="brand">우리동네재테크</p>
+          </div>
 
-              <!-- 시안 A: 한 줄 표기 -->
-              <p class="applicant-line" data-variant="A">
-                <strong data-name>홍길동</strong>
-                <span class="sep">·</span>
-                <span data-phone>010-1234-5678</span>
-              </p>
-
-              <!-- 시안 B: 라벨 박스 -->
-              <dl class="applicant-box" data-variant="B" style="display:none;">
-                <dt>신청자</dt>
-                <dd data-name>홍길동</dd>
-                <dt>연락처</dt>
-                <dd data-phone>010-1234-5678</dd>
-              </dl>
-            </div>
+          <!-- 시안 B-1: 헤더 아래 가로 풀폭 박스 -->
+          <div class="applicant-bar" data-variant="B1">
+            <span class="ab-item">
+              <span class="ab-label">신청자</span>
+              <span class="ab-value" data-name>홍길동</span>
+            </span>
+            <span class="ab-item">
+              <span class="ab-label">연락처</span>
+              <span class="ab-value" data-phone>010-1234-5678</span>
+            </span>
           </div>
 
           <h1 id="modal-title" class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 40px; margin-top: 22px;">신청 접수 완료</h1>
           <p class="mt-3 text-sm text-gray-500 font-medium word-keep">아래 안내대로 결제를 진행해주세요.</p>
 
           <dl class="dashed py-3 space-y-1.5 mt-5" style="font-size:14px;">
+            <!-- 시안 B-2: 본문 점선 박스 안 행 통합 -->
+            <div class="row applicant-row" data-variant="B2">
+              <dt>신청자</dt>
+              <dd data-name>홍길동</dd>
+            </div>
+            <div class="row applicant-row" data-variant="B2">
+              <dt>연락처</dt>
+              <dd data-phone>010-1234-5678</dd>
+            </div>
             <div class="row">
               <dt>상품</dt>
               <dd class="font-display font-black text-brand-dark" style="font-size:17px;">코칭 A</dd>
@@ -465,7 +463,11 @@
       var modalTag = document.getElementById('modal-tag');
       var closeBtn = document.getElementById('modal-close-btn');
       var toggleBtns = document.querySelectorAll('.variant-toggle button');
-      var currentVariant = 'A';
+      var currentVariant = 'B1';
+      var variantLabels = {
+        'B1': '시안 B-1 · 헤더 아래 가로 박스',
+        'B2': '시안 B-2 · 본문 점선 박스 통합'
+      };
 
       function applyVariant(v) {
         currentVariant = v;
@@ -475,13 +477,13 @@
         modal.querySelectorAll('[data-variant]').forEach(function (el) {
           if (el.tagName === 'BUTTON') return;
           var match = el.getAttribute('data-variant') === v;
-          if (el.classList.contains('applicant-line')) {
-            el.style.display = match ? '' : 'none';
-          } else if (el.classList.contains('applicant-box')) {
-            el.style.display = match ? 'grid' : 'none';
+          if (el.classList.contains('applicant-bar')) {
+            el.style.display = match ? 'flex' : 'none';
+          } else if (el.classList.contains('applicant-row')) {
+            el.style.display = match ? 'flex' : 'none';
           }
         });
-        modalTag.textContent = '시안 ' + v + (v === 'A' ? ' · 한 줄 표기' : ' · 라벨 박스');
+        modalTag.textContent = variantLabels[v] || ('시안 ' + v);
       }
 
       toggleBtns.forEach(function (b) {
