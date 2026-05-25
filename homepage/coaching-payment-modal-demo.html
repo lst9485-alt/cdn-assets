@@ -45,7 +45,46 @@
     font-weight: 900; font-size: 26px; color: #0a1638;
     margin: 8px 0 6px;
   }
-  .demo-sub { font-size: 14px; color: #6b7280; font-weight: 600; margin-bottom: 28px; }
+  .demo-sub { font-size: 14px; color: #6b7280; font-weight: 600; margin-bottom: 22px; line-height: 1.55; }
+
+  .variant-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 6px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1.5px solid #e2e8f0;
+  }
+  .variant-toggle button {
+    padding: 12px 10px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    font-family: 'GmarketSans', Pretendard, sans-serif;
+    font-weight: 900; font-size: 13px;
+    color: #64748b;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 0.04em;
+    transition: all .15s ease;
+  }
+  .variant-toggle button .vt-sub {
+    display: block;
+    margin-top: 4px;
+    font-family: Pretendard, sans-serif;
+    font-weight: 700;
+    font-size: 11.5px;
+    color: #94a3b8;
+    letter-spacing: 0;
+  }
+  .variant-toggle button.active {
+    background: #0055FF;
+    color: #ffffff;
+  }
+  .variant-toggle button.active .vt-sub { color: rgba(255,255,255,.85); }
+
   .demo-form { background: #ffffff; border-radius: 16px; padding: 28px 24px; box-shadow: 0 8px 28px rgba(15, 23, 42, .06); }
   .demo-field { margin-bottom: 14px; }
   .demo-field label { display: block; font-size: 13px; font-weight: 800; color: #1e293b; margin-bottom: 6px; }
@@ -90,6 +129,18 @@
     position: relative;
     margin: auto;
   }
+  .modal-tag {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 4px 12px;
+    background: rgba(255,255,255,.95);
+    color: #0055FF;
+    font-family: 'GmarketSans', Pretendard, sans-serif;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    border-radius: 999px;
+  }
   .modal-close {
     position: absolute;
     top: -42px; right: 0;
@@ -105,7 +156,7 @@
   }
   .modal-close:hover { background: #ffffff; }
 
-  /* ===== 시안 6 영수증 ===== */
+  /* ===== 영수증 공통 ===== */
   .receipt-wrap { width: 100%; filter: drop-shadow(0 24px 60px rgba(0, 85, 255, .18)); }
   .receipt {
     width: 100%;
@@ -120,7 +171,7 @@
   }
   .receipt-head {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 24px;
   }
@@ -133,28 +184,63 @@
     padding: 4px 10px;
     border: 2px solid #0055FF;
     border-radius: 4px;
+    flex-shrink: 0;
   }
+  .head-right { text-align: right; min-width: 0; }
   .brand {
     font-family: 'GmarketSans', Pretendard, sans-serif;
     font-weight: 900;
     font-size: 14px;
     color: #6b7280;
   }
-  .recipient-name {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 16px;
-    padding: 6px 14px;
-    background: #fff7ee;
-    border: 1px solid #ffd8b3;
-    border-radius: 999px;
+
+  /* ===== 시안 A: 한 줄 텍스트 ===== */
+  .applicant-line {
+    margin-top: 8px;
+    font-family: Pretendard, sans-serif;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #475569;
+    line-height: 1.5;
+  }
+  .applicant-line strong {
+    color: #0a1638;
+    font-weight: 900;
+  }
+  .applicant-line .sep {
+    display: inline-block;
+    margin: 0 6px;
+    color: #cbd5e1;
+  }
+
+  /* ===== 시안 B: 라벨 + 값 박스 ===== */
+  .applicant-box {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 10px;
+    text-align: left;
+    min-width: 200px;
+  }
+  .applicant-box dt {
+    font-size: 11px;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 0.04em;
+  }
+  .applicant-box dd {
+    margin: 0;
     font-family: 'GmarketSans', Pretendard, sans-serif;
     font-weight: 900;
     font-size: 13px;
-    color: #b34900;
-    width: fit-content;
+    color: #0a1638;
+    text-align: right;
   }
+
   .row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
   .row dt { color: #4b5563; font-size: 14px; }
   .dashed { border-top: 1.5px dashed #d1d5db; border-bottom: 1.5px dashed #d1d5db; }
@@ -241,6 +327,10 @@
     .receipt-head { gap: 12px; }
     .stamp { font-size: 11px; letter-spacing: 0.24em; padding: 3px 8px; }
     .brand { font-size: 12px; }
+    .applicant-line { font-size: 11.5px; }
+    .applicant-box { padding: 8px 10px; min-width: 0; }
+    .applicant-box dt { font-size: 10.5px; }
+    .applicant-box dd { font-size: 12px; }
     .row { gap: 12px; }
     .row dt { font-size: 13px; }
     .pay-bank-full { padding: 16px 14px; }
@@ -260,7 +350,12 @@
   <div class="demo-wrap">
     <p class="demo-hint">DEMO</p>
     <h1 class="demo-title">신청 폼 데모</h1>
-    <p class="demo-sub">아래 폼에 이름 넣고 "신청하기"를 누르면 결제 안내 팝업이 떠요.</p>
+    <p class="demo-sub">이름·연락처 넣고 시안을 골라 "신청하기"를 누르면 그 시안 결제 안내 팝업이 뜹니다.</p>
+
+    <div class="variant-toggle" role="tablist" aria-label="시안 선택">
+      <button type="button" class="active" data-variant="A" role="tab">시안 A<span class="vt-sub">한 줄 표기</span></button>
+      <button type="button" data-variant="B" role="tab">시안 B<span class="vt-sub">라벨 박스</span></button>
+    </div>
 
     <form class="demo-form" id="demo-form">
       <div class="demo-field">
@@ -268,12 +363,12 @@
         <input id="applicant-name" name="name" type="text" placeholder="홍길동" required>
       </div>
       <div class="demo-field">
-        <label for="applicant-email">이메일</label>
-        <input id="applicant-email" name="email" type="email" placeholder="hong@example.com">
+        <label for="applicant-phone">휴대폰 번호</label>
+        <input id="applicant-phone" name="phone" type="tel" placeholder="010-1234-5678" required>
       </div>
       <div class="demo-field">
-        <label for="applicant-phone">연락처</label>
-        <input id="applicant-phone" name="phone" type="tel" placeholder="010-1234-5678">
+        <label for="applicant-email">이메일 (선택)</label>
+        <input id="applicant-email" name="email" type="email" placeholder="hong@example.com">
       </div>
       <button type="submit" class="demo-submit">신청하기</button>
     </form>
@@ -282,16 +377,33 @@
   <!-- ===== 결제 안내 모달 ===== -->
   <div class="modal-overlay" id="payment-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-shell">
+      <span class="modal-tag" id="modal-tag">시안 A</span>
       <button type="button" class="modal-close" id="modal-close-btn" aria-label="닫기">×</button>
       <div class="receipt-wrap">
         <div class="receipt">
           <div class="receipt-head">
             <span class="stamp">주문결제</span>
-            <p class="brand">우리동네재테크</p>
+            <div class="head-right">
+              <p class="brand">우리동네재테크</p>
+
+              <!-- 시안 A: 한 줄 표기 -->
+              <p class="applicant-line" data-variant="A">
+                <strong data-name>홍길동</strong>
+                <span class="sep">·</span>
+                <span data-phone>010-1234-5678</span>
+              </p>
+
+              <!-- 시안 B: 라벨 박스 -->
+              <dl class="applicant-box" data-variant="B" style="display:none;">
+                <dt>신청자</dt>
+                <dd data-name>홍길동</dd>
+                <dt>연락처</dt>
+                <dd data-phone>010-1234-5678</dd>
+              </dl>
+            </div>
           </div>
 
-          <h1 id="modal-title" class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 40px; margin-top: 18px;">신청 접수 완료</h1>
-          <p class="recipient-name"><iconify-icon icon="solar:user-check-bold"></iconify-icon><span data-applicant>홍길동</span>님께서 신청해주셨습니다</p>
+          <h1 id="modal-title" class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 40px; margin-top: 22px;">신청 접수 완료</h1>
           <p class="mt-3 text-sm text-gray-500 font-medium word-keep">아래 안내대로 결제를 진행해주세요.</p>
 
           <dl class="dashed py-3 space-y-1.5 mt-5" style="font-size:14px;">
@@ -350,12 +462,38 @@
     (function () {
       var form = document.getElementById('demo-form');
       var modal = document.getElementById('payment-modal');
+      var modalTag = document.getElementById('modal-tag');
       var closeBtn = document.getElementById('modal-close-btn');
+      var toggleBtns = document.querySelectorAll('.variant-toggle button');
+      var currentVariant = 'A';
 
-      function openModal(name) {
-        modal.querySelectorAll('[data-applicant]').forEach(function (el) {
-          el.textContent = name || '신청자';
+      function applyVariant(v) {
+        currentVariant = v;
+        toggleBtns.forEach(function (b) {
+          b.classList.toggle('active', b.getAttribute('data-variant') === v);
         });
+        modal.querySelectorAll('[data-variant]').forEach(function (el) {
+          if (el.tagName === 'BUTTON') return;
+          var match = el.getAttribute('data-variant') === v;
+          if (el.classList.contains('applicant-line')) {
+            el.style.display = match ? '' : 'none';
+          } else if (el.classList.contains('applicant-box')) {
+            el.style.display = match ? 'grid' : 'none';
+          }
+        });
+        modalTag.textContent = '시안 ' + v + (v === 'A' ? ' · 한 줄 표기' : ' · 라벨 박스');
+      }
+
+      toggleBtns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          applyVariant(b.getAttribute('data-variant'));
+        });
+      });
+
+      function openModal(name, phone) {
+        modal.querySelectorAll('[data-name]').forEach(function (el) { el.textContent = name || '신청자'; });
+        modal.querySelectorAll('[data-phone]').forEach(function (el) { el.textContent = phone || '-'; });
+        applyVariant(currentVariant);
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
       }
@@ -367,8 +505,9 @@
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var name = document.getElementById('applicant-name').value.trim();
-        if (!name) return;
-        openModal(name);
+        var phone = document.getElementById('applicant-phone').value.trim();
+        if (!name || !phone) return;
+        openModal(name, phone);
       });
       closeBtn.addEventListener('click', closeModal);
       modal.addEventListener('click', function (e) {
