@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-25T06:00:03.664264+09:00",
+  "updated": "2026-05-26T06:00:04.039975+09:00",
   "sections": [
     {
       "name": "프로젝트",
@@ -47,6 +47,14 @@
             },
             {
               "text": "1-7. 공개 URL 모바일/데스크톱 점검",
+              "done": false
+            },
+            {
+              "text": "1-8. 신청 후 진행순서(07 섹션) 수정 (5/25~) — 정본 `workspace/apps/dashboard/repo/homepage/coaching-all-v3.html`",
+              "done": false
+            },
+            {
+              "text": "1-9. **신청 → 즉시 문자 자동 발송** (5/25~) — 폼 제출 시 신청자 휴대폰으로 결제 안내 즉시 발송. 모달은 폰 닫으면 사라지므로 카톡/SMS 백업 필요. 채널 우선순위: 알림톡(UL_1040 또는 신규) → SMS 폴백. 본문: 신청자명·금액·계좌번호·카드결제 링크(`ourdongne.com/coaching-pay`)·입금자명 동일 안내. `consulting-crm` GAS `processNewApplication` 안에 발송 로직 추가. 알림톡 검수 통과 전엔 SMS만 운영",
               "done": false
             },
             {
