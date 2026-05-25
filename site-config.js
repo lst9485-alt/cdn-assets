@@ -187,26 +187,12 @@
             groupLabel: '결제'
           },
           {
-            id: 'coaching-payment-receipt-options',
-            title: '결제 안내 (영수증+결제 시안)',
-            description: '신청 완료 후 영수증+결제 시안 비교',
-            href: 'homepage/coaching-payment-receipt-options.html',
-            publicPath: '~/coaching-payment-receipt-options',
-            badgeText: 'NEW',
-            badgeTone: 'live',
-            iconKey: 'money',
-            sidebarType: 'root',
-            activeMatch: ['coaching-payment-receipt-options.html'],
-            hubVisible: true,
-            groupLabel: '결제'
-          },
-          {
             id: 'coaching-payment-modal-demo',
-            title: '신청 폼 → 결제 안내 팝업 데모',
-            description: '폼 제출 시 시안 6 모달 + 신청자명 자동 채움',
+            title: '신청 완료 팝업 (정본 미리보기)',
+            description: '코칭 랜딩 신청 시 뜨는 결제 안내 팝업 — 신청자명·번호 자동 채움',
             href: 'homepage/coaching-payment-modal-demo.html',
             publicPath: '~/coaching-payment-modal-demo',
-            badgeText: 'NEW',
+            badgeText: '정본',
             badgeTone: 'live',
             iconKey: 'money',
             sidebarType: 'root',
@@ -889,6 +875,20 @@
             iconKey: 'money',
             sidebarType: 'root',
             activeMatch: ['coaching-alimtalk-receipt-svg.html'],
+            hubVisible: true
+          },
+          {
+            id: 'archive-coaching-payment-receipt-options',
+            archiveNo: 'A023',
+            modifiedDate: '2026-05-25',
+            title: '결제 안내 영수증+결제 시안 6종',
+            description: '신청 완료 팝업 정본 채택 전 영수증·결제 안내 시안 비교 (시안 6 채택)',
+            href: 'homepage/coaching-payment-receipt-options.html',
+            badgeText: '홈페이지',
+            badgeTone: 'soon',
+            iconKey: 'money',
+            sidebarType: 'root',
+            activeMatch: ['coaching-payment-receipt-options.html'],
             hubVisible: true
           },
           {
