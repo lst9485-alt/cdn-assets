@@ -199,6 +199,20 @@
             groupLabel: '결제'
           },
           {
+            id: 'coaching-payment-modal-demo',
+            title: '신청 폼 → 결제 안내 팝업 데모',
+            description: '폼 제출 시 시안 6 모달 + 신청자명 자동 채움',
+            href: 'homepage/coaching-payment-modal-demo.html',
+            publicPath: '~/coaching-payment-modal-demo',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'money',
+            sidebarType: 'root',
+            activeMatch: ['coaching-payment-modal-demo.html'],
+            hubVisible: true,
+            groupLabel: '결제'
+          },
+          {
             id: 'curriculum-page',
             title: '커리큘럼 페이지',
             description: '전체 커리큘럼 한눈에 보기',
