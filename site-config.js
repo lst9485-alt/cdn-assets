@@ -140,7 +140,8 @@
             sidebarType: 'root',
             activeMatch: ['coaching-all-v3.html'],
             hubVisible: true,
-            groupLabel: '상품'
+            groupLabel: '상품',
+            imwebCode: 'homepage/coaching-all-v3-imweb.html'
           },
           {
             id: 'main-page',
@@ -154,7 +155,8 @@
             sidebarType: 'root',
             activeMatch: ['main-page.html'],
             hubVisible: true,
-            groupLabel: '기타'
+            groupLabel: '기타',
+            imwebCode: 'homepage/main-page-imweb.html'
           },
           {
             id: 'investment-philosophy',
@@ -224,7 +226,8 @@
             sidebarType: 'root',
             activeMatch: ['curriculum.html'],
             hubVisible: true,
-            groupLabel: '기타'
+            groupLabel: '기타',
+            imwebCode: 'homepage/curriculum-imweb.html'
           },
           {
             id: 'lecture-allinone',
@@ -280,7 +283,8 @@
             sidebarType: 'root',
             activeMatch: ['refund-policy.html'],
             hubVisible: true,
-            groupLabel: '기타'
+            groupLabel: '기타',
+            imwebCode: 'homepage/refund-policy-imweb.html'
           },
         ]
       },

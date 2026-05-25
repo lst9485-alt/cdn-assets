@@ -1,0 +1,277 @@
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    important: true,
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+          display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+        },
+        colors: {
+          brand: { orange: '#FF6B00', beige: '#F5F0E8', dark: '#0a0a0a', blue: '#0055FF' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+<style>
+  html { font-size: 16px !important; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; }
+  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+  [data-reveal] { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].revealed { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+  [data-stagger] > * { opacity: 0; transform: translateY(24px) scale(0.9); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  [data-stagger].revealed > *:nth-child(1) { transition-delay: 0s; }
+  [data-stagger].revealed > *:nth-child(2) { transition-delay: 0.12s; }
+  [data-stagger].revealed > *:nth-child(3) { transition-delay: 0.24s; }
+  [data-stagger].revealed > *:nth-child(4) { transition-delay: 0.36s; }
+  [data-stagger].revealed > *:nth-child(5) { transition-delay: 0.48s; }
+  [data-stagger].revealed > * { opacity: 1; transform: translateY(0) scale(1); }
+
+  /* 슬라이더 */
+  .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+  .slide { min-width: 100%; }
+
+  /* 글래스 */
+  .glass-chip { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(12px); }
+  .glass-info { background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(16px); box-shadow: 0 16px 40px rgba(0,0,0,.2); }
+
+  /* 오브 (빛 구체) */
+  @keyframes orbFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  .orb { filter: blur(40px); opacity: .4; animation: orbFloat 6s ease-in-out infinite; }
+
+  /* 아이콘 플로트 */
+  @keyframes iconFloat { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-6px) scale(1)} }
+  .icon-float { animation: iconFloat 3s ease-in-out infinite; }
+  .icon-float:hover { animation: none; transform: scale(1.08); }
+  .icon-float:nth-child(2) { animation-delay: 0.4s; }
+  .icon-float:nth-child(3) { animation-delay: 0.8s; }
+  .icon-float:nth-child(4) { animation-delay: 1.2s; }
+  .icon-float:nth-child(5) { animation-delay: 1.6s; }
+
+  /* 아이콘 도크 */
+  .icon-dock { background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(248,250,252,.88)); border: 1px solid rgba(148,163,184,.14); box-shadow: 0 20px 60px rgba(15,23,42,.07); backdrop-filter: blur(12px); }
+
+  /* 슬라이더 인디케이터 */
+  .dot { width: 10px; height: 10px; border-radius: 999px; background: rgba(255,255,255,.3); transition: all .3s ease; cursor: pointer; }
+  .dot.active { width: 32px; background: #fff; }
+
+  .site-topbar { max-width: 1160px; margin: 0 auto; padding: 18px 20px 10px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .site-logo { color: #0a0a0a; font-family: "GmarketSans", Pretendard, sans-serif; font-size: 26px; font-weight: 900; letter-spacing: -0.02em; text-decoration: none; white-space: nowrap; }
+  .site-nav { display: flex; align-items: center; justify-content: center; gap: 26px; flex: 1; }
+  .site-nav a, .site-login { color: #0a0a0a; font-size: 16px; font-weight: 800; text-decoration: none; white-space: nowrap; }
+  .site-nav a:hover, .site-login:hover { color: #FF6B00; }
+  @media (max-width: 900px) {
+    .site-topbar { align-items: flex-start; flex-direction: column; gap: 12px; padding: 16px 16px 8px; }
+    .site-nav { width: 100%; justify-content: flex-start; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+    .site-nav a { border: 1px solid #e5e7eb; border-radius: 999px; padding: 8px 12px; font-size: 14px; }
+    .site-login { display: none; }
+  }
+</style>
+<div class="bg-white od-imweb-page">
+
+<!-- ===== 히어로 배너 슬라이더 ===== -->
+<section data-section="main-slider" class="max-w-6xl mx-auto px-4 sm:px-6 pt-4 sm:pt-6">
+  <div class="relative rounded-[28px] overflow-hidden shadow-2xl" id="bannerSlider" style="box-shadow: 0 30px 80px rgba(15,23,42,.18);">
+    <div class="slider-track" id="sliderTrack">
+
+      <!-- 슬라이드 1: 코칭A -->
+      <a href="coaching-all-v3.html" class="slide block">
+        <div class="relative h-[380px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+          <!-- 오브 -->
+          <div class="orb absolute right-20 top-10 w-32 h-32 rounded-full bg-orange-400/30"></div>
+          <div class="orb absolute right-40 bottom-16 w-24 h-24 rounded-full bg-purple-400/20" style="animation-delay:-2s"></div>
+          <div class="relative z-10 px-10 sm:px-16 max-w-xl">
+            <span class="glass-chip inline-flex items-center gap-2 text-white text-sm font-bold px-5 py-2 rounded-full mb-5">
+              <iconify-icon icon="solar:chat-round-dots-bold" class="text-base"></iconify-icon> 1:1 코칭
+            </span>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-tight word-keep mb-5">지금 여기,<br>사도 될까요?</h2>
+            <p class="text-white/70 text-base sm:text-lg mb-5 word-keep">내 예산에 딱 맞는 내집마련 방법</p>
+            <!-- 글래스 정보칩 -->
+            <div class="flex flex-wrap gap-2.5 sm:gap-4">
+              <div class="glass-info rounded-2xl px-4 sm:px-6 py-2.5 sm:py-4">
+                <p class="text-[10px] sm:text-xs text-white/50 tracking-widest mb-1">만족도(5점만점)</p>
+                <p class="text-white font-bold text-xl sm:text-2xl">4.97점</p>
+              </div>
+              <div class="glass-info rounded-2xl px-4 sm:px-6 py-2.5 sm:py-4">
+                <p class="text-[10px] sm:text-xs text-white/50 tracking-widest mb-1">누적수강</p>
+                <p class="text-white font-bold text-xl sm:text-2xl">100+건</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 슬라이드 2: 코칭B -->
+      <a href="coaching-all-v3.html" class="slide block">
+        <div class="relative h-[380px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-2.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+          <div class="orb absolute right-16 top-8 w-28 h-28 rounded-full bg-blue-300/30"></div>
+          <div class="relative z-10 px-10 sm:px-16 max-w-xl">
+            <span class="glass-chip inline-flex items-center gap-2 text-white text-sm font-bold px-5 py-2 rounded-full mb-5">
+              <iconify-icon icon="solar:videocamera-record-bold" class="text-sm"></iconify-icon> 1:1 코칭
+            </span>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-tight word-keep mb-5">원하는 시간에<br>1:1 맞춤 학습</h2>
+            <p class="text-white/70 text-base sm:text-lg word-keep">Google Meet · 약 50분 · 배우자 동반 가능 →</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- 슬라이드 3: 커리큘럼 -->
+      <a href="curriculum.html" class="slide block">
+        <div class="relative h-[380px] sm:h-[420px] lg:h-[460px] flex items-center overflow-hidden">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/banner-3.jpg" alt="" class="absolute inset-0 w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"></div>
+          <div class="orb absolute right-24 bottom-10 w-36 h-36 rounded-full bg-emerald-300/25"></div>
+          <div class="relative z-10 px-10 sm:px-16 max-w-xl">
+            <span class="glass-chip inline-flex items-center gap-2 text-white text-sm font-bold px-5 py-2 rounded-full mb-5">
+              <iconify-icon icon="solar:map-bold" class="text-sm"></iconify-icon> 커리큘럼
+            </span>
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-tight word-keep mb-5">내게 맞는<br>학습 로드맵 찾기</h2>
+            <p class="text-white/70 text-base sm:text-lg word-keep">내집마련부터 재테크까지 단계별 안내 →</p>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- 컨트롤: 좌하단 도트 + 우하단 화살표 -->
+    <div class="absolute bottom-4 sm:bottom-5 left-6 sm:left-10 right-5 sm:right-10 z-10 flex items-center justify-between">
+      <div class="flex items-center gap-2" id="sliderDots"></div>
+      <div class="flex items-center gap-2">
+        <button id="sliderPause" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60 text-xs sm:text-sm font-bold" style="transition:background 0.2s">||</button>
+        <button id="sliderPrev" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60" style="transition:background 0.2s"><iconify-icon icon="solar:alt-arrow-left-bold" class="text-sm sm:text-base"></iconify-icon></button>
+        <button id="sliderNext" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/60" style="transition:background 0.2s"><iconify-icon icon="solar:alt-arrow-right-bold" class="text-sm sm:text-base"></iconify-icon></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 아이콘 도크 ===== -->
+<section data-section="main-icons" class="max-w-4xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
+  <div class="icon-dock rounded-[28px] p-5 sm:p-6 flex justify-around gap-2 sm:gap-6" data-stagger>
+    <a href="coaching-all-v3.html" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-coaching.png" alt="1:1 코칭" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-base font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">1:1 코칭</span>
+    </a>
+    <a href="curriculum.html" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
+      <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/icon-curriculum.png" alt="커리큘럼" class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+      <span class="text-base font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">커리큘럼</span>
+    </a>
+    <a href="refund-policy.html" class="flex flex-col items-center gap-2.5 group icon-float" style="transition:transform .3s ease">
+      <span class="w-14 h-14 sm:w-16 sm:h-16 rounded-[16px] shadow-md group-hover:shadow-lg bg-pink-500 text-white flex items-center justify-center" style="transition:all .3s cubic-bezier(.34,1.56,.64,1)">
+        <iconify-icon icon="solar:document-text-bold" class="text-3xl"></iconify-icon>
+      </span>
+      <span class="text-base font-bold text-gray-600 group-hover:text-brand-orange" style="transition:color .2s">환불 규정</span>
+    </a>
+  </div>
+</section>
+
+<!-- ===== 유튜브 ===== -->
+<section data-section="main-content" class="max-w-5xl mx-auto px-6 sm:px-8 py-14 sm:py-18">
+  <div class="text-center mb-10">
+    <span class="inline-flex items-center gap-2 bg-red-50 text-red-500 text-sm font-bold px-4 py-1.5 rounded-full tracking-wide mb-4">
+      <iconify-icon icon="logos:youtube-icon" class="text-base"></iconify-icon> YOUTUBE
+    </span>
+    <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark word-keep">이런 영상을 만들고 있어요</h2>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-stagger>
+    <a href="https://www.youtube.com/watch?v=wzGeLrBPEg8" target="_blank" class="group block">
+      <div class="relative rounded-xl overflow-hidden mb-3"><img src="https://img.youtube.com/vi/wzGeLrBPEg8/mqdefault.jpg" alt="" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform .3s"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background .3s"></div></div>
+      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color .2s">돈 되는 아파트 고르는 3가지 방법</p>
+      <p class="text-gray-400 text-xs mt-1">조회수 7.6만</p>
+    </a>
+    <a href="https://www.youtube.com/watch?v=0aPDvqjNm6M" target="_blank" class="group block">
+      <div class="relative rounded-xl overflow-hidden mb-3"><img src="https://img.youtube.com/vi/0aPDvqjNm6M/mqdefault.jpg" alt="" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform .3s"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background .3s"></div></div>
+      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color .2s">첫 번째 내집마련 이렇게 하세요</p>
+      <p class="text-gray-400 text-xs mt-1">조회수 4.1만</p>
+    </a>
+    <a href="https://www.youtube.com/watch?v=TkXfMsX13dg" target="_blank" class="group block">
+      <div class="relative rounded-xl overflow-hidden mb-3"><img src="https://img.youtube.com/vi/TkXfMsX13dg/mqdefault.jpg" alt="" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform .3s"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background .3s"></div></div>
+      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color .2s">30대 후반부터 격차가 벌어지는 과정</p>
+      <p class="text-gray-400 text-xs mt-1">조회수 5.1만</p>
+    </a>
+    <a href="https://www.youtube.com/watch?v=WDh_RfgwdBI" target="_blank" class="group block">
+      <div class="relative rounded-xl overflow-hidden mb-3"><img src="https://img.youtube.com/vi/WDh_RfgwdBI/mqdefault.jpg" alt="" class="w-full aspect-video object-cover group-hover:scale-105" style="transition:transform .3s"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20" style="transition:background .3s"></div></div>
+      <p class="font-bold text-brand-dark text-sm leading-snug word-keep group-hover:text-brand-orange" style="transition:color .2s">연봉별 적정 집값부터 대출까지 총정리</p>
+      <p class="text-gray-400 text-xs mt-1">조회수 2.8만</p>
+    </a>
+  </div>
+  <div class="text-center mt-8">
+    <a href="https://www.youtube.com/@우리동네재테크" target="_blank" class="inline-flex items-center gap-2 text-gray-500 font-medium hover:text-brand-orange" style="transition:color .2s">
+      유튜브에서 더 보기 <iconify-icon icon="solar:arrow-right-bold" class="text-lg"></iconify-icon>
+    </a>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<div class="px-6 sm:px-8 pb-16">
+  <section data-section="main-cta" class="max-w-5xl mx-auto bg-brand-dark rounded-3xl py-14 sm:py-20 px-8 text-center">
+    <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
+    <h2 class="text-2xl sm:text-3xl font-display font-black text-white mb-3 word-keep">내집마련, 어디서부터 시작할지 모르겠다면?</h2>
+    <p class="text-gray-400 mb-8 word-keep">현재 상황에 맞는 맞춤 학습 방법을 안내해드립니다.</p>
+    <a href="curriculum.html" class="inline-flex items-center justify-center gap-2 bg-brand-orange text-white font-bold px-8 py-4 rounded-full text-lg hover:scale-[1.02] active:scale-[0.98]" style="transition:all .5s cubic-bezier(.16,1,.3,1)">
+      커리큘럼 보기 <iconify-icon icon="solar:map-bold" class="text-xl"></iconify-icon>
+    </a>
+  </section>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // reveal
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('revealed'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+  document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
+
+  // slider
+  var track = document.getElementById('sliderTrack');
+  var dotsWrap = document.getElementById('sliderDots');
+  var total = 3, idx = 0, paused = false;
+
+  // 도트 생성
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.dataset.i = i;
+    d.onclick = function() { goTo(+this.dataset.i); };
+    dotsWrap.appendChild(d);
+  }
+
+  function goTo(i) {
+    idx = ((i % total) + total) % total;
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    dotsWrap.querySelectorAll('.dot').forEach(function(d, j) {
+      d.classList.toggle('active', j === idx);
+    });
+  }
+  setInterval(function() { if (!paused) goTo(idx + 1); }, 4500);
+  document.getElementById('sliderNext').onclick = function() { goTo(idx + 1); };
+  document.getElementById('sliderPrev').onclick = function() { goTo(idx - 1); };
+  document.getElementById('sliderPause').onclick = function() {
+    paused = !paused;
+    this.textContent = paused ? '\u25B6' : '||';
+  };
+  var slider = document.getElementById('bannerSlider');
+  slider.onmouseenter = function() { paused = true; };
+  slider.onmouseleave = function() { paused = false; };
+
+  // 터치 스와이프
+  var sx = 0;
+  slider.addEventListener('touchstart', function(e) { sx = e.changedTouches[0].screenX; }, {passive:true});
+  slider.addEventListener('touchend', function(e) {
+    var d = sx - e.changedTouches[0].screenX;
+    if (Math.abs(d) > 50) { d > 0 ? goTo(idx+1) : goTo(idx-1); }
+  });
+});
+</script>
+</div>

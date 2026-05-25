@@ -67,7 +67,12 @@
         .title-path { flex: 0 0 auto; color: #94A3B8; font-size: 11px; font-weight: 750; }
         .sheet-desc { color: #8090AA; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sheet-status { justify-content: center; }
-        .generic-sheet .sheet-row { grid-template-columns: 38px 112px minmax(160px, 1.1fr) minmax(220px, 1.6fr) 70px; }
+        .generic-sheet .sheet-row { grid-template-columns: 38px 112px minmax(160px, 1.1fr) minmax(220px, 1.6fr) 72px 70px; }
+        .sheet-copy { justify-content: center; padding: 4px 6px; }
+        .copy-btn { background: #F1F5F9; border: 1px solid #D8E0EA; border-radius: 6px; padding: 3px 8px; font-size: 11px; font-weight: 700; color: #475569; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+        .copy-btn:hover { background: #E0F2FE; border-color: #0077C8; color: #0077C8; }
+        .copy-btn.copied { background: #D1FAE5; border-color: #10B981; color: #065F46; }
+        .copy-btn:disabled { opacity: 0.6; cursor: wait; }
 
         @media (max-width: 1200px) { .hub { padding-right: 20px; } }
         @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
@@ -76,6 +81,7 @@
             .generic-sheet .sheet-row { grid-template-columns: 34px 92px minmax(130px, 1fr) 56px; }
             .sheet-desc { display: none; }
             .sheet-cell.desc-col { display: none; }
+            .sheet-cell.sheet-copy { display: none; }
             .sheet-cell.group-col { display: flex; }
         }
         @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
@@ -102,6 +108,13 @@
     var starred = loadStars();
     container.innerHTML = site.sections.map(renderSection).join('');
     container.addEventListener('click', function(event) {
+        var copyBtn = event.target.closest('.copy-btn');
+        if (copyBtn) {
+            event.preventDefault();
+            event.stopPropagation();
+            handleCopy(copyBtn);
+            return;
+        }
         var star = event.target.closest('[data-star-key]');
         if (star) {
             event.preventDefault();
@@ -122,6 +135,43 @@
         };
         container.innerHTML = site.sections.map(renderSection).join('');
     });
+
+    function handleCopy(btn) {
+        if (btn.disabled) return;
+        var src = btn.getAttribute('data-copy-src');
+        if (!src) return;
+        var originalText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = '⏳ 가져오는중';
+        fetch('./' + src + '?t=' + Date.now())
+            .then(function(res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.text();
+            })
+            .then(function(text) {
+                if (!navigator.clipboard) {
+                    throw new Error('clipboard API 미지원 (HTTPS 필요)');
+                }
+                return navigator.clipboard.writeText(text);
+            })
+            .then(function() {
+                btn.textContent = '✓ 복사됨';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                    btn.disabled = false;
+                }, 2000);
+            })
+            .catch(function(err) {
+                btn.textContent = '✗ 실패';
+                console.error('[copy-code]', src, err);
+                setTimeout(function() {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                }, 2200);
+            });
+    }
 
     function renderSection(section) {
         var items = section.items.filter(function(item) { return item.hubVisible; });
@@ -192,6 +242,7 @@
             + '<div class="sheet-cell group-col" data-sheet-sort="groupLabel" data-section-id="' + esc(sectionId) + '">구분</div>'
             + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">이름</div>'
             + '<div class="sheet-cell desc-col" data-sheet-sort="description" data-section-id="' + esc(sectionId) + '">설명</div>'
+            + '<div class="sheet-cell sheet-copy">코드</div>'
             + '<div class="sheet-cell sheet-status" data-sheet-sort="badgeText" data-section-id="' + esc(sectionId) + '">상태</div>'
             + '</div>';
     }
@@ -231,12 +282,16 @@
         var href = item.href.indexOf('http') === 0 ? item.href : './' + item.href;
         var group = item.groupLabel || item.sidebarLabel || '기타';
         var titleHtml = renderGenericTitle(item, sectionId);
+        var copyCell = item.imwebCode
+            ? '<div class="sheet-cell sheet-copy"><button type="button" class="copy-btn" data-copy-src="' + attr(item.imwebCode) + '" title="아임웹 코드위젯용 본문 통째 복사">📋 복사</button></div>'
+            : '<div class="sheet-cell sheet-copy"></div>';
         return ''
             + '<a href="' + href + '" class="sheet-row" target="_blank" rel="noopener">'
             + starCell(item)
             + '<div class="sheet-cell sheet-group group-col">' + esc(group) + '</div>'
             + titleHtml
             + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
+            + copyCell
             + '<div class="sheet-cell sheet-status"><span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span></div>'
             + '</a>';
     }
