@@ -169,13 +169,19 @@
     flex-direction: column;
     justify-content: space-between;
   }
-  .receipt-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+
+  /* 영수증 상단: 좌(주문결제+신청완료) / 우(우리동네재테크+신청자정보) 2열 */
+  .receipt-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
     gap: 24px;
+    align-items: start;
   }
+  .receipt-top-left { min-width: 0; }
+  .receipt-top-right { text-align: right; min-width: 0; }
+
   .stamp {
+    display: inline-block;
     font-family: 'GmarketSans', Pretendard, sans-serif;
     font-weight: 900;
     font-size: 13px;
@@ -184,9 +190,7 @@
     padding: 4px 10px;
     border: 2px solid #0055FF;
     border-radius: 4px;
-    flex-shrink: 0;
   }
-  .head-right { text-align: right; min-width: 0; }
   .brand {
     font-family: 'GmarketSans', Pretendard, sans-serif;
     font-weight: 900;
@@ -194,9 +198,8 @@
     color: #6b7280;
   }
 
-  /* ===== 시안 C-1: 박스 없이 텍스트 (우측 정렬, 매우 컴팩트) ===== */
   .applicant-plain {
-    margin-top: 8px;
+    margin-top: 10px;
     text-align: right;
     line-height: 1.55;
   }
@@ -219,34 +222,6 @@
     font-weight: 900;
     color: #0a1638;
     font-size: 13px;
-  }
-
-  /* ===== 시안 C-2: 컴팩트 라벨 박스 (우측 정렬, 텍스트 폭에 맞게) ===== */
-  .applicant-mini {
-    margin-top: 8px;
-    margin-left: auto;
-    padding: 6px 10px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    display: inline-grid;
-    grid-template-columns: auto auto;
-    gap: 2px 10px;
-    text-align: right;
-  }
-  .applicant-mini dt {
-    font-size: 10.5px;
-    font-weight: 800;
-    color: #94a3b8;
-    letter-spacing: 0.04em;
-    text-align: left;
-  }
-  .applicant-mini dd {
-    margin: 0;
-    font-family: 'GmarketSans', Pretendard, sans-serif;
-    font-weight: 900;
-    font-size: 12.5px;
-    color: #0a1638;
   }
 
   .row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
@@ -331,14 +306,14 @@
     .modal-overlay { padding: 24px 12px; }
     .modal-close { top: -38px; }
     .receipt { padding: 24px 20px 20px; border-radius: 14px; }
-    .receipt h1 { font-size: 30px !important; }
-    .receipt-head { gap: 12px; }
+    .receipt h1 { font-size: 28px !important; }
+    .receipt-top { grid-template-columns: 1fr; gap: 12px; }
+    .receipt-top-right { text-align: left; }
+    .applicant-plain { text-align: left; }
     .stamp { font-size: 11px; letter-spacing: 0.24em; padding: 3px 8px; }
     .brand { font-size: 12px; }
-    .applicant-line { font-size: 11.5px; }
-    .applicant-box { padding: 8px 10px; min-width: 0; }
-    .applicant-box dt { font-size: 10.5px; }
-    .applicant-box dd { font-size: 12px; }
+    .applicant-plain p { font-size: 11.5px; }
+    .applicant-plain .ap-value { font-size: 12px; }
     .row { gap: 12px; }
     .row dt { font-size: 13px; }
     .pay-bank-full { padding: 16px 14px; }
@@ -358,12 +333,7 @@
   <div class="demo-wrap">
     <p class="demo-hint">DEMO</p>
     <h1 class="demo-title">신청 폼 데모</h1>
-    <p class="demo-sub">이름·연락처 넣고 시안을 골라 "신청하기"를 누르면 그 시안 결제 안내 팝업이 뜹니다.</p>
-
-    <div class="variant-toggle" role="tablist" aria-label="시안 선택">
-      <button type="button" class="active" data-variant="C1" role="tab">시안 C-1<span class="vt-sub">박스 없이 텍스트</span></button>
-      <button type="button" data-variant="C2" role="tab">시안 C-2<span class="vt-sub">컴팩트 박스</span></button>
-    </div>
+    <p class="demo-sub">이름·연락처 넣고 "신청하기"를 누르면 결제 안내 팝업이 뜹니다.</p>
 
     <form class="demo-form" id="demo-form">
       <div class="demo-field">
@@ -385,33 +355,23 @@
   <!-- ===== 결제 안내 모달 ===== -->
   <div class="modal-overlay" id="payment-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-shell">
-      <span class="modal-tag" id="modal-tag">시안 C-1</span>
       <button type="button" class="modal-close" id="modal-close-btn" aria-label="닫기">×</button>
       <div class="receipt-wrap">
         <div class="receipt">
-          <div class="receipt-head">
-            <span class="stamp">주문결제</span>
-            <div class="head-right">
+          <div class="receipt-top">
+            <div class="receipt-top-left">
+              <span class="stamp">주문결제</span>
+              <h1 id="modal-title" class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 40px; margin-top: 22px;">신청 접수 완료</h1>
+              <p class="mt-3 text-sm text-gray-500 font-medium word-keep">아래 안내대로 결제를 진행해주세요.</p>
+            </div>
+            <div class="receipt-top-right">
               <p class="brand">우리동네재테크</p>
-
-              <!-- 시안 C-1: 박스 없이 텍스트 -->
-              <div class="applicant-plain" data-variant="C1">
+              <div class="applicant-plain">
                 <p><span class="ap-label">신청자</span><span class="ap-value" data-name>홍길동</span></p>
                 <p><span class="ap-label">연락처</span><span class="ap-value" data-phone>010-1234-5678</span></p>
               </div>
-
-              <!-- 시안 C-2: 컴팩트 라벨 박스 -->
-              <dl class="applicant-mini" data-variant="C2" style="display:none;">
-                <dt>신청자</dt>
-                <dd data-name>홍길동</dd>
-                <dt>연락처</dt>
-                <dd data-phone>010-1234-5678</dd>
-              </dl>
             </div>
           </div>
-
-          <h1 id="modal-title" class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 40px; margin-top: 22px;">신청 접수 완료</h1>
-          <p class="mt-3 text-sm text-gray-500 font-medium word-keep">아래 안내대로 결제를 진행해주세요.</p>
 
           <dl class="dashed py-3 space-y-1.5 mt-5" style="font-size:14px;">
             <div class="row">
@@ -469,42 +429,11 @@
     (function () {
       var form = document.getElementById('demo-form');
       var modal = document.getElementById('payment-modal');
-      var modalTag = document.getElementById('modal-tag');
       var closeBtn = document.getElementById('modal-close-btn');
-      var toggleBtns = document.querySelectorAll('.variant-toggle button');
-      var currentVariant = 'C1';
-      var variantLabels = {
-        'C1': '시안 C-1 · 박스 없이 텍스트',
-        'C2': '시안 C-2 · 컴팩트 박스'
-      };
-
-      function applyVariant(v) {
-        currentVariant = v;
-        toggleBtns.forEach(function (b) {
-          b.classList.toggle('active', b.getAttribute('data-variant') === v);
-        });
-        modal.querySelectorAll('[data-variant]').forEach(function (el) {
-          if (el.tagName === 'BUTTON') return;
-          var match = el.getAttribute('data-variant') === v;
-          if (el.classList.contains('applicant-plain')) {
-            el.style.display = match ? 'block' : 'none';
-          } else if (el.classList.contains('applicant-mini')) {
-            el.style.display = match ? 'inline-grid' : 'none';
-          }
-        });
-        modalTag.textContent = variantLabels[v] || ('시안 ' + v);
-      }
-
-      toggleBtns.forEach(function (b) {
-        b.addEventListener('click', function () {
-          applyVariant(b.getAttribute('data-variant'));
-        });
-      });
 
       function openModal(name, phone) {
         modal.querySelectorAll('[data-name]').forEach(function (el) { el.textContent = name || '신청자'; });
         modal.querySelectorAll('[data-phone]').forEach(function (el) { el.textContent = phone || '-'; });
-        applyVariant(currentVariant);
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
       }
