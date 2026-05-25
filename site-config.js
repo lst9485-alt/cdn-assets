@@ -185,6 +185,20 @@
             groupLabel: '결제'
           },
           {
+            id: 'coaching-payment-receipt-options',
+            title: '결제 안내 (영수증+결제 시안)',
+            description: '신청 완료 후 영수증+결제 시안 비교',
+            href: 'homepage/coaching-payment-receipt-options.html',
+            publicPath: '~/coaching-payment-receipt-options',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'money',
+            sidebarType: 'root',
+            activeMatch: ['coaching-payment-receipt-options.html'],
+            hubVisible: true,
+            groupLabel: '결제'
+          },
+          {
             id: 'curriculum-page',
             title: '커리큘럼 페이지',
             description: '전체 커리큘럼 한눈에 보기',
