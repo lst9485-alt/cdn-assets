@@ -3,9 +3,9 @@
  *
  * 기능:
  *   - OAuth 로그인 (GIS token client, SPA 친화)
- *   - 내 채널 영상 전체 목록 로드 (제목/설명/썸네일/핀댓글)
+ *   - 내 채널 영상 전체 목록 로드 (제목/설명/썸네일/고정댓글용 내 댓글)
  *   - Analytics 조회수 로드
- *   - 설명글/핀댓글 일괄 수정 + 저장
+ *   - 설명글/고정댓글용 내 댓글 일괄 수정 + 저장
  *   - 텍스트 일괄 교체 (미리보기 + 적용)
  *   - 검색/날짜필터/변경필터/Shorts 포함
  *   - Excel 내보내기 (SheetJS)
@@ -295,9 +295,9 @@
           thumbnailUrl: thumb,
           description: desc,
           originalDescription: desc,
-          pinnedCommentId: null,
-          pinnedCommentText: '',
-          originalPinnedComment: '',
+          ownerCommentId: null,
+          ownerCommentText: '',
+          originalOwnerComment: '',
           publishedAt,
           isShort: durSec <= 120 && durSec > 0,
           commentsDisabled: false,
@@ -313,19 +313,18 @@
     return out;
   }
 
-  // 핀댓글 식별 한계: YouTube API v3는 핀고정 여부를 직접 알려주는 필드가 없다.
-  // relevance 정렬 상위 N개 중 채널 주인 댓글을 핀댓글로 간주하는 휴리스틱 사용.
-  // maxResults를 충분히 키워(30) 정확도를 높였지만, 채널 주인이 일반 댓글을
-  // 다수 단 영상에서는 일반 댓글이 잘못 매칭될 수 있다. 따라서 저장 전 사용자가
-  // 카드에서 텍스트를 직접 확인해야 한다 (UI상 핀댓글 섹션에 안내).
-  const PINNED_COMMENT_PROBE_LIMIT = 30;
+  // YouTube API v3는 핀고정 여부를 직접 알려주는 필드를 제공하지 않는다.
+  // 이 채널 운영 기준에서는 채널 주인 댓글을 고정댓글용 댓글로 사용한다.
+  // 실제 전체 영상 점검 기준: 91개 중 채널 주인 댓글은 전부 잡혔고,
+  // 2개는 댓글은 있으나 YouTube에서 고정만 누락된 상태였다.
+  const OWNER_COMMENT_PROBE_LIMIT = 30;
 
-  async function getPinnedComment(videoId, channelId) {
+  async function getOwnerComment(videoId, channelId) {
     const url = new URL(`${YT_API}/commentThreads`);
     url.searchParams.set('part', 'snippet');
     url.searchParams.set('videoId', videoId);
     url.searchParams.set('order', 'relevance');
-    url.searchParams.set('maxResults', String(PINNED_COMMENT_PROBE_LIMIT));
+    url.searchParams.set('maxResults', String(OWNER_COMMENT_PROBE_LIMIT));
     try {
       const data = await ytFetch(url.toString());
       for (const thread of data.items || []) {
@@ -411,14 +410,14 @@
     });
   }
 
-  async function updatePinnedComment(item) {
-    if (!item.pinnedCommentId) return;
+  async function updateOwnerComment(item) {
+    if (!item.ownerCommentId) return;
     await ytFetch(`${YT_API}/comments?part=snippet`, {
       method: 'PUT',
       body: JSON.stringify({
-        id: item.pinnedCommentId,
+        id: item.ownerCommentId,
         snippet: {
-          textOriginal: item.pinnedCommentText,
+          textOriginal: item.ownerCommentText,
         },
       }),
     });
@@ -450,29 +449,32 @@
         setLoadProgress(35 + (done / total) * 30, `상세 ${done}/${total}`);
       });
 
-      setLoadProgress(65, '핀댓글 확인 중...');
-      let pinnedDone = 0;
-      const pinnedErrors = [];
+      setLoadProgress(65, '고정댓글용 댓글 확인 중...');
+      let ownerCommentDone = 0;
+      const ownerCommentErrors = [];
       for (const item of videos) {
-        const pin = await getPinnedComment(item.videoId, channelId);
-        item.pinnedCommentId = pin.id;
-        item.pinnedCommentText = pin.text;
-        item.originalPinnedComment = pin.text;
-        item.commentsDisabled = pin.disabled;
-        if (pin.error) pinnedErrors.push({ title: item.title, error: pin.error });
-        pinnedDone += 1;
-        setLoadProgress(65 + (pinnedDone / videos.length) * 30, `핀댓글 ${pinnedDone}/${videos.length}`);
+        const ownerComment = await getOwnerComment(item.videoId, channelId);
+        item.ownerCommentId = ownerComment.id;
+        item.ownerCommentText = ownerComment.text;
+        item.originalOwnerComment = ownerComment.text;
+        item.commentsDisabled = ownerComment.disabled;
+        if (ownerComment.error) ownerCommentErrors.push({ title: item.title, error: ownerComment.error });
+        ownerCommentDone += 1;
+        setLoadProgress(
+          65 + (ownerCommentDone / videos.length) * 30,
+          `고정댓글용 댓글 ${ownerCommentDone}/${videos.length}`,
+        );
       }
 
       state.videos = videos;
       setLoadProgress(100, '완료');
-      if (pinnedErrors.length) {
+      if (ownerCommentErrors.length) {
         toast(
-          `영상 ${videos.length}개 로드 (핀댓글 ${pinnedErrors.length}건 조회 실패 — 콘솔 확인)`,
+          `영상 ${videos.length}개 로드 (고정댓글용 댓글 ${ownerCommentErrors.length}건 조회 실패 — 콘솔 확인)`,
           'error',
           6000,
         );
-        console.error('핀댓글 조회 실패:', pinnedErrors);
+        console.error('고정댓글용 댓글 조회 실패:', ownerCommentErrors);
       } else {
         toast(`영상 ${videos.length}개 로드 완료`, 'success');
       }
@@ -526,7 +528,7 @@
   function isChanged(item) {
     return (
       item.description !== item.originalDescription ||
-      (item.pinnedCommentText !== item.originalPinnedComment && item.pinnedCommentId)
+      (item.ownerCommentText !== item.originalOwnerComment && item.ownerCommentId)
     );
   }
 
@@ -612,7 +614,7 @@
   function renderVideoCard(v) {
     const badges = [];
     if (v.description !== v.originalDescription) badges.push('설명글 수정');
-    if (v.pinnedCommentText !== v.originalPinnedComment && v.pinnedCommentId) badges.push('핀댓글 수정');
+    if (v.ownerCommentText !== v.originalOwnerComment && v.ownerCommentId) badges.push('댓글 수정');
     const badgeHtml = badges.length
       ? `<div class="video-badges">${badges.map((b) => `<span class="badge">${b}</span>`).join('')}</div>`
       : '';
@@ -620,13 +622,13 @@
     if (v.views != null) stats.push(`조회수 ${v.views.toLocaleString()}`);
     if (v.isShort) stats.push('Shorts');
     const descChanged = v.description !== v.originalDescription ? ' changed' : '';
-    const commentChanged = v.pinnedCommentText !== v.originalPinnedComment ? ' changed' : '';
+    const commentChanged = v.ownerCommentText !== v.originalOwnerComment ? ' changed' : '';
 
     const commentBlock = v.commentsDisabled
       ? '<div class="disabled-note">댓글 비활성화 영상입니다.</div>'
-      : v.pinnedCommentId
-      ? `<textarea data-field="comment" data-id="${v.videoId}" class="${commentChanged.trim()}">${escapeHtml(v.pinnedCommentText)}</textarea>`
-      : '<div class="disabled-note">핀댓글 없음 (새 핀고정은 YouTube Studio에서 설정)</div>';
+      : v.ownerCommentId
+      ? `<textarea data-field="comment" data-id="${v.videoId}" class="${commentChanged.trim()}">${escapeHtml(v.ownerCommentText)}</textarea>`
+      : '<div class="disabled-note">채널 주인 댓글 없음 (YouTube에서 댓글 작성 후 고정 필요)</div>';
 
     return `
       <article class="video-card" data-id="${v.videoId}">
@@ -643,7 +645,7 @@
             <textarea data-field="description" data-id="${v.videoId}" rows="6" class="${descChanged.trim()}">${escapeHtml(v.description)}</textarea>
           </details>
           <details class="field">
-            <summary>핀댓글</summary>
+            <summary>고정댓글용 내 댓글</summary>
             ${commentBlock}
           </details>
         </div>
@@ -661,15 +663,15 @@
       v.description = ta.value;
       ta.classList.toggle('changed', v.description !== v.originalDescription);
     } else if (field === 'comment') {
-      v.pinnedCommentText = ta.value;
-      ta.classList.toggle('changed', v.pinnedCommentText !== v.originalPinnedComment);
+      v.ownerCommentText = ta.value;
+      ta.classList.toggle('changed', v.ownerCommentText !== v.originalOwnerComment);
     }
     // 배지 갱신
     const card = ta.closest('.video-card');
     const badgesContainer = card.querySelector('.video-badges');
     const badges = [];
     if (v.description !== v.originalDescription) badges.push('설명글 수정');
-    if (v.pinnedCommentText !== v.originalPinnedComment && v.pinnedCommentId) badges.push('핀댓글 수정');
+    if (v.ownerCommentText !== v.originalOwnerComment && v.ownerCommentId) badges.push('댓글 수정');
     const badgeHtml = badges.map((b) => `<span class="badge">${b}</span>`).join('');
     if (badgesContainer) {
       if (badges.length) badgesContainer.innerHTML = badgeHtml;
@@ -685,7 +687,7 @@
 
   // ---------- 저장 ----------
   // 필드 단위 원자성: 설명글 저장에 성공한 직후 originalDescription을 갱신해서,
-  // 핀댓글 저장이 실패해도 다음 재시도 때 설명글이 다시 호출되지 않도록 한다.
+  // 댓글 저장이 실패해도 다음 재시도 때 설명글이 다시 호출되지 않도록 한다.
   async function saveChanges() {
     const changed = state.videos.filter(isChanged);
     if (!changed.length) return;
@@ -708,18 +710,18 @@
           itemErrors.push(`설명글: ${err.message}`);
         }
       }
-      // 핀댓글 저장 + 즉시 original 갱신 (설명글 결과와 독립)
+      // 고정댓글용 댓글 저장 + 즉시 original 갱신 (설명글 결과와 독립)
       if (
-        item.pinnedCommentText !== item.originalPinnedComment &&
+        item.ownerCommentText !== item.originalOwnerComment &&
         !item.commentsDisabled &&
-        item.pinnedCommentId
+        item.ownerCommentId
       ) {
         try {
-          await updatePinnedComment(item);
-          item.originalPinnedComment = item.pinnedCommentText;
+          await updateOwnerComment(item);
+          item.originalOwnerComment = item.ownerCommentText;
         } catch (err) {
           console.error(err);
-          itemErrors.push(`핀댓글: ${err.message}`);
+          itemErrors.push(`댓글: ${err.message}`);
         }
       }
       if (itemErrors.length) {
@@ -753,7 +755,7 @@
     for (const v of state.videos) {
       const hits = [];
       if (applyDesc && v.description.includes(oldStr)) hits.push('설명글');
-      if (applyComment && v.pinnedCommentId && !v.commentsDisabled && v.pinnedCommentText.includes(oldStr)) hits.push('핀댓글');
+      if (applyComment && v.ownerCommentId && !v.commentsDisabled && v.ownerCommentText.includes(oldStr)) hits.push('고정댓글용 댓글');
       if (hits.length) {
         count += 1;
         if (samples.length < 5) samples.push(`${v.title} (${hits.join(', ')})`);
@@ -780,8 +782,8 @@
         v.description = v.description.split(oldStr).join(newStr);
         changed = true;
       }
-      if (applyComment && v.pinnedCommentId && !v.commentsDisabled && v.pinnedCommentText.includes(oldStr)) {
-        v.pinnedCommentText = v.pinnedCommentText.split(oldStr).join(newStr);
+      if (applyComment && v.ownerCommentId && !v.commentsDisabled && v.ownerCommentText.includes(oldStr)) {
+        v.ownerCommentText = v.ownerCommentText.split(oldStr).join(newStr);
         changed = true;
       }
       if (changed) count += 1;
@@ -801,7 +803,7 @@
       return;
     }
     const list = filteredVideos();
-    const rows = [['제목', 'URL', '게시일', '구분', '조회수', '설명글', '핀댓글']];
+    const rows = [['제목', 'URL', '게시일', '구분', '조회수', '설명글', '고정댓글용 내 댓글']];
     for (const v of list) {
       rows.push([
         v.title,
@@ -810,7 +812,7 @@
         v.isShort ? '쇼츠' : '일반',
         v.views != null ? v.views : '',
         v.description,
-        v.commentsDisabled ? '' : v.pinnedCommentText,
+        v.commentsDisabled ? '' : v.ownerCommentText,
       ]);
     }
     const ws = XLSX.utils.aoa_to_sheet(rows);

@@ -627,7 +627,7 @@
           {
             id: 'yt-bulk-editor',
             title: 'YT 일괄 편집기',
-            description: '영상 설명글 · 핀댓글 일괄 수정',
+            description: '영상 설명글 · 고정댓글용 내 댓글 일괄 수정',
             href: 'tools/yt-bulk-editor/',
             badgeText: 'LIVE',
             badgeTone: 'live',
