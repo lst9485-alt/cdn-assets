@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-26T06:00:04.039975+09:00",
+  "updated": "2026-05-27T06:00:03.494978+09:00",
   "sections": [
     {
       "name": "프로젝트",
@@ -10,23 +10,11 @@
           "ref": null,
           "items": [
             {
-              "text": "1-1. 결제 안내 시안 4종(A/B/C/D) 중 1개 선택 → 결제 안내 페이지 정본에 반영 + 고정 URL 운영. 원본 시안: `workspace/apps/dashboard/repo/homepage/coaching-alimtalk-receipt.html`",
+              "text": "1-1. (정리) 운영 시작 후 archive A024~A028 시안 5개 일괄 삭제 (`coaching-payment-card-e/f.html`, `inline-receipt-demo.html`, `inline-retry-demo.html`, `coaching-payment.html` 옛 정본)",
               "done": false
             },
             {
-              "text": "1-1a. **⚠️ 정본 분열 먼저 확정** — `coaching-payment.html`(홈페이지 노트 line 58 \"정본\" 표시, 4KB, 5/11) vs `coaching-payment-guide-v3.html`(todo-list 기존 참조, 6KB, 5/21) 둘 다 존재. 어느 게 결제 안내 정본인지 결정 후 다른 하나는 통폐합 또는 폐기. 둘 다 두려면 용도 명확히 분리 (예: 신청 완료 페이지 vs 결제 가이드)",
-              "done": false
-            },
-            {
-              "text": "1-1b. 정본 페이지에 영수증 그림(A/B/C/D 중 선택) + 계좌번호 복사 버튼 + 입금자명/금액 안내 반영",
-              "done": false
-            },
-            {
-              "text": "1-1c. CDN 푸시 + 공개 URL 점검 (workspace/CLAUDE.md \"대시보드 동기화\" 규칙)",
-              "done": false
-            },
-            {
-              "text": "1-2. (반려 5/21) 알림톡 UL_1040 폐기 + 텍스트 2종 신규 등록 — \"신청 접수됐어요\" / \"입금 확인됐어요\"만. 영수증·계좌·결제링크는 알림톡에서 전부 빼고 결제 안내 페이지(1-1)로 이동. **반려 사유**: 결제 유도 금지(PG 미등록) + 영수증 그림이 알림톡 이미지형 4종(로고/텍스트혼합/아이콘/배송) 안 맞음. BMS도 채널 친구 5만명 안 되면 비친구 발송 불가라 한계 동일",
+              "text": "1-2. (5/26 살리기 재신청 진행 중) 알림톡 UL_1040 — 기본형으로 전환(이미지형 사유 해결) + KG이니시스 결제창 캡처 확보 완료. 알리고 수정 검수 신청 들어감, 결과 3~5영업일 대기. **확인된 정책 (5/26 재조사)**: 무통장 계좌 = \"경로 안내\"로 허용 / 결제 유도(카드결제) = PG사(KG이니시스) 결제 페이지 캡처 첨부 시 통과 가능. 5/21 반려는 \"PG 미등록\" 단정이 잘못이었음 — 아임웹이 KG이니시스 PG로 결제 중. **다음**: ① 통과 시 CRM 연결(1-3) ② 또 반려 시 본문 끝에 \"※ 카드결제는 KG이니시스(PG사) 결제 모듈로 진행됩니다\" 한 줄 추가 + 답변글 채널로 캡처 첨부 시도(알리고 02-511-4560 문의). 본문·답변글·캡처 경로 정본 = `Obsidian/4. Archive/copy.md`",
               "done": false
             },
             {
@@ -34,39 +22,39 @@
               "done": false
             },
             {
-              "text": "1-4. 코칭페이지 가격/신청 흐름 통일 — A/B 상품 상태, 상담신청/대기신청 라벨, 폼 비활성 한 기준으로",
-              "done": false
+              "text": "1-4. 코칭페이지 가격/신청 흐름 통일 — A/B 상품 상태, 상담신청/대기신청 라벨, 폼 비활성 한 기준으로 (5/26)",
+              "done": true
             },
             {
-              "text": "1-5. 코칭페이지 신청폼 마찰 줄이기 — 신청 직전 요약 카드, 기타 입력 조건부 노출, 결제 안내 문구 단순화",
-              "done": false
-            },
-            {
-              "text": "1-6. 1:1 코칭 랜딩 속도 최적화 — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축 (5/13~)",
-              "done": false
+              "text": "1-5. 코칭페이지 신청폼 마찰 줄이기 — 신청 직전 요약 카드, 기타 입력 조건부 노출, 결제 안내 문구 단순화 (5/26)",
+              "done": true
             },
             {
               "text": "1-7. 공개 URL 모바일/데스크톱 점검",
               "done": false
             },
             {
-              "text": "1-8. 신청 후 진행순서(07 섹션) 수정 (5/25~) — 정본 `workspace/apps/dashboard/repo/homepage/coaching-all-v3.html`",
+              "text": "1-8. **아임웹 운영 전 필수**: imweb 모달 정본 디자인으로 통일 — `coaching-all-v3-imweb.html`의 successModal이 단순 텍스트 버전. 정본(`coaching-all-v3.html`)의 풍부한 모달(영수증 + 무통장 + 카드결제 박스)을 imweb 파일에 복사해서 통일해야 함. 5/26 정본 모달 디자인 수정 완료 상태 (계좌번호 복사 버튼·카드결제 풀버튼·모바일 정렬 다 반영됨). 시작 프롬프트: \"1-8 — imweb 모달 정본과 통일. coaching-all-v3.html의 #successModal CSS + HTML + JS를 coaching-all-v3-imweb.html에 복사 후 기존 단순 모달 제거\"",
               "done": false
             },
             {
-              "text": "1-9. **신청 → 즉시 문자 자동 발송** (5/25~) — 폼 제출 시 신청자 휴대폰으로 결제 안내 즉시 발송. 모달은 폰 닫으면 사라지므로 카톡/SMS 백업 필요. 채널 우선순위: 알림톡(UL_1040 또는 신규) → SMS 폴백. 본문: 신청자명·금액·계좌번호·카드결제 링크(`ourdongne.com/coaching-pay`)·입금자명 동일 안내. `consulting-crm` GAS `processNewApplication` 안에 발송 로직 추가. 알림톡 검수 통과 전엔 SMS만 운영",
+              "text": "1-9 아임웹 배포 후속 — 정본 noindex 제거, 모달 카드결제 링크 `ourdongne.com/coaching-pay` 직행 (전부 확인필요함)",
               "done": false
             },
             {
-              "text": "1-9. 투자 철학 페이지(`investment-philosophy.html`) 수정 (5/14~)",
+              "text": "1-12. 투자 철학 페이지(`investment-philosophy.html`) 수정 (5/14~)",
               "done": false
             },
             {
-              "text": "1-10. 자료실/커뮤니티 신설 — 영상 자료 배포",
+              "text": "1-13. 자료실/커뮤니티 신설 — 영상 자료 배포",
               "done": false
             },
             {
-              "text": "1-11. 아임웹 결제/완료 페이지 GA4 코드 삽입 — 결제 본문 교체랑 묶음",
+              "text": "1-14. 아임웹 결제/완료 페이지 GA4 코드 삽입 — 결제 본문 교체랑 묶음",
+              "done": false
+            },
+            {
+              "text": "1-15. 1:1 코칭 랜딩 속도 최적화 — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축 (5/13~)",
               "done": false
             }
           ]
@@ -333,6 +321,18 @@
             },
             {
               "text": "6-4. **자동화 모니터링 강화** — n8n cron이 며칠 누락되면 텔레그램 즉시 알림 (5/17~5/20 누락 재발 방지). nightwatch 또는 별도 cron으로 헬스체크",
+              "done": false
+            },
+            {
+              "text": "6-6. **매도 추정은 텔레그램 확인 후 반영 (재발방지)** (5/26~)",
+              "done": false
+            },
+            {
+              "text": "6-7. **5/26 사이클 1 종료 처리 + 시트 정정** (5/26~)",
+              "done": false
+            },
+            {
+              "text": "6-8. **사이클 2 시작 결정 + 새 사이클 진입** (5/26~) — 사이클 1 종료 후 다음 사이클 셋업",
               "done": false
             }
           ]
