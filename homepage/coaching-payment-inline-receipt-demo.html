@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>폼 하단 영수증형 결제 안내 시안 - 우리동네재테크</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+          display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+        },
+        colors: {
+          brand: { blue: '#0055FF', dark: '#111111' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+<style>
+  html { font-size: 16px; overflow-x: hidden; }
+  body { font-family: Pretendard, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+  .receipt-row { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: baseline; }
+  @media (max-width: 640px) {
+    .receipt-row { grid-template-columns: 1fr; gap: 6px; }
+  }
+</style>
+</head>
+<body class="bg-[#f5f0e8] text-brand-dark">
+  <main class="mx-auto max-w-4xl px-5 py-10">
+    <section class="rounded-3xl bg-white p-7 shadow-xl sm:p-10">
+      <p class="text-sm font-black text-[#ff6b00]">코칭 신청</p>
+      <h1 class="mt-2 text-3xl font-black tracking-tight">신청서 영역 예시</h1>
+      <div class="mt-8 space-y-5">
+        <div>
+          <label class="block text-sm font-bold">성함</label>
+          <div class="mt-2 h-12 rounded-xl border border-gray-200 bg-gray-50"></div>
+        </div>
+        <div>
+          <label class="block text-sm font-bold">휴대폰 번호</label>
+          <div class="mt-2 h-12 rounded-xl border border-gray-200 bg-gray-50"></div>
+        </div>
+        <button class="h-14 w-full rounded-2xl bg-[#ff6b00] font-black text-white">코칭 대기신청</button>
+      </div>
+    </section>
+
+    <section class="mt-6 rounded-[24px] bg-[#dfe9ff] p-4 sm:p-7">
+      <p class="mb-5 text-sm font-black tracking-[0.18em] text-brand-blue">결제 안내 다시 보기</p>
+      <article class="bg-white px-6 py-7 shadow-[0_18px_50px_rgba(15,23,42,.08)] sm:px-10 sm:py-9">
+        <header class="flex items-start justify-between gap-4">
+          <div>
+            <p class="inline-flex rounded-md border-2 border-brand-blue px-3 py-1 text-xs font-black tracking-[0.2em] text-brand-blue">결제 안내</p>
+            <h2 class="mt-4 font-display text-4xl font-black leading-tight sm:text-5xl word-keep">신청 접수 완료</h2>
+          </div>
+          <p class="shrink-0 font-display text-base font-black text-gray-500 sm:text-xl">우리동네재테크</p>
+        </header>
+
+        <dl class="mt-6 space-y-4 border-y border-dashed border-gray-300 py-5">
+          <div class="receipt-row">
+            <dt class="text-gray-500">상품</dt>
+            <dd class="text-right font-display text-xl font-black sm:text-2xl">내집마련 1:1 코칭 A</dd>
+          </div>
+          <div class="receipt-row">
+            <dt class="text-gray-500">수강 기간</dt>
+            <dd class="text-right font-display text-lg font-black sm:text-xl">최대 180일</dd>
+          </div>
+          <div class="receipt-row">
+            <dt class="text-gray-500">결제 금액</dt>
+            <dd class="text-right font-display text-4xl font-black text-brand-blue sm:text-5xl">400,000원</dd>
+          </div>
+        </dl>
+
+        <div class="mt-5 grid gap-3 sm:grid-cols-[120px_1fr] sm:items-center">
+          <div class="flex items-center gap-2">
+            <p class="text-gray-500">입금 계좌</p>
+            <span class="rounded-md bg-blue-100 px-2 py-1 text-xs font-black text-brand-blue">현금영수증 가능</span>
+          </div>
+          <div class="text-right">
+            <p class="font-display text-xl font-black sm:text-2xl">하나은행 125-910032-26304</p>
+            <p class="mt-1 text-sm font-bold text-gray-500">주식회사 우리동네사람들</p>
+          </div>
+        </div>
+
+        <div class="mt-6 grid gap-3 sm:grid-cols-2">
+          <div class="rounded-2xl border border-gray-200 bg-white p-4">
+            <p class="font-display text-lg font-black">카드결제</p>
+            <p class="mt-1 text-xs leading-5 text-gray-500 word-keep">카드로 결제하실 분은 아래 버튼에서 진행해주세요.</p>
+            <a href="https://ourdongne.com/coaching-pay" class="mt-4 flex h-12 items-center justify-center rounded-xl bg-brand-blue px-5 text-sm font-black text-white">카드결제 하기</a>
+          </div>
+          <div class="rounded-2xl bg-blue-50 p-4">
+            <p class="font-display text-lg font-black text-blue-950">계좌이체</p>
+            <p class="mt-1 text-xs leading-5 text-blue-950/60 word-keep">입금자명은 신청자명과 동일하게 보내주세요.</p>
+            <button type="button" data-copy="하나은행 125-910032-26304" class="mt-4 h-12 w-full rounded-xl bg-white px-5 text-sm font-black text-blue-950 shadow-sm">계좌번호 복사</button>
+          </div>
+        </div>
+
+        <footer class="mt-6 flex flex-col gap-2 border-t border-gray-100 pt-4 text-xs leading-5 text-gray-400 sm:flex-row sm:items-end sm:justify-between">
+          <p>(주)우리동네사람들 · 사업자등록번호 386-86-03832<br>통신판매신고번호 제 2026-서울영등포-0991 호</p>
+          <p>신청자 보관용</p>
+        </footer>
+      </article>
+    </section>
+  </main>
+
+  <div id="copyToast" class="pointer-events-none fixed left-1/2 top-5 hidden -translate-x-1/2 rounded-full bg-gray-950 px-5 py-3 text-sm font-bold text-white shadow-xl">계좌번호를 복사했습니다</div>
+  <script>
+    document.querySelector('[data-copy]').addEventListener('click', function(e) {
+      navigator.clipboard.writeText(e.currentTarget.getAttribute('data-copy')).then(function() {
+        var toast = document.getElementById('copyToast');
+        toast.classList.remove('hidden');
+        setTimeout(function() { toast.classList.add('hidden'); }, 1500);
+      });
+    });
+  </script>
+</body>
+</html>
