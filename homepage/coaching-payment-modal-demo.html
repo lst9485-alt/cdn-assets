@@ -351,25 +351,12 @@
 </head>
 <body>
 
-  <!-- ===== 데모 폼 ===== -->
-  <div class="demo-wrap">
-    <p class="demo-hint">DEMO</p>
-    <h1 class="demo-title">신청 폼 데모</h1>
-    <p class="demo-sub">이름·연락처 넣고 "신청하기"를 누르면 결제 안내 팝업이 뜹니다.</p>
-
+  <!-- ===== 데모 폼 (숨김 — 모달 자동 표시용) ===== -->
+  <div class="demo-wrap" style="display:none;">
     <form class="demo-form" id="demo-form">
-      <div class="demo-field">
-        <label for="applicant-name">이름</label>
-        <input id="applicant-name" name="name" type="text" placeholder="홍길동" required>
-      </div>
-      <div class="demo-field">
-        <label for="applicant-phone">휴대폰 번호</label>
-        <input id="applicant-phone" name="phone" type="tel" placeholder="010-1234-5678" required>
-      </div>
-      <div class="demo-field">
-        <label for="applicant-email">이메일 (선택)</label>
-        <input id="applicant-email" name="email" type="email" placeholder="hong@example.com">
-      </div>
+      <input id="applicant-name" name="name" type="text" value="홍길동">
+      <input id="applicant-phone" name="phone" type="tel" value="010-1234-5678">
+      <input id="applicant-email" name="email" type="email" value="">
       <button type="submit" class="demo-submit">신청하기</button>
     </form>
   </div>
@@ -471,6 +458,10 @@
         if (!name || !phone) return;
         openModal(name, phone);
       });
+
+      // 페이지 로드 시 자동으로 모달 표시 (데모 미리보기용)
+      openModal('홍길동', '010-1234-5678');
+
       closeBtn.addEventListener('click', closeModal);
       modal.addEventListener('click', function (e) {
         if (e.target === modal) closeModal();
