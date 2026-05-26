@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>코칭 페이지 아임웹 배포 도우미 · 우리동네재테크</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
+      background: #f5f7fb;
+      color: #0a1638;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 32px 16px 64px; }
+    h1 { font-size: 28px; font-weight: 900; margin: 0 0 8px; letter-spacing: -0.02em; }
+    .sub { color: #4b5563; font-size: 15px; margin: 0 0 24px; }
+    .status {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px;
+      font-size: 13px; font-weight: 700;
+      background: #fff; border: 1px solid #e5e7eb;
+    }
+    .status .dot { width: 8px; height: 8px; border-radius: 50%; background: #9ca3af; }
+    .status.loaded .dot { background: #16a34a; }
+    .status.error .dot { background: #dc2626; }
+    .guide {
+      background: #fff8e7; border: 1px solid #fde68a;
+      border-radius: 12px; padding: 16px 20px; margin: 16px 0 28px;
+      font-size: 14px; color: #78350f;
+    }
+    .guide b { color: #92400e; }
+    .card {
+      background: #fff; border: 1px solid #e5e7eb;
+      border-radius: 16px; padding: 24px; margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .step {
+      display: inline-block;
+      width: 32px; height: 32px;
+      background: #0a1638; color: #fff;
+      border-radius: 50%;
+      text-align: center; line-height: 32px;
+      font-weight: 900; font-size: 16px;
+      margin-right: 12px;
+    }
+    .card h2 {
+      font-size: 20px; font-weight: 900; margin: 0 0 8px;
+      display: flex; align-items: center;
+    }
+    .card .where {
+      font-size: 14px; color: #4b5563;
+      margin: 8px 0 16px;
+      padding: 12px 14px;
+      background: #f3f4f6;
+      border-radius: 8px;
+      border-left: 4px solid #0055ff;
+    }
+    .card .where b { color: #0055ff; }
+    .preview {
+      width: 100%;
+      min-height: 80px;
+      max-height: 200px;
+      overflow-y: auto;
+      padding: 12px 14px;
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: 'SF Mono', Menlo, monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      border-radius: 8px;
+      border: none;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin-bottom: 12px;
+    }
+    .preview.empty { color: #64748b; font-style: italic; }
+    .btn-row { display: flex; gap: 12px; align-items: center; }
+    .copy-btn {
+      flex: 1;
+      padding: 16px 20px;
+      background: #0055ff;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 900;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.05s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .copy-btn:hover { background: #003fbf; }
+    .copy-btn:active { transform: scale(0.98); }
+    .copy-btn.copied { background: #16a34a; }
+    .copy-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+    .size {
+      font-size: 13px; color: #6b7280; font-weight: 700;
+      white-space: nowrap;
+    }
+    .reload-btn {
+      background: #fff;
+      border: 1px solid #d1d5db;
+      color: #374151;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .reload-btn:hover { background: #f9fafb; }
+    .footer-note {
+      margin-top: 32px;
+      padding: 16px;
+      background: #eff6ff;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #1e40af;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      h1 { font-size: 22px; }
+      .card { padding: 18px; }
+      .card h2 { font-size: 17px; }
+      .copy-btn { font-size: 15px; padding: 14px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>코칭 페이지 → 아임웹 배포 도우미</h1>
+    <p class="sub">버튼을 눌러 코드를 복사한 뒤, 아임웹 해당 자리에 그대로 붙여넣으세요.</p>
+
+    <div class="status" id="status">
+      <span class="dot"></span>
+      <span class="text">정본 코드 불러오는 중...</span>
+      <button class="reload-btn" onclick="loadSource()" style="margin-left:8px;">다시 불러오기</button>
+    </div>
+
+    <div class="guide">
+      <b>순서대로 진행</b> · ① 머리 복사 → 아임웹 머리 자리에 붙여넣기 → ② 본문 복사 → 본문 자리에 → ③ 꼬리 복사 → 꼬리 자리에. <br>
+      정본 파일: <code>coaching-all-v3.html</code> (수정될 때마다 이 페이지도 자동으로 따라옴)
+    </div>
+
+    <!-- ① 머리 -->
+    <div class="card">
+      <h2><span class="step">1</span>머리 코드 (스타일 · 폰트)</h2>
+      <div class="where">
+        붙여넣는 자리: 아임웹 관리자 → <b>설정</b> → <b>SEO 설정</b> → <b>공통 코드 삽입</b> → <b>Header Code</b>
+      </div>
+      <div class="preview empty" id="preview-head">불러오는 중...</div>
+      <div class="btn-row">
+        <span class="size" id="size-head">— 글자</span>
+        <button class="copy-btn" id="btn-head" onclick="copyPart('head')" disabled>
+          📋 머리 코드 복사하기
+        </button>
+      </div>
+    </div>
+
+    <!-- ② 본문 -->
+    <div class="card">
+      <h2><span class="step">2</span>본문 코드 (실제 페이지 내용)</h2>
+      <div class="where">
+        붙여넣는 자리: 아임웹 관리자 → <b>상품 관리</b> → <b>1:1 코칭 상품</b> → <b>상품 설명</b>
+      </div>
+      <div class="preview empty" id="preview-body">불러오는 중...</div>
+      <div class="btn-row">
+        <span class="size" id="size-body">— 글자</span>
+        <button class="copy-btn" id="btn-body" onclick="copyPart('body')" disabled>
+          📋 본문 코드 복사하기
+        </button>
+      </div>
+    </div>
+
+    <!-- ③ 꼬리 -->
+    <div class="card">
+      <h2><span class="step">3</span>꼬리 코드 (버튼 동작 · 폼 처리)</h2>
+      <div class="where">
+        붙여넣는 자리: 아임웹 관리자 → <b>설정</b> → <b>SEO 설정</b> → <b>공통 코드 삽입</b> → <b>Footer Code</b>
+      </div>
+      <div class="preview empty" id="preview-footer">불러오는 중...</div>
+      <div class="btn-row">
+        <span class="size" id="size-footer">— 글자</span>
+        <button class="copy-btn" id="btn-footer" onclick="copyPart('footer')" disabled>
+          📋 꼬리 코드 복사하기
+        </button>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      ⚠️ 이 페이지는 운영자 전용입니다. 손님에게 공유하지 마세요. (검색엔진 노출 차단됨)
+    </div>
+  </div>
+
+  <script>
+    // 정본 파일 경로 (같은 폴더의 coaching-all-v3.html)
+    const SOURCE_URL = 'coaching-all-v3.html';
+
+    // 분할된 코드 저장
+    const parts = { head: '', body: '', footer: '' };
+
+    function setStatus(text, type) {
+      const el = document.getElementById('status');
+      el.className = 'status' + (type ? ' ' + type : '');
+      el.querySelector('.text').textContent = text;
+    }
+
+    function fmt(n) {
+      return n.toLocaleString('ko-KR');
+    }
+
+    async function loadSource() {
+      setStatus('정본 코드 불러오는 중...', '');
+      ['head', 'body', 'footer'].forEach(k => {
+        document.getElementById('btn-' + k).disabled = true;
+        document.getElementById('preview-' + k).textContent = '불러오는 중...';
+        document.getElementById('preview-' + k).classList.add('empty');
+        document.getElementById('size-' + k).textContent = '— 글자';
+      });
+
+      try {
+        // 캐시 우회: ?t=timestamp
+        const res = await fetch(SOURCE_URL + '?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const html = await res.text();
+        splitHtml(html);
+        setStatus('정본 코드 불러옴 (' + fmt(html.length) + ' 글자)', 'loaded');
+      } catch (err) {
+        console.error(err);
+        setStatus('불러오기 실패: ' + err.message, 'error');
+      }
+    }
+
+    function splitHtml(html) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      // ===== 머리 자리 =====
+      // <head> 안의 내용 (단, <meta charset>, <meta viewport>, <title>은 아임웹이 자체 처리하므로 제외 권장)
+      // 그러나 안전하게 전부 포함 (중복돼도 작동에는 문제 없음)
+      // 다만 인앱 가드 script는 아임웹 페이지 전역에 한 번만 들어가야 하므로 그대로 포함
+      let headParts = [];
+      Array.from(doc.head.children).forEach(child => {
+        const tag = child.tagName.toLowerCase();
+        // 불필요한 항목 제외
+        if (tag === 'meta') {
+          const name = (child.getAttribute('name') || '').toLowerCase();
+          const property = (child.getAttribute('property') || '').toLowerCase();
+          const charset = child.getAttribute('charset');
+          // og:, twitter:, description, keywords 같은 SEO 메타는 아임웹이 처리 → 제외
+          if (charset || name === 'viewport') return; // 아임웹 기본 제공
+          if (property.startsWith('og:') || property.startsWith('twitter:')) return;
+          if (name === 'description' || name === 'keywords' || name === 'author') return;
+        }
+        if (tag === 'title') return; // 아임웹이 상품명으로 자동 설정
+        if (tag === 'link' && child.getAttribute('rel') === 'icon') return;
+        headParts.push(child.outerHTML);
+      });
+      parts.head = headParts.join('\n');
+
+      // ===== 본문 자리 =====
+      // <body> 안의 보이는 HTML (script 제외)
+      const bodyClone = doc.body.cloneNode(true);
+      const scriptsInBody = Array.from(bodyClone.querySelectorAll('script'));
+      const footerScripts = [];
+      scriptsInBody.forEach(s => {
+        footerScripts.push(s.outerHTML);
+        s.remove();
+      });
+      parts.body = bodyClone.innerHTML.trim();
+
+      // ===== 꼬리 자리 =====
+      parts.footer = footerScripts.join('\n\n');
+
+      // 미리보기·크기·버튼 활성화
+      ['head', 'body', 'footer'].forEach(k => {
+        const code = parts[k];
+        const prev = document.getElementById('preview-' + k);
+        const size = document.getElementById('size-' + k);
+        const btn = document.getElementById('btn-' + k);
+        if (code && code.length > 0) {
+          // 미리보기는 앞 800자만
+          prev.textContent = code.length > 800 ? code.slice(0, 800) + '\n\n... (이하 생략, 복사 시 전체 포함)' : code;
+          prev.classList.remove('empty');
+          size.textContent = fmt(code.length) + ' 글자';
+          btn.disabled = false;
+        } else {
+          prev.textContent = '(비어있음)';
+          prev.classList.add('empty');
+          size.textContent = '0 글자';
+        }
+      });
+    }
+
+    async function copyPart(key) {
+      const code = parts[key];
+      if (!code) return;
+      const btn = document.getElementById('btn-' + key);
+      try {
+        await navigator.clipboard.writeText(code);
+        const original = btn.textContent;
+        btn.classList.add('copied');
+        btn.textContent = '✅ 복사 완료! 아임웹에 붙여넣으세요';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.textContent = original;
+        }, 2500);
+      } catch (err) {
+        // 폴백: textarea 통해 복사
+        const ta = document.createElement('textarea');
+        ta.value = code;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        btn.classList.add('copied');
+        btn.textContent = '✅ 복사 완료!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.textContent = '📋 ' + key + ' 코드 복사하기';
+        }, 2500);
+      }
+    }
+
+    // 페이지 로드 시 자동 fetch
+    loadSource();
+  </script>
+</body>
+</html>
