@@ -346,3 +346,17 @@ div[doz_type="section"][doz_footer_repeat="Y"] {
   padding: 0 !important;
 }
 </style>
+<script>
+(function(){
+  function purge(){
+    document.querySelectorAll('[doz_footer_repeat="Y"]').forEach(function(el){ el.remove(); });
+  }
+  purge();
+  document.addEventListener('DOMContentLoaded', purge);
+  window.addEventListener('load', purge);
+  setTimeout(purge, 1500);
+  new MutationObserver(function(){
+    if (document.querySelector('[doz_footer_repeat="Y"]')) purge();
+  }).observe(document.documentElement, { childList:true, subtree:true });
+})();
+</script>
