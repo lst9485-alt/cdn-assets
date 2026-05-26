@@ -1,0 +1,334 @@
+<script>
+      document.addEventListener('DOMContentLoaded', function(){
+        document.querySelectorAll('.review-card-clickable').forEach(function(card){
+          card.addEventListener('click', function(){
+            var body = card.querySelector('.review-body');
+            var more = card.querySelector('.review-more');
+            if (body.classList.contains('line-clamp-3')) {
+              body.classList.remove('line-clamp-3');
+              more.textContent = '접기 ‹';
+            } else {
+              body.classList.add('line-clamp-3');
+              more.textContent = '더보기 ›';
+            }
+          });
+        });
+      });
+    </script>
+
+<script>
+// 아임웹 설정 → SEO → 공통 코드 삽입 → Footer Code
+  // ===== 폼 설정 (수정은 여기서만) =====
+  var FORM_CONFIG = {
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbxa-_oqlNBCa3s7mccHLfIejU50jLUyjZYVbmCZU6iAMpUAMDGcVBveGzCEIZCq_eKS/exec'
+  };
+  var V3_PREVIEW_MODE = false;
+
+  // 전화번호 자동 포맷 (010-1234-5678)
+	  function formatPhone(el) {
+	    var v = el.value.replace(/[^0-9]/g, '');
+	    if (v.length > 11) v = v.slice(0, 11);
+	    if (v.length > 7) el.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7);
+	    else if (v.length > 3) el.value = v.slice(0,3) + '-' + v.slice(3);
+	    else el.value = v;
+	  }
+
+  // 기타의견 입력 시 자동으로 "기타" 체크
+  document.addEventListener('DOMContentLoaded', function() {
+    var memo = document.getElementById('f-memo');
+    if (memo) memo.addEventListener('input', function() {
+      if (memo.value.trim()) {
+        var cb = document.querySelector('input[name="purpose"][value="기타"]');
+        if (cb && !cb.checked) cb.checked = true;
+      }
+    });
+  });
+
+  // 결제 안내 모달 데이터 채우기
+  function fillSuccessModal(name, phone, amount) {
+    var modal = document.getElementById('successModal');
+    if (!modal) return;
+    var nameEl = modal.querySelector('[data-applicant-name]');
+    var phoneEl = modal.querySelector('[data-applicant-phone]');
+    var productEl = modal.querySelector('[data-product]');
+    var amountEl = modal.querySelector('[data-amount]');
+    if (nameEl) nameEl.textContent = name || '신청자';
+    if (phoneEl) phoneEl.textContent = formatPhoneDisplay(phone);
+    if (productEl) productEl.textContent = amount === 96 ? '코칭 B' : '코칭 A';
+    if (amountEl) amountEl.textContent = (amount * 10000).toLocaleString('ko-KR') + '원';
+  }
+
+  function formatPhoneDisplay(raw) {
+    var d = String(raw || '').replace(/[^0-9]/g, '');
+    if (d.length === 11) return d.slice(0,3) + '-' + d.slice(3,7) + '-' + d.slice(7);
+    if (d.length === 10) return d.slice(0,3) + '-' + d.slice(3,6) + '-' + d.slice(6);
+    return d || '-';
+  }
+
+  // 모달 안 계좌번호 복사 버튼
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('#successModal .copy-btn');
+    if (!btn) return;
+    var text = btn.getAttribute('data-copy') || '';
+    var done = function() {
+      var orig = btn.innerHTML;
+      btn.classList.add('is-copied');
+      btn.innerHTML = '<iconify-icon icon="solar:check-circle-bold"></iconify-icon> 복사됨';
+      setTimeout(function() {
+        btn.classList.remove('is-copied');
+        btn.innerHTML = orig;
+      }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function() {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch (err) {}
+        document.body.removeChild(ta);
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (err) {}
+      document.body.removeChild(ta);
+    }
+  });
+
+	  // 폼 제출
+	  function submitForm() {
+	    var name = document.getElementById('f-name').value.trim();
+    var phone = document.getElementById('f-phone').value.replace(/[^0-9]/g, '');
+    var purposes = Array.from(document.querySelectorAll('input[name="purpose"]:checked')).map(function(c){return c.value});
+    var memo = document.getElementById('f-memo').value.trim();
+    var coaching = document.querySelector('input[name="coaching"]:checked');
+    var privacy = document.getElementById('f-privacy').checked;
+
+    // 검증 (순서대로)
+    if (!name) return showStatus('성함을 입력해주세요', 'error', 'f-name');
+    if (!phone || phone.length < 10) return showStatus('올바른 휴대폰 번호를 입력해주세요', 'error', 'f-phone');
+    if (purposes.length === 0) return showStatus('신청 목적을 최소 1개 선택해주세요', 'error', 'f-purpose-wrap');
+    if (!privacy) return showStatus('개인정보 수집 동의가 필요합니다', 'error', 'f-privacy');
+
+    var amount = coaching ? (coaching.value === 'B' ? 96 : 40) : 40;
+
+    // 결제 안내 모달에 신청자 정보 채우기
+    fillSuccessModal(name, phone, amount);
+
+    var params = new URLSearchParams(window.location.search);
+    var utm = params.get('utm_campaign') || '';
+
+	    var payload = {
+	      source: 'homepage-coaching-v3',
+	      formVersion: 'coaching-all-v3',
+	      name: name,
+	      phone: phone,
+	      purpose: purposes.join(','), memo: memo,
+	      amount: amount,
+	      utm: utm
+	    };
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '제출 중...';
+    btn.classList.add('opacity-70');
+
+	    sendPayload(payload);
+	  }
+
+  function resetConsultForm() {
+    var form = document.getElementById('consultForm');
+    if (!form) return;
+    Array.from(form.querySelectorAll('input')).forEach(function(input) {
+      if (input.type === 'checkbox' || input.type === 'radio') input.checked = input.defaultChecked;
+      else if (input.type !== 'file') input.value = '';
+    });
+	  }
+
+	  function finishPreviewSubmit() {
+	    resetConsultForm();
+	    document.getElementById('successModal').classList.remove('hidden');
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = false;
+    btn.textContent = '코칭 대기신청';
+    btn.classList.remove('opacity-70');
+  }
+
+  function sendPayload(payload) {
+    if (V3_PREVIEW_MODE || !FORM_CONFIG.scriptUrl) {
+      finishPreviewSubmit();
+      return;
+    }
+    fetch(FORM_CONFIG.scriptUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+	      if (data.success) {
+	        resetConsultForm();
+	        document.getElementById('successModal').classList.remove('hidden');
+      } else {
+        showStatus(data.error || '제출에 실패했습니다. 다시 시도해주세요.', 'error', 'submitBtn');
+      }
+    })
+    .catch(function() {
+      showStatus('네트워크 오류가 발생했습니다. 다시 시도해주세요.', 'error', 'submitBtn');
+    })
+    .finally(function() {
+      var btn = document.getElementById('submitBtn');
+      btn.disabled = false;
+      btn.textContent = '코칭 대기신청';
+      btn.classList.remove('opacity-70');
+    });
+  }
+
+  function showStatus(msg, type, fieldId) {
+    var el = document.getElementById('form-status');
+    el.textContent = msg;
+    el.className = 'text-center text-sm mt-4 ' + (type === 'error' ? 'text-red-500 font-bold' : 'text-green-500');
+    el.classList.remove('hidden');
+    if (type === 'error' && fieldId) {
+      var field = document.getElementById(fieldId);
+      if (field) field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else if (type === 'error') {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  function initReviewMarquees() {
+    var tracks = document.querySelectorAll('.marquee-left, .marquee-right');
+    tracks.forEach(function(track) {
+      track.classList.remove('gap-5');
+      track.style.setProperty('gap', '0px', 'important');
+      if (track.dataset.marqueeReady === 'true') {
+        return;
+      }
+      var cards = Array.prototype.slice.call(track.children).filter(function(el) {
+        return el.classList && el.classList.contains('review-card');
+      });
+      var half = cards.length / 2;
+      if (!cards.length || half % 1 !== 0) return;
+      var firstSet = document.createElement('div');
+      var secondSet = document.createElement('div');
+      firstSet.className = 'marquee-set';
+      secondSet.className = 'marquee-set';
+      secondSet.setAttribute('aria-hidden', 'true');
+      cards.forEach(function(card, index) {
+        (index < half ? firstSet : secondSet).appendChild(card);
+      });
+      track.appendChild(firstSet);
+      track.appendChild(secondSet);
+      track.dataset.marqueeReady = 'true';
+    });
+    var started = false;
+    var start = function() {
+      if (started) return;
+      started = true;
+      tracks.forEach(function(track) {
+        if (track.dataset.marqueeReady === 'true') track.classList.add('is-running');
+      });
+    };
+    var startAfterPaint = function() {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(start);
+      });
+    };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(startAfterPaint);
+    }
+    setTimeout(startAfterPaint, 800);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initReviewMarquees();
+	    var phoneInput = document.getElementById('f-phone');
+	    if (phoneInput) phoneInput.addEventListener('input', function() { formatPhone(phoneInput); });
+	    var submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) submitBtn.addEventListener('click', submitForm);
+    var closeModal = document.getElementById('closeModal');
+    if (closeModal) closeModal.addEventListener('click', function() {
+      document.getElementById('successModal').classList.add('hidden');
+    });
+    document.querySelectorAll('.scroll-to-form').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var formSection = document.getElementById('apply-form');
+        if (formSection) formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    var stickyCta = document.getElementById('stickyCoachingCta');
+    var heroSection = document.querySelector('[data-section="hero"]');
+    var applyFormSection = document.querySelector('[data-section="apply-form"]');
+    function updateStickyCta() {
+      if (!stickyCta || !heroSection || !applyFormSection) return;
+      var y = window.scrollY || window.pageYOffset || 0;
+      var start = heroSection.offsetTop + heroSection.offsetHeight * 0.7;
+      var end = applyFormSection.offsetTop - window.innerHeight * 0.3;
+      var visible = y >= start && y <= end;
+      stickyCta.classList.toggle('is-visible', visible);
+      stickyCta.setAttribute('aria-hidden', visible ? 'false' : 'true');
+    }
+    updateStickyCta();
+    window.addEventListener('scroll', updateStickyCta, { passive: true });
+    window.addEventListener('resize', updateStickyCta);
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
+    document.querySelectorAll('[data-nav-target]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var target = document.querySelector('[data-section="' + btn.dataset.navTarget + '"]');
+        if (target) target.scrollIntoView({ block: 'start' });
+      });
+    });
+    var chartObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.querySelectorAll('.chart-line,.chart-arrow').forEach(function(l){l.classList.add('animated')}); chartObs.unobserve(e.target); } });
+    }, { threshold: 0.3 });
+    var c = document.getElementById('chartContainer'); if (c) chartObs.observe(c);
+    // Hero animation replay
+    var heroSection = document.querySelector('[data-section="hero"]');
+    if (heroSection) {
+      var heroObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          var words = e.target.querySelectorAll('.hero-word:not(.hero-word-center),.hero-main,.hero-cta,.hero-scroll');
+          if (e.isIntersecting) {
+            words.forEach(function(w) { w.style.animation = 'none'; w.offsetHeight; w.style.animation = ''; });
+          }
+        });
+      }, { threshold: 0.3 });
+      heroObs.observe(heroSection);
+    }
+  });
+  </script>
+
+<script>
+                (function(){
+                  var clip = document.getElementById('step3DemoClip');
+                  var img = document.getElementById('step3DemoImg');
+                  var SHEET = 'images/step3-sheet.gif';
+                  var DATA = 'images/step3-data.gif';
+                  var SHEET_MS = 5400;
+                  var DATA_MS = 6400;
+                  var state = 0; // 0: sheet, 1: data
+                  function tick() {
+                    if (state === 0) {
+                      clip.classList.add('tall');
+                      setTimeout(function(){
+                        img.src = DATA + '?t=' + Date.now();
+                        state = 1;
+                        setTimeout(tick, DATA_MS);
+                      }, 600);
+                    } else {
+                      img.src = SHEET + '?t=' + Date.now();
+                      clip.classList.remove('tall');
+                      state = 0;
+                      setTimeout(tick, SHEET_MS);
+                    }
+                  }
+                  setTimeout(tick, SHEET_MS);
+                })();
+              </script>
+
+<script src="homepage-shell.js?v=20260520a"></script>

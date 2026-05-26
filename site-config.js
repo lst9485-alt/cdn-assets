@@ -115,6 +115,36 @@
             groupLabel: '공통'
           },
           {
+            id: 'imweb-header-code',
+            title: '아임웹 Header Code',
+            description: '아임웹 설정 → SEO → 공통 코드 삽입 → Header Code 자리에 박는 코드',
+            href: 'homepage/head-code-imweb.html',
+            publicPath: '~/imweb-header',
+            badgeText: '아임웹',
+            badgeTone: 'live',
+            iconKey: 'tool',
+            sidebarType: 'root',
+            activeMatch: ['head-code-imweb.html'],
+            hubVisible: true,
+            groupLabel: '공통',
+            imwebCode: 'homepage/head-code-imweb.html'
+          },
+          {
+            id: 'imweb-footer-code',
+            title: '아임웹 Footer Code',
+            description: '아임웹 설정 → SEO → 공통 코드 삽입 → Footer Code 자리에 박는 코드',
+            href: 'homepage/footer-code.html',
+            publicPath: '~/imweb-footer',
+            badgeText: '아임웹',
+            badgeTone: 'live',
+            iconKey: 'tool',
+            sidebarType: 'root',
+            activeMatch: ['footer-code.html'],
+            hubVisible: true,
+            groupLabel: '공통',
+            imwebCode: 'homepage/footer-code.html'
+          },
+          {
             id: 'page-template',
             title: '새 페이지 템플릿',
             description: '일반 페이지 / 결제용 페이지 복붙용',
