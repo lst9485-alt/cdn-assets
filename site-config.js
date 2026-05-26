@@ -191,7 +191,7 @@
             title: '신청 후 팝업',
             description: '신청 후 뜨는 결제 안내 모달 미리보기',
             href: 'homepage/coaching-payment-modal-demo.html',
-            publicPath: '~/coaching-payment-modal-demo',
+            publicPath: '~/coaching-modal',
             badgeText: '정본',
             badgeTone: 'live',
             iconKey: 'money',
