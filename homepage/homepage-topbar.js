@@ -1,6 +1,10 @@
 (function () {
   var script = document.currentScript;
   var base = script ? new URL('.', script.src).href : './';
+  var isImweb = (location.hostname === 'ourdongne.com');
+  function link(githubFile, imwebPath) {
+    return isImweb ? imwebPath : new URL(githubFile, base).href;
+  }
 
   function ready(fn) {
     if (document.readyState === 'loading') {
@@ -30,11 +34,11 @@
 
     bar.innerHTML = [
       '<div data-homepage-topbar-inner style="max-width:1160px;margin:0 auto;padding:20px 20px;display:flex;align-items:center;justify-content:space-between;gap:28px">',
-      '  <a data-homepage-topbar-logo href="' + new URL('main-page.html', base).href + '" style="color:#0a0a0a;font-family:GmarketSans,Pretendard,sans-serif;font-size:28px;font-weight:900;letter-spacing:-.02em;text-decoration:none;white-space:nowrap">우리동네재테크</a>',
+      '  <a data-homepage-topbar-logo href="' + link('main-page.html', '/') + '" style="color:#0a0a0a;font-family:GmarketSans,Pretendard,sans-serif;font-size:28px;font-weight:900;letter-spacing:-.02em;text-decoration:none;white-space:nowrap">우리동네재테크</a>',
       '  <nav data-homepage-topbar-nav style="display:flex;align-items:center;justify-content:center;gap:34px;flex:1;overflow-x:auto">',
-      '    <a href="' + new URL('coaching-all-v3.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">내집마련 1:1 코칭</a>',
-      '    <a href="' + new URL('curriculum.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">커리큘럼</a>',
-      '    <a href="' + new URL('refund-policy.html', base).href + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">환불 규정</a>',
+      '    <a href="' + link('coaching-all-v3.html', '/counsel') + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">내집마련 1:1 코칭</a>',
+      '    <a href="' + link('curriculum.html', '/curriculum') + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">커리큘럼</a>',
+      '    <a href="' + link('refund-policy.html', '/refund') + '" style="color:#0a0a0a;font-size:16px;font-weight:800;text-decoration:none;white-space:nowrap">환불 규정</a>',
       '  </nav>',
       '</div>'
     ].join('');
