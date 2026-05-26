@@ -188,8 +188,8 @@
           },
           {
             id: 'coaching-payment-modal-demo',
-            title: '신청 완료 팝업 (정본 미리보기)',
-            description: '코칭 랜딩 신청 시 뜨는 결제 안내 팝업 — 신청자명·번호 자동 채움',
+            title: '신청 후 팝업',
+            description: '신청 후 뜨는 결제 안내 모달 미리보기',
             href: 'homepage/coaching-payment-modal-demo.html',
             publicPath: '~/coaching-payment-modal-demo',
             badgeText: '정본',
