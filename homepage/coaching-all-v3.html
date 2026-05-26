@@ -1191,11 +1191,29 @@
     #successModal .pay-bank-full .b2 { font-size: 14.5px; }
     #successModal .copy-btn { padding: 3px 7px; font-size: 10.5px; }
     #successModal .copy-btn iconify-icon { font-size: 11px; }
-    #successModal .card-link-subtle { padding: 11px 14px; gap: 8px; }
-    #successModal .card-link-subtle .left strong { font-size: 12.5px; }
-    #successModal .card-link-subtle .left .sub { font-size: 10.5px; }
-    #successModal .card-link-subtle .right { font-size: 12.5px; flex-shrink: 0; }
-    #successModal .card-link-subtle .right iconify-icon { font-size: 14px; }
+    #successModal .card-link-subtle {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+    #successModal .card-link-subtle .left {
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    #successModal .card-link-subtle .left strong { font-size: 13px; }
+    #successModal .card-link-subtle .left .sub { font-size: 11px; margin-top: 0; }
+    #successModal .card-link-subtle .right {
+      justify-content: center;
+      background: #1747d4;
+      color: #ffffff;
+      padding: 11px;
+      border-radius: 8px;
+      font-size: 13.5px;
+    }
+    #successModal .card-link-subtle .right iconify-icon { color: #ffffff; }
     #successModal .recv-footer { flex-direction: column; align-items: flex-start; gap: 6px; }
     #successModal .recv-footer p { font-size: 10.5px; }
   }
