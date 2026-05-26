@@ -351,15 +351,7 @@
 </head>
 <body>
 
-  <!-- ===== 데모 폼 (숨김 — 모달 자동 표시용) ===== -->
-  <div class="demo-wrap" style="display:none;">
-    <form class="demo-form" id="demo-form">
-      <input id="applicant-name" name="name" type="text" value="홍길동">
-      <input id="applicant-phone" name="phone" type="tel" value="010-1234-5678">
-      <input id="applicant-email" name="email" type="email" value="">
-      <button type="submit" class="demo-submit">신청하기</button>
-    </form>
-  </div>
+  <!-- 신청 폼 제거됨 — 페이지 로드 시 모달 자동 표시 -->
 
   <!-- ===== 결제 안내 모달 ===== -->
   <div class="modal-overlay" id="payment-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -436,7 +428,6 @@
 
   <script>
     (function () {
-      var form = document.getElementById('demo-form');
       var modal = document.getElementById('payment-modal');
       var closeBtn = document.getElementById('modal-close-btn');
 
@@ -450,14 +441,6 @@
         modal.classList.remove('is-open');
         document.body.style.overflow = '';
       }
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var name = document.getElementById('applicant-name').value.trim();
-        var phone = document.getElementById('applicant-phone').value.trim();
-        if (!name || !phone) return;
-        openModal(name, phone);
-      });
 
       // 페이지 로드 시 자동으로 모달 표시 (데모 미리보기용)
       openModal('홍길동', '010-1234-5678');
