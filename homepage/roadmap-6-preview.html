@@ -529,6 +529,229 @@
     margin-left: 4px;
   }
 
+  /* ===== E-1: 깔끔 도트 (정렬 보정 + 가운뎃점 제거) ===== */
+  .e1-timeline {
+    background: linear-gradient(180deg, #FFFAF2 0%, #FFF4E6 100%);
+    border: 1.5px solid rgba(255, 107, 0, 0.22);
+    border-radius: 22px;
+    padding: 24px 26px;
+    box-shadow: 0 18px 42px rgba(255, 107, 0, 0.10);
+  }
+  .e1-timeline ol {
+    position: relative;
+    margin: 0; padding: 0 0 0 32px;
+    list-style: none;
+  }
+  .e1-timeline ol::before {
+    content: '';
+    position: absolute;
+    left: 13px; top: 20px; bottom: 20px;
+    width: 3px; border-radius: 999px;
+    background: linear-gradient(180deg,
+      #FF6B00 0%, #FF6B00 42%,
+      rgba(255,107,0,0.22) 42%, rgba(255,107,0,0.22) 100%);
+  }
+  .e1-timeline li {
+    position: relative;
+    padding: 9px 0;
+    min-height: 32px;
+    display: flex; align-items: center;
+    gap: 10px; flex-wrap: wrap;
+  }
+  .e1-timeline li::before {
+    content: '';
+    position: absolute;
+    left: -25px; top: 50%;
+    transform: translateY(-50%);
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid rgba(255, 107, 0, 0.30);
+    z-index: 1;
+    box-sizing: border-box;
+  }
+  .e1-timeline li.done::before {
+    background: #FF6B00; border-color: #FF6B00;
+  }
+  .e1-timeline li.now::before {
+    background: #FF6B00; border-color: #FFD7B5;
+    box-shadow: 0 0 0 5px rgba(255, 107, 0, 0.20);
+  }
+  .e1-timeline .num {
+    font-family: GmarketSans, Pretendard, sans-serif;
+    font-weight: 900; font-size: 14px;
+    color: #FF6B00;
+    min-width: 18px;
+  }
+  .e1-timeline .name {
+    font-family: GmarketSans, Pretendard, sans-serif;
+    font-weight: 900; font-size: 15.5px;
+    color: #0A0A0A;
+  }
+  .e1-timeline .desc {
+    font-size: 12.5px;
+    color: #4b5563;
+    font-weight: 500;
+  }
+  .e1-timeline .now-badge {
+    background: #FF6B00; color: #fff;
+    font-family: GmarketSans, Pretendard, sans-serif;
+    font-weight: 900;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ===== E-2: 번호 원 (도트 자리에 번호 직접) ===== */
+  .e2-timeline {
+    background: linear-gradient(180deg, #FFFAF2 0%, #FFF4E6 100%);
+    border: 1.5px solid rgba(255, 107, 0, 0.22);
+    border-radius: 22px;
+    padding: 24px 26px;
+    box-shadow: 0 18px 42px rgba(255, 107, 0, 0.10);
+  }
+  .e2-timeline ol {
+    position: relative;
+    margin: 0; padding: 0 0 0 44px;
+    list-style: none;
+  }
+  .e2-timeline ol::before {
+    content: '';
+    position: absolute;
+    left: 15px; top: 24px; bottom: 24px;
+    width: 3px; border-radius: 999px;
+    background: linear-gradient(180deg,
+      #FF6B00 0%, #FF6B00 42%,
+      rgba(255,107,0,0.22) 42%, rgba(255,107,0,0.22) 100%);
+  }
+  .e2-timeline li {
+    position: relative;
+    padding: 10px 0;
+    min-height: 36px;
+    display: flex; align-items: center;
+    gap: 12px; flex-wrap: wrap;
+  }
+  .e2-timeline li .num {
+    position: absolute;
+    left: -38px; top: 50%;
+    transform: translateY(-50%);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2.5px solid rgba(255, 107, 0, 0.30);
+    color: rgba(255, 107, 0, 0.85);
+    font-family: GmarketSans, Pretendard, sans-serif;
+    font-weight: 900; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    box-sizing: border-box;
+    z-index: 1;
+  }
+  .e2-timeline li.done .num {
+    background: #FF6B00; color: #fff; border-color: #FF6B00;
+  }
+  .e2-timeline li.now .num {
+    background: #FF6B00; color: #fff; border-color: #FFD7B5;
+    box-shadow: 0 0 0 5px rgba(255, 107, 0, 0.20);
+  }
+  .e2-timeline .name {
+    font-family: GmarketSans, Pretendard, sans-serif;
+    font-weight: 900; font-size: 15.5px;
+    color: #0A0A0A;
+  }
+  .e2-timeline .desc {
+    font-size: 12.5px;
+    color: #4b5563;
+    font-weight: 500;
+  }
+  .e2-timeline .now-badge {
+    background: #FF6B00; color: #fff;
+    font-family: GmarketSans, Pretendard, sans-serif;
+    font-weight: 900;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ===== E-3: 카드 박스형 ===== */
+  .e3-timeline {
+    background: linear-gradient(180deg, #FFFAF2 0%, #FFF4E6 100%);
+    border: 1.5px solid rgba(255, 107, 0, 0.22);
+    border-radius: 22px;
+    padding: 18px;
+    box-shadow: 0 18px 42px rgba(255, 107, 0, 0.10);
+  }
+  .e3-timeline ol {
+    margin: 0; padding: 0;
+    list-style: none;
+    position: relative;
+  }
+  .e3-timeline li {
+    background: #fff;
+    border: 1.5px solid rgba(255, 107, 0, 0.16);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 12px;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(255, 107, 0, 0.05);
+  }
+  .e3-timeline li:last-child { margin-bottom: 0; }
+  .e3-timeline li.now {
+    background: #FFF4E6;
+    border-color: #FF6B00;
+    box-shadow: 0 10px 24px rgba(255, 107, 0, 0.18);
+  }
+  .e3-timeline li::after {
+    content: '';
+    position: absolute;
+    left: 30px; bottom: -10px;
+    width: 4px; height: 10px;
+    background: rgba(255, 107, 0, 0.30);
+  }
+  .e3-timeline li.done::after { background: #FF6B00; }
+  .e3-timeline li:last-child::after { display: none; }
+  .e3-timeline .num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 107, 0, 0.18);
+    color: #FF6B00;
+    font-family: GmarketSans, Pretendard, sans-serif;
+    font-weight: 900; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .e3-timeline li.done .num,
+  .e3-timeline li.now .num {
+    background: #FF6B00; color: #fff;
+  }
+  .e3-timeline .meta {
+    display: flex; align-items: baseline;
+    gap: 8px; flex-wrap: wrap;
+  }
+  .e3-timeline .name {
+    font-family: GmarketSans, Pretendard, sans-serif;
+    font-weight: 900; font-size: 15px;
+    color: #0A0A0A;
+  }
+  .e3-timeline .desc {
+    font-size: 12.5px;
+    color: #4b5563;
+  }
+  .e3-timeline .now-badge {
+    background: #FF6B00; color: #fff;
+    font-family: GmarketSans, Pretendard, sans-serif;
+    font-weight: 900;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    margin-left: 2px;
+  }
+
   /* ===== F안: 가로 트랙 + 정류장 (지하철 노선도) ===== */
   .f-track {
     background: linear-gradient(180deg, #FFFAF2 0%, #FFF4E6 100%);
@@ -1265,6 +1488,156 @@
             <li><span class="num">4.</span><span class="name">부동산 방문</span><span class="desc">· 매수 플래너 활용</span></li>
             <li><span class="num">5.</span><span class="name">계약</span><span class="desc">· 협상·등기부 확인</span></li>
             <li><span class="num">6.</span><span class="name">잔금·입주</span><span class="desc">· 잔금·인테리어 등</span></li>
+          </ol>
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2 md:hidden">
+          <span class="deliverable-chip"><iconify-icon icon="solar:route-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>내집마련 6단계 로드맵</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stripe"></div>
+
+  <!-- ============== E-1: 깔끔 도트 (정렬 보정 + 가운뎃점 제거) ============== -->
+  <div class="mb-4">
+    <span class="pill">E-1</span>
+    <h2 class="font-display text-xl md:text-2xl font-black mt-3">깔끔 도트 (E 직접 개선)</h2>
+    <p class="text-gray-600 text-sm mt-1 word-keep">
+      가운뎃점 제거. 원 크기 통일(14px) + 정확한 세로 중앙 정렬. 진행 중은 도트 자체 안 키우고 outer ring으로 강조.
+    </p>
+  </div>
+
+  <div class="step-card">
+    <div class="grid gap-8 md:grid-cols-[1fr_1fr] md:gap-10">
+      <div>
+        <div class="flex items-center gap-3 flex-wrap mb-4">
+          <span class="step-number">2</span>
+          <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep">
+            <iconify-icon icon="solar:target-bold"></iconify-icon>단계별 행동 정리
+          </span>
+        </div>
+        <h2 class="font-display text-2xl md:text-3xl font-black leading-snug text-brand-dark word-keep">
+          지금 뭘 해야 할지 단계별로<br>정리해드립니다.
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+          예산 및 대출, 후보 단지, 매수 판단 등 내 상황에 맞춰 함께 정리합니다. 막연했던 고민이 명확한 결론으로 바뀝니다.
+        </p>
+        <div class="mt-5 pt-5 border-t border-brand-orange/15 hidden md:block">
+          <div class="flex flex-wrap gap-2">
+            <span class="deliverable-chip"><iconify-icon icon="solar:route-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>내집마련 6단계 로드맵</span>
+          </div>
+        </div>
+      </div>
+      <div class="md:self-start">
+        <div class="e1-timeline">
+          <ol>
+            <li class="done"><span class="num">1.</span><span class="name">예산 확정</span><span class="desc">종잣돈·대출 체크</span></li>
+            <li class="done"><span class="num">2.</span><span class="name">매매 방법</span><span class="desc">일반매매·청약 등</span></li>
+            <li class="now"><span class="num">3.</span><span class="name">지역·단지 선정</span><span class="desc">가격이 오를 곳</span><span class="now-badge">진행 중</span></li>
+            <li><span class="num">4.</span><span class="name">부동산 방문</span><span class="desc">매수 플래너 활용</span></li>
+            <li><span class="num">5.</span><span class="name">계약</span><span class="desc">협상·등기부 확인</span></li>
+            <li><span class="num">6.</span><span class="name">잔금·입주</span><span class="desc">잔금·인테리어 등</span></li>
+          </ol>
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2 md:hidden">
+          <span class="deliverable-chip"><iconify-icon icon="solar:route-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>내집마련 6단계 로드맵</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stripe"></div>
+
+  <!-- ============== E-2: 번호 원 (도트 자리에 번호) ============== -->
+  <div class="mb-4">
+    <span class="pill">E-2</span>
+    <h2 class="font-display text-xl md:text-2xl font-black mt-3">번호 원 (도트 대신 번호)</h2>
+    <p class="text-gray-600 text-sm mt-1 word-keep">
+      세로 라인 옆 도트 자리에 번호 동그라미(32px) 직접 배치. 단계명 옆에 별도 "1." 번호 없음.
+    </p>
+  </div>
+
+  <div class="step-card">
+    <div class="grid gap-8 md:grid-cols-[1fr_1fr] md:gap-10">
+      <div>
+        <div class="flex items-center gap-3 flex-wrap mb-4">
+          <span class="step-number">2</span>
+          <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep">
+            <iconify-icon icon="solar:target-bold"></iconify-icon>단계별 행동 정리
+          </span>
+        </div>
+        <h2 class="font-display text-2xl md:text-3xl font-black leading-snug text-brand-dark word-keep">
+          지금 뭘 해야 할지 단계별로<br>정리해드립니다.
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+          예산 및 대출, 후보 단지, 매수 판단 등 내 상황에 맞춰 함께 정리합니다. 막연했던 고민이 명확한 결론으로 바뀝니다.
+        </p>
+        <div class="mt-5 pt-5 border-t border-brand-orange/15 hidden md:block">
+          <div class="flex flex-wrap gap-2">
+            <span class="deliverable-chip"><iconify-icon icon="solar:route-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>내집마련 6단계 로드맵</span>
+          </div>
+        </div>
+      </div>
+      <div class="md:self-start">
+        <div class="e2-timeline">
+          <ol>
+            <li class="done"><span class="num">1</span><span class="name">예산 확정</span><span class="desc">종잣돈·대출 체크</span></li>
+            <li class="done"><span class="num">2</span><span class="name">매매 방법</span><span class="desc">일반매매·청약 등</span></li>
+            <li class="now"><span class="num">3</span><span class="name">지역·단지 선정</span><span class="desc">가격이 오를 곳</span><span class="now-badge">진행 중</span></li>
+            <li><span class="num">4</span><span class="name">부동산 방문</span><span class="desc">매수 플래너 활용</span></li>
+            <li><span class="num">5</span><span class="name">계약</span><span class="desc">협상·등기부 확인</span></li>
+            <li><span class="num">6</span><span class="name">잔금·입주</span><span class="desc">잔금·인테리어 등</span></li>
+          </ol>
+        </div>
+        <div class="mt-4 flex flex-wrap gap-2 md:hidden">
+          <span class="deliverable-chip"><iconify-icon icon="solar:route-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>내집마련 6단계 로드맵</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stripe"></div>
+
+  <!-- ============== E-3: 카드 박스형 ============== -->
+  <div class="mb-4">
+    <span class="pill">E-3</span>
+    <h2 class="font-display text-xl md:text-2xl font-black mt-3">카드 박스형</h2>
+    <p class="text-gray-600 text-sm mt-1 word-keep">
+      각 단계를 흰 카드로 분리 + 좌측 번호 원 + 카드 사이 짧은 세로선. 진행 중은 오렌지 배경 카드로 강조.
+    </p>
+  </div>
+
+  <div class="step-card">
+    <div class="grid gap-8 md:grid-cols-[1fr_1fr] md:gap-10">
+      <div>
+        <div class="flex items-center gap-3 flex-wrap mb-4">
+          <span class="step-number">2</span>
+          <span class="inline-flex items-center gap-2 rounded-full bg-brand-orange/10 px-3 py-1 text-sm font-bold text-brand-orange word-keep">
+            <iconify-icon icon="solar:target-bold"></iconify-icon>단계별 행동 정리
+          </span>
+        </div>
+        <h2 class="font-display text-2xl md:text-3xl font-black leading-snug text-brand-dark word-keep">
+          지금 뭘 해야 할지 단계별로<br>정리해드립니다.
+        </h2>
+        <p class="mt-4 text-base leading-relaxed text-gray-600 word-keep">
+          예산 및 대출, 후보 단지, 매수 판단 등 내 상황에 맞춰 함께 정리합니다. 막연했던 고민이 명확한 결론으로 바뀝니다.
+        </p>
+        <div class="mt-5 pt-5 border-t border-brand-orange/15 hidden md:block">
+          <div class="flex flex-wrap gap-2">
+            <span class="deliverable-chip"><iconify-icon icon="solar:route-bold-duotone" class="text-brand-orange text-lg"></iconify-icon>내집마련 6단계 로드맵</span>
+          </div>
+        </div>
+      </div>
+      <div class="md:self-start">
+        <div class="e3-timeline">
+          <ol>
+            <li class="done"><div class="num">1</div><div class="meta"><span class="name">예산 확정</span><span class="desc">종잣돈·대출 체크</span></div></li>
+            <li class="done"><div class="num">2</div><div class="meta"><span class="name">매매 방법</span><span class="desc">일반매매·청약 등</span></div></li>
+            <li class="now"><div class="num">3</div><div class="meta"><span class="name">지역·단지 선정</span><span class="desc">가격이 오를 곳</span><span class="now-badge">진행 중</span></div></li>
+            <li><div class="num">4</div><div class="meta"><span class="name">부동산 방문</span><span class="desc">매수 플래너 활용</span></div></li>
+            <li><div class="num">5</div><div class="meta"><span class="name">계약</span><span class="desc">협상·등기부 확인</span></div></li>
+            <li><div class="num">6</div><div class="meta"><span class="name">잔금·입주</span><span class="desc">잔금·인테리어 등</span></div></li>
           </ol>
         </div>
         <div class="mt-4 flex flex-wrap gap-2 md:hidden">
