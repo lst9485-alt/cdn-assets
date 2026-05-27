@@ -84,9 +84,9 @@
   @keyframes heroFadeUpFast { 0%{opacity:0;transform:translateY(24px)} 100%{opacity:1;transform:translateY(0)} }
   @keyframes budgetFadeIn { 0%{opacity:0} 100%{opacity:1} }
   .hero-word { opacity:0; animation-name: heroDropFast !important; animation-duration: 0.5s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; will-change: transform, opacity; }
-  .hero-main { opacity:0; animation-name: heroFadeUpFast !important; animation-duration: 0.45s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; }
-  .hero-cta { opacity:0; animation-name: heroFadeUpFast !important; animation-duration: 0.45s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; }
-  .hero-scroll { opacity:0; animation-name: heroFadeUpFast !important; animation-duration: 0.35s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; }
+  .hero-main { opacity:0; animation-name: heroFadeUpFast !important; animation-duration: 0.3s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; }
+  .hero-cta { opacity:0; animation-name: heroFadeUpFast !important; animation-duration: 0.3s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; }
+  .hero-scroll { opacity:0; animation-name: heroFadeUpFast !important; animation-duration: 0.24s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; }
   @keyframes softNudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
   @keyframes softNudgeX { 0%,100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
   .soft-nudge { animation: softNudge 1.4s ease-in-out infinite; }
@@ -1271,7 +1271,7 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
 <div class="hero-word hero-word-edge-right absolute border-2 border-white/80 rounded-xl px-5 py-3 bg-white/80 backdrop-blur-sm shadow-lg" style="top:90px;animation-delay:.84s"><span class="text-2xl md:text-3xl font-display font-black text-brand-dark">매매</span></div>
 <div class="hero-word-center border-2 border-brand-orange rounded-xl px-5 py-3 bg-brand-orange/20 backdrop-blur-sm shadow-lg" style="top:88px"><span class="text-2xl md:text-3xl font-display font-black text-brand-orange">내 예산</span></div>
 </div>
-<div class="relative z-10 text-center px-6 hero-main" style="animation-delay:0.08s">
+<div class="relative z-10 text-center px-6 hero-main" style="animation-delay:0s">
 <p class="text-[#7a5f45] text-lg md:text-xl mb-6 word-keep"><span aria-hidden="true">🏠</span> 확신갖고 후회없이, 내집마련 고민 끝!</p>
 <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-black text-brand-dark leading-tight mb-8 word-keep">지금 여기<br/>사도 될까요?</h1>
 <div class="inline-flex items-center gap-2 md:gap-3 bg-white/75 backdrop-blur-sm border border-white/80 rounded-2xl px-4 md:px-6 py-3 md:py-4 mb-10 shadow-sm">
@@ -1279,7 +1279,7 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
 <p class="text-brand-dark text-sm md:text-lg word-keep text-left">예산 안에서, <span class="text-brand-orange font-black">어디를 사야 할지</span> 정리해드립니다.</p>
 </div>
 </div>
-<div class="relative z-10 text-center hero-cta mb-16" style="animation-delay:0.22s">
+<div class="relative z-10 text-center hero-cta mb-16" style="animation-delay:0.08s">
 <div class="flex flex-row items-center justify-center gap-2 sm:gap-5 mb-6 px-4 word-keep">
 <span class="inline-flex items-center gap-1.5 text-sm md:text-lg font-bold text-brand-dark">
 <iconify-icon class="text-brand-orange text-base md:text-lg" icon="solar:graph-up-bold"></iconify-icon>
@@ -1299,7 +1299,7 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
 </span>
 </button>
 </div>
-<div class="absolute bottom-4 left-1/2 -translate-x-1/2 hero-scroll z-10" style="animation-delay:0.5s">
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 hero-scroll z-10" style="animation-delay:0.28s">
 <div class="flex flex-col items-center gap-2 text-[#8a6b4a]"><span class="text-xs">스크롤</span><iconify-icon class="text-xl animate-bounce" icon="solar:alt-arrow-down-linear"></iconify-icon></div>
 </div>
 </section>
@@ -2606,19 +2606,6 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
       entries.forEach(function(e) { if (e.isIntersecting) { e.target.querySelectorAll('.chart-line,.chart-arrow').forEach(function(l){l.classList.add('animated')}); chartObs.unobserve(e.target); } });
     }, { threshold: 0.3 });
     var c = document.getElementById('chartContainer'); if (c) chartObs.observe(c);
-    // Hero animation replay
-    var heroSection = document.querySelector('[data-section="hero"]');
-    if (heroSection) {
-      var heroObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          var words = e.target.querySelectorAll('.hero-word:not(.hero-word-center),.hero-main,.hero-cta,.hero-scroll');
-          if (e.isIntersecting) {
-            words.forEach(function(w) { w.style.animation = 'none'; w.offsetHeight; w.style.animation = ''; });
-          }
-        });
-      }, { threshold: 0.3 });
-      heroObs.observe(heroSection);
-    }
   });
   </script>
 <!-- ===== 2step demo toggle script (step3 sheet/data GIF cycle) ===== -->
