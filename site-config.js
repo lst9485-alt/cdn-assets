@@ -171,7 +171,7 @@
             activeMatch: ['coaching-all-v3.html'],
             hubVisible: true,
             groupLabel: '상품',
-            imwebCode: 'homepage/coaching-all-v3-imweb.html'
+            imwebCode: 'homepage/coaching-all-v3-imweb-copy.html'
           },
           {
             id: 'main-page',
