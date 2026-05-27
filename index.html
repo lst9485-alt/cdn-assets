@@ -144,7 +144,7 @@
         var originalText = btn.textContent;
         btn.disabled = true;
         btn.textContent = '⏳ 가져오는중';
-        fetch('./' + src + '?t=' + Date.now())
+        fetch('./' + src + '?t=' + Date.now(), { cache: 'no-store' })
             .then(function(res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.text();
