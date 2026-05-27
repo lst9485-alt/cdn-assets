@@ -242,7 +242,7 @@
             + '<div class="sheet-cell group-col" data-sheet-sort="groupLabel" data-section-id="' + esc(sectionId) + '">구분</div>'
             + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">이름</div>'
             + '<div class="sheet-cell desc-col" data-sheet-sort="description" data-section-id="' + esc(sectionId) + '">설명</div>'
-            + '<div class="sheet-cell sheet-copy">코드</div>'
+            + '<div class="sheet-cell sheet-copy">아임웹</div>'
             + '<div class="sheet-cell sheet-status" data-sheet-sort="modifiedDate" data-section-id="' + esc(sectionId) + '">날짜</div>'
             + '</div>';
     }
@@ -283,7 +283,7 @@
         var group = item.groupLabel || item.sidebarLabel || '기타';
         var titleHtml = renderGenericTitle(item, sectionId);
         var copyCell = item.imwebCode
-            ? '<div class="sheet-cell sheet-copy"><button type="button" class="copy-btn" data-copy-src="' + attr(item.imwebCode) + '" title="아임웹 코드위젯용 본문 통째 복사">📋 복사</button></div>'
+            ? '<div class="sheet-cell sheet-copy"><button type="button" class="copy-btn" data-copy-src="' + attr(item.imwebCode) + '" title="아임웹 코드위젯용 본문 코드 복사">아임웹용 코드</button></div>'
             : '<div class="sheet-cell sheet-copy"></div>';
         return ''
             + '<a href="' + href + '" class="sheet-row" target="_blank" rel="noopener">'
