@@ -83,10 +83,10 @@
   }
   @keyframes heroFadeUpFast { 0%{opacity:0;transform:translateY(24px)} 100%{opacity:1;transform:translateY(0)} }
   @keyframes budgetFadeIn { 0%{opacity:0} 100%{opacity:1} }
-  .hero-word { opacity:0; animation: heroDropFast 0.5s ease-out forwards !important; will-change: transform, opacity; }
-  .hero-main { opacity:0; animation: heroFadeUpFast 0.45s ease-out forwards !important; }
-  .hero-cta { opacity:0; animation: heroFadeUpFast 0.45s ease-out forwards !important; }
-  .hero-scroll { opacity:0; animation: heroFadeUpFast 0.35s ease-out forwards !important; }
+  .hero-word { opacity:0; animation-name: heroDropFast !important; animation-duration: 0.5s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; will-change: transform, opacity; }
+  .hero-main { opacity:0; animation-name: heroFadeUpFast !important; animation-duration: 0.45s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; }
+  .hero-cta { opacity:0; animation-name: heroFadeUpFast !important; animation-duration: 0.45s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; }
+  .hero-scroll { opacity:0; animation-name: heroFadeUpFast !important; animation-duration: 0.35s !important; animation-timing-function: ease-out !important; animation-fill-mode: forwards !important; }
   @keyframes softNudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
   @keyframes softNudgeX { 0%,100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
   .soft-nudge { animation: softNudge 1.4s ease-in-out infinite; }
