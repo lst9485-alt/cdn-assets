@@ -172,7 +172,7 @@
             hubVisible: true,
             groupLabel: '상품',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
-            dateSuffix: '2'
+            dateSuffix: '3'
           },
           {
             id: 'main-page',
