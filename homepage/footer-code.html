@@ -1,19 +1,24 @@
 <script>
-      document.addEventListener('DOMContentLoaded', function(){
-        document.querySelectorAll('.review-card-clickable').forEach(function(card){
-          card.addEventListener('click', function(){
-            var body = card.querySelector('.review-body');
-            var more = card.querySelector('.review-more');
-            if (body.classList.contains('line-clamp-3')) {
-              body.classList.remove('line-clamp-3');
-              more.textContent = '접기 ‹';
-            } else {
-              body.classList.add('line-clamp-3');
-              more.textContent = '더보기 ›';
-            }
-          });
-        });
-      });
+      (function(){
+        if (window.__odReviewToggleGuard) return;
+        window.__odReviewToggleGuard = true;
+        document.addEventListener('click', function(e){
+          var card = e.target && e.target.closest ? e.target.closest('.review-card-clickable') : null;
+          if (!card) return;
+          var body = card.querySelector('.review-body');
+          var more = card.querySelector('.review-more');
+          if (!body || !more) return;
+          e.preventDefault();
+          e.stopPropagation();
+          if (body.classList.contains('line-clamp-3')) {
+            body.classList.remove('line-clamp-3');
+            more.textContent = '접기 ‹';
+          } else {
+            body.classList.add('line-clamp-3');
+            more.textContent = '더보기 ›';
+          }
+        }, true);
+      })();
     </script>
 
 <script>
