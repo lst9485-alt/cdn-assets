@@ -648,7 +648,8 @@
 <div class="md:self-start">
 <div aria-label="자료 4종 실제 화면 데모" class="demo-frame">
 <div class="demo-clip" id="step3DemoClip">
-<img alt="자료 4종 실제 화면 데모" id="step3DemoImg" loading="lazy" src="https://lst9485-alt.github.io/cdn-assets/homepage/images/step3-sheet.gif"/>
+<img alt="자료 4종 실제 화면 데모 - 자산 관리와 매수 플래너" class="demo-img-layer is-active" decoding="async" id="step3DemoSheet" loading="lazy" src="https://lst9485-alt.github.io/cdn-assets/homepage/images/step3-sheet.gif"/>
+<img alt="자료 4종 실제 화면 데모 - 상담 리포트와 실행 요약본" class="demo-img-layer" decoding="async" id="step3DemoData" loading="lazy" src="https://lst9485-alt.github.io/cdn-assets/homepage/images/step3-data.gif"/>
 </div>
 </div>
 <p class="demo-caption">제공자료 일부</p>
@@ -1556,9 +1557,9 @@
 <script>
                 (function(){
                   var clip = document.getElementById('step3DemoClip');
-                  var img = document.getElementById('step3DemoImg');
-                  var SHEET = 'https://lst9485-alt.github.io/cdn-assets/homepage/images/step3-sheet.gif';
-                  var DATA = 'https://lst9485-alt.github.io/cdn-assets/homepage/images/step3-data.gif';
+                  var sheet = document.getElementById('step3DemoSheet');
+                  var data = document.getElementById('step3DemoData');
+                  if (!clip || !sheet || !data) return;
                   var SHEET_MS = 5400;
                   var DATA_MS = 6400;
                   var state = 0; // 0: sheet, 1: data
@@ -1566,12 +1567,14 @@
                     if (state === 0) {
                       clip.classList.add('tall');
                       setTimeout(function(){
-                        img.src = DATA + '?t=' + Date.now();
+                        sheet.classList.remove('is-active');
+                        data.classList.add('is-active');
                         state = 1;
                         setTimeout(tick, DATA_MS);
                       }, 600);
                     } else {
-                      img.src = SHEET + '?t=' + Date.now();
+                      data.classList.remove('is-active');
+                      sheet.classList.add('is-active');
                       clip.classList.remove('tall');
                       state = 0;
                       setTimeout(tick, SHEET_MS);

@@ -314,9 +314,9 @@
 <script>
                 (function(){
                   var clip = document.getElementById('step3DemoClip');
-                  var img = document.getElementById('step3DemoImg');
-                  var SHEET = 'images/step3-sheet.gif';
-                  var DATA = 'images/step3-data.gif';
+                  var sheet = document.getElementById('step3DemoSheet');
+                  var data = document.getElementById('step3DemoData');
+                  if (!clip || !sheet || !data) return;
                   var SHEET_MS = 5400;
                   var DATA_MS = 6400;
                   var state = 0; // 0: sheet, 1: data
@@ -324,12 +324,14 @@
                     if (state === 0) {
                       clip.classList.add('tall');
                       setTimeout(function(){
-                        img.src = DATA + '?t=' + Date.now();
+                        sheet.classList.remove('is-active');
+                        data.classList.add('is-active');
                         state = 1;
                         setTimeout(tick, DATA_MS);
                       }, 600);
                     } else {
-                      img.src = SHEET + '?t=' + Date.now();
+                      data.classList.remove('is-active');
+                      sheet.classList.add('is-active');
                       clip.classList.remove('tall');
                       state = 0;
                       setTimeout(tick, SHEET_MS);
