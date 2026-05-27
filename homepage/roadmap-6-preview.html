@@ -356,7 +356,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 26px;
-    row-gap: 32px;
+    row-gap: 0;
     position: relative;
   }
   .d-roadmap .step {
@@ -383,7 +383,7 @@
     letter-spacing: 0.04em;
     z-index: 3;
   }
-  /* 가로 흐름 화살표 (카드 사이 → 모양) */
+  /* 카드 사이 가로 → 화살표 (1→2, 2→3, 4→5, 5→6) */
   .d-roadmap .step::after {
     content: '';
     position: absolute;
@@ -394,14 +394,40 @@
     transform: translateY(-50%) rotate(45deg);
     z-index: 2;
   }
-  /* 3번 카드 (1행 끝) → 아래로 흐름 */
-  .d-roadmap .step:nth-child(3)::after {
-    right: 50%; top: auto;
-    bottom: -22px;
-    transform: translateX(50%) rotate(135deg);
-  }
-  /* 6번 카드 (마지막): 화살표 없음 */
+  /* 줄 끝(3번)과 마지막(6번): 가로 화살표 제거 */
+  .d-roadmap .step:nth-child(3)::after { display: none; }
   .d-roadmap .step:nth-child(6)::after { display: none; }
+
+  /* 줄 사이 디바이더: 양쪽 점선 + 가운데 ↓ */
+  .d-roadmap .row-divider {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 18px 0;
+  }
+  .d-roadmap .row-divider .dash {
+    flex: 1;
+    height: 0;
+    border-top: 2px dashed rgba(255, 107, 0, 0.45);
+  }
+  .d-roadmap .row-divider .down-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #FF6B00;
+    color: #fff;
+    font-family: GmarketSans, Pretendard, sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    box-shadow: 0 6px 14px rgba(255, 107, 0, 0.30);
+    line-height: 1;
+    padding-bottom: 2px;
+  }
+
   .d-roadmap .step .num {
     display: inline-block; width: 26px; height: 26px;
     background: #FF6B00; color: #fff;
@@ -422,9 +448,10 @@
   }
   @media (max-width: 720px) {
     .d-roadmap { padding: 18px 16px; }
-    .d-roadmap .grid-3 { column-gap: 18px; row-gap: 24px; }
+    .d-roadmap .grid-3 { column-gap: 18px; }
     .d-roadmap .step::after { right: -14px; width: 9px; height: 9px; }
-    .d-roadmap .step:nth-child(3)::after { bottom: -18px; }
+    .d-roadmap .row-divider { padding: 14px 0; gap: 12px; }
+    .d-roadmap .row-divider .down-arrow { width: 28px; height: 28px; font-size: 16px; }
   }
 
   .pill {
@@ -534,6 +561,11 @@
             <div class="step"><span class="num">1</span><div class="name">예산 확정</div><div class="desc">종잣돈·대출 체크</div></div>
             <div class="step"><span class="num">2</span><div class="name">매매 방법</div><div class="desc">일반매매·청약 등</div></div>
             <div class="step is-now"><span class="num">3</span><div class="name">지역·단지 선정</div><div class="desc">가격이 오를 곳</div></div>
+            <div class="row-divider">
+              <span class="dash"></span>
+              <span class="down-arrow">↓</span>
+              <span class="dash"></span>
+            </div>
             <div class="step"><span class="num">4</span><div class="name">부동산 방문</div><div class="desc">매수 플래너 활용</div></div>
             <div class="step"><span class="num">5</span><div class="name">계약</div><div class="desc">협상·등기부 확인</div></div>
             <div class="step"><span class="num">6</span><div class="name">잔금·입주</div><div class="desc">잔금·인테리어 등</div></div>
