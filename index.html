@@ -61,6 +61,7 @@
         .sheet-no .archive-chip { font-size: 9px; }
         .sheet-group { color: #64748B; font-weight: 750; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sheet-date { color: #8090AA; font-weight: 700; }
+        .date-cell { cursor: help; }
         .sheet-title { color: #051C2C; font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sheet-title.with-path { gap: 6px; }
         .title-name { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
@@ -382,6 +383,19 @@
     var day = String(dt.getDate()).padStart(2,'0');
     return y+'/'+m+'/'+day;
   }
+  function formatFull(d){
+    if(!d) return '';
+    var dt = new Date(d);
+    if(isNaN(dt)) return '';
+    return dt.toLocaleString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+  }
   function fillDates(){
     document.querySelectorAll('[data-date-for]').forEach(function(cell){
       var src = cell.getAttribute('data-date-for');
@@ -390,7 +404,8 @@
       cell.setAttribute('data-date-pending', src);
       fetch(src, {method:'HEAD', cache:'no-store'}).then(function(r){
         var d = r.headers.get('Last-Modified');
-        cell.innerHTML = '<span class="date-cell">' + format(d) + '</span>';
+        var full = formatFull(d);
+        cell.innerHTML = '<span class="date-cell" title="' + (full ? '최종수정: ' + full : '') + '">' + format(d) + '</span>';
         cell.setAttribute('data-date-loaded', src);
         cell.removeAttribute('data-date-pending');
       }).catch(function(){
