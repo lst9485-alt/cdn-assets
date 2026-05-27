@@ -386,11 +386,17 @@
     document.querySelectorAll('[data-date-for]').forEach(function(cell){
       var src = cell.getAttribute('data-date-for');
       if(!src) return;
+      if(cell.getAttribute('data-date-loaded') === src || cell.getAttribute('data-date-pending') === src) return;
+      cell.setAttribute('data-date-pending', src);
       fetch(src, {method:'HEAD', cache:'no-store'}).then(function(r){
         var d = r.headers.get('Last-Modified');
         cell.innerHTML = '<span class="date-cell">' + format(d) + '</span>';
+        cell.setAttribute('data-date-loaded', src);
+        cell.removeAttribute('data-date-pending');
       }).catch(function(){
         cell.innerHTML = '<span class="date-cell">-</span>';
+        cell.setAttribute('data-date-loaded', src);
+        cell.removeAttribute('data-date-pending');
       });
     });
   }
@@ -400,7 +406,15 @@
     setTimeout(fillDates, 600);
   }
   // sheet 재렌더 시에도 다시 채우기
-  var mo = new MutationObserver(function(){ fillDates(); });
+  var scheduled = false;
+  var mo = new MutationObserver(function(){
+    if(scheduled) return;
+    scheduled = true;
+    setTimeout(function(){
+      scheduled = false;
+      fillDates();
+    }, 100);
+  });
   mo.observe(document.body, {childList:true, subtree:true});
 })();
 </script>
