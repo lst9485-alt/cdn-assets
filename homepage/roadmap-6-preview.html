@@ -613,13 +613,14 @@
   }
   .e2-timeline ol {
     position: relative;
-    margin: 0; padding: 0 0 0 44px;
+    margin: 0; padding: 0 0 0 40px;
     list-style: none;
   }
+  /* 라인 중심을 원 중심(20px)에 정확히 맞춤 */
   .e2-timeline ol::before {
     content: '';
     position: absolute;
-    left: 15px; top: 24px; bottom: 24px;
+    left: 18.5px; top: 22px; bottom: 22px;
     width: 3px; border-radius: 999px;
     background: linear-gradient(180deg,
       #FF6B00 0%, #FF6B00 42%,
@@ -627,22 +628,23 @@
   }
   .e2-timeline li {
     position: relative;
-    padding: 10px 0;
-    min-height: 36px;
+    padding: 9px 0;
+    min-height: 32px;
     display: flex; align-items: center;
     gap: 12px; flex-wrap: wrap;
   }
+  /* 원 28px, 중심 = ol left + 20px (라인 중심과 일치) */
   .e2-timeline li .num {
     position: absolute;
-    left: -38px; top: 50%;
+    left: -34px; top: 50%;
     transform: translateY(-50%);
-    width: 32px; height: 32px;
+    width: 28px; height: 28px;
     border-radius: 50%;
     background: #fff;
     border: 2.5px solid rgba(255, 107, 0, 0.30);
     color: rgba(255, 107, 0, 0.85);
     font-family: GmarketSans, Pretendard, sans-serif;
-    font-weight: 900; font-size: 13px;
+    font-weight: 900; font-size: 12.5px;
     display: flex; align-items: center; justify-content: center;
     box-sizing: border-box;
     z-index: 1;
