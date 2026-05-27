@@ -1060,6 +1060,20 @@
             sidebarType: 'root',
             activeMatch: ['curriculum-kakao-cta-drafts.html'],
             hubVisible: true
+          },
+          {
+            id: 'archive-roadmap-6-preview',
+            archiveNo: 'A029',
+            modifiedDate: '2026-05-27',
+            title: '내집마련 6단계 로드맵 시안',
+            description: '기존 + A(가로 타임라인) / B(세로 스텝) / C(3x2 강화형) 3안 비교',
+            href: 'homepage/roadmap-6-preview.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['roadmap-6-preview.html'],
+            hubVisible: true
           }
         ]
       }
