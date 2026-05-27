@@ -268,8 +268,11 @@
       if (!stickyCta || !heroSection || !applyFormSection) return;
       var y = window.scrollY || window.pageYOffset || 0;
       var start = heroSection.offsetTop + heroSection.offsetHeight * 0.7;
-      var end = applyFormSection.offsetTop - window.innerHeight * 0.3;
-      var visible = y >= start && y <= end;
+      var viewportH = document.documentElement.clientHeight || window.innerHeight || 0;
+      var end = applyFormSection.offsetTop - viewportH * 0.3;
+      var isVisible = stickyCta.classList.contains('is-visible');
+      var buffer = 56;
+      var visible = isVisible ? (y >= start - buffer && y <= end + buffer) : (y >= start + buffer && y <= end - buffer);
       stickyCta.classList.toggle('is-visible', visible);
       stickyCta.setAttribute('aria-hidden', visible ? 'false' : 'true');
     }

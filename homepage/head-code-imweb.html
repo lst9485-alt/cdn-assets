@@ -43,7 +43,7 @@
   @media (max-width: 480px) {
     .apply-form-inner { padding-left: 16px !important; padding-right: 16px !important; }
     #consultForm { padding: 24px 20px !important; border-radius: 24px !important; }
-    .review-badge-num-sub { display: block !important; margin-left: 0 !important; margin-top: 6px !important; transform: none !important; }
+    .review-badge-num-sub { display: inline-block !important; margin-left: 6px !important; margin-top: 0 !important; transform: translateY(4px) !important; }
     .service-notice { max-width: 320px; margin-left: auto; margin-right: auto; }
   }
   .word-keep { word-break: keep-all; overflow-wrap: break-word; }
@@ -866,13 +866,19 @@
     /* ===== 신뢰 지표 G: 별점 배지 ===== */
     .metric-review-badge {
       background: #fff;
-      border-radius: 20px;
+      border-radius: 18px;
       border: 1px solid rgba(26, 43, 71, 0.10);
-      padding: 28px;
+      padding: 22px 26px;
       box-shadow: 0 14px 30px rgba(26, 43, 71, 0.07);
       display: flex;
       align-items: center;
-      gap: 20px;
+      justify-content: center;
+      min-height: 142px;
+      gap: 16px;
+    }
+    .metric-review-badge > div {
+      width: max-content;
+      max-width: 100%;
     }
     .review-badge-num {
       font-family: GmarketSans, Pretendard, sans-serif;
