@@ -293,7 +293,7 @@
             + titleHtml
             + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
             + copyCell
-            + '<div class="sheet-cell sheet-status" data-date-for="' + attr(item.imwebCode || '') + '">' + (item.imwebCode ? '<span class="date-loading">…</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>') + '</div>'
+            + '<div class="sheet-cell sheet-status" data-date-for="' + attr(item.imwebCode || '') + '" data-date-suffix="' + attr(item.dateSuffix || '') + '">' + (item.imwebCode ? '<span class="date-loading">…</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>') + '</div>'
             + '</a>';
     }
 
@@ -396,16 +396,22 @@
       second: '2-digit'
     });
   }
+  function formatWithSuffix(d, suffix){
+    var base = format(d);
+    if(!suffix || base === '-') return base;
+    return base + '(' + suffix + ')';
+  }
   function fillDates(){
     document.querySelectorAll('[data-date-for]').forEach(function(cell){
       var src = cell.getAttribute('data-date-for');
+      var suffix = cell.getAttribute('data-date-suffix') || '';
       if(!src) return;
       if(cell.getAttribute('data-date-loaded') === src || cell.getAttribute('data-date-pending') === src) return;
       cell.setAttribute('data-date-pending', src);
       fetch(src, {method:'HEAD', cache:'no-store'}).then(function(r){
         var d = r.headers.get('Last-Modified');
         var full = formatFull(d);
-        cell.innerHTML = '<span class="date-cell" title="' + (full ? '최종수정: ' + full : '') + '">' + format(d) + '</span>';
+        cell.innerHTML = '<span class="date-cell" title="' + (full ? '최종수정: ' + full : '') + '">' + formatWithSuffix(d, suffix) + '</span>';
         cell.setAttribute('data-date-loaded', src);
         cell.removeAttribute('data-date-pending');
       }).catch(function(){
