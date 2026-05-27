@@ -14,11 +14,19 @@
     }
   }
 
+  function isMainPage() {
+    var path = location.pathname.replace(/\/+$/, '');
+    return path === '' || path === '/' || /\/main-page(?:\.html)?$/.test(path) || /\/index(?:\.html)?$/.test(path);
+  }
+
   ready(function () {
     if (document.querySelector('[data-homepage-topbar]')) return;
 
     var bar = document.createElement('header');
     bar.setAttribute('data-homepage-topbar', 'true');
+    if (isMainPage()) {
+      bar.setAttribute('data-main-page', 'true');
+    }
     var switcher = document.querySelector('[data-draft-switcher]');
     var stickyTop = switcher ? switcher.offsetHeight : 0;
 
@@ -60,14 +68,27 @@
       '    justify-content: space-between !important;',
       '    gap: 16px !important;',
       '  }',
-      '  [data-homepage-topbar-back], [data-homepage-topbar-home] {',
+      '  [data-homepage-topbar]:not([data-main-page]) [data-homepage-topbar-back], [data-homepage-topbar]:not([data-main-page]) [data-homepage-topbar-home] {',
       '    display: inline-flex !important;',
       '  }',
-      '  [data-homepage-topbar-logo] {',
+      '  [data-homepage-topbar]:not([data-main-page]) [data-homepage-topbar-logo] {',
       '    display: none !important;',
       '  }',
-      '  [data-homepage-topbar-nav] {',
+      '  [data-homepage-topbar]:not([data-main-page]) [data-homepage-topbar-nav] {',
       '    display: none !important;',
+      '  }',
+      '  [data-homepage-topbar][data-main-page] [data-homepage-topbar-logo] {',
+      '    font-size: 20px !important;',
+      '    line-height: 1.1 !important;',
+      '  }',
+      '  [data-homepage-topbar][data-main-page] [data-homepage-topbar-nav] {',
+      '    justify-content: flex-start !important;',
+      '    gap: 16px !important;',
+      '    -webkit-overflow-scrolling: touch !important;',
+      '  }',
+      '  [data-homepage-topbar][data-main-page] [data-homepage-topbar-nav] a {',
+      '    font-size: 13px !important;',
+      '    line-height: 1.2 !important;',
       '  }',
       '}'
     ].join('');
