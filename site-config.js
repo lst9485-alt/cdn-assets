@@ -245,7 +245,7 @@
             hubVisible: true,
             groupLabel: '기타',
             imwebCode: 'homepage/curriculum-imweb.html',
-            dateSuffix: '2'
+            dateSuffix: '3'
           },
           {
             id: 'lecture-allinone',

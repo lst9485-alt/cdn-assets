@@ -1,6 +1,8 @@
 <!-- curriculum.html body 시작 -->
 <!-- head-code.html 공유 (Tailwind/Pretendard/G마켓산스/Iconify) -->
 <style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { max-width: 100%; overflow-x: hidden; }
   .flow-line { position: relative; }
   .flow-line::after { content: ''; position: absolute; left: 50%; bottom: -28px; transform: translateX(-50%); width: 2px; height: 28px; background: #cbd5e1; }
   .flow-line:last-child::after { display: none; }
