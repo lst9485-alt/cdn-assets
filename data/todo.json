@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-28T10:44:34.229618+09:00",
+  "updated": "2026-05-28T10:51:55.019473+09:00",
   "sections": [
     {
       "name": "프로젝트",
@@ -10,27 +10,27 @@
           "ref": null,
           "items": [
             {
-              "text": "1-2. (5/28 재신청 완료, 검수 대기) 알림톡 UL_1040 — 반려 쟁점이던 `<카드결제 바로가기>` 링크의 결제사 캡처를 `kakao.talkcrm.co.kr` 재검수 요청 팝업에 첨부해 재신청 완료. 캡처에는 `KG 이니시스`, 상품명 `내집마련 코칭 A`, 결제금액 `400,000원`이 함께 표시됨. **다음**: 검수 통과 여부 확인 → 통과하면 1-3 CRM 연결 진행, 또 반려되면 반려 사유 기준으로 템플릿 재수정.",
+              "text": "1-1. (5/28 재신청 완료, 검수 대기) 알림톡 UL_1040 — 반려 쟁점이던 `<카드결제 바로가기>` 링크의 결제사 캡처를 `kakao.talkcrm.co.kr` 재검수 요청 팝업에 첨부해 재신청 완료. 캡처에는 `KG 이니시스`, 상품명 `내집마련 코칭 A`, 결제금액 `400,000원`이 함께 표시됨. **다음**: 검수 통과 여부 확인 → 통과하면 1-2 CRM 연결 진행, 또 반려되면 반려 사유 기준으로 템플릿 재수정.",
               "done": false
             },
             {
-              "text": "1-3. 알림톡 텍스트 2종 검수 통과 후 CRM 연결 — ALIMTALK_TEMPLATES에 신규 코드 2개 등록 + processNewApplication doPost에 sendAlimtalk 자동 호출 연결 + 입금 확인 시점 트리거 + 본인 번호 테스트 발송",
+              "text": "1-2. 알림톡 텍스트 2종 검수 통과 후 CRM 연결 — ALIMTALK_TEMPLATES에 신규 코드 2개 등록 + processNewApplication doPost에 sendAlimtalk 자동 호출 연결 + 입금 확인 시점 트리거 + 본인 번호 테스트 발송",
               "done": false
             },
             {
-              "text": "1-9 정본 noindex 제거 — 실제 확인 결과 `/counsel`은 메뉴·sitemap에 공개되어 있어 제거 필요. `coaching-all-v3.html`, `coaching-all-v3-imweb-copy.html`, `head-code-imweb.html`의 noindex는 로컬에서 제거됨. **다음**: cdn-assets 푸시 후 아임웹 `/counsel` 실서비스에 최신 코드 반영 → 공개 URL에서 `noindex` 0건 확인 후 완료 삭제.",
+              "text": "1-3. 정본 noindex 제거 — 실제 확인 결과 `/counsel`은 메뉴·sitemap에 공개되어 있어 제거 필요. `coaching-all-v3.html`, `coaching-all-v3-imweb-copy.html`, `head-code-imweb.html`의 noindex는 로컬에서 제거됨. **다음**: cdn-assets 푸시 후 아임웹 `/counsel` 실서비스에 최신 코드 반영 → 공개 URL에서 `noindex` 0건 확인 후 완료 삭제.",
               "done": false
             },
             {
-              "text": "1-12. 투자 철학 페이지(`investment-philosophy.html`) 수정 (5/14~)",
+              "text": "1-4. 투자 철학 페이지(`investment-philosophy.html`) 수정 (5/14~)",
               "done": false
             },
             {
-              "text": "1-13. 자료실/커뮤니티 신설 — 영상 자료 배포",
+              "text": "1-5. 자료실/커뮤니티 신설 — 영상 자료 배포",
               "done": false
             },
             {
-              "text": "1-15. 1:1 코칭 랜딩 속도 최적화 — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축 (5/13~)",
+              "text": "1-6. 1:1 코칭 랜딩 속도 최적화 — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축 (5/13~)",
               "done": false
             }
           ]
@@ -124,7 +124,11 @@
               "done": false
             },
             {
-              "text": "3-2-5. 최종 배포 후 공개 URL에서 캐시 버전과 화면 반영 확인",
+              "text": "3-2-4. 최종 배포 후 공개 URL에서 캐시 버전과 화면 반영 확인",
+              "done": false
+            },
+            {
+              "text": "3-2-5. 현재 내 위치는? 상위 1% 5% 10% 30% 50% 차트로 만들어보는건? 은퇴 계산기말고 자산관리시트?",
               "done": false
             }
           ]
@@ -135,19 +139,19 @@
           "ref": null,
           "items": [
             {
-              "text": "5-1. 내집마련 실전반 강의안 구조 확정",
+              "text": "4-1. 내집마련 실전반 강의안 구조 확정",
               "done": false
             },
             {
-              "text": "5-2. 재테크 기초반 강의안 구조 확정",
+              "text": "4-2. 재테크 기초반 강의안 구조 확정",
               "done": false
             },
             {
-              "text": "5-3. 강의·랜딩·제공자료·과제 흐름 연결",
+              "text": "4-3. 강의·랜딩·제공자료·과제 흐름 연결",
               "done": false
             },
             {
-              "text": "5-4. 판매/운영 형태 기준 정리",
+              "text": "4-4. 판매/운영 형태 기준 정리",
               "done": false
             }
           ]
@@ -155,19 +159,19 @@
       ]
     },
     {
-      "name": "작업",
+      "name": "작업 (일회성/점검)",
       "categories": [
         {
           "id": 1,
-          "title": "상담 CRM 알림톡 + Calendly 자동화 검증 (5/6~)",
+          "title": "기존 상담 CRM 자동화 점검 (5/6~)",
           "ref": null,
           "items": [
             {
-              "text": "1-2. 알리고 SMS 발송 내역 주기 확인 — 매주 1회 후속 SMS 4종 (3/30/90/180일) 정상 발송 점검",
+              "text": "1-1. 알리고 SMS 발송 내역 주기 확인 — 매주 1회 후속 SMS 4종 (3/30/90/180일) 정상 발송 점검",
               "done": false
             },
             {
-              "text": "1-3. (선택) 매칭 실패 알림 정리 — `06_상담후처리.gs:617-625` importTasksToSheet 캘린더↔시트 C열 이름 매칭 알림. Calendly 직접 예약 시 매번 알림. phone 매칭 전환 또는 알림 제거 검토",
+              "text": "1-2. (선택) 매칭 실패 알림 정리 — `06_상담후처리.gs:617-625` importTasksToSheet 캘린더↔시트 C열 이름 매칭 알림. Calendly 직접 예약 시 매번 알림. phone 매칭 전환 또는 알림 제거 검토",
               "done": false
             }
           ]
@@ -267,16 +271,16 @@
           ]
         },
         {
-          "id": 6,
+          "id": 5,
           "title": "무한매수법 자동화 안정화 (5/23~)",
           "ref": null,
           "items": [
             {
-              "text": "6-3. **매일 정산 때 메리츠 잔고 ↔ 매수시트 보유수량 비교** — 또 어긋나면 즉시 정정",
+              "text": "5-1. **매일 정산 때 메리츠 잔고 ↔ 매수시트 보유수량 비교** — 또 어긋나면 즉시 정정",
               "done": false
             },
             {
-              "text": "6-4. **자동화 모니터링 강화** — n8n cron이 며칠 누락되면 텔레그램 즉시 알림 (5/17~5/20 누락 재발 방지). nightwatch 또는 별도 cron으로 헬스체크",
+              "text": "5-2. **자동화 모니터링 강화** — n8n cron이 며칠 누락되면 텔레그램 즉시 알림 (5/17~5/20 누락 재발 방지). nightwatch 또는 별도 cron으로 헬스체크",
               "done": false
             }
           ]
@@ -292,23 +296,23 @@
           "ref": null,
           "items": [
             {
-              "text": "1-3. 사용자 의사결정: TOP 7 중 가장 깊게 분석할 채널 1~2개 선택",
+              "text": "1-1. 사용자 의사결정: TOP 7 중 가장 깊게 분석할 채널 1~2개 선택",
               "done": false
             },
             {
-              "text": "1-4. 선택한 채널 영상 5편 정밀 분석 (썸네일·구조·코멘트)",
+              "text": "1-2. 선택한 채널 영상 5편 정밀 분석 (썸네일·구조·코멘트)",
               "done": false
             },
             {
-              "text": "1-5. BiggerPockets 사업구조·퍼널만 별도 분석 (콘텐츠 톤 제외)",
+              "text": "1-3. BiggerPockets 사업구조·퍼널만 별도 분석 (콘텐츠 톤 제외)",
               "done": false
             },
             {
-              "text": "1-6. 마스코트 캐릭터 도입 의사결정 (両学長 모델)",
+              "text": "1-4. 마스코트 캐릭터 도입 의사결정 (両学長 모델)",
               "done": false
             },
             {
-              "text": "1-7. 우리 채널 즉시 적용 액션 1개 도출 → 실행",
+              "text": "1-5. 우리 채널 즉시 적용 액션 1개 도출 → 실행",
               "done": false
             }
           ]
@@ -335,43 +339,43 @@
               "done": false
             },
             {
-              "text": "2-2-3. 전일 스냅샷 2~3일 누적 후 24시간 증가 TOP 안정화 확인",
+              "text": "2-2-1. 전일 스냅샷 2~3일 누적 후 24시간 증가 TOP 안정화 확인",
               "done": false
             },
             {
-              "text": "2-2-5. 7일 스냅샷 누적 후 주간 급상승 TOP 안정화 확인",
+              "text": "2-2-2. 7일 스냅샷 누적 후 주간 급상승 TOP 안정화 확인",
               "done": false
             },
             {
-              "text": "2-2-6. 대시보드 운영 상태 카드 추가 — 마지막 실행, 성공/실패, 수집 영상 수, Telegram 발송 여부",
+              "text": "2-2-3. 대시보드 운영 상태 카드 추가 — 마지막 실행, 성공/실패, 수집 영상 수, Telegram 발송 여부",
               "done": false
             },
             {
-              "text": "2-3-3. 네이버 블로그 수집 PoC — RSS 동작, 본문 파싱, 공감/댓글/이웃 수 대안, robots.txt 확인",
+              "text": "2-3-1. 네이버 블로그 수집 PoC — RSS 동작, 본문 파싱, 공감/댓글/이웃 수 대안, robots.txt 확인",
               "done": false
             },
             {
-              "text": "2-3-4. 블로그 1군 후보 조사 — 네이버 부동산 파워블로거 10명+ 목록 + 이웃 수/일 발행량/최근 인기글",
+              "text": "2-3-2. 블로그 1군 후보 조사 — 네이버 부동산 파워블로거 10명+ 목록 + 이웃 수/일 발행량/최근 인기글",
               "done": false
             },
             {
-              "text": "2-3-5. RSSHub 기반 뉴스/블로그/커뮤니티 소스 확장 가능성 확인",
+              "text": "2-3-3. RSSHub 기반 뉴스/블로그/커뮤니티 소스 확장 가능성 확인",
               "done": false
             },
             {
-              "text": "2-3-6. changedetection.io식 웹 변경 감지 대상 후보 정리 — RSS 없는 페이지, 강의/커뮤니티/뉴스 페이지",
+              "text": "2-3-4. changedetection.io식 웹 변경 감지 대상 후보 정리 — RSS 없는 페이지, 강의/커뮤니티/뉴스 페이지",
               "done": false
             },
             {
-              "text": "2-4-4. yt01-topic에서 최근 히트작 후보를 로컬 DB/JSON으로 조회하는 방식 설계",
+              "text": "2-4-1. yt01-topic에서 최근 히트작 후보를 로컬 DB/JSON으로 조회하는 방식 설계",
               "done": false
             },
             {
-              "text": "2-4-5. 제목/자막/설명 검색용 SQLite FTS 또는 yt-fts류 구조 검토",
+              "text": "2-4-2. 제목/자막/설명 검색용 SQLite FTS 또는 yt-fts류 구조 검토",
               "done": false
             },
             {
-              "text": "2-4-6. 주제 선정 리포트에 “최근 2주 히트작 + 최근 3개월 TOP + 채널 평균대비 TOP” 연결",
+              "text": "2-4-3. 주제 선정 리포트에 “최근 2주 히트작 + 최근 3개월 TOP + 채널 평균대비 TOP” 연결",
               "done": false
             }
           ]
@@ -382,15 +386,15 @@
           "ref": null,
           "items": [
             {
-              "text": "3-2. 사용자 결정: TOP 5 중 우선 채택할 도구 1~2개 선택",
+              "text": "3-1. 사용자 결정: TOP 5 중 우선 채택할 도구 1~2개 선택",
               "done": false
             },
             {
-              "text": "3-3. nova-youtube-agent 코드 깊이 분석 → yt01-topic v3.0 설계 베이스 검토 (7과 연계)",
+              "text": "3-2. nova-youtube-agent 코드 깊이 분석 → yt01-topic v3.0 설계 베이스 검토 (2와 연계)",
               "done": false
             },
             {
-              "text": "3-4. youtube-comment-downloader PoC: 우리 채널 코멘트 → 다음 주제 발굴 시도",
+              "text": "3-3. youtube-comment-downloader PoC: 우리 채널 코멘트 → 다음 주제 발굴 시도",
               "done": false
             }
           ]
