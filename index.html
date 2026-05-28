@@ -18,6 +18,7 @@
         .section-title span:last-child { display: inline-flex; align-items: center; }
         .section-icon { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 6px; background: transparent; color: inherit; font-size: 15px; line-height: 1; }
         .section-dashboard { --section-color: #1F2937; }
+        .section-investment-section { --section-color: #0F766E; }
         .section-homepage-section { --section-color: #0077C8; }
         .section-pg-homepage { --section-color: #0F766E; }
         .section-consult { --section-color: #64748B; }
@@ -69,6 +70,7 @@
         .sheet-desc { color: #8090AA; white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.45; word-break: keep-all; overflow-wrap: anywhere; }
         .sheet-status { justify-content: center; }
         .generic-sheet .sheet-row { grid-template-columns: 38px 112px minmax(160px, 1.1fr) minmax(220px, 1.6fr) 72px 70px; }
+        .generic-sheet.no-copy .sheet-row { grid-template-columns: 38px 112px minmax(160px, 1.1fr) minmax(260px, 1.6fr) 82px; }
         .sheet-copy { justify-content: center; padding: 4px 6px; }
         .copy-btn { background: #F1F5F9; border: 1px solid #D8E0EA; border-radius: 6px; padding: 3px 8px; font-size: 11px; font-weight: 700; color: #475569; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
         .copy-btn:hover { background: #E0F2FE; border-color: #0077C8; color: #0077C8; }
@@ -80,6 +82,7 @@
         @media (max-width: 760px) {
             .sheet-row { grid-template-columns: 34px 62px 92px minmax(130px, 1fr) 56px; }
             .generic-sheet .sheet-row { grid-template-columns: 34px 92px minmax(130px, 1fr) 56px; }
+            .generic-sheet.no-copy .sheet-row { grid-template-columns: 34px 92px minmax(130px, 1fr) 56px; }
             .sheet-desc { display: none; }
             .sheet-cell.desc-col { display: none; }
             .sheet-cell.sheet-copy { display: none; }
@@ -96,7 +99,7 @@
         </div>
         <div id="hub-sections"></div>
     </div>
-<script src="./site-config.js?v=20260528-investment"></script>
+<script src="./site-config.js?v=20260528-investment-section"></script>
 <script>
 (function() {
     var site = window.DASHBOARD_SITE;
@@ -199,6 +202,7 @@
     function renderSectionIcon(section) {
         var iconMap = {
             dashboard: '📊',
+            'investment-section': '📈',
             'homepage-section': '🏠',
             'pg-homepage': '💳',
             consult: '💬',
@@ -216,11 +220,12 @@
     }
 
     function renderSheet(items, sectionId) {
-        var isArchive = items.some(function(item) { return item.archiveNo || item.modifiedDate; });
-        var head = isArchive ? renderArchiveHead(sectionId) : renderGenericHead(sectionId);
-        var className = isArchive ? 'sheet archive-sheet' : 'sheet generic-sheet';
+        var isArchive = sectionId === 'archive' || items.some(function(item) { return item.archiveNo; });
+        var showCopy = sectionId === 'homepage-section' || sectionId === 'pg-homepage';
+        var head = isArchive ? renderArchiveHead(sectionId) : renderGenericHead(sectionId, showCopy);
+        var className = isArchive ? 'sheet archive-sheet' : 'sheet generic-sheet' + (showCopy ? '' : ' no-copy');
         return '<div class="' + className + '">' + head + sortSheetItems(items, sectionId).map(function(item) {
-            return isArchive ? renderArchiveSheetItem(item) : renderGenericSheetItem(item, sectionId);
+            return isArchive ? renderArchiveSheetItem(item) : renderGenericSheetItem(item, sectionId, showCopy);
         }).join('') + '</div>';
     }
 
@@ -236,14 +241,14 @@
             + '</div>';
     }
 
-    function renderGenericHead(sectionId) {
+    function renderGenericHead(sectionId, showCopy) {
         return ''
             + '<div class="sheet-row sheet-head">'
             + '<div class="sheet-cell sheet-star"></div>'
             + '<div class="sheet-cell group-col" data-sheet-sort="groupLabel" data-section-id="' + esc(sectionId) + '">구분</div>'
             + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">이름</div>'
             + '<div class="sheet-cell desc-col" data-sheet-sort="description" data-section-id="' + esc(sectionId) + '">설명</div>'
-            + '<div class="sheet-cell sheet-copy">아임웹</div>'
+            + (showCopy ? '<div class="sheet-cell sheet-copy">아임웹</div>' : '')
             + '<div class="sheet-cell sheet-status" data-sheet-sort="modifiedDate" data-section-id="' + esc(sectionId) + '">날짜</div>'
             + '</div>';
     }
@@ -278,14 +283,17 @@
             + '</a>';
     }
 
-    function renderGenericSheetItem(item, sectionId) {
+    function renderGenericSheetItem(item, sectionId, showCopy) {
         var badgeClass = item.badgeTone === 'soon' ? 'badge-soon' : 'badge-live';
         var href = item.href.indexOf('http') === 0 ? item.href : './' + item.href;
         var group = item.groupLabel || item.sidebarLabel || '기타';
         var titleHtml = renderGenericTitle(item, sectionId);
-        var copyCell = item.imwebCode
+        var copyCell = showCopy && item.imwebCode
             ? '<div class="sheet-cell sheet-copy"><button type="button" class="copy-btn" data-copy-src="' + attr(item.imwebCode) + '" title="아임웹 코드위젯용 코드 복사">아임웹코드</button></div>'
-            : '<div class="sheet-cell sheet-copy"></div>';
+            : (showCopy ? '<div class="sheet-cell sheet-copy"></div>' : '');
+        var dateCell = item.imwebCode
+            ? '<span class="date-loading">…</span>'
+            : (item.modifiedDate ? '<span class="date-chip">' + esc(item.modifiedDate) + '</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>');
         return ''
             + '<a href="' + href + '" class="sheet-row" target="_blank" rel="noopener">'
             + starCell(item)
@@ -293,7 +301,7 @@
             + titleHtml
             + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
             + copyCell
-            + '<div class="sheet-cell sheet-status" data-date-for="' + attr(item.imwebCode || '') + '" data-date-suffix="' + attr(item.dateSuffix || '') + '">' + (item.imwebCode ? '<span class="date-loading">…</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>') + '</div>'
+            + '<div class="sheet-cell sheet-status" data-date-for="' + attr(item.imwebCode || '') + '" data-date-suffix="' + attr(item.dateSuffix || '') + '">' + dateCell + '</div>'
             + '</a>';
     }
 

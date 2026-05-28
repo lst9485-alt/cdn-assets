@@ -69,20 +69,39 @@
             navVisible: true,
             sidebarType: 'root',
             activeMatch: ['branding.html']
-          },
+          }
+        ]
+      },
+      {
+        id: 'investment-section',
+        hubTitle: '투자종합',
+        collapsible: true,
+        defaultOpen: true,
+        nav: {
+          type: 'single',
+          label: '투자종합',
+          href: 'dashboard/investment.html',
+          activeMatch: ['investment.html']
+        },
+        sidebar: {
+          title: '투자종합'
+        },
+        items: [
           {
-            id: 'investment',
-            title: '투자 종합',
-            sidebarLabel: '투자 종합',
-            description: '무매·VR 백테스트와 투자 관련 도구',
+            id: 'investment-backtest',
+            title: '백테스트',
+            sidebarLabel: '백테스트',
+            description: '무한매수법·VR·Buy & Hold 비교, MDD/CAGR/매매 로그',
             href: 'dashboard/investment.html',
+            modifiedDate: '2026-05-28',
             badgeText: 'NEW',
             badgeTone: 'live',
             iconKey: 'investment',
             hubVisible: true,
             navVisible: true,
             sidebarType: 'root',
-            activeMatch: ['investment.html']
+            activeMatch: ['investment.html'],
+            groupLabel: '주식'
           }
         ]
       },
