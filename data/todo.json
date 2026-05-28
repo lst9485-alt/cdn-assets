@@ -1,8 +1,8 @@
 {
-  "updated": "2026-05-28T12:09:54.764315+09:00",
+  "updated": "2026-05-28T12:42:00.929422+09:00",
   "sections": [
     {
-      "name": "프로젝트",
+      "name": "1. 프로젝트",
       "categories": [
         {
           "id": 1,
@@ -159,7 +159,7 @@
       ]
     },
     {
-      "name": "작업 (일회성/점검)",
+      "name": "2. 작업 (일회성/점검)",
       "categories": [
         {
           "id": 1,
@@ -273,7 +273,7 @@
       ]
     },
     {
-      "name": "낮은 우선순위",
+      "name": "3. 낮은 우선순위",
       "categories": [
         {
           "id": 1,
@@ -485,6 +485,53 @@
             },
             {
               "text": "6-13. (선택) 실전 연습 모드 — 실투자 전 가상 자금 5000달러로 2~4주 연습, 매일 주문표/체결 기록만 입력하는 모드",
+              "done": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. 실행환경",
+      "categories": [
+        {
+          "id": 1,
+          "title": "맥",
+          "ref": null,
+          "items": [
+            {
+              "text": "1-1. 직접 키보드 꽂아 잠금화면 비번 입력 테스트 — 직접도 안 되면 macOS 26.3.1 버그, 직접만 되면 Parsec 문제 (원인 판별)",
+              "done": false
+            },
+            {
+              "text": "1-2. 시스템 설정 → 개인정보 보호 및 보안 → Parsec 권한 ON 확인: 손쉬운 사용 / 화면 기록 및 시스템 오디오 녹음 / 마이크",
+              "done": false
+            },
+            {
+              "text": "1-3. Parsec 최신 업데이트 확인 (현재 150.101.1 → 150-103a 이상)",
+              "done": false
+            },
+            {
+              "text": "1-4. 그래도 안 되면 Parsec 잠금화면 별도 설치판 설치 — https://support.parsec.app/hc/en-us/articles/32381618319124-Access-Login-Screen-on-macOS",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "회사PC",
+          "ref": null,
+          "items": [
+            {
+              "text": "1-1. 회사 관련 폴더 context 확인하고 현재 소스/배포본 차이 점검",
+              "done": false
+            },
+            {
+              "text": "1-2. `http://leaplab.cafe24.com/tele/ip_audit.php` 어뷰징 관련 추가 수정사항 정리 후 반영",
+              "done": false
+            },
+            {
+              "text": "1-3. 회사PC 또는 서버 배포본에서 화면 확인",
               "done": false
             }
           ]
