@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <title>투자 종합 - 운영 대시보드</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: #f8fafc;
+      color: #111827;
+      line-height: 1.55;
+    }
+    .page {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 32px 20px 72px;
+      padding-right: 190px;
+    }
+    .back {
+      display: inline-flex;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 22px;
+      font-weight: 700;
+    }
+    .back:hover { color: #0077c8; }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 25px;
+      line-height: 1.2;
+      color: #051c2c;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      margin: 0 0 24px;
+      color: #64748b;
+      font-size: 14px;
+    }
+    .hero {
+      background: #ffffff;
+      border: 1px solid #dbe3ee;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, .04);
+      margin-bottom: 18px;
+    }
+    .hero-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      color: #047857;
+      font-size: 11px;
+      font-weight: 850;
+      margin-bottom: 9px;
+    }
+    .hero h2 {
+      margin: 0;
+      font-size: 21px;
+      line-height: 1.28;
+      color: #051c2c;
+      letter-spacing: 0;
+    }
+    .status {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 5px 10px;
+      background: #fff7ed;
+      color: #c2410c;
+      font-size: 11px;
+      font-weight: 850;
+    }
+    .desc {
+      margin: 0 0 16px;
+      color: #475569;
+      font-size: 14px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 9px;
+      border: 1px solid #cbd5e1;
+      color: #17202a;
+      background: #ffffff;
+      font-size: 13px;
+      font-weight: 850;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn.primary {
+      border-color: #0f766e;
+      background: #0f766e;
+      color: #ffffff;
+    }
+    .btn:hover {
+      border-color: #0077c8;
+      color: #0077c8;
+    }
+    .btn.primary:hover {
+      border-color: #0f766e;
+      color: #ffffff;
+      filter: brightness(.96);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .mini {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 13px;
+      background: #f8fafc;
+    }
+    .mini b {
+      display: block;
+      color: #051c2c;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+    .mini span {
+      display: block;
+      color: #64748b;
+      font-size: 12px;
+    }
+    .section-title {
+      margin: 26px 0 10px;
+      font-size: 16px;
+      color: #051c2c;
+      font-weight: 850;
+    }
+    .tool-list {
+      display: grid;
+      gap: 10px;
+    }
+    .tool {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      color: #111827;
+      text-decoration: none;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, .03);
+    }
+    .tool:hover {
+      border-color: #0077c8;
+    }
+    .tool strong {
+      display: block;
+      color: #051c2c;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .tool span {
+      color: #64748b;
+      font-size: 13px;
+    }
+    .arrow {
+      color: #94a3b8;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .note {
+      margin-top: 16px;
+      border-left: 3px solid #f97316;
+      background: #fff7ed;
+      color: #7c2d12;
+      padding: 11px 13px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    code {
+      display: inline-flex;
+      max-width: 100%;
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #f1f5f9;
+      color: #334155;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 1200px) {
+      .page { padding-right: 20px; }
+    }
+    @media (max-width: 720px) {
+      .hero-top { display: block; }
+      .status { margin-top: 10px; }
+      .grid { grid-template-columns: 1fr; }
+      .tool { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../">&larr; 대시보드</a>
+    <h1>투자 종합</h1>
+    <p class="subtitle">개인 투자 검증 도구와 투자 관련 페이지 모음</p>
+
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="eyebrow">BACKTEST</div>
+          <h2>무한매수법 · VR 백테스트</h2>
+        </div>
+        <span class="status">LOCAL APP</span>
+      </div>
+      <p class="desc">QQQ, QLD, TQQQ, SOXL과 커스텀 티커로 무한매수법, VR, Buy & Hold를 비교합니다. MDD, 연환산 수익률, 현금비중, 매수·매도 지점 차트를 확인할 수 있습니다.</p>
+      <div class="actions">
+        <a class="btn primary" href="http://127.0.0.1:8501" target="_blank" rel="noopener">백테스트 열기</a>
+        <button class="btn" type="button" data-copy-run>실행 명령 복사</button>
+      </div>
+      <div class="grid">
+        <div class="mini"><b>전략</b><span>무매 V1/V2/V2.1, VR, Buy & Hold</span></div>
+        <div class="mini"><b>지표</b><span>MDD, 연환산, Sharpe, Calmar, 총투입금</span></div>
+        <div class="mini"><b>차트</b><span>자산곡선, 낙폭, 현금비중, 매매 로그</span></div>
+      </div>
+      <div class="note">GitHub Pages는 Python 서버를 직접 실행하지 못합니다. 이 카드는 현재 맥에서 실행 중인 Streamlit 앱으로 연결합니다. Streamlit Cloud 배포 후 버튼 URL만 교체하면 상시 접속용으로 바뀝니다.</div>
+    </section>
+
+    <h2 class="section-title">투자 관련 페이지</h2>
+    <div class="tool-list">
+      <a class="tool" href="../homepage/fire-retirement-calculator.html">
+        <span><strong>은퇴계산기</strong><span>FIRE 목표금액, 예상 은퇴시점, 연도별 상세표</span></span>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="tool" href="../homepage/investment-philosophy.html">
+        <span><strong>투자 철학</strong><span>우리동네재테크 투자 방향과 핵심 메시지</span></span>
+        <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    document.querySelector('[data-copy-run]').addEventListener('click', function() {
+      var button = this;
+      var command = 'cd "$HOME/HQ/workspace/apps/infinite-vr-backtest" && .venv/bin/streamlit run app.py --server.address 127.0.0.1 --server.port 8501 --server.headless true';
+      navigator.clipboard.writeText(command).then(function() {
+        var old = button.textContent;
+        button.textContent = '복사됨';
+        setTimeout(function() { button.textContent = old; }, 1200);
+      });
+    });
+  </script>
+  <script src="../nav.js"></script>
+  <script src="../sidebar.js"></script>
+</body>
+</html>

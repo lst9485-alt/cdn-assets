@@ -5,7 +5,8 @@
 
   if (currentPath.indexOf('/dashboard') !== -1 &&
       currentPath.indexOf('business.html') === -1 &&
-      currentPath.indexOf('branding.html') === -1) {
+      currentPath.indexOf('branding.html') === -1 &&
+      currentPath.indexOf('investment.html') === -1) {
     return;
   }
 
