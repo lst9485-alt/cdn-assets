@@ -53,6 +53,11 @@
     $('download-metrics').addEventListener('click', downloadMetrics);
     $('download-trades').addEventListener('click', downloadTrades);
     $('csv-upload').addEventListener('change', handleCsvUpload);
+    document.addEventListener('click', function(event) {
+      var button = event.target.closest('[data-reset-chart]');
+      if (!button) return;
+      resetChart(button.getAttribute('data-reset-chart'));
+    });
   }
 
   function renderTickerOptions() {
@@ -564,6 +569,23 @@
                 return ctx.dataset.label + ': ' + (id === 'drawdown-chart' ? value.toFixed(1) + '%' : money(value));
               }
             }
+          },
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: 'x',
+              threshold: 8
+            },
+            zoom: {
+              wheel: {
+                enabled: true,
+                speed: 0.08
+              },
+              pinch: {
+                enabled: true
+              },
+              mode: 'x'
+            }
           }
         },
         scales: {
@@ -572,6 +594,13 @@
         }
       }
     });
+  }
+
+  function resetChart(key) {
+    var chart = state.charts[key];
+    if (chart && typeof chart.resetZoom === 'function') {
+      chart.resetZoom();
+    }
   }
 
   function renderEmpty(message) {

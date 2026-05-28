@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-  <link rel="stylesheet" href="./investment.css?v=20260528-static">
+  <link rel="stylesheet" href="./investment.css?v=20260528-zoom">
   <title>투자 종합 - 운영 대시보드</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.2.0/dist/chartjs-plugin-zoom.min.js"></script>
 </head>
 <body>
   <main class="page">
@@ -94,11 +96,23 @@
 
     <section class="chart-grid">
       <article class="panel chart-panel">
-        <h2>자산 곡선</h2>
+        <div class="panel-head">
+          <h2>자산 곡선</h2>
+          <div class="chart-tools">
+            <span>휠 줌 · 드래그 이동</span>
+            <button type="button" data-reset-chart="equity">초기화</button>
+          </div>
+        </div>
         <canvas id="equity-chart"></canvas>
       </article>
       <article class="panel chart-panel">
-        <h2>MDD / 낙폭</h2>
+        <div class="panel-head">
+          <h2>MDD / 낙폭</h2>
+          <div class="chart-tools">
+            <span>휠 줌 · 드래그 이동</span>
+            <button type="button" data-reset-chart="drawdown">초기화</button>
+          </div>
+        </div>
         <canvas id="drawdown-chart"></canvas>
       </article>
     </section>
@@ -106,7 +120,11 @@
     <section class="panel chart-panel">
       <div class="panel-head">
         <h2>가격과 매매 지점</h2>
-        <select id="trade-strategy"></select>
+        <div class="chart-tools">
+          <span>휠 줌 · 드래그 이동</span>
+          <select id="trade-strategy"></select>
+          <button type="button" data-reset-chart="trade">초기화</button>
+        </div>
       </div>
       <canvas id="trade-chart"></canvas>
     </section>
@@ -135,7 +153,7 @@
     </section>
   </main>
 
-  <script src="./investment.js?v=20260528-static"></script>
+  <script src="./investment.js?v=20260528-zoom"></script>
   <script src="../nav.js"></script>
   <script src="../sidebar.js"></script>
 </body>
