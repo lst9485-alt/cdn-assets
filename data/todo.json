@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-28T11:41:04.871934+09:00",
+  "updated": "2026-05-28T12:09:54.764315+09:00",
   "sections": [
     {
       "name": "프로젝트",
@@ -163,41 +163,30 @@
       "categories": [
         {
           "id": 1,
-          "title": "기존 상담 CRM 자동화 점검 (5/6~)",
+          "title": "proof-issue 이름 매칭 강화 검토 (5/6~)",
           "ref": null,
           "items": [
             {
-              "text": "1-1. UH_5037/UH_5038 실제 발송 확인 — 트리거·웹훅 정상 확인됨(5/28). 오늘/내일 상담 0건이라 다음 상담 일정 발생 시 전날/당일 알림톡 발송만 확인",
+              "text": "1-1. 첫 월요일 운영 결과 점검 — mismatch/extra 빈도 확인",
+              "done": false
+            },
+            {
+              "text": "1-2. 양식 메모 vs 화면 메모 형식 비교 (양식: \"{name} ({date})\", 화면: \"{name} 회원\" 같이 다른 패턴)",
+              "done": false
+            },
+            {
+              "text": "1-3. 부작용 있으면 토큰 분리 매칭 도입 검토 (parse_paste.py:105)",
               "done": false
             }
           ]
         },
         {
           "id": 2,
-          "title": "proof-issue 이름 매칭 강화 검토 (5/6~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "2-1. 첫 월요일 운영 결과 점검 — mismatch/extra 빈도 확인",
-              "done": false
-            },
-            {
-              "text": "2-2. 양식 메모 vs 화면 메모 형식 비교 (양식: \"{name} ({date})\", 화면: \"{name} 회원\" 같이 다른 패턴)",
-              "done": false
-            },
-            {
-              "text": "2-3. 부작용 있으면 토큰 분리 매칭 도입 검토 (parse_paste.py:105)",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 3,
           "title": "노션 자료 옵시디언 이전 (5/6~)",
           "ref": null,
           "items": [
             {
-              "text": "3-1. 노션 -> 옵시디언으로 옮기기. 브랜드정본등 옵시디언으로.",
+              "text": "2-1. 노션 -> 옵시디언으로 옮기기. 브랜드정본등 옵시디언으로.",
               "done": false
             },
             {
@@ -205,78 +194,78 @@
               "done": false
             },
             {
-              "text": "3-2. 콘텐츠관리 등(투두, CRM?? 글쎄)",
+              "text": "2-2. 콘텐츠관리 등(투두, CRM?? 글쎄)",
               "done": false
             },
             {
-              "text": "3-3. brand-context 정본을 옵시디언으로 전환 — 현재 노션이 정본, `Workspace/config/brand-context/`가 사본. 수정할 때마다 `/profile sync` 부담. 정본 옮기면 sync 단방향(옵시디언→노션) 또는 노션 폐지 가능",
+              "text": "2-3. brand-context 정본을 옵시디언으로 전환 — 현재 노션이 정본, `Workspace/config/brand-context/`가 사본. 수정할 때마다 `/profile sync` 부담. 정본 옮기면 sync 단방향(옵시디언→노션) 또는 노션 폐지 가능",
               "done": false
             },
             {
-              "text": "3-3-1. 옵시디언 5개 노트 frontmatter + `> [!info]` 콜아웃 장식 제거 (`Obsidian/2. Area/00_브랜딩/01~05*.md`)",
+              "text": "2-3-1. 옵시디언 5개 노트 frontmatter + `> [!info]` 콜아웃 장식 제거 (`Obsidian/2. Area/00_브랜딩/01~05*.md`)",
               "done": false
             },
             {
-              "text": "3-3-2. 옵시디언 노트 상단 메타 \"정본=노션\" → \"정본=옵시디언, 노션/workspace는 사본\"으로 정정",
+              "text": "2-3-2. 옵시디언 노트 상단 메타 \"정본=노션\" → \"정본=옵시디언, 노션/workspace는 사본\"으로 정정",
               "done": false
             },
             {
-              "text": "3-3-3. 스킬 9개 경로 일괄 변경 `Workspace/config/brand-context/` → `Obsidian/2. Area/00_브랜딩/`. 대상: homepage, consult, yt01-topic, yt02-thumbnail, yt03-research, yt04-intro, yt05-manuscript, yt06-revision, yt09-upload, profile, _yt-references 3개(prerequisites/writing-core/writing-techniques)",
+              "text": "2-3-3. 스킬 9개 경로 일괄 변경 `Workspace/config/brand-context/` → `Obsidian/2. Area/00_브랜딩/`. 대상: homepage, consult, yt01-topic, yt02-thumbnail, yt03-research, yt04-intro, yt05-manuscript, yt06-revision, yt09-upload, profile, _yt-references 3개(prerequisites/writing-core/writing-techniques)",
               "done": false
             },
             {
-              "text": "3-3-4. `_yt-references/prerequisites.md`는 이미 옵시디언 경로 명시 — 다른 곳도 같은 형식으로 통일",
+              "text": "2-3-4. `_yt-references/prerequisites.md`는 이미 옵시디언 경로 명시 — 다른 곳도 같은 형식으로 통일",
               "done": false
             },
             {
-              "text": "3-3-5. profile-sync.py / profile-pull.py 방향 재설계 — 옵시디언이 정본 → 노션/workspace는 단방향 push 대상. pull 스크립트는 폐지 또는 검토용으로만",
+              "text": "2-3-5. profile-sync.py / profile-pull.py 방향 재설계 — 옵시디언이 정본 → 노션/workspace는 단방향 push 대상. pull 스크립트는 폐지 또는 검토용으로만",
               "done": false
             },
             {
-              "text": "3-3-6. homepage 스킬 한 번 실제 실행해서 brand-context 자동 로드 정상인지 테스트 (frontmatter/콜아웃 제거 후 호환 확인)",
+              "text": "2-3-6. homepage 스킬 한 번 실제 실행해서 brand-context 자동 로드 정상인지 테스트 (frontmatter/콜아웃 제거 후 호환 확인)",
               "done": false
             },
             {
-              "text": "3-3-7. 통과하면 `Workspace/config/brand-context/` 폴더 archive 또는 `Workspace/config/_archive/brand-context-260514/`로 이동 (삭제 X)",
+              "text": "2-3-7. 통과하면 `Workspace/config/brand-context/` 폴더 archive 또는 `Workspace/config/_archive/brand-context-260514/`로 이동 (삭제 X)",
               "done": false
             },
             {
-              "text": "3-3-8. `Obsidian/CLAUDE.md` \"2. Area: 서브: 00_브랜딩(정본=brand-context)\" 줄 수정 → \"정본=이 폴더\"",
+              "text": "2-3-8. `Obsidian/CLAUDE.md` \"2. Area: 서브: 00_브랜딩(정본=brand-context)\" 줄 수정 → \"정본=이 폴더\"",
               "done": false
             },
             {
-              "text": "3-3-9. 노션 01~05 페이지 상단에 \"사본 — 정본은 옵시디언\" 표시 또는 페이지 폐지",
+              "text": "2-3-9. 노션 01~05 페이지 상단에 \"사본 — 정본은 옵시디언\" 표시 또는 페이지 폐지",
               "done": false
             },
             {
-              "text": "3-3-10. `Workspace/config/skills-source/profile/data/profile.md` + `Workspace/apps/homepage/.context.md`도 brand-context 박힌 곳 → 옵시디언 경로로 변경 (위 2-3-3 일괄에 포함)",
+              "text": "2-3-10. `Workspace/config/skills-source/profile/data/profile.md` + `Workspace/apps/homepage/.context.md`도 brand-context 박힌 곳 → 옵시디언 경로로 변경 (위 2-3-3 일괄에 포함)",
               "done": false
             },
             {
-              "text": "3-3-11. `content-sheet/SKILL.md`는 \"brand-context 참조하지 말 것\" 명시 — **수정 대상 아님**. 그대로 둠",
+              "text": "2-3-11. `content-sheet/SKILL.md`는 \"brand-context 참조하지 말 것\" 명시 — **수정 대상 아님**. 그대로 둠",
               "done": false
             },
             {
-              "text": "3-3-12. `manage-skills/SKILL.md`는 homepage 설명에 단순 언급만 — 본문 의미는 그대로, 경로만 일괄 치환 시 자동 처리됨",
+              "text": "2-3-12. `manage-skills/SKILL.md`는 homepage 설명에 단순 언급만 — 본문 의미는 그대로, 경로만 일괄 치환 시 자동 처리됨",
               "done": false
             },
             {
-              "text": "3-3-13. profile-sync.py는 옵시디언 → 노션 단방향으로 재설계, profile-pull.py는 **폐지** (노션→workspace 의미 없어짐). 둘 다 폐지하고 옵시디언에서만 관리하는 옵션도 검토",
+              "text": "2-3-13. profile-sync.py는 옵시디언 → 노션 단방향으로 재설계, profile-pull.py는 **폐지** (노션→workspace 의미 없어짐). 둘 다 폐지하고 옵시디언에서만 관리하는 옵션도 검토",
               "done": false
             }
           ]
         },
         {
-          "id": 5,
+          "id": 3,
           "title": "무한매수법 자동화 안정화 (5/23~)",
           "ref": null,
           "items": [
             {
-              "text": "5-1. **매일 정산 때 메리츠 잔고 ↔ 매수시트 보유수량 비교** — 또 어긋나면 즉시 정정",
+              "text": "3-1. **매일 정산 때 메리츠 잔고 ↔ 매수시트 보유수량 비교** — 또 어긋나면 즉시 정정",
               "done": false
             },
             {
-              "text": "5-2. **자동화 모니터링 강화** — n8n cron이 며칠 누락되면 텔레그램 즉시 알림 (5/17~5/20 누락 재발 방지). nightwatch 또는 별도 cron으로 헬스체크",
+              "text": "3-2. **자동화 모니터링 강화** — n8n cron이 며칠 누락되면 텔레그램 즉시 알림 (5/17~5/20 누락 재발 방지). nightwatch 또는 별도 cron으로 헬스체크",
               "done": false
             }
           ]
