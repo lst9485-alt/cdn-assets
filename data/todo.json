@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-28T13:47:45.517110+09:00",
+  "updated": "2026-05-29T06:00:03.396287+09:00",
   "sections": [
     {
       "name": "1. 프로젝트",
@@ -148,6 +148,76 @@
             },
             {
               "text": "4-4. 판매/운영 형태 기준 정리",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "무한매수법 프로젝트 (백테스트) (5/5~)",
+          "ref": "백테스트툴",
+          "items": [
+            {
+              "text": "5-1. GitHub 후보 2차 조사 — 기존 후보 외 추가 포크/한국 사례/라이선스 확인",
+              "done": false
+            },
+            {
+              "text": "5-2. 후보 비교표 작성 — 라이선스, 업데이트, 데이터 소스, VR·무매 적용성, 시각화 수준",
+              "done": false
+            },
+            {
+              "text": "5-3. VR 5.0 공식 정밀화 — V/Pool/G, 실력공식, 인출식, 사이클 한도 반영",
+              "done": false
+            },
+            {
+              "text": "5-4. VR 검증 — 카페 글/운영 사례 기준으로 방향성·수치 비교",
+              "done": false
+            },
+            {
+              "text": "5-5. 무한매수법 V1/V2/V2.1 정밀화 — LOC평단매수, LOC큰수매수, 40회 사이클, 쿼터매도, 영혼법, RSI 조건",
+              "done": false
+            },
+            {
+              "text": "5-6. 무한매수법 검증 — 라오어 카페 본문/운영 사례와 비교하고 “근사 시뮬레이션”으로 표기",
+              "done": false
+            },
+            {
+              "text": "5-7. 가격 데이터 자동갱신 — `data/investment-prices.json` 생성 작업 자동화",
+              "done": false
+            },
+            {
+              "text": "5-8. 파라미터 민감도 표 — G값/밴드/익절목표/라운드별 성과 비교",
+              "done": false
+            },
+            {
+              "text": "5-9. (선택) 실전 연습 모드 — 가상 자금으로 매일 주문표/체결 기록 입력",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "title": "(높음) 유튜브 제작 스킬 일부 수정 (5/28~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "6-1. yt01~yt09 + _yt-references 각 단계 실제 사용 빈도 점검",
+              "done": false
+            },
+            {
+              "text": "6-2. 리서치(yt03) 단계 간소화 — 자료 카드·5섹션 형식 단순화",
+              "done": false
+            },
+            {
+              "text": "6-3. plan.md 슬림화 — 미확정 필드·과다 항목 제거",
+              "done": false
+            },
+            {
+              "text": "6-4. 0.checklist.md 단순화 또는 폐지 검토",
+              "done": false
+            },
+            {
+              "text": "6-5. 1편(레버리지, 5/31) 영상 만들 때 실제 적용 + 사용감 점검",
               "done": false
             }
           ]
@@ -422,65 +492,6 @@
             },
             {
               "text": "5-4. 중복 관리가 생기면 보드 도입하지 않기",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 6,
-          "title": "무한매수법·VR 백테스트 툴 (5/5~)",
-          "ref": "라오어 무한매수법",
-          "items": [
-            {
-              "text": "6-1. 깃허브 조사 2차 — 1차 후보 외에 `infinite buying`, `라오어`, `value rebalancing`, `value averaging`, `TQQQ backtest`, `leveraged ETF DCA backtest`, `VWAP TWAP backtest`, `awesome-quant`, `awesome-systematic-trading`, `vectorbt`, `backtrader`, `zipline-reloaded`, 한국 블로거 포크까지 훑기",
-              "done": false
-            },
-            {
-              "text": "6-2. 후보 3~5개 비교표 작성 — 라이선스 / 최근 업데이트 / 언어·프레임워크 / 한국 사용 사례 / 무한매수법 적용 가능성 / VR 적용 가능성 / 데이터 소스(yfinance·Polygon 등) / 시각화 수준 / Streamlit 이전 난이도",
-              "done": false
-            },
-            {
-              "text": "6-3. 채택 결정 — 기본안: `Streamlit + Python 엔진`, GitHub Pages 대시보드는 바로가기 버튼. 프로젝트명은 `workspace/apps/laoer-backtest/` 또는 `workspace/apps/infinite-vr-backtest/` 중 결정",
-              "done": false
-            },
-            {
-              "text": "6-4. 프로젝트 폴더 생성 + `.context.md` — 목표, 참고 repo, 채택 구조, 검증 기준, 배포 방식(Streamlit Cloud + dashboard link) 기록",
-              "done": false
-            },
-            {
-              "text": "6-5. 백테스트 환경 셋업 — Python venv, `streamlit`, `pandas`, `yfinance`, `plotly`, 테스트 도구, 데이터 캐시 구조(TQQQ/SOXL/QQQ/QLD 일봉, 필요시 분봉)",
-              "done": false
-            },
-            {
-              "text": "6-6. 입력 UI 설계 — 종목, 기간, 시작금, 적립금, 수수료, 세금, 슬리피지, G값, 밴드, 회차, 전략 버전, 현금풀, 리밸런싱 주기, 실전/근사 모드 토글을 쉽게 바꾸게 만들기",
-              "done": false
-            },
-            {
-              "text": "6-7. VR 5.0 기본공식 먼저 구현 — V/Pool/G 갱신 공식 (`다음V = 현재V + Pool/G + 적립금`), G=10/20/40, 밴드 ±5/10/15/20%, 적립식/거치식/인출식, 사이클당 한도(75/50/25%)",
-              "done": false
-            },
-            {
-              "text": "6-8. VR 검증 — 카페 글 38945(G값), 38947(밴드폭), 3596/51823(운영 사례) 기준으로 결과가 방향성·수치상 맞는지 비교",
-              "done": false
-            },
-            {
-              "text": "6-9. 무한매수법 V1/V2/V2.1 구현 — LOC평단매수, LOC큰수매수, 40회 사이클, 쿼터매도, 영혼법, RSI 진입 조건, 보수적 매도 룰",
-              "done": false
-            },
-            {
-              "text": "6-10. 무한매수법 검증 — 라오어 카페 본문/운영 사례와 비교. 단, 프리장/애프터장 체결 차이 때문에 결과 명칭은 “완벽 백테스트”가 아니라 “근사 시뮬레이션”으로 표시",
-              "done": false
-            },
-            {
-              "text": "6-11. 결과 리포트 — 수익률 그래프, MDD, 현금 소진 시점, 평균 현금비중, 사이클 횟수, 매매 로그, 연도별 수익률, 파라미터별 민감도 표",
-              "done": false
-            },
-            {
-              "text": "6-12. 배포 — Streamlit Cloud 무료 배포, GitHub repo push, 기존 `https://lst9485-alt.github.io/cdn-assets/` 대시보드에 “무한매수법·VR 백테스트” 바로가기 추가",
-              "done": false
-            },
-            {
-              "text": "6-13. (선택) 실전 연습 모드 — 실투자 전 가상 자금 5000달러로 2~4주 연습, 매일 주문표/체결 기록만 입력하는 모드",
               "done": false
             }
           ]
