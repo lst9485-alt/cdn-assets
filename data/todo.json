@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-28T12:42:40.999729+09:00",
+  "updated": "2026-05-28T13:47:45.517110+09:00",
   "sections": [
     {
       "name": "1. 프로젝트",
@@ -18,19 +18,15 @@
               "done": false
             },
             {
-              "text": "1-3. 정본 noindex 제거 — 실제 확인 결과 `/counsel`은 메뉴·sitemap에 공개되어 있어 제거 필요. `coaching-all-v3.html`, `coaching-all-v3-imweb-copy.html`, `head-code-imweb.html`의 noindex는 로컬에서 제거됨. **다음**: cdn-assets 푸시 후 아임웹 `/counsel` 실서비스에 최신 코드 반영 → 공개 URL에서 `noindex` 0건 확인 후 완료 삭제.",
+              "text": "1-3. 투자 철학 페이지(`investment-philosophy.html`) 수정 (5/14~)",
               "done": false
             },
             {
-              "text": "1-4. 투자 철학 페이지(`investment-philosophy.html`) 수정 (5/14~)",
+              "text": "1-4. 자료실/커뮤니티 신설 — 영상 자료 배포",
               "done": false
             },
             {
-              "text": "1-5. 자료실/커뮤니티 신설 — 영상 자료 배포",
-              "done": false
-            },
-            {
-              "text": "1-6. 1:1 코칭 랜딩 속도 최적화 — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축 (5/13~)",
+              "text": "1-5. 1:1 코칭 랜딩 속도 최적화 — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축 (5/13~)",
               "done": false
             }
           ]
