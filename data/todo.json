@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-28T10:51:55.019473+09:00",
+  "updated": "2026-05-28T10:58:59.724639+09:00",
   "sections": [
     {
       "name": "프로젝트",
@@ -167,11 +167,15 @@
           "ref": null,
           "items": [
             {
-              "text": "1-1. 알리고 SMS 발송 내역 주기 확인 — 매주 1회 후속 SMS 4종 (3/30/90/180일) 정상 발송 점검",
+              "text": "1-1. UH_5037/UH_5038 자동 리마인드 검증 — `sendDailyReminders`(매일 8시, 전날) / `sendThreeHourReminders`(매시간, 당일 3시간 전) 트리거·로그·Notion 체크박스 확인",
               "done": false
             },
             {
-              "text": "1-2. (선택) 매칭 실패 알림 정리 — `06_상담후처리.gs:617-625` importTasksToSheet 캘린더↔시트 C열 이름 매칭 알림. Calendly 직접 예약 시 매번 알림. phone 매칭 전환 또는 알림 제거 검토",
+              "text": "1-2. 후속 SMS 4종 발송 점검 — `sendAligoMessages` 매일 9시, 상담일+3/30/90/180일 대상 dry-run·실제 발송 내역 확인. 운영 루틴이면 task로 이관",
+              "done": false
+            },
+            {
+              "text": "1-3. (선택) 캘린더↔DB 매칭 실패 알림 정리 — `06_상담후처리.gs:625`, `06_상담후처리.gs:705-712` 이름 매칭 기반 알림. phone 매칭 전환 또는 알림 조건 조정 검토",
               "done": false
             }
           ]
