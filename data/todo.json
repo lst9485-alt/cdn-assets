@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-30T06:00:04.233995+09:00",
+  "updated": "2026-05-31T06:00:04.081212+09:00",
   "sections": [
     {
       "name": "1. 프로젝트",
@@ -15,6 +15,14 @@
             },
             {
               "text": "1-2. 알림톡 텍스트 2종 검수 통과 후 CRM 연결 — ALIMTALK_TEMPLATES에 신규 코드 2개 등록 + processNewApplication doPost에 sendAlimtalk 자동 호출 연결 + 입금 확인 시점 트리거 + 본인 번호 테스트 발송",
+              "done": false
+            },
+            {
+              "text": "faq 수정. 그 외 질문이 있으면 어디로 연락드리면 될까요? 추가 및 수정",
+              "done": false
+            },
+            {
+              "text": "문구수정. 입장이 확인되지않아~ 알림톡도달이 아니라",
               "done": false
             },
             {
