@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-31T06:00:16.892901+09:00",
+  "updated": "2026-06-01T06:00:15.735496+09:00",
   "okr": [
     {
       "title": "전환율 3% 달성(랜딩 업글)",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 496,
+    "total": 498,
     "done": 464,
-    "overdue": 13,
+    "overdue": 17,
     "pending": [
       {
         "title": "전자책 작성",
@@ -91,34 +91,24 @@
         "overdue": true
       },
       {
-        "title": "원소스 멀티유즈 준비",
-        "date": "2026-05-31T09:30:00.000+09:00",
-        "overdue": false
+        "title": "P1~P3/목실감",
+        "date": "2026-05-31T08:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "홍대이불",
         "date": "2026-05-31T12:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
-        "title": "쓰레드 매일 알람+월말점검",
-        "date": "2026-05-31T13:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "일정예약 테스트",
-        "date": "2026-05-31T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "투두리스트 밀린것",
-        "date": "2026-05-31T15:30:00.000+09:00",
-        "overdue": false
+        "title": "원씽복기",
+        "date": "2026-05-31T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "앞으로 계획점검",
-        "date": "2026-05-31T17:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-05-31T16:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "메모정리",
@@ -136,13 +126,18 @@
         "overdue": false
       },
       {
-        "title": "강의 기획",
-        "date": "2026-06-01T12:00:00.000+09:00",
+        "title": "원소스 멀티유즈 준비",
+        "date": "2026-06-01T10:45:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "date": "2026-06-01T13:45:00.000+09:00",
+        "title": "쓰레드 매일 알람+월말점검",
+        "date": "2026-06-01T12:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "일정예약 테스트",
+        "date": "2026-06-01T14:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -156,6 +151,16 @@
         "overdue": false
       },
       {
+        "title": "강의 기획",
+        "date": "2026-06-02T12:45:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-06-02T15:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "자료수집&도입부",
         "date": "2026-06-03",
         "overdue": false
@@ -163,6 +168,11 @@
       {
         "title": "콘텐츠 관리시트",
         "date": "2026-06-03T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "투두리스트 밀린것",
+        "date": "2026-06-03T15:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -188,38 +198,44 @@
     ],
     "schedule": [
       {
-        "title": "원소스 멀티유즈 준비",
-        "time": "09:30",
+        "title": "메모정리",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "홍대이불",
-        "time": "12:00",
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원소스 멀티유즈 준비",
+        "time": "10:45",
         "allDay": false,
         "done": false
       },
       {
         "title": "쓰레드 매일 알람+월말점검",
-        "time": "13:30",
+        "time": "12:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "일정예약 테스트",
-        "time": "15:00",
+        "time": "14:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "투두리스트 밀린것",
-        "time": "15:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "앞으로 계획점검",
-        "time": "17:00",
+        "title": "코칭3일차 제작",
+        "time": "15:15",
         "allDay": false,
         "done": false
       }
@@ -250,14 +266,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 10,
-      "rate": "36%",
+      "done": 11,
+      "rate": "39%",
       "days": [
-        {
-          "date": "2026-05-25",
-          "done": 1,
-          "total": 4
-        },
         {
           "date": "2026-05-26",
           "done": 3,
@@ -280,11 +291,16 @@
         },
         {
           "date": "2026-05-30",
-          "done": 0,
+          "done": 1,
           "total": 4
         },
         {
           "date": "2026-05-31",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-06-01",
           "done": 0,
           "total": 4
         }
@@ -292,21 +308,10 @@
     }
   },
   "sales": {
-    "month": "2026-05",
-    "month_label": "5월",
-    "total_amount": 80,
-    "total_count": 2,
-    "weekly": [
-      {
-        "week": "1주차",
-        "count": 1,
-        "amount": 40
-      },
-      {
-        "week": "2주차",
-        "count": 1,
-        "amount": 40
-      }
-    ]
+    "month": "2026-06",
+    "month_label": "6월",
+    "total_amount": 0,
+    "total_count": 0,
+    "weekly": []
   }
 }
