@@ -1,6 +1,22 @@
 {
-  "updated": "2026-06-02T06:00:04.253845+09:00",
+  "updated": "2026-06-03T06:00:04.514170+09:00",
   "projects": [
+    {
+      "name": "후순위",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-06-02",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "상담 후 자료발송",
+      "type": "file",
+      "app": null,
+      "modified": "2026-06-02",
+      "status": null,
+      "next": null
+    },
     {
       "name": "강의안",
       "type": "folder",
@@ -10,32 +26,8 @@
       "next": null
     },
     {
-      "name": "백테스트툴",
-      "type": "file",
-      "app": null,
-      "modified": "2026-05-28",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "경쟁채널 모니터링 시스템",
-      "type": "file",
-      "app": null,
-      "modified": "2026-05-19",
-      "status": null,
-      "next": null
-    },
-    {
       "name": "원소스 멀티유즈",
       "type": "folder",
-      "app": null,
-      "modified": "2026-05-19",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "해외 유튜브 벤치마킹",
-      "type": "file",
       "app": null,
       "modified": "2026-05-19",
       "status": null,

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-02T06:00:14.349305+09:00",
+  "updated": "2026-06-03T06:00:24.146617+09:00",
   "okr": [
     {
       "title": "6월 : 쓰레드 500명(현재 173명)",
@@ -33,9 +33,9 @@
     }
   ],
   "tasks": {
-    "total": 506,
-    "done": 470,
-    "overdue": 19,
+    "total": 510,
+    "done": 474,
+    "overdue": 20,
     "pending": [
       {
         "title": "전자책 작성",
@@ -113,53 +113,33 @@
         "overdue": true
       },
       {
-        "title": "주간점검",
-        "date": "2026-06-01T12:00:00.000+09:00",
+        "title": "P1~P3/목실감",
+        "date": "2026-06-02T08:30:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "일정예약 테스트",
-        "date": "2026-06-01T13:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-06-01T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "앞으로 계획점검",
-        "date": "2026-06-01T15:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-06-02",
-        "overdue": false
       },
       {
         "title": "코칭3,30,90,180일 기획 및 제작",
         "date": "2026-06-02T09:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "강의 기획",
         "date": "2026-06-02T13:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
-        "date": "2026-06-02T15:30:00.000+09:00",
-        "overdue": false
+        "title": "원씽복기",
+        "date": "2026-06-02T14:00:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "자료수집&도입부",
-        "date": "2026-06-03",
-        "overdue": false
+        "title": "앞으로 계획점검",
+        "date": "2026-06-02T15:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "상담준비",
-        "date": "2026-06-03T08:45:00.000+09:00",
+        "date": "2026-06-03T09:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -169,22 +149,22 @@
       },
       {
         "title": "원소스 멀티유즈 준비",
-        "date": "2026-06-03T12:30:00.000+09:00",
+        "date": "2026-06-03T13:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "쓰레드 매일 알람+월말점검",
-        "date": "2026-06-03T14:00:00.000+09:00",
+        "date": "2026-06-03T15:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "투두리스트 밀린것",
+        "title": "주제선정&썸네일&제목",
         "date": "2026-06-03T16:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "원고완성",
-        "date": "2026-06-04",
+        "title": "자료수집&도입부",
+        "date": "2026-06-03T17:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -193,13 +173,28 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-06-04T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "date": "2026-06-04T15:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "PPT완료",
-        "date": "2026-06-05",
+        "date": "2026-06-05T09:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-06-06",
+        "overdue": false
+      },
+      {
+        "title": "상담준비",
+        "date": "2026-06-07T09:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -216,30 +211,47 @@
         "title": "현금영수증&세금계산서 발행",
         "date": "2026-06-08T10:00:00.000+09:00",
         "overdue": false
+      },
+      {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-06-09",
+        "overdue": false
       }
     ],
     "schedule": [
       {
-        "title": "주제선정&썸네일&제목",
-        "time": "",
-        "allDay": true,
-        "done": false
-      },
-      {
-        "title": "코칭3,30,90,180일 기획 및 제작",
-        "time": "09:30",
+        "title": "상담준비",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의 기획",
-        "time": "13:00",
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "내집마련 가이드북 및 체크리스트수정(계약서 등)",
+        "title": "원소스 멀티유즈 준비",
+        "time": "13:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "쓰레드 매일 알람+월말점검",
         "time": "15:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "주제선정&썸네일&제목",
+        "time": "16:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "time": "17:30",
         "allDay": false,
         "done": false
       }
@@ -270,14 +282,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-05-27",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-05-28",
           "done": 2,
@@ -300,11 +307,16 @@
         },
         {
           "date": "2026-06-01",
-          "done": 3,
+          "done": 4,
           "total": 4
         },
         {
           "date": "2026-06-02",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-06-03",
           "done": 0,
           "total": 4
         }
@@ -314,8 +326,14 @@
   "sales": {
     "month": "2026-06",
     "month_label": "6월",
-    "total_amount": 0,
-    "total_count": 0,
-    "weekly": []
+    "total_amount": 40,
+    "total_count": 1,
+    "weekly": [
+      {
+        "week": "1주차",
+        "count": 1,
+        "amount": 40
+      }
+    ]
   }
 }
