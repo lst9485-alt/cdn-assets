@@ -1,9 +1,9 @@
 {
-  "updated": "2026-06-04T06:00:42.118770+09:00",
+  "updated": "2026-06-05T06:00:42.033221+09:00",
   "summary": {
-    "정상": 9,
+    "정상": 8,
     "정리 필요": 1,
-    "꺼짐": 5
+    "꺼짐": 6
   },
   "important": [
     {
@@ -212,11 +212,11 @@
       "cron": "30 7 * * 2-6",
       "day": "화~토",
       "time": "07:30",
-      "status": "정상",
+      "status": "꺼짐",
       "script": "mumae-fill-log.sh",
-      "registered": true,
+      "registered": false,
       "scriptExists": true,
-      "enabled": true
+      "enabled": false
     },
     {
       "name": "tailscale-funnel-watch",
