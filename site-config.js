@@ -436,7 +436,7 @@
         nav: {
           type: 'single',
           label: '상담',
-          href: 'consult/',
+          href: 'https://ourdongne.github.io/',
           activeMatch: ['/consult']
         },
         sidebar: {
@@ -447,7 +447,7 @@
             id: 'consult-root',
             title: '회원 맞춤 페이지',
             description: 'URL 파라미터로 회원별 자료',
-            href: 'consult/',
+            href: 'https://ourdongne.github.io/',
             badgeText: 'LIVE',
             badgeTone: 'live',
             iconKey: 'doc',
@@ -459,7 +459,7 @@
             id: 'consult-prep',
             title: '재무 계산기',
             description: '매수가·월상환·갈아타기 시뮬레이션',
-            href: 'consult/prep.html',
+            href: 'https://ourdongne.github.io/prep.html',
             badgeText: 'LIVE',
             badgeTone: 'live',
             iconKey: 'doc',
@@ -781,7 +781,7 @@
             modifiedDate: '2026-04-30',
             title: '상담 리포트 테스트',
             description: '색감을 정리한 상담 자료 페이지',
-            href: 'consult/index-trust.html',
+            href: 'https://ourdongne.github.io/index-trust.html',
             badgeText: '상담',
             badgeTone: 'soon',
             iconKey: 'doc',
