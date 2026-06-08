@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-08T06:00:03.373512+09:00",
+  "updated": "2026-06-09T06:00:03.665234+09:00",
   "sections": [
     {
       "name": "1. 프로젝트",
@@ -27,6 +27,14 @@
             },
             {
               "text": "1-8. 짧은 소개영상 혹은 자료제작",
+              "done": false
+            },
+            {
+              "text": "1-9. 회원 자료 페이지(ourdongne.github.io) 후속 — 디자인 개편 배포 완료(6/8, 브랜드 주황+GmarketSans, 날짜 자동계산). 남은 것: (a) `prep.html`(재무 계산기)도 같은 브랜드 톤으로 디자인 통일. (b) rv 지적 JS 보강(우선순위 낮음 — 정적페이지라 영향 작음): ppt/doc href에 http(s) 검증, date 형식 검증, 빈 ppt/doc 카드 숨김. 브라우저로 동작 확인하며 적용. 파일: `workspace/apps/dashboard/ourdongne-site/index.html`",
+              "done": false
+            },
+            {
+              "text": "1-10. \"배포 완료 자동 알림\" 방식 결정 — push 후 라이브 반영을 매번 자동으로 ✅ 보고하게 할지. **권장: 훅보다 규칙(CLAUDE.md)**. 이유: GitHub Pages 반영이 1~2분 비동기라 훅(도구 이벤트 동기 실행)으로는 \"푸시함\"까지만 즉시 알 수 있고 \"라이브 떴음\"은 못 기다림. → `apps/dashboard/CLAUDE.md`에 \"ourdongne/cdn-assets push 후 라이브 반영 폴링 → ✅ 보고\" 한 줄 추가가 가장 단순·확실. 훅으로 하려면 push 감지 후 백그라운드 폴링 스크립트를 띄우는 형태라 복잡. 둘 중 택1만 정하면 바로 반영 가능.",
               "done": false
             },
             {
@@ -225,7 +233,7 @@
       "categories": [
         {
           "id": 1,
-          "title": "proof-issue 이름 매칭 강화 검토 (5/6~)",
+          "title": "hometax-issue 이름 매칭 강화 검토 (5/6~)",
           "ref": null,
           "items": [
             {
