@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-10T06:00:18.600412+09:00",
+  "updated": "2026-06-11T06:00:17.067934+09:00",
   "okr": [
     {
       "title": "6월 : 쓰레드 500명(현재 173명)",
@@ -33,9 +33,9 @@
     }
   ],
   "tasks": {
-    "total": 541,
-    "done": 510,
-    "overdue": 13,
+    "total": 546,
+    "done": 519,
+    "overdue": 8,
     "pending": [
       {
         "title": "전자책 작성",
@@ -73,64 +73,9 @@
         "overdue": true
       },
       {
-        "title": "메모정리",
-        "date": "2026-06-01",
-        "overdue": true
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-06-01T10:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "코칭30,90,180일 기획 및 제작",
-        "date": "2026-06-09T10:30:00.000+09:00",
+        "date": "2026-06-10T11:30:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-06-09T13:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-06-09T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "강의기획",
-        "date": "2026-06-09T15:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "급여&자산체크",
-        "date": "2026-06-10",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-06-10T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-06-10T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-06-10T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원소스 멀티유즈 준비",
-        "date": "2026-06-10T14:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "쓰레드 매일 알람+월말점검",
-        "date": "2026-06-10T16:00:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "주간계획 수정",
@@ -138,23 +83,38 @@
         "overdue": false
       },
       {
-        "title": "원고",
+        "title": "주제선정&썸네일&제목",
         "date": "2026-06-11T09:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "원고완성",
-        "date": "2026-06-11T13:00:00.000+09:00",
+        "title": "원소스 멀티유즈 준비",
+        "date": "2026-06-11T11:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "앞으로 계획점검",
-        "date": "2026-06-11T16:00:00.000+09:00",
+        "title": "자료수집&도입부",
+        "date": "2026-06-11T12:45:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고",
+        "date": "2026-06-11T14:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "쓰레드 매일 알람+월말점검",
+        "date": "2026-06-11T18:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고완성",
+        "date": "2026-06-12T09:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "PPT완료",
-        "date": "2026-06-12T09:30:00.000+09:00",
+        "date": "2026-06-12T12:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -170,6 +130,16 @@
       {
         "title": "강의",
         "date": "2026-06-13T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "앞으로 계획점검",
+        "date": "2026-06-13T18:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의기획",
+        "date": "2026-06-14T10:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -191,42 +161,52 @@
         "title": "주제선정&썸네일&제목",
         "date": "2026-06-16",
         "overdue": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "date": "2026-06-17",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-06-17T12:00:00.000+09:00",
+        "overdue": false
       }
     ],
     "schedule": [
       {
-        "title": "급여&자산체크",
-        "time": "",
-        "allDay": true,
+        "title": "주간계획 수정",
+        "time": "08:30",
+        "allDay": false,
         "done": false
       },
       {
         "title": "주제선정&썸네일&제목",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "time": "13:00",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "원소스 멀티유즈 준비",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "time": "12:45",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원고",
         "time": "14:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "쓰레드 매일 알람+월말점검",
-        "time": "16:00",
+        "time": "18:00",
         "allDay": false,
         "done": false
       }
@@ -257,14 +237,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 11,
-      "rate": "39%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-06-04",
-          "done": 1,
-          "total": 4
-        },
         {
           "date": "2026-06-05",
           "done": 2,
@@ -287,11 +262,16 @@
         },
         {
           "date": "2026-06-09",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-06-10",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-06-11",
           "done": 0,
           "total": 4
         }
