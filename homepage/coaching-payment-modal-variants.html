@@ -23,12 +23,11 @@
   .receipt { width: 100%; background: #fff; box-sizing: border-box; position: relative; padding: 32px 48px 24px; border-radius: 18px; overflow: hidden; }
   .receipt-top { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start; }
   .receipt-top-left { min-width: 0; }
-  .receipt-top-right { text-align: right; min-width: 0; }
+  .receipt-top-right { text-align: right; min-width: 0; word-break: keep-all; }
   .stamp { display:inline-block; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:13px; letter-spacing:0.32em; color:#0055FF; padding:4px 10px; border:2px solid #0055FF; border-radius:4px; }
   .r-title { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:40px; color:#111; line-height:1; margin:22px 0 0; }
-  /* 안내문 두 줄 — 각 문장이 한 줄(중간에 안 깨짐) */
-  .r-sub { margin-top:14px; font-size:14px; color:#6b7280; font-weight:500; line-height:1.6; }
-  .r-sub span { display:block; white-space:nowrap; }
+  /* 안내문 — 좁으면 띄어쓰기 단위로 줄바꿈(단어 중간 안 깨짐) */
+  .r-sub { margin-top:14px; font-size:14px; color:#6b7280; font-weight:500; line-height:1.6; word-break:keep-all; overflow-wrap:break-word; }
   .brand { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:14px; color:#6b7280; }
   .applicant-plain { margin-top:10px; text-align:right; line-height:1.55; }
   .applicant-plain p { margin:0; font-size:12.5px; font-weight:700; color:#475569; }
