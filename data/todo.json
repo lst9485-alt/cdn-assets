@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15T06:00:04.071714+09:00",
+  "updated": "2026-06-16T06:00:03.893064+09:00",
   "sections": [
     {
       "name": "1. 프로젝트",
@@ -330,6 +330,25 @@
           "title": "유튜브 애드센스 확인",
           "ref": null,
           "items": []
+        },
+        {
+          "id": 4,
+          "title": "consult 스킬 점검 결과 반영 (6/15~ 플랜 있음)",
+          "ref": null,
+          "items": [
+            {
+              "text": "4-1. SKILL.md 4-1단계를 단축주소 기준으로 재작성 (Short.io 목적지 갱신 → 재무 숫자 보존)",
+              "done": false
+            },
+            {
+              "text": "4-2. allowed-tools에 Edit, Write 추가",
+              "done": false
+            },
+            {
+              "text": "4-3. C-3 \"+50분\" → \"원본 일정의 길이 유지\"",
+              "done": false
+            }
+          ]
         },
         {
           "id": 5,
