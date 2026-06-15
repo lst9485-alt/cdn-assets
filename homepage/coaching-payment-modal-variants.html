@@ -74,9 +74,14 @@
 
   @media (max-width: 720px) {
     .receipt { padding: 24px 18px 20px; }
-    .receipt-top { grid-template-columns: 1fr; gap: 14px; }   /* 폰에선 세로로 쌓기 → 안내문이 넓은 폭 다 씀(2줄) */
+    /* 폰: 세로로 쌓되 신청자 정보는 왼쪽 정렬 + 얇은 구분선으로 깔끔하게 */
+    .receipt-top { grid-template-columns: 1fr; gap: 0; }
     .r-title { font-size: 26px; }
-    .r-sub { font-size: 12px; }   /* 각 문장 한 줄 유지(nowrap) */
+    .r-sub { font-size: 12px; }   /* 각 문장 한 줄 유지(nowrap), 풀폭이라 2줄 */
+    .receipt-top-right { text-align: left; margin-top: 16px; padding-top: 13px; border-top: 1px solid #eef2f7; }
+    .applicant-plain { text-align: left; margin-top: 6px; }
+    .applicant-plain .ap-label { display:inline-block; min-width: 44px; }
+    .kakao-mini { margin-top: 11px; }
     .bank-info .b2 { font-size: 15px; }   /* 계좌번호 한 줄로 */
     .copy-btn { padding: 5px 9px; font-size: 11px; }
     .row .amt { font-size: 24px; }
