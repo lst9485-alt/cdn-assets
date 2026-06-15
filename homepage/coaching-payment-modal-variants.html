@@ -56,10 +56,10 @@
   .promo-box iconify-icon { font-size:17px; flex-shrink:0; }
 
   .pay-bank-full { margin-top:16px; border:1px solid #dbe4ff; background:#f6f9ff; border-radius:16px; padding:18px 20px; }
-  .pay-bank-full h4 { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:17px; color:#0a1638; margin:0 0 12px; }
+  .pay-bank-full h4 { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:17px; color:#0a1638; margin:0 0 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
   .bank-info { background:#fff; border-radius:12px; padding:12px 14px; }
   .bank-info .b1 { font-size:12px; color:#9ca3af; font-weight:700; margin:0; }
-  .bank-info .b1 .rc { display:inline-block; margin-left:6px; padding:3px 8px; border-radius:5px; background:#dbeafe; color:#1d4ed8; font-size:11px; font-weight:800; }
+  .rc { display:inline-block; padding:3px 8px; border-radius:5px; background:#dbeafe; color:#1d4ed8; font-size:11px; font-weight:800; }
   .bank-info .b2 { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:20px; color:#0a1638; margin:4px 0 0; display:flex; align-items:center; justify-content:space-between; gap:8px; }
   .bank-info .b3 { font-size:14px; color:#111; font-weight:800; margin:4px 0 0; }
   .copy-btn { display:inline-flex; align-items:center; gap:4px; padding:5px 10px; background:#0a1638; color:#fff; border:0; border-radius:8px; font-size:12px; font-weight:800; cursor:pointer; flex-shrink:0; }
@@ -74,7 +74,8 @@
   @media (max-width: 720px) {
     .receipt { padding: 24px 18px 20px; }
     .r-title { font-size: 26px; }
-    .r-sub { font-size: 12px; }   /* 폰에서 두 줄, 각 줄은 안 깨지게 */
+    .r-sub { font-size: 12px; }
+    .r-sub span { white-space: normal; }   /* 폰 좁은 칸 넘침 방지 */
     .row .amt { font-size: 24px; }
   }
 </style>
@@ -92,6 +93,7 @@
       <div class="receipt-top-left">
         <span class="stamp">주문결제</span>
         <h1 class="r-title word-keep">신청 완료</h1>
+        <p class="r-sub"><span>아래 안내대로 결제를 진행해주세요.</span><span>결제 완료 시 일정예약 카톡이 발송됩니다.</span></p>
       </div>
       <div class="receipt-top-right">
         <p class="brand">우리동네재테크</p>
@@ -102,8 +104,6 @@
         <a href="https://pf.kakao.com/_mcxnjX/friend" target="_blank" rel="noopener" class="kakao-mini" aria-label="카카오톡 채널로 문의"><iconify-icon icon="ri:kakao-talk-fill"></iconify-icon> 1:1 문의</a>
       </div>
     </div>
-    <p class="r-sub"><span>아래 안내대로 결제를 진행해주세요.</span><span>결제 완료 시 일정예약 카톡이 발송됩니다.</span></p>
-
     <dl class="dl">
       <div class="row"><dt>상품</dt><dd class="prod">코칭 A</dd></div>
       <div class="row"><dt>결제 금액</dt><dd class="amt">400,000원</dd></div>
@@ -115,10 +115,10 @@
     </div>
 
     <div class="pay-bank-full">
-      <h4>무통장 입금</h4>
+      <h4>무통장 입금 <span class="rc">현금영수증 발행</span></h4>
       <div class="bank-info">
-        <p class="b1">입금 계좌 <span class="rc">현금영수증 발행</span></p>
-        <p class="b2"><span>하나은행 125-910032-26304</span><button type="button" class="copy-btn" data-copy="125-910032-26304"><iconify-icon icon="solar:copy-linear"></iconify-icon> 복사</button></p>
+        <p class="b1">하나은행</p>
+        <p class="b2"><span>125-910032-26304</span><button type="button" class="copy-btn" data-copy="125-910032-26304"><iconify-icon icon="solar:copy-linear"></iconify-icon> 복사</button></p>
         <p class="b3">주식회사 우리동네사람들</p>
       </div>
     </div>
