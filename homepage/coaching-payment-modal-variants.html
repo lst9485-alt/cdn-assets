@@ -61,6 +61,7 @@
   .bank-info .b1 { font-size:12px; color:#9ca3af; font-weight:700; margin:0; }
   .rc { display:inline-block; padding:3px 8px; border-radius:5px; background:#dbeafe; color:#1d4ed8; font-size:11px; font-weight:800; }
   .bank-info .b2 { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:20px; color:#0a1638; margin:4px 0 0; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .bank-info .b2 span { white-space:nowrap; }
   .bank-info .b3 { font-size:14px; color:#111; font-weight:800; margin:4px 0 0; }
   .copy-btn { display:inline-flex; align-items:center; gap:4px; padding:5px 10px; background:#0a1638; color:#fff; border:0; border-radius:8px; font-size:12px; font-weight:800; cursor:pointer; flex-shrink:0; }
   .copy-btn iconify-icon { font-size:13px; }
@@ -73,9 +74,11 @@
 
   @media (max-width: 720px) {
     .receipt { padding: 24px 18px 20px; }
+    .receipt-top { grid-template-columns: 1fr; gap: 14px; }   /* 폰에선 세로로 쌓기 → 안내문이 넓은 폭 다 씀(2줄) */
     .r-title { font-size: 26px; }
-    .r-sub { font-size: 12px; }
-    .r-sub span { white-space: normal; }   /* 폰 좁은 칸 넘침 방지 */
+    .r-sub { font-size: 12px; }   /* 각 문장 한 줄 유지(nowrap) */
+    .bank-info .b2 { font-size: 15px; }   /* 계좌번호 한 줄로 */
+    .copy-btn { padding: 5px 9px; font-size: 11px; }
     .row .amt { font-size: 24px; }
   }
 </style>
