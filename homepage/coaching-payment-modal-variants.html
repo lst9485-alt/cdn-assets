@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<!-- 시안 비교용 페이지: "2주 이내 상담 가능" 박스 위치 3안 + 카톡 문의 버튼. 정본 아님(미리보기). 고른 안을 coaching-all-v3.html 모달에 반영 -->
+<title>결제 모달 시안 — 2주 가능 박스 3안 + 카톡 버튼</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: Pretendard, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; background: #eef2f8; }
+  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+
+  .page { max-width: 860px; margin: 0 auto; padding: 48px 18px 90px; }
+  .page-title { font-family: 'GmarketSans', Pretendard, sans-serif; font-weight: 900; font-size: 24px; color: #0a1638; margin: 0 0 6px; }
+  .page-note { font-size: 14px; color: #64748b; font-weight: 600; line-height: 1.6; margin: 0 0 36px; }
+  .page-note b { color: #0055FF; }
+
+  .variant-card { margin-bottom: 44px; }
+  .variant-label { font-family: 'GmarketSans', Pretendard, sans-serif; font-weight: 900; font-size: 15px; color: #0a1638; margin-bottom: 4px; }
+  .variant-label .tag { display:inline-block; margin-left:8px; padding:3px 9px; border-radius:999px; background:#0055FF; color:#fff; font-size:11px; letter-spacing:0.04em; vertical-align:middle; }
+  .variant-desc { font-size: 12.5px; color: #64748b; font-weight: 600; margin-bottom: 14px; }
+
+  /* ===== 영수증(모달 본체) — 라이브 모달과 동일 스타일 ===== */
+  .receipt-wrap { width: 100%; filter: drop-shadow(0 18px 44px rgba(0, 85, 255, .16)); }
+  .receipt { width: 100%; background: #fff; box-sizing: border-box; position: relative; padding: 32px 48px 24px; border-radius: 18px; }
+  .receipt-top { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start; }
+  .receipt-top-left { min-width: 0; }
+  .receipt-top-right { text-align: right; min-width: 0; }
+  .stamp { display:inline-block; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:13px; letter-spacing:0.32em; color:#0055FF; padding:4px 10px; border:2px solid #0055FF; border-radius:4px; }
+  .r-title { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:40px; color:#111; line-height:1; margin:22px 0 0; }
+  .r-sub { margin-top:12px; font-size:14px; color:#6b7280; font-weight:500; line-height:1.55; }
+  .brand { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:14px; color:#6b7280; }
+  .applicant-plain { margin-top:10px; text-align:right; line-height:1.55; }
+  .applicant-plain p { margin:0; font-size:12.5px; font-weight:700; color:#475569; }
+  .applicant-plain .ap-label { color:#94a3b8; font-size:11px; font-weight:800; letter-spacing:0.04em; margin-right:6px; }
+  .applicant-plain .ap-value { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; color:#0a1638; font-size:13px; }
+
+  /* 카톡 문의 미니 버튼 (연락처 밑) */
+  .kakao-mini { margin-top:12px; display:inline-flex; align-items:center; gap:5px; padding:6px 12px; background:#FEE500; color:#3A1D1D; border-radius:999px; font-size:12px; font-weight:800; text-decoration:none; box-shadow:0 2px 7px rgba(0,0,0,.10); transition:background .15s ease, transform .1s ease; }
+  .kakao-mini iconify-icon { font-size:16px; }
+  .kakao-mini:hover { background:#f5d800; }
+  .kakao-mini:active { transform:scale(.96); }
+
+  .dl { border-top:1.5px dashed #d1d5db; border-bottom:1.5px dashed #d1d5db; margin-top:20px; padding:12px 0; }
+  .row { display:flex; align-items:baseline; justify-content:space-between; gap:24px; margin:6px 0; }
+  .row dt { color:#4b5563; font-size:14px; margin:0; }
+  .row dd { margin:0; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; }
+  .row .prod { font-size:17px; color:#111; }
+  .row .amt { font-size:28px; color:#0055FF; }
+
+  .pay-bank-full { margin-top:16px; border:1px solid #dbe4ff; background:#f6f9ff; border-radius:16px; padding:18px 20px; }
+  .pay-bank-full h4 { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:17px; color:#0a1638; margin:0 0 12px; }
+  .bank-info { background:#fff; border-radius:12px; padding:12px 14px; }
+  .bank-info .b1 { font-size:12px; color:#9ca3af; font-weight:700; margin:0; }
+  .bank-info .b1 .rc { display:inline-block; margin-left:6px; padding:3px 8px; border-radius:5px; background:#dbeafe; color:#1d4ed8; font-size:11px; font-weight:800; }
+  .bank-info .b2 { font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; font-size:20px; color:#0a1638; margin:4px 0 0; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .bank-info .b3 { font-size:14px; color:#111; font-weight:800; margin:4px 0 0; }
+  .copy-btn { display:inline-flex; align-items:center; gap:4px; padding:5px 10px; background:#0a1638; color:#fff; border:0; border-radius:8px; font-size:12px; font-weight:800; cursor:pointer; flex-shrink:0; }
+  .copy-btn iconify-icon { font-size:13px; }
+
+  .card-link { margin-top:14px; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 16px; border:1.5px dashed #cbd5e1; border-radius:10px; color:#475569; font-size:13.5px; font-weight:700; background:#fff; text-decoration:none; }
+  .card-link .sub { font-size:11.5px; color:#94a3b8; font-weight:600; }
+  .card-link .right { display:inline-flex; align-items:center; gap:4px; color:#1747d4; font-weight:900; }
+  .footer-info { margin-top:16px; padding-top:10px; border-top:1px solid #f3f4f6; }
+  .footer-info p { margin:0; font-size:11px; color:#9ca3af; line-height:1.5; }
+
+  /* ===== 시안별 "2주 가능" 박스 ===== */
+  /* A: 제목 밑 작은 배지 */
+  .avail-pill { display:inline-flex; align-items:center; gap:6px; margin-top:14px; padding:7px 13px; background:#ecfdf5; color:#047857; border:1.5px solid #a7f3d0; border-radius:999px; font-size:12.5px; font-weight:800; }
+  .avail-pill iconify-icon { font-size:15px; }
+
+  /* 공통: 1시간 취소 경고줄 (계좌 위) */
+  .deadline-line { display:flex; align-items:center; gap:8px; margin-top:14px; padding:11px 15px; background:#fff7ed; border:1.5px solid #fed7aa; border-radius:12px; color:#c2410c; font-size:13px; font-weight:800; line-height:1.4; }
+  .deadline-line iconify-icon { font-size:17px; flex-shrink:0; }
+
+  /* B: 계좌 위 강조 박스 (당근+채찍 결합) */
+  .promo-box { margin-top:16px; border-radius:14px; overflow:hidden; border:1.5px solid #bfdbfe; }
+  .promo-box .pb-good { display:flex; align-items:center; gap:8px; padding:12px 16px; background:#eff6ff; color:#1d4ed8; font-size:13.5px; font-weight:800; }
+  .promo-box .pb-warn { display:flex; align-items:center; gap:8px; padding:12px 16px; background:#fff7ed; color:#c2410c; font-size:13px; font-weight:800; border-top:1px dashed #fed7aa; line-height:1.4; }
+  .promo-box iconify-icon { font-size:17px; flex-shrink:0; }
+
+  /* C: 최상단 띠 배너 */
+  .top-banner { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:22px; padding:12px 16px; background:linear-gradient(90deg,#0055FF,#3b82f6); color:#fff; border-radius:12px; font-size:13.5px; font-weight:800; letter-spacing:0.01em; }
+  .top-banner iconify-icon { font-size:17px; }
+
+  @media (max-width: 720px) {
+    .receipt { padding: 24px 18px 20px; }
+    .r-title { font-size: 28px; }
+    .row .amt { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 class="page-title">결제 모달 시안 — "2주 가능" 박스 위치 3안</h1>
+  <p class="page-note">
+    "현재 2주 이내 상담 가능"을 어디에 둘지 3가지로 만들었어요. 세 안 모두 <b>1시간 미입금 취소 문구</b>와
+    <b>우측 상단 카톡 문의 버튼</b>(누르면 채널 친구추가로 이동)이 들어가 있어요.
+    제목 "신청 접수 완료"는 일단 그대로 뒀어요 — 박스 고른 뒤 제목은 따로 입히면 됩니다.
+  </p>
+
+  <!-- ============ A안 ============ -->
+  <div class="variant-card">
+    <div class="variant-label">A안 · 제목 밑 작은 배지<span class="tag">차분</span></div>
+    <div class="variant-desc">제목 바로 밑에 초록 배지로 슬쩍. 안 튀고 깔끔. 1시간 취소는 계좌 위에 따로.</div>
+    <div class="receipt-wrap"><div class="receipt">
+      <div class="receipt-top">
+        <div class="receipt-top-left">
+          <span class="stamp">주문결제</span>
+          <h1 class="r-title word-keep">신청 접수 완료</h1>
+          <p class="r-sub word-keep">아래 안내대로 결제를 진행해주세요.<br/>결제 완료 시 일정예약 카톡이 발송됩니다.</p>
+          <div><span class="avail-pill"><iconify-icon icon="solar:calendar-bold"></iconify-icon> 지금은 2주 이내 상담 가능</span></div>
+        </div>
+        <div class="receipt-top-right">
+          <p class="brand">우리동네재테크</p>
+          <div class="applicant-plain">
+            <p><span class="ap-label">신청자</span><span class="ap-value">홍길동</span></p>
+            <p><span class="ap-label">연락처</span><span class="ap-value">010-1234-5678</span></p>
+          </div>
+          <a href="https://pf.kakao.com/_mcxnjX/friend" target="_blank" rel="noopener" class="kakao-mini" aria-label="카카오톡 채널로 문의"><iconify-icon icon="ri:kakao-talk-fill"></iconify-icon> 1:1 문의</a>
+        </div>
+      </div>
+      <dl class="dl">
+        <div class="row"><dt>상품</dt><dd class="prod">코칭 A</dd></div>
+        <div class="row"><dt>결제 금액</dt><dd class="amt">400,000원</dd></div>
+      </dl>
+      <div class="deadline-line"><iconify-icon icon="solar:clock-circle-bold"></iconify-icon> 신청 후 1시간 내 미입금 시 예약이 자동 취소됩니다</div>
+      <div class="pay-bank-full">
+        <h4>무통장 입금</h4>
+        <div class="bank-info">
+          <p class="b1">입금 계좌 <span class="rc">현금영수증 발행</span></p>
+          <p class="b2"><span>하나은행 125-910032-26304</span><button type="button" class="copy-btn" data-copy="125-910032-26304"><iconify-icon icon="solar:copy-linear"></iconify-icon> 복사</button></p>
+          <p class="b3">주식회사 우리동네사람들</p>
+        </div>
+      </div>
+      <a href="https://ourdongne.com/coaching-pay" target="_blank" rel="noopener" class="card-link"><span class="sub">BC · 삼성 · 현대카드 제외</span><span class="right">카드결제 하러가기 <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span></a>
+      <div class="footer-info"><p>(주)우리동네사람들 · 사업자등록번호 386-86-03832</p><p>통신판매신고번호 제 2026-서울영등포-0991 호</p></div>
+    </div></div>
+  </div>
+
+  <!-- ============ B안 ============ -->
+  <div class="variant-card">
+    <div class="variant-label">B안 · 계좌 위 강조 박스<span class="tag">추천</span></div>
+    <div class="variant-desc">입금 직전에 "2주 가능(당근)+1시간 취소(채찍)"를 한 박스로. 결제 압박이 제일 셈.</div>
+    <div class="receipt-wrap"><div class="receipt">
+      <div class="receipt-top">
+        <div class="receipt-top-left">
+          <span class="stamp">주문결제</span>
+          <h1 class="r-title word-keep">신청 접수 완료</h1>
+          <p class="r-sub word-keep">아래 안내대로 결제를 진행해주세요.<br/>결제 완료 시 일정예약 카톡이 발송됩니다.</p>
+        </div>
+        <div class="receipt-top-right">
+          <p class="brand">우리동네재테크</p>
+          <div class="applicant-plain">
+            <p><span class="ap-label">신청자</span><span class="ap-value">홍길동</span></p>
+            <p><span class="ap-label">연락처</span><span class="ap-value">010-1234-5678</span></p>
+          </div>
+          <a href="https://pf.kakao.com/_mcxnjX/friend" target="_blank" rel="noopener" class="kakao-mini" aria-label="카카오톡 채널로 문의"><iconify-icon icon="ri:kakao-talk-fill"></iconify-icon> 1:1 문의</a>
+        </div>
+      </div>
+      <dl class="dl">
+        <div class="row"><dt>상품</dt><dd class="prod">코칭 A</dd></div>
+        <div class="row"><dt>결제 금액</dt><dd class="amt">400,000원</dd></div>
+      </dl>
+      <div class="promo-box">
+        <div class="pb-good"><iconify-icon icon="solar:calendar-bold"></iconify-icon> 현재 2주 이내 상담 가능 · 자리 빠르게 마감</div>
+        <div class="pb-warn"><iconify-icon icon="solar:clock-circle-bold"></iconify-icon> 신청 후 1시간 내 미입금 시 예약이 자동 취소됩니다</div>
+      </div>
+      <div class="pay-bank-full">
+        <h4>무통장 입금</h4>
+        <div class="bank-info">
+          <p class="b1">입금 계좌 <span class="rc">현금영수증 발행</span></p>
+          <p class="b2"><span>하나은행 125-910032-26304</span><button type="button" class="copy-btn" data-copy="125-910032-26304"><iconify-icon icon="solar:copy-linear"></iconify-icon> 복사</button></p>
+          <p class="b3">주식회사 우리동네사람들</p>
+        </div>
+      </div>
+      <a href="https://ourdongne.com/coaching-pay" target="_blank" rel="noopener" class="card-link"><span class="sub">BC · 삼성 · 현대카드 제외</span><span class="right">카드결제 하러가기 <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span></a>
+      <div class="footer-info"><p>(주)우리동네사람들 · 사업자등록번호 386-86-03832</p><p>통신판매신고번호 제 2026-서울영등포-0991 호</p></div>
+    </div></div>
+  </div>
+
+  <!-- ============ C안 ============ -->
+  <div class="variant-card">
+    <div class="variant-label">C안 · 최상단 띠 배너<span class="tag">강조</span></div>
+    <div class="variant-desc">모달 맨 위 파란 띠로 제일 먼저 눈에 박힘. "지금 가능"을 강하게. 1시간 취소는 계좌 위에 따로.</div>
+    <div class="receipt-wrap"><div class="receipt">
+      <div class="top-banner"><iconify-icon icon="solar:calendar-bold"></iconify-icon> 지금 신청하면 2주 이내 상담 가능 · 선착순 마감</div>
+      <div class="receipt-top">
+        <div class="receipt-top-left">
+          <span class="stamp">주문결제</span>
+          <h1 class="r-title word-keep">신청 접수 완료</h1>
+          <p class="r-sub word-keep">아래 안내대로 결제를 진행해주세요.<br/>결제 완료 시 일정예약 카톡이 발송됩니다.</p>
+        </div>
+        <div class="receipt-top-right">
+          <p class="brand">우리동네재테크</p>
+          <div class="applicant-plain">
+            <p><span class="ap-label">신청자</span><span class="ap-value">홍길동</span></p>
+            <p><span class="ap-label">연락처</span><span class="ap-value">010-1234-5678</span></p>
+          </div>
+          <a href="https://pf.kakao.com/_mcxnjX/friend" target="_blank" rel="noopener" class="kakao-mini" aria-label="카카오톡 채널로 문의"><iconify-icon icon="ri:kakao-talk-fill"></iconify-icon> 1:1 문의</a>
+        </div>
+      </div>
+      <dl class="dl">
+        <div class="row"><dt>상품</dt><dd class="prod">코칭 A</dd></div>
+        <div class="row"><dt>결제 금액</dt><dd class="amt">400,000원</dd></div>
+      </dl>
+      <div class="deadline-line"><iconify-icon icon="solar:clock-circle-bold"></iconify-icon> 신청 후 1시간 내 미입금 시 예약이 자동 취소됩니다</div>
+      <div class="pay-bank-full">
+        <h4>무통장 입금</h4>
+        <div class="bank-info">
+          <p class="b1">입금 계좌 <span class="rc">현금영수증 발행</span></p>
+          <p class="b2"><span>하나은행 125-910032-26304</span><button type="button" class="copy-btn" data-copy="125-910032-26304"><iconify-icon icon="solar:copy-linear"></iconify-icon> 복사</button></p>
+          <p class="b3">주식회사 우리동네사람들</p>
+        </div>
+      </div>
+      <a href="https://ourdongne.com/coaching-pay" target="_blank" rel="noopener" class="card-link"><span class="sub">BC · 삼성 · 현대카드 제외</span><span class="right">카드결제 하러가기 <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span></a>
+      <div class="footer-info"><p>(주)우리동네사람들 · 사업자등록번호 386-86-03832</p><p>통신판매신고번호 제 2026-서울영등포-0991 호</p></div>
+    </div></div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+    var text = btn.getAttribute('data-copy') || '';
+    var orig = btn.innerHTML;
+    var done = function () { btn.innerHTML = '<iconify-icon icon="solar:check-circle-bold"></iconify-icon> 복사됨'; setTimeout(function(){ btn.innerHTML = orig; }, 1500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done).catch(done); }
+    else { done(); }
+  });
+</script>
+</body>
+</html>
