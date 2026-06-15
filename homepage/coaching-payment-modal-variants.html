@@ -73,18 +73,21 @@
   .footer-info p { margin:0; font-size:11px; color:#9ca3af; line-height:1.5; }
 
   @media (max-width: 720px) {
-    .receipt { padding: 24px 18px 20px; }
-    /* 폰: 세로로 쌓되 신청자 정보는 왼쪽 정렬 + 얇은 구분선으로 깔끔하게 */
-    .receipt-top { grid-template-columns: 1fr; gap: 0; }
-    .r-title { font-size: 26px; }
-    .r-sub { font-size: 12px; }   /* 각 문장 한 줄 유지(nowrap), 풀폭이라 2줄 */
-    .receipt-top-right { text-align: left; margin-top: 16px; padding-top: 13px; border-top: 1px solid #eef2f7; }
-    .applicant-plain { text-align: left; margin-top: 6px; }
-    .applicant-plain .ap-label { display:inline-block; min-width: 44px; }
-    .kakao-mini { margin-top: 11px; }
+    .receipt { padding: 22px 15px 18px; }
+    /* 데스크탑처럼 좌(제목+안내문) / 우(신청자정보) 2단 유지. 오른쪽을 작게 해 왼쪽 안내문 자리 확보 */
+    .receipt-top { grid-template-columns: 1fr auto; gap: 10px; }
+    .r-title { font-size: 23px; }
+    .r-sub { font-size: 10.5px; line-height: 1.5; }
+    .r-sub span { white-space: normal; }   /* 좁은 칸 넘침 방지(글자 안 잘림) */
+    .brand { font-size: 11px; }
+    .applicant-plain p { font-size: 10px; }
+    .applicant-plain .ap-label { font-size: 9.5px; margin-right: 3px; }
+    .applicant-plain .ap-value { font-size: 10.5px; }
+    .kakao-mini { font-size: 10.5px; padding: 4px 9px; margin-top: 8px; }
+    .kakao-mini iconify-icon { font-size: 14px; }
     .bank-info .b2 { font-size: 15px; }   /* 계좌번호 한 줄로 */
     .copy-btn { padding: 5px 9px; font-size: 11px; }
-    .row .amt { font-size: 24px; }
+    .row .amt { font-size: 23px; }
   }
 </style>
 </head>
