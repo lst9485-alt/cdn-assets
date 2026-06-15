@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>결제 안내 박스 시안 3종</title>
+<title>결제 안내 박스 시안 (모바일 간격 개선)</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -26,6 +26,7 @@
   .price-strike { display:inline-flex; align-items:flex-end; gap:2px; color:#6b7280; text-decoration:line-through; text-decoration-thickness:2px; white-space:nowrap; }
   .price-strike .won { font-size:0.72em; transform:translateY(0.22em); display:inline-block; }
   .opt-label { display:inline-block; font-size:13px; font-weight:800; color:#fff; background:#0a0a0a; padding:4px 12px; border-radius:999px; }
+  .opt-label.ref { background:#9ca3af; }
   .opt-desc { font-size:13px; color:#6b7280; line-height:1.6; margin-top:8px; }
 </style>
 </head>
@@ -34,19 +35,18 @@
 <div class="max-w-md mx-auto space-y-12">
 
   <header class="text-center">
-    <h1 class="text-xl font-black">결제 안내 박스 시안 3종</h1>
-    <p class="text-sm text-gray-500 mt-2">아래 3가지 중 마음에 드는 번호를 골라주세요.<br>모바일 폭(390px) 기준으로 보여드려요.</p>
+    <h1 class="text-xl font-black">결제 안내 박스 시안 · 모바일 간격 개선</h1>
+    <p class="text-sm text-gray-500 mt-2">1번 라디오 리스트형을 기준으로, 모바일에서 안 붙도록<br>간격을 살린 새 시안 3개입니다. 마음에 드는 번호를 골라주세요.</p>
   </header>
 
-  <!-- ===================== 옵션 1 ===================== -->
+  <!-- ===================== 기준 (기존 옵션1) ===================== -->
   <section>
-    <span class="opt-label">옵션 1 · 라디오 리스트형</span>
-    <p class="opt-desc">체크 동그라미를 왼쪽에 칸으로 완전히 분리(겹침 없음). 제목·가격은 한 줄, 배지·취소선은 그 아래 한 줄. 간격이 넉넉해서 답답하지 않음.</p>
+    <span class="opt-label ref">기준 · 기존 1번 (참고용)</span>
+    <p class="opt-desc">제목·가격이 한 줄에 있어서 폰 좁은 화면에선 가운데가 붙어 보임.</p>
     <div class="bg-white rounded-2xl p-5 mt-4 shadow-sm">
       <p class="font-bold mb-3">4. 결제 안내</p>
       <div class="space-y-3">
-        <!-- A -->
-        <label class="flex items-center gap-4 border-2 border-[#DC2626] bg-red-50 rounded-2xl p-5 cursor-pointer">
+        <label class="flex items-center gap-4 border-2 border-[#DC2626] bg-red-50 rounded-2xl p-5">
           <span class="shrink-0 w-7 h-7 rounded-full bg-[#DC2626] flex items-center justify-center text-white">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
           </span>
@@ -61,16 +61,39 @@
             </div>
           </div>
         </label>
-        <!-- B -->
-        <label class="flex items-center gap-4 border border-gray-200 bg-gray-50 rounded-2xl p-5 opacity-60 cursor-not-allowed">
-          <span class="shrink-0 w-7 h-7 rounded-full border-2 border-gray-300"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 새 옵션 1 ===================== -->
+  <section>
+    <span class="opt-label">새 1번 · 세로 분리형 (가격 아래로)</span>
+    <p class="opt-desc">제목·배지·가격을 위에서 아래로 차곡차곡. 가운데 옅은 구분선으로 정보와 가격을 나눔. 가격이 제 줄을 가져서 절대 안 붙음.</p>
+    <div class="bg-white rounded-2xl p-5 mt-4 shadow-sm">
+      <p class="font-bold mb-3">4. 결제 안내</p>
+      <div class="space-y-3">
+        <!-- A -->
+        <label class="flex items-start gap-4 border-2 border-[#DC2626] bg-red-50 rounded-2xl p-5 cursor-pointer">
+          <span class="shrink-0 mt-0.5 w-7 h-7 rounded-full bg-[#DC2626] flex items-center justify-center text-white">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </span>
           <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-between">
-              <span class="font-black text-lg text-gray-500 whitespace-nowrap">코칭 B <span class="text-sm font-bold text-gray-500">(매월 2명)</span></span>
-              <span class="font-black text-lg text-gray-500 whitespace-nowrap">960,000원</span>
+            <div class="font-black text-lg text-brand-dark">코칭 A <span class="text-sm font-bold text-gray-500">(매주 2명)</span></div>
+            <div class="mt-2"><span class="inline-block bg-[#DC2626] text-white text-xs font-bold px-3 py-1 rounded-md">현재 신청 가능</span></div>
+            <div class="border-t border-red-200 mt-3 pt-3 flex items-baseline gap-2.5">
+              <span class="font-black text-2xl text-brand-dark whitespace-nowrap">400,000원</span>
+              <span class="price-strike text-base font-semibold">800,000<span class="won">원</span></span>
             </div>
-            <div class="flex items-center justify-between mt-2">
-              <span class="inline-block bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-md">현재 모집 마감</span>
+          </div>
+        </label>
+        <!-- B -->
+        <label class="flex items-start gap-4 border border-gray-200 bg-gray-50 rounded-2xl p-5 opacity-60 cursor-not-allowed">
+          <span class="shrink-0 mt-0.5 w-7 h-7 rounded-full border-2 border-gray-300"></span>
+          <div class="flex-1 min-w-0">
+            <div class="font-black text-lg text-gray-500">코칭 B <span class="text-sm font-bold text-gray-500">(매월 2명)</span></div>
+            <div class="mt-2"><span class="inline-block bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-md">현재 모집 마감</span></div>
+            <div class="border-t border-gray-200 mt-3 pt-3 flex items-baseline gap-2.5">
+              <span class="font-black text-2xl text-gray-500 whitespace-nowrap">960,000원</span>
               <span class="price-strike text-base font-semibold">1,600,000<span class="won">원</span></span>
             </div>
           </div>
@@ -80,43 +103,40 @@
     </div>
   </section>
 
-  <!-- ===================== 옵션 2 ===================== -->
+  <!-- ===================== 새 옵션 2 ===================== -->
   <section>
-    <span class="opt-label">옵션 2 · 선택 배지형 (체크 없음)</span>
-    <p class="opt-desc">체크 동그라미를 아예 없애고, 빨간 테두리 + 제목 옆 "선택됨" 배지로 선택 상태 표시. 가격은 오른쪽에 위아래로(할인가 크게 / 취소선 아래). 깔끔하고 가격이 잘 보임.</p>
+    <span class="opt-label">새 2번 · 좌우 2단형</span>
+    <p class="opt-desc">왼쪽은 제목+배지를 위아래로, 오른쪽은 가격(할인가 크게/취소선 아래)을 위아래로. 두 덩어리로 나뉘어서 가운데가 비고 시원함.</p>
     <div class="bg-white rounded-2xl p-5 mt-4 shadow-sm">
       <p class="font-bold mb-3">4. 결제 안내</p>
       <div class="space-y-3">
         <!-- A -->
-        <label class="block border-2 border-[#DC2626] bg-red-50 rounded-2xl p-5 cursor-pointer">
-          <div class="flex items-start justify-between gap-3">
+        <label class="flex items-center gap-3 border-2 border-[#DC2626] bg-red-50 rounded-2xl p-5 cursor-pointer">
+          <span class="shrink-0 w-7 h-7 rounded-full bg-[#DC2626] flex items-center justify-center text-white">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </span>
+          <div class="flex-1 min-w-0 flex items-center justify-between gap-3">
             <div class="min-w-0">
-              <div class="flex flex-wrap items-center gap-x-2 gap-y-1 mb-2">
-                <span class="font-black text-lg text-brand-dark">코칭 A <span class="text-sm font-bold text-gray-500">(매주 2명)</span></span>
-                <span class="inline-flex items-center gap-1 bg-[#DC2626] text-white text-xs font-bold px-2.5 py-0.5 rounded-full">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>선택됨
-                </span>
-              </div>
-              <span class="inline-block bg-[#DC2626] text-white text-xs font-bold px-3 py-1 rounded-md">현재 신청 가능</span>
+              <div class="font-black text-lg text-brand-dark leading-tight">코칭 A <span class="text-sm font-bold text-gray-500">(매주 2명)</span></div>
+              <span class="inline-block mt-2 bg-[#DC2626] text-white text-xs font-bold px-3 py-1 rounded-md">현재 신청 가능</span>
             </div>
             <div class="text-right shrink-0">
               <div class="font-black text-xl text-brand-dark whitespace-nowrap leading-tight">400,000원</div>
-              <div class="price-strike text-base font-semibold mt-0.5">800,000<span class="won">원</span></div>
+              <div class="price-strike text-base font-semibold mt-1">800,000<span class="won">원</span></div>
             </div>
           </div>
         </label>
         <!-- B -->
-        <label class="block border border-gray-200 bg-gray-50 rounded-2xl p-5 opacity-60 cursor-not-allowed">
-          <div class="flex items-start justify-between gap-3">
+        <label class="flex items-center gap-3 border border-gray-200 bg-gray-50 rounded-2xl p-5 opacity-60 cursor-not-allowed">
+          <span class="shrink-0 w-7 h-7 rounded-full border-2 border-gray-300"></span>
+          <div class="flex-1 min-w-0 flex items-center justify-between gap-3">
             <div class="min-w-0">
-              <div class="mb-2">
-                <span class="font-black text-lg text-gray-500">코칭 B <span class="text-sm font-bold text-gray-500">(매월 2명)</span></span>
-              </div>
-              <span class="inline-block bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-md">현재 모집 마감</span>
+              <div class="font-black text-lg text-gray-500 leading-tight">코칭 B <span class="text-sm font-bold text-gray-500">(매월 2명)</span></div>
+              <span class="inline-block mt-2 bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-md">현재 모집 마감</span>
             </div>
             <div class="text-right shrink-0">
               <div class="font-black text-xl text-gray-500 whitespace-nowrap leading-tight">960,000원</div>
-              <div class="price-strike text-base font-semibold mt-0.5">1,600,000<span class="won">원</span></div>
+              <div class="price-strike text-base font-semibold mt-1">1,600,000<span class="won">원</span></div>
             </div>
           </div>
         </label>
@@ -125,42 +145,43 @@
     </div>
   </section>
 
-  <!-- ===================== 옵션 3 ===================== -->
+  <!-- ===================== 새 옵션 3 ===================== -->
   <section>
-    <span class="opt-label">옵션 3 · 가격 패널 분리 + 코너 체크</span>
-    <p class="opt-desc">왼쪽엔 제목·배지, 오른쪽엔 "50% 할인" 태그가 붙은 가격 패널을 색 박스로 분리. 체크는 카드 왼쪽 위 모서리에 코너 리본으로(글자랑 안 겹침). 할인 강조가 가장 셈.</p>
+    <span class="opt-label">새 3번 · 하단 가격 바형</span>
+    <p class="opt-desc">위 칸엔 체크+제목+배지만, 아래 옅은 색 바에 "결제 금액"과 가격을 따로. 가격이 완전히 분리된 띠 안에 있어서 가장 안 붙고 또렷함.</p>
     <div class="bg-white rounded-2xl p-5 mt-4 shadow-sm">
       <p class="font-bold mb-3">4. 결제 안내</p>
       <div class="space-y-3">
         <!-- A -->
-        <label class="relative block border-2 border-[#DC2626] bg-white rounded-2xl p-5 pl-7 cursor-pointer overflow-hidden">
-          <span class="absolute top-0 left-0 w-9 h-9 bg-[#DC2626] text-white flex items-start justify-start pt-1.5 pl-1.5" style="clip-path: polygon(0 0, 100% 0, 0 100%);">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          </span>
-          <div class="flex items-center justify-between gap-3">
-            <div class="min-w-0">
-              <div class="font-black text-lg text-brand-dark">코칭 A <span class="text-sm font-bold text-gray-500">(매주 2명)</span></div>
-              <span class="inline-block mt-2 bg-[#DC2626] text-white text-xs font-bold px-3 py-1 rounded-md">현재 신청 가능</span>
-            </div>
-            <div class="text-right shrink-0 rounded-xl bg-red-50 px-4 py-2.5">
-              <div class="inline-block bg-brand-orange text-white text-[11px] font-bold px-2 py-0.5 rounded mb-1">50% 할인</div>
-              <div class="price-strike text-sm font-semibold">800,000<span class="won">원</span></div>
-              <div class="font-black text-xl text-brand-dark whitespace-nowrap leading-tight">400,000원</div>
-            </div>
+        <label class="block border-2 border-[#DC2626] rounded-2xl overflow-hidden cursor-pointer">
+          <div class="bg-red-50 flex items-center gap-3 px-5 py-4">
+            <span class="shrink-0 w-7 h-7 rounded-full bg-[#DC2626] flex items-center justify-center text-white">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+            <span class="font-black text-lg text-brand-dark">코칭 A <span class="text-sm font-bold text-gray-500">(매주 2명)</span></span>
+            <span class="ml-auto inline-block bg-[#DC2626] text-white text-xs font-bold px-3 py-1 rounded-md whitespace-nowrap">현재 신청 가능</span>
+          </div>
+          <div class="bg-white border-t border-red-200 flex items-center justify-between px-5 py-3.5">
+            <span class="text-sm font-bold text-gray-500">결제 금액</span>
+            <span class="flex items-baseline gap-2.5">
+              <span class="price-strike text-base font-semibold">800,000<span class="won">원</span></span>
+              <span class="font-black text-2xl text-brand-dark whitespace-nowrap">400,000원</span>
+            </span>
           </div>
         </label>
         <!-- B -->
-        <label class="relative block border border-gray-200 bg-gray-50 rounded-2xl p-5 pl-7 opacity-60 cursor-not-allowed overflow-hidden">
-          <div class="flex items-center justify-between gap-3">
-            <div class="min-w-0">
-              <div class="font-black text-lg text-gray-500">코칭 B <span class="text-sm font-bold text-gray-500">(매월 2명)</span></div>
-              <span class="inline-block mt-2 bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-md">현재 모집 마감</span>
-            </div>
-            <div class="text-right shrink-0 rounded-xl bg-gray-100 px-4 py-2.5">
-              <div class="inline-block bg-gray-400 text-white text-[11px] font-bold px-2 py-0.5 rounded mb-1">40% 할인</div>
-              <div class="price-strike text-sm font-semibold">1,600,000<span class="won">원</span></div>
-              <div class="font-black text-xl text-gray-500 whitespace-nowrap leading-tight">960,000원</div>
-            </div>
+        <label class="block border border-gray-200 rounded-2xl overflow-hidden opacity-60 cursor-not-allowed">
+          <div class="bg-gray-50 flex items-center gap-3 px-5 py-4">
+            <span class="shrink-0 w-7 h-7 rounded-full border-2 border-gray-300"></span>
+            <span class="font-black text-lg text-gray-500">코칭 B <span class="text-sm font-bold text-gray-500">(매월 2명)</span></span>
+            <span class="ml-auto inline-block bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-md whitespace-nowrap">현재 모집 마감</span>
+          </div>
+          <div class="bg-white border-t border-gray-200 flex items-center justify-between px-5 py-3.5">
+            <span class="text-sm font-bold text-gray-500">결제 금액</span>
+            <span class="flex items-baseline gap-2.5">
+              <span class="price-strike text-base font-semibold">1,600,000<span class="won">원</span></span>
+              <span class="font-black text-2xl text-gray-500 whitespace-nowrap">960,000원</span>
+            </span>
           </div>
         </label>
       </div>
