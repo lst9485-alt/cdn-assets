@@ -73,21 +73,20 @@
   .footer-info p { margin:0; font-size:11px; color:#9ca3af; line-height:1.5; }
 
   @media (max-width: 720px) {
-    .receipt { padding: 22px 15px 18px; }
-    /* 데스크탑처럼 좌(제목+안내문) / 우(신청자정보) 2단 유지. 오른쪽을 작게 해 왼쪽 안내문 자리 확보 */
-    .receipt-top { grid-template-columns: 1fr auto; gap: 10px; }
-    .r-title { font-size: 23px; }
-    .r-sub { font-size: 10.5px; line-height: 1.5; }
-    .r-sub span { white-space: normal; }   /* 좁은 칸 넘침 방지(글자 안 잘림) */
-    .brand { font-size: 11px; }
-    .applicant-plain p { font-size: 10px; }
-    .applicant-plain .ap-label { font-size: 9.5px; margin-right: 3px; }
-    .applicant-plain .ap-value { font-size: 10.5px; }
-    .kakao-mini { font-size: 10.5px; padding: 4px 9px; margin-top: 8px; }
-    .kakao-mini iconify-icon { font-size: 14px; }
+    .receipt { padding: 22px 16px 18px; }
+    /* 좌(제목+안내문) / 우(신청자정보) 2단 유지. 안내문 한 줄로 줄여서 글자 시원하게 */
+    .receipt-top { grid-template-columns: 1fr auto; gap: 12px; }
+    .r-title { font-size: 26px; }
+    .r-sub { font-size: 13px; line-height: 1.5; }
+    .brand { font-size: 13px; }
+    .applicant-plain p { font-size: 12px; }
+    .applicant-plain .ap-label { font-size: 11px; margin-right: 5px; }
+    .applicant-plain .ap-value { font-size: 12.5px; }
+    .kakao-mini { font-size: 12px; padding: 5px 11px; margin-top: 10px; }
+    .kakao-mini iconify-icon { font-size: 15px; }
     .bank-info .b2 { font-size: 15px; }   /* 계좌번호 한 줄로 */
     .copy-btn { padding: 5px 9px; font-size: 11px; }
-    .row .amt { font-size: 23px; }
+    .row .amt { font-size: 24px; }
   }
 </style>
 </head>
@@ -95,8 +94,8 @@
 <div class="page">
   <h1 class="page-title">결제 모달 — 최종 미리보기 (B안)</h1>
   <p class="page-note">
-    요청 반영: 둘째 문장 <b>둘째 줄</b>로(각 줄은 안 깨짐), "2주 이내" <b>밑줄</b>, 제목 <b>"신청 완료"</b>.
-    폰에서 두 줄·밑줄 잘 나오는지 봐주세요.
+    안내문은 "결제 완료 시 일정예약 카톡이 발송됩니다." 한 줄로 줄여 글자를 키웠어요(좌우 2단 유지).
+    폰에서 안내문·신청자 정보 잘 읽히는지 봐주세요.
   </p>
 
   <div class="receipt-wrap"><div class="receipt">
@@ -104,7 +103,7 @@
       <div class="receipt-top-left">
         <span class="stamp">주문결제</span>
         <h1 class="r-title word-keep">신청 완료</h1>
-        <p class="r-sub"><span>아래 안내대로 결제를 진행해주세요.</span><span>결제 완료 시 일정예약 카톡이 발송됩니다.</span></p>
+        <p class="r-sub">결제 완료 시 일정예약 카톡이 발송됩니다.</p>
       </div>
       <div class="receipt-top-right">
         <p class="brand">우리동네재테크</p>
