@@ -2183,30 +2183,34 @@
 	        <div id="f-deposit-wrap">
 	          <label class="block text-brand-dark font-bold mb-3">4. 결제 안내</label>
 	          <div class="space-y-3 mb-4">
-	            <label class="block border-2 border-[#DC2626] bg-red-50 rounded-2xl p-5 cursor-pointer relative">
+	            <label class="flex items-center gap-3 border-2 border-[#DC2626] bg-red-50 rounded-2xl p-5 cursor-pointer">
 	              <input type="radio" name="coaching" value="A" checked class="hidden">
-	              <div class="absolute top-4 left-4 w-7 h-7 rounded-full bg-[#DC2626] flex items-center justify-center text-white">
-	                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-	              </div>
-	              <div class="flex items-center justify-between pl-10">
-	                <span class="font-black text-lg text-brand-dark whitespace-nowrap">코칭 A <span class="text-sm font-bold text-gray-500">(매주 2명)</span></span>
-	                <span class="font-black text-lg text-brand-dark whitespace-nowrap">400,000원</span>
-	              </div>
-	              <div class="flex items-center justify-between pl-10 mt-2">
-	                <span class="inline-block bg-[#DC2626] text-white text-xs font-bold px-3 py-1 rounded-md">현재 신청 가능</span>
-	                <span class="price-strike text-base font-semibold">800,000<span class="won">원</span></span>
+	              <span class="shrink-0 w-5 h-5 rounded-full bg-[#DC2626] flex items-center justify-center text-white">
+	                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+	              </span>
+	              <div class="flex-1 min-w-0 flex items-center justify-between gap-4">
+	                <div class="min-w-0">
+	                  <div class="font-black text-lg text-brand-dark leading-tight">코칭 A <span class="text-sm font-bold text-gray-500 whitespace-nowrap">(매주 2명)</span></div>
+	                  <span class="inline-block mt-2 bg-[#DC2626] text-white text-xs font-bold px-3 py-1 rounded-md">현재 신청 가능</span>
+	                </div>
+	                <div class="text-right shrink-0">
+	                  <div class="font-black text-xl text-brand-dark whitespace-nowrap leading-tight">400,000원</div>
+	                  <div class="price-strike text-base font-semibold mt-1">800,000<span class="won">원</span></div>
+	                </div>
 	              </div>
 	            </label>
-	            <label class="block border border-gray-200 bg-gray-50 rounded-2xl p-5 opacity-60 cursor-not-allowed relative">
+	            <label class="flex items-center gap-3 border border-gray-200 bg-gray-50 rounded-2xl p-5 opacity-60 cursor-not-allowed">
 	              <input type="radio" name="coaching" value="B" disabled class="hidden">
-	              <div class="absolute top-4 left-4 w-7 h-7 rounded-full border-2 border-gray-300"></div>
-	              <div class="flex items-center justify-between pl-10">
-	                <span class="font-black text-lg text-gray-500 whitespace-nowrap">코칭 B <span class="text-sm font-bold text-gray-500">(매월 2명)</span></span>
-	                <span class="font-black text-lg text-gray-500 whitespace-nowrap">960,000원</span>
-	              </div>
-	              <div class="flex items-center justify-between pl-10 mt-2">
-	                <span class="inline-block bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-md">현재 모집 마감</span>
-	                <span class="price-strike text-base font-semibold">1,600,000<span class="won">원</span></span>
+	              <span class="shrink-0 w-5 h-5 rounded-full border-2 border-gray-300"></span>
+	              <div class="flex-1 min-w-0 flex items-center justify-between gap-4">
+	                <div class="min-w-0">
+	                  <div class="font-black text-lg text-gray-500 leading-tight">코칭 B <span class="text-sm font-bold text-gray-500 whitespace-nowrap">(매월 2명)</span></div>
+	                  <span class="inline-block mt-2 bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-md">현재 모집 마감</span>
+	                </div>
+	                <div class="text-right shrink-0">
+	                  <div class="font-black text-xl text-gray-500 whitespace-nowrap leading-tight">960,000원</div>
+	                  <div class="price-strike text-base font-semibold mt-1">1,600,000<span class="won">원</span></div>
+	                </div>
 	              </div>
 	            </label>
 	          </div>
