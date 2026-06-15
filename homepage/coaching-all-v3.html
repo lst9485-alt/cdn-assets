@@ -121,6 +121,8 @@
   .soft-nudge-delay { animation: softNudge 1.4s ease-in-out infinite; animation-delay: 0.18s; }
   .soft-nudge-x { animation: softNudgeX 1.4s ease-in-out infinite; }
   .soft-nudge-x-delay { animation: softNudgeX 1.4s ease-in-out infinite; animation-delay: 0.18s; }
+  @keyframes badgeFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+  .badge-float { animation: badgeFloat 2.6s ease-in-out infinite; box-shadow: 0 4px 10px rgba(220,38,38,.22); }
   .hero-word-center { position: absolute; left: 50%; width: 140px; margin-left: -70px; text-align: center; opacity: 0; animation: budgetFadeIn 0.35s ease-out 0.68s forwards !important; }
   .hero-word-edge-left { left: 4%; }
   .hero-word-edge-right { right: 4%; }
@@ -2261,7 +2263,7 @@
 	                <span class="font-black text-lg text-brand-dark">코칭 A</span>
 	                <span class="font-black text-lg text-brand-dark">400,000원</span>
 	              </div>
-	              <span class="inline-block bg-[#DC2626] text-white text-xs font-bold px-3 py-1 rounded-md">현재 신청 가능</span>
+	              <span class="badge-float inline-block bg-[#DC2626] text-white text-xs font-bold px-3 py-1 rounded-md">현재 신청 가능</span>
 	            </label>
 	            <label class="block border border-gray-200 bg-gray-50 rounded-2xl p-5 opacity-60 cursor-not-allowed">
 	              <input type="radio" name="coaching" value="B" disabled class="hidden">
