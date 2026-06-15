@@ -1065,66 +1065,41 @@
 <div class="fixed inset-0 bg-black/55 backdrop-blur-sm z-[9999] hidden overflow-y-auto" id="successModal" style="padding: 32px 16px;">
 <div class="modal-shell">
 <button aria-label="닫기" class="modal-close" id="closeModal" type="button">×</button>
-<div class="receipt-wrap">
-<div class="receipt">
+<div class="receipt-wrap"><div class="receipt">
 <div class="receipt-top">
 <div class="receipt-top-left">
-<span class="stamp">주문결제</span>
-<h1 class="font-display font-black leading-none text-brand-dark word-keep" style="font-size: 40px; margin-top: 22px;">신청 접수 완료</h1>
-<p class="mt-3 text-sm text-gray-500 font-medium word-keep">아래 안내대로 결제를 진행해주세요.<br/>결제 완료 시 일정예약 카톡이 발송됩니다.</p>
+<span class="stamp font-display">주문결제</span>
+<h1 class="r-title font-display word-keep">신청 접수 완료</h1>
+<p class="r-sub">결제 완료 시 일정예약 카톡이 발송됩니다.</p>
 </div>
 <div class="receipt-top-right">
-<p class="brand">우리동네재테크</p>
+<p class="brand font-display">우리동네재테크</p>
 <div class="applicant-plain">
-<p><span class="ap-label">신청자</span><span class="ap-value" data-applicant-name="">—</span></p>
-<p><span class="ap-label">연락처</span><span class="ap-value" data-applicant-phone="">—</span></p>
+<p><span class="ap-label">신청자</span><span class="ap-value font-display" data-applicant-name="">—</span></p>
+<p><span class="ap-label">연락처</span><span class="ap-value font-display" data-applicant-phone="">—</span></p>
+</div>
+<a aria-label="카카오톡 채널로 문의" class="kakao-mini" href="https://pf.kakao.com/_mcxnjX/friend" rel="noopener" target="_blank"><iconify-icon icon="ri:kakao-talk-fill"></iconify-icon> 1:1 문의</a>
 </div>
 </div>
-</div>
-<div class="recv-dashed" style="margin-top: 24px;">
-<div class="recv-row">
-<dt>상품</dt>
-<dd class="font-display font-black text-brand-dark" data-product="" style="font-size:17px;">코칭 A</dd>
-</div>
-<div class="recv-row">
-<dt>결제 금액</dt>
-<dd class="font-display font-black text-brand-blue" data-amount="" style="font-size:28px;">400,000원</dd>
-</div>
+<dl class="dl">
+<div class="row"><dt>상품</dt><dd class="prod font-display" data-product="">코칭 A</dd></div>
+<div class="row"><dt>결제 금액</dt><dd class="amt font-display" data-amount="">400,000원</dd></div>
+</dl>
+<div class="promo-box">
+<div class="pb-good"><iconify-icon icon="solar:calendar-bold"></iconify-icon><span>현재 <span class="ul">2주 이내</span> 상담 가능</span></div>
+<div class="pb-warn"><iconify-icon icon="solar:clock-circle-bold"></iconify-icon><span>1시간 내 미입금 시 예약이 <span class="ul">자동 취소</span>됩니다</span></div>
 </div>
 <div class="pay-bank-full">
-<h4>무통장 입금</h4>
+<h4 class="font-display">무통장 입금 <span class="rc">현금영수증 발행</span></h4>
 <div class="bank-info">
-<p class="b1">
-                입금 계좌
-                <span style="display:inline-block; margin-left:6px; padding:3px 8px; border-radius:5px; background:#dbeafe; color:#1d4ed8; font-size:11px; font-weight:800; letter-spacing:0.02em;">현금영수증 발행</span>
-</p>
-<p class="b2">
-<span>하나은행 125-910032-26304</span>
-<button aria-label="계좌번호 복사" class="copy-btn" data-copy="125-910032-26304" type="button">
-<iconify-icon icon="solar:copy-linear"></iconify-icon>
-                  복사
-                </button>
-</p>
+<p class="b1">하나은행</p>
+<p class="b2"><span class="font-display">125-910032-26304</span><button aria-label="계좌번호 복사" class="copy-btn" data-copy="125-910032-26304" type="button"><iconify-icon icon="solar:copy-linear"></iconify-icon> 복사</button></p>
 <p class="b3">주식회사 우리동네사람들</p>
 </div>
 </div>
-<a class="card-link-subtle" href="https://ourdongne.com/coaching-pay" rel="noopener" target="_blank">
-<span class="left">
-<span class="sub">BC · 삼성 · 현대카드 제외</span>
-</span>
-<span class="right">
-              카드결제 하러가기
-              <iconify-icon height="16" icon="solar:arrow-right-linear" width="16"></iconify-icon>
-</span>
-</a>
-<div class="recv-footer" style="margin-top:18px;">
-<div>
-<p>(주)우리동네사람들 · 사업자등록번호 386-86-03832</p>
-<p>통신판매신고번호 제 2026-서울영등포-0991 호</p>
-</div>
-</div>
-</div>
-</div>
+<a class="card-link" href="https://ourdongne.com/coaching-pay" rel="noopener" target="_blank"><span class="sub">BC · 삼성 · 현대카드 제외</span><span class="right">카드결제 하러가기 <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span></a>
+<div class="footer-info"><p>(주)우리동네사람들 · 사업자등록번호 386-86-03832</p><p>통신판매신고번호 제 2026-서울영등포-0991 호</p></div>
+</div></div>
 </div>
 </div>
 <script>
