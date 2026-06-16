@@ -1075,12 +1075,12 @@
   #successModal .kakao-mini iconify-icon { font-size:16px; }
   #successModal .kakao-mini:hover { background:#f5d800; }
   #successModal .kakao-mini:active { transform:scale(.96); }
-  #successModal .dl { border-top:1.5px dashed #d1d5db; border-bottom:1.5px dashed #d1d5db; margin-top:20px; padding:12px 0; }
-  #successModal .row { display:flex; align-items:baseline; justify-content:space-between; gap:24px; margin:6px 0; }
-  #successModal .row dt { color:#4b5563; font-size:14px; margin:0; }
-  #successModal .row dd { margin:0; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; }
-  #successModal .row .prod { font-size:17px; color:#111; }
-  #successModal .row .amt { font-size:28px; color:#0055FF; }
+  #successModal .dl { display:block; width:100%; box-sizing:border-box; border-top:1.5px dashed #d1d5db; border-bottom:1.5px dashed #d1d5db; margin-top:20px; padding:12px 0; }
+  #successModal .receipt-row { display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important; align-items:baseline !important; justify-content:space-between !important; gap:24px; width:100%; box-sizing:border-box; margin:6px 0 !important; padding:0 !important; text-align:left; float:none !important; }
+  #successModal .receipt-row dt { display:block !important; width:auto !important; min-width:0 !important; color:#4b5563; font-size:14px; margin:0 !important; flex:0 0 auto !important; text-align:left !important; white-space:nowrap; float:none !important; }
+  #successModal .receipt-row dd { display:block !important; width:auto !important; min-width:0 !important; margin:0 0 0 auto !important; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; flex:0 1 auto !important; text-align:right !important; white-space:nowrap; float:none !important; }
+  #successModal .receipt-row .prod { font-size:17px; color:#111; }
+  #successModal .receipt-row .amt { font-size:28px; color:#0055FF; }
   #successModal .promo-box { margin-top:16px; border-radius:14px; overflow:hidden; border:1.5px solid #bfdbfe; }
   #successModal .promo-box .pb-good { display:flex; align-items:center; gap:8px; padding:12px 16px; background:#eff6ff; color:#1d4ed8; font-size:13.5px; font-weight:800; }
   #successModal .promo-box .ul { text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:2px; }
@@ -1118,7 +1118,7 @@
     #successModal .kakao-mini iconify-icon { font-size: 15px; }
     #successModal .bank-info .b2 { font-size: 15px; }
     #successModal .copy-btn { padding: 5px 9px; font-size: 11px; }
-    #successModal .row .amt { font-size: 24px; }
+    #successModal .receipt-row .amt { font-size: 24px; }
   }
 </style>
 
@@ -2087,11 +2087,11 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
 <section class="max-w-4xl mx-auto bg-gray-100 pt-4 pb-14 md:pt-12 md:pb-20 relative" data-section="apply-form" id="apply-form">
 <span class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded z-50 font-mono">09 상담 신청 폼</span>
 <div class="apply-form-inner max-w-2xl mx-auto px-6 sm:px-8 lg:px-8" style="padding-left:0 !important;padding-right:0 !important;">
-<div class="space-y-8 bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-10" style="padding-left:14px;padding-right:14px;border:2px solid #9ca3af;" data-reveal="" id="consultForm">
-        <div class="text-center">
-          <h2 class="text-3xl md:text-4xl font-display font-black text-brand-dark mb-3">코칭 신청</h2>
-          <p class="text-gray-500 word-keep">신청서를 제출하면 결제 안내가 이어집니다</p>
-        </div>
+<div class="space-y-8 bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-10" data-reveal="" id="consultForm" style="padding-left:14px;padding-right:14px;border:2px solid #9ca3af;">
+<div class="text-center">
+<h2 class="text-3xl md:text-4xl font-display font-black text-brand-dark mb-3">코칭 신청</h2>
+<p class="text-gray-500 word-keep">신청서를 제출하면 결제 안내가 이어집니다</p>
+</div>
 <!-- 1. 성함 -->
 <div>
 <label class="block text-brand-dark font-bold mb-2">1. 성함 <span class="text-brand-orange">*</span></label>
@@ -2233,8 +2233,8 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
 </div>
 </div>
 <dl class="dl">
-<div class="row" style="display:flex;align-items:baseline;justify-content:space-between;gap:24px"><dt>상품</dt><dd class="prod font-display" data-product="">코칭 A</dd></div>
-<div class="row" style="display:flex;align-items:baseline;justify-content:space-between;gap:24px"><dt>결제 금액</dt><dd class="amt font-display" data-amount="">400,000원</dd></div>
+<div class="receipt-row" style="display:flex;flex-direction:row;flex-wrap:nowrap;align-items:baseline;justify-content:space-between;gap:24px;width:100%;box-sizing:border-box;margin:6px 0;padding:0"><dt>상품</dt><dd class="prod font-display" data-product="">코칭 A</dd></div>
+<div class="receipt-row" style="display:flex;flex-direction:row;flex-wrap:nowrap;align-items:baseline;justify-content:space-between;gap:24px;width:100%;box-sizing:border-box;margin:6px 0;padding:0"><dt>결제 금액</dt><dd class="amt font-display" data-amount="">400,000원</dd></div>
 </dl>
 <div class="promo-box">
 <div class="pb-good"><iconify-icon icon="solar:calendar-bold"></iconify-icon><span>현재 <span class="ul">2주 이내</span> 상담 가능</span></div>

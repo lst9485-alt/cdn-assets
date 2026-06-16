@@ -1075,16 +1075,12 @@
   #successModal .kakao-mini iconify-icon { font-size:16px; }
   #successModal .kakao-mini:hover { background:#f5d800; }
   #successModal .kakao-mini:active { transform:scale(.96); }
-  #successModal .dl,
-  #successModal .recv-dashed { display:block; width:100%; box-sizing:border-box; border-top:1.5px dashed #d1d5db; border-bottom:1.5px dashed #d1d5db; margin-top:20px; padding:12px 0; }
-  #successModal .row,
-  #successModal .recv-row { display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important; align-items:baseline !important; justify-content:space-between !important; gap:24px; width:100%; box-sizing:border-box; margin:6px 0 !important; padding-left:0 !important; padding-right:0 !important; text-align:left; float:none !important; }
-  #successModal .row dt,
-  #successModal .recv-row dt { display:block !important; width:auto !important; min-width:0 !important; color:#4b5563; font-size:14px; margin:0 !important; flex:0 0 auto !important; text-align:left !important; white-space:nowrap; float:none !important; }
-  #successModal .row dd,
-  #successModal .recv-row dd { display:block !important; width:auto !important; min-width:0 !important; margin:0 0 0 auto !important; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; flex:0 1 auto !important; text-align:right !important; white-space:nowrap; float:none !important; }
-  #successModal .row .prod { font-size:17px; color:#111; }
-  #successModal .row .amt { font-size:28px; color:#0055FF; }
+  #successModal .dl { display:block; width:100%; box-sizing:border-box; border-top:1.5px dashed #d1d5db; border-bottom:1.5px dashed #d1d5db; margin-top:20px; padding:12px 0; }
+  #successModal .receipt-row { display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important; align-items:baseline !important; justify-content:space-between !important; gap:24px; width:100%; box-sizing:border-box; margin:6px 0 !important; padding:0 !important; text-align:left; float:none !important; }
+  #successModal .receipt-row dt { display:block !important; width:auto !important; min-width:0 !important; color:#4b5563; font-size:14px; margin:0 !important; flex:0 0 auto !important; text-align:left !important; white-space:nowrap; float:none !important; }
+  #successModal .receipt-row dd { display:block !important; width:auto !important; min-width:0 !important; margin:0 0 0 auto !important; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; flex:0 1 auto !important; text-align:right !important; white-space:nowrap; float:none !important; }
+  #successModal .receipt-row .prod { font-size:17px; color:#111; }
+  #successModal .receipt-row .amt { font-size:28px; color:#0055FF; }
   #successModal .promo-box { margin-top:16px; border-radius:14px; overflow:hidden; border:1.5px solid #bfdbfe; }
   #successModal .promo-box .pb-good { display:flex; align-items:center; gap:8px; padding:12px 16px; background:#eff6ff; color:#1d4ed8; font-size:13.5px; font-weight:800; }
   #successModal .promo-box .ul { text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:2px; }
@@ -1102,18 +1098,12 @@
   #successModal .copy-btn:hover { background:#1747d4; }
   #successModal .copy-btn.is-copied { background:#16a34a; }
   #successModal .copy-btn iconify-icon { font-size:13px; }
-  #successModal .card-link,
-  #successModal .card-link-subtle { margin-top:14px; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 16px; border:1.5px dashed #cbd5e1; border-radius:10px; color:#475569; font-size:13.5px; font-weight:700; background:#fff; text-decoration:none; }
-  #successModal .card-link:hover,
-  #successModal .card-link-subtle:hover { border-color:#1747d4; background:#f6f9ff; }
-  #successModal .card-link .sub,
-  #successModal .card-link-subtle .sub { font-size:11.5px; color:#94a3b8; font-weight:600; }
-  #successModal .card-link .right,
-  #successModal .card-link-subtle .right { display:inline-flex; align-items:center; gap:4px; color:#1747d4; font-weight:900; }
-  #successModal .footer-info,
-  #successModal .recv-footer { margin-top:16px; padding-top:10px; border-top:1px solid #f3f4f6; }
-  #successModal .footer-info p,
-  #successModal .recv-footer p { margin:0; font-size:11px; color:#9ca3af; line-height:1.5; }
+  #successModal .card-link { margin-top:14px; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 16px; border:1.5px dashed #cbd5e1; border-radius:10px; color:#475569; font-size:13.5px; font-weight:700; background:#fff; text-decoration:none; }
+  #successModal .card-link:hover { border-color:#1747d4; background:#f6f9ff; }
+  #successModal .card-link .sub { font-size:11.5px; color:#94a3b8; font-weight:600; }
+  #successModal .card-link .right { display:inline-flex; align-items:center; gap:4px; color:#1747d4; font-weight:900; }
+  #successModal .footer-info { margin-top:16px; padding-top:10px; border-top:1px solid #f3f4f6; }
+  #successModal .footer-info p { margin:0; font-size:11px; color:#9ca3af; line-height:1.5; }
   @media (max-width: 720px) {
     #successModal .modal-close { top: -38px; }
     #successModal .receipt { padding: 22px 16px 18px; }
@@ -1128,84 +1118,9 @@
     #successModal .kakao-mini iconify-icon { font-size: 15px; }
     #successModal .bank-info .b2 { font-size: 15px; }
     #successModal .copy-btn { padding: 5px 9px; font-size: 11px; }
-    #successModal .row .amt,
-    #successModal .recv-row [data-amount] { font-size: 24px !important; }
+    #successModal .receipt-row .amt { font-size: 24px; }
   }
 </style>
-
-<script>
-(function(){
-  function forceReceiptRows(){
-    var modal = document.getElementById('successModal');
-    if (!modal) return;
-    function findReceiptRow(value){
-      var node = value.parentElement;
-      var depth = 0;
-      while (node && node !== modal && depth < 4) {
-        if (node.querySelector && node.querySelector('dt') && node.contains(value)) return node;
-        node = node.parentElement;
-        depth += 1;
-      }
-      return value.parentElement;
-    }
-    ['[data-product]', '[data-amount]'].forEach(function(selector){
-      var value = modal.querySelector(selector);
-      if (!value) return;
-      var row = findReceiptRow(value);
-      if (!row) return;
-      row.style.setProperty('display', 'flex', 'important');
-      row.style.setProperty('flex-direction', 'row', 'important');
-      row.style.setProperty('flex-wrap', 'nowrap', 'important');
-      row.style.setProperty('align-items', 'baseline', 'important');
-      row.style.setProperty('justify-content', 'space-between', 'important');
-      row.style.setProperty('gap', '24px', 'important');
-      row.style.setProperty('width', '100%', 'important');
-      row.style.setProperty('box-sizing', 'border-box', 'important');
-      row.style.setProperty('margin', '6px 0', 'important');
-      row.style.setProperty('padding-left', '0', 'important');
-      row.style.setProperty('padding-right', '0', 'important');
-      row.style.setProperty('float', 'none', 'important');
-
-      var label = row.querySelector('dt');
-      if (label) {
-        label.style.setProperty('display', 'block', 'important');
-        label.style.setProperty('width', 'auto', 'important');
-        label.style.setProperty('min-width', '0', 'important');
-        label.style.setProperty('margin', '0', 'important');
-        label.style.setProperty('flex', '0 0 auto', 'important');
-        label.style.setProperty('text-align', 'left', 'important');
-        label.style.setProperty('white-space', 'nowrap', 'important');
-        label.style.setProperty('float', 'none', 'important');
-      }
-      value.style.setProperty('display', 'block', 'important');
-      value.style.setProperty('width', 'auto', 'important');
-      value.style.setProperty('min-width', '0', 'important');
-      value.style.setProperty('margin', '0 0 0 auto', 'important');
-      value.style.setProperty('flex', '0 1 auto', 'important');
-      value.style.setProperty('text-align', 'right', 'important');
-      value.style.setProperty('white-space', 'nowrap', 'important');
-      value.style.setProperty('float', 'none', 'important');
-    });
-  }
-  document.addEventListener('DOMContentLoaded', function(){
-    forceReceiptRows();
-    var count = 0;
-    var timer = setInterval(function(){
-      forceReceiptRows();
-      count += 1;
-      if (count >= 20) clearInterval(timer);
-    }, 300);
-    if (document.body && window.MutationObserver) {
-      new MutationObserver(forceReceiptRows).observe(document.body, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['class', 'style']
-      });
-    }
-  });
-})();
-</script>
 
 <style id="od-imweb-font-guard">
 /* 아임웹 기본 폰트 CSS가 코드위젯 내부 텍스트를 덮어쓰는 현상 방지 */

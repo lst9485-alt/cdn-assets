@@ -162,7 +162,7 @@
             hubVisible: true,
             groupLabel: '공통',
             imwebCode: 'homepage/head-code-imweb.html',
-            dateSuffix: '6'
+            dateSuffix: '7'
           },
           {
             id: 'imweb-footer-code',
@@ -207,7 +207,7 @@
             hubVisible: true,
             groupLabel: '상품',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
-            dateSuffix: '15'
+            dateSuffix: '16'
           },
           {
             id: 'main-page',
