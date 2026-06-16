@@ -34,9 +34,9 @@
     footer.innerHTML = [
       '<div style="max-width:1100px;margin:0 auto">',
       '  <div data-footer-grid="true" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,260px);grid-template-areas:\'brand menu\' \'info menu\';gap:0 44px;align-items:start;margin-bottom:0">',
-      '    <div style="grid-area:brand;margin-left:-18px">',
-      '      <strong style="display:block;font-size:22px;font-weight:800;color:#f3f4f6;letter-spacing:-0.02em">우리동네 재테크</strong>',
-      '      <a href="https://www.youtube.com/@우리동네재테크" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:6px;margin-top:6px;color:#ededed;text-decoration:none;font-size:14px;font-weight:600"><span>유튜브</span><span aria-hidden="true" style="display:inline-flex;align-items:center"><svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="17" height="12" rx="3" fill="#FF0000"/><path d="M7 3.5L11.5 6L7 8.5V3.5Z" fill="white"/></svg></span></a>',
+      '    <div style="grid-area:brand;margin-left:-18px;display:flex;align-items:center;justify-content:space-between;gap:12px">',
+      '      <strong style="font-size:22px;font-weight:800;color:#f3f4f6;letter-spacing:-0.02em">우리동네 재테크</strong>',
+      '      <a href="https://www.youtube.com/@우리동네재테크" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:6px;flex-shrink:0;color:#ededed;text-decoration:none;font-size:14px;font-weight:600"><span>유튜브</span><span aria-hidden="true" style="display:inline-flex;align-items:center"><svg width="17" height="12" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="17" height="12" rx="3" fill="#FF0000"/><path d="M7 3.5L11.5 6L7 8.5V3.5Z" fill="white"/></svg></span></a>',
       '    </div>',
       '    <div data-footer-info="true" style="grid-area:info;margin-left:-18px;color:#888888;font-size:13px;line-height:2.15;margin-top:18px">',
       '        <p style="margin:0">(주)우리동네사람들 | 대표자 : 홍윤지 | 서울특별시 영등포구 당산로 92, 301-이3호(당산동1가, 호서빌딩)</p>',
