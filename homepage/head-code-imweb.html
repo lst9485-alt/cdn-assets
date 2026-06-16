@@ -1133,6 +1133,63 @@
   }
 </style>
 
+<script>
+(function(){
+  function forceReceiptRows(){
+    var modal = document.getElementById('successModal');
+    if (!modal) return;
+    ['[data-product]', '[data-amount]'].forEach(function(selector){
+      var value = modal.querySelector(selector);
+      if (!value) return;
+      var row = value.closest('.row, .recv-row') || value.parentElement;
+      if (!row) return;
+      row.style.setProperty('display', 'flex', 'important');
+      row.style.setProperty('flex-direction', 'row', 'important');
+      row.style.setProperty('align-items', 'baseline', 'important');
+      row.style.setProperty('justify-content', 'space-between', 'important');
+      row.style.setProperty('gap', '24px', 'important');
+      row.style.setProperty('width', '100%', 'important');
+      row.style.setProperty('box-sizing', 'border-box', 'important');
+      row.style.setProperty('margin', '6px 0', 'important');
+      row.style.setProperty('float', 'none', 'important');
+
+      var label = row.querySelector('dt');
+      if (label) {
+        label.style.setProperty('display', 'block', 'important');
+        label.style.setProperty('margin', '0', 'important');
+        label.style.setProperty('flex', '0 0 auto', 'important');
+        label.style.setProperty('text-align', 'left', 'important');
+        label.style.setProperty('white-space', 'nowrap', 'important');
+        label.style.setProperty('float', 'none', 'important');
+      }
+      value.style.setProperty('display', 'block', 'important');
+      value.style.setProperty('margin', '0 0 0 auto', 'important');
+      value.style.setProperty('flex', '0 1 auto', 'important');
+      value.style.setProperty('text-align', 'right', 'important');
+      value.style.setProperty('white-space', 'nowrap', 'important');
+      value.style.setProperty('float', 'none', 'important');
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    forceReceiptRows();
+    var count = 0;
+    var timer = setInterval(function(){
+      forceReceiptRows();
+      count += 1;
+      if (count >= 20) clearInterval(timer);
+    }, 300);
+    if (document.body && window.MutationObserver) {
+      new MutationObserver(forceReceiptRows).observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'style']
+      });
+    }
+  });
+})();
+</script>
+
 <style id="od-imweb-font-guard">
 /* 아임웹 기본 폰트 CSS가 코드위젯 내부 텍스트를 덮어쓰는 현상 방지 */
 div[data-widget-type="code"] :where(div,section,article,main,nav,aside,p,span,a,button,input,select,textarea,label,li,dt,dd,small,strong,em,h1,h2,h3,h4,h5,h6),

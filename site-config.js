@@ -162,7 +162,7 @@
             hubVisible: true,
             groupLabel: '공통',
             imwebCode: 'homepage/head-code-imweb.html',
-            dateSuffix: '4'
+            dateSuffix: '5'
           },
           {
             id: 'imweb-footer-code',
