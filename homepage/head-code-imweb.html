@@ -1078,11 +1078,11 @@
   #successModal .dl,
   #successModal .recv-dashed { display:block; width:100%; box-sizing:border-box; border-top:1.5px dashed #d1d5db; border-bottom:1.5px dashed #d1d5db; margin-top:20px; padding:12px 0; }
   #successModal .row,
-  #successModal .recv-row { display:flex !important; flex-direction:row !important; align-items:baseline !important; justify-content:space-between !important; gap:24px; width:100%; box-sizing:border-box; margin:6px 0; text-align:left; }
+  #successModal .recv-row { display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important; align-items:baseline !important; justify-content:space-between !important; gap:24px; width:100%; box-sizing:border-box; margin:6px 0 !important; padding-left:0 !important; padding-right:0 !important; text-align:left; float:none !important; }
   #successModal .row dt,
-  #successModal .recv-row dt { display:block; color:#4b5563; font-size:14px; margin:0; flex:0 0 auto; text-align:left; white-space:nowrap; }
+  #successModal .recv-row dt { display:block !important; width:auto !important; min-width:0 !important; color:#4b5563; font-size:14px; margin:0 !important; flex:0 0 auto !important; text-align:left !important; white-space:nowrap; float:none !important; }
   #successModal .row dd,
-  #successModal .recv-row dd { display:block; margin:0 0 0 auto; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; flex:0 1 auto; text-align:right; white-space:nowrap; }
+  #successModal .recv-row dd { display:block !important; width:auto !important; min-width:0 !important; margin:0 0 0 auto !important; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; flex:0 1 auto !important; text-align:right !important; white-space:nowrap; float:none !important; }
   #successModal .row .prod { font-size:17px; color:#111; }
   #successModal .row .amt { font-size:28px; color:#0055FF; }
   #successModal .promo-box { margin-top:16px; border-radius:14px; overflow:hidden; border:1.5px solid #bfdbfe; }
@@ -1138,24 +1138,39 @@
   function forceReceiptRows(){
     var modal = document.getElementById('successModal');
     if (!modal) return;
+    function findReceiptRow(value){
+      var node = value.parentElement;
+      var depth = 0;
+      while (node && node !== modal && depth < 4) {
+        if (node.querySelector && node.querySelector('dt') && node.contains(value)) return node;
+        node = node.parentElement;
+        depth += 1;
+      }
+      return value.parentElement;
+    }
     ['[data-product]', '[data-amount]'].forEach(function(selector){
       var value = modal.querySelector(selector);
       if (!value) return;
-      var row = value.closest('.row, .recv-row') || value.parentElement;
+      var row = findReceiptRow(value);
       if (!row) return;
       row.style.setProperty('display', 'flex', 'important');
       row.style.setProperty('flex-direction', 'row', 'important');
+      row.style.setProperty('flex-wrap', 'nowrap', 'important');
       row.style.setProperty('align-items', 'baseline', 'important');
       row.style.setProperty('justify-content', 'space-between', 'important');
       row.style.setProperty('gap', '24px', 'important');
       row.style.setProperty('width', '100%', 'important');
       row.style.setProperty('box-sizing', 'border-box', 'important');
       row.style.setProperty('margin', '6px 0', 'important');
+      row.style.setProperty('padding-left', '0', 'important');
+      row.style.setProperty('padding-right', '0', 'important');
       row.style.setProperty('float', 'none', 'important');
 
       var label = row.querySelector('dt');
       if (label) {
         label.style.setProperty('display', 'block', 'important');
+        label.style.setProperty('width', 'auto', 'important');
+        label.style.setProperty('min-width', '0', 'important');
         label.style.setProperty('margin', '0', 'important');
         label.style.setProperty('flex', '0 0 auto', 'important');
         label.style.setProperty('text-align', 'left', 'important');
@@ -1163,6 +1178,8 @@
         label.style.setProperty('float', 'none', 'important');
       }
       value.style.setProperty('display', 'block', 'important');
+      value.style.setProperty('width', 'auto', 'important');
+      value.style.setProperty('min-width', '0', 'important');
       value.style.setProperty('margin', '0 0 0 auto', 'important');
       value.style.setProperty('flex', '0 1 auto', 'important');
       value.style.setProperty('text-align', 'right', 'important');
