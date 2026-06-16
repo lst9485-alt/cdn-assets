@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-16T06:00:10.840847+09:00",
+  "updated": "2026-06-17T06:00:10.800916+09:00",
   "okr": [
     {
       "title": "6월 : 쓰레드 500명(현재 173명)",
@@ -33,9 +33,9 @@
     }
   ],
   "tasks": {
-    "total": 564,
-    "done": 536,
-    "overdue": 10,
+    "total": 568,
+    "done": 537,
+    "overdue": 17,
     "pending": [
       {
         "title": "전자책 작성",
@@ -83,29 +83,44 @@
         "overdue": true
       },
       {
-        "title": "코칭 30일 기획",
-        "date": "2026-06-15T19:30:00.000+09:00",
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-06-16",
         "overdue": true
       },
       {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-06-16",
-        "overdue": false
+        "title": "P1~P3/목실감",
+        "date": "2026-06-16T08:30:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "앞으로 계획점검",
+        "title": "코칭 30일 기획",
         "date": "2026-06-16T10:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "삼성닷컴 확인",
         "date": "2026-06-16T11:45:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "코칭30,90,180일 기획 및 제작",
         "date": "2026-06-16T13:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-06-16T14:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "앞으로 계획점검",
+        "date": "2026-06-16T16:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "강의기획",
+        "date": "2026-06-16T18:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "자료수집&도입부",
@@ -120,11 +135,6 @@
       {
         "title": "콘텐츠 관리시트",
         "date": "2026-06-17T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의기획",
-        "date": "2026-06-17T13:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -173,6 +183,11 @@
         "overdue": false
       },
       {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-06-23",
+        "overdue": false
+      },
+      {
         "title": "법인폰 자동 일시정지 재신청(6/12~9/13 일지정지종료)",
         "date": "2026-09-10T12:00:00.000+09:00",
         "overdue": false
@@ -180,26 +195,20 @@
     ],
     "schedule": [
       {
-        "title": "주제선정&썸네일&제목",
+        "title": "자료수집&도입부",
         "time": "",
         "allDay": true,
         "done": false
       },
       {
-        "title": "앞으로 계획점검",
+        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
         "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "삼성닷컴 확인",
-        "time": "11:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "코칭30,90,180일 기획 및 제작",
-        "time": "13:00",
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
         "allDay": false,
         "done": false
       }
@@ -234,11 +243,6 @@
       "rate": "46%",
       "days": [
         {
-          "date": "2026-06-10",
-          "done": 3,
-          "total": 4
-        },
-        {
           "date": "2026-06-11",
           "done": 2,
           "total": 4
@@ -260,11 +264,16 @@
         },
         {
           "date": "2026-06-15",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-06-16",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-06-17",
           "done": 0,
           "total": 4
         }
