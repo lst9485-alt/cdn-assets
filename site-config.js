@@ -161,7 +161,8 @@
             activeMatch: ['head-code-imweb.html'],
             hubVisible: true,
             groupLabel: '공통',
-            imwebCode: 'homepage/head-code-imweb.html'
+            imwebCode: 'homepage/head-code-imweb.html',
+            dateSuffix: '2'
           },
           {
             id: 'imweb-footer-code',
