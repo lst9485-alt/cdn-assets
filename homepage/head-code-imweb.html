@@ -1076,13 +1076,13 @@
   #successModal .kakao-mini:hover { background:#f5d800; }
   #successModal .kakao-mini:active { transform:scale(.96); }
   #successModal .dl,
-  #successModal .recv-dashed { border-top:1.5px dashed #d1d5db; border-bottom:1.5px dashed #d1d5db; margin-top:20px; padding:12px 0; }
+  #successModal .recv-dashed { display:block; width:100%; box-sizing:border-box; border-top:1.5px dashed #d1d5db; border-bottom:1.5px dashed #d1d5db; margin-top:20px; padding:12px 0; }
   #successModal .row,
-  #successModal .recv-row { display:grid !important; grid-template-columns:max-content minmax(0,1fr); align-items:baseline; column-gap:24px; width:100%; margin:6px 0; text-align:left; }
+  #successModal .recv-row { display:flex !important; flex-direction:row !important; align-items:baseline !important; justify-content:space-between !important; gap:24px; width:100%; box-sizing:border-box; margin:6px 0; text-align:left; }
   #successModal .row dt,
-  #successModal .recv-row dt { color:#4b5563; font-size:14px; margin:0; justify-self:start; text-align:left; }
+  #successModal .recv-row dt { display:block; color:#4b5563; font-size:14px; margin:0; flex:0 0 auto; text-align:left; white-space:nowrap; }
   #successModal .row dd,
-  #successModal .recv-row dd { margin:0; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; justify-self:end; text-align:right; }
+  #successModal .recv-row dd { display:block; margin:0 0 0 auto; font-family:'GmarketSans',Pretendard,sans-serif; font-weight:900; flex:0 1 auto; text-align:right; white-space:nowrap; }
   #successModal .row .prod { font-size:17px; color:#111; }
   #successModal .row .amt { font-size:28px; color:#0055FF; }
   #successModal .promo-box { margin-top:16px; border-radius:14px; overflow:hidden; border:1.5px solid #bfdbfe; }
