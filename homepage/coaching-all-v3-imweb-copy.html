@@ -1143,7 +1143,7 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
 <p class="text-sm text-white/80 md:text-base">
 <span class="font-bold text-white">₩400,000</span> <span class="font-bold" style="color:#ff7a7a;margin-right:6px;font-size:0.85em">(50%할인)</span>
 <span class="text-yellow-400">★</span> 4.97점<span style="font-size:0.85em">(후기 186)</span>
-          <span class="mx-1 text-white/40">·</span>
+<span class="mx-1 text-white/40">·</span>
           6개월 케어
         </p>
 </div>
@@ -1637,7 +1637,7 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
                 </p>
 <div class="mt-5 pt-5 border-t border-brand-orange/15">
 <div class="deliverable-chips-2x2">
-<span class="deliverable-chip"><iconify-icon class="text-brand-orange text-lg" icon="solar:chart-square-bold"></iconify-icon>자산 관리&amp;<br class="md:hidden">매수 플래너</span>
+<span class="deliverable-chip"><iconify-icon class="text-brand-orange text-lg" icon="solar:chart-square-bold"></iconify-icon>자산 관리&amp;<br class="md:hidden"/>매수 플래너</span>
 <span class="deliverable-chip"><iconify-icon class="text-brand-orange text-lg" icon="solar:calculator-bold"></iconify-icon>재무 계산기</span>
 <span class="deliverable-chip"><iconify-icon class="text-brand-orange text-lg" icon="solar:presentation-graph-bold"></iconify-icon>상담 리포트</span>
 <span class="deliverable-chip"><iconify-icon class="text-brand-orange text-lg" icon="solar:document-text-bold"></iconify-icon>솔루션 요약</span>
@@ -1958,7 +1958,6 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
 <p class="text-5xl md:text-[56px] font-bold tracking-tight text-black">960,000 <span class="text-base font-medium text-gray-600">원</span></p>
 <span class="price-strike text-lg font-semibold">1,600,000<span class="won">원</span></span>
 </div>
-
 </div>
 <div class="mb-7 flex min-h-[72px] flex-col gap-3 rounded-xl border border-gray-300 bg-white px-5 py-4 sm:flex-row sm:items-center">
 <span class="shrink-0 rounded-md bg-gray-700 px-3 py-1 text-sm font-bold text-white">진행 방식</span>
@@ -2146,7 +2145,7 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
 </label>
 </div>
 <div class="space-y-1.5 text-sm text-gray-500">
-<p class="text-gray-700 font-medium">&nbsp;* 카드결제, 현금영수증 모두 가능합니다</p>
+<p class="text-gray-700 font-medium"> * 카드결제, 현금영수증 모두 가능합니다</p>
 </div>
 </div>
 <!-- 5. 개인정보 수집 동의 -->
@@ -2259,6 +2258,25 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
   };
   var V3_PREVIEW_MODE = false;
 
+  // ===== UTM 보존 (도착 시 저장 → 신청 시 복원, 24시간) =====
+  (function () {
+    var KEY = 'odn_utm';
+    var TTL_MS = 24 * 60 * 60 * 1000;
+    function readUrlUtm() { return new URLSearchParams(window.location.search).get('utm_campaign') || ''; }
+    function save(v) {
+      if (!v) return;
+      try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {}
+      try { document.cookie = KEY + '=' + encodeURIComponent(v) + '; path=/; max-age=86400; SameSite=Lax'; } catch (e) {}
+    }
+    function readStored() {
+      try { var raw = localStorage.getItem(KEY); if (raw) { var d = JSON.parse(raw); if (d.v && d.t && Date.now() - d.t < TTL_MS) return d.v; } } catch (e) {}
+      try { var m = document.cookie.match(new RegExp('(?:^|; )' + KEY + '=([^;]*)')); if (m) return decodeURIComponent(m[1]); } catch (e) {}
+      return '';
+    }
+    save(readUrlUtm());
+    window.getCounselUtm = function () { return readUrlUtm() || readStored() || ''; };
+  })();
+
   // 전화번호 자동 포맷 (010-1234-5678)
 	  function formatPhone(el) {
 	    var v = el.value.replace(/[^0-9]/g, '');
@@ -2349,8 +2367,8 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
     // 결제 안내 모달에 신청자 정보 채우기
     fillSuccessModal(name, phone, amount);
 
-    var params = new URLSearchParams(window.location.search);
-    var utm = params.get('utm_campaign') || '';
+    var utm = window.getCounselUtm ? window.getCounselUtm()
+              : (new URLSearchParams(window.location.search).get('utm_campaign') || '');
 
 	    var payload = {
 	      source: 'homepage-coaching-v3',

@@ -2352,8 +2352,8 @@
     }
     function readStored() {
       try { var raw = localStorage.getItem(KEY); if (raw) { var d = JSON.parse(raw); if (d.v && d.t && Date.now() - d.t < TTL_MS) return d.v; } } catch (e) {}
-      var m = document.cookie.match(/(?:^|; )odn_utm=([^;]*)/);
-      return m ? decodeURIComponent(m[1]) : '';
+      try { var m = document.cookie.match(new RegExp('(?:^|; )' + KEY + '=([^;]*)')); if (m) return decodeURIComponent(m[1]); } catch (e) {}
+      return '';
     }
     save(readUrlUtm());
     window.getCounselUtm = function () { return readUrlUtm() || readStored() || ''; };
