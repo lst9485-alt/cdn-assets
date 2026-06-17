@@ -148,7 +148,7 @@
         <div class="flex flex-wrap gap-2.5" id="chip-bar">
           <button data-target="step-1" class="step-chip inline-flex items-center gap-2 rounded-full border border-brand-dark/15 bg-white px-4 py-2.5 text-sm font-semibold text-brand-dark">
             <span class="chip-dot grid h-5 w-5 place-items-center rounded-full bg-brand-orange/10 text-[11px] font-bold text-brand-orange">1</span>
-            마인드셋·재테크
+            마인드·재테크
           </button>
           <button data-target="step-2" class="step-chip inline-flex items-center gap-2 rounded-full border border-brand-dark/15 bg-white px-4 py-2.5 text-sm font-semibold text-brand-dark">
             <span class="chip-dot grid h-5 w-5 place-items-center rounded-full bg-brand-orange/10 text-[11px] font-bold text-brand-orange">2</span>
@@ -173,22 +173,22 @@
         <div>
           <div class="flex items-center gap-2.5">
             <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">1</span>
-            <h2 class="font-display text-xl text-brand-dark sm:text-2xl">마인드셋 · 재테크 기초</h2>
+            <h2 class="font-display text-xl text-brand-dark sm:text-2xl">마인드 · 재테크 기초</h2>
           </div>
           <p class="mt-2 pl-[42px] text-sm text-brand-dark/60">돈을 대하는 태도부터. 부자들의 생각을 먼저 들여다봅니다.</p>
         </div>
         <span class="hidden shrink-0 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-semibold text-brand-orange sm:inline">초급</span>
       </div>
 
-      <!-- 대표 도서 (표지 왼쪽) -->
+      <!-- 추천 (표지 왼쪽) -->
       <article class="reveal grid items-center gap-8 rounded-3xl bg-white p-6 card-shadow sm:p-8 md:grid-cols-12 md:gap-10">
         <div class="md:col-span-5">
           <div class="relative">
             <span class="absolute -top-3 -left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
               <iconify-icon icon="solar:star-bold" class="text-sm"></iconify-icon>
-              대표 도서
+              추천
             </span>
-            <img src="https://ourdongne.github.io/books/onething.jpg" alt="원씽 표지" class="mx-auto w-full max-w-[175px] rounded-xl cover-shadow" loading="lazy" />
+            <img src="https://ourdongne.github.io/books/onething.jpg" alt="원씽 표지" class="mx-auto w-full max-w-[175px] md:max-w-[225px] rounded-xl cover-shadow" loading="lazy" />
           </div>
         </div>
         <div class="md:col-span-7">
@@ -216,7 +216,7 @@
       <!-- 함께 읽으면 좋은 책 (B 카드, 3열로 조금 크게) -->
       <div class="reveal mt-10">
         <p class="mb-5 text-xs uppercase tracking-widest text-brand-dark/60">함께 읽으면 좋은 책</p>
-        <div class="grid max-w-2xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
+        <div class="grid max-w-3xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
           <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
             <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/richdad.jpg" alt="부자 아빠 가난한 아빠 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
             <div class="flex flex-1 flex-col p-4">
@@ -244,6 +244,15 @@
               <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">'수입의 일부를 먼저 떼어둔다'는 기본 원칙. 종잣돈 만들기의 출발점.</p>
             </div>
           </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/moneynature.jpg" alt="돈의 속성 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 text-brand-orange px-2 py-0.5 text-[11px] font-semibold">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">돈의 속성</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/65">김승호</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">돈을 어떻게 대하고 불릴지, 부자의 태도를 짚어줍니다.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -268,7 +277,7 @@
         <span class="hidden shrink-0 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold text-brand-blue sm:inline">초급~중급</span>
       </div>
 
-      <!-- 대표 도서 (표지 오른쪽 — zig-zag) -->
+      <!-- 추천 (표지 오른쪽 — zig-zag) -->
       <article class="reveal grid items-center gap-8 rounded-3xl bg-white p-6 card-shadow-blue sm:p-8 md:grid-cols-12 md:gap-10">
         <div class="md:col-span-7 md:order-1 order-2">
           <p class="mb-2 text-xs uppercase tracking-widest text-brand-dark/60">Featured</p>
@@ -294,16 +303,16 @@
           <div class="relative">
             <span class="absolute -top-3 -right-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
               <iconify-icon icon="solar:star-bold" class="text-sm"></iconify-icon>
-              대표 도서
+              추천
             </span>
-            <img src="https://ourdongne.github.io/books/socool.jpg" alt="쏘쿨의 인서울 인강남 내집마련 표지" class="mx-auto w-full max-w-[175px] rounded-xl cover-shadow" loading="lazy" />
+            <img src="https://ourdongne.github.io/books/socool.jpg" alt="쏘쿨의 인서울 인강남 내집마련 표지" class="mx-auto w-full max-w-[175px] md:max-w-[225px] rounded-xl cover-shadow" loading="lazy" />
           </div>
         </div>
       </article>
 
       <div class="reveal mt-10">
         <p class="mb-5 text-xs uppercase tracking-widest text-brand-dark/60">함께 읽으면 좋은 책</p>
-        <div class="grid max-w-2xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
+        <div class="grid max-w-3xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
           <article class="book-card card-shadow-blue group flex flex-col overflow-hidden rounded-2xl bg-white">
             <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/realestate101.jpg" alt="부동산투자수업 기초편 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
             <div class="flex flex-1 flex-col p-4">
@@ -331,6 +340,15 @@
               <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">데이터로 증명하는 '꾸준히 사 모으기'. 타이밍 고민을 덜어줍니다.</p>
             </div>
           </article>
+          <article class="book-card card-shadow-blue group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/magicmoney.jpg" alt="마법의 돈 굴리기 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-blue/10 text-brand-blue px-2 py-0.5 text-[11px] font-semibold">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">마법의 돈 굴리기</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/65">김성일</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">자산을 어떻게 나눠 담을지, 자산배분의 기본을 잡아줍니다.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -355,15 +373,15 @@
         <span class="hidden shrink-0 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-semibold text-brand-orange sm:inline">중급</span>
       </div>
 
-      <!-- 대표 도서 (표지 왼쪽) -->
+      <!-- 추천 (표지 왼쪽) -->
       <article class="reveal grid items-center gap-8 rounded-3xl bg-white p-6 card-shadow sm:p-8 md:grid-cols-12 md:gap-10">
         <div class="md:col-span-5">
           <div class="relative">
             <span class="absolute -top-3 -left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
               <iconify-icon icon="solar:star-bold" class="text-sm"></iconify-icon>
-              대표 도서
+              추천
             </span>
-            <img src="https://ourdongne.github.io/books/mostimportant.jpg" alt="투자에 대한 생각 표지" class="mx-auto w-full max-w-[175px] rounded-xl cover-shadow" loading="lazy" />
+            <img src="https://ourdongne.github.io/books/mostimportant.jpg" alt="투자에 대한 생각 표지" class="mx-auto w-full max-w-[175px] md:max-w-[225px] rounded-xl cover-shadow" loading="lazy" />
           </div>
         </div>
         <div class="md:col-span-7">
@@ -390,7 +408,7 @@
 
       <div class="reveal mt-10">
         <p class="mb-5 text-xs uppercase tracking-widest text-brand-dark/60">함께 읽으면 좋은 책</p>
-        <div class="grid max-w-2xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
+        <div class="grid max-w-3xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
           <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
             <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/intelligentinvestor.jpg" alt="현명한 초보투자자 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
             <div class="flex flex-1 flex-col p-4">
@@ -415,7 +433,16 @@
               <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">중급</span>
               <h4 class="text-[15px] font-bold leading-snug text-brand-dark">돈</h4>
               <p class="mt-0.5 text-xs text-brand-dark/65">보도 섀퍼</p>
-              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">목표를 숫자로 적고 실행으로 옮기는 법. 마인드셋과 실전 사이를 잇습니다.</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">목표를 숫자로 적고 실행으로 옮기는 법. 마인드과 실전 사이를 잇습니다.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/onwallstreet.jpg" alt="전설로 떠나는 월가의 영웅 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 text-brand-orange px-2 py-0.5 text-[11px] font-semibold">중급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">전설로 떠나는 월가의 영웅</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/65">피터 린치</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">생활 속에서 좋은 기업을 찾는 법. 투자 고전입니다.</p>
             </div>
           </article>
         </div>
