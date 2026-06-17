@@ -1121,6 +1121,25 @@
   };
   var V3_PREVIEW_MODE = false;
 
+  // ===== UTM 보존 (도착 시 저장 → 신청 시 복원, 24시간) =====
+  (function () {
+    var KEY = 'odn_utm';
+    var TTL_MS = 24 * 60 * 60 * 1000;
+    function readUrlUtm() { return new URLSearchParams(window.location.search).get('utm_campaign') || ''; }
+    function save(v) {
+      if (!v) return;
+      try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {}
+      try { document.cookie = KEY + '=' + encodeURIComponent(v) + '; path=/; max-age=86400; SameSite=Lax'; } catch (e) {}
+    }
+    function readStored() {
+      try { var raw = localStorage.getItem(KEY); if (raw) { var d = JSON.parse(raw); if (d.v && d.t && Date.now() - d.t < TTL_MS) return d.v; } } catch (e) {}
+      var m = document.cookie.match(/(?:^|; )odn_utm=([^;]*)/);
+      return m ? decodeURIComponent(m[1]) : '';
+    }
+    save(readUrlUtm());
+    window.getCounselUtm = function () { return readUrlUtm() || readStored() || ''; };
+  })();
+
   // 전화번호 자동 포맷 (010-1234-5678)
 	  function formatPhone(el) {
 	    var v = el.value.replace(/[^0-9]/g, '');
@@ -1211,8 +1230,8 @@
     // 결제 안내 모달에 신청자 정보 채우기
     fillSuccessModal(name, phone, amount);
 
-    var params = new URLSearchParams(window.location.search);
-    var utm = params.get('utm_campaign') || '';
+    var utm = window.getCounselUtm ? window.getCounselUtm()
+              : (new URLSearchParams(window.location.search).get('utm_campaign') || '');
 
 	    var payload = {
 	      source: 'homepage-coaching-v3',
