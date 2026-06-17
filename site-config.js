@@ -239,6 +239,20 @@
             groupLabel: '기타'
           },
           {
+            id: 'recommended-books',
+            title: '추천도서 페이지',
+            description: '상담 90일차 발송 · 내집마련 독서 로드맵 15선 (회원 사이트 호스팅)',
+            href: 'https://ourdongne.github.io/books.html',
+            publicPath: 'ourdongne.github.io/books.html',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['books.html'],
+            hubVisible: true,
+            groupLabel: '기타'
+          },
+          {
             id: 'coaching-payment',
             title: '카드결제 페이지',
             description: '신청 완료자 전용 카드결제 페이지 (정본)',
