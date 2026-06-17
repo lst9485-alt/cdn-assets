@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>추천도서 페이지 시안 비교 — A / B / C</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: { 'brand-orange': '#FF6B00', 'brand-blue': '#0055FF', 'brand-dark': '#0A0A0A', 'brand-beige': '#F5F0E8' },
+      fontFamily: { sans: ['Pretendard','system-ui','sans-serif'] }
+    } }
+  }
+</script>
+<style>
+  body { font-family: 'Pretendard', system-ui, sans-serif; word-break: keep-all; }
+  .variant-card { transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s; }
+  .variant-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(0,0,0,.18); }
+</style>
+</head>
+<body class="bg-brand-beige text-brand-dark min-h-[100dvh]">
+  <header class="max-w-5xl mx-auto px-5 pt-14 pb-8 text-center">
+    <span class="inline-block text-xs font-bold tracking-widest text-brand-orange mb-3">우리동네재테크 · 추천도서 페이지</span>
+    <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-3">추천도서 페이지 레이아웃 시안 3가지</h1>
+    <p class="text-gray-600 text-base md:text-lg leading-relaxed">같은 책 데이터, 다른 틀입니다. 카드를 눌러 각 시안을 전체 화면으로 확인하세요.<br class="hidden md:block">책은 모양 확인용 샘플이라 표지·문구는 임시값입니다.</p>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-5 pb-20 grid gap-6 md:grid-cols-3">
+    <a href="booklist-a-timeline.html" class="variant-card block bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div class="h-32 bg-brand-dark flex items-center justify-center text-white">
+        <iconify-icon icon="solar:list-arrow-down-linear" class="text-5xl text-brand-orange"></iconify-icon>
+      </div>
+      <div class="p-5">
+        <span class="text-xs font-bold text-brand-orange">A안</span>
+        <h2 class="text-lg font-bold mt-1 mb-2">세로 타임라인 로드맵</h2>
+        <p class="text-sm text-gray-600 leading-relaxed">1→2→3단계가 위에서 아래로 흐르는 타임라인. "이 순서대로 읽으세요" 동선이 가장 명확.</p>
+        <span class="inline-flex items-center gap-1 text-sm font-bold text-brand-blue mt-4">시안 열기 <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
+      </div>
+    </a>
+
+    <a href="booklist-b-grid.html" class="variant-card block bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div class="h-32 bg-white border-b border-gray-100 flex items-center justify-center">
+        <iconify-icon icon="solar:widget-5-linear" class="text-5xl text-brand-orange"></iconify-icon>
+      </div>
+      <div class="p-5">
+        <span class="text-xs font-bold text-brand-orange">B안</span>
+        <h2 class="text-lg font-bold mt-1 mb-2">분야별 카드 그리드</h2>
+        <p class="text-sm text-gray-600 leading-relaxed">단계 필터 칩 + 책 카드 그리드. 깔끔하게 정돈된 라이브러리 느낌. 한눈에 훑기 좋음.</p>
+        <span class="inline-flex items-center gap-1 text-sm font-bold text-brand-blue mt-4">시안 열기 <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
+      </div>
+    </a>
+
+    <a href="booklist-c-editorial.html" class="variant-card block bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div class="h-32 bg-brand-beige flex items-center justify-center">
+        <iconify-icon icon="solar:book-bookmark-linear" class="text-5xl text-brand-orange"></iconify-icon>
+      </div>
+      <div class="p-5">
+        <span class="text-xs font-bold text-brand-orange">C안</span>
+        <h2 class="text-lg font-bold mt-1 mb-2">매거진 · 북클럽 에디토리얼</h2>
+        <p class="text-sm text-gray-600 leading-relaxed">큰 표지 + 큐레이터 코멘트를 잡지처럼. 따뜻한 톤, 책 한 권씩 크게 소개.</p>
+        <span class="inline-flex items-center gap-1 text-sm font-bold text-brand-blue mt-4">시안 열기 <iconify-icon icon="solar:arrow-right-linear"></iconify-icon></span>
+      </div>
+    </a>
+  </main>
+
+  <footer class="text-center text-xs text-gray-400 pb-10">우리동네 재테크 · 직장인을 위한 내집마련 로드맵 · 내부 시안</footer>
+</body>
+</html>

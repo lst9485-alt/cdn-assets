@@ -1041,6 +1041,20 @@
             sidebarType: 'root',
             activeMatch: ['roadmap-6-preview.html'],
             hubVisible: true
+          },
+          {
+            id: 'archive-booklist-variants',
+            archiveNo: 'A030',
+            modifiedDate: '2026-06-17',
+            title: '추천도서 페이지 시안',
+            description: 'A(세로 타임라인) / B(분야별 그리드) / C(매거진 에디토리얼) 3안 비교 — 상담 90일차 발송용',
+            href: 'homepage/booklist-variants.html',
+            badgeText: 'TEST',
+            badgeTone: 'soon',
+            iconKey: 'web',
+            sidebarType: 'root',
+            activeMatch: ['booklist-variants.html'],
+            hubVisible: true
           }
         ]
       }
