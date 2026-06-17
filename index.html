@@ -237,7 +237,7 @@
     }
 
     function renderGroupedRows(items, sectionId, showCopy) {
-        var groups = ['공통', '코칭', '페이지', '예정'];
+        var groups = ['페이지', '코칭', '예정', '공통'];
         items.forEach(function(item) {
             var g = item.groupLabel || '기타';
             if (groups.indexOf(g) === -1) groups.push(g);
