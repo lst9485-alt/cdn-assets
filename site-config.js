@@ -73,39 +73,6 @@
         ]
       },
       {
-        id: 'investment-section',
-        hubTitle: '투자종합',
-        collapsible: true,
-        defaultOpen: true,
-        nav: {
-          type: 'single',
-          label: '투자종합',
-          href: 'dashboard/investment.html',
-          activeMatch: ['investment.html']
-        },
-        sidebar: {
-          title: '투자종합'
-        },
-        items: [
-          {
-            id: 'investment-backtest',
-            title: '백테스트',
-            sidebarLabel: '백테스트',
-            description: '무한매수법·VR·Buy & Hold 비교, MDD/CAGR/매매 로그',
-            href: 'dashboard/investment.html',
-            modifiedDate: '2026-05-28',
-            badgeText: 'NEW',
-            badgeTone: 'live',
-            iconKey: 'investment',
-            hubVisible: true,
-            navVisible: true,
-            sidebarType: 'root',
-            activeMatch: ['investment.html'],
-            groupLabel: '주식'
-          }
-        ]
-      },
-      {
         id: 'homepage-section',
         hubTitle: '홈페이지',
         collapsible: true,
@@ -205,7 +172,7 @@
             sidebarType: 'root',
             activeMatch: ['coaching-all-v3.html'],
             hubVisible: true,
-            groupLabel: '상품',
+            groupLabel: '코칭',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
             dateSuffix: '16'
           },
@@ -221,7 +188,7 @@
             sidebarType: 'root',
             activeMatch: ['main-page.html'],
             hubVisible: true,
-            groupLabel: '기타',
+            groupLabel: '페이지',
             imwebCode: 'homepage/main-page-imweb.html'
           },
           {
@@ -236,7 +203,7 @@
             sidebarType: 'root',
             activeMatch: ['investment-philosophy.html'],
             hubVisible: true,
-            groupLabel: '기타'
+            groupLabel: '페이지'
           },
           {
             id: 'recommended-books',
@@ -250,7 +217,7 @@
             sidebarType: 'root',
             activeMatch: ['booklist-final.html'],
             hubVisible: true,
-            groupLabel: '기타',
+            groupLabel: '페이지',
             imwebCode: 'homepage/booklist-imweb-copy.html'
           },
           {
@@ -265,7 +232,7 @@
             sidebarType: 'root',
             activeMatch: ['coaching-pay'],
             hubVisible: true,
-            groupLabel: '결제'
+            groupLabel: '코칭'
           },
           {
             id: 'coaching-payment-modal-demo',
@@ -279,7 +246,7 @@
             sidebarType: 'root',
             activeMatch: ['coaching-payment-modal-demo.html'],
             hubVisible: true,
-            groupLabel: '결제'
+            groupLabel: '코칭'
           },
           {
             id: 'curriculum-page',
@@ -293,7 +260,7 @@
             sidebarType: 'root',
             activeMatch: ['curriculum.html'],
             hubVisible: true,
-            groupLabel: '기타',
+            groupLabel: '페이지',
             imwebCode: 'homepage/curriculum-imweb.html',
             dateSuffix: '3'
           },
@@ -309,7 +276,7 @@
             sidebarType: 'root',
             activeMatch: ['lecture-allinone.html'],
             hubVisible: true,
-            groupLabel: '상품'
+            groupLabel: '예정'
           },
           {
             id: 'lecture-bookclub',
@@ -323,7 +290,7 @@
             sidebarType: 'root',
             activeMatch: ['lecture-bookclub.html'],
             hubVisible: true,
-            groupLabel: '상품'
+            groupLabel: '예정'
           },
           {
             id: 'fire-retirement-calculator',
@@ -337,7 +304,7 @@
             sidebarType: 'root',
             activeMatch: ['fire-retirement-calculator.html'],
             hubVisible: true,
-            groupLabel: '템플릿'
+            groupLabel: '페이지'
           },
           {
             id: 'refund-policy',
@@ -351,9 +318,42 @@
             sidebarType: 'root',
             activeMatch: ['refund-policy.html'],
             hubVisible: true,
-            groupLabel: '기타',
+            groupLabel: '페이지',
             imwebCode: 'homepage/refund-policy-imweb.html'
           },
+        ]
+      },
+      {
+        id: 'investment-section',
+        hubTitle: '투자종합',
+        collapsible: true,
+        defaultOpen: true,
+        nav: {
+          type: 'single',
+          label: '투자종합',
+          href: 'dashboard/investment.html',
+          activeMatch: ['investment.html']
+        },
+        sidebar: {
+          title: '투자종합'
+        },
+        items: [
+          {
+            id: 'investment-backtest',
+            title: '백테스트',
+            sidebarLabel: '백테스트',
+            description: '무한매수법·VR·Buy & Hold 비교, MDD/CAGR/매매 로그',
+            href: 'dashboard/investment.html',
+            modifiedDate: '2026-05-28',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'investment',
+            hubVisible: true,
+            navVisible: true,
+            sidebarType: 'root',
+            activeMatch: ['investment.html'],
+            groupLabel: '주식'
+          }
         ]
       },
       {

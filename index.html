@@ -76,6 +76,7 @@
         .copy-btn:hover { background: #E0F2FE; border-color: #0077C8; color: #0077C8; }
         .copy-btn.copied { background: #D1FAE5; border-color: #10B981; color: #065F46; }
         .copy-btn:disabled { opacity: 0.6; cursor: wait; }
+        .sheet-group-row { display: block; padding: 8px 10px 4px; background: #F8FAFC; border-top: 1px solid #E8EEF5; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; color: #8597AD; }
 
         @media (max-width: 1200px) { .hub { padding-right: 20px; } }
         @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
@@ -224,9 +225,35 @@
         var showCopy = sectionId === 'homepage-section' || sectionId === 'pg-homepage';
         var head = isArchive ? renderArchiveHead(sectionId) : renderGenericHead(sectionId, showCopy);
         var className = isArchive ? 'sheet archive-sheet' : 'sheet generic-sheet' + (showCopy ? '' : ' no-copy');
-        return '<div class="' + className + '">' + head + sortSheetItems(items, sectionId).map(function(item) {
-            return isArchive ? renderArchiveSheetItem(item) : renderGenericSheetItem(item, sectionId, showCopy);
-        }).join('') + '</div>';
+        var rows;
+        if (sectionId === 'homepage-section') {
+            rows = renderGroupedRows(items, sectionId, showCopy);
+        } else {
+            rows = sortSheetItems(items, sectionId).map(function(item) {
+                return isArchive ? renderArchiveSheetItem(item) : renderGenericSheetItem(item, sectionId, showCopy);
+            }).join('');
+        }
+        return '<div class="' + className + '">' + head + rows + '</div>';
+    }
+
+    function renderGroupedRows(items, sectionId, showCopy) {
+        var groups = ['공통', '코칭', '페이지', '예정'];
+        items.forEach(function(item) {
+            var g = item.groupLabel || '기타';
+            if (groups.indexOf(g) === -1) groups.push(g);
+        });
+        return groups.map(function(g) {
+            var groupItems = items.filter(function(item) { return (item.groupLabel || '기타') === g; });
+            if (!groupItems.length) return '';
+            return '<div class="sheet-group-row">' + esc(g) + '</div>'
+                + groupItems.map(function(item) { return renderGenericSheetItem(item, sectionId, showCopy); }).join('');
+        }).join('');
+    }
+
+    function shortDate(value) {
+        if (!value) return '';
+        var m = String(value).match(/^(\d{4})-(\d{2})-(\d{2})/);
+        return m ? m[1].slice(2) + '/' + m[2] + '/' + m[3] : String(value);
     }
 
     function renderArchiveHead(sectionId) {
@@ -276,7 +303,7 @@
             + '<a href="' + href + '" class="sheet-row" target="_blank" rel="noopener">'
             + starCell(item)
             + '<div class="sheet-cell sheet-no">' + (item.archiveNo ? '<span class="archive-chip">' + esc(item.archiveNo) + '</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>') + '</div>'
-            + '<div class="sheet-cell sheet-date">' + esc(item.modifiedDate || '-') + '</div>'
+            + '<div class="sheet-cell sheet-date">' + esc(shortDate(item.modifiedDate) || '-') + '</div>'
             + '<div class="sheet-cell sheet-title">' + esc(item.title) + '</div>'
             + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
             + '<div class="sheet-cell sheet-status"><span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span></div>'
@@ -293,7 +320,7 @@
             : (showCopy ? '<div class="sheet-cell sheet-copy"></div>' : '');
         var dateCell = item.imwebCode
             ? '<span class="date-loading">…</span>'
-            : (item.modifiedDate ? '<span class="date-chip">' + esc(item.modifiedDate) + '</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>');
+            : (item.modifiedDate ? '<span class="date-chip">' + esc(shortDate(item.modifiedDate)) + '</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>');
         return ''
             + '<a href="' + href + '" class="sheet-row" target="_blank" rel="noopener">'
             + starCell(item)
