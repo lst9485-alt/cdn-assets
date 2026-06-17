@@ -1,0 +1,509 @@
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <title>우리동네재테크 추천도서 · 내집마련 독서 로드맵</title>
+  <meta name="description" content="직장인이 꼭 먼저 읽었으면 하는 책 15권. 마인드셋부터 부동산·ETF·투자까지, 순서대로 읽는 단계별 독서 로드맵." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="우리동네재테크 추천도서 · 내집마련 독서 로드맵" />
+  <meta property="og:description" content="직장인이 꼭 먼저 읽었으면 하는 책 15권. 마인드셋부터 부동산·ETF·투자까지, 순서대로 읽는 단계별 독서 로드맵." />
+  <meta property="og:image" content="https://ourdongne.github.io/books/onething.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="우리동네재테크 추천도서 · 내집마련 독서 로드맵" />
+  <meta name="twitter:description" content="마인드셋부터 부동산·ETF·투자까지, 직장인 내집마련 독서 로드맵 15선." />
+  <meta name="twitter:image" content="https://ourdongne.github.io/books/onething.jpg" />
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" />
+  <style>
+    @font-face { font-family: 'GmarketSans'; src: url('https://ourdongne.github.io/fonts/GmarketSansBold.woff2') format('woff2'); font-weight: 400 900; font-display: swap; }
+  </style>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-orange': '#FF6B00',
+            'brand-blue': '#0055FF',
+            'brand-dark': '#0A0A0A',
+            'brand-beige': '#F5F0E8',
+          },
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', 'sans-serif'],
+            display: ['GmarketSans', 'Pretendard', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Pretendard', system-ui, sans-serif; word-break: keep-all; }
+    .font-display { font-family: 'GmarketSans', 'Pretendard', sans-serif; }
+
+    /* tinted shadows */
+    .card-shadow { box-shadow: 0 6px 24px -8px rgba(255, 107, 0, 0.18), 0 2px 8px -4px rgba(10, 10, 10, 0.08); }
+    .card-shadow-blue { box-shadow: 0 6px 24px -8px rgba(0, 85, 255, 0.16), 0 2px 8px -4px rgba(10, 10, 10, 0.08); }
+    .cover-shadow { box-shadow: 0 24px 60px -24px rgba(10, 10, 10, 0.45); }
+
+    /* fadeInUp */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* nav chips */
+    .step-chip { transition: all .25s ease; }
+    .step-chip.active { background-color: #FF6B00; color: #fff; border-color: #FF6B00; box-shadow: 0 6px 18px -6px rgba(255,107,0,.5); }
+    .step-chip.active .chip-dot { background-color: #fff; color: #FF6B00; }
+
+    /* book card hover */
+    .book-card { transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease; }
+    .book-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px -14px rgba(255,107,0,.28), 0 6px 16px -8px rgba(10,10,10,.12); }
+    .book-card:hover .book-cover { transform: scale(1.04); }
+    .book-cover { transition: transform .5s cubic-bezier(.16,1,.3,1); }
+
+    /* pull quote 장식 */
+    .pull-quote::before {
+      content: '\201C';
+      font-family: 'GmarketSans', Georgia, serif;
+      color: #FF6B00;
+      font-size: 2.4rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.2rem;
+      opacity: 0.85;
+    }
+    /* scroll offset for anchor jumps */
+    section[id^="step-"] { scroll-margin-top: 88px; }
+  </style>
+
+<div class="bg-brand-beige text-brand-dark antialiased min-h-[100dvh] selection:bg-brand-orange/20 od-imweb-page">
+
+  <!-- ============ HERO ============ -->
+  <header class="relative overflow-hidden bg-white">
+    <div class="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand-orange/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute top-40 -left-20 h-56 w-56 rounded-full bg-brand-blue/5 blur-3xl"></div>
+
+    <!-- 매거진 상단 머리글 -->
+    <div class="relative border-b border-brand-dark/10">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 text-[11px] uppercase tracking-[0.2em] text-brand-dark/70 sm:px-8 sm:text-xs">
+        <span class="font-semibold">우리동네재테크 BOOK CLUB</span>
+        <span>추천도서</span>
+      </div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-5 pt-10 pb-12 sm:px-8 md:pt-14 md:pb-16">
+      <div class="grid items-center gap-10 md:grid-cols-[1.15fr_0.85fr]">
+
+        <!-- left: copy -->
+        <div class="reveal">
+          <span class="inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-3.5 py-1.5 text-sm font-semibold text-brand-orange">
+            <iconify-icon icon="solar:book-bookmark-bold" class="text-sm"></iconify-icon>
+            독서 로드맵
+          </span>
+
+          <h1 class="font-display mt-5 text-[28px] leading-[1.3] sm:text-4xl md:text-[44px] md:leading-[1.25]">
+            돈 공부, 무슨 책부터<br class="hidden sm:block" />
+            읽어야 할지 <span class="text-brand-orange">정리했습니다</span>
+          </h1>
+
+          <p class="mt-4 max-w-md text-[15px] leading-relaxed text-brand-dark/70 sm:text-base">
+            기초부터 중급까지 1,000권 이상을 읽고, 엄선한 추천도서 리스트입니다.
+          </p>
+
+          <!-- 발행 정보 (매거진 메타) -->
+          <div class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-brand-dark/10 pt-6">
+            <div>
+              <p class="text-[11px] uppercase tracking-widest text-brand-dark/60">Volume</p>
+              <p class="font-display mt-1 text-brand-dark">VOL.1</p>
+            </div>
+            <div class="hidden h-8 w-px bg-brand-dark/15 sm:block"></div>
+            <div>
+              <p class="text-[11px] uppercase tracking-widest text-brand-dark/60">Edition</p>
+              <p class="font-display mt-1 text-brand-dark">독서 로드맵</p>
+            </div>
+            <div class="hidden h-8 w-px bg-brand-dark/15 sm:block"></div>
+            <div>
+              <p class="text-[11px] uppercase tracking-widest text-brand-dark/60">Selection</p>
+              <p class="font-display mt-1 text-brand-dark">3단계 · 15선</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- right: stacked book visual -->
+        <div class="reveal hidden md:block">
+          <div class="relative mx-auto h-[300px] w-full max-w-xs">
+            <img src="https://ourdongne.github.io/books/onething.jpg" alt="" class="absolute left-2 top-0 h-56 w-40 -rotate-6 rounded-lg object-cover shadow-xl ring-1 ring-black/5" />
+            <img src="https://ourdongne.github.io/books/richdad.jpg" alt="" class="absolute left-20 top-8 h-60 w-40 rotate-2 rounded-lg object-cover shadow-2xl ring-1 ring-black/5" />
+            <img src="https://ourdongne.github.io/books/babylon.jpg" alt="" class="absolute left-36 top-2 h-52 w-36 rotate-8 rounded-lg object-cover shadow-xl ring-1 ring-black/5" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 단계 바로가기 (스크롤 이동, 전체는 항상 표시) -->
+      <div class="reveal mt-10 md:mt-12">
+        <div class="mb-3 text-xs font-medium text-brand-dark/65">단계별 바로가기</div>
+        <div class="flex flex-wrap gap-2.5" id="chip-bar">
+          <button data-target="step-1" class="step-chip inline-flex items-center gap-2 rounded-full border border-brand-dark/15 bg-white px-4 py-2.5 text-sm font-semibold text-brand-dark">
+            <span class="chip-dot grid h-5 w-5 place-items-center rounded-full bg-brand-orange/10 text-[11px] font-bold text-brand-orange">1</span>
+            마인드·재테크
+          </button>
+          <button data-target="step-2" class="step-chip inline-flex items-center gap-2 rounded-full border border-brand-dark/15 bg-white px-4 py-2.5 text-sm font-semibold text-brand-dark">
+            <span class="chip-dot grid h-5 w-5 place-items-center rounded-full bg-brand-orange/10 text-[11px] font-bold text-brand-orange">2</span>
+            부동산·ETF
+          </button>
+          <button data-target="step-3" class="step-chip inline-flex items-center gap-2 rounded-full border border-brand-dark/15 bg-white px-4 py-2.5 text-sm font-semibold text-brand-dark">
+            <span class="chip-dot grid h-5 w-5 place-items-center rounded-full bg-brand-orange/10 text-[11px] font-bold text-brand-orange">3</span>
+            투자
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ MAIN ============ -->
+  <main class="mx-auto max-w-6xl px-5 py-12 sm:px-8 md:py-16">
+
+    <!-- =============== STEP 1 =============== -->
+    <section id="step-1" data-step="1">
+      <!-- 단계 헤더 -->
+      <div class="reveal mb-8 flex items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">1</span>
+            <h2 class="font-display text-xl text-brand-dark sm:text-2xl">마인드 · 재테크 기초</h2>
+          </div>
+          <p class="mt-2 pl-[42px] text-sm font-medium text-brand-dark/80">돈을 대하는 태도를 정립합니다.</p>
+        </div>
+        <span class="hidden shrink-0 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-semibold text-brand-orange sm:inline">초급</span>
+      </div>
+
+      <!-- 추천 (표지 왼쪽) -->
+      <article class="reveal grid items-center gap-8 rounded-3xl bg-white p-6 card-shadow sm:p-8 md:grid-cols-12 md:gap-10">
+        <div class="md:col-span-5">
+          <div class="relative mx-auto w-full max-w-[175px] md:max-w-[225px]">
+            <span class="absolute -top-3 -left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
+              <iconify-icon icon="solar:star-bold" class="text-sm"></iconify-icon>
+              추천
+            </span>
+            <img src="https://ourdongne.github.io/books/onething.jpg" alt="원씽 표지" class="w-full rounded-xl cover-shadow" decoding="async" />
+          </div>
+        </div>
+        <div class="md:col-span-7">
+          <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2.5 py-1 text-xs font-semibold text-brand-orange">초급</span>
+          <h3 class="font-display text-2xl leading-snug text-brand-dark sm:text-3xl">원씽 (The One Thing)</h3>
+          <p class="mt-1.5 text-sm text-brand-dark/80">게리 켈러 · 제이 파파산</p>
+          <div class="pull-quote mt-8 text-[16px] leading-relaxed text-brand-dark/80">
+            한 번에 다 잘하려다 아무것도 못 끝낸 경험, 누구나 있죠.
+            이 책은 "지금 가장 중요한 단 하나"에 집중하는 힘을 알려줍니다.
+            내집마련도 결국 매달 한 가지씩 끝내가는 싸움이라, 첫 책으로 권합니다.
+          </div>
+          <div class="mt-7 rounded-xl border border-brand-dark/10 bg-brand-beige/60 p-5">
+            <p class="mb-2 flex items-center gap-2 text-sm font-semibold text-brand-orange">
+              <iconify-icon icon="solar:lightbulb-bolt-bold-duotone" class="text-lg"></iconify-icon>
+              이 책을 추천하는 이유
+            </p>
+            <p class="text-sm leading-relaxed text-brand-dark/70">
+              재테크가 어려운 건 정보가 없어서가 아니라 집중을 못 해서입니다.
+              선택과 집중의 기준을 먼저 세우면, 뒤따르는 부동산·투자 공부가 훨씬 가벼워집니다.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 함께 읽으면 좋은 책 (B 카드, 3열로 조금 크게) -->
+      <div class="reveal mt-10">
+        <p class="mb-5 text-[13px] font-semibold uppercase tracking-wide text-brand-dark/75">함께 읽으면 좋은 책</p>
+        <div class="grid max-w-3xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/richdad.jpg" alt="부자 아빠 가난한 아빠 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">부자 아빠 가난한 아빠</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">로버트 기요사키</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">자산과 부채의 차이. 돈이 일하게 만드는 개념을 처음 잡기 좋습니다.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/richbowl.jpg" alt="부자의 그릇 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">부자의 그릇</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">이즈미 마사토</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">돈을 담을 그릇을 키우는 이야기. 부담 없이 읽히는 우화 형식입니다.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/babylon.jpg" alt="바빌론 부자들의 돈 버는 지혜 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">바빌론 부자들의 돈 버는 지혜</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">조지 S. 클레이슨</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">'수입의 일부를 먼저 떼어둔다'는 기본 원칙. 종잣돈 만들기의 출발점.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/moneynature.jpg" alt="돈의 속성 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">돈의 속성</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">김승호</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">돈을 어떻게 대하고 불릴지, 부자의 태도를 짚어줍니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div class="my-14 flex items-center gap-4 md:my-16">
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+      <iconify-icon icon="solar:arrow-down-bold-duotone" class="text-lg text-brand-orange/60"></iconify-icon>
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+    </div>
+
+    <!-- =============== STEP 2 =============== -->
+    <section id="step-2" data-step="2">
+      <div class="reveal mb-8 flex items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">2</span>
+            <h2 class="font-display text-xl text-brand-dark sm:text-2xl">부동산 기초 · ETF 기초</h2>
+          </div>
+          <p class="mt-2 pl-[42px] text-sm font-medium text-brand-dark/80">내집마련의 첫걸음과, 꾸준히 모으는 ETF 투자의 기본기.</p>
+        </div>
+        <span class="hidden shrink-0 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold text-brand-blue sm:inline">초급~중급</span>
+      </div>
+
+      <article class="reveal grid items-center gap-8 rounded-3xl bg-white p-6 card-shadow-blue sm:p-8 md:grid-cols-12 md:gap-10">
+        <div class="md:col-span-7 md:order-1 order-2">
+          <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2.5 py-1 text-xs font-semibold text-brand-orange">초급</span>
+          <h3 class="font-display text-2xl leading-snug text-brand-dark sm:text-3xl">모든 주식을 소유하라</h3>
+          <p class="mt-1.5 text-sm text-brand-dark/80">존 보글</p>
+          <div class="pull-quote mt-8 text-[16px] leading-relaxed text-brand-dark/80">
+            개별 종목을 맞히려 애쓰지 말고, 시장 전체를 낮은 비용에 통째로 사서 오래 들고 가라.
+            인덱스 투자의 창시자가 남긴 가장 단순하고 강력한 원칙입니다. ETF로 잃지 않고 모아가는 출발점이에요.
+          </div>
+          <div class="mt-7 rounded-xl border border-brand-dark/10 bg-brand-beige/60 p-5">
+            <p class="mb-2 flex items-center gap-2 text-sm font-semibold text-brand-orange">
+              <iconify-icon icon="solar:chart-2-bold-duotone" class="text-lg"></iconify-icon>
+              이 책을 추천하는 이유
+            </p>
+            <p class="text-sm leading-relaxed text-brand-dark/70">
+              시장을 이기려다 지치기보다, 시장 전체를 그대로 보유하는 게 직장인에게 가장 검증된 길입니다.
+              ETF로 자산을 쌓는 기준을 잡아줘요.
+            </p>
+          </div>
+        </div>
+        <div class="md:col-span-5 md:order-2 order-1">
+          <div class="relative mx-auto w-full max-w-[175px] md:max-w-[225px]">
+            <span class="absolute -top-3 -left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
+              <iconify-icon icon="solar:star-bold" class="text-sm"></iconify-icon>
+              추천
+            </span>
+            <img src="https://ourdongne.github.io/books/ownallstocks.jpg" alt="모든 주식을 소유하라 표지" class="w-full rounded-xl cover-shadow" decoding="async" />
+          </div>
+        </div>
+      </article>
+
+      <div class="reveal mt-10">
+        <p class="mb-5 text-[13px] font-semibold uppercase tracking-wide text-brand-dark/75">함께 읽으면 좋은 책</p>
+        <div class="grid max-w-3xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+          <article class="book-card card-shadow-blue group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/justkeepbuying.jpg" alt="저스트 킵 바잉 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">저스트 킵 바잉</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">닉 매기울리</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">데이터로 증명하는 '꾸준히 사 모으기'. 타이밍 고민을 덜어줍니다.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow-blue group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/kimbujang.jpg" alt="서울 자가에 대기업 다니는 김부장 이야기 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">서울 자가에 대기업 다니는 김부장 이야기</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">송희구</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">평범한 직장인의 내집마련 이야기를 소설로. 처음이라도 술술 읽혀요.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow-blue group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/redevelop.jpg" alt="돈 되는 재건축 재개발 2 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-blue/10 px-2 py-0.5 text-[11px] font-semibold text-brand-blue">중급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">돈 되는 재건축 재개발 2</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">이정열</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">재건축·재개발이 어떻게 돈이 되는지 구조를 짚어주는 실전편.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow-blue group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/wave5.jpg" alt="아파트값 5차 파동 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-blue/10 px-2 py-0.5 text-[11px] font-semibold text-brand-blue">중급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">아파트값 5차 파동</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">최명철</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">아파트 가격이 움직이는 큰 사이클을 짚어주는 책.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div class="my-14 flex items-center gap-4 md:my-16">
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+      <iconify-icon icon="solar:arrow-down-bold-duotone" class="text-lg text-brand-orange/60"></iconify-icon>
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+    </div>
+
+    <!-- =============== STEP 3 =============== -->
+    <section id="step-3" data-step="3">
+      <div class="reveal mb-8 flex items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">3</span>
+            <h2 class="font-display text-xl text-brand-dark sm:text-2xl">투자 기초</h2>
+          </div>
+          <p class="mt-2 pl-[42px] text-sm font-medium text-brand-dark/80">시장을 보는 눈과 흔들리지 않는 원칙. 한 단계 더 깊이 들어갑니다.</p>
+        </div>
+        <span class="hidden shrink-0 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold text-brand-blue sm:inline">초급~중급</span>
+      </div>
+
+      <article class="reveal grid items-center gap-8 rounded-3xl bg-white p-6 card-shadow sm:p-8 md:grid-cols-12 md:gap-10">
+        <div class="md:col-span-5">
+          <div class="relative mx-auto w-full max-w-[175px] md:max-w-[225px]">
+            <span class="absolute -top-3 -left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
+              <iconify-icon icon="solar:star-bold" class="text-sm"></iconify-icon>
+              추천
+            </span>
+            <img src="https://ourdongne.github.io/books/mostimportant.jpg" alt="투자에 대한 생각 표지" class="w-full rounded-xl cover-shadow" decoding="async" />
+          </div>
+        </div>
+        <div class="md:col-span-7">
+          <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-blue/10 px-2.5 py-1 text-xs font-semibold text-brand-blue">중급</span>
+          <h3 class="font-display text-2xl leading-snug text-brand-dark sm:text-3xl">투자에 대한 생각</h3>
+          <p class="mt-1.5 text-sm text-brand-dark/80">하워드 막스</p>
+          <div class="pull-quote mt-8 text-[16px] leading-relaxed text-brand-dark/80">
+            남들이 욕심낼 때 조심하고, 남들이 겁낼 때 기회를 보는 법.
+            화려한 비법 대신 "위험을 어떻게 바라볼 것인가"를 차분하게 설명합니다. 큰 결정 앞에서 마음을 다잡게 해줘요.
+          </div>
+          <div class="mt-7 rounded-xl border border-brand-dark/10 bg-brand-beige/60 p-5">
+            <p class="mb-2 flex items-center gap-2 text-sm font-semibold text-brand-orange">
+              <iconify-icon icon="solar:chart-2-bold-duotone" class="text-lg"></iconify-icon>
+              이 책을 추천하는 이유
+            </p>
+            <p class="text-sm leading-relaxed text-brand-dark/70">
+              투자에서 가장 어려운 건 타이밍이 아니라 심리입니다.
+              흔들리지 않는 판단 기준을 세워두면 어떤 시장에서도 버틸 수 있어요.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <div class="reveal mt-10">
+        <p class="mb-5 text-[13px] font-semibold uppercase tracking-wide text-brand-dark/75">함께 읽으면 좋은 책</p>
+        <div class="grid max-w-3xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/livermore.jpg" alt="제시 리버모어의 회상 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">제시 리버모어의 회상</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">에드윈 르페브르</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">100년 전 전설적 투자자의 실전 회고. 시장 심리의 본질은 지금도 같아요.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/kostolany.jpg" alt="돈, 뜨겁게 사랑하고 차갑게 다루어라 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">돈, 뜨겁게 사랑하고 차갑게 다루어라</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">앙드레 코스톨라니</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">투자 대가가 풀어내는 돈과 심리 이야기. 쉽고 통찰이 깊어요.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/onwallstreet.jpg" alt="전설로 떠나는 월가의 영웅 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">전설로 떠나는 월가의 영웅</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">피터 린치</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">생활 속에서 좋은 기업을 찾는 법. 투자 고전입니다.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://ourdongne.github.io/books/graham.jpg" alt="현명한 투자자 표지" class="book-cover aspect-[5/7] w-full object-cover" decoding="async" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-blue/10 px-2 py-0.5 text-[11px] font-semibold text-brand-blue">중급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">현명한 투자자</h4>
+              <p class="mt-0.5 text-[13px] text-brand-dark/80">벤저민 그레이엄</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">가치투자의 고전. 시장에 휘둘리지 않는 원칙을 세워줍니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ CTA (C안 다크) ============ -->
+  <section class="bg-brand-dark text-white">
+    <div class="mx-auto max-w-5xl px-6 py-20 text-center sm:py-28">
+      <iconify-icon icon="solar:book-bookmark-bold-duotone" class="mb-6 inline-block text-[44px] text-brand-orange"></iconify-icon>
+      <h2 class="reveal font-display text-2xl leading-tight sm:text-4xl">
+        한 권씩 읽다 보면,<br class="sm:hidden" />
+        어느새 <span class="text-brand-orange">길이 보입니다</span>
+      </h2>
+      <p class="reveal mx-auto mt-5 max-w-xl leading-relaxed text-white/65" style="transition-delay:.08s">
+        욕심내지 말고, 오늘 한 권만 펼쳐보세요.
+      </p>
+      <div class="reveal mt-10 flex flex-col justify-center gap-4 sm:flex-row" style="transition-delay:.16s">
+        <a href="https://pf.kakao.com/_mcxnjX/chat" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#FEE500] px-8 py-4 font-semibold text-[#191919] transition hover:brightness-95">
+          <iconify-icon icon="solar:chat-round-line-bold" class="text-xl"></iconify-icon>
+          카카오톡 문의
+        </a>
+        <a href="https://ourdongne.com/curriculum" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-8 py-4 font-semibold text-white transition hover:bg-white/10">
+          <iconify-icon icon="solar:user-speak-rounded-bold" class="text-xl"></iconify-icon>
+          커리큘럼
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+
+  <script>
+    // fadeInUp
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // 단계 칩 = 스크롤 이동 (전체는 항상 표시)
+    const chips = Array.from(document.querySelectorAll('.step-chip'));
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const target = document.getElementById(chip.dataset.target);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // 스크롤 위치에 따라 현재 단계 칩 강조 (scrollspy)
+    const stepSections = document.querySelectorAll('section[id^="step-"]');
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          chips.forEach((c) => c.classList.toggle('active', c.dataset.target === id));
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    stepSections.forEach((s) => spy.observe(s));
+  </script>
+</div>

@@ -241,16 +241,17 @@
           {
             id: 'recommended-books',
             title: '추천도서 페이지',
-            description: '상담 90일차 발송 · 내집마련 독서 로드맵 15선 (회원 사이트 호스팅)',
-            href: 'https://ourdongne.github.io/books.html',
-            publicPath: 'ourdongne.github.io/books.html',
+            description: '상담 90일차 발송 · 내집마련 독서 로드맵 15선',
+            href: 'homepage/booklist-final.html',
+            publicPath: '~/books',
             badgeText: 'NEW',
             badgeTone: 'live',
             iconKey: 'web',
             sidebarType: 'root',
-            activeMatch: ['books.html'],
+            activeMatch: ['booklist-final.html'],
             hubVisible: true,
-            groupLabel: '기타'
+            groupLabel: '기타',
+            imwebCode: 'homepage/booklist-imweb-copy.html'
           },
           {
             id: 'coaching-payment',
