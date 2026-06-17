@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>추천도서 — 내집마련 독서 로드맵 (B+C 반영)</title>
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" />
+  <style>
+    @font-face { font-family: 'GmarketSans'; src: url('./fonts/GmarketSansBold.woff2') format('woff2'); font-weight: 400 900; font-display: swap; }
+  </style>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-orange': '#FF6B00',
+            'brand-blue': '#0055FF',
+            'brand-dark': '#0A0A0A',
+            'brand-beige': '#F5F0E8',
+          },
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', 'sans-serif'],
+            display: ['GmarketSans', 'Pretendard', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Pretendard', system-ui, sans-serif; word-break: keep-all; }
+    .font-display { font-family: 'GmarketSans', 'Pretendard', sans-serif; }
+
+    /* tinted shadows */
+    .card-shadow { box-shadow: 0 6px 24px -8px rgba(255, 107, 0, 0.18), 0 2px 8px -4px rgba(10, 10, 10, 0.08); }
+    .card-shadow-blue { box-shadow: 0 6px 24px -8px rgba(0, 85, 255, 0.16), 0 2px 8px -4px rgba(10, 10, 10, 0.08); }
+    .cover-shadow { box-shadow: 0 24px 60px -24px rgba(10, 10, 10, 0.45); }
+
+    /* fadeInUp */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* nav chips */
+    .step-chip { transition: all .25s ease; }
+    .step-chip.active { background-color: #FF6B00; color: #fff; border-color: #FF6B00; box-shadow: 0 6px 18px -6px rgba(255,107,0,.5); }
+    .step-chip.active .chip-dot { background-color: #fff; color: #FF6B00; }
+
+    /* book card hover */
+    .book-card { transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease; }
+    .book-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px -14px rgba(255,107,0,.28), 0 6px 16px -8px rgba(10,10,10,.12); }
+    .book-card:hover .book-cover { transform: scale(1.04); }
+    .book-cover { transition: transform .5s cubic-bezier(.16,1,.3,1); }
+
+    /* pull quote 장식 */
+    .pull-quote::before {
+      content: '\201C';
+      font-family: 'GmarketSans', serif;
+      color: #FF6B00;
+      font-size: 4rem;
+      line-height: 0;
+      display: block;
+      height: 1.6rem;
+      opacity: 0.9;
+    }
+    /* scroll offset for anchor jumps */
+    section[id^="step-"] { scroll-margin-top: 88px; }
+  </style>
+</head>
+
+<body class="bg-brand-beige text-brand-dark antialiased min-h-[100dvh] selection:bg-brand-orange/20">
+
+  <!-- ============ HERO ============ -->
+  <header class="relative overflow-hidden bg-white">
+    <div class="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand-orange/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute top-40 -left-20 h-56 w-56 rounded-full bg-brand-blue/5 blur-3xl"></div>
+
+    <!-- 매거진 상단 머리글 -->
+    <div class="relative border-b border-brand-dark/10">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 text-[11px] uppercase tracking-[0.2em] text-brand-dark/55 sm:px-8 sm:text-xs">
+        <span class="font-semibold">우리동네재테크 BOOK CLUB</span>
+        <span class="hidden sm:inline">EST. 직장인 내집마련</span>
+        <span>추천도서</span>
+      </div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-5 pt-10 pb-12 sm:px-8 md:pt-14 md:pb-16">
+      <div class="grid items-center gap-10 md:grid-cols-[1.15fr_0.85fr]">
+
+        <!-- left: copy -->
+        <div class="reveal">
+          <span class="inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/5 px-3.5 py-1.5 text-xs font-semibold text-brand-orange">
+            <iconify-icon icon="solar:book-bookmark-bold" class="text-sm"></iconify-icon>
+            내집마련 독서 로드맵
+          </span>
+
+          <h1 class="font-display mt-5 text-[28px] leading-[1.3] sm:text-4xl md:text-[44px] md:leading-[1.25]">
+            돈 공부, 무슨 책부터<br class="hidden sm:block" />
+            읽어야 할지 <span class="text-brand-orange">정리했습니다</span>
+          </h1>
+
+          <p class="mt-4 max-w-md text-[15px] leading-relaxed text-brand-dark/70 sm:text-base">
+            투자 책 1,000권을 읽은 우재가, 직장인이 꼭 먼저 읽었으면 하는 책을 골랐습니다.
+            빠르게 많이 읽기보다, 순서대로 한 권씩 제대로 소화하는 독서를 권합니다.
+          </p>
+
+          <!-- 발행 정보 (매거진 메타) -->
+          <div class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-brand-dark/10 pt-6">
+            <div>
+              <p class="text-[11px] uppercase tracking-widest text-brand-dark/45">Volume</p>
+              <p class="font-display mt-1 text-brand-dark">VOL.1</p>
+            </div>
+            <div class="hidden h-8 w-px bg-brand-dark/15 sm:block"></div>
+            <div>
+              <p class="text-[11px] uppercase tracking-widest text-brand-dark/45">Edition</p>
+              <p class="font-display mt-1 text-brand-dark">내집마련 독서 로드맵</p>
+            </div>
+            <div class="hidden h-8 w-px bg-brand-dark/15 sm:block"></div>
+            <div>
+              <p class="text-[11px] uppercase tracking-widest text-brand-dark/45">Selection</p>
+              <p class="font-display mt-1 text-brand-dark">3단계 · 12선</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- right: stacked book visual -->
+        <div class="reveal hidden md:block">
+          <div class="relative mx-auto h-[300px] w-full max-w-xs">
+            <img src="https://picsum.photos/seed/onething/300/420" alt="" class="absolute left-2 top-0 h-56 w-40 -rotate-6 rounded-lg object-cover shadow-xl ring-1 ring-black/5" />
+            <img src="https://picsum.photos/seed/richdad/300/420" alt="" class="absolute left-20 top-8 h-60 w-40 rotate-2 rounded-lg object-cover shadow-2xl ring-1 ring-black/5" />
+            <img src="https://picsum.photos/seed/babylon/300/420" alt="" class="absolute left-36 top-2 h-52 w-36 rotate-8 rounded-lg object-cover shadow-xl ring-1 ring-black/5" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 단계 바로가기 (스크롤 이동, 전체는 항상 표시) -->
+      <div class="reveal mt-10 md:mt-12">
+        <div class="mb-3 text-xs font-medium text-brand-dark/50">단계별 바로가기</div>
+        <div class="flex flex-wrap gap-2.5" id="chip-bar">
+          <button data-target="step-1" class="step-chip inline-flex items-center gap-2 rounded-full border border-brand-dark/15 bg-white px-4 py-2.5 text-sm font-semibold text-brand-dark">
+            <span class="chip-dot grid h-5 w-5 place-items-center rounded-full bg-brand-orange/10 text-[11px] font-bold text-brand-orange">1</span>
+            마인드셋·재테크
+          </button>
+          <button data-target="step-2" class="step-chip inline-flex items-center gap-2 rounded-full border border-brand-dark/15 bg-white px-4 py-2.5 text-sm font-semibold text-brand-dark">
+            <span class="chip-dot grid h-5 w-5 place-items-center rounded-full bg-brand-orange/10 text-[11px] font-bold text-brand-orange">2</span>
+            부동산·ETF
+          </button>
+          <button data-target="step-3" class="step-chip inline-flex items-center gap-2 rounded-full border border-brand-dark/15 bg-white px-4 py-2.5 text-sm font-semibold text-brand-dark">
+            <span class="chip-dot grid h-5 w-5 place-items-center rounded-full bg-brand-orange/10 text-[11px] font-bold text-brand-orange">3</span>
+            투자
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ MAIN ============ -->
+  <main class="mx-auto max-w-6xl px-5 py-12 sm:px-8 md:py-16">
+
+    <!-- =============== STEP 1 =============== -->
+    <section id="step-1" data-step="1">
+      <!-- 단계 헤더 -->
+      <div class="reveal mb-8 flex items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">1</span>
+            <h2 class="font-display text-xl text-brand-dark sm:text-2xl">마인드셋 · 재테크 기초</h2>
+          </div>
+          <p class="mt-2 pl-[42px] text-sm text-brand-dark/60">돈을 대하는 태도부터. 부자들의 생각을 먼저 들여다봅니다.</p>
+        </div>
+        <span class="hidden shrink-0 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-semibold text-brand-orange sm:inline">초급</span>
+      </div>
+
+      <!-- 대표 도서 (표지 왼쪽) -->
+      <article class="reveal grid items-center gap-8 rounded-3xl bg-white p-6 card-shadow sm:p-8 md:grid-cols-12 md:gap-10">
+        <div class="md:col-span-5">
+          <div class="relative">
+            <span class="absolute -top-3 -left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
+              <iconify-icon icon="solar:star-bold" class="text-sm"></iconify-icon>
+              대표 도서
+            </span>
+            <img src="https://picsum.photos/seed/onething/400/560" alt="원씽 표지" class="mx-auto w-full max-w-[260px] rounded-xl cover-shadow" loading="lazy" />
+          </div>
+        </div>
+        <div class="md:col-span-7">
+          <p class="mb-2 text-xs uppercase tracking-widest text-brand-dark/45">Featured</p>
+          <h3 class="font-display text-2xl leading-snug text-brand-dark sm:text-3xl">원씽 (The One Thing)</h3>
+          <p class="mt-1.5 text-sm text-brand-dark/55">게리 켈러 · 제이 파파산</p>
+          <div class="pull-quote mt-6 text-[17px] leading-relaxed text-brand-dark/80">
+            한 번에 다 잘하려다 아무것도 못 끝낸 경험, 누구나 있죠.
+            이 책은 "지금 가장 중요한 단 하나"에 집중하는 힘을 알려줍니다.
+            내집마련도 결국 매달 한 가지씩 끝내가는 싸움이라, 첫 책으로 권합니다.
+          </div>
+          <div class="mt-7 rounded-xl border border-brand-dark/10 bg-brand-beige/60 p-5">
+            <p class="mb-2 flex items-center gap-2 text-sm font-semibold text-brand-orange">
+              <iconify-icon icon="solar:lightbulb-bolt-bold-duotone" class="text-lg"></iconify-icon>
+              이 책을 추천하는 이유
+            </p>
+            <p class="text-sm leading-relaxed text-brand-dark/70">
+              재테크가 어려운 건 정보가 없어서가 아니라 집중을 못 해서입니다.
+              선택과 집중의 기준을 먼저 세우면, 뒤따르는 부동산·투자 공부가 훨씬 가벼워집니다.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 함께 읽으면 좋은 책 (B 카드, 3열로 조금 크게) -->
+      <div class="reveal mt-10">
+        <p class="mb-5 text-xs uppercase tracking-widest text-brand-dark/45">함께 읽으면 좋은 책</p>
+        <div class="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3">
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://picsum.photos/seed/richdad/300/420" alt="부자 아빠 가난한 아빠 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">부자 아빠 가난한 아빠</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/50">로버트 기요사키</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">자산과 부채의 차이. 돈이 일하게 만드는 개념을 처음 잡기 좋습니다.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://picsum.photos/seed/richbowl/300/420" alt="부자의 그릇 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">부자의 그릇</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/50">이즈미 마사토</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">돈을 담을 그릇을 키우는 이야기. 부담 없이 읽히는 우화 형식입니다.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://picsum.photos/seed/babylon/300/420" alt="바빌론 부자들의 돈 버는 지혜 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">바빌론 부자들의 돈 버는 지혜</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/50">조지 S. 클레이슨</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">'수입의 일부를 먼저 떼어둔다'는 기본 원칙. 종잣돈 만들기의 출발점.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div class="my-14 flex items-center gap-4 md:my-16">
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+      <iconify-icon icon="solar:arrow-down-bold-duotone" class="text-lg text-brand-orange/60"></iconify-icon>
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+    </div>
+
+    <!-- =============== STEP 2 =============== -->
+    <section id="step-2" data-step="2">
+      <div class="reveal mb-8 flex items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">2</span>
+            <h2 class="font-display text-xl text-brand-dark sm:text-2xl">부동산 기초 · ETF 기초</h2>
+          </div>
+          <p class="mt-2 pl-[42px] text-sm text-brand-dark/60">내집마련의 첫걸음과, 꾸준히 모으는 ETF 투자의 기본기.</p>
+        </div>
+        <span class="hidden shrink-0 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold text-brand-blue sm:inline">초급~중급</span>
+      </div>
+
+      <!-- 대표 도서 (표지 오른쪽 — zig-zag) -->
+      <article class="reveal grid items-center gap-8 rounded-3xl bg-white p-6 card-shadow-blue sm:p-8 md:grid-cols-12 md:gap-10">
+        <div class="md:col-span-7 md:order-1 order-2">
+          <p class="mb-2 text-xs uppercase tracking-widest text-brand-dark/45">Featured</p>
+          <h3 class="font-display text-2xl leading-snug text-brand-dark sm:text-3xl">쏘쿨의 인서울 인강남 내집마련</h3>
+          <p class="mt-1.5 text-sm text-brand-dark/55">쏘쿨</p>
+          <div class="pull-quote mt-6 text-[17px] leading-relaxed text-brand-dark/80">
+            "집값이 비싸서 못 산다"는 생각을 먼저 흔드는 책입니다.
+            월급쟁이가 어떤 순서로 종잣돈을 모으고, 어디부터 봐야 하는지 실제 동선으로 보여줍니다.
+            막연한 부동산 공포를 구체적인 계획으로 바꿔줍니다.
+          </div>
+          <div class="mt-7 rounded-xl border border-brand-dark/10 bg-brand-beige/60 p-5">
+            <p class="mb-2 flex items-center gap-2 text-sm font-semibold text-brand-orange">
+              <iconify-icon icon="solar:home-smile-bold-duotone" class="text-lg"></iconify-icon>
+              이 책을 추천하는 이유
+            </p>
+            <p class="text-sm leading-relaxed text-brand-dark/70">
+              내집마련을 "언젠가"가 아니라 "올해 무엇부터"로 바꿔주는 입문서입니다.
+              직장인 눈높이에서 현실적인 첫걸음을 잡기에 가장 좋습니다.
+            </p>
+          </div>
+        </div>
+        <div class="md:col-span-5 md:order-2 order-1">
+          <div class="relative">
+            <span class="absolute -top-3 -right-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
+              <iconify-icon icon="solar:star-bold" class="text-sm"></iconify-icon>
+              대표 도서
+            </span>
+            <img src="https://picsum.photos/seed/socool/400/560" alt="쏘쿨의 인서울 인강남 내집마련 표지" class="mx-auto w-full max-w-[260px] rounded-xl cover-shadow" loading="lazy" />
+          </div>
+        </div>
+      </article>
+
+      <div class="reveal mt-10">
+        <p class="mb-5 text-xs uppercase tracking-widest text-brand-dark/45">함께 읽으면 좋은 책</p>
+        <div class="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3">
+          <article class="book-card card-shadow-blue group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://picsum.photos/seed/realestate101/300/420" alt="부동산투자수업 기초편 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-blue/10 px-2 py-0.5 text-[11px] font-semibold text-brand-blue">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">부동산투자수업 기초편</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/50">이현철</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">용어부터 흐름까지. 부동산이 처음인 직장인을 위한 입문서입니다.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow-blue group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://picsum.photos/seed/etfall/300/420" alt="ETF투자의 모든 것 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-blue/10 px-2 py-0.5 text-[11px] font-semibold text-brand-blue">중급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">ETF투자의 모든 것</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/50">systrader79</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">ETF 고르는 기준과 운용 방법. 분산투자를 제대로 이해하고 싶을 때.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow-blue group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://picsum.photos/seed/justkeepbuying/300/420" alt="저스트 킵 바잉 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-blue/10 px-2 py-0.5 text-[11px] font-semibold text-brand-blue">초급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">저스트 킵 바잉</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/50">닉 매기울리</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">데이터로 증명하는 '꾸준히 사 모으기'. 타이밍 고민을 덜어줍니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div class="my-14 flex items-center gap-4 md:my-16">
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+      <iconify-icon icon="solar:arrow-down-bold-duotone" class="text-lg text-brand-orange/60"></iconify-icon>
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+    </div>
+
+    <!-- =============== STEP 3 =============== -->
+    <section id="step-3" data-step="3">
+      <div class="reveal mb-8 flex items-end justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">3</span>
+            <h2 class="font-display text-xl text-brand-dark sm:text-2xl">투자 기초</h2>
+          </div>
+          <p class="mt-2 pl-[42px] text-sm text-brand-dark/60">시장을 보는 눈과 흔들리지 않는 원칙. 한 단계 더 깊이 들어갑니다.</p>
+        </div>
+        <span class="hidden shrink-0 rounded-full bg-brand-orange/10 px-3 py-1 text-xs font-semibold text-brand-orange sm:inline">중급</span>
+      </div>
+
+      <!-- 대표 도서 (표지 왼쪽) -->
+      <article class="reveal grid items-center gap-8 rounded-3xl bg-white p-6 card-shadow sm:p-8 md:grid-cols-12 md:gap-10">
+        <div class="md:col-span-5">
+          <div class="relative">
+            <span class="absolute -top-3 -left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-brand-orange px-3 py-1.5 text-xs font-semibold text-white shadow-lg">
+              <iconify-icon icon="solar:star-bold" class="text-sm"></iconify-icon>
+              대표 도서
+            </span>
+            <img src="https://picsum.photos/seed/mostimportant/400/560" alt="투자에 대한 생각 표지" class="mx-auto w-full max-w-[260px] rounded-xl cover-shadow" loading="lazy" />
+          </div>
+        </div>
+        <div class="md:col-span-7">
+          <p class="mb-2 text-xs uppercase tracking-widest text-brand-dark/45">Featured</p>
+          <h3 class="font-display text-2xl leading-snug text-brand-dark sm:text-3xl">투자에 대한 생각</h3>
+          <p class="mt-1.5 text-sm text-brand-dark/55">하워드 막스</p>
+          <div class="pull-quote mt-6 text-[17px] leading-relaxed text-brand-dark/80">
+            남들이 욕심낼 때 조심하고, 남들이 겁낼 때 기회를 보는 법.
+            화려한 비법 대신 "위험을 어떻게 바라볼 것인가"를 차분하게 설명합니다.
+            내집마련처럼 큰 결정 앞에서 마음을 다잡게 해주는 책입니다.
+          </div>
+          <div class="mt-7 rounded-xl border border-brand-dark/10 bg-brand-beige/60 p-5">
+            <p class="mb-2 flex items-center gap-2 text-sm font-semibold text-brand-orange">
+              <iconify-icon icon="solar:chart-2-bold-duotone" class="text-lg"></iconify-icon>
+              이 책을 추천하는 이유
+            </p>
+            <p class="text-sm leading-relaxed text-brand-dark/70">
+              투자에서 가장 어려운 건 타이밍이 아니라 심리입니다.
+              흔들리지 않는 판단 기준을 세워두면 어떤 시장에서도 버틸 수 있습니다.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <div class="reveal mt-10">
+        <p class="mb-5 text-xs uppercase tracking-widest text-brand-dark/45">함께 읽으면 좋은 책</p>
+        <div class="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3">
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://picsum.photos/seed/intelligentinvestor/300/420" alt="현명한 초보투자자 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">중급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">현명한 초보투자자</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/50">야마구치 요헤이</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">가치투자의 기본기를 초보 눈높이로. 종목을 보는 틀을 잡아줍니다.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://picsum.photos/seed/wealthinstinct/300/420" alt="부의 본능 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">중급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">부의 본능</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/50">브라운스톤</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">왜 사람들이 투자에서 같은 실수를 반복하는지. 심리의 함정을 짚어줍니다.</p>
+            </div>
+          </article>
+          <article class="book-card card-shadow group flex flex-col overflow-hidden rounded-2xl bg-white">
+            <div class="overflow-hidden"><img src="https://picsum.photos/seed/moneyschafer/300/420" alt="돈 표지" class="book-cover aspect-[5/7] w-full object-cover" loading="lazy" /></div>
+            <div class="flex flex-1 flex-col p-4">
+              <span class="mb-2 inline-flex w-fit items-center rounded-md bg-brand-orange/10 px-2 py-0.5 text-[11px] font-semibold text-brand-orange">중급</span>
+              <h4 class="text-[15px] font-bold leading-snug text-brand-dark">돈</h4>
+              <p class="mt-0.5 text-xs text-brand-dark/50">보도 섀퍼</p>
+              <p class="mt-2 text-[13px] leading-relaxed text-brand-dark/65">목표를 숫자로 적고 실행으로 옮기는 법. 마인드셋과 실전 사이를 잇습니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ CTA ============ -->
+  <section class="bg-brand-orange">
+    <div class="mx-auto max-w-6xl px-5 py-14 sm:px-8 md:py-20">
+      <div class="reveal grid items-center gap-8 md:grid-cols-[1fr_auto]">
+        <div>
+          <iconify-icon icon="solar:hand-heart-bold" class="mb-4 text-3xl text-white/90"></iconify-icon>
+          <h2 class="font-display text-2xl leading-snug text-white sm:text-3xl">
+            어떤 책부터 막막하면,<br />
+            1:1 코칭에서 같이 정해드려요
+          </h2>
+          <p class="mt-3 max-w-md text-[15px] leading-relaxed text-white/85">
+            지금 내 상황과 목표에 맞춰, 무엇부터 읽고 무엇부터 움직일지 함께 정리합니다.
+          </p>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row md:flex-col">
+          <a href="#" class="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 text-[15px] font-bold text-brand-dark shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl">
+            <iconify-icon icon="solar:chat-round-dots-bold" class="text-lg text-brand-orange"></iconify-icon>
+            카카오톡 채널
+          </a>
+          <a href="#" class="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/40 bg-white/10 px-6 py-4 text-[15px] font-bold text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20">
+            <iconify-icon icon="solar:user-speak-rounded-bold" class="text-lg"></iconify-icon>
+            1:1 코칭 보기
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-white">
+    <div class="mx-auto flex max-w-6xl flex-col items-center gap-2 px-5 py-8 text-center sm:px-8">
+      <div class="flex items-center gap-2 font-display text-sm text-brand-dark">
+        <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange"></iconify-icon>
+        우리동네 재테크
+      </div>
+      <p class="text-xs text-brand-dark/50">직장인을 위한 내집마련 로드맵</p>
+    </div>
+  </footer>
+
+  <script>
+    // fadeInUp
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // 단계 칩 = 스크롤 이동 (전체는 항상 표시)
+    const chips = Array.from(document.querySelectorAll('.step-chip'));
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const target = document.getElementById(chip.dataset.target);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // 스크롤 위치에 따라 현재 단계 칩 강조 (scrollspy)
+    const stepSections = document.querySelectorAll('section[id^="step-"]');
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          chips.forEach((c) => c.classList.toggle('active', c.dataset.target === id));
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    stepSections.forEach((s) => spy.observe(s));
+  </script>
+</body>
+</html>
