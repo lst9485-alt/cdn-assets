@@ -8,8 +8,10 @@
 
   <!-- Pretendard (본문) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
-  <!-- G마켓산스 (제목) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/pstorms/gmarket-sans/GmarketSans.css">
+  <!-- G마켓산스 (제목) — self-host (jsdelivr pstorms 깨짐) -->
+  <style>
+    @font-face { font-family: 'GmarketSans'; src: url('./fonts/GmarketSansBold.woff2') format('woff2'); font-weight: 400 900; font-display: swap; }
+  </style>
   <!-- Iconify -->
   <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
   <!-- Tailwind -->
