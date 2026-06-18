@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18T06:00:03.852007+09:00",
+  "updated": "2026-06-19T06:00:03.431773+09:00",
   "sections": [
     {
       "name": "1. 프로젝트",
@@ -10,31 +10,11 @@
           "ref": null,
           "items": [
             {
-              "text": "1-3. 카카오 채널 FAQ 수정 — 무통장/카드결제 방법, 입금 확인 시점, 결제 후 일정 예약 안내 등록.",
-              "done": false
-            },
-            {
-              "text": "1-4. 상담 후 자료발송 제작 — 정본 노트 `Obsidian/1. Project/상담 후 자료발송.md` 기준. 3일차 노션 가이드북 링크는 `UH_6784` 알림톡으로 전환 완료(승인본 대조, 본인/홍윤지 테스트 `rslt=0`, Apps Script 배포, 커밋 `d4a9e826`). 남은 범위는 30일/90일/180일 자료와 알림톡 템플릿(UH_6785~6787) 제작·연결.",
-              "done": false
-            },
-            {
               "text": "1-6 상담랜딩페이지 주차별로 달력마감표시.",
               "done": false
             },
             {
-              "text": "1-7. 상담완료 알림톡(UI_3906) 검수 통과 후 코드에 반영. 버튼 2개(상담자료 확인 + 만족도 조사)짜리 새 템플릿 연결, 본인번호 테스트 `rslt=0`, Apps Script/n8n 배포 완료. (6/4)",
-              "done": true
-            },
-            {
               "text": "1-8. 짧은 소개영상 혹은 자료제작",
-              "done": false
-            },
-            {
-              "text": "1-9. 회원 자료 페이지(ourdongne.github.io) 후속 — 디자인 개편 배포 완료(6/8, 브랜드 주황+GmarketSans, 날짜 자동계산). 남은 것: (a) `prep.html`(재무 계산기)도 같은 브랜드 톤으로 디자인 통일. (b) rv 지적 JS 보강(우선순위 낮음 — 정적페이지라 영향 작음): ppt/doc href에 http(s) 검증, date 형식 검증, 빈 ppt/doc 카드 숨김. 브라우저로 동작 확인하며 적용. 파일: `workspace/apps/dashboard/ourdongne-site/index.html`",
-              "done": false
-            },
-            {
-              "text": "1-10. \"배포 완료 자동 알림\" 방식 결정 — push 후 라이브 반영을 매번 자동으로 ✅ 보고하게 할지. **권장: 훅보다 규칙(CLAUDE.md)**. 이유: GitHub Pages 반영이 1~2분 비동기라 훅(도구 이벤트 동기 실행)으로는 \"푸시함\"까지만 즉시 알 수 있고 \"라이브 떴음\"은 못 기다림. → `apps/dashboard/CLAUDE.md`에 \"ourdongne/cdn-assets push 후 라이브 반영 폴링 → ✅ 보고\" 한 줄 추가가 가장 단순·확실. 훅으로 하려면 push 감지 후 백그라운드 폴링 스크립트를 띄우는 형태라 복잡. 둘 중 택1만 정하면 바로 반영 가능.",
               "done": false
             },
             {
@@ -96,28 +76,12 @@
               "done": false
             },
             {
-              "text": "3-1-2. 내집마련 가이드북 노션 페이지 제작 → 3일차(UH_6784) 선물 발송. 자료URL은 `https://` 제외한 Notion 링크로 주입. 현재 링크: `www.notion.so/2026ver-2ec4b8183b308075915edff2908aa255?source=copy_link`. 운영 전환 완료. (6/3)",
-              "done": true
-            },
-            {
               "text": "3-1-3. 상담 하루 전 자료 (읽을거리 + 3분 강의) 제작 → UH_5037 추가",
-              "done": false
-            },
-            {
-              "text": "3-1-4. 30일차 읽을거리 제작 → UH_6785 추가",
-              "done": false
-            },
-            {
-              "text": "3-1-5. 90일차 읽을거리 제작 → UH_6786 추가",
               "done": false
             },
             {
               "text": "3-1-6. 180일차 읽을거리 제작 → UH_6787 추가",
               "done": false
-            },
-            {
-              "text": "3-1-7. 후속지원 알림톡 발송 코드 전환 — 1차: 3일차만 기존 SMS → UH_6784 알림톡으로 교체 완료. 승인 본문/버튼명/버튼 URL 형식(`http://#{자료URL}`) 대조, `FOLLOWUP_ALIMTALK_CONFIG[3]` 활성화, 후속관리 상태만 발송하도록 보정, `npx clasp push --force`, 커밋 `d4a9e826`. 2차: 30/90/180일차 자료 완성 후 UH_6785~6787을 순차 연결. (6/3)",
-              "done": true
             },
             {
               "text": "3-1-8. 구글 비즈니스 프로필 070 반영 검증 — 1주일 후 다른 갤럭시 폰으로 본인 번호 전화 테스트",
@@ -171,66 +135,23 @@
               "done": false
             }
           ]
-        },
-        {
-          "id": 5,
-          "title": "무한매수법 프로젝트 (백테스트) (5/5~)",
-          "ref": "백테스트툴",
-          "items": [
-            {
-              "text": "5-1. GitHub 후보 2차 조사 — 기존 후보 외 추가 포크/한국 사례/라이선스 확인",
-              "done": false
-            },
-            {
-              "text": "5-2. 후보 비교표 작성 — 라이선스, 업데이트, 데이터 소스, VR·무매 적용성, 시각화 수준",
-              "done": false
-            },
-            {
-              "text": "5-3. VR 5.0 공식 정밀화 — V/Pool/G, 실력공식, 인출식, 사이클 한도 반영",
-              "done": false
-            },
-            {
-              "text": "5-4. VR 검증 — 카페 글/운영 사례 기준으로 방향성·수치 비교",
-              "done": false
-            },
-            {
-              "text": "5-5. 무한매수법 V1/V2/V2.1 정밀화 — LOC평단매수, LOC큰수매수, 40회 사이클, 쿼터매도, 영혼법, RSI 조건",
-              "done": false
-            },
-            {
-              "text": "5-6. 무한매수법 검증 — 라오어 카페 본문/운영 사례와 비교하고 “근사 시뮬레이션”으로 표기",
-              "done": false
-            },
-            {
-              "text": "5-7. 가격 데이터 자동갱신 — `data/investment-prices.json` 생성 작업 자동화",
-              "done": false
-            },
-            {
-              "text": "5-8. 파라미터 민감도 표 — G값/밴드/익절목표/라운드별 성과 비교",
-              "done": false
-            },
-            {
-              "text": "5-9. (선택) 실전 연습 모드 — 가상 자금으로 매일 주문표/체결 기록 입력",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 6,
-          "title": "(높음) 유튜브 제작 스킬 일부 수정 (5/28~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "6-2. 원고수정 스킬(yt06-revision) 축소 — 치명적인 것 위주로 남기고 정리",
-              "done": false
-            }
-          ]
         }
       ]
     },
     {
       "name": "2. 작업 (일회성/점검)",
       "categories": [
+        {
+          "id": 0,
+          "title": "(높음) 상담 CRM 대시보드 재무 파라미터 버그 — 배포만 남음 (6/18~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "2-0. clasp 재로그인 후 배포: `cd workspace/apps/consulting-crm/integrated && npx clasp push --force` (시간 트리거 함수라 push만으로 반영)",
+              "done": false
+            }
+          ]
+        },
         {
           "id": 1,
           "title": "hometax-issue 이름 매칭 강화 검토 (5/6~)",
@@ -501,29 +422,6 @@
               "done": false
             }
           ]
-        },
-        {
-          "id": 5,
-          "title": "(낮음) Obsidian Projects/Kanban 보드 검토 (5/19~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "5-1. Projects 플러그인으로 todo-list 기반 보조 보드가 가능한지 확인",
-              "done": false
-            },
-            {
-              "text": "5-2. Kanban 플러그인 설치가 더 단순한지 비교",
-              "done": false
-            },
-            {
-              "text": "5-3. 보드를 만든다면 컬럼을 `진행 중 / 해야 함 / 막힘 / 언젠가` 로 할지 결정",
-              "done": false
-            },
-            {
-              "text": "5-4. 중복 관리가 생기면 보드 도입하지 않기",
-              "done": false
-            }
-          ]
         }
       ]
     },
@@ -568,6 +466,25 @@
             },
             {
               "text": "1-3. 회사PC 또는 서버 배포본에서 화면 확인",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "노트북",
+          "ref": null,
+          "items": [
+            {
+              "text": "1-1. scp로 3개 파일(obsidian-guard.ps1 / -launch.vbs / -install.ps1)을 노트북 임의 폴더(예: `%USERPROFILE%\\obsidian-guard\\`)에 복사",
+              "done": false
+            },
+            {
+              "text": "1-2. 그 폴더에서 `obsidian-guard-install.ps1` 실행 → 로그온 작업 등록 → 작업 시작 → 가드 1개 도는지 확인",
+              "done": false
+            },
+            {
+              "text": "1-3. (확인만) 노트북 저장소가 `%USERPROFILE%\\Desktop\\HQ\\Obsidian`에 있는지. 다른 위치면 guard.ps1의 $Vault 한 줄만 맞춤",
               "done": false
             }
           ]
