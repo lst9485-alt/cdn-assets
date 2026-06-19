@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T06:00:03.431773+09:00",
+  "updated": "2026-06-20T06:00:03.961053+09:00",
   "sections": [
     {
       "name": "1. 프로젝트",
@@ -141,17 +141,6 @@
     {
       "name": "2. 작업 (일회성/점검)",
       "categories": [
-        {
-          "id": 0,
-          "title": "(높음) 상담 CRM 대시보드 재무 파라미터 버그 — 배포만 남음 (6/18~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "2-0. clasp 재로그인 후 배포: `cd workspace/apps/consulting-crm/integrated && npx clasp push --force` (시간 트리거 함수라 push만으로 반영)",
-              "done": false
-            }
-          ]
-        },
         {
           "id": 1,
           "title": "hometax-issue 이름 매칭 강화 검토 (5/6~)",
