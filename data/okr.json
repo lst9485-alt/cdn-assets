@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T06:00:13.001504+09:00",
+  "updated": "2026-06-21T06:00:11.762895+09:00",
   "okr": [
     {
       "title": "6월 : 쓰레드 500명(현재 173명)",
@@ -33,9 +33,9 @@
     }
   ],
   "tasks": {
-    "total": 585,
+    "total": 588,
     "done": 557,
-    "overdue": 9,
+    "overdue": 15,
     "pending": [
       {
         "title": "전자책 작성",
@@ -83,24 +83,34 @@
         "overdue": true
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-06-20T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "원고수정",
         "date": "2026-06-20T09:15:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "PPT완료",
         "date": "2026-06-20T13:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-06-20T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "앞으로 계획점검",
         "date": "2026-06-20T16:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-06-20T19:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "코칭 180일 기획 및 제작",
@@ -173,6 +183,11 @@
         "overdue": false
       },
       {
+        "title": "촬영&편집&업로드",
+        "date": "2026-06-27",
+        "overdue": false
+      },
+      {
         "title": "법인폰 자동 일시정지 재신청(6/12~9/13 일지정지종료)",
         "date": "2026-09-10T12:00:00.000+09:00",
         "overdue": false
@@ -180,26 +195,20 @@
     ],
     "schedule": [
       {
-        "title": "원고수정",
+        "title": "코칭 180일 기획 및 제작",
         "time": "09:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "PPT완료",
+        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
+        "time": "11:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의기획",
         "time": "13:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "앞으로 계획점검",
-        "time": "16:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "time": "19:00",
         "allDay": false,
         "done": false
       }
@@ -230,14 +239,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 17,
-      "rate": "61%",
+      "done": 14,
+      "rate": "50%",
       "days": [
-        {
-          "date": "2026-06-14",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-06-15",
           "done": 3,
@@ -265,6 +269,11 @@
         },
         {
           "date": "2026-06-20",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-06-21",
           "done": 0,
           "total": 4
         }
