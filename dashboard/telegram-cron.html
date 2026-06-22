@@ -49,6 +49,22 @@
     .room ul{padding-left:18px;margin:10px 0 0}
     .room li{margin:8px 0}
     @media(max-width:780px){.summary,.rooms{grid-template-columns:1fr}table,thead,tbody,tr,td,th{display:block}thead{display:none}td{border-radius:0!important}td:first-child{border-radius:14px 14px 0 0!important}td:last-child{border-radius:0 0 14px 14px!important;margin-bottom:10px}.star-col{text-align:left}}
+    .notion-recur{background:white;border-radius:16px;padding:18px 18px 20px;box-shadow:0 1px 4px #0001;margin:20px 0;border:1px solid #e9d5ff}
+    .nr-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    .nr-head h2{margin:0;font-size:20px}
+    .nr-tag{background:#f3e8ff;color:#7e22ce;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:800}
+    .nr-grid{display:grid;grid-template-columns:260px 1fr;gap:14px}
+    .nr-card{background:#faf9fc;border-radius:12px;padding:14px}
+    .nr-card h3{margin:0 0 10px;font-size:15px;color:#6b21a8}
+    .nr-list{list-style:none;padding:0;margin:0}
+    .nr-list li{padding:6px 0;border-bottom:1px solid #f0ecf5;font-size:14px}
+    .nr-list li:last-child{border-bottom:0}
+    .nr-list b{display:inline-block;min-width:52px;color:#7e22ce;font-weight:800}
+    .nr-note{color:#94a3b8;font-size:12px;margin:10px 0 0;line-height:1.5}
+    .nr-days{display:flex;flex-direction:column;gap:7px}
+    .nr-day{font-size:14px;line-height:1.5;color:#334155}
+    .nr-d{display:inline-block;min-width:64px;font-weight:800;color:#7e22ce;background:#f3e8ff;border-radius:7px;padding:1px 8px;margin-right:6px;text-align:center;font-size:12px}
+    @media(max-width:780px){.nr-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -56,6 +72,38 @@
   <a href="../">← 메인</a>
   <h1>크론 · 알림 요일표</h1>
   <p class="desc" id="desc">요일과 시간 기준으로 정리한 운영 현황입니다.</p>
+  <section class="notion-recur">
+    <div class="nr-head">
+      <h2>🔁 노션 반복알림</h2>
+      <span class="nr-tag">매일 08:30 자동 생성 · 텔레그램 리마인더</span>
+    </div>
+    <div class="nr-grid">
+      <div class="nr-card">
+        <h3>⏰ 알림 시간 (매일)</h3>
+        <ul class="nr-list">
+          <li><b>08:00</b> 오늘 할 일</li>
+          <li><b>14:00</b> 오후 리마인더</li>
+          <li><b>19:00</b> 저녁 리마인더</li>
+          <li><b>22:00</b> 하루 마감 정리</li>
+        </ul>
+        <p class="nr-note">시간이 정해진 할 일은 그 시각에 따로 알림이 와요.</p>
+      </div>
+      <div class="nr-card">
+        <h3>📋 요일별 반복 할 일</h3>
+        <div class="nr-days">
+          <div class="nr-day"><span class="nr-d">매일</span>원씽복기(14:00) · P1~P3/목실감(08:30)</div>
+          <div class="nr-day"><span class="nr-d">평일</span>체크남&amp;링크, db기입(09:00)</div>
+          <div class="nr-day"><span class="nr-d">월</span>메모정리 · 마케팅업체 정산(09:00) · 현금영수증&amp;세금계산서 발행(10:00) · 주간복기(11:00)</div>
+          <div class="nr-day"><span class="nr-d">화</span>주제선정&amp;썸네일&amp;제목</div>
+          <div class="nr-day"><span class="nr-d">수</span>자료수집&amp;도입부 · 콘텐츠 관리시트(12:00)</div>
+          <div class="nr-day"><span class="nr-d">목</span>원고완성 · 주간계획 수정(08:30)</div>
+          <div class="nr-day"><span class="nr-d">금</span>PPT완료</div>
+          <div class="nr-day"><span class="nr-d">토</span>촬영&amp;편집&amp;업로드</div>
+          <div class="nr-day"><span class="nr-d">매달 10일</span>급여&amp;자산체크</div>
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="summary">
     <div class="sum"><span>정상</span><b class="okc" id="sum-ok">—</b></div>
     <div class="sum"><span>정리 필요</span><b class="warnc" id="sum-warn">—</b></div>
