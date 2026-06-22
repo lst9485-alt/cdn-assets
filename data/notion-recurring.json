@@ -1,0 +1,37 @@
+{
+  "updated": "2026-06-22",
+  "note": "노션 반복알림 단일 원본. 대시보드 표시 + n8n 01-1 워크플로우가 이 파일을 읽음. 여기만 고치면 됨.",
+  "reminders": [
+    { "time": "08:00", "label": "오늘 할 일" },
+    { "time": "14:00", "label": "오후 리마인더" },
+    { "time": "19:00", "label": "저녁 리마인더" },
+    { "time": "22:00", "label": "하루 마감 정리" }
+  ],
+  "tasks": [
+    { "title": "원씽복기", "repeat": "매일", "time": "14:00", "priority": "P2", "status": "대기" },
+    { "title": "P1~P3/목실감", "repeat": "매일", "time": "08:30", "priority": "P2", "status": "대기" },
+    { "title": "체크남&링크, db기입", "repeat": "평일", "time": "09:00", "priority": "P2", "status": "대기" },
+    { "title": "메모정리", "repeat": "주간", "dow": 1, "priority": "P3", "status": "백로그" },
+    { "title": "마케팅업체 정산", "repeat": "주간", "dow": 1, "time": "09:00", "priority": "P1", "status": "대기" },
+    { "title": "현금영수증&세금계산서 발행", "repeat": "주간", "dow": 1, "time": "10:00", "priority": "P2", "status": "대기" },
+    { "title": "주간복기", "repeat": "주간", "dow": 1, "time": "11:00", "priority": "P2", "status": "대기" },
+    { "title": "주제선정&썸네일&제목", "repeat": "주간", "dow": 2, "priority": "P2", "status": "대기" },
+    { "title": "자료수집&도입부", "repeat": "주간", "dow": 3, "priority": "P2", "status": "대기" },
+    { "title": "콘텐츠 관리시트", "repeat": "주간", "dow": 3, "time": "12:00", "priority": "P2", "status": "대기" },
+    { "title": "원고완성", "repeat": "주간", "dow": 4, "priority": "P2", "status": "대기" },
+    { "title": "주간계획 수정", "repeat": "주간", "dow": 4, "time": "08:30", "priority": "P2", "status": "대기" },
+    { "title": "PPT완료", "repeat": "주간", "dow": 5, "priority": "P2", "status": "백로그" },
+    { "title": "촬영&편집&업로드", "repeat": "주간", "dow": 6, "priority": "P2", "status": "대기" },
+    { "title": "급여&자산체크", "repeat": "월간", "day": 10, "priority": "P3", "status": "백로그" }
+  ],
+  "holidays": [
+    "2026-01-01",
+    "2026-01-28", "2026-01-29", "2026-01-30",
+    "2026-03-01", "2026-03-02",
+    "2026-05-05", "2026-05-15",
+    "2026-06-06", "2026-08-15",
+    "2026-09-24", "2026-09-25", "2026-09-26", "2026-09-27",
+    "2026-10-03", "2026-10-09",
+    "2026-12-25"
+  ]
+}
