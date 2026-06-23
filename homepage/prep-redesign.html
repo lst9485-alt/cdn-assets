@@ -63,6 +63,7 @@
 
         .note { background:var(--note-bg); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 14px; font-size:14px; color:var(--muted); line-height:1.7; margin-top:12px; }
         .note b { color:var(--ink); }
+        .note .amt { color:var(--accent); font-weight:800; font-size:15px; }
         .note-warn { background:var(--accent-2-soft); border-color:transparent; color:#92400E; }
 
         .gauge-wrap { display:flex; align-items:center; gap:16px; padding:10px 0; }
@@ -338,7 +339,7 @@
         },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:13}},grid:{color:'#F1F5F9'},max:xMax},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
         $('cBuyChart').parentElement.style.height='160px';
 
-        $('buyN').innerHTML='DSR 40%, 스트레스 금리 '+stressRt+'%'+tip(T.stress)+' (입력 '+rt+'% + 1.5%p), '+yr+'년, LTV 70% 기준<br>실제 대출: '+fmt(actual)+' (DSR '+fmt(mxDSR)+' / LTV '+fmt(mxLTV)+' 중 작은 값)<br>정책대출: 디딤돌(소득6천↓), 보금자리론(7천↓), 신생아특례(맞벌이2억↓)';
+        $('buyN').innerHTML='실제 대출 <b class="amt">'+fmt(actual)+'</b> (DSR '+fmt(mxDSR)+' / LTV '+fmt(mxLTV)+' 중 작은 값)';
     }
 
     // === TAB 2: 월 상환 ===
