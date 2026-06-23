@@ -348,7 +348,7 @@
     }
 
     function renderGenericTitle(item, sectionId) {
-        if ((sectionId !== 'homepage-section' && sectionId !== 'pg-homepage') || !item.href) {
+        if ((sectionId !== 'homepage-section' && sectionId !== 'pg-homepage' && sectionId !== 'consult') || !item.href) {
             return '<div class="sheet-cell sheet-title">' + esc(item.title) + '</div>';
         }
         var path = item.publicPath || shortPath(item.href);

@@ -387,7 +387,7 @@
             title: '180일차 투자 칼럼',
             description: '상담 180일차 발송 · 투자 로드맵+노후 · 복리/은퇴 계산기 2종',
             href: 'homepage/retire-column-final.html',
-            publicPath: '~/retire-column-final',
+            publicPath: '~/roadmap',
             badgeText: 'NEW',
             badgeTone: 'live',
             iconKey: 'web',
