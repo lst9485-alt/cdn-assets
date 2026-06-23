@@ -227,7 +227,6 @@
 
     <!-- TAB 3: 갈아타기 -->
     <div class="tc" id="tab-asset">
-        <div class="verdict" id="astV"></div>
         <div class="cmp">
             <div class="cmp-card"><span class="cmp-badge ba">내 상황</span>
                 <div class="ig ig1 inline-fields">
@@ -237,16 +236,19 @@
                     <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="a_sv" inputmode="decimal"><span class="is">만원</span></div></div>
                 </div>
             </div>
-            <div class="cmp-card"><span class="cmp-badge bb">목표 단지</span>
-                <div class="ig ig1 inline-fields">
-                    <div><div class="il">현재가</div><div class="iw"><input class="if" id="a_gl" inputmode="decimal"><span class="is">만원</span></div></div>
-                    <div><div class="il">연 상승률 <span class="info" tabindex="0" data-tip="집값 연간 상승 가정값. 직접 조정 가능.">i</span></div><div class="iw"><input class="if" id="a_gr" inputmode="decimal"><span class="is">%</span></div></div>
+            <div style="display:flex;flex-direction:column;gap:12px;min-width:0;">
+                <div class="cmp-card"><span class="cmp-badge bb">목표 단지</span>
+                    <div class="ig ig1 inline-fields">
+                        <div><div class="il">현재가</div><div class="iw"><input class="if" id="a_gl" inputmode="decimal"><span class="is">만원</span></div></div>
+                        <div><div class="il">연 상승률 <span class="info" tabindex="0" data-tip="집값 연간 상승 가정값. 직접 조정 가능.">i</span></div><div class="iw"><input class="if" id="a_gr" inputmode="decimal"><span class="is">%</span></div></div>
+                    </div>
                 </div>
+                <div class="verdict" id="astV" style="margin-bottom:0;"></div>
             </div>
         </div>
         <div class="card"><div class="card-t">갈아타기 시뮬레이션</div><div class="cw"><canvas id="cAst"></canvas></div></div>
         <div class="card"><div class="card-t">레버리지 수익률 곡선 <span class="info" tabindex="0" data-tip="내 돈 대비 수익률. 대출 활용 효과.">i</span></div>
-            <div class="note" style="margin-top:0;margin-bottom:8px;">자기자본 대비 수익률. 시간이 지나면 레버리지 효과가 줄어들어 갈아타기 적기를 보여줍니다.</div>
+            <div class="note" style="margin-top:0;margin-bottom:8px;">자기자본 대비 수익률. 시간이 지나면 레버리지 효과가 줄어들어 갈아타기 적기를 알 수 있습니다(15~20% 기준).</div>
             <div class="cw"><canvas id="cLev"></canvas></div>
         </div>
     </div>
