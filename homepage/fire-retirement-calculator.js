@@ -66,23 +66,22 @@
     if (fallback == null) fallback = 0;
     var cleaned = String(value == null ? '' : value).replace(/,/g, '').replace(/\s/g, '').trim();
     if (cleaned === '') return fallback;
-    if (cleaned.indexOf('억') !== -1) {
+    if (cleaned.indexOf('억') !== -1 || cleaned.indexOf('천') !== -1) {
       var total = 0;
-      var eok = cleaned.match(/(-?\d+(?:\.\d+)?)억/);
-      var cheonAfterEok = cleaned.match(/억(-?\d+(?:\.\d+)?)천/);
-      var man = cleaned.match(/억(?:-?\d+(?:\.\d+)?천)?(-?\d+(?:\.\d+)?)(?:만|만원)?/);
-      if (eok) total += Number(eok[1]) * 10000;
-      if (cheonAfterEok) total += Number(cheonAfterEok[1]) * 1000;
+      var rest = cleaned;
+      var eok = rest.match(/(-?\d+(?:\.\d+)?)억/);
+      if (eok) {
+        total += Number(eok[1]) * 10000;
+        rest = rest.slice(rest.indexOf(eok[0]) + eok[0].length);
+      }
+      var cheon = rest.match(/(-?\d+(?:\.\d+)?)천/);
+      if (cheon) {
+        total += Number(cheon[1]) * 1000;
+        rest = rest.slice(rest.indexOf(cheon[0]) + cheon[0].length);
+      }
+      var man = rest.match(/(-?\d+(?:\.\d+)?)/);
       if (man) total += Number(man[1]);
       return isFinite(total) ? total : fallback;
-    }
-    if (cleaned.indexOf('천') !== -1) {
-      var cheon = cleaned.match(/(-?\d+(?:\.\d+)?)천/);
-      var remainder = cleaned.match(/천(-?\d+(?:\.\d+)?)(?:만|만원)?/);
-      var manwonTotal = 0;
-      if (cheon) manwonTotal += Number(cheon[1]) * 1000;
-      if (remainder) manwonTotal += Number(remainder[1]);
-      return isFinite(manwonTotal) ? manwonTotal : fallback;
     }
     if (cleaned.indexOf('만') !== -1) {
       cleaned = cleaned.replace(/만원|만/g, '');
@@ -144,14 +143,15 @@
       independent: networth >= targetNetworth
     }];
     var retirementYear = networth >= targetNetworth ? 0 : null;
+    var alreadyReached = retirementYear === 0;
 
-    for (var year = 1; retirementYear !== 0 && year <= 80; year += 1) {
+    for (var year = 1; year <= 80; year += 1) {
       var roi = (networth + savings / 2) * returnRate;
       var change = savings + roi;
       networth = networth + change;
       var coveredRatio = cfg.annualExpenses > 0 ? roi / cfg.annualExpenses : 1;
       var independent = networth >= targetNetworth;
-      if (retirementYear == null && independent) retirementYear = year;
+      if (!alreadyReached && retirementYear == null && independent) retirementYear = year;
       rows.push({
         year: year,
         age: cfg.currentAge + year,
@@ -163,7 +163,11 @@
         networth: networth,
         independent: independent
       });
-      if (independent) break;
+      if (alreadyReached) {
+        if (year >= 10) break;
+      } else if (independent) {
+        break;
+      }
     }
 
     return {
@@ -222,7 +226,7 @@
     if (result.retirementYear == null) {
       insight.textContent = '현재 조건으로는 목표 은퇴자산에 도달하기 어렵습니다. 연지출을 줄이거나 저축률을 높이면 은퇴 시점이 크게 당겨집니다.';
     } else if (result.retirementYear === 0) {
-      insight.textContent = '현재 보유자산이 이미 목표 은퇴자산 이상입니다. 표는 현재 시점의 목표 달성 상태를 보여줍니다.';
+      insight.textContent = '현재 보유자산이 이미 목표 은퇴자산 이상입니다. 차트와 표는 지금부터 자산이 더 늘어나는 모습을 보여줍니다.';
     } else if (result.config.annualReturn < result.config.withdrawalRate) {
       insight.textContent = '현재 조건이면 ' + result.retirementAge + '세에 목표 은퇴자산에 도달합니다. 인출률 기준은 투자수익만 쓰는 계산이 아니라 원금 일부 인출을 포함합니다.';
     } else {

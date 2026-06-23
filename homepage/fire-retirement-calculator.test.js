@@ -65,14 +65,23 @@ test('three percent annual return reaches target at age 55', () => {
   approx(result.rows.at(-1).networth, 65456.232255156414);
 });
 
-test('already reached target reports immediate retirement without projection rows', () => {
+test('already reached target reports immediate retirement and still draws a projection', () => {
   const result = calculateFire({ ...DEFAULTS, currentAssets: '6.5억' });
 
   assert.equal(result.targetNetworth, 65000);
   assert.equal(result.retirementYear, 0);
   assert.equal(result.retirementAge, DEFAULTS.currentAge);
-  assert.equal(result.rows.length, 1);
+  assert.equal(result.rows.length, 11);
+  assert.equal(result.rows.at(-1).year, 10);
   assert.equal(result.rows[0].independent, true);
+});
+
+test('Korean money input with 천 unit does not double-count the trailing digit', () => {
+  assert.equal(normalizeConfig({ currentAssets: '1억5천' }).currentAssets, 15000);
+  assert.equal(normalizeConfig({ currentAssets: '1억' }).currentAssets, 10000);
+  assert.equal(normalizeConfig({ currentAssets: '2천' }).currentAssets, 2000);
+  assert.equal(normalizeConfig({ currentAssets: '1억500' }).currentAssets, 10500);
+  assert.equal(normalizeConfig({ currentAssets: '3천600만원' }).currentAssets, 3600);
 });
 
 test('Korean money input is normalized before calculation', () => {
