@@ -7,7 +7,7 @@
   <meta name="description" content="현재 자산, 월저축, 은퇴 후 연지출, 투자수익률로 은퇴 가능 시점을 계산하는 한국형 은퇴계산기">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260623n">
+  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260623o">
 </head>
 <body>
   <main class="fire-page">
@@ -52,13 +52,26 @@
           </label>
         </section>
 
-        <section class="input-card">
+        <section class="input-card" id="planCard">
           <h2><span class="step-num">2</span>은퇴 계획</h2>
 
-          <label class="ly-field">
+          <div class="mode-toggle" role="group" aria-label="입력 방식">
+            <button type="button" class="mode-btn active" data-emode="expense" aria-pressed="true">생활비로</button>
+            <button type="button" class="mode-btn" data-emode="target" aria-pressed="false">목표 금액</button>
+          </div>
+
+          <label class="ly-field emode-expense-only">
             <span>은퇴 후 월지출</span>
             <div class="value-box">
               <input id="monthlyExpenses" type="text" inputmode="decimal" value="217">
+              <em>만원</em>
+            </div>
+          </label>
+
+          <label class="ly-field emode-target-only">
+            <span>목표 은퇴자금</span>
+            <div class="value-box">
+              <input id="targetInput" type="text" inputmode="decimal" value="65,100">
               <em>만원</em>
             </div>
           </label>
@@ -148,7 +161,7 @@
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="fire-retirement-calculator.js?v=20260623g"></script>
+  <script src="fire-retirement-calculator.js?v=20260623h"></script>
   <script src="homepage-shell.js?v=20260506d"></script>
 </body>
 </html>

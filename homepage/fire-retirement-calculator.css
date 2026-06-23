@@ -441,6 +441,44 @@ a {
   vertical-align: 2px;
 }
 
+.mode-toggle {
+  display: flex;
+  gap: 4px;
+  width: fit-content;
+  margin: 0 auto 16px;
+  padding: 4px;
+  background: #f1f0ff;
+  border-radius: 999px;
+}
+
+.mode-btn {
+  min-height: 32px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 18px;
+  color: var(--muted);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.mode-btn.active {
+  color: #fff;
+  background: var(--purple);
+}
+
+.emode-target-only {
+  display: none;
+}
+
+#planCard.is-target-mode .emode-expense-only {
+  display: none;
+}
+
+#planCard.is-target-mode .emode-target-only {
+  display: grid;
+}
+
 .result-strip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

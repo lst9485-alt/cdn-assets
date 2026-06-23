@@ -26,6 +26,7 @@
   var tableExpanded = false;
   var lastResult = null;
   var projectionView = 'chart';
+  var expenseMode = 'expense';
   var goalLabelPlugin = {
     id: 'goalLabel',
     afterDatasetsDraw: function (chart, args, options) {
@@ -183,13 +184,38 @@
   }
 
   function readConfigFromDom() {
+    var annualExpenses;
+    if (expenseMode === 'target') {
+      annualExpenses = toNumber(qs('targetInput').value, DEFAULTS.annualExpenses * 25) / 25;
+    } else {
+      annualExpenses = toNumber(qs('monthlyExpenses').value, DEFAULTS.annualExpenses / 12) * 12;
+    }
     return normalizeConfig({
       currentAge: qs('currentAge').value,
       currentAssets: qs('currentAssets').value,
       annualSavings: qs('annualSavings').value,
-      annualExpenses: toNumber(qs('monthlyExpenses').value, DEFAULTS.annualExpenses / 12) * 12,
+      annualExpenses: annualExpenses,
       annualReturn: qs('annualReturn').value
     });
+  }
+
+  function setEmode(mode) {
+    expenseMode = mode === 'target' ? 'target' : 'expense';
+    var card = qs('planCard');
+    if (card) card.classList.toggle('is-target-mode', expenseMode === 'target');
+    document.querySelectorAll('[data-emode]').forEach(function (btn) {
+      var active = btn.dataset.emode === expenseMode;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  function syncExpenseInputs(annualExpenses) {
+    if (expenseMode === 'target') {
+      qs('monthlyExpenses').value = formatInput(annualExpenses / 12);
+    } else {
+      qs('targetInput').value = formatInput(annualExpenses * 25);
+    }
   }
 
   function writeConfigToDom(cfg) {
@@ -198,6 +224,7 @@
     qs('currentAssets').value = formatInput(cfg.currentAssets);
     qs('annualSavings').value = formatInput(cfg.annualSavings);
     qs('monthlyExpenses').value = formatInput(cfg.annualExpenses / 12);
+    if (qs('targetInput')) qs('targetInput').value = formatInput(cfg.annualExpenses * 25);
     qs('annualReturn').value = cfg.annualReturn;
     if (qs('annualReturnRange')) qs('annualReturnRange').value = cfg.annualReturn;
   }
@@ -427,6 +454,7 @@
 
   function update() {
     var result = calculateFire(readConfigFromDom());
+    syncExpenseInputs(result.config.annualExpenses);
     lastResult = result;
     renderSummary(result);
     renderChart(result);
@@ -476,6 +504,17 @@
       var cfg = readConfigFromDom();
       normalizeVisibleInput('monthlyExpenses', cfg.annualExpenses / 12);
       update();
+    });
+    qs('targetInput').addEventListener('change', function () {
+      var cfg = readConfigFromDom();
+      normalizeVisibleInput('targetInput', cfg.annualExpenses * 25);
+      update();
+    });
+    document.querySelectorAll('[data-emode]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        setEmode(button.dataset.emode);
+        update();
+      });
     });
     qs('resetInputs').addEventListener('click', function () {
       writeConfigToDom(DEFAULTS);
