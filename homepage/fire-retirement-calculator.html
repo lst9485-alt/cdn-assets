@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260623c">
+  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260623d">
 </head>
 <body>
   <main class="fire-page">
@@ -22,11 +22,29 @@
     <section class="calculator" id="calculator">
       <div class="unit-pill">(만원)</div>
 
+      <section class="result-hero" aria-live="polite">
+        <span class="result-kicker">예상 은퇴</span>
+        <strong id="retirementAge">-</strong>
+        <p id="retirementSub">계산 중</p>
+      </section>
+
+      <section class="result-strip" aria-live="polite">
+        <article>
+          <span>목표 은퇴자산</span>
+          <strong id="fireTarget">0원</strong>
+          <p id="targetSub">인출률 4% 기준</p>
+        </article>
+        <article>
+          <span>연간 저축액</span>
+          <strong id="annualSavings">0원</strong>
+          <p id="savingRate">월 저축액 -</p>
+        </article>
+      </section>
+
       <form class="input-panel" id="inputForm">
         <div class="input-stack">
           <section class="input-card">
-            <span class="card-kicker">오늘</span>
-            <h2>현재 상황</h2>
+            <h2><span class="step-num">1</span>현재 상황</h2>
 
             <label class="ly-field">
               <span>현재 나이</span>
@@ -54,8 +72,7 @@
           </section>
 
           <section class="input-card">
-            <span class="card-kicker">나중</span>
-            <h2>은퇴 계획<details class="hint"><summary aria-label="인출률 설명 보기">i</summary><p>인출률은 은퇴자산에서 매년 꺼내 쓸 비율입니다. 4%는 장기 은퇴 계획에서 자주 쓰는 기준입니다.</p></details></h2>
+            <h2><span class="step-num">2</span>은퇴 계획<details class="hint"><summary aria-label="인출률 설명 보기">i</summary><p>인출률은 은퇴자산에서 매년 꺼내 쓸 비율입니다. 4%는 장기 은퇴 계획에서 자주 쓰는 기준입니다.</p></details></h2>
 
             <label class="ly-field">
               <span>계산 방식</span>
@@ -83,8 +100,7 @@
         </div>
 
         <section class="input-card plan-card">
-          <span class="card-kicker">계획</span>
-          <h2>예상 수익률<details class="hint"><summary aria-label="수익률 설명 보기">i</summary><p>세금, 수수료, 물가상승률을 제외한 단순 연평균 수익률 가정입니다.</p></details></h2>
+          <h2><span class="step-num">3</span>수익률 가정<details class="hint"><summary aria-label="수익률 설명 보기">i</summary><p>세금, 수수료, 물가상승률을 제외한 단순 연평균 수익률 가정입니다.</p></details></h2>
 
           <div class="plan-note">
             <strong>계산에 적용되는 연평균 수익률</strong>
@@ -108,28 +124,9 @@
         </section>
       </form>
 
-      <section class="result-strip" aria-live="polite">
-        <article>
-          <span>목표 은퇴자산</span>
-          <strong id="fireTarget">0원</strong>
-          <p id="targetSub">인출률 4% 기준</p>
-        </article>
-        <article>
-          <span>예상 은퇴</span>
-          <strong id="retirementAge">-</strong>
-          <p id="retirementSub">계산 중</p>
-        </article>
-        <article>
-          <span>연간 저축액</span>
-          <strong id="annualSavings">0원</strong>
-          <p id="savingRate">월 저축액 -</p>
-        </article>
-      </section>
-
       <section class="projection-shell">
         <div class="projection-card" id="projectionCard">
-          <span id="chartKicker">여정</span>
-          <h2 id="chartTitle">나의 FIRE 예상 경로</h2>
+          <h2 id="chartTitle">예상 경로</h2>
 
           <div class="chart-tabs" role="tablist" aria-label="결과 보기 선택">
             <button type="button" class="active" data-projection-view="chart">차트</button>

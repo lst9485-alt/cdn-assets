@@ -241,7 +241,7 @@
   }
 
   function getChartMeta() {
-    return { kicker: '여정', title: '나의 FIRE 예상 경로' };
+    return { kicker: '', title: '예상 경로' };
   }
 
   function setProjectionView(view) {
