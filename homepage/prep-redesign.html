@@ -234,12 +234,7 @@
                     <div><div class="il">내 단지 현재가</div><div class="iw"><input class="if" id="a_my" inputmode="decimal"><span class="is">만원</span></div></div>
                     <div><div class="il">연 상승률 <span class="info" tabindex="0" data-tip="집값 연간 상승 가정값. 직접 조정 가능.">i</span></div><div class="iw"><input class="if" id="a_mr" inputmode="decimal"><span class="is">%</span></div></div>
                     <div><div class="il">대출 금액</div><div class="iw"><input class="if" id="a_ln" inputmode="decimal"><span class="is">만원</span></div></div>
-                </div>
-                <div style="margin:14px 0 8px;font-size:13px;font-weight:700;color:var(--ink);">앞으로 모을 돈</div>
-                <div class="ig ig1 inline-fields">
                     <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="a_sv" inputmode="decimal"><span class="is">만원</span></div></div>
-                    <div><div class="il">투자 수익률 <span class="info" tabindex="0" data-tip="모은 돈의 연 수익률. 예금·투자 등.">i</span></div><div class="iw"><input class="if" id="a_rt" inputmode="decimal"><span class="is">%</span></div></div>
-                    <div><div class="il">기간</div><div class="iw"><input class="if" id="a_yr" inputmode="decimal"><span class="is">년</span></div></div>
                 </div>
             </div>
             <div class="cmp-card"><span class="cmp-badge bb">목표 단지</span>
@@ -305,7 +300,7 @@
     sV('ra_amt',50000);$('ra_mo').value='360';$('ra_r').value='4.3';
     sV('rb_amt',45000);$('rb_mo').value='360';$('rb_r').value='4.5';
     $('rep_income').value=Math.round(D.i/12).toLocaleString();
-    sV('a_my',D.ma);$('a_mr').value='3';sV('a_gl',D.ga);$('a_gr').value='5';sV('a_sv',D.s);$('a_rt').value='5';sV('a_ln',35000);$('a_yr').value='10';
+    sV('a_my',D.ma);$('a_mr').value='3';sV('a_gl',D.ga);$('a_gr').value='5';sV('a_sv',D.s);sV('a_ln',35000);
 
     document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){
         document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
@@ -399,13 +394,13 @@
 
     // === TAB 3: 갈아타기 ===
     function rAst(){
-        var my=V('a_my'),mr=V('a_mr')/100,gl=V('a_gl'),gr=V('a_gr')/100,sv=V('a_sv'),rt=V('a_rt')/100,ln=V('a_ln'),yr=V('a_yr');
+        var my=V('a_my'),mr=V('a_mr')/100,gl=V('a_gl'),gr=V('a_gr')/100,sv=V('a_sv'),ln=V('a_ln'),yr=15;
         var lb=[],mD=[],gD=[],nD=[],levD=[],cy=null,ty=new Date().getFullYear();
 
         for(var y=0;y<=yr;y++){
             lb.push(String(ty+y));
             var mv=my*Math.pow(1+mr,y),gv=gl*Math.pow(1+gr,y);
-            var savings=0;for(var j=0;j<y;j++)savings+=sv*Math.pow(1+rt,y-1-j);
+            var savings=sv*y;
             var nw=mv-ln+savings;
             mD.push(Math.round(mv));gD.push(Math.round(gv));nD.push(Math.round(nw));
 
