@@ -82,6 +82,7 @@
         .gauge-wrap { display:flex; align-items:center; gap:16px; padding:10px 0; }
         .gauge-bar { flex:1; height:28px; border-radius:14px; position:relative; background:var(--track); }
         .gauge-bar::after { content:''; position:absolute; left:40%; top:0; bottom:0; border-left:2px dashed var(--faint); z-index:2; }
+        .gauge-bar::before { content:'40% 위험'; position:absolute; left:40%; top:-13px; transform:translateX(-50%); font-size:9px; font-weight:700; color:var(--faint); white-space:nowrap; z-index:2; }
         .gauge-fill { height:100%; border-radius:14px; transition:width .3s; }
         .gauge-tag { font-size:14px; font-weight:700; min-width:110px; }
         .gauge-label { font-family:var(--font-head); font-size:20px; font-weight:800; min-width:70px; text-align:right; }
