@@ -575,6 +575,11 @@ td:nth-child(1) {
     gap: 8px;
   }
 
+  .slider-field.rate-row,
+  .slider-field.years-row {
+    grid-template-columns: 1fr;
+  }
+
   .slider-field strong {
     margin-top: -4px;
   }

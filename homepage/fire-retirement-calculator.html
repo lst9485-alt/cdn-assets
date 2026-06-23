@@ -11,6 +11,8 @@
   <style>
     /* 끼워넣기(embed) 모드: 사이트 머리글·탭·뒤로가기 숨김 */
     html.embed .calc-tabs, html.embed .hero .back-link { display: none !important; }
+    /* 끼워넣을 땐 좌우 여백 줄여 폭 넓힘 */
+    html.embed .fire-page { padding-left: 8px; padding-right: 8px; max-width: 100%; }
   </style>
   <script>
     if (new URLSearchParams(location.search).get('embed') === '1') document.documentElement.classList.add('embed');
