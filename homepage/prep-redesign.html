@@ -395,14 +395,15 @@
     // === TAB 3: 갈아타기 ===
     function rAst(){
         var my=V('a_my'),mr=V('a_mr')/100,gl=V('a_gl'),gr=V('a_gr')/100,sv=V('a_sv'),ln=V('a_ln'),yr=15;
-        var lb=[],mD=[],gD=[],nD=[],levD=[],cy=null,ty=new Date().getFullYear();
+        var lb=[],gD=[],nD=[],buyD=[],levD=[],cy=null,ty=new Date().getFullYear();
 
         for(var y=0;y<=yr;y++){
             lb.push(String(ty+y));
             var mv=my*Math.pow(1+mr,y),gv=gl*Math.pow(1+gr,y);
             var savings=sv*y;
             var nw=mv-ln+savings;
-            mD.push(Math.round(mv));gD.push(Math.round(gv));nD.push(Math.round(nw));
+            var buy=nw+0.7*gv;        // 순자산 + 목표집 70% 대출
+            gD.push(Math.round(gv));nD.push(Math.round(nw));buyD.push(Math.round(buy));
 
             var equityY=mv-ln;
             if(equityY>0){
@@ -410,25 +411,22 @@
                 levD.push(Math.round(levReturn*10)/10);
             }else{levD.push(0);}
 
-            if(cy===null&&nw>=gv*0.3&&y>0)cy=y;
+            if(cy===null&&buy>=gv&&y>0)cy=y;
         }
 
         var vd=$('astV');
-        // 목표 단지 자기자본 30% 데이터
-        var needD=[];for(var y2=0;y2<=yr;y2++)needD.push(Math.round(gD[y2]*0.3));
-
-        if(cy!==null){vd.className='verdict';vd.innerHTML='<div class="v-text">'+(ty+cy)+'년 ('+cy+'년 후) 갈아타기 가능</div><div class="v-sub">순자산 '+fmt(nD[cy])+' ≥ 필요 자기자본 '+fmt(needD[cy])+' (목표가의 30%)</div>';}
-        else{vd.className='verdict warn';vd.innerHTML='<div class="v-text">'+yr+'년 내 미도달</div><div class="v-sub">'+yr+'년 후 순자산 '+fmt(nD[nD.length-1])+' / 필요 '+fmt(needD[needD.length-1])+'</div>';}
+        if(cy!==null){vd.className='verdict';vd.innerHTML='<div class="v-text">'+(ty+cy)+'년 ('+cy+'년 후) 갈아타기 가능</div><div class="v-sub">순자산(+대출) '+fmt(buyD[cy])+' ≥ 목표 집값 '+fmt(gD[cy])+'</div>';}
+        else{vd.className='verdict warn';vd.innerHTML='<div class="v-text">'+yr+'년 내 미도달</div><div class="v-sub">'+yr+'년 후 순자산(+대출) '+fmt(buyD[buyD.length-1])+' / 목표 집값 '+fmt(gD[gD.length-1])+'</div>';}
 
         if(CAst)CAst.destroy();
-        var an={};if(cy!==null){an.cp={type:'point',xValue:String(ty+cy),yValue:nD[cy],backgroundColor:'#10b981',borderColor:'#fff',borderWidth:3,radius:7};an.cl={type:'label',xValue:String(ty+cy),yValue:nD[cy],content:['갈아타기 가능'],font:{size:13,weight:'bold'},backgroundColor:'rgba(16,185,129,.92)',color:'#fff',padding:5,borderRadius:4,yAdjust:-22};}
+        var surplus=buyD.map(function(v,i){return Math.max(v,gD[i]);});
+        var an={};if(cy!==null){an.ln={type:'line',xMin:cy,xMax:cy,borderColor:'#10b981',borderWidth:2,label:{display:true,content:(ty+cy)+'부터 가능',position:'start',backgroundColor:'#10b981',color:'#fff',font:{size:11,weight:'bold'},padding:5,borderRadius:6}};}
         CAst=new Chart($('cAst'),{type:'line',data:{labels:lb,datasets:[
-            {label:'내 단지',data:mD,borderColor:'#2563eb',backgroundColor:'#2563eb',fill:false,tension:.35,borderWidth:2.5,pointRadius:2.5,pointHoverRadius:5,pointBackgroundColor:'#2563eb',pointBorderColor:'#fff',pointBorderWidth:1.5},
-            {label:'목표 단지',data:gD,borderColor:'#f59e0b',backgroundColor:'#f59e0b',fill:false,tension:.35,borderWidth:2.5,pointRadius:2.5,pointHoverRadius:5,pointBackgroundColor:'#f59e0b',pointBorderColor:'#fff',pointBorderWidth:1.5},
-            {label:'필요 자기자본 (LTV 70%)',data:needD,borderColor:'#cbd5e1',backgroundColor:'#cbd5e1',borderDash:[6,4],fill:false,tension:.35,borderWidth:1.5,pointRadius:0,pointHoverRadius:0},
-            {label:'순자산(+대출)',data:nD,borderColor:'#10b981',backgroundColor:'#10b981',fill:false,tension:.35,borderWidth:2.5,pointRadius:2.5,pointHoverRadius:5,pointBackgroundColor:'#10b981',pointBorderColor:'#fff',pointBorderWidth:1.5}
+            {label:'순자산 (+대출 70% 가정)',data:buyD,borderColor:'#10b981',backgroundColor:'#10b981',fill:false,tension:.35,borderWidth:3,pointRadius:0,pointHoverRadius:4},
+            {label:'목표 집값',data:gD,borderColor:'#f59e0b',backgroundColor:'#f59e0b',fill:false,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:4},
+            {label:'_surplus',data:surplus,borderColor:'rgba(0,0,0,0)',backgroundColor:'rgba(16,185,129,.22)',fill:'-1',tension:.35,borderWidth:0,pointRadius:0,order:1}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
-            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
+            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13},filter:function(it){return it.text.indexOf('_')!==0;}}},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fmt(ctx.parsed.y);}}},
             annotation:{annotations:an}
         },scales:{y:{ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false},ticks:{font:{size:13}}}}}});
@@ -437,7 +435,7 @@
         // 레버리지 수익률 곡선
         if(CLev)CLev.destroy();
         CLev=new Chart($('cLev'),{type:'line',data:{labels:lb,datasets:[
-            {label:'연평균 레버리지 수익률',data:levD,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.07)',fill:true,tension:.35,borderWidth:2.5,pointRadius:2.5,pointHoverRadius:5,pointBackgroundColor:'#2563eb',pointBorderColor:'#fff',pointBorderWidth:1.5}
+            {label:'연평균 레버리지 수익률',data:levD,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.07)',fill:true,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:4,pointBackgroundColor:'#2563eb',pointBorderColor:'#fff',pointBorderWidth:1.5}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
             legend:{display:false},
             tooltip:{callbacks:{label:function(ctx){return '연평균 '+ctx.parsed.y+'%';}}}
