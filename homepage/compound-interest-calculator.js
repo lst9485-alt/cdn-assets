@@ -190,12 +190,12 @@
   function renderChart(result) {
     if (typeof Chart === 'undefined') return;
     var modeWord = result.config.mode === 'simple' ? '단리' : '복리';
-    setText('chartTitle', '돈이 불어나는 모습');
+    setText('chartTitle', '수익률 차트');
 
     var labels = result.rows.map(function (row) { return row.year + '년'; });
     var datasets = [
       {
-        label: '넣은 돈',
+        label: '  넣은 돈',
         data: result.rows.map(function (row) { return Math.round(row.principalLine); }),
         borderColor: '#9a93c4',
         backgroundColor: 'rgba(154,147,196,.08)',
@@ -206,7 +206,7 @@
         fill: false
       },
       {
-        label: modeWord,
+        label: '  ' + modeWord,
         data: result.rows.map(function (row) { return Math.round(row.networth); }),
         borderColor: '#5b2df0',
         backgroundColor: 'rgba(91,45,240,.10)',
@@ -219,7 +219,7 @@
     ];
     var yTick = function (value) { return formatMoney(value).replace('원', ''); };
     var tooltipLabel = function (ctx) {
-      return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y);
+      return ctx.dataset.label.trim() + ': ' + formatMoney(ctx.parsed.y);
     };
 
     if (chart) chart.destroy();
