@@ -162,13 +162,9 @@
       <p class="mt-8 text-[16px] font-semibold leading-relaxed text-brand-dark">
         지금 모으는 돈, 복리로 굴리면 몇 년 뒤 얼마가 될까요? 직접 넣어보세요.
       </p>
-      <!-- ▼▼▼ 복리계산기 자리 (비워둠 — 실제 계산기 넣을 때 이 블록 통째로 교체) ▼▼▼ -->
-      <div class="calc-slot mt-4 grid place-items-center rounded-3xl border-2 border-dashed border-brand-orange/40 bg-white/60 px-6 py-16 text-center sm:py-20">
-        <iconify-icon icon="solar:graph-up-bold-duotone" class="text-5xl text-brand-orange/70"></iconify-icon>
-        <p class="mt-4 font-display text-lg text-brand-dark/70">복리계산기가 들어갈 자리</p>
-        <p class="mt-1.5 text-sm text-brand-dark/50">시안에서는 비워둔 영역입니다. 여기에 계산기를 끼워 넣습니다.</p>
+      <div class="mt-4 overflow-hidden rounded-3xl bg-white card-shadow">
+        <iframe data-calc-frame src="https://lst9485-alt.github.io/cdn-assets/homepage/compound-interest-calculator.html?embed=1" title="복리계산기" loading="lazy" scrolling="no" style="display:block;width:100%;border:0;height:1200px"></iframe>
       </div>
-      <!-- ▲▲▲ 복리계산기 자리 끝 ▲▲▲ -->
     </section>
 
     <!-- divider -->
@@ -231,13 +227,9 @@
       <p class="mt-8 text-[16px] font-semibold leading-relaxed text-brand-dark">
         내 노후에 얼마가 필요할까요? 아래에서 확인해보세요.
       </p>
-      <!-- ▼▼▼ 은퇴계산기 자리 (비워둠 — 실제 계산기 넣을 때 이 블록 통째로 교체) ▼▼▼ -->
-      <div class="calc-slot mt-4 grid place-items-center rounded-3xl border-2 border-dashed border-brand-orange/40 bg-white/60 px-6 py-16 text-center sm:py-20">
-        <iconify-icon icon="solar:calculator-minimalistic-bold-duotone" class="text-5xl text-brand-orange/70"></iconify-icon>
-        <p class="mt-4 font-display text-lg text-brand-dark/70">은퇴계산기가 들어갈 자리</p>
-        <p class="mt-1.5 text-sm text-brand-dark/50">시안에서는 비워둔 영역입니다. 여기에 계산기를 끼워 넣습니다.</p>
+      <div class="mt-4 overflow-hidden rounded-3xl bg-white card-shadow">
+        <iframe data-calc-frame src="https://lst9485-alt.github.io/cdn-assets/homepage/fire-retirement-calculator.html?embed=1" title="은퇴계산기" loading="lazy" scrolling="no" style="display:block;width:100%;border:0;height:1200px"></iframe>
       </div>
-      <!-- ▲▲▲ 계산기 자리 끝 ▲▲▲ -->
     </section>
   </main>
 
@@ -266,6 +258,14 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // 계산기 iframe 높이 자동 맞춤 (계산기가 보내주는 높이로 — CDN·아임웹 둘 다 작동)
+    const calcFrames = Array.from(document.querySelectorAll('iframe[data-calc-frame]'));
+    window.addEventListener('message', (e) => {
+      if (!e.data || e.data.type !== 'calc-height' || !e.data.h) return;
+      const f = calcFrames.find((fr) => fr.contentWindow === e.source);
+      if (f) f.style.height = e.data.h + 'px';
+    });
   </script>
 </body>
 </html>

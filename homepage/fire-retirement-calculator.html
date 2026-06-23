@@ -170,12 +170,22 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="fire-retirement-calculator.js?v=20260623i"></script>
   <script>
-    // 끼워넣기 모드에서는 사이트 머리글/꼬리글(shell)을 불러오지 않음
-    if (new URLSearchParams(location.search).get('embed') !== '1') {
-      var s = document.createElement('script');
-      s.src = 'homepage-shell.js?v=20260506d';
-      document.body.appendChild(s);
-    }
+    (function () {
+      var embed = new URLSearchParams(location.search).get('embed') === '1';
+      if (!embed) {
+        // 단독 페이지: 사이트 머리글/꼬리글(shell) 로드
+        var s = document.createElement('script');
+        s.src = 'homepage-shell.js?v=20260506d';
+        document.body.appendChild(s);
+        return;
+      }
+      // 끼워넣기 모드: shell 미로드 + 부모 창에 높이 전달(칼럼 iframe 높이 자동맞춤)
+      var postH = function () { parent.postMessage({ type: 'calc-height', h: document.body.scrollHeight }, '*'); };
+      window.addEventListener('load', postH);
+      window.addEventListener('resize', postH);
+      if (window.ResizeObserver) new ResizeObserver(postH).observe(document.body);
+      setInterval(postH, 1000);
+    })();
   </script>
 </body>
 </html>

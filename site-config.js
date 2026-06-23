@@ -364,7 +364,7 @@
           },
           {
             id: 'consult-ppt-template',
-            title: '상담 리포트 PPT',
+            title: '상담 PPT',
             description: '회원별 28페이지 자동 생성 템플릿',
             href: 'https://docs.google.com/presentation/d/1ELi2NxglmzNXga8q0-ztn_AVRisZnQjM-aztyrNF7RE/edit',
             badgeText: '외부',
@@ -374,12 +374,24 @@
           },
           {
             id: 'consult-asset-planner',
-            title: '자산·매수 플래너',
+            title: '자산관리시트',
             description: '회원 제공 실행 시트 6탭',
             href: 'https://docs.google.com/spreadsheets/d/1B419dWEt3iooHRjZE9e8a7nh0iJaFLfGwqMFM3PsOsA/edit',
             badgeText: '외부',
             badgeTone: 'soon',
             iconKey: 'doc',
+            hubVisible: true
+          },
+          {
+            id: 'consult-180day-column',
+            title: '180일차 투자 칼럼',
+            description: '상담 180일차 발송 · 투자 로드맵+노후 · 복리/은퇴 계산기 2종',
+            href: 'homepage/retire-column-final.html',
+            publicPath: '~/retire-column-final',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'web',
+            activeMatch: ['retire-column-final.html'],
             hubVisible: true
           }
         ]
