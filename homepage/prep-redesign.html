@@ -19,12 +19,13 @@
         .themebar button:hover { border-color:#64748b; color:#fff; }
         .themebar button.on { background:#fff; color:#0f172a; border-color:#fff; }
 
-        .wrap { max-width:820px; margin:0 auto; padding:28px 20px 40px; }
+        .wrap { max-width:820px; margin:0 auto; padding:28px 20px 16px; }
 
         .hdr { background:var(--hdr-bg); color:var(--hdr-fg); padding:26px 30px; border-radius:var(--radius); margin-bottom:22px; border:var(--hdr-bd); box-shadow:var(--hdr-sh); display:flex; justify-content:space-between; align-items:center; gap:16px; }
         .hdr h1 { font-family:var(--font-head); font-size:23px; font-weight:800; letter-spacing:-.01em; color:var(--hdr-fg); }
         .hdr .sub { font-size:14px; color:var(--hdr-sub); margin-top:5px; }
         .hdr-logo { width:64px; height:64px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+        .disclaimer { font-size:12.5px; color:var(--muted); margin:-8px 2px 18px; line-height:1.5; }
 
         .tabs { display:flex; gap:6px; margin-bottom:22px; background:var(--card-bg); padding:6px; border-radius:999px; box-shadow:var(--card-sh); border:var(--card-bd); }
         .tab { flex:1; padding:11px 12px; font-size:15px; font-weight:700; color:var(--muted); cursor:pointer; border:none; background:none; border-radius:999px; transition:all .15s; font-family:inherit; white-space:nowrap; }
@@ -35,11 +36,11 @@
         .card { background:var(--card-bg); border:var(--card-bd); border-radius:var(--radius); padding:var(--pad-card); margin-bottom:16px; box-shadow:var(--card-sh); }
         .card-t { font-family:var(--font-head); font-size:16px; font-weight:800; color:var(--ink); margin-bottom:16px; }
 
-        .verdict { border-radius:var(--radius); padding:20px 22px; margin-bottom:16px; background:var(--accent-soft); text-align:center; box-shadow:var(--card-sh); border:1px solid var(--soft-border); }
+        .verdict { border-radius:var(--radius); padding:14px 18px; margin-bottom:16px; background:var(--accent-soft); text-align:center; box-shadow:var(--card-sh); border:1px solid var(--soft-border); }
         .verdict.warn { background:var(--accent-2-soft); border-color:var(--warn-border); }
-        .verdict .v-text { font-family:var(--font-head); font-size:24px; font-weight:800; color:var(--accent); }
+        .verdict .v-text { font-family:var(--font-head); font-size:19px; font-weight:800; color:var(--accent); }
         .verdict.warn .v-text { color:var(--accent-2); }
-        .verdict .v-sub { font-size:15px; color:var(--muted); margin-top:6px; }
+        .verdict .v-sub { font-size:13.5px; color:var(--muted); margin-top:4px; }
 
         .ig { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
         .ig1 { grid-template-columns:1fr; }
@@ -76,7 +77,7 @@
         .cmp-badge { display:inline-block; font-size:12px; font-weight:800; padding:3px 10px; border-radius:999px; margin-bottom:10px; }
         .ba { background:var(--accent-soft); color:var(--accent); } .bb { background:var(--accent-2-soft); color:var(--accent-2); }
 
-        .ft { text-align:center; font-size:12px; color:var(--faint); padding:20px; }
+        .ft { text-align:center; font-size:12px; color:var(--faint); padding:6px 20px 18px; line-height:1.5; }
 
         /* 용어 설명 말풍선 */
         .info { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:800; font-style:normal; line-height:1; cursor:pointer; vertical-align:middle; position:relative; user-select:none; flex-shrink:0; }
@@ -143,6 +144,7 @@
         </div>
         <img class="hdr-logo" src="https://ourdongne.github.io/channel-logo.png" alt="우리동네재테크">
     </div>
+    <p class="disclaimer">참고용입니다. 정확한 대출·세금은 세무사·은행에 확인하세요.</p>
     <div class="tabs">
         <button class="tab active" data-tab="buy">매수 계산</button>
         <button class="tab" data-tab="repay">월 상환</button>
@@ -314,8 +316,8 @@
         else{vd.className='verdict';vd.innerHTML='<div class="v-text">매수 가능 (여유 '+fmt(Math.abs(short))+')</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본 '+fmt(selfNeed)+tip(T.equity)+'</div>';}
 
         $('buyR').innerHTML=''
-            +'<div class="rb accent"><div class="rb-label">DSR 최대 대출'+tip(T.dsr)+'</div><div class="rb-val blue">'+fmt(mxDSR)+'</div><div class="rb-sub">금리 '+rt+'% + 가산 1.5%</div></div>'
-            +'<div class="rb accent"><div class="rb-label">LTV 대출 한도'+tip(T.ltv)+'</div><div class="rb-val blue">'+fmt(mxLTV)+'</div><div class="rb-sub">'+fmt(tg)+' x 70%</div></div>'
+            +'<div class="rb accent"><div class="rb-label">DSR 최대'+tip(T.dsr)+'</div><div class="rb-val blue">'+fmt(mxDSR)+'</div><div class="rb-sub">DSR 40% · 금리 '+rt+'%+가산 1.5% 가정</div></div>'
+            +'<div class="rb accent"><div class="rb-label">LTV 대출 한도'+tip(T.ltv)+'</div><div class="rb-val blue">'+fmt(mxLTV)+'</div><div class="rb-sub">집값 '+fmt(tg)+' × 70% 가정</div></div>'
             +'<div class="rb '+(short>0?'warn':'accent')+'"><div class="rb-label">'+(short>0?'부족분':'여유분')+'</div><div class="rb-val '+(short>0?'orange':'blue')+'">'+fmt(Math.abs(short))+'</div><div class="rb-sub">'+(short>0?'현금 추가 필요':'현금 여유')+'</div></div>';
 
         // 차트: 내 예산 vs 희망가 (가로 바 2줄 + DSR/LTV 점선)
