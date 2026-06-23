@@ -294,8 +294,8 @@
           },
           {
             id: 'fire-retirement-calculator',
-            title: '은퇴계산기',
-            description: 'FIRE 목표금액 · 예상 은퇴시점 · 연도별 상세표',
+            title: '은퇴·복리 계산기',
+            description: '은퇴 가능 시점 · 복리 수익 · 연도별 상세표 (탭으로 전환)',
             href: 'homepage/fire-retirement-calculator.html',
             publicPath: '~/fire-retirement-calculator',
             badgeText: 'NEW',

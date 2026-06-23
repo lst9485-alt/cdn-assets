@@ -223,14 +223,15 @@
     setText('returnInlinePreview', result.config.annualReturn + '%');
 
     var insight = qs('insightCard');
+    var ageHtml = '<b class="hl">' + result.retirementAge + '세</b>';
     if (result.retirementYear == null) {
-      insight.textContent = '현재 조건으로는 목표 은퇴자산에 도달하기 어렵습니다. 연지출을 줄이거나 저축률을 높이면 은퇴 시점이 크게 당겨집니다.';
+      insight.innerHTML = '현재 조건으로는 목표 은퇴자산에 도달하기 어렵습니다. 연지출을 줄이거나 저축을 늘리면 은퇴 시점이 크게 당겨집니다.';
     } else if (result.retirementYear === 0) {
-      insight.textContent = '현재 보유자산이 이미 목표 은퇴자산 이상입니다. 차트와 표는 지금부터 자산이 더 늘어나는 모습을 보여줍니다.';
+      insight.innerHTML = '현재 보유자산이 이미 목표 은퇴자산 이상입니다. 차트와 표는 지금부터 자산이 더 늘어나는 모습을 보여줍니다.';
     } else if (result.config.annualReturn < result.config.withdrawalRate) {
-      insight.textContent = '현재 조건이면 ' + result.retirementAge + '세에 목표 은퇴자산에 도달합니다. 인출률 기준은 투자수익만 쓰는 계산이 아니라 원금 일부 인출을 포함합니다.';
+      insight.innerHTML = '현재 조건이면 ' + ageHtml + '에 목표 은퇴자산에 도달합니다. 인출률은 투자수익만 쓰는 게 아니라 원금 일부 인출을 포함합니다.';
     } else {
-      insight.textContent = '현재 조건이면 ' + result.retirementAge + '세에 목표 은퇴자산에 도달합니다. 표 탭에서 매년 투자수익과 연지출의 비율을 확인할 수 있습니다.';
+      insight.innerHTML = '현재 조건이면 ' + ageHtml + '에 목표 은퇴자산에 도달합니다. 표 탭에서 매년 투자수익과 연지출 비율을 볼 수 있습니다.';
     }
   }
 
@@ -264,28 +265,29 @@
     var labels = result.rows.map(function (row) { return row.year + '년'; });
     var datasets = [
       {
-        label: '저축만 했을 때 ' + formatMoney(result.config.monthlySavings) + '/월',
+        label: '  저축만 했을 때',
         data: result.rows.map(function (row) {
           return Math.round(result.config.currentAssets + result.annualSavings * row.year);
         }),
-        borderColor: '#5b2df0',
-        backgroundColor: 'rgba(91,45,240,.08)',
+        borderColor: '#9a93c4',
+        backgroundColor: 'rgba(154,147,196,.06)',
         borderWidth: 2,
-        pointRadius: 2,
+        borderDash: [4, 4],
+        pointRadius: 0,
         pointHoverRadius: 4,
         tension: .2,
         fill: false
       },
       {
-        label: '투자성장 ' + result.config.annualReturn.toFixed(1).replace(/\.0$/, '') + '%/년',
+        label: '  투자하며 모을 때',
         data: result.rows.map(function (row) { return Math.round(row.networth); }),
-        borderColor: '#5a7118',
-        backgroundColor: 'rgba(90,113,24,.08)',
-        borderWidth: 2,
+        borderColor: '#5b2df0',
+        backgroundColor: 'rgba(91,45,240,.10)',
+        borderWidth: 2.5,
         pointRadius: 2,
         pointHoverRadius: 4,
         tension: .2,
-        fill: false
+        fill: true
       },
       {
         label: '목표',
@@ -299,7 +301,7 @@
     ];
     var yTick = function (value) { return formatMoney(value).replace('원', ''); };
     var tooltipLabel = function (ctx) {
-      return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y);
+      return ctx.dataset.label.trim() + ': ' + formatMoney(ctx.parsed.y);
     };
     var legendFilter = function (item) { return item.text !== '목표'; };
 
