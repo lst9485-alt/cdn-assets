@@ -53,9 +53,12 @@
 
           <div class="ly-field slider-field rate-row">
             <span class="rate-name">연 수익률</span>
-            <div class="mode-toggle" role="group" aria-label="이자 방식">
-              <button type="button" class="mode-btn active" data-mode="compound" aria-pressed="true">복리</button>
-              <button type="button" class="mode-btn" data-mode="simple" aria-pressed="false">단리</button>
+            <div class="mode-row">
+              <div class="mode-toggle" role="group" aria-label="이자 방식">
+                <button type="button" class="mode-btn active" data-mode="compound" aria-pressed="true">복리</button>
+                <button type="button" class="mode-btn" data-mode="simple" aria-pressed="false">단리</button>
+              </div>
+              <button type="button" class="reset-icon" id="resetInputs" title="기본값으로 초기화" aria-label="초기화">↻</button>
             </div>
             <input id="annualRateRange" type="range" min="0" max="30" step="0.1" value="5" aria-label="연 수익률 조정">
             <div class="value-box compact">
@@ -71,7 +74,6 @@
               <input id="years" type="number" min="1" max="50" step="1" value="10" aria-label="기간">
               <em>년</em>
             </div>
-            <button type="button" class="reset-icon" id="resetInputs" title="기본값으로 초기화" aria-label="초기화">↻</button>
           </div>
         </section>
       </form>

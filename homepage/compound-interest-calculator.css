@@ -184,7 +184,14 @@ a {
 }
 
 .slider-field.years-row {
-  grid-template-columns: 112px minmax(60px, 1fr) 92px 36px;
+  grid-template-columns: 112px minmax(60px, 1fr) 92px;
+}
+
+.mode-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .reset-icon {
