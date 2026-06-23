@@ -49,6 +49,13 @@
         .if { border:1px solid var(--border); border-radius:var(--radius-sm) 0 0 var(--radius-sm); padding:11px 12px; font-size:16px; font-weight:700; color:var(--ink); font-family:inherit; outline:none; flex:1; min-width:0; text-align:right; background:var(--input-bg); border-right:none; }
         .if:focus { border-color:var(--accent); box-shadow:-1px 0 0 var(--accent); }
         .is { padding:11px 12px; font-size:13px; font-weight:600; color:var(--muted); background:var(--input-suffix-bg); border:1px solid var(--border); border-radius:0 var(--radius-sm) var(--radius-sm) 0; border-left:none; white-space:nowrap; }
+        .inline-fields > div { display:flex; align-items:center; gap:10px; }
+        .inline-fields .il { margin-bottom:0; flex-shrink:0; width:64px; white-space:nowrap; }
+        .inline-fields .iw { flex:1; min-width:0; }
+        .card-result { margin-top:12px; padding-top:11px; border-top:1px dashed var(--border); font-size:13.5px; color:var(--muted); }
+        .card-result b { font-size:17px; font-weight:800; }
+        .card-result .a { color:var(--accent); }
+        .card-result .b { color:var(--accent-2); }
 
         .rbox { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:16px; }
         .rb { border:var(--card-bd); border-radius:var(--radius-sm); padding:16px; text-align:center; background:var(--card-bg); box-shadow:var(--card-sh); }
@@ -175,18 +182,20 @@
         <div class="verdict" id="repV"></div>
         <div class="cmp">
             <div class="cmp-card"><span class="cmp-badge ba">조건 A</span>
-                <div class="ig ig1">
+                <div class="ig ig1 inline-fields">
                     <div><div class="il">대출 금액</div><div class="iw"><input class="if" id="ra_amt" inputmode="decimal"><span class="is">만원</span></div></div>
                     <div><div class="il">기간</div><div class="iw"><input class="if" id="ra_mo" inputmode="decimal"><span class="is">개월</span></div></div>
                     <div><div class="il">금리</div><div class="iw"><input class="if" id="ra_r" inputmode="decimal"><span class="is">%</span></div></div>
                 </div>
+                <div class="card-result" id="repResA"></div>
             </div>
             <div class="cmp-card"><span class="cmp-badge bb">조건 B</span>
-                <div class="ig ig1">
+                <div class="ig ig1 inline-fields">
                     <div><div class="il">대출 금액</div><div class="iw"><input class="if" id="rb_amt" inputmode="decimal"><span class="is">만원</span></div></div>
                     <div><div class="il">기간</div><div class="iw"><input class="if" id="rb_mo" inputmode="decimal"><span class="is">개월</span></div></div>
                     <div><div class="il">금리</div><div class="iw"><input class="if" id="rb_r" inputmode="decimal"><span class="is">%</span></div></div>
                 </div>
+                <div class="card-result" id="repResB"></div>
             </div>
         </div>
         <div style="margin-top:14px;">
@@ -207,7 +216,6 @@
                 </div>
             </div>
         </div>
-        <div class="rbox" id="repR" style="margin-top:14px;"></div>
         <div class="card"><div class="card-t">월 상환액 비교</div><div class="cw"><canvas id="cRep"></canvas></div></div>
     </div>
 
@@ -372,9 +380,8 @@
             $('gaugeLabelB').style.color=pctB>40?'var(--red)':pctB>30?'var(--orange)':'var(--orange)';
         }
 
-        $('repR').innerHTML=''
-            +'<div class="rb accent"><div class="rb-label">A 월 상환</div><div class="rb-val blue">'+fF(am)+'</div><div class="rb-sub">총이자 '+fmt(aI)+'</div></div>'
-            +'<div class="rb warn"><div class="rb-label">B 월 상환</div><div class="rb-val orange">'+fF(bm)+'</div><div class="rb-sub">총이자 '+fmt(bI)+'</div></div>';
+        $('repResA').innerHTML='월 상환 <b class="a">'+fF(am)+'</b> · 총이자 '+fmt(aI);
+        $('repResB').innerHTML='월 상환 <b class="b">'+fF(bm)+'</b> · 총이자 '+fmt(bI);
 
         if(CRep)CRep.destroy();
         CRep=new Chart($('cRep'),{type:'bar',data:{labels:['총 이자','총 상환'],datasets:[
