@@ -76,7 +76,9 @@
         .copy-btn:hover { background: #E0F2FE; border-color: #0077C8; color: #0077C8; }
         .copy-btn.copied { background: #D1FAE5; border-color: #10B981; color: #065F46; }
         .copy-btn:disabled { opacity: 0.6; cursor: wait; }
-        .sheet-group-row { display: block; padding: 8px 10px 4px; background: #F8FAFC; border-top: 1px solid #E8EEF5; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; color: #8597AD; }
+        .sheet-group-row { display: flex; align-items: center; gap: 5px; padding: 8px 10px 4px; background: #F8FAFC; border-top: 1px solid #E8EEF5; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; color: #8597AD; cursor: pointer; user-select: none; }
+        .sheet-group-row:hover { background: #EEF2F7; color: #64748B; }
+        .group-caret { font-size: 8px; color: #94A3B8; line-height: 1; }
 
         @media (max-width: 1200px) { .hub { padding-right: 20px; } }
         @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
@@ -111,6 +113,7 @@
 
     var sheetSort = {};
     var starred = loadStars();
+    var collapsedGroups = loadGroups();
     container.innerHTML = site.sections.map(renderSection).join('');
     container.addEventListener('click', function(event) {
         var copyBtn = event.target.closest('.copy-btn');
@@ -124,6 +127,12 @@
         if (star) {
             event.preventDefault();
             toggleStar(star.getAttribute('data-star-key'));
+            return;
+        }
+        var groupToggle = event.target.closest('[data-group-toggle]');
+        if (groupToggle) {
+            event.preventDefault();
+            toggleGroup(groupToggle.getAttribute('data-group-toggle'));
             return;
         }
         var cell = event.target.closest('[data-sheet-sort]');
@@ -245,7 +254,12 @@
         return groups.map(function(g) {
             var groupItems = items.filter(function(item) { return (item.groupLabel || '기타') === g; });
             if (!groupItems.length) return '';
-            return '<div class="sheet-group-row">' + esc(g) + '</div>'
+            var gkey = sectionId + '|' + g;
+            var collapsed = !!collapsedGroups[gkey];
+            var header = '<div class="sheet-group-row" role="button" tabindex="0" data-group-toggle="' + attr(gkey) + '">'
+                + '<span class="group-caret">' + (collapsed ? '▶' : '▼') + '</span>' + esc(g) + '</div>';
+            if (collapsed) return header;
+            return header
                 + groupItems.map(function(item) { return renderGenericSheetItem(item, sectionId, showCopy); }).join('');
         }).join('');
     }
@@ -370,6 +384,30 @@
         }
         saveStars();
         container.innerHTML = site.sections.map(renderSection).join('');
+    }
+
+    function toggleGroup(key) {
+        if (collapsedGroups[key]) {
+            delete collapsedGroups[key];
+        } else {
+            collapsedGroups[key] = true;
+        }
+        saveGroups();
+        container.innerHTML = site.sections.map(renderSection).join('');
+    }
+
+    function loadGroups() {
+        try {
+            return JSON.parse(localStorage.getItem('hubDashboardGroups') || '{}') || {};
+        } catch (error) {
+            return {};
+        }
+    }
+
+    function saveGroups() {
+        try {
+            localStorage.setItem('hubDashboardGroups', JSON.stringify(collapsedGroups));
+        } catch (error) {}
     }
 
     function loadStars() {
