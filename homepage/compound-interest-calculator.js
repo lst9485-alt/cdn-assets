@@ -11,7 +11,8 @@
   var DEFAULTS = {
     principal: 1000,
     annualRate: 5,
-    years: 10
+    years: 10,
+    mode: 'compound'
   };
   var RATE_MIN = 0;
   var RATE_MAX = 30;
@@ -23,6 +24,7 @@
   var tableExpanded = false;
   var lastResult = null;
   var projectionView = 'chart';
+  var calcMode = 'compound';
 
   function qs(id) {
     return document.getElementById(id);
@@ -77,6 +79,7 @@
     cfg.principal = Math.max(0, toNumber(cfg.principal, DEFAULTS.principal));
     cfg.annualRate = Math.max(RATE_MIN, Math.min(RATE_MAX, toNumber(cfg.annualRate, DEFAULTS.annualRate)));
     cfg.years = Math.max(YEARS_MIN, Math.min(YEARS_MAX, Math.round(toNumber(cfg.years, DEFAULTS.years))));
+    cfg.mode = cfg.mode === 'simple' ? 'simple' : 'compound';
     return cfg;
   }
 
@@ -85,7 +88,9 @@
     var rate = cfg.annualRate / 100;
     var rows = [];
     for (var year = 0; year <= cfg.years; year += 1) {
-      var networth = cfg.principal * Math.pow(1 + rate, year);
+      var networth = cfg.mode === 'simple'
+        ? cfg.principal * (1 + rate * year)
+        : cfg.principal * Math.pow(1 + rate, year);
       rows.push({
         year: year,
         networth: networth,
@@ -107,7 +112,17 @@
     return normalizeConfig({
       principal: qs('principal').value,
       annualRate: qs('annualRate').value,
-      years: qs('years').value
+      years: qs('years').value,
+      mode: calcMode
+    });
+  }
+
+  function setMode(mode) {
+    calcMode = mode === 'simple' ? 'simple' : 'compound';
+    document.querySelectorAll('[data-mode]').forEach(function (btn) {
+      var active = btn.dataset.mode === calcMode;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
   }
 
@@ -118,6 +133,7 @@
     qs('years').value = cfg.years;
     if (qs('annualRateRange')) qs('annualRateRange').value = cfg.annualRate;
     if (qs('yearsRange')) qs('yearsRange').value = cfg.years;
+    setMode(cfg.mode);
   }
 
   function setText(id, value) {
@@ -133,14 +149,15 @@
     setText('finalAmount', formatMoney(result.finalAmount));
     setText('resultSummary', '불어난 돈 ' + formatMoney(result.totalInterest) + ' · 원금의 ' + result.multiple.toFixed(1).replace(/\.0$/, '') + '배');
 
+    var modeWord = cfg.mode === 'simple' ? '단리' : '복리';
     var insight = qs('insightCard');
     if (!insight) return;
     if (cfg.principal <= 0) {
-      insight.textContent = '원금을 넣으면 복리로 얼마가 되는지 보여드립니다.';
+      insight.textContent = '원금을 넣으면 ' + modeWord + '로 얼마가 되는지 보여드립니다.';
     } else if (cfg.annualRate <= 0) {
-      insight.textContent = '수익률이 0%면 돈이 불어나지 않습니다. 수익률을 올려 복리 효과를 확인해 보세요.';
+      insight.textContent = '수익률이 0%면 돈이 불어나지 않습니다. 수익률을 올려 ' + modeWord + ' 효과를 확인해 보세요.';
     } else {
-      insight.textContent = formatMoney(cfg.principal) + '을 연 ' + cfg.annualRate + '%로 ' + cfg.years + '년 두면 ' + formatMoney(result.finalAmount) + '이 됩니다. 그중 불어난 돈이 ' + formatMoney(result.totalInterest) + '이에요.';
+      insight.textContent = formatMoney(cfg.principal) + '을 연 ' + cfg.annualRate + '%로 ' + cfg.years + '년 두면(' + modeWord + ' 기준) ' + formatMoney(result.finalAmount) + '. 그중 불어난 돈이 ' + formatMoney(result.totalInterest) + '입니다.';
     }
   }
 
@@ -173,7 +190,7 @@
         fill: false
       },
       {
-        label: '복리 성장 ' + result.config.annualRate + '%/년',
+        label: (result.config.mode === 'simple' ? '단리' : '복리') + ' 성장 ' + result.config.annualRate + '%/년',
         data: result.rows.map(function (row) { return Math.round(row.networth); }),
         borderColor: '#5b2df0',
         backgroundColor: 'rgba(91,45,240,.10)',
@@ -336,6 +353,12 @@
       writeConfigToDom(DEFAULTS);
       update();
       showToast('기본값으로 복원했습니다.');
+    });
+    document.querySelectorAll('[data-mode]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        setMode(btn.dataset.mode);
+        update();
+      });
     });
     qs('copyShare').addEventListener('click', copyShareLink);
     if (qs('copyShareTop')) qs('copyShareTop').addEventListener('click', copyShareLink);

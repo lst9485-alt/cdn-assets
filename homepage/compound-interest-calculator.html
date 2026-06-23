@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <link rel="stylesheet" href="compound-interest-calculator.css?v=20260623c">
+  <link rel="stylesheet" href="compound-interest-calculator.css?v=20260623d">
 </head>
 <body>
   <main class="ci-page">
@@ -27,6 +27,11 @@
       <form class="input-panel" id="inputForm">
         <section class="input-card">
           <h2>원금과 기간</h2>
+
+          <div class="mode-toggle" role="group" aria-label="계산 방식">
+            <button type="button" class="mode-btn active" data-mode="compound" aria-pressed="true">복리</button>
+            <button type="button" class="mode-btn" data-mode="simple" aria-pressed="false">단리</button>
+          </div>
 
           <label class="ly-field">
             <span>원금</span>
@@ -57,7 +62,7 @@
           </label>
 
           <div class="button-row">
-            <button type="button" class="secondary-button" id="resetInputs">기본값 복원</button>
+            <button type="button" class="secondary-button" id="resetInputs">초기화</button>
             <button type="button" class="primary-button" id="copyShare">링크 공유</button>
           </div>
         </section>
@@ -116,7 +121,7 @@
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="compound-interest-calculator.js?v=20260623a"></script>
+  <script src="compound-interest-calculator.js?v=20260623b"></script>
   <script src="homepage-shell.js?v=20260506d"></script>
 </body>
 </html>

@@ -59,6 +59,21 @@ test('each row carries year, networth, interest', () => {
   approx(result.rows[3].interest, 331);
 });
 
+test('simple interest mode grows linearly', () => {
+  const result = calculateCompound({ principal: 1000, annualRate: 5, years: 10, mode: 'simple' });
+
+  assert.equal(result.finalAmount, 1500);
+  assert.equal(result.totalInterest, 500);
+  approx(result.rows[5].networth, 1250);
+  assert.equal(result.config.mode, 'simple');
+});
+
+test('mode defaults to compound and is validated', () => {
+  assert.equal(normalizeConfig({}).mode, 'compound');
+  assert.equal(normalizeConfig({ mode: 'simple' }).mode, 'simple');
+  assert.equal(normalizeConfig({ mode: 'weird' }).mode, 'compound');
+});
+
 test('Korean money input is normalized for principal', () => {
   const cfg = normalizeConfig({ principal: '1억', annualRate: '5', years: '10' });
   assert.equal(cfg.principal, 10000);

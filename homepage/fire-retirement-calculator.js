@@ -265,20 +265,6 @@
     var labels = result.rows.map(function (row) { return row.year + '년'; });
     var datasets = [
       {
-        label: '  저축만 했을 때',
-        data: result.rows.map(function (row) {
-          return Math.round(result.config.currentAssets + result.annualSavings * row.year);
-        }),
-        borderColor: '#9a93c4',
-        backgroundColor: 'rgba(154,147,196,.06)',
-        borderWidth: 2,
-        borderDash: [4, 4],
-        pointRadius: 0,
-        pointHoverRadius: 4,
-        tension: .2,
-        fill: false
-      },
-      {
         label: '  투자하며 모을 때',
         data: result.rows.map(function (row) { return Math.round(row.networth); }),
         borderColor: '#5b2df0',
@@ -288,6 +274,20 @@
         pointHoverRadius: 4,
         tension: .2,
         fill: true
+      },
+      {
+        label: '  저축만 했을 때',
+        data: result.rows.map(function (row) {
+          return Math.round(result.config.currentAssets + result.annualSavings * row.year);
+        }),
+        borderColor: '#8079a8',
+        backgroundColor: 'rgba(128,121,168,.06)',
+        borderWidth: 2.5,
+        borderDash: [5, 4],
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        tension: .2,
+        fill: false
       },
       {
         label: '목표',
@@ -325,6 +325,7 @@
           legend: {
             position: 'bottom',
             align: 'start',
+            reverse: true,
             labels: {
               filter: legendFilter,
               usePointStyle: true,
