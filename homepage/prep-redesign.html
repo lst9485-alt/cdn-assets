@@ -329,15 +329,15 @@
             {label:'매매가',data:[tg,0],backgroundColor:short>0?'#f59e0b':'#2563eb',barPercentage:.5},
             {label:'현금 '+fmt(c),data:[0,c],backgroundColor:'#2563eb',barPercentage:.5},
             {label:'대출 '+fmt(actual),data:[0,actual],backgroundColor:'#94A3B8',barPercentage:.5}
-        ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{
+        ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{top:24}},plugins:{
             legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:13},filter:function(item){return item.text!=='매매가';}}},
             tooltip:{callbacks:{label:function(ctx){if(ctx.parsed.x===0)return '';return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
             annotation:{annotations:{
                 dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#2563eb',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#fff',color:'#2563eb',borderColor:'#2563eb',borderWidth:1.5,borderRadius:6,font:{size:12,weight:'bold'},padding:5,position:'center'}},
-                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#f59e0b',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#fff',color:'#d97706',borderColor:'#f59e0b',borderWidth:1.5,borderRadius:6,font:{size:12,weight:'bold'},padding:5,position:'end',yAdjust:-8}}
+                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#f59e0b',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#fff',color:'#d97706',borderColor:'#f59e0b',borderWidth:1.5,borderRadius:6,font:{size:12,weight:'bold'},padding:5,position:'end'}}
             }}
         },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:13}},grid:{color:'#F1F5F9'},max:xMax},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
-        $('cBuyChart').parentElement.style.height='160px';
+        $('cBuyChart').parentElement.style.height='185px';
 
         $('buyN').innerHTML='실제 대출 <b class="amt">'+fmt(actual)+'</b> (DSR '+fmt(mxDSR)+' / LTV '+fmt(mxLTV)+' 중 작은 값)';
     }
