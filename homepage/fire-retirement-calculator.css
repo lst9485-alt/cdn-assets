@@ -438,7 +438,7 @@ a {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
-  margin: 0 0 16px;
+  margin: 16px 0 0;
   border-radius: 12px;
   padding: 22px 28px;
   background: #f6f5ff;
