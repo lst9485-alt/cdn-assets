@@ -218,7 +218,8 @@
             activeMatch: ['booklist-final.html'],
             hubVisible: true,
             groupLabel: '페이지',
-            imwebCode: 'homepage/booklist-imweb-copy.html'
+            imwebCode: 'homepage/booklist-imweb-copy.html',
+            dateSuffix: '1'
           },
           {
             id: 'coaching-payment',
