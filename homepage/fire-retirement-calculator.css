@@ -226,6 +226,7 @@ a {
   font-weight: 600;
   line-height: 1.55;
   text-align: left;
+  white-space: normal;
   word-break: keep-all;
   box-shadow: var(--shadow);
 }
