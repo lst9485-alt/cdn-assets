@@ -64,9 +64,12 @@
         <section class="input-card" id="planCard">
           <h2><span class="step-num">2</span>은퇴 계획</h2>
 
-          <div class="mode-toggle" role="group" aria-label="입력 방식">
-            <button type="button" class="mode-btn active" data-emode="expense" aria-pressed="true">월지출</button>
-            <button type="button" class="mode-btn" data-emode="target" aria-pressed="false">은퇴자금</button>
+          <div class="mode-row">
+            <div class="mode-toggle" role="group" aria-label="입력 방식">
+              <button type="button" class="mode-btn active" data-emode="expense" aria-pressed="true">월지출</button>
+              <button type="button" class="mode-btn" data-emode="target" aria-pressed="false">은퇴자금</button>
+            </div>
+            <button type="button" class="reset-icon" id="resetInputs" title="기본값으로 초기화" aria-label="초기화">↻</button>
           </div>
 
           <label class="ly-field emode-expense-only">
@@ -96,9 +99,6 @@
           </label>
         </section>
 
-        <div class="reset-row">
-          <button type="button" class="reset-icon" id="resetInputs" title="기본값으로 초기화" aria-label="초기화">↻</button>
-        </div>
       </form>
 
       <section class="result-strip" aria-live="polite">
