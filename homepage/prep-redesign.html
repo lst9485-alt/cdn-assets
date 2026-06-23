@@ -50,10 +50,11 @@
         .if:focus { border-color:var(--accent); box-shadow:-1px 0 0 var(--accent); }
         .is { padding:11px 12px; font-size:13px; font-weight:600; color:var(--muted); background:var(--input-suffix-bg); border:1px solid var(--border); border-radius:0 var(--radius-sm) var(--radius-sm) 0; border-left:none; white-space:nowrap; }
         .inline-fields > div { display:flex; align-items:center; gap:10px; }
-        .inline-fields .il { margin-bottom:0; flex-shrink:0; width:64px; white-space:nowrap; }
+        .inline-fields .il { margin-bottom:0; flex-shrink:0; min-width:72px; white-space:nowrap; }
         .inline-fields .iw { flex:1; min-width:0; }
-        .card-result { margin-top:12px; padding-top:11px; border-top:1px dashed var(--border); font-size:13.5px; color:var(--muted); }
+        .card-result { margin-top:12px; padding-top:11px; border-top:1px dashed var(--border); font-size:13.5px; color:var(--muted); text-align:center; }
         .card-result b { font-size:17px; font-weight:800; }
+        .card-result b.sm { font-size:14px; }
         .card-result .a { color:var(--accent); }
         .card-result .b { color:var(--accent-2); }
 
@@ -201,7 +202,7 @@
         <div style="margin-top:14px;">
             <div class="card">
                 <div class="card-t">소득 대비 상환 비중</div>
-                <div class="ig ig1" style="margin-bottom:12px;">
+                <div class="ig ig1 inline-fields" style="margin-bottom:12px;">
                     <div><div class="il">월 세후 소득</div><div class="iw"><input class="if" id="rep_income" inputmode="decimal"><span class="is">만원</span></div></div>
                 </div>
                 <div class="gauge-wrap">
@@ -380,8 +381,8 @@
             $('gaugeLabelB').style.color=pctB>40?'var(--red)':pctB>30?'var(--orange)':'var(--orange)';
         }
 
-        $('repResA').innerHTML='월 상환 <b class="a">'+fF(am)+'</b> · 총이자 '+fmt(aI);
-        $('repResB').innerHTML='월 상환 <b class="b">'+fF(bm)+'</b> · 총이자 '+fmt(bI);
+        $('repResA').innerHTML='월 상환 <b class="a">'+fF(am)+'</b> · 총이자 <b class="a sm">'+fmt(aI)+'</b>';
+        $('repResB').innerHTML='월 상환 <b class="b">'+fF(bm)+'</b> · 총이자 <b class="b sm">'+fmt(bI)+'</b>';
 
         if(CRep)CRep.destroy();
         CRep=new Chart($('cRep'),{type:'bar',data:{labels:['총 이자','총 상환'],datasets:[
