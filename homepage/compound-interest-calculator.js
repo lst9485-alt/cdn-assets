@@ -172,7 +172,9 @@
     if (cfg.annualRate <= 0) {
       insight.textContent = '수익률이 0%면 돈이 불어나지 않습니다. 수익률을 올려 ' + modeWord + ' 효과를 확인해 보세요.';
     } else {
-      insight.textContent = how + ' 연 ' + cfg.annualRate + '%로 ' + cfg.years + '년 넣으면(' + modeWord + ' 기준) ' + formatMoney(result.finalAmount) + '. 넣은 돈 ' + formatMoney(result.totalPaid) + ', 불어난 돈 ' + formatMoney(result.totalInterest) + '입니다.';
+      var finHtml = '<b class="hl">' + formatMoney(result.finalAmount) + '</b>';
+      var grewHtml = '<b class="hl">' + formatMoney(result.totalInterest) + '</b>';
+      insight.innerHTML = how + ' 연 ' + cfg.annualRate + '%로 ' + cfg.years + '년 넣으면(' + modeWord + ' 기준) ' + finHtml + '. 넣은 돈 ' + formatMoney(result.totalPaid) + ', 불어난 돈 ' + grewHtml + '입니다.';
     }
   }
 
@@ -379,7 +381,7 @@
         update();
       });
     });
-    qs('copyShare').addEventListener('click', copyShareLink);
+    if (qs('copyShare')) qs('copyShare').addEventListener('click', copyShareLink);
     if (qs('copyShareTop')) qs('copyShareTop').addEventListener('click', copyShareLink);
     if (qs('toggleRows')) qs('toggleRows').addEventListener('click', function () {
       tableExpanded = !tableExpanded;

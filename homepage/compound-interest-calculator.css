@@ -183,6 +183,28 @@ a {
   grid-template-columns: 112px auto minmax(60px, 1fr) 92px;
 }
 
+.slider-field.years-row {
+  grid-template-columns: 112px minmax(60px, 1fr) 92px 36px;
+}
+
+.reset-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--purple-soft);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--purple);
+  font-size: 17px;
+  line-height: 1;
+}
+
+.reset-icon:hover {
+  background: var(--purple-soft);
+}
+
 .mode-toggle {
   display: flex;
   gap: 3px;
@@ -374,6 +396,14 @@ label.ly-field:first-of-type {
   font-size: 13px;
   line-height: 1.55;
   word-break: keep-all;
+}
+
+.chart-foot p .hl {
+  color: var(--purple);
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
 .share-bottom {

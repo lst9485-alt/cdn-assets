@@ -7,7 +7,7 @@
   <meta name="description" content="예금식·적금식으로 복리·단리 수익을 계산하는 한국형 복리계산기">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <link rel="stylesheet" href="compound-interest-calculator.css?v=20260623j">
+  <link rel="stylesheet" href="compound-interest-calculator.css?v=20260623k">
   <style>
     /* 끼워넣기(embed) 모드: 사이트 머리글·탭·뒤로가기 숨김 */
     html.embed .calc-tabs, html.embed .hero .back-link { display: none !important; }
@@ -31,8 +31,6 @@
     <section class="calculator" id="calculator">
       <form class="input-panel" id="inputForm">
         <section class="input-card" id="inputCard">
-          <h2>원금과 매달 적립</h2>
-
           <label class="ly-field">
             <span>원금</span>
             <div class="value-box">
@@ -62,18 +60,14 @@
             </div>
           </div>
 
-          <label class="ly-field slider-field">
+          <div class="ly-field slider-field years-row">
             <span>기간</span>
-            <input id="yearsRange" type="range" min="1" max="50" step="1" value="10">
+            <input id="yearsRange" type="range" min="1" max="50" step="1" value="10" aria-label="기간 조정">
             <div class="value-box compact">
-              <input id="years" type="number" min="1" max="50" step="1" value="10">
+              <input id="years" type="number" min="1" max="50" step="1" value="10" aria-label="기간">
               <em>년</em>
             </div>
-          </label>
-
-          <div class="button-row">
-            <button type="button" class="secondary-button" id="resetInputs">초기화</button>
-            <button type="button" class="primary-button" id="copyShare">링크 공유</button>
+            <button type="button" class="reset-icon" id="resetInputs" title="기본값으로 초기화" aria-label="초기화">↻</button>
           </div>
         </section>
       </form>
@@ -131,7 +125,7 @@
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="compound-interest-calculator.js?v=20260623e"></script>
+  <script src="compound-interest-calculator.js?v=20260623f"></script>
   <script>
     (function () {
       var embed = new URLSearchParams(location.search).get('embed') === '1';
