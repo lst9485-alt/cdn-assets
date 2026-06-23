@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재무 계산기 시안 - 우리동네재테크</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); background:var(--page-bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; transition:background .2s; }
+
+        /* ===== 시안 선택 바 (미리보기 전용 — 실제 적용 시 삭제) ===== */
+        .themebar { position:sticky; top:0; z-index:50; display:flex; flex-wrap:wrap; gap:8px; justify-content:center; align-items:center; padding:11px 12px; background:#0f172a; }
+        .themebar .tlabel { color:#94a3b8; font-size:12px; font-weight:700; margin-right:4px; }
+        .themebar button { padding:7px 16px; border-radius:999px; border:1px solid #334155; background:transparent; color:#cbd5e1; font-weight:700; cursor:pointer; font-size:13px; font-family:inherit; transition:all .15s; }
+        .themebar button:hover { border-color:#64748b; color:#fff; }
+        .themebar button.on { background:#fff; color:#0f172a; border-color:#fff; }
+
+        .wrap { max-width:820px; margin:0 auto; padding:28px 20px 40px; }
+
+        .hdr { background:var(--hdr-bg); color:var(--hdr-fg); padding:26px 30px; border-radius:var(--radius); margin-bottom:22px; border:var(--hdr-bd); box-shadow:var(--hdr-sh); display:flex; justify-content:space-between; align-items:center; gap:16px; }
+        .hdr h1 { font-family:var(--font-head); font-size:23px; font-weight:800; letter-spacing:-.01em; color:var(--hdr-fg); }
+        .hdr .sub { font-size:14px; color:var(--hdr-sub); margin-top:5px; }
+        .hdr-logo { width:64px; height:64px; border-radius:50%; object-fit:cover; flex-shrink:0; }
+
+        .tabs { display:flex; gap:6px; margin-bottom:22px; background:var(--card-bg); padding:6px; border-radius:999px; box-shadow:var(--card-sh); border:var(--card-bd); }
+        .tab { flex:1; padding:11px 12px; font-size:15px; font-weight:700; color:var(--muted); cursor:pointer; border:none; background:none; border-radius:999px; transition:all .15s; font-family:inherit; white-space:nowrap; }
+        .tab:hover { color:var(--ink); }
+        .tab.active { color:#fff; background:var(--accent); box-shadow:0 4px 12px var(--accent-shadow); }
+        .tc { display:none; } .tc.active { display:block; }
+
+        .card { background:var(--card-bg); border:var(--card-bd); border-radius:var(--radius); padding:var(--pad-card); margin-bottom:16px; box-shadow:var(--card-sh); }
+        .card-t { font-family:var(--font-head); font-size:16px; font-weight:800; color:var(--ink); margin-bottom:16px; }
+
+        .verdict { border-radius:var(--radius); padding:20px 22px; margin-bottom:16px; background:var(--accent-soft); text-align:center; box-shadow:var(--card-sh); }
+        .verdict.warn { background:var(--accent-2-soft); }
+        .verdict .v-text { font-family:var(--font-head); font-size:24px; font-weight:800; color:var(--accent); }
+        .verdict.warn .v-text { color:var(--accent-2); }
+        .verdict .v-sub { font-size:15px; color:var(--muted); margin-top:6px; }
+
+        .ig { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+        .ig1 { grid-template-columns:1fr; }
+        .iw { display:flex; align-items:center; }
+        .il { font-size:13px; font-weight:600; color:var(--muted); margin-bottom:6px; }
+        .if { border:1px solid var(--border); border-radius:var(--radius-sm) 0 0 var(--radius-sm); padding:11px 12px; font-size:16px; font-weight:700; color:var(--ink); font-family:inherit; outline:none; flex:1; min-width:0; text-align:right; background:var(--input-bg); border-right:none; }
+        .if:focus { border-color:var(--accent); box-shadow:-1px 0 0 var(--accent); }
+        .is { padding:11px 12px; font-size:13px; font-weight:600; color:var(--muted); background:var(--input-suffix-bg); border:1px solid var(--border); border-radius:0 var(--radius-sm) var(--radius-sm) 0; border-left:none; white-space:nowrap; }
+
+        .rbox { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:16px; }
+        .rb { border:var(--card-bd); border-radius:var(--radius-sm); padding:16px; text-align:center; background:var(--card-bg); box-shadow:var(--card-sh); }
+        .rb.accent { background:var(--accent-soft); border:none; box-shadow:none; }
+        .rb.warn { background:var(--accent-2-soft); border:none; box-shadow:none; }
+        .rb-label { font-size:12px; font-weight:700; color:var(--muted); letter-spacing:.04em; margin-bottom:6px; }
+        .rb-val { font-family:var(--font-head); font-size:30px; font-weight:800; color:var(--ink); }
+        .rb-val.blue { color:var(--accent); } .rb-val.orange { color:var(--accent-2); }
+        .rb-sub { font-size:12px; color:var(--faint); margin-top:4px; }
+
+        .cw { position:relative; margin-top:8px; } .cw canvas { max-height:320px; }
+
+        .note { background:var(--note-bg); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 14px; font-size:14px; color:var(--muted); line-height:1.7; margin-top:12px; }
+        .note b { color:var(--ink); }
+        .note-warn { background:var(--accent-2-soft); border-color:transparent; color:#92400E; }
+
+        .gauge-wrap { display:flex; align-items:center; gap:16px; padding:10px 0; }
+        .gauge-bar { flex:1; height:28px; border-radius:14px; position:relative; background:var(--track); }
+        .gauge-bar::after { content:'40% 초과 위험'; position:absolute; left:40%; top:0; bottom:0; border-left:2px dashed var(--faint); z-index:2; font-size:10px; color:var(--faint); padding-left:4px; padding-top:32px; white-space:nowrap; }
+        .gauge-fill { height:100%; border-radius:14px; transition:width .3s; }
+        .gauge-tag { font-size:14px; font-weight:700; min-width:110px; }
+        .gauge-label { font-family:var(--font-head); font-size:20px; font-weight:800; min-width:70px; text-align:right; }
+
+        .cmp { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+        .cmp-card { background:var(--card-bg); border:var(--card-bd); border-radius:var(--radius); padding:16px; box-shadow:var(--card-sh); }
+        .cmp-badge { display:inline-block; font-size:12px; font-weight:800; padding:3px 10px; border-radius:999px; margin-bottom:10px; }
+        .ba { background:var(--accent-soft); color:var(--accent); } .bb { background:var(--accent-2-soft); color:var(--accent-2); }
+
+        .ft { text-align:center; font-size:12px; color:var(--faint); padding:20px; }
+
+        @media (max-width:768px) {
+            .wrap { padding:16px 12px 32px; } .hdr { padding:18px 18px; } .hdr h1 { font-size:19px; } .hdr-logo { width:52px; height:52px; }
+            .tabs { overflow-x:auto; } .tab { padding:9px 12px; font-size:14px; }
+            .ig { grid-template-columns:1fr; }
+            .rbox { grid-template-columns:1fr 1fr; } .rb-val { font-size:24px; }
+            .card { padding:16px; } .cmp { grid-template-columns:1fr; }
+            .verdict .v-text { font-size:18px; }
+        }
+
+        /* ===================== 시안 A — 소프트 보라 ===================== */
+        body.theme-a {
+            --page-bg:#faf9ff; --ink:#1c1830; --muted:#615c80; --faint:#9d99b8;
+            --card-bg:#ffffff; --card-bd:none; --card-sh:0 18px 44px rgba(28,24,48,.07); --radius:16px; --radius-sm:10px; --pad-card:24px 22px;
+            --accent:#5b2df0; --accent-soft:#efeaff; --accent-shadow:rgba(91,45,240,.35);
+            --accent-2:#e6820a; --accent-2-soft:#fff4e2;
+            --track:#e9e6f7; --input-bg:#ffffff; --input-suffix-bg:#f5f3ff; --note-bg:#f7f5ff; --border:#e7e3f5;
+            --hdr-bg:#ffffff; --hdr-fg:#1c1830; --hdr-sub:#615c80; --hdr-bd:none; --hdr-sh:0 18px 44px rgba(28,24,48,.07);
+            --font-head:"GmarketSans",Pretendard,-apple-system,sans-serif; --font-body:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
+            --blue:#5b2df0; --orange:#e6820a; --red:#e5484d; --green:#197a54; --navy:#1c1830; --gray:#615c80; --light-gray:#9d99b8; --bg:#faf9ff; --blue-light:#efeaff; --orange-light:#fff4e2;
+        }
+        /* ===================== 시안 B — 브랜드 블루 미니멀 ===================== */
+        body.theme-b {
+            --page-bg:#f7f9fc; --ink:#0f2740; --muted:#5b6b80; --faint:#9aa7b8;
+            --card-bg:#ffffff; --card-bd:1px solid #e8eef5; --card-sh:0 6px 18px rgba(15,39,64,.05); --radius:14px; --radius-sm:9px; --pad-card:22px 20px;
+            --accent:#0077C8; --accent-soft:#e8f4fc; --accent-shadow:rgba(0,119,200,.30);
+            --accent-2:#f59e0b; --accent-2-soft:#fff6e6;
+            --track:#e6edf4; --input-bg:#ffffff; --input-suffix-bg:#f4f8fc; --note-bg:#f6f9fc; --border:#e3eaf2;
+            --hdr-bg:#ffffff; --hdr-fg:#0f2740; --hdr-sub:#5b6b80; --hdr-bd:1px solid #e8eef5; --hdr-sh:0 6px 18px rgba(15,39,64,.05);
+            --font-head:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif; --font-body:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
+            --blue:#0077C8; --orange:#f59e0b; --red:#ef4444; --green:#10b981; --navy:#0f2740; --gray:#5b6b80; --light-gray:#9aa7b8; --bg:#f7f9fc; --blue-light:#e8f4fc; --orange-light:#fff6e6;
+        }
+        /* ===================== 시안 C — 핀테크 네이비 ===================== */
+        body.theme-c {
+            --page-bg:#eef2f7; --ink:#13243b; --muted:#5a6b82; --faint:#93a1b5;
+            --card-bg:#ffffff; --card-bd:none; --card-sh:0 10px 30px rgba(19,36,59,.08); --radius:18px; --radius-sm:12px; --pad-card:24px 22px;
+            --accent:#2563eb; --accent-soft:#e7efff; --accent-shadow:rgba(37,99,235,.35);
+            --accent-2:#f97316; --accent-2-soft:#fff1e6;
+            --track:#e3e9f1; --input-bg:#f7f9fc; --input-suffix-bg:#eef2f8; --note-bg:#f5f8fc; --border:#e2e8f1;
+            --hdr-bg:linear-gradient(135deg,#13294b,#1e3a6b); --hdr-fg:#ffffff; --hdr-sub:#aebfd6; --hdr-bd:none; --hdr-sh:0 12px 30px rgba(19,41,75,.25);
+            --font-head:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif; --font-body:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
+            --blue:#2563eb; --orange:#f97316; --red:#ef4444; --green:#10b981; --navy:#13243b; --gray:#5a6b82; --light-gray:#93a1b5; --bg:#eef2f7; --blue-light:#e7efff; --orange-light:#fff1e6;
+        }
+    </style>
+</head>
+<body class="theme-a">
+<div class="themebar">
+    <span class="tlabel">시안 미리보기 →</span>
+    <button data-t="a" class="on">A 소프트 보라</button>
+    <button data-t="b">B 브랜드 블루</button>
+    <button data-t="c">C 핀테크 네이비</button>
+</div>
+<div class="wrap">
+    <div class="hdr">
+        <div>
+            <h1 id="hT">우리동네재테크 재무 계산기</h1>
+            <div class="sub" id="hS">내집마련 코칭 · 상담 자료</div>
+        </div>
+        <img class="hdr-logo" src="https://ourdongne.github.io/channel-logo.png" alt="우리동네재테크">
+    </div>
+    <div class="tabs">
+        <button class="tab active" data-tab="buy">매수 계산</button>
+        <button class="tab" data-tab="repay">월 상환</button>
+        <button class="tab" data-tab="asset">갈아타기</button>
+    </div>
+
+    <!-- TAB 1: 매수 계산 -->
+    <div class="tc active" id="tab-buy">
+        <div class="verdict" id="buyV"></div>
+        <div class="card">
+            <div class="card-t">자산 및 소득</div>
+            <div class="ig">
+                <div><div class="il">보유 현금 (현금성 자산)</div><div class="iw"><input class="if" id="b_cash" inputmode="decimal"><span class="is">만원</span></div></div>
+                <div><div class="il">연소득 (세전)</div><div class="iw"><input class="if" id="b_income" inputmode="decimal"><span class="is">만원</span></div></div>
+                <div><div class="il">희망 아파트 가격</div><div class="iw"><input class="if" id="b_target" inputmode="decimal"><span class="is">만원</span></div></div>
+                <div><div class="il">대출 금리</div><div class="iw"><input class="if" id="b_rate" inputmode="decimal"><span class="is">%</span></div></div>
+                <div><div class="il">대출 기간</div><div class="iw"><input class="if" id="b_years" inputmode="decimal"><span class="is">년</span></div></div>
+            </div>
+        </div>
+        <div class="rbox" id="buyR"></div>
+        <div class="card"><div class="card-t">매수 가능 분석</div><div class="cw"><canvas id="cBuyChart"></canvas></div></div>
+        <div class="note" id="buyN"></div>
+    </div>
+
+    <!-- TAB 2: 월 상환 -->
+    <div class="tc" id="tab-repay">
+        <div class="verdict" id="repV"></div>
+        <div class="cmp">
+            <div class="cmp-card"><span class="cmp-badge ba">조건 A</span>
+                <div class="ig ig1">
+                    <div><div class="il">대출 금액</div><div class="iw"><input class="if" id="ra_amt" inputmode="decimal"><span class="is">만원</span></div></div>
+                    <div><div class="il">기간</div><div class="iw"><input class="if" id="ra_mo" inputmode="decimal"><span class="is">개월</span></div></div>
+                    <div><div class="il">금리</div><div class="iw"><input class="if" id="ra_r" inputmode="decimal"><span class="is">%</span></div></div>
+                </div>
+            </div>
+            <div class="cmp-card"><span class="cmp-badge bb">조건 B</span>
+                <div class="ig ig1">
+                    <div><div class="il">대출 금액</div><div class="iw"><input class="if" id="rb_amt" inputmode="decimal"><span class="is">만원</span></div></div>
+                    <div><div class="il">기간</div><div class="iw"><input class="if" id="rb_mo" inputmode="decimal"><span class="is">개월</span></div></div>
+                    <div><div class="il">금리</div><div class="iw"><input class="if" id="rb_r" inputmode="decimal"><span class="is">%</span></div></div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:14px;">
+            <div class="card">
+                <div class="card-t">소득 대비 상환 비중</div>
+                <div class="ig ig1" style="margin-bottom:12px;">
+                    <div><div class="il">월 세후 소득</div><div class="iw"><input class="if" id="rep_income" inputmode="decimal"><span class="is">만원</span></div></div>
+                </div>
+                <div class="gauge-wrap">
+                    <div class="gauge-tag" id="gaugeTagA" style="color:var(--blue)">A</div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="gaugeA" style="width:0;background:var(--blue)"></div></div>
+                    <div class="gauge-label" id="gaugeLabelA" style="color:var(--blue)">0%</div>
+                </div>
+                <div class="gauge-wrap">
+                    <div class="gauge-tag" id="gaugeTagB" style="color:var(--orange)">B</div>
+                    <div class="gauge-bar"><div class="gauge-fill" id="gaugeB" style="width:0;background:var(--orange)"></div></div>
+                    <div class="gauge-label" id="gaugeLabelB" style="color:var(--orange)">0%</div>
+                </div>
+            </div>
+        </div>
+        <div class="rbox" id="repR" style="margin-top:14px;"></div>
+        <div class="card"><div class="card-t">월 상환액 비교</div><div class="cw"><canvas id="cRep"></canvas></div></div>
+    </div>
+
+    <!-- TAB 3: 갈아타기 -->
+    <div class="tc" id="tab-asset">
+        <div class="verdict" id="astV"></div>
+        <div class="cmp">
+            <div class="cmp-card"><span class="cmp-badge ba">내 상황</span>
+                <div class="ig ig1">
+                    <div><div class="il">내 단지 현재가</div><div class="iw"><input class="if" id="a_my" inputmode="decimal"><span class="is">만원</span></div></div>
+                    <div><div class="il">연 상승률</div><div class="iw"><input class="if" id="a_mr" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">대출 금액</div><div class="iw"><input class="if" id="a_ln" inputmode="decimal"><span class="is">만원</span></div></div>
+                </div>
+                <div style="margin:10px 0 6px;font-size:12px;font-weight:600;color:var(--gray);">(갈아타기)</div>
+                <div class="ig ig1">
+                    <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="a_sv" inputmode="decimal"><span class="is">만원</span></div></div>
+                    <div><div class="il">투자 수익률</div><div class="iw"><input class="if" id="a_rt" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">기간</div><div class="iw"><input class="if" id="a_yr" inputmode="decimal"><span class="is">년</span></div></div>
+                </div>
+            </div>
+            <div class="cmp-card"><span class="cmp-badge bb">목표 단지</span>
+                <div class="ig ig1">
+                    <div><div class="il">현재가</div><div class="iw"><input class="if" id="a_gl" inputmode="decimal"><span class="is">만원</span></div></div>
+                    <div><div class="il">연 상승률</div><div class="iw"><input class="if" id="a_gr" inputmode="decimal"><span class="is">%</span></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="card"><div class="card-t">갈아타기 시뮬레이션</div><div class="cw"><canvas id="cAst"></canvas></div></div>
+        <div class="card"><div class="card-t">레버리지 수익률 곡선</div>
+            <div class="note" style="margin-top:0;margin-bottom:8px;">자기자본 대비 수익률. 시간이 지나면 레버리지 효과가 줄어들어 갈아타기 적기를 보여줍니다.</div>
+            <div class="cw"><canvas id="cLev"></canvas></div>
+        </div>
+    </div>
+</div>
+<div class="ft">
+    <p>본 자료의 저작권은 우리동네재테크에 있습니다.</p>
+    <p>&copy; 2026 Home Buying Coaching. All Rights Reserved.</p>
+</div>
+
+<script>
+// 시안 선택 바 (미리보기 전용)
+(function(){
+    document.querySelector('.themebar').addEventListener('click',function(e){
+        var b=e.target.closest('button[data-t]');if(!b)return;
+        document.body.className='theme-'+b.dataset.t;
+        document.querySelectorAll('.themebar button').forEach(function(x){x.classList.toggle('on',x===b);});
+    });
+})();
+</script>
+<script>
+(function(){
+    var $=function(id){return document.getElementById(id);};
+    var V=function(id){var el=$(id);if(!el)return 0;return Number(el.value.replace(/,/g,''))||0;};
+    var fmt=function(v){if(Math.abs(v)>=10000)return(v/10000).toFixed(1).replace(/\.0$/,'')+'억';if(Math.abs(v)>=1000)return Math.round(v/1000)+'천만';return Math.round(v).toLocaleString()+'만';};
+    var fF=function(v){return Math.round(v).toLocaleString()+'만원';};
+    var cF=function(el){var p=el.selectionStart,r=el.value.replace(/,/g,'');if(!r||r==='-'||r.indexOf('.')!==-1)return;var n=parseInt(r,10);if(isNaN(n))return;var f=n.toLocaleString();el.value=f;el.setSelectionRange(Math.max(0,p+(f.length-r.length)),Math.max(0,p+(f.length-r.length)));};
+    var gP=function(n,d){var m=new RegExp('[?&]'+n+'=([^&#]*)').exec(location.search);return m?decodeURIComponent(m[1]):d;};
+    var gN=function(n,d){var v=gP(n,'');return v?Number(v):d;};
+    var PMT=function(p,ar,m){if(ar===0)return p/m;var r=ar/12/100,pw=Math.pow(1+r,m);return p*r*pw/(pw-1);};
+
+    // 크로스헤어 플러그인 (호버 시 세로 점선)
+    var crosshairPlugin={id:'crosshair',afterDraw:function(chart){if(chart.tooltip&&chart.tooltip._active&&chart.tooltip._active.length){var x=chart.tooltip._active[0].element.x;var yA=chart.chartArea;var ctx=chart.ctx;ctx.save();ctx.beginPath();ctx.setLineDash([4,4]);ctx.strokeStyle='#94A3B8';ctx.lineWidth=1;ctx.moveTo(x,yA.top);ctx.lineTo(x,yA.bottom);ctx.stroke();ctx.restore();}}};
+    Chart.register(crosshairPlugin);
+
+    var nm=gP('name','');if(nm)$('hT').textContent=nm+'님 재무 계산기';
+    var D={c:gN('cash',18000),i:gN('income',7700),s:gN('saving',2400),t:gN('target',60000),ma:gN('my_apt',50000),ga:gN('goal_apt',130000)};
+
+    function sV(id,v){$(id).value=v.toLocaleString();}
+    sV('b_cash',D.c);sV('b_income',D.i);sV('b_target',D.t);
+    $('b_rate').value='4.5';$('b_years').value='30';
+    sV('ra_amt',50000);$('ra_mo').value='360';$('ra_r').value='4.3';
+    sV('rb_amt',45000);$('rb_mo').value='360';$('rb_r').value='4.5';
+    $('rep_income').value=Math.round(D.i/12).toLocaleString();
+    sV('a_my',D.ma);$('a_mr').value='3';sV('a_gl',D.ga);$('a_gr').value='5';sV('a_sv',D.s);$('a_rt').value='5';sV('a_ln',35000);$('a_yr').value='10';
+
+    document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){
+        document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+        document.querySelectorAll('.tc').forEach(function(x){x.classList.remove('active');});
+        t.classList.add('active');$('tab-'+t.dataset.tab).classList.add('active');
+    });});
+
+    var CBuy=null,CRep=null,CAst=null,CLev=null;
+
+    // === TAB 1: 매수 계산 ===
+    function rBuy(){
+        var c=V('b_cash'),i=V('b_income'),tg=V('b_target'),rt=V('b_rate'),yr=V('b_years');
+        var mo=yr*12;
+        var ar=i*0.4,mr=ar/12;
+        var stressRt=rt+1.5;
+        var mxDSR=Math.round(PMT(1,stressRt,mo)>0?mr/PMT(1,stressRt,mo):0);
+        var mxLTV=Math.round(tg*0.7);
+        var actual=Math.min(mxDSR,mxLTV);
+        var selfNeed=tg-actual;
+        var short=selfNeed-c;
+
+        // 결론 카드
+        var vd=$('buyV');
+        if(short>0){vd.className='verdict warn';vd.innerHTML='<div class="v-text">현금 '+fmt(short)+' 부족</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본 '+fmt(selfNeed)+'</div>';}
+        else{vd.className='verdict';vd.innerHTML='<div class="v-text">매수 가능 (여유 '+fmt(Math.abs(short))+')</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본 '+fmt(selfNeed)+'</div>';}
+
+        $('buyR').innerHTML=''
+            +'<div class="rb accent"><div class="rb-label">DSR 최대 대출</div><div class="rb-val blue">'+fmt(mxDSR)+'</div><div class="rb-sub">금리 '+rt+'% + 가산 1.5%</div></div>'
+            +'<div class="rb accent"><div class="rb-label">LTV 대출 한도</div><div class="rb-val blue">'+fmt(mxLTV)+'</div><div class="rb-sub">'+fmt(tg)+' x 70%</div></div>'
+            +'<div class="rb '+(short>0?'warn':'accent')+'"><div class="rb-label">'+(short>0?'부족분':'여유분')+'</div><div class="rb-val '+(short>0?'orange':'blue')+'">'+fmt(Math.abs(short))+'</div><div class="rb-sub">'+(short>0?'현금 추가 필요':'현금 여유')+'</div></div>';
+
+        // 차트: 내 예산 vs 희망가 (가로 바 2줄 + DSR/LTV 점선)
+        if(CBuy)CBuy.destroy();
+        var buyPower=c+actual;
+        var xMax=Math.max(tg,buyPower,mxLTV,mxDSR+c)*1.15;
+        CBuy=new Chart($('cBuyChart'),{type:'bar',data:{labels:['희망가','내 예산'],datasets:[
+            {label:'매매가',data:[tg,0],backgroundColor:short>0?'#F59E0B':'#0077C8',barPercentage:.5},
+            {label:'현금 '+fmt(c),data:[0,c],backgroundColor:'#0077C8',barPercentage:.5},
+            {label:'대출 '+fmt(actual),data:[0,actual],backgroundColor:'#94A3B8',barPercentage:.5}
+        ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{
+            legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:13},filter:function(item){return item.text!=='매매가';}}},
+            tooltip:{callbacks:{label:function(ctx){if(ctx.parsed.x===0)return '';return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
+            annotation:{annotations:{
+                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:13},padding:4,position:'center'}},
+                ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:13},padding:4,position:'center'}}
+            }}
+        },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:13}},grid:{color:'#F1F5F9'},max:xMax},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
+        $('cBuyChart').parentElement.style.height='160px';
+
+        $('buyN').innerHTML='DSR 40%, 스트레스 금리 '+stressRt+'% (입력 '+rt+'% + 1.5%p), '+yr+'년, LTV 70% 기준<br>실제 대출: '+fmt(actual)+' (DSR '+fmt(mxDSR)+' / LTV '+fmt(mxLTV)+' 중 작은 값)<br>정책대출: 디딤돌(소득6천↓), 보금자리론(7천↓), 신생아특례(맞벌이2억↓)';
+    }
+
+    // === TAB 2: 월 상환 ===
+    function rRep(){
+        var aA=V('ra_amt'),aM=V('ra_mo'),aR=V('ra_r');
+        var bA=V('rb_amt'),bM=V('rb_mo'),bR=V('rb_r');
+        var am=Math.round(PMT(aA,aR,aM)),bm=Math.round(PMT(bA,bR,bM));
+        var aT=am*aM,aI=aT-aA,bT=bm*bM,bI=bT-bA;
+        var df=am-bm;
+        var inc=V('rep_income');
+
+        // 결론 카드
+        var vd=$('repV');
+        var bigger=am>bm?'A':'B',smaller=am>bm?'B':'A';
+        vd.className='verdict';
+        vd.innerHTML='<div class="v-text">'+smaller+'가 월 '+fF(Math.abs(df))+' ↓</div><div class="v-sub">A: '+fF(am)+'/월 · B: '+fF(bm)+'/월</div>';
+
+        // 소득 대비 게이지
+        if(inc>0){
+            var pctA=Math.round(am/inc*100),pctB=Math.round(bm/inc*100);
+            $('gaugeA').style.width=Math.min(pctA,100)+'%';
+            $('gaugeA').style.background=pctA>40?'var(--red)':pctA>30?'var(--orange)':'var(--blue)';
+            $('gaugeTagA').textContent='A 대출 '+fmt(aA);
+            $('gaugeLabelA').textContent=pctA+'%';
+            $('gaugeLabelA').style.color=pctA>40?'var(--red)':pctA>30?'var(--orange)':'var(--blue)';
+            $('gaugeB').style.width=Math.min(pctB,100)+'%';
+            $('gaugeB').style.background=pctB>40?'var(--red)':pctB>30?'var(--orange)':'var(--orange)';
+            $('gaugeTagB').textContent='B 대출 '+fmt(bA);
+            $('gaugeLabelB').textContent=pctB+'%';
+            $('gaugeLabelB').style.color=pctB>40?'var(--red)':pctB>30?'var(--orange)':'var(--orange)';
+        }
+
+        $('repR').innerHTML=''
+            +'<div class="rb accent"><div class="rb-label">A 월 상환</div><div class="rb-val blue">'+fF(am)+'</div><div class="rb-sub">총이자 '+fmt(aI)+'</div></div>'
+            +'<div class="rb warn"><div class="rb-label">B 월 상환</div><div class="rb-val orange">'+fF(bm)+'</div><div class="rb-sub">총이자 '+fmt(bI)+'</div></div>';
+
+        if(CRep)CRep.destroy();
+        CRep=new Chart($('cRep'),{type:'bar',data:{labels:['총 이자','총 상환'],datasets:[
+            {label:'A: '+fmt(aA)+' / '+aR+'%',data:[aI,aT],backgroundColor:'#0077C8',borderRadius:4,barPercentage:.4},
+            {label:'B: '+fmt(bA)+' / '+bR+'%',data:[bI,bT],backgroundColor:'#F59E0B',borderRadius:4,barPercentage:.4}
+        ]},options:{responsive:true,maintainAspectRatio:false,plugins:{
+            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
+            tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fF(ctx.parsed.y);}}}
+        },scales:{y:{ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}});
+        $('cRep').parentElement.style.height='260px';
+    }
+
+    // === TAB 3: 갈아타기 ===
+    function rAst(){
+        var my=V('a_my'),mr=V('a_mr')/100,gl=V('a_gl'),gr=V('a_gr')/100,sv=V('a_sv'),rt=V('a_rt')/100,ln=V('a_ln'),yr=V('a_yr');
+        var lb=[],mD=[],gD=[],nD=[],levD=[],cy=null,ty=new Date().getFullYear();
+
+        for(var y=0;y<=yr;y++){
+            lb.push(String(ty+y));
+            var mv=my*Math.pow(1+mr,y),gv=gl*Math.pow(1+gr,y);
+            var savings=0;for(var j=0;j<y;j++)savings+=sv*Math.pow(1+rt,y-1-j);
+            var nw=mv-ln+savings;
+            mD.push(Math.round(mv));gD.push(Math.round(gv));nD.push(Math.round(nw));
+
+            var equityY=mv-ln;
+            if(equityY>0){
+                var levReturn=mr*100*(mv/equityY);
+                levD.push(Math.round(levReturn*10)/10);
+            }else{levD.push(0);}
+
+            if(cy===null&&nw>=gv*0.3&&y>0)cy=y;
+        }
+
+        var vd=$('astV');
+        // 목표 단지 자기자본 30% 데이터
+        var needD=[];for(var y2=0;y2<=yr;y2++)needD.push(Math.round(gD[y2]*0.3));
+
+        if(cy!==null){vd.className='verdict';vd.innerHTML='<div class="v-text">'+(ty+cy)+'년 ('+cy+'년 후) 갈아타기 가능</div><div class="v-sub">순자산 '+fmt(nD[cy])+' ≥ 필요 자기자본 '+fmt(needD[cy])+' (목표가의 30%)</div>';}
+        else{vd.className='verdict warn';vd.innerHTML='<div class="v-text">'+yr+'년 내 미도달</div><div class="v-sub">'+yr+'년 후 순자산 '+fmt(nD[nD.length-1])+' / 필요 '+fmt(needD[needD.length-1])+'</div>';}
+
+        if(CAst)CAst.destroy();
+        var an={};if(cy!==null){an.cp={type:'point',xValue:String(ty+cy),yValue:nD[cy],backgroundColor:'#0077C8',borderColor:'#fff',borderWidth:3,radius:7};an.cl={type:'label',xValue:String(ty+cy),yValue:nD[cy],content:['갈아타기 가능'],font:{size:13,weight:'bold'},backgroundColor:'rgba(0,119,200,.9)',color:'#fff',padding:5,borderRadius:4,yAdjust:-22};}
+        CAst=new Chart($('cAst'),{type:'line',data:{labels:lb,datasets:[
+            {label:'내 단지',data:mD,borderColor:'#0077C8',fill:false,tension:.3,borderWidth:2,pointRadius:2},
+            {label:'목표 단지',data:gD,borderColor:'#F59E0B',fill:false,tension:.3,borderWidth:2,pointRadius:2},
+            {label:'필요 자기자본 (LTV 70%)',data:needD,borderColor:'#F59E0B',borderDash:[6,3],fill:false,tension:.3,borderWidth:1.5,pointRadius:0},
+            {label:'순자산(+대출)',data:nD,borderColor:'#94A3B8',backgroundColor:'rgba(148,163,184,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#94A3B8'}
+        ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
+            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
+            tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fmt(ctx.parsed.y);}}},
+            annotation:{annotations:an}
+        },scales:{y:{ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false},ticks:{font:{size:13}}}}}});
+        $('cAst').parentElement.style.height='320px';
+
+        // 레버리지 수익률 곡선
+        if(CLev)CLev.destroy();
+        CLev=new Chart($('cLev'),{type:'line',data:{labels:lb,datasets:[
+            {label:'연평균 레버리지 수익률',data:levD,borderColor:'#0077C8',backgroundColor:'rgba(0,119,200,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#0077C8'}
+        ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
+            legend:{display:false},
+            tooltip:{callbacks:{label:function(ctx){return '연평균 '+ctx.parsed.y+'%';}}}
+        },scales:{y:{ticks:{callback:function(v){return v+'%';}},grid:{color:'#F1F5F9'}},x:{grid:{display:false},ticks:{font:{size:13}}}}}});
+        $('cLev').parentElement.style.height='220px';
+    }
+
+    function bind(pf,fn){document.querySelectorAll('[id^="'+pf+'"]').forEach(function(el){el.addEventListener('input',function(){cF(el);fn();});});}
+    bind('b_',rBuy);bind('ra_',rRep);bind('rb_',rRep);bind('rep_',rRep);bind('a_',rAst);
+    rBuy();rRep();rAst();
+})();
+</script>
+</body>
+</html>
