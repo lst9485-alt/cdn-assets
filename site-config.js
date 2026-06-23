@@ -324,6 +324,67 @@
         ]
       },
       {
+        id: 'consult',
+        hubTitle: '상담',
+        collapsible: true,
+        defaultOpen: true,
+        nav: {
+          type: 'single',
+          label: '상담',
+          href: 'https://ourdongne.github.io/',
+          activeMatch: ['/consult']
+        },
+        sidebar: {
+          title: '상담'
+        },
+        items: [
+          {
+            id: 'consult-root',
+            title: '회원 맞춤 페이지',
+            description: 'URL 파라미터로 회원별 자료',
+            href: 'https://ourdongne.github.io/',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['/consult'],
+            hubVisible: true
+          },
+          {
+            id: 'consult-prep',
+            title: '재무 계산기',
+            description: '매수가·월상환·갈아타기 시뮬레이션',
+            href: 'https://ourdongne.github.io/prep.html',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            sidebarType: 'root',
+            activeMatch: ['prep.html'],
+            hubVisible: true
+          },
+          {
+            id: 'consult-ppt-template',
+            title: '상담 리포트 PPT',
+            description: '회원별 28페이지 자동 생성 템플릿',
+            href: 'https://docs.google.com/presentation/d/1ELi2NxglmzNXga8q0-ztn_AVRisZnQjM-aztyrNF7RE/edit',
+            badgeText: '외부',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            hubVisible: true
+          },
+          {
+            id: 'consult-asset-planner',
+            title: '자산·매수 플래너',
+            description: '회원 제공 실행 시트 6탭',
+            href: 'https://docs.google.com/spreadsheets/d/1B419dWEt3iooHRjZE9e8a7nh0iJaFLfGwqMFM3PsOsA/edit',
+            badgeText: '외부',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            hubVisible: true
+          }
+        ]
+      },
+      {
         id: 'investment-section',
         hubTitle: '투자종합',
         collapsible: true,
@@ -441,67 +502,6 @@
             activeMatch: ['pg-version/curriculum-all.html'],
             hubVisible: true,
             groupLabel: '원본'
-          }
-        ]
-      },
-      {
-        id: 'consult',
-        hubTitle: '상담',
-        collapsible: true,
-        defaultOpen: true,
-        nav: {
-          type: 'single',
-          label: '상담',
-          href: 'https://ourdongne.github.io/',
-          activeMatch: ['/consult']
-        },
-        sidebar: {
-          title: '상담'
-        },
-        items: [
-          {
-            id: 'consult-root',
-            title: '회원 맞춤 페이지',
-            description: 'URL 파라미터로 회원별 자료',
-            href: 'https://ourdongne.github.io/',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['/consult'],
-            hubVisible: true
-          },
-          {
-            id: 'consult-prep',
-            title: '재무 계산기',
-            description: '매수가·월상환·갈아타기 시뮬레이션',
-            href: 'https://ourdongne.github.io/prep.html',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['prep.html'],
-            hubVisible: true
-          },
-          {
-            id: 'consult-ppt-template',
-            title: '상담 리포트 PPT',
-            description: '회원별 28페이지 자동 생성 템플릿',
-            href: 'https://docs.google.com/presentation/d/1ELi2NxglmzNXga8q0-ztn_AVRisZnQjM-aztyrNF7RE/edit',
-            badgeText: '외부',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            hubVisible: true
-          },
-          {
-            id: 'consult-asset-planner',
-            title: '자산·매수 플래너',
-            description: '회원 제공 실행 시트 6탭',
-            href: 'https://docs.google.com/spreadsheets/d/1B419dWEt3iooHRjZE9e8a7nh0iJaFLfGwqMFM3PsOsA/edit',
-            badgeText: '외부',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            hubVisible: true
           }
         ]
       },
