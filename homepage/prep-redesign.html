@@ -215,25 +215,25 @@
             <div class="cmp-card"><span class="cmp-badge ba">내 상황</span>
                 <div class="ig ig1">
                     <div><div class="il">내 단지 현재가</div><div class="iw"><input class="if" id="a_my" inputmode="decimal"><span class="is">만원</span></div></div>
-                    <div><div class="il">연 상승률 <span class="info" tabindex="0" data-tip="집값이 매년 오를 거라 가정한 값이에요. 예상치라 직접 바꿔보세요. 미래 집값은 아무도 몰라요.">i</span></div><div class="iw"><input class="if" id="a_mr" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">연 상승률 <span class="info" tabindex="0" data-tip="집값 연간 상승 가정값. 직접 조정 가능.">i</span></div><div class="iw"><input class="if" id="a_mr" inputmode="decimal"><span class="is">%</span></div></div>
                     <div><div class="il">대출 금액</div><div class="iw"><input class="if" id="a_ln" inputmode="decimal"><span class="is">만원</span></div></div>
                 </div>
                 <div style="margin:14px 0 8px;font-size:13px;font-weight:700;color:var(--ink);">앞으로 모을 돈</div>
                 <div class="ig ig1">
                     <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="a_sv" inputmode="decimal"><span class="is">만원</span></div></div>
-                    <div><div class="il">투자 수익률 <span class="info" tabindex="0" data-tip="모은 돈을 굴려서 얻는 연 수익률이에요. 예금·투자 등으로요.">i</span></div><div class="iw"><input class="if" id="a_rt" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">투자 수익률 <span class="info" tabindex="0" data-tip="모은 돈의 연 수익률. 예금·투자 등.">i</span></div><div class="iw"><input class="if" id="a_rt" inputmode="decimal"><span class="is">%</span></div></div>
                     <div><div class="il">기간</div><div class="iw"><input class="if" id="a_yr" inputmode="decimal"><span class="is">년</span></div></div>
                 </div>
             </div>
             <div class="cmp-card"><span class="cmp-badge bb">목표 단지</span>
                 <div class="ig ig1">
                     <div><div class="il">현재가</div><div class="iw"><input class="if" id="a_gl" inputmode="decimal"><span class="is">만원</span></div></div>
-                    <div><div class="il">연 상승률 <span class="info" tabindex="0" data-tip="집값이 매년 오를 거라 가정한 값이에요. 예상치라 직접 바꿔보세요. 미래 집값은 아무도 몰라요.">i</span></div><div class="iw"><input class="if" id="a_gr" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">연 상승률 <span class="info" tabindex="0" data-tip="집값 연간 상승 가정값. 직접 조정 가능.">i</span></div><div class="iw"><input class="if" id="a_gr" inputmode="decimal"><span class="is">%</span></div></div>
                 </div>
             </div>
         </div>
         <div class="card"><div class="card-t">갈아타기 시뮬레이션</div><div class="cw"><canvas id="cAst"></canvas></div></div>
-        <div class="card"><div class="card-t">레버리지 수익률 곡선 <span class="info" tabindex="0" data-tip="내 돈 대비 수익률이에요. 대출을 끼면 적은 돈으로 더 큰 집에 투자하는 효과가 있어요.">i</span></div>
+        <div class="card"><div class="card-t">레버리지 수익률 곡선 <span class="info" tabindex="0" data-tip="내 돈 대비 수익률. 대출 활용 효과.">i</span></div>
             <div class="note" style="margin-top:0;margin-bottom:8px;">자기자본 대비 수익률. 시간이 지나면 레버리지 효과가 줄어들어 갈아타기 적기를 보여줍니다.</div>
             <div class="cw"><canvas id="cLev"></canvas></div>
         </div>
@@ -266,10 +266,10 @@
     var PMT=function(p,ar,m){if(ar===0)return p/m;var r=ar/12/100,pw=Math.pow(1+r,m);return p*r*pw/(pw-1);};
     // 용어 설명 말풍선
     var T={
-        dsr:'내 소득으로 1년에 빚을 얼마나 갚을 수 있는지 보는 비율이에요. 이 한도 안에서만 대출이 나와요.',
-        ltv:'집값 대비 빌릴 수 있는 비율이에요. 보통 집값의 70%까지 대출이 나와요.',
-        stress:'지금 금리보다 조금 높게 잡아 심사하는 금리예요. 나중에 금리가 올라도 갚을 수 있는지 보려는 거예요.',
-        equity:'대출을 뺀, 내가 직접 마련해야 하는 현금이에요.'
+        dsr:'소득 대비 갚는 돈 비율. 이 한도 안에서만 대출 가능.',
+        ltv:'집값 대비 대출 비율. 보통 70%까지.',
+        stress:'심사 때 실제보다 높게 잡는 금리. 입력 금리 + 1.5%.',
+        equity:'대출 뺀, 직접 마련할 현금.'
     };
     var tip=function(t){return ' <span class="info" tabindex="0" data-tip="'+t+'">i</span>';};
 
@@ -323,14 +323,14 @@
         var buyPower=c+actual;
         var xMax=Math.max(tg,buyPower,mxLTV,mxDSR+c)*1.15;
         CBuy=new Chart($('cBuyChart'),{type:'bar',data:{labels:['희망가','내 예산'],datasets:[
-            {label:'매매가',data:[tg,0],backgroundColor:short>0?'#F59E0B':'#0077C8',barPercentage:.5},
-            {label:'현금 '+fmt(c),data:[0,c],backgroundColor:'#0077C8',barPercentage:.5},
+            {label:'매매가',data:[tg,0],backgroundColor:short>0?'#f59e0b':'#2563eb',barPercentage:.5},
+            {label:'현금 '+fmt(c),data:[0,c],backgroundColor:'#2563eb',barPercentage:.5},
             {label:'대출 '+fmt(actual),data:[0,actual],backgroundColor:'#94A3B8',barPercentage:.5}
         ]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{
             legend:{display:true,position:'bottom',labels:{usePointStyle:true,padding:10,font:{size:13},filter:function(item){return item.text!=='매매가';}}},
             tooltip:{callbacks:{label:function(ctx){if(ctx.parsed.x===0)return '';return ctx.dataset.label+': '+fF(ctx.parsed.x);}}},
             annotation:{annotations:{
-                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#0077C8',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#0077C8',font:{size:13},padding:4,position:'center'}},
+                dsr:{type:'line',xMin:mxDSR+c,xMax:mxDSR+c,borderColor:'#2563eb',borderWidth:2,borderDash:[5,3],label:{display:true,content:'DSR '+fmt(mxDSR+c),backgroundColor:'#2563eb',font:{size:13},padding:4,position:'center'}},
                 ltv:{type:'line',xMin:mxLTV,xMax:mxLTV,borderColor:'#F59E0B',borderWidth:2,borderDash:[5,3],label:{display:true,content:'LTV '+fmt(mxLTV),backgroundColor:'#F59E0B',font:{size:13},padding:4,position:'center'}}
             }}
         },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:13}},grid:{color:'#F1F5F9'},max:xMax},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
@@ -375,7 +375,7 @@
 
         if(CRep)CRep.destroy();
         CRep=new Chart($('cRep'),{type:'bar',data:{labels:['총 이자','총 상환'],datasets:[
-            {label:'A: '+fmt(aA)+' / '+aR+'%',data:[aI,aT],backgroundColor:'#0077C8',borderRadius:4,barPercentage:.4},
+            {label:'A: '+fmt(aA)+' / '+aR+'%',data:[aI,aT],backgroundColor:'#2563eb',borderRadius:4,barPercentage:.4},
             {label:'B: '+fmt(bA)+' / '+bR+'%',data:[bI,bT],backgroundColor:'#F59E0B',borderRadius:4,barPercentage:.4}
         ]},options:{responsive:true,maintainAspectRatio:false,plugins:{
             legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
@@ -413,12 +413,12 @@
         else{vd.className='verdict warn';vd.innerHTML='<div class="v-text">'+yr+'년 내 미도달</div><div class="v-sub">'+yr+'년 후 순자산 '+fmt(nD[nD.length-1])+' / 필요 '+fmt(needD[needD.length-1])+'</div>';}
 
         if(CAst)CAst.destroy();
-        var an={};if(cy!==null){an.cp={type:'point',xValue:String(ty+cy),yValue:nD[cy],backgroundColor:'#0077C8',borderColor:'#fff',borderWidth:3,radius:7};an.cl={type:'label',xValue:String(ty+cy),yValue:nD[cy],content:['갈아타기 가능'],font:{size:13,weight:'bold'},backgroundColor:'rgba(0,119,200,.9)',color:'#fff',padding:5,borderRadius:4,yAdjust:-22};}
+        var an={};if(cy!==null){an.cp={type:'point',xValue:String(ty+cy),yValue:nD[cy],backgroundColor:'#10b981',borderColor:'#fff',borderWidth:3,radius:7};an.cl={type:'label',xValue:String(ty+cy),yValue:nD[cy],content:['갈아타기 가능'],font:{size:13,weight:'bold'},backgroundColor:'rgba(16,185,129,.92)',color:'#fff',padding:5,borderRadius:4,yAdjust:-22};}
         CAst=new Chart($('cAst'),{type:'line',data:{labels:lb,datasets:[
-            {label:'내 단지',data:mD,borderColor:'#0077C8',fill:false,tension:.3,borderWidth:2,pointRadius:2},
-            {label:'목표 단지',data:gD,borderColor:'#F59E0B',fill:false,tension:.3,borderWidth:2,pointRadius:2},
-            {label:'필요 자기자본 (LTV 70%)',data:needD,borderColor:'#F59E0B',borderDash:[6,3],fill:false,tension:.3,borderWidth:1.5,pointRadius:0},
-            {label:'순자산(+대출)',data:nD,borderColor:'#94A3B8',backgroundColor:'rgba(148,163,184,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#94A3B8'}
+            {label:'내 단지',data:mD,borderColor:'#2563eb',backgroundColor:'#2563eb',fill:false,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointBackgroundColor:'#2563eb',pointBorderColor:'#fff',pointBorderWidth:2},
+            {label:'목표 단지',data:gD,borderColor:'#f59e0b',backgroundColor:'#f59e0b',fill:false,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointBackgroundColor:'#f59e0b',pointBorderColor:'#fff',pointBorderWidth:2},
+            {label:'필요 자기자본 (LTV 70%)',data:needD,borderColor:'#cbd5e1',backgroundColor:'#cbd5e1',borderDash:[6,4],fill:false,tension:.35,borderWidth:1.5,pointRadius:0,pointHoverRadius:0},
+            {label:'순자산(+대출)',data:nD,borderColor:'#10b981',backgroundColor:'#10b981',fill:false,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointBackgroundColor:'#10b981',pointBorderColor:'#fff',pointBorderWidth:2}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
             legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fmt(ctx.parsed.y);}}},
@@ -429,7 +429,7 @@
         // 레버리지 수익률 곡선
         if(CLev)CLev.destroy();
         CLev=new Chart($('cLev'),{type:'line',data:{labels:lb,datasets:[
-            {label:'연평균 레버리지 수익률',data:levD,borderColor:'#0077C8',backgroundColor:'rgba(0,119,200,.05)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3,pointBackgroundColor:'#0077C8'}
+            {label:'연평균 레버리지 수익률',data:levD,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.07)',fill:true,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointBackgroundColor:'#2563eb',pointBorderColor:'#fff',pointBorderWidth:2}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
             legend:{display:false},
             tooltip:{callbacks:{label:function(ctx){return '연평균 '+ctx.parsed.y+'%';}}}
