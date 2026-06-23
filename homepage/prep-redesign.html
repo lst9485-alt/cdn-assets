@@ -276,7 +276,7 @@
     var cF=function(el){var p=el.selectionStart,r=el.value.replace(/,/g,'');if(!r||r==='-'||r.indexOf('.')!==-1)return;var n=parseInt(r,10);if(isNaN(n))return;var f=n.toLocaleString();el.value=f;el.setSelectionRange(Math.max(0,p+(f.length-r.length)),Math.max(0,p+(f.length-r.length)));};
     var gP=function(n,d){var m=new RegExp('[?&]'+n+'=([^&#]*)').exec(location.search);return m?decodeURIComponent(m[1]):d;};
     var gN=function(n,d){var v=gP(n,'');return v?Number(v):d;};
-    var PMT=function(p,ar,m){if(ar===0)return p/m;var r=ar/12/100,pw=Math.pow(1+r,m);return p*r*pw/(pw-1);};
+    var PMT=function(p,ar,m){if(m<=0)return 0;if(ar===0)return p/m;var r=ar/12/100,pw=Math.pow(1+r,m);return p*r*pw/(pw-1);};
     // 용어 설명 말풍선
     var T={
         dsr:'소득 대비 갚는 돈 비율. 40% 가정.',
@@ -360,7 +360,6 @@
         var bA=V('rb_amt'),bM=V('rb_mo'),bR=V('rb_r');
         var am=Math.round(PMT(aA,aR,aM)),bm=Math.round(PMT(bA,bR,bM));
         var aT=am*aM,aI=aT-aA,bT=bm*bM,bI=bT-bA;
-        var df=am-bm;
         var inc=V('rep_income');
 
         // 소득 대비 게이지
