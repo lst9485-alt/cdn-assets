@@ -289,16 +289,29 @@ a {
   text-align: right;
 }
 
-.button-row {
+.reset-row {
   grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  display: flex;
+  justify-content: center;
   margin-top: 4px;
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
+}
+
+.reset-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--purple-soft);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--purple);
+  font-size: 19px;
+  line-height: 1;
+}
+
+.reset-icon:hover {
+  background: var(--purple-soft);
 }
 
 .primary-button,
@@ -746,10 +759,6 @@ tr.is-covered td {
 
   .slider-field strong {
     margin-top: -4px;
-  }
-
-  .button-row {
-    grid-template-columns: 1fr;
   }
 
   .result-hero {

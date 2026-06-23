@@ -506,7 +506,7 @@
       update();
       showToast('기본값으로 복원했습니다.');
     });
-    qs('copyShare').addEventListener('click', copyShareLink);
+    if (qs('copyShare')) qs('copyShare').addEventListener('click', copyShareLink);
     if (qs('copyShareTop')) qs('copyShareTop').addEventListener('click', copyShareLink);
     if (qs('toggleRows')) qs('toggleRows').addEventListener('click', function () {
       tableExpanded = !tableExpanded;
