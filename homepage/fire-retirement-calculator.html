@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260507h">
+  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260623b">
 </head>
 <body>
   <main class="fire-page">
@@ -20,13 +20,13 @@
     </section>
 
     <section class="calculator" id="calculator">
-      <div class="unit-pill">만원 기준</div>
+      <div class="unit-pill">(만원)</div>
 
       <form class="input-panel" id="inputForm">
         <div class="input-stack">
           <section class="input-card">
             <span class="card-kicker">오늘</span>
-            <h2>나의 현재 상황</h2>
+            <h2>현재 상황</h2>
 
             <label class="ly-field">
               <span>현재 나이</span>
@@ -55,7 +55,7 @@
 
           <section class="input-card">
             <span class="card-kicker">나중</span>
-            <h2>나의 은퇴 계획</h2>
+            <h2>은퇴 계획<details class="hint"><summary aria-label="인출률 설명 보기">i</summary><p>인출률은 은퇴자산에서 매년 꺼내 쓸 비율입니다. 4%는 장기 은퇴 계획에서 자주 쓰는 기준입니다.</p></details></h2>
 
             <label class="ly-field">
               <span>계산 방식</span>
@@ -79,14 +79,12 @@
                 <em>%</em>
               </div>
             </label>
-
-            <p class="fine-print">인출률은 은퇴자산에서 매년 꺼내 쓸 비율입니다. 4%는 장기 은퇴 계획에서 자주 쓰는 기준입니다.</p>
           </section>
         </div>
 
         <section class="input-card plan-card">
           <span class="card-kicker">계획</span>
-          <h2>예상 수익률</h2>
+          <h2>예상 수익률<details class="hint"><summary aria-label="수익률 설명 보기">i</summary><p>세금, 수수료, 물가상승률을 제외한 단순 연평균 수익률 가정입니다.</p></details></h2>
 
           <div class="plan-note">
             <strong>계산에 적용되는 연평균 수익률</strong>
@@ -102,8 +100,6 @@
               <em>%</em>
             </div>
           </label>
-
-          <p class="fine-print">세금, 수수료, 물가상승률을 제외한 단순 연평균 수익률 가정입니다.</p>
 
           <div class="button-row">
             <button type="button" class="primary-button" id="copyShare">공유 링크</button>
