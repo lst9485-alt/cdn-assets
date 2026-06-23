@@ -87,3 +87,27 @@ test('inputs are clamped to sane ranges', () => {
   assert.equal(cfg.annualRate, 30);
   assert.equal(cfg.years, 50);
 });
+
+test('installment compound: 월 50만원 5% 10년 적립', () => {
+  const result = calculateCompound({ monthly: 50, annualRate: 5, years: 10, mode: 'compound', depositMode: 'installment' });
+
+  assert.equal(result.totalPaid, 6000);
+  approx(result.finalAmount, 7764.1139722833595);
+  approx(result.totalInterest, 1764.1139722833595);
+  assert.equal(result.rows[0].networth, 0);
+  assert.equal(result.rows.at(-1).year, 10);
+});
+
+test('installment simple: 적금 단리 = 원금 + 단리이자', () => {
+  const result = calculateCompound({ monthly: 50, annualRate: 5, years: 10, mode: 'simple', depositMode: 'installment' });
+
+  assert.equal(result.totalPaid, 6000);
+  approx(result.finalAmount, 7512.5);
+  approx(result.totalInterest, 1512.5);
+});
+
+test('depositMode defaults to lump and is validated', () => {
+  assert.equal(normalizeConfig({}).depositMode, 'lump');
+  assert.equal(normalizeConfig({ depositMode: 'installment' }).depositMode, 'installment');
+  assert.equal(normalizeConfig({ depositMode: 'weird' }).depositMode, 'lump');
+});
