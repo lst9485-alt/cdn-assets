@@ -180,7 +180,7 @@ a {
 }
 
 .slider-field.rate-row {
-  grid-template-columns: 84px auto minmax(60px, 1fr) 92px;
+  grid-template-columns: 112px auto minmax(60px, 1fr) 92px;
 }
 
 .mode-toggle {
@@ -215,7 +215,7 @@ a {
   margin-top: 16px;
 }
 
-.ly-field:first-of-type {
+label.ly-field:first-of-type {
   margin-top: 0;
 }
 
