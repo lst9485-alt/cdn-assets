@@ -11,7 +11,7 @@
   var DEFAULTS = {
     currentAge: 35,
     currentAssets: 0,
-    monthlySavings: 200,
+    annualSavings: 2400,
     annualExpenses: 2600,
     annualReturn: 5,
     withdrawalRate: 4
@@ -115,9 +115,9 @@
     var cfg = Object.assign({}, DEFAULTS, raw || {});
     cfg.currentAge = Math.max(10, Math.min(99, Math.round(toNumber(cfg.currentAge, DEFAULTS.currentAge))));
     cfg.currentAssets = Math.max(0, toNumber(cfg.currentAssets, DEFAULTS.currentAssets));
-    cfg.monthlySavings = Math.max(0, toNumber(
-      cfg.monthlySavings,
-      raw && raw.annualIncome != null ? Math.max(0, toNumber(raw.annualIncome, 0) - toNumber(raw.annualExpenses, DEFAULTS.annualExpenses)) / 12 : DEFAULTS.monthlySavings
+    cfg.annualSavings = Math.max(0, toNumber(
+      cfg.annualSavings,
+      raw && raw.annualIncome != null ? Math.max(0, toNumber(raw.annualIncome, 0) - toNumber(raw.annualExpenses, DEFAULTS.annualExpenses)) : DEFAULTS.annualSavings
     ));
     cfg.annualExpenses = Math.max(0, toNumber(cfg.annualExpenses, DEFAULTS.annualExpenses));
     cfg.annualReturn = Math.max(ANNUAL_RETURN_MIN, Math.min(ANNUAL_RETURN_MAX, toNumber(cfg.annualReturn, DEFAULTS.annualReturn)));
@@ -127,7 +127,7 @@
 
   function calculateFire(rawConfig) {
     var cfg = normalizeConfig(rawConfig);
-    var savings = cfg.monthlySavings * 12;
+    var savings = cfg.annualSavings;
     var returnRate = cfg.annualReturn / 100;
     var targetNetworth = cfg.annualExpenses / (cfg.withdrawalRate / 100);
     var networth = cfg.currentAssets;
@@ -186,7 +186,7 @@
     return normalizeConfig({
       currentAge: qs('currentAge').value,
       currentAssets: qs('currentAssets').value,
-      monthlySavings: qs('monthlySavings').value,
+      annualSavings: qs('annualSavings').value,
       annualExpenses: qs('annualExpenses').value,
       annualReturn: qs('annualReturn').value,
       withdrawalRate: qs('withdrawalRate').value
@@ -197,7 +197,7 @@
     cfg = normalizeConfig(cfg);
     qs('currentAge').value = cfg.currentAge;
     qs('currentAssets').value = formatInput(cfg.currentAssets);
-    qs('monthlySavings').value = formatInput(cfg.monthlySavings);
+    qs('annualSavings').value = formatInput(cfg.annualSavings);
     qs('annualExpenses').value = formatInput(cfg.annualExpenses);
     qs('annualReturn').value = cfg.annualReturn;
     qs('withdrawalRate').value = cfg.withdrawalRate;
@@ -216,8 +216,8 @@
     setText('targetSub', '연지출 ' + formatMoney(result.config.annualExpenses) + ' ÷ 인출률 ' + result.config.withdrawalRate + '%');
     setText('retirementAge', ageText);
     setText('retirementSub', result.retirementYear == null ? '80년 안에 목표 미도달' : result.retirementYear === 0 ? '현재 자산으로 목표 도달' : '지금부터 ' + result.retirementYear + '년 뒤');
-    setText('annualSavings', formatMoney(result.annualSavings));
-    setText('savingRate', '월 저축액 ' + formatMoney(result.config.monthlySavings));
+    setText('annualSavingsOut', formatMoney(result.annualSavings));
+    setText('savingRate', '월 ' + formatMoney(result.config.annualSavings / 12) + ' 꼴');
     setText('withdrawalPreview', result.config.withdrawalRate + '%');
     setText('returnPreview', result.config.annualReturn + '%');
     setText('returnInlinePreview', result.config.annualReturn + '%');
@@ -469,7 +469,7 @@
       el.addEventListener('input', update);
       el.addEventListener('change', update);
     });
-    ['currentAssets', 'monthlySavings', 'annualExpenses'].forEach(function (id) {
+    ['currentAssets', 'annualSavings', 'annualExpenses'].forEach(function (id) {
       qs(id).addEventListener('change', function () {
         var cfg = readConfigFromDom();
         normalizeVisibleInput(id, cfg[id]);
@@ -490,6 +490,11 @@
     document.querySelectorAll('[data-projection-view]').forEach(function (button) {
       button.addEventListener('click', function () {
         setProjectionView(button.dataset.projectionView);
+      });
+    });
+    document.querySelectorAll('.hint summary').forEach(function (summary) {
+      summary.addEventListener('click', function (event) {
+        event.stopPropagation();
       });
     });
     setProjectionView('chart');

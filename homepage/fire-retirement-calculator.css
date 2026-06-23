@@ -166,11 +166,17 @@ a {
   text-align: center;
 }
 
+.label-with-hint {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
 .hint {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
   vertical-align: middle;
-  margin-left: 11px;
+  margin-left: 6px;
 }
 
 .hint summary {
@@ -206,8 +212,8 @@ a {
 .hint p {
   position: absolute;
   top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  transform: none;
   z-index: 30;
   width: 244px;
   max-width: 72vw;

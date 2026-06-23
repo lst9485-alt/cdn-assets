@@ -26,8 +26,8 @@ test('default case reaches target FIRE amount at age 53', () => {
   assert.equal(result.rows.at(-1).independent, true);
 });
 
-test('zero monthly savings does not reach target within 80 years from zero assets', () => {
-  const result = calculateFire({ ...DEFAULTS, monthlySavings: 0 });
+test('zero savings does not reach target within 80 years from zero assets', () => {
+  const result = calculateFire({ ...DEFAULTS, annualSavings: 0 });
 
   assert.equal(result.annualSavings, 0);
   assert.equal(result.retirementYear, null);
@@ -88,7 +88,7 @@ test('Korean money input is normalized before calculation', () => {
   const config = normalizeConfig({
     currentAge: '40',
     currentAssets: '1억2천500',
-    monthlySavings: '300만원',
+    annualSavings: '3천600만원',
     annualExpenses: '3천600만원',
     annualReturn: '3',
     withdrawalRate: '4',
@@ -98,7 +98,7 @@ test('Korean money input is normalized before calculation', () => {
   assert.deepEqual(config, {
     currentAge: 40,
     currentAssets: 12500,
-    monthlySavings: 300,
+    annualSavings: 3600,
     annualExpenses: 3600,
     annualReturn: 3,
     withdrawalRate: 4,

@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260623i">
+  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260623j">
 </head>
 <body>
   <main class="fire-page">
@@ -45,21 +45,16 @@
           </label>
 
           <label class="ly-field">
-            <span>월 저축액</span>
+            <span>연 저축액</span>
             <div class="value-box">
-              <input id="monthlySavings" type="text" inputmode="decimal" value="200">
+              <input id="annualSavings" type="text" inputmode="decimal" value="2,400">
               <em>만원</em>
             </div>
           </label>
         </section>
 
         <section class="input-card">
-          <h2><span class="step-num">2</span>은퇴 계획<details class="hint"><summary aria-label="용어 설명 보기">i</summary><p>인출률은 은퇴자산에서 매년 꺼내 쓸 비율(보통 4%). 수익률은 세금·수수료·물가를 뺀 연평균 가정.</p></details></h2>
-
-          <label class="ly-field">
-            <span>계산 방식</span>
-            <p class="method-note">은퇴 후 연지출 ÷ 인출률</p>
-          </label>
+          <h2><span class="step-num">2</span>은퇴 계획</h2>
 
           <label class="ly-field">
             <span>은퇴 후 연지출</span>
@@ -70,7 +65,7 @@
           </label>
 
           <label class="ly-field slider-field">
-            <span>인출률</span>
+            <span class="label-with-hint">인출률<details class="hint"><summary aria-label="인출률 설명 보기">i</summary><p>은퇴자산에서 매년 꺼내 쓸 비율(보통 4%). 목표 은퇴자산 = 연지출 ÷ 인출률.</p></details></span>
             <strong id="withdrawalPreview">4%</strong>
             <input id="withdrawalRange" type="range" min="0.5" max="10" step="0.1" value="4">
             <div class="value-box compact">
@@ -80,7 +75,7 @@
           </label>
 
           <label class="ly-field slider-field">
-            <span>연 수익률</span>
+            <span class="label-with-hint">연 수익률<details class="hint"><summary aria-label="수익률 설명 보기">i</summary><p>세금·수수료·물가를 뺀 연평균 가정.</p></details></span>
             <strong id="returnInlinePreview">5%</strong>
             <input id="annualReturnRange" type="range" min="-5" max="15" step="0.1" value="5">
             <div class="value-box compact">
@@ -109,7 +104,7 @@
         </article>
         <article>
           <span>연간 저축액</span>
-          <strong id="annualSavings">0원</strong>
+          <strong id="annualSavingsOut">0원</strong>
           <p id="savingRate">월 저축액 -</p>
         </article>
       </section>
@@ -164,7 +159,7 @@
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="fire-retirement-calculator.js?v=20260623b"></script>
+  <script src="fire-retirement-calculator.js?v=20260623c"></script>
   <script src="homepage-shell.js?v=20260506d"></script>
 </body>
 </html>
