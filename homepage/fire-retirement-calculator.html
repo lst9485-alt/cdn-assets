@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260623e">
+  <link rel="stylesheet" href="fire-retirement-calculator.css?v=20260623f">
 </head>
 <body>
   <main class="fire-page">
@@ -22,13 +22,12 @@
     <section class="calculator" id="calculator">
       <div class="unit-pill">(만원)</div>
 
-      <section class="result-hero" aria-live="polite">
-        <span class="result-kicker">예상 은퇴</span>
-        <strong id="retirementAge">-</strong>
-        <p id="retirementSub">계산 중</p>
-      </section>
-
       <section class="result-strip" aria-live="polite">
+        <article>
+          <span>예상 은퇴</span>
+          <strong id="retirementAge">-</strong>
+          <p id="retirementSub">계산 중</p>
+        </article>
         <article>
           <span>목표 은퇴자산</span>
           <strong id="fireTarget">0원</strong>
@@ -42,73 +41,62 @@
       </section>
 
       <form class="input-panel" id="inputForm">
-        <div class="input-stack">
-          <section class="input-card">
-            <h2><span class="step-num">1</span>현재 상황</h2>
+        <section class="input-card">
+          <h2><span class="step-num">1</span>현재 상황</h2>
 
-            <label class="ly-field">
-              <span>현재 나이</span>
-              <div class="value-box">
-                <input id="currentAge" type="number" min="10" max="99" step="1" value="35">
-                <em>세</em>
-              </div>
-            </label>
+          <label class="ly-field">
+            <span>현재 나이</span>
+            <div class="value-box">
+              <input id="currentAge" type="number" min="10" max="99" step="1" value="35">
+              <em>세</em>
+            </div>
+          </label>
 
-            <label class="ly-field">
-              <span>현재 보유자산</span>
-              <div class="value-box">
-                <input id="currentAssets" type="text" inputmode="decimal" value="0">
-                <em>만원</em>
-              </div>
-            </label>
+          <label class="ly-field">
+            <span>현재 보유자산</span>
+            <div class="value-box">
+              <input id="currentAssets" type="text" inputmode="decimal" value="0">
+              <em>만원</em>
+            </div>
+          </label>
 
-            <label class="ly-field">
-              <span>월 저축액</span>
-              <div class="value-box">
-                <input id="monthlySavings" type="text" inputmode="decimal" value="200">
-                <em>만원</em>
-              </div>
-            </label>
-          </section>
+          <label class="ly-field">
+            <span>월 저축액</span>
+            <div class="value-box">
+              <input id="monthlySavings" type="text" inputmode="decimal" value="200">
+              <em>만원</em>
+            </div>
+          </label>
+        </section>
 
-          <section class="input-card">
-            <h2><span class="step-num">2</span>은퇴 계획<details class="hint"><summary aria-label="인출률 설명 보기">i</summary><p>인출률은 은퇴자산에서 매년 꺼내 쓸 비율입니다. 4%는 장기 은퇴 계획에서 자주 쓰는 기준입니다.</p></details></h2>
+        <section class="input-card">
+          <h2><span class="step-num">2</span>은퇴 계획<details class="hint"><summary aria-label="용어 설명 보기">i</summary><p>인출률은 은퇴자산에서 매년 꺼내 쓸 비율이에요(4%가 기준). 수익률은 세금·수수료·물가를 뺀 단순 연평균 가정입니다.</p></details></h2>
 
-            <label class="ly-field">
-              <span>계산 방식</span>
-              <p class="method-note">은퇴 후 연지출 ÷ 인출률</p>
-            </label>
+          <label class="ly-field">
+            <span>계산 방식</span>
+            <p class="method-note">은퇴 후 연지출 ÷ 인출률</p>
+          </label>
 
-            <label class="ly-field">
-              <span>은퇴 후 연지출</span>
-              <div class="value-box">
-                <input id="annualExpenses" type="text" inputmode="decimal" value="2600">
-                <em>만원</em>
-              </div>
-            </label>
+          <label class="ly-field">
+            <span>은퇴 후 연지출</span>
+            <div class="value-box">
+              <input id="annualExpenses" type="text" inputmode="decimal" value="2600">
+              <em>만원</em>
+            </div>
+          </label>
 
-            <label class="ly-field slider-field">
-              <span>인출률</span>
-              <strong id="withdrawalPreview">4%</strong>
-              <input id="withdrawalRange" type="range" min="0.5" max="10" step="0.1" value="4">
-              <div class="value-box compact">
-                <input id="withdrawalRate" type="number" min="0.5" max="10" step="0.1" value="4">
-                <em>%</em>
-              </div>
-            </label>
-          </section>
-        </div>
+          <label class="ly-field slider-field">
+            <span>인출률</span>
+            <strong id="withdrawalPreview">4%</strong>
+            <input id="withdrawalRange" type="range" min="0.5" max="10" step="0.1" value="4">
+            <div class="value-box compact">
+              <input id="withdrawalRate" type="number" min="0.5" max="10" step="0.1" value="4">
+              <em>%</em>
+            </div>
+          </label>
 
-        <section class="input-card plan-card">
-          <h2><span class="step-num">3</span>수익률 가정<details class="hint"><summary aria-label="수익률 설명 보기">i</summary><p>세금, 수수료, 물가상승률을 제외한 단순 연평균 수익률 가정입니다.</p></details></h2>
-
-          <div class="plan-note">
-            <strong>계산에 적용되는 연평균 수익률</strong>
-            <span id="returnPreview">5%</span>
-          </div>
-
-          <label class="ly-field slider-field return-field">
-            <span>수익률 조정</span>
+          <label class="ly-field slider-field">
+            <span>연 수익률</span>
             <strong id="returnInlinePreview">5%</strong>
             <input id="annualReturnRange" type="range" min="-5" max="15" step="0.1" value="5">
             <div class="value-box compact">
@@ -116,12 +104,12 @@
               <em>%</em>
             </div>
           </label>
-
-          <div class="button-row">
-            <button type="button" class="primary-button" id="copyShare">공유 링크</button>
-            <button type="button" class="secondary-button" id="resetInputs">기본값 복원</button>
-          </div>
         </section>
+
+        <div class="button-row">
+          <button type="button" class="primary-button" id="copyShare">공유 링크</button>
+          <button type="button" class="secondary-button" id="resetInputs">기본값 복원</button>
+        </div>
       </form>
 
       <section class="projection-shell">
