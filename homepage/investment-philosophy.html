@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
   <title>투자 철학 — 우리동네 재테크</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,18 +26,39 @@
   </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
   <style>
-    html { font-size: 16px !important; }
+    html { font-size: 16px !important; scroll-behavior: smooth; }
     body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
     .word-keep { word-break: keep-all; overflow-wrap: break-word; }
     .prose-body p { font-size: 1.0625rem; line-height: 1.85; color: #1f2937; margin: 0; }
     .prose-body p + p { margin-top: 1.25rem; }
     .prose-body strong { color: #0a0a0a; font-weight: 700; }
 
+    /* 카드 그림자 (칼럼 스타일과 통일) */
+    .card-shadow { box-shadow: 0 6px 24px -8px rgba(255, 107, 0, 0.18), 0 2px 8px -4px rgba(10, 10, 10, 0.08); }
+    .card-shadow-blue { box-shadow: 0 6px 24px -8px rgba(0, 85, 255, 0.16), 0 2px 8px -4px rgba(10, 10, 10, 0.08); }
+
+    /* fadeInUp */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* pull quote 장식 */
+    .pull-quote::before {
+      content: '\201C';
+      font-family: 'GmarketSans', Georgia, serif;
+      color: #FF6B00;
+      font-size: 2.4rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.2rem;
+      opacity: 0.85;
+    }
+
     /* 손실 회복률 표 */
     .loss-table { width: 100%; border-collapse: collapse; }
-    .loss-table th, .loss-table td { border: 1px solid #d1d5db; padding: 12px 16px; text-align: center; font-weight: 700; }
-    .loss-table thead th { background: #e5e7eb; color: #0a0a0a; font-size: 1rem; }
+    .loss-table th, .loss-table td { border: 1px solid #e5e7eb; padding: 12px 16px; text-align: center; font-weight: 700; }
+    .loss-table thead th { background: #f3f0e8; color: #0a0a0a; font-size: 1rem; }
     .loss-table thead th.head-loss { text-decoration: underline; text-decoration-color: #ef4444; text-underline-offset: 4px; }
     .loss-table tbody td.col-loss { color: #1d4ed8; font-size: 1.0625rem; }
     .loss-table tbody td.col-need { color: #dc2626; font-size: 1.0625rem; }
@@ -60,11 +82,13 @@
     .cycle-restart { background: #FFF7ED; color: #FF6B00; font-weight: 800; padding: 10px 18px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 0.875rem; border: 1px solid #FFD7A8; }
   </style>
 </head>
-<body class="bg-white">
+<body class="bg-brand-beige text-brand-dark selection:bg-brand-orange/20">
 
 <!-- Hero -->
-<section class="bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f0f1e] text-white">
-  <div class="max-w-3xl mx-auto px-6 sm:px-8 pt-24 pb-20 text-center">
+<section class="relative overflow-hidden bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f0f1e] text-white">
+  <div class="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand-orange/10 blur-3xl"></div>
+  <div class="pointer-events-none absolute top-32 -left-20 h-56 w-56 rounded-full bg-brand-blue/10 blur-3xl"></div>
+  <div class="relative max-w-3xl mx-auto px-6 sm:px-8 pt-24 pb-20 text-center">
     <span class="inline-block bg-brand-orange/15 text-brand-orange text-xs font-bold px-3 py-1.5 rounded-full mb-6 tracking-wider">투자 철학</span>
     <h1 class="font-display font-black text-4xl sm:text-5xl leading-tight word-keep mb-5">
       분산하지 마세요.<br>
@@ -79,49 +103,52 @@
 
   <article class="prose-body word-keep">
 
-    <p>많은 전문가들이 공통적으로 하는 이야기가 있습니다.</p>
+    <div class="reveal space-y-5">
+      <p>많은 전문가들이 공통적으로 하는 이야기가 있습니다.</p>
 
-    <p class="text-gray-500">분산투자를 해야 한다. 자산배분은 선택이 아닌 필수다.</p>
+      <p class="text-gray-500">분산투자를 해야 한다. 자산배분은 선택이 아닌 필수다.</p>
 
-    <p>한편으로는 매우 맞는 말입니다. 어떤 분들은 아예 수치화시켜서, 자산 비율은 집이 몇 %여야 하고, IRP에는 매년 얼마씩 넣어야 한다고 이야기합니다.</p>
+      <p>한편으로는 매우 맞는 말입니다. 어떤 분들은 아예 수치화시켜서, 자산 비율은 집이 몇 %여야 하고, IRP에는 매년 얼마씩 넣어야 한다고 이야기합니다.</p>
 
-    <p>여기까지는 우리가 여기저기서 흔히 듣던 이야기입니다.<br>지금부터 제가 드릴 이야기는 조금 다릅니다.</p>
-
-    <div class="border-l-4 border-brand-orange bg-orange-50/40 pl-5 pr-5 py-5 my-8 rounded-r-xl">
-      <p class="text-lg font-bold text-brand-dark !leading-relaxed">저는 <strong>분산투자가 더 위험하다</strong>고 생각합니다. 돈을 벌려면 몰빵을 해야 합니다. 단, 잃지 않는 자산에 투자를 해야겠죠.</p>
-      <p class="text-lg font-bold text-brand-dark !leading-relaxed mt-3">돈을 벌려면 몰빵을 해야 합니다. 단, 잃지않는 자산에 투자를 해야겠죠.</p>
+      <p>여기까지는 우리가 여기저기서 흔히 듣던 이야기입니다.<br>지금부터 제가 드릴 이야기는 조금 다릅니다.</p>
     </div>
 
-    <p>왜냐하면, 분산투자로는 평범한 사람의 인생이 바뀌지 않기 때문입니다.</p>
+    <div class="reveal pull-quote my-8 rounded-2xl bg-white p-6 sm:p-8 card-shadow">
+      <p class="text-lg font-bold text-brand-dark !leading-relaxed">저는 <strong>분산투자가 더 위험하다</strong>고 생각합니다. 돈을 벌려면 몰빵을 해야 합니다. 단, 잃지 않는 자산에 투자를 해야겠죠.</p>
+    </div>
 
-    <p>주변에서 "이번에 50% 수익 냈다", "100% 수익 냈다"는 이야기를 종종 듣습니다. 그런데 그 사람들 인생이 정말 바뀌었나요? 대부분은 아닙니다. 이유는 단순합니다. 투자한 금액이 너무 작았기 때문입니다.</p>
+    <div class="reveal space-y-5">
+      <p>왜냐하면, 분산투자로는 평범한 사람의 인생이 바뀌지 않기 때문입니다.</p>
 
-    <p><strong>100만원으로 100% 수익을 내봤자 200만원입니다.</strong> 인생을 바꾸는 돈은 아닙니다.</p>
+      <p>주변에서 "이번에 50% 수익 냈다", "100% 수익 냈다"는 이야기를 종종 듣습니다. 그런데 그 사람들 인생이 정말 바뀌었나요? 대부분은 아닙니다. 이유는 단순합니다. 투자한 금액이 너무 작았기 때문입니다.</p>
 
-    <p>분산투자의 진짜 문제는 여기에 있습니다. 분산은 손실을 줄여주지만, 큰 수익도 같이 줄입니다. 안전할 수는 있어도, 부자가 되는 길과는 점점 멀어집니다.</p>
+      <p><strong>100만원으로 100% 수익을 내봤자 200만원입니다.</strong> 인생을 바꾸는 돈은 아닙니다.</p>
 
-    <p>워런 버핏이 운용하는 자산 <strong>400조원 중 200조가 애플 한 종목</strong>에 들어가 있습니다. 세계에서 가장 성공한 투자자도, 결정적인 순간에는 몰빵을 합니다.</p>
+      <p>분산투자의 진짜 문제는 여기에 있습니다. 분산은 손실을 줄여주지만, 큰 수익도 같이 줄입니다. 안전할 수는 있어도, 부자가 되는 길과는 점점 멀어집니다.</p>
 
-    <p>물론 오해하시면 안 됩니다. <strong>도박처럼 아무 데나 베팅하라는 이야기가 아닙니다.</strong></p>
+      <p>워런 버핏이 운용하는 자산 <strong>400조원 중 200조가 애플 한 종목</strong>에 들어가 있습니다. 세계에서 가장 성공한 투자자도, 결정적인 순간에는 몰빵을 합니다.</p>
 
-    <p>몰빵에는 두 가지 전제가 있습니다.</p>
+      <p>물론 오해하시면 안 됩니다. <strong>도박처럼 아무 데나 베팅하라는 이야기가 아닙니다.</strong></p>
+
+      <p>몰빵에는 두 가지 전제가 있습니다.</p>
+    </div>
 
     <!-- 두 전제 카드 -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
-      <div class="bg-brand-orange/5 border-2 border-brand-orange rounded-2xl p-6">
+    <div class="reveal grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
+      <div class="rounded-2xl bg-white p-6 card-shadow">
         <div class="text-brand-orange text-xs font-bold tracking-wider mb-2">전제 1</div>
         <p class="text-brand-dark text-lg font-bold leading-snug word-keep">내가 잘 아는 분야여야 합니다.</p>
       </div>
-      <div class="bg-brand-orange/5 border-2 border-brand-orange rounded-2xl p-6">
+      <div class="rounded-2xl bg-white p-6 card-shadow">
         <div class="text-brand-orange text-xs font-bold tracking-wider mb-2">전제 2</div>
         <p class="text-brand-dark text-lg font-bold leading-snug word-keep">잃지 않는 자산이어야 합니다.</p>
       </div>
     </div>
 
-    <p>손실은 한 번 나면 회복이 어렵습니다. 50% 잃으면 100% 수익을 내야 본전입니다.</p>
+    <p class="reveal">손실은 한 번 나면 회복이 어렵습니다. 50% 잃으면 100% 수익을 내야 본전입니다.</p>
 
     <!-- 손실 회복률 표 -->
-    <div class="my-8 overflow-x-auto">
+    <div class="reveal my-8 rounded-2xl bg-white p-4 sm:p-6 card-shadow overflow-x-auto">
       <table class="loss-table">
         <thead>
           <tr>
@@ -144,17 +171,19 @@
       </table>
     </div>
 
-    <p>그래서 워런 버핏의 1원칙은 <strong>"절대로 돈을 잃지 마라"</strong>, 2원칙은 <strong>"1원칙을 잊지 마라"</strong>입니다.</p>
+    <div class="reveal space-y-5">
+      <p>그래서 워런 버핏의 1원칙은 <strong>"절대로 돈을 잃지 마라"</strong>, 2원칙은 <strong>"1원칙을 잊지 마라"</strong>입니다.</p>
 
-    <p>그렇다면 평범한 직장인이 잘 알고, 잃지 않을 수 있는 자산은 무엇일까요?</p>
+      <p>그렇다면 평범한 직장인이 잘 알고, 잃지 않을 수 있는 자산은 무엇일까요?</p>
+    </div>
 
-    <p class="text-2xl font-display font-bold text-brand-dark text-center my-10">저는 <span class="text-brand-orange">'집'</span>이라고 생각합니다.</p>
+    <p class="reveal text-2xl font-display font-bold text-brand-dark text-center my-10">저는 <span class="text-brand-orange">'집'</span>이라고 생각합니다.</p>
 
-    <p>집은 두 가지 면에서 다른 자산과 다릅니다.</p>
+    <p class="reveal">집은 두 가지 면에서 다른 자산과 다릅니다.</p>
 
     <!-- 집의 두 차이 카드 -->
-    <div class="space-y-4 my-8">
-      <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+    <div class="reveal space-y-4 my-8">
+      <div class="bg-white rounded-2xl p-6 card-shadow">
         <div class="flex items-start gap-4">
           <div class="flex-shrink-0 w-10 h-10 bg-brand-orange/10 text-brand-orange rounded-full flex items-center justify-center font-bold">1</div>
           <div>
@@ -163,9 +192,9 @@
           </div>
         </div>
       </div>
-      <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+      <div class="bg-white rounded-2xl p-6 card-shadow-blue">
         <div class="flex items-start gap-4">
-          <div class="flex-shrink-0 w-10 h-10 bg-brand-orange/10 text-brand-orange rounded-full flex items-center justify-center font-bold">2</div>
+          <div class="flex-shrink-0 w-10 h-10 bg-brand-blue/10 text-brand-blue rounded-full flex items-center justify-center font-bold">2</div>
           <div>
             <p class="font-bold text-brand-dark text-lg mb-1">환금성이 떨어집니다.</p>
             <p class="text-gray-600">단점처럼 보이지만 오히려 장점입니다. 주식처럼 클릭 한 번으로 팔 수 없으니, 마음이 흔들려도 함부로 팔지 못합니다. 시간을 두고 오를 때까지 기다리게 됩니다.</p>
@@ -174,12 +203,14 @@
       </div>
     </div>
 
-    <p>투자의 기본은 싸게 사서 비싸게 파는 것입니다. 여기에 한 가지가 빠져 있습니다. 싸게 사서, <strong>오를 때까지 기다렸다가</strong>, 비싸게 파는 것이죠. 집은 이 '기다리는 과정'을 강제로 만들어 줍니다.</p>
+    <div class="reveal space-y-5">
+      <p>투자의 기본은 싸게 사서 비싸게 파는 것입니다. 여기에 한 가지가 빠져 있습니다. 싸게 사서, <strong>오를 때까지 기다렸다가</strong>, 비싸게 파는 것이죠. 집은 이 '기다리는 과정'을 강제로 만들어 줍니다.</p>
 
-    <p>제가 드리는 메시지는 단순합니다.</p>
+      <p>제가 드리는 메시지는 단순합니다.</p>
+    </div>
 
     <!-- 마지막 메시지 박스 -->
-    <div class="bg-brand-beige rounded-3xl p-8 sm:p-10 my-8 text-center">
+    <div class="reveal bg-white rounded-3xl p-8 sm:p-10 my-8 text-center card-shadow">
       <p class="text-xl sm:text-2xl font-display font-bold text-brand-dark leading-relaxed word-keep">
         분산하지 마세요.<br>
         잃지 않는 자산에 <span class="text-brand-orange">레버리지까지 써서 몰빵</span>하세요.<br>
@@ -187,8 +218,15 @@
       </p>
     </div>
 
+    <!-- divider -->
+    <div class="my-14 flex items-center gap-4">
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+      <iconify-icon icon="solar:refresh-circle-bold-duotone" class="text-xl text-brand-orange/60"></iconify-icon>
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+    </div>
+
     <!-- ETF→집→ETF 순환 구조 -->
-    <div class="my-14">
+    <div class="reveal my-14">
       <h2 class="text-2xl sm:text-3xl font-display font-bold text-brand-dark text-center mb-3 word-keep">그리고 끝이 아닙니다</h2>
       <p class="text-center text-gray-600 mb-8 word-keep">ETF로 시작해, 집으로 갈아타며 자산을 키웁니다.</p>
 
@@ -231,11 +269,21 @@
       </div>
     </div>
 
-    <p class="text-center text-gray-600 mt-10">이게 우리동네재테크가 약속하는 <strong>'잃지 않는 투자'</strong>이고,<br>직장인 내집마련 로드맵의 출발점입니다.</p>
+    <p class="reveal text-center text-gray-600 mt-10"><strong>'잃지 않는 투자'</strong>가 가장 중요합니다.<br>직장인 재테크의 출발점입니다.</p>
 
   </article>
 
 </main>
+
+<script>
+  // fadeInUp
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
 
 <script src="homepage-shell.js?v=d5608a0"></script>
 </body>
