@@ -146,18 +146,6 @@ a {
   box-shadow: var(--shadow);
 }
 
-.plan-card {
-  min-height: 100%;
-}
-
-.card-kicker {
-  display: block;
-  color: var(--purple);
-  font-size: 11px;
-  font-weight: 950;
-  letter-spacing: .13em;
-  text-align: center;
-}
 
 .input-card h2 {
   margin: 8px 0 24px;
@@ -282,20 +270,6 @@ a {
   box-shadow: 0 0 0 3px rgba(91, 45, 240, .12);
 }
 
-.method-note {
-  min-height: 42px;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  padding: 0 14px;
-  color: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: #fbfaff;
-  font-size: 14px;
-  font-weight: 750;
-}
-
 .slider-field {
   grid-template-columns: 112px 42px minmax(110px, 1fr) 92px;
 }
@@ -315,33 +289,6 @@ a {
   text-align: right;
 }
 
-.fine-print {
-  margin: 16px 0 0;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.55;
-  word-break: keep-all;
-}
-
-.plan-note {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  margin-top: 22px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
-}
-
-.plan-note strong {
-  font-size: 14px;
-}
-
-.plan-note span {
-  color: var(--purple);
-  font-weight: 950;
-}
-
 .button-row {
   grid-column: 1 / -1;
   display: grid;
@@ -352,55 +299,6 @@ a {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-}
-
-.strategy-list {
-  display: grid;
-  gap: 22px;
-  margin-top: 12px;
-}
-
-.strategy-row {
-  display: grid;
-  grid-template-columns: 98px 72px minmax(0, 1fr) 42px;
-  align-items: center;
-  gap: 12px;
-}
-
-.strategy-row strong,
-.strategy-row span,
-.strategy-row b {
-  font-size: 13px;
-}
-
-.strategy-row strong {
-  font-weight: 850;
-}
-
-.strategy-row span {
-  color: var(--muted);
-  font-weight: 750;
-}
-
-.strategy-row b {
-  text-align: right;
-}
-
-.strategy-track {
-  height: 3px;
-  border-radius: 999px;
-  background: #e5e2f5;
-}
-
-.strategy-track i {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: var(--purple);
-}
-
-.return-field {
-  margin-top: 16px;
 }
 
 .primary-button,

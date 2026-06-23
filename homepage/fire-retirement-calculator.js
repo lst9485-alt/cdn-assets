@@ -18,8 +18,6 @@
   };
   var ANNUAL_RETURN_MIN = -5;
   var ANNUAL_RETURN_MAX = 15;
-  var WITHDRAWAL_MIN = 0.5;
-  var WITHDRAWAL_MAX = 10;
 
   var chart = null;
   var toastTimer = null;
@@ -175,7 +173,6 @@
       config: cfg,
       rows: rows,
       annualSavings: savings,
-      savingsRate: 0,
       targetNetworth: targetNetworth,
       retirementYear: retirementYear,
       retirementAge: retirementYear == null ? null : cfg.currentAge + retirementYear,
@@ -242,7 +239,6 @@
     setText('retirementSub', result.retirementYear == null ? '80년 안에 목표 미도달' : result.retirementYear === 0 ? '현재 자산으로 목표 도달' : '지금부터 ' + result.retirementYear + '년 뒤');
     setText('annualSavingsOut', formatMoney(result.annualSavings));
     setText('savingRate', '월 ' + formatMoney(result.config.annualSavings / 12) + ' 꼴');
-    setText('returnPreview', result.config.annualReturn + '%');
     setText('returnInlinePreview', result.config.annualReturn + '%');
 
     var insight = qs('insightCard');
@@ -258,16 +254,6 @@
     }
   }
 
-  function findRetirementIndex(result) {
-    return result.rows.findIndex(function (row) {
-      return row.year === result.retirementYear;
-    });
-  }
-
-  function getChartMeta() {
-    return { kicker: '', title: '예상 경로' };
-  }
-
   function setProjectionView(view) {
     projectionView = view || 'chart';
     var card = qs('projectionCard');
@@ -281,9 +267,7 @@
 
   function renderChart(result) {
     if (typeof Chart === 'undefined') return;
-    var meta = getChartMeta();
-    setText('chartKicker', meta.kicker);
-    setText('chartTitle', meta.title);
+    setText('chartTitle', '예상 경로');
 
     var labels = result.rows.map(function (row) { return row.year + '년'; });
     var datasets = [
