@@ -21,7 +21,7 @@
 <body>
 <div class="wrap">
   <h2>갈아타기 차트 — 가능/불가능 표시 시안 3종</h2>
-  <p class="desc">두 줄만 비교해요: <b style="color:#10b981">초록 = 내가 마련 가능한 금액(내 돈+대출)</b> vs <b style="color:#f59e0b">주황 = 목표 집값</b>. 초록이 주황을 넘으면 갈아타기 가능. 내 단지·필요자기자본 선은 뺐고, 점도 뺐어요. 마음에 드는 번호 알려주세요.</p>
+  <p class="desc">두 줄만 비교해요: <b style="color:#10b981">초록 = 순자산(+대출 70% 가정)</b> vs <b style="color:#f59e0b">주황 = 목표 집값</b>. 초록이 주황을 넘으면 갈아타기 가능. 내 단지·필요자기자본 선은 뺐고, 점도 뺐어요. 마음에 드는 번호 알려주세요.</p>
 
   <div class="card"><h3>시안 A — 가능 구간 배경 색칠</h3><p class="note">초록이 주황을 넘는 해부터 오른쪽 끝까지 연초록 배경 + "○년부터 가능" 세로선.</p><div class="cw"><canvas id="cA"></canvas></div></div>
 
@@ -47,7 +47,7 @@
 
   function baseSets(){return[
     {label:'목표 집값',data:gD,borderColor:'#f59e0b',backgroundColor:'#f59e0b',fill:false,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:4},
-    {label:'마련 가능 금액 (내 돈+대출)',data:buyD,borderColor:'#10b981',backgroundColor:'#10b981',fill:false,tension:.35,borderWidth:3,pointRadius:0,pointHoverRadius:4}
+    {label:'순자산 (+대출 70% 가정)',data:buyD,borderColor:'#10b981',backgroundColor:'#10b981',fill:false,tension:.35,borderWidth:3,pointRadius:0,pointHoverRadius:4}
   ];}
   function baseOpts(ann){return{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
     legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:12}}},
