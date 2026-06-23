@@ -428,6 +428,7 @@
 
   function showToast(message) {
     var el = qs('toast');
+    if (!el) return;
     el.textContent = message;
     el.classList.add('show');
     clearTimeout(toastTimer);
