@@ -215,8 +215,8 @@ a {
   left: 0;
   transform: none;
   z-index: 30;
-  width: 244px;
-  max-width: 72vw;
+  width: 200px;
+  max-width: 60vw;
   margin: 0;
   padding: 11px 13px;
   border-radius: 10px;

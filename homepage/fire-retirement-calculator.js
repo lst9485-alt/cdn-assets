@@ -265,7 +265,7 @@
     var labels = result.rows.map(function (row) { return row.year + '년'; });
     var datasets = [
       {
-        label: '  투자하며 모을 때',
+        label: '  저축 + 투자',
         data: result.rows.map(function (row) { return Math.round(row.networth); }),
         borderColor: '#5b2df0',
         backgroundColor: 'rgba(91,45,240,.10)',
@@ -342,7 +342,7 @@
         },
         scales: {
           x: {
-            title: { display: true, text: '지금부터 경과 연수', color: '#605b83', font: { weight: 700 } },
+            title: { display: false },
             grid: { display: false },
             ticks: { maxRotation: 0, maxTicksLimit: 9, color: '#605b83' }
           },
