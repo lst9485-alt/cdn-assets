@@ -385,39 +385,6 @@
         ]
       },
       {
-        id: 'investment-section',
-        hubTitle: '투자종합',
-        collapsible: true,
-        defaultOpen: true,
-        nav: {
-          type: 'single',
-          label: '투자종합',
-          href: 'dashboard/investment.html',
-          activeMatch: ['investment.html']
-        },
-        sidebar: {
-          title: '투자종합'
-        },
-        items: [
-          {
-            id: 'investment-backtest',
-            title: '백테스트',
-            sidebarLabel: '백테스트',
-            description: '무한매수법·VR·Buy & Hold 비교, MDD/CAGR/매매 로그',
-            href: 'dashboard/investment.html',
-            modifiedDate: '2026-05-28',
-            badgeText: 'NEW',
-            badgeTone: 'live',
-            iconKey: 'investment',
-            hubVisible: true,
-            navVisible: true,
-            sidebarType: 'root',
-            activeMatch: ['investment.html'],
-            groupLabel: '주식'
-          }
-        ]
-      },
-      {
         id: 'pg-homepage',
         hubTitle: 'PG사 통과용',
         collapsible: true,
@@ -504,24 +471,6 @@
             groupLabel: '원본'
           }
         ]
-      },
-      {
-        id: 'templates',
-        hubTitle: '템플릿',
-        alwaysVisible: true,
-        collapsible: true,
-        defaultOpen: true,
-        nav: {
-          type: 'single',
-          label: '템플릿',
-          href: 'templates/',
-          activeMatch: ['/templates'],
-          hidden: true
-        },
-        sidebar: {
-          title: '템플릿'
-        },
-        items: []
       },
       {
         id: 'process',
@@ -700,6 +649,21 @@
             sidebarType: 'root',
             activeMatch: ['slide-viewer'],
             hubVisible: true
+          },
+          {
+            id: 'investment-backtest',
+            title: '주식 백테스트',
+            sidebarLabel: '주식 백테스트',
+            description: '무한매수법·VR·Buy & Hold 비교, MDD/CAGR/매매 로그',
+            href: 'dashboard/investment.html',
+            modifiedDate: '2026-05-28',
+            badgeText: 'NEW',
+            badgeTone: 'live',
+            iconKey: 'investment',
+            hubVisible: true,
+            navVisible: true,
+            sidebarType: 'root',
+            activeMatch: ['investment.html']
           }
         ]
       },

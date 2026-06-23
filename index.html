@@ -102,7 +102,7 @@
         </div>
         <div id="hub-sections"></div>
     </div>
-<script src="./site-config.js?v=20260528-investment-section"></script>
+<script src="./site-config.js?v=20260623-tools-backtest"></script>
 <script>
 (function() {
     var site = window.DASHBOARD_SITE;
@@ -387,20 +387,18 @@
     }
 
     function toggleGroup(key) {
-        if (collapsedGroups[key]) {
-            delete collapsedGroups[key];
-        } else {
-            collapsedGroups[key] = true;
-        }
+        collapsedGroups[key] = !collapsedGroups[key];
         saveGroups();
         container.innerHTML = site.sections.map(renderSection).join('');
     }
 
     function loadGroups() {
+        var defaults = { 'homepage-section|공통': true };
         try {
-            return JSON.parse(localStorage.getItem('hubDashboardGroups') || '{}') || {};
+            var stored = JSON.parse(localStorage.getItem('hubDashboardGroups') || '{}') || {};
+            return Object.assign({}, defaults, stored);
         } catch (error) {
-            return {};
+            return Object.assign({}, defaults);
         }
     }
 
