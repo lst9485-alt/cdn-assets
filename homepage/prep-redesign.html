@@ -78,6 +78,12 @@
 
         .ft { text-align:center; font-size:12px; color:var(--faint); padding:20px; }
 
+        /* 용어 설명 말풍선 */
+        .info { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:800; font-style:normal; line-height:1; cursor:pointer; vertical-align:middle; position:relative; user-select:none; flex-shrink:0; }
+        .info::before { content:attr(data-tip); position:absolute; left:50%; top:calc(100% + 9px); transform:translateX(-50%); width:215px; max-width:72vw; background:#1f2433; color:#fff; font-size:12.5px; font-weight:500; line-height:1.55; text-align:left; padding:11px 13px; border-radius:10px; box-shadow:0 12px 30px rgba(0,0,0,.24); letter-spacing:0; opacity:0; visibility:hidden; transition:opacity .15s; z-index:60; pointer-events:none; }
+        .info::after { content:''; position:absolute; left:50%; top:calc(100% + 3px); transform:translateX(-50%); border:6px solid transparent; border-bottom-color:#1f2433; opacity:0; visibility:hidden; transition:opacity .15s; z-index:60; }
+        .info:hover::before, .info:focus::before, .info:hover::after, .info:focus::after { opacity:1; visibility:visible; }
+
         @media (max-width:768px) {
             .wrap { padding:16px 12px 32px; } .hdr { padding:18px 18px; } .hdr h1 { font-size:19px; } .hdr-logo { width:52px; height:52px; }
             .tabs { overflow-x:auto; } .tab { padding:9px 12px; font-size:14px; }
@@ -209,25 +215,25 @@
             <div class="cmp-card"><span class="cmp-badge ba">내 상황</span>
                 <div class="ig ig1">
                     <div><div class="il">내 단지 현재가</div><div class="iw"><input class="if" id="a_my" inputmode="decimal"><span class="is">만원</span></div></div>
-                    <div><div class="il">연 상승률</div><div class="iw"><input class="if" id="a_mr" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">연 상승률 <span class="info" tabindex="0" data-tip="집값이 매년 오를 거라 가정한 값이에요. 예상치라 직접 바꿔보세요. 미래 집값은 아무도 몰라요.">i</span></div><div class="iw"><input class="if" id="a_mr" inputmode="decimal"><span class="is">%</span></div></div>
                     <div><div class="il">대출 금액</div><div class="iw"><input class="if" id="a_ln" inputmode="decimal"><span class="is">만원</span></div></div>
                 </div>
                 <div style="margin:10px 0 6px;font-size:12px;font-weight:600;color:var(--gray);">(갈아타기)</div>
                 <div class="ig ig1">
                     <div><div class="il">연 저축액</div><div class="iw"><input class="if" id="a_sv" inputmode="decimal"><span class="is">만원</span></div></div>
-                    <div><div class="il">투자 수익률</div><div class="iw"><input class="if" id="a_rt" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">투자 수익률 <span class="info" tabindex="0" data-tip="모은 돈을 굴려서 얻는 연 수익률이에요. 예금·투자 등으로요.">i</span></div><div class="iw"><input class="if" id="a_rt" inputmode="decimal"><span class="is">%</span></div></div>
                     <div><div class="il">기간</div><div class="iw"><input class="if" id="a_yr" inputmode="decimal"><span class="is">년</span></div></div>
                 </div>
             </div>
             <div class="cmp-card"><span class="cmp-badge bb">목표 단지</span>
                 <div class="ig ig1">
                     <div><div class="il">현재가</div><div class="iw"><input class="if" id="a_gl" inputmode="decimal"><span class="is">만원</span></div></div>
-                    <div><div class="il">연 상승률</div><div class="iw"><input class="if" id="a_gr" inputmode="decimal"><span class="is">%</span></div></div>
+                    <div><div class="il">연 상승률 <span class="info" tabindex="0" data-tip="집값이 매년 오를 거라 가정한 값이에요. 예상치라 직접 바꿔보세요. 미래 집값은 아무도 몰라요.">i</span></div><div class="iw"><input class="if" id="a_gr" inputmode="decimal"><span class="is">%</span></div></div>
                 </div>
             </div>
         </div>
         <div class="card"><div class="card-t">갈아타기 시뮬레이션</div><div class="cw"><canvas id="cAst"></canvas></div></div>
-        <div class="card"><div class="card-t">레버리지 수익률 곡선</div>
+        <div class="card"><div class="card-t">레버리지 수익률 곡선 <span class="info" tabindex="0" data-tip="내 돈 대비 수익률이에요. 대출을 끼면 적은 돈으로 더 큰 집에 투자하는 효과가 있어요.">i</span></div>
             <div class="note" style="margin-top:0;margin-bottom:8px;">자기자본 대비 수익률. 시간이 지나면 레버리지 효과가 줄어들어 갈아타기 적기를 보여줍니다.</div>
             <div class="cw"><canvas id="cLev"></canvas></div>
         </div>
@@ -258,6 +264,14 @@
     var gP=function(n,d){var m=new RegExp('[?&]'+n+'=([^&#]*)').exec(location.search);return m?decodeURIComponent(m[1]):d;};
     var gN=function(n,d){var v=gP(n,'');return v?Number(v):d;};
     var PMT=function(p,ar,m){if(ar===0)return p/m;var r=ar/12/100,pw=Math.pow(1+r,m);return p*r*pw/(pw-1);};
+    // 용어 설명 말풍선
+    var T={
+        dsr:'내 소득으로 1년에 빚을 얼마나 갚을 수 있는지 보는 비율이에요. 이 한도 안에서만 대출이 나와요.',
+        ltv:'집값 대비 빌릴 수 있는 비율이에요. 보통 집값의 70%까지 대출이 나와요.',
+        stress:'지금 금리보다 조금 높게 잡아 심사하는 금리예요. 나중에 금리가 올라도 갚을 수 있는지 보려는 거예요.',
+        equity:'대출을 뺀, 내가 직접 마련해야 하는 현금이에요.'
+    };
+    var tip=function(t){return ' <span class="info" tabindex="0" data-tip="'+t+'">i</span>';};
 
     // 크로스헤어 플러그인 (호버 시 세로 점선)
     var crosshairPlugin={id:'crosshair',afterDraw:function(chart){if(chart.tooltip&&chart.tooltip._active&&chart.tooltip._active.length){var x=chart.tooltip._active[0].element.x;var yA=chart.chartArea;var ctx=chart.ctx;ctx.save();ctx.beginPath();ctx.setLineDash([4,4]);ctx.strokeStyle='#94A3B8';ctx.lineWidth=1;ctx.moveTo(x,yA.top);ctx.lineTo(x,yA.bottom);ctx.stroke();ctx.restore();}}};
@@ -296,12 +310,12 @@
 
         // 결론 카드
         var vd=$('buyV');
-        if(short>0){vd.className='verdict warn';vd.innerHTML='<div class="v-text">현금 '+fmt(short)+' 부족</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본 '+fmt(selfNeed)+'</div>';}
-        else{vd.className='verdict';vd.innerHTML='<div class="v-text">매수 가능 (여유 '+fmt(Math.abs(short))+')</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본 '+fmt(selfNeed)+'</div>';}
+        if(short>0){vd.className='verdict warn';vd.innerHTML='<div class="v-text">현금 '+fmt(short)+' 부족</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본'+tip(T.equity)+' '+fmt(selfNeed)+'</div>';}
+        else{vd.className='verdict';vd.innerHTML='<div class="v-text">매수 가능 (여유 '+fmt(Math.abs(short))+')</div><div class="v-sub">희망가 '+fmt(tg)+' / 필요 자기자본'+tip(T.equity)+' '+fmt(selfNeed)+'</div>';}
 
         $('buyR').innerHTML=''
-            +'<div class="rb accent"><div class="rb-label">DSR 최대 대출</div><div class="rb-val blue">'+fmt(mxDSR)+'</div><div class="rb-sub">금리 '+rt+'% + 가산 1.5%</div></div>'
-            +'<div class="rb accent"><div class="rb-label">LTV 대출 한도</div><div class="rb-val blue">'+fmt(mxLTV)+'</div><div class="rb-sub">'+fmt(tg)+' x 70%</div></div>'
+            +'<div class="rb accent"><div class="rb-label">DSR 최대 대출'+tip(T.dsr)+'</div><div class="rb-val blue">'+fmt(mxDSR)+'</div><div class="rb-sub">금리 '+rt+'% + 가산 1.5%</div></div>'
+            +'<div class="rb accent"><div class="rb-label">LTV 대출 한도'+tip(T.ltv)+'</div><div class="rb-val blue">'+fmt(mxLTV)+'</div><div class="rb-sub">'+fmt(tg)+' x 70%</div></div>'
             +'<div class="rb '+(short>0?'warn':'accent')+'"><div class="rb-label">'+(short>0?'부족분':'여유분')+'</div><div class="rb-val '+(short>0?'orange':'blue')+'">'+fmt(Math.abs(short))+'</div><div class="rb-sub">'+(short>0?'현금 추가 필요':'현금 여유')+'</div></div>';
 
         // 차트: 내 예산 vs 희망가 (가로 바 2줄 + DSR/LTV 점선)
@@ -322,7 +336,7 @@
         },scales:{x:{stacked:true,ticks:{callback:function(v){return fmt(v);},font:{size:13}},grid:{color:'#F1F5F9'},max:xMax},y:{stacked:true,ticks:{font:{size:13,weight:'bold'}}}}}});
         $('cBuyChart').parentElement.style.height='160px';
 
-        $('buyN').innerHTML='DSR 40%, 스트레스 금리 '+stressRt+'% (입력 '+rt+'% + 1.5%p), '+yr+'년, LTV 70% 기준<br>실제 대출: '+fmt(actual)+' (DSR '+fmt(mxDSR)+' / LTV '+fmt(mxLTV)+' 중 작은 값)<br>정책대출: 디딤돌(소득6천↓), 보금자리론(7천↓), 신생아특례(맞벌이2억↓)';
+        $('buyN').innerHTML='DSR 40%, 스트레스 금리'+tip(T.stress)+' '+stressRt+'% (입력 '+rt+'% + 1.5%p), '+yr+'년, LTV 70% 기준<br>실제 대출: '+fmt(actual)+' (DSR '+fmt(mxDSR)+' / LTV '+fmt(mxLTV)+' 중 작은 값)<br>정책대출: 디딤돌(소득6천↓), 보금자리론(7천↓), 신생아특례(맞벌이2억↓)';
     }
 
     // === TAB 2: 월 상환 ===
