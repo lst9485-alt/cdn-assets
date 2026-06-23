@@ -76,7 +76,7 @@
 
         .gauge-wrap { display:flex; align-items:center; gap:16px; padding:10px 0; }
         .gauge-bar { flex:1; height:28px; border-radius:14px; position:relative; background:var(--track); }
-        .gauge-bar::after { content:'40% 초과 위험'; position:absolute; left:40%; top:0; bottom:0; border-left:2px dashed var(--faint); z-index:2; font-size:10px; color:var(--faint); padding-left:4px; padding-top:32px; white-space:nowrap; }
+        .gauge-bar::after { content:''; position:absolute; left:40%; top:0; bottom:0; border-left:2px dashed var(--faint); z-index:2; }
         .gauge-fill { height:100%; border-radius:14px; transition:width .3s; }
         .gauge-tag { font-size:14px; font-weight:700; min-width:110px; }
         .gauge-label { font-family:var(--font-head); font-size:20px; font-weight:800; min-width:70px; text-align:right; }
@@ -180,7 +180,6 @@
 
     <!-- TAB 2: 월 상환 -->
     <div class="tc" id="tab-repay">
-        <div class="verdict" id="repV"></div>
         <div class="cmp">
             <div class="cmp-card"><span class="cmp-badge ba">조건 A</span>
                 <div class="ig ig1 inline-fields">
@@ -360,12 +359,6 @@
         var df=am-bm;
         var inc=V('rep_income');
 
-        // 결론 카드
-        var vd=$('repV');
-        var bigger=am>bm?'A':'B',smaller=am>bm?'B':'A';
-        vd.className='verdict';
-        vd.innerHTML='<div class="v-text">'+smaller+'가 월 '+fF(Math.abs(df))+' ↓</div><div class="v-sub">A: '+fF(am)+'/월 · B: '+fF(bm)+'/월</div>';
-
         // 소득 대비 게이지
         if(inc>0){
             var pctA=Math.round(am/inc*100),pctB=Math.round(bm/inc*100);
@@ -386,10 +379,10 @@
 
         if(CRep)CRep.destroy();
         CRep=new Chart($('cRep'),{type:'bar',data:{labels:['총 이자','총 상환'],datasets:[
-            {label:'A: '+fmt(aA)+' / '+aR+'%',data:[aI,aT],backgroundColor:'#2563eb',borderRadius:4,barPercentage:.4},
-            {label:'B: '+fmt(bA)+' / '+bR+'%',data:[bI,bT],backgroundColor:'#F59E0B',borderRadius:4,barPercentage:.4}
+            {label:'A: '+fmt(aA)+' / '+aR+'%',data:[aI,aT],backgroundColor:'#2563eb',borderRadius:4,barPercentage:.62,categoryPercentage:.62},
+            {label:'B: '+fmt(bA)+' / '+bR+'%',data:[bI,bT],backgroundColor:'#F59E0B',borderRadius:4,barPercentage:.62,categoryPercentage:.62}
         ]},options:{responsive:true,maintainAspectRatio:false,plugins:{
-            legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
+            legend:{display:false},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fF(ctx.parsed.y);}}}
         },scales:{y:{ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}});
         $('cRep').parentElement.style.height='260px';
@@ -426,10 +419,10 @@
         if(CAst)CAst.destroy();
         var an={};if(cy!==null){an.cp={type:'point',xValue:String(ty+cy),yValue:nD[cy],backgroundColor:'#10b981',borderColor:'#fff',borderWidth:3,radius:7};an.cl={type:'label',xValue:String(ty+cy),yValue:nD[cy],content:['갈아타기 가능'],font:{size:13,weight:'bold'},backgroundColor:'rgba(16,185,129,.92)',color:'#fff',padding:5,borderRadius:4,yAdjust:-22};}
         CAst=new Chart($('cAst'),{type:'line',data:{labels:lb,datasets:[
-            {label:'내 단지',data:mD,borderColor:'#2563eb',backgroundColor:'#2563eb',fill:false,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointBackgroundColor:'#2563eb',pointBorderColor:'#fff',pointBorderWidth:2},
-            {label:'목표 단지',data:gD,borderColor:'#f59e0b',backgroundColor:'#f59e0b',fill:false,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointBackgroundColor:'#f59e0b',pointBorderColor:'#fff',pointBorderWidth:2},
+            {label:'내 단지',data:mD,borderColor:'#2563eb',backgroundColor:'#2563eb',fill:false,tension:.35,borderWidth:2.5,pointRadius:2.5,pointHoverRadius:5,pointBackgroundColor:'#2563eb',pointBorderColor:'#fff',pointBorderWidth:1.5},
+            {label:'목표 단지',data:gD,borderColor:'#f59e0b',backgroundColor:'#f59e0b',fill:false,tension:.35,borderWidth:2.5,pointRadius:2.5,pointHoverRadius:5,pointBackgroundColor:'#f59e0b',pointBorderColor:'#fff',pointBorderWidth:1.5},
             {label:'필요 자기자본 (LTV 70%)',data:needD,borderColor:'#cbd5e1',backgroundColor:'#cbd5e1',borderDash:[6,4],fill:false,tension:.35,borderWidth:1.5,pointRadius:0,pointHoverRadius:0},
-            {label:'순자산(+대출)',data:nD,borderColor:'#10b981',backgroundColor:'#10b981',fill:false,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointBackgroundColor:'#10b981',pointBorderColor:'#fff',pointBorderWidth:2}
+            {label:'순자산(+대출)',data:nD,borderColor:'#10b981',backgroundColor:'#10b981',fill:false,tension:.35,borderWidth:2.5,pointRadius:2.5,pointHoverRadius:5,pointBackgroundColor:'#10b981',pointBorderColor:'#fff',pointBorderWidth:1.5}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
             legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:13}}},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fmt(ctx.parsed.y);}}},
@@ -440,7 +433,7 @@
         // 레버리지 수익률 곡선
         if(CLev)CLev.destroy();
         CLev=new Chart($('cLev'),{type:'line',data:{labels:lb,datasets:[
-            {label:'연평균 레버리지 수익률',data:levD,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.07)',fill:true,tension:.35,borderWidth:2.5,pointRadius:0,pointHoverRadius:5,pointBackgroundColor:'#2563eb',pointBorderColor:'#fff',pointBorderWidth:2}
+            {label:'연평균 레버리지 수익률',data:levD,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.07)',fill:true,tension:.35,borderWidth:2.5,pointRadius:2.5,pointHoverRadius:5,pointBackgroundColor:'#2563eb',pointBorderColor:'#fff',pointBorderWidth:1.5}
         ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{
             legend:{display:false},
             tooltip:{callbacks:{label:function(ctx){return '연평균 '+ctx.parsed.y+'%';}}}
