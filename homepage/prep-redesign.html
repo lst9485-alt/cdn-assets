@@ -292,6 +292,8 @@
     // 크로스헤어 플러그인 (호버 시 세로 점선)
     var crosshairPlugin={id:'crosshair',afterDraw:function(chart){if(chart.tooltip&&chart.tooltip._active&&chart.tooltip._active.length){var x=chart.tooltip._active[0].element.x;var yA=chart.chartArea;var ctx=chart.ctx;ctx.save();ctx.beginPath();ctx.setLineDash([4,4]);ctx.strokeStyle='#94A3B8';ctx.lineWidth=1;ctx.moveTo(x,yA.top);ctx.lineTo(x,yA.bottom);ctx.stroke();ctx.restore();}}};
     Chart.register(crosshairPlugin);
+    // 막대 안 흰색 금액 라벨 (cRep 전용 인라인 플러그인)
+    var barLabels={id:'barLabels',afterDatasetsDraw:function(chart){var ctx=chart.ctx;chart.data.datasets.forEach(function(ds,di){var meta=chart.getDatasetMeta(di);if(meta.hidden)return;meta.data.forEach(function(bar,i){var v=ds.data[i];if(v==null)return;var top=bar.y,base=bar.base!=null?bar.base:chart.scales.y.bottom;if(Math.abs(base-top)<22)return;ctx.save();ctx.fillStyle='#fff';ctx.font='700 12px Pretendard, -apple-system, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText(fmt(v),bar.x,top+7);ctx.restore();});});}};
 
     var nm=gP('name','');if(nm)$('hT').textContent=nm+'님 재무 계산기';
     var D={c:gN('cash',18000),i:gN('income',7700),s:gN('saving',2400),t:gN('target',60000),ma:gN('my_apt',50000),ga:gN('goal_apt',130000)};
@@ -390,7 +392,7 @@
         ]},options:{responsive:true,maintainAspectRatio:false,plugins:{
             legend:{display:false},
             tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': '+fF(ctx.parsed.y);}}}
-        },scales:{y:{ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}}});
+        },scales:{y:{ticks:{callback:function(v){return fmt(v);}},grid:{color:'#F1F5F9'}},x:{grid:{display:false}}}},plugins:[barLabels]});
         $('cRep').parentElement.style.height='260px';
     }
 
