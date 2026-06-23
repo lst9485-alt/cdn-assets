@@ -65,16 +65,6 @@
           </label>
 
           <label class="ly-field slider-field">
-            <span class="label-with-hint">인출률<details class="hint"><summary aria-label="인출률 설명 보기">i</summary><p>은퇴자산에서 매년 꺼내 쓸 비율(보통 4%).</p></details></span>
-            <strong id="withdrawalPreview">4%</strong>
-            <input id="withdrawalRange" type="range" min="0.5" max="10" step="0.1" value="4">
-            <div class="value-box compact">
-              <input id="withdrawalRate" type="number" min="0.5" max="10" step="0.1" value="4">
-              <em>%</em>
-            </div>
-          </label>
-
-          <label class="ly-field slider-field">
             <span class="label-with-hint">연 수익률<details class="hint"><summary aria-label="수익률 설명 보기">i</summary><p>자산 전체(저축액 포함)가 1년에 불어나는 비율.</p></details></span>
             <strong id="returnInlinePreview">5%</strong>
             <input id="annualReturnRange" type="range" min="-5" max="15" step="0.1" value="5">
@@ -98,9 +88,9 @@
           <p id="retirementSub">계산 중</p>
         </article>
         <article>
-          <span>목표 은퇴자산</span>
+          <span>목표 은퇴자금</span>
           <strong id="fireTarget">0원</strong>
-          <p id="targetSub">인출률 4% 기준</p>
+          <p id="targetSub">1년 생활비의 25배</p>
         </article>
         <article>
           <span>연간 저축액</span>
@@ -131,7 +121,7 @@
             <div class="table-title">
               <div>
                 <span>연도별 상세표</span>
-                <strong>목표 은퇴자산에 도달하는 시점이 예상 은퇴 기준입니다. 투자수익/연지출은 참고 지표입니다. 단위: 만원</strong>
+                <strong>목표 은퇴자금에 도달하는 시점이 예상 은퇴 기준입니다. 투자수익/연지출은 참고 지표입니다. 단위: 만원</strong>
               </div>
               <button class="secondary-button table-toggle" type="button" id="toggleRows">전체 연도 보기</button>
             </div>
@@ -159,7 +149,7 @@
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="fire-retirement-calculator.js?v=20260623f"></script>
+  <script src="fire-retirement-calculator.js?v=20260623g"></script>
   <script src="homepage-shell.js?v=20260506d"></script>
 </body>
 </html>

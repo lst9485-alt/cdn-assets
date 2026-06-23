@@ -121,7 +121,7 @@
     ));
     cfg.annualExpenses = Math.max(0, toNumber(cfg.annualExpenses, DEFAULTS.annualExpenses));
     cfg.annualReturn = Math.max(ANNUAL_RETURN_MIN, Math.min(ANNUAL_RETURN_MAX, toNumber(cfg.annualReturn, DEFAULTS.annualReturn)));
-    cfg.withdrawalRate = Math.max(WITHDRAWAL_MIN, Math.min(WITHDRAWAL_MAX, toNumber(cfg.withdrawalRate, DEFAULTS.withdrawalRate)));
+    cfg.withdrawalRate = 4;
     return cfg;
   }
 
@@ -188,8 +188,7 @@
       currentAssets: qs('currentAssets').value,
       annualSavings: qs('annualSavings').value,
       annualExpenses: toNumber(qs('monthlyExpenses').value, DEFAULTS.annualExpenses / 12) * 12,
-      annualReturn: qs('annualReturn').value,
-      withdrawalRate: qs('withdrawalRate').value
+      annualReturn: qs('annualReturn').value
     });
   }
 
@@ -200,9 +199,7 @@
     qs('annualSavings').value = formatInput(cfg.annualSavings);
     qs('monthlyExpenses').value = formatInput(cfg.annualExpenses / 12);
     qs('annualReturn').value = cfg.annualReturn;
-    qs('withdrawalRate').value = cfg.withdrawalRate;
     if (qs('annualReturnRange')) qs('annualReturnRange').value = cfg.annualReturn;
-    if (qs('withdrawalRange')) qs('withdrawalRange').value = cfg.withdrawalRate;
   }
 
   function setText(id, value) {
@@ -213,25 +210,24 @@
   function renderSummary(result) {
     var ageText = result.retirementAge == null ? '도달 어려움' : result.retirementAge + '세';
     setText('fireTarget', formatMoney(result.targetNetworth));
-    setText('targetSub', '월지출 ' + formatMoney(result.config.annualExpenses / 12) + ' × 12 ÷ 인출률 ' + result.config.withdrawalRate + '%');
+    setText('targetSub', '1년 생활비 ' + formatMoney(result.config.annualExpenses) + '의 25배');
     setText('retirementAge', ageText);
     setText('retirementSub', result.retirementYear == null ? '80년 안에 목표 미도달' : result.retirementYear === 0 ? '현재 자산으로 목표 도달' : '지금부터 ' + result.retirementYear + '년 뒤');
     setText('annualSavingsOut', formatMoney(result.annualSavings));
     setText('savingRate', '월 ' + formatMoney(result.config.annualSavings / 12) + ' 꼴');
-    setText('withdrawalPreview', result.config.withdrawalRate + '%');
     setText('returnPreview', result.config.annualReturn + '%');
     setText('returnInlinePreview', result.config.annualReturn + '%');
 
     var insight = qs('insightCard');
     var ageHtml = '<b class="hl">' + result.retirementAge + '세</b>';
     if (result.retirementYear == null) {
-      insight.innerHTML = '현재 조건으로는 목표 은퇴자산에 도달하기 어렵습니다. 연지출을 줄이거나 저축을 늘리면 은퇴 시점이 크게 당겨집니다.';
+      insight.innerHTML = '현재 조건으로는 목표 은퇴자금에 도달하기 어렵습니다. 연지출을 줄이거나 저축을 늘리면 은퇴 시점이 크게 당겨집니다.';
     } else if (result.retirementYear === 0) {
-      insight.innerHTML = '현재 보유자산이 이미 목표 은퇴자산 이상입니다. 차트와 표는 지금부터 자산이 더 늘어나는 모습을 보여줍니다.';
+      insight.innerHTML = '현재 보유자산이 이미 목표 은퇴자금 이상입니다. 차트와 표는 지금부터 자산이 더 늘어나는 모습을 보여줍니다.';
     } else if (result.config.annualReturn < result.config.withdrawalRate) {
-      insight.innerHTML = '현재 조건이면 ' + ageHtml + '에 목표 은퇴자산에 도달합니다. 인출률은 투자수익만 쓰는 게 아니라 원금 일부 인출을 포함합니다.';
+      insight.innerHTML = '현재 조건이면 ' + ageHtml + '에 목표 은퇴자금에 도달합니다. 인출률은 투자수익만 쓰는 게 아니라 원금 일부 인출을 포함합니다.';
     } else {
-      insight.innerHTML = '현재 조건이면 ' + ageHtml + '에 목표 은퇴자산에 도달합니다. 표 탭에서 매년 투자수익과 연지출 비율을 볼 수 있습니다.';
+      insight.innerHTML = '현재 조건이면 ' + ageHtml + '에 목표 은퇴자금에 도달합니다. 표 탭에서 매년 투자수익과 연지출 비율을 볼 수 있습니다.';
     }
   }
 
@@ -465,7 +461,6 @@
     var params = new URLSearchParams(window.location.search);
     writeConfigToDom(decodeShareData(params.get('data')) || DEFAULTS);
     syncRangeControl('annualReturnRange', 'annualReturn');
-    syncRangeControl('withdrawalRange', 'withdrawalRate');
     document.querySelectorAll('#inputForm input').forEach(function (el) {
       el.addEventListener('input', update);
       el.addEventListener('change', update);
