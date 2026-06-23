@@ -48,6 +48,33 @@ a {
   padding: 36px 20px 96px;
 }
 
+.calc-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  margin: 0 auto 4px;
+  padding: 6px;
+  background: #f1f0ff;
+  border-radius: 999px;
+}
+
+.calc-tabs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 22px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.calc-tabs a.active {
+  color: #fff;
+  background: var(--purple);
+}
+
 .hero {
   display: grid;
   justify-items: center;
