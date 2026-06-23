@@ -352,7 +352,7 @@
           },
           {
             id: 'consult-prep',
-            title: '재무 계산기',
+            title: '내집마련 계산기',
             description: '매수가·월상환·갈아타기 시뮬레이션',
             href: 'https://ourdongne.github.io/prep.html',
             badgeText: 'LIVE',

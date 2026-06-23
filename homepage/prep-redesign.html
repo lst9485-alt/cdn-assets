@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>재무 계산기 시안 - 우리동네재테크</title>
+    <title>내집마련 계산기 시안 - 우리동네재테크</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
@@ -154,7 +154,7 @@
 <div class="wrap">
     <div class="hdr">
         <div>
-            <h1 id="hT">우리동네재테크 재무 계산기</h1>
+            <h1 id="hT">우리동네재테크 내집마련 계산기</h1>
             <div class="sub" id="hS">내집마련 코칭 · 상담 자료</div>
         </div>
         <img class="hdr-logo" src="https://ourdongne.github.io/channel-logo.png" alt="우리동네재테크">
@@ -296,7 +296,7 @@
     // 막대 안 흰색 금액 라벨 (cRep 전용 인라인 플러그인)
     var barLabels={id:'barLabels',afterDatasetsDraw:function(chart){var ctx=chart.ctx;chart.data.datasets.forEach(function(ds,di){var meta=chart.getDatasetMeta(di);if(meta.hidden)return;meta.data.forEach(function(bar,i){var v=ds.data[i];if(v==null)return;var top=bar.y,base=bar.base!=null?bar.base:chart.scales.y.bottom;if(Math.abs(base-top)<22)return;ctx.save();ctx.fillStyle='#fff';ctx.font='700 12px Pretendard, -apple-system, sans-serif';ctx.textAlign='center';ctx.textBaseline='top';ctx.fillText(fmt(v),bar.x,top+7);ctx.restore();});});}};
 
-    var nm=gP('name','');if(nm)$('hT').textContent=nm+'님 재무 계산기';
+    var nm=gP('name','');if(nm)$('hT').textContent=nm+'님 내집마련 계산기';
     var D={c:gN('cash',18000),i:gN('income',7700),s:gN('saving',2400),t:gN('target',60000),ma:gN('my_apt',50000),ga:gN('goal_apt',130000)};
 
     function sV(id,v){$(id).value=v.toLocaleString();}
