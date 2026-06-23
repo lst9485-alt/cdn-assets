@@ -392,7 +392,9 @@
             badgeTone: 'live',
             iconKey: 'web',
             activeMatch: ['retire-column-final.html'],
-            hubVisible: true
+            hubVisible: true,
+            imwebCode: 'homepage/retire-column-imweb-copy.html',
+            dateSuffix: '1'
           }
         ]
       },

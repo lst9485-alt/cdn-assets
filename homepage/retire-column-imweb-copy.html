@@ -1,0 +1,266 @@
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <title>우리동네재테크 · 시간을 내 편으로 만드는 법</title>
+  <meta name="description" content="복리는 시간에서 나옵니다. 상담 6개월 차에 다시 점검하는, 꾸준함과 시세 트래킹 이야기. 직접 은퇴계산기로 내 숫자를 확인해 보세요." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="우리동네재테크 · 시간을 내 편으로 만드는 법" />
+  <meta property="og:description" content="복리는 시간에서 나옵니다. 상담 6개월 차에 다시 점검하는, 꾸준함과 시세 트래킹 이야기." />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" />
+  <style>
+    @font-face { font-family: 'GmarketSans'; src: url('https://ourdongne.github.io/fonts/GmarketSansBold.woff2') format('woff2'); font-weight: 400 900; font-display: swap; }
+  </style>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-orange': '#FF6B00',
+            'brand-blue': '#0055FF',
+            'brand-dark': '#0A0A0A',
+            'brand-beige': '#F5F0E8',
+          },
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', 'sans-serif'],
+            display: ['GmarketSans', 'Pretendard', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Pretendard', system-ui, sans-serif; word-break: keep-all; }
+    .font-display { font-family: 'GmarketSans', 'Pretendard', sans-serif; }
+
+    /* tinted shadows */
+    .card-shadow { box-shadow: 0 6px 24px -8px rgba(255, 107, 0, 0.18), 0 2px 8px -4px rgba(10, 10, 10, 0.08); }
+    .card-shadow-blue { box-shadow: 0 6px 24px -8px rgba(0, 85, 255, 0.16), 0 2px 8px -4px rgba(10, 10, 10, 0.08); }
+
+    /* fadeInUp */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* pull quote 장식 */
+    .pull-quote::before {
+      content: '\201C';
+      font-family: 'GmarketSans', Georgia, serif;
+      color: #FF6B00;
+      font-size: 2.4rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.2rem;
+      opacity: 0.85;
+    }
+    section[id] { scroll-margin-top: 88px; }
+
+    /* 계산기 자리 (시안용 placeholder — 실제 계산기 넣을 때 이 박스 통째로 교체) */
+    .calc-slot {
+      background-image: repeating-linear-gradient(45deg, rgba(255,107,0,.04) 0 12px, transparent 12px 24px);
+    }
+  </style>
+
+<div class="bg-brand-beige text-brand-dark antialiased min-h-[100dvh] selection:bg-brand-orange/20 od-imweb-page">
+
+  <!-- ============ HERO ============ -->
+  <header class="relative overflow-hidden bg-white">
+    <div class="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand-orange/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute top-40 -left-20 h-56 w-56 rounded-full bg-brand-blue/5 blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-3xl px-4 pt-10 pb-12 sm:px-8 md:pt-14 md:pb-14">
+      <div class="reveal">
+        <span class="inline-flex items-center gap-2 rounded-full border border-brand-orange/30 bg-brand-orange/10 px-3.5 py-1.5 text-sm font-semibold text-brand-orange">
+          <iconify-icon icon="solar:clock-circle-bold" class="text-sm"></iconify-icon>
+          투자 로드맵
+        </span>
+
+        <h1 class="font-display mt-5 text-[28px] leading-[1.3] sm:text-4xl md:text-[44px] md:leading-[1.25]">
+          시간을 <span class="text-brand-orange">내 편으로</span><br class="hidden sm:block" />
+          만드는 법
+        </h1>
+
+        <p class="mt-4 max-w-xl text-[15px] leading-relaxed text-brand-dark/70 sm:text-base">
+          처음 세운 계획, 지금도 잘 이어가고 계신가요?
+          오늘은 장기적인 투자 로드맵과 노후준비에 대해 말씀드리겠습니다.
+        </p>
+
+        <!-- 발행 정보 (매거진 메타) -->
+        <div class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-brand-dark/10 pt-6">
+          <div>
+            <p class="text-[11px] uppercase tracking-widest text-brand-dark/60">Volume</p>
+            <p class="font-display mt-1 text-brand-dark">VOL.2</p>
+          </div>
+          <div class="hidden h-8 w-px bg-brand-dark/15 sm:block"></div>
+          <div>
+            <p class="text-[11px] uppercase tracking-widest text-brand-dark/60">Theme</p>
+            <p class="font-display mt-1 text-brand-dark">복리 · 노후준비</p>
+          </div>
+          <div class="hidden h-8 w-px bg-brand-dark/15 sm:block"></div>
+          <div>
+            <p class="text-[11px] uppercase tracking-widest text-brand-dark/60">Tool</p>
+            <p class="font-display mt-1 text-brand-dark">은퇴계산기</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ MAIN ============ -->
+  <main class="mx-auto max-w-3xl px-4 py-12 sm:px-8 md:py-16">
+
+    <!-- 1. 멈춤이 가장 무섭다 -->
+    <section id="part-1" class="reveal">
+      <div class="flex items-center gap-2.5">
+        <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">1</span>
+        <h2 class="font-display text-xl text-brand-dark sm:text-2xl">가장 무서운 건 큰 실수가 아닙니다</h2>
+      </div>
+      <div class="mt-5 space-y-4 text-[16px] leading-relaxed text-brand-dark/80">
+        <p>처음엔 누구나 의욕이 넘칩니다. 그런데 6개월, 1년이 지나면 바쁜 일상에 치여 슬슬 손을 놓게 됩니다. 특히 노후처럼 먼 일일수록 더 미루게 되죠.</p>
+        <p>그런데 재테크에서 가장 무서운 건 한 번의 큰 실수가 아니라, 바로 이 <span class="font-semibold text-brand-dark">'멈춤'</span>입니다. 멈춰 있는 동안에는 좋은 기회가 와도 보이지 않고, 위험이 다가와도 알아채지 못하니까요.</p>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div class="my-12 flex items-center gap-4 md:my-14">
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+      <iconify-icon icon="solar:arrow-down-bold-duotone" class="text-lg text-brand-orange/60"></iconify-icon>
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+    </div>
+
+    <!-- 2. 복리 = 시간 -->
+    <section id="part-2" class="reveal">
+      <div class="flex items-center gap-2.5">
+        <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">2</span>
+        <h2 class="font-display text-xl text-brand-dark sm:text-2xl">작은 차이가, 시간이 지나면 어마어마해집니다</h2>
+      </div>
+      <div class="mt-5 space-y-4 text-[16px] leading-relaxed text-brand-dark/80">
+        <p>돈이 돈을 버는 걸 복리라고 합니다. 익숙한 말이지만, 핵심은 하나예요. <span class="font-semibold text-brand-dark">시간이 길수록 차이가 눈덩이처럼 커집니다.</span></p>
+        <p>매달 같은 돈을 모으더라도, 한 푼도 안 붙는 통장에 두는 것과 해마다 조금씩이라도 불어나는 곳에 두는 것은 1~2년 차엔 차이가 거의 안 보입니다. 그런데 10년, 20년이 지나면 두 사람의 자산은 눈을 의심할 만큼 벌어져 있습니다.</p>
+      </div>
+
+      <div class="pull-quote mt-8 rounded-2xl bg-white p-6 text-[17px] font-medium leading-relaxed text-brand-dark/90 card-shadow sm:p-8">
+        복리의 힘은 '시간'에서 나오고, 그 시간은 오늘부터만 쌓입니다.<br />
+        그래서 일찍 시작하고, 중간에 멈추지 않는 사람이 결국 이깁니다.
+      </div>
+
+      <!-- 복리계산기 소개 + 자리 -->
+      <p class="mt-8 text-[16px] font-semibold leading-relaxed text-brand-dark">
+        지금 모으는 돈, 복리로 굴리면 몇 년 뒤 얼마가 될까요? 직접 넣어보세요.
+      </p>
+      <div class="mt-4 overflow-hidden rounded-3xl bg-white card-shadow">
+        <iframe data-calc-frame src="https://lst9485-alt.github.io/cdn-assets/homepage/compound-interest-calculator.html?embed=1" title="복리계산기" loading="lazy" scrolling="no" style="display:block;width:100%;border:0;height:1200px"></iframe>
+      </div>
+    </section>
+
+    <!-- divider -->
+    <div class="my-12 flex items-center gap-4 md:my-14">
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+      <iconify-icon icon="solar:arrow-down-bold-duotone" class="text-lg text-brand-orange/60"></iconify-icon>
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+    </div>
+
+    <!-- 3. 모으기 → 불리기 (장기 로드맵 + 노후) -->
+    <section id="part-3" class="reveal">
+      <div class="flex items-center gap-2.5">
+        <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">3</span>
+        <h2 class="font-display text-xl text-brand-dark sm:text-2xl">모으기만 해선, 노후가 빠듯합니다</h2>
+      </div>
+      <div class="mt-5 space-y-4 text-[16px] leading-relaxed text-brand-dark/80">
+        <p>냉정하게 말씀드리면, 평범하게 벌어서 아끼고 모으기만 하면 은퇴할 때쯤 순자산은 대개 <span class="font-semibold text-brand-dark">4~5억 언저리</span>에서 멈춥니다. 한평생 성실하게 산 결과치고는 아쉬운 숫자예요.</p>
+        <p>그래서 어느 지점부터는 <span class="font-semibold text-brand-dark">'모으기'에서 '불리기'로</span> 방향을 바꿔야 합니다. 1억까지는 누구나 모읍니다. 진짜 차이는 그다음, 모은 돈을 어떻게 굴리고 갈아타느냐에서 벌어집니다. 이게 장기 투자 로드맵이고, 노후 준비의 핵심입니다.</p>
+        <p>거창하게 매일 공부하라는 말이 아닙니다. 그 로드맵을 놓치지 않으려면 딱 두 가지만 습관으로 만들면 됩니다.</p>
+      </div>
+
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl bg-white p-6 card-shadow">
+          <iconify-icon icon="solar:eye-bold-duotone" class="text-3xl text-brand-orange"></iconify-icon>
+          <h3 class="mt-3 font-display text-lg text-brand-dark">관심을 끊지 않기</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-brand-dark/70">한 달에 한 번이라도 내 자산이 어떻게 흘러가는지 들여다봅니다.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 card-shadow-blue">
+          <iconify-icon icon="solar:chart-2-bold-duotone" class="text-3xl text-brand-blue"></iconify-icon>
+          <h3 class="mt-3 font-display text-lg text-brand-dark">간단한 시세 트래킹</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-brand-dark/70">내 집·예적금·투자 상품이 지금 어디쯤 와 있는지 가볍게 체크합니다.</p>
+        </div>
+      </div>
+
+      <p class="mt-6 text-[16px] leading-relaxed text-brand-dark/80">
+        이걸 안 하고 있으면, 더 좋은 곳으로 갈아탈 타이밍도 위험을 줄여야 할 순간도 그냥 지나쳐 버립니다.
+        <span class="font-semibold text-brand-dark">보고 있는 사람만 움직일 수 있습니다.</span>
+      </p>
+    </section>
+
+    <!-- divider -->
+    <div class="my-12 flex items-center gap-4 md:my-14">
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+      <iconify-icon icon="solar:calculator-bold-duotone" class="text-lg text-brand-orange/60"></iconify-icon>
+      <div class="h-px flex-1 bg-brand-dark/10"></div>
+    </div>
+
+    <!-- 4. 계산기로 연결 -->
+    <section id="part-4" class="reveal">
+      <div class="flex items-center gap-2.5">
+        <span class="grid h-8 w-8 place-items-center rounded-xl bg-brand-orange text-sm font-bold text-white">4</span>
+        <h2 class="font-display text-xl text-brand-dark sm:text-2xl">그럼, 지금 이대로면 내 노후는 어떨까요?</h2>
+      </div>
+      <div class="mt-5 space-y-4 text-[16px] leading-relaxed text-brand-dark/80">
+        <p>말로만 들으면 잘 와닿지 않습니다. 그래서 직접 숫자로 확인해 보시라고 아래에 <span class="font-semibold text-brand-dark">은퇴계산기</span>를 준비했습니다.</p>
+        <p>지금의 저축과 투자 방식을 그대로 이어갔을 때 은퇴 시점에 내 자산이 얼마가 되는지 넣어보세요. 그냥 모으기만 할 때와 꾸준히 불려갈 때가 어떻게 갈리는지, 숫자가 바로 보여줄 겁니다.</p>
+      </div>
+
+      <!-- 은퇴계산기 소개 + 자리 -->
+      <p class="mt-8 text-[16px] font-semibold leading-relaxed text-brand-dark">
+        내 노후에 얼마가 필요할까요? 아래에서 확인해보세요.
+      </p>
+      <div class="mt-4 overflow-hidden rounded-3xl bg-white card-shadow">
+        <iframe data-calc-frame src="https://lst9485-alt.github.io/cdn-assets/homepage/fire-retirement-calculator.html?embed=1" title="은퇴계산기" loading="lazy" scrolling="no" style="display:block;width:100%;border:0;height:1200px"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ CTA (다크) ============ -->
+  <section class="bg-brand-dark text-white">
+    <div class="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 sm:py-24">
+      <iconify-icon icon="solar:posts-carousel-vertical-bold-duotone" class="mb-6 inline-block text-[44px] text-brand-orange"></iconify-icon>
+      <h2 class="reveal font-display text-2xl leading-tight sm:text-4xl">
+        작은 관심이<br class="sm:hidden" />
+        <span class="text-brand-orange">10년 뒤를 바꿉니다</span>
+      </h2>
+      <div class="reveal mt-10 flex flex-col justify-center gap-4 sm:flex-row" style="transition-delay:.08s">
+        <a href="https://pf.kakao.com/_mcxnjX/chat" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#FEE500] px-8 py-4 font-semibold text-[#191919] transition hover:brightness-95">
+          <iconify-icon icon="solar:chat-round-line-bold" class="text-xl"></iconify-icon>
+          카카오톡 문의
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // fadeInUp
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // 계산기 iframe 높이 자동 맞춤 (계산기가 보내주는 높이로 — CDN·아임웹 둘 다 작동)
+    const calcFrames = Array.from(document.querySelectorAll('iframe[data-calc-frame]'));
+    window.addEventListener('message', (e) => {
+      if (!e.data || e.data.type !== 'calc-height' || !e.data.h) return;
+      const f = calcFrames.find((fr) => fr.contentWindow === e.source);
+      if (f) f.style.height = e.data.h + 'px';
+    });
+  </script>
+</div>
