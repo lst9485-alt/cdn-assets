@@ -232,7 +232,7 @@
 
     function renderSheet(items, sectionId) {
         var isArchive = sectionId === 'archive' || items.some(function(item) { return item.archiveNo; });
-        var showCopy = sectionId === 'homepage-section' || sectionId === 'pg-homepage';
+        var showCopy = sectionId === 'homepage-section' || sectionId === 'pg-homepage' || sectionId === 'consult';
         var head = isArchive ? renderArchiveHead(sectionId) : renderGenericHead(sectionId, showCopy);
         var className = isArchive ? 'sheet archive-sheet' : 'sheet generic-sheet' + (showCopy ? '' : ' no-copy');
         var rows;
