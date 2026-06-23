@@ -10,11 +10,10 @@
 
   var DEFAULTS = {
     principal: 1000,
-    monthly: 50,
+    monthly: 0,
     annualRate: 5,
     years: 10,
-    mode: 'compound',
-    depositMode: 'lump'
+    mode: 'compound'
   };
   var RATE_MIN = 0;
   var RATE_MAX = 30;
@@ -27,7 +26,6 @@
   var lastResult = null;
   var projectionView = 'chart';
   var calcMode = 'compound';
-  var depositMode = 'lump';
 
   function qs(id) {
     return document.getElementById(id);
@@ -84,36 +82,28 @@
     cfg.annualRate = Math.max(RATE_MIN, Math.min(RATE_MAX, toNumber(cfg.annualRate, DEFAULTS.annualRate)));
     cfg.years = Math.max(YEARS_MIN, Math.min(YEARS_MAX, Math.round(toNumber(cfg.years, DEFAULTS.years))));
     cfg.mode = cfg.mode === 'simple' ? 'simple' : 'compound';
-    cfg.depositMode = cfg.depositMode === 'installment' ? 'installment' : 'lump';
     return cfg;
   }
 
   function calculateCompound(rawConfig) {
     var cfg = normalizeConfig(rawConfig);
     var rate = cfg.annualRate / 100;
+    var i = rate / 12;
     var rows = [];
-    if (cfg.depositMode === 'installment') {
-      var i = rate / 12;
-      for (var y = 0; y <= cfg.years; y += 1) {
-        var m = y * 12;
-        var paid = cfg.monthly * m;
-        var amount;
-        if (m === 0) {
-          amount = 0;
-        } else if (cfg.mode === 'simple') {
-          amount = paid + cfg.monthly * i * (m * (m + 1) / 2);
-        } else {
-          amount = i === 0 ? paid : cfg.monthly * ((Math.pow(1 + i, m) - 1) / i);
-        }
-        rows.push({ year: y, networth: amount, principalLine: paid, interest: amount - paid });
+    for (var y = 0; y <= cfg.years; y += 1) {
+      var m = y * 12;
+      var paid = cfg.principal + cfg.monthly * m;
+      var lumpPart;
+      var instPart;
+      if (cfg.mode === 'simple') {
+        lumpPart = cfg.principal * (1 + rate * y);
+        instPart = cfg.monthly * m + cfg.monthly * i * (m * (m + 1) / 2);
+      } else {
+        lumpPart = cfg.principal * Math.pow(1 + rate, y);
+        instPart = (m === 0 || i === 0) ? cfg.monthly * m : cfg.monthly * ((Math.pow(1 + i, m) - 1) / i);
       }
-    } else {
-      for (var year = 0; year <= cfg.years; year += 1) {
-        var nw = cfg.mode === 'simple'
-          ? cfg.principal * (1 + rate * year)
-          : cfg.principal * Math.pow(1 + rate, year);
-        rows.push({ year: year, networth: nw, principalLine: cfg.principal, interest: nw - cfg.principal });
-      }
+      var amount = lumpPart + instPart;
+      rows.push({ year: y, networth: amount, principalLine: paid, interest: amount - paid });
     }
     var last = rows[rows.length - 1];
     var totalPaid = last.principalLine;
@@ -133,8 +123,7 @@
       monthly: qs('monthly').value,
       annualRate: qs('annualRate').value,
       years: qs('years').value,
-      mode: calcMode,
-      depositMode: depositMode
+      mode: calcMode
     });
   }
 
@@ -142,18 +131,6 @@
     calcMode = mode === 'simple' ? 'simple' : 'compound';
     document.querySelectorAll('[data-mode]').forEach(function (btn) {
       var active = btn.dataset.mode === calcMode;
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-    });
-  }
-
-  function setDepositMode(mode) {
-    depositMode = mode === 'installment' ? 'installment' : 'lump';
-    var card = qs('inputCard');
-    if (card) card.classList.toggle('is-installment', depositMode === 'installment');
-    setText('inputTitle', depositMode === 'installment' ? '매달 모으기' : '목돈 굴리기');
-    document.querySelectorAll('[data-deposit]').forEach(function (btn) {
-      var active = btn.dataset.deposit === depositMode;
       btn.classList.toggle('active', active);
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
@@ -168,7 +145,6 @@
     if (qs('annualRateRange')) qs('annualRateRange').value = cfg.annualRate;
     if (qs('yearsRange')) qs('yearsRange').value = cfg.years;
     setMode(cfg.mode);
-    setDepositMode(cfg.depositMode);
   }
 
   function setText(id, value) {
@@ -178,22 +154,25 @@
 
   function renderSummary(result) {
     var cfg = result.config;
-    var isInst = cfg.depositMode === 'installment';
     var modeWord = cfg.mode === 'simple' ? '단리' : '복리';
     setText('resultKicker', cfg.years + '년 뒤');
     setText('finalAmount', formatMoney(result.finalAmount));
-    setText('resultSummary', isInst
-      ? '낸 돈 ' + formatMoney(result.totalPaid) + ' · 불어난 돈 ' + formatMoney(result.totalInterest)
-      : '불어난 돈 ' + formatMoney(result.totalInterest) + ' · 원금의 ' + result.multiple.toFixed(1).replace(/\.0$/, '') + '배');
+    setText('resultSummary', '넣은 돈 ' + formatMoney(result.totalPaid) + ' · 불어난 돈 ' + formatMoney(result.totalInterest));
 
     var insight = qs('insightCard');
     if (!insight) return;
+    var how;
+    if (cfg.principal > 0 && cfg.monthly > 0) {
+      how = '원금 ' + formatMoney(cfg.principal) + '에 매달 ' + formatMoney(cfg.monthly) + '씩';
+    } else if (cfg.monthly > 0) {
+      how = '매달 ' + formatMoney(cfg.monthly) + '씩';
+    } else {
+      how = '원금 ' + formatMoney(cfg.principal) + '을';
+    }
     if (cfg.annualRate <= 0) {
       insight.textContent = '수익률이 0%면 돈이 불어나지 않습니다. 수익률을 올려 ' + modeWord + ' 효과를 확인해 보세요.';
-    } else if (isInst) {
-      insight.textContent = '매달 ' + formatMoney(cfg.monthly) + '씩 연 ' + cfg.annualRate + '%로 ' + cfg.years + '년 모으면(' + modeWord + ' 기준) ' + formatMoney(result.finalAmount) + '. 낸 돈 ' + formatMoney(result.totalPaid) + ', 불어난 돈 ' + formatMoney(result.totalInterest) + '입니다.';
     } else {
-      insight.textContent = formatMoney(cfg.principal) + '을 연 ' + cfg.annualRate + '%로 ' + cfg.years + '년 두면(' + modeWord + ' 기준) ' + formatMoney(result.finalAmount) + '. 그중 불어난 돈이 ' + formatMoney(result.totalInterest) + '입니다.';
+      insight.textContent = how + ' 연 ' + cfg.annualRate + '%로 ' + cfg.years + '년 넣으면(' + modeWord + ' 기준) ' + formatMoney(result.finalAmount) + '. 넣은 돈 ' + formatMoney(result.totalPaid) + ', 불어난 돈 ' + formatMoney(result.totalInterest) + '입니다.';
     }
   }
 
@@ -210,14 +189,13 @@
 
   function renderChart(result) {
     if (typeof Chart === 'undefined') return;
-    var isInst = result.config.depositMode === 'installment';
     var modeWord = result.config.mode === 'simple' ? '단리' : '복리';
-    setText('chartTitle', isInst ? '돈이 쌓이고 불어나는 모습' : '원금이 불어나는 모습');
+    setText('chartTitle', '돈이 불어나는 모습');
 
     var labels = result.rows.map(function (row) { return row.year + '년'; });
     var datasets = [
       {
-        label: isInst ? '낸 돈' : '원금',
+        label: '넣은 돈',
         data: result.rows.map(function (row) { return Math.round(row.principalLine); }),
         borderColor: '#9a93c4',
         backgroundColor: 'rgba(154,147,196,.08)',
@@ -286,8 +264,6 @@
   }
 
   function renderTable(result) {
-    var isInst = result.config.depositMode === 'installment';
-    setText('thPrincipal', isInst ? '낸 돈' : '원금');
     var rows = getCompactRows(result);
     var toggle = qs('toggleRows');
     if (toggle) {
@@ -400,12 +376,6 @@
     document.querySelectorAll('[data-mode]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         setMode(btn.dataset.mode);
-        update();
-      });
-    });
-    document.querySelectorAll('[data-deposit]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        setDepositMode(btn.dataset.deposit);
         update();
       });
     });

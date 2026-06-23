@@ -207,23 +207,6 @@ a {
   background: var(--purple);
 }
 
-.deposit-toggle {
-  width: fit-content;
-  margin: 0 auto 18px;
-}
-
-.deposit-inst-only {
-  display: none;
-}
-
-#inputCard.is-installment .deposit-lump-only {
-  display: none;
-}
-
-#inputCard.is-installment .deposit-inst-only {
-  display: grid;
-}
-
 .ly-field {
   display: grid;
   grid-template-columns: 112px minmax(0, 1fr);

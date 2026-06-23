@@ -7,7 +7,7 @@
   <meta name="description" content="예금식·적금식으로 복리·단리 수익을 계산하는 한국형 복리계산기">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <link rel="stylesheet" href="compound-interest-calculator.css?v=20260623h">
+  <link rel="stylesheet" href="compound-interest-calculator.css?v=20260623i">
 </head>
 <body>
   <main class="ci-page">
@@ -24,14 +24,9 @@
     <section class="calculator" id="calculator">
       <form class="input-panel" id="inputForm">
         <section class="input-card" id="inputCard">
-          <h2 id="inputTitle">목돈 굴리기</h2>
+          <h2>원금과 매달 적립</h2>
 
-          <div class="mode-toggle deposit-toggle" role="group" aria-label="저축 방식">
-            <button type="button" class="mode-btn active" data-deposit="lump" aria-pressed="true">예금식</button>
-            <button type="button" class="mode-btn" data-deposit="installment" aria-pressed="false">적금식</button>
-          </div>
-
-          <label class="ly-field deposit-lump-only">
+          <label class="ly-field">
             <span>원금</span>
             <div class="value-box">
               <input id="principal" type="text" inputmode="decimal" value="1,000">
@@ -39,10 +34,10 @@
             </div>
           </label>
 
-          <label class="ly-field deposit-inst-only">
+          <label class="ly-field">
             <span>월 적립액</span>
             <div class="value-box">
-              <input id="monthly" type="text" inputmode="decimal" value="50">
+              <input id="monthly" type="text" inputmode="decimal" value="0">
               <em>만원</em>
             </div>
           </label>
@@ -114,7 +109,7 @@
                 <thead>
                   <tr>
                     <th>연차</th>
-                    <th id="thPrincipal">원금</th>
+                    <th>넣은 돈</th>
                     <th>이자누계</th>
                     <th>평가액</th>
                   </tr>
@@ -129,7 +124,7 @@
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="compound-interest-calculator.js?v=20260623c"></script>
+  <script src="compound-interest-calculator.js?v=20260623d"></script>
   <script src="homepage-shell.js?v=20260506d"></script>
 </body>
 </html>

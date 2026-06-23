@@ -88,8 +88,8 @@ test('inputs are clamped to sane ranges', () => {
   assert.equal(cfg.years, 50);
 });
 
-test('installment compound: 월 50만원 5% 10년 적립', () => {
-  const result = calculateCompound({ monthly: 50, annualRate: 5, years: 10, mode: 'compound', depositMode: 'installment' });
+test('적금만(원금0): 월 50만원 5% 10년 복리 적립', () => {
+  const result = calculateCompound({ principal: 0, monthly: 50, annualRate: 5, years: 10, mode: 'compound' });
 
   assert.equal(result.totalPaid, 6000);
   approx(result.finalAmount, 7764.1139722833595);
@@ -98,16 +98,19 @@ test('installment compound: 월 50만원 5% 10년 적립', () => {
   assert.equal(result.rows.at(-1).year, 10);
 });
 
-test('installment simple: 적금 단리 = 원금 + 단리이자', () => {
-  const result = calculateCompound({ monthly: 50, annualRate: 5, years: 10, mode: 'simple', depositMode: 'installment' });
+test('적금만(원금0): 단리 = 원금 + 단리이자', () => {
+  const result = calculateCompound({ principal: 0, monthly: 50, annualRate: 5, years: 10, mode: 'simple' });
 
   assert.equal(result.totalPaid, 6000);
   approx(result.finalAmount, 7512.5);
   approx(result.totalInterest, 1512.5);
 });
 
-test('depositMode defaults to lump and is validated', () => {
-  assert.equal(normalizeConfig({}).depositMode, 'lump');
-  assert.equal(normalizeConfig({ depositMode: 'installment' }).depositMode, 'installment');
-  assert.equal(normalizeConfig({ depositMode: 'weird' }).depositMode, 'lump');
+test('원금+월적립 혼합: 둘을 합산한다', () => {
+  const lump = calculateCompound({ principal: 1000, monthly: 0, annualRate: 5, years: 10, mode: 'compound' });
+  const inst = calculateCompound({ principal: 0, monthly: 50, annualRate: 5, years: 10, mode: 'compound' });
+  const both = calculateCompound({ principal: 1000, monthly: 50, annualRate: 5, years: 10, mode: 'compound' });
+
+  assert.equal(both.totalPaid, 7000);
+  approx(both.finalAmount, lump.finalAmount + inst.finalAmount);
 });
