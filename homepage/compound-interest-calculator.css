@@ -173,27 +173,14 @@ a {
   text-align: center;
 }
 
-.rate-block {
-  margin-top: 16px;
-}
-
-.rate-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
 .rate-name {
   color: var(--ink);
   font-size: 14.5px;
   font-weight: 800;
 }
 
-.rate-slider {
-  margin-top: 0;
-  grid-template-columns: 44px minmax(110px, 1fr) 92px;
+.slider-field.rate-row {
+  grid-template-columns: 84px auto minmax(60px, 1fr) 92px;
 }
 
 .mode-toggle {
@@ -276,7 +263,7 @@ a {
 }
 
 .slider-field {
-  grid-template-columns: 112px 44px minmax(110px, 1fr) 92px;
+  grid-template-columns: 112px minmax(110px, 1fr) 92px;
 }
 
 .slider-field strong {
