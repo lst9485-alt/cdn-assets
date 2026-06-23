@@ -35,8 +35,8 @@
         .card { background:var(--card-bg); border:var(--card-bd); border-radius:var(--radius); padding:var(--pad-card); margin-bottom:16px; box-shadow:var(--card-sh); }
         .card-t { font-family:var(--font-head); font-size:16px; font-weight:800; color:var(--ink); margin-bottom:16px; }
 
-        .verdict { border-radius:var(--radius); padding:20px 22px; margin-bottom:16px; background:var(--accent-soft); text-align:center; box-shadow:var(--card-sh); }
-        .verdict.warn { background:var(--accent-2-soft); }
+        .verdict { border-radius:var(--radius); padding:20px 22px; margin-bottom:16px; background:var(--accent-soft); text-align:center; box-shadow:var(--card-sh); border:1px solid var(--soft-border); }
+        .verdict.warn { background:var(--accent-2-soft); border-color:var(--warn-border); }
         .verdict .v-text { font-family:var(--font-head); font-size:24px; font-weight:800; color:var(--accent); }
         .verdict.warn .v-text { color:var(--accent-2); }
         .verdict .v-sub { font-size:15px; color:var(--muted); margin-top:6px; }
@@ -51,8 +51,8 @@
 
         .rbox { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:16px; }
         .rb { border:var(--card-bd); border-radius:var(--radius-sm); padding:16px; text-align:center; background:var(--card-bg); box-shadow:var(--card-sh); }
-        .rb.accent { background:var(--accent-soft); border:none; box-shadow:none; }
-        .rb.warn { background:var(--accent-2-soft); border:none; box-shadow:none; }
+        .rb.accent { background:var(--accent-soft); border:1px solid var(--soft-border); box-shadow:none; }
+        .rb.warn { background:var(--accent-2-soft); border:1px solid var(--warn-border); box-shadow:none; }
         .rb-label { font-size:12px; font-weight:700; color:var(--muted); letter-spacing:.04em; margin-bottom:6px; }
         .rb-val { font-family:var(--font-head); font-size:30px; font-weight:800; color:var(--ink); }
         .rb-val.blue { color:var(--accent); } .rb-val.orange { color:var(--accent-2); }
@@ -93,7 +93,7 @@
             --card-bg:#ffffff; --card-bd:none; --card-sh:0 18px 44px rgba(28,24,48,.07); --radius:16px; --radius-sm:10px; --pad-card:24px 22px;
             --accent:#5b2df0; --accent-soft:#efeaff; --accent-shadow:rgba(91,45,240,.35);
             --accent-2:#e6820a; --accent-2-soft:#fff4e2;
-            --track:#e9e6f7; --input-bg:#ffffff; --input-suffix-bg:#f5f3ff; --note-bg:#f7f5ff; --border:#e7e3f5;
+            --track:#e9e6f7; --input-bg:#ffffff; --input-suffix-bg:#f5f3ff; --note-bg:#f7f5ff; --border:#e7e3f5; --soft-border:#d6c8f5; --warn-border:#f4dcaf;
             --hdr-bg:#ffffff; --hdr-fg:#1c1830; --hdr-sub:#615c80; --hdr-bd:none; --hdr-sh:0 18px 44px rgba(28,24,48,.07);
             --font-head:"GmarketSans",Pretendard,-apple-system,sans-serif; --font-body:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
             --blue:#5b2df0; --orange:#e6820a; --red:#e5484d; --green:#197a54; --navy:#1c1830; --gray:#615c80; --light-gray:#9d99b8; --bg:#faf9ff; --blue-light:#efeaff; --orange-light:#fff4e2;
@@ -104,7 +104,7 @@
             --card-bg:#ffffff; --card-bd:1px solid #e8eef5; --card-sh:0 6px 18px rgba(15,39,64,.05); --radius:14px; --radius-sm:9px; --pad-card:22px 20px;
             --accent:#0077C8; --accent-soft:#e8f4fc; --accent-shadow:rgba(0,119,200,.30);
             --accent-2:#f59e0b; --accent-2-soft:#fff6e6;
-            --track:#e6edf4; --input-bg:#ffffff; --input-suffix-bg:#f4f8fc; --note-bg:#f6f9fc; --border:#e3eaf2;
+            --track:#e6edf4; --input-bg:#ffffff; --input-suffix-bg:#f4f8fc; --note-bg:#f6f9fc; --border:#e3eaf2; --soft-border:#bfdcf2; --warn-border:#f6dca8;
             --hdr-bg:#ffffff; --hdr-fg:#0f2740; --hdr-sub:#5b6b80; --hdr-bd:1px solid #e8eef5; --hdr-sh:0 6px 18px rgba(15,39,64,.05);
             --font-head:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif; --font-body:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
             --blue:#0077C8; --orange:#f59e0b; --red:#ef4444; --green:#10b981; --navy:#0f2740; --gray:#5b6b80; --light-gray:#9aa7b8; --bg:#f7f9fc; --blue-light:#e8f4fc; --orange-light:#fff6e6;
@@ -115,7 +115,7 @@
             --card-bg:#ffffff; --card-bd:none; --card-sh:0 10px 30px rgba(19,36,59,.08); --radius:18px; --radius-sm:12px; --pad-card:24px 22px;
             --accent:#2563eb; --accent-soft:#e7efff; --accent-shadow:rgba(37,99,235,.35);
             --accent-2:#f97316; --accent-2-soft:#fff1e6;
-            --track:#e3e9f1; --input-bg:#f7f9fc; --input-suffix-bg:#eef2f8; --note-bg:#f5f8fc; --border:#e2e8f1;
+            --track:#e3e9f1; --input-bg:#f7f9fc; --input-suffix-bg:#eef2f8; --note-bg:#f5f8fc; --border:#e2e8f1; --soft-border:#b6ccf2; --warn-border:#f8d8a6;
             --hdr-bg:linear-gradient(135deg,#13294b,#1e3a6b); --hdr-fg:#ffffff; --hdr-sub:#aebfd6; --hdr-bd:none; --hdr-sh:0 12px 30px rgba(19,41,75,.25);
             --font-head:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif; --font-body:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
             --blue:#2563eb; --orange:#f97316; --red:#ef4444; --green:#10b981; --navy:#13243b; --gray:#5a6b82; --light-gray:#93a1b5; --bg:#eef2f7; --blue-light:#e7efff; --orange-light:#fff1e6;
