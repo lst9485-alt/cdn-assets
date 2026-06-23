@@ -187,7 +187,7 @@
       currentAge: qs('currentAge').value,
       currentAssets: qs('currentAssets').value,
       annualSavings: qs('annualSavings').value,
-      annualExpenses: qs('annualExpenses').value,
+      annualExpenses: toNumber(qs('monthlyExpenses').value, DEFAULTS.annualExpenses / 12) * 12,
       annualReturn: qs('annualReturn').value,
       withdrawalRate: qs('withdrawalRate').value
     });
@@ -198,7 +198,7 @@
     qs('currentAge').value = cfg.currentAge;
     qs('currentAssets').value = formatInput(cfg.currentAssets);
     qs('annualSavings').value = formatInput(cfg.annualSavings);
-    qs('annualExpenses').value = formatInput(cfg.annualExpenses);
+    qs('monthlyExpenses').value = formatInput(cfg.annualExpenses / 12);
     qs('annualReturn').value = cfg.annualReturn;
     qs('withdrawalRate').value = cfg.withdrawalRate;
     if (qs('annualReturnRange')) qs('annualReturnRange').value = cfg.annualReturn;
@@ -213,7 +213,7 @@
   function renderSummary(result) {
     var ageText = result.retirementAge == null ? '도달 어려움' : result.retirementAge + '세';
     setText('fireTarget', formatMoney(result.targetNetworth));
-    setText('targetSub', '연지출 ' + formatMoney(result.config.annualExpenses) + ' ÷ 인출률 ' + result.config.withdrawalRate + '%');
+    setText('targetSub', '월지출 ' + formatMoney(result.config.annualExpenses / 12) + ' × 12 ÷ 인출률 ' + result.config.withdrawalRate + '%');
     setText('retirementAge', ageText);
     setText('retirementSub', result.retirementYear == null ? '80년 안에 목표 미도달' : result.retirementYear === 0 ? '현재 자산으로 목표 도달' : '지금부터 ' + result.retirementYear + '년 뒤');
     setText('annualSavingsOut', formatMoney(result.annualSavings));
@@ -470,12 +470,17 @@
       el.addEventListener('input', update);
       el.addEventListener('change', update);
     });
-    ['currentAssets', 'annualSavings', 'annualExpenses'].forEach(function (id) {
+    ['currentAssets', 'annualSavings'].forEach(function (id) {
       qs(id).addEventListener('change', function () {
         var cfg = readConfigFromDom();
         normalizeVisibleInput(id, cfg[id]);
         update();
       });
+    });
+    qs('monthlyExpenses').addEventListener('change', function () {
+      var cfg = readConfigFromDom();
+      normalizeVisibleInput('monthlyExpenses', cfg.annualExpenses / 12);
+      update();
     });
     qs('resetInputs').addEventListener('click', function () {
       writeConfigToDom(DEFAULTS);
