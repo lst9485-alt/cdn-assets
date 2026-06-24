@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24T06:00:11.419484+09:00",
+  "updated": "2026-06-25T06:00:11.217153+09:00",
   "okr": [
     {
       "title": "6월 : 쓰레드 500명(현재 173명)",
@@ -33,8 +33,8 @@
     }
   ],
   "tasks": {
-    "total": 600,
-    "done": 565,
+    "total": 608,
+    "done": 572,
     "overdue": 9,
     "pending": [
       {
@@ -68,54 +68,19 @@
         "overdue": true
       },
       {
-        "title": "코칭 180일 기획 및 제작",
-        "date": "2026-06-23T09:30:00.000+09:00",
+        "title": "자료수집&도입부",
+        "date": "2026-06-24T11:00:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "강의기획",
-        "date": "2026-06-23T13:00:00.000+09:00",
+        "title": "원고",
+        "date": "2026-06-24T14:00:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원씽복기",
-        "date": "2026-06-23T14:00:00.000+09:00",
+        "date": "2026-06-24T14:00:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-06-24T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "커피챗12시",
-        "date": "2026-06-24T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-06-24T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "삼성닷컴 확인",
-        "date": "2026-06-24T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-06-24T13:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "앞으로 계획점검",
-        "date": "2026-06-24T16:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "스케일링",
-        "date": "2026-06-24T17:00:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "주간계획 수정",
@@ -139,7 +104,12 @@
       },
       {
         "title": "원고완성",
-        "date": "2026-06-25T14:30:00.000+09:00",
+        "date": "2026-06-25T13:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의기획",
+        "date": "2026-06-25T16:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -148,8 +118,23 @@
         "overdue": false
       },
       {
+        "title": "lg유플러스 인터넷확인",
+        "date": "2026-06-26T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
         "date": "2026-06-26T12:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "삼성닷컴 확인",
+        "date": "2026-06-26T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "앞으로 계획점검",
+        "date": "2026-06-26T14:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -165,6 +150,11 @@
       {
         "title": "촬영&편집&업로드",
         "date": "2026-06-27T18:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "회사출근",
+        "date": "2026-06-28T11:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -193,6 +183,21 @@
         "overdue": false
       },
       {
+        "title": "스케일링",
+        "date": "2026-06-30T17:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "date": "2026-07-01",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-07-01T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "고딩친구들 모임준비",
         "date": "2026-08-24",
         "overdue": false
@@ -215,44 +220,38 @@
     ],
     "schedule": [
       {
-        "title": "주제선정&썸네일&제목",
-        "time": "09:30",
+        "title": "주간계획 수정",
+        "time": "08:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "커피챗12시",
-        "time": "12:00",
+        "title": "수도세 카드변경 및 납부",
+        "time": "09:45",
         "allDay": false,
         "done": false
       },
       {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
+        "title": "원고",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "삼성닷컴 확인",
-        "time": "13:00",
+        "title": "상담준비",
+        "time": "12:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "자료수집&도입부",
+        "title": "원고완성",
         "time": "13:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "앞으로 계획점검",
+        "title": "강의기획",
         "time": "16:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "스케일링",
-        "time": "17:00",
         "allDay": false,
         "done": false
       }
@@ -287,11 +286,6 @@
       "rate": "54%",
       "days": [
         {
-          "date": "2026-06-18",
-          "done": 3,
-          "total": 4
-        },
-        {
           "date": "2026-06-19",
           "done": 2,
           "total": 4
@@ -318,6 +312,11 @@
         },
         {
           "date": "2026-06-24",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-06-25",
           "done": 0,
           "total": 4
         }
@@ -327,8 +326,8 @@
   "sales": {
     "month": "2026-06",
     "month_label": "6월",
-    "total_amount": 320,
-    "total_count": 8,
+    "total_amount": 360,
+    "total_count": 9,
     "weekly": [
       {
         "week": "1주차",
@@ -347,8 +346,8 @@
       },
       {
         "week": "4주차",
-        "count": 1,
-        "amount": 40
+        "count": 2,
+        "amount": 80
       }
     ]
   }
