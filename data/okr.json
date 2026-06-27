@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-27T06:00:11.368714+09:00",
+  "updated": "2026-06-28T06:00:10.659020+09:00",
   "okr": [
     {
       "title": "6월 : 쓰레드 500명(현재 173명)",
@@ -33,9 +33,9 @@
     }
   ],
   "tasks": {
-    "total": 617,
+    "total": 620,
     "done": 581,
-    "overdue": 10,
+    "overdue": 15,
     "pending": [
       {
         "title": "전자책 작성",
@@ -88,19 +88,29 @@
         "overdue": true
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-06-27T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "이사",
         "date": "2026-06-27T11:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-06-27T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "PPT완료",
         "date": "2026-06-27T16:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-06-27T18:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "회사출근",
@@ -198,6 +208,11 @@
         "overdue": false
       },
       {
+        "title": "촬영&편집&업로드",
+        "date": "2026-07-04",
+        "overdue": false
+      },
+      {
         "title": "고딩친구들 모임준비",
         "date": "2026-08-24",
         "overdue": false
@@ -220,20 +235,20 @@
     ],
     "schedule": [
       {
-        "title": "이사",
+        "title": "회사출근",
         "time": "11:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "PPT완료",
+        "title": "앞으로 계획점검",
         "time": "16:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "time": "18:30",
+        "title": "강의기획",
+        "time": "17:30",
         "allDay": false,
         "done": false
       }
@@ -264,14 +279,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 13,
-      "rate": "46%",
+      "done": 10,
+      "rate": "36%",
       "days": [
-        {
-          "date": "2026-06-21",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-06-22",
           "done": 3,
@@ -299,6 +309,11 @@
         },
         {
           "date": "2026-06-27",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-06-28",
           "done": 0,
           "total": 4
         }
