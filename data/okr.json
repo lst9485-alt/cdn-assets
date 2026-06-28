@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-28T06:00:10.659020+09:00",
+  "updated": "2026-06-29T06:00:12.652828+09:00",
   "okr": [
     {
       "title": "6월 : 쓰레드 500명(현재 173명)",
@@ -33,9 +33,9 @@
     }
   ],
   "tasks": {
-    "total": 620,
+    "total": 622,
     "done": 581,
-    "overdue": 15,
+    "overdue": 20,
     "pending": [
       {
         "title": "전자책 작성",
@@ -113,19 +113,29 @@
         "overdue": true
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-06-28T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "회사출근",
         "date": "2026-06-28T11:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-06-28T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "앞으로 계획점검",
         "date": "2026-06-28T16:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "강의기획",
         "date": "2026-06-28T17:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "메모정리",
@@ -235,20 +245,50 @@
     ],
     "schedule": [
       {
-        "title": "회사출근",
+        "title": "메모정리",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "주간복기",
         "time": "11:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "앞으로 계획점검",
-        "time": "16:00",
+        "title": "lg유플러스 인터넷확인",
+        "time": "12:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의기획",
-        "time": "17:30",
+        "title": "삼성닷컴 확인",
+        "time": "13:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "주차등록",
+        "time": "14:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
+        "time": "15:45",
         "allDay": false,
         "done": false
       }
@@ -279,14 +319,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 10,
-      "rate": "36%",
+      "done": 7,
+      "rate": "25%",
       "days": [
-        {
-          "date": "2026-06-22",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-06-23",
           "done": 2,
@@ -314,6 +349,11 @@
         },
         {
           "date": "2026-06-28",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-06-29",
           "done": 0,
           "total": 4
         }

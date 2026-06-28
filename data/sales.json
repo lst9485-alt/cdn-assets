@@ -1,12 +1,12 @@
 {
-  "updated": "2026-06-28T06:00:44.169558+09:00",
+  "updated": "2026-06-29T06:00:44.934894+09:00",
   "summary": {
-    "current_month": 6800000,
+    "current_month": 7600000,
     "current_month_label": "2026-06",
     "last_month": 2400000,
     "last_month_label": "2026-05",
-    "change_pct": "+183.3%",
-    "total_customers": 142
+    "change_pct": "+216.7%",
+    "total_customers": 144
   },
   "monthly": [
     {
@@ -81,8 +81,8 @@
     },
     {
       "month": "2026-06",
-      "revenue": 6800000,
-      "customers": 17
+      "revenue": 7600000,
+      "customers": 19
     }
   ],
   "weekly": [
@@ -662,8 +662,8 @@
     },
     {
       "utm": "yt_home",
-      "count": 14,
-      "revenue": 5600000
+      "count": 15,
+      "revenue": 6000000
     },
     {
       "utm": "yt_045_key1",
@@ -671,14 +671,14 @@
       "revenue": 1600000
     },
     {
-      "utm": "yt_2025",
+      "utm": "yt_045",
       "count": 3,
       "revenue": 1200000
     },
     {
-      "utm": "yt_045",
-      "count": 2,
-      "revenue": 800000
+      "utm": "yt_2025",
+      "count": 3,
+      "revenue": 1200000
     },
     {
       "utm": "yt_2026",
@@ -709,21 +709,21 @@
   "by_purpose": [
     {
       "purpose": "내집마련",
-      "count": 125,
-      "revenue": 39350000,
-      "ratio": "55.7%"
+      "count": 127,
+      "revenue": 40150000,
+      "ratio": "55.9%"
     },
     {
       "purpose": "투자",
-      "count": 84,
-      "revenue": 25600000,
+      "count": 85,
+      "revenue": 26000000,
       "ratio": "36.2%"
     },
     {
       "purpose": "기타",
       "count": 21,
       "revenue": 5700000,
-      "ratio": "8.1%"
+      "ratio": "7.9%"
     }
   ],
   "by_region": [
@@ -731,13 +731,13 @@
       "region": "수도권",
       "count": 89,
       "revenue": 25750000,
-      "ratio": "69.5%"
+      "ratio": "69.0%"
     },
     {
       "region": "지방",
-      "count": 39,
-      "revenue": 12750000,
-      "ratio": "30.5%"
+      "count": 40,
+      "revenue": 13150000,
+      "ratio": "31.0%"
     }
   ],
   "expenses": [
