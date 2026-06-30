@@ -1,47 +1,10 @@
 {
-  "updated": "2026-06-30T06:00:11.715409+09:00",
-  "okr": [
-    {
-      "title": "7월 : 인스타 50명 ",
-      "target": 50,
-      "current": 0,
-      "rate": "🔴 0%"
-    },
-    {
-      "title": "6월 : 쓰레드 500명(현재 173명)",
-      "target": 500,
-      "current": 173,
-      "rate": "🔴 35%"
-    },
-    {
-      "title": "6월 : 인스타 50명",
-      "target": 50,
-      "current": 0,
-      "rate": "🔴 0%"
-    },
-    {
-      "title": "4월 : 전환율 3% 달성(랜딩 업글)",
-      "target": 10,
-      "current": 7,
-      "rate": "🟢 70%"
-    },
-    {
-      "title": "4월 : 카톡친구10명",
-      "target": 10,
-      "current": 8,
-      "rate": "🟢 80%"
-    },
-    {
-      "title": "4월 : 구독자2만(5월26일 19,424명)",
-      "target": 19424,
-      "current": 0,
-      "rate": "🔴 0%"
-    }
-  ],
+  "updated": "2026-07-01T06:00:10.932289+09:00",
+  "okr": [],
   "tasks": {
-    "total": 619,
-    "done": 587,
-    "overdue": 8,
+    "total": 623,
+    "done": 595,
+    "overdue": 10,
     "pending": [
       {
         "title": "전자책 작성",
@@ -74,49 +37,24 @@
         "overdue": true
       },
       {
-        "title": "주간복기",
-        "date": "2026-06-29T11:00:00.000+09:00",
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-06-30",
         "overdue": true
       },
       {
         "title": "앞으로 계획점검",
-        "date": "2026-06-29T15:30:00.000+09:00",
+        "date": "2026-06-30T11:30:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-06-30",
-        "overdue": false
-      },
-      {
-        "title": "주차등록",
-        "date": "2026-06-30T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "승연 지문등록",
-        "date": "2026-06-30T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "헬스장등록",
-        "date": "2026-06-30T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "삼성닷컴 확인",
-        "date": "2026-06-30T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "강의기획",
-        "date": "2026-06-30T13:45:00.000+09:00",
-        "overdue": false
+        "date": "2026-06-30T13:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "병원",
         "date": "2026-06-30T16:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "자료수집&도입부",
@@ -184,6 +122,11 @@
         "overdue": false
       },
       {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-07-07",
+        "overdue": false
+      },
+      {
         "title": "고딩친구들 모임준비",
         "date": "2026-08-24",
         "overdue": false
@@ -206,44 +149,26 @@
     ],
     "schedule": [
       {
-        "title": "주제선정&썸네일&제목",
+        "title": "자료수집&도입부",
         "time": "",
         "allDay": true,
         "done": false
       },
       {
-        "title": "주차등록",
-        "time": "09:30",
+        "title": "정산",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "승연 지문등록",
-        "time": "10:00",
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "헬스장등록",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "삼성닷컴 확인",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의기획",
-        "time": "13:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "병원",
-        "time": "16:00",
+        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
+        "time": "13:30",
         "allDay": false,
         "done": false
       }
@@ -274,14 +199,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 11,
-      "rate": "39%",
+      "done": 12,
+      "rate": "43%",
       "days": [
-        {
-          "date": "2026-06-24",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-06-25",
           "done": 3,
@@ -304,11 +224,16 @@
         },
         {
           "date": "2026-06-29",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-06-30",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-07-01",
           "done": 0,
           "total": 4
         }
@@ -316,31 +241,10 @@
     }
   },
   "sales": {
-    "month": "2026-06",
-    "month_label": "6월",
-    "total_amount": 400,
-    "total_count": 10,
-    "weekly": [
-      {
-        "week": "1주차",
-        "count": 4,
-        "amount": 160
-      },
-      {
-        "week": "2주차",
-        "count": 2,
-        "amount": 80
-      },
-      {
-        "week": "3주차",
-        "count": 1,
-        "amount": 40
-      },
-      {
-        "week": "4주차",
-        "count": 3,
-        "amount": 120
-      }
-    ]
+    "month": "2026-07",
+    "month_label": "7월",
+    "total_amount": 0,
+    "total_count": 0,
+    "weekly": []
   }
 }

@@ -1,12 +1,12 @@
 {
-  "updated": "2026-06-30T06:00:43.446081+09:00",
+  "updated": "2026-07-01T06:00:42.260004+09:00",
   "summary": {
-    "current_month": 7200000,
-    "current_month_label": "2026-06",
-    "last_month": 2400000,
-    "last_month_label": "2026-05",
-    "change_pct": "+200.0%",
-    "total_customers": 143
+    "current_month": 0,
+    "current_month_label": "2026-07",
+    "last_month": 8000000,
+    "last_month_label": "2026-06",
+    "change_pct": "-100.0%",
+    "total_customers": 145
   },
   "monthly": [
     {
@@ -81,8 +81,8 @@
     },
     {
       "month": "2026-06",
-      "revenue": 7200000,
-      "customers": 18
+      "revenue": 8000000,
+      "customers": 20
     }
   ],
   "weekly": [
@@ -662,8 +662,8 @@
     },
     {
       "utm": "yt_home",
-      "count": 15,
-      "revenue": 6000000
+      "count": 16,
+      "revenue": 6400000
     },
     {
       "utm": "yt_045_key1",
@@ -671,14 +671,14 @@
       "revenue": 1600000
     },
     {
-      "utm": "yt_2025",
+      "utm": "yt_045",
       "count": 3,
       "revenue": 1200000
     },
     {
-      "utm": "yt_045",
-      "count": 2,
-      "revenue": 800000
+      "utm": "yt_2025",
+      "count": 3,
+      "revenue": 1200000
     },
     {
       "utm": "yt_2026",
@@ -709,21 +709,21 @@
   "by_purpose": [
     {
       "purpose": "내집마련",
-      "count": 126,
-      "revenue": 39750000,
-      "ratio": "55.6%"
+      "count": 128,
+      "revenue": 40550000,
+      "ratio": "55.8%"
     },
     {
       "purpose": "투자",
-      "count": 85,
-      "revenue": 26000000,
-      "ratio": "36.4%"
+      "count": 86,
+      "revenue": 26400000,
+      "ratio": "36.3%"
     },
     {
       "purpose": "기타",
       "count": 21,
       "revenue": 5700000,
-      "ratio": "8.0%"
+      "ratio": "7.8%"
     }
   ],
   "by_region": [
