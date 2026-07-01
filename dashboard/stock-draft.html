@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <title>주식 투자 대시보드 (초안) - 운영 대시보드</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: #f8fafc; color: #111827; line-height: 1.5;
+    }
+    .page { max-width: 1040px; margin: 0 auto; padding: 32px 20px 72px; padding-right: 190px; }
+    .back { display: inline-flex; margin-bottom: 18px; color: #64748b; text-decoration: none; font-size: 14px; font-weight: 750; }
+    .back:hover { color: #0077c8; }
+    .page-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+    h1 { margin: 0 0 4px; font-size: 25px; line-height: 1.2; color: #051c2c; font-weight: 850; }
+    .page-head p { margin: 0; color: #64748b; font-size: 14px; }
+    .data-chip { flex: 0 0 auto; padding: 5px 10px; border-radius: 999px; background: #fff7ed; color: #c2410c; font-size: 11px; font-weight: 850; }
+
+    /* 버전 토글 */
+    .vtoggle { display: inline-flex; gap: 6px; background: #eef2f7; border-radius: 12px; padding: 5px; margin-bottom: 20px; flex-wrap: wrap; }
+    .vtoggle button {
+      border: 0; background: transparent; cursor: pointer; border-radius: 9px;
+      padding: 8px 14px; font-size: 13px; font-weight: 850; color: #64748b;
+      font-family: inherit; display: flex; flex-direction: column; align-items: flex-start; gap: 1px; line-height: 1.25;
+    }
+    .vtoggle button small { font-size: 10px; font-weight: 700; color: #94a3b8; }
+    .vtoggle button.on { background: #ffffff; color: #051c2c; box-shadow: 0 1px 3px rgba(15,23,42,.1); }
+    .vtoggle button.on small { color: #0077c8; }
+
+    .section-head { display: flex; align-items: baseline; gap: 8px; margin: 24px 0 12px; }
+    .section-head:first-child { margin-top: 0; }
+    .section-head h2 { margin: 0; font-size: 16px; color: #051c2c; font-weight: 800; }
+    .section-head .hint { color: #94a3b8; font-size: 12px; font-weight: 700; }
+    .section-head .link { margin-left: auto; color: #0077c8; text-decoration: none; font-size: 12px; font-weight: 800; }
+    .section-head .link:hover { text-decoration: underline; }
+
+    .panel { background: #fff; border: 1px solid #dbe3ee; border-radius: 14px; padding: 16px 18px; box-shadow: 0 1px 4px rgba(15,23,42,.04); margin-bottom: 14px; }
+
+    /* 원칙 칩 */
+    .principles { display: flex; flex-wrap: wrap; gap: 8px; }
+    .principles .p { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 999px; padding: 7px 12px; font-size: 12.5px; font-weight: 750; color: #334155; }
+    .principles .p b { color: #0f766e; font-weight: 850; }
+
+    /* 밸류체인 */
+    .chain { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+    .stage { flex: 1 0 132px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 11px 12px; background: #fff; position: relative; }
+    .stage .no { font-size: 10px; font-weight: 850; color: #94a3b8; }
+    .stage .nm { font-size: 14px; font-weight: 850; color: #051c2c; margin: 1px 0; }
+    .stage .sub { font-size: 10.5px; color: #94a3b8; font-weight: 700; }
+    .stage .cos { font-size: 11px; color: #475569; margin-top: 6px; font-weight: 700; line-height: 1.35; }
+    .stage .top { font-size: 10.5px; color: #0f766e; font-weight: 850; margin-top: 5px; }
+    .stage .st { display: inline-block; margin-top: 7px; font-size: 10px; font-weight: 850; padding: 2px 7px; border-radius: 999px; }
+    .st-stable { background: #f1f5f9; color: #64748b; }
+    .st-done { background: #ecfdf5; color: #047857; }
+    .st-now { background: #fff7ed; color: #c2410c; }
+    .st-next { background: #eff6ff; color: #1d4ed8; }
+    .stage.now { border-color: #f97316; box-shadow: 0 0 0 2px rgba(249,115,22,.18); }
+    .stage.next { border-style: dashed; }
+    .chain-note { margin-top: 10px; font-size: 12.5px; font-weight: 750; color: #475569; }
+    .chain-note b.now { color: #c2410c; } .chain-note b.done { color: #047857; } .chain-note b.next { color: #1d4ed8; }
+
+    /* 스크리닝 퍼널 */
+    .funnel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .fstep { border: 1px solid #dbe3ee; border-radius: 12px; padding: 13px; background: #fff; }
+    .fstep .n { width: 22px; height: 22px; border-radius: 999px; background: #0f766e; color: #fff; font-size: 12px; font-weight: 850; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+    .fstep h4 { margin: 0 0 3px; font-size: 13.5px; color: #051c2c; font-weight: 850; }
+    .fstep p { margin: 0; font-size: 11.5px; color: #64748b; font-weight: 700; line-height: 1.4; }
+
+    /* 포트폴리오 도넛 + 비중 */
+    .alloc-grid { display: grid; grid-template-columns: 260px 1fr; gap: 18px; align-items: center; }
+    .alloc-grid canvas { max-width: 220px; max-height: 220px; margin: 0 auto; }
+    .legend { font-size: 13px; }
+    .legend .lrow { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+    .legend .dot { width: 11px; height: 11px; border-radius: 3px; flex: 0 0 auto; }
+    .legend .lrow b { color: #051c2c; } .legend .lrow span { color: #64748b; margin-left: auto; font-weight: 800; }
+    .bars .bar-row { margin-bottom: 9px; }
+    .bars .bl { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; margin-bottom: 3px; }
+    .bars .bl .tk { color: #051c2c; } .bars .bl .tk small { color: #94a3b8; font-weight: 700; margin-left: 4px; }
+    .bars .bl .w { color: #475569; }
+    .bars .track { height: 9px; background: #f1f5f9; border-radius: 999px; overflow: hidden; position: relative; }
+    .bars .track > i { display: block; height: 100%; border-radius: 999px; background: #0f766e; }
+    .bars .track.over > i { background: #dc2626; }
+    .bars .guard { position: absolute; top: -2px; bottom: -2px; left: 100%; width: 2px; background: #dc2626; opacity: .5; }
+    .guard-note { font-size: 11px; color: #94a3b8; font-weight: 700; margin-top: 4px; }
+
+    /* KPI */
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
+    .kpi { background: #fff; border: 1px solid #dbe3ee; border-radius: 12px; padding: 13px 14px; }
+    .kpi span { display: block; color: #64748b; font-size: 11px; font-weight: 850; margin-bottom: 3px; }
+    .kpi b { display: block; color: #051c2c; font-size: 20px; }
+    .kpi em { display: block; margin-top: 2px; color: #94a3b8; font-size: 11px; font-style: normal; font-weight: 700; }
+
+    /* 보유 종목 테이블 */
+    .table-wrap { overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th, td { padding: 9px 11px; border-bottom: 1px solid #eef2f7; text-align: right; white-space: nowrap; }
+    th.l, td.l { text-align: left; }
+    th { background: #f8fafc; color: #64748b; font-weight: 850; font-size: 11.5px; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:hover td { background: #f8fafc; }
+    .tk2 { font-weight: 850; color: #051c2c; } .tk2 small { display: block; color: #94a3b8; font-weight: 700; font-size: 10.5px; }
+    .sig { font-size: 11px; font-weight: 850; padding: 3px 9px; border-radius: 999px; }
+    .sig-hold { background: #eff6ff; color: #1d4ed8; } .sig-buy { background: #ecfdf5; color: #047857; } .sig-sell { background: #fef2f2; color: #b91c1c; }
+    .fcf-h { color: #047857; font-weight: 850; } .fcf-m { color: #64748b; font-weight: 800; }
+
+    /* 종목 카드 */
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .card { border: 1px solid #dbe3ee; border-radius: 14px; padding: 14px; background: #fff; box-shadow: 0 1px 4px rgba(15,23,42,.04); }
+    .card .top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .card .top .nm { font-size: 15px; font-weight: 850; color: #051c2c; } .card .top .nm small { display: block; font-size: 11px; color: #94a3b8; font-weight: 700; }
+    .card .stg { font-size: 10.5px; color: #0f766e; font-weight: 850; margin: 6px 0 10px; }
+    .card .m3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px; }
+    .card .m3 .mm { background: #f8fafc; border-radius: 8px; padding: 6px; text-align: center; }
+    .card .m3 .mm s { display: block; text-decoration: none; color: #94a3b8; font-size: 10px; font-weight: 800; }
+    .card .m3 .mm b { color: #051c2c; font-size: 14px; }
+    .card .val { font-size: 11px; color: #64748b; font-weight: 750; }
+
+    /* 내 포지션 매핑 (C) */
+    .maprow { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .maprow .stg { flex: 0 0 120px; font-size: 12px; font-weight: 850; color: #334155; }
+    .maprow .holds { display: flex; gap: 6px; flex-wrap: wrap; }
+    .maprow .hchip { font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 999px; background: #eef2f7; color: #334155; }
+    .maprow .hchip.mine { background: #0f766e; color: #fff; }
+
+    .foot { margin-top: 24px; color: #94a3b8; font-size: 11px; line-height: 1.6; }
+    .up { color: #059669; } .down { color: #dc2626; }
+
+    @media (max-width: 1200px) { .page { padding-right: 20px; } }
+    @media (max-width: 860px) {
+      .funnel { grid-template-columns: 1fr 1fr; }
+      .kpis { grid-template-columns: 1fr 1fr; }
+      .alloc-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .funnel, .kpis, .cards { grid-template-columns: 1fr; }
+      .maprow .stg { flex-basis: 90px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a href="./" class="back">&larr; 대시보드</a>
+
+    <div class="page-head">
+      <div>
+        <h1>📊 주식 투자 대시보드</h1>
+        <p>재무 기반 해자 투자 · 지수+α · 산업 → 기업 → 재무 → 밸류 흐름</p>
+      </div>
+      <div class="data-chip">초안 · 예시 수치</div>
+    </div>
+
+    <div class="vtoggle" id="vtoggle">
+      <button data-v="A" class="on">A · 의사결정 흐름<small>산업→스크리닝→판단</small></button>
+      <button data-v="B">B · 포트폴리오<small>비중·현금·보유종목</small></button>
+      <button data-v="C">C · 산업 지도<small>밸류체인 로테이션</small></button>
+    </div>
+
+    <div id="view"></div>
+
+    <div class="foot" id="foot"></div>
+  </div>
+
+  <script src="../nav.js"></script>
+  <script src="../footer.js"></script>
+  <script src="../sidebar.js"></script>
+  <script>
+  (function () {
+    // ── 데이터 (예시 수치 — 실제 재무·비중은 클로드 재무분석/첨부 기준으로 교체) ──
+    const DATA = {
+      principles: [
+        ["투자 대상", "재무 기반 <b>해자</b> 있는 기업"],
+        ["목표", "지수 <b>+α</b>"],
+        ["구성", "지수 <b>30%</b> + 개별 <b>70%</b>"],
+        ["분산", "개별 1종목 <b>10% 이내</b>"],
+        ["현금", "<b>5~10%</b> (시장 따라)"],
+        ["선정", "<b>독점·과점</b> 또는 <b>1등</b>"],
+        ["순서", "산업 → 기업 → 재무 → 밸류"]
+      ],
+      alloc: [
+        { key: "지수",   pct: 30, color: "#2563eb" },
+        { key: "개별기업", pct: 62, color: "#0f766e" },
+        { key: "현금",   pct: 8,  color: "#94a3b8" }
+      ],
+      // 지수 30% 구성
+      index: [
+        { t: "VOO", name: "S&P500", w: 16 },
+        { t: "QQQ", name: "나스닥100", w: 14 }
+      ],
+      // 개별 70%(현재 62% 투입) — 전부 반도체 밸류체인
+      holdings: [
+        { t: "NVDA", name: "엔비디아",   stage: "팹리스",        w: 10, roe: 115, opm: 62, fcf: "H", per: 52, pbr: 48, peg: 1.3, sig: "hold" },
+        { t: "ASML", name: "ASML",       stage: "전공정·노광",    w: 10, roe: 50,  opm: 33, fcf: "H", per: 38, pbr: 18, peg: 1.6, sig: "hold" },
+        { t: "TSM",  name: "TSMC",       stage: "파운드리",       w: 9,  roe: 28,  opm: 45, fcf: "H", per: 28, pbr: 7,  peg: 1.1, sig: "hold" },
+        { t: "AMAT", name: "어플라이드",  stage: "전공정·증착식각", w: 9,  roe: 45,  opm: 29, fcf: "M", per: 24, pbr: 9,  peg: 1.4, sig: "buy",  note: "지난달 신규" },
+        { t: "LRCX", name: "램리서치",    stage: "전공정·식각",    w: 8,  roe: 55,  opm: 30, fcf: "M", per: 26, pbr: 12, peg: 1.5, sig: "buy",  note: "지난달 신규" },
+        { t: "KLAC", name: "KLA",        stage: "전공정·검사",    w: 8,  roe: 90,  opm: 40, fcf: "H", per: 30, pbr: 22, peg: 1.7, sig: "hold" },
+        { t: "8035", name: "도쿄일렉트론", stage: "전공정·증착식각", w: 8,  roe: 25,  opm: 26, fcf: "M", per: 25, pbr: 6,  peg: 1.4, sig: "hold" }
+      ],
+      chain: [
+        { no: "",  nm: "EDA·IP",   sub: "설계 앞단",     cos: "시놉시스·케이던스·ARM", top: "과점",          st: "stable" },
+        { no: "3", nm: "팹리스",    sub: "설계",          cos: "엔비디아·AMD·브로드컴", top: "1등 엔비디아",   st: "done" },
+        { no: "4", nm: "IDM",      sub: "종합 반도체",    cos: "인텔·삼성전자·마이크론", top: "메모리 과점",    st: "done" },
+        { no: "5", nm: "파운드리",   sub: "위탁 생산",     cos: "TSMC·삼성",           top: "1등 TSMC 60%+",  st: "done" },
+        { no: "6", nm: "전공정 장비", sub: "노광·증착·식각·검사", cos: "ASML·AMAT·LRCX·KLA·도쿄일렉트론", top: "ASML EUV 100%", st: "now" },
+        { no: "7", nm: "소재·화학",  sub: "포토레지스트·특수가스", cos: "신에츠·도쿄오카·엔테그리스", top: "과점",       st: "next" },
+        { no: "8", nm: "후공정",    sub: "패키징·테스트",  cos: "ASE·앰코·첨단패키징",  top: "과점",          st: "next" }
+      ],
+      screen: [
+        ["1", "독과점 선별", "밸류체인에서 독점·과점 또는 1등 기업만 후보로"],
+        ["2", "핵심 재무 3", "ROE · 영업이익률 · FCF 를 중점 확인"],
+        ["3", "밸류 점검", "PER · PBR · PEG 로 지금 비싼지 판단"],
+        ["4", "매매 결정", "보유=홀딩/매도, 신규=매수 여부 결정"]
+      ]
+    };
+
+    const sigLabel = { hold: "홀딩", buy: "매수", sell: "매도" };
+    const fcfLabel = { H: "우수", M: "양호", L: "주의" };
+    const investedPct = DATA.holdings.reduce((s, h) => s + h.w, 0);
+
+    // ── 공용 조각 ──
+    function principlesHTML() {
+      return '<div class="panel"><div class="principles">' +
+        DATA.principles.map(p => '<div class="p">' + p[0] + ' · ' + p[1] + '</div>').join('') +
+        '</div></div>';
+    }
+
+    function chainHTML(compact) {
+      const stmap = { stable: "앞단 안정", done: "이미 상승", now: "지금 매수 중", next: "다음 차례" };
+      const body = DATA.chain.map(s =>
+        '<div class="stage ' + s.st + '">' +
+        (s.no ? '<div class="no">' + s.no + '단계</div>' : '<div class="no">앞단</div>') +
+        '<div class="nm">' + s.nm + '</div><div class="sub">' + s.sub + '</div>' +
+        (compact ? '' : '<div class="cos">' + s.cos + '</div><div class="top">' + s.top + '</div>') +
+        '<span class="st st-' + s.st + '">' + stmap[s.st] + '</span></div>'
+      ).join('');
+      const note = '<div class="chain-note">사이클 로테이션 — ' +
+        '<b class="done">팹리스·IDM·파운드리 (이미 상승)</b> → ' +
+        '<b class="now">전공정 장비 (지금, ASML·AMAT·LRCX·KLA 보유)</b> → ' +
+        '<b class="next">소재·화학 · 후공정 (다음 차례)</b></div>';
+      return '<div class="panel"><div class="chain">' + body + '</div>' + note + '</div>';
+    }
+
+    function funnelHTML() {
+      return '<div class="funnel">' + DATA.screen.map(f =>
+        '<div class="fstep"><div class="n">' + f[0] + '</div><h4>' + f[1] + '</h4><p>' + f[2] + '</p></div>'
+      ).join('') + '</div>';
+    }
+
+    function holdingsTableHTML() {
+      const rows = DATA.holdings.map(h =>
+        '<tr><td class="l"><span class="tk2">' + h.t + '<small>' + h.name + '</small></span></td>' +
+        '<td class="l" style="color:#0f766e;font-weight:800;">' + h.stage + '</td>' +
+        '<td>' + h.w + '%</td>' +
+        '<td>' + h.roe + '%</td><td>' + h.opm + '%</td>' +
+        '<td class="' + (h.fcf === "H" ? "fcf-h" : "fcf-m") + '">' + fcfLabel[h.fcf] + '</td>' +
+        '<td>' + h.per + '</td><td>' + h.pbr + '</td><td>' + h.peg + '</td>' +
+        '<td><span class="sig sig-' + h.sig + '">' + sigLabel[h.sig] + (h.note ? ' ·신규' : '') + '</span></td></tr>'
+      ).join('');
+      return '<div class="table-wrap"><table><thead><tr>' +
+        '<th class="l">종목</th><th class="l">밸류체인</th><th>비중</th>' +
+        '<th>ROE</th><th>영업이익률</th><th>FCF</th><th>PER</th><th>PBR</th><th>PEG</th><th>판단</th>' +
+        '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+        '<div class="guard-note">핵심 3지표 = ROE · 영업이익률 · FCF / 밸류 = PER · PBR · PEG · 예시 수치</div>';
+    }
+
+    function kpisHTML() {
+      return '<div class="kpis">' +
+        '<div class="kpi"><span>지수 비중</span><b>30%</b><em>VOO 16 · QQQ 14</em></div>' +
+        '<div class="kpi"><span>개별 비중</span><b>' + investedPct + '%</b><em>목표 70% · 반도체 집중</em></div>' +
+        '<div class="kpi"><span>현금 비중</span><b>' + (100 - 30 - investedPct) + '%</b><em>목표 5~10%</em></div>' +
+        '<div class="kpi"><span>보유 종목</span><b>' + (DATA.index.length + DATA.holdings.length) + '</b><em>지수 2 · 개별 ' + DATA.holdings.length + '</em></div>' +
+        '</div>';
+    }
+
+    function barsHTML() {
+      const all = DATA.index.map(i => ({ t: i.t, name: i.name, w: i.w, idx: true }))
+        .concat(DATA.holdings.map(h => ({ t: h.t, name: h.name, w: h.w, idx: false })));
+      return '<div class="panel bars">' + all.map(a => {
+        const over = !a.idx && a.w > 10; // 10% 상한은 개별 종목만 적용 (지수는 예외)
+        const width = Math.min(a.w * 9, 100); // 10% ~= 90% 트랙 → 가드레일 보이게
+        return '<div class="bar-row"><div class="bl"><span class="tk">' + a.t + '<small>' + a.name + (a.idx ? ' · 지수' : '') + '</small></span>' +
+          '<span class="w' + (over ? ' down' : '') + '">' + a.w + '%' + (over ? ' ⚠' : '') + '</span></div>' +
+          '<div class="track' + (over ? ' over' : '') + '"><i style="width:' + width + '%;background:' + (a.idx ? '#2563eb' : '') + ';"></i>' +
+          (a.idx ? '' : '<span class="guard" style="left:90%;"></span>') + '</div></div>';
+      }).join('') + '<div class="guard-note">빨간 선 = 개별 10% 상한 가드레일 (지수는 예외)</div></div>';
+    }
+
+    function cardsHTML() {
+      return '<div class="cards">' + DATA.holdings.map(h =>
+        '<div class="card"><div class="top"><div class="nm">' + h.t + '<small>' + h.name + '</small></div>' +
+        '<span class="sig sig-' + h.sig + '">' + sigLabel[h.sig] + '</span></div>' +
+        '<div class="stg">' + h.stage + ' · 비중 ' + h.w + '%</div>' +
+        '<div class="m3">' +
+        '<div class="mm"><s>ROE</s><b>' + h.roe + '%</b></div>' +
+        '<div class="mm"><s>영업이익률</s><b>' + h.opm + '%</b></div>' +
+        '<div class="mm"><s>FCF</s><b>' + fcfLabel[h.fcf] + '</b></div></div>' +
+        '<div class="val">PER ' + h.per + ' · PBR ' + h.pbr + ' · PEG ' + h.peg + (h.note ? ' · ' + h.note : '') + '</div></div>'
+      ).join('') + '</div>';
+    }
+
+    function positionMapHTML() {
+      const byStage = {};
+      DATA.holdings.forEach(h => {
+        const key = h.stage.split("·")[0];
+        (byStage[key] = byStage[key] || []).push(h.t);
+      });
+      const order = ["팹리스", "IDM", "파운드리", "전공정", "소재", "후공정"];
+      return '<div class="panel">' + order.map(stg => {
+        const mine = byStage[stg] || [];
+        const chips = mine.length
+          ? mine.map(t => '<span class="hchip mine">' + t + '</span>').join('')
+          : '<span class="hchip">보유 없음</span>';
+        return '<div class="maprow"><div class="stg">' + stg + '</div><div class="holds">' + chips + '</div></div>';
+      }).join('') + '<div class="guard-note">초록 = 내가 보유한 단계 · 현재 전공정 집중</div></div>';
+    }
+
+    // ── 레이아웃 A/B/C ──
+    function layoutA() {
+      return sh("🧭 나의 투자 원칙", "매매 이전에 지키는 규칙") + principlesHTML() +
+        sh("🔗 반도체 밸류체인 로테이션", "산업 분석이 먼저") + chainHTML(false) +
+        sh("🔎 종목 스크리닝 4단계", "독과점 → 재무 3 → 밸류 → 판단") + '<div class="panel">' + funnelHTML() + '</div>' +
+        sh("📋 보유·후보 종목 판단", "핵심 3지표 + 밸류 + 매매 판단") + holdingsTableHTML();
+    }
+    function layoutB() {
+      return sh("💼 포트폴리오 구성", "지수 30 + 개별 70 + 현금") + kpisHTML() +
+        '<div class="panel"><div class="alloc-grid"><div><canvas id="donut"></canvas></div><div class="legend" id="legend"></div></div></div>' +
+        sh("📊 종목별 비중", "개별 10% 상한 관리") + barsHTML() +
+        sh("🃏 보유 종목 카드", "종목별 재무 한눈에") + cardsHTML() +
+        sh("🔗 밸류체인 위치", "지금 어디에 집중하나") + chainHTML(true);
+    }
+    function layoutC() {
+      return sh("🗺️ 반도체 밸류체인 지도", "독점·과점 · 1등 · 사이클") + chainHTML(false) +
+        sh("📍 내 포지션 매핑", "밸류체인 단계별 보유 현황") + positionMapHTML() +
+        sh("📋 보유 종목 재무", "ROE · 영업이익률 · FCF · 밸류") + holdingsTableHTML() +
+        sh("🧭 투자 원칙", "이 지도를 이렇게 읽는다") + principlesHTML();
+    }
+    function sh(title, hint) {
+      return '<div class="section-head"><h2>' + title + '</h2><span class="hint">' + hint + '</span></div>';
+    }
+
+    let donutChart = null;
+    function mount(v) {
+      const view = document.getElementById('view');
+      view.innerHTML = v === "B" ? layoutB() : v === "C" ? layoutC() : layoutA();
+      if (donutChart) { donutChart.destroy(); donutChart = null; }
+      if (v === "B") {
+        const ctx = document.getElementById('donut').getContext('2d');
+        donutChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: { labels: DATA.alloc.map(a => a.key), datasets: [{ data: DATA.alloc.map(a => a.pct), backgroundColor: DATA.alloc.map(a => a.color), borderWidth: 0 }] },
+          options: { cutout: '62%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.label + ' ' + c.raw + '%' } } } }
+        });
+        document.getElementById('legend').innerHTML = DATA.alloc.map(a =>
+          '<div class="lrow"><span class="dot" style="background:' + a.color + ';"></span><b>' + a.key + '</b><span>' + a.pct + '%</span></div>'
+        ).join('') + '<div class="guard-note" style="margin-top:8px;">현금 ' + (100 - 30 - investedPct) + '% · 개별 투입 ' + investedPct + '/70%</div>';
+      }
+    }
+
+    document.getElementById('vtoggle').addEventListener('click', e => {
+      const btn = e.target.closest('button'); if (!btn) return;
+      document.querySelectorAll('#vtoggle button').forEach(b => b.classList.toggle('on', b === btn));
+      mount(btn.dataset.v);
+    });
+
+    document.getElementById('foot').innerHTML =
+      '예시 수치 초안입니다 — 실제 재무(ROE·영업이익률·FCF·PER·PBR·PEG)와 보유 비중은 클로드 재무분석/첨부 자료 기준으로 교체 예정. 투자 판단 근거가 아닙니다. ' +
+      '밸류체인 단계·기업은 산업 구조 이해용이며 시점에 따라 달라질 수 있습니다.';
+
+    mount("A");
+  })();
+  </script>
+</body>
+</html>
