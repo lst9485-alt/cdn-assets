@@ -8,135 +8,219 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <style>
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      background: #eef2f9; color: #0f172a; line-height: 1.5;
-    }
-    .page { max-width: 1060px; margin: 0 auto; padding: 28px 20px 72px; padding-right: 190px; }
-    .back { display: inline-flex; margin-bottom: 16px; color: #64748b; text-decoration: none; font-size: 14px; font-weight: 750; }
-    .back:hover { color: #0077c8; }
+    body { margin: 0; font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; line-height: 1.5; transition: background .2s; }
+    .page { max-width: 1060px; margin: 0 auto; padding: 26px 20px 72px; padding-right: 190px; }
+    .back { display: inline-flex; margin-bottom: 14px; text-decoration: none; font-size: 14px; font-weight: 750; }
 
-    /* 히어로 */
-    .hero {
-      background: linear-gradient(135deg, #0b3b53 0%, #0f766e 100%);
-      border-radius: 20px; padding: 22px 24px; color: #fff; margin-bottom: 16px;
-      box-shadow: 0 10px 30px rgba(11,59,83,.25);
-    }
-    .hero .badge { display: inline-block; background: rgba(255,255,255,.16); color: #fff; font-size: 11px; font-weight: 850; padding: 4px 10px; border-radius: 999px; margin-bottom: 10px; }
-    .hero h1 { margin: 0 0 4px; font-size: 26px; font-weight: 850; letter-spacing: -.3px; }
-    .hero p { margin: 0; color: #cfe9e6; font-size: 13.5px; font-weight: 650; }
-    .hero .now {
-      margin-top: 16px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22);
-      border-radius: 14px; padding: 13px 16px; display: flex; align-items: center; gap: 12px;
-    }
-    .hero .now .fire { font-size: 26px; }
-    .hero .now b { display: block; font-size: 15px; font-weight: 850; }
-    .hero .now span { display: block; font-size: 12.5px; color: #d6efec; font-weight: 650; margin-top: 2px; }
+    /* 디자인 스위처 */
+    .dswitch { display: inline-flex; gap: 6px; padding: 5px; border-radius: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+    .dswitch button { border: 0; cursor: pointer; border-radius: 10px; padding: 9px 15px; font-size: 13px; font-weight: 850; font-family: inherit; display: flex; flex-direction: column; gap: 1px; line-height: 1.25; }
+    .dswitch button small { font-size: 10px; font-weight: 700; opacity: .7; }
 
     .sec { margin: 22px 0 12px; display: flex; align-items: baseline; gap: 9px; }
-    .sec h2 { margin: 0; font-size: 17px; font-weight: 850; color: #0f172a; }
-    .sec .hint { font-size: 12px; color: #94a3b8; font-weight: 750; }
+    .sec h2 { margin: 0; font-size: 17px; font-weight: 850; }
+    .sec .hint { font-size: 12px; font-weight: 750; opacity: .6; }
 
-    .card {
-      background: #fff; border-radius: 18px; padding: 18px 20px;
-      box-shadow: 0 4px 18px rgba(15,23,42,.06); border: 1px solid #e7edf6; margin-bottom: 14px;
-    }
+    /* ===== 공용 구조 ===== */
+    .hero { border-radius: 20px; padding: 22px 24px; margin-bottom: 16px; }
+    .hero .badge { display: inline-block; font-size: 11px; font-weight: 850; padding: 4px 10px; border-radius: 999px; margin-bottom: 10px; }
+    .hero h1 { margin: 0 0 4px; font-size: 26px; font-weight: 850; letter-spacing: -.3px; }
+    .hero p { margin: 0; font-size: 13.5px; font-weight: 650; }
+    .hero .now { margin-top: 16px; border-radius: 14px; padding: 13px 16px; display: flex; align-items: center; gap: 12px; }
+    .hero .now .fire { font-size: 26px; }
+    .hero .now b { display: block; font-size: 15px; font-weight: 850; }
+    .hero .now span { display: block; font-size: 12.5px; font-weight: 650; margin-top: 2px; opacity: .85; }
 
-    /* 밸류체인 흐름도 */
-    .flow { display: flex; align-items: stretch; gap: 0; overflow-x: auto; padding: 4px 2px 8px; }
+    .card { border-radius: 18px; padding: 18px 20px; margin-bottom: 14px; }
+
+    /* 밸류체인 */
+    .flow { display: flex; align-items: stretch; overflow-x: auto; padding: 4px 2px 8px; }
     .stage { flex: 1 0 120px; min-width: 120px; position: relative; }
-    .stage .box {
-      border-radius: 14px; padding: 12px 12px 13px; height: 100%; border: 2px solid transparent;
-      background: #f8fafc; transition: transform .1s;
-    }
-    .stage .no { font-size: 10px; font-weight: 850; opacity: .65; }
-    .stage .nm { font-size: 14.5px; font-weight: 850; margin: 1px 0; color: #0f172a; }
-    .stage .sub { font-size: 10px; font-weight: 700; opacity: .7; }
-    .stage .co { font-size: 10.5px; font-weight: 700; color: #475569; margin-top: 7px; line-height: 1.35; min-height: 28px; }
-    .stage .lead { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 850; color: #b45309; background: #fffbeb; border: 1px solid #fde68a; border-radius: 999px; padding: 2px 7px; margin-top: 6px; }
-    .stage .shr { margin-top: 8px; }
-    .stage .shr .bar { height: 6px; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
-    .stage .shr .bar > i { display: block; height: 100%; border-radius: 999px; }
-    .stage .shr .lbl { font-size: 9.5px; font-weight: 800; color: #64748b; margin-top: 3px; }
-    .stage .pill { display: inline-block; margin-top: 9px; font-size: 10px; font-weight: 850; padding: 3px 9px; border-radius: 999px; }
-    /* 상태별 */
-    .s-stable .box { background: #f1f5f9; }
-    .s-stable .pill { background: #e2e8f0; color: #475569; }
-    .s-done .box { background: #ecfdf5; border-color: #a7f3d0; }
-    .s-done .pill { background: #16a34a; color: #fff; }
-    .s-now .box { background: #fff7ed; border-color: #fb923c; box-shadow: 0 6px 18px rgba(249,115,22,.28); transform: translateY(-4px); }
-    .s-now .pill { background: #f97316; color: #fff; }
-    .s-next .box { background: #eff6ff; border-color: #bfdbfe; border-style: dashed; }
-    .s-next .pill { background: #dbeafe; color: #1d4ed8; }
-    /* 화살표 커넥터 */
-    .stage:not(:last-child) .box::after {
-      content: "▸"; position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
-      color: #cbd5e1; font-size: 16px; font-weight: 900; z-index: 2;
-    }
     .stage:not(:last-child) { margin-right: 12px; }
-
-    /* 로테이션 리본 */
+    .stage .box { border-radius: 14px; padding: 12px; height: 100%; border: 2px solid transparent; }
+    .stage .no { font-size: 10px; font-weight: 850; opacity: .6; }
+    .stage .nm { font-size: 14.5px; font-weight: 850; margin: 1px 0; }
+    .stage .sub { font-size: 10px; font-weight: 700; opacity: .65; }
+    .stage .co { font-size: 10.5px; font-weight: 700; margin-top: 7px; line-height: 1.35; min-height: 28px; opacity: .85; }
+    .stage .lead { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 850; border-radius: 999px; padding: 2px 7px; margin-top: 6px; }
+    .stage .shr { margin-top: 8px; }
+    .stage .shr .bar { height: 6px; border-radius: 999px; overflow: hidden; }
+    .stage .shr .bar > i { display: block; height: 100%; border-radius: 999px; }
+    .stage .shr .lbl { font-size: 9.5px; font-weight: 800; margin-top: 3px; opacity: .7; }
+    .stage .pill { display: inline-block; margin-top: 9px; font-size: 10px; font-weight: 850; padding: 3px 9px; border-radius: 999px; }
+    .stage:not(:last-child) .box::after { content: "▸"; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); font-size: 16px; font-weight: 900; opacity: .4; }
     .ribbon { display: flex; height: 34px; border-radius: 10px; overflow: hidden; margin-top: 14px; font-size: 11.5px; font-weight: 850; }
-    .ribbon > div { display: flex; align-items: center; justify-content: center; color: #fff; gap: 5px; }
-    .ribbon .r-done { background: #16a34a; }
-    .ribbon .r-now { background: #f97316; }
-    .ribbon .r-next { background: #93b4f7; }
+    .ribbon > div { display: flex; align-items: center; justify-content: center; color: #fff; gap: 5px; text-align: center; }
+
+    /* 티커 (다크 전용) */
+    .ticker { display: none; }
+    .ticker .trow { display: flex; align-items: center; gap: 10px; padding: 9px 4px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .ticker .trow:last-child { border-bottom: 0; }
+    .ticker .tk { font-weight: 850; font-size: 13px; width: 58px; }
+    .ticker .tn { font-size: 11px; opacity: .6; flex: 1; }
+    .ticker .tw { font-size: 11px; opacity: .7; width: 42px; text-align: right; }
+    .ticker .tc { font-weight: 850; font-size: 12.5px; width: 62px; text-align: right; }
 
     /* 포트폴리오 */
-    .pf { display: grid; grid-template-columns: 210px 1fr; gap: 22px; align-items: center; }
-    .pf canvas { max-width: 190px; max-height: 190px; margin: 0 auto; }
-    .stack { display: flex; height: 46px; border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 0 1px #e7edf6; }
+    .pf { display: grid; grid-template-columns: 200px 1fr; gap: 22px; align-items: center; }
+    .pf canvas { max-width: 180px; max-height: 180px; margin: 0 auto; }
+    .stack { display: flex; height: 46px; border-radius: 12px; overflow: hidden; }
     .stack > div { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 850; min-width: 0; }
     .stack .seg-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 4px; }
     .pf-legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; font-size: 12.5px; font-weight: 800; }
-    .pf-legend .li { display: flex; align-items: center; gap: 6px; color: #334155; }
+    .pf-legend .li { display: flex; align-items: center; gap: 6px; }
     .pf-legend .dot { width: 11px; height: 11px; border-radius: 4px; }
-    .pf-note { margin-top: 10px; font-size: 12px; color: #64748b; font-weight: 700; }
+    .pf-note { margin-top: 10px; font-size: 12px; font-weight: 700; opacity: .7; }
 
     /* 종목 카드 */
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .stock {
-      border-radius: 16px; padding: 15px; background: #fff; border: 1px solid #e7edf6;
-      box-shadow: 0 4px 14px rgba(15,23,42,.05); position: relative; overflow: hidden;
-    }
-    .stock::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; }
+    .stock { border-radius: 16px; padding: 15px; position: relative; overflow: hidden; }
     .stock .head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3px; }
-    .stock .t { font-size: 16px; font-weight: 850; color: #0f172a; }
-    .stock .n { font-size: 11.5px; color: #94a3b8; font-weight: 750; }
-    .stock .stg { font-size: 10.5px; font-weight: 850; padding: 2px 8px; border-radius: 999px; background: #f1f5f9; color: #475569; }
+    .stock .t { font-size: 16px; font-weight: 850; }
+    .stock .n { font-size: 11.5px; font-weight: 750; opacity: .55; }
+    .stg { font-size: 10.5px; font-weight: 850; padding: 2px 8px; border-radius: 999px; }
     .sig { font-size: 11px; font-weight: 850; padding: 3px 10px; border-radius: 999px; }
-    .sig-hold { background: #eff6ff; color: #1d4ed8; }
-    .sig-buy { background: #dcfce7; color: #15803d; }
     .m3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin: 12px 0 9px; }
     .m3 .mm { text-align: center; }
-    .m3 .mm s { display: block; text-decoration: none; font-size: 10px; font-weight: 800; color: #94a3b8; margin-bottom: 4px; }
-    .m3 .mm b { font-size: 15px; font-weight: 850; color: #0f172a; }
-    .m3 .mm .barw { height: 5px; border-radius: 999px; background: #eef2f7; margin-top: 5px; overflow: hidden; }
+    .m3 .mm s { display: block; text-decoration: none; font-size: 10px; font-weight: 800; opacity: .55; margin-bottom: 4px; }
+    .m3 .mm b { font-size: 15px; font-weight: 850; }
+    .m3 .mm .barw { height: 5px; border-radius: 999px; margin-top: 5px; overflow: hidden; }
     .m3 .mm .barw > i { display: block; height: 100%; border-radius: 999px; }
-    .stock .val { font-size: 11.5px; color: #64748b; font-weight: 750; border-top: 1px dashed #e7edf6; padding-top: 9px; }
-    .stock .val b { color: #334155; }
+    .stock .val { font-size: 11.5px; font-weight: 750; padding-top: 9px; opacity: .8; }
     .newtag { position: absolute; top: 12px; right: 12px; font-size: 9.5px; font-weight: 850; color: #fff; background: #f97316; padding: 2px 7px; border-radius: 999px; }
 
     /* 원칙 */
     .principles { display: flex; flex-wrap: wrap; gap: 8px; }
-    .principles .p { background: linear-gradient(180deg,#ffffff,#f6f9ff); border: 1px solid #e2e8f0; border-radius: 12px; padding: 9px 13px; font-size: 12.5px; font-weight: 750; color: #334155; }
-    .principles .p s { text-decoration: none; display: block; font-size: 10px; font-weight: 850; color: #0f766e; margin-bottom: 1px; }
-    .principles .p b { color: #0f172a; font-weight: 850; }
+    .principles .p { border-radius: 12px; padding: 9px 13px; font-size: 12.5px; font-weight: 750; }
+    .principles .p s { text-decoration: none; display: block; font-size: 10px; font-weight: 850; margin-bottom: 1px; opacity: .8; }
+    .principles .p b { font-weight: 850; }
+    .foot { margin-top: 22px; font-size: 11px; line-height: 1.6; opacity: .55; }
 
-    .foot { margin-top: 22px; color: #94a3b8; font-size: 11px; line-height: 1.6; }
+    /* =========================================================
+       THEME 1 · 인포그래픽 (밝은 컬러 지도)
+       ========================================================= */
+    body.t-info { background: #eef2f9; color: #0f172a; }
+    .t-info .back { color: #64748b; } .t-info .back:hover { color: #0077c8; }
+    .t-info .dswitch { background: #dde5f2; }
+    .t-info .dswitch button { background: transparent; color: #64748b; }
+    .t-info .dswitch button.on { background: #fff; color: #0f172a; box-shadow: 0 1px 3px rgba(15,23,42,.12); }
+    .t-info .sec h2 { color: #0f172a; }
+    .t-info .hero { background: linear-gradient(135deg,#0b3b53,#0f766e); color: #fff; box-shadow: 0 10px 30px rgba(11,59,83,.25); }
+    .t-info .hero .badge { background: rgba(255,255,255,.16); color: #fff; }
+    .t-info .hero p { color: #cfe9e6; }
+    .t-info .hero .now { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); }
+    .t-info .card { background: #fff; border: 1px solid #e7edf6; box-shadow: 0 4px 18px rgba(15,23,42,.06); }
+    .t-info .stage .box { background: #f8fafc; }
+    .t-info .stage .co { color: #475569; }
+    .t-info .stage .lead { color: #b45309; background: #fffbeb; border: 1px solid #fde68a; }
+    .t-info .stage .shr .bar { background: #e2e8f0; }
+    .t-info .stage:not(:last-child) .box::after { color: #cbd5e1; }
+    .t-info .s-stable .box { background: #f1f5f9; } .t-info .s-stable .pill { background: #e2e8f0; color: #475569; }
+    .t-info .s-done .box { background: #ecfdf5; border-color: #a7f3d0; } .t-info .s-done .pill { background: #16a34a; color: #fff; }
+    .t-info .s-now .box { background: #fff7ed; border-color: #fb923c; box-shadow: 0 6px 18px rgba(249,115,22,.28); transform: translateY(-4px); } .t-info .s-now .pill { background: #f97316; color: #fff; }
+    .t-info .s-next .box { background: #eff6ff; border-color: #bfdbfe; border-style: dashed; } .t-info .s-next .pill { background: #dbeafe; color: #1d4ed8; }
+    .t-info .ribbon .r-done { background: #16a34a; } .t-info .ribbon .r-now { background: #f97316; } .t-info .ribbon .r-next { background: #93b4f7; }
+    .t-info .stack { box-shadow: inset 0 0 0 1px #e7edf6; }
+    .t-info .pf-legend .li { color: #334155; }
+    .t-info .stock { background: #fff; border: 1px solid #e7edf6; box-shadow: 0 4px 14px rgba(15,23,42,.05); }
+    .t-info .stock .t { color: #0f172a; }
+    .t-info .sig-hold { background: #eff6ff; color: #1d4ed8; } .t-info .sig-buy { background: #dcfce7; color: #15803d; }
+    .t-info .m3 .mm b { color: #0f172a; } .t-info .m3 .mm .barw { background: #eef2f7; }
+    .t-info .stock .val { color: #64748b; border-top: 1px dashed #e7edf6; } .t-info .stock .val b { color: #334155; }
+    .t-info .principles .p { background: linear-gradient(180deg,#fff,#f6f9ff); border: 1px solid #e2e8f0; color: #334155; }
+    .t-info .principles .p s { color: #0f766e; } .t-info .principles .p b { color: #0f172a; }
+
+    /* =========================================================
+       THEME 2 · 다크 프로 (트레이딩 터미널)
+       ========================================================= */
+    body.t-dark { background: #080b12; color: #dbe4f3; }
+    .t-dark .back { color: #6b7a95; } .t-dark .back:hover { color: #22e0a1; }
+    .t-dark .dswitch { background: #121826; }
+    .t-dark .dswitch button { background: transparent; color: #7c8aa5; }
+    .t-dark .dswitch button.on { background: #1e2740; color: #22e0a1; box-shadow: inset 0 0 0 1px #2f3a57; }
+    .t-dark .sec h2 { color: #eaf1fb; }
+    .t-dark .hero { background: linear-gradient(135deg,#0c1b2a,#0a2b28); border: 1px solid #1b2740; box-shadow: 0 0 40px rgba(34,224,161,.08); }
+    .t-dark .hero .badge { background: rgba(34,224,161,.15); color: #22e0a1; }
+    .t-dark .hero h1 { color: #f2f7ff; } .t-dark .hero p { color: #9fb2cc; }
+    .t-dark .hero .now { background: rgba(255,138,61,.1); border: 1px solid rgba(255,138,61,.35); }
+    .t-dark .hero .now b { color: #ffb37a; }
+    .t-dark .card { background: #0f1522; border: 1px solid #1b2740; box-shadow: 0 8px 30px rgba(0,0,0,.4); }
+    .t-dark .ticker { display: block; }
+    .t-dark .ticker .trow { border-color: #1b2740; }
+    .t-dark .ticker .tc.up { color: #22e0a1; } .t-dark .ticker .tc.down { color: #ff5d73; }
+    .t-dark .stage .box { background: #141c2e; }
+    .t-dark .stage .nm, .t-dark .stage .no { color: #eaf1fb; }
+    .t-dark .stage .co { color: #9fb2cc; }
+    .t-dark .stage .lead { color: #ffcf8b; background: rgba(255,183,122,.12); border: 1px solid rgba(255,183,122,.3); }
+    .t-dark .stage .shr .bar { background: #1b2740; }
+    .t-dark .stage:not(:last-child) .box::after { color: #37456a; }
+    .t-dark .s-stable .box { background: #141c2e; } .t-dark .s-stable .pill { background: #1b2740; color: #8b97b0; }
+    .t-dark .s-done .box { border-color: rgba(34,224,161,.45); } .t-dark .s-done .pill { background: #12c98d; color: #04231a; }
+    .t-dark .s-now .box { border-color: #ff8a3d; box-shadow: 0 0 22px rgba(255,138,61,.35); transform: translateY(-4px); } .t-dark .s-now .pill { background: #ff8a3d; color: #2a1200; }
+    .t-dark .s-next .box { border-color: #3b6ad6; border-style: dashed; } .t-dark .s-next .pill { background: rgba(59,106,214,.2); color: #86aef7; }
+    .t-dark .ribbon .r-done { background: #12c98d; color: #04231a; } .t-dark .ribbon .r-now { background: #ff8a3d; color: #2a1200; } .t-dark .ribbon .r-next { background: #2f4d8f; }
+    .t-dark .stack { box-shadow: inset 0 0 0 1px #1b2740; }
+    .t-dark .stock { background: #141c2e; border: 1px solid #1b2740; }
+    .t-dark .stock .t { color: #eaf1fb; }
+    .t-dark .stg { background: #1b2740; }
+    .t-dark .sig-hold { background: rgba(59,106,214,.2); color: #86aef7; } .t-dark .sig-buy { background: rgba(34,224,161,.18); color: #22e0a1; }
+    .t-dark .m3 .mm b { color: #eaf1fb; } .t-dark .m3 .mm .barw { background: #1b2740; }
+    .t-dark .stock .val { color: #9fb2cc; border-top: 1px solid #1b2740; } .t-dark .stock .val b { color: #dbe4f3; }
+    .t-dark .principles .p { background: #141c2e; border: 1px solid #1b2740; color: #b9c6dd; }
+    .t-dark .principles .p s { color: #22e0a1; } .t-dark .principles .p b { color: #eaf1fb; }
+
+    /* =========================================================
+       THEME 3 · 핀테크 (토스식 · 큰 카드/여백)
+       ========================================================= */
+    body.t-fintech { background: #f4f6fb; color: #1a2233; }
+    .t-fintech .page { padding-top: 30px; }
+    .t-fintech .back { color: #97a2b6; } .t-fintech .back:hover { color: #3b82f6; }
+    .t-fintech .dswitch { background: #e7ebf4; }
+    .t-fintech .dswitch button { background: transparent; color: #8592ab; }
+    .t-fintech .dswitch button.on { background: #fff; color: #1a2233; box-shadow: 0 2px 8px rgba(26,34,51,.1); }
+    .t-fintech .sec h2 { color: #1a2233; font-size: 18px; }
+    .t-fintech .hero { background: #fff; color: #1a2233; box-shadow: 0 6px 26px rgba(26,34,51,.07); }
+    .t-fintech .hero h1 { font-size: 28px; }
+    .t-fintech .hero .badge { background: #eef1f7; color: #6b7896; }
+    .t-fintech .hero p { color: #6b7896; }
+    .t-fintech .hero .now { background: #fff7ed; border: 1px solid #ffe4c7; }
+    .t-fintech .hero .now b { color: #d1730a; }
+    .t-fintech .card { background: #fff; box-shadow: 0 6px 26px rgba(26,34,51,.06); border-radius: 22px; padding: 22px 24px; }
+    .t-fintech .stage .box { background: #f7f9fc; border-radius: 18px; }
+    .t-fintech .stage .co { color: #6b7896; }
+    .t-fintech .stage .lead { color: #b45309; background: #fffbeb; }
+    .t-fintech .stage .shr .bar { background: #eaeef6; }
+    .t-fintech .s-stable .box { background: #f2f4f8; } .t-fintech .s-stable .pill { background: #e7ebf4; color: #6b7896; }
+    .t-fintech .s-done .box { background: #e9faf3; } .t-fintech .s-done .pill { background: #10b981; color: #fff; }
+    .t-fintech .s-now .box { background: #fff4e8; box-shadow: 0 8px 22px rgba(249,115,22,.2); transform: translateY(-4px); } .t-fintech .s-now .pill { background: #fb923c; color: #fff; }
+    .t-fintech .s-next .box { background: #eef4ff; } .t-fintech .s-next .pill { background: #dbeafe; color: #2563eb; }
+    .t-fintech .ribbon { height: 40px; border-radius: 14px; } .t-fintech .ribbon .r-done { background: #10b981; } .t-fintech .ribbon .r-now { background: #fb923c; } .t-fintech .ribbon .r-next { background: #a5c4fb; }
+    .t-fintech .pf canvas { max-width: 210px; max-height: 210px; }
+    .t-fintech .stack { height: 54px; border-radius: 16px; }
+    .t-fintech .pf-legend .li { color: #46536e; }
+    .t-fintech .stock { background: #fff; box-shadow: 0 6px 22px rgba(26,34,51,.07); border-radius: 20px; padding: 18px; }
+    .t-fintech .stock .t { font-size: 18px; color: #1a2233; }
+    .t-fintech .stg { background: #f2f4f8; }
+    .t-fintech .sig-hold { background: #eaf1ff; color: #2563eb; } .t-fintech .sig-buy { background: #e2f7ee; color: #059669; }
+    .t-fintech .m3 .mm b { font-size: 17px; color: #1a2233; } .t-fintech .m3 .mm .barw { background: #eef1f7; }
+    .t-fintech .stock .val { color: #6b7896; border-top: 1px solid #eef1f7; }
+    .t-fintech .principles .p { background: #f7f9fc; border-radius: 14px; color: #46536e; }
+    .t-fintech .principles .p s { color: #14b8a6; } .t-fintech .principles .p b { color: #1a2233; }
 
     @media (max-width: 1200px) { .page { padding-right: 20px; } }
-    @media (max-width: 820px) {
-      .pf { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr 1fr; }
-    }
+    @media (max-width: 820px) { .pf { grid-template-columns: 1fr; } .grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 540px) { .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
-<body>
+<body class="t-info">
   <div class="page">
     <a href="./" class="back">&larr; 대시보드</a>
+
+    <div class="dswitch" id="dswitch">
+      <button data-t="t-info" class="on">🗺️ 인포그래픽<small>밝은 컬러 지도</small></button>
+      <button data-t="t-dark">🌙 다크 프로<small>트레이딩 터미널</small></button>
+      <button data-t="t-fintech">☀️ 핀테크<small>토스식 큰 카드</small></button>
+    </div>
 
     <div class="hero">
       <span class="badge">초안 · 예시 수치</span>
@@ -150,6 +234,9 @@
         </div>
       </div>
     </div>
+
+    <div class="sec ticker-sec" style="display:none;"><h2>📈 보유 종목 시세</h2><span class="hint">예시</span></div>
+    <div class="card ticker" id="ticker"></div>
 
     <div class="sec"><h2>🗺️ 반도체 밸류체인 지도</h2><span class="hint">독점·과점 · 1등 · 사이클 로테이션</span></div>
     <div class="card">
@@ -187,7 +274,6 @@
   <script src="../sidebar.js"></script>
   <script>
   (function () {
-    // ── 데이터 (예시 수치 — 실제 재무·비중은 클로드 재무분석/첨부 기준 교체) ──
     const STAGE_COLOR = { "팹리스": "#7e22ce", "IDM": "#2563eb", "파운드리": "#0f766e", "전공정": "#f97316" };
     const DATA = {
       chain: [
@@ -205,13 +291,13 @@
         { key: "현금", pct: 8, color: "#94a3b8" }
       ],
       holdings: [
-        { t: "NVDA", n: "엔비디아",  stage: "팹리스",  w: 10, roe: 115, opm: 62, fcf: 95, per: 52, pbr: 48, peg: 1.3, sig: "hold" },
-        { t: "ASML", n: "ASML",      stage: "전공정",  w: 10, roe: 50,  opm: 33, fcf: 90, per: 38, pbr: 18, peg: 1.6, sig: "hold" },
-        { t: "TSM",  n: "TSMC",      stage: "파운드리", w: 9,  roe: 28,  opm: 45, fcf: 88, per: 28, pbr: 7,  peg: 1.1, sig: "hold" },
-        { t: "AMAT", n: "어플라이드", stage: "전공정",  w: 9,  roe: 45,  opm: 29, fcf: 75, per: 24, pbr: 9,  peg: 1.4, sig: "buy", note: true },
-        { t: "LRCX", n: "램리서치",   stage: "전공정",  w: 8,  roe: 55,  opm: 30, fcf: 78, per: 26, pbr: 12, peg: 1.5, sig: "buy", note: true },
-        { t: "KLAC", n: "KLA",       stage: "전공정",  w: 8,  roe: 90,  opm: 40, fcf: 85, per: 30, pbr: 22, peg: 1.7, sig: "hold" },
-        { t: "8035", n: "도쿄일렉트론", stage: "전공정", w: 8,  roe: 25,  opm: 26, fcf: 70, per: 25, pbr: 6,  peg: 1.4, sig: "hold" }
+        { t: "NVDA", n: "엔비디아",  stage: "팹리스",  w: 10, chg: 2.4,  roe: 115, opm: 62, fcf: 95, per: 52, pbr: 48, peg: 1.3, sig: "hold" },
+        { t: "ASML", n: "ASML",      stage: "전공정",  w: 10, chg: 1.1,  roe: 50,  opm: 33, fcf: 90, per: 38, pbr: 18, peg: 1.6, sig: "hold" },
+        { t: "TSM",  n: "TSMC",      stage: "파운드리", w: 9,  chg: 0.8,  roe: 28,  opm: 45, fcf: 88, per: 28, pbr: 7,  peg: 1.1, sig: "hold" },
+        { t: "AMAT", n: "어플라이드", stage: "전공정",  w: 9,  chg: 3.1,  roe: 45,  opm: 29, fcf: 75, per: 24, pbr: 9,  peg: 1.4, sig: "buy", note: true },
+        { t: "LRCX", n: "램리서치",   stage: "전공정",  w: 8,  chg: 2.6,  roe: 55,  opm: 30, fcf: 78, per: 26, pbr: 12, peg: 1.5, sig: "buy", note: true },
+        { t: "KLAC", n: "KLA",       stage: "전공정",  w: 8,  chg: 0.5,  roe: 90,  opm: 40, fcf: 85, per: 30, pbr: 22, peg: 1.7, sig: "hold" },
+        { t: "8035", n: "도쿄일렉트론", stage: "전공정", w: 8,  chg: -0.7, roe: 25,  opm: 26, fcf: 70, per: 25, pbr: 6,  peg: 1.4, sig: "hold" }
       ],
       principles: [
         ["투자 대상", "재무 기반 <b>해자</b> 기업"],
@@ -223,32 +309,30 @@
         ["순서", "산업→기업→재무→밸류"]
       ]
     };
+    const stageC = st => STAGE_COLOR[st] || "#0f766e";
+    const fcfTxt = v => v >= 85 ? "우수" : v >= 70 ? "양호" : "주의";
 
-    // 밸류체인 흐름도
+    // 밸류체인
     document.getElementById('flow').innerHTML = DATA.chain.map(s => {
       const shr = s.share != null
-        ? '<div class="shr"><div class="bar"><i style="width:' + s.share + '%;background:' +
-            (s.st === "now" ? "#f97316" : s.st === "done" ? "#16a34a" : "#64748b") + ';"></i></div>' +
-            '<div class="lbl">점유율 ' + s.share + '%</div></div>'
+        ? '<div class="shr"><div class="bar"><i style="width:' + s.share + '%;background:' + (s.st === "now" ? "#f97316" : s.st === "done" ? "#16a34a" : "#64748b") + ';"></i></div><div class="lbl">점유율 ' + s.share + '%</div></div>'
         : '<div class="shr"><div class="lbl" style="margin-top:6px;">시장 구조 · 과점</div></div>';
       return '<div class="stage s-' + s.st + '"><div class="box">' +
         '<div class="no">' + (s.no ? s.no + '단계' : '앞단') + '</div>' +
         '<div class="nm">' + s.nm + '</div><div class="sub">' + s.sub + '</div>' +
-        '<div class="co">' + s.co + '</div>' +
-        '<div class="lead">🏆 ' + s.lead + '</div>' + shr +
+        '<div class="co">' + s.co + '</div><div class="lead">🏆 ' + s.lead + '</div>' + shr +
         '<span class="pill">' + ({ stable: "앞단 안정", done: "✅ 이미 상승", now: "🔥 지금 매수", next: "⏳ 다음 차례" })[s.st] + '</span>' +
         '</div></div>';
     }).join('');
 
-    // 포트폴리오 도넛
-    new Chart(document.getElementById('donut').getContext('2d'), {
-      type: 'doughnut',
-      data: { labels: DATA.alloc.map(a => a.key), datasets: [{ data: DATA.alloc.map(a => a.pct), backgroundColor: DATA.alloc.map(a => a.color), borderWidth: 0 }] },
-      options: { cutout: '64%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.label + ' ' + c.raw + '%' } } } }
-    });
+    // 티커 (다크)
+    document.getElementById('ticker').innerHTML = DATA.holdings.map(h =>
+      '<div class="trow"><span class="tk">' + h.t + '</span><span class="tn">' + h.n + '</span>' +
+      '<span class="tw">' + h.w + '%</span>' +
+      '<span class="tc ' + (h.chg >= 0 ? 'up' : 'down') + '">' + (h.chg >= 0 ? '▲ +' : '▼ ') + h.chg + '%</span></div>'
+    ).join('');
 
-    // 100% 스택 바 (지수 | 개별 세분화 | 현금)
-    const stageC = st => STAGE_COLOR[st] || "#0f766e";
+    // 스택 바
     let stackHTML = '<div style="flex:30;background:#2563eb;" title="지수 30%"><span class="seg-label">지수 30</span></div>';
     DATA.holdings.forEach((h, i) => {
       const shade = ["#0f766e", "#12857b", "#149488", "#16a394", "#3fb0a3", "#5fbdb1", "#7fcabf"][i % 7];
@@ -256,41 +340,49 @@
     });
     stackHTML += '<div style="flex:8;background:#94a3b8;" title="현금 8%"><span class="seg-label">현금</span></div>';
     document.getElementById('stack').innerHTML = stackHTML;
-
-    document.getElementById('pf-legend').innerHTML = DATA.alloc.map(a =>
-      '<div class="li"><span class="dot" style="background:' + a.color + ';"></span>' + a.key + ' ' + a.pct + '%</div>'
-    ).join('');
-    document.getElementById('pf-note').textContent =
-      '개별 7종목 모두 반도체 밸류체인 · 전공정 5종목 집중 · 개별 목표 70% 중 62% 투입 (여력 8%p)';
+    document.getElementById('pf-legend').innerHTML = DATA.alloc.map(a => '<div class="li"><span class="dot" style="background:' + a.color + ';"></span>' + a.key + ' ' + a.pct + '%</div>').join('');
+    document.getElementById('pf-note').textContent = '개별 7종목 모두 반도체 밸류체인 · 전공정 5종목 집중 · 개별 목표 70% 중 62% 투입 (여력 8%p)';
 
     // 종목 카드
-    const fcfTxt = v => v >= 85 ? "우수" : v >= 70 ? "양호" : "주의";
     document.getElementById('stocks').innerHTML = DATA.holdings.map(h => {
       const c = stageC(h.stage);
-      const mm = (label, val, disp, color) =>
-        '<div class="mm"><s>' + label + '</s><b>' + disp + '</b><div class="barw"><i style="width:' + Math.min(val, 100) + '%;background:' + color + ';"></i></div></div>';
+      const mm = (label, val, disp, color) => '<div class="mm"><s>' + label + '</s><b>' + disp + '</b><div class="barw"><i style="width:' + Math.min(val, 100) + '%;background:' + color + ';"></i></div></div>';
       return '<div class="stock" style="border-top:3px solid ' + c + ';">' +
         '<span style="position:absolute;left:0;top:0;bottom:0;width:5px;background:' + c + ';"></span>' +
         (h.note ? '<span class="newtag">지난달 신규</span>' : '') +
         '<div class="head"><div><div class="t">' + h.t + '</div><div class="n">' + h.n + '</div></div>' +
         '<span class="sig sig-' + h.sig + '">' + (h.sig === "buy" ? "매수" : "홀딩") + '</span></div>' +
-        '<span class="stg" style="color:' + c + ';background:' + c + '14;">' + h.stage + ' · ' + h.w + '%</span>' +
-        '<div class="m3">' +
-        mm("ROE", h.roe, h.roe + "%", "#16a34a") +
-        mm("영업이익률", h.opm, h.opm + "%", "#2563eb") +
-        mm("FCF", h.fcf, fcfTxt(h.fcf), "#0f766e") +
-        '</div>' +
+        '<span class="stg" style="color:' + c + ';">' + h.stage + ' · ' + h.w + '%</span>' +
+        '<div class="m3">' + mm("ROE", h.roe, h.roe + "%", "#16a34a") + mm("영업이익률", h.opm, h.opm + "%", "#2563eb") + mm("FCF", h.fcf, fcfTxt(h.fcf), "#0f766e") + '</div>' +
         '<div class="val">밸류 &nbsp; PER <b>' + h.per + '</b> · PBR <b>' + h.pbr + '</b> · PEG <b>' + h.peg + '</b></div>' +
         '</div>';
     }).join('');
 
     // 원칙
-    document.getElementById('principles').innerHTML = DATA.principles.map(p =>
-      '<div class="p"><s>' + p[0] + '</s>' + p[1] + '</div>'
-    ).join('');
+    document.getElementById('principles').innerHTML = DATA.principles.map(p => '<div class="p"><s>' + p[0] + '</s>' + p[1] + '</div>').join('');
+    document.getElementById('foot').innerHTML = '예시 수치 초안입니다 — 실제 재무(ROE·영업이익률·FCF·PER·PBR·PEG)와 보유 비중은 클로드 재무분석/첨부 자료 기준으로 교체 예정. 투자 판단 근거가 아닙니다. 밸류체인 단계·기업·점유율은 산업 구조 이해용이며 시점에 따라 달라질 수 있습니다.';
 
-    document.getElementById('foot').innerHTML =
-      '예시 수치 초안입니다 — 실제 재무(ROE·영업이익률·FCF·PER·PBR·PEG)와 보유 비중은 클로드 재무분석/첨부 자료 기준으로 교체 예정. 투자 판단 근거가 아닙니다. 밸류체인 단계·기업·점유율은 산업 구조 이해용이며 시점에 따라 달라질 수 있습니다.';
+    // 도넛 (테마 전환 시 재생성)
+    let donut = null;
+    function drawDonut() {
+      if (donut) donut.destroy();
+      const dark = document.body.classList.contains('t-dark');
+      donut = new Chart(document.getElementById('donut').getContext('2d'), {
+        type: 'doughnut',
+        data: { labels: DATA.alloc.map(a => a.key), datasets: [{ data: DATA.alloc.map(a => a.pct), backgroundColor: DATA.alloc.map(a => a.color), borderWidth: dark ? 2 : 0, borderColor: dark ? '#0f1522' : '#fff' }] },
+        options: { cutout: '64%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.label + ' ' + c.raw + '%' } } } }
+      });
+    }
+    drawDonut();
+
+    // 디자인 스위처
+    document.getElementById('dswitch').addEventListener('click', e => {
+      const btn = e.target.closest('button'); if (!btn) return;
+      document.body.className = btn.dataset.t;
+      document.querySelectorAll('#dswitch button').forEach(b => b.classList.toggle('on', b === btn));
+      document.querySelector('.ticker-sec').style.display = btn.dataset.t === 't-dark' ? 'flex' : 'none';
+      drawDonut();
+    });
   })();
   </script>
 </body>
