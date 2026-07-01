@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-01T06:00:10.932289+09:00",
+  "updated": "2026-07-02T06:00:14.624096+09:00",
   "okr": [],
   "tasks": {
-    "total": 623,
-    "done": 595,
-    "overdue": 10,
+    "total": 629,
+    "done": 600,
+    "overdue": 11,
     "pending": [
       {
         "title": "전자책 작성",
@@ -42,39 +42,24 @@
         "overdue": true
       },
       {
+        "title": "자료수집&도입부",
+        "date": "2026-07-01",
+        "overdue": true
+      },
+      {
         "title": "앞으로 계획점검",
-        "date": "2026-06-30T11:30:00.000+09:00",
+        "date": "2026-07-01T12:45:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-07-01T14:00:00.000+09:00",
         "overdue": true
       },
       {
         "title": "강의기획",
-        "date": "2026-06-30T13:00:00.000+09:00",
+        "date": "2026-07-01T15:45:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "병원",
-        "date": "2026-06-30T16:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-07-01",
-        "overdue": false
-      },
-      {
-        "title": "정산",
-        "date": "2026-07-01T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-07-01T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
-        "date": "2026-07-01T13:30:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "원고완성",
@@ -89,6 +74,16 @@
       {
         "title": "lg유플러스 인터넷확인",
         "date": "2026-07-02T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "실비신청",
+        "date": "2026-07-02T10:15:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
+        "date": "2026-07-02T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -127,6 +122,16 @@
         "overdue": false
       },
       {
+        "title": "자료수집&도입부",
+        "date": "2026-07-08",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-07-08T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "고딩친구들 모임준비",
         "date": "2026-08-24",
         "overdue": false
@@ -149,26 +154,32 @@
     ],
     "schedule": [
       {
-        "title": "자료수집&도입부",
+        "title": "원고완성",
         "time": "",
         "allDay": true,
         "done": false
       },
       {
-        "title": "정산",
-        "time": "09:00",
+        "title": "주간계획 수정",
+        "time": "08:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
+        "title": "lg유플러스 인터넷확인",
+        "time": "09:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "실비신청",
+        "time": "10:15",
         "allDay": false,
         "done": false
       },
       {
         "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
-        "time": "13:30",
+        "time": "13:00",
         "allDay": false,
         "done": false
       }
@@ -203,11 +214,6 @@
       "rate": "43%",
       "days": [
         {
-          "date": "2026-06-25",
-          "done": 3,
-          "total": 4
-        },
-        {
           "date": "2026-06-26",
           "done": 3,
           "total": 4
@@ -234,6 +240,11 @@
         },
         {
           "date": "2026-07-01",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-07-02",
           "done": 0,
           "total": 4
         }
