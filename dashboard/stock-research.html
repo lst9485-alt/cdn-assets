@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <title>투자 리서치 책꽂이 - 운영 대시보드</title>
+  <style>
+    :root{
+      --bg:#f5f6f8; --card:#ffffff; --line:#e4e7ec; --line2:#eef0f4;
+      --ink:#14161c; --sub:#565d6b; --muted:#8b909c;
+      --accent:#2f6feb; --accent-soft:#eef3fe;
+      --v-watch:#8a6d1f; --v-watch-bg:#fbf3df;
+      --v-buy:#1a7f43;   --v-buy-bg:#e7f4ec;
+      --v-hold:#2f6feb;  --v-hold-bg:#eef3fe;
+      --v-sell:#cf3b3b;  --v-sell-bg:#fdecec;
+      --v-drop:#8b909c;  --v-drop-bg:#f1f2f4;
+    }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+      font-size:15px; line-height:1.6; background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased; }
+    .page{ max-width:1100px; margin:0 auto; padding:28px 24px 90px; padding-right:200px; }
+    a.back{ display:inline-flex; margin-bottom:18px; color:var(--sub); text-decoration:none; font-size:14px; font-weight:600; }
+    a.back:hover{ color:var(--accent); }
+    button{ font-family:inherit; cursor:pointer; }
+
+    header{ display:flex; align-items:flex-start; justify-content:space-between; gap:14px; flex-wrap:wrap;
+      border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:20px; }
+    h1{ margin:0; font-size:22px; font-weight:700; letter-spacing:-.3px; }
+    header .sub{ margin:6px 0 0; color:var(--sub); font-size:14px; }
+    .toolbar{ display:flex; gap:8px; flex-wrap:wrap; }
+    .btn{ border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:9px;
+      padding:9px 14px; font-size:14px; font-weight:600; }
+    .btn:hover{ border-color:#cdd2db; }
+    .btn.primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
+    .btn.primary:hover{ filter:brightness(.96); }
+    .btn.sm{ padding:5px 9px; font-size:13px; border-radius:7px; }
+    .btn.ghost{ border-color:transparent; background:transparent; color:var(--sub); }
+    .btn.ghost:hover{ background:#eef0f4; color:var(--ink); }
+
+    /* 요약 */
+    .summary{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
+    .sumcard{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:11px 15px; min-width:96px; }
+    .sumcard .k{ font-size:12px; color:var(--muted); font-weight:600; }
+    .sumcard .v{ font-size:20px; font-weight:700; margin-top:1px; }
+    .sumcard.mini .v{ font-size:16px; }
+
+    /* 필터 */
+    .filters{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
+    .chip{ border:1px solid var(--line); background:var(--card); border-radius:999px; padding:6px 13px;
+      font-size:13px; font-weight:600; color:var(--sub); }
+    .chip.on{ background:var(--ink); border-color:var(--ink); color:#fff; }
+    .filters .sp{ flex:1; }
+    select.sort{ border:1px solid var(--line); border-radius:8px; padding:7px 10px; font-size:13px; font-weight:600;
+      background:var(--card); color:var(--ink); font-family:inherit; }
+
+    /* 선반 */
+    .shelf{ margin-bottom:26px; }
+    .shelf .sh-head{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    .shelf .sh-name{ font-size:16px; font-weight:700; }
+    .shelf .sh-count{ font-size:12.5px; color:var(--muted); font-weight:600; }
+    .shelf .sh-tag{ font-size:11.5px; font-weight:700; color:var(--accent); background:var(--accent-soft);
+      border-radius:6px; padding:2px 8px; }
+    .shelf .sh-actions{ margin-left:auto; display:flex; gap:2px; opacity:.5; }
+    .shelf:hover .sh-actions{ opacity:1; }
+    .plank{ border:1px solid var(--line); border-radius:12px; background:var(--card); padding:14px;
+      border-bottom:3px solid #dfe3ea; min-height:64px; }
+    .books{ display:flex; gap:10px; flex-wrap:wrap; }
+    .book{ position:relative; width:158px; border:1px solid var(--line); border-radius:10px; padding:12px 13px 12px 15px;
+      background:#fff; text-align:left; overflow:hidden; }
+    .book:hover{ border-color:#cdd2db; box-shadow:0 2px 8px rgba(20,22,28,.06); }
+    .book::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--muted); }
+    .book.v-매수::before{ background:var(--v-buy); } .book.v-보유::before{ background:var(--v-hold); }
+    .book.v-관심::before{ background:var(--v-watch); } .book.v-매도::before{ background:var(--v-sell); }
+    .book.v-제외::before{ background:var(--v-drop); }
+    .book .tk{ font-size:15px; font-weight:700; }
+    .book .nm{ font-size:12.5px; color:var(--muted); font-weight:500; margin-bottom:8px; }
+    .book .vb{ display:inline-block; font-size:11.5px; font-weight:700; border-radius:6px; padding:2px 8px; }
+    .book .mini{ font-size:11.5px; color:var(--sub); margin-top:7px; line-height:1.4; }
+    .vb.v-매수{ color:var(--v-buy); background:var(--v-buy-bg); } .vb.v-보유{ color:var(--v-hold); background:var(--v-hold-bg); }
+    .vb.v-관심{ color:var(--v-watch); background:var(--v-watch-bg); } .vb.v-매도{ color:var(--v-sell); background:var(--v-sell-bg); }
+    .vb.v-제외{ color:var(--v-drop); background:var(--v-drop-bg); }
+    .book.v-제외 .tk{ color:var(--muted); }
+    .addbook{ width:158px; min-height:96px; border:1px dashed #cdd2db; border-radius:10px; background:transparent;
+      color:var(--muted); font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:center; }
+    .addbook:hover{ border-color:var(--accent); color:var(--accent); }
+    .empty-shelf{ color:var(--muted); font-size:13px; }
+
+    .foot{ margin-top:16px; color:var(--muted); font-size:12.5px; line-height:1.7; }
+
+    /* 모달 */
+    .overlay{ position:fixed; inset:0; background:rgba(20,22,28,.45); display:none; align-items:flex-start;
+      justify-content:center; padding:40px 16px; z-index:50; overflow-y:auto; }
+    .overlay.on{ display:flex; }
+    .modal{ background:#fff; border-radius:14px; width:100%; max-width:520px; padding:22px 24px; }
+    .modal h3{ margin:0 0 4px; font-size:18px; font-weight:700; }
+    .modal .msub{ color:var(--muted); font-size:13px; margin:0 0 16px; }
+    .frow{ display:flex; gap:12px; margin-bottom:12px; }
+    .frow.trip > *{ flex:1; }
+    .field{ flex:1; }
+    .field label{ display:block; font-size:12.5px; font-weight:700; color:var(--sub); margin-bottom:5px; }
+    .field input, .field select, .field textarea{ width:100%; border:1px solid var(--line); border-radius:8px;
+      padding:9px 11px; font-size:14px; font-family:inherit; color:var(--ink); background:#fff; }
+    .field textarea{ min-height:84px; resize:vertical; line-height:1.5; }
+    .field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(47,111,235,.12); }
+    .modal .actions{ display:flex; align-items:center; gap:8px; margin-top:18px; }
+    .modal .actions .sp{ flex:1; }
+    .btn.danger{ border-color:#f0caca; color:var(--v-sell); background:#fff; }
+    .btn.danger:hover{ background:#fdecec; }
+
+    @media (max-width:1240px){ .page{ padding-right:24px; } }
+    @media (max-width:620px){ .frow{ flex-direction:column; gap:12px; } .book,.addbook{ width:100%; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a href="../" class="back">&larr; 운영 대시보드 홈</a>
+
+    <header>
+      <div>
+        <h1>투자 리서치 책꽂이</h1>
+        <p class="sub">공부한 기업을 산업 선반에 꽂아 정리하는 내 조사 서재 · 브라우저에 자동 저장</p>
+      </div>
+      <div class="toolbar">
+        <button class="btn primary" id="addBookBtn">＋ 기업 추가</button>
+        <button class="btn" id="addShelfBtn">＋ 선반 추가</button>
+        <button class="btn" id="exportBtn">내보내기</button>
+        <button class="btn" id="importBtn">불러오기</button>
+        <input type="file" id="importFile" accept="application/json" style="display:none">
+      </div>
+    </header>
+
+    <div class="summary" id="summary"></div>
+    <div class="filters" id="filters"></div>
+    <div id="shelves"></div>
+    <div class="foot">
+      브라우저에 자동 저장됩니다. 컴퓨터를 바꾸거나 백업하려면 <b>내보내기</b>로 파일을 저장하고, 다른 기기에서 <b>불러오기</b>로 여세요.
+      맨 처음엔 예시로 반도체 기업 몇 개가 꽂혀 있습니다 — 실제 검토 값으로 고쳐 쓰시면 됩니다.
+    </div>
+  </div>
+
+  <!-- 모달 -->
+  <div class="overlay" id="overlay">
+    <div class="modal" id="modal"></div>
+  </div>
+
+  <script src="../nav.js"></script>
+  <script src="../footer.js"></script>
+  <script src="../sidebar.js"></script>
+  <script>
+  // ===LOGIC_START=== (화면과 분리된 순수 로직 — 자동 테스트 대상)
+  var RS = (function () {
+    var VERDICTS = ["관심", "매수", "보유", "매도", "제외"];
+    var _c = 0;
+    function uid(p) { return p + Date.now().toString(36) + (_c++).toString(36); }
+    function clone(s) { return JSON.parse(JSON.stringify(s)); }
+
+    function seed() {
+      return {
+        version: 1,
+        shelves: [
+          { id: "s_fabless", name: "팹리스 (설계)", tag: "" },
+          { id: "s_idm", name: "IDM (종합·메모리)", tag: "" },
+          { id: "s_foundry", name: "파운드리 (위탁생산)", tag: "" },
+          { id: "s_frontend", name: "전공정 장비", tag: "지금 국면" },
+          { id: "s_material", name: "소재·화학", tag: "" },
+          { id: "s_backend", name: "후공정 (패키징·테스트)", tag: "" },
+          { id: "s_index", name: "지수·ETF", tag: "" }
+        ],
+        books: [
+          book("s_fabless", "NVDA", "엔비디아", "GPU 사실상 독점 90%+", "115%", "62%", "우수", "52", "48", "1.3", "보유", "AI 가속기 1등. 밸류 부담은 있지만 해자 최강.", "2026-06"),
+          book("s_foundry", "TSM", "TSMC", "파운드리 1등 60%+", "28%", "45%", "우수", "28", "7", "1.1", "보유", "미세공정 독주. 증설 지속.", "2026-06"),
+          book("s_frontend", "ASML", "ASML", "EUV 노광 100% 독점", "50%", "33%", "우수", "38", "18", "1.6", "보유", "노광 대체 불가 독점. 전공정 핵심.", "2026-06"),
+          book("s_frontend", "AMAT", "어플라이드머티어리얼즈", "증착·식각 장비 상위", "45%", "29%", "양호", "24", "9", "1.4", "매수", "전공정 로테이션 초입에 신규 편입.", "2026-06"),
+          book("s_frontend", "LRCX", "램리서치", "식각 장비 강자", "55%", "30%", "양호", "26", "12", "1.5", "매수", "식각 비중 확대 수혜. 신규 편입.", "2026-06"),
+          book("s_frontend", "KLAC", "KLA", "검사·계측 50%+", "90%", "40%", "우수", "30", "22", "1.7", "보유", "검사 독점적 지위. 수익성 최상.", "2026-06"),
+          book("s_index", "VOO", "S&P500", "지수", "", "", "", "", "", "", "보유", "포트폴리오 지수 축.", "2026-06"),
+          book("s_index", "QQQ", "나스닥100", "지수", "", "", "", "", "", "", "보유", "성장주 지수 축.", "2026-06")
+        ]
+      };
+    }
+    function book(shelfId, ticker, name, moat, roe, opm, fcf, per, pbr, peg, verdict, note, reviewedAt) {
+      return { id: uid("b_"), shelfId: shelfId, ticker: ticker, name: name, moat: moat,
+        roe: roe, opm: opm, fcf: fcf, per: per, pbr: pbr, peg: peg,
+        verdict: verdict || "관심", note: note || "", reviewedAt: reviewedAt || "" };
+    }
+
+    function addBook(state, data) { var s = clone(state); var b = book(data.shelfId); Object.assign(b, data); b.id = uid("b_"); s.books.push(b); return s; }
+    function updateBook(state, id, patch) { var s = clone(state); s.books = s.books.map(function (b) { return b.id === id ? Object.assign(b, patch) : b; }); return s; }
+    function deleteBook(state, id) { var s = clone(state); s.books = s.books.filter(function (b) { return b.id !== id; }); return s; }
+
+    function addShelf(state, name) { var s = clone(state); s.shelves.push({ id: uid("s_"), name: name || "새 선반", tag: "" }); return s; }
+    function renameShelf(state, id, name) { var s = clone(state); s.shelves = s.shelves.map(function (sh) { return sh.id === id ? Object.assign(sh, { name: name }) : sh; }); return s; }
+    function setShelfTag(state, id, tag) { var s = clone(state); s.shelves = s.shelves.map(function (sh) { return sh.id === id ? Object.assign(sh, { tag: tag }) : sh; }); return s; }
+    function moveShelf(state, id, dir) {
+      var s = clone(state); var i = s.shelves.findIndex(function (sh) { return sh.id === id; });
+      var j = i + dir; if (i < 0 || j < 0 || j >= s.shelves.length) return s;
+      var tmp = s.shelves[i]; s.shelves[i] = s.shelves[j]; s.shelves[j] = tmp; return s;
+    }
+    function deleteShelf(state, id, reassignToId) {
+      var s = clone(state); if (s.shelves.length <= 1) return s; // 마지막 선반은 못 지움
+      var target = reassignToId || s.shelves.filter(function (sh) { return sh.id !== id; })[0].id;
+      s.books = s.books.map(function (b) { return b.shelfId === id ? Object.assign(b, { shelfId: target }) : b; });
+      s.shelves = s.shelves.filter(function (sh) { return sh.id !== id; });
+      return s;
+    }
+
+    function summary(state) {
+      var by = {}; VERDICTS.forEach(function (v) { by[v] = 0; });
+      state.books.forEach(function (b) { if (by[b.verdict] != null) by[b.verdict]++; });
+      var used = {}; state.books.forEach(function (b) { used[b.shelfId] = true; });
+      return { total: state.books.length, byVerdict: by,
+        shelvesFilled: state.shelves.filter(function (sh) { return used[sh.id]; }).length,
+        shelvesTotal: state.shelves.length };
+    }
+    function booksOfShelf(state, shelfId, filter, sort) {
+      var arr = state.books.filter(function (b) { return b.shelfId === shelfId; });
+      if (filter && filter !== "전체") arr = arr.filter(function (b) { return b.verdict === filter; });
+      arr.sort(function (a, b) {
+        if (sort === "판단") return VERDICTS.indexOf(a.verdict) - VERDICTS.indexOf(b.verdict);
+        if (sort === "티커") return (a.ticker || "").localeCompare(b.ticker || "");
+        return (b.reviewedAt || "").localeCompare(a.reviewedAt || ""); // 검토일 최신순
+      });
+      return arr;
+    }
+    function validate(o) {
+      return o && typeof o === "object" && Array.isArray(o.shelves) && Array.isArray(o.books) && o.shelves.length > 0;
+    }
+
+    return { VERDICTS: VERDICTS, seed: seed, addBook: addBook, updateBook: updateBook, deleteBook: deleteBook,
+      addShelf: addShelf, renameShelf: renameShelf, setShelfTag: setShelfTag, moveShelf: moveShelf, deleteShelf: deleteShelf,
+      summary: summary, booksOfShelf: booksOfShelf, validate: validate };
+  })();
+  // ===LOGIC_END===
+
+  (function () {
+    if (typeof document === "undefined") return; // node 테스트 시 UI 실행 안 함
+    var KEY = "stockResearch_v1";
+    var state = load();
+    var ui = { filter: "전체", sort: "검토일" };
+
+    function load() { try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (RS.validate(o)) return o; } } catch (e) {} return RS.seed(); }
+    function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
+    function commit(next) { state = next; save(); render(); }
+    function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
+
+    function render() {
+      renderSummary(); renderFilters(); renderShelves();
+    }
+
+    function renderSummary() {
+      var s = RS.summary(state);
+      var cards = [["검토 기업", s.total]];
+      var el = document.getElementById("summary");
+      el.innerHTML =
+        '<div class="sumcard"><div class="k">검토 기업</div><div class="v">' + s.total + '</div></div>' +
+        '<div class="sumcard"><div class="k">채운 선반</div><div class="v">' + s.shelvesFilled + ' / ' + s.shelvesTotal + '</div></div>' +
+        RS.VERDICTS.map(function (v) {
+          return '<div class="sumcard mini"><div class="k">' + v + '</div><div class="v" style="color:var(--v-' + vkey(v) + ')">' + s.byVerdict[v] + '</div></div>';
+        }).join('');
+    }
+    function vkey(v) { return { "관심": "watch", "매수": "buy", "보유": "hold", "매도": "sell", "제외": "drop" }[v]; }
+
+    function renderFilters() {
+      var el = document.getElementById("filters");
+      var chips = ["전체"].concat(RS.VERDICTS).map(function (v) {
+        return '<button class="chip' + (ui.filter === v ? ' on' : '') + '" data-f="' + v + '">' + v + '</button>';
+      }).join('');
+      el.innerHTML = chips + '<span class="sp"></span>' +
+        '<select class="sort" id="sortSel">' +
+        ['검토일', '판단', '티커'].map(function (o) { return '<option' + (ui.sort === o ? ' selected' : '') + '>' + o + '순'.replace('순', o === '검토일' ? ' 최신순' : '순') + '</option>'; }).join('') +
+        '</select>';
+      el.querySelectorAll(".chip").forEach(function (c) { c.onclick = function () { ui.filter = c.dataset.f; render(); }; });
+      document.getElementById("sortSel").onchange = function (e) { ui.sort = e.target.value.replace(' 최신순', '').replace('순', ''); render(); };
+    }
+
+    function renderShelves() {
+      var host = document.getElementById("shelves");
+      host.innerHTML = state.shelves.map(function (sh, idx) {
+        var books = RS.booksOfShelf(state, sh.id, ui.filter, ui.sort);
+        var allCount = state.books.filter(function (b) { return b.shelfId === sh.id; }).length;
+        var cards = books.map(function (b) {
+          var metric = [b.roe && ("ROE " + b.roe), b.opm && ("영익 " + b.opm), b.moat].filter(Boolean).slice(0, 2).join(" · ");
+          return '<button class="book v-' + esc(b.verdict) + '" data-id="' + b.id + '">' +
+            '<div class="tk">' + esc(b.ticker) + '</div><div class="nm">' + esc(b.name) + '</div>' +
+            '<span class="vb v-' + esc(b.verdict) + '">' + esc(b.verdict) + '</span>' +
+            (metric ? '<div class="mini">' + esc(metric) + '</div>' : '') +
+            '</button>';
+        }).join('');
+        var body = books.length ? cards
+          : (allCount ? '<div class="empty-shelf">이 필터에 해당하는 기업 없음</div>' : '<div class="empty-shelf">아직 비어 있음</div>');
+        return '<div class="shelf" data-sid="' + sh.id + '">' +
+          '<div class="sh-head"><span class="sh-name">' + esc(sh.name) + '</span>' +
+          '<span class="sh-count">' + allCount + '개</span>' +
+          (sh.tag ? '<span class="sh-tag">' + esc(sh.tag) + '</span>' : '') +
+          '<span class="sh-actions">' +
+          '<button class="btn ghost sm" data-act="up" title="위로">↑</button>' +
+          '<button class="btn ghost sm" data-act="down" title="아래로">↓</button>' +
+          '<button class="btn ghost sm" data-act="rename" title="이름·국면">이름</button>' +
+          '<button class="btn ghost sm" data-act="del" title="선반 삭제">삭제</button>' +
+          '</span></div>' +
+          '<div class="plank"><div class="books">' + body +
+          '<button class="addbook" data-add="' + sh.id + '">＋ 기업</button>' +
+          '</div></div></div>';
+      }).join('');
+
+      host.querySelectorAll(".book").forEach(function (el) { el.onclick = function () { openBookModal(el.dataset.id); }; });
+      host.querySelectorAll(".addbook").forEach(function (el) { el.onclick = function () { openBookModal(null, el.dataset.add); }; });
+      host.querySelectorAll(".shelf").forEach(function (shEl) {
+        var sid = shEl.dataset.sid;
+        shEl.querySelectorAll("[data-act]").forEach(function (b) {
+          b.onclick = function () { shelfAction(sid, b.dataset.act); };
+        });
+      });
+    }
+
+    function shelfAction(sid, act) {
+      var sh = state.shelves.find(function (x) { return x.id === sid; });
+      if (act === "up") commit(RS.moveShelf(state, sid, -1));
+      else if (act === "down") commit(RS.moveShelf(state, sid, 1));
+      else if (act === "rename") {
+        var name = prompt("선반 이름", sh.name); if (name === null) return;
+        var tag = prompt("국면 표시 (없으면 비워두기, 예: 지금 국면)", sh.tag || "");
+        var next = RS.renameShelf(state, sid, name.trim() || sh.name);
+        commit(RS.setShelfTag(next, sid, (tag || "").trim()));
+      } else if (act === "del") {
+        if (state.shelves.length <= 1) { alert("마지막 선반은 지울 수 없어요."); return; }
+        var n = state.books.filter(function (b) { return b.shelfId === sid; }).length;
+        if (!confirm("'" + sh.name + "' 선반을 지울까요?" + (n ? " 꽂힌 기업 " + n + "개는 첫 선반으로 옮겨집니다." : ""))) return;
+        commit(RS.deleteShelf(state, sid));
+      }
+    }
+
+    // 기업 추가/편집 모달
+    function openBookModal(id, presetShelf) {
+      var b = id ? state.books.find(function (x) { return x.id === id; }) : null;
+      var shelfOpts = state.shelves.map(function (sh) {
+        var sel = (b ? b.shelfId : presetShelf) === sh.id ? " selected" : "";
+        return '<option value="' + sh.id + '"' + sel + '>' + esc(sh.name) + '</option>';
+      }).join('');
+      var verdictOpts = RS.VERDICTS.map(function (v) {
+        return '<option' + (b && b.verdict === v ? ' selected' : (!b && v === '관심' ? ' selected' : '')) + '>' + v + '</option>';
+      }).join('');
+      function val(k) { return b ? esc(b[k]) : ""; }
+      document.getElementById("modal").innerHTML =
+        '<h3>' + (id ? '기업 수정' : '기업 추가') + '</h3>' +
+        '<p class="msub">공부하며 검토한 내용을 채워서 선반에 꽂아요. 숫자는 비워둬도 됩니다.</p>' +
+        '<div class="frow">' +
+        fld("티커", "ticker", val("ticker"), "예: NVDA") + fld("기업명", "name", val("name"), "예: 엔비디아") +
+        '</div>' +
+        '<div class="frow"><div class="field"><label>선반 (산업/단계)</label><select id="f_shelfId">' + shelfOpts + '</select></div>' +
+        '<div class="field"><label>판단</label><select id="f_verdict">' + verdictOpts + '</select></div></div>' +
+        '<div class="frow"><div class="field"><label>해자 (독점·과점·1등)</label><input id="f_moat" value="' + val("moat") + '" placeholder="예: EUV 노광 100% 독점"></div></div>' +
+        '<div class="frow trip">' + fld("ROE", "roe", val("roe"), "예: 50%") + fld("영업이익률", "opm", val("opm"), "예: 33%") + fld("FCF", "fcf", val("fcf"), "예: 우수") + '</div>' +
+        '<div class="frow trip">' + fld("PER", "per", val("per"), "예: 38") + fld("PBR", "pbr", val("pbr"), "예: 18") + fld("PEG", "peg", val("peg"), "예: 1.6") + '</div>' +
+        '<div class="frow">' + fld("검토일", "reviewedAt", val("reviewedAt"), "예: 2026-06") + '</div>' +
+        '<div class="frow"><div class="field"><label>공부 메모</label><textarea id="f_note" placeholder="왜 좋은지 / 리스크 / 판단 근거">' + val("note") + '</textarea></div></div>' +
+        '<div class="actions">' +
+        (id ? '<button class="btn danger" id="m_del">삭제</button>' : '') +
+        '<span class="sp"></span>' +
+        '<button class="btn" id="m_cancel">취소</button>' +
+        '<button class="btn primary" id="m_save">' + (id ? '저장' : '꽂기') + '</button>' +
+        '</div>';
+      showModal();
+      document.getElementById("m_cancel").onclick = hideModal;
+      document.getElementById("m_save").onclick = function () {
+        var data = {
+          shelfId: gv("f_shelfId"), verdict: gv("f_verdict"), ticker: gv("f_ticker").trim(),
+          name: gv("f_name").trim(), moat: gv("f_moat").trim(),
+          roe: gv("f_roe").trim(), opm: gv("f_opm").trim(), fcf: gv("f_fcf").trim(),
+          per: gv("f_per").trim(), pbr: gv("f_pbr").trim(), peg: gv("f_peg").trim(),
+          reviewedAt: gv("f_reviewedAt").trim(), note: gv("f_note").trim()
+        };
+        if (!data.ticker && !data.name) { alert("티커나 기업명 중 하나는 입력해 주세요."); return; }
+        commit(id ? RS.updateBook(state, id, data) : RS.addBook(state, data));
+        hideModal();
+      };
+      if (id) document.getElementById("m_del").onclick = function () {
+        if (confirm("'" + (b.ticker || b.name) + "' 을 책꽂이에서 뺄까요?")) { commit(RS.deleteBook(state, id)); hideModal(); }
+      };
+    }
+    function fld(label, key, value, ph) {
+      return '<div class="field"><label>' + label + '</label><input id="f_' + key + '" value="' + value + '" placeholder="' + ph + '"></div>';
+    }
+    function gv(id) { return document.getElementById(id).value; }
+    function showModal() { document.getElementById("overlay").classList.add("on"); }
+    function hideModal() { document.getElementById("overlay").classList.remove("on"); }
+    document.getElementById("overlay").onclick = function (e) { if (e.target.id === "overlay") hideModal(); };
+
+    // 툴바
+    document.getElementById("addBookBtn").onclick = function () { openBookModal(null, state.shelves[0].id); };
+    document.getElementById("addShelfBtn").onclick = function () {
+      var name = prompt("새 선반 이름 (산업/단계/자산군 등)", ""); if (name === null) return;
+      if (!name.trim()) return; commit(RS.addShelf(state, name.trim()));
+    };
+    document.getElementById("exportBtn").onclick = function () {
+      var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+      var a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+      a.download = "투자리서치-책꽂이.json"; a.click(); URL.revokeObjectURL(a.href);
+    };
+    document.getElementById("importBtn").onclick = function () { document.getElementById("importFile").click(); };
+    document.getElementById("importFile").onchange = function (e) {
+      var file = e.target.files[0]; if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        try { var o = JSON.parse(reader.result); if (!RS.validate(o)) throw 0;
+          if (confirm("불러오면 지금 내용을 파일 내용으로 덮어씁니다. 진행할까요?")) commit(o);
+        } catch (err) { alert("불러올 수 없는 파일이에요 (형식 확인)."); }
+        e.target.value = "";
+      };
+      reader.readAsText(file);
+    };
+
+    render();
+  })();
+  </script>
+</body>
+</html>
