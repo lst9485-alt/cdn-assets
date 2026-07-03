@@ -1,6 +1,14 @@
 {
-  "updated": "2026-07-03T06:00:03.993036+09:00",
+  "updated": "2026-07-04T06:00:04.247909+09:00",
   "projects": [
+    {
+      "name": "강의안",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-07-03",
+      "status": null,
+      "next": null
+    },
     {
       "name": "내집마련코칭(+상담후 자료)",
       "type": "file",
@@ -14,14 +22,6 @@
       "type": "folder",
       "app": null,
       "modified": "2026-06-18",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "강의안",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-06-01",
       "status": null,
       "next": null
     },

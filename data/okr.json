@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-03T06:00:12.774451+09:00",
+  "updated": "2026-07-04T06:00:11.024096+09:00",
   "okr": [],
   "tasks": {
-    "total": 638,
-    "done": 606,
-    "overdue": 10,
+    "total": 644,
+    "done": 610,
+    "overdue": 9,
     "pending": [
       {
         "title": "전자책 작성",
@@ -37,33 +37,23 @@
         "overdue": true
       },
       {
-        "title": "lg유플러스 인터넷확인",
-        "date": "2026-07-02T09:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-07-02T11:30:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "자료수집&도입부",
-        "date": "2026-07-02T13:00:00.000+09:00",
+        "date": "2026-07-03T12:30:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원씽복기",
-        "date": "2026-07-02T14:00:00.000+09:00",
+        "date": "2026-07-03T14:00:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원고완성",
-        "date": "2026-07-03T10:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-07-03T14:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "PPT완료",
-        "date": "2026-07-03T14:30:00.000+09:00",
+        "date": "2026-07-04T09:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -102,18 +92,28 @@
         "overdue": false
       },
       {
+        "title": "도서 미팅진행 알아보기",
+        "date": "2026-07-06T10:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "주간복기",
         "date": "2026-07-06T11:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
-        "date": "2026-07-06T11:00:00.000+09:00",
+        "date": "2026-07-06T13:15:00.000+09:00",
         "overdue": false
       },
       {
         "title": "주제선정&썸네일&제목",
         "date": "2026-07-07",
+        "overdue": false
+      },
+      {
+        "title": "lg유플러스 인터넷확인",
+        "date": "2026-07-07T10:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -134,6 +134,16 @@
       {
         "title": "주간계획 수정",
         "date": "2026-07-09T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "급여&자산체크",
+        "date": "2026-07-10",
+        "overdue": false
+      },
+      {
+        "title": "PPT완료",
+        "date": "2026-07-10",
         "overdue": false
       },
       {
@@ -169,14 +179,20 @@
     ],
     "schedule": [
       {
-        "title": "원고완성",
-        "time": "10:00",
+        "title": "PPT완료",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "PPT완료",
-        "time": "14:30",
+        "title": "점심",
+        "time": "11:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "time": "19:00",
         "allDay": false,
         "done": false
       }
@@ -207,14 +223,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 10,
-      "rate": "36%",
+      "done": 12,
+      "rate": "43%",
       "days": [
-        {
-          "date": "2026-06-27",
-          "done": 0,
-          "total": 4
-        },
         {
           "date": "2026-06-28",
           "done": 1,
@@ -237,11 +248,16 @@
         },
         {
           "date": "2026-07-02",
-          "done": 0,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-07-03",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-07-04",
           "done": 0,
           "total": 4
         }
