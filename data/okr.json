@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-04T06:00:11.024096+09:00",
+  "updated": "2026-07-05T06:00:10.809118+09:00",
   "okr": [],
   "tasks": {
-    "total": 644,
+    "total": 647,
     "done": 610,
-    "overdue": 9,
+    "overdue": 14,
     "pending": [
       {
         "title": "전자책 작성",
@@ -52,19 +52,29 @@
         "overdue": true
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-07-04T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "PPT완료",
         "date": "2026-07-04T09:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "점심",
         "date": "2026-07-04T11:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-07-04T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-07-04T19:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "상담준비",
@@ -147,6 +157,11 @@
         "overdue": false
       },
       {
+        "title": "촬영&편집&업로드",
+        "date": "2026-07-11",
+        "overdue": false
+      },
+      {
         "title": "상담준비",
         "date": "2026-07-11T09:30:00.000+09:00",
         "overdue": false
@@ -179,20 +194,14 @@
     ],
     "schedule": [
       {
-        "title": "PPT완료",
-        "time": "09:00",
+        "title": "상담준비",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "점심",
-        "time": "11:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "time": "19:00",
+        "title": "강의기획",
+        "time": "15:30",
         "allDay": false,
         "done": false
       }
@@ -223,14 +232,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 12,
-      "rate": "43%",
+      "done": 11,
+      "rate": "39%",
       "days": [
-        {
-          "date": "2026-06-28",
-          "done": 1,
-          "total": 4
-        },
         {
           "date": "2026-06-29",
           "done": 3,
@@ -260,6 +264,11 @@
           "date": "2026-07-04",
           "done": 0,
           "total": 4
+        },
+        {
+          "date": "2026-07-05",
+          "done": 0,
+          "total": 4
         }
       ]
     }
@@ -267,8 +276,14 @@
   "sales": {
     "month": "2026-07",
     "month_label": "7월",
-    "total_amount": 0,
-    "total_count": 0,
-    "weekly": []
+    "total_amount": 40,
+    "total_count": 1,
+    "weekly": [
+      {
+        "week": "1주차",
+        "count": 1,
+        "amount": 40
+      }
+    ]
   }
 }
