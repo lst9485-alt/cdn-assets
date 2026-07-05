@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-05T06:00:10.809118+09:00",
+  "updated": "2026-07-06T06:00:11.387619+09:00",
   "okr": [],
   "tasks": {
-    "total": 647,
-    "done": 610,
-    "overdue": 14,
+    "total": 644,
+    "done": 611,
+    "overdue": 11,
     "pending": [
       {
         "title": "전자책 작성",
@@ -37,54 +37,29 @@
         "overdue": true
       },
       {
-        "title": "자료수집&도입부",
-        "date": "2026-07-03T12:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-07-03T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-07-03T14:30:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "P1~P3/목실감",
-        "date": "2026-07-04T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "PPT완료",
-        "date": "2026-07-04T09:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "점심",
-        "date": "2026-07-04T11:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-07-04T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-07-04T19:00:00.000+09:00",
+        "date": "2026-07-05T08:30:00.000+09:00",
         "overdue": true
       },
       {
         "title": "상담준비",
         "date": "2026-07-05T10:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
-        "title": "강의기획",
-        "date": "2026-07-05T15:30:00.000+09:00",
-        "overdue": false
+        "title": "PPT완료",
+        "date": "2026-07-05T11:30:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-07-05T14:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "date": "2026-07-05T14:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "메모정리",
@@ -112,8 +87,8 @@
         "overdue": false
       },
       {
-        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
-        "date": "2026-07-06T13:15:00.000+09:00",
+        "title": "강의기획",
+        "date": "2026-07-06T12:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -124,6 +99,11 @@
       {
         "title": "lg유플러스 인터넷확인",
         "date": "2026-07-07T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
+        "date": "2026-07-07T12:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -194,14 +174,38 @@
     ],
     "schedule": [
       {
-        "title": "상담준비",
+        "title": "메모정리",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
         "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
+        "title": "도서 미팅진행 알아보기",
+        "time": "10:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "주간복기",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
         "title": "강의기획",
-        "time": "15:30",
+        "time": "12:00",
         "allDay": false,
         "done": false
       }
@@ -232,14 +236,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 11,
-      "rate": "39%",
+      "done": 9,
+      "rate": "32%",
       "days": [
-        {
-          "date": "2026-06-29",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-06-30",
           "done": 2,
@@ -262,11 +261,16 @@
         },
         {
           "date": "2026-07-04",
-          "done": 0,
+          "done": 1,
           "total": 4
         },
         {
           "date": "2026-07-05",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-07-06",
           "done": 0,
           "total": 4
         }
