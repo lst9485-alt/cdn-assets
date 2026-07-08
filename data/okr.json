@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-08T06:00:12.111771+09:00",
+  "updated": "2026-07-09T06:00:12.447522+09:00",
   "okr": [],
   "tasks": {
     "total": 662,
-    "done": 626,
-    "overdue": 15,
+    "done": 630,
+    "overdue": 9,
     "pending": [
       {
         "title": "전자책 작성",
@@ -37,74 +37,19 @@
         "overdue": true
       },
       {
-        "title": "메모정리",
-        "date": "2026-07-06",
-        "overdue": true
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-07-07",
-        "overdue": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-07-07T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "썸네일, 제목",
-        "date": "2026-07-07T11:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "건보료알아보기. 법인급여받는거랑 지역가입자차이등",
-        "date": "2026-07-07T12:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "도입부",
-        "date": "2026-07-07T13:00:00.000+09:00",
+        "date": "2026-07-08T11:00:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원씽복기",
-        "date": "2026-07-07T14:00:00.000+09:00",
+        "date": "2026-07-08T14:00:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원고챕터",
-        "date": "2026-07-07T14:30:00.000+09:00",
+        "date": "2026-07-08T14:30:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "lg유플러스 인터넷확인",
-        "date": "2026-07-07T16:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-07-08",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-07-08T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
-        "date": "2026-07-08T12:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의기획",
-        "date": "2026-07-08T14:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-07-09",
-        "overdue": false
       },
       {
         "title": "주간계획 수정",
@@ -112,12 +57,32 @@
         "overdue": false
       },
       {
-        "title": "급여&자산체크",
-        "date": "2026-07-10",
+        "title": "원고완성",
+        "date": "2026-07-09T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "lg유플러스 인터넷확인",
+        "date": "2026-07-09T13:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "PPT완료",
+        "date": "2026-07-09T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "건보료알아보기. 법인급여받는거랑 지역가입자차이등",
+        "date": "2026-07-09T16:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의기획",
+        "date": "2026-07-09T17:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "급여&자산체크",
         "date": "2026-07-10",
         "overdue": false
       },
@@ -167,6 +132,21 @@
         "overdue": false
       },
       {
+        "title": "자료수집&도입부",
+        "date": "2026-07-15",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-07-15T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
+        "date": "2026-07-21T12:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "고딩친구들 모임준비",
         "date": "2026-08-24",
         "overdue": false
@@ -189,26 +169,38 @@
     ],
     "schedule": [
       {
-        "title": "자료수집&도입부",
-        "time": "",
-        "allDay": true,
-        "done": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
+        "title": "주간계획 수정",
+        "time": "08:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
-        "time": "12:45",
+        "title": "원고완성",
+        "time": "09:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "lg유플러스 인터넷확인",
+        "time": "13:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "PPT완료",
+        "time": "14:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "건보료알아보기. 법인급여받는거랑 지역가입자차이등",
+        "time": "16:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "강의기획",
-        "time": "14:45",
+        "time": "17:30",
         "allDay": false,
         "done": false
       }
@@ -239,14 +231,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 9,
-      "rate": "32%",
+      "done": 10,
+      "rate": "36%",
       "days": [
-        {
-          "date": "2026-07-02",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-07-03",
           "done": 0,
@@ -269,11 +256,16 @@
         },
         {
           "date": "2026-07-07",
-          "done": 1,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-07-08",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-07-09",
           "done": 0,
           "total": 4
         }
