@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-10T06:00:11.366671+09:00",
+  "updated": "2026-07-11T06:00:13.067940+09:00",
   "okr": [],
   "tasks": {
-    "total": 671,
-    "done": 635,
-    "overdue": 9,
+    "total": 678,
+    "done": 640,
+    "overdue": 13,
     "pending": [
       {
         "title": "전자책 작성",
@@ -37,54 +37,39 @@
         "overdue": true
       },
       {
-        "title": "주간계획 수정",
-        "date": "2026-07-09T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-07-09T09:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-07-09T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "급여&자산체크",
         "date": "2026-07-10",
-        "overdue": false
+        "overdue": true
       },
       {
-        "title": "건보료알아보기. 법인급여받는거랑 지역가입자차이등",
+        "title": "원고마감",
         "date": "2026-07-10T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PPT완료",
-        "date": "2026-07-10T11:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "lg유플러스 인터넷확인",
         "date": "2026-07-10T13:45:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-07-10T14:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "ppt",
+        "date": "2026-07-10T14:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "쓰레기 빼놓기",
         "date": "2026-07-10T14:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "우편보내기",
         "date": "2026-07-10T15:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의기획",
-        "date": "2026-07-10T17:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "촬영&편집&업로드",
@@ -107,6 +92,11 @@
         "overdue": false
       },
       {
+        "title": "강의기획",
+        "date": "2026-07-12T16:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "메모정리",
         "date": "2026-07-13",
         "overdue": false
@@ -122,8 +112,23 @@
         "overdue": false
       },
       {
+        "title": "경민연차",
+        "date": "2026-07-13T10:15:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "정수기+등기보냄",
+        "date": "2026-07-13T10:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "주간복기",
         "date": "2026-07-13T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "건보료알아보기. 법인급여받는거랑 지역가입자차이등",
+        "date": "2026-07-13T12:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -162,6 +167,11 @@
         "overdue": false
       },
       {
+        "title": "PPT완료",
+        "date": "2026-07-17",
+        "overdue": false
+      },
+      {
         "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
         "date": "2026-07-21T12:15:00.000+09:00",
         "overdue": false
@@ -189,44 +199,14 @@
     ],
     "schedule": [
       {
-        "title": "급여&자산체크",
+        "title": "촬영&편집&업로드",
         "time": "",
         "allDay": true,
         "done": false
       },
       {
-        "title": "건보료알아보기. 법인급여받는거랑 지역가입자차이등",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "PPT완료",
-        "time": "11:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "lg유플러스 인터넷확인",
-        "time": "13:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "쓰레기 빼놓기",
-        "time": "14:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "우편보내기",
-        "time": "15:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의기획",
-        "time": "17:00",
+        "title": "상담준비",
+        "time": "09:30",
         "allDay": false,
         "done": false
       }
@@ -257,14 +237,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 11,
-      "rate": "39%",
+      "done": 14,
+      "rate": "50%",
       "days": [
-        {
-          "date": "2026-07-04",
-          "done": 1,
-          "total": 4
-        },
         {
           "date": "2026-07-05",
           "done": 2,
@@ -287,11 +262,16 @@
         },
         {
           "date": "2026-07-09",
-          "done": 0,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-07-10",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-07-11",
           "done": 0,
           "total": 4
         }
@@ -301,11 +281,16 @@
   "sales": {
     "month": "2026-07",
     "month_label": "7월",
-    "total_amount": 40,
-    "total_count": 1,
+    "total_amount": 80,
+    "total_count": 2,
     "weekly": [
       {
         "week": "1주차",
+        "count": 1,
+        "amount": 40
+      },
+      {
+        "week": "2주차",
         "count": 1,
         "amount": 40
       }
