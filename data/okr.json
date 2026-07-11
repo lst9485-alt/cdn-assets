@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-11T06:00:13.067940+09:00",
+  "updated": "2026-07-12T06:00:12.340534+09:00",
   "okr": [],
   "tasks": {
-    "total": 678,
-    "done": 640,
-    "overdue": 13,
+    "total": 680,
+    "done": 646,
+    "overdue": 9,
     "pending": [
       {
         "title": "전자책 작성",
@@ -37,49 +37,19 @@
         "overdue": true
       },
       {
-        "title": "급여&자산체크",
-        "date": "2026-07-10",
+        "title": "촬영&편집&업로드",
+        "date": "2026-07-11",
         "overdue": true
       },
       {
-        "title": "원고마감",
-        "date": "2026-07-10T11:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "lg유플러스 인터넷확인",
-        "date": "2026-07-10T13:45:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-07-10T14:00:00.000+09:00",
+        "title": "P1~P3/목실감",
+        "date": "2026-07-11T08:30:00.000+09:00",
         "overdue": true
       },
       {
         "title": "ppt",
-        "date": "2026-07-10T14:30:00.000+09:00",
+        "date": "2026-07-11T18:00:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "쓰레기 빼놓기",
-        "date": "2026-07-10T14:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "우편보내기",
-        "date": "2026-07-10T15:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-07-11",
-        "overdue": false
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-07-11T09:30:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "윤택스토리 폐업",
@@ -137,6 +107,11 @@
         "overdue": false
       },
       {
+        "title": "lg유플러스 인터넷확인",
+        "date": "2026-07-13T13:45:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "주제선정&썸네일&제목",
         "date": "2026-07-14",
         "overdue": false
@@ -172,6 +147,11 @@
         "overdue": false
       },
       {
+        "title": "촬영&편집&업로드",
+        "date": "2026-07-18",
+        "overdue": false
+      },
+      {
         "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
         "date": "2026-07-21T12:15:00.000+09:00",
         "overdue": false
@@ -199,14 +179,20 @@
     ],
     "schedule": [
       {
-        "title": "촬영&편집&업로드",
-        "time": "",
-        "allDay": true,
+        "title": "윤택스토리 폐업",
+        "time": "10:00",
+        "allDay": false,
         "done": false
       },
       {
-        "title": "상담준비",
-        "time": "09:30",
+        "title": "티타임",
+        "time": "14:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의기획",
+        "time": "16:00",
         "allDay": false,
         "done": false
       }
@@ -237,14 +223,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 12,
+      "rate": "43%",
       "days": [
-        {
-          "date": "2026-07-05",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-07-06",
           "done": 3,
@@ -272,6 +253,11 @@
         },
         {
           "date": "2026-07-11",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-07-12",
           "done": 0,
           "total": 4
         }
