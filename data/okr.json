@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-14T06:00:10.921752+09:00",
+  "updated": "2026-07-15T06:00:13.221652+09:00",
   "okr": [],
   "tasks": {
-    "total": 693,
-    "done": 661,
-    "overdue": 7,
+    "total": 698,
+    "done": 663,
+    "overdue": 12,
     "pending": [
       {
         "title": "전자책 작성",
@@ -44,21 +44,31 @@
       {
         "title": "미팅준비",
         "date": "2026-07-14T09:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "lg유플러스 인터넷확인",
         "date": "2026-07-14T12:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "주제선정&썸네일&제목",
         "date": "2026-07-14T13:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
-        "title": "자료수집&도입부",
-        "date": "2026-07-15T10:00:00.000+09:00",
+        "title": "원씽복기",
+        "date": "2026-07-14T14:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "자료수집",
+        "date": "2026-07-14T15:30:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "도입부",
+        "date": "2026-07-15T09:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -137,6 +147,11 @@
         "overdue": false
       },
       {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-07-21",
+        "overdue": false
+      },
+      {
         "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
         "date": "2026-07-21T12:15:00.000+09:00",
         "overdue": false
@@ -169,20 +184,26 @@
     ],
     "schedule": [
       {
-        "title": "미팅준비",
+        "title": "도입부",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "lg유플러스 인터넷확인",
-        "time": "12:30",
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "주제선정&썸네일&제목",
+        "title": "원고",
         "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의기획",
+        "time": "15:00",
         "allDay": false,
         "done": false
       }
@@ -213,14 +234,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 12,
-      "rate": "43%",
+      "done": 11,
+      "rate": "39%",
       "days": [
-        {
-          "date": "2026-07-08",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-07-09",
           "done": 2,
@@ -243,11 +259,16 @@
         },
         {
           "date": "2026-07-13",
-          "done": 3,
+          "done": 4,
           "total": 4
         },
         {
           "date": "2026-07-14",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-07-15",
           "done": 0,
           "total": 4
         }
