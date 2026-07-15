@@ -1,9 +1,9 @@
 {
-  "updated": "2026-07-15T06:00:13.221652+09:00",
+  "updated": "2026-07-16T06:00:13.145588+09:00",
   "okr": [],
   "tasks": {
-    "total": 698,
-    "done": 663,
+    "total": 702,
+    "done": 669,
     "overdue": 12,
     "pending": [
       {
@@ -42,49 +42,29 @@
         "overdue": true
       },
       {
-        "title": "미팅준비",
-        "date": "2026-07-14T09:30:00.000+09:00",
+        "title": "도입부",
+        "date": "2026-07-15T09:30:00.000+09:00",
         "overdue": true
       },
       {
         "title": "lg유플러스 인터넷확인",
-        "date": "2026-07-14T12:30:00.000+09:00",
+        "date": "2026-07-15T12:30:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-07-14T13:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-07-14T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "자료수집",
-        "date": "2026-07-14T15:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "도입부",
-        "date": "2026-07-15T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-07-15T12:00:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "원고",
         "date": "2026-07-15T13:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-07-15T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "강의기획",
         "date": "2026-07-15T15:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "주간계획 수정",
@@ -157,6 +137,16 @@
         "overdue": false
       },
       {
+        "title": "자료수집&도입부",
+        "date": "2026-07-22",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-07-22T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "윤택스토리 부가세 무실적 신고 (폐업 마무리)",
         "date": "2026-08-04T09:30:00.000+09:00",
         "overdue": false
@@ -184,26 +174,14 @@
     ],
     "schedule": [
       {
-        "title": "도입부",
-        "time": "09:30",
+        "title": "주간계획 수정",
+        "time": "08:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "원고",
+        "title": "원고완성",
         "time": "13:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의기획",
-        "time": "15:00",
         "allDay": false,
         "done": false
       }
@@ -234,14 +212,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 11,
-      "rate": "39%",
+      "done": 13,
+      "rate": "46%",
       "days": [
-        {
-          "date": "2026-07-09",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-07-10",
           "done": 2,
@@ -264,11 +237,16 @@
         },
         {
           "date": "2026-07-14",
-          "done": 1,
+          "done": 4,
           "total": 4
         },
         {
           "date": "2026-07-15",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-07-16",
           "done": 0,
           "total": 4
         }
