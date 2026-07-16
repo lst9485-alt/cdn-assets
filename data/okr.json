@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-16T06:00:13.145588+09:00",
+  "updated": "2026-07-17T06:00:14.529775+09:00",
   "okr": [],
   "tasks": {
-    "total": 702,
-    "done": 669,
-    "overdue": 12,
+    "total": 708,
+    "done": 673,
+    "overdue": 11,
     "pending": [
       {
         "title": "전자책 작성",
@@ -42,39 +42,24 @@
         "overdue": true
       },
       {
-        "title": "도입부",
-        "date": "2026-07-15T09:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "lg유플러스 인터넷확인",
-        "date": "2026-07-15T12:30:00.000+09:00",
+        "title": "주간계획 수정",
+        "date": "2026-07-16T10:15:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원고",
-        "date": "2026-07-15T13:00:00.000+09:00",
+        "date": "2026-07-16T11:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "원고완성",
+        "date": "2026-07-16T13:30:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원씽복기",
-        "date": "2026-07-15T14:00:00.000+09:00",
+        "date": "2026-07-16T14:00:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "강의기획",
-        "date": "2026-07-15T15:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주간계획 수정",
-        "date": "2026-07-16T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-07-16T13:00:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "상담준비",
@@ -92,13 +77,18 @@
         "overdue": false
       },
       {
-        "title": "강의준비",
-        "date": "2026-07-18T10:00:00.000+09:00",
+        "title": "이메일상담 준비",
+        "date": "2026-07-18T12:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "놀러갈곳 예약",
         "date": "2026-07-18T14:15:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의준비",
+        "date": "2026-07-19T10:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -127,6 +117,16 @@
         "overdue": false
       },
       {
+        "title": "lg유플러스 인터넷확인",
+        "date": "2026-07-20T12:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의기획",
+        "date": "2026-07-20T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "주제선정&썸네일&제목",
         "date": "2026-07-21",
         "overdue": false
@@ -144,6 +144,16 @@
       {
         "title": "콘텐츠 관리시트",
         "date": "2026-07-22T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고완성",
+        "date": "2026-07-23",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-07-23T08:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -174,14 +184,20 @@
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
+        "title": "상담준비",
+        "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고완성",
-        "time": "13:00",
+        "title": "PPT완료",
+        "time": "12:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "time": "17:00",
         "allDay": false,
         "done": false
       }
@@ -212,14 +228,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 13,
-      "rate": "46%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-07-10",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-07-11",
           "done": 2,
@@ -242,11 +253,16 @@
         },
         {
           "date": "2026-07-15",
-          "done": 1,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-07-16",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-07-17",
           "done": 0,
           "total": 4
         }
@@ -256,8 +272,8 @@
   "sales": {
     "month": "2026-07",
     "month_label": "7월",
-    "total_amount": 120,
-    "total_count": 3,
+    "total_amount": 160,
+    "total_count": 4,
     "weekly": [
       {
         "week": "1주차",
@@ -268,6 +284,11 @@
         "week": "2주차",
         "count": 2,
         "amount": 80
+      },
+      {
+        "week": "3주차",
+        "count": 1,
+        "amount": 40
       }
     ]
   }
