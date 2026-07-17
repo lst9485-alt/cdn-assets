@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-17T06:00:14.529775+09:00",
+  "updated": "2026-07-18T06:00:11.570502+09:00",
   "okr": [],
   "tasks": {
-    "total": 708,
+    "total": 712,
     "done": 673,
-    "overdue": 11,
+    "overdue": 17,
     "pending": [
       {
         "title": "전자책 작성",
@@ -62,19 +62,34 @@
         "overdue": true
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-07-17T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-07-17T09:00:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "상담준비",
         "date": "2026-07-17T10:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "PPT완료",
         "date": "2026-07-17T12:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-07-17T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-07-17T17:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "이메일상담 준비",
@@ -157,6 +172,11 @@
         "overdue": false
       },
       {
+        "title": "PPT완료",
+        "date": "2026-07-24",
+        "overdue": false
+      },
+      {
         "title": "윤택스토리 부가세 무실적 신고 (폐업 마무리)",
         "date": "2026-08-04T09:30:00.000+09:00",
         "overdue": false
@@ -184,20 +204,14 @@
     ],
     "schedule": [
       {
-        "title": "상담준비",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "PPT완료",
+        "title": "이메일상담 준비",
         "time": "12:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "time": "17:00",
+        "title": "놀러갈곳 예약",
+        "time": "14:15",
         "allDay": false,
         "done": false
       }
@@ -228,14 +242,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 15,
-      "rate": "54%",
+      "done": 14,
+      "rate": "50%",
       "days": [
-        {
-          "date": "2026-07-11",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-07-12",
           "done": 0,
@@ -258,11 +267,16 @@
         },
         {
           "date": "2026-07-16",
-          "done": 3,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-07-17",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-07-18",
           "done": 0,
           "total": 4
         }
