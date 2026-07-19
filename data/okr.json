@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-19T06:00:11.050773+09:00",
+  "updated": "2026-07-20T06:00:14.685424+09:00",
   "okr": [],
   "tasks": {
-    "total": 715,
-    "done": 673,
-    "overdue": 21,
+    "total": 710,
+    "done": 675,
+    "overdue": 9,
     "pending": [
       {
         "title": "전자책 작성",
@@ -42,79 +42,14 @@
         "overdue": true
       },
       {
-        "title": "주간계획 수정",
-        "date": "2026-07-16T10:15:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원고",
-        "date": "2026-07-16T11:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-07-16T13:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-07-16T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-07-17T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-07-17T09:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-07-17T10:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "PPT완료",
-        "date": "2026-07-17T12:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-07-17T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-07-17T17:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-07-18T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "이메일상담 준비",
         "date": "2026-07-18T12:30:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "원씽복기",
-        "date": "2026-07-18T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "놀러갈곳 예약",
-        "date": "2026-07-18T14:15:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "강의준비",
         "date": "2026-07-19T10:45:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "메모정리",
@@ -153,17 +88,22 @@
       },
       {
         "title": "주제선정&썸네일&제목",
-        "date": "2026-07-21",
+        "date": "2026-07-21T10:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "원소스 멀티유즈 준비 (+쓰레드 매일알람 등)",
-        "date": "2026-07-21T12:15:00.000+09:00",
+        "title": "상담준비",
+        "date": "2026-07-21T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의안 1주차",
+        "date": "2026-07-21T14:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "자료수집&도입부",
-        "date": "2026-07-22",
+        "date": "2026-07-22T10:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -172,8 +112,13 @@
         "overdue": false
       },
       {
-        "title": "원고완성",
-        "date": "2026-07-23",
+        "title": "원고",
+        "date": "2026-07-22T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의안 1주차",
+        "date": "2026-07-22T16:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -182,13 +127,33 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-07-23T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의안 1주차",
+        "date": "2026-07-23T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "PPT완료",
-        "date": "2026-07-24",
+        "date": "2026-07-24T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의안 2주차",
+        "date": "2026-07-24T13:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "촬영&편집&업로드",
-        "date": "2026-07-25",
+        "date": "2026-07-25T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의안 2주차",
+        "date": "2026-07-25T14:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -219,8 +184,44 @@
     ],
     "schedule": [
       {
-        "title": "강의준비",
-        "time": "10:45",
+        "title": "메모정리",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "주간복기",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "생일준비 - 케이크 & 식당예약",
+        "time": "11:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "lg유플러스 인터넷확인",
+        "time": "12:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의기획",
+        "time": "15:00",
         "allDay": false,
         "done": false
       }
@@ -251,14 +252,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 18,
-      "rate": "64%",
+      "done": 16,
+      "rate": "57%",
       "days": [
-        {
-          "date": "2026-07-13",
-          "done": 4,
-          "total": 4
-        },
         {
           "date": "2026-07-14",
           "done": 4,
@@ -286,6 +282,11 @@
         },
         {
           "date": "2026-07-19",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-07-20",
           "done": 0,
           "total": 4
         }
