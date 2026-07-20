@@ -1,11 +1,19 @@
 {
-  "updated": "2026-07-20T06:00:04.151874+09:00",
+  "updated": "2026-07-21T06:00:03.959992+09:00",
   "projects": [
     {
-      "name": "강의안",
+      "name": "재테크 기초반",
       "type": "folder",
       "app": null,
-      "modified": "2026-07-19",
+      "modified": "2026-07-20",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "내집마련 실전반",
+      "type": "file",
+      "app": null,
+      "modified": "2026-07-20",
       "status": null,
       "next": null
     },
