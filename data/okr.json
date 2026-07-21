@@ -1,9 +1,9 @@
 {
-  "updated": "2026-07-21T06:00:11.612018+09:00",
+  "updated": "2026-07-22T06:00:14.266543+09:00",
   "okr": [],
   "tasks": {
-    "total": 712,
-    "done": 681,
+    "total": 717,
+    "done": 687,
     "overdue": 8,
     "pending": [
       {
@@ -42,24 +42,9 @@
         "overdue": true
       },
       {
-        "title": "원씽복기",
-        "date": "2026-07-20T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-07-21T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-07-21T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "강의안 1주차",
         "date": "2026-07-21T14:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "자료수집&도입부",
@@ -137,6 +122,16 @@
         "overdue": false
       },
       {
+        "title": "2시 안과",
+        "date": "2026-07-27T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-07-28",
+        "overdue": false
+      },
+      {
         "title": "윤택스토리 부가세 무실적 신고 (폐업 마무리)",
         "date": "2026-08-04T09:30:00.000+09:00",
         "overdue": false
@@ -164,20 +159,26 @@
     ],
     "schedule": [
       {
-        "title": "주제선정&썸네일&제목",
+        "title": "자료수집&도입부",
         "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "상담준비",
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원고",
         "time": "13:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "강의안 1주차",
-        "time": "14:30",
+        "time": "16:00",
         "allDay": false,
         "done": false
       }
@@ -212,11 +213,6 @@
       "rate": "57%",
       "days": [
         {
-          "date": "2026-07-15",
-          "done": 2,
-          "total": 4
-        },
-        {
           "date": "2026-07-16",
           "done": 2,
           "total": 4
@@ -243,6 +239,11 @@
         },
         {
           "date": "2026-07-21",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-07-22",
           "done": 0,
           "total": 4
         }
