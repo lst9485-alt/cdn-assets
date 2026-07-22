@@ -1,11 +1,11 @@
 {
-  "updated": "2026-07-22T06:00:04.309520+09:00",
+  "updated": "2026-07-23T06:00:04.799224+09:00",
   "projects": [
     {
       "name": "재테크 기초반",
       "type": "folder",
       "app": null,
-      "modified": "2026-07-21",
+      "modified": "2026-07-22",
       "status": null,
       "next": null
     },
@@ -14,14 +14,6 @@
       "type": "file",
       "app": null,
       "modified": "2026-07-20",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "내집마련코칭(+상담후 자료)",
-      "type": "file",
-      "app": null,
-      "modified": "2026-06-23",
       "status": null,
       "next": null
     },
