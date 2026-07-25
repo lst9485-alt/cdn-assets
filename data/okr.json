@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-25T06:00:12.010468+09:00",
+  "updated": "2026-07-26T06:00:12.965588+09:00",
   "okr": [],
   "tasks": {
-    "total": 732,
+    "total": 736,
     "done": 702,
-    "overdue": 11,
+    "overdue": 17,
     "pending": [
       {
         "title": "전자책 작성",
@@ -62,19 +62,34 @@
         "overdue": true
       },
       {
+        "title": "타임라인",
+        "date": "2026-07-24T18:30:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-07-25T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "PPT완료",
         "date": "2026-07-25T10:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-07-25T13:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-07-25T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "강의안 1주차",
         "date": "2026-07-25T17:15:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "메모정리",
@@ -132,6 +147,11 @@
         "overdue": false
       },
       {
+        "title": "촬영&편집&업로드",
+        "date": "2026-08-01",
+        "overdue": false
+      },
+      {
         "title": "윤택스토리 부가세 무실적 신고 (폐업 마무리)",
         "date": "2026-08-04T09:30:00.000+09:00",
         "overdue": false
@@ -157,26 +177,7 @@
         "overdue": false
       }
     ],
-    "schedule": [
-      {
-        "title": "PPT완료",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "time": "13:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의안 1주차",
-        "time": "17:15",
-        "allDay": false,
-        "done": false
-      }
-    ]
+    "schedule": []
   },
   "routines": {
     "total": 4,
@@ -202,10 +203,46 @@
     "priorities": [],
     "identity": null,
     "weekly_stats": {
-      "total": 0,
-      "done": 0,
-      "rate": "0%",
-      "days": []
+      "total": 28,
+      "done": 15,
+      "rate": "54%",
+      "days": [
+        {
+          "date": "2026-07-20",
+          "done": 4,
+          "total": 4
+        },
+        {
+          "date": "2026-07-21",
+          "done": 4,
+          "total": 4
+        },
+        {
+          "date": "2026-07-22",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-07-23",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-07-24",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-07-25",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-07-26",
+          "done": 0,
+          "total": 4
+        }
+      ]
     }
   },
   "sales": {
