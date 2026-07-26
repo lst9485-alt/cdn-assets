@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-26T06:00:12.965588+09:00",
+  "updated": "2026-07-27T06:00:13.735508+09:00",
   "okr": [],
   "tasks": {
-    "total": 736,
+    "total": 738,
     "done": 702,
-    "overdue": 17,
+    "overdue": 19,
     "pending": [
       {
         "title": "전자책 작성",
@@ -89,6 +89,16 @@
       {
         "title": "강의안 1주차",
         "date": "2026-07-25T17:15:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-07-26T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-07-26T14:00:00.000+09:00",
         "overdue": true
       },
       {
@@ -177,7 +187,38 @@
         "overdue": false
       }
     ],
-    "schedule": []
+    "schedule": [
+      {
+        "title": "메모정리",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "주간복기",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "2시 안과",
+        "time": "14:00",
+        "allDay": false,
+        "done": false
+      }
+    ]
   },
   "routines": {
     "total": 4,
@@ -204,14 +245,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 15,
-      "rate": "54%",
+      "done": 13,
+      "rate": "46%",
       "days": [
-        {
-          "date": "2026-07-20",
-          "done": 4,
-          "total": 4
-        },
         {
           "date": "2026-07-21",
           "done": 4,
@@ -234,11 +270,16 @@
         },
         {
           "date": "2026-07-25",
-          "done": 0,
+          "done": 1,
           "total": 4
         },
         {
           "date": "2026-07-26",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-07-27",
           "done": 0,
           "total": 4
         }
