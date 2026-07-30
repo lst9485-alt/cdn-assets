@@ -1,10 +1,10 @@
 {
-  "updated": "2026-07-30T06:00:14.467304+09:00",
+  "updated": "2026-07-31T06:00:14.663437+09:00",
   "okr": [],
   "tasks": {
-    "total": 747,
-    "done": 714,
-    "overdue": 13,
+    "total": 752,
+    "done": 721,
+    "overdue": 11,
     "pending": [
       {
         "title": "전자책 작성",
@@ -47,44 +47,19 @@
         "overdue": true
       },
       {
-        "title": "P1~P3/목실감",
-        "date": "2026-07-29T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-07-29T10:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-07-29T11:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "강의안 1,2",
-        "date": "2026-07-29T13:30:00.000+09:00",
+        "title": "원고초안",
+        "date": "2026-07-30T09:30:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원씽복기",
-        "date": "2026-07-29T14:00:00.000+09:00",
+        "date": "2026-07-30T14:00:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "주간계획 수정",
-        "date": "2026-07-30T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
-        "date": "2026-07-30T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
+        "title": "강의안 1",
         "date": "2026-07-30T15:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원고완성",
@@ -102,13 +77,18 @@
         "overdue": false
       },
       {
+        "title": "강의안2",
+        "date": "2026-07-31T18:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "촬영&편집&업로드",
         "date": "2026-08-01T10:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "강의안345",
-        "date": "2026-08-01T15:00:00.000+09:00",
+        "date": "2026-08-02T14:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -152,6 +132,16 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-08-06",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-08-06T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "고딩친구들 모임준비",
         "date": "2026-08-24",
         "overdue": false
@@ -174,20 +164,26 @@
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "원고",
+        "title": "원고완성",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고",
-        "time": "15:30",
+        "title": "월말점검",
+        "time": "11:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "ppt",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의안2",
+        "time": "18:00",
         "allDay": false,
         "done": false
       }
@@ -218,14 +214,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 12,
-      "rate": "43%",
+      "done": 11,
+      "rate": "39%",
       "days": [
-        {
-          "date": "2026-07-24",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-07-25",
           "done": 1,
@@ -248,11 +239,16 @@
         },
         {
           "date": "2026-07-29",
-          "done": 2,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-07-30",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-07-31",
           "done": 0,
           "total": 4
         }
