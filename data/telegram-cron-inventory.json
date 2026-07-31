@@ -431,12 +431,12 @@
       ]
     },
     {
-      "title": "메모정리",
+      "title": "이렇게산다(성장일지), 메모",
       "repeat": "주간",
       "trigger": "매주 월",
       "priority": "P3",
       "status": "백로그",
-      "content": "월요일 기준으로 생성되는 주간 메모 정리 태스크",
+      "content": "월요일 기준으로 생성되는 주간 성장일지·메모 정리 태스크",
       "evidence": [
         "workspace/config/skills-source/task/references/recurring-tasks.md:20",
         "workspace/apps/n8n/workflows/01 notion 태스크/01-1 반복태스크 생성/workflow.json:27"

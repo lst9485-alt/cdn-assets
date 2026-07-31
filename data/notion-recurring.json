@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22",
+  "updated": "2026-07-31",
   "note": "노션 반복알림 단일 원본. 대시보드 표시 + n8n 01-1 워크플로우가 이 파일을 읽음. 여기만 고치면 됨.",
   "reminders": [
     { "time": "08:00", "label": "오늘 할 일" },
@@ -11,7 +11,7 @@
     { "title": "원씽복기", "repeat": "매일", "time": "14:00", "priority": "P2", "status": "대기" },
     { "title": "P1~P3/목실감", "repeat": "매일", "time": "08:30", "priority": "P2", "status": "대기" },
     { "title": "체크남&링크, db기입", "repeat": "평일", "time": "09:00", "priority": "P2", "status": "대기" },
-    { "title": "메모정리", "repeat": "주간", "dow": 1, "priority": "P3", "status": "백로그" },
+    { "title": "이렇게산다(성장일지), 메모", "repeat": "주간", "dow": 1, "priority": "P3", "status": "백로그" },
     { "title": "마케팅업체 정산", "repeat": "주간", "dow": 1, "time": "09:00", "priority": "P1", "status": "대기" },
     { "title": "현금영수증&세금계산서 발행", "repeat": "주간", "dow": 1, "time": "10:00", "priority": "P2", "status": "대기" },
     { "title": "주간복기", "repeat": "주간", "dow": 1, "time": "11:00", "priority": "P2", "status": "대기" },
