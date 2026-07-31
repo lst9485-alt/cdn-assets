@@ -1,11 +1,11 @@
 {
-  "updated": "2026-07-31T06:00:25.213207+09:00",
+  "updated": "2026-08-01T06:00:24.750730+09:00",
   "summary": {
-    "current_month": 1600000,
-    "current_month_label": "2026-07",
-    "last_month": 8000000,
-    "last_month_label": "2026-06",
-    "change_pct": "-80.0%",
+    "current_month": 0,
+    "current_month_label": "2026-08",
+    "last_month": 1600000,
+    "last_month_label": "2026-07",
+    "change_pct": "-100.0%",
     "total_customers": 149
   },
   "monthly": [
@@ -764,15 +764,15 @@
   "by_region": [
     {
       "region": "수도권",
-      "count": 90,
-      "revenue": 26150000,
-      "ratio": "68.7%"
+      "count": 91,
+      "revenue": 26550000,
+      "ratio": "68.9%"
     },
     {
       "region": "지방",
       "count": 41,
       "revenue": 13550000,
-      "ratio": "31.3%"
+      "ratio": "31.1%"
     }
   ],
   "expenses": [
