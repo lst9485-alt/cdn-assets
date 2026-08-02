@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-02T06:00:14.943291+09:00",
+  "updated": "2026-08-03T06:00:13.388074+09:00",
   "okr": [],
   "tasks": {
-    "total": 759,
+    "total": 761,
     "done": 729,
-    "overdue": 10,
+    "overdue": 14,
     "pending": [
       {
         "title": "전자책 작성",
@@ -57,14 +57,24 @@
         "overdue": true
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-08-02T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "촬영&편집&업로드",
         "date": "2026-08-02T13:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-08-02T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "강의안 1",
         "date": "2026-08-02T16:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "이렇게산다(성장일지), 메모",
@@ -159,14 +169,32 @@
     ],
     "schedule": [
       {
-        "title": "촬영&편집&업로드",
-        "time": "13:00",
+        "title": "이렇게산다(성장일지), 메모",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의안 1",
-        "time": "16:30",
+        "title": "8월 연차확인",
+        "time": "09:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "주간복기",
+        "time": "11:00",
         "allDay": false,
         "done": false
       }
@@ -197,14 +225,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 12,
+      "rate": "43%",
       "days": [
-        {
-          "date": "2026-07-27",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-07-28",
           "done": 3,
@@ -232,6 +255,11 @@
         },
         {
           "date": "2026-08-02",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-08-03",
           "done": 0,
           "total": 4
         }
