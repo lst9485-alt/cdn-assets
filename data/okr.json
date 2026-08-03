@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-03T06:00:13.388074+09:00",
+  "updated": "2026-08-04T06:00:13.747172+09:00",
   "okr": [],
   "tasks": {
-    "total": 761,
-    "done": 729,
-    "overdue": 14,
+    "total": 775,
+    "done": 744,
+    "overdue": 7,
     "pending": [
       {
         "title": "전자책 작성",
@@ -37,74 +37,9 @@
         "overdue": true
       },
       {
-        "title": "ppt",
-        "date": "2026-08-01T10:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-08-01T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-08-01T14:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "월말점검",
-        "date": "2026-08-01T17:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-08-02T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-08-02T13:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-08-02T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "강의안 1",
-        "date": "2026-08-02T16:30:00.000+09:00",
+        "date": "2026-08-03T16:30:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "이렇게산다(성장일지), 메모",
-        "date": "2026-08-03",
-        "overdue": false
-      },
-      {
-        "title": "마케팅업체 정산",
-        "date": "2026-08-03T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "8월 연차확인",
-        "date": "2026-08-03T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-08-03T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주간복기",
-        "date": "2026-08-03T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-08-04",
-        "overdue": false
       },
       {
         "title": "윤택스토리 부가세 무실적 신고 (폐업 마무리)",
@@ -112,13 +47,23 @@
         "overdue": false
       },
       {
-        "title": "강의안345",
-        "date": "2026-08-04T13:30:00.000+09:00",
+        "title": "강의안 1주차",
+        "date": "2026-08-04T10:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-08-04T14:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "자료수집&도입부",
-        "date": "2026-08-05",
+        "date": "2026-08-04T15:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의안 1주차",
+        "date": "2026-08-05T09:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -127,8 +72,8 @@
         "overdue": false
       },
       {
-        "title": "원고완성",
-        "date": "2026-08-06",
+        "title": "원고 7분",
+        "date": "2026-08-05T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -137,13 +82,63 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-08-06T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "윤지편지",
+        "date": "2026-08-06T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고검토",
+        "date": "2026-08-06T14:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "PPT완료",
-        "date": "2026-08-07",
+        "date": "2026-08-07T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의안 1주차 완료",
+        "date": "2026-08-07T15:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-08-08",
+        "overdue": false
+      },
+      {
+        "title": "급여&자산체크",
+        "date": "2026-08-10",
+        "overdue": false
+      },
+      {
+        "title": "이렇게산다(성장일지), 메모",
+        "date": "2026-08-10",
+        "overdue": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "date": "2026-08-10T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "date": "2026-08-10T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "주간복기",
+        "date": "2026-08-10T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의안 3주차",
+        "date": "2026-08-10T11:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -169,32 +164,26 @@
     ],
     "schedule": [
       {
-        "title": "이렇게산다(성장일지), 메모",
-        "time": "",
-        "allDay": true,
-        "done": false
-      },
-      {
-        "title": "마케팅업체 정산",
-        "time": "09:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "8월 연차확인",
+        "title": "윤택스토리 부가세 무실적 신고 (폐업 마무리)",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "현금영수증&세금계산서 발행",
-        "time": "10:00",
+        "title": "강의안 1주차",
+        "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "주간복기",
-        "time": "11:00",
+        "title": "주제선정&썸네일&제목",
+        "time": "14:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "time": "15:30",
         "allDay": false,
         "done": false
       }
@@ -225,14 +214,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 12,
-      "rate": "43%",
+      "done": 17,
+      "rate": "61%",
       "days": [
-        {
-          "date": "2026-07-28",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-07-29",
           "done": 3,
@@ -250,16 +234,21 @@
         },
         {
           "date": "2026-08-01",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-08-02",
-          "done": 0,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-08-03",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-08-04",
           "done": 0,
           "total": 4
         }
