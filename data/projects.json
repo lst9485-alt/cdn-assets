@@ -1,11 +1,11 @@
 {
-  "updated": "2026-08-04T06:00:03.887536+09:00",
+  "updated": "2026-08-05T06:00:04.115910+09:00",
   "projects": [
     {
       "name": "재테크 기초반",
       "type": "folder",
       "app": null,
-      "modified": "2026-07-31",
+      "modified": "2026-08-04",
       "status": null,
       "next": null
     },
