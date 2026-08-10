@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-06T06:00:03.057753+09:00",
+  "updated": "2026-08-10T06:00:03.143480+09:00",
   "sections": [
     {
       "name": "1. 프로젝트",
@@ -141,6 +141,25 @@
     {
       "name": "2. 작업 (일회성/점검)",
       "categories": [
+        {
+          "id": 0,
+          "title": "yt08 — 자막을 의미 단위로 자르기 (8/9~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "0-1. 어색하게 끊긴 블록을 자동으로 찾는 규칙 정하기 (뒤 블록이 조사·의존명사로 시작 / 앞 블록이 관형어로 끝남 등)",
+              "done": false
+            },
+            {
+              "text": "0-2. yt08 SKILL.md에 \"의미 단위 경계 정리\" 단계 추가 + 병합 시 타임코드 처리 규칙 명시",
+              "done": false
+            },
+            {
+              "text": "0-3. 92번 SRT(`Movies/CapCut/0808.srt`)로 결과 검증",
+              "done": false
+            }
+          ]
+        },
         {
           "id": 1,
           "title": "hometax-issue 이름 매칭 강화 검토 (5/6~)",
@@ -408,6 +427,25 @@
             },
             {
               "text": "4-4. 마음에 드는 1~2개만 투명 배경 WebM/MOV 출력 방식까지 정리",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "(낮음) 맥에서 옵시디언 켤 때 윈도우 PC가 안 꺼지는 문제 (8/6~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "5-1. 합침 커밋이 계속 생기는지 2~3주 관찰 (`git -C Obsidian log --merges --oneline`)",
+              "done": false
+            },
+            {
+              "text": "5-2. 계속 생기면 쪽지 방식 구현 — 맥 `close_peer` + `obsidian-guard.ps1` 양쪽 수정",
+              "done": false
+            },
+            {
+              "text": "5-3. 회사PC(`C:\\Users\\leaplab\\obsidian-guard\\`)·노트북(`C:\\Users\\lst\\obsidian-guard\\`)에 각각 복사 + 가드 재시작 — 레포와 분리된 복사본이라 수동 배포 필요",
               "done": false
             }
           ]

@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-06T06:00:13.282893+09:00",
+  "updated": "2026-08-10T06:00:12.089756+09:00",
   "okr": [],
   "tasks": {
-    "total": 785,
-    "done": 754,
-    "overdue": 8,
+    "total": 791,
+    "done": 764,
+    "overdue": 9,
     "pending": [
       {
         "title": "전자책 작성",
@@ -37,64 +37,19 @@
         "overdue": true
       },
       {
-        "title": "원고 3분",
-        "date": "2026-08-05T15:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원고 초안",
-        "date": "2026-08-05T18:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주간계획 수정",
-        "date": "2026-08-06T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-08-06T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "윤지편지",
-        "date": "2026-08-06T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고검토",
-        "date": "2026-08-06T14:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PPT완료",
-        "date": "2026-08-07T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의안 1주차",
-        "date": "2026-08-08T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-08-08T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의안1주차",
-        "date": "2026-08-08T16:30:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "강의안",
         "date": "2026-08-09T09:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-08-09T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "강의안 1주차 완료",
         "date": "2026-08-09T17:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "급여&자산체크",
@@ -114,6 +69,11 @@
       {
         "title": "현금영수증&세금계산서 발행",
         "date": "2026-08-10T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "상담틀에 수익확정못함 넣기",
+        "date": "2026-08-10T10:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -142,6 +102,26 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-08-13",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-08-13T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "PPT완료",
+        "date": "2026-08-14",
+        "overdue": false
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "date": "2026-08-15",
+        "overdue": false
+      },
+      {
         "title": "고딩친구들 모임준비",
         "date": "2026-08-24",
         "overdue": false
@@ -164,26 +144,44 @@
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
+        "title": "급여&자산체크",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "이렇게산다(성장일지), 메모",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고완성",
-        "time": "09:30",
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "윤지편지",
-        "time": "13:00",
+        "title": "상담틀에 수익확정못함 넣기",
+        "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고검토",
-        "time": "14:30",
+        "title": "주간복기",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의안 3주차",
+        "time": "11:30",
         "allDay": false,
         "done": false
       }
@@ -214,29 +212,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 18,
-      "rate": "64%",
+      "done": 14,
+      "rate": "50%",
       "days": [
-        {
-          "date": "2026-07-31",
-          "done": 4,
-          "total": 4
-        },
-        {
-          "date": "2026-08-01",
-          "done": 3,
-          "total": 4
-        },
-        {
-          "date": "2026-08-02",
-          "done": 3,
-          "total": 4
-        },
-        {
-          "date": "2026-08-03",
-          "done": 4,
-          "total": 4
-        },
         {
           "date": "2026-08-04",
           "done": 2,
@@ -244,11 +222,31 @@
         },
         {
           "date": "2026-08-05",
-          "done": 2,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-08-06",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-08-07",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-08-08",
+          "done": 4,
+          "total": 4
+        },
+        {
+          "date": "2026-08-09",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-08-10",
           "done": 0,
           "total": 4
         }
