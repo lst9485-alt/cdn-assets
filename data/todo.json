@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10T06:00:03.143480+09:00",
+  "updated": "2026-08-13T06:00:03.606783+09:00",
   "sections": [
     {
       "name": "1. 프로젝트",
@@ -293,6 +293,21 @@
               "done": false
             }
           ]
+        },
+        {
+          "id": 6,
+          "title": "상담 캘린더-시트 이름 매칭 보강 (8/10~)",
+          "ref": null,
+          "items": [
+            {
+              "text": "6-1. `findCalMatch`에 전화번호 대안 추가 — calMap에 일정 설명의 전화번호도 같이 담고, 이름 매칭 실패 시 시트 E열 번호로 매칭",
+              "done": false
+            },
+            {
+              "text": "6-2. 테스트: 영어 이름 일정 + 한글 시트 이름 조합에서 상담일이 채워지는지 확인",
+              "done": false
+            }
+          ]
         }
       ]
     },
@@ -430,25 +445,6 @@
               "done": false
             }
           ]
-        },
-        {
-          "id": 5,
-          "title": "(낮음) 맥에서 옵시디언 켤 때 윈도우 PC가 안 꺼지는 문제 (8/6~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "5-1. 합침 커밋이 계속 생기는지 2~3주 관찰 (`git -C Obsidian log --merges --oneline`)",
-              "done": false
-            },
-            {
-              "text": "5-2. 계속 생기면 쪽지 방식 구현 — 맥 `close_peer` + `obsidian-guard.ps1` 양쪽 수정",
-              "done": false
-            },
-            {
-              "text": "5-3. 회사PC(`C:\\Users\\leaplab\\obsidian-guard\\`)·노트북(`C:\\Users\\lst\\obsidian-guard\\`)에 각각 복사 + 가드 재시작 — 레포와 분리된 복사본이라 수동 배포 필요",
-              "done": false
-            }
-          ]
         }
       ]
     },
@@ -501,25 +497,6 @@
             },
             {
               "text": "2-2. (별개, 선택) cafe24 서버 시계 15분 느림 → NTP 동기화 (데이터 시각 정확도용)",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 3,
-          "title": "노트북",
-          "ref": null,
-          "items": [
-            {
-              "text": "1-1. scp로 3개 파일(obsidian-guard.ps1 / -launch.vbs / -install.ps1)을 노트북 임의 폴더(예: `%USERPROFILE%\\obsidian-guard\\`)에 복사",
-              "done": false
-            },
-            {
-              "text": "1-2. 그 폴더에서 `obsidian-guard-install.ps1` 실행 → 로그온 작업 등록 → 작업 시작 → 가드 1개 도는지 확인",
-              "done": false
-            },
-            {
-              "text": "1-3. (확인만) 노트북 저장소가 `%USERPROFILE%\\Desktop\\HQ\\Obsidian`에 있는지. 다른 위치면 guard.ps1의 $Vault 한 줄만 맞춤",
               "done": false
             }
           ]

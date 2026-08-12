@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-10T06:00:12.089756+09:00",
+  "updated": "2026-08-13T06:00:11.710676+09:00",
   "okr": [],
   "tasks": {
-    "total": 791,
-    "done": 764,
-    "overdue": 9,
+    "total": 817,
+    "done": 780,
+    "overdue": 13,
     "pending": [
       {
         "title": "전자책 작성",
@@ -37,74 +37,39 @@
         "overdue": true
       },
       {
-        "title": "강의안",
-        "date": "2026-08-09T09:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-08-09T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "강의안 1주차 완료",
-        "date": "2026-08-09T17:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "급여&자산체크",
-        "date": "2026-08-10",
-        "overdue": false
-      },
-      {
         "title": "이렇게산다(성장일지), 메모",
         "date": "2026-08-10",
-        "overdue": false
+        "overdue": true
       },
       {
-        "title": "마케팅업체 정산",
-        "date": "2026-08-10T09:00:00.000+09:00",
-        "overdue": false
+        "title": "P1~P3/목실감",
+        "date": "2026-08-12T08:30:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-08-10T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상담틀에 수익확정못함 넣기",
-        "date": "2026-08-10T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주간복기",
-        "date": "2026-08-10T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의안 3주차",
-        "date": "2026-08-10T11:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-08-11",
-        "overdue": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-08-12",
-        "overdue": false
+        "title": "원고",
+        "date": "2026-08-12T10:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "콘텐츠 관리시트",
         "date": "2026-08-12T12:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원고완성",
-        "date": "2026-08-13",
-        "overdue": false
+        "date": "2026-08-12T13:30:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-08-12T14:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "ppt",
+        "date": "2026-08-12T18:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "주간계획 수정",
@@ -113,12 +78,92 @@
       },
       {
         "title": "PPT완료",
-        "date": "2026-08-14",
+        "date": "2026-08-13T09:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "촬영&편집&업로드",
-        "date": "2026-08-15",
+        "date": "2026-08-13T18:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "상담준비",
+        "date": "2026-08-14T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "이메일상담 준비",
+        "date": "2026-08-14T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의안1주차",
+        "date": "2026-08-14T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "비공개 촬영리스트 정리\n집구매, 시트작성법 등",
+        "date": "2026-08-14T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "대체주택 특례",
+        "date": "2026-08-15T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "시트 등 촬영 계획",
+        "date": "2026-08-15T16:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "임대사업자 스터디",
+        "date": "2026-08-16T11:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "일/주/월간 옵시디언으로 이동?",
+        "date": "2026-08-16T14:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "이렇게산다(성장일지), 메모",
+        "date": "2026-08-17",
+        "overdue": false
+      },
+      {
+        "title": "주간복기",
+        "date": "2026-08-17T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-08-18",
+        "overdue": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "date": "2026-08-18T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "date": "2026-08-18T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "상담준비",
+        "date": "2026-08-18T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "date": "2026-08-19",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-08-19T12:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -140,48 +185,29 @@
         "title": "고딩친구들 모임준비",
         "date": "2026-12-21",
         "overdue": false
+      },
+      {
+        "title": "옵시디언 1년 결제 28.8$(법인카드)",
+        "date": "2027-08-10",
+        "overdue": false
       }
     ],
     "schedule": [
       {
-        "title": "급여&자산체크",
-        "time": "",
-        "allDay": true,
-        "done": false
-      },
-      {
-        "title": "이렇게산다(성장일지), 메모",
-        "time": "",
-        "allDay": true,
-        "done": false
-      },
-      {
-        "title": "마케팅업체 정산",
-        "time": "09:00",
+        "title": "주간계획 수정",
+        "time": "08:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "현금영수증&세금계산서 발행",
-        "time": "10:00",
+        "title": "PPT완료",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "상담틀에 수익확정못함 넣기",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "주간복기",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의안 3주차",
-        "time": "11:30",
+        "title": "촬영&편집&업로드",
+        "time": "18:30",
         "allDay": false,
         "done": false
       }
@@ -212,24 +238,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 17,
+      "rate": "61%",
       "days": [
-        {
-          "date": "2026-08-04",
-          "done": 2,
-          "total": 4
-        },
-        {
-          "date": "2026-08-05",
-          "done": 3,
-          "total": 4
-        },
-        {
-          "date": "2026-08-06",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-08-07",
           "done": 2,
@@ -242,11 +253,26 @@
         },
         {
           "date": "2026-08-09",
-          "done": 0,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-08-10",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-08-11",
+          "done": 4,
+          "total": 4
+        },
+        {
+          "date": "2026-08-12",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-08-13",
           "done": 0,
           "total": 4
         }
@@ -256,11 +282,16 @@
   "sales": {
     "month": "2026-08",
     "month_label": "8월",
-    "total_amount": 40,
-    "total_count": 1,
+    "total_amount": 80,
+    "total_count": 2,
     "weekly": [
       {
         "week": "1주차",
+        "count": 1,
+        "amount": 40
+      },
+      {
+        "week": "2주차",
         "count": 1,
         "amount": 40
       }
