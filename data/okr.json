@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-14T06:00:16.294952+09:00",
+  "updated": "2026-08-15T06:00:15.184440+09:00",
   "okr": [],
   "tasks": {
-    "total": 821,
-    "done": 785,
-    "overdue": 10,
+    "total": 825,
+    "done": 793,
+    "overdue": 7,
     "pending": [
       {
         "title": "전자책 작성",
@@ -42,38 +42,13 @@
         "overdue": true
       },
       {
-        "title": "원고",
-        "date": "2026-08-13T10:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-08-13T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-08-13T15:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-08-14T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PPT완료",
-        "date": "2026-08-14T10:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-08-14T17:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "편집",
-        "date": "2026-08-14T20:15:00.000+09:00",
+        "date": "2026-08-15T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의",
+        "date": "2026-08-15T13:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -162,6 +137,11 @@
         "overdue": false
       },
       {
+        "title": "PPT완료",
+        "date": "2026-08-21",
+        "overdue": false
+      },
+      {
         "title": "고딩친구들 모임준비",
         "date": "2026-08-24",
         "overdue": false
@@ -189,26 +169,26 @@
     ],
     "schedule": [
       {
-        "title": "상담준비",
+        "title": "편집",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "PPT완료",
-        "time": "10:45",
+        "title": "강의",
+        "time": "13:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "time": "17:00",
+        "title": "비공개 촬영리스트 정리\n집구매, 시트작성법 등",
+        "time": "15:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "편집",
-        "time": "20:15",
+        "title": "시트 등 촬영 계획",
+        "time": "16:30",
         "allDay": false,
         "done": false
       }
@@ -239,14 +219,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 16,
-      "rate": "57%",
+      "done": 12,
+      "rate": "43%",
       "days": [
-        {
-          "date": "2026-08-08",
-          "done": 4,
-          "total": 4
-        },
         {
           "date": "2026-08-09",
           "done": 2,
@@ -274,6 +249,11 @@
         },
         {
           "date": "2026-08-14",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-08-15",
           "done": 0,
           "total": 4
         }
