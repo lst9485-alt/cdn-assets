@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-16T06:00:14.347682+09:00",
+  "updated": "2026-08-17T06:00:12.783364+09:00",
   "okr": [],
   "tasks": {
-    "total": 828,
+    "total": 830,
     "done": 793,
-    "overdue": 13,
+    "overdue": 17,
     "pending": [
       {
         "title": "전자책 작성",
@@ -72,14 +72,24 @@
         "overdue": true
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-08-16T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
         "title": "임대사업자 스터디",
         "date": "2026-08-16T11:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "대체주택 특례",
         "date": "2026-08-16T12:45:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-08-16T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "이렇게산다(성장일지), 메모",
@@ -184,14 +194,20 @@
     ],
     "schedule": [
       {
-        "title": "임대사업자 스터디",
-        "time": "11:30",
+        "title": "이렇게산다(성장일지), 메모",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "주간복기",
+        "time": "11:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "대체주택 특례",
-        "time": "12:45",
+        "title": "이메일상담 준비",
+        "time": "11:45",
         "allDay": false,
         "done": false
       }
@@ -222,14 +238,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 10,
-      "rate": "36%",
+      "done": 7,
+      "rate": "25%",
       "days": [
-        {
-          "date": "2026-08-10",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-08-11",
           "done": 4,
@@ -257,6 +268,11 @@
         },
         {
           "date": "2026-08-16",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-08-17",
           "done": 0,
           "total": 4
         }
