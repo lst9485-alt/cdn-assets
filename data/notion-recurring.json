@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-18",
+  "updated": "2026-08-19",
   "note": "tasks는 노션 '🔁 반복 목록' 표에서 매일 새벽 자동 생성됨 — tasks 직접 수정 금지(덮어써짐). holidays/reminders는 이 파일이 원본. 대시보드 + n8n 01-1이 이 파일을 읽음.",
   "reminders": [
     { "time": "08:00", "label": "오늘 할 일" },
@@ -9,6 +9,7 @@
   ],
   "tasks": [
     { "title": "P1~P3/목실감", "repeat": "매일", "time": "08:30", "priority": "P2", "status": "대기" },
+    { "title": "테스트", "repeat": "매일", "time": "09:00", "priority": "P2", "status": "대기" },
     { "title": "원씽복기", "repeat": "매일", "time": "14:00", "priority": "P2", "status": "대기" },
     { "title": "체크남&링크, db기입", "repeat": "평일", "time": "09:00", "priority": "P2", "status": "대기" },
     { "title": "이렇게산다(성장일지), 메모", "repeat": "주간", "dow": 1, "priority": "P3", "status": "백로그" },

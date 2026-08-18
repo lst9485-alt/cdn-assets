@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-18T06:00:26.824387+09:00",
+  "updated": "2026-08-19T06:00:30.436429+09:00",
   "summary": {
     "정상": 8,
     "정리 필요": 1,
@@ -152,7 +152,7 @@
       "name": "dashboard-data",
       "title": "대시보드 갱신",
       "room": "알림봇",
-      "description": "대시보드 데이터 생성 — 투두/프로젝트/OKR JSON → dashboard push",
+      "description": "대시보드 데이터 생성 — 투두/프로젝트/OKR/반복목록 JSON → dashboard push",
       "cron": "0 6 * * *",
       "day": "매일",
       "time": "06:00",
