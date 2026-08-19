@@ -1,19 +1,11 @@
 {
-  "updated": "2026-08-19T06:00:04.220420+09:00",
+  "updated": "2026-08-20T06:00:04.198305+09:00",
   "projects": [
-    {
-      "name": "비즈니스PT 프로",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-08-18",
-      "status": null,
-      "next": null
-    },
     {
       "name": "260823 원고",
       "type": "file",
       "app": null,
-      "modified": "2026-08-18",
+      "modified": "2026-08-20",
       "status": null,
       "next": null
     },
@@ -21,7 +13,15 @@
       "name": "재테크 기초반 등 강의",
       "type": "folder",
       "app": null,
-      "modified": "2026-08-18",
+      "modified": "2026-08-19",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "비즈니스PT 프로",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-08-19",
       "status": null,
       "next": null
     },

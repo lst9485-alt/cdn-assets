@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-19T06:00:14.202722+09:00",
+  "updated": "2026-08-20T06:00:12.124917+09:00",
   "okr": [],
   "tasks": {
-    "total": 836,
-    "done": 801,
-    "overdue": 11,
+    "total": 846,
+    "done": 807,
+    "overdue": 12,
     "pending": [
       {
         "title": "전자책 작성",
@@ -47,49 +47,24 @@
         "overdue": true
       },
       {
-        "title": "강의",
-        "date": "2026-08-18T11:45:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "주제선정&썸네일&제목",
-        "date": "2026-08-18T15:00:00.000+09:00",
+        "date": "2026-08-19T10:30:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "원데이클래스",
-        "date": "2026-08-18T20:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-08-19T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "완강",
-        "date": "2026-08-19T11:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-08-19T12:00:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "자료수집&도입부",
         "date": "2026-08-19T13:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-08-19T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "~원고 3분",
-        "date": "2026-08-19T14:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의복습",
-        "date": "2026-08-19T18:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-08-19T15:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "주간계획 수정",
@@ -102,28 +77,53 @@
         "overdue": false
       },
       {
+        "title": "폰 다시 일시정지",
+        "date": "2026-08-20T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "대체주택 특례, 임대사업자 스터디",
         "date": "2026-08-20T12:00:00.000+09:00",
         "overdue": false
       },
       {
+        "title": "강의복습",
+        "date": "2026-08-20T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원고완성",
-        "date": "2026-08-20T16:00:00.000+09:00",
+        "date": "2026-08-20T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원데이클래스",
+        "date": "2026-08-20T18:45:00.000+09:00",
         "overdue": false
       },
       {
         "title": "PPT완료",
-        "date": "2026-08-21",
+        "date": "2026-08-21T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ppt완료",
+        "date": "2026-08-21T13:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "촬영&편집&업로드",
-        "date": "2026-08-22",
+        "date": "2026-08-21T18:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "시트 등 촬영 계획\n집구매, 시트작성법 등",
-        "date": "2026-08-22T15:30:00.000+09:00",
+        "title": "옵시디언으로 변경",
+        "date": "2026-08-22T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "유튜브제작 템플릿 변경(스킬9번반영)",
+        "date": "2026-08-22T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -152,18 +152,38 @@
         "overdue": false
       },
       {
+        "title": "상담준비",
+        "date": "2026-08-24T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "시트 등 촬영 계획\n집구매, 시트작성법 등",
+        "date": "2026-08-24T15:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "주제선정&썸네일&제목",
         "date": "2026-08-25",
         "overdue": false
       },
       {
-        "title": "상담준비",
-        "date": "2026-08-25T09:30:00.000+09:00",
+        "title": "강의복습",
+        "date": "2026-08-25T10:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "pt준비",
         "date": "2026-08-25T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "date": "2026-08-26",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-08-26T12:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -184,38 +204,44 @@
     ],
     "schedule": [
       {
-        "title": "상담준비",
+        "title": "주간계획 수정",
+        "time": "08:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원고초안",
+        "time": "09:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "폰 다시 일시정지",
         "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "완강",
-        "time": "11:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
+        "title": "대체주택 특례, 임대사업자 스터디",
         "time": "12:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "자료수집&도입부",
+        "title": "강의복습",
         "time": "13:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "~원고 3분",
-        "time": "14:30",
+        "title": "원고완성",
+        "time": "15:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의복습",
-        "time": "18:00",
+        "title": "원데이클래스",
+        "time": "18:45",
         "allDay": false,
         "done": false
       }
@@ -246,14 +272,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 10,
-      "rate": "36%",
+      "done": 12,
+      "rate": "43%",
       "days": [
-        {
-          "date": "2026-08-13",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-08-14",
           "done": 4,
@@ -276,11 +297,16 @@
         },
         {
           "date": "2026-08-18",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-08-19",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-08-20",
           "done": 0,
           "total": 4
         }
