@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20T06:00:04.198305+09:00",
+  "updated": "2026-08-21T06:00:04.050340+09:00",
   "projects": [
     {
       "name": "260823 원고",
@@ -10,10 +10,18 @@
       "next": null
     },
     {
-      "name": "재테크 기초반 등 강의",
+      "name": "260830 원고",
+      "type": "file",
+      "app": null,
+      "modified": "2026-08-20",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "할 일",
       "type": "folder",
       "app": null,
-      "modified": "2026-08-19",
+      "modified": "2026-08-20",
       "status": null,
       "next": null
     },
@@ -21,7 +29,15 @@
       "name": "비즈니스PT 프로",
       "type": "folder",
       "app": null,
-      "modified": "2026-08-19",
+      "modified": "2026-08-20",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "재테크 기초반 등 강의",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-08-20",
       "status": null,
       "next": null
     },

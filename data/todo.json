@@ -1,40 +1,69 @@
 {
-  "updated": "2026-08-20T06:00:03.538454+09:00",
+  "updated": "2026-08-21T06:00:03.345305+09:00",
   "sections": [
     {
-      "name": "1. 프로젝트",
+      "name": "프로젝트",
       "categories": [
         {
           "id": 1,
-          "title": "(높음) 1:1 코칭 운영 후속 (5/15~)",
-          "ref": null,
+          "title": "1:1 코칭 운영 후속",
+          "ref": "1대1 코칭 운영 후속",
+          "priority": "high",
+          "status": "in-progress",
           "items": [
             {
-              "text": "1-6 상담랜딩페이지 주차별로 달력마감표시.",
+              "text": "1-6 상담랜딩페이지 주차별로 달력마감표시",
               "done": false
             },
             {
-              "text": "1-8. 짧은 소개영상 혹은 자료제작",
+              "text": "1-8 짧은 소개영상 혹은 자료제작",
               "done": false
             },
             {
-              "text": "1-4. 투자 철학 페이지(`investment-philosophy.html`) 수정 (5/14~)",
+              "text": "1-4 투자 철학 페이지(`investment-philosophy.html`) 수정 (5/14~)",
               "done": false
             },
             {
-              "text": "1-5. 자료실/커뮤니티 신설 — 영상 자료 배포",
+              "text": "1-5 자료실/커뮤니티 신설 — 영상 자료 배포",
               "done": false
             },
             {
-              "text": "1-6. 1:1 코칭 랜딩 속도 최적화 — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축 (5/13~)",
+              "text": "1-6 1:1 코칭 랜딩 속도 최적화 — 폰트 preload + Tailwind CDN → 빌드 CSS 교체. 첫 방문 1~2초 단축 (5/13~)",
               "done": false
             }
           ]
         },
         {
           "id": 2,
-          "title": "원소스 멀티유즈 콘텐츠 시스템 셋업 (4/25~)",
-          "ref": "원소스 멀티유즈",
+          "title": "강의안 제작",
+          "ref": "강의안 제작",
+          "priority": "normal",
+          "status": "in-progress",
+          "items": [
+            {
+              "text": "4-1. 내집마련 실전반 강의안 구조 확정",
+              "done": false
+            },
+            {
+              "text": "4-2. 재테크 기초반 강의안 구조 확정 — 1주차 5편 구성·제작 방향·표기 통일 3건 완료(7/28). 남은 것: 1주차 대본(04→03→02→05→01) → 2~5주차 편 구성",
+              "done": false
+            },
+            {
+              "text": "4-3. 강의·랜딩·제공자료·과제 흐름 연결",
+              "done": false
+            },
+            {
+              "text": "4-4. 판매/운영 형태 기준 정리",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "원소스 멀티유즈 콘텐츠 시스템 셋업",
+          "ref": "원소스 멀티유즈 시스템 셋업",
+          "priority": "normal",
+          "status": "open",
           "items": [
             {
               "text": "2-1. 첫 주제 선정 — [[주제 풀]] 6개 카테고리에서 1주차 주제 1개 확정",
@@ -67,9 +96,11 @@
           ]
         },
         {
-          "id": 3,
-          "title": "콘텐츠&템플릿 제작 (5/6~)",
-          "ref": "상담 CRM",
+          "id": 4,
+          "title": "콘텐츠&템플릿 제작",
+          "ref": "콘텐츠 템플릿 제작",
+          "priority": "normal",
+          "status": "in-progress",
           "items": [
             {
               "text": "3-1-1. 상담 템플릿 분할 → 회원 맞춤 대시보드에 표준 부분 + 개별 맞춤 부분 분리 구성",
@@ -112,58 +143,56 @@
               "done": false
             }
           ]
-        },
-        {
-          "id": 4,
-          "title": "강의안 제작 (5/18~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "4-1. 내집마련 실전반 강의안 구조 확정",
-              "done": false
-            },
-            {
-              "text": "4-2. 재테크 기초반 강의안 구조 확정 — 1주차 5편 구성·제작 방향·표기 통일 3건 완료(7/28). 남은 것: 1주차 대본(04→03→02→05→01) → 2~5주차 편 구성",
-              "done": false
-            },
-            {
-              "text": "4-3. 강의·랜딩·제공자료·과제 흐름 연결",
-              "done": false
-            },
-            {
-              "text": "4-4. 판매/운영 형태 기준 정리",
-              "done": false
-            }
-          ]
         }
       ]
     },
     {
-      "name": "2. 작업 (일회성/점검)",
+      "name": "작업",
       "categories": [
         {
-          "id": 0,
-          "title": "yt08 — 자막을 의미 단위로 자르기 (8/9~)",
-          "ref": null,
+          "id": 1,
+          "title": "consult 스킬 점검 결과 반영",
+          "ref": "consult 스킬 점검 반영",
+          "priority": "normal",
+          "status": "open",
           "items": [
             {
-              "text": "0-1. 어색하게 끊긴 블록을 자동으로 찾는 규칙 정하기 (뒤 블록이 조사·의존명사로 시작 / 앞 블록이 관형어로 끝남 등)",
+              "text": "4-1. SKILL.md 4-1단계를 단축주소 기준으로 재작성 (Short.io 목적지 갱신 → 재무 숫자 보존)",
               "done": false
             },
             {
-              "text": "0-2. yt08 SKILL.md에 \"의미 단위 경계 정리\" 단계 추가 + 병합 시 타임코드 처리 규칙 명시",
+              "text": "4-2. allowed-tools에 Edit, Write 추가",
               "done": false
             },
             {
-              "text": "0-3. 92번 SRT(`Movies/CapCut/0808.srt`)로 결과 검증",
+              "text": "4-3. C-3 \"+50분\" → \"원본 일정의 길이 유지\"",
               "done": false
             }
           ]
         },
         {
-          "id": 1,
-          "title": "hometax-issue 이름 매칭 강화 검토 (5/6~)",
-          "ref": null,
+          "id": 2,
+          "title": "content-sheet 83주 키/풀링 재분류 애널리틱스 반영 검증",
+          "ref": "content-sheet 83주 재분류 검증",
+          "priority": "normal",
+          "status": "open",
+          "items": [
+            {
+              "text": "5-1. 6/5 이후 재조회: `python3 tools/scripts/yt-analytics-query.py --start-date 2026-05-25 --end-date 2026-05-31` → 키 조회수 **~4356**, 풀링 **~14372** 나오면 정상(끝). 82주는 그 영상 조회수 0이라 검증 불필요.",
+              "done": false
+            },
+            {
+              "text": "5-2. 값이 다르면 시트 CH열 수정: CH17(키조회수)·CH19(키시청지속)·CH20(키페이지유입)·CH21(키검색유입)·CH22(풀링조회수)·CH23(풀링시청지속)·CH24(탐색유입) → 그 후 `python3 tools/scripts/nightwatch/parse-funnel.py apps/dashboard/repo/data/funnel.json` 재실행 + cdn-assets 커밋·푸시.",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "hometax-issue 이름 매칭 강화 검토",
+          "ref": "hometax-issue 이름 매칭 강화",
+          "priority": "normal",
+          "status": "open",
           "items": [
             {
               "text": "1-1. 첫 월요일 운영 결과 점검 — mismatch/extra 빈도 확인",
@@ -180,16 +209,39 @@
           ]
         },
         {
-          "id": 2,
-          "title": "노션 자료 옵시디언 이전 (5/6~)",
-          "ref": null,
+          "id": 4,
+          "title": "yt08 — 자막을 의미 단위로 자르기",
+          "ref": "yt08 자막 의미 단위 자르기",
+          "priority": "normal",
+          "status": "open",
           "items": [
             {
-              "text": "2-1. 노션 -> 옵시디언으로 옮기기. 브랜드정본등 옵시디언으로.",
+              "text": "0-1. 어색하게 끊긴 블록을 자동으로 찾는 규칙 정하기 (뒤 블록이 조사·의존명사로 시작 / 앞 블록이 관형어로 끝남 등)",
               "done": false
             },
             {
-              "text": "노션역할 축소. 일부만 남기기.",
+              "text": "0-2. yt08 SKILL.md에 \"의미 단위 경계 정리\" 단계 추가 + 병합 시 타임코드 처리 규칙 명시",
+              "done": false
+            },
+            {
+              "text": "0-3. 92번 SRT(`Movies/CapCut/0808.srt`)로 결과 검증",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "노션 자료 옵시디언 이전",
+          "ref": "노션 자료 옵시디언 이전",
+          "priority": "normal",
+          "status": "open",
+          "items": [
+            {
+              "text": "2-1. 노션 → 옵시디언으로 옮기기. 브랜드정본 등 옵시디언으로",
+              "done": false
+            },
+            {
+              "text": "노션역할 축소. 일부만 남기기",
               "done": false
             },
             {
@@ -197,7 +249,7 @@
               "done": false
             },
             {
-              "text": "2-3. brand-context 정본을 옵시디언으로 전환 — 현재 노션이 정본, `Workspace/config/brand-context/`가 사본. 수정할 때마다 `/profile sync` 부담. 정본 옮기면 sync 단방향(옵시디언→노션) 또는 노션 폐지 가능",
+              "text": "2-3. brand-context 정본을 옵시디언으로 전환",
               "done": false
             },
             {
@@ -255,49 +307,11 @@
           ]
         },
         {
-          "id": 3,
-          "title": "유튜브 애드센스 확인",
-          "ref": null,
-          "items": []
-        },
-        {
-          "id": 4,
-          "title": "consult 스킬 점검 결과 반영 (6/15~ 플랜 있음)",
-          "ref": null,
-          "items": [
-            {
-              "text": "4-1. SKILL.md 4-1단계를 단축주소 기준으로 재작성 (Short.io 목적지 갱신 → 재무 숫자 보존)",
-              "done": false
-            },
-            {
-              "text": "4-2. allowed-tools에 Edit, Write 추가",
-              "done": false
-            },
-            {
-              "text": "4-3. C-3 \"+50분\" → \"원본 일정의 길이 유지\"",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 5,
-          "title": "content-sheet 83주 키/풀링 재분류 애널리틱스 반영 검증 (6/3~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "5-1. 6/5 이후 재조회: `python3 tools/scripts/yt-analytics-query.py --start-date 2026-05-25 --end-date 2026-05-31` → 키 조회수 **~4356**, 풀링 **~14372** 나오면 정상(끝). 82주는 그 영상 조회수 0이라 검증 불필요.",
-              "done": false
-            },
-            {
-              "text": "5-2. 값이 다르면 시트 CH열 수정: CH17(키조회수)·CH19(키시청지속)·CH20(키페이지유입)·CH21(키검색유입)·CH22(풀링조회수)·CH23(풀링시청지속)·CH24(탐색유입) → 그 후 `python3 tools/scripts/nightwatch/parse-funnel.py apps/dashboard/repo/data/funnel.json` 재실행 + cdn-assets 커밋·푸시.",
-              "done": false
-            }
-          ]
-        },
-        {
           "id": 6,
-          "title": "상담 캘린더-시트 이름 매칭 보강 (8/10~)",
-          "ref": null,
+          "title": "상담 캘린더-시트 이름 매칭 보강",
+          "ref": "상담 캘린더-시트 이름 매칭 보강",
+          "priority": "normal",
+          "status": "open",
           "items": [
             {
               "text": "6-1. `findCalMatch`에 전화번호 대안 추가 — calMap에 일정 설명의 전화번호도 같이 담고, 이름 매칭 실패 시 시트 E열 번호로 매칭",
@@ -308,58 +322,45 @@
               "done": false
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "3. 낮은 우선순위",
-      "categories": [
+        },
         {
-          "id": 1,
-          "title": "해외 유튜브 벤치마킹 조사 (4/27~)",
-          "ref": null,
+          "id": 7,
+          "title": "유튜브 애드센스 확인",
+          "ref": "유튜브 애드센스 확인",
+          "priority": "normal",
+          "status": "open",
           "items": [
             {
-              "text": "1-1. 사용자 의사결정: TOP 7 중 가장 깊게 분석할 채널 1~2개 선택",
+              "text": "입금 여부 확인",
               "done": false
             },
             {
-              "text": "1-2. 선택한 채널 영상 5편 정밀 분석 (썸네일·구조·코멘트)",
-              "done": false
-            },
-            {
-              "text": "1-3. BiggerPockets 사업구조·퍼널만 별도 분석 (콘텐츠 톤 제외)",
-              "done": false
-            },
-            {
-              "text": "1-4. 마스코트 캐릭터 도입 의사결정 (両学長 모델)",
-              "done": false
-            },
-            {
-              "text": "1-5. 우리 채널 즉시 적용 액션 1개 도출 → 실행",
+              "text": "법인 달러계좌 개설",
               "done": false
             }
           ]
         },
         {
-          "id": 2,
-          "title": "(낮음) 경쟁채널/콘텐츠 모니터링 시스템 (4/16~)",
-          "ref": "경쟁채널 모니터링 시스템",
+          "id": 8,
+          "title": "경쟁채널/콘텐츠 모니터링 시스템",
+          "ref": "경쟁채널 모니터링 시스템 구축",
+          "priority": "low",
+          "status": "in-progress",
           "items": [
             {
-              "text": "2-1-1. 고스타 모니터링 시스템 심화 조사 — n8n, Huginn, RSSHub, changedetection.io, Grafana, Uptime Kuma, ntfy, Apprise 등 스타 많은 프로젝트를 “도입/구조 차용/제외” 매트릭스로 정리",
+              "text": "2-1-1. 고스타 모니터링 시스템 심화 조사 — n8n, Huginn, RSSHub, changedetection.io, Grafana, Uptime Kuma, ntfy, Apprise 등 별 많은 프로젝트를 도입/구조 차용/제외로 나눠 정리",
               "done": false
             },
             {
-              "text": "2-1-2. n8n으로 맡길 범위 결정 — 수집까지 맡길지, Python 수집기는 유지하고 알림/오케스트레이션만 맡길지 비교",
+              "text": "2-1-2. n8n으로 맡길 범위 결정 — 수집까지 맡길지, Python 수집기는 유지하고 알림만 맡길지 비교",
               "done": false
             },
             {
-              "text": "2-1-3. YouTube Data API v3 쿼터/수집 안정성 재점검 — uploads playlist vs search, 일일 quota, 실패 재시도, API key만으로 충분한지",
+              "text": "2-1-3. YouTube Data API v3 사용량/수집 안정성 재점검 — uploads playlist vs search, 일일 사용량 한도, 실패 재시도, API key만으로 충분한지",
               "done": false
             },
             {
-              "text": "2-1-4. yt-dlp/scrapetube 폴백 PoC — API 장애 또는 quota 초과 시 신규 영상/기본 메타데이터만 보강 가능한지 확인",
+              "text": "2-1-4. yt-dlp/scrapetube 대체 경로 시험 — API 장애나 한도 초과 시 신규 영상·기본 정보만 보강 가능한지 확인",
               "done": false
             },
             {
@@ -371,11 +372,11 @@
               "done": false
             },
             {
-              "text": "2-2-3. 대시보드 운영 상태 카드 추가 — 마지막 실행, 성공/실패, 수집 영상 수, Telegram 발송 여부",
+              "text": "2-2-3. 대시보드 운영 상태 카드 추가 — 마지막 실행, 성공/실패, 수집 영상 수, 텔레그램 발송 여부",
               "done": false
             },
             {
-              "text": "2-3-1. 네이버 블로그 수집 PoC — RSS 동작, 본문 파싱, 공감/댓글/이웃 수 대안, robots.txt 확인",
+              "text": "2-3-1. 네이버 블로그 수집 시험 — RSS 동작, 본문 파싱, 공감/댓글/이웃 수 대안, robots.txt 확인",
               "done": false
             },
             {
@@ -399,41 +400,24 @@
               "done": false
             },
             {
-              "text": "2-4-3. 주제 선정 리포트에 “최근 2주 히트작 + 최근 3개월 TOP + 채널 평균대비 TOP” 연결",
+              "text": "2-4-3. 주제 선정 리포트에 최근 2주 히트작 + 최근 3개월 TOP + 채널 평균대비 TOP 연결",
               "done": false
             }
           ]
         },
         {
-          "id": 3,
-          "title": "(낮음) 유튜브 제작 GitHub 오픈소스·스킬 조사 (4/27~)",
-          "ref": null,
-          "items": [
-            {
-              "text": "3-1. 사용자 결정: TOP 5 중 우선 채택할 도구 1~2개 선택",
-              "done": false
-            },
-            {
-              "text": "3-2. nova-youtube-agent 코드 깊이 분석 → yt01-topic v3.0 설계 베이스 검토 (2와 연계)",
-              "done": false
-            },
-            {
-              "text": "3-3. youtube-comment-downloader PoC: 우리 채널 코멘트 → 다음 주제 발굴 시도",
-              "done": false
-            }
-          ]
-        },
-        {
-          "id": 4,
-          "title": "(낮음) 유튜브 우측상단 브랜드 버그 모션 정리 (5/7~)",
-          "ref": null,
+          "id": 9,
+          "title": "유튜브 우측상단 브랜드 버그 모션 정리",
+          "ref": "유튜브 브랜드 버그 모션",
+          "priority": "low",
+          "status": "in-progress",
           "items": [
             {
               "text": "4-1. 현재 18개 후보 중 버릴 것/남길 것 표시 — 후보 자체는 아카이브에 보관, 최종 로고로 쓰지 않음",
               "done": false
             },
             {
-              "text": "4-2. 새 방향 5개 제작 — `우리동네 재테크` 워드마크 중심, 동네 좌표/주소 라벨/기준선/브리핑 시그널 중 1개만 결합",
+              "text": "4-2. 새 방향 5개 제작 — `우리동네 재테크` 워드마크 중심, 동네 좌표/주소 라벨/기준선/브리핑 신호 중 1개만 결합",
               "done": false
             },
             {
@@ -445,42 +429,71 @@
               "done": false
             }
           ]
-        }
-      ]
-    },
-    {
-      "name": "4. 실행환경",
-      "categories": [
+        },
         {
-          "id": 1,
-          "title": "맥",
-          "ref": null,
+          "id": 10,
+          "title": "유튜브 제작 GitHub 오픈소스·스킬 조사",
+          "ref": "유튜브 제작 오픈소스 조사",
+          "priority": "low",
+          "status": "in-progress",
           "items": [
             {
-              "text": "1-1. 직접 키보드 꽂아 잠금화면 비번 입력 테스트 — 직접도 안 되면 macOS 26.3.1 버그, 직접만 되면 Parsec 문제 (원인 판별)",
+              "text": "3-1. 사용자 결정: TOP 5 중 우선 채택할 도구 1~2개 선택",
               "done": false
             },
             {
-              "text": "1-2. 시스템 설정 → 개인정보 보호 및 보안 → Parsec 권한 ON 확인: 손쉬운 사용 / 화면 기록 및 시스템 오디오 녹음 / 마이크",
+              "text": "3-2. nova-youtube-agent 코드 깊이 분석 → yt01-topic v3.0 설계 베이스 검토",
               "done": false
             },
             {
-              "text": "1-3. Parsec 최신 업데이트 확인 (현재 150.101.1 → 150-103a 이상)",
-              "done": false
-            },
-            {
-              "text": "1-4. 그래도 안 되면 Parsec 잠금화면 별도 설치판 설치 — https://support.parsec.app/hc/en-us/articles/32381618319124-Access-Login-Screen-on-macOS",
+              "text": "3-3. youtube-comment-downloader 시험: 우리 채널 코멘트로 다음 주제 발굴 시도",
               "done": false
             }
           ]
         },
         {
-          "id": 2,
-          "title": "회사PC",
-          "ref": null,
+          "id": 11,
+          "title": "해외 유튜브 벤치마킹 조사",
+          "ref": "해외 유튜브 벤치마킹 조사",
+          "priority": "low",
+          "status": "in-progress",
           "items": [
             {
-              "text": "1-1. 회사 관련 폴더 context 확인하고 현재 소스/배포본 차이 점검",
+              "text": "1-1. 사용자 의사결정: TOP 7 중 가장 깊게 분석할 채널 1~2개 선택",
+              "done": false
+            },
+            {
+              "text": "1-2. 선택한 채널 영상 5편 정밀 분석 (썸네일·구조·코멘트)",
+              "done": false
+            },
+            {
+              "text": "1-3. BiggerPockets 사업구조·퍼널만 별도 분석 (콘텐츠 톤 제외)",
+              "done": false
+            },
+            {
+              "text": "1-4. 마스코트 캐릭터 도입 의사결정 (両学長 모델)",
+              "done": false
+            },
+            {
+              "text": "1-5. 우리 채널 즉시 적용 액션 1개 도출 → 실행",
+              "done": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "실행환경",
+      "categories": [
+        {
+          "id": 1,
+          "title": "IP 감사 어뷰징 화면 추가 수정",
+          "ref": "IP 감사 어뷰징 화면 수정",
+          "priority": "normal",
+          "status": "open",
+          "items": [
+            {
+              "text": "1-1. 회사 관련 폴더 context 확인하고 현재 소스와 배포본 차이 점검",
               "done": false
             },
             {
@@ -490,13 +503,109 @@
             {
               "text": "1-3. 회사PC 또는 서버 배포본에서 화면 확인",
               "done": false
-            },
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "맥미니 Parsec 잠금화면 비번 입력 문제 해결",
+          "ref": "맥미니 Parsec 잠금화면 문제",
+          "priority": "normal",
+          "status": "open",
+          "items": [
             {
-              "text": "2-1. 체크봇 워치독(멈추면 자동 재시작) + 텔레그램 API 타임아웃 보강",
+              "text": "1-1. 직접 키보드 꽂아 잠금화면 비번 입력 테스트 — 직접도 안 되면 macOS 26.3.1 문제, 직접만 되면 Parsec 문제 (원인 판별)",
               "done": false
             },
             {
-              "text": "2-2. (별개, 선택) cafe24 서버 시계 15분 느림 → NTP 동기화 (데이터 시각 정확도용)",
+              "text": "1-2. 시스템 설정 → 개인정보 보호 및 보안 → Parsec 권한 켜짐 확인: 손쉬운 사용 / 화면 기록 및 시스템 오디오 녹음 / 마이크",
+              "done": false
+            },
+            {
+              "text": "1-3. Parsec 최신 업데이트 확인 (현재 150.101.1 → 150-103a 이상)",
+              "done": false
+            },
+            {
+              "text": "1-4. 그래도 안 되면 Parsec 잠금화면 별도 설치판 설치",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "체크봇 자동복구(워치독) 도입",
+          "ref": "체크봇 자동복구 워치독",
+          "priority": "low",
+          "status": "open",
+          "items": [
+            {
+              "text": "2-1. 체크봇 워치독(멈추면 자동 재시작) + 텔레그램 API 응답 대기 시간 보강",
+              "done": false
+            },
+            {
+              "text": "2-2. (별개, 선택) cafe24 서버 시계 15분 느림 → 시간 맞추기 (데이터 시각 정확도용)",
+              "done": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "코드리뷰",
+      "categories": [
+        {
+          "id": 1,
+          "title": "코드리뷰 대기 (자동 적립)",
+          "ref": "코드리뷰 대기",
+          "priority": "normal",
+          "status": "open",
+          "items": [
+            {
+              "text": "[06/08] co-monthly-check — `입력_월정산.py:529` — 명단 실매출 검증에서 불일치를 발견해도 출력만 하고 `--apply` 시트 입력을 계속 진행함. 불일치가 있으면 `sys.exit`로 중단하거나 `--force` 없이는 입력 금지",
+              "done": false
+            },
+            {
+              "text": "[06/08] integrated — `05_상담준비.gs:216` — `CalendarCopied` 태그를 캘린더 복사 직후 찍어서, 이후 UI_3467 알림톡 발송이 실패해도 다음 실행에서 200번 조건에 걸려 영구 건너뜀. 캘린더 복사와 알림톡 발송 완료 태그를 분리하라",
+              "done": false
+            },
+            {
+              "text": "[06/08] integrated — `05_상담준비.gs:302` — `_trySendNextDayAlimtalk()` 실패 여부와 무관하게 `REMINDER_SENT`를 기록해 전날 리마인드 실패도 당일 재시도되지 않음. 헬퍼가 성공/실패를 반환하게 하고, 발송 성공 후에만 완료키 기록",
+              "done": false
+            },
+            {
+              "text": "[06/08] integrated — `06_상담후처리.gs:248` — Notion 페이지를 이름만으로 매핑해 동명이인/재신청자가 있으면 다른 사람 페이지에 대시보드 URL·상태가 들어갈 수 있음. 전화번호+상담일 기준으로 매칭하고 이름 단독 매칭은 후보 1건일 때만 허용",
+              "done": false
+            },
+            {
+              "text": "[06/08] tools — `sync-workflow.py:41` — 입력한 `<workflow_id>`와 `workflow.json`의 `id`를 대조하지 않아, ID/파일을 잘못 조합하면 다른 워크플로우를 통째로 덮어씀. `local.get(\"id\")`가 있으면 `wf_id`와 불일치 시 즉시 중단",
+              "done": false
+            },
+            {
+              "text": "[06/08] tools — `sync-workflow.py:81` — GET한 `staticData`를 그대로 PUT에 다시 넣어, GET~PUT 사이 실행된 워크플로우의 최신 `staticData`가 예전 값으로 덮일 수 있음. `staticData`는 빼거나 배포 전 비활성화 후 갱신",
+              "done": false
+            },
+            {
+              "text": "[07/20] yt-image-pop — `verify.py:58` — `max(3, int(images * 0.6))` 때문에 이미지 1~2개 프로젝트는 정상 적용돼도 실패로 뜨고, 6개 이상은 60% 미만도 통과할 수 있음. `ceil(images * 0.6)` 기반 순수 함수로 분리해 테스트 추가",
+              "done": false
+            },
+            {
+              "text": "[07/20] yt-image-pop — `verify.py:42` — 이미지 수를 실제 타임라인 조각이 아니라 `materials.videos`로 세어 `image-pop.py`의 `find_image_segments()` 기준과 불일치. 이미지 감지 로직을 공용 모듈로 빼서 둘이 같이 쓰게 수정",
+              "done": false
+            },
+            {
+              "text": "[07/29] co-telegramocr — `sheets_writer.py` `detect_channel_rooms()` — 인원수 칸(X2/X3/X4)이 비면 `get_channel_start_rows()`가 `None`을 돌려주는데 가드가 `if exp == 0`뿐이라 `range(rs, rs + None)`에서 죽음(재현 확인). `if not exp: continue`로 바꾸고 테스트 추가",
+              "done": false
+            },
+            {
+              "text": "[08/03] co-telegramocr — `sheets_writer.py:1254` — `actual_rooms`가 빈 배열인 \"판단 불가\" 경우도 방번호 불일치로 처리되어 `fix_room_mismatches()`가 S열 회원번호를 자동으로 덮어쓸 수 있음. 빈 방 목록은 자동 정정 대상에서 빼고 사용자 확인으로 넘김",
+              "done": false
+            },
+            {
+              "text": "[08/03] co-telegramocr — `sheets_writer.py:1191` — 방번호 표본이 동률이거나 1~2건뿐인 낮은 신뢰 값도 `channel_rooms`에 넣어 이후 검증·자동 정정에서 확정값처럼 쓰임. 낮은 신뢰 채널은 `room_unverified`로 분류하고 자동 정정 금지",
+              "done": false
+            },
+            {
+              "text": "야간 점검 스크립트가 새 코드리뷰 항목을 `todo-list.md`가 아니라 이 노트에 쌓도록 기록 위치 변경",
               "done": false
             }
           ]
