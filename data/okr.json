@@ -1,10 +1,10 @@
 {
-  "updated": "2026-08-23T06:00:14.227557+09:00",
+  "updated": "2026-08-24T06:00:12.598471+09:00",
   "okr": [],
   "tasks": {
-    "total": 859,
+    "total": 861,
     "done": 821,
-    "overdue": 14,
+    "overdue": 16,
     "pending": [
       {
         "title": "전자책 작성",
@@ -74,6 +74,16 @@
       {
         "title": "원씽복기",
         "date": "2026-08-22T14:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-08-23T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-08-23T14:00:00.000+09:00",
         "overdue": true
       },
       {
@@ -197,7 +207,74 @@
         "overdue": false
       }
     ],
-    "schedule": []
+    "schedule": [
+      {
+        "title": "이렇게산다(성장일지), 메모",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "고딩친구들 모임준비",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "주간복기",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "상담준비",
+        "time": "12:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "유튜브제작 템플릿 변경(스킬9번반영)",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "옵시디언으로 변경",
+        "time": "14:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "대체주택 특례, 임대사업자 스터디",
+        "time": "15:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "시트 등 촬영 계획\n집구매, 시트작성법 등",
+        "time": "15:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원데이클래스",
+        "time": "17:30",
+        "allDay": false,
+        "done": false
+      }
+    ]
   },
   "routines": {
     "total": 4,
@@ -224,14 +301,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 12,
+      "rate": "43%",
       "days": [
-        {
-          "date": "2026-08-17",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-08-18",
           "done": 3,
@@ -259,6 +331,11 @@
         },
         {
           "date": "2026-08-23",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-08-24",
           "done": 0,
           "total": 4
         }
