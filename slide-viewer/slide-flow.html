@@ -420,14 +420,14 @@
                                 <span class="io-arrow">→</span>
                                 <span class="io-box io-script">generate-slides.py</span>
                                 <span class="io-arrow">→</span>
-                                <span class="io-box io-out">{날짜}-slides.html</span>
+                                <span class="io-box io-out">YYMMDD-slides.html</span>
                             </div>
                         </div>
                         <div class="step-human human-no">자동</div>
                         <div class="step-toggle">▶</div>
                     </div>
                     <div class="step-detail">
-                        <p>slide.md를 읽어서 각 슬라이드 타입에 맞는 HTML로 변환합니다. type-registry.json에 정의된 좌표·필드 정보를 사용합니다. 결과물은 260419-slides.html 같은 이름의 단일 HTML 파일입니다.</p>
+                        <p>YYMMDD-slide.md를 읽어서 각 슬라이드 타입에 맞는 HTML로 변환합니다. type-registry.json에 정의된 좌표·필드 정보를 사용합니다. 결과물은 260419-slides.html 같은 이름의 단일 HTML 파일입니다.</p>
                         <div class="detail-paths">
                             <span class="detail-path">template/generate-slides.py</span>
                             <span class="detail-path">references/type-registry.json</span>
@@ -504,7 +504,7 @@
                             <div class="flow-files-group">
                                 <span class="flow-lang-tag lang-out">📤 출력 2</span>
                                 <ol class="flow-file-list">
-                                    <li>{title}-slides.html</li>
+                                    <li>YYMMDD-slides.html</li>
                                     <li>assets/slide-editor.js (JS 병합본)</li>
                                 </ol>
                             </div>
@@ -525,7 +525,7 @@
                         <div class="step-title-area">
                             <div class="step-title">최종 HTML 검수</div>
                             <div class="step-io">
-                                <span class="io-box io-in">slide.md + {날짜}-slides.html</span>
+                                <span class="io-box io-in">YYMMDD-slide.md + YYMMDD-slides.html</span>
                                 <span class="io-arrow">→</span>
                                 <span class="io-box io-script">pipeline.py final-audit</span>
                                 <span class="io-arrow">→</span>
@@ -538,7 +538,7 @@
                     <div class="step-detail">
                         <p><b>verify-md</b>가 기획표 검사라면, <b>final-audit</b>는 실제 HTML 화면 검사입니다. slide.md의 내용 칸과 HTML의 보이는 글자를 비교하고, Playwright로 화면을 열어 빈 슬라이드, placeholder, 이미지 깨짐, 글자 넘침을 잡습니다.</p>
                         <div class="detail-paths">
-                            <span class="detail-path">pipeline.py final-audit slide.md --html {날짜}-slides.html</span>
+                            <span class="detail-path">pipeline.py final-audit YYMMDD-slide.md --html YYMMDD-slides.html</span>
                             <span class="detail-path">tools/verify_html_text.py</span>
                             <span class="detail-path">tools/audit_render.cjs</span>
                             <span class="detail-path">tmp/final-audit/{HTML파일명}/manifest.json</span>
@@ -581,7 +581,7 @@
                         <div class="step-title-area">
                             <div class="step-title">GitHub Pages 배포</div>
                             <div class="step-io">
-                                <span class="io-box io-in">{날짜}-slides.html</span>
+                                <span class="io-box io-in">YYMMDD-slides.html</span>
                                 <span class="io-arrow">→</span>
                                 <span class="io-box io-script">git commit / push</span>
                                 <span class="io-arrow">→</span>
