@@ -1,11 +1,11 @@
 {
-  "updated": "2026-08-24T06:00:03.955537+09:00",
+  "updated": "2026-08-25T06:00:04.519481+09:00",
   "projects": [
     {
-      "name": "재테크 기초반 등 강의",
-      "type": "folder",
+      "name": "260906 원고",
+      "type": "file",
       "app": null,
-      "modified": "2026-08-23",
+      "modified": "2026-08-24",
       "status": null,
       "next": null
     },
@@ -13,15 +13,31 @@
       "name": "260830 원고",
       "type": "file",
       "app": null,
-      "modified": "2026-08-22",
+      "modified": "2026-08-24",
       "status": null,
       "next": null
     },
     {
-      "name": "260906 원고",
+      "name": "강의",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-08-24",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "미국출산",
       "type": "file",
       "app": null,
-      "modified": "2026-08-22",
+      "modified": "2026-08-24",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "할 일",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-08-24",
       "status": null,
       "next": null
     },
@@ -30,14 +46,6 @@
       "type": "folder",
       "app": null,
       "modified": "2026-08-21",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "할 일",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-08-20",
       "status": null,
       "next": null
     },

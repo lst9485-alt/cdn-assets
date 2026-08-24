@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T06:00:03.276269+09:00",
+  "updated": "2026-08-25T06:00:03.841087+09:00",
   "sections": [
     {
       "name": "프로젝트",
@@ -234,7 +234,7 @@
           "title": "노션 자료 옵시디언 이전",
           "ref": "노션 자료 옵시디언 이전",
           "priority": "normal",
-          "status": "open",
+          "status": "in-progress",
           "items": [
             {
               "text": "2-1. 노션 → 옵시디언으로 옮기기. 브랜드정본 등 옵시디언으로",
@@ -342,6 +342,123 @@
         },
         {
           "id": 8,
+          "title": "일정관리 옵시디언 이전 (today·weekly 스킬)",
+          "ref": "일정관리 옵시디언 이전",
+          "priority": "normal",
+          "status": "in-progress",
+          "items": [
+            {
+              "text": "표를 누를 수 있게 (자동 생성 표 → 직접 만든 표)",
+              "done": true
+            },
+            {
+              "text": "`언제 할지` 칸 — 누르면 달력 뜸, 고르면 `scheduled`에 저장",
+              "done": true
+            },
+            {
+              "text": "`진행` 칸 — `1 / 5` 형태. 다 끝나면 **다 끝남** + `완료로` 단추",
+              "done": true
+            },
+            {
+              "text": "`다음 할 일` 칸 — 안 끝난 첫 번째 할 일",
+              "done": true
+            },
+            {
+              "text": "`손댄 때` 칸 — 2주↑ 주황, 1달↑ 빨강",
+              "done": true
+            },
+            {
+              "text": "상태 칸 제외 (진행률과 중복)",
+              "done": true
+            },
+            {
+              "text": "칸반 끼워넣기",
+              "done": true
+            },
+            {
+              "text": "`status: none` 두 건 되돌림",
+              "done": true
+            },
+            {
+              "text": "`설정 → TaskNotes → Task properties → Statuses → None`에 `Exclude from cycle` 켜기",
+              "done": false
+            },
+            {
+              "text": "`설정 → TaskNotes → Features → Instant convert` 끄기 (모든 체크박스 옆 단추 없애기)",
+              "done": false
+            },
+            {
+              "text": "구글 캘린더 오늘 일정 읽기 (`config/secrets/auth/gworkspace-mcp-tokens.json`에 calendar 권한 이미 있음. 플러그인 불필요)",
+              "done": false
+            },
+            {
+              "text": "`할 일/` 폴더에서 `scheduled`가 오늘·지난 것 뽑기",
+              "done": false
+            },
+            {
+              "text": "한 화면에 출력. **파일 안 만듦, 빈칸 안 물어봄**",
+              "done": false
+            },
+            {
+              "text": "기존 `task` 스킬과 트리거 충돌 정리 (\"오늘 뭐해\", \"스케줄\")",
+              "done": false
+            },
+            {
+              "text": "범위만 7일로. 주간 노트에 결과 남길지는 그때 결정",
+              "done": false
+            },
+            {
+              "text": "개인 일정용 캘린더 새로 만들기 (기본 캘린더는 Calendly 상담 예약이 꽂히므로 건드리지 말 것)",
+              "done": false
+            },
+            {
+              "text": "`enableGoogleCalendar` + `googleCalendarExport.enabled` 켜기",
+              "done": false
+            },
+            {
+              "text": "구글 클라우드 게시 상태 **\"프로덕션\"** 확인 (테스트면 7일마다 끊김)",
+              "done": false
+            },
+            {
+              "text": "아침 8시 텔레그램(n8n `01-2`)이 옵시디언 파일을 읽도록 변경",
+              "done": false
+            },
+            {
+              "text": "야간 자동화(`parse-todo.py` 등) 옵시디언 기준으로",
+              "done": false
+            },
+            {
+              "text": "반복 할 일 생성(n8n `01-1`) 옮기기",
+              "done": false
+            },
+            {
+              "text": "`task` 스킬 은퇴",
+              "done": false
+            },
+            {
+              "text": "`todo` 스킬 — 8/20 구조 변경 반영 안 됨. 지금 쓰면 엉뚱하게 동작",
+              "done": false
+            },
+            {
+              "text": "끊어진 스킬 바로가기 9개 정리 (`~/.claude/skills`의 schedule·memo·notion-task 등)",
+              "done": false
+            },
+            {
+              "text": "깨진 참조: `stock/SKILL.md`(31·56·97행), `hq-root/CLAUDE.md:37`, `rules/quality.md:60`, `sync-guard.js:51`, n8n `03 memo-bot`(todo-list.md에 append)",
+              "done": false
+            },
+            {
+              "text": "`todo-list.md` 맨 아래 \"개인 하루 할 일·루틴·일정은 노션 Tasks 사용\" 문구 수정",
+              "done": false
+            },
+            {
+              "text": "`.base` 수식의 `YYYY-[W]WW` → `GGGG-[W]WW` (연말에 주간 노트와 어긋남)",
+              "done": false
+            }
+          ]
+        },
+        {
+          "id": 9,
           "title": "경쟁채널/콘텐츠 모니터링 시스템",
           "ref": "경쟁채널 모니터링 시스템 구축",
           "priority": "low",
@@ -406,7 +523,7 @@
           ]
         },
         {
-          "id": 9,
+          "id": 10,
           "title": "유튜브 우측상단 브랜드 버그 모션 정리",
           "ref": "유튜브 브랜드 버그 모션",
           "priority": "low",
@@ -431,7 +548,7 @@
           ]
         },
         {
-          "id": 10,
+          "id": 11,
           "title": "유튜브 제작 GitHub 오픈소스·스킬 조사",
           "ref": "유튜브 제작 오픈소스 조사",
           "priority": "low",
@@ -452,7 +569,7 @@
           ]
         },
         {
-          "id": 11,
+          "id": 12,
           "title": "해외 유튜브 벤치마킹 조사",
           "ref": "해외 유튜브 벤치마킹 조사",
           "priority": "low",
