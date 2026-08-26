@@ -34,7 +34,7 @@ const PageMain = ({ version }) => {
       </section>
 
       <section style={{ padding: '80px 48px', background: ds.bg }}>
-        <SectionHead version={version} eyebrow="REVIEWS" title="100건+ 상담, 4.97/5 만족도" />
+        <SectionHead version={version} eyebrow="REVIEWS" title="200건+ 상담, 4.97/5 만족도" />
         <div style={{ marginTop: 40 }}><Reviews version={version} reviews={C.reviews} count={6} /></div>
       </section>
 

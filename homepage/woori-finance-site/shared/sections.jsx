@@ -31,7 +31,7 @@ const Hero = ({ version, eyebrow, title, subtitle, buttons = [], stats }) => {
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(#1A2B47 1px, transparent 1px)', backgroundSize: '20px 20px', opacity: 0.05, pointerEvents: 'none' }}></div>
       <h1 style={{ fontSize: 110, fontWeight: 900, margin: 0, lineHeight: 0.95, letterSpacing: '-0.04em', maxWidth: 900, position: 'relative', zIndex: 2, color: ds.ink }}>{title}</h1>
       {subtitle && <p style={{ fontSize: 19, marginTop: 24, lineHeight: 1.6, maxWidth: 520, color: ds.ink, position: 'relative', zIndex: 2 }}>{subtitle}</p>}
-      <div style={{ transform: 'rotate(-6deg)', background: ds.accent2, color: ds.ink, position: 'absolute', top: 60, right: 80, padding: '20px 28px', fontSize: 18, fontWeight: 800, boxShadow: '0 8px 24px rgba(26,43,71,0.12)', zIndex: 3, borderRadius: 4 }}>{eyebrow || '⭐ 100건+ 상담\n4.97/5 만족'}</div>
+      <div style={{ transform: 'rotate(-6deg)', background: ds.accent2, color: ds.ink, position: 'absolute', top: 60, right: 80, padding: '20px 28px', fontSize: 18, fontWeight: 800, boxShadow: '0 8px 24px rgba(26,43,71,0.12)', zIndex: 3, borderRadius: 4 }}>{eyebrow || '⭐ 200건+ 상담\n4.97/5 만족'}</div>
       <div style={{ marginTop: 40, display: 'flex', gap: 12, flexWrap: 'wrap', position: 'relative', zIndex: 2 }}>
         {buttons.map((b, i) => (
           <a key={i} href={b.href} style={{ background: i === 0 ? ds.ink : 'transparent', color: i === 0 ? ds.bg : ds.ink, border: i === 0 ? 'none' : `2px solid ${ds.ink}`, padding: '18px 32px', fontSize: 16, fontWeight: 800, borderRadius: 999, textDecoration: 'none' }}>{b.label}</a>
