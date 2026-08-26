@@ -73,7 +73,7 @@
     var amountEl = modal.querySelector('[data-amount]');
     if (nameEl) nameEl.textContent = name || '신청자';
     if (phoneEl) phoneEl.textContent = formatPhoneDisplay(phone);
-    if (productEl) productEl.textContent = amount === 96 ? '코칭 B' : '코칭 A';
+    if (productEl) productEl.textContent = amount === 120 ? '코칭 B' : '코칭 A';
     if (amountEl) amountEl.textContent = (amount * 10000).toLocaleString('ko-KR') + '원';
   }
 
@@ -128,7 +128,7 @@
     if (purposes.length === 0) return showStatus('신청 목적을 최소 1개 선택해주세요', 'error', 'f-purpose-wrap');
     if (!privacy) return showStatus('개인정보 수집 동의가 필요합니다', 'error', 'f-privacy');
 
-    var amount = coaching ? (coaching.value === 'B' ? 96 : 40) : 40;
+    var amount = coaching ? (coaching.value === 'B' ? 120 : 50) : 50;
 
     // 결제 안내 모달에 신청자 정보 채우기
     fillSuccessModal(name, phone, amount);
