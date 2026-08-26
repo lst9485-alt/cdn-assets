@@ -159,7 +159,7 @@ const PageLecture = ({ version }) => {
       </section>
 
       <section style={{ padding: '80px 48px', background: ds.surface }} id="buy">
-        <SectionHead version={version} eyebrow="PRICE" title="29만원 · 평생 1회 결제" subtitle="1:1 코칭(40만원) 1회보다 저렴 · 평생 다시보기" />
+        <SectionHead version={version} eyebrow="PRICE" title="29만원 · 평생 1회 결제" subtitle="1:1 코칭(50만원) 1회보다 저렴 · 평생 다시보기" />
         <div style={{ marginTop: 40, maxWidth: 600, marginLeft: 'auto', marginRight: 'auto' }}>
           <div style={{
             background: ds.accent, color: ds.ink,

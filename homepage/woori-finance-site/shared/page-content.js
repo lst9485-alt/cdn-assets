@@ -17,7 +17,7 @@ window.PAGE_CONTENT = {
       { n: "90일", l: "코칭 후 케어" }
     ],
     services: [
-      { id: "coaching", title: "1:1 코칭", desc: "예산·지역·매물까지, 화상 50분 + 90일 카톡 케어", price: "40만원~", href: "coaching.html" },
+      { id: "coaching", title: "1:1 코칭", desc: "예산·지역·매물까지, 화상 50분 + 90일 카톡 케어", price: "50만원~", href: "coaching.html" },
       { id: "curriculum", title: "기초 커리큘럼", desc: "내집마련의 모든 것 — 단계별 무료 가이드", price: "무료", href: "curriculum.html" },
       { id: "lecture", title: "올인원 강의", desc: "내집마련 A to Z, 평생 다시보기 + 오픈채팅", price: "29만원", href: "lecture.html" },
       { id: "bookclub", title: "독서모임", desc: "한 달에 한 권, 함께 읽고 함께 사이좋게 부자되기", price: "월 5만원", href: "bookclub.html" }

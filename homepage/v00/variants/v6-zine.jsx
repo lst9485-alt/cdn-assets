@@ -107,7 +107,7 @@ const V6Zine = () => {
               <div style={{ fontSize: 32, fontWeight: 900 }}>코칭 A</div>
               <div style={{ fontFamily: "'Courier New', monospace", fontSize: 12, fontWeight: 700 }}>20% OFF</div>
             </div>
-            <div style={{ fontSize: 56, fontWeight: 900, marginTop: 12, letterSpacing: '-0.03em' }}>40만원 <span style={{ fontSize: 22, opacity: 0.4, textDecoration: 'line-through', fontWeight: 600 }}>50만원</span></div>
+            <div style={{ fontSize: 56, fontWeight: 900, marginTop: 12, letterSpacing: '-0.03em' }}>50만원 <span style={{ fontSize: 22, opacity: 0.4, textDecoration: 'line-through', fontWeight: 600 }}>50만원</span></div>
             <ul style={{ fontSize: 15, lineHeight: 1.7, padding: 0, listStyle: 'none', marginTop: 16 }}>
               <li>· 온라인 화상회의 50분</li>
               <li>· 90일 카톡 질의응답</li>
@@ -118,9 +118,9 @@ const V6Zine = () => {
           <div style={{ border: '4px solid #2A1F1A', padding: 28, background: '#FF4D2D', color: '#FFE9C8' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
               <div style={{ fontSize: 32, fontWeight: 900 }}>코칭 B</div>
-              <div style={{ fontFamily: "'Courier New', monospace", fontSize: 12, fontWeight: 700 }}>매월 2명만</div>
+              <div style={{ fontFamily: "'Courier New', monospace", fontSize: 12, fontWeight: 700 }}>매월 1명만</div>
             </div>
-            <div style={{ fontSize: 56, fontWeight: 900, marginTop: 12, letterSpacing: '-0.03em' }}>96만원</div>
+            <div style={{ fontSize: 56, fontWeight: 900, marginTop: 12, letterSpacing: '-0.03em' }}>120만원</div>
             <ul style={{ fontSize: 15, lineHeight: 1.7, padding: 0, listStyle: 'none', marginTop: 16 }}>
               <li>· 코칭 A 전체 포함</li>
               <li>· + 동행임장 1회</li>

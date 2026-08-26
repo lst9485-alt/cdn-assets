@@ -260,7 +260,7 @@ const Pricing = ({ version, pricing }) => {
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
           <div style={{ fontSize: 32, fontWeight: 900 }}>{pricing.b.name}</div>
-          <div style={{ fontSize: 12, fontWeight: 700, fontFamily: "'Courier New', monospace" }}>매월 2명만</div>
+          <div style={{ fontSize: 12, fontWeight: 700, fontFamily: "'Courier New', monospace" }}>매월 1명만</div>
         </div>
         <div style={{ fontSize: 48, fontWeight: 900, marginTop: 12, letterSpacing: '-0.03em' }}>
           {fmt(pricing.b.price)}원 <span style={{ fontSize: 18, opacity: 0.5, textDecoration: 'line-through', fontWeight: 600 }}>{fmt(pricing.b.original)}원</span>
