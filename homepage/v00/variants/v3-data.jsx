@@ -32,7 +32,7 @@ const V3Data = () => {
           <span style={{ color: '#0E1729', borderBottom: '8px solid #F4C430' }}>데이터로</span> 내집마련.
         </h1>
         <p style={{ fontSize: 19, marginTop: 24, opacity: 0.65, maxWidth: 720, lineHeight: 1.6 }}>
-          ETF로 종잣돈, 부동산으로 자산. 100건+ 상담 데이터를 기반으로 직장인이 따라할 수 있는 단계별 내집마련 로드맵을 설계합니다.
+          ETF로 종잣돈, 부동산으로 자산. 200건+ 상담 데이터를 기반으로 직장인이 따라할 수 있는 단계별 내집마련 로드맵을 설계합니다.
         </p>
       </div>
 

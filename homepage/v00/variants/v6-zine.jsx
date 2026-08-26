@@ -14,7 +14,7 @@ const V6Zine = () => {
 
       {/* Hero — huge poster type */}
       <div style={{ padding: '40px 40px 0', position: 'relative' }}>
-        <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "'Courier New', monospace", marginBottom: 16 }}>※ 100건++ 상담 · 만족도 4.97 ※</div>
+        <div style={{ fontSize: 16, fontWeight: 700, fontFamily: "'Courier New', monospace", marginBottom: 16 }}>※ 200건++ 상담 · 만족도 4.97 ※</div>
         <div style={{ position: 'relative' }}>
           <h1 style={{ fontSize: 220, fontWeight: 900, margin: 0, lineHeight: 0.85, letterSpacing: '-0.06em', color: '#FF4D2D' }}>
             추측<br/>그만,

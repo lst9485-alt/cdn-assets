@@ -25,7 +25,7 @@ const V1Editorial = () => {
       <div style={{ padding: '40px 56px 80px', borderTop: '1px solid #1A2B47' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 56, alignItems: 'end' }}>
           <div>
-            <div style={{ display: 'inline-block', background: '#F4C430', padding: '6px 14px', fontSize: 13, fontWeight: 700, marginBottom: 32 }}>★ 100건+ 상담 · 만족도 4.97/5</div>
+            <div style={{ display: 'inline-block', background: '#F4C430', padding: '6px 14px', fontSize: 13, fontWeight: 700, marginBottom: 32 }}>★ 200건+ 상담 · 만족도 4.97/5</div>
             <h1 style={{ fontSize: 124, lineHeight: 0.95, fontWeight: 900, margin: 0, letterSpacing: '-0.04em' }}>
               지금<br />
               <span style={{ color: '#FF6B5B' }}>여기,</span><br />
@@ -107,7 +107,7 @@ const V1Editorial = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginTop: 48 }}>
           {[
             ['01', 'ETF로 종잣돈 모으기', '잃지 않는 자산배분으로 시드를 만든다.', '#4ECDC4'],
-            ['02', '내가 살 수 있는 가장 좋은 집', '예산 진단부터 계약까지 100건+ 데이터.', '#F4C430'],
+            ['02', '내가 살 수 있는 가장 좋은 집', '예산 진단부터 계약까지 200건+ 데이터.', '#F4C430'],
             ['03', '갈아타기로 자산 늘리기', '1주택자가 더 좋은 자산으로 옮기는 순서.', '#FF6B5B'],
           ].map(([n, t, d, c]) => (
             <div key={n} style={{ borderTop: `3px solid ${c}`, paddingTop: 20 }}>

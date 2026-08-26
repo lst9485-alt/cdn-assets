@@ -21,7 +21,7 @@ const V4Map = () => {
               살까요?
             </h1>
             <p style={{ fontSize: 17, marginTop: 24, lineHeight: 1.6, maxWidth: 480 }}>
-              전국 어디든 OK. 서울·경기·인천부터 지방까지, 100건+ 상담 데이터로 <strong>내 예산에 맞는 동네</strong>를 함께 찾아드려요.
+              전국 어디든 OK. 서울·경기·인천부터 지방까지, 200건+ 상담 데이터로 <strong>내 예산에 맞는 동네</strong>를 함께 찾아드려요.
             </p>
             <div style={{ display: 'flex', gap: 12, marginTop: 28 }}>
               <button style={{ background: '#1A2B47', color: '#FFF8E7', border: 'none', padding: '18px 32px', fontWeight: 800, borderRadius: 999, cursor: 'pointer', fontSize: 16 }}>무료 상담 →</button>

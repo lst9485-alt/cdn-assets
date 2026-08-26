@@ -34,7 +34,7 @@ const V2Sticker = () => {
 
         {/* Stickers floating */}
         <div style={{ ...stickerStyle(-6, '#F4C430'), position: 'absolute', top: 80, right: 120, padding: '20px 28px', fontSize: 18, fontWeight: 800, zIndex: 3 }}>
-          ⭐ 100건+ 상담<br/>4.97/5 만족
+          ⭐ 200건+ 상담<br/>4.97/5 만족
         </div>
 
         <div style={{ ...stickerStyle(8, '#4ECDC4'), color: '#FFF8E7', position: 'absolute', top: 280, right: 60, padding: '24px 32px', maxWidth: 280, zIndex: 3 }}>

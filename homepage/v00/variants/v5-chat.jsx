@@ -40,14 +40,14 @@ const V5Chat = () => {
             <span style={{ color: '#FF6B5B' }}>편하게.</span>
           </h1>
           <p style={{ fontSize: 18, marginTop: 24, lineHeight: 1.6, color: '#1A2B47', maxWidth: 480 }}>
-            "지금 사도 될까요?" 한 줄로 시작하세요. 100건+ 상담의 경험으로, <strong>내 상황에 딱 맞는 답</strong>을 드립니다.
+            "지금 사도 될까요?" 한 줄로 시작하세요. 200건+ 상담의 경험으로, <strong>내 상황에 딱 맞는 답</strong>을 드립니다.
           </p>
           <div style={{ display: 'flex', gap: 12, marginTop: 32 }}>
             <button style={{ background: '#FEE500', color: '#1A2B47', border: 'none', padding: '18px 32px', fontWeight: 800, borderRadius: 12, cursor: 'pointer', fontSize: 16 }}>카톡으로 상담 신청 →</button>
             <button style={{ background: 'transparent', color: '#1A2B47', border: '2px solid #1A2B47', padding: '16px 30px', fontWeight: 800, borderRadius: 12, cursor: 'pointer', fontSize: 16 }}>요금 보기</button>
           </div>
           <div style={{ marginTop: 32, display: 'flex', gap: 24, fontSize: 14 }}>
-            <div><strong style={{ fontSize: 22 }}>100건+</strong><div style={{ opacity: 0.6 }}>상담 진행</div></div>
+            <div><strong style={{ fontSize: 22 }}>200건+</strong><div style={{ opacity: 0.6 }}>상담 진행</div></div>
             <div><strong style={{ fontSize: 22 }}>4.97/5</strong><div style={{ opacity: 0.6 }}>만족도</div></div>
             <div><strong style={{ fontSize: 22 }}>90일</strong><div style={{ opacity: 0.6 }}>케어</div></div>
           </div>
