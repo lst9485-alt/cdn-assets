@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-27T06:00:16.730822+09:00",
+  "updated": "2026-08-28T06:00:13.214710+09:00",
   "okr": [
     {
       "title": "8월 : 원데이클래스 날짜공지",
@@ -15,8 +15,8 @@
     }
   ],
   "tasks": {
-    "total": 880,
-    "done": 845,
+    "total": 890,
+    "done": 853,
     "overdue": 9,
     "pending": [
       {
@@ -55,53 +55,33 @@
         "overdue": true
       },
       {
-        "title": "원고",
-        "date": "2026-08-26T17:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "강의",
-        "date": "2026-08-26T21:30:00.000+09:00",
+        "date": "2026-08-27T18:15:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "주간계획 수정",
-        "date": "2026-08-27T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "알리고확인",
-        "date": "2026-08-27T09:15:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "원고완성",
-        "date": "2026-08-27T09:30:00.000+09:00",
-        "overdue": false
+        "date": "2026-08-27T19:00:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "키콘텐츠 변경",
-        "date": "2026-08-27T13:00:00.000+09:00",
+        "title": "알리고확인",
+        "date": "2026-08-28T09:15:00.000+09:00",
         "overdue": false
       },
       {
         "title": "PPT완료",
-        "date": "2026-08-27T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "구독,좋아요 자르기(앞/뒤)",
-        "date": "2026-08-27T17:30:00.000+09:00",
+        "date": "2026-08-28T09:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "상담준비",
-        "date": "2026-08-28T10:30:00.000+09:00",
+        "date": "2026-08-28T14:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "원데이클래스",
-        "date": "2026-08-28T13:00:00.000+09:00",
+        "title": "강의복습",
+        "date": "2026-08-28T15:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -117,6 +97,16 @@
       {
         "title": "편집",
         "date": "2026-08-29T08:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원데이클래스",
+        "date": "2026-08-30T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "구독,좋아요 자르기(앞/뒤)",
+        "date": "2026-08-30T20:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -137,6 +127,11 @@
       {
         "title": "주간복기",
         "date": "2026-08-31T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
+        "date": "2026-08-31T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -170,6 +165,16 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-09-03",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-09-03T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "보경 연락?",
         "date": "2026-09-07T10:45:00.000+09:00",
         "overdue": false
@@ -185,6 +190,11 @@
         "overdue": false
       },
       {
+        "title": "강영운생일?",
+        "date": "2026-10-07",
+        "overdue": false
+      },
+      {
         "title": "고딩친구들 모임준비",
         "date": "2026-10-26",
         "overdue": false
@@ -197,38 +207,32 @@
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
         "title": "알리고확인",
         "time": "09:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고완성",
+        "title": "PPT완료",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "키콘텐츠 변경",
-        "time": "13:00",
+        "title": "상담준비",
+        "time": "14:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "PPT완료",
-        "time": "15:00",
+        "title": "강의복습",
+        "time": "15:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "구독,좋아요 자르기(앞/뒤)",
-        "time": "17:30",
+        "title": "촬영",
+        "time": "18:00",
         "allDay": false,
         "done": false
       }
@@ -259,14 +263,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 15,
-      "rate": "54%",
+      "done": 16,
+      "rate": "57%",
       "days": [
-        {
-          "date": "2026-08-21",
-          "done": 1,
-          "total": 4
-        },
         {
           "date": "2026-08-22",
           "done": 3,
@@ -289,11 +288,16 @@
         },
         {
           "date": "2026-08-26",
-          "done": 2,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-08-27",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-08-28",
           "done": 0,
           "total": 4
         }
@@ -303,8 +307,8 @@
   "sales": {
     "month": "2026-08",
     "month_label": "8월",
-    "total_amount": 280,
-    "total_count": 7,
+    "total_amount": 320,
+    "total_count": 8,
     "weekly": [
       {
         "week": "1주차",
@@ -323,8 +327,8 @@
       },
       {
         "week": "4주차",
-        "count": 2,
-        "amount": 80
+        "count": 3,
+        "amount": 120
       }
     ]
   }
