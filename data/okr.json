@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-29T06:00:15.024537+09:00",
+  "updated": "2026-08-30T06:00:14.637897+09:00",
   "okr": [
     {
       "title": "8월 : 원데이클래스 날짜공지",
@@ -15,9 +15,9 @@
     }
   ],
   "tasks": {
-    "total": 894,
+    "total": 897,
     "done": 858,
-    "overdue": 10,
+    "overdue": 14,
     "pending": [
       {
         "title": "전자책 작성",
@@ -72,12 +72,22 @@
       {
         "title": "촬영&편집&업로드",
         "date": "2026-08-29",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "편집",
         "date": "2026-08-29T08:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-08-29T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-08-29T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "원데이클래스",
@@ -170,6 +180,11 @@
         "overdue": false
       },
       {
+        "title": "촬영&편집&업로드",
+        "date": "2026-09-05",
+        "overdue": false
+      },
+      {
         "title": "보경 연락?",
         "date": "2026-09-07T10:45:00.000+09:00",
         "overdue": false
@@ -202,14 +217,26 @@
     ],
     "schedule": [
       {
-        "title": "촬영&편집&업로드",
-        "time": "",
-        "allDay": true,
+        "title": "원데이클래스",
+        "time": "14:00",
+        "allDay": false,
         "done": false
       },
       {
-        "title": "편집",
-        "time": "08:00",
+        "title": "강의",
+        "time": "18:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "구독,좋아요 자르기(앞/뒤)",
+        "time": "20:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의복습",
+        "time": "21:00",
         "allDay": false,
         "done": false
       }
@@ -240,14 +267,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 16,
-      "rate": "57%",
+      "done": 14,
+      "rate": "50%",
       "days": [
-        {
-          "date": "2026-08-23",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-08-24",
           "done": 4,
@@ -275,6 +297,11 @@
         },
         {
           "date": "2026-08-29",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-08-30",
           "done": 0,
           "total": 4
         }
