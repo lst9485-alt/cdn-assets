@@ -1,11 +1,11 @@
 {
-  "updated": "2026-08-30T06:00:04.349978+09:00",
+  "updated": "2026-08-31T06:00:04.665237+09:00",
   "projects": [
     {
       "name": "비즈니스PT 프로",
       "type": "folder",
       "app": null,
-      "modified": "2026-08-29",
+      "modified": "2026-08-30",
       "status": null,
       "next": null
     },
@@ -13,7 +13,7 @@
       "name": "강의",
       "type": "folder",
       "app": null,
-      "modified": "2026-08-29",
+      "modified": "2026-08-30",
       "status": null,
       "next": null
     },
@@ -40,14 +40,6 @@
       "modified": "2026-08-26",
       "status": "daily-check 스킬이 전체 프로세스를 자동 처리 (텔레그램 수량 확인 → 시트 기입 → SSH 프로그램 실행 → 미매칭 해결 → 누적DB 복사 → Notion 완료)",
       "next": "`--channel` 옵션 추가 (부분 채널 재실행 — run_prep 시트 리셋 로직 개선 필요)"
-    },
-    {
-      "name": "미국출산",
-      "type": "file",
-      "app": null,
-      "modified": "2026-08-24",
-      "status": null,
-      "next": null
     },
     {
       "name": "원소스 멀티유즈",

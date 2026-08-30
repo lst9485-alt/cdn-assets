@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-30T06:00:14.637897+09:00",
+  "updated": "2026-08-31T06:00:13.958961+09:00",
   "okr": [
     {
       "title": "8월 : 원데이클래스 날짜공지",
@@ -15,9 +15,9 @@
     }
   ],
   "tasks": {
-    "total": 897,
-    "done": 858,
-    "overdue": 14,
+    "total": 896,
+    "done": 860,
+    "overdue": 13,
     "pending": [
       {
         "title": "전자책 작성",
@@ -55,59 +55,34 @@
         "overdue": true
       },
       {
-        "title": "상담준비",
-        "date": "2026-08-28T15:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영",
-        "date": "2026-08-28T18:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "알리고확인",
-        "date": "2026-08-28T21:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-08-29",
-        "overdue": true
-      },
-      {
-        "title": "편집",
-        "date": "2026-08-29T08:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "P1~P3/목실감",
-        "date": "2026-08-29T08:30:00.000+09:00",
+        "date": "2026-08-30T08:30:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원씽복기",
-        "date": "2026-08-29T14:00:00.000+09:00",
+        "date": "2026-08-30T14:00:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원데이클래스",
         "date": "2026-08-30T14:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "강의",
         "date": "2026-08-30T18:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "구독,좋아요 자르기(앞/뒤)",
         "date": "2026-08-30T20:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "강의복습",
         "date": "2026-08-30T21:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "이렇게산다(성장일지), 메모",
@@ -150,6 +125,11 @@
         "overdue": false
       },
       {
+        "title": "알리고확인",
+        "date": "2026-08-31T21:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "주제선정&썸네일&제목",
         "date": "2026-09-01",
         "overdue": false
@@ -180,13 +160,18 @@
         "overdue": false
       },
       {
+        "title": "용선 6시30분 신도림",
+        "date": "2026-09-04T18:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "촬영&편집&업로드",
         "date": "2026-09-05",
         "overdue": false
       },
       {
-        "title": "보경 연락?",
-        "date": "2026-09-07T10:45:00.000+09:00",
+        "title": "마곡?",
+        "date": "2026-09-09",
         "overdue": false
       },
       {
@@ -217,25 +202,55 @@
     ],
     "schedule": [
       {
-        "title": "원데이클래스",
-        "time": "14:00",
+        "title": "이렇게산다(성장일지), 메모",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의",
-        "time": "18:30",
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "구독,좋아요 자르기(앞/뒤)",
-        "time": "20:00",
+        "title": "주간복기",
+        "time": "11:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의복습",
+        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "셀프커스터디",
+        "time": "14:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "시트 등 촬영 계획\n집구매, 시트작성법 등",
+        "time": "14:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "인트로영상만들기",
+        "time": "15:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "알리고확인",
         "time": "21:00",
         "allDay": false,
         "done": false
@@ -267,14 +282,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 10,
+      "rate": "36%",
       "days": [
-        {
-          "date": "2026-08-24",
-          "done": 4,
-          "total": 4
-        },
         {
           "date": "2026-08-25",
           "done": 3,
@@ -304,6 +314,11 @@
           "date": "2026-08-30",
           "done": 0,
           "total": 4
+        },
+        {
+          "date": "2026-08-31",
+          "done": 0,
+          "total": 4
         }
       ]
     }
@@ -311,8 +326,8 @@
   "sales": {
     "month": "2026-08",
     "month_label": "8월",
-    "total_amount": 320,
-    "total_count": 8,
+    "total_amount": 360,
+    "total_count": 9,
     "weekly": [
       {
         "week": "1주차",
@@ -333,6 +348,11 @@
         "week": "4주차",
         "count": 3,
         "amount": 120
+      },
+      {
+        "week": "5주차",
+        "count": 1,
+        "amount": 40
       }
     ]
   }
