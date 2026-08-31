@@ -1,16 +1,16 @@
 {
-  "updated": "2026-08-31T06:00:04.665237+09:00",
+  "updated": "2026-09-01T06:00:04.318442+09:00",
   "projects": [
     {
-      "name": "비즈니스PT 프로",
+      "name": "강의",
       "type": "folder",
       "app": null,
-      "modified": "2026-08-30",
+      "modified": "2026-08-31",
       "status": null,
       "next": null
     },
     {
-      "name": "강의",
+      "name": "비즈니스PT 프로",
       "type": "folder",
       "app": null,
       "modified": "2026-08-30",

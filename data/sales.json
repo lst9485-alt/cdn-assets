@@ -1,12 +1,12 @@
 {
-  "updated": "2026-08-31T06:00:27.511045+09:00",
+  "updated": "2026-09-01T06:00:27.880523+09:00",
   "summary": {
-    "current_month": 8400000,
-    "current_month_label": "2026-08",
-    "last_month": 1600000,
-    "last_month_label": "2026-07",
-    "change_pct": "+425.0%",
-    "total_customers": 169
+    "current_month": 0,
+    "current_month_label": "2026-09",
+    "last_month": 10400000,
+    "last_month_label": "2026-08",
+    "change_pct": "-100.0%",
+    "total_customers": 173
   },
   "monthly": [
     {
@@ -91,8 +91,8 @@
     },
     {
       "month": "2026-08",
-      "revenue": 8400000,
-      "customers": 20
+      "revenue": 10400000,
+      "customers": 24
     }
   ],
   "weekly": [
@@ -717,8 +717,8 @@
     },
     {
       "utm": "yt_home",
-      "count": 20,
-      "revenue": 8000000
+      "count": 21,
+      "revenue": 8500000
     },
     {
       "utm": "yt_094",
@@ -729,6 +729,16 @@
       "utm": "yt_045",
       "count": 5,
       "revenue": 2000000
+    },
+    {
+      "utm": "yt_090",
+      "count": 4,
+      "revenue": 1900000
+    },
+    {
+      "utm": "yt_2025",
+      "count": 4,
+      "revenue": 1700000
     },
     {
       "utm": "yt_045_key1",
@@ -744,16 +754,6 @@
       "utm": "yt_2026",
       "count": 3,
       "revenue": 1200000
-    },
-    {
-      "utm": "yt_2025",
-      "count": 3,
-      "revenue": 1200000
-    },
-    {
-      "utm": "yt_090",
-      "count": 2,
-      "revenue": 900000
     },
     {
       "utm": "yt_070",
@@ -789,21 +789,21 @@
   "by_purpose": [
     {
       "purpose": "내집마련",
-      "count": 149,
-      "revenue": 49150000,
-      "ratio": "55.3%"
+      "count": 152,
+      "revenue": 50650000,
+      "ratio": "55.4%"
     },
     {
       "purpose": "투자",
-      "count": 97,
-      "revenue": 31000000,
-      "ratio": "34.9%"
+      "count": 98,
+      "revenue": 31500000,
+      "ratio": "34.5%"
     },
     {
       "purpose": "기타",
-      "count": 28,
-      "revenue": 8700000,
-      "ratio": "9.8%"
+      "count": 29,
+      "revenue": 9200000,
+      "ratio": "10.1%"
     }
   ],
   "by_region": [
@@ -811,13 +811,13 @@
       "region": "수도권",
       "count": 102,
       "revenue": 31150000,
-      "ratio": "70.8%"
+      "ratio": "70.3%"
     },
     {
       "region": "지방",
-      "count": 42,
-      "revenue": 13950000,
-      "ratio": "29.2%"
+      "count": 43,
+      "revenue": 14450000,
+      "ratio": "29.7%"
     }
   ],
   "expenses": [
