@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-01T06:00:15.140975+09:00",
+  "updated": "2026-09-02T06:00:15.163649+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,8 +21,8 @@
     }
   ],
   "tasks": {
-    "total": 916,
-    "done": 872,
+    "total": 920,
+    "done": 877,
     "overdue": 8,
     "pending": [
       {
@@ -56,34 +56,14 @@
         "overdue": true
       },
       {
-        "title": "이렇게산다(성장일지), 메모",
-        "date": "2026-08-24",
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-09-01T20:30:00.000+09:00",
         "overdue": true
-      },
-      {
-        "title": "이렇게산다(성장일지), 메모",
-        "date": "2026-08-31",
-        "overdue": true
-      },
-      {
-        "title": "강의복습",
-        "date": "2026-09-01T10:00:00.000+09:00",
-        "overdue": false
       },
       {
         "title": "특강목차",
-        "date": "2026-09-01T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
-        "date": "2026-09-01T14:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-09-01T20:30:00.000+09:00",
-        "overdue": false
+        "date": "2026-09-01T21:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "상담준비",
@@ -138,6 +118,11 @@
       {
         "title": "강의",
         "date": "2026-09-03T17:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
+        "date": "2026-09-03T21:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -201,6 +186,11 @@
         "overdue": false
       },
       {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-09-08",
+        "overdue": false
+      },
+      {
         "title": "마곡?",
         "date": "2026-09-09",
         "overdue": false
@@ -231,6 +221,11 @@
         "overdue": false
       },
       {
+        "title": "월별 채널운영표 만들기?",
+        "date": "2026-09-21T16:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "강영운생일?",
         "date": "2026-10-07",
         "overdue": false
@@ -248,25 +243,37 @@
     ],
     "schedule": [
       {
-        "title": "강의복습",
-        "time": "10:00",
+        "title": "상담준비",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강목차",
+        "title": "자료수집&도입부",
+        "time": "10:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의",
         "time": "13:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
-        "time": "14:30",
+        "title": "원고",
+        "time": "15:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "주제선정&썸네일&제목",
+        "title": "특강",
         "time": "20:30",
         "allDay": false,
         "done": false
@@ -302,11 +309,6 @@
       "rate": "39%",
       "days": [
         {
-          "date": "2026-08-26",
-          "done": 3,
-          "total": 4
-        },
-        {
           "date": "2026-08-27",
           "done": 2,
           "total": 4
@@ -328,11 +330,16 @@
         },
         {
           "date": "2026-08-31",
-          "done": 2,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-09-01",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-09-02",
           "done": 0,
           "total": 4
         }
@@ -342,8 +349,14 @@
   "sales": {
     "month": "2026-09",
     "month_label": "9월",
-    "total_amount": 0,
-    "total_count": 0,
-    "weekly": []
+    "total_amount": 50,
+    "total_count": 1,
+    "weekly": [
+      {
+        "week": "1주차",
+        "count": 1,
+        "amount": 50
+      }
+    ]
   }
 }

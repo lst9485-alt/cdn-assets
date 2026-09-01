@@ -1,8 +1,8 @@
 {
-  "updated": "2026-09-01T06:00:29.796390+09:00",
+  "updated": "2026-09-02T06:00:30.150076+09:00",
   "source_updated": {
-    "funnel": "2026-09-01T06:00:29.488689+09:00",
-    "sales": "2026-09-01T06:00:27.880523+09:00"
+    "funnel": "2026-09-02T06:00:29.835898+09:00",
+    "sales": "2026-09-02T06:00:28.242970+09:00"
   },
   "summary": {
     "total_weeks": 96,
@@ -17,8 +17,8 @@
       "week_start": "2026-07-07",
       "week_end": "",
       "totals": {
-        "revenue": 5600000,
-        "paid_customers": 14,
+        "revenue": 8900000,
+        "paid_customers": 21,
         "landing_visits": 1026,
         "key_views": 125223,
         "pulling_views": 66774,
@@ -30,8 +30,8 @@
         "convert_rate": 1.14
       },
       "avg_per_week": {
-        "revenue": 700000,
-        "paid_customers": 1.75,
+        "revenue": 1112500,
+        "paid_customers": 2.62,
         "landing_visits": 128.25,
         "total_views": 23999.62
       }
@@ -42,8 +42,8 @@
       "week_start": "2026-06-08",
       "week_end": "",
       "totals": {
-        "revenue": 8400000,
-        "paid_customers": 21,
+        "revenue": 11700000,
+        "paid_customers": 28,
         "landing_visits": 1435,
         "key_views": 131151,
         "pulling_views": 169876,
@@ -55,8 +55,8 @@
         "convert_rate": 1.31
       },
       "avg_per_week": {
-        "revenue": 700000,
-        "paid_customers": 1.75,
+        "revenue": 975000,
+        "paid_customers": 2.33,
         "landing_visits": 119.58,
         "total_views": 25085.58
       }
@@ -67,8 +67,8 @@
       "week_start": "2026-03-04",
       "week_end": "",
       "totals": {
-        "revenue": 13600000,
-        "paid_customers": 34,
+        "revenue": 16900000,
+        "paid_customers": 41,
         "landing_visits": 2869,
         "key_views": 155801,
         "pulling_views": 418736,
@@ -80,8 +80,8 @@
         "convert_rate": 1.1
       },
       "avg_per_week": {
-        "revenue": 523077,
-        "paid_customers": 1.31,
+        "revenue": 650000,
+        "paid_customers": 1.58,
         "landing_visits": 110.35,
         "total_views": 22097.58
       }
@@ -92,8 +92,8 @@
       "week_start": "2024-10-30",
       "week_end": "",
       "totals": {
-        "revenue": 43050000,
-        "paid_customers": 142,
+        "revenue": 46350000,
+        "paid_customers": 149,
         "landing_visits": 6935,
         "key_views": 220048,
         "pulling_views": 1303526,
@@ -105,8 +105,8 @@
         "convert_rate": 2.42
       },
       "avg_per_week": {
-        "revenue": 448438,
-        "paid_customers": 1.48,
+        "revenue": 482812,
+        "paid_customers": 1.55,
         "landing_visits": 72.24,
         "total_views": 15870.56
       }
@@ -1731,10 +1731,10 @@
     {
       "week_start": "2026-08-25",
       "week_end": "",
-      "revenue": 0,
-      "sales_revenue": 0,
-      "paid_customers": 0,
-      "sales_customers": 0,
+      "revenue": 3300000,
+      "sales_revenue": 3300000,
+      "paid_customers": 7,
+      "sales_customers": 7,
       "landing_visits": 0,
       "key_views": 0,
       "pulling_views": 0,
