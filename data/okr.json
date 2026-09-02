@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-02T06:00:15.163649+09:00",
+  "updated": "2026-09-03T06:00:14.520114+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 920,
-    "done": 877,
-    "overdue": 8,
+    "total": 928,
+    "done": 883,
+    "overdue": 7,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,44 +56,9 @@
         "overdue": true
       },
       {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-09-01T20:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "특강목차",
-        "date": "2026-09-01T21:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-09-02T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-09-02T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-09-02T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "강의",
-        "date": "2026-09-02T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
-        "date": "2026-09-02T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강",
-        "date": "2026-09-02T20:30:00.000+09:00",
-        "overdue": false
+        "date": "2026-09-02T21:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "주간계획 수정",
@@ -101,13 +66,38 @@
         "overdue": false
       },
       {
+        "title": "특강 마감으로 변경",
+        "date": "2026-09-03T09:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "상담준비",
-        "date": "2026-09-03T09:30:00.000+09:00",
+        "date": "2026-09-03T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "장소예약(마이크, ppt등)",
+        "date": "2026-09-03T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "date": "2026-09-03T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-09-03T12:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "원고",
-        "date": "2026-09-03T11:00:00.000+09:00",
+        "date": "2026-09-03T12:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "특강목차",
+        "date": "2026-09-03T14:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -117,12 +107,17 @@
       },
       {
         "title": "강의",
-        "date": "2026-09-03T17:30:00.000+09:00",
+        "date": "2026-09-03T18:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
         "date": "2026-09-03T21:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "재생목록 변경(돈되는 ETF, 풀링/키 등)",
+        "date": "2026-09-03T22:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -191,8 +186,18 @@
         "overdue": false
       },
       {
+        "title": "자료수집&도입부",
+        "date": "2026-09-09",
+        "overdue": false
+      },
+      {
         "title": "마곡?",
         "date": "2026-09-09",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-09-09T12:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -208,6 +213,11 @@
       {
         "title": "특강",
         "date": "2026-09-20T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "김성찬 자료보내기",
+        "date": "2026-09-21T09:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -243,14 +253,32 @@
     ],
     "schedule": [
       {
+        "title": "주간계획 수정",
+        "time": "08:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "특강 마감으로 변경",
+        "time": "09:15",
+        "allDay": false,
+        "done": false
+      },
+      {
         "title": "상담준비",
-        "time": "09:30",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "장소예약(마이크, ppt등)",
+        "time": "11:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "자료수집&도입부",
-        "time": "10:30",
+        "time": "11:00",
         "allDay": false,
         "done": false
       },
@@ -261,20 +289,38 @@
         "done": false
       },
       {
-        "title": "강의",
-        "time": "13:00",
+        "title": "원고",
+        "time": "12:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고",
+        "title": "특강목차",
+        "time": "14:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "특강 ~10p",
         "time": "15:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강",
-        "time": "20:30",
+        "title": "강의",
+        "time": "18:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
+        "time": "21:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "재생목록 변경(돈되는 ETF, 풀링/키 등)",
+        "time": "22:15",
         "allDay": false,
         "done": false
       }
@@ -309,11 +355,6 @@
       "rate": "39%",
       "days": [
         {
-          "date": "2026-08-27",
-          "done": 2,
-          "total": 4
-        },
-        {
           "date": "2026-08-28",
           "done": 2,
           "total": 4
@@ -335,11 +376,16 @@
         },
         {
           "date": "2026-09-01",
-          "done": 2,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-09-02",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-09-03",
           "done": 0,
           "total": 4
         }
@@ -349,13 +395,13 @@
   "sales": {
     "month": "2026-09",
     "month_label": "9월",
-    "total_amount": 50,
-    "total_count": 1,
+    "total_amount": 90,
+    "total_count": 2,
     "weekly": [
       {
         "week": "1주차",
-        "count": 1,
-        "amount": 50
+        "count": 2,
+        "amount": 90
       }
     ]
   }
