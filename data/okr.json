@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-03T06:00:14.520114+09:00",
+  "updated": "2026-09-04T06:00:14.911052+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 928,
-    "done": 883,
-    "overdue": 7,
+    "total": 935,
+    "done": 894,
+    "overdue": 8,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,73 +56,23 @@
         "overdue": true
       },
       {
-        "title": "강의",
-        "date": "2026-09-02T21:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주간계획 수정",
-        "date": "2026-09-03T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강 마감으로 변경",
-        "date": "2026-09-03T09:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-09-03T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "장소예약(마이크, ppt등)",
-        "date": "2026-09-03T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "자료수집&도입부",
-        "date": "2026-09-03T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-09-03T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
         "date": "2026-09-03T12:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강목차",
-        "date": "2026-09-03T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강 ~10p",
-        "date": "2026-09-03T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의",
-        "date": "2026-09-03T18:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
-        "date": "2026-09-03T21:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "재생목록 변경(돈되는 ETF, 풀링/키 등)",
         "date": "2026-09-03T22:15:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "특강 0~20p",
+        "date": "2026-09-04T09:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "특강 10~20p",
-        "date": "2026-09-04T09:30:00.000+09:00",
+        "title": "특강목차",
+        "date": "2026-09-04T11:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -146,13 +96,28 @@
         "overdue": false
       },
       {
-        "title": "특강 20~30p",
-        "date": "2026-09-05T13:00:00.000+09:00",
+        "title": "올림픽공원",
+        "date": "2026-09-05T18:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "올림픽공원",
-        "date": "2026-09-05T18:00:00.000+09:00",
+        "title": "상담준비",
+        "date": "2026-09-05T22:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의",
+        "date": "2026-09-06T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "특강 20~30p",
+        "date": "2026-09-06T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
+        "date": "2026-09-06T17:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -201,12 +166,27 @@
         "overdue": false
       },
       {
+        "title": "급여&자산체크",
+        "date": "2026-09-10",
+        "overdue": false
+      },
+      {
+        "title": "원고완성",
+        "date": "2026-09-10",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-09-10T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "법인폰 자동 일시정지 재신청(6/12~9/13 일지정지종료)",
         "date": "2026-09-10T12:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "장소 이메일 보내기",
+        "title": "장소 이메일 보내기(전화해보고)",
         "date": "2026-09-17T10:30:00.000+09:00",
         "overdue": false
       },
@@ -253,74 +233,32 @@
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "특강 마감으로 변경",
-        "time": "09:15",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "상담준비",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "장소예약(마이크, ppt등)",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "원고",
-        "time": "12:30",
+        "title": "특강 0~20p",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "특강목차",
-        "time": "14:00",
+        "time": "11:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강 ~10p",
-        "time": "15:00",
+        "title": "원고완성",
+        "time": "13:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의",
-        "time": "18:00",
+        "title": "PPT완료",
+        "time": "15:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
-        "time": "21:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "재생목록 변경(돈되는 ETF, 풀링/키 등)",
-        "time": "22:15",
+        "title": "용선 6시30분 신도림",
+        "time": "18:30",
         "allDay": false,
         "done": false
       }
@@ -351,14 +289,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 11,
-      "rate": "39%",
+      "done": 13,
+      "rate": "46%",
       "days": [
-        {
-          "date": "2026-08-28",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-08-29",
           "done": 0,
@@ -381,11 +314,16 @@
         },
         {
           "date": "2026-09-02",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-09-03",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-09-04",
           "done": 0,
           "total": 4
         }
