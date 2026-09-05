@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-05T06:00:13.288615+09:00",
+  "updated": "2026-09-06T06:00:13.739306+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 942,
-    "done": 898,
-    "overdue": 9,
+    "total": 945,
+    "done": 901,
+    "overdue": 12,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,39 +56,34 @@
         "overdue": true
       },
       {
-        "title": "초안",
-        "date": "2026-09-04T15:30:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "원고완성",
-        "date": "2026-09-04T17:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "용선 6시30분 신도림",
-        "date": "2026-09-04T18:30:00.000+09:00",
+        "date": "2026-09-05T12:00:00.000+09:00",
         "overdue": true
       },
       {
         "title": "PPT완료",
-        "date": "2026-09-05T09:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-09-05T13:00:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "촬영&편집&업로드",
-        "date": "2026-09-05T12:00:00.000+09:00",
-        "overdue": false
+        "title": "원씽복기",
+        "date": "2026-09-05T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "올림픽공원",
         "date": "2026-09-05T18:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "date": "2026-09-05T21:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "상담준비",
         "date": "2026-09-05T22:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "강의",
@@ -201,6 +196,11 @@
         "overdue": false
       },
       {
+        "title": "촬영&편집&업로드",
+        "date": "2026-09-12",
+        "overdue": false
+      },
+      {
         "title": "장소 이메일 보내기(전화해보고)",
         "date": "2026-09-17T10:30:00.000+09:00",
         "overdue": false
@@ -248,26 +248,38 @@
     ],
     "schedule": [
       {
-        "title": "PPT완료",
+        "title": "강의",
         "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "time": "12:00",
+        "title": "특강목차",
+        "time": "13:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "올림픽공원",
-        "time": "18:00",
+        "title": "특강 0~20p",
+        "time": "14:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "상담준비",
-        "time": "22:30",
+        "title": "강의",
+        "time": "17:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "재생목록 변경(돈되는 ETF, 풀링/키 등)",
+        "time": "18:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
+        "time": "19:00",
         "allDay": false,
         "done": false
       }
@@ -302,11 +314,6 @@
       "rate": "57%",
       "days": [
         {
-          "date": "2026-08-30",
-          "done": 2,
-          "total": 4
-        },
-        {
           "date": "2026-08-31",
           "done": 3,
           "total": 4
@@ -328,11 +335,16 @@
         },
         {
           "date": "2026-09-04",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-09-05",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-09-06",
           "done": 0,
           "total": 4
         }
@@ -342,13 +354,13 @@
   "sales": {
     "month": "2026-09",
     "month_label": "9월",
-    "total_amount": 90,
-    "total_count": 2,
+    "total_amount": 130,
+    "total_count": 3,
     "weekly": [
       {
         "week": "1주차",
-        "count": 2,
-        "amount": 90
+        "count": 3,
+        "amount": 130
       }
     ]
   }
