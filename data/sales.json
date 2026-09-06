@@ -1,12 +1,12 @@
 {
-  "updated": "2026-09-06T06:00:26.982820+09:00",
+  "updated": "2026-09-07T06:00:35.430888+09:00",
   "summary": {
-    "current_month": 3000000,
+    "current_month": 4000000,
     "current_month_label": "2026-09",
     "last_month": 10400000,
     "last_month_label": "2026-08",
-    "change_pct": "-71.2%",
-    "total_customers": 179
+    "change_pct": "-61.5%",
+    "total_customers": 181
   },
   "monthly": [
     {
@@ -96,8 +96,8 @@
     },
     {
       "month": "2026-09",
-      "revenue": 3000000,
-      "customers": 6
+      "revenue": 4000000,
+      "customers": 8
     }
   ],
   "weekly": [
@@ -732,8 +732,8 @@
     },
     {
       "utm": "yt_094",
-      "count": 8,
-      "revenue": 3600000
+      "count": 10,
+      "revenue": 4600000
     },
     {
       "utm": "yt_090",
@@ -799,35 +799,35 @@
   "by_purpose": [
     {
       "purpose": "내집마련",
-      "count": 158,
-      "revenue": 53650000,
-      "ratio": "56.3%"
+      "count": 160,
+      "revenue": 54650000,
+      "ratio": "56.4%"
     },
     {
       "purpose": "투자",
-      "count": 100,
-      "revenue": 32500000,
+      "count": 101,
+      "revenue": 33000000,
       "ratio": "34.1%"
     },
     {
       "purpose": "기타",
       "count": 29,
       "revenue": 9200000,
-      "ratio": "9.6%"
+      "ratio": "9.5%"
     }
   ],
   "by_region": [
     {
       "region": "수도권",
-      "count": 105,
-      "revenue": 32550000,
-      "ratio": "70.0%"
+      "count": 108,
+      "revenue": 34050000,
+      "ratio": "70.6%"
     },
     {
       "region": "지방",
       "count": 45,
       "revenue": 15450000,
-      "ratio": "30.0%"
+      "ratio": "29.4%"
     }
   ],
   "expenses": [

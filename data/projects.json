@@ -1,11 +1,19 @@
 {
-  "updated": "2026-09-06T06:00:03.830207+09:00",
+  "updated": "2026-09-07T06:00:04.297129+09:00",
   "projects": [
     {
-      "name": "260906 원고",
+      "name": "260920 원고",
       "type": "file",
       "app": null,
-      "modified": "2026-09-05",
+      "modified": "2026-09-06",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "260913 원고",
+      "type": "file",
+      "app": null,
+      "modified": "2026-09-06",
       "status": null,
       "next": null
     },
@@ -13,7 +21,7 @@
       "name": "강의",
       "type": "folder",
       "app": null,
-      "modified": "2026-09-05",
+      "modified": "2026-09-06",
       "status": null,
       "next": null
     },
@@ -22,14 +30,6 @@
       "type": "folder",
       "app": null,
       "modified": "2026-09-04",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "260913 원고",
-      "type": "file",
-      "app": null,
-      "modified": "2026-09-02",
       "status": null,
       "next": null
     },
