@@ -1,11 +1,39 @@
 {
-  "updated": "2026-09-07T06:00:38.878516+09:00",
+  "updated": "2026-09-08T06:00:30.582109+09:00",
   "summary": {
-    "정상": 8,
-    "정리 필요": 1,
+    "정상": 6,
+    "정리 필요": 3,
     "꺼짐": 6
   },
   "important": [
+    {
+      "name": "weekly-ops-brief",
+      "title": "주간 건강검진",
+      "room": "알림봇",
+      "description": "주간 건강검진 실행 래퍼 — launchd com.nightwatch.weekly-ops-brief (월 10:00)",
+      "cron": "0 10 * * 1",
+      "day": "월요일",
+      "time": "10:00",
+      "status": "정리 필요",
+      "script": "weekly-ops-brief.sh",
+      "registered": false,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "aarrr-weekly",
+      "title": "AARRR 주간 리포트",
+      "room": "알림봇",
+      "description": "AARRR 주간 리포트 (YouTube/Notion/콘텐츠관리시트)",
+      "cron": "0 7 * * 0",
+      "day": "일요일",
+      "time": "07:00",
+      "status": "정리 필요",
+      "script": "aarrr-weekly.sh",
+      "registered": false,
+      "scriptExists": true,
+      "enabled": true
+    },
     {
       "name": "tailscale-funnel-watch",
       "title": "tailscale-funnel-watch",
@@ -26,13 +54,13 @@
       "name": "weekly-ops-brief",
       "title": "주간 건강검진",
       "room": "알림봇",
-      "description": "주간 건강검진 실행 래퍼 — 기존 crontab 월 10:00 줄 유지",
+      "description": "주간 건강검진 실행 래퍼 — launchd com.nightwatch.weekly-ops-brief (월 10:00)",
       "cron": "0 10 * * 1",
       "day": "월요일",
       "time": "10:00",
-      "status": "정상",
+      "status": "정리 필요",
       "script": "weekly-ops-brief.sh",
-      "registered": true,
+      "registered": false,
       "scriptExists": true,
       "enabled": true
     },
@@ -86,9 +114,9 @@
       "cron": "0 7 * * 0",
       "day": "일요일",
       "time": "07:00",
-      "status": "정상",
+      "status": "정리 필요",
       "script": "aarrr-weekly.sh",
-      "registered": true,
+      "registered": false,
       "scriptExists": true,
       "enabled": true
     },

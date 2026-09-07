@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-07T06:00:21.421975+09:00",
+  "updated": "2026-09-08T06:00:13.996306+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 966,
-    "done": 906,
-    "overdue": 11,
+    "total": 974,
+    "done": 916,
+    "overdue": 10,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,78 +56,33 @@
         "overdue": true
       },
       {
-        "title": "PPT완료",
-        "date": "2026-09-06T12:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-09-06T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-09-06T14:15:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "재생목록 변경(돈되는 ETF, 풀링/키 등)",
-        "date": "2026-09-06T18:30:00.000+09:00",
+        "title": "이렇게산다(성장일지), 메모",
+        "date": "2026-09-07",
         "overdue": true
       },
       {
         "title": "특강목차",
-        "date": "2026-09-06T19:15:00.000+09:00",
+        "date": "2026-09-07T18:00:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "이렇게산다(성장일지), 메모",
-        "date": "2026-09-07",
-        "overdue": false
-      },
-      {
-        "title": "마케팅업체 정산",
-        "date": "2026-09-07T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-09-07T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강 현금영수증 발행",
-        "date": "2026-09-07T09:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의복습",
-        "date": "2026-09-07T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주간복기",
-        "date": "2026-09-07T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
-        "date": "2026-09-07T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "특강 0~20p",
-        "date": "2026-09-07T14:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-09-07T21:00:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "특강 20~30p",
-        "date": "2026-09-07T15:30:00.000+09:00",
-        "overdue": false
+        "title": "강의",
+        "date": "2026-09-07T22:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "주제선정&썸네일&제목",
         "date": "2026-09-08T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "pt복습",
+        "date": "2026-09-08T10:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -136,28 +91,33 @@
         "overdue": false
       },
       {
+        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
+        "date": "2026-09-08T11:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "재생목록 변경(돈되는 ETF, 풀링/키 등)",
+        "date": "2026-09-08T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "자료수집&도입부",
         "date": "2026-09-08T13:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "특강 30~50p",
+        "title": "특강 20~30p",
         "date": "2026-09-08T14:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "강의",
-        "date": "2026-09-08T17:30:00.000+09:00",
+        "title": "특강 30~50p",
+        "date": "2026-09-08T15:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "강의",
         "date": "2026-09-08T21:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "마곡?",
-        "date": "2026-09-09",
         "overdue": false
       },
       {
@@ -177,6 +137,11 @@
       },
       {
         "title": "원고초안 완성",
+        "date": "2026-09-09T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "마곡?",
         "date": "2026-09-09T18:00:00.000+09:00",
         "overdue": false
       },
@@ -241,6 +206,26 @@
         "overdue": false
       },
       {
+        "title": "이렇게산다(성장일지), 메모",
+        "date": "2026-09-14",
+        "overdue": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "date": "2026-09-14T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "date": "2026-09-14T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "주간복기",
+        "date": "2026-09-14T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "특강 160p",
         "date": "2026-09-14T13:30:00.000+09:00",
         "overdue": false
@@ -291,6 +276,11 @@
         "overdue": false
       },
       {
+        "title": "특강영상 고정댓글(설명글) 변경- 신청기간 끝났다. 1차모집은 끝났는데, 다음에 진행할때 알림받기로 변경. ",
+        "date": "2026-09-21T10:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "셀프커스터디",
         "date": "2026-09-21T14:30:00.000+09:00",
         "overdue": false
@@ -328,56 +318,56 @@
     ],
     "schedule": [
       {
-        "title": "이렇게산다(성장일지), 메모",
-        "time": "",
-        "allDay": true,
-        "done": false
-      },
-      {
-        "title": "마케팅업체 정산",
-        "time": "09:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
+        "title": "주제선정&썸네일&제목",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강 현금영수증 발행",
-        "time": "09:45",
+        "title": "pt복습",
+        "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의복습",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "주간복기",
-        "time": "10:00",
+        "title": "상담준비",
+        "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
+        "time": "11:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "재생목록 변경(돈되는 ETF, 풀링/키 등)",
+        "time": "12:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "자료수집&도입부",
         "time": "13:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강 0~20p",
+        "title": "특강 20~30p",
         "time": "14:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강 20~30p",
+        "title": "특강 30~50p",
         "time": "15:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의",
+        "time": "21:00",
         "allDay": false,
         "done": false
       }
@@ -408,14 +398,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-09-01",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-09-02",
           "done": 3,
@@ -438,11 +423,16 @@
         },
         {
           "date": "2026-09-06",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-09-07",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-09-08",
           "done": 0,
           "total": 4
         }
@@ -452,13 +442,18 @@
   "sales": {
     "month": "2026-09",
     "month_label": "9월",
-    "total_amount": 130,
-    "total_count": 3,
+    "total_amount": 180,
+    "total_count": 4,
     "weekly": [
       {
         "week": "1주차",
         "count": 3,
         "amount": 130
+      },
+      {
+        "week": "2주차",
+        "count": 1,
+        "amount": 50
       }
     ]
   }
