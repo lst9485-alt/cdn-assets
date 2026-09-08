@@ -1,8 +1,8 @@
 {
-  "updated": "2026-09-08T06:00:29.339771+09:00",
+  "updated": "2026-09-09T06:00:31.980888+09:00",
   "source_updated": {
-    "funnel": "2026-09-08T06:00:29.023984+09:00",
-    "sales": "2026-09-08T06:00:27.240852+09:00"
+    "funnel": "2026-09-09T06:00:31.666258+09:00",
+    "sales": "2026-09-09T06:00:29.877919+09:00"
   },
   "summary": {
     "total_weeks": 97,
@@ -17,7 +17,7 @@
       "week_start": "2026-07-14",
       "week_end": "",
       "totals": {
-        "revenue": 8000000,
+        "revenue": 10400000,
         "paid_customers": 19,
         "landing_visits": 1181,
         "key_views": 188002,
@@ -30,7 +30,7 @@
         "convert_rate": 1.31
       },
       "avg_per_week": {
-        "revenue": 1000000,
+        "revenue": 1300000,
         "paid_customers": 2.38,
         "landing_visits": 147.62,
         "total_views": 31217.5
@@ -42,7 +42,7 @@
       "week_start": "2026-06-16",
       "week_end": "",
       "totals": {
-        "revenue": 10800000,
+        "revenue": 13200000,
         "paid_customers": 26,
         "landing_visits": 1583,
         "key_views": 193999,
@@ -55,7 +55,7 @@
         "convert_rate": 1.43
       },
       "avg_per_week": {
-        "revenue": 900000,
+        "revenue": 1100000,
         "paid_customers": 2.17,
         "landing_visits": 131.92,
         "total_views": 27441.83
@@ -67,7 +67,7 @@
       "week_start": "2026-03-11",
       "week_end": "",
       "totals": {
-        "revenue": 16400000,
+        "revenue": 18800000,
         "paid_customers": 40,
         "landing_visits": 3003,
         "key_views": 218497,
@@ -80,7 +80,7 @@
         "convert_rate": 1.19
       },
       "avg_per_week": {
-        "revenue": 630769,
+        "revenue": 723077,
         "paid_customers": 1.54,
         "landing_visits": 115.5,
         "total_views": 24311.08
@@ -92,7 +92,7 @@
       "week_start": "2024-10-30",
       "week_end": "",
       "totals": {
-        "revenue": 45850000,
+        "revenue": 48250000,
         "paid_customers": 148,
         "landing_visits": 7171,
         "key_views": 283524,
@@ -105,7 +105,7 @@
         "convert_rate": 2.42
       },
       "avg_per_week": {
-        "revenue": 472680,
+        "revenue": 497423,
         "paid_customers": 1.53,
         "landing_visits": 73.93,
         "total_views": 16452.89
@@ -1731,8 +1731,8 @@
     {
       "week_start": "2026-08-25",
       "week_end": "2026-08-31",
-      "revenue": 2800000,
-      "sales_revenue": 2800000,
+      "revenue": 5200000,
+      "sales_revenue": 5200000,
       "paid_customers": 6,
       "sales_customers": 6,
       "landing_visits": 236,

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-08T06:00:27.240852+09:00",
+  "updated": "2026-09-09T06:00:29.877919+09:00",
   "summary": {
     "current_month": 4000000,
     "current_month_label": "2026-09",
@@ -223,7 +223,7 @@
     },
     {
       "week_start": "2026-08-25",
-      "revenue": 2800000,
+      "revenue": 5200000,
       "customers": 6
     },
     {
@@ -710,7 +710,7 @@
     },
     {
       "week_start": "2026-08-25",
-      "revenue": 2800000,
+      "revenue": 5200000,
       "customers": 6
     },
     {
