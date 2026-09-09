@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21",
+  "updated": "2026-09-10",
   "note": "tasks는 노션 '🔁 반복 목록' 표에서 매일 새벽 자동 생성됨 — tasks 직접 수정 금지(덮어써짐). holidays/reminders는 이 파일이 원본. 대시보드 + n8n 01-1이 이 파일을 읽음.",
   "reminders": [
     { "time": "08:00", "label": "오늘 할 일" },
@@ -17,9 +17,9 @@
     { "title": "주간복기", "repeat": "주간", "dow": 1, "time": "11:00", "priority": "P2", "status": "대기" },
     { "title": "주제선정&썸네일&제목", "repeat": "주간", "dow": 2, "priority": "P2", "status": "대기" },
     { "title": "자료수집&도입부", "repeat": "주간", "dow": 3, "priority": "P2", "status": "대기" },
-    { "title": "콘텐츠 관리시트", "repeat": "주간", "dow": 3, "time": "12:00", "priority": "P2", "status": "대기" },
     { "title": "원고완성", "repeat": "주간", "dow": 4, "priority": "P2", "status": "대기" },
     { "title": "주간계획 수정", "repeat": "주간", "dow": 4, "time": "08:30", "priority": "P2", "status": "대기" },
+    { "title": "콘텐츠 관리시트", "repeat": "주간", "dow": 4, "time": "12:00", "priority": "P2", "status": "대기" },
     { "title": "PPT완료", "repeat": "주간", "dow": 5, "priority": "P2", "status": "백로그" },
     { "title": "촬영&편집&업로드", "repeat": "주간", "dow": 6, "priority": "P2", "status": "대기" },
     { "title": "급여&자산체크", "repeat": "월간", "day": 10, "priority": "P3", "status": "백로그" }

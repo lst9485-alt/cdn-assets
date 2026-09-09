@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-09T06:00:29.877919+09:00",
+  "updated": "2026-09-10T06:00:29.628036+09:00",
   "summary": {
     "current_month": 4000000,
     "current_month_label": "2026-09",
@@ -101,11 +101,6 @@
     }
   ],
   "weekly": [
-    {
-      "week_start": "2026-03-11",
-      "revenue": 400000,
-      "customers": 1
-    },
     {
       "week_start": "2026-03-16",
       "revenue": 800000,
@@ -228,6 +223,11 @@
     },
     {
       "week_start": "2026-09-01",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-09-08",
       "revenue": 0,
       "customers": 0
     }
@@ -715,6 +715,11 @@
     },
     {
       "week_start": "2026-09-01",
+      "revenue": 0,
+      "customers": 0
+    },
+    {
+      "week_start": "2026-09-08",
       "revenue": 0,
       "customers": 0
     }
