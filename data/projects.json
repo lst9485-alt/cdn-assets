@@ -1,11 +1,11 @@
 {
-  "updated": "2026-09-11T06:00:04.637123+09:00",
+  "updated": "2026-09-12T06:00:04.480090+09:00",
   "projects": [
     {
       "name": "260913 원고",
       "type": "file",
       "app": null,
-      "modified": "2026-09-10",
+      "modified": "2026-09-12",
       "status": null,
       "next": null
     },
@@ -13,7 +13,7 @@
       "name": "강의",
       "type": "folder",
       "app": null,
-      "modified": "2026-09-10",
+      "modified": "2026-09-11",
       "status": null,
       "next": null
     },

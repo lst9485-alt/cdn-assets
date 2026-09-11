@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11T06:00:18.000971+09:00",
+  "updated": "2026-09-12T06:00:21.955521+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 994,
-    "done": 941,
-    "overdue": 8,
+    "total": 1000,
+    "done": 942,
+    "overdue": 13,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,38 +56,48 @@
         "overdue": true
       },
       {
-        "title": "특강 ~20p",
-        "date": "2026-09-10T15:30:00.000+09:00",
+        "title": "P1~P3/목실감",
+        "date": "2026-09-11T08:30:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-09-11T09:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-09-11T14:00:00.000+09:00",
         "overdue": true
       },
       {
         "title": "원고완성",
-        "date": "2026-09-10T19:45:00.000+09:00",
+        "date": "2026-09-11T14:15:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "하남 스타필드",
-        "date": "2026-09-11T08:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "PPT완료",
-        "date": "2026-09-11T13:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-09-11T15:00:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "특강 ~40p",
-        "date": "2026-09-11T15:00:00.000+09:00",
-        "overdue": false
+        "title": "특강 ~20p",
+        "date": "2026-09-11T17:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "촬영&편집&업로드",
         "date": "2026-09-11T18:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "특강 ~40p",
+        "date": "2026-09-12T08:15:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "특강 ~60p",
-        "date": "2026-09-12T08:00:00.000+09:00",
+        "title": "국제운전면허증 신청",
+        "date": "2026-09-12T09:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -101,8 +111,13 @@
         "overdue": false
       },
       {
+        "title": "특강 ~60p",
+        "date": "2026-09-12T19:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "특강 ~80p",
-        "date": "2026-09-12T20:00:00.000+09:00",
+        "date": "2026-09-12T21:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -148,6 +163,11 @@
       {
         "title": "재생목록 변경(돈되는 ETF, 풀링/키 등)",
         "date": "2026-09-14T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "항공기 프린트",
+        "date": "2026-09-14T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -213,6 +233,11 @@
       {
         "title": "특강 최종점검",
         "date": "2026-09-17T13:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "PPT완료",
+        "date": "2026-09-18",
         "overdue": false
       },
       {
@@ -293,26 +318,38 @@
     ],
     "schedule": [
       {
-        "title": "하남 스타필드",
-        "time": "08:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "PPT완료",
-        "time": "13:00",
-        "allDay": false,
-        "done": false
-      },
-      {
         "title": "특강 ~40p",
-        "time": "15:00",
+        "time": "08:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "time": "18:00",
+        "title": "국제운전면허증 신청",
+        "time": "09:45",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "구독리스트 느낌보내기.",
+        "time": "12:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "상담준비",
+        "time": "18:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "특강 ~60p",
+        "time": "19:15",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "특강 ~80p",
+        "time": "21:15",
         "allDay": false,
         "done": false
       }
@@ -347,11 +384,6 @@
       "rate": "50%",
       "days": [
         {
-          "date": "2026-09-05",
-          "done": 0,
-          "total": 4
-        },
-        {
           "date": "2026-09-06",
           "done": 3,
           "total": 4
@@ -378,6 +410,11 @@
         },
         {
           "date": "2026-09-11",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-09-12",
           "done": 0,
           "total": 4
         }
