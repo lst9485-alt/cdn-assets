@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-15T06:00:14.509189+09:00",
+  "updated": "2026-09-16T06:00:14.812603+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1017,
-    "done": 963,
-    "overdue": 8,
+    "total": 1022,
+    "done": 969,
+    "overdue": 9,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,39 +56,19 @@
         "overdue": true
       },
       {
-        "title": "이렇게산다(성장일지), 메모",
-        "date": "2026-09-14",
-        "overdue": true
-      },
-      {
         "title": "하나은행 원화결제차단",
         "date": "2026-09-14T11:45:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-09-15T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "공가올리기",
-        "date": "2026-09-15T11:15:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "특강 100p",
         "date": "2026-09-15T13:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "특강 ~30p",
         "date": "2026-09-15T20:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강 50p",
-        "date": "2026-09-15T22:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "상담준비",
@@ -96,18 +76,8 @@
         "overdue": false
       },
       {
-        "title": "이더 500매수",
-        "date": "2026-09-16T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "자료수집&도입부",
         "date": "2026-09-16T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-09-16T12:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -178,6 +148,21 @@
       {
         "title": "PPT완료",
         "date": "2026-09-18T14:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "미용실 펌",
+        "date": "2026-09-18T15:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ppt 프린트",
+        "date": "2026-09-18T16:15:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "촬영 손나오게",
+        "date": "2026-09-18T17:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -271,6 +256,16 @@
         "overdue": false
       },
       {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-09-22",
+        "overdue": false
+      },
+      {
+        "title": "이더 500매수",
+        "date": "2026-09-25T10:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "어흥가입",
         "date": "2026-10-01T07:00:00.000+09:00",
         "overdue": false
@@ -298,32 +293,38 @@
     ],
     "schedule": [
       {
-        "title": "주제선정&썸네일&제목",
+        "title": "상담준비",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "공가올리기",
-        "time": "11:15",
+        "title": "자료수집&도입부",
+        "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강 100p",
+        "title": "원고",
         "time": "13:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강 ~30p",
-        "time": "20:30",
+        "title": "특강 130p",
+        "time": "14:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강 50p",
-        "time": "22:00",
+        "title": "특강 150p",
+        "time": "17:45",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의",
+        "time": "21:30",
         "allDay": false,
         "done": false
       }
@@ -354,14 +355,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 12,
-      "rate": "43%",
+      "done": 14,
+      "rate": "50%",
       "days": [
-        {
-          "date": "2026-09-09",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-09-10",
           "done": 2,
@@ -384,11 +380,16 @@
         },
         {
           "date": "2026-09-14",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-09-15",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-09-16",
           "done": 0,
           "total": 4
         }
@@ -398,8 +399,8 @@
   "sales": {
     "month": "2026-09",
     "month_label": "9월",
-    "total_amount": 220,
-    "total_count": 5,
+    "total_amount": 320,
+    "total_count": 7,
     "weekly": [
       {
         "week": "1주차",
@@ -410,6 +411,11 @@
         "week": "2주차",
         "count": 2,
         "amount": 90
+      },
+      {
+        "week": "3주차",
+        "count": 2,
+        "amount": 100
       }
     ]
   }
