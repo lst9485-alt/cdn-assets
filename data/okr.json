@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17T06:00:15.393181+09:00",
+  "updated": "2026-09-18T06:00:15.344222+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1025,
-    "done": 974,
-    "overdue": 10,
+    "total": 1031,
+    "done": 975,
+    "overdue": 19,
     "pending": [
       {
         "title": "전자책 작성",
@@ -71,44 +71,54 @@
         "overdue": true
       },
       {
-        "title": "강의",
-        "date": "2026-09-16T22:00:00.000+09:00",
+        "title": "P1~P3/목실감",
+        "date": "2026-09-17T08:30:00.000+09:00",
         "overdue": true
       },
       {
         "title": "주간계획 수정",
         "date": "2026-09-17T08:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-09-17T09:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "콘텐츠 관리시트",
         "date": "2026-09-17T12:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "장소 이메일 보내기(전화해보고)",
         "date": "2026-09-17T13:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-09-17T14:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "원고",
         "date": "2026-09-17T15:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "특강 100p",
         "date": "2026-09-17T16:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원고",
         "date": "2026-09-17T19:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "강의",
         "date": "2026-09-17T22:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "4시 미용실 펌",
@@ -251,6 +261,21 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-09-24",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-09-24T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-09-24T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "이더 500매수",
         "date": "2026-09-25T10:30:00.000+09:00",
         "overdue": false
@@ -283,44 +308,56 @@
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "장소 이메일 보내기(전화해보고)",
-        "time": "13:30",
-        "allDay": false,
+        "title": "4시 미용실 펌",
+        "time": "",
+        "allDay": true,
         "done": false
       },
       {
         "title": "원고",
-        "time": "15:00",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강 100p",
-        "time": "16:30",
+        "title": "원고완성",
+        "time": "13:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고",
+        "title": "PPT완료",
+        "time": "14:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "미용실 펌",
+        "time": "15:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "ppt 프린트",
+        "time": "16:15",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "촬영 손나오게",
+        "time": "17:15",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "촬영",
+        "time": "18:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "특강130p",
         "time": "19:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의",
-        "time": "22:00",
         "allDay": false,
         "done": false
       }
@@ -355,11 +392,6 @@
       "rate": "46%",
       "days": [
         {
-          "date": "2026-09-11",
-          "done": 0,
-          "total": 4
-        },
-        {
           "date": "2026-09-12",
           "done": 3,
           "total": 4
@@ -386,6 +418,11 @@
         },
         {
           "date": "2026-09-17",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-09-18",
           "done": 0,
           "total": 4
         }
