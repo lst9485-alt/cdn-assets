@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-19T06:00:18.984916+09:00",
+  "updated": "2026-09-20T06:00:15.857042+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1031,
-    "done": 985,
-    "overdue": 13,
+    "total": 1033,
+    "done": 993,
+    "overdue": 12,
     "pending": [
       {
         "title": "전자책 작성",
@@ -66,59 +66,24 @@
         "overdue": true
       },
       {
-        "title": "원씽복기",
-        "date": "2026-09-18T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-09-18T15:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "미용실 펌",
-        "date": "2026-09-18T16:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "ppt 프린트",
-        "date": "2026-09-18T17:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원고",
-        "date": "2026-09-18T19:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-09-19T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-09-19T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "PPT완료",
-        "date": "2026-09-19T14:30:00.000+09:00",
-        "overdue": false
+        "date": "2026-09-19T15:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "촬영",
-        "date": "2026-09-19T17:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-09-19T17:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "촬영 손나오게",
-        "date": "2026-09-19T18:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-09-19T17:45:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "특강 리허설",
-        "date": "2026-09-19T20:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-09-19T19:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "특강",
@@ -226,6 +191,11 @@
         "overdue": false
       },
       {
+        "title": "촬영&편집&업로드",
+        "date": "2026-09-26",
+        "overdue": false
+      },
+      {
         "title": "어흥가입",
         "date": "2026-10-01T07:00:00.000+09:00",
         "overdue": false
@@ -258,38 +228,20 @@
     ],
     "schedule": [
       {
-        "title": "상담준비",
+        "title": "특강",
         "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고완성",
-        "time": "13:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "PPT완료",
+        "title": "편집&업로드",
         "time": "14:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영",
-        "time": "17:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "촬영 손나오게",
-        "time": "18:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "특강 리허설",
-        "time": "20:00",
+        "title": "강의",
+        "time": "19:00",
         "allDay": false,
         "done": false
       }
@@ -320,14 +272,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-09-13",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-09-14",
           "done": 3,
@@ -350,11 +297,16 @@
         },
         {
           "date": "2026-09-18",
-          "done": 2,
+          "done": 4,
           "total": 4
         },
         {
           "date": "2026-09-19",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-09-20",
           "done": 0,
           "total": 4
         }
