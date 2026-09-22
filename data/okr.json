@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-22T06:00:15.399521+09:00",
+  "updated": "2026-09-23T06:00:19.106472+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1057,
-    "done": 1007,
-    "overdue": 14,
+    "total": 1065,
+    "done": 1021,
+    "overdue": 7,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,78 +61,23 @@
         "overdue": true
       },
       {
-        "title": "4시 미용실 펌",
-        "date": "2026-09-18",
-        "overdue": true
-      },
-      {
-        "title": "PPT완료",
-        "date": "2026-09-19T15:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영",
-        "date": "2026-09-19T17:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영 손나오게",
-        "date": "2026-09-19T17:45:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "특강 리허설",
-        "date": "2026-09-19T19:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "이렇게산다(성장일지), 메모",
-        "date": "2026-09-21",
-        "overdue": true
-      },
-      {
-        "title": "키콘텐츠 변경(+내집마련함께하기 변경)",
-        "date": "2026-09-21T19:15:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-09-22T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-09-22T10:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특별영상 25분짜리",
-        "date": "2026-09-22T12:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "시트 등 촬영 계획\n집구매, 시트작성법 등",
-        "date": "2026-09-22T13:30:00.000+09:00",
+        "title": "후기 확인 및 자료발송",
+        "date": "2026-09-23T09:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "원고",
-        "date": "2026-09-22T16:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의",
-        "date": "2026-09-22T18:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고완성",
         "date": "2026-09-23T09:30:00.000+09:00",
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-09-23T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "상담준비",
-        "date": "2026-09-23T14:00:00.000+09:00",
+        "date": "2026-09-23T14:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -141,8 +86,8 @@
         "overdue": false
       },
       {
-        "title": "강의완강",
-        "date": "2026-09-23T17:30:00.000+09:00",
+        "title": "강의",
+        "date": "2026-09-23T17:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -161,6 +106,11 @@
         "overdue": false
       },
       {
+        "title": "광고준비",
+        "date": "2026-09-24T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "콘텐츠 관리시트",
         "date": "2026-09-24T12:00:00.000+09:00",
         "overdue": false
@@ -176,13 +126,13 @@
         "overdue": false
       },
       {
-        "title": "특강복기",
-        "date": "2026-09-24T20:00:00.000+09:00",
+        "title": "강의완강",
+        "date": "2026-09-24T19:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "공개방 미션",
-        "date": "2026-09-24T21:30:00.000+09:00",
+        "title": "특강복기",
+        "date": "2026-09-24T20:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -206,6 +156,11 @@
         "overdue": false
       },
       {
+        "title": "공개방 미션",
+        "date": "2026-09-25T18:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "노션&옵시디언 정비",
         "date": "2026-09-25T21:00:00.000+09:00",
         "overdue": false
@@ -218,6 +173,16 @@
       {
         "title": "신규강의(?)준비",
         "date": "2026-09-26T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "상표권등록 알아보기",
+        "date": "2026-09-26T18:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "시트 등 촬영 계획\n집구매, 시트작성법 등",
+        "date": "2026-09-26T19:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -243,6 +208,11 @@
       {
         "title": "주간복기",
         "date": "2026-09-28T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-09-29",
         "overdue": false
       },
       {
@@ -278,38 +248,38 @@
     ],
     "schedule": [
       {
-        "title": "주제선정&썸네일&제목",
-        "time": "09:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "time": "10:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "특별영상 25분짜리",
-        "time": "12:15",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "시트 등 촬영 계획\n집구매, 시트작성법 등",
-        "time": "13:30",
+        "title": "후기 확인 및 자료발송",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "원고",
-        "time": "16:00",
+        "time": "09:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원고완성",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "상담준비",
+        "time": "14:15",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의프린트",
+        "time": "15:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "강의",
-        "time": "18:00",
+        "time": "17:00",
         "allDay": false,
         "done": false
       }
@@ -340,14 +310,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 17,
-      "rate": "61%",
+      "done": 19,
+      "rate": "68%",
       "days": [
-        {
-          "date": "2026-09-16",
-          "done": 1,
-          "total": 4
-        },
         {
           "date": "2026-09-17",
           "done": 2,
@@ -375,6 +340,11 @@
         },
         {
           "date": "2026-09-22",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-09-23",
           "done": 0,
           "total": 4
         }
@@ -384,8 +354,8 @@
   "sales": {
     "month": "2026-09",
     "month_label": "9월",
-    "total_amount": 360,
-    "total_count": 8,
+    "total_amount": 410,
+    "total_count": 9,
     "weekly": [
       {
         "week": "1주차",
@@ -401,6 +371,11 @@
         "week": "3주차",
         "count": 3,
         "amount": 140
+      },
+      {
+        "week": "4주차",
+        "count": 1,
+        "amount": 50
       }
     ]
   }
