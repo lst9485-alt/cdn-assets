@@ -1,11 +1,11 @@
 {
-  "updated": "2026-09-23T06:00:04.800107+09:00",
+  "updated": "2026-09-24T06:00:04.930991+09:00",
   "projects": [
     {
       "name": "비즈니스PT 프로",
       "type": "folder",
       "app": null,
-      "modified": "2026-09-22",
+      "modified": "2026-09-23",
       "status": null,
       "next": null
     },
@@ -13,7 +13,7 @@
       "name": "260927 원고",
       "type": "file",
       "app": null,
-      "modified": "2026-09-22",
+      "modified": "2026-09-23",
       "status": null,
       "next": null
     },
