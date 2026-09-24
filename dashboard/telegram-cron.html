@@ -112,14 +112,17 @@
     document.getElementById('nr-reminders').innerHTML=rem.map(function(r){return '<li><b>'+esc(r.time)+'</b> '+esc(r.label)+'</li>';}).join('');
     var tasks=d.tasks||[];
     var dowName={0:'일',1:'월',2:'화',3:'수',4:'목',5:'금',6:'토'};
-    function label(t){return esc(t.title)+(t.time?'('+esc(t.time)+')':'');}
+    // dow: 옛 형식은 숫자 하나, 새 형식은 [1,3] 목록
+    function dows(t){return Array.isArray(t.dow)?t.dow:(typeof t.dow==='number'?[t.dow]:[]);}
+    function label(t){return esc(t.title)+(t.time?'('+esc(t.time)+(t.end_time?'-'+esc(t.end_time):'')+')':'');}
+    function labelWithDays(t){var ds=dows(t);return label(t)+(ds.length?' ['+ds.map(function(n){return dowName[n]}).join('·')+']':'');}
     var rows=[];
     var daily=tasks.filter(function(t){return t.repeat==='매일'});
-    if(daily.length)rows.push(['매일',daily.map(label).join(' · ')]);
+    if(daily.length)rows.push(['매일',daily.map(labelWithDays).join(' · ')]);
     var wd=tasks.filter(function(t){return t.repeat==='평일'});
-    if(wd.length)rows.push(['평일',wd.map(label).join(' · ')]);
+    if(wd.length)rows.push(['평일',wd.map(labelWithDays).join(' · ')]);
     [1,2,3,4,5,6,0].forEach(function(dw){
-      var g=tasks.filter(function(t){return t.repeat==='주간'&&t.dow===dw});
+      var g=tasks.filter(function(t){return t.repeat==='주간'&&dows(t).indexOf(dw)>=0});
       if(g.length)rows.push([dowName[dw],g.map(label).join(' · ')]);
     });
     tasks.filter(function(t){return t.repeat==='월간'}).forEach(function(t){rows.push(['매달 '+esc(t.day)+'일',label(t)]);});
