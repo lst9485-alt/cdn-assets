@@ -101,15 +101,15 @@
       "bot": "woori0608_marketing_bot",
       "sourceEnv": "TELEGRAM_MARKETING_CHAT_ID",
       "role": "마케팅·콘텐츠 기획 보조 알림",
-      "cadence": "매일 07:10",
+      "cadence": "월 11:00 경쟁채널 주간 요약 + SNS(스레드) 알림 매일",
       "volume": "중간",
       "items": [
         {
           "name": "competitor-monitor",
           "runtime": "nightwatch shell + Python",
-          "trigger": "매일 07:10",
+          "trigger": "매일 07:10 수집 · 월 11:00 주간 요약 발송 (2026-09-27~)",
           "purpose": "경쟁 YouTube 채널 모니터링",
-          "content": "신규/급상승 영상 수집, 대시보드 갱신, 상세 리포트",
+          "content": "매일 신규/급상승 영상 수집·대시보드 갱신, 월요일에 지난 7일 잘된 영상 요약 이미지 1장",
           "evidence": [
             "workspace/tools/scripts/nightwatch/jobs.json:93",
             "workspace/tools/scripts/nightwatch/competitor-monitor.sh:56",
