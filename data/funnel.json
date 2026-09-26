@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-26T06:00:35.623973+09:00",
+  "updated": "2026-09-27T06:00:35.022284+09:00",
   "current_week": {
     "week_start": "2026-09-15",
     "week_end": "2026-09-21",
@@ -36,40 +36,40 @@
     "convert_rate": 3.0
   },
   "changes": {
-    "shorts_views": 6.8,
-    "explore_traffic": -33.3,
     "key_search_traffic": -8.4,
-    "key_views": 0.4,
-    "pulling_views": -17.3,
+    "revenue_per_view": -48.6,
+    "paid_customers": -50.0,
+    "subscriber_increase": 16.2,
+    "revenue": -50.0,
+    "explore_traffic": -33.3,
+    "midform_views": -3.4,
+    "shorts_views": 6.8,
+    "landing_visits": -5.7,
     "key_page_traffic": -4.9,
     "subscribers_total": 1.1,
-    "paid_customers": -50.0,
-    "revenue_per_view": -48.6,
-    "landing_visits": -5.7,
-    "midform_views": -3.4,
-    "subscriber_increase": 16.2,
-    "revenue": -50.0
+    "pulling_views": -17.3,
+    "key_views": 0.4
   },
   "avg_4w": {
-    "shorts_views": 761.5,
-    "explore_traffic": 3845.0,
     "key_search_traffic": 7452.0,
-    "key_views": 39314.8,
-    "pulling_views": 5998.2,
-    "key_page_traffic": 1214.5,
-    "subscribers_total": 25725.0,
-    "paid_customers": 4.8,
     "revenue_per_view": 60.5,
-    "landing_visits": 232.5,
-    "midform_views": 45313.0,
+    "paid_customers": 4.8,
     "subscriber_increase": 717.0,
     "revenue": 2800000.0,
+    "explore_traffic": 3845.0,
+    "midform_views": 45313.0,
+    "shorts_views": 761.5,
+    "landing_visits": 232.5,
+    "key_page_traffic": 1214.5,
+    "subscribers_total": 25725.0,
+    "pulling_views": 5998.2,
+    "key_views": 39314.8,
     "pulling_subscriber_rate": 0.0,
     "interest_rate": 690.92,
     "convert_rate": 2.08,
     "link_click_rate": 0.62,
-    "pulling_watch_time": "4:35",
     "key_watch_time": "4:04",
+    "pulling_watch_time": "4:35",
     "_rate_interest_rate": 690.92,
     "_rate_link_click_rate": 0.54,
     "_rate_convert_rate": 2.09
@@ -120,7 +120,7 @@
       "pulling_watch_time": "01:00",
       "explore_traffic": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
+      "pulling_subscriber_rate": 80.0,
       "label": "2024-11-06"
     },
     {
@@ -144,7 +144,7 @@
       "pulling_watch_time": "03:29",
       "explore_traffic": 1,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
+      "pulling_subscriber_rate": 5.0,
       "label": "2024-11-13"
     },
     {
@@ -168,7 +168,7 @@
       "pulling_watch_time": "05:00",
       "explore_traffic": 1,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
+      "pulling_subscriber_rate": 9.5,
       "label": "2024-11-20"
     },
     {
@@ -192,7 +192,7 @@
       "pulling_watch_time": "02:29",
       "explore_traffic": 1,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
+      "pulling_subscriber_rate": 7.4,
       "label": "2024-11-27"
     },
     {
@@ -216,7 +216,7 @@
       "pulling_watch_time": "02:29",
       "explore_traffic": 1,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
+      "pulling_subscriber_rate": 7.8,
       "label": "2024-12-04"
     },
     {
@@ -264,7 +264,7 @@
       "pulling_watch_time": "04:23",
       "explore_traffic": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 40.0,
+      "pulling_subscriber_rate": 4.0,
       "label": "2024-12-18"
     },
     {
@@ -288,7 +288,7 @@
       "pulling_watch_time": "03:33",
       "explore_traffic": 2,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
+      "pulling_subscriber_rate": 10.5,
       "label": "2024-12-25"
     },
     {
@@ -312,7 +312,7 @@
       "pulling_watch_time": "04:18",
       "explore_traffic": 3,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
+      "pulling_subscriber_rate": 5.1,
       "label": "2025-01-01"
     },
     {
@@ -336,7 +336,7 @@
       "pulling_watch_time": "04:56",
       "explore_traffic": 2,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 5.9,
+      "pulling_subscriber_rate": 6.2,
       "label": "2025-01-08"
     },
     {
@@ -360,7 +360,7 @@
       "pulling_watch_time": "04:00",
       "explore_traffic": 16,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
+      "pulling_subscriber_rate": 8.7,
       "label": "2025-01-15"
     },
     {
@@ -384,7 +384,7 @@
       "pulling_watch_time": "02:55",
       "explore_traffic": 3172,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 2.3,
+      "pulling_subscriber_rate": 7.0,
       "label": "2025-01-22"
     },
     {
@@ -408,7 +408,7 @@
       "pulling_watch_time": "03:52",
       "explore_traffic": 916,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.3,
+      "pulling_subscriber_rate": 6.4,
       "label": "2025-01-29"
     },
     {
@@ -432,7 +432,7 @@
       "pulling_watch_time": "03:37",
       "explore_traffic": 7988,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.7,
+      "pulling_subscriber_rate": 10.8,
       "label": "2025-02-05"
     },
     {
@@ -456,7 +456,7 @@
       "pulling_watch_time": "03:18",
       "explore_traffic": 2697,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.1,
+      "pulling_subscriber_rate": 6.6,
       "label": "2025-02-12"
     },
     {
@@ -480,7 +480,7 @@
       "pulling_watch_time": "02:13",
       "explore_traffic": 1786,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.2,
+      "pulling_subscriber_rate": 7.6,
       "label": "2025-02-19"
     },
     {
@@ -504,7 +504,7 @@
       "pulling_watch_time": "02:47",
       "explore_traffic": 1222,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 6.4,
       "label": "2025-02-26"
     },
     {
@@ -528,7 +528,7 @@
       "pulling_watch_time": "02:53",
       "explore_traffic": 2373,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.1,
+      "pulling_subscriber_rate": 9.8,
       "label": "2025-03-05"
     },
     {
@@ -552,7 +552,7 @@
       "pulling_watch_time": "03:00",
       "explore_traffic": 940,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.3,
+      "pulling_subscriber_rate": 4.0,
       "label": "2025-03-12"
     },
     {
@@ -576,7 +576,7 @@
       "pulling_watch_time": "02:23",
       "explore_traffic": 1088,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.5,
+      "pulling_subscriber_rate": 4.3,
       "label": "2025-03-19"
     },
     {
@@ -600,7 +600,7 @@
       "pulling_watch_time": "02:33",
       "explore_traffic": 2260,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.0,
+      "pulling_subscriber_rate": 7.7,
       "label": "2025-03-26"
     },
     {
@@ -624,7 +624,7 @@
       "pulling_watch_time": "03:14",
       "explore_traffic": 3145,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.8,
+      "pulling_subscriber_rate": 8.6,
       "label": "2025-04-02"
     },
     {
@@ -648,7 +648,7 @@
       "pulling_watch_time": "03:05",
       "explore_traffic": 4677,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 7.1,
       "label": "2025-04-09"
     },
     {
@@ -672,7 +672,7 @@
       "pulling_watch_time": "03:49",
       "explore_traffic": 1258,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 2.3,
+      "pulling_subscriber_rate": 9.3,
       "label": "2025-04-16"
     },
     {
@@ -696,7 +696,7 @@
       "pulling_watch_time": "02:43",
       "explore_traffic": 3099,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.1,
+      "pulling_subscriber_rate": 10.5,
       "label": "2025-04-23"
     },
     {
@@ -720,7 +720,7 @@
       "pulling_watch_time": "02:42",
       "explore_traffic": 2933,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.2,
+      "pulling_subscriber_rate": 7.1,
       "label": "2025-04-30"
     },
     {
@@ -744,7 +744,7 @@
       "pulling_watch_time": "03:15",
       "explore_traffic": 2403,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.0,
+      "pulling_subscriber_rate": 3.8,
       "label": "2025-05-07"
     },
     {
@@ -768,7 +768,7 @@
       "pulling_watch_time": "03:41",
       "explore_traffic": 492,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.1,
+      "pulling_subscriber_rate": 6.6,
       "label": "2025-05-14"
     },
     {
@@ -792,7 +792,7 @@
       "pulling_watch_time": "03:33",
       "explore_traffic": 259,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 2.4,
+      "pulling_subscriber_rate": 9.1,
       "label": "2025-05-21"
     },
     {
@@ -816,7 +816,7 @@
       "pulling_watch_time": "03:17",
       "explore_traffic": 514,
       "revenue_per_view": 44,
-      "pulling_subscriber_rate": 1.0,
+      "pulling_subscriber_rate": 5.8,
       "label": "2025-05-28"
     },
     {
@@ -840,7 +840,7 @@
       "pulling_watch_time": "02:50",
       "explore_traffic": 977,
       "revenue_per_view": 31,
-      "pulling_subscriber_rate": 0.8,
+      "pulling_subscriber_rate": 6.7,
       "label": "2025-06-04"
     },
     {
@@ -864,7 +864,7 @@
       "pulling_watch_time": "03:17",
       "explore_traffic": 2920,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.6,
+      "pulling_subscriber_rate": 8.0,
       "label": "2025-06-11"
     },
     {
@@ -888,7 +888,7 @@
       "pulling_watch_time": "03:25",
       "explore_traffic": 11048,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.7,
+      "pulling_subscriber_rate": 9.5,
       "label": "2025-06-18"
     },
     {
@@ -912,7 +912,7 @@
       "pulling_watch_time": "03:21",
       "explore_traffic": 5532,
       "revenue_per_view": 40,
-      "pulling_subscriber_rate": 1.7,
+      "pulling_subscriber_rate": 7.7,
       "label": "2025-06-25"
     },
     {
@@ -936,7 +936,7 @@
       "pulling_watch_time": "03:25",
       "explore_traffic": 4083,
       "revenue_per_view": 27,
-      "pulling_subscriber_rate": 1.0,
+      "pulling_subscriber_rate": 10.1,
       "label": "2025-07-02"
     },
     {
@@ -960,7 +960,7 @@
       "pulling_watch_time": "04:43",
       "explore_traffic": 16654,
       "revenue_per_view": 9,
-      "pulling_subscriber_rate": 2.7,
+      "pulling_subscriber_rate": 8.7,
       "label": "2025-07-09"
     },
     {
@@ -984,7 +984,7 @@
       "pulling_watch_time": "4:33",
       "explore_traffic": 10338,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.6,
+      "pulling_subscriber_rate": 7.7,
       "label": "2025-07-16"
     },
     {
@@ -1008,7 +1008,7 @@
       "pulling_watch_time": "5:10",
       "explore_traffic": 14200,
       "revenue_per_view": 5,
-      "pulling_subscriber_rate": 1.6,
+      "pulling_subscriber_rate": 8.5,
       "label": "2025-07-23"
     },
     {
@@ -1032,7 +1032,7 @@
       "pulling_watch_time": "05:01",
       "explore_traffic": 5069,
       "revenue_per_view": 12,
-      "pulling_subscriber_rate": 1.7,
+      "pulling_subscriber_rate": 7.4,
       "label": "2025-07-30"
     },
     {
@@ -1056,7 +1056,7 @@
       "pulling_watch_time": "04:11",
       "explore_traffic": 4528,
       "revenue_per_view": 50,
-      "pulling_subscriber_rate": 1.1,
+      "pulling_subscriber_rate": 7.2,
       "label": "2025-08-06"
     },
     {
@@ -1080,7 +1080,7 @@
       "pulling_watch_time": "4:44",
       "explore_traffic": 3540,
       "revenue_per_view": 24,
-      "pulling_subscriber_rate": 1.5,
+      "pulling_subscriber_rate": 6.6,
       "label": "2025-08-13"
     },
     {
@@ -1104,7 +1104,7 @@
       "pulling_watch_time": "4:43",
       "explore_traffic": 2925,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 7.1,
       "label": "2025-08-20"
     },
     {
@@ -1128,7 +1128,7 @@
       "pulling_watch_time": "4:35",
       "explore_traffic": 7852,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 2.0,
+      "pulling_subscriber_rate": 11.0,
       "label": "2025-08-27"
     },
     {
@@ -1152,7 +1152,7 @@
       "pulling_watch_time": "4:21",
       "explore_traffic": 11657,
       "revenue_per_view": 6,
-      "pulling_subscriber_rate": 2.0,
+      "pulling_subscriber_rate": 10.5,
       "label": "2025-09-03"
     },
     {
@@ -1176,7 +1176,7 @@
       "pulling_watch_time": "4:04",
       "explore_traffic": 8319,
       "revenue_per_view": 13,
-      "pulling_subscriber_rate": 1.5,
+      "pulling_subscriber_rate": 8.8,
       "label": "2025-09-10"
     },
     {
@@ -1200,7 +1200,7 @@
       "pulling_watch_time": "3:57",
       "explore_traffic": 6335,
       "revenue_per_view": 39,
-      "pulling_subscriber_rate": 1.3,
+      "pulling_subscriber_rate": 8.4,
       "label": "2025-09-17"
     },
     {
@@ -1224,7 +1224,7 @@
       "pulling_watch_time": "4:10",
       "explore_traffic": 7065,
       "revenue_per_view": 27,
-      "pulling_subscriber_rate": 1.4,
+      "pulling_subscriber_rate": 7.6,
       "label": "2025-09-24"
     },
     {
@@ -1248,7 +1248,7 @@
       "pulling_watch_time": "4:07",
       "explore_traffic": 23934,
       "revenue_per_view": 9,
-      "pulling_subscriber_rate": 1.6,
+      "pulling_subscriber_rate": 10.9,
       "label": "2025-10-01"
     },
     {
@@ -1272,7 +1272,7 @@
       "pulling_watch_time": "4:20",
       "explore_traffic": 21324,
       "revenue_per_view": 50,
-      "pulling_subscriber_rate": 2.1,
+      "pulling_subscriber_rate": 9.6,
       "label": "2025-10-08"
     },
     {
@@ -1296,7 +1296,7 @@
       "pulling_watch_time": "4:13",
       "explore_traffic": 7996,
       "revenue_per_view": 62,
-      "pulling_subscriber_rate": 1.6,
+      "pulling_subscriber_rate": 9.0,
       "label": "2025-10-15"
     },
     {
@@ -1320,7 +1320,7 @@
       "pulling_watch_time": "4:28",
       "explore_traffic": 5798,
       "revenue_per_view": 43,
-      "pulling_subscriber_rate": 1.2,
+      "pulling_subscriber_rate": 9.9,
       "label": "2025-10-22"
     },
     {
@@ -1344,7 +1344,7 @@
       "pulling_watch_time": "4:29",
       "explore_traffic": 7066,
       "revenue_per_view": 53,
-      "pulling_subscriber_rate": 1.4,
+      "pulling_subscriber_rate": 7.3,
       "label": "2025-10-29"
     },
     {
@@ -1368,7 +1368,7 @@
       "pulling_watch_time": "4:08",
       "explore_traffic": 3927,
       "revenue_per_view": 58,
-      "pulling_subscriber_rate": 1.3,
+      "pulling_subscriber_rate": 7.4,
       "label": "2025-11-05"
     },
     {
@@ -1392,7 +1392,7 @@
       "pulling_watch_time": "4:11",
       "explore_traffic": 2495,
       "revenue_per_view": 23,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 7.8,
       "label": "2025-11-12"
     },
     {
@@ -1416,7 +1416,7 @@
       "pulling_watch_time": "4:20",
       "explore_traffic": 15005,
       "revenue_per_view": 13,
-      "pulling_subscriber_rate": 1.4,
+      "pulling_subscriber_rate": 7.9,
       "label": "2025-11-19"
     },
     {
@@ -1440,7 +1440,7 @@
       "pulling_watch_time": "4::28",
       "explore_traffic": 27049,
       "revenue_per_view": 44,
-      "pulling_subscriber_rate": 1.5,
+      "pulling_subscriber_rate": 7.9,
       "label": "2025-11-26"
     },
     {
@@ -1464,7 +1464,7 @@
       "pulling_watch_time": "4:38",
       "explore_traffic": 34019,
       "revenue_per_view": 31,
-      "pulling_subscriber_rate": 1.6,
+      "pulling_subscriber_rate": 8.0,
       "label": "2025-12-03"
     },
     {
@@ -1488,7 +1488,7 @@
       "pulling_watch_time": "4:30",
       "explore_traffic": 21345,
       "revenue_per_view": 70,
-      "pulling_subscriber_rate": 1.4,
+      "pulling_subscriber_rate": 6.9,
       "label": "2025-12-10"
     },
     {
@@ -1512,7 +1512,7 @@
       "pulling_watch_time": "4:24",
       "explore_traffic": 7645,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.2,
+      "pulling_subscriber_rate": 7.2,
       "label": "2025-12-17"
     },
     {
@@ -1536,7 +1536,7 @@
       "pulling_watch_time": "4:42",
       "explore_traffic": 13959,
       "revenue_per_view": 27,
-      "pulling_subscriber_rate": 1.2,
+      "pulling_subscriber_rate": 7.5,
       "label": "2025-12-24"
     },
     {
@@ -1560,7 +1560,7 @@
       "pulling_watch_time": "4:39",
       "explore_traffic": 17801,
       "revenue_per_view": 34,
-      "pulling_subscriber_rate": 1.2,
+      "pulling_subscriber_rate": 8.2,
       "label": "2025-12-31"
     },
     {
@@ -1584,7 +1584,7 @@
       "pulling_watch_time": "4:39",
       "explore_traffic": 18009,
       "revenue_per_view": 33,
-      "pulling_subscriber_rate": 1.2,
+      "pulling_subscriber_rate": 7.7,
       "label": "2026-01-07"
     },
     {
@@ -1608,7 +1608,7 @@
       "pulling_watch_time": "4:26",
       "explore_traffic": 9948,
       "revenue_per_view": 60,
-      "pulling_subscriber_rate": 1.1,
+      "pulling_subscriber_rate": 7.8,
       "label": "2026-01-14"
     },
     {
@@ -1632,7 +1632,7 @@
       "pulling_watch_time": "4:15",
       "explore_traffic": 8024,
       "revenue_per_view": 52,
-      "pulling_subscriber_rate": 1.0,
+      "pulling_subscriber_rate": 7.5,
       "label": "2026-01-21"
     },
     {
@@ -1656,7 +1656,7 @@
       "pulling_watch_time": "4:16",
       "explore_traffic": 10582,
       "revenue_per_view": 62,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 7.2,
       "label": "2026-01-28"
     },
     {
@@ -1680,7 +1680,7 @@
       "pulling_watch_time": "4:16",
       "explore_traffic": 7388,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 7.1,
       "label": "2026-02-04"
     },
     {
@@ -1704,7 +1704,7 @@
       "pulling_watch_time": "4:55",
       "explore_traffic": 6243,
       "revenue_per_view": 16,
-      "pulling_subscriber_rate": 1.3,
+      "pulling_subscriber_rate": 7.1,
       "label": "2026-02-11"
     },
     {
@@ -1728,7 +1728,7 @@
       "pulling_watch_time": "5:43",
       "explore_traffic": 5429,
       "revenue_per_view": 48,
-      "pulling_subscriber_rate": 1.6,
+      "pulling_subscriber_rate": 6.2,
       "label": "2026-02-18"
     },
     {
@@ -1752,7 +1752,7 @@
       "pulling_watch_time": "4:19",
       "explore_traffic": 4497,
       "revenue_per_view": 45,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 6.8,
       "label": "2026-02-25"
     },
     {
@@ -1776,7 +1776,7 @@
       "pulling_watch_time": "4:15",
       "explore_traffic": 2527,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.1,
+      "pulling_subscriber_rate": 6.9,
       "label": "2026-03-04"
     },
     {
@@ -1800,7 +1800,7 @@
       "pulling_watch_time": "4:31",
       "explore_traffic": 1551,
       "revenue_per_view": 35,
-      "pulling_subscriber_rate": 1.2,
+      "pulling_subscriber_rate": 6.9,
       "label": "2026-03-11"
     },
     {
@@ -1824,7 +1824,7 @@
       "pulling_watch_time": "4:34",
       "explore_traffic": 3496,
       "revenue_per_view": 41,
-      "pulling_subscriber_rate": 1.0,
+      "pulling_subscriber_rate": 6.9,
       "label": "2026-03-16"
     },
     {
@@ -1848,7 +1848,7 @@
       "pulling_watch_time": "3:56",
       "explore_traffic": 13399,
       "revenue_per_view": 28,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 7.2,
       "label": "2026-03-23"
     },
     {
@@ -1872,7 +1872,7 @@
       "pulling_watch_time": "3:46",
       "explore_traffic": 15105,
       "revenue_per_view": 29,
-      "pulling_subscriber_rate": 0.7,
+      "pulling_subscriber_rate": 6.7,
       "label": "2026-03-30"
     },
     {
@@ -1896,7 +1896,7 @@
       "pulling_watch_time": "4:12",
       "explore_traffic": 6923,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.0,
+      "pulling_subscriber_rate": 6.7,
       "label": "2026-04-06"
     },
     {
@@ -1920,7 +1920,7 @@
       "pulling_watch_time": "4:05",
       "explore_traffic": 10335,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 7.4,
       "label": "2026-04-13"
     },
     {
@@ -1944,7 +1944,7 @@
       "pulling_watch_time": "4:19",
       "explore_traffic": 6279,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 6.3,
       "label": "2026-04-20"
     },
     {
@@ -1968,7 +1968,7 @@
       "pulling_watch_time": "4:29",
       "explore_traffic": 4317,
       "revenue_per_view": 22,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 5.5,
       "label": "2026-04-27"
     },
     {
@@ -1992,7 +1992,7 @@
       "pulling_watch_time": "4:17",
       "explore_traffic": 3758,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
+      "pulling_subscriber_rate": 0.0,
       "label": "2026-05-04"
     },
     {

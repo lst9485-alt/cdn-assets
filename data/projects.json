@@ -1,17 +1,33 @@
 {
-  "updated": "2026-09-26T06:00:03.745323+09:00",
+  "updated": "2026-09-27T06:00:03.998661+09:00",
   "projects": [
     {
-      "name": "261004 원고",
-      "type": "file",
+      "name": "강의",
+      "type": "folder",
       "app": null,
-      "modified": "2026-09-25",
+      "modified": "2026-09-27",
       "status": null,
       "next": null
     },
     {
       "name": "비즈니스PT 프로",
       "type": "folder",
+      "app": null,
+      "modified": "2026-09-26",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "원소스 멀티유즈",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-09-26",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "261004 원고",
+      "type": "file",
       "app": null,
       "modified": "2026-09-25",
       "status": null,
@@ -26,28 +42,12 @@
       "next": null
     },
     {
-      "name": "강의",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-09-25",
-      "status": null,
-      "next": null
-    },
-    {
       "name": "할 일",
       "type": "folder",
       "app": "company/co-telegramocr",
       "modified": "2026-08-26",
       "status": "daily-check 스킬이 전체 프로세스를 자동 처리 (텔레그램 수량 확인 → 시트 기입 → SSH 프로그램 실행 → 미매칭 해결 → 누적DB 복사 → Notion 완료)",
       "next": "`--channel` 옵션 추가 (부분 채널 재실행 — run_prep 시트 리셋 로직 개선 필요)"
-    },
-    {
-      "name": "원소스 멀티유즈",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-05-19",
-      "status": null,
-      "next": null
     }
   ]
 }
