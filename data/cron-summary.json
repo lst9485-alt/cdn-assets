@@ -1,25 +1,11 @@
 {
-  "updated": "2026-09-27T09:23:13.207265+09:00",
+  "updated": "2026-09-27T09:26:09.274140+09:00",
   "summary": {
-    "정상": 13,
+    "정상": 12,
     "정리 필요": 0,
     "꺼짐": 0
   },
   "important": [
-    {
-      "name": "weekly-ops-brief",
-      "title": "주간 건강검진",
-      "room": "알림봇",
-      "description": "주간 건강검진 실행 래퍼 — launchd com.nightwatch.weekly-ops-brief (월 10:00)",
-      "cron": "0 10 * * 1",
-      "day": "월요일",
-      "time": "10:00",
-      "status": "정상",
-      "script": "weekly-ops-brief.sh",
-      "registered": true,
-      "scriptExists": true,
-      "enabled": true
-    },
     {
       "name": "aarrr-weekly",
       "title": "AARRR 주간 리포트",
@@ -61,23 +47,23 @@
       "registered": true,
       "scriptExists": true,
       "enabled": true
-    }
-  ],
-  "items": [
+    },
     {
-      "name": "weekly-ops-brief",
-      "title": "주간 건강검진",
-      "room": "알림봇",
-      "description": "주간 건강검진 실행 래퍼 — launchd com.nightwatch.weekly-ops-brief (월 10:00)",
-      "cron": "0 10 * * 1",
-      "day": "월요일",
-      "time": "10:00",
+      "name": "competitor-monitor",
+      "title": "경쟁채널 모니터링",
+      "room": "마케팅봇",
+      "description": "경쟁채널 모니터링 — 매일 07:10 YouTube 수집 → dashboard push (텔레그램 안 보냄, 2026-09-27~)",
+      "cron": "10 7 * * *",
+      "day": "매일",
+      "time": "07:10",
       "status": "정상",
-      "script": "weekly-ops-brief.sh",
+      "script": "competitor-monitor.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
-    },
+    }
+  ],
+  "items": [
     {
       "name": "aarrr-weekly",
       "title": "AARRR 주간 리포트",
