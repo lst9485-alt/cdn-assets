@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-27T06:00:18.179082+09:00",
+  "updated": "2026-09-28T06:00:38.956899+09:00",
   "okr": [
     {
       "title": "9월 : 원데이클래스 완료&미국예약완료",
@@ -21,8 +21,8 @@
     }
   ],
   "tasks": {
-    "total": 1084,
-    "done": 1047,
+    "total": 1085,
+    "done": 1052,
     "overdue": 7,
     "pending": [
       {
@@ -61,46 +61,6 @@
         "overdue": true
       },
       {
-        "title": "특강복기",
-        "date": "2026-09-27T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의준비",
-        "date": "2026-09-27T09:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상표권등록 알아보기",
-        "date": "2026-09-27T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "공개방 미션",
-        "date": "2026-09-27T14:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의준비",
-        "date": "2026-09-27T15:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "쇼츠등 업로드 확인",
-        "date": "2026-09-27T17:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "독서",
-        "date": "2026-09-27T18:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "옵시디언 투두리스트, 테스크노트, 프로젝트 정비",
-        "date": "2026-09-27T19:30:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "이렇게산다(성장일지), 메모",
         "date": "2026-09-28",
         "overdue": false
@@ -116,6 +76,11 @@
         "overdue": false
       },
       {
+        "title": "쇼츠등 업로드 확인",
+        "date": "2026-09-28T10:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "주간복기",
         "date": "2026-09-28T11:00:00.000+09:00",
         "overdue": false
@@ -126,23 +91,33 @@
         "overdue": false
       },
       {
-        "title": "시트 등 촬영 계획\n집구매, 시트작성법 등",
-        "date": "2026-09-28T12:30:00.000+09:00",
+        "title": "상표권등록 알아보기",
+        "date": "2026-09-28T14:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의기획",
+        "date": "2026-09-28T15:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "옵시디언, 노션 area / resource 등 정비",
-        "date": "2026-09-28T15:00:00.000+09:00",
+        "date": "2026-09-28T16:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "인트로영상만들기",
-        "date": "2026-09-28T16:45:00.000+09:00",
+        "date": "2026-09-28T18:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "주제선정&썸네일&제목",
         "date": "2026-09-29",
+        "overdue": false
+      },
+      {
+        "title": "시트 등 촬영 계획\n집구매, 시트작성법 등",
+        "date": "2026-09-29T12:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -163,6 +138,11 @@
       {
         "title": "주간계획 수정",
         "date": "2026-10-01T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "회사정산",
+        "date": "2026-10-01T09:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -213,50 +193,62 @@
     ],
     "schedule": [
       {
-        "title": "특강복기",
-        "time": "08:30",
+        "title": "이렇게산다(성장일지), 메모",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "마케팅업체 정산",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의준비",
-        "time": "09:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "상표권등록 알아보기",
-        "time": "13:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "공개방 미션",
-        "time": "14:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의준비",
-        "time": "15:30",
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "쇼츠등 업로드 확인",
-        "time": "17:15",
+        "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "독서",
-        "time": "18:30",
+        "title": "주간복기",
+        "time": "11:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "옵시디언 투두리스트, 테스크노트, 프로젝트 정비",
-        "time": "19:30",
+        "title": "광고확인",
+        "time": "11:45",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "상표권등록 알아보기",
+        "time": "14:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의기획",
+        "time": "15:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "옵시디언, 노션 area / resource 등 정비",
+        "time": "16:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "인트로영상만들기",
+        "time": "18:00",
         "allDay": false,
         "done": false
       }
@@ -287,14 +279,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 13,
+      "rate": "46%",
       "days": [
-        {
-          "date": "2026-09-21",
-          "done": 4,
-          "total": 4
-        },
         {
           "date": "2026-09-22",
           "done": 3,
@@ -322,6 +309,11 @@
         },
         {
           "date": "2026-09-27",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-09-28",
           "done": 0,
           "total": 4
         }

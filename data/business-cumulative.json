@@ -1,8 +1,8 @@
 {
-  "updated": "2026-09-27T06:00:35.352485+09:00",
+  "updated": "2026-09-28T06:00:53.021227+09:00",
   "source_updated": {
-    "funnel": "2026-09-27T06:00:35.022284+09:00",
-    "sales": "2026-09-27T06:00:33.313419+09:00"
+    "funnel": "2026-09-28T06:00:52.882898+09:00",
+    "sales": "2026-09-28T06:00:50.770635+09:00"
   },
   "summary": {
     "total_weeks": 100,
@@ -20,20 +20,20 @@
         "revenue": 13700000,
         "paid_customers": 25,
         "landing_visits": 1361,
-        "key_views": 224400,
-        "pulling_views": 40692,
-        "total_views": 265092
+        "key_views": 83188,
+        "pulling_views": 211797,
+        "total_views": 294985
       },
       "avg_rates": {
-        "interest_rate": 496.89,
-        "link_click_rate": 0.46,
+        "interest_rate": 30.52,
+        "link_click_rate": 0.41,
         "convert_rate": 1.55
       },
       "avg_per_week": {
         "revenue": 1712500,
         "paid_customers": 3.12,
         "landing_visits": 170.12,
-        "total_views": 33136.5
+        "total_views": 36873.12
       }
     },
     "12": {
@@ -45,20 +45,20 @@
         "revenue": 15300000,
         "paid_customers": 29,
         "landing_visits": 1715,
-        "key_views": 261085,
-        "pulling_views": 89507,
-        "total_views": 350592
+        "key_views": 98130,
+        "pulling_views": 278780,
+        "total_views": 376910
       },
       "avg_rates": {
-        "interest_rate": 419.43,
-        "link_click_rate": 0.46,
+        "interest_rate": 27.88,
+        "link_click_rate": 0.42,
         "convert_rate": 1.42
       },
       "avg_per_week": {
         "revenue": 1275000,
         "paid_customers": 2.42,
         "landing_visits": 142.92,
-        "total_views": 29216.0
+        "total_views": 31409.17
       }
     },
     "26": {
@@ -70,20 +70,20 @@
         "revenue": 21300000,
         "paid_customers": 44,
         "landing_visits": 3117,
-        "key_views": 288811,
-        "pulling_views": 370503,
-        "total_views": 659314
+        "key_views": 127992,
+        "pulling_views": 568136,
+        "total_views": 696128
       },
       "avg_rates": {
-        "interest_rate": 199.48,
-        "link_click_rate": 0.47,
+        "interest_rate": 18.99,
+        "link_click_rate": 0.44,
         "convert_rate": 1.23
       },
       "avg_per_week": {
         "revenue": 819231,
         "paid_customers": 1.69,
         "landing_visits": 119.88,
-        "total_views": 25358.23
+        "total_views": 26774.15
       }
     },
     "all": {
@@ -95,20 +95,20 @@
         "revenue": 52750000,
         "paid_customers": 157,
         "landing_visits": 7624,
-        "key_views": 355910,
-        "pulling_views": 1326259,
-        "total_views": 1682169
+        "key_views": 195091,
+        "pulling_views": 1523892,
+        "total_views": 1718983
       },
       "avg_rates": {
-        "interest_rate": 63.77,
-        "link_click_rate": 1.79,
+        "interest_rate": 16.85,
+        "link_click_rate": 1.78,
         "convert_rate": 2.4
       },
       "avg_per_week": {
         "revenue": 527500,
         "paid_customers": 1.57,
         "landing_visits": 76.24,
-        "total_views": 16821.69
+        "total_views": 17189.83
       }
     }
   },
@@ -1566,11 +1566,11 @@
       "paid_customers": 3,
       "sales_customers": 3,
       "landing_visits": 131,
-      "key_views": 3135,
-      "pulling_views": 21108,
-      "total_views": 24243,
-      "interest_rate": 14.85,
-      "link_click_rate": 0.54,
+      "key_views": 4509,
+      "pulling_views": 23870,
+      "total_views": 28379,
+      "interest_rate": 18.89,
+      "link_click_rate": 0.46,
       "convert_rate": 2.29,
       "shorts_views": 646,
       "subscriber_increase": 372
@@ -1583,11 +1583,11 @@
       "paid_customers": 2,
       "sales_customers": 2,
       "landing_visits": 94,
-      "key_views": 1044,
-      "pulling_views": 20866,
-      "total_views": 21910,
-      "interest_rate": 5.0,
-      "link_click_rate": 0.43,
+      "key_views": 1698,
+      "pulling_views": 24171,
+      "total_views": 25869,
+      "interest_rate": 7.02,
+      "link_click_rate": 0.36,
       "convert_rate": 2.13,
       "shorts_views": 486,
       "subscriber_increase": 342
@@ -1600,11 +1600,11 @@
       "paid_customers": 1,
       "sales_customers": 1,
       "landing_visits": 96,
-      "key_views": 1121,
-      "pulling_views": 17675,
-      "total_views": 18796,
-      "interest_rate": 6.34,
-      "link_click_rate": 0.51,
+      "key_views": 1229,
+      "pulling_views": 19968,
+      "total_views": 21197,
+      "interest_rate": 6.15,
+      "link_click_rate": 0.45,
       "convert_rate": 1.04,
       "shorts_views": 420,
       "subscriber_increase": 305
@@ -1617,11 +1617,11 @@
       "paid_customers": 1,
       "sales_customers": 1,
       "landing_visits": 81,
-      "key_views": 697,
-      "pulling_views": 13916,
-      "total_views": 14613,
-      "interest_rate": 5.01,
-      "link_click_rate": 0.55,
+      "key_views": 1165,
+      "pulling_views": 16348,
+      "total_views": 17513,
+      "interest_rate": 7.13,
+      "link_click_rate": 0.46,
       "convert_rate": 1.23,
       "shorts_views": 441,
       "subscriber_increase": 245
@@ -1634,11 +1634,11 @@
       "paid_customers": 1,
       "sales_customers": 1,
       "landing_visits": 76,
-      "key_views": 432,
-      "pulling_views": 14548,
-      "total_views": 14980,
-      "interest_rate": 2.97,
-      "link_click_rate": 0.51,
+      "key_views": 999,
+      "pulling_views": 16522,
+      "total_views": 17521,
+      "interest_rate": 6.05,
+      "link_click_rate": 0.43,
       "convert_rate": 1.32,
       "shorts_views": 294,
       "subscriber_increase": 231
@@ -1651,11 +1651,11 @@
       "paid_customers": 1,
       "sales_customers": 1,
       "landing_visits": 107,
-      "key_views": 17902,
-      "pulling_views": 18499,
-      "total_views": 36401,
-      "interest_rate": 96.77,
-      "link_click_rate": 0.29,
+      "key_views": 8238,
+      "pulling_views": 15644,
+      "total_views": 23882,
+      "interest_rate": 52.66,
+      "link_click_rate": 0.45,
       "convert_rate": 0.93,
       "shorts_views": 382,
       "subscriber_increase": 292
@@ -1668,11 +1668,11 @@
       "paid_customers": 1,
       "sales_customers": 1,
       "landing_visits": 90,
-      "key_views": 17654,
-      "pulling_views": 1852,
-      "total_views": 19506,
-      "interest_rate": 953.24,
-      "link_click_rate": 0.46,
+      "key_views": 4540,
+      "pulling_views": 18469,
+      "total_views": 23009,
+      "interest_rate": 24.58,
+      "link_click_rate": 0.39,
       "convert_rate": 1.11,
       "shorts_views": 388,
       "subscriber_increase": 240
@@ -1685,11 +1685,11 @@
       "paid_customers": 3,
       "sales_customers": 3,
       "landing_visits": 161,
-      "key_views": 21091,
-      "pulling_views": 5417,
-      "total_views": 26508,
-      "interest_rate": 389.35,
-      "link_click_rate": 0.61,
+      "key_views": 5373,
+      "pulling_views": 26334,
+      "total_views": 31707,
+      "interest_rate": 20.4,
+      "link_click_rate": 0.51,
       "convert_rate": 1.86,
       "shorts_views": 405,
       "subscriber_increase": 438
@@ -1702,11 +1702,11 @@
       "paid_customers": 2,
       "sales_customers": 2,
       "landing_visits": 154,
-      "key_views": 24701,
-      "pulling_views": 6360,
-      "total_views": 31061,
-      "interest_rate": 388.38,
-      "link_click_rate": 0.5,
+      "key_views": 5716,
+      "pulling_views": 31750,
+      "total_views": 37466,
+      "interest_rate": 18.0,
+      "link_click_rate": 0.41,
       "convert_rate": 1.3,
       "shorts_views": 585,
       "subscriber_increase": 421
@@ -1719,11 +1719,11 @@
       "paid_customers": 5,
       "sales_customers": 5,
       "landing_visits": 357,
-      "key_views": 42746,
-      "pulling_views": 6182,
-      "total_views": 48928,
-      "interest_rate": 691.46,
-      "link_click_rate": 0.73,
+      "key_views": 21961,
+      "pulling_views": 40961,
+      "total_views": 62922,
+      "interest_rate": 53.61,
+      "link_click_rate": 0.57,
       "convert_rate": 1.4,
       "shorts_views": 606,
       "subscriber_increase": 713
@@ -1736,10 +1736,10 @@
       "paid_customers": 6,
       "sales_customers": 6,
       "landing_visits": 236,
-      "key_views": 63476,
-      "pulling_views": 8880,
-      "total_views": 72356,
-      "interest_rate": 714.82,
+      "key_views": 32730,
+      "pulling_views": 39561,
+      "total_views": 72291,
+      "interest_rate": 82.73,
       "link_click_rate": 0.33,
       "convert_rate": 2.54,
       "shorts_views": 797,
@@ -1753,11 +1753,11 @@
       "paid_customers": 6,
       "sales_customers": 6,
       "landing_visits": 214,
-      "key_views": 29782,
-      "pulling_views": 2977,
-      "total_views": 32759,
-      "interest_rate": 1000.4,
-      "link_click_rate": 0.65,
+      "key_views": 9109,
+      "pulling_views": 28084,
+      "total_views": 37193,
+      "interest_rate": 32.43,
+      "link_click_rate": 0.58,
       "convert_rate": 2.8,
       "shorts_views": 889,
       "subscriber_increase": 560
@@ -1770,10 +1770,10 @@
       "paid_customers": 2,
       "sales_customers": 2,
       "landing_visits": 123,
-      "key_views": 21255,
-      "pulling_views": 5954,
-      "total_views": 27209,
-      "interest_rate": 356.99,
+      "key_views": 3717,
+      "pulling_views": 23448,
+      "total_views": 27165,
+      "interest_rate": 15.85,
       "link_click_rate": 0.45,
       "convert_rate": 1.63,
       "shorts_views": 754,
@@ -1787,10 +1787,10 @@
       "paid_customers": 1,
       "sales_customers": 1,
       "landing_visits": 116,
-      "key_views": 21349,
-      "pulling_views": 4922,
-      "total_views": 26271,
-      "interest_rate": 433.75,
+      "key_views": 4582,
+      "pulling_views": 21659,
+      "total_views": 26241,
+      "interest_rate": 21.16,
       "link_click_rate": 0.44,
       "convert_rate": 0.86,
       "shorts_views": 805,
