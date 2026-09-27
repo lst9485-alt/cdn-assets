@@ -24,18 +24,6 @@
       "volume": "높음",
       "items": [
         {
-          "name": "weekly-ops-brief",
-          "runtime": "nightwatch shell + Claude/Codex",
-          "trigger": "매주 월 10:00",
-          "purpose": "주간 운영 브리핑",
-          "content": "건강검진, 핵심 코드리뷰, OKR/상담/태스크 원씽, 추천 작업 1~3개",
-          "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:21",
-            "workspace/tools/scripts/nightwatch/weekly-ops-brief.sh:1",
-            "workspace/tools/scripts/nightwatch/weekly-ops-brief.sh:141"
-          ]
-        },
-        {
           "name": "aarrr-weekly",
           "runtime": "nightwatch shell",
           "trigger": "매주 일 07:00",
@@ -67,18 +55,6 @@
             "workspace/tools/scripts/nightwatch/jobs.json:93",
             "workspace/tools/scripts/nightwatch/market-daily-report.sh:50",
             "workspace/tools/scripts/nightwatch/market-daily-report.config.json:4"
-          ]
-        },
-        {
-          "name": "nlm-auth-refresh",
-          "runtime": "nightwatch shell",
-          "trigger": "매주 월 03:00",
-          "purpose": "NotebookLM 인증 갱신",
-          "content": "갱신 성공/실패. 이미 유효하면 미발송",
-          "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:66",
-            "workspace/tools/scripts/nightwatch/nlm-auth-refresh.sh:13",
-            "workspace/tools/scripts/nightwatch/nlm-auth-refresh.sh:41"
           ]
         },
         {
@@ -137,23 +113,13 @@
           ]
         },
         {
-          "name": "threads-weekly",
-          "runtime": "nightwatch",
-          "trigger": "월 06:00 (launchd)",
-          "purpose": "스레드 한 주치 작성",
-          "content": "한 주치 글 전문·확인 필요 글",
+          "name": "threads-manage",
+          "runtime": "launchd",
+          "trigger": "30분마다",
+          "purpose": "스레드 관리",
+          "content": "발행기 점검 알림 + 월 06~12시 한 주치 글 전문",
           "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json"
-          ]
-        },
-        {
-          "name": "threads-health",
-          "runtime": "nightwatch",
-          "trigger": "30분마다 (launchd)",
-          "purpose": "스레드 발행 점검",
-          "content": "이상할 때만",
-          "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json"
+            "workspace/tools/scripts/threads/threads-manage.sh"
           ]
         }
       ]
@@ -167,17 +133,6 @@
       "cadence": "매분 / 매일 07:00, 08:00, 14:00, 19:00, 22:00 / 오류 때만 / 버튼 이벤트",
       "volume": "매우 높음",
       "items": [
-        {
-          "name": "morning-planner",
-          "runtime": "nightwatch shell",
-          "trigger": "매일 07:00",
-          "purpose": "아침 플래너",
-          "content": "오늘 루틴 링크, 원씽, 오늘 마감 태스크, 어제 루틴 미기입",
-          "evidence": [
-            "workspace/tools/scripts/nightwatch/jobs.json:75",
-            "workspace/tools/scripts/nightwatch/morning-planner.sh:332"
-          ]
-        },
         {
           "name": "task-reminder",
           "runtime": "n8n",
