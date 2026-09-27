@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-27T09:18:05.513386+09:00",
+  "updated": "2026-09-27T09:23:13.207265+09:00",
   "summary": {
-    "정상": 16,
+    "정상": 13,
     "정리 필요": 0,
     "꺼짐": 0
   },
@@ -180,7 +180,7 @@
       "name": "threads-publish",
       "title": "스레드 자동 발행",
       "room": "마케팅봇",
-      "description": "스레드 자동 발행 — 대기열(logs/threads/queue.json) 글을 시간 맞춰 발행, 일요일 18:00~23:40 영상 공개 감지 후 링크 넣어 발행. 텔레그램 마케팅 방",
+      "description": "스레드 발행 — 10분마다 올릴 시각이 된 글을 버퍼로 올림, 일요일 18:00~23:40 새 영상 공개되면 링크 글. 텔레그램 마케팅 방",
       "cron": "*/10 * * * *",
       "day": "매일",
       "time": "*:*/10",
@@ -191,43 +191,15 @@
       "enabled": true
     },
     {
-      "name": "threads-weekly",
-      "title": "스레드 한 주치 작성",
-      "room": "마케팅봇",
-      "description": "스레드 + 유튜브 게시물 한 주치 자동 작성 — 어제(일) 공개 영상의 유튜브 자막 + 원고로 월~다음 일 빈 칸을 claude -p로 채움, 다음 일 18시 새 영상 링크 글은 {auto}, 텔레그램 마케팅 방으로 전문. launchd com.nightwatch.threads-weekly (월 06:00)",
-      "cron": "0 6 * * 1",
-      "day": "월요일",
-      "time": "06:00",
-      "status": "정상",
-      "script": "../threads/threads-weekly.sh",
-      "registered": true,
-      "scriptExists": true,
-      "enabled": true
-    },
-    {
-      "name": "threads-health",
-      "title": "스레드 발행 점검",
-      "room": "마케팅봇",
-      "description": "스레드 자동 발행 점검 — 발행기 멈춤(heartbeat 35분+), 올릴 시각 1시간 지난 글, 1시간째 보내는 중, 월 06시 자동 작성 안 돎. 이상할 때만 텔레그램 마케팅 방(같은 문제 한 번, 풀리면 '다시 정상'). launchd com.nightwatch.threads-health (30분마다, 크론과 다른 스케줄러)",
+      "name": "threads-manage",
+      "title": "threads-manage",
+      "room": "확인 필요",
+      "description": "스레드 관리 — 30분마다 발행기 점검(멈춤·밀린 글·월요일 작성 안 돎이면 알림), 월요일 06~12시에 이번 주 한 주치 글(스레드 + 유튜브 게시물)을 claude -p로 작성. 텔레그램 마케팅 방. launchd com.nightwatch.threads-manage (30분마다)",
       "cron": "*/30 * * * *",
       "day": "매일",
       "time": "*:*/30",
       "status": "정상",
-      "script": "../threads/threads-publisher.py health --notify",
-      "registered": true,
-      "scriptExists": true,
-      "enabled": true
-    },
-    {
-      "name": "codex-update",
-      "title": "코덱스 최신 버전",
-      "room": "HQ",
-      "description": "코덱스 CLI 매일 최신 버전으로 (npm @openai/codex@latest), 실패 시 텔레그램 HQ",
-      "cron": "40 4 * * *",
-      "day": "매일",
-      "time": "04:40",
-      "status": "정상",
-      "script": "codex-update.sh",
+      "script": "../threads/threads-manage.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
@@ -256,20 +228,6 @@
       "time": "매분",
       "status": "정상",
       "script": "../n8n-monitor.sh",
-      "registered": true,
-      "scriptExists": true,
-      "enabled": true
-    },
-    {
-      "name": "claudian-sync",
-      "title": "claudian-sync",
-      "room": "확인 필요",
-      "description": "Claudian 대화 옮기기 — 기기 간 Claudian 대화 동기화(맥이 중계)",
-      "cron": "*/2 * * * *",
-      "day": "매일",
-      "time": "*:*/2",
-      "status": "정상",
-      "script": "../claudian-sync/sync.py",
       "registered": true,
       "scriptExists": true,
       "enabled": true
