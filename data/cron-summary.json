@@ -1,9 +1,9 @@
 {
-  "updated": "2026-09-27T09:13:28.246091+09:00",
+  "updated": "2026-09-27T09:18:05.513386+09:00",
   "summary": {
     "정상": 16,
     "정리 필요": 0,
-    "꺼짐": 1
+    "꺼짐": 0
   },
   "important": [
     {
@@ -105,20 +105,6 @@
       "registered": true,
       "scriptExists": true,
       "enabled": true
-    },
-    {
-      "name": "morning-planner",
-      "title": "모닝 플래너",
-      "room": "테스크",
-      "description": "모닝 플래너 — 루틴 체크 + 오늘 원씽/P2/P3 + 마감 태스크 (테스크 방)",
-      "cron": "0 7 * * *",
-      "day": "매일",
-      "time": "07:00",
-      "status": "꺼짐",
-      "script": "morning-planner.sh",
-      "registered": false,
-      "scriptExists": true,
-      "enabled": false
     },
     {
       "name": "dashboard-data",
