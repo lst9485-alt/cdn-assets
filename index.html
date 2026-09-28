@@ -77,6 +77,10 @@
         .copy-btn:hover { background: #E0F2FE; border-color: #0077C8; color: #0077C8; }
         .copy-btn.copied { background: #D1FAE5; border-color: #10B981; color: #065F46; }
         .copy-btn:disabled { opacity: 0.6; cursor: wait; }
+        .homepage-tree { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; font-size: 13px; line-height: 1.7; color: #475569; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+        .homepage-tree .tree-root { font-weight: 800; color: #0F172A; margin-bottom: 2px; }
+        .homepage-tree a { color: #0F172A; text-decoration: none; }
+        .homepage-tree a:hover { text-decoration: underline; }
         .sheet-group-row { display: flex; align-items: center; gap: 5px; padding: 8px 10px 4px; background: #F8FAFC; border-top: 1px solid #E8EEF5; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; color: #8597AD; cursor: pointer; user-select: none; }
         .sheet-group-row:hover { background: #EEF2F7; color: #64748B; }
         .group-caret { font-size: 8px; color: #94A3B8; line-height: 1; }
@@ -227,7 +231,31 @@
     }
 
     function renderBody(items, section) {
-        return renderSheet(items, section.id);
+        var tree = section.id === 'homepage-section' ? renderHomepageTree(items) : '';
+        return tree + renderSheet(items, section.id);
+    }
+
+    // 홈페이지 구조 트리 — 아래 목록(groupLabel)에서 자동으로 그린다. 따로 관리하지 않는다
+    function renderHomepageTree(items) {
+        var groups = ['페이지', '코칭', '예정', '공통'];
+        items.forEach(function(item) {
+            var g = item.groupLabel || '기타';
+            if (groups.indexOf(g) === -1) groups.push(g);
+        });
+        groups = groups.filter(function(g) {
+            return items.some(function(item) { return (item.groupLabel || '기타') === g; });
+        });
+        var lines = ['<div class="tree-root">우리동네재테크 홈페이지</div>'];
+        groups.forEach(function(g, gi) {
+            var lastGroup = gi === groups.length - 1;
+            lines.push('<div>' + (lastGroup ? '└─ ' : '├─ ') + '<b>' + esc(g) + '</b></div>');
+            var groupItems = items.filter(function(item) { return (item.groupLabel || '기타') === g; });
+            groupItems.forEach(function(item, ii) {
+                lines.push('<div>' + (lastGroup ? '&nbsp;&nbsp;&nbsp;&nbsp;' : '│&nbsp;&nbsp;&nbsp;') + (ii === groupItems.length - 1 ? '└─ ' : '├─ ')
+                    + '<a href="' + attr(item.href) + '">' + esc(item.title) + '</a></div>');
+            });
+        });
+        return '<div class="homepage-tree">' + lines.join('') + '</div>';
     }
 
     function renderSheet(items, sectionId) {
