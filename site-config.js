@@ -24,52 +24,11 @@
         nav: {
           type: 'dropdown',
           label: '대시보드',
-          activeMatch: ['/dashboard']
+          activeMatch: ['/dashboard'],
+          hidden: true
         },
         sidebar: {},
         items: [
-          {
-            id: 'telegram-cron',
-            title: '크론 · 알림 요일표',
-            sidebarLabel: '크론·알림',
-            description: '요일/시간별 · 텔레그램 방별 운영 현황',
-            href: 'dashboard/telegram-cron.html',
-            badgeText: '정리중',
-            badgeTone: 'warn',
-            iconKey: 'tg',
-            hubVisible: true,
-            navVisible: true,
-            sidebarType: 'root',
-            activeMatch: ['telegram-cron.html']
-          },
-          {
-            id: 'business',
-            title: '사업현황',
-            sidebarLabel: '사업현황',
-            description: '전환 퍼널 + 병목 분석',
-            href: 'dashboard/business.html',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'business',
-            hubVisible: true,
-            navVisible: true,
-            sidebarType: 'root',
-            activeMatch: ['business.html']
-          },
-          {
-            id: 'branding',
-            title: '00_브랜딩',
-            sidebarLabel: '브랜딩',
-            description: '채널 정체성 · 타겟 · 톤앤매너',
-            href: 'dashboard/branding.html',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'branding',
-            hubVisible: true,
-            navVisible: true,
-            sidebarType: 'root',
-            activeMatch: ['branding.html']
-          }
         ]
       },
       {
@@ -145,20 +104,6 @@
             hubVisible: true,
             groupLabel: '공통',
             imwebCode: 'homepage/footer-code.html'
-          },
-          {
-            id: 'page-template',
-            title: '새 페이지 템플릿',
-            description: '일반 페이지 / 결제용 페이지 복붙용',
-            href: 'homepage/page-template.html',
-            publicPath: '~/새페이지템플릿',
-            badgeText: '공통',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['page-template.html'],
-            hubVisible: true,
-            groupLabel: '공통'
           },
           {
             id: 'landing-page-v3',
@@ -321,7 +266,7 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/refund-policy-imweb.html'
-          },
+          }
         ]
       },
       {
@@ -415,76 +360,6 @@
           title: 'PG사 통과용'
         },
         items: [
-          {
-            id: 'pg-main-page',
-            title: 'PG 메인 페이지',
-            description: 'PG사 심사 통과용 메인 페이지',
-            href: 'homepage/pg-version/main-page.html',
-            publicPath: '~/',
-            badgeText: 'PG',
-            badgeTone: 'live',
-            iconKey: 'web',
-            sidebarType: 'root',
-            activeMatch: ['pg-version/main-page.html'],
-            hubVisible: true,
-            groupLabel: 'PG'
-          },
-          {
-            id: 'pg-curriculum-page',
-            title: 'PG 커리큘럼 페이지',
-            description: 'PG사 심사 통과용 커리큘럼 페이지',
-            href: 'homepage/pg-version/curriculum.html',
-            publicPath: '~/curriculum',
-            badgeText: 'PG',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['pg-version/curriculum.html'],
-            hubVisible: true,
-            groupLabel: 'PG'
-          },
-          {
-            id: 'pg-refund-policy',
-            title: 'PG 환불규정 안내',
-            description: 'PG사 심사 통과용 환불 규정 페이지',
-            href: 'homepage/pg-version/refund-policy.html',
-            publicPath: '~/refund-policy',
-            badgeText: 'PG',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['pg-version/refund-policy.html'],
-            hubVisible: true,
-            groupLabel: 'PG'
-          },
-          {
-            id: 'pg-main-page-all',
-            title: 'PG 메인 페이지 전체본',
-            description: 'PG사 심사 통과용 메인 페이지 원본 전체 HTML',
-            href: 'homepage/pg-version/main-page-all.html',
-            publicPath: '~/ 원본',
-            badgeText: 'ALL',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['pg-version/main-page-all.html'],
-            hubVisible: true,
-            groupLabel: '원본'
-          },
-          {
-            id: 'pg-curriculum-all',
-            title: 'PG 커리큘럼 전체본',
-            description: 'PG사 심사 통과용 커리큘럼 원본 전체 HTML',
-            href: 'homepage/pg-version/curriculum-all.html',
-            publicPath: '~/curriculum 원본',
-            badgeText: 'ALL',
-            badgeTone: 'soon',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['pg-version/curriculum-all.html'],
-            hubVisible: true,
-            groupLabel: '원본'
-          }
         ]
       },
       {
@@ -651,18 +526,6 @@
             navVisible: true,
             sidebarType: 'root',
             activeMatch: ['yt-bulk-editor'],
-            hubVisible: true
-          },
-          {
-            id: 'slide-viewer',
-            title: '슬라이드 템플릿',
-            description: '기본 36종 + 베리언츠 95장',
-            href: './slide-viewer/',
-            badgeText: 'LIVE',
-            badgeTone: 'live',
-            iconKey: 'doc',
-            sidebarType: 'root',
-            activeMatch: ['slide-viewer'],
             hubVisible: true
           },
           {
@@ -1048,6 +911,161 @@
             iconKey: 'web',
             sidebarType: 'root',
             activeMatch: ['booklist-variants.html'],
+            hubVisible: true
+          },
+          {
+            id: 'telegram-cron',
+            archiveNo: 'A031',
+            modifiedDate: '2026-09-28',
+            title: '크론 · 알림 요일표',
+            sidebarLabel: '크론·알림',
+            description: '요일/시간별 · 텔레그램 방별 운영 현황',
+            href: 'dashboard/telegram-cron.html',
+            badgeText: '정리중',
+            badgeTone: 'warn',
+            iconKey: 'tg',
+            activeMatch: ['telegram-cron.html'],
+            sidebarType: 'root',
+            hubVisible: true
+          },
+          {
+            id: 'business',
+            archiveNo: 'A032',
+            modifiedDate: '2026-09-28',
+            title: '사업현황',
+            sidebarLabel: '사업현황',
+            description: '전환 퍼널 + 병목 분석',
+            href: 'dashboard/business.html',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'business',
+            activeMatch: ['business.html'],
+            sidebarType: 'root',
+            hubVisible: true
+          },
+          {
+            id: 'branding',
+            archiveNo: 'A033',
+            modifiedDate: '2026-09-28',
+            title: '00_브랜딩',
+            sidebarLabel: '브랜딩',
+            description: '채널 정체성 · 타겟 · 톤앤매너',
+            href: 'dashboard/branding.html',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'branding',
+            activeMatch: ['branding.html'],
+            sidebarType: 'root',
+            hubVisible: true
+          },
+          {
+            id: 'slide-viewer',
+            archiveNo: 'A034',
+            modifiedDate: '2026-09-28',
+            title: '슬라이드 템플릿',
+            description: '기본 36종 + 베리언츠 95장',
+            href: './slide-viewer/',
+            badgeText: 'LIVE',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            activeMatch: ['slide-viewer'],
+            sidebarType: 'root',
+            hubVisible: true
+          },
+          {
+            id: 'page-template',
+            archiveNo: 'A035',
+            modifiedDate: '2026-09-28',
+            title: '새 페이지 템플릿',
+            description: '일반 페이지 / 결제용 페이지 복붙용',
+            href: 'homepage/page-template.html',
+            publicPath: '~/새페이지템플릿',
+            badgeText: '공통',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            activeMatch: ['page-template.html'],
+            groupLabel: '공통',
+            sidebarType: 'root',
+            hubVisible: true
+          },
+          {
+            id: 'pg-main-page',
+            archiveNo: 'A036',
+            modifiedDate: '2026-09-28',
+            title: 'PG 메인 페이지',
+            description: 'PG사 심사 통과용 메인 페이지',
+            href: 'homepage/pg-version/main-page.html',
+            publicPath: '~/',
+            badgeText: 'PG',
+            badgeTone: 'live',
+            iconKey: 'web',
+            activeMatch: ['pg-version/main-page.html'],
+            groupLabel: 'PG',
+            sidebarType: 'root',
+            hubVisible: true
+          },
+          {
+            id: 'pg-curriculum-page',
+            archiveNo: 'A037',
+            modifiedDate: '2026-09-28',
+            title: 'PG 커리큘럼 페이지',
+            description: 'PG사 심사 통과용 커리큘럼 페이지',
+            href: 'homepage/pg-version/curriculum.html',
+            publicPath: '~/curriculum',
+            badgeText: 'PG',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            activeMatch: ['pg-version/curriculum.html'],
+            groupLabel: 'PG',
+            sidebarType: 'root',
+            hubVisible: true
+          },
+          {
+            id: 'pg-refund-policy',
+            archiveNo: 'A038',
+            modifiedDate: '2026-09-28',
+            title: 'PG 환불규정 안내',
+            description: 'PG사 심사 통과용 환불 규정 페이지',
+            href: 'homepage/pg-version/refund-policy.html',
+            publicPath: '~/refund-policy',
+            badgeText: 'PG',
+            badgeTone: 'live',
+            iconKey: 'doc',
+            activeMatch: ['pg-version/refund-policy.html'],
+            groupLabel: 'PG',
+            sidebarType: 'root',
+            hubVisible: true
+          },
+          {
+            id: 'pg-main-page-all',
+            archiveNo: 'A039',
+            modifiedDate: '2026-09-28',
+            title: 'PG 메인 페이지 전체본',
+            description: 'PG사 심사 통과용 메인 페이지 원본 전체 HTML',
+            href: 'homepage/pg-version/main-page-all.html',
+            publicPath: '~/ 원본',
+            badgeText: 'ALL',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            activeMatch: ['pg-version/main-page-all.html'],
+            groupLabel: '원본',
+            sidebarType: 'root',
+            hubVisible: true
+          },
+          {
+            id: 'pg-curriculum-all',
+            archiveNo: 'A040',
+            modifiedDate: '2026-09-28',
+            title: 'PG 커리큘럼 전체본',
+            description: 'PG사 심사 통과용 커리큘럼 원본 전체 HTML',
+            href: 'homepage/pg-version/curriculum-all.html',
+            publicPath: '~/curriculum 원본',
+            badgeText: 'ALL',
+            badgeTone: 'soon',
+            iconKey: 'doc',
+            activeMatch: ['pg-version/curriculum-all.html'],
+            groupLabel: '원본',
+            sidebarType: 'root',
             hubVisible: true
           }
         ]
