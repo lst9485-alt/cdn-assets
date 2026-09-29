@@ -207,7 +207,7 @@
       "name": "메모장(정식)",
       "bot": "wooridongne_memo_bot",
       "sourceEnv": "TELEGRAM_MEMO_CHAT_ID / workflow dynamic chat",
-      "role": "짜투리 메모 수집과 대기 메모 리마인더",
+      "role": "짜투리 메모 수집과 대기 메모 리마인더 — 2026-09-29 n8n에서 꺼짐 (안 씀)",
       "cadence": "매일 09:00 / 메시지 이벤트성",
       "volume": "중간",
       "items": [
