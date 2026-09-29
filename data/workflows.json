@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-29T06:01:03.385437+09:00",
+  "updated": "2026-09-30T06:00:29.681627+09:00",
   "workflows": [
     {
       "name": "01-1 반복태스크 생성",
@@ -71,7 +71,7 @@
     },
     {
       "name": "03-1 메모봇 텔레그램",
-      "active": true,
+      "active": false,
       "category": "메모봇",
       "triggers": [
         "telegramTrigger"
@@ -85,7 +85,7 @@
     },
     {
       "name": "03-2 메모봇 대기 리마인더",
-      "active": true,
+      "active": false,
       "category": "메모봇",
       "triggers": [
         "scheduleTrigger"
