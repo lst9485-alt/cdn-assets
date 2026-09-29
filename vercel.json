@@ -3,15 +3,14 @@
     {
       "source": "/(.*)\\.html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=0, max-age=0, must-revalidate" },
-        { "key": "Vercel-CDN-Cache-Control", "value": "no-store" }
-      ]
-    },
-    {
-      "source": "/slide-viewer/assets/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=0, max-age=0, must-revalidate" },
-        { "key": "Vercel-CDN-Cache-Control", "value": "no-store" }
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=0, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Vercel-CDN-Cache-Control",
+          "value": "no-store"
+        }
       ]
     }
   ]
