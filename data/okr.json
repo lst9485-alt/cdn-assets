@@ -1,29 +1,29 @@
 {
-  "updated": "2026-09-30T06:00:29.536039+09:00",
+  "updated": "2026-10-01T06:00:59.937325+09:00",
   "okr": [
     {
-      "title": "9월 : 원데이클래스 완료&미국예약완료",
-      "target": 2,
-      "current": 2,
-      "rate": "🟢 100%"
+      "title": "12월 : 미국 (출산)",
+      "target": null,
+      "current": null,
+      "rate": "🔴 0%"
     },
     {
-      "title": "8월 : 원데이클래스 날짜공지",
-      "target": 1,
-      "current": 1,
-      "rate": "🟢 100%"
+      "title": "11월 : 특강 + 스터디 관심자 명단 받기",
+      "target": null,
+      "current": null,
+      "rate": "🔴 0%"
     },
     {
-      "title": "7월 : 강의안 1주차 완료",
-      "target": 50,
-      "current": 0,
+      "title": "10월 : 특강",
+      "target": null,
+      "current": null,
       "rate": "🔴 0%"
     }
   ],
   "tasks": {
-    "total": 1123,
-    "done": 1069,
-    "overdue": 8,
+    "total": 1126,
+    "done": 1079,
+    "overdue": 9,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,59 +61,14 @@
         "overdue": true
       },
       {
-        "title": "강의",
-        "date": "2026-09-29T20:30:00.000+09:00",
+        "title": "상표권등록 알아보기",
+        "date": "2026-09-30T21:15:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "자료수집&도입부",
-        "date": "2026-09-30T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "7일차 응원메시지 추가. 잘되고있냐. 궁금한점있으면 연락해라. 화이팅해라.함께하는 파트너. 약속한것처럼 상담은끝났지만, 궁금한점은 답변드리겠다. 화이팅해라.",
-        "date": "2026-09-30T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "1년차 메시지(잊지 않고 기억하고있다, 상담이후로 투자도 놓지않고 꾸준히 관심가지고 있는지 궁금하다. 혹시 궁금한점은 여기에 질문남기면, 간단하게라도 답변주겠다. 이런내용?)",
-        "date": "2026-09-30T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "랜딩수정",
-        "date": "2026-09-30T10:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "구글비즈니스 활용",
-        "date": "2026-09-30T11:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
-        "date": "2026-09-30T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-09-30T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
-        "date": "2026-09-30T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상표권등록 알아보기",
-        "date": "2026-09-30T16:30:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "강의",
-        "date": "2026-09-30T21:30:00.000+09:00",
-        "overdue": false
+        "date": "2026-09-30T22:15:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "주간계획 수정",
@@ -128,6 +83,11 @@
       {
         "title": "회사정산",
         "date": "2026-10-01T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "상담준비",
+        "date": "2026-10-01T10:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -151,13 +111,8 @@
         "overdue": false
       },
       {
-        "title": "상담준비",
-        "date": "2026-10-01T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "ppt",
-        "date": "2026-10-01T15:00:00.000+09:00",
+        "date": "2026-10-01T16:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -167,7 +122,7 @@
       },
       {
         "title": "촬영&편집&업로드",
-        "date": "2026-10-01T20:30:00.000+09:00",
+        "date": "2026-10-01T21:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -256,6 +211,11 @@
         "overdue": false
       },
       {
+        "title": "자료수집&도입부",
+        "date": "2026-10-07",
+        "overdue": false
+      },
+      {
         "title": "강영운생일?",
         "date": "2026-10-07",
         "overdue": false
@@ -294,66 +254,77 @@
         "title": "고딩친구들 모임준비",
         "date": "2026-12-21",
         "overdue": false
+      },
+      {
+        "title": "1년차 메시지(잊지 않고 기억하고있다, 상담이후로 투자도 놓지않고 꾸준히 관심가지고 있는지 궁금하다. 혹시 궁금한점은 여기에 질문남기면, 간단하게라도 답변주겠다. 이런내용?)",
+        "date": "2026-12-22T10:00:00.000+09:00",
+        "overdue": false
       }
     ],
     "schedule": [
       {
-        "title": "자료수집&도입부",
+        "title": "주간계획 수정",
+        "time": "08:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "어흥가입",
         "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "7일차 응원메시지 추가. 잘되고있냐. 궁금한점있으면 연락해라. 화이팅해라.함께하는 파트너. 약속한것처럼 상담은끝났지만, 궁금한점은 답변드리겠다. 화이팅해라.",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "1년차 메시지(잊지 않고 기억하고있다, 상담이후로 투자도 놓지않고 꾸준히 관심가지고 있는지 궁금하다. 혹시 궁금한점은 여기에 질문남기면, 간단하게라도 답변주겠다. 이런내용?)",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "랜딩수정",
-        "time": "10:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "구글비즈니스 활용",
-        "time": "11:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "원고",
-        "time": "12:00",
+        "title": "회사정산",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "상담준비",
-        "time": "14:00",
+        "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고",
-        "time": "15:00",
+        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
+        "time": "11:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "상표권등록 알아보기",
-        "time": "16:30",
+        "title": "하나은행 원화결제차단",
+        "time": "11:45",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의",
-        "time": "21:30",
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원고완성",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "ppt",
+        "time": "16:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "PPT완료",
+        "time": "19:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "time": "21:00",
         "allDay": false,
         "done": false
       }
@@ -384,14 +355,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 15,
-      "rate": "54%",
+      "done": 16,
+      "rate": "57%",
       "days": [
-        {
-          "date": "2026-09-24",
-          "done": 1,
-          "total": 4
-        },
         {
           "date": "2026-09-25",
           "done": 3,
@@ -419,6 +385,11 @@
         },
         {
           "date": "2026-09-30",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-10-01",
           "done": 0,
           "total": 4
         }
@@ -426,35 +397,15 @@
     }
   },
   "sales": {
-    "month": "2026-09",
-    "month_label": "9월",
-    "total_amount": 710,
-    "total_count": 15,
+    "month": "2026-10",
+    "month_label": "10월",
+    "total_amount": 50,
+    "total_count": 1,
     "weekly": [
       {
         "week": "1주차",
-        "count": 3,
-        "amount": 130
-      },
-      {
-        "week": "2주차",
-        "count": 2,
-        "amount": 90
-      },
-      {
-        "week": "3주차",
-        "count": 3,
-        "amount": 140
-      },
-      {
-        "week": "4주차",
-        "count": 5,
-        "amount": 250
-      },
-      {
-        "week": "5주차",
-        "count": 2,
-        "amount": 100
+        "count": 1,
+        "amount": 50
       }
     ]
   }
