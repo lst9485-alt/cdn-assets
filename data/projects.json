@@ -1,11 +1,27 @@
 {
-  "updated": "2026-10-01T06:00:47.720616+09:00",
+  "updated": "2026-10-02T06:00:13.364002+09:00",
   "projects": [
     {
       "name": "261004 원고",
       "type": "file",
       "app": null,
-      "modified": "2026-09-30",
+      "modified": "2026-10-01",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "비즈니스PT 프로",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-10-01",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "강의",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-10-01",
       "status": null,
       "next": null
     },
@@ -18,24 +34,8 @@
       "next": "1:1 코칭 상품 본문 교체 — 아임웹에 들어 있는 옛 본문(코칭 랜딩 전체)을 `coaching-payment.html`(결제 페이지)로 교체. 아임웹 상품 설명에 붙이기"
     },
     {
-      "name": "강의",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-09-30",
-      "status": null,
-      "next": null
-    },
-    {
       "name": "261011 원고",
       "type": "file",
-      "app": null,
-      "modified": "2026-09-30",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "비즈니스PT 프로",
-      "type": "folder",
       "app": null,
       "modified": "2026-09-30",
       "status": null,

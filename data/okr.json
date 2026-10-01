@@ -1,28 +1,28 @@
 {
-  "updated": "2026-10-01T06:00:59.937325+09:00",
+  "updated": "2026-10-02T06:00:28.760416+09:00",
   "okr": [
     {
-      "title": "12월 : 미국 (출산)",
-      "target": null,
+      "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
+      "target": 300,
       "current": null,
       "rate": "🔴 0%"
     },
     {
-      "title": "11월 : 특강 + 스터디 관심자 명단 받기",
-      "target": null,
+      "title": "11월 : 특강 / 상담400+특강300",
+      "target": 700,
       "current": null,
       "rate": "🔴 0%"
     },
     {
-      "title": "10월 : 특강",
-      "target": null,
+      "title": "10월 : 특강 / 상담400+특강300",
+      "target": 700,
       "current": null,
       "rate": "🔴 0%"
     }
   ],
   "tasks": {
-    "total": 1126,
-    "done": 1079,
+    "total": 1137,
+    "done": 1089,
     "overdue": 9,
     "pending": [
       {
@@ -61,68 +61,18 @@
         "overdue": true
       },
       {
-        "title": "상표권등록 알아보기",
-        "date": "2026-09-30T21:15:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "강의",
-        "date": "2026-09-30T22:15:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주간계획 수정",
-        "date": "2026-10-01T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "어흥가입",
-        "date": "2026-10-01T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "회사정산",
-        "date": "2026-10-01T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-10-01T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
-        "date": "2026-10-01T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "하나은행 원화결제차단",
-        "date": "2026-10-01T11:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-10-01T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "원고완성",
-        "date": "2026-10-01T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "ppt",
-        "date": "2026-10-01T16:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-10-01T20:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "PPT완료",
-        "date": "2026-10-01T19:30:00.000+09:00",
-        "overdue": false
+        "date": "2026-10-01T21:00:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "촬영&편집&업로드",
-        "date": "2026-10-01T21:00:00.000+09:00",
+        "title": "어흥가입",
+        "date": "2026-10-02T09:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -131,8 +81,18 @@
         "overdue": false
       },
       {
+        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
+        "date": "2026-10-02T10:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "홈페이지 커리큘럼 변경",
         "date": "2026-10-02T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "상표권등록 알아보기",
+        "date": "2026-10-02T11:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -141,8 +101,18 @@
         "overdue": false
       },
       {
-        "title": "사이트구축 기획",
-        "date": "2026-10-02T17:30:00.000+09:00",
+        "title": "강의",
+        "date": "2026-10-02T18:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "유튜브수익 계좌변경 및 세금알아보기(누적해서 한번에 받으면 그 해로 계산되는거지)",
+        "date": "2026-10-02T20:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "date": "2026-10-02T21:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -168,6 +138,16 @@
       {
         "title": "강의준비",
         "date": "2026-10-03T15:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "광고돌린거 확인 및 연장",
+        "date": "2026-10-03T19:45:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "사이트구축 기획",
+        "date": "2026-10-03T20:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -221,13 +201,38 @@
         "overdue": false
       },
       {
+        "title": "급여&자산체크",
+        "date": "2026-10-08",
+        "overdue": false
+      },
+      {
+        "title": "원고완성",
+        "date": "2026-10-08",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-10-08T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "급여체크",
         "date": "2026-10-08T09:30:00.000+09:00",
         "overdue": false
       },
       {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-10-08T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "상담준비",
         "date": "2026-10-09T17:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "까르강의",
+        "date": "2026-10-10T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -263,62 +268,50 @@
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
         "title": "어흥가입",
         "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "회사정산",
+        "title": "강의기획(래퍼런스확인 및 풀링키 기획)",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "상담준비",
+        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
         "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
+        "title": "홈페이지 커리큘럼 변경",
         "time": "11:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "하나은행 원화결제차단",
+        "title": "상표권등록 알아보기",
         "time": "11:45",
         "allDay": false,
         "done": false
       },
       {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "원고완성",
+        "title": "강의준비",
         "time": "13:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "ppt",
-        "time": "16:00",
+        "title": "강의",
+        "time": "18:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "PPT완료",
-        "time": "19:30",
+        "title": "유튜브수익 계좌변경 및 세금알아보기(누적해서 한번에 받으면 그 해로 계산되는거지)",
+        "time": "20:00",
         "allDay": false,
         "done": false
       },
@@ -359,11 +352,6 @@
       "rate": "57%",
       "days": [
         {
-          "date": "2026-09-25",
-          "done": 3,
-          "total": 4
-        },
-        {
           "date": "2026-09-26",
           "done": 2,
           "total": 4
@@ -385,11 +373,16 @@
         },
         {
           "date": "2026-09-30",
-          "done": 2,
+          "done": 4,
           "total": 4
         },
         {
           "date": "2026-10-01",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-10-02",
           "done": 0,
           "total": 4
         }
