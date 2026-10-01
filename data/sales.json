@@ -1,12 +1,12 @@
 {
-  "updated": "2026-10-01T06:01:09.636876+09:00",
+  "updated": "2026-10-01T11:45:58.818241+09:00",
   "summary": {
     "current_month": 0,
     "current_month_label": "2026-10",
-    "last_month": 8500000,
+    "last_month": 6500000,
     "last_month_label": "2026-09",
     "change_pct": "-100.0%",
-    "total_customers": 190
+    "total_customers": 168
   },
   "monthly": [
     {
@@ -76,13 +76,13 @@
     },
     {
       "month": "2026-05",
-      "revenue": 2400000,
-      "customers": 6
+      "revenue": 1600000,
+      "customers": 4
     },
     {
       "month": "2026-06",
-      "revenue": 8000000,
-      "customers": 20
+      "revenue": 4400000,
+      "customers": 11
     },
     {
       "month": "2026-07",
@@ -91,21 +91,16 @@
     },
     {
       "month": "2026-08",
-      "revenue": 10400000,
-      "customers": 24
+      "revenue": 7050000,
+      "customers": 17
     },
     {
       "month": "2026-09",
-      "revenue": 8500000,
-      "customers": 17
+      "revenue": 6500000,
+      "customers": 13
     }
   ],
   "weekly": [
-    {
-      "week_start": "2026-03-30",
-      "revenue": 800000,
-      "customers": 2
-    },
     {
       "week_start": "2026-04-06",
       "revenue": 0,
@@ -213,8 +208,8 @@
     },
     {
       "week_start": "2026-09-01",
-      "revenue": 3000000,
-      "customers": 6
+      "revenue": 2500000,
+      "customers": 5
     },
     {
       "week_start": "2026-09-08",
@@ -228,6 +223,11 @@
     },
     {
       "week_start": "2026-09-22",
+      "revenue": 1000000,
+      "customers": 2
+    },
+    {
+      "week_start": "2026-09-29",
       "revenue": 0,
       "customers": 0
     }
@@ -715,8 +715,8 @@
     },
     {
       "week_start": "2026-09-01",
-      "revenue": 3000000,
-      "customers": 6
+      "revenue": 2500000,
+      "customers": 5
     },
     {
       "week_start": "2026-09-08",
@@ -730,6 +730,11 @@
     },
     {
       "week_start": "2026-09-22",
+      "revenue": 1000000,
+      "customers": 2
+    },
+    {
+      "week_start": "2026-09-29",
       "revenue": 0,
       "customers": 0
     }
@@ -737,36 +742,26 @@
   "by_utm": [
     {
       "utm": "(직접)",
-      "count": 115,
-      "revenue": 33200000
+      "count": 111,
+      "revenue": 31600000
     },
     {
       "utm": "yt_home",
-      "count": 25,
-      "revenue": 10500000
+      "count": 18,
+      "revenue": 7400000
     },
     {
       "utm": "yt_094",
-      "count": 11,
-      "revenue": 5100000
-    },
-    {
-      "utm": "yt_045",
-      "count": 7,
-      "revenue": 3000000
+      "count": 8,
+      "revenue": 3800000
     },
     {
       "utm": "yt_090",
-      "count": 6,
-      "revenue": 2900000
-    },
-    {
-      "utm": "yt_2026",
       "count": 4,
-      "revenue": 1700000
+      "revenue": 2000000
     },
     {
-      "utm": "yt_2025",
+      "utm": "yt_045",
       "count": 4,
       "revenue": 1700000
     },
@@ -776,14 +771,19 @@
       "revenue": 1600000
     },
     {
+      "utm": "yt_2026",
+      "count": 3,
+      "revenue": 1300000
+    },
+    {
       "utm": "yt_092",
       "count": 3,
       "revenue": 1200000
     },
     {
-      "utm": "yt_058",
-      "count": 2,
-      "revenue": 1000000
+      "utm": "yt_2025",
+      "count": 3,
+      "revenue": 1050000
     },
     {
       "utm": "yt_070",
@@ -801,6 +801,11 @@
       "revenue": 500000
     },
     {
+      "utm": "yt_058",
+      "count": 1,
+      "revenue": 500000
+    },
+    {
       "utm": "yt_083",
       "count": 1,
       "revenue": 400000
@@ -814,35 +819,35 @@
   "by_purpose": [
     {
       "purpose": "내집마련",
-      "count": 169,
-      "revenue": 59150000,
-      "ratio": "56.7%"
+      "count": 150,
+      "revenue": 51050000,
+      "ratio": "56.8%"
     },
     {
       "purpose": "투자",
-      "count": 104,
-      "revenue": 34500000,
-      "ratio": "33.1%"
+      "count": 96,
+      "revenue": 31000000,
+      "ratio": "34.5%"
     },
     {
       "purpose": "기타",
-      "count": 32,
-      "revenue": 10700000,
-      "ratio": "10.3%"
+      "count": 26,
+      "revenue": 7750000,
+      "ratio": "8.6%"
     }
   ],
   "by_region": [
     {
       "region": "수도권",
-      "count": 114,
-      "revenue": 37050000,
-      "ratio": "71.2%"
+      "count": 115,
+      "revenue": 37550000,
+      "ratio": "71.4%"
     },
     {
       "region": "지방",
       "count": 46,
-      "revenue": 15950000,
-      "ratio": "28.7%"
+      "revenue": 15700000,
+      "ratio": "28.6%"
     }
   ],
   "expenses": [
