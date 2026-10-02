@@ -135,7 +135,7 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/main-page-imweb.html',
-            dateSuffix: '2'
+            dateSuffix: '3'
           },
           {
             id: 'investment-philosophy',
@@ -209,7 +209,7 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/curriculum-imweb.html',
-            dateSuffix: '3'
+            dateSuffix: '4'
           },
           {
             id: 'lecture-allinone',
@@ -267,7 +267,7 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/refund-policy-imweb.html',
-            dateSuffix: '3'
+            dateSuffix: '4'
           }
         ]
       },
