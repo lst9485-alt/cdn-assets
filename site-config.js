@@ -266,7 +266,8 @@
             activeMatch: ['refund-policy.html'],
             hubVisible: true,
             groupLabel: '페이지',
-            imwebCode: 'homepage/refund-policy-imweb.html'
+            imwebCode: 'homepage/refund-policy-imweb.html',
+            dateSuffix: '1'
           }
         ]
       },
