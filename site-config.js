@@ -209,7 +209,7 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/curriculum-imweb.html',
-            dateSuffix: '1'
+            dateSuffix: '2'
           },
           {
             id: 'lecture-allinone',
