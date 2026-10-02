@@ -1,12 +1,12 @@
 :root {
-  --ink: #171339;
-  --muted: #605b83;
-  --line: #e7e4f4;
-  --soft: #f3f1ff;
+  --ink: #1a1a1a;
+  --muted: #6b6158;
+  --line: #ece4d8;
+  --soft: #fbf6ee;
   --card: #ffffff;
-  --purple: #5b2df0;
-  --purple-soft: #eee9ff;
-  --shadow: 0 20px 48px rgba(23, 19, 57, .075);
+  --purple: #FF6B00;
+  --purple-soft: #ffeedd;
+  --shadow: 0 20px 48px rgba(26,26,26, .075);
 }
 
 * {
@@ -52,7 +52,7 @@ a {
   width: fit-content;
   margin: 0 auto 4px;
   padding: 6px;
-  background: #f1f0ff;
+  background: #f6efe4;
   border-radius: 999px;
 }
 
@@ -106,7 +106,7 @@ a {
 
 .hero .assumption-note {
   max-width: 560px;
-  color: #8984a9;
+  color: #9a8f84;
   font-size: 13px;
 }
 
@@ -129,7 +129,7 @@ a {
   margin: 16px 0 0;
   padding: 40px 24px;
   border-radius: 16px;
-  background: linear-gradient(160deg, #f1f0ff 0%, #eee9ff 100%);
+  background: linear-gradient(160deg, #f6efe4 0%, #ffeedd 100%);
   text-align: center;
 }
 
@@ -159,7 +159,7 @@ a {
 }
 
 .input-card {
-  border: 1px solid rgba(91, 45, 240, .08);
+  border: 1px solid rgba(255,107,0, .08);
   border-radius: 12px;
   padding: 30px 26px;
   background: var(--card);
@@ -216,7 +216,7 @@ a {
   display: flex;
   gap: 3px;
   padding: 3px;
-  background: #f1f0ff;
+  background: #f6efe4;
   border-radius: 999px;
 }
 
@@ -279,7 +279,7 @@ label.ly-field:first-of-type {
   right: 13px;
   top: 50%;
   transform: translateY(-50%);
-  color: #8984a9;
+  color: #9a8f84;
   font-size: 12px;
   font-style: normal;
   font-weight: 850;
@@ -288,7 +288,7 @@ label.ly-field:first-of-type {
 
 .value-box:focus-within {
   border-color: var(--purple);
-  box-shadow: 0 0 0 3px rgba(91, 45, 240, .12);
+  box-shadow: 0 0 0 3px rgba(255,107,0, .12);
 }
 
 .slider-field {
@@ -302,7 +302,7 @@ label.ly-field:first-of-type {
 
 .slider-field input[type="range"] {
   width: 100%;
-  accent-color: var(--purple);
+  accent-color: #E2570A;
 }
 
 .value-box.compact input {
@@ -344,7 +344,7 @@ label.ly-field:first-of-type {
   margin-top: 16px;
   padding: 18px;
   border-radius: 12px;
-  background: #f1f0ff;
+  background: #f6efe4;
 }
 
 .projection-card {
@@ -506,7 +506,7 @@ td:nth-child(1) {
   border-radius: 999px;
   padding: 12px 16px;
   color: #fff;
-  background: rgba(23, 19, 57, .94);
+  background: rgba(26,26,26, .94);
   font-weight: 850;
   transition: opacity .18s ease, transform .18s ease;
 }

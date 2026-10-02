@@ -199,8 +199,8 @@
       {
         label: '  넣은 돈',
         data: result.rows.map(function (row) { return Math.round(row.principalLine); }),
-        borderColor: '#9a93c4',
-        backgroundColor: 'rgba(154,147,196,.08)',
+        borderColor: '#b8a99a',
+        backgroundColor: 'rgba(184,169,154,.08)',
         borderWidth: 2,
         borderDash: [4, 4],
         pointRadius: 0,
@@ -210,8 +210,8 @@
       {
         label: '  ' + modeWord,
         data: result.rows.map(function (row) { return Math.round(row.networth); }),
-        borderColor: '#5b2df0',
-        backgroundColor: 'rgba(91,45,240,.10)',
+        borderColor: '#FF6B00',
+        backgroundColor: 'rgba(255,107,0,.10)',
         borderWidth: 2.5,
         pointRadius: 2,
         pointHoverRadius: 4,
@@ -244,13 +244,13 @@
         scales: {
           x: {
             grid: { display: false },
-            ticks: { maxRotation: 0, maxTicksLimit: 9, color: '#605b83' }
+            ticks: { maxRotation: 0, maxTicksLimit: 9, color: '#6b6158' }
           },
           y: {
             position: 'right',
             beginAtZero: true,
-            grid: { color: 'rgba(23,19,57,.08)' },
-            ticks: { callback: yTick, color: '#605b83' }
+            grid: { color: 'rgba(26,26,26,.08)' },
+            ticks: { callback: yTick, color: '#6b6158' }
           }
         }
       }
