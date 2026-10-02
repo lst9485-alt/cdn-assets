@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02T06:00:28.760416+09:00",
+  "updated": "2026-10-03T06:00:56.843146+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1137,
-    "done": 1089,
-    "overdue": 9,
+    "total": 1141,
+    "done": 1096,
+    "overdue": 8,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,68 +61,23 @@
         "overdue": true
       },
       {
-        "title": "원고완성",
-        "date": "2026-10-01T20:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "PPT완료",
-        "date": "2026-10-01T21:00:00.000+09:00",
+        "date": "2026-10-02T20:30:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "어흥가입",
-        "date": "2026-10-02T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의기획(래퍼런스확인 및 풀링키 기획)",
-        "date": "2026-10-02T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
-        "date": "2026-10-02T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "홈페이지 커리큘럼 변경",
-        "date": "2026-10-02T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상표권등록 알아보기",
-        "date": "2026-10-02T11:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의준비",
-        "date": "2026-10-02T13:00:00.000+09:00",
+        "title": "촬영&편집&업로드",
+        "date": "2026-10-03T08:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "강의",
-        "date": "2026-10-02T18:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "유튜브수익 계좌변경 및 세금알아보기(누적해서 한번에 받으면 그 해로 계산되는거지)",
-        "date": "2026-10-02T20:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-10-02T21:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의준비",
-        "date": "2026-10-03T09:00:00.000+09:00",
+        "date": "2026-10-03T10:15:00.000+09:00",
         "overdue": false
       },
       {
         "title": "헬스",
-        "date": "2026-10-03T11:45:00.000+09:00",
+        "date": "2026-10-03T11:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -136,8 +91,13 @@
         "overdue": false
       },
       {
+        "title": "유튜브수익 계좌변경 및 세금알아보기(누적해서 한번에 받으면 그 해로 계산되는거지)",
+        "date": "2026-10-03T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "강의준비",
-        "date": "2026-10-03T15:30:00.000+09:00",
+        "date": "2026-10-03T16:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -151,8 +111,23 @@
         "overdue": false
       },
       {
+        "title": "강의기획(래퍼런스확인 및 풀링키 기획)",
+        "date": "2026-10-04T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의준비",
+        "date": "2026-10-04T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "이렇게산다(성장일지), 메모",
         "date": "2026-10-05",
+        "overdue": false
+      },
+      {
+        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
+        "date": "2026-10-05T08:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -191,6 +166,11 @@
         "overdue": false
       },
       {
+        "title": "구글광고확인",
+        "date": "2026-10-06T11:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "자료수집&도입부",
         "date": "2026-10-07",
         "overdue": false
@@ -223,6 +203,11 @@
       {
         "title": "콘텐츠 관리시트",
         "date": "2026-10-08T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "PPT완료",
+        "date": "2026-10-09",
         "overdue": false
       },
       {
@@ -268,56 +253,56 @@
     ],
     "schedule": [
       {
-        "title": "어흥가입",
-        "time": "09:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의기획(래퍼런스확인 및 풀링키 기획)",
-        "time": "09:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "홈페이지 커리큘럼 변경",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "상표권등록 알아보기",
-        "time": "11:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의준비",
-        "time": "13:00",
+        "title": "촬영&편집&업로드",
+        "time": "08:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "강의",
-        "time": "18:00",
+        "time": "10:15",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "헬스",
+        "time": "11:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "이불",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "상담준비",
+        "time": "14:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "유튜브수익 계좌변경 및 세금알아보기(누적해서 한번에 받으면 그 해로 계산되는거지)",
-        "time": "20:00",
+        "time": "15:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "time": "21:00",
+        "title": "강의준비",
+        "time": "16:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "광고돌린거 확인 및 연장",
+        "time": "19:45",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "사이트구축 기획",
+        "time": "20:30",
         "allDay": false,
         "done": false
       }
@@ -352,11 +337,6 @@
       "rate": "57%",
       "days": [
         {
-          "date": "2026-09-26",
-          "done": 2,
-          "total": 4
-        },
-        {
           "date": "2026-09-27",
           "done": 3,
           "total": 4
@@ -378,11 +358,16 @@
         },
         {
           "date": "2026-10-01",
-          "done": 1,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-10-02",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-10-03",
           "done": 0,
           "total": 4
         }
