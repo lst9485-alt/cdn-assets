@@ -237,7 +237,7 @@
             position: 'bottom',
             align: 'start',
             reverse: true,
-            labels: { usePointStyle: true, boxWidth: 8, padding: 22, font: { weight: 700 } }
+            labels: { boxWidth: 18, boxHeight: 4, padding: 22, color: '#6b6158', font: { weight: 600 }, generateLabels: function (c) { return Chart.defaults.plugins.legend.labels.generateLabels(c).map(function (l) { var d = c.data.datasets[l.datasetIndex]; l.fillStyle = d.borderColor; l.strokeStyle = d.borderColor; l.lineWidth = 0; l.lineDash = []; return l; }); } }
           },
           tooltip: { callbacks: { label: tooltipLabel } }
         },

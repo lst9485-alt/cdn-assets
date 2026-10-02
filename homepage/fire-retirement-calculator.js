@@ -335,10 +335,12 @@
             reverse: true,
             labels: {
               filter: legendFilter,
-              usePointStyle: true,
-              boxWidth: 8,
+              boxWidth: 18,
+              boxHeight: 4,
               padding: 22,
-              font: { weight: 700 }
+              color: '#6b6158',
+              font: { weight: 600 },
+              generateLabels: function (c) { return Chart.defaults.plugins.legend.labels.generateLabels(c).map(function (l) { var d = c.data.datasets[l.datasetIndex]; l.fillStyle = d.borderColor; l.strokeStyle = d.borderColor; l.lineWidth = 0; l.lineDash = []; return l; }); }
             }
           },
           tooltip: {
