@@ -267,7 +267,7 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/refund-policy-imweb.html',
-            dateSuffix: '2'
+            dateSuffix: '3'
           }
         ]
       },
