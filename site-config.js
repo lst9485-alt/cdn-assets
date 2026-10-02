@@ -134,7 +134,8 @@
             activeMatch: ['main-page.html'],
             hubVisible: true,
             groupLabel: '페이지',
-            imwebCode: 'homepage/main-page-imweb.html'
+            imwebCode: 'homepage/main-page-imweb.html',
+            dateSuffix: '1'
           },
           {
             id: 'investment-philosophy',
@@ -208,7 +209,7 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/curriculum-imweb.html',
-            dateSuffix: '3'
+            dateSuffix: '1'
           },
           {
             id: 'lecture-allinone',
