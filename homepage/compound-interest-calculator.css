@@ -399,10 +399,12 @@ label.ly-field:first-of-type {
 
 .chart-foot p {
   margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.55;
+  color: var(--ink);
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.7;
   word-break: keep-all;
+  text-wrap: pretty;
 }
 
 .chart-foot p .hl {

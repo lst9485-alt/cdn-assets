@@ -250,7 +250,7 @@
     } else if (result.config.annualReturn < result.config.withdrawalRate) {
       insight.innerHTML = '현재 조건이면 ' + ageHtml + '에 목표 은퇴자금에 도달합니다. 인출률은 투자수익만 쓰는 게 아니라 원금 일부 인출을 포함합니다.';
     } else {
-      insight.innerHTML = '현재 조건이면 ' + ageHtml + '에 목표 은퇴자금에 도달합니다. 표 탭에서 매년 투자수익과 연지출 비율을 볼 수 있습니다.';
+      insight.innerHTML = '현재 조건이면 ' + ageHtml + '에 목표 은퇴자금에 도달합니다.<br>표 탭에서 매년 투자수익과 연지출 비율을 볼 수 있습니다.';
     }
   }
 

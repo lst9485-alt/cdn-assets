@@ -174,7 +174,7 @@
     } else {
       var finHtml = '<b class="hl">' + formatMoney(result.finalAmount) + '</b>';
       var grewHtml = '<b class="hl">' + formatMoney(result.totalInterest) + '</b>';
-      insight.innerHTML = how + ' 연 ' + cfg.annualRate + '%로 ' + cfg.years + '년 넣으면(' + modeWord + ' 기준) ' + finHtml + '. 넣은 돈 ' + formatMoney(result.totalPaid) + ', 불어난 돈 ' + grewHtml + '입니다.';
+      insight.innerHTML = how + ' 연 ' + cfg.annualRate + '%로 ' + cfg.years + '년 넣으면<span style="white-space:nowrap">(' + modeWord + ' 기준)</span> ' + finHtml + '.<br>넣은 돈 ' + formatMoney(result.totalPaid) + ', 불어난 돈 ' + grewHtml + '입니다.';
     }
   }
 
