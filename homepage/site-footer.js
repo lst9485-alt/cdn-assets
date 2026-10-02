@@ -69,6 +69,7 @@
       '    margin-bottom: 0 !important;',
       '  }',
       '  footer[data-homepage-footer] [data-footer-info="true"] { margin-top: 0 !important; }',
+      '  footer[data-homepage-footer] [data-footer-grid="true"] > div { margin-left: 0 !important; }',
       '}'
     ].join('');
     document.head.appendChild(style);

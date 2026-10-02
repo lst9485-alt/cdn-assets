@@ -135,7 +135,7 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/main-page-imweb.html',
-            dateSuffix: '1'
+            dateSuffix: '2'
           },
           {
             id: 'investment-philosophy',
