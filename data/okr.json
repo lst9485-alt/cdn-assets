@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-03T06:00:56.843146+09:00",
+  "updated": "2026-10-04T06:00:38.952081+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1141,
-    "done": 1096,
-    "overdue": 8,
+    "total": 1146,
+    "done": 1102,
+    "overdue": 10,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,54 +61,19 @@
         "overdue": true
       },
       {
-        "title": "PPT완료",
-        "date": "2026-10-02T20:30:00.000+09:00",
+        "title": "원씽복기",
+        "date": "2026-10-03T14:00:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "상담준비",
+        "date": "2026-10-03T15:15:00.000+09:00",
         "overdue": true
       },
       {
         "title": "촬영&편집&업로드",
-        "date": "2026-10-03T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의",
-        "date": "2026-10-03T10:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "헬스",
-        "date": "2026-10-03T11:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "이불",
-        "date": "2026-10-03T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-10-03T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "유튜브수익 계좌변경 및 세금알아보기(누적해서 한번에 받으면 그 해로 계산되는거지)",
-        "date": "2026-10-03T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의준비",
-        "date": "2026-10-03T16:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "광고돌린거 확인 및 연장",
-        "date": "2026-10-03T19:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "사이트구축 기획",
-        "date": "2026-10-03T20:30:00.000+09:00",
-        "overdue": false
+        "date": "2026-10-03T16:15:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "강의기획(래퍼런스확인 및 풀링키 기획)",
@@ -116,8 +81,23 @@
         "overdue": false
       },
       {
-        "title": "강의준비",
+        "title": "유튜브수익 계좌변경 및 세금알아보기(누적해서 한번에 받으면 그 해로 계산되는거지)",
+        "date": "2026-10-04T12:15:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "광고돌린거 확인 및 연장",
         "date": "2026-10-04T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의준비",
+        "date": "2026-10-04T13:45:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "사이트구축 기획",
+        "date": "2026-10-04T16:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -171,6 +151,11 @@
         "overdue": false
       },
       {
+        "title": "헬스PT",
+        "date": "2026-10-06T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "자료수집&도입부",
         "date": "2026-10-07",
         "overdue": false
@@ -206,6 +191,11 @@
         "overdue": false
       },
       {
+        "title": "헬스 PT",
+        "date": "2026-10-08T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "PPT완료",
         "date": "2026-10-09",
         "overdue": false
@@ -213,6 +203,11 @@
       {
         "title": "상담준비",
         "date": "2026-10-09T17:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "date": "2026-10-10",
         "overdue": false
       },
       {
@@ -253,56 +248,32 @@
     ],
     "schedule": [
       {
-        "title": "촬영&편집&업로드",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의",
-        "time": "10:15",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "헬스",
-        "time": "11:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "이불",
-        "time": "13:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "상담준비",
-        "time": "14:00",
+        "title": "강의기획(래퍼런스확인 및 풀링키 기획)",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "유튜브수익 계좌변경 및 세금알아보기(누적해서 한번에 받으면 그 해로 계산되는거지)",
-        "time": "15:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의준비",
-        "time": "16:00",
+        "time": "12:15",
         "allDay": false,
         "done": false
       },
       {
         "title": "광고돌린거 확인 및 연장",
-        "time": "19:45",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의준비",
+        "time": "13:45",
         "allDay": false,
         "done": false
       },
       {
         "title": "사이트구축 기획",
-        "time": "20:30",
+        "time": "16:00",
         "allDay": false,
         "done": false
       }
@@ -333,14 +304,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 16,
-      "rate": "57%",
+      "done": 17,
+      "rate": "61%",
       "days": [
-        {
-          "date": "2026-09-27",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-09-28",
           "done": 3,
@@ -363,11 +329,16 @@
         },
         {
           "date": "2026-10-02",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-10-03",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-10-04",
           "done": 0,
           "total": 4
         }
@@ -377,13 +348,13 @@
   "sales": {
     "month": "2026-10",
     "month_label": "10월",
-    "total_amount": 50,
-    "total_count": 1,
+    "total_amount": 100,
+    "total_count": 2,
     "weekly": [
       {
         "week": "1주차",
-        "count": 1,
-        "amount": 50
+        "count": 2,
+        "amount": 100
       }
     ]
   }
