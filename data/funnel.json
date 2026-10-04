@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-04T06:00:48.563556+09:00",
+  "updated": "2026-10-04T15:43:08.911260+09:00",
   "current_week": {
     "week_start": "2026-09-22",
     "week_end": "2026-09-28",
     "revenue": 1000000,
     "paid_customers": 2,
-    "landing_visits": 146,
+    "landing_visits": 163,
     "midform_views": 31294,
     "key_views": 5693,
     "pulling_views": 25601,
@@ -15,15 +15,14 @@
     "key_watch_time": "4:38",
     "key_page_traffic": 363,
     "key_search_traffic": 400,
-    "pulling_subscriber_rate": 0.0,
     "pulling_watch_time": "3:52",
     "explore_traffic": 13079,
     "revenue_per_view": 32
   },
   "rates": {
     "interest_rate": 22.24,
-    "link_click_rate": 0.47,
-    "convert_rate": 1.37
+    "link_click_rate": 0.52,
+    "convert_rate": 1.23
   },
   "targets": {
     "pulling_views": 20000,
@@ -37,42 +36,41 @@
   },
   "changes": {
     "explore_traffic": 38.2,
-    "subscriber_increase": 24.0,
-    "midform_views": 19.3,
-    "revenue": 100.0,
-    "key_page_traffic": 29.2,
-    "paid_customers": 100.0,
-    "revenue_per_view": 68.4,
     "subscribers_total": 1.5,
-    "landing_visits": 25.9,
+    "subscriber_increase": 24.0,
     "shorts_views": 801.6,
-    "pulling_views": 18.2,
+    "key_page_traffic": 29.2,
+    "revenue_per_view": 68.4,
+    "landing_visits": 21.6,
+    "paid_customers": 100.0,
+    "revenue": 100.0,
     "key_views": 24.2,
-    "key_search_traffic": -3.8
+    "key_search_traffic": -3.8,
+    "pulling_views": 18.2,
+    "midform_views": 19.3
   },
   "avg_4w": {
     "explore_traffic": 13891.2,
-    "subscriber_increase": 630.2,
-    "midform_views": 40722.5,
-    "revenue": 2300000.0,
-    "key_page_traffic": 570.8,
-    "paid_customers": 3.5,
-    "revenue_per_view": 48.8,
     "subscribers_total": 26250.0,
-    "landing_visits": 172.2,
+    "subscriber_increase": 630.2,
     "shorts_views": 811.2,
-    "pulling_views": 28188.0,
+    "key_page_traffic": 570.8,
+    "revenue_per_view": 48.8,
+    "landing_visits": 241.2,
+    "paid_customers": 3.5,
+    "revenue": 2300000.0,
     "key_views": 12534.5,
     "key_search_traffic": 652.0,
+    "pulling_views": 28188.0,
+    "midform_views": 40722.5,
     "interest_rate": 38.05,
-    "convert_rate": 1.82,
-    "pulling_subscriber_rate": 0.0,
-    "link_click_rate": 2.2,
-    "key_watch_time": "4:42",
+    "convert_rate": 1.38,
+    "link_click_rate": 2.73,
     "pulling_watch_time": "4:01",
+    "key_watch_time": "4:42",
     "_rate_interest_rate": 38.04,
-    "_rate_link_click_rate": 0.45,
-    "_rate_convert_rate": 1.84
+    "_rate_link_click_rate": 0.58,
+    "_rate_convert_rate": 1.38
   },
   "weekly_history": [
     {
@@ -96,7 +94,6 @@
       "explore_traffic": 0,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2024-10-30"
     },
     {
@@ -120,7 +117,6 @@
       "explore_traffic": 0,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2024-11-06"
     },
     {
@@ -144,7 +140,6 @@
       "explore_traffic": 1,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2024-11-13"
     },
     {
@@ -168,7 +163,6 @@
       "explore_traffic": 1,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2024-11-20"
     },
     {
@@ -192,7 +186,6 @@
       "explore_traffic": 1,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2024-11-27"
     },
     {
@@ -216,7 +209,6 @@
       "explore_traffic": 1,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2024-12-04"
     },
     {
@@ -240,7 +232,6 @@
       "explore_traffic": 0,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2024-12-11"
     },
     {
@@ -264,7 +255,6 @@
       "explore_traffic": 0,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 40.0,
       "label": "2024-12-18"
     },
     {
@@ -288,7 +278,6 @@
       "explore_traffic": 2,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2024-12-25"
     },
     {
@@ -312,7 +301,6 @@
       "explore_traffic": 3,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2025-01-01"
     },
     {
@@ -336,7 +324,6 @@
       "explore_traffic": 2,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 5.9,
       "label": "2025-01-08"
     },
     {
@@ -360,7 +347,6 @@
       "explore_traffic": 16,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2025-01-15"
     },
     {
@@ -384,7 +370,6 @@
       "explore_traffic": 3172,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 2.3,
       "label": "2025-01-22"
     },
     {
@@ -408,7 +393,6 @@
       "explore_traffic": 916,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.3,
       "label": "2025-01-29"
     },
     {
@@ -432,7 +416,6 @@
       "explore_traffic": 7988,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.7,
       "label": "2025-02-05"
     },
     {
@@ -456,7 +439,6 @@
       "explore_traffic": 2697,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.1,
       "label": "2025-02-12"
     },
     {
@@ -480,7 +462,6 @@
       "explore_traffic": 1786,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.2,
       "label": "2025-02-19"
     },
     {
@@ -504,7 +485,6 @@
       "explore_traffic": 1222,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
       "label": "2025-02-26"
     },
     {
@@ -528,7 +508,6 @@
       "explore_traffic": 2373,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.1,
       "label": "2025-03-05"
     },
     {
@@ -552,7 +531,6 @@
       "explore_traffic": 940,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.3,
       "label": "2025-03-12"
     },
     {
@@ -576,7 +554,6 @@
       "explore_traffic": 1088,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.5,
       "label": "2025-03-19"
     },
     {
@@ -600,7 +577,6 @@
       "explore_traffic": 2260,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.0,
       "label": "2025-03-26"
     },
     {
@@ -624,7 +600,6 @@
       "explore_traffic": 3145,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.8,
       "label": "2025-04-02"
     },
     {
@@ -648,7 +623,6 @@
       "explore_traffic": 4677,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
       "label": "2025-04-09"
     },
     {
@@ -672,7 +646,6 @@
       "explore_traffic": 1258,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 2.3,
       "label": "2025-04-16"
     },
     {
@@ -696,7 +669,6 @@
       "explore_traffic": 3099,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.1,
       "label": "2025-04-23"
     },
     {
@@ -720,7 +692,6 @@
       "explore_traffic": 2933,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.2,
       "label": "2025-04-30"
     },
     {
@@ -744,7 +715,6 @@
       "explore_traffic": 2403,
       "shorts_views": 0,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.0,
       "label": "2025-05-07"
     },
     {
@@ -768,7 +738,6 @@
       "explore_traffic": 492,
       "shorts_views": 2057,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.1,
       "label": "2025-05-14"
     },
     {
@@ -792,7 +761,6 @@
       "explore_traffic": 259,
       "shorts_views": 1493,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 2.4,
       "label": "2025-05-21"
     },
     {
@@ -816,7 +784,6 @@
       "explore_traffic": 514,
       "shorts_views": 1808,
       "revenue_per_view": 44,
-      "pulling_subscriber_rate": 1.0,
       "label": "2025-05-28"
     },
     {
@@ -840,7 +807,6 @@
       "explore_traffic": 977,
       "shorts_views": 3012,
       "revenue_per_view": 31,
-      "pulling_subscriber_rate": 0.8,
       "label": "2025-06-04"
     },
     {
@@ -864,7 +830,6 @@
       "explore_traffic": 2920,
       "shorts_views": 16189,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.6,
       "label": "2025-06-11"
     },
     {
@@ -888,7 +853,6 @@
       "explore_traffic": 11048,
       "shorts_views": 7073,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.7,
       "label": "2025-06-18"
     },
     {
@@ -912,7 +876,6 @@
       "explore_traffic": 5532,
       "shorts_views": 422,
       "revenue_per_view": 40,
-      "pulling_subscriber_rate": 1.7,
       "label": "2025-06-25"
     },
     {
@@ -936,7 +899,6 @@
       "explore_traffic": 4083,
       "shorts_views": 2418,
       "revenue_per_view": 27,
-      "pulling_subscriber_rate": 1.0,
       "label": "2025-07-02"
     },
     {
@@ -960,7 +922,6 @@
       "explore_traffic": 16654,
       "shorts_views": 870,
       "revenue_per_view": 9,
-      "pulling_subscriber_rate": 2.7,
       "label": "2025-07-09"
     },
     {
@@ -984,7 +945,6 @@
       "explore_traffic": 10338,
       "shorts_views": 239,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.6,
       "label": "2025-07-16"
     },
     {
@@ -1008,7 +968,6 @@
       "explore_traffic": 14200,
       "shorts_views": 198,
       "revenue_per_view": 5,
-      "pulling_subscriber_rate": 1.6,
       "label": "2025-07-23"
     },
     {
@@ -1032,7 +991,6 @@
       "explore_traffic": 5069,
       "shorts_views": 263,
       "revenue_per_view": 12,
-      "pulling_subscriber_rate": 1.7,
       "label": "2025-07-30"
     },
     {
@@ -1056,7 +1014,6 @@
       "explore_traffic": 4528,
       "shorts_views": 240,
       "revenue_per_view": 50,
-      "pulling_subscriber_rate": 1.1,
       "label": "2025-08-06"
     },
     {
@@ -1080,7 +1037,6 @@
       "explore_traffic": 3540,
       "shorts_views": 201,
       "revenue_per_view": 24,
-      "pulling_subscriber_rate": 1.5,
       "label": "2025-08-13"
     },
     {
@@ -1104,7 +1060,6 @@
       "explore_traffic": 2925,
       "shorts_views": 239,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
       "label": "2025-08-20"
     },
     {
@@ -1128,7 +1083,6 @@
       "explore_traffic": 7852,
       "shorts_views": 229,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 2.0,
       "label": "2025-08-27"
     },
     {
@@ -1152,7 +1106,6 @@
       "explore_traffic": 11657,
       "shorts_views": 223,
       "revenue_per_view": 6,
-      "pulling_subscriber_rate": 2.0,
       "label": "2025-09-03"
     },
     {
@@ -1176,7 +1129,6 @@
       "explore_traffic": 8319,
       "shorts_views": 270,
       "revenue_per_view": 13,
-      "pulling_subscriber_rate": 1.5,
       "label": "2025-09-10"
     },
     {
@@ -1200,7 +1152,6 @@
       "explore_traffic": 6335,
       "shorts_views": 229,
       "revenue_per_view": 39,
-      "pulling_subscriber_rate": 1.3,
       "label": "2025-09-17"
     },
     {
@@ -1224,7 +1175,6 @@
       "explore_traffic": 7065,
       "shorts_views": 187,
       "revenue_per_view": 27,
-      "pulling_subscriber_rate": 1.4,
       "label": "2025-09-24"
     },
     {
@@ -1248,7 +1198,6 @@
       "explore_traffic": 23934,
       "shorts_views": 336,
       "revenue_per_view": 9,
-      "pulling_subscriber_rate": 1.6,
       "label": "2025-10-01"
     },
     {
@@ -1272,7 +1221,6 @@
       "explore_traffic": 21324,
       "shorts_views": 436,
       "revenue_per_view": 50,
-      "pulling_subscriber_rate": 2.1,
       "label": "2025-10-08"
     },
     {
@@ -1296,7 +1244,6 @@
       "explore_traffic": 7996,
       "shorts_views": 239,
       "revenue_per_view": 62,
-      "pulling_subscriber_rate": 1.6,
       "label": "2025-10-15"
     },
     {
@@ -1320,7 +1267,6 @@
       "explore_traffic": 5798,
       "shorts_views": 217,
       "revenue_per_view": 43,
-      "pulling_subscriber_rate": 1.2,
       "label": "2025-10-22"
     },
     {
@@ -1344,7 +1290,6 @@
       "explore_traffic": 7066,
       "shorts_views": 202,
       "revenue_per_view": 53,
-      "pulling_subscriber_rate": 1.4,
       "label": "2025-10-29"
     },
     {
@@ -1368,7 +1313,6 @@
       "explore_traffic": 3927,
       "shorts_views": 322,
       "revenue_per_view": 58,
-      "pulling_subscriber_rate": 1.3,
       "label": "2025-11-05"
     },
     {
@@ -1392,7 +1336,6 @@
       "explore_traffic": 2495,
       "shorts_views": 167,
       "revenue_per_view": 23,
-      "pulling_subscriber_rate": 0.9,
       "label": "2025-11-12"
     },
     {
@@ -1416,7 +1359,6 @@
       "explore_traffic": 15005,
       "shorts_views": 277,
       "revenue_per_view": 13,
-      "pulling_subscriber_rate": 1.4,
       "label": "2025-11-19"
     },
     {
@@ -1440,7 +1382,6 @@
       "explore_traffic": 27049,
       "shorts_views": 408,
       "revenue_per_view": 44,
-      "pulling_subscriber_rate": 1.5,
       "label": "2025-11-26"
     },
     {
@@ -1464,7 +1405,6 @@
       "explore_traffic": 34019,
       "shorts_views": 334,
       "revenue_per_view": 31,
-      "pulling_subscriber_rate": 1.6,
       "label": "2025-12-03"
     },
     {
@@ -1488,7 +1428,6 @@
       "explore_traffic": 21345,
       "shorts_views": 462,
       "revenue_per_view": 70,
-      "pulling_subscriber_rate": 1.4,
       "label": "2025-12-10"
     },
     {
@@ -1512,7 +1451,6 @@
       "explore_traffic": 7645,
       "shorts_views": 475,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.2,
       "label": "2025-12-17"
     },
     {
@@ -1536,7 +1474,6 @@
       "explore_traffic": 13959,
       "shorts_views": 467,
       "revenue_per_view": 27,
-      "pulling_subscriber_rate": 1.2,
       "label": "2025-12-24"
     },
     {
@@ -1560,7 +1497,6 @@
       "explore_traffic": 17801,
       "shorts_views": 465,
       "revenue_per_view": 34,
-      "pulling_subscriber_rate": 1.2,
       "label": "2025-12-31"
     },
     {
@@ -1584,7 +1520,6 @@
       "explore_traffic": 18009,
       "shorts_views": 399,
       "revenue_per_view": 33,
-      "pulling_subscriber_rate": 1.2,
       "label": "2026-01-07"
     },
     {
@@ -1608,7 +1543,6 @@
       "explore_traffic": 9948,
       "shorts_views": 486,
       "revenue_per_view": 60,
-      "pulling_subscriber_rate": 1.1,
       "label": "2026-01-14"
     },
     {
@@ -1632,7 +1566,6 @@
       "explore_traffic": 8024,
       "shorts_views": 522,
       "revenue_per_view": 52,
-      "pulling_subscriber_rate": 1.0,
       "label": "2026-01-21"
     },
     {
@@ -1656,7 +1589,6 @@
       "explore_traffic": 10582,
       "shorts_views": 426,
       "revenue_per_view": 62,
-      "pulling_subscriber_rate": 0.9,
       "label": "2026-01-28"
     },
     {
@@ -1680,7 +1612,6 @@
       "explore_traffic": 7388,
       "shorts_views": 398,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
       "label": "2026-02-04"
     },
     {
@@ -1704,7 +1635,6 @@
       "explore_traffic": 6243,
       "shorts_views": 363,
       "revenue_per_view": 16,
-      "pulling_subscriber_rate": 1.3,
       "label": "2026-02-11"
     },
     {
@@ -1728,7 +1658,6 @@
       "explore_traffic": 5429,
       "shorts_views": 590,
       "revenue_per_view": 48,
-      "pulling_subscriber_rate": 1.6,
       "label": "2026-02-18"
     },
     {
@@ -1752,7 +1681,6 @@
       "explore_traffic": 4497,
       "shorts_views": 385,
       "revenue_per_view": 45,
-      "pulling_subscriber_rate": 0.9,
       "label": "2026-02-25"
     },
     {
@@ -1776,7 +1704,6 @@
       "explore_traffic": 2527,
       "shorts_views": 547,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.1,
       "label": "2026-03-04"
     },
     {
@@ -1800,7 +1727,6 @@
       "explore_traffic": 1551,
       "shorts_views": 377,
       "revenue_per_view": 35,
-      "pulling_subscriber_rate": 1.2,
       "label": "2026-03-11"
     },
     {
@@ -1824,7 +1750,6 @@
       "explore_traffic": 3496,
       "shorts_views": 549,
       "revenue_per_view": 41,
-      "pulling_subscriber_rate": 1.0,
       "label": "2026-03-16"
     },
     {
@@ -1848,7 +1773,6 @@
       "explore_traffic": 13399,
       "shorts_views": 492,
       "revenue_per_view": 28,
-      "pulling_subscriber_rate": 0.9,
       "label": "2026-03-23"
     },
     {
@@ -1872,7 +1796,6 @@
       "explore_traffic": 15105,
       "shorts_views": 481,
       "revenue_per_view": 29,
-      "pulling_subscriber_rate": 0.7,
       "label": "2026-03-30"
     },
     {
@@ -1896,7 +1819,6 @@
       "explore_traffic": 6923,
       "shorts_views": 407,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 1.0,
       "label": "2026-04-06"
     },
     {
@@ -1920,7 +1842,6 @@
       "explore_traffic": 10335,
       "shorts_views": 524,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
       "label": "2026-04-13"
     },
     {
@@ -1944,7 +1865,6 @@
       "explore_traffic": 6279,
       "shorts_views": 563,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
       "label": "2026-04-20"
     },
     {
@@ -1968,7 +1888,6 @@
       "explore_traffic": 4317,
       "shorts_views": 572,
       "revenue_per_view": 22,
-      "pulling_subscriber_rate": 0.9,
       "label": "2026-04-27"
     },
     {
@@ -1992,7 +1911,6 @@
       "explore_traffic": 3758,
       "shorts_views": 652,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.9,
       "label": "2026-05-04"
     },
     {
@@ -2016,7 +1934,6 @@
       "explore_traffic": 2869,
       "shorts_views": 496,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-05-11"
     },
     {
@@ -2040,7 +1957,6 @@
       "explore_traffic": 1863,
       "shorts_views": 600,
       "revenue_per_view": 0,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-05-18"
     },
     {
@@ -2064,7 +1980,6 @@
       "explore_traffic": 2706,
       "shorts_views": 716,
       "revenue_per_view": 43,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-05-25"
     },
     {
@@ -2072,9 +1987,9 @@
       "week_end": "2026-06-07",
       "revenue": 1200000,
       "paid_customers": 3,
-      "convert_rate": 3.9,
-      "landing_visits": 77,
-      "link_click_rate": 0.42,
+      "convert_rate": 3.75,
+      "landing_visits": 80,
+      "link_click_rate": 0.44,
       "midform_views": 18121,
       "subscribers_total": 19800,
       "subscriber_increase": 228,
@@ -2088,7 +2003,6 @@
       "explore_traffic": 4053,
       "shorts_views": 524,
       "revenue_per_view": 66,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-06-01"
     },
     {
@@ -2096,9 +2010,9 @@
       "week_end": "2026-06-15",
       "revenue": 400000,
       "paid_customers": 1,
-      "convert_rate": 1.14,
-      "landing_visits": 88,
-      "link_click_rate": 0.2,
+      "convert_rate": 0.62,
+      "landing_visits": 162,
+      "link_click_rate": 0.37,
       "midform_views": 44081,
       "subscribers_total": 20600,
       "subscriber_increase": 817,
@@ -2112,7 +2026,6 @@
       "explore_traffic": 13567,
       "shorts_views": 521,
       "revenue_per_view": 9,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-06-08"
     },
     {
@@ -2120,9 +2033,9 @@
       "week_end": "2026-06-22",
       "revenue": 1200000,
       "paid_customers": 3,
-      "convert_rate": 2.29,
-      "landing_visits": 131,
-      "link_click_rate": 0.46,
+      "convert_rate": 2.13,
+      "landing_visits": 141,
+      "link_click_rate": 0.5,
       "midform_views": 28379,
       "subscribers_total": 20900,
       "subscriber_increase": 372,
@@ -2136,7 +2049,6 @@
       "explore_traffic": 3796,
       "shorts_views": 646,
       "revenue_per_view": 42,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-06-16"
     },
     {
@@ -2144,9 +2056,9 @@
       "week_end": "2026-06-29",
       "revenue": 800000,
       "paid_customers": 2,
-      "convert_rate": 2.13,
-      "landing_visits": 94,
-      "link_click_rate": 0.36,
+      "convert_rate": 1.77,
+      "landing_visits": 113,
+      "link_click_rate": 0.44,
       "midform_views": 25869,
       "subscribers_total": 21300,
       "subscriber_increase": 342,
@@ -2160,7 +2072,6 @@
       "explore_traffic": 5500,
       "shorts_views": 486,
       "revenue_per_view": 31,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-06-23"
     },
     {
@@ -2168,8 +2079,8 @@
       "week_end": "2026-07-06",
       "revenue": 400000,
       "paid_customers": 1,
-      "convert_rate": 1.04,
-      "landing_visits": 96,
+      "convert_rate": 1.05,
+      "landing_visits": 95,
       "link_click_rate": 0.45,
       "midform_views": 21197,
       "subscribers_total": 21500,
@@ -2184,7 +2095,6 @@
       "explore_traffic": 4474,
       "shorts_views": 420,
       "revenue_per_view": 19,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-06-30"
     },
     {
@@ -2192,8 +2102,8 @@
       "week_end": "2026-07-13",
       "revenue": 400000,
       "paid_customers": 1,
-      "convert_rate": 1.23,
-      "landing_visits": 81,
+      "convert_rate": 1.25,
+      "landing_visits": 80,
       "link_click_rate": 0.46,
       "midform_views": 17513,
       "subscribers_total": 21800,
@@ -2208,7 +2118,6 @@
       "explore_traffic": 4175,
       "shorts_views": 441,
       "revenue_per_view": 23,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-07-07"
     },
     {
@@ -2216,9 +2125,9 @@
       "week_end": "2026-07-20",
       "revenue": 400000,
       "paid_customers": 1,
-      "convert_rate": 1.32,
-      "landing_visits": 76,
-      "link_click_rate": 0.43,
+      "convert_rate": 1.28,
+      "landing_visits": 78,
+      "link_click_rate": 0.45,
       "midform_views": 17521,
       "subscribers_total": 22000,
       "subscriber_increase": 231,
@@ -2232,7 +2141,6 @@
       "explore_traffic": 3036,
       "shorts_views": 294,
       "revenue_per_view": 23,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-07-14"
     },
     {
@@ -2240,9 +2148,9 @@
       "week_end": "2026-07-27",
       "revenue": 400000,
       "paid_customers": 1,
-      "convert_rate": 0.93,
-      "landing_visits": 107,
-      "link_click_rate": 0.45,
+      "convert_rate": 0.87,
+      "landing_visits": 115,
+      "link_click_rate": 0.48,
       "midform_views": 23882,
       "subscribers_total": 22300,
       "subscriber_increase": 292,
@@ -2256,7 +2164,6 @@
       "explore_traffic": 1925,
       "shorts_views": 382,
       "revenue_per_view": 17,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-07-21"
     },
     {
@@ -2264,9 +2171,9 @@
       "week_end": "2026-08-03",
       "revenue": 400000,
       "paid_customers": 1,
-      "convert_rate": 1.11,
-      "landing_visits": 90,
-      "link_click_rate": 0.39,
+      "convert_rate": 1.06,
+      "landing_visits": 94,
+      "link_click_rate": 0.41,
       "midform_views": 23009,
       "subscribers_total": 22500,
       "subscriber_increase": 240,
@@ -2280,7 +2187,6 @@
       "explore_traffic": 3950,
       "shorts_views": 388,
       "revenue_per_view": 17,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-07-28"
     },
     {
@@ -2288,9 +2194,9 @@
       "week_end": "2026-08-10",
       "revenue": 1200000,
       "paid_customers": 3,
-      "convert_rate": 1.86,
-      "landing_visits": 161,
-      "link_click_rate": 0.51,
+      "convert_rate": 1.76,
+      "landing_visits": 170,
+      "link_click_rate": 0.54,
       "midform_views": 31707,
       "subscribers_total": 23000,
       "subscriber_increase": 438,
@@ -2304,7 +2210,6 @@
       "explore_traffic": 7419,
       "shorts_views": 405,
       "revenue_per_view": 38,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-08-04"
     },
     {
@@ -2312,8 +2217,8 @@
       "week_end": "2026-08-17",
       "revenue": 800000,
       "paid_customers": 2,
-      "convert_rate": 1.3,
-      "landing_visits": 154,
+      "convert_rate": 1.32,
+      "landing_visits": 152,
       "link_click_rate": 0.41,
       "midform_views": 37466,
       "subscribers_total": 23500,
@@ -2328,7 +2233,6 @@
       "explore_traffic": 11123,
       "shorts_views": 585,
       "revenue_per_view": 21,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-08-11"
     },
     {
@@ -2337,7 +2241,7 @@
       "revenue": 2000000,
       "paid_customers": 5,
       "convert_rate": 1.4,
-      "landing_visits": 357,
+      "landing_visits": 358,
       "link_click_rate": 0.57,
       "midform_views": 62922,
       "subscribers_total": 24600,
@@ -2352,7 +2256,6 @@
       "explore_traffic": 20428,
       "shorts_views": 606,
       "revenue_per_view": 32,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-08-18"
     },
     {
@@ -2360,9 +2263,9 @@
       "week_end": "2026-08-31",
       "revenue": 5200000,
       "paid_customers": 6,
-      "convert_rate": 2.54,
-      "landing_visits": 236,
-      "link_click_rate": 0.33,
+      "convert_rate": 1.38,
+      "landing_visits": 435,
+      "link_click_rate": 0.6,
       "midform_views": 72291,
       "subscribers_total": 25800,
       "subscriber_increase": 1280,
@@ -2376,7 +2279,6 @@
       "explore_traffic": 21522,
       "shorts_views": 797,
       "revenue_per_view": 72,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-08-25"
     },
     {
@@ -2384,9 +2286,9 @@
       "week_end": "2026-09-07",
       "revenue": 2500000,
       "paid_customers": 5,
-      "convert_rate": 2.34,
-      "landing_visits": 214,
-      "link_click_rate": 0.58,
+      "convert_rate": 2.02,
+      "landing_visits": 248,
+      "link_click_rate": 0.67,
       "midform_views": 37193,
       "subscribers_total": 26100,
       "subscriber_increase": 560,
@@ -2400,7 +2302,6 @@
       "explore_traffic": 13509,
       "shorts_views": 889,
       "revenue_per_view": 67,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-09-01"
     },
     {
@@ -2408,9 +2309,9 @@
       "week_end": "2026-09-14",
       "revenue": 1000000,
       "paid_customers": 2,
-      "convert_rate": 1.63,
-      "landing_visits": 123,
-      "link_click_rate": 0.45,
+      "convert_rate": 1.35,
+      "landing_visits": 148,
+      "link_click_rate": 0.54,
       "midform_views": 27165,
       "subscribers_total": 26400,
       "subscriber_increase": 315,
@@ -2424,7 +2325,6 @@
       "explore_traffic": 11071,
       "shorts_views": 754,
       "revenue_per_view": 37,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-09-08"
     },
     {
@@ -2432,9 +2332,9 @@
       "week_end": "2026-09-21",
       "revenue": 500000,
       "paid_customers": 1,
-      "convert_rate": 0.86,
-      "landing_visits": 116,
-      "link_click_rate": 0.44,
+      "convert_rate": 0.75,
+      "landing_visits": 134,
+      "link_click_rate": 0.51,
       "midform_views": 26241,
       "subscribers_total": 26700,
       "subscriber_increase": 366,
@@ -2448,7 +2348,6 @@
       "explore_traffic": 9463,
       "shorts_views": 805,
       "revenue_per_view": 19,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-09-15"
     },
     {
@@ -2456,9 +2355,9 @@
       "week_end": "2026-09-28",
       "revenue": 1000000,
       "paid_customers": 2,
-      "convert_rate": 1.37,
-      "landing_visits": 146,
-      "link_click_rate": 0.47,
+      "convert_rate": 1.23,
+      "landing_visits": 163,
+      "link_click_rate": 0.52,
       "midform_views": 31294,
       "subscribers_total": 27100,
       "subscriber_increase": 454,
@@ -2472,7 +2371,6 @@
       "explore_traffic": 13079,
       "shorts_views": 7258,
       "revenue_per_view": 32,
-      "pulling_subscriber_rate": 0.0,
       "label": "2026-09-22"
     }
   ]
