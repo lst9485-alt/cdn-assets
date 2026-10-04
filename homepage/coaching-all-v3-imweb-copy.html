@@ -2442,6 +2442,8 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
     .then(function(res) { return res.json(); })
     .then(function(data) {
 	      if (data.success) {
+	        // 구글 애널리틱스에 '상담 신청' 알림 → 구글 애즈가 광고 본 사람의 신청을 따로 셈 (2026-10-04)
+	        if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'counsel', utm_campaign: payload.utm || '' });
 	        resetConsultForm();
 	        document.getElementById('successModal').classList.remove('hidden');
       } else {
