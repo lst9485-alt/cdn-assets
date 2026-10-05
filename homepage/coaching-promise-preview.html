@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>결과 약속 칸 시안 3종</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      fontFamily: { sans: ['Pretendard','system-ui','sans-serif'], display: ['"GmarketSans"','Pretendard','sans-serif'] },
+      colors: { brand: { orange: '#FF6B00', beige: '#F5F0E8', dark: '#0a0a0a', blue: '#0055FF' } }
+    } }
+  }
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+<style>
+  @font-face { font-family: 'GmarketSans'; src: url('./fonts/GmarketSansBold.woff2') format('woff2'); font-weight: 700 900; font-display: swap; }
+  body { font-size: 17px; -webkit-font-smoothing: antialiased; background: #e5e5e5; }
+  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+  .label { position: sticky; top: 0; z-index: 10; }
+</style>
+</head>
+<body class="font-sans text-brand-dark">
+
+<!-- ===== 버전 1: 두 칸 나누기 ===== -->
+<div class="label max-w-4xl mx-auto bg-black text-white text-center py-3 font-bold">버전 1 · 두 칸 나누기</div>
+<section class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 px-4">
+  <div class="text-center mb-10">
+    <div class="mb-4 flex justify-center"><iconify-icon icon="solar:hand-shake-bold-duotone" class="text-4xl text-brand-orange"></iconify-icon></div>
+    <h2 class="text-3xl md:text-4xl font-display font-black word-keep">코칭으로 약속드릴 수 있는 것</h2>
+    <p class="mt-4 text-gray-600 text-lg word-keep">사자마자 집값이 오르는 건 약속드릴 수 없습니다.<br>대신 <b class="text-brand-dark">후회 없는 최선의 선택</b>은 끝까지 함께하겠습니다.</p>
+  </div>
+  <div class="grid gap-4 md:grid-cols-2 max-w-3xl mx-auto">
+    <div class="rounded-[20px] border-2 border-brand-orange bg-white p-6 md:p-8 shadow-[0_18px_42px_rgba(255,107,0,0.10)]">
+      <p class="font-bold text-brand-orange mb-4 text-lg">제가 해드리는 것</p>
+      <ul class="space-y-3 word-keep">
+        <li class="flex gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl shrink-0 mt-0.5"></iconify-icon>내 예산으로 살 수 있는 범위 정하기</li>
+        <li class="flex gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl shrink-0 mt-0.5"></iconify-icon>사야 할 단지 후보와 우선순위 정하기</li>
+        <li class="flex gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl shrink-0 mt-0.5"></iconify-icon>지금 살지, 기다릴지 분명하게 답하기</li>
+        <li class="flex gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl shrink-0 mt-0.5"></iconify-icon>6개월 카톡 질문에 직접 답하기</li>
+      </ul>
+    </div>
+    <div class="rounded-[20px] border border-gray-300 bg-white/70 p-6 md:p-8">
+      <p class="font-bold text-gray-700 mb-4 text-lg">함께 해주셔야 하는 것</p>
+      <ul class="space-y-3 word-keep text-gray-700">
+        <li class="flex gap-2"><iconify-icon icon="solar:pen-bold" class="text-gray-500 text-xl shrink-0 mt-0.5"></iconify-icon>사전질문지 솔직하고 자세히 쓰기</li>
+        <li class="flex gap-2"><iconify-icon icon="solar:play-circle-bold" class="text-gray-500 text-xl shrink-0 mt-0.5"></iconify-icon>상담 전 유튜브 영상 3개 보기</li>
+        <li class="flex gap-2"><iconify-icon icon="solar:walking-bold" class="text-gray-500 text-xl shrink-0 mt-0.5"></iconify-icon>추천 단지 직접 가서 보기</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<div class="max-w-4xl mx-auto bg-brand-beige text-center text-sm text-gray-400 pb-6">↓ 이 아래로 "코칭 안내"(가격 카드)가 이어집니다</div>
+
+<div class="h-16"></div>
+
+<!-- ===== 버전 2: 말하듯 쓰기 ===== -->
+<div class="label max-w-4xl mx-auto bg-black text-white text-center py-3 font-bold">버전 2 · 말하듯 쓰기 (편지)</div>
+<section class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 px-4">
+  <div class="max-w-2xl mx-auto rounded-[28px] bg-white px-6 py-10 md:px-12 md:py-14 shadow-md relative">
+    <span class="absolute -top-5 left-1/2 -translate-x-1/2 rounded-full bg-brand-orange px-5 py-2 text-sm font-bold text-white whitespace-nowrap">코칭 전에 꼭 읽어주세요</span>
+    <h2 class="text-2xl md:text-3xl font-display font-black text-center word-keep">솔직하게 말씀드릴게요</h2>
+    <div class="mt-8 space-y-5 text-lg leading-relaxed text-gray-700 word-keep">
+      <p>코칭을 받는다고 <b class="text-brand-dark">내일 집값이 1억 오르진 않습니다.</b></p>
+      <p>대신 <b class="text-brand-orange">지금 뭘 해야 하는지, 어떤 단지를 사야 하는지</b>는 분명하게 알게 되실 거예요.<br>상담이 끝나도 6개월 동안 카톡으로 제가 직접 답해드립니다.</p>
+      <div class="border-t border-dashed border-gray-300"></div>
+      <p>다만 한 가지만 부탁드릴게요.<br><b class="text-brand-dark">사전질문지를 꼼꼼히 써주시고, 상담 전에 영상 3개만 봐주세요.</b><br>준비해 오시는 만큼 더 깊이 도와드릴 수 있습니다.</p>
+    </div>
+    <div class="mt-10 rounded-2xl bg-brand-beige px-5 py-5 text-center">
+      <p class="font-display font-black text-xl md:text-2xl word-keep">방향은 제가 끝까지 잡아드립니다.<br><span class="text-brand-orange">발걸음은 직접 떼셔야 합니다.</span></p>
+    </div>
+    <p class="mt-6 text-right text-gray-500">— 우재 드림</p>
+  </div>
+</section>
+<div class="max-w-4xl mx-auto bg-brand-beige text-center text-sm text-gray-400 pb-6">↓ 이 아래로 "코칭 안내"(가격 카드)가 이어집니다</div>
+
+<div class="h-16"></div>
+
+<!-- ===== 버전 3: 짧은 약속 세 줄 ===== -->
+<div class="label max-w-4xl mx-auto bg-black text-white text-center py-3 font-bold">버전 3 · 짧은 약속 세 줄</div>
+<section class="max-w-4xl mx-auto bg-brand-beige py-16 md:py-24 px-4">
+  <div class="text-center mb-10">
+    <p class="text-brand-orange font-bold mb-2">PROMISE</p>
+    <h2 class="text-3xl md:text-4xl font-display font-black word-keep">우재가 약속드리는 3가지</h2>
+  </div>
+  <div class="max-w-2xl mx-auto space-y-4">
+    <div class="flex items-center gap-4 rounded-[18px] bg-white p-5 md:p-6 shadow-sm">
+      <span class="font-display font-black text-3xl text-brand-orange w-10 text-center shrink-0">1</span>
+      <p class="text-lg font-bold word-keep">내 예산으로 살 수 있는 <span class="text-brand-orange">가장 좋은 단지</span>를 알려드립니다</p>
+    </div>
+    <div class="flex items-center gap-4 rounded-[18px] bg-white p-5 md:p-6 shadow-sm">
+      <span class="font-display font-black text-3xl text-brand-orange w-10 text-center shrink-0">2</span>
+      <p class="text-lg font-bold word-keep">지금 살지, 기다릴지 <span class="text-brand-orange">분명하게</span> 답해드립니다</p>
+    </div>
+    <div class="flex items-center gap-4 rounded-[18px] bg-white p-5 md:p-6 shadow-sm">
+      <span class="font-display font-black text-3xl text-brand-orange w-10 text-center shrink-0">3</span>
+      <p class="text-lg font-bold word-keep">계약하는 날까지 <span class="text-brand-orange">6개월 동안</span> 제가 직접 답해드립니다</p>
+    </div>
+  </div>
+  <div class="max-w-2xl mx-auto mt-6 rounded-[18px] border-2 border-dashed border-gray-300 bg-white/60 p-5 md:p-6 text-center word-keep">
+    <p class="font-bold text-gray-700 mb-2">🙏 딱 하나만 부탁드려요</p>
+    <p class="text-gray-600">상담 전에 <b class="text-brand-dark">사전질문지와 영상 3개</b>는 꼭 챙겨주세요.</p>
+  </div>
+  <p class="mt-10 text-center font-display font-black text-xl md:text-2xl word-keep">대신 집을 사드릴 순 없지만,<br><span class="text-brand-orange">혼자 고민하게 두지는 않겠습니다.</span></p>
+</section>
+<div class="max-w-4xl mx-auto bg-brand-beige text-center text-sm text-gray-400 pb-6">↓ 이 아래로 "코칭 안내"(가격 카드)가 이어집니다</div>
+
+<div class="h-24"></div>
+</body>
+</html>
