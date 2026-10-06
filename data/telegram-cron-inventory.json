@@ -1,11 +1,11 @@
 {
   "updated": "2026-05-11",
   "summary": {
-    "telegramRooms": 6,
-    "telegramSenders": 16,
+    "telegramRooms": 5,
+    "telegramSenders": 14,
     "nonTelegramCronJobs": 4,
     "nonTelegramWebhooks": 1,
-    "retiredJobs": 4,
+    "retiredJobs": 5,
     "sources": [
       "macOS crontab",
       "nightwatch shell scripts",
@@ -203,40 +203,6 @@
       ]
     },
     {
-      "id": "memo",
-      "name": "메모장(정식)",
-      "bot": "wooridongne_memo_bot",
-      "sourceEnv": "TELEGRAM_MEMO_CHAT_ID / workflow dynamic chat",
-      "role": "짜투리 메모 수집과 대기 메모 리마인더 — 2026-09-29 n8n에서 꺼짐 (안 씀)",
-      "cadence": "매일 09:00 / 메시지 이벤트성",
-      "volume": "중간",
-      "items": [
-        {
-          "name": "waiting-reminder",
-          "runtime": "n8n",
-          "trigger": "매일 09:00",
-          "purpose": "Notion 대기 항목 리마인더",
-          "content": "대기 메모 목록과 처리 버튼",
-          "evidence": [
-            "workspace/apps/n8n/workflows/03 memo-bot/waiting-reminder.json:90",
-            "workspace/apps/n8n/workflows/03 memo-bot/waiting-reminder.json:104"
-          ]
-        },
-        {
-          "name": "memo-bot",
-          "runtime": "n8n",
-          "trigger": "Telegram message/callback",
-          "purpose": "메모 분류와 저장",
-          "content": "카테고리 버튼, 저장 완료 후 원 메시지 편집",
-          "evidence": [
-            "workspace/apps/n8n/workflows/03 memo-bot/memo-bot.json:13",
-            "workspace/apps/n8n/workflows/03 memo-bot/memo-bot.json:45",
-            "workspace/apps/n8n/workflows/03 memo-bot/memo-bot.json:559"
-          ]
-        }
-      ]
-    },
-    {
       "id": "custom",
       "name": "바이럴알림봇",
       "bot": "custom Telegram Bot API",
@@ -385,6 +351,14 @@
         "workspace/tools/scripts/nightwatch/jobs.json:30",
         "workspace/tools/scripts/nightwatch/button-poller.sh:1"
       ]
+    },
+    {
+      "name": "memo-bot · waiting-reminder",
+      "runtime": "n8n",
+      "trigger": "삭제됨 (2026-10-06)",
+      "purpose": "메모봇 — 짜투리 메모 수집·대기 메모 리마인더",
+      "content": "5/19부터 안 씀, 9/29 끔, 10/6 n8n 워크플로우·폴더 삭제",
+      "evidence": []
     }
   ],
   "notionRecurringTasks": "정본은 노션 '🔁 반복 목록' 표(Home 하단). 여기에 사본을 두지 않는다 — data/notion-recurring.json 의 tasks 가 매일 새벽 그 표에서 자동 생성됨 (2026-08-18 사본 제거)"
