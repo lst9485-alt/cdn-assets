@@ -36,6 +36,8 @@ h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
 .verdict{background:var(--bad-soft);border-radius:10px;padding:14px 16px;margin-bottom:16px}
 .verdict b{color:var(--bad)}
 .verdict .gain{margin-top:4px;color:var(--sub);font-size:13px}
+.unpaid{border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:-6px 0 16px;font-size:13px}
+.unpaid b{color:var(--bad);margin-right:6px}
 .funnel{display:flex;flex-direction:column}
 .funnel-head{display:grid;grid-template-columns:90px 1fr 80px 150px;gap:10px;font-size:11px;color:var(--muted);margin-bottom:4px}
 .funnel-head span:last-child{text-align:center}
@@ -188,7 +190,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     var hist=(funnel.weekly_history||[]).filter(function(w){ return w.landing_visits>0 && w.key_views>0 && w.pulling_views>0; });
     renderStamp(funnel, sales);
     renderTiles(hist, sales);
-    renderBottleneck(hist, funnel.targets||{});
+    renderBottleneck(hist, funnel.targets||{}, sales.unpaid_monthly||[], (sales.summary||{}).current_month_label);
     renderMonthly(sales.monthly||[]);
     renderHomepage(hist);
   }).catch(function(e){
@@ -219,7 +221,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   }
 
   // ---------- 병목 ----------
-  function renderBottleneck(hist, targets){
+  function renderBottleneck(hist, targets, unpaid, curMonth){
     var box=document.getElementById('bottleneck');
     var last4=hist.slice(-4);
     if(last4.length<4){ box.innerHTML='<p class="err">4주치 숫자가 아직 없어요.</p>'; return; }
@@ -256,8 +258,9 @@ details.grp summary{cursor:pointer;color:var(--muted)}
 
     var weeks=hist.slice(-12);
     var chart = stuck ? '<div class="sub-h">'+esc(worst.name)+' 칸, 최근 12주</div>'+trendSvg(weeks.map(function(w){ return pct(w[worst.to]||0,w[worst.from]||0); }), worst.target, weeks) : '';
+    var unpaidLine = (stuck && worst.to==='paid_customers') ? unpaidHtml(unpaid, curMonth) : '';
     var zones = (stuck && worst.to==='paid_customers') ? '<div class="sub-h">그럼 랜딩 페이지 어디서 빠질까 — 각 구역까지 내려온 사람</div><div id="zones" class="zones num"><span class="hint">불러오는 중…</span></div>' : '';
-    box.innerHTML='<div class="verdict">'+head+'</div><div class="funnel"><div class="funnel-head"><span></span><span></span><span style="text-align:right">4주 합계</span><span>최근 12주 흐름</span></div>'+rows+'</div>'+chart+zones;
+    box.innerHTML='<div class="verdict">'+head+'</div>'+unpaidLine+'<div class="funnel"><div class="funnel-head"><span></span><span></span><span style="text-align:right">4주 합계</span><span>최근 12주 흐름</span></div>'+rows+'</div>'+chart+zones;
     if(zones) renderZones();
   }
 
@@ -278,6 +281,18 @@ details.grp summary{cursor:pointer;color:var(--muted)}
         }).join('');
       })
       .catch(function(){ el.innerHTML='<p class="hint">랜딩 구역 숫자 파일이 아직 없어요. 내일 아침 6시 뒤에 생겨요.</p>'; });
+  }
+
+  // 신청하고 입금 안 한 회원 — 이미 사려던 사람이라 먼저 챙길 곳. data/sales.json unpaid_monthly (노션 상태 입금안함)
+  function unpaidHtml(unpaid, curMonth){
+    if(!curMonth) return '';
+    var y=+curMonth.slice(0,4), m=+curMonth.slice(5,7), parts=[];
+    for(var k=0;k<3;k++){
+      var mm=m-k, yy=y; if(mm<1){ mm+=12; yy-=1; }
+      var key=yy+'-'+String(mm).padStart(2,'0'), hit=unpaid.filter(function(u){ return u.month===key; })[0];
+      parts.push(mm+'월'+(k===0?'(진행 중)':'')+' '+(hit?hit.count:0)+'명');
+    }
+    return '<div class="unpaid"><b>먼저 챙길 곳</b> 신청하고 입금 안 한 회원 · '+parts.join(' · ')+'<span class="hint"> — 이미 사려던 사람들이에요</span></div>';
   }
 
   // 칸 옆 작은 추이 (최근 12주 주별 숫자). 끝점 = 시트에 마지막으로 채운 주
@@ -349,10 +364,10 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   // ---------- 홈페이지 ----------
   // 묶음은 여기서 id로 정한다. 새 페이지는 site-config.js에 넣고 여기에도 id를 추가한다
   var GROUPS=[
-    {title:'홈페이지 (손님이 보는 실제 페이지)', ids:['main-page','landing-page-v3','coaching-payment','curriculum-page','refund-policy']},
-    {title:'상담 손님에게 보내는 페이지 (홈페이지 안에 있음)', ids:['recommended-books','consult-180day-column'], notes:{'recommended-books':'90일 후 알림톡','consult-180day-column':'180일 후 알림톡'}},
+    {title:'홈페이지 (방문자가 보는 실제 페이지)', ids:['main-page','landing-page-v3','coaching-payment-modal-demo','coaching-payment','curriculum-page','refund-policy'], notes:{'coaching-payment-modal-demo':'코칭 페이지에서 신청하면 뜸'}},
+    {title:'상담 회원에게 보내는 페이지 (홈페이지 안에 있음)', ids:['recommended-books','consult-180day-column'], notes:{'recommended-books':'90일 후 알림톡','consult-180day-column':'180일 후 알림톡'}},
     {title:'모든 페이지에 붙는 코드 (고치면 전부 바뀜)', ids:['imweb-header-code','imweb-footer-code','common-header','common-footer']},
-    {title:'작업본에만 있는 것', ids:['coaching-payment-modal-demo','fire-retirement-calculator','investment-philosophy','lecture-allinone','lecture-bookclub'], fold:true}
+    {title:'작업본에만 있는 것', ids:['fire-retirement-calculator','investment-philosophy','lecture-allinone','lecture-bookclub'], fold:true}
   ];
 
   function dateLine(it){
@@ -400,23 +415,23 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   // 순서·발송 방법 정본: consulting-crm (07_후속문자.gs 3·30·90·180일, 12_알림톡.gs), nightwatch payment-guide-auto·consult-prep-auto·consult-chat-daily
   // kind = 어떤 자료인지, how = 어떻게 나가는지, note = 짧은 설명 (화면에 그대로 보임)
   var BEFORE=[
-    {when:'신청 직후', what:'결제 안내', kind:'홈페이지', how:'자동 알림톡', note:'10분 안에 결제 안 하면 결제 페이지 링크', it:byId['coaching-payment']},
-    {when:'예약하면', what:'사전질문지 안내', kind:'구글 폼', how:'자동 알림톡', note:'손님이 상담 전에 질문지 작성'},
-    {when:'이틀 전', what:'상담 PPT · 준비 메모', kind:'구글 슬라이드 · 노션', how:'자동 생성 (사장님용)', note:'손님별 PPT 사본 + 노션 준비 메모', it:byId['consult-ppt-template']},
-    {when:'전날·당일', what:'리마인드', how:'자동 알림톡', note:'상담 시간 알려 주는 안내'}
+    {when:'신청 직후', what:'결제 안내', kind:'카드결제 페이지 링크', how:'자동 알림톡', note:'10분 안에 결제 안 하면', it:byId['coaching-payment']},
+    {when:'예약하면', what:'사전질문지 안내', kind:'구글 폼', how:'자동 알림톡'},
+    {when:'이틀 전', what:'상담 PPT · 준비 메모', kind:'구글 슬라이드 · 노션', how:'자동 생성 (사장님용)', it:byId['consult-ppt-template']},
+    {when:'전날·당일', what:'상담 리마인드', how:'자동 알림톡', note:'전날 오전 + 상담 3시간 전'}
   ];
   var AFTER=[
-    {when:'상담 끝나고', what:'상담 자료 + 후기 부탁', kind:'회원 페이지', how:'알림톡 (상담 정리 후)', note:'손님별 요약 페이지 링크', it:byId['consult-root']},
+    {when:'상담 끝나고', what:'상담 자료 + 후기 설문', kind:'회원 페이지 · 구글 폼', how:'알림톡 (상담 정리 후)', it:byId['consult-root']},
     {when:'3일 후', what:'내집마련 가이드', kind:'노션', how:'자동 알림톡', it:{title:'내집마련 가이드', href:'https://link.ourdongne.com/home-guide'}},
-    {when:'7일 후', what:'안부 인사', how:'자동 카톡', note:'자료 없이 안부만'},
+    {when:'7일 후', what:'안부 인사', how:'자동 카톡'},
     {when:'30일 후', what:'세금 가이드', kind:'노션', how:'자동 알림톡', it:{title:'세금 가이드', href:'https://link.ourdongne.com/tax-guide'}},
     {when:'90일 후', what:'추천도서', kind:'홈페이지', how:'자동 알림톡', it:byId['recommended-books']},
     {when:'180일 후', what:'투자로드맵', kind:'홈페이지', how:'자동 알림톡', it:byId['consult-180day-column']}
   ];
   var DURING=[
-    {what:'상담 PPT', kind:'구글 슬라이드', note:'화면에 띄워 놓고 진행', it:byId['consult-ppt-template']},
+    {what:'상담 PPT', kind:'구글 슬라이드', it:byId['consult-ppt-template']},
     {what:'내집마련 계산기', kind:'웹페이지', note:'매수가 · 월 상환액 · 갈아타기', it:byId['consult-prep']},
-    {what:'자산관리시트', kind:'구글 시트', note:'손님에게 공유하는 실행용 시트', it:byId['consult-asset-planner']}
+    {what:'자산관리시트', kind:'구글 시트', note:'회원에게 공유하는 실행용 시트', it:byId['consult-asset-planner']}
   ];
   function jName(j){
     var t=esc(j.what)+(j.kind?' <span class="ji-kind">('+esc(j.kind)+')</span>':'');
@@ -429,10 +444,10 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     }).join('')+'</div>';
   }
   function renderConsult(){
-    var during='<div class="during"><span class="du-title">상담할 때 쓰는 것</span>'+DURING.map(function(d){
-      return '<a class="du" href="'+esc(href(d.it))+'" target="_blank" rel="noopener"><b>'+esc(d.what)+'</b> <span class="ji-kind">('+esc(d.kind)+')</span><span class="ji-note">'+esc(d.note)+'</span></a>';
+    var during='<div class="during"><span class="du-title">상담할 때</span>'+DURING.map(function(d){
+      return '<a class="du" href="'+esc(href(d.it))+'" target="_blank" rel="noopener"><b>'+esc(d.what)+'</b> <span class="ji-kind">('+esc(d.kind)+')</span>'+(d.note?'<span class="ji-note">'+esc(d.note)+'</span>':'')+'</a>';
     }).join('')+'</div>';
-    document.getElementById('consult').innerHTML='<div class="jcols">'+jCol('상담 전',BEFORE)+jCol('상담 후 — 전부 손님에게 보내는 것',AFTER)+'</div>'+during;
+    document.getElementById('consult').innerHTML='<div class="jcols">'+jCol('상담 전',BEFORE)+jCol('상담 후 — 전부 회원에게 보내는 것',AFTER)+'</div>'+during;
   }
   renderConsult();
 
