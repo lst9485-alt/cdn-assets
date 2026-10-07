@@ -372,7 +372,8 @@
         nav: {
           type: 'dropdown',
           label: '프로세스',
-          activeMatch: ['/process']
+          activeMatch: ['/process'],
+          hidden: true
         },
         sidebar: {
           title: '프로세스'
@@ -484,7 +485,8 @@
           type: 'single',
           label: '도구·기타',
           href: 'tools/',
-          activeMatch: ['/tools']
+          activeMatch: ['/tools'],
+          hidden: true
         },
         sidebar: {
           title: '도구·기타'

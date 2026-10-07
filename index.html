@@ -1,542 +1,367 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-    <title>운영 대시보드</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: #F8FAFC; color: #1A1A1A; min-height: 100vh; }
-        .hub { max-width: 1060px; margin: 0 auto; padding: 32px 20px; padding-right: 190px; }
-        .header { margin-bottom: 28px; }
-        h1 { font-size: 24px; font-weight: 800; color: #051C2C; margin-bottom: 4px; }
-        .subtitle { color: #64748B; font-size: 14px; }
-        .section { margin-bottom: 24px; }
-        .section.dashed-top { border-top: 2px dashed #CBD5E1; padding-top: 28px; margin-top: 32px; }
-        .section-title { width: 100%; min-height: 28px; padding: 0 0 8px; border-bottom: 1px solid #E2E8F0; font-size: 13px; font-weight: 850; color: #334155; letter-spacing: 0; margin-bottom: 10px; }
-        .section-title span:last-child { display: inline-flex; align-items: center; }
-        .section-icon { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 6px; background: transparent; color: inherit; font-size: 15px; line-height: 1; }
-        .section-dashboard { --section-color: #1F2937; }
-        .section-investment-section { --section-color: #0F766E; }
-        .section-homepage-section { --section-color: #0077C8; }
-        .section-pg-homepage { --section-color: #0F766E; }
-        .section-consult { --section-color: #64748B; }
-        .section-process { --section-color: #059669; }
-        .section-tools { --section-color: #475569; }
-        .section-archive { --section-color: #FF6B00; }
-        .section-templates { --section-color: #1F2937; }
-        details.section > summary.section-title { cursor: pointer; list-style: none; user-select: none; display: flex; align-items: center; gap: 7px; }
-        details.section > summary.section-title::-webkit-details-marker { display: none; }
-        details.section > summary.section-title::before { content: '▶'; font-size: 10px; color: #94A3B8; transition: transform 0.15s; }
-        details.section[open] > summary.section-title::before { transform: rotate(90deg); }
-        .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-        .group-label { font-size: 11px; font-weight: 700; color: #94A3B8; letter-spacing: 0.5px; padding: 14px 0 6px; text-transform: uppercase; }
-        .group-label:first-child { padding-top: 4px; }
-        .item { background: white; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 14px; text-decoration: none; color: #1A1A1A; display: flex; align-items: center; gap: 11px; transition: all 0.15s; min-height: 58px; }
-        .item:hover { border-color: #0077C8; }
-        .item-icon { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
-        .item-body { flex: 1; min-width: 0; }
-        .item-title { display: block; font-size: 13px; font-weight: 750; color: #051C2C; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .item-desc { font-size: 12px; color: #94A3B8; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .badge { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 8px; flex-shrink: 0; }
-        .badge-live { background: #E8F3FF; color: #0077C8; }
-        .badge-soon { background: #F1F5F9; color: #94A3B8; }
-        .archive-meta { flex-shrink: 0; min-width: 68px; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; align-self: flex-start; margin-top: 7px; }
-        .archive-chip { display: inline-flex; align-items: center; width: fit-content; border-radius: 999px; padding: 1px 6px; background: #0F172A; color: #FFFFFF; font-size: 9px; font-weight: 800; line-height: 1.35; }
-        .date-chip { display: inline-flex; align-items: center; width: fit-content; border-radius: 999px; padding: 1px 6px; background: #F1F5F9; color: #8090AA; font-size: 9px; font-weight: 700; line-height: 1.35; }
-        .arrow { color: #CBD5E1; font-size: 16px; flex-shrink: 0; }
-        .sheet { overflow: hidden; border: 1px solid #D8E0EA; border-radius: 8px; background: #FFFFFF; }
-        .sheet-row { display: grid; grid-template-columns: 38px 72px 106px minmax(150px, 1.1fr) minmax(160px, 1.4fr) 68px; min-height: 34px; color: #1A1A1A; text-decoration: none; border-top: 1px solid #E8EEF5; }
-        .sheet-row:first-child { border-top: 0; }
-        .sheet-row:hover:not(.sheet-head) { background: #F8FBFF; }
-        .sheet-head { min-height: 30px; background: #F4F7FB; color: #64748B; font-size: 11px; font-weight: 800; letter-spacing: 0.02em; }
-        .sheet-head .sheet-cell { cursor: pointer; user-select: none; }
-        .sheet-head .sheet-cell:hover { background: #EAF0F7; color: #334155; }
-        .sheet-cell { display: flex; align-items: center; min-width: 0; padding: 7px 9px; font-size: 12px; line-height: 1.3; }
-        .sheet-star { justify-content: center; padding-left: 5px; padding-right: 5px; }
-        .star-btn { width: 26px; height: 26px; border-radius: 999px; color: #CBD5E1; display: inline-flex; align-items: center; justify-content: center; font-size: 21px; line-height: 1; cursor: pointer; user-select: none; }
-        .star-btn:hover { background: #FFF7ED; color: #F59E0B; }
-        .star-btn.active { color: #F59E0B; text-shadow: 0 1px 0 rgba(146,64,14,.14); }
-        .sheet-no { justify-content: center; }
-        .sheet-no .archive-chip { font-size: 9px; }
-        .sheet-group { color: #64748B; font-weight: 750; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .sheet-date { color: #8090AA; font-weight: 700; }
-        .date-cell { cursor: help; }
-        .sheet-title { color: #051C2C; font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .sheet-title.with-path { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1px; }
-        .title-name { flex: 0 0 auto; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
-        .title-path { flex: 0 0 auto; max-width: 100%; overflow: hidden; text-overflow: ellipsis; color: #0077C8; font-size: 10px; font-weight: 700; }
-        .sheet-row:hover .title-path { text-decoration: underline; }
-        .sheet-desc { color: #8090AA; white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.45; word-break: keep-all; overflow-wrap: anywhere; }
-        .sheet-status { justify-content: center; }
-        .generic-sheet .sheet-row { grid-template-columns: 38px 112px minmax(160px, 1.1fr) minmax(220px, 1.6fr) 72px 70px; }
-        .generic-sheet.no-copy .sheet-row { grid-template-columns: 38px 112px minmax(160px, 1.1fr) minmax(260px, 1.6fr) 82px; }
-        .sheet-copy { justify-content: center; padding: 4px 6px; }
-        .copy-btn { background: #F1F5F9; border: 1px solid #D8E0EA; border-radius: 6px; padding: 3px 8px; font-size: 11px; font-weight: 700; color: #475569; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
-        .copy-btn:hover { background: #E0F2FE; border-color: #0077C8; color: #0077C8; }
-        .copy-btn.copied { background: #D1FAE5; border-color: #10B981; color: #065F46; }
-        .copy-btn:disabled { opacity: 0.6; cursor: wait; }
-        .homepage-tree { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; font-size: 13px; line-height: 1.7; color: #475569; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-        .homepage-tree .tree-root { font-weight: 800; color: #0F172A; margin-bottom: 2px; }
-        .homepage-tree a { color: #0F172A; text-decoration: none; }
-        .homepage-tree a:hover { text-decoration: underline; }
-        .sheet-group-row { display: flex; align-items: center; gap: 5px; padding: 8px 10px 4px; background: #F8FAFC; border-top: 1px solid #E8EEF5; font-size: 10px; font-weight: 800; letter-spacing: 0.06em; color: #8597AD; cursor: pointer; user-select: none; }
-        .sheet-group-row:hover { background: #EEF2F7; color: #64748B; }
-        .group-caret { font-size: 8px; color: #94A3B8; line-height: 1; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<title>우리동네재테크 운영판</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  --bg:#F3F5F8; --card:#FFFFFF; --ink:#0F1C2A; --sub:#4A5A6B; --muted:#8393A5; --line:#E1E6EC;
+  --blue:#1D5FD1; --blue-soft:#E7EFFC; --ok:#1F7A55; --ok-soft:#E3F3EB; --bad:#C63B26; --bad-soft:#FBE7E3;
+  --bar:#B9C9DD; --bar-now:#1D5FD1;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:14px;line-height:1.55;padding:0 16px}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding-block:28px 64px;display:flex;flex-direction:column;gap:22px}
+.num{font-variant-numeric:tabular-nums}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+h1{font-size:24px;font-weight:800;letter-spacing:-0.02em}
+.stamp{color:var(--muted);font-size:12px}
+h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
+.h2row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.hint{color:var(--muted);font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
 
-        @media (max-width: 1200px) { .hub { padding-right: 20px; } }
-        @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 760px) {
-            .sheet-row { grid-template-columns: 34px 62px 92px minmax(130px, 1fr) 56px; }
-            .generic-sheet .sheet-row { grid-template-columns: 34px 92px minmax(130px, 1fr) 56px; }
-            .generic-sheet.no-copy .sheet-row { grid-template-columns: 34px 92px minmax(130px, 1fr) 56px; }
-            .sheet-desc { display: none; }
-            .sheet-cell.desc-col { display: none; }
-            .sheet-cell.sheet-copy { display: none; }
-            .sheet-cell.group-col { display: flex; }
-        }
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
-    </style>
+/* 성적 타일 */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.tile .lbl{font-size:12px;color:var(--sub);font-weight:600}
+.tile .val{font-size:24px;font-weight:800;margin-top:2px;letter-spacing:-0.02em}
+.tile .cmp{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* 병목 */
+.verdict{background:var(--bad-soft);border-radius:10px;padding:14px 16px;margin-bottom:16px}
+.verdict b{color:var(--bad)}
+.verdict .gain{margin-top:4px;color:var(--sub);font-size:13px}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:stretch;gap:8px}
+.stage{border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.stage .s-name{font-size:12px;color:var(--sub);font-weight:600}
+.stage .s-val{font-size:20px;font-weight:800}
+.link{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:92px;font-size:12px;color:var(--sub);text-align:center}
+.link .arrow{font-size:16px;color:var(--muted);line-height:1}
+.link .rate{font-size:15px;font-weight:800;color:var(--ink)}
+.chip{display:inline-block;margin-top:3px;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.link.is-bad .rate{color:var(--bad)}
+.sparks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.spark{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.spark.is-bad{border-color:var(--bad)}
+.spark .t{font-size:12px;font-weight:700;color:var(--sub);display:flex;justify-content:space-between}
+.spark svg{width:100%;height:auto;display:block;margin-top:6px}
+
+/* 월 매출 */
+.chartbox{position:relative}
+.chartbox svg{width:100%;height:auto;display:block}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;padding:5px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-120%)}
+
+/* 홈페이지 지도 */
+.lane{margin-top:14px}
+.lane:first-of-type{margin-top:0}
+.lane-title{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:8px}
+.lane-row{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
+.lane-row.path .pg{flex:1 1 200px}
+.lane-row .pg{flex:1 1 220px}
+.path-arrow{display:flex;align-items:center;color:var(--muted);font-size:16px}
+.pg{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px;background:var(--card);min-width:0}
+.pg:hover{border-color:var(--blue)}
+.pg .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.pg .name{font-weight:800;font-size:14px;text-decoration:none}
+.pg .name:hover{text-decoration:underline}
+.pg .date{font-size:11px;color:var(--muted);white-space:nowrap}
+.pg .addr{font-size:12px;color:var(--blue);font-weight:600;word-break:break-all}
+.pg .desc{font-size:12px;color:var(--muted)}
+.pg .stat{font-size:12px;color:var(--sub)}
+.pg .stat b{color:var(--ink)}
+.pg .acts{display:flex;gap:6px;margin-top:auto;padding-top:2px;flex-wrap:wrap}
+.btn{font:inherit;font-size:12px;font-weight:700;border:1px solid var(--line);background:#F7F9FB;color:var(--sub);border-radius:7px;padding:4px 10px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
+.btn.copy{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.copy:hover{background:#174CA8;color:#fff}
+.btn.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.fail{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+details.later{margin-top:14px}
+details.later summary{cursor:pointer;font-size:12px;font-weight:700;color:var(--muted)}
+details.later .lane-row{margin-top:8px}
+
+/* 자료·바로가기 */
+.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.lk{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;text-decoration:none;background:var(--card)}
+.lk:hover{border-color:var(--blue)}
+.lk b{font-size:13px}
+.lk span{font-size:12px;color:var(--muted)}
+.err{color:var(--bad);font-size:13px}
+
+@media (max-width:860px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow{grid-template-columns:1fr}
+  .link{flex-direction:row;gap:8px;min-width:0;padding:2px 0}
+  .link .arrow{transform:rotate(90deg)}
+  .sparks{grid-template-columns:1fr}
+  .links{grid-template-columns:1fr 1fr}
+  .path-arrow{display:none}
+}
+@media (max-width:480px){ .links{grid-template-columns:1fr} h1{font-size:21px} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-    <div class="hub">
-        <div class="header">
-            <h1>운영 대시보드</h1>
-            <p class="subtitle">우리동네재테크</p>
-        </div>
-        <div id="hub-sections"></div>
-    </div>
-<script src="./site-config.js?v=20260623-tools-backtest"></script>
-<script>
-(function() {
-    var site = window.DASHBOARD_SITE;
-    var container = document.getElementById('hub-sections');
-    if (!site || !container) {
-        return;
-    }
+<div class="wrap">
+  <header>
+    <h1>우리동네재테크 운영판</h1>
+    <div class="stamp num" id="stamp">숫자 불러오는 중…</div>
+  </header>
 
-    var sheetSort = {};
-    var starred = loadStars();
-    var collapsedGroups = loadGroups();
-    container.innerHTML = site.sections.map(renderSection).join('');
-    container.addEventListener('click', function(event) {
-        var copyBtn = event.target.closest('.copy-btn');
-        if (copyBtn) {
-            event.preventDefault();
-            event.stopPropagation();
-            handleCopy(copyBtn);
-            return;
-        }
-        var star = event.target.closest('[data-star-key]');
-        if (star) {
-            event.preventDefault();
-            toggleStar(star.getAttribute('data-star-key'));
-            return;
-        }
-        var groupToggle = event.target.closest('[data-group-toggle]');
-        if (groupToggle) {
-            event.preventDefault();
-            toggleGroup(groupToggle.getAttribute('data-group-toggle'));
-            return;
-        }
-        var cell = event.target.closest('[data-sheet-sort]');
-        if (!cell) {
-            return;
-        }
-        event.preventDefault();
-        var sectionId = cell.getAttribute('data-section-id');
-        var key = cell.getAttribute('data-sheet-sort');
-        var current = sheetSort[sectionId] || {};
-        sheetSort[sectionId] = {
-            key: key,
-            dir: current.key === key && current.dir === 'asc' ? 'desc' : 'asc'
-        };
-        container.innerHTML = site.sections.map(renderSection).join('');
-    });
+  <section>
+    <div class="h2row"><h2>최근 주 성적</h2><span class="hint" id="weekLabel"></span></div>
+    <div class="tiles num" id="tiles"></div>
+  </section>
 
-    function handleCopy(btn) {
-        if (btn.disabled) return;
-        var src = btn.getAttribute('data-copy-src');
-        if (!src) return;
-        var originalText = btn.textContent;
-        btn.disabled = true;
-        btn.textContent = '⏳ 가져오는중';
-        fetch('./' + src + '?t=' + Date.now(), { cache: 'no-store' })
-            .then(function(res) {
-                if (!res.ok) throw new Error('HTTP ' + res.status);
-                return res.text();
-            })
-            .then(function(text) {
-                if (!navigator.clipboard) {
-                    throw new Error('clipboard API 미지원 (HTTPS 필요)');
-                }
-                return navigator.clipboard.writeText(text);
-            })
-            .then(function() {
-                btn.textContent = '✓ 복사됨';
-                btn.classList.add('copied');
-                setTimeout(function() {
-                    btn.textContent = originalText;
-                    btn.classList.remove('copied');
-                    btn.disabled = false;
-                }, 2000);
-            })
-            .catch(function(err) {
-                btn.textContent = '✗ 실패';
-                console.error('[copy-code]', src, err);
-                setTimeout(function() {
-                    btn.textContent = originalText;
-                    btn.disabled = false;
-                }, 2200);
-            });
-    }
+  <section class="card">
+    <div class="h2row"><h2>지금 병목</h2><span class="hint">최근 4주 합계 · 콘텐츠관리 시트 기준</span></div>
+    <div id="bottleneck"></div>
+  </section>
 
-    function renderSection(section) {
-        var items = section.items.filter(function(item) { return item.hubVisible; });
-        if (!items.length && !section.alwaysVisible) {
-            return '';
-        }
-        var sectionClass = (section.dashedTop ? 'section dashed-top' : 'section') + ' section-' + section.id;
-        var body = renderBody(items, section);
-        if (section.collapsible) {
-            var openAttr = section.defaultOpen ? ' open' : '';
-            return ''
-                + '<details class="' + sectionClass + '"' + openAttr + '>'
-                + '<summary class="section-title">' + renderSectionIcon(section) + '<span>' + esc(section.hubTitle) + '</span></summary>'
-                + body
-                + '</details>';
-        }
-        return ''
-            + '<div class="' + sectionClass + '">'
-            + '<div class="section-title">' + renderSectionIcon(section) + '<span>' + esc(section.hubTitle) + '</span></div>'
-            + body
-            + '</div>';
-    }
+  <section class="card">
+    <div class="h2row"><h2>월 매출</h2><span class="hint">노션 상담일지 · 입금 안 한 신청과 환불은 뺀 금액</span></div>
+    <div class="chartbox" id="monthly"><div class="tip" id="tip" hidden></div></div>
+  </section>
 
-    function renderSectionIcon(section) {
-        var iconMap = {
-            dashboard: '📊',
-            'investment-section': '📈',
-            'homepage-section': '🏠',
-            'pg-homepage': '💳',
-            consult: '💬',
-            templates: '📄',
-            process: '🔁',
-            tools: '🛠️',
-            archive: '🗂️',
-            temp: '🧪'
-        };
-        return '<span class="section-icon">' + esc(iconMap[section.id] || '•') + '</span>';
-    }
+  <section class="card">
+    <div class="h2row"><h2>홈페이지</h2><span class="hint">방문자가 움직이는 순서대로 · 파란 버튼 = 아임웹 코드 복사</span></div>
+    <div id="homepage"></div>
+  </section>
 
-    function renderBody(items, section) {
-        var tree = section.id === 'homepage-section' ? renderHomepageTree(items) : '';
-        return tree + renderSheet(items, section.id);
-    }
+  <section class="card">
+    <div class="h2row"><h2>상담·회원 자료</h2></div>
+    <div class="links" id="consult"></div>
+  </section>
 
-    // 홈페이지 구조 트리 — 아래 목록(groupLabel)에서 자동으로 그린다. 따로 관리하지 않는다
-    function renderHomepageTree(items) {
-        var groups = ['페이지', '코칭', '예정', '공통'];
-        items.forEach(function(item) {
-            var g = item.groupLabel || '기타';
-            if (groups.indexOf(g) === -1) groups.push(g);
-        });
-        groups = groups.filter(function(g) {
-            return items.some(function(item) { return (item.groupLabel || '기타') === g; });
-        });
-        var lines = ['<div class="tree-root">우리동네재테크 홈페이지</div>'];
-        groups.forEach(function(g, gi) {
-            var lastGroup = gi === groups.length - 1;
-            lines.push('<div>' + (lastGroup ? '└─ ' : '├─ ') + '<b>' + esc(g) + '</b></div>');
-            var groupItems = items.filter(function(item) { return (item.groupLabel || '기타') === g; });
-            groupItems.forEach(function(item, ii) {
-                lines.push('<div>' + (lastGroup ? '&nbsp;&nbsp;&nbsp;&nbsp;' : '│&nbsp;&nbsp;&nbsp;') + (ii === groupItems.length - 1 ? '└─ ' : '├─ ')
-                    + '<a href="' + attr(item.href) + '">' + esc(item.title) + '</a></div>');
-            });
-        });
-        return '<div class="homepage-tree">' + lines.join('') + '</div>';
-    }
+  <section>
+    <div class="h2row"><h2>바로가기</h2></div>
+    <div class="links" id="shortcuts"></div>
+  </section>
+</div>
 
-    function renderSheet(items, sectionId) {
-        var isArchive = sectionId === 'archive' || items.some(function(item) { return item.archiveNo; });
-        var showCopy = sectionId === 'homepage-section' || sectionId === 'pg-homepage' || sectionId === 'consult';
-        var head = isArchive ? renderArchiveHead(sectionId) : renderGenericHead(sectionId, showCopy);
-        var className = isArchive ? 'sheet archive-sheet' : 'sheet generic-sheet' + (showCopy ? '' : ' no-copy');
-        var rows;
-        if (sectionId === 'homepage-section') {
-            rows = renderGroupedRows(items, sectionId, showCopy);
-        } else {
-            rows = sortSheetItems(items, sectionId).map(function(item) {
-                return isArchive ? renderArchiveSheetItem(item) : renderGenericSheetItem(item, sectionId, showCopy);
-            }).join('');
-        }
-        return '<div class="' + className + '">' + head + rows + '</div>';
-    }
-
-    function renderGroupedRows(items, sectionId, showCopy) {
-        var groups = ['페이지', '코칭', '예정', '공통'];
-        items.forEach(function(item) {
-            var g = item.groupLabel || '기타';
-            if (groups.indexOf(g) === -1) groups.push(g);
-        });
-        return groups.map(function(g) {
-            var groupItems = items.filter(function(item) { return (item.groupLabel || '기타') === g; });
-            if (!groupItems.length) return '';
-            var gkey = sectionId + '|' + g;
-            var collapsed = !!collapsedGroups[gkey];
-            var header = '<div class="sheet-group-row" role="button" tabindex="0" data-group-toggle="' + attr(gkey) + '">'
-                + '<span class="group-caret">' + (collapsed ? '▶' : '▼') + '</span>' + esc(g) + '</div>';
-            if (collapsed) return header;
-            return header
-                + groupItems.map(function(item) { return renderGenericSheetItem(item, sectionId, showCopy); }).join('');
-        }).join('');
-    }
-
-    function shortDate(value) {
-        if (!value) return '';
-        var m = String(value).match(/^(\d{4})-(\d{2})-(\d{2})/);
-        return m ? m[1].slice(2) + '/' + m[2] + '/' + m[3] : String(value);
-    }
-
-    function renderArchiveHead(sectionId) {
-        return ''
-            + '<div class="sheet-row sheet-head">'
-            + '<div class="sheet-cell sheet-star"></div>'
-            + '<div class="sheet-cell sheet-no" data-sheet-sort="archiveNo" data-section-id="' + esc(sectionId) + '">번호</div>'
-            + '<div class="sheet-cell" data-sheet-sort="modifiedDate" data-section-id="' + esc(sectionId) + '">수정일</div>'
-            + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">제목</div>'
-            + '<div class="sheet-cell desc-col" data-sheet-sort="description" data-section-id="' + esc(sectionId) + '">설명</div>'
-            + '<div class="sheet-cell sheet-status" data-sheet-sort="badgeText" data-section-id="' + esc(sectionId) + '">비고</div>'
-            + '</div>';
-    }
-
-    function renderGenericHead(sectionId, showCopy) {
-        return ''
-            + '<div class="sheet-row sheet-head">'
-            + '<div class="sheet-cell sheet-star"></div>'
-            + '<div class="sheet-cell group-col" data-sheet-sort="groupLabel" data-section-id="' + esc(sectionId) + '">구분</div>'
-            + '<div class="sheet-cell" data-sheet-sort="title" data-section-id="' + esc(sectionId) + '">이름</div>'
-            + '<div class="sheet-cell desc-col" data-sheet-sort="description" data-section-id="' + esc(sectionId) + '">설명</div>'
-            + (showCopy ? '<div class="sheet-cell sheet-copy">아임웹</div>' : '')
-            + '<div class="sheet-cell sheet-status" data-sheet-sort="modifiedDate" data-section-id="' + esc(sectionId) + '">날짜</div>'
-            + '</div>';
-    }
-
-    function sortSheetItems(items, sectionId) {
-        var state = sheetSort[sectionId];
-        if (!state && sectionId === 'archive') {
-            state = { key: 'modifiedDate', dir: 'desc' };
-        }
-        if (!state || !state.key) {
-            return items;
-        }
-        return items.slice().sort(function(a, b) {
-            var av = String(a[state.key] || '');
-            var bv = String(b[state.key] || '');
-            var result = av.localeCompare(bv, 'ko', { numeric: true, sensitivity: 'base' });
-            return state.dir === 'desc' ? -result : result;
-        });
-    }
-
-    function renderArchiveSheetItem(item) {
-        var badgeClass = item.badgeTone === 'soon' ? 'badge-soon' : 'badge-live';
-        var href = item.href.indexOf('http') === 0 ? item.href : './' + item.href;
-        return ''
-            + '<a href="' + href + '" class="sheet-row" target="_blank" rel="noopener">'
-            + starCell(item)
-            + '<div class="sheet-cell sheet-no">' + (item.archiveNo ? '<span class="archive-chip">' + esc(item.archiveNo) + '</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>') + '</div>'
-            + '<div class="sheet-cell sheet-date">' + esc(shortDate(item.modifiedDate) || '-') + '</div>'
-            + '<div class="sheet-cell sheet-title">' + esc(item.title) + '</div>'
-            + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
-            + '<div class="sheet-cell sheet-status"><span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span></div>'
-            + '</a>';
-    }
-
-    function renderGenericSheetItem(item, sectionId, showCopy) {
-        var badgeClass = item.badgeTone === 'soon' ? 'badge-soon' : 'badge-live';
-        var href = item.href.indexOf('http') === 0 ? item.href : './' + item.href;
-        var group = item.groupLabel || item.sidebarLabel || '기타';
-        var titleHtml = renderGenericTitle(item, sectionId);
-        var copyCell = showCopy && item.imwebCode
-            ? '<div class="sheet-cell sheet-copy"><button type="button" class="copy-btn" data-copy-src="' + attr(item.imwebCode) + '" title="아임웹 코드위젯용 코드 복사">아임웹코드</button></div>'
-            : (showCopy ? '<div class="sheet-cell sheet-copy"></div>' : '');
-        var dateCell = item.imwebCode
-            ? '<span class="date-loading">…</span>'
-            : (item.modifiedDate ? '<span class="date-chip">' + esc(shortDate(item.modifiedDate)) + '</span>' : '<span class="badge ' + badgeClass + '">' + esc(item.badgeText || '') + '</span>');
-        return ''
-            + '<a href="' + href + '" class="sheet-row" target="_blank" rel="noopener">'
-            + starCell(item)
-            + '<div class="sheet-cell sheet-group group-col">' + esc(group) + '</div>'
-            + titleHtml
-            + '<div class="sheet-cell sheet-desc desc-col">' + esc(item.description || '') + '</div>'
-            + copyCell
-            + '<div class="sheet-cell sheet-status" data-date-for="' + attr(item.imwebCode || '') + '" data-date-suffix="' + attr(item.dateSuffix || '') + '">' + dateCell + '</div>'
-            + '</a>';
-    }
-
-    function renderGenericTitle(item, sectionId) {
-        if ((sectionId !== 'homepage-section' && sectionId !== 'pg-homepage' && sectionId !== 'consult') || !item.href) {
-            return '<div class="sheet-cell sheet-title">' + esc(item.title) + '</div>';
-        }
-        var path = item.publicPath || shortPath(item.href);
-        return ''
-            + '<div class="sheet-cell sheet-title with-path">'
-            + '<span class="title-name">' + esc(item.title) + '</span>'
-            + '<span class="title-path">' + esc(path) + '</span>'
-            + '</div>';
-    }
-
-    function shortPath(href) {
-        if (href.indexOf('https://') === 0 || href.indexOf('http://') === 0) {
-            try {
-                var url = new URL(href);
-                return url.hostname + url.pathname + url.search;
-            } catch (error) {
-                return href.replace(/^https?:\/\//, '');
-            }
-        }
-        return '/' + href.replace(/^\.\//, '').replace(/^\/+/, '');
-    }
-
-    function starCell(item) {
-        var key = starKey(item);
-        var on = !!starred[key];
-        return '<div class="sheet-cell sheet-star"><span class="star-btn ' + (on ? 'active' : '') + '" role="button" tabindex="0" data-star-key="' + attr(key) + '" aria-label="' + (on ? '별표 해제' : '별표 표시') + '">' + (on ? '★' : '☆') + '</span></div>';
-    }
-
-    function toggleStar(key) {
-        if (starred[key]) {
-            delete starred[key];
-        } else {
-            starred[key] = true;
-        }
-        saveStars();
-        container.innerHTML = site.sections.map(renderSection).join('');
-    }
-
-    function toggleGroup(key) {
-        collapsedGroups[key] = !collapsedGroups[key];
-        saveGroups();
-        container.innerHTML = site.sections.map(renderSection).join('');
-    }
-
-    function loadGroups() {
-        var defaults = { 'homepage-section|공통': true };
-        try {
-            var stored = JSON.parse(localStorage.getItem('hubDashboardGroups') || '{}') || {};
-            return Object.assign({}, defaults, stored);
-        } catch (error) {
-            return Object.assign({}, defaults);
-        }
-    }
-
-    function saveGroups() {
-        try {
-            localStorage.setItem('hubDashboardGroups', JSON.stringify(collapsedGroups));
-        } catch (error) {}
-    }
-
-    function loadStars() {
-        try {
-            return JSON.parse(localStorage.getItem('hubDashboardStars') || '{}') || {};
-        } catch (error) {
-            return {};
-        }
-    }
-
-    function saveStars() {
-        try {
-            localStorage.setItem('hubDashboardStars', JSON.stringify(starred));
-        } catch (error) {}
-    }
-
-    function starKey(item) {
-        return [item.href || '', item.title || '', item.groupLabel || item.sidebarLabel || ''].map(function(value) {
-            return String(value).trim().toLowerCase().replace(/\s+/g, ' ');
-        }).join('|');
-    }
-
-    function esc(value) {
-        var el = document.createElement('span');
-        el.textContent = value;
-        return el.innerHTML;
-    }
-
-    function attr(value) {
-        return esc(value).replace(/"/g, '&quot;');
-    }
-})();
-</script>
-<script src="./nav.js"></script>
-<script src="./sidebar.js"></script>
-<script src="./footer.js"></script>
-
+<script src="./site-config.js?v=20261007-ops"></script>
 <script>
 (function(){
-  function format(d){
-    if(!d) return '-';
-    var dt = new Date(d);
-    if(isNaN(dt)) return '-';
-    var y = String(dt.getFullYear()).slice(2);
-    var m = String(dt.getMonth()+1).padStart(2,'0');
-    var day = String(dt.getDate()).padStart(2,'0');
-    return y+'/'+m+'/'+day;
-  }
-  function formatFull(d){
-    if(!d) return '';
-    var dt = new Date(d);
-    if(isNaN(dt)) return '';
-    return dt.toLocaleString('ko-KR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
-  }
-  function formatWithSuffix(d, suffix){
-    var base = format(d);
-    if(!suffix || base === '-') return base;
-    return base + '(' + suffix + ')';
-  }
-  function fillDates(){
-    document.querySelectorAll('[data-date-for]').forEach(function(cell){
-      var src = cell.getAttribute('data-date-for');
-      var suffix = cell.getAttribute('data-date-suffix') || '';
-      if(!src) return;
-      if(cell.getAttribute('data-date-loaded') === src || cell.getAttribute('data-date-pending') === src) return;
-      cell.setAttribute('data-date-pending', src);
-      fetch(src, {method:'HEAD', cache:'no-store'}).then(function(r){
-        var d = r.headers.get('Last-Modified');
-        var full = formatFull(d);
-        cell.innerHTML = '<span class="date-cell" title="' + (full ? '최종수정: ' + full : '') + '">' + formatWithSuffix(d, suffix) + '</span>';
-        cell.setAttribute('data-date-loaded', src);
-        cell.removeAttribute('data-date-pending');
-      }).catch(function(){
-        cell.innerHTML = '<span class="date-cell">-</span>';
-        cell.setAttribute('data-date-loaded', src);
-        cell.removeAttribute('data-date-pending');
-      });
-    });
-  }
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){ setTimeout(fillDates, 600); });
-  } else {
-    setTimeout(fillDates, 600);
-  }
-  // sheet 재렌더 시에도 다시 채우기
-  var scheduled = false;
-  var mo = new MutationObserver(function(){
-    if(scheduled) return;
-    scheduled = true;
-    setTimeout(function(){
-      scheduled = false;
-      fillDates();
-    }, 100);
+  var site = window.DASHBOARD_SITE || {sections:[]};
+  var byId = {};
+  site.sections.forEach(function(s){ (s.items||[]).forEach(function(it){ byId[it.id] = it; }); });
+
+  // ---------- 공통 ----------
+  function esc(v){ var el=document.createElement('span'); el.textContent = v==null?'':String(v); return el.innerHTML; }
+  function won(n){ if(n>=10000) return (Math.round(n/10000)).toLocaleString('ko-KR')+'만 원'; return n.toLocaleString('ko-KR')+'원'; }
+  function md(s){ var m=String(s||'').match(/(\d{4})-(\d{2})-(\d{2})/); return m? (+m[2])+'/'+(+m[3]) : ''; }
+  function pct(n,d){ return d>0 ? n/d*100 : 0; }
+  function f1(x){ return (Math.round(x*10)/10).toFixed(1); }
+  function href(it){ return it.href.indexOf('http')===0 ? it.href : './'+it.href; }
+
+  // ---------- 숫자 ----------
+  Promise.all([
+    fetch('./data/funnel.json?t='+Date.now(),{cache:'no-store'}).then(function(r){ if(!r.ok) throw new Error('funnel '+r.status); return r.json(); }),
+    fetch('./data/sales.json?t='+Date.now(),{cache:'no-store'}).then(function(r){ if(!r.ok) throw new Error('sales '+r.status); return r.json(); })
+  ]).then(function(res){
+    var funnel=res[0], sales=res[1];
+    var hist=(funnel.weekly_history||[]).filter(function(w){ return w.landing_visits>0 && w.key_views>0 && w.pulling_views>0; });
+    renderStamp(funnel, sales);
+    renderTiles(hist, sales);
+    renderBottleneck(hist, funnel.targets||{});
+    renderMonthly(sales.monthly||[]);
+    renderHomepage(hist);
+  }).catch(function(e){
+    document.getElementById('stamp').textContent='숫자를 못 불러왔어요';
+    document.getElementById('bottleneck').innerHTML='<p class="err">숫자 파일을 못 읽었어요 ('+esc(e.message)+'). 매일 아침 6시 자동 작업이 돌았는지 확인해 주세요.</p>';
+    renderHomepage([]);
   });
-  mo.observe(document.body, {childList:true, subtree:true});
+
+  function renderStamp(funnel, sales){
+    var u=new Date(funnel.updated||sales.updated);
+    document.getElementById('stamp').textContent = isNaN(u) ? '' : '숫자 갱신 '+(u.getMonth()+1)+'/'+u.getDate()+' '+String(u.getHours()).padStart(2,'0')+':'+String(u.getMinutes()).padStart(2,'0')+' · 매일 아침 6시';
+  }
+
+  function renderTiles(hist, sales){
+    var w=hist[hist.length-1]||{}, p=hist[hist.length-2]||{};
+    document.getElementById('weekLabel').textContent = w.week_start ? md(w.week_start)+'~'+md(w.week_end)+' · 시트에 마지막으로 채운 주' : '';
+    var sm=sales.summary||{};
+    function cmp(cur,prev,unit){ if(prev==null) return ''; var d=cur-prev; return '전주 '+prev.toLocaleString('ko-KR')+unit+' → '+(d>=0?'+':'')+d.toLocaleString('ko-KR'); }
+    var tiles=[
+      {lbl:'이번 달 매출 ('+(+String(sm.current_month_label||'').slice(5))+'월, 진행 중)', val:won(sm.current_month||0), cmp:'지난달 '+won(sm.last_month||0)},
+      {lbl:'구매', val:(w.paid_customers||0)+'명', cmp:cmp(w.paid_customers||0,p.paid_customers,'명')},
+      {lbl:'랜딩 방문', val:(w.landing_visits||0).toLocaleString('ko-KR')+'명', cmp:cmp(w.landing_visits||0,p.landing_visits,'명')},
+      {lbl:'구독자', val:(w.subscribers_total||0).toLocaleString('ko-KR'), cmp: w.subscriber_increase? '그 주 +'+w.subscriber_increase.toLocaleString('ko-KR') : ''}
+    ];
+    document.getElementById('tiles').innerHTML = tiles.map(function(t){
+      return '<div class="tile"><div class="lbl">'+esc(t.lbl)+'</div><div class="val">'+esc(t.val)+'</div><div class="cmp">'+esc(t.cmp)+'</div></div>';
+    }).join('');
+  }
+
+  // ---------- 병목 ----------
+  function renderBottleneck(hist, targets){
+    var box=document.getElementById('bottleneck');
+    var last4=hist.slice(-4);
+    if(last4.length<4){ box.innerHTML='<p class="err">4주치 숫자가 아직 없어요.</p>'; return; }
+    function sum(k){ return last4.reduce(function(a,w){ return a+(w[k]||0); },0); }
+    var pull=sum('pulling_views'), key=sum('key_views'), land=sum('landing_visits'), buy=sum('paid_customers'), rev=sum('revenue');
+    var steps=[
+      {name:'풀링 → 키', from:'pulling_views', to:'key_views', rate:pct(key,pull), target:targets.interest_rate||20},
+      {name:'키 → 랜딩', from:'key_views', to:'landing_visits', rate:pct(land,key), target:targets.link_click_rate||2.5},
+      {name:'랜딩 → 구매', from:'landing_visits', to:'paid_customers', rate:pct(buy,land), target:targets.convert_rate||3}
+    ];
+    steps.forEach(function(s){ s.score=s.rate/s.target; });
+    var worst=steps.reduce(function(a,b){ return b.score<a.score?b:a; });
+    var price = buy>0 ? rev/buy : 0;
+    var moreBuy = worst.score<1 ? buy*(1/worst.score) - buy : 0;
+
+    var verdict = worst.score<1
+      ? '<b>'+esc(worst.name)+'</b> 칸이 막혀 있어요. 지금 '+f1(worst.rate)+'%인데 목표는 '+f1(worst.target)+'%예요.'
+        + '<div class="gain">이 칸만 목표대로 되면 4주 구매가 '+buy+'명 → 약 '+Math.round(buy+moreBuy)+'명'
+        + (price? ', 매출은 약 '+won(Math.round(moreBuy*price/10000)*10000)+' 더 들어와요 (1명 평균 '+won(Math.round(price/10000)*10000)+' 기준).' : '.')
+        + '</div>'
+      : '<b>모든 칸이 목표를 넘겼어요.</b> 목표를 올릴 때예요.';
+
+    var stages=[['풀링 조회',pull],['키 조회',key],['랜딩 방문',land],['구매',buy]];
+    var flow='';
+    stages.forEach(function(st,i){
+      flow+='<div class="stage"><div class="s-name">'+st[0]+'</div><div class="s-val num">'+st[1].toLocaleString('ko-KR')+(i===3?'명':'')+'</div></div>';
+      if(i<3){
+        var s=steps[i], ok=s.rate>=s.target;
+        flow+='<div class="link'+(s===worst&&!ok?' is-bad':'')+'"><span class="arrow">→</span><span class="rate num">'+f1(s.rate)+'%</span><span>목표 '+f1(s.target)+'%</span>'
+          +'<span class="chip '+(ok?'ok':'bad')+'">'+(ok?'통과':(s===worst?'병목':'미달'))+'</span></div>';
+      }
+    });
+
+    var last12=hist.slice(-12);
+    var sparks=steps.map(function(s){
+      var vals=last12.map(function(w){ return pct(w[s.to]||0,w[s.from]||0); });
+      return '<div class="spark'+(s===worst&&s.score<1?' is-bad':'')+'"><div class="t"><span>'+esc(s.name)+'</span><span class="num">최근 12주</span></div>'+sparkSvg(vals,s.target,last12)+'</div>';
+    }).join('');
+
+    box.innerHTML='<div class="verdict">'+verdict+'</div><div class="flow">'+flow+'</div><div class="sparks">'+sparks+'</div>';
+  }
+
+  function sparkSvg(vals,target,weeks){
+    var W=300,H=90,L=30,R=8,T=8,B=18;
+    var max=Math.max(target*1.6, Math.max.apply(null,vals)*1.1);
+    var x=function(i){ return L+i*(W-L-R)/Math.max(vals.length-1,1); };
+    var y=function(v){ return T+(1-v/max)*(H-T-B); };
+    var pts=vals.map(function(v,i){ return x(i)+','+y(v); }).join(' ');
+    var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="주별 비율과 목표">';
+    s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(0)+'" y2="'+y(0)+'" stroke="#E1E6EC"/>';
+    s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(target)+'" y2="'+y(target)+'" stroke="#C63B26" stroke-width="1.5" stroke-dasharray="4 4"/>';
+    s+='<text x="'+(L-4)+'" y="'+(y(target)+4)+'" text-anchor="end" font-size="10" fill="#C63B26">'+f1(target)+'</text>';
+    s+='<text x="'+(L-4)+'" y="'+(y(0)+4)+'" text-anchor="end" font-size="10" fill="#8393A5">0</text>';
+    s+='<polyline points="'+pts+'" fill="none" stroke="#1D5FD1" stroke-width="2" stroke-linejoin="round"/>';
+    vals.forEach(function(v,i){ s+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="'+(i===vals.length-1?3.5:2)+'" fill="#1D5FD1"><title>'+md(weeks[i].week_start)+' 주 '+f1(v)+'%</title></circle>'; });
+    s+='<text x="'+L+'" y="'+(H-4)+'" font-size="10" fill="#8393A5">'+md(weeks[0].week_start)+'</text>';
+    s+='<text x="'+(W-R)+'" y="'+(H-4)+'" text-anchor="end" font-size="10" fill="#8393A5">'+md(weeks[weeks.length-1].week_start)+' · '+f1(vals[vals.length-1])+'%</text>';
+    return s+'</svg>';
+  }
+
+  // ---------- 월 매출 ----------
+  function renderMonthly(monthly){
+    var box=document.getElementById('monthly'), tip=document.getElementById('tip');
+    var m=monthly.slice(-12); if(!m.length) return;
+    var W=1000,H=240,L=56,R=10,T=16,B=28;
+    var max=Math.max.apply(null,m.map(function(r){return r.revenue;}));
+    var step=max>6000000?2000000:1000000; var top=Math.ceil(max/step)*step||step;
+    var bw=(W-L-R)/m.length;
+    var y=function(v){ return T+(1-v/top)*(H-T-B); };
+    var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="최근 12개월 월 매출">';
+    for(var g=0; g<=top; g+=step){ s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(g)+'" y2="'+y(g)+'" stroke="#EEF1F5"/><text x="'+(L-8)+'" y="'+(y(g)+4)+'" text-anchor="end" font-size="12" fill="#8393A5">'+(g/10000)+'만</text>'; }
+    m.forEach(function(r,i){
+      var now=i===m.length-1, x0=L+i*bw+bw*0.2, w=bw*0.6, h=Math.max(y(0)-y(r.revenue),0);
+      s+='<rect x="'+x0+'" y="'+(y(0)-h)+'" width="'+w+'" height="'+h+'" rx="4" fill="'+(now?'#1D5FD1':'#B9C9DD')+'"'+(now?' fill-opacity=".55"':'')+'/>';
+      s+='<text x="'+(x0+w/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="12" fill="#4A5A6B">'+(+r.month.slice(5))+'월'+(now?'·진행 중':'')+'</text>';
+      s+='<rect data-i="'+i+'" x="'+(L+i*bw)+'" y="'+T+'" width="'+bw+'" height="'+(H-T-B)+'" fill="transparent"/>';
+    });
+    var best=m.reduce(function(a,b){return b.revenue>a.revenue?b:a;}), bi=m.indexOf(best);
+    s+='<text x="'+(L+bi*bw+bw/2)+'" y="'+(y(best.revenue)-6)+'" text-anchor="middle" font-size="12" font-weight="700" fill="#0F1C2A">'+won(best.revenue)+'</text>';
+    s+='</svg>';
+    box.insertAdjacentHTML('beforeend',s);
+    box.querySelectorAll('rect[data-i]').forEach(function(r){
+      r.addEventListener('mouseenter',function(){
+        var i=+r.dataset.i, d=m[i], k=box.querySelector('svg').getBoundingClientRect().width/W;
+        tip.textContent=d.month.replace('-','년 ')+'월 · '+won(d.revenue)+' · '+d.customers+'명';
+        tip.style.left=(L+i*bw+bw/2)*k+'px'; tip.style.top=y(d.revenue)*k+'px'; tip.hidden=false;
+      });
+      r.addEventListener('mouseleave',function(){ tip.hidden=true; });
+    });
+  }
+
+  // ---------- 홈페이지 ----------
+  var LANES=[
+    {title:'파는 길 — 방문자가 이 순서로 움직여요', path:true, ids:['main-page','landing-page-v3','coaching-payment-modal-demo','coaching-payment']},
+    {title:'둘러보는 페이지', ids:['curriculum-page','refund-policy','fire-retirement-calculator','investment-philosophy']},
+    {title:'모든 페이지 공통 (고치면 전부 바뀜)', ids:['imweb-header-code','imweb-footer-code','common-header','common-footer']}
+  ];
+  var LATER=['lecture-allinone','lecture-bookclub'];
+
+  function pageCard(it, hist){
+    if(!it) return '';
+    var w=hist[hist.length-1];
+    var stat = (it.id==='landing-page-v3' && w) ? '<div class="stat">최근 주 방문 <b>'+w.landing_visits+'명</b> · 구매 <b>'+(w.paid_customers||0)+'명</b></div>' : '';
+    var copy = it.imwebCode ? '<button type="button" class="btn copy" data-copy="'+esc(it.imwebCode)+'">아임웹 코드 복사</button>' : '';
+    return '<div class="pg">'
+      +'<div class="top"><a class="name" href="'+esc(href(it))+'" target="_blank" rel="noopener">'+esc(it.title)+'</a>'
+      +'<span class="date num" data-date="'+esc(it.imwebCode||'')+'" data-suffix="'+esc(it.dateSuffix||'')+'"></span></div>'
+      +(it.publicPath? '<div class="addr">'+esc(it.publicPath.replace('~','ourdongne.com'))+'</div>' : '')
+      +'<div class="desc">'+esc(it.description||'')+'</div>'+stat
+      +'<div class="acts"><a class="btn" href="'+esc(href(it))+'" target="_blank" rel="noopener">열기</a>'+copy+'</div>'
+      +'</div>';
+  }
+
+  function renderHomepage(hist){
+    var html=LANES.map(function(l){
+      var cards=l.ids.map(function(id){ return pageCard(byId[id],hist); }).filter(Boolean);
+      return '<div class="lane"><div class="lane-title">'+esc(l.title)+'</div><div class="lane-row'+(l.path?' path':'')+'">'
+        +cards.join(l.path?'<span class="path-arrow" aria-hidden="true">→</span>':'')+'</div></div>';
+    }).join('');
+    html+='<details class="later"><summary>준비 중인 페이지 '+LATER.length+'개</summary><div class="lane-row">'+LATER.map(function(id){ return pageCard(byId[id],hist); }).join('')+'</div></details>';
+    document.getElementById('homepage').innerHTML=html;
+    fillDates();
+  }
+
+  // 아임웹 코드 파일의 마지막 수정일 (GitHub Pages가 알려주는 날짜)
+  function fillDates(){
+    document.querySelectorAll('[data-date]').forEach(function(el){
+      var src=el.getAttribute('data-date'); if(!src) return;
+      fetch('./'+src,{method:'HEAD',cache:'no-store'}).then(function(r){
+        var d=new Date(r.headers.get('Last-Modified')); if(isNaN(d)) return;
+        var sfx=el.getAttribute('data-suffix');
+        el.textContent='수정 '+(d.getMonth()+1)+'/'+d.getDate()+(sfx?' ('+sfx+')':'');
+        el.title='아임웹 코드 마지막 수정: '+d.toLocaleString('ko-KR');
+      }).catch(function(){});
+    });
+  }
+
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('[data-copy]'); if(!btn||btn.disabled) return;
+    var src=btn.getAttribute('data-copy'), label=btn.textContent;
+    btn.disabled=true; btn.textContent='가져오는 중…';
+    fetch('./'+src+'?t='+Date.now(),{cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+      .then(function(t){ return navigator.clipboard.writeText(t); })
+      .then(function(){ btn.textContent='복사됐어요'; btn.classList.add('done'); })
+      .catch(function(err){ console.error('[복사 실패]',src,err); btn.textContent='복사 실패'; btn.classList.add('fail'); })
+      .then(function(){ setTimeout(function(){ btn.textContent=label; btn.classList.remove('done','fail'); btn.disabled=false; },2000); });
+  });
+
+  // ---------- 상담·바로가기 ----------
+  function linkCard(it, note){
+    if(!it) return '';
+    return '<a class="lk" href="'+esc(href(it))+'" target="_blank" rel="noopener"><b>'+esc(it.title)+'</b><span>'+esc(note||it.description||'')+'</span></a>';
+  }
+  document.getElementById('consult').innerHTML=[
+    linkCard(byId['consult-root']), linkCard(byId['consult-prep']), linkCard(byId['consult-ppt-template']),
+    linkCard(byId['consult-asset-planner']), linkCard(byId['recommended-books'],'상담 90일차에 보내는 독서 로드맵'), linkCard(byId['consult-180day-column'],'상담 180일차에 보내는 투자 로드맵')
+  ].join('');
+  document.getElementById('shortcuts').innerHTML=[linkCard(byId['yt-bulk-editor'])].join('');
 })();
 </script>
 </body>
