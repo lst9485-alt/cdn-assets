@@ -63,7 +63,7 @@ h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
 /* 월 매출 */
 .chartbox{position:relative}
 .chartbox svg{width:100%;height:auto;display:block}
-.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;padding:5px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-120%)}
+.tip{position:fixed;z-index:10;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;padding:5px 8px;border-radius:6px;white-space:nowrap}
 
 /* 홈페이지 타일 */
 .grp{margin-top:16px}
@@ -145,7 +145,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
 
   <section class="card">
     <div class="h2row"><h2>월 매출</h2><span class="hint">노션 상담일지 · 입금 안 한 신청과 환불은 뺀 금액</span></div>
-    <div class="chartbox" id="monthly"><div class="tip" id="tip" hidden></div></div>
+    <div class="chartbox" id="monthly"></div>
   </section>
 
   <section class="card">
@@ -253,7 +253,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     stages.forEach(function(sg,i){
       var v=vals[sg[1]], w=Math.max(6, Math.log10(Math.max(v,1))/max*100);
       var last=i===3;
-      rows+='<div class="fr"><span class="fr-name">'+sg[0]+'</span><div class="fr-track"><div class="fr-bar'+(last&&stuck&&worst.to==='paid_customers'?' bad':'')+'" style="width:'+w+'%"></div></div><span class="fr-val num">'+v.toLocaleString('ko-KR')+sg[2]+'</span>'+miniSvg(hist.slice(-12).map(function(x){ return x[sg[1]]||0; }), sg[0])+'</div>';
+      rows+='<div class="fr"><span class="fr-name">'+sg[0]+'</span><div class="fr-track"><div class="fr-bar'+(last&&stuck&&worst.to==='paid_customers'?' bad':'')+'" style="width:'+w+'%"></div></div><span class="fr-val num">'+v.toLocaleString('ko-KR')+sg[2]+'</span>'+miniSvg(hist.slice(-12).map(function(x){ return x[sg[1]]||0; }), sg[0], hist.slice(-12))+'</div>';
       if(i<3){
         var st=steps[i], ok=st.rate>=st.target, isW=st===worst&&stuck;
         rows+='<div class="fs'+(isW?' bad':'')+'"><span></span><span>↓ '+f1(st.rate)+'%가 넘어감 · 목표 '+f1(st.target)+'% <span class="chip '+(ok?'ok':'bad')+'">'+(ok?'통과':(isW?'막힘':'미달'))+'</span></span></div>';
@@ -300,15 +300,16 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   }
 
   // 칸 옆 작은 추이 (최근 12주 주별 숫자). 끝점 = 시트에 마지막으로 채운 주
-  function miniSvg(vals, label){
+  function miniSvg(vals, label, weeks){
     var W=150,H=34,P=3, max=Math.max.apply(null,vals)||1, min=Math.min.apply(null,vals);
     var x=function(i){ return P+i*(W-2*P)/Math.max(vals.length-1,1); };
     var y=function(v){ return P+(1-(v-min)/Math.max(max-min,1))*(H-2*P); };
     var pts=vals.map(function(v,i){ return x(i)+','+y(v); }).join(' ');
     var lx=x(vals.length-1), ly=y(vals[vals.length-1]);
-    return '<svg class="mini" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+attr(label)+' 최근 12주"><title>'+esc(label)+' 최근 12주: '+vals.map(function(v){return v.toLocaleString('ko-KR');}).join(' → ')+'</title>'
+    var hits=vals.map(function(v,i){ var w=(W-2*P)/Math.max(vals.length-1,1); return '<rect x="'+(x(i)-w/2)+'" y="0" width="'+w+'" height="'+H+'" fill="transparent" data-tip="'+attr((weeks[i]?md(weeks[i].week_start)+' 주 · ':'')+label+' '+v.toLocaleString('ko-KR'))+'"/>'; }).join('');
+    return '<svg class="mini" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+attr(label)+' 최근 12주">'
       +'<polyline points="'+pts+'" fill="none" stroke="#8FA6C4" stroke-width="1.5" stroke-linejoin="round"/>'
-      +'<circle cx="'+lx+'" cy="'+ly+'" r="3" fill="#1D5FD1"/></svg>';
+      +'<circle cx="'+lx+'" cy="'+ly+'" r="3" fill="#1D5FD1"/>'+hits+'</svg>';
   }
 
   function trendSvg(vals,target,weeks){
@@ -327,7 +328,9 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     s+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="#1D5FD1" stroke-width="2.5" stroke-linejoin="round"/>';
     vals.forEach(function(v,i){
       var lastP=i===vals.length-1;
-      s+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="'+(lastP?5:3.5)+'" fill="#1D5FD1" stroke="#fff" stroke-width="2"><title>'+md(weeks[i].week_start)+' 주 · '+f1(v)+'%</title></circle>';
+      var hw=(W-L-R)/Math.max(vals.length-1,1);
+      s+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="'+(lastP?5:3.5)+'" fill="#1D5FD1" stroke="#fff" stroke-width="2"/>';
+      s+='<rect x="'+(x(i)-hw/2)+'" y="'+T+'" width="'+hw+'" height="'+(H-T-B)+'" fill="transparent" data-tip="'+attr(md(weeks[i].week_start)+' 주 · '+f1(v)+'% (목표 '+f1(target)+'%)')+'"/>';
       if(i%2===0||lastP) s+='<text x="'+x(i)+'" y="'+(H-6)+'" text-anchor="middle" font-size="12" fill="#8393A5">'+md(weeks[i].week_start)+'</text>';
     });
     s+='<text x="'+x(vals.length-1)+'" y="'+(y(vals[vals.length-1])-12)+'" text-anchor="end" font-size="13" font-weight="700" fill="#0F1C2A">'+f1(vals[vals.length-1])+'%</text>';
@@ -336,7 +339,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
 
   // ---------- 월 매출 ----------
   function renderMonthly(monthly, curMonth){
-    var box=document.getElementById('monthly'), tip=document.getElementById('tip');
+    var box=document.getElementById('monthly');
     if(!monthly.length) return;
     // 매출 없는 달도 0으로 채워 이번 달부터 거꾸로 12개월을 만든다 (진행 중 = 이번 달)
     var byM={}; monthly.forEach(function(r){ byM[r.month]=r; });
@@ -353,27 +356,19 @@ details.grp summary{cursor:pointer;color:var(--muted)}
       var now=r.month===curMonth, x0=L+i*bw+bw*0.2, w=bw*0.6, h=Math.max(y(0)-y(r.revenue),0);
       s+='<rect x="'+x0+'" y="'+(y(0)-h)+'" width="'+w+'" height="'+h+'" rx="4" fill="'+(now?'#1D5FD1':'#B9C9DD')+'"'+(now?' fill-opacity=".55"':'')+'/>';
       s+='<text x="'+(x0+w/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="12" fill="#4A5A6B">'+(+r.month.slice(5))+'월'+(now?'·진행 중':'')+'</text>';
-      s+='<rect data-i="'+i+'" x="'+(L+i*bw)+'" y="'+T+'" width="'+bw+'" height="'+(H-T-B)+'" fill="transparent"/>';
+      s+='<rect x="'+(L+i*bw)+'" y="'+T+'" width="'+bw+'" height="'+(H-T-B)+'" fill="transparent" data-tip="'+attr(r.month.replace('-','년 ')+'월 · '+won(r.revenue)+' · '+r.customers+'명')+'"/>';
     });
     var best=m.reduce(function(a,b){return b.revenue>a.revenue?b:a;}), bi=m.indexOf(best);
     s+='<text x="'+(L+bi*bw+bw/2)+'" y="'+(y(best.revenue)-6)+'" text-anchor="middle" font-size="12" font-weight="700" fill="#0F1C2A">'+won(best.revenue)+'</text>';
     s+='</svg>';
     box.insertAdjacentHTML('beforeend',s);
-    box.querySelectorAll('rect[data-i]').forEach(function(r){
-      r.addEventListener('mouseenter',function(){
-        var i=+r.dataset.i, d=m[i], k=box.querySelector('svg').getBoundingClientRect().width/W;
-        tip.textContent=d.month.replace('-','년 ')+'월 · '+won(d.revenue)+' · '+d.customers+'명';
-        tip.style.left=(L+i*bw+bw/2)*k+'px'; tip.style.top=y(d.revenue)*k+'px'; tip.hidden=false;
-      });
-      r.addEventListener('mouseleave',function(){ tip.hidden=true; });
-    });
   }
 
   // ---------- 홈페이지 ----------
   // 묶음은 여기서 id로 정한다. 새 페이지는 site-config.js에 넣고 여기에도 id를 추가한다
   var GROUPS=[
     {title:'홈페이지 (방문자가 보는 실제 페이지)', ids:['main-page','landing-page-v3','coaching-payment-modal-demo','coaching-payment','curriculum-page','refund-policy'], notes:{'coaching-payment-modal-demo':'코칭 페이지에서 신청하면 뜸'}},
-    {title:'상담 회원에게 보내는 페이지 (홈페이지 안에 있음)', ids:['recommended-books','consult-180day-column'], notes:{'recommended-books':'90일 후 알림톡','consult-180day-column':'180일 후 알림톡'}},
+    {title:'상담 회원에게 보내는 페이지 (홈페이지 주소지만 위쪽 메뉴엔 안 보임 · 알림톡 링크로 들어옴)', ids:['recommended-books','consult-180day-column'], notes:{'recommended-books':'90일 후 알림톡','consult-180day-column':'180일 후 알림톡'}},
     {title:'모든 페이지에 붙는 코드 (고치면 전부 바뀜)', ids:['imweb-header-code','imweb-footer-code','common-header','common-footer']},
     {title:'작업본에만 있는 것', ids:['fire-retirement-calculator','investment-philosophy','lecture-allinone','lecture-bookclub'], fold:true}
   ];
@@ -405,6 +400,14 @@ details.grp summary{cursor:pointer;color:var(--muted)}
       return '<div class="grp"><div class="g-title">'+esc(g.title)+'</div>'+tiles+'</div>';
     }).join('');
   }
+
+  var hoverTip=document.createElement('div'); hoverTip.className='tip'; hoverTip.hidden=true; document.body.appendChild(hoverTip);
+  document.addEventListener('mousemove',function(e){
+    var t=e.target.closest&&e.target.closest('[data-tip]');
+    if(!t){ hoverTip.hidden=true; return; }
+    hoverTip.textContent=t.getAttribute('data-tip'); hoverTip.hidden=false;
+    hoverTip.style.left=Math.min(e.clientX+12, window.innerWidth-hoverTip.offsetWidth-8)+'px'; hoverTip.style.top=(e.clientY-36)+'px';
+  });
 
   document.addEventListener('click',function(e){
     var btn=e.target.closest('[data-copy]'); if(!btn||btn.disabled) return;
