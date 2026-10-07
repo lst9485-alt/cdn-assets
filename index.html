@@ -210,14 +210,21 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   }
 
   function renderTiles(hist, sales){
-    var w=hist[hist.length-1]||{}, p=hist[hist.length-2]||{};
+    var w=hist[hist.length-1]||{};
     document.getElementById('weekLabel').textContent = w.week_start ? md(w.week_start)+'~'+md(w.week_end)+' · 시트에 마지막으로 채운 주' : '';
     var sm=sales.summary||{};
-    function cmp(cur,prev,unit){ if(prev==null) return ''; var d=cur-prev; return '전주 '+prev.toLocaleString('ko-KR')+unit+' → '+(d>=0?'+':'')+d.toLocaleString('ko-KR'); }
+    // 이번 주를 뺀 앞 12주 평균과 비교 — 전주 하나와 비교하면 출렁여서 판단이 안 됨 (2026-10-07 사용자)
+    var prev12=hist.slice(-13,-1);
+    function cmp(k,unit,dec){
+      if(!prev12.length) return '';
+      var avg=prev12.reduce(function(a,x){ return a+(x[k]||0); },0)/prev12.length, d=(w[k]||0)-avg;
+      var fmt=function(v){ return dec ? f1(v) : Math.round(v).toLocaleString('ko-KR'); };
+      return prev12.length+'주 평균 '+fmt(avg)+unit+' → '+(d>=0?'+':'-')+fmt(Math.abs(d));
+    }
     var tiles=[
       {lbl:'이번 달 매출'+(sm.current_month_label?' ('+(+sm.current_month_label.slice(5))+'월, 진행 중)':''), val:won(sm.current_month||0), cmp:'지난달 '+won(sm.last_month||0)},
-      {lbl:'구매', val:(w.paid_customers||0)+'명', cmp:cmp(w.paid_customers||0,p.paid_customers,'명')},
-      {lbl:'랜딩 방문', val:(w.landing_visits||0).toLocaleString('ko-KR')+'명', cmp:cmp(w.landing_visits||0,p.landing_visits,'명')},
+      {lbl:'구매', val:(w.paid_customers||0)+'명', cmp:cmp('paid_customers','명',true)},
+      {lbl:'랜딩 방문', val:(w.landing_visits||0).toLocaleString('ko-KR')+'명', cmp:cmp('landing_visits','명',false)},
       {lbl:'구독자', val:(w.subscribers_total||0).toLocaleString('ko-KR'), cmp: w.subscriber_increase? '그 주 +'+w.subscriber_increase.toLocaleString('ko-KR') : ''}
     ];
     document.getElementById('tiles').innerHTML = tiles.map(function(t){
