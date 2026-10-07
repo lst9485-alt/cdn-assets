@@ -10,7 +10,6 @@
 :root{
   --bg:#F3F5F8; --card:#FFFFFF; --ink:#0F1C2A; --sub:#4A5A6B; --muted:#8393A5; --line:#E1E6EC;
   --blue:#1D5FD1; --blue-soft:#E7EFFC; --ok:#1F7A55; --ok-soft:#E3F3EB; --bad:#C63B26; --bad-soft:#FBE7E3;
-  --bar:#B9C9DD; --bar-now:#1D5FD1;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:"Pretendard",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:14px;line-height:1.55;padding:0 16px}
@@ -45,7 +44,7 @@ h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
 .mini{width:150px;height:34px}
 .fr{display:grid;grid-template-columns:90px 1fr 80px 150px;align-items:center;gap:10px}
 .fr-name{font-weight:700}
-.fr-bar{height:24px;border-radius:0 5px 5px 0;background:#1D5FD1}
+.fr-bar{height:24px;border-radius:0 5px 5px 0;background:var(--blue)}
 .fr-bar.bad{background:var(--bad)}
 .fr-val{text-align:right;font-weight:800;font-size:15px}
 .fs{display:grid;grid-template-columns:90px 1fr;gap:10px;padding:7px 0;color:var(--sub);font-size:13px}
@@ -125,7 +124,6 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   .jcols{grid-template-columns:1fr}
 }
 @media (max-width:480px){ .links{grid-template-columns:1fr} h1{font-size:21px} }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
@@ -175,6 +173,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
 
   // ---------- 공통 ----------
   function esc(v){ var el=document.createElement('span'); el.textContent = v==null?'':String(v); return el.innerHTML; }
+  function attr(v){ return esc(v).replace(/"/g,'&quot;'); }
   function won(n){ if(n>=10000) return (Math.round(n/10000)).toLocaleString('ko-KR')+'만 원'; return n.toLocaleString('ko-KR')+'원'; }
   function md(s){ var m=String(s||'').match(/(\d{4})-(\d{2})-(\d{2})/); return m? (+m[2])+'/'+(+m[3]) : ''; }
   function pct(n,d){ return d>0 ? n/d*100 : 0; }
@@ -182,21 +181,26 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   function href(it){ return it.href.indexOf('http')===0 ? it.href : './'+it.href; }
 
   // ---------- 숫자 ----------
-  Promise.all([
-    fetch('./data/funnel.json?t='+Date.now(),{cache:'no-store'}).then(function(r){ if(!r.ok) throw new Error('funnel '+r.status); return r.json(); }),
-    fetch('./data/sales.json?t='+Date.now(),{cache:'no-store'}).then(function(r){ if(!r.ok) throw new Error('sales '+r.status); return r.json(); })
-  ]).then(function(res){
-    var funnel=res[0], sales=res[1];
+  function getJson(name){
+    return fetch('./data/'+name+'?t='+Date.now(),{cache:'no-store'}).then(function(r){ if(!r.ok) throw new Error(name+' '+r.status); return r.json(); });
+  }
+  // 한 칸이 그리다 실패해도 다른 칸은 그린다
+  function safe(id, fn){
+    try { fn(); } catch(e){ console.error('['+id+' 그리기 실패]', e); var el=document.getElementById(id); if(el) el.innerHTML='<p class="err">이 칸을 그리다 오류가 났어요 ('+esc(e.message)+')</p>'; }
+  }
+
+  Promise.all([getJson('funnel.json'), getJson('sales.json')]).then(function(res){
+    var funnel=res[0], sales=res[1], sm=sales.summary||{};
     var hist=(funnel.weekly_history||[]).filter(function(w){ return w.landing_visits>0 && w.key_views>0 && w.pulling_views>0; });
-    renderStamp(funnel, sales);
-    renderTiles(hist, sales);
-    renderBottleneck(hist, funnel.targets||{}, sales.unpaid_monthly||[], (sales.summary||{}).current_month_label);
-    renderMonthly(sales.monthly||[]);
-    renderHomepage(hist);
-  }).catch(function(e){
+    safe('stamp', function(){ renderStamp(funnel, sales); });
+    safe('tiles', function(){ renderTiles(hist, sales); });
+    safe('bottleneck', function(){ renderBottleneck(hist, funnel.targets||{}, sales.unpaid_monthly, sm.current_month_label); });
+    safe('monthly', function(){ renderMonthly(sales.monthly||[], sm.current_month_label); });
+    safe('homepage', function(){ renderHomepage(hist); });
+  }, function(e){
     document.getElementById('stamp').textContent='숫자를 못 불러왔어요';
     document.getElementById('bottleneck').innerHTML='<p class="err">숫자 파일을 못 읽었어요 ('+esc(e.message)+'). 매일 아침 6시 자동 작업이 돌았는지 확인해 주세요.</p>';
-    renderHomepage([]);
+    safe('homepage', function(){ renderHomepage([]); });
   });
 
   function renderStamp(funnel, sales){
@@ -210,7 +214,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     var sm=sales.summary||{};
     function cmp(cur,prev,unit){ if(prev==null) return ''; var d=cur-prev; return '전주 '+prev.toLocaleString('ko-KR')+unit+' → '+(d>=0?'+':'')+d.toLocaleString('ko-KR'); }
     var tiles=[
-      {lbl:'이번 달 매출 ('+(+String(sm.current_month_label||'').slice(5))+'월, 진행 중)', val:won(sm.current_month||0), cmp:'지난달 '+won(sm.last_month||0)},
+      {lbl:'이번 달 매출'+(sm.current_month_label?' ('+(+sm.current_month_label.slice(5))+'월, 진행 중)':''), val:won(sm.current_month||0), cmp:'지난달 '+won(sm.last_month||0)},
       {lbl:'구매', val:(w.paid_customers||0)+'명', cmp:cmp(w.paid_customers||0,p.paid_customers,'명')},
       {lbl:'랜딩 방문', val:(w.landing_visits||0).toLocaleString('ko-KR')+'명', cmp:cmp(w.landing_visits||0,p.landing_visits,'명')},
       {lbl:'구독자', val:(w.subscribers_total||0).toLocaleString('ko-KR'), cmp: w.subscriber_increase? '그 주 +'+w.subscriber_increase.toLocaleString('ko-KR') : ''}
@@ -237,11 +241,11 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     steps.forEach(function(st){ st.rate=pct(vals[st.to],vals[st.from]); st.score=st.rate/st.target; });
     var worst=steps.reduce(function(x,y){ return y.score<x.score?y:x; });
     var stuck=worst.score<1;
-    var price=buy>0?rev/buy:0, more=stuck?buy/worst.score-buy:0;
+    var price=buy>0?rev/buy:0, more=(stuck&&worst.score>0)?buy/worst.score-buy:0;
 
     var head = stuck
       ? '<b>'+esc(worst.name)+'</b> 칸에서 막혀요. 100명 중 '+f1(worst.rate)+'명만 넘어가요 (목표 '+f1(worst.target)+'명).'
-        +'<div class="gain">이 칸만 목표대로면 4주 구매 '+buy+'명 → 약 '+Math.round(buy+more)+'명'+(price?' · 매출 약 '+won(Math.round(more*price/10000)*10000)+' 더':'')+'</div>'
+        +(buy>0 ? '<div class="gain">이 칸만 목표대로면 4주 구매 '+buy+'명 → 약 '+Math.round(buy+more)+'명'+(price?' · 매출 약 '+won(Math.round(more*price/10000)*10000)+' 더':'')+'</div>' : '<div class="gain">최근 4주 동안 구매가 없었어요.</div>')
       : '<b>모든 칸이 목표를 넘겼어요.</b> 목표를 올릴 때예요.';
 
     var max=Math.log10(vals.pulling_views||10);
@@ -267,8 +271,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   // 랜딩 구역 도달 — data/landing-sections.json (GA4, 매일 06시). 병목이 랜딩 → 구매일 때만 보인다
   function renderZones(){
     var el=document.getElementById('zones');
-    fetch('./data/landing-sections.json?t='+Date.now(),{cache:'no-store'})
-      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    getJson('landing-sections.json')
       .then(function(d){
         if(!d.visitors || d.visitors<30){
           el.innerHTML='<p class="hint">'+md(d.start)+'부터 새로 세는 중이에요 (지금 방문자 '+(d.visitors||0)+'명). 30명이 넘으면 여기에 구역별 막대가 떠요.</p>';
@@ -286,6 +289,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   // 신청하고 입금 안 한 회원 — 이미 사려던 사람이라 먼저 챙길 곳. data/sales.json unpaid_monthly (노션 상태 입금안함)
   function unpaidHtml(unpaid, curMonth){
     if(!curMonth) return '';
+    if(!Array.isArray(unpaid)) return '<div class="unpaid"><b>먼저 챙길 곳</b> 신청하고 입금 안 한 회원 숫자를 오늘은 못 읽었어요 (노션 읽기 실패)</div>';
     var y=+curMonth.slice(0,4), m=+curMonth.slice(5,7), parts=[];
     for(var k=0;k<3;k++){
       var mm=m-k, yy=y; if(mm<1){ mm+=12; yy-=1; }
@@ -302,7 +306,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     var y=function(v){ return P+(1-(v-min)/Math.max(max-min,1))*(H-2*P); };
     var pts=vals.map(function(v,i){ return x(i)+','+y(v); }).join(' ');
     var lx=x(vals.length-1), ly=y(vals[vals.length-1]);
-    return '<svg class="mini" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(label)+' 최근 12주"><title>'+esc(label)+' 최근 12주: '+vals.map(function(v){return v.toLocaleString('ko-KR');}).join(' → ')+'</title>'
+    return '<svg class="mini" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+attr(label)+' 최근 12주"><title>'+esc(label)+' 최근 12주: '+vals.map(function(v){return v.toLocaleString('ko-KR');}).join(' → ')+'</title>'
       +'<polyline points="'+pts+'" fill="none" stroke="#8FA6C4" stroke-width="1.5" stroke-linejoin="round"/>'
       +'<circle cx="'+lx+'" cy="'+ly+'" r="3" fill="#1D5FD1"/></svg>';
   }
@@ -331,9 +335,13 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   }
 
   // ---------- 월 매출 ----------
-  function renderMonthly(monthly){
+  function renderMonthly(monthly, curMonth){
     var box=document.getElementById('monthly'), tip=document.getElementById('tip');
-    var m=monthly.slice(-12); if(!m.length) return;
+    if(!monthly.length) return;
+    // 매출 없는 달도 0으로 채워 이번 달부터 거꾸로 12개월을 만든다 (진행 중 = 이번 달)
+    var byM={}; monthly.forEach(function(r){ byM[r.month]=r; });
+    var last=curMonth||monthly[monthly.length-1].month, y0=+last.slice(0,4), m0=+last.slice(5,7), m=[];
+    for(var k=11;k>=0;k--){ var mm=m0-k, yy=y0; while(mm<1){ mm+=12; yy-=1; } var key=yy+'-'+String(mm).padStart(2,'0'); m.push(byM[key]||{month:key,revenue:0,customers:0}); }
     var W=1000,H=240,L=56,R=10,T=16,B=28;
     var max=Math.max.apply(null,m.map(function(r){return r.revenue;}));
     var step=max>6000000?2000000:1000000; var top=Math.ceil(max/step)*step||step;
@@ -342,7 +350,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="최근 12개월 월 매출">';
     for(var g=0; g<=top; g+=step){ s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(g)+'" y2="'+y(g)+'" stroke="#EEF1F5"/><text x="'+(L-8)+'" y="'+(y(g)+4)+'" text-anchor="end" font-size="12" fill="#8393A5">'+(g/10000)+'만</text>'; }
     m.forEach(function(r,i){
-      var now=i===m.length-1, x0=L+i*bw+bw*0.2, w=bw*0.6, h=Math.max(y(0)-y(r.revenue),0);
+      var now=r.month===curMonth, x0=L+i*bw+bw*0.2, w=bw*0.6, h=Math.max(y(0)-y(r.revenue),0);
       s+='<rect x="'+x0+'" y="'+(y(0)-h)+'" width="'+w+'" height="'+h+'" rx="4" fill="'+(now?'#1D5FD1':'#B9C9DD')+'"'+(now?' fill-opacity=".55"':'')+'/>';
       s+='<text x="'+(x0+w/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="12" fill="#4A5A6B">'+(+r.month.slice(5))+'월'+(now?'·진행 중':'')+'</text>';
       s+='<rect data-i="'+i+'" x="'+(L+i*bw)+'" y="'+T+'" width="'+bw+'" height="'+(H-T-B)+'" fill="transparent"/>';
@@ -371,22 +379,21 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   ];
 
   function dateLine(it){
-    var m=String(it.imwebDate||'').match(/^\d{4}-(\d{2})-(\d{2})$/);
-    if(!m) return '';
-    return (+m[1])+'/'+(+m[2])+' 수정'+(it.dateSuffix?' ('+esc(it.dateSuffix)+'번째)':'');
+    var d=md(it.imwebDate);
+    return d ? d+' 수정'+(it.dateSuffix?' ('+esc(it.dateSuffix)+'번째)':'') : '';
   }
 
   function pageTile(it, note, hist){
     if(!it) return '';
     var w=hist[hist.length-1];
     var extra = note || ((it.id==='landing-page-v3' && w) ? '최근 주 방문 '+w.landing_visits+'명 · 구매 '+(w.paid_customers||0)+'명' : '');
-    var sub = it.liveUrl ? '<a class="t-addr" href="'+esc(it.liveUrl)+'" target="_blank" rel="noopener">'+esc(it.liveUrl.replace('https://',''))+'</a>' : '';
+    var sub = it.liveUrl ? '<a class="t-addr" href="'+attr(it.liveUrl)+'" target="_blank" rel="noopener">'+esc(it.liveUrl.replace('https://',''))+'</a>' : '';
     var acts='';
-    if(href(it)!==it.liveUrl) acts+='<a class="btn" href="'+esc(href(it))+'" target="_blank" rel="noopener">작업본</a>';
-    if(it.imwebCode) acts+='<button type="button" class="btn copy" data-copy="'+esc(it.imwebCode)+'">코드 복사</button>';
+    if(href(it)!==it.liveUrl) acts+='<a class="btn" href="'+attr(href(it))+'" target="_blank" rel="noopener">작업본</a>';
+    if(it.imwebCode) acts+='<button type="button" class="btn copy" data-copy="'+attr(it.imwebCode)+'">코드 복사</button>';
     var d=dateLine(it);
     return '<div class="pt">'
-      +'<a class="t-name" href="'+esc(it.liveUrl||href(it))+'" target="_blank" rel="noopener">'+esc(it.title.replace(' (예정)','').replace(' 페이지',''))+'</a>'
+      +'<a class="t-name" href="'+attr(it.liveUrl||href(it))+'" target="_blank" rel="noopener">'+esc(it.title.replace(' (예정)','').replace(' 페이지',''))+'</a>'
       +sub+(extra?'<span class="t-extra">'+esc(extra)+'</span>':'')
       +'<div class="t-foot"><span class="t-date num">'+(d||'')+'</span><span class="t-acts">'+acts+'</span></div></div>';
   }
@@ -435,7 +442,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   ];
   function jName(j){
     var t=esc(j.what)+(j.kind?' <span class="ji-kind">('+esc(j.kind)+')</span>':'');
-    return j.it ? '<a href="'+esc(j.it.liveUrl||href(j.it))+'" target="_blank" rel="noopener">'+t+' ↗</a>' : t;
+    return j.it ? '<a href="'+attr(j.it.liveUrl||href(j.it))+'" target="_blank" rel="noopener">'+t+' ↗</a>' : t;
   }
   function jCol(title, list){
     return '<div class="jcol"><div class="jc-title">'+esc(title)+'</div>'+list.map(function(j){
@@ -445,7 +452,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   }
   function renderConsult(){
     var during='<div class="during"><span class="du-title">상담할 때</span>'+DURING.map(function(d){
-      return '<a class="du" href="'+esc(href(d.it))+'" target="_blank" rel="noopener"><b>'+esc(d.what)+'</b> <span class="ji-kind">('+esc(d.kind)+')</span>'+(d.note?'<span class="ji-note">'+esc(d.note)+'</span>':'')+'</a>';
+      return '<a class="du" href="'+attr(href(d.it))+'" target="_blank" rel="noopener"><b>'+esc(d.what)+'</b> <span class="ji-kind">('+esc(d.kind)+')</span>'+(d.note?'<span class="ji-note">'+esc(d.note)+'</span>':'')+'</a>';
     }).join('')+'</div>';
     document.getElementById('consult').innerHTML='<div class="jcols">'+jCol('상담 전',BEFORE)+jCol('상담 후 — 전부 회원에게 보내는 것',AFTER)+'</div>'+during;
   }
@@ -453,7 +460,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
 
   function linkCard(it){
     if(!it) return '';
-    return '<a class="lk" href="'+esc(href(it))+'" target="_blank" rel="noopener"><b>'+esc(it.title)+'</b><span>'+esc(it.description||'')+'</span></a>';
+    return '<a class="lk" href="'+attr(href(it))+'" target="_blank" rel="noopener"><b>'+esc(it.title)+'</b><span>'+esc(it.description||'')+'</span></a>';
   }
   document.getElementById('shortcuts').innerHTML=linkCard(byId['yt-bulk-editor']);
 })();
