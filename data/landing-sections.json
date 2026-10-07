@@ -1,0 +1,72 @@
+{
+  "updated": "2026-10-07T11:46:17+09:00",
+  "start": "2026-10-08",
+  "visitors": 0,
+  "sections": [
+    {
+      "key": "hero",
+      "label": "첫 화면",
+      "users": 0
+    },
+    {
+      "key": "best-reviews",
+      "label": "베스트 후기",
+      "users": 0
+    },
+    {
+      "key": "story-hook",
+      "label": "문제 인식(분당·일산)",
+      "users": 0
+    },
+    {
+      "key": "curriculum",
+      "label": "코칭 내용",
+      "users": 0
+    },
+    {
+      "key": "reviews-trusted",
+      "label": "실제 후기",
+      "users": 0
+    },
+    {
+      "key": "consultant",
+      "label": "내 소개·실적",
+      "users": 0
+    },
+    {
+      "key": "reviews",
+      "label": "후기 모음",
+      "users": 0
+    },
+    {
+      "key": "promise",
+      "label": "결과 약속",
+      "users": 0
+    },
+    {
+      "key": "pricing",
+      "label": "가격",
+      "users": 0
+    },
+    {
+      "key": "coaching-steps",
+      "label": "진행 순서",
+      "users": 0
+    },
+    {
+      "key": "cta",
+      "label": "신청 권유 문구",
+      "users": 0
+    },
+    {
+      "key": "apply-form",
+      "label": "신청서",
+      "users": 0
+    },
+    {
+      "key": "faq",
+      "label": "자주 묻는 질문",
+      "users": 0
+    }
+  ]
+}

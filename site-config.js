@@ -88,7 +88,8 @@
             hubVisible: true,
             groupLabel: '공통',
             imwebCode: 'homepage/head-code-imweb.html',
-            dateSuffix: '1'
+            dateSuffix: '1',
+            imwebDate: '2026-10-06'
           },
           {
             id: 'imweb-footer-code',
@@ -103,10 +104,12 @@
             activeMatch: ['footer-code.html'],
             hubVisible: true,
             groupLabel: '공통',
-            imwebCode: 'homepage/footer-code.html'
+            imwebCode: 'homepage/footer-code.html',
+            imwebDate: '2026-10-04'
           },
           {
             id: 'landing-page-v3',
+            liveUrl: 'https://ourdongne.com/counsel',
             title: '1:1 코칭 페이지',
             description: '내집마련 1:1 코칭 신청 페이지',
             href: 'homepage/coaching-all-v3.html',
@@ -119,10 +122,12 @@
             hubVisible: true,
             groupLabel: '코칭',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
-            dateSuffix: '7'
+            dateSuffix: '7',
+            imwebDate: '2026-10-05'
           },
           {
             id: 'main-page',
+            liveUrl: 'https://ourdongne.com/',
             title: '메인 페이지',
             description: '우리동네재테크 운영 메인',
             href: 'homepage/main-page.html',
@@ -135,7 +140,8 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/main-page-imweb.html',
-            dateSuffix: '3'
+            dateSuffix: '3',
+            imwebDate: '2026-10-02'
           },
           {
             id: 'investment-philosophy',
@@ -153,6 +159,7 @@
           },
           {
             id: 'recommended-books',
+            liveUrl: 'https://ourdongne.com/books',
             title: '추천도서 페이지',
             description: '상담 90일차 발송 · 내집마련 독서 로드맵 15선',
             href: 'homepage/booklist-final.html',
@@ -165,10 +172,12 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/booklist-imweb-copy.html',
-            dateSuffix: '1'
+            dateSuffix: '1',
+            imwebDate: '2026-10-02'
           },
           {
             id: 'coaching-payment',
+            liveUrl: 'https://ourdongne.com/coaching-pay',
             title: '카드결제 페이지',
             description: '신청 완료자 전용 카드결제 페이지 (정본)',
             href: 'https://ourdongne.com/coaching-pay',
@@ -197,6 +206,7 @@
           },
           {
             id: 'curriculum-page',
+            liveUrl: 'https://ourdongne.com/curriculum',
             title: '커리큘럼 페이지',
             description: '전체 커리큘럼 한눈에 보기',
             href: 'homepage/curriculum.html',
@@ -209,7 +219,8 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/curriculum-imweb.html',
-            dateSuffix: '4'
+            dateSuffix: '4',
+            imwebDate: '2026-10-02'
           },
           {
             id: 'lecture-allinone',
@@ -255,10 +266,11 @@
           },
           {
             id: 'refund-policy',
+            liveUrl: 'https://ourdongne.com/refund',
             title: '환불규정 안내',
             description: 'VOD 강의 · 독서모임 환불 규정',
             href: 'homepage/refund-policy.html',
-            publicPath: '~/refund-policy',
+            publicPath: '~/refund',
             badgeText: 'NEW',
             badgeTone: 'live',
             iconKey: 'doc',
@@ -267,7 +279,8 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/refund-policy-imweb.html',
-            dateSuffix: '4'
+            dateSuffix: '4',
+            imwebDate: '2026-10-02'
           }
         ]
       },
@@ -332,6 +345,7 @@
           },
           {
             id: 'consult-180day-column',
+            liveUrl: 'https://ourdongne.com/roadmap',
             title: '투자로드맵',
             description: '상담 180일차 발송 · 투자 로드맵+노후 · 복리/은퇴 계산기 2종',
             href: 'homepage/retire-column-final.html',
@@ -342,7 +356,8 @@
             activeMatch: ['retire-column-final.html'],
             hubVisible: true,
             imwebCode: 'homepage/retire-column-imweb-copy.html',
-            dateSuffix: '3'
+            dateSuffix: '3',
+            imwebDate: '2026-10-02'
           }
         ]
       },
@@ -933,7 +948,7 @@
             title: 'PG 환불규정 안내',
             description: 'PG사 심사 통과용 환불 규정 페이지',
             href: 'homepage/pg-version/refund-policy.html',
-            publicPath: '~/refund-policy',
+            publicPath: '~/refund',
             badgeText: 'PG',
             badgeTone: 'live',
             iconKey: 'doc',

@@ -36,23 +36,38 @@ h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
 .verdict{background:var(--bad-soft);border-radius:10px;padding:14px 16px;margin-bottom:16px}
 .verdict b{color:var(--bad)}
 .verdict .gain{margin-top:4px;color:var(--sub);font-size:13px}
-.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:stretch;gap:8px}
-.stage{border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
-.stage .s-name{font-size:12px;color:var(--sub);font-weight:600}
-.stage .s-val{font-size:20px;font-weight:800}
-.link{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:92px;font-size:12px;color:var(--sub);text-align:center}
-.link .arrow{font-size:16px;color:var(--muted);line-height:1}
-.link .rate{font-size:15px;font-weight:800;color:var(--ink)}
-.chip{display:inline-block;margin-top:3px;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.funnel{display:flex;flex-direction:column;max-width:760px}
+.fr{display:grid;grid-template-columns:90px 1fr 80px;align-items:center;gap:10px}
+.fr-name{font-weight:700}
+.fr-bar{height:24px;border-radius:0 5px 5px 0;background:#1D5FD1}
+.fr-bar.bad{background:var(--bad)}
+.fr-val{text-align:right;font-weight:800;font-size:15px}
+.fs{display:grid;grid-template-columns:90px 1fr;gap:10px;padding:7px 0;color:var(--sub);font-size:13px}
+.fs.bad{color:var(--bad);font-weight:700}
+.chip{display:inline-block;margin-left:4px;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:700}
 .chip.ok{background:var(--ok-soft);color:var(--ok)}
 .chip.bad{background:var(--bad-soft);color:var(--bad)}
-.link.is-bad .rate{color:var(--bad)}
-.sparks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
-.spark{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-.spark.is-bad{border-color:var(--bad)}
-.spark .t{font-size:12px;font-weight:700;color:var(--sub);display:flex;justify-content:space-between}
-.spark svg{width:100%;height:auto;display:block;margin-top:6px}
-
+.sub-h{font-size:13px;font-weight:700;color:var(--sub);margin:20px 0 6px}
+#bottleneck svg{width:100%;height:auto;display:block}
+.zones{display:flex;flex-direction:column;gap:5px;max-width:760px}
+.zr{display:grid;grid-template-columns:150px 1fr 48px;gap:10px;align-items:center;font-size:13px}
+.zb{height:12px;border-radius:0 4px 4px 0;background:#B9C9DD}
+.zr.hot{color:var(--bad);font-weight:700}
+.zr.hot .zb{background:var(--bad)}
+.zv{text-align:right}
+/* 상담 순서표 */
+.journey{display:flex;flex-direction:column}
+.jp{font-size:12px;font-weight:800;color:var(--blue);padding:14px 0 6px;border-bottom:1px solid var(--line)}
+.jp:first-child{padding-top:0}
+.jr{display:grid;grid-template-columns:96px 1fr auto;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid var(--line)}
+.j-when{font-weight:800;font-size:13px}
+.j-body b{font-size:14px}
+.j-how{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;background:#F1F4F8;color:var(--sub);margin-left:4px}
+.j-how.auto{background:var(--ok-soft);color:var(--ok)}
+.j-note{font-size:12px;color:var(--muted);margin-top:2px}
+.j-body .date{margin-top:4px}
+.j-acts{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.date{font-size:12px;color:var(--ink);font-weight:600;background:#F1F4F8;border-radius:6px;padding:2px 8px;width:fit-content}
 /* 월 매출 */
 .chartbox{position:relative}
 .chartbox svg{width:100%;height:auto;display:block}
@@ -63,16 +78,20 @@ h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
 .lane:first-of-type{margin-top:0}
 .lane-title{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:8px}
 .lane-row{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
-.lane-row.path .pg{flex:1 1 200px}
+.lane-row.path .pg{flex:1 1 170px}
 .lane-row .pg{flex:1 1 220px}
 .path-arrow{display:flex;align-items:center;color:var(--muted);font-size:16px}
 .pg{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px;background:var(--card);min-width:0}
 .pg:hover{border-color:var(--blue)}
-.pg .top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
 .pg .name{font-weight:800;font-size:14px;text-decoration:none}
 .pg .name:hover{text-decoration:underline}
-.pg .date{font-size:11px;color:var(--muted);white-space:nowrap}
-.pg .addr{font-size:12px;color:var(--blue);font-weight:600;word-break:break-all}
+.pg .date{font-size:12px;color:var(--ink);font-weight:600;background:#F1F4F8;border-radius:6px;padding:2px 8px;width:fit-content}
+.pg .when{font-size:12px;font-weight:800;color:var(--blue)}
+.pg .where{font-size:12px;color:var(--sub)}
+.pg .addr{font-size:12px;color:var(--blue);font-weight:700;word-break:break-all;text-decoration:none;width:fit-content}
+.pg a.addr:hover{text-decoration:underline}
+.pg .addr.none{color:var(--muted);font-weight:500}
+.btn.live{border-color:var(--blue);color:var(--blue);background:#fff}
 .pg .desc{font-size:12px;color:var(--muted)}
 .pg .stat{font-size:12px;color:var(--sub)}
 .pg .stat b{color:var(--ink)}
@@ -98,10 +117,10 @@ details.later .lane-row{margin-top:8px}
 
 @media (max-width:860px){
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .flow{grid-template-columns:1fr}
-  .link{flex-direction:row;gap:8px;min-width:0;padding:2px 0}
-  .link .arrow{transform:rotate(90deg)}
-  .sparks{grid-template-columns:1fr}
+  .fr{grid-template-columns:72px 1fr 64px}
+  .fs{grid-template-columns:72px 1fr}
+  .jr{grid-template-columns:72px 1fr}
+  .j-acts{grid-column:2;justify-content:flex-start}
   .links{grid-template-columns:1fr 1fr}
   .path-arrow{display:none}
 }
@@ -122,7 +141,7 @@ details.later .lane-row{margin-top:8px}
   </section>
 
   <section class="card">
-    <div class="h2row"><h2>지금 병목</h2><span class="hint">최근 4주 합계 · 콘텐츠관리 시트 기준</span></div>
+    <div class="h2row"><h2>지금 병목</h2><span class="hint">최근 4주 합계 · 콘텐츠관리 시트 기준 · 막대 길이는 보기 좋게 줄였어요</span></div>
     <div id="bottleneck"></div>
   </section>
 
@@ -132,13 +151,13 @@ details.later .lane-row{margin-top:8px}
   </section>
 
   <section class="card">
-    <div class="h2row"><h2>홈페이지</h2><span class="hint">방문자가 움직이는 순서대로 · 파란 버튼 = 아임웹 코드 복사</span></div>
+    <div class="h2row"><h2>홈페이지</h2><span class="hint">파란 버튼 = 아임웹에 붙일 코드 복사</span></div>
     <div id="homepage"></div>
   </section>
 
   <section class="card">
-    <div class="h2row"><h2>상담·회원 자료</h2></div>
-    <div class="links" id="consult"></div>
+    <div class="h2row"><h2>상담 흐름과 자료</h2><span class="hint">초록 = 저절로 나가는 것</span></div>
+    <div id="consult"></div>
   </section>
 
   <section>
@@ -207,59 +226,82 @@ details.later .lane-row{margin-top:8px}
     var last4=hist.slice(-4);
     if(last4.length<4){ box.innerHTML='<p class="err">4주치 숫자가 아직 없어요.</p>'; return; }
     function sum(k){ return last4.reduce(function(a,w){ return a+(w[k]||0); },0); }
-    var pull=sum('pulling_views'), key=sum('key_views'), land=sum('landing_visits'), buy=sum('paid_customers'), rev=sum('revenue');
+    var vals={pulling_views:sum('pulling_views'), key_views:sum('key_views'), landing_visits:sum('landing_visits'), paid_customers:sum('paid_customers')};
+    var rev=sum('revenue'), buy=vals.paid_customers;
+    var stages=[['풀링 조회','pulling_views',''],['키 조회','key_views',''],['랜딩 방문','landing_visits',''],['구매','paid_customers','명']];
     var steps=[
-      {name:'풀링 → 키', from:'pulling_views', to:'key_views', rate:pct(key,pull), target:targets.interest_rate||20},
-      {name:'키 → 랜딩', from:'key_views', to:'landing_visits', rate:pct(land,key), target:targets.link_click_rate||2.5},
-      {name:'랜딩 → 구매', from:'landing_visits', to:'paid_customers', rate:pct(buy,land), target:targets.convert_rate||3}
+      {name:'풀링 → 키', from:'pulling_views', to:'key_views', target:targets.interest_rate||20},
+      {name:'키 → 랜딩', from:'key_views', to:'landing_visits', target:targets.link_click_rate||2.5},
+      {name:'랜딩 → 구매', from:'landing_visits', to:'paid_customers', target:targets.convert_rate||3}
     ];
-    steps.forEach(function(s){ s.score=s.rate/s.target; });
-    var worst=steps.reduce(function(a,b){ return b.score<a.score?b:a; });
-    var price = buy>0 ? rev/buy : 0;
-    var moreBuy = worst.score<1 ? buy*(1/worst.score) - buy : 0;
+    steps.forEach(function(st){ st.rate=pct(vals[st.to],vals[st.from]); st.score=st.rate/st.target; });
+    var worst=steps.reduce(function(x,y){ return y.score<x.score?y:x; });
+    var stuck=worst.score<1;
+    var price=buy>0?rev/buy:0, more=stuck?buy/worst.score-buy:0;
 
-    var verdict = worst.score<1
-      ? '<b>'+esc(worst.name)+'</b> 칸이 막혀 있어요. 지금 '+f1(worst.rate)+'%인데 목표는 '+f1(worst.target)+'%예요.'
-        + '<div class="gain">이 칸만 목표대로 되면 4주 구매가 '+buy+'명 → 약 '+Math.round(buy+moreBuy)+'명'
-        + (price? ', 매출은 약 '+won(Math.round(moreBuy*price/10000)*10000)+' 더 들어와요 (1명 평균 '+won(Math.round(price/10000)*10000)+' 기준).' : '.')
-        + '</div>'
+    var head = stuck
+      ? '<b>'+esc(worst.name)+'</b> 칸에서 막혀요. 100명 중 '+f1(worst.rate)+'명만 넘어가요 (목표 '+f1(worst.target)+'명).'
+        +'<div class="gain">이 칸만 목표대로면 4주 구매 '+buy+'명 → 약 '+Math.round(buy+more)+'명'+(price?' · 매출 약 '+won(Math.round(more*price/10000)*10000)+' 더':'')+'</div>'
       : '<b>모든 칸이 목표를 넘겼어요.</b> 목표를 올릴 때예요.';
 
-    var stages=[['풀링 조회',pull],['키 조회',key],['랜딩 방문',land],['구매',buy]];
-    var flow='';
-    stages.forEach(function(st,i){
-      flow+='<div class="stage"><div class="s-name">'+st[0]+'</div><div class="s-val num">'+st[1].toLocaleString('ko-KR')+(i===3?'명':'')+'</div></div>';
+    var max=Math.log10(vals.pulling_views||10);
+    var rows='';
+    stages.forEach(function(sg,i){
+      var v=vals[sg[1]], w=Math.max(6, Math.log10(Math.max(v,1))/max*100);
+      var last=i===3;
+      rows+='<div class="fr"><span class="fr-name">'+sg[0]+'</span><div class="fr-bar'+(last&&stuck&&worst.to==='paid_customers'?' bad':'')+'" style="width:'+w+'%"></div><span class="fr-val num">'+v.toLocaleString('ko-KR')+sg[2]+'</span></div>';
       if(i<3){
-        var s=steps[i], ok=s.rate>=s.target;
-        flow+='<div class="link'+(s===worst&&!ok?' is-bad':'')+'"><span class="arrow">→</span><span class="rate num">'+f1(s.rate)+'%</span><span>목표 '+f1(s.target)+'%</span>'
-          +'<span class="chip '+(ok?'ok':'bad')+'">'+(ok?'통과':(s===worst?'병목':'미달'))+'</span></div>';
+        var st=steps[i], ok=st.rate>=st.target, isW=st===worst&&stuck;
+        rows+='<div class="fs'+(isW?' bad':'')+'"><span></span><span>↓ '+f1(st.rate)+'%가 넘어감 · 목표 '+f1(st.target)+'% <span class="chip '+(ok?'ok':'bad')+'">'+(ok?'통과':(isW?'막힘':'미달'))+'</span></span></div>';
       }
     });
 
-    var last12=hist.slice(-12);
-    var sparks=steps.map(function(s){
-      var vals=last12.map(function(w){ return pct(w[s.to]||0,w[s.from]||0); });
-      return '<div class="spark'+(s===worst&&s.score<1?' is-bad':'')+'"><div class="t"><span>'+esc(s.name)+'</span><span class="num">최근 12주</span></div>'+sparkSvg(vals,s.target,last12)+'</div>';
-    }).join('');
-
-    box.innerHTML='<div class="verdict">'+verdict+'</div><div class="flow">'+flow+'</div><div class="sparks">'+sparks+'</div>';
+    var weeks=hist.slice(-12);
+    var chart = stuck ? '<div class="sub-h">'+esc(worst.name)+' 칸, 최근 12주</div>'+trendSvg(weeks.map(function(w){ return pct(w[worst.to]||0,w[worst.from]||0); }), worst.target, weeks) : '';
+    var zones = (stuck && worst.to==='paid_customers') ? '<div class="sub-h">그럼 랜딩 페이지 어디서 빠질까 — 각 구역까지 내려온 사람</div><div id="zones" class="zones num"><span class="hint">불러오는 중…</span></div>' : '';
+    box.innerHTML='<div class="verdict">'+head+'</div><div class="funnel">'+rows+'</div>'+chart+zones;
+    if(zones) renderZones();
   }
 
-  function sparkSvg(vals,target,weeks){
-    var W=300,H=90,L=30,R=8,T=8,B=18;
-    var max=Math.max(target*1.6, Math.max.apply(null,vals)*1.1);
+  // 랜딩 구역 도달 — data/landing-sections.json (GA4, 매일 06시). 병목이 랜딩 → 구매일 때만 보인다
+  function renderZones(){
+    var el=document.getElementById('zones');
+    fetch('./data/landing-sections.json?t='+Date.now(),{cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(d){
+        if(!d.visitors || d.visitors<30){
+          el.innerHTML='<p class="hint">'+md(d.start)+'부터 새로 세는 중이에요 (지금 방문자 '+(d.visitors||0)+'명). 30명이 넘으면 여기에 구역별 막대가 떠요.</p>';
+          return;
+        }
+        var form=d.sections.filter(function(x){ return x.key==='apply-form'; })[0];
+        el.innerHTML='<p class="hint" style="margin-bottom:8px">'+md(d.start)+'부터 방문자 '+d.visitors.toLocaleString('ko-KR')+'명</p>'+d.sections.map(function(x){
+          var p=Math.round(x.users/d.visitors*100), hot=x===form;
+          return '<div class="zr'+(hot?' hot':'')+'"><span>'+esc(x.label)+'</span><div class="zb" style="width:'+Math.max(p,1)+'%"></div><span class="zv">'+p+'%</span></div>';
+        }).join('');
+      })
+      .catch(function(){ el.innerHTML='<p class="hint">랜딩 구역 숫자 파일이 아직 없어요. 내일 아침 6시 뒤에 생겨요.</p>'; });
+  }
+
+  function trendSvg(vals,target,weeks){
+    var W=900,H=200,L=40,R=16,T=18,B=26;
+    var max=Math.max(target*1.5, Math.max.apply(null,vals)*1.15);
     var x=function(i){ return L+i*(W-L-R)/Math.max(vals.length-1,1); };
     var y=function(v){ return T+(1-v/max)*(H-T-B); };
-    var pts=vals.map(function(v,i){ return x(i)+','+y(v); }).join(' ');
-    var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="주별 비율과 목표">';
+    var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="막힌 칸의 주별 비율">';
     s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(0)+'" y2="'+y(0)+'" stroke="#E1E6EC"/>';
-    s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(target)+'" y2="'+y(target)+'" stroke="#C63B26" stroke-width="1.5" stroke-dasharray="4 4"/>';
-    s+='<text x="'+(L-4)+'" y="'+(y(target)+4)+'" text-anchor="end" font-size="10" fill="#C63B26">'+f1(target)+'</text>';
-    s+='<text x="'+(L-4)+'" y="'+(y(0)+4)+'" text-anchor="end" font-size="10" fill="#8393A5">0</text>';
-    s+='<polyline points="'+pts+'" fill="none" stroke="#1D5FD1" stroke-width="2" stroke-linejoin="round"/>';
-    vals.forEach(function(v,i){ s+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="'+(i===vals.length-1?3.5:2)+'" fill="#1D5FD1"><title>'+md(weeks[i].week_start)+' 주 '+f1(v)+'%</title></circle>'; });
-    s+='<text x="'+L+'" y="'+(H-4)+'" font-size="10" fill="#8393A5">'+md(weeks[0].week_start)+'</text>';
-    s+='<text x="'+(W-R)+'" y="'+(H-4)+'" text-anchor="end" font-size="10" fill="#8393A5">'+md(weeks[weeks.length-1].week_start)+' · '+f1(vals[vals.length-1])+'%</text>';
+    s+='<text x="'+(L-8)+'" y="'+(y(0)+4)+'" text-anchor="end" font-size="12" fill="#8393A5">0%</text>';
+    s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(target)+'" y2="'+y(target)+'" stroke="#C63B26" stroke-width="2" stroke-dasharray="6 5"/>';
+    s+='<text x="'+(L-8)+'" y="'+(y(target)+4)+'" text-anchor="end" font-size="12" fill="#C63B26">'+f1(target)+'%</text>';
+    s+='<text x="'+(W-R)+'" y="'+(y(target)-6)+'" text-anchor="end" font-size="12" fill="#C63B26">목표</text>';
+    var pts=vals.map(function(v,i){ return x(i)+','+y(v); });
+    s+='<polygon points="'+L+','+y(0)+' '+pts.join(' ')+' '+(W-R)+','+y(0)+'" fill="#E7EFFC"/>';
+    s+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="#1D5FD1" stroke-width="2.5" stroke-linejoin="round"/>';
+    vals.forEach(function(v,i){
+      var lastP=i===vals.length-1;
+      s+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="'+(lastP?5:3.5)+'" fill="#1D5FD1" stroke="#fff" stroke-width="2"><title>'+md(weeks[i].week_start)+' 주 · '+f1(v)+'%</title></circle>';
+      if(i%2===0||lastP) s+='<text x="'+x(i)+'" y="'+(H-6)+'" text-anchor="middle" font-size="12" fill="#8393A5">'+md(weeks[i].week_start)+'</text>';
+    });
+    s+='<text x="'+x(vals.length-1)+'" y="'+(y(vals[vals.length-1])-12)+'" text-anchor="end" font-size="13" font-weight="700" fill="#0F1C2A">'+f1(vals[vals.length-1])+'%</text>';
     return s+'</svg>';
   }
 
@@ -295,49 +337,62 @@ details.later .lane-row{margin-top:8px}
   }
 
   // ---------- 홈페이지 ----------
+  // 묶음은 여기서 id로 정한다. 새 페이지는 site-config.js에 넣고 여기에도 id를 추가한다
   var LANES=[
-    {title:'파는 길 — 방문자가 이 순서로 움직여요', path:true, ids:['main-page','landing-page-v3','coaching-payment-modal-demo','coaching-payment']},
-    {title:'둘러보는 페이지', ids:['curriculum-page','refund-policy','fire-retirement-calculator','investment-philosophy']},
-    {title:'모든 페이지 공통 (고치면 전부 바뀜)', ids:['imweb-header-code','imweb-footer-code','common-header','common-footer']}
+    {title:'손님이 사는 길 — 메인 → 코칭 → 신청 → 결제', path:true, ids:['main-page','landing-page-v3','coaching-payment-modal-demo','coaching-payment']},
+    {title:'그 밖의 페이지', ids:['curriculum-page','refund-policy','fire-retirement-calculator','investment-philosophy']},
+    {title:'모든 페이지에 붙는 코드 (고치면 전부 바뀜)', ids:['imweb-header-code','imweb-footer-code','common-header','common-footer']}
   ];
+  var WHERE={ 'curriculum-page':'홈페이지 위쪽 메뉴에 있음', 'refund-policy':'홈페이지 위쪽 메뉴에 있음', 'fire-retirement-calculator':'작업본에만 있음 · 링크로 보냄', 'investment-philosophy':'작업본에만 있음 · 링크로 보냄' };
   var LATER=['lecture-allinone','lecture-bookclub'];
 
-  function pageCard(it, hist){
+  function dateLine(it){
+    var m=String(it.imwebDate||'').match(/^\d{4}-(\d{2})-(\d{2})$/);
+    if(!m) return '';
+    return '<div class="date num">'+(+m[1])+'월 '+(+m[2])+'일 수정'+(it.dateSuffix?' · 그날 '+esc(it.dateSuffix)+'번째':'')+'</div>';
+  }
+
+  // 실제 홈페이지(아임웹)에 없는 것의 설명
+  var NOLIVE={ 'coaching-payment-modal-demo':'코칭 페이지에서 신청하면 뜨는 창', 'imweb-header-code':'아임웹 설정에 붙이는 코드', 'imweb-footer-code':'아임웹 설정에 붙이는 코드', 'common-header':'모든 페이지 위쪽 메뉴', 'common-footer':'모든 페이지 아래쪽 정보' };
+
+  function liveLine(it){
+    if(it.liveUrl) return '<a class="addr" href="'+esc(it.liveUrl)+'" target="_blank" rel="noopener">'+esc(it.liveUrl.replace('https://',''))+' ↗</a>';
+    if(!it.publicPath) return '';
+    return '<div class="addr none">'+esc(NOLIVE[it.id]||'실제 홈페이지엔 아직 없어요')+'</div>';
+  }
+  function openBtns(it, workLabel){
+    var b='';
+    if(it.liveUrl) b+='<a class="btn live" href="'+esc(it.liveUrl)+'" target="_blank" rel="noopener">실제 페이지</a>';
+    if(href(it)!==it.liveUrl) b+='<a class="btn" href="'+esc(href(it))+'" target="_blank" rel="noopener">'+esc(workLabel||(it.liveUrl||it.publicPath?'작업본':'열기'))+'</a>';
+    if(it.imwebCode) b+='<button type="button" class="btn copy" data-copy="'+esc(it.imwebCode)+'">아임웹 코드 복사</button>';
+    return b;
+  }
+
+  function pageCard(it, hist, note){
     if(!it) return '';
     var w=hist[hist.length-1];
     var stat = (it.id==='landing-page-v3' && w) ? '<div class="stat">최근 주 방문 <b>'+w.landing_visits+'명</b> · 구매 <b>'+(w.paid_customers||0)+'명</b></div>' : '';
-    var copy = it.imwebCode ? '<button type="button" class="btn copy" data-copy="'+esc(it.imwebCode)+'">아임웹 코드 복사</button>' : '';
+    var where = WHERE[it.id] ? '<div class="where">'+esc(WHERE[it.id])+'</div>' : '';
     return '<div class="pg">'
-      +'<div class="top"><a class="name" href="'+esc(href(it))+'" target="_blank" rel="noopener">'+esc(it.title)+'</a>'
-      +'<span class="date num" data-date="'+esc(it.imwebCode||'')+'" data-suffix="'+esc(it.dateSuffix||'')+'"></span></div>'
-      +(it.publicPath? '<div class="addr">'+esc(it.publicPath.replace('~','ourdongne.com'))+'</div>' : '')
-      +'<div class="desc">'+esc(it.description||'')+'</div>'+stat
-      +'<div class="acts"><a class="btn" href="'+esc(href(it))+'" target="_blank" rel="noopener">열기</a>'+copy+'</div>'
+      +(note? '<div class="when">'+esc(note)+'</div>' : '')
+      +'<a class="name" href="'+esc(it.liveUrl||href(it))+'" target="_blank" rel="noopener">'+esc(it.title)+'</a>'
+      +liveLine(it)
+      +'<div class="desc">'+esc(it.description||'')+'</div>'+where+stat+dateLine(it)
+      +'<div class="acts">'+openBtns(it)+'</div>'
       +'</div>';
+  }
+
+  function lane(title, cards, path){
+    return '<div class="lane"><div class="lane-title">'+esc(title)+'</div><div class="lane-row'+(path?' path':'')+'">'
+      +cards.filter(Boolean).join(path?'<span class="path-arrow" aria-hidden="true">→</span>':'')+'</div></div>';
   }
 
   function renderHomepage(hist){
     var html=LANES.map(function(l){
-      var cards=l.ids.map(function(id){ return pageCard(byId[id],hist); }).filter(Boolean);
-      return '<div class="lane"><div class="lane-title">'+esc(l.title)+'</div><div class="lane-row'+(l.path?' path':'')+'">'
-        +cards.join(l.path?'<span class="path-arrow" aria-hidden="true">→</span>':'')+'</div></div>';
+      return lane(l.title, l.ids.map(function(id){ return pageCard(byId[id],hist); }), l.path);
     }).join('');
     html+='<details class="later"><summary>준비 중인 페이지 '+LATER.length+'개</summary><div class="lane-row">'+LATER.map(function(id){ return pageCard(byId[id],hist); }).join('')+'</div></details>';
     document.getElementById('homepage').innerHTML=html;
-    fillDates();
-  }
-
-  // 아임웹 코드 파일의 마지막 수정일 (GitHub Pages가 알려주는 날짜)
-  function fillDates(){
-    document.querySelectorAll('[data-date]').forEach(function(el){
-      var src=el.getAttribute('data-date'); if(!src) return;
-      fetch('./'+src,{method:'HEAD',cache:'no-store'}).then(function(r){
-        var d=new Date(r.headers.get('Last-Modified')); if(isNaN(d)) return;
-        var sfx=el.getAttribute('data-suffix');
-        el.textContent='수정 '+(d.getMonth()+1)+'/'+d.getDate()+(sfx?' ('+sfx+')':'');
-        el.title='아임웹 코드 마지막 수정: '+d.toLocaleString('ko-KR');
-      }).catch(function(){});
-    });
   }
 
   document.addEventListener('click',function(e){
@@ -352,16 +407,46 @@ details.later .lane-row{margin-top:8px}
       .then(function(){ setTimeout(function(){ btn.textContent=label; btn.classList.remove('done','fail'); btn.disabled=false; },2000); });
   });
 
-  // ---------- 상담·바로가기 ----------
-  function linkCard(it, note){
-    if(!it) return '';
-    return '<a class="lk" href="'+esc(href(it))+'" target="_blank" rel="noopener"><b>'+esc(it.title)+'</b><span>'+esc(note||it.description||'')+'</span></a>';
+  // ---------- 상담 ----------
+  // 순서·발송 방법 정본: consulting-crm (07_후속문자.gs 3·30·90·180일, 12_알림톡.gs), nightwatch payment-guide-auto·consult-prep-auto·consult-chat-daily
+  var JOURNEY=[
+    {phase:'상담 전'},
+    {when:'신청 직후', what:'결제 안내', how:'알림톡 · 자동', note:'10분 안에 결제 안 하면 카드결제 페이지 링크를 보내요', it:byId['coaching-payment']},
+    {when:'일정 잡으면', what:'예약 확인 + 사전질문지 안내', how:'알림톡 · 자동', note:'손님이 구글 폼으로 사전질문지를 써요'},
+    {when:'상담 이틀 전', what:'상담 PPT · 준비 메모', how:'자동으로 만들어짐', note:'손님별 PPT 사본이 생기고, 노션에 상담 준비 메모가 채워져요', it:byId['consult-ppt-template'], itNote:'PPT 원본 틀'},
+    {when:'전날 · 당일', what:'상담 리마인드', how:'알림톡 · 자동', note:'상담 시간 알려 주는 안내'},
+    {phase:'상담 당일 (사장님이 쓰는 것)'},
+    {when:'상담 중', what:'상담 PPT', how:'화면 공유', note:'손님별 PPT를 보면서 진행해요'},
+    {when:'필요할 때', what:'내집마련 계산기', how:'화면 공유', note:'매수가 · 월 상환액 · 갈아타기 계산', it:byId['consult-prep']},
+    {when:'상담 중', what:'자산관리시트', how:'손님에게 줌', note:'손님이 계속 쓰는 실행 시트 (6탭)', it:byId['consult-asset-planner']},
+    {phase:'상담 후'},
+    {when:'상담 직후', what:'회원 맞춤 페이지', how:'링크 보냄', note:'상담 요약을 담은 손님별 페이지 (주소가 손님마다 달라요)', it:byId['consult-root']},
+    {when:'3일 후', what:'내집마련 가이드', how:'알림톡 · 자동', note:'노션 문서', it:{title:'내집마련 가이드', href:'https://link.ourdongne.com/home-guide'}},
+    {when:'7일 후', what:'안부 인사', how:'카톡 · 자동', note:'자료 없이 안부만 (못 보내면 10~12일에 다시)'},
+    {when:'30일 후', what:'세금 가이드', how:'알림톡 · 자동', note:'노션 문서', it:{title:'세금 가이드', href:'https://link.ourdongne.com/tax-guide'}},
+    {when:'90일 후', what:'추천도서', how:'알림톡 · 자동', note:'내집마련 독서 로드맵 15권', it:byId['recommended-books']},
+    {when:'180일 후', what:'투자로드맵', how:'알림톡 · 자동', note:'투자 로드맵 + 노후 · 복리·은퇴 계산기', it:byId['consult-180day-column']}
+  ];
+  function renderConsult(){
+    var html=JOURNEY.map(function(j){
+      if(j.phase) return '<div class="jp">'+esc(j.phase)+'</div>';
+      var acts='';
+      if(j.it) acts=openBtns(j.it, j.itNote);
+      var auto=j.how.indexOf('자동')>-1;
+      return '<div class="jr">'
+        +'<span class="j-when">'+esc(j.when)+'</span>'
+        +'<div class="j-body"><b>'+esc(j.what)+'</b> <span class="j-how'+(auto?' auto':'')+'">'+esc(j.how)+'</span><div class="j-note">'+esc(j.note)+'</div>'+(j.it&&j.it.imwebDate?dateLine(j.it):'')+'</div>'
+        +'<div class="j-acts">'+acts+'</div></div>';
+    }).join('');
+    document.getElementById('consult').innerHTML='<div class="journey">'+html+'</div>';
   }
-  document.getElementById('consult').innerHTML=[
-    linkCard(byId['consult-root']), linkCard(byId['consult-prep']), linkCard(byId['consult-ppt-template']),
-    linkCard(byId['consult-asset-planner']), linkCard(byId['recommended-books'],'상담 90일차에 보내는 독서 로드맵'), linkCard(byId['consult-180day-column'],'상담 180일차에 보내는 투자 로드맵')
-  ].join('');
-  document.getElementById('shortcuts').innerHTML=[linkCard(byId['yt-bulk-editor'])].join('');
+  renderConsult();
+
+  function linkCard(it){
+    if(!it) return '';
+    return '<a class="lk" href="'+esc(href(it))+'" target="_blank" rel="noopener"><b>'+esc(it.title)+'</b><span>'+esc(it.description||'')+'</span></a>';
+  }
+  document.getElementById('shortcuts').innerHTML=linkCard(byId['yt-bulk-editor']);
 })();
 </script>
 </body>

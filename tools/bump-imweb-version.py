@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""아임웹 코드 파일이 커밋될 때 site-config.js의 dateSuffix(버전 N)를 자동 갱신.
+"""아임웹 코드 파일이 커밋될 때 site-config.js의 dateSuffix(버전 N)와 imwebDate(수정일)를 자동 갱신.
 
 규칙: 같은 날 그 파일이 다시 커밋되면 +1, 새 날이면 1.
 - 날짜 판단은 그 파일의 '직전 커밋 날짜'를 본다(지금 커밋 직전 상태).
@@ -15,6 +15,23 @@ import sys
 
 def sh(args):
     return subprocess.run(args, capture_output=True, text=True).stdout.strip()
+
+
+def set_imweb_date(lines, idx, indent, day):
+    """imwebCode 줄(+dateSuffix 줄) 바로 아래 imwebDate를 day로 맞춘다. 운영판이 이 날짜를 '수정일'로 보여준다."""
+    pos = idx + 1
+    if pos < len(lines) and re.match(r"\s*dateSuffix:", lines[pos]):
+        pos += 1
+    if pos < len(lines) and re.match(r"\s*imwebDate:", lines[pos]):
+        trail = "," if lines[pos].rstrip().endswith(",") else ""
+        lines[pos] = "%simwebDate: '%s'%s" % (indent, day, trail)
+        return
+    prev = pos - 1
+    if not lines[prev].rstrip().endswith(","):
+        lines[prev] = lines[prev].rstrip() + ","
+    nxt = lines[pos].strip() if pos < len(lines) else "}"
+    trail = "" if nxt.startswith("}") else ","
+    lines.insert(pos, "%simwebDate: '%s'%s" % (indent, day, trail))
 
 
 def main():
@@ -60,6 +77,7 @@ def main():
                 lines[idx] = lines[idx].rstrip() + ","
             lines.insert(idx + 1, "%sdateSuffix: '1'" % indent)
 
+        set_imweb_date(lines, idx, indent, today)
         text = "\n".join(lines)
         changed = True
         print("[bump-imweb-version] %s → 버전 갱신" % f)
