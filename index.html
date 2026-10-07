@@ -140,12 +140,12 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   </section>
 
   <section class="card">
-    <div class="h2row"><h2>지금 병목</h2><span class="hint">최근 4주 합계 · 콘텐츠관리 시트 기준 · 막대 길이는 보기 좋게 줄였어요</span></div>
+    <div class="h2row"><h2>지금 병목</h2><span class="hint">최근 4주 합계</span></div>
     <div id="bottleneck"></div>
   </section>
 
   <section class="card">
-    <div class="h2row"><h2>월 매출</h2><span class="hint">노션 상담일지 · 입금 안 한 신청과 환불은 뺀 금액</span></div>
+    <div class="h2row"><h2>월 매출</h2><span class="hint">입금 안 한 신청·환불 뺌</span></div>
     <div class="chartbox" id="monthly"></div>
   </section>
 
@@ -253,7 +253,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
 
     var head = stuck
       ? '<b>'+esc(worst.name)+'</b> 칸에서 막혀요. 100명 중 '+f1(worst.rate)+'명만 넘어가요 (목표 '+f1(worst.target)+'명).'
-        +(buy>0 ? '<div class="gain">이 칸만 목표대로면 4주 구매 '+buy+'명 → 약 '+Math.round(buy+more)+'명'+(price?' · 매출 약 '+won(Math.round(more*price/10000)*10000)+' 더':'')+'</div>' : '<div class="gain">최근 4주 동안 구매가 없었어요.</div>')
+        +(buy>0 ? '<div class="gain">목표 '+f1(worst.target)+'%를 채우면 → 4주 구매 '+buy+'명이 약 '+Math.round(buy+more)+'명'+(price?', 매출 약 '+won(Math.round(more*price/10000)*10000)+' 더':'')+'</div>' : '<div class="gain">최근 4주 동안 구매가 없었어요.</div>')
       : '<b>모든 칸이 목표를 넘겼어요.</b> 목표를 올릴 때예요.';
 
     var max=Math.log10(vals.pulling_views||10);
@@ -304,7 +304,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
       var key=yy+'-'+String(mm).padStart(2,'0'), hit=unpaid.filter(function(u){ return u.month===key; })[0];
       parts.push(mm+'월'+(k===0?'(진행 중)':'')+' '+(hit?hit.count:0)+'명');
     }
-    return '<div class="unpaid"><b>먼저 챙길 곳</b> 신청하고 입금 안 한 회원 · '+parts.join(' · ')+'<span class="hint"> — 이미 사려던 사람들이에요</span></div>';
+    return '<div class="unpaid"><b>먼저 챙길 곳</b> 신청하고 입금 안 한 회원 · '+parts.join(' · ')+'</div>';
   }
 
   // 칸 옆 작은 추이 (최근 12주 주별 숫자). 끝점 = 시트에 마지막으로 채운 주
