@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07T06:01:02.915459+09:00",
+  "updated": "2026-10-08T06:00:49.393634+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,8 +21,8 @@
     }
   ],
   "tasks": {
-    "total": 1183,
-    "done": 1128,
+    "total": 1186,
+    "done": 1134,
     "overdue": 7,
     "pending": [
       {
@@ -61,58 +61,23 @@
         "overdue": true
       },
       {
-        "title": "강영운생일?",
-        "date": "2026-10-07",
-        "overdue": false
-      },
-      {
-        "title": "강의기획(래퍼런스확인 및 풀링키 기획)",
-        "date": "2026-10-07T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "윤택스토리 폐업·부가세 확인 (양천세무서 통지)",
-        "date": "2026-10-07T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-10-07T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-10-07T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
-        "date": "2026-10-07T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의",
-        "date": "2026-10-07T18:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
-        "date": "2026-10-07T19:30:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "주간계획 수정",
         "date": "2026-10-08T08:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "급여&자산체크",
-        "date": "2026-10-08T09:30:00.000+09:00",
+        "date": "2026-10-08T09:15:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "인트로영상",
-        "date": "2026-10-08T10:15:00.000+09:00",
+        "title": "자료수집&도입부",
+        "date": "2026-10-08T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고",
+        "date": "2026-10-08T11:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -121,7 +86,7 @@
         "overdue": false
       },
       {
-        "title": "원고",
+        "title": "상담준비",
         "date": "2026-10-08T13:00:00.000+09:00",
         "overdue": false
       },
@@ -142,7 +107,7 @@
       },
       {
         "title": "ppt",
-        "date": "2026-10-08T19:30:00.000+09:00",
+        "date": "2026-10-08T21:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -251,6 +216,16 @@
         "overdue": false
       },
       {
+        "title": "인트로영상",
+        "date": "2026-10-13T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "자료수집&도입부",
+        "date": "2026-10-14",
+        "overdue": false
+      },
+      {
         "title": "특강 모집시작(랜딩)",
         "date": "2026-10-18T18:00:00.000+09:00",
         "overdue": false
@@ -299,42 +274,64 @@
         "title": "1년차 메시지(잊지 않고 기억하고있다, 상담이후로 투자도 놓지않고 꾸준히 관심가지고 있는지 궁금하다. 혹시 궁금한점은 여기에 질문남기면, 간단하게라도 답변주겠다. 이런내용?)",
         "date": "2026-12-22T10:00:00.000+09:00",
         "overdue": false
+      },
+      {
+        "title": "강영운생일(음력 8월27일)",
+        "date": "2027-09-27",
+        "overdue": false
+      },
+      {
+        "title": "강영운생일(음력 8월27일)",
+        "date": "2028-10-15",
+        "overdue": false
       }
     ],
     "schedule": [
       {
-        "title": "강영운생일?",
-        "time": "",
-        "allDay": true,
-        "done": false
-      },
-      {
-        "title": "강의기획(래퍼런스확인 및 풀링키 기획)",
-        "time": "09:30",
+        "title": "주간계획 수정",
+        "time": "08:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "윤택스토리 폐업·부가세 확인 (양천세무서 통지)",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "time": "11:00",
+        "title": "급여&자산체크",
+        "time": "09:15",
         "allDay": false,
         "done": false
       },
       {
         "title": "자료수집&도입부",
-        "time": "13:00",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "원고",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "상담준비",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "헬스 PT",
         "time": "14:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원고완성",
+        "time": "15:00",
         "allDay": false,
         "done": false
       },
@@ -345,8 +342,8 @@
         "done": false
       },
       {
-        "title": "원고",
-        "time": "19:30",
+        "title": "ppt",
+        "time": "21:00",
         "allDay": false,
         "done": false
       }
@@ -377,14 +374,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 15,
-      "rate": "54%",
+      "done": 16,
+      "rate": "57%",
       "days": [
-        {
-          "date": "2026-10-01",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-10-02",
           "done": 3,
@@ -412,6 +404,11 @@
         },
         {
           "date": "2026-10-07",
+          "done": 3,
+          "total": 4
+        },
+        {
+          "date": "2026-10-08",
           "done": 0,
           "total": 4
         }
@@ -421,13 +418,18 @@
   "sales": {
     "month": "2026-10",
     "month_label": "10월",
-    "total_amount": 150,
-    "total_count": 3,
+    "total_amount": 200,
+    "total_count": 4,
     "weekly": [
       {
         "week": "1주차",
         "count": 3,
         "amount": 150
+      },
+      {
+        "week": "2주차",
+        "count": 1,
+        "amount": 50
       }
     ]
   }

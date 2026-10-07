@@ -1,8 +1,8 @@
 {
-  "updated": "2026-10-07T06:01:15.444270+09:00",
+  "updated": "2026-10-08T06:01:00.080826+09:00",
   "source_updated": {
-    "funnel": "2026-10-07T06:01:15.307204+09:00",
-    "sales": "2026-10-07T06:01:14.148007+09:00"
+    "funnel": "2026-10-08T06:00:59.840664+09:00",
+    "sales": "2026-10-08T06:00:57.979623+09:00"
   },
   "summary": {
     "total_weeks": 101,
@@ -26,7 +26,7 @@
       },
       "avg_rates": {
         "interest_rate": 30.75,
-        "link_click_rate": 0.48,
+        "link_click_rate": 2.26,
         "convert_rate": 1.18
       },
       "avg_per_week": {
@@ -51,7 +51,7 @@
       },
       "avg_rates": {
         "interest_rate": 29.14,
-        "link_click_rate": 0.48,
+        "link_click_rate": 2.71,
         "convert_rate": 1.2
       },
       "avg_per_week": {
@@ -76,7 +76,7 @@
       },
       "avg_rates": {
         "interest_rate": 19.73,
-        "link_click_rate": 0.48,
+        "link_click_rate": 5.8,
         "convert_rate": 1.07
       },
       "avg_per_week": {
@@ -101,7 +101,7 @@
       },
       "avg_rates": {
         "interest_rate": 16.9,
-        "link_click_rate": 1.78,
+        "link_click_rate": 29.8,
         "convert_rate": 2.35
       },
       "avg_per_week": {
@@ -244,7 +244,7 @@
       "pulling_views": 5,
       "total_views": 34,
       "interest_rate": 580.0,
-      "link_click_rate": 2.94,
+      "link_click_rate": 3.45,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -295,7 +295,7 @@
       "pulling_views": 17,
       "total_views": 21,
       "interest_rate": 23.53,
-      "link_click_rate": 9.52,
+      "link_click_rate": 50.0,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -312,7 +312,7 @@
       "pulling_views": 17,
       "total_views": 17,
       "interest_rate": 0.0,
-      "link_click_rate": 5.88,
+      "link_click_rate": 0.0,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -329,7 +329,7 @@
       "pulling_views": 1241,
       "total_views": 1282,
       "interest_rate": 3.3,
-      "link_click_rate": 1.33,
+      "link_click_rate": 41.46,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -346,7 +346,7 @@
       "pulling_views": 1262,
       "total_views": 1284,
       "interest_rate": 1.74,
-      "link_click_rate": 0.78,
+      "link_click_rate": 45.45,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -363,7 +363,7 @@
       "pulling_views": 7841,
       "total_views": 7888,
       "interest_rate": 0.6,
-      "link_click_rate": 0.27,
+      "link_click_rate": 44.68,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -380,7 +380,7 @@
       "pulling_views": 4114,
       "total_views": 4129,
       "interest_rate": 0.36,
-      "link_click_rate": 0.15,
+      "link_click_rate": 40.0,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -397,7 +397,7 @@
       "pulling_views": 2083,
       "total_views": 2097,
       "interest_rate": 0.67,
-      "link_click_rate": 0.52,
+      "link_click_rate": 78.57,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -414,7 +414,7 @@
       "pulling_views": 1626,
       "total_views": 1631,
       "interest_rate": 0.31,
-      "link_click_rate": 2.15,
+      "link_click_rate": 700.0,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -431,7 +431,7 @@
       "pulling_views": 2751,
       "total_views": 2756,
       "interest_rate": 0.18,
-      "link_click_rate": 1.16,
+      "link_click_rate": 640.0,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -448,7 +448,7 @@
       "pulling_views": 1310,
       "total_views": 1317,
       "interest_rate": 0.53,
-      "link_click_rate": 1.75,
+      "link_click_rate": 328.57,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -465,7 +465,7 @@
       "pulling_views": 1302,
       "total_views": 1311,
       "interest_rate": 0.69,
-      "link_click_rate": 0.61,
+      "link_click_rate": 88.89,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -482,7 +482,7 @@
       "pulling_views": 2629,
       "total_views": 2643,
       "interest_rate": 0.53,
-      "link_click_rate": 0.34,
+      "link_click_rate": 64.29,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -499,7 +499,7 @@
       "pulling_views": 3939,
       "total_views": 3939,
       "interest_rate": 0.0,
-      "link_click_rate": 0.38,
+      "link_click_rate": 0.0,
       "convert_rate": 33.33,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -516,7 +516,7 @@
       "pulling_views": 5804,
       "total_views": 5804,
       "interest_rate": 0.0,
-      "link_click_rate": 0.5,
+      "link_click_rate": 0.0,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -533,7 +533,7 @@
       "pulling_views": 1758,
       "total_views": 3127,
       "interest_rate": 77.87,
-      "link_click_rate": 0.16,
+      "link_click_rate": 0.37,
       "convert_rate": 20.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -550,7 +550,7 @@
       "pulling_views": 3627,
       "total_views": 3673,
       "interest_rate": 1.27,
-      "link_click_rate": 0.44,
+      "link_click_rate": 34.78,
       "convert_rate": 12.5,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -567,7 +567,7 @@
       "pulling_views": 3413,
       "total_views": 3445,
       "interest_rate": 0.94,
-      "link_click_rate": 0.12,
+      "link_click_rate": 12.5,
       "convert_rate": 0.0,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -584,7 +584,7 @@
       "pulling_views": 2799,
       "total_views": 2837,
       "interest_rate": 1.36,
-      "link_click_rate": 0.21,
+      "link_click_rate": 15.79,
       "convert_rate": 16.67,
       "shorts_views": 0,
       "subscriber_increase": 0
@@ -601,7 +601,7 @@
       "pulling_views": 844,
       "total_views": 863,
       "interest_rate": 2.25,
-      "link_click_rate": 0.58,
+      "link_click_rate": 26.32,
       "convert_rate": 0.0,
       "shorts_views": 2057,
       "subscriber_increase": 0
@@ -618,7 +618,7 @@
       "pulling_views": 614,
       "total_views": 1011,
       "interest_rate": 64.66,
-      "link_click_rate": 1.29,
+      "link_click_rate": 3.27,
       "convert_rate": 0.0,
       "shorts_views": 1493,
       "subscriber_increase": 0
@@ -635,7 +635,7 @@
       "pulling_views": 1068,
       "total_views": 1131,
       "interest_rate": 5.9,
-      "link_click_rate": 0.44,
+      "link_click_rate": 7.94,
       "convert_rate": 20.0,
       "shorts_views": 1808,
       "subscriber_increase": 0
@@ -652,7 +652,7 @@
       "pulling_views": 1563,
       "total_views": 1627,
       "interest_rate": 4.09,
-      "link_click_rate": 0.61,
+      "link_click_rate": 15.62,
       "convert_rate": 10.0,
       "shorts_views": 3012,
       "subscriber_increase": 0
@@ -669,7 +669,7 @@
       "pulling_views": 3758,
       "total_views": 3880,
       "interest_rate": 3.25,
-      "link_click_rate": 0.82,
+      "link_click_rate": 26.23,
       "convert_rate": 0.0,
       "shorts_views": 16189,
       "subscriber_increase": 0
@@ -686,7 +686,7 @@
       "pulling_views": 13303,
       "total_views": 13547,
       "interest_rate": 1.83,
-      "link_click_rate": 0.3,
+      "link_click_rate": 16.39,
       "convert_rate": 0.0,
       "shorts_views": 7073,
       "subscriber_increase": 0
@@ -703,7 +703,7 @@
       "pulling_views": 6904,
       "total_views": 7560,
       "interest_rate": 9.5,
-      "link_click_rate": 0.83,
+      "link_click_rate": 9.6,
       "convert_rate": 4.76,
       "shorts_views": 422,
       "subscriber_increase": 0
@@ -720,7 +720,7 @@
       "pulling_views": 7260,
       "total_views": 7538,
       "interest_rate": 3.83,
-      "link_click_rate": 0.52,
+      "link_click_rate": 14.03,
       "convert_rate": 5.13,
       "shorts_views": 2418,
       "subscriber_increase": 0
@@ -737,7 +737,7 @@
       "pulling_views": 22938,
       "total_views": 23335,
       "interest_rate": 1.73,
-      "link_click_rate": 0.25,
+      "link_click_rate": 14.61,
       "convert_rate": 3.45,
       "shorts_views": 870,
       "subscriber_increase": 0
@@ -754,7 +754,7 @@
       "pulling_views": 14259,
       "total_views": 14558,
       "interest_rate": 2.1,
-      "link_click_rate": 0.45,
+      "link_click_rate": 21.74,
       "convert_rate": 0.0,
       "shorts_views": 239,
       "subscriber_increase": 0
@@ -771,7 +771,7 @@
       "pulling_views": 18530,
       "total_views": 18678,
       "interest_rate": 0.8,
-      "link_click_rate": 0.16,
+      "link_click_rate": 20.27,
       "convert_rate": 3.33,
       "shorts_views": 198,
       "subscriber_increase": 0
@@ -788,7 +788,7 @@
       "pulling_views": 7431,
       "total_views": 8284,
       "interest_rate": 11.48,
-      "link_click_rate": 0.7,
+      "link_click_rate": 6.8,
       "convert_rate": 1.72,
       "shorts_views": 263,
       "subscriber_increase": 0
@@ -805,7 +805,7 @@
       "pulling_views": 6796,
       "total_views": 10033,
       "interest_rate": 47.63,
-      "link_click_rate": 0.8,
+      "link_click_rate": 2.47,
       "convert_rate": 5.0,
       "shorts_views": 240,
       "subscriber_increase": 0
@@ -822,7 +822,7 @@
       "pulling_views": 5726,
       "total_views": 6353,
       "interest_rate": 10.95,
-      "link_click_rate": 0.63,
+      "link_click_rate": 6.38,
       "convert_rate": 2.5,
       "shorts_views": 201,
       "subscriber_increase": 0
@@ -839,7 +839,7 @@
       "pulling_views": 4837,
       "total_views": 5254,
       "interest_rate": 8.62,
-      "link_click_rate": 0.38,
+      "link_click_rate": 4.8,
       "convert_rate": 0.0,
       "shorts_views": 239,
       "subscriber_increase": 0
@@ -856,7 +856,7 @@
       "pulling_views": 13943,
       "total_views": 14300,
       "interest_rate": 2.56,
-      "link_click_rate": 0.38,
+      "link_click_rate": 15.41,
       "convert_rate": 0.0,
       "shorts_views": 229,
       "subscriber_increase": 0
@@ -873,7 +873,7 @@
       "pulling_views": 22471,
       "total_views": 25005,
       "interest_rate": 11.28,
-      "link_click_rate": 0.24,
+      "link_click_rate": 2.33,
       "convert_rate": 1.69,
       "shorts_views": 223,
       "subscriber_increase": 0
@@ -890,7 +890,7 @@
       "pulling_views": 18460,
       "total_views": 22962,
       "interest_rate": 24.39,
-      "link_click_rate": 0.36,
+      "link_click_rate": 1.84,
       "convert_rate": 2.41,
       "shorts_views": 270,
       "subscriber_increase": 0
@@ -907,7 +907,7 @@
       "pulling_views": 14422,
       "total_views": 19423,
       "interest_rate": 34.68,
-      "link_click_rate": 0.65,
+      "link_click_rate": 2.54,
       "convert_rate": 3.94,
       "shorts_views": 229,
       "subscriber_increase": 0
@@ -924,7 +924,7 @@
       "pulling_views": 15404,
       "total_views": 21866,
       "interest_rate": 41.95,
-      "link_click_rate": 0.46,
+      "link_click_rate": 1.56,
       "convert_rate": 2.97,
       "shorts_views": 187,
       "subscriber_increase": 0
@@ -941,7 +941,7 @@
       "pulling_views": 38536,
       "total_views": 44226,
       "interest_rate": 14.77,
-      "link_click_rate": 0.22,
+      "link_click_rate": 1.7,
       "convert_rate": 2.06,
       "shorts_views": 336,
       "subscriber_increase": 0
@@ -958,7 +958,7 @@
       "pulling_views": 41990,
       "total_views": 47862,
       "interest_rate": 13.98,
-      "link_click_rate": 0.36,
+      "link_click_rate": 2.93,
       "convert_rate": 5.23,
       "shorts_views": 436,
       "subscriber_increase": 0
@@ -975,7 +975,7 @@
       "pulling_views": 21205,
       "total_views": 24098,
       "interest_rate": 13.64,
-      "link_click_rate": 0.42,
+      "link_click_rate": 3.53,
       "convert_rate": 4.9,
       "shorts_views": 239,
       "subscriber_increase": 0
@@ -992,7 +992,7 @@
       "pulling_views": 19825,
       "total_views": 20883,
       "interest_rate": 5.34,
-      "link_click_rate": 0.47,
+      "link_click_rate": 9.26,
       "convert_rate": 3.06,
       "shorts_views": 217,
       "subscriber_increase": 0
@@ -1009,7 +1009,7 @@
       "pulling_views": 28539,
       "total_views": 29392,
       "interest_rate": 2.99,
-      "link_click_rate": 0.39,
+      "link_click_rate": 13.36,
       "convert_rate": 4.39,
       "shorts_views": 202,
       "subscriber_increase": 0
@@ -1026,7 +1026,7 @@
       "pulling_views": 17574,
       "total_views": 18241,
       "interest_rate": 3.8,
-      "link_click_rate": 0.59,
+      "link_click_rate": 16.04,
       "convert_rate": 2.8,
       "shorts_views": 322,
       "subscriber_increase": 0
@@ -1043,7 +1043,7 @@
       "pulling_views": 14457,
       "total_views": 15057,
       "interest_rate": 4.15,
-      "link_click_rate": 0.5,
+      "link_click_rate": 12.67,
       "convert_rate": 1.32,
       "shorts_views": 167,
       "subscriber_increase": 0
@@ -1060,7 +1060,7 @@
       "pulling_views": 30462,
       "total_views": 31255,
       "interest_rate": 2.6,
-      "link_click_rate": 0.37,
+      "link_click_rate": 14.63,
       "convert_rate": 0.86,
       "shorts_views": 277,
       "subscriber_increase": 0
@@ -1077,7 +1077,7 @@
       "pulling_views": 44390,
       "total_views": 45436,
       "interest_rate": 2.36,
-      "link_click_rate": 0.34,
+      "link_click_rate": 14.91,
       "convert_rate": 3.21,
       "shorts_views": 408,
       "subscriber_increase": 0
@@ -1094,7 +1094,7 @@
       "pulling_views": 51230,
       "total_views": 52399,
       "interest_rate": 2.28,
-      "link_click_rate": 0.28,
+      "link_click_rate": 12.66,
       "convert_rate": 2.7,
       "shorts_views": 334,
       "subscriber_increase": 0
@@ -1111,7 +1111,7 @@
       "pulling_views": 38790,
       "total_views": 39808,
       "interest_rate": 2.62,
-      "link_click_rate": 0.47,
+      "link_click_rate": 18.27,
       "convert_rate": 3.76,
       "shorts_views": 462,
       "subscriber_increase": 0
@@ -1128,7 +1128,7 @@
       "pulling_views": 20074,
       "total_views": 20756,
       "interest_rate": 3.4,
-      "link_click_rate": 0.53,
+      "link_click_rate": 16.28,
       "convert_rate": 0.0,
       "shorts_views": 475,
       "subscriber_increase": 0
@@ -1145,7 +1145,7 @@
       "pulling_views": 29336,
       "total_views": 30085,
       "interest_rate": 2.55,
-      "link_click_rate": 0.44,
+      "link_click_rate": 17.76,
       "convert_rate": 1.5,
       "shorts_views": 467,
       "subscriber_increase": 0
@@ -1162,7 +1162,7 @@
       "pulling_views": 34745,
       "total_views": 35574,
       "interest_rate": 2.39,
-      "link_click_rate": 0.46,
+      "link_click_rate": 19.9,
       "convert_rate": 1.82,
       "shorts_views": 465,
       "subscriber_increase": 0
@@ -1179,7 +1179,7 @@
       "pulling_views": 35471,
       "total_views": 36204,
       "interest_rate": 2.07,
-      "link_click_rate": 0.36,
+      "link_click_rate": 17.6,
       "convert_rate": 2.33,
       "shorts_views": 399,
       "subscriber_increase": 0
@@ -1196,7 +1196,7 @@
       "pulling_views": 24689,
       "total_views": 26621,
       "interest_rate": 7.83,
-      "link_click_rate": 0.37,
+      "link_click_rate": 5.12,
       "convert_rate": 4.04,
       "shorts_views": 486,
       "subscriber_increase": 0
@@ -1213,7 +1213,7 @@
       "pulling_views": 21074,
       "total_views": 23216,
       "interest_rate": 10.16,
-      "link_click_rate": 0.65,
+      "link_click_rate": 7.0,
       "convert_rate": 2.0,
       "shorts_views": 522,
       "subscriber_increase": 0
@@ -1230,7 +1230,7 @@
       "pulling_views": 24882,
       "total_views": 25893,
       "interest_rate": 4.06,
-      "link_click_rate": 0.44,
+      "link_click_rate": 11.37,
       "convert_rate": 3.48,
       "shorts_views": 426,
       "subscriber_increase": 0
@@ -1247,7 +1247,7 @@
       "pulling_views": 20628,
       "total_views": 21379,
       "interest_rate": 3.64,
-      "link_click_rate": 0.34,
+      "link_click_rate": 9.72,
       "convert_rate": 0.0,
       "shorts_views": 398,
       "subscriber_increase": 0
@@ -1264,7 +1264,7 @@
       "pulling_views": 23819,
       "total_views": 24556,
       "interest_rate": 3.09,
-      "link_click_rate": 0.35,
+      "link_click_rate": 11.67,
       "convert_rate": 1.16,
       "shorts_views": 363,
       "subscriber_increase": 0
@@ -1281,7 +1281,7 @@
       "pulling_views": 38390,
       "total_views": 41972,
       "interest_rate": 9.33,
-      "link_click_rate": 0.56,
+      "link_click_rate": 6.5,
       "convert_rate": 2.15,
       "shorts_views": 590,
       "subscriber_increase": 0
@@ -1298,7 +1298,7 @@
       "pulling_views": 16573,
       "total_views": 17626,
       "interest_rate": 6.35,
-      "link_click_rate": 0.9,
+      "link_click_rate": 15.0,
       "convert_rate": 1.27,
       "shorts_views": 385,
       "subscriber_increase": 0
@@ -1315,7 +1315,7 @@
       "pulling_views": 14025,
       "total_views": 14805,
       "interest_rate": 5.56,
-      "link_click_rate": 0.69,
+      "link_click_rate": 13.08,
       "convert_rate": 0.0,
       "shorts_views": 547,
       "subscriber_increase": 0
@@ -1332,7 +1332,7 @@
       "pulling_views": 10901,
       "total_views": 11351,
       "interest_rate": 4.13,
-      "link_click_rate": 0.56,
+      "link_click_rate": 14.22,
       "convert_rate": 1.56,
       "shorts_views": 377,
       "subscriber_increase": 0
@@ -1349,7 +1349,7 @@
       "pulling_views": 18499,
       "total_views": 19290,
       "interest_rate": 4.28,
-      "link_click_rate": 0.65,
+      "link_click_rate": 15.8,
       "convert_rate": 1.6,
       "shorts_views": 549,
       "subscriber_increase": 0
@@ -1366,7 +1366,7 @@
       "pulling_views": 27541,
       "total_views": 28372,
       "interest_rate": 3.02,
-      "link_click_rate": 0.53,
+      "link_click_rate": 18.05,
       "convert_rate": 1.33,
       "shorts_views": 492,
       "subscriber_increase": 0
@@ -1383,7 +1383,7 @@
       "pulling_views": 27051,
       "total_views": 27860,
       "interest_rate": 2.99,
-      "link_click_rate": 0.49,
+      "link_click_rate": 16.93,
       "convert_rate": 1.46,
       "shorts_views": 481,
       "subscriber_increase": 0
@@ -1400,7 +1400,7 @@
       "pulling_views": 18838,
       "total_views": 21502,
       "interest_rate": 14.14,
-      "link_click_rate": 0.52,
+      "link_click_rate": 4.2,
       "convert_rate": 0.0,
       "shorts_views": 407,
       "subscriber_increase": 0
@@ -1417,7 +1417,7 @@
       "pulling_views": 23236,
       "total_views": 26908,
       "interest_rate": 15.8,
-      "link_click_rate": 0.43,
+      "link_click_rate": 3.16,
       "convert_rate": 0.0,
       "shorts_views": 524,
       "subscriber_increase": 0
@@ -1434,7 +1434,7 @@
       "pulling_views": 18746,
       "total_views": 23311,
       "interest_rate": 24.35,
-      "link_click_rate": 0.52,
+      "link_click_rate": 2.65,
       "convert_rate": 0.0,
       "shorts_views": 563,
       "subscriber_increase": 0
@@ -1451,7 +1451,7 @@
       "pulling_views": 17578,
       "total_views": 18342,
       "interest_rate": 4.35,
-      "link_click_rate": 0.51,
+      "link_click_rate": 12.3,
       "convert_rate": 1.06,
       "shorts_views": 572,
       "subscriber_increase": 0
@@ -1468,7 +1468,7 @@
       "pulling_views": 16634,
       "total_views": 17332,
       "interest_rate": 4.2,
-      "link_click_rate": 0.54,
+      "link_click_rate": 13.47,
       "convert_rate": 0.0,
       "shorts_views": 652,
       "subscriber_increase": 215
@@ -1485,7 +1485,7 @@
       "pulling_views": 14559,
       "total_views": 15130,
       "interest_rate": 3.92,
-      "link_click_rate": 0.42,
+      "link_click_rate": 11.21,
       "convert_rate": 0.0,
       "shorts_views": 496,
       "subscriber_increase": 215
@@ -1502,7 +1502,7 @@
       "pulling_views": 12022,
       "total_views": 12458,
       "interest_rate": 3.63,
-      "link_click_rate": 0.56,
+      "link_click_rate": 16.06,
       "convert_rate": 0.0,
       "shorts_views": 600,
       "subscriber_increase": 166
@@ -1519,7 +1519,7 @@
       "pulling_views": 14372,
       "total_views": 18728,
       "interest_rate": 30.31,
-      "link_click_rate": 0.58,
+      "link_click_rate": 2.48,
       "convert_rate": 1.85,
       "shorts_views": 716,
       "subscriber_increase": 211
@@ -1536,7 +1536,7 @@
       "pulling_views": 14858,
       "total_views": 18121,
       "interest_rate": 21.96,
-      "link_click_rate": 0.44,
+      "link_click_rate": 2.45,
       "convert_rate": 3.75,
       "shorts_views": 524,
       "subscriber_increase": 228
@@ -1553,7 +1553,7 @@
       "pulling_views": 43453,
       "total_views": 44081,
       "interest_rate": 1.45,
-      "link_click_rate": 0.37,
+      "link_click_rate": 25.8,
       "convert_rate": 0.62,
       "shorts_views": 521,
       "subscriber_increase": 817
@@ -1570,7 +1570,7 @@
       "pulling_views": 23870,
       "total_views": 28379,
       "interest_rate": 18.89,
-      "link_click_rate": 0.5,
+      "link_click_rate": 3.13,
       "convert_rate": 2.13,
       "shorts_views": 646,
       "subscriber_increase": 372
@@ -1587,7 +1587,7 @@
       "pulling_views": 24171,
       "total_views": 25869,
       "interest_rate": 7.02,
-      "link_click_rate": 0.44,
+      "link_click_rate": 6.65,
       "convert_rate": 1.77,
       "shorts_views": 486,
       "subscriber_increase": 342
@@ -1604,7 +1604,7 @@
       "pulling_views": 19968,
       "total_views": 21197,
       "interest_rate": 6.15,
-      "link_click_rate": 0.45,
+      "link_click_rate": 7.73,
       "convert_rate": 1.05,
       "shorts_views": 420,
       "subscriber_increase": 305
@@ -1621,7 +1621,7 @@
       "pulling_views": 16348,
       "total_views": 17513,
       "interest_rate": 7.13,
-      "link_click_rate": 0.46,
+      "link_click_rate": 6.87,
       "convert_rate": 1.25,
       "shorts_views": 441,
       "subscriber_increase": 245
@@ -1638,7 +1638,7 @@
       "pulling_views": 16522,
       "total_views": 17521,
       "interest_rate": 6.05,
-      "link_click_rate": 0.45,
+      "link_click_rate": 7.81,
       "convert_rate": 1.28,
       "shorts_views": 294,
       "subscriber_increase": 231
@@ -1655,7 +1655,7 @@
       "pulling_views": 15644,
       "total_views": 23882,
       "interest_rate": 52.66,
-      "link_click_rate": 0.48,
+      "link_click_rate": 1.4,
       "convert_rate": 0.87,
       "shorts_views": 382,
       "subscriber_increase": 292
@@ -1672,7 +1672,7 @@
       "pulling_views": 18469,
       "total_views": 23009,
       "interest_rate": 24.58,
-      "link_click_rate": 0.41,
+      "link_click_rate": 2.07,
       "convert_rate": 1.06,
       "shorts_views": 388,
       "subscriber_increase": 240
@@ -1689,7 +1689,7 @@
       "pulling_views": 26334,
       "total_views": 31707,
       "interest_rate": 20.4,
-      "link_click_rate": 0.54,
+      "link_click_rate": 3.16,
       "convert_rate": 1.76,
       "shorts_views": 405,
       "subscriber_increase": 438
@@ -1706,7 +1706,7 @@
       "pulling_views": 31750,
       "total_views": 37466,
       "interest_rate": 18.0,
-      "link_click_rate": 0.41,
+      "link_click_rate": 2.66,
       "convert_rate": 1.32,
       "shorts_views": 585,
       "subscriber_increase": 421
@@ -1723,7 +1723,7 @@
       "pulling_views": 40961,
       "total_views": 62922,
       "interest_rate": 53.61,
-      "link_click_rate": 0.57,
+      "link_click_rate": 1.63,
       "convert_rate": 1.4,
       "shorts_views": 606,
       "subscriber_increase": 713
@@ -1740,7 +1740,7 @@
       "pulling_views": 39561,
       "total_views": 72291,
       "interest_rate": 82.73,
-      "link_click_rate": 0.6,
+      "link_click_rate": 1.33,
       "convert_rate": 1.38,
       "shorts_views": 797,
       "subscriber_increase": 1280
@@ -1757,7 +1757,7 @@
       "pulling_views": 28084,
       "total_views": 37193,
       "interest_rate": 32.43,
-      "link_click_rate": 0.67,
+      "link_click_rate": 2.72,
       "convert_rate": 2.02,
       "shorts_views": 889,
       "subscriber_increase": 560
@@ -1774,7 +1774,7 @@
       "pulling_views": 23448,
       "total_views": 27165,
       "interest_rate": 15.85,
-      "link_click_rate": 0.54,
+      "link_click_rate": 3.98,
       "convert_rate": 1.35,
       "shorts_views": 754,
       "subscriber_increase": 315
@@ -1791,7 +1791,7 @@
       "pulling_views": 21659,
       "total_views": 26241,
       "interest_rate": 21.16,
-      "link_click_rate": 0.51,
+      "link_click_rate": 2.92,
       "convert_rate": 0.75,
       "shorts_views": 805,
       "subscriber_increase": 366
@@ -1808,7 +1808,7 @@
       "pulling_views": 25601,
       "total_views": 31294,
       "interest_rate": 22.24,
-      "link_click_rate": 0.52,
+      "link_click_rate": 2.86,
       "convert_rate": 1.23,
       "shorts_views": 7258,
       "subscriber_increase": 454
