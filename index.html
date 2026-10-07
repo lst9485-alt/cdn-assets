@@ -70,7 +70,7 @@ h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
 .grp:first-child{margin-top:0}
 .g-title{font-size:12px;font-weight:800;color:var(--blue);margin-bottom:8px}
 details.grp summary{cursor:pointer;color:var(--muted)}
-.ptg{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.ptg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .pt{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;min-width:0;background:var(--card)}
 .pt:hover{border-color:var(--blue)}
 .t-name{font-weight:800;font-size:14px;text-decoration:none}
@@ -122,8 +122,9 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   .fs{grid-template-columns:72px 1fr}
   .links{grid-template-columns:1fr 1fr}
   .jcols{grid-template-columns:1fr}
+  .ptg{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media (max-width:480px){ .links{grid-template-columns:1fr} h1{font-size:21px} }
+@media (max-width:480px){ .links{grid-template-columns:1fr} .ptg{grid-template-columns:1fr} h1{font-size:21px} }
 </style>
 </head>
 <body>
