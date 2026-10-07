@@ -314,8 +314,10 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     var y=function(v){ return P+(1-(v-min)/Math.max(max-min,1))*(H-2*P); };
     var pts=vals.map(function(v,i){ return x(i)+','+y(v); }).join(' ');
     var lx=x(vals.length-1), ly=y(vals[vals.length-1]);
+    var avg=vals.reduce(function(a,v){ return a+v; },0)/Math.max(vals.length,1); // 빨간 점선 = 12주 평균
     var hits=vals.map(function(v,i){ var w=(W-2*P)/Math.max(vals.length-1,1); return '<rect x="'+(x(i)-w/2)+'" y="0" width="'+w+'" height="'+H+'" fill="transparent" data-tip="'+attr((weeks[i]?md(weeks[i].week_start)+' 주 · ':'')+label+' '+v.toLocaleString('ko-KR'))+'"/>'; }).join('');
     return '<svg class="mini" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+attr(label)+' 최근 12주">'
+      +'<line x1="'+P+'" x2="'+(W-P)+'" y1="'+y(avg)+'" y2="'+y(avg)+'" stroke="#C63B26" stroke-width="1" stroke-dasharray="3 3"/>'
       +'<polyline points="'+pts+'" fill="none" stroke="#8FA6C4" stroke-width="1.5" stroke-linejoin="round"/>'
       +'<circle cx="'+lx+'" cy="'+ly+'" r="3" fill="#1D5FD1"/>'+hits+'</svg>';
   }
