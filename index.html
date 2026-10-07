@@ -36,8 +36,12 @@ h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
 .verdict{background:var(--bad-soft);border-radius:10px;padding:14px 16px;margin-bottom:16px}
 .verdict b{color:var(--bad)}
 .verdict .gain{margin-top:4px;color:var(--sub);font-size:13px}
-.funnel{display:flex;flex-direction:column;max-width:760px}
-.fr{display:grid;grid-template-columns:90px 1fr 80px;align-items:center;gap:10px}
+.funnel{display:flex;flex-direction:column}
+.funnel-head{display:grid;grid-template-columns:90px 1fr 80px 150px;gap:10px;font-size:11px;color:var(--muted);margin-bottom:4px}
+.funnel-head span:last-child{text-align:center}
+.fr-track{min-width:0}
+.mini{width:150px;height:34px}
+.fr{display:grid;grid-template-columns:90px 1fr 80px 150px;align-items:center;gap:10px}
 .fr-name{font-weight:700}
 .fr-bar{height:24px;border-radius:0 5px 5px 0;background:#1D5FD1}
 .fr-bar.bad{background:var(--bad)}
@@ -73,29 +77,20 @@ h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
 .chartbox svg{width:100%;height:auto;display:block}
 .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;padding:5px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-120%)}
 
-/* 홈페이지 지도 */
-.lane{margin-top:14px}
-.lane:first-of-type{margin-top:0}
-.lane-title{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:8px}
-.lane-row{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
-.lane-row.path .pg{flex:1 1 170px}
-.lane-row .pg{flex:1 1 220px}
-.path-arrow{display:flex;align-items:center;color:var(--muted);font-size:16px}
-.pg{border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px;background:var(--card);min-width:0}
-.pg:hover{border-color:var(--blue)}
-.pg .name{font-weight:800;font-size:14px;text-decoration:none}
-.pg .name:hover{text-decoration:underline}
-.pg .date{font-size:12px;color:var(--ink);font-weight:600;background:#F1F4F8;border-radius:6px;padding:2px 8px;width:fit-content}
-.pg .when{font-size:12px;font-weight:800;color:var(--blue)}
-.pg .where{font-size:12px;color:var(--sub)}
-.pg .addr{font-size:12px;color:var(--blue);font-weight:700;word-break:break-all;text-decoration:none;width:fit-content}
-.pg a.addr:hover{text-decoration:underline}
-.pg .addr.none{color:var(--muted);font-weight:500}
-.btn.live{border-color:var(--blue);color:var(--blue);background:#fff}
-.pg .desc{font-size:12px;color:var(--muted)}
-.pg .stat{font-size:12px;color:var(--sub)}
-.pg .stat b{color:var(--ink)}
-.pg .acts{display:flex;gap:6px;margin-top:auto;padding-top:2px;flex-wrap:wrap}
+/* 홈페이지 목록 */
+.grp{margin-top:16px}
+.grp:first-child{margin-top:0}
+.g-title{font-size:12px;font-weight:800;color:var(--blue);padding-bottom:6px;border-bottom:1px solid var(--line)}
+details.grp summary{cursor:pointer;color:var(--muted)}
+.row{display:grid;grid-template-columns:1fr 120px 170px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.r-main{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-width:0}
+.r-name{font-weight:800;font-size:14px;text-decoration:none}
+.r-name:hover{text-decoration:underline}
+.r-addr{font-size:12px;color:var(--blue);text-decoration:none}
+.r-addr:hover{text-decoration:underline}
+.r-extra{font-size:12px;color:var(--muted)}
+.r-date{font-size:12px;color:var(--sub)}
+.r-acts{display:flex;gap:6px;justify-content:flex-end}
 .btn{font:inherit;font-size:12px;font-weight:700;border:1px solid var(--line);background:#F7F9FB;color:var(--sub);border-radius:7px;padding:4px 10px;cursor:pointer;text-decoration:none;white-space:nowrap}
 .btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
 .btn.copy{background:var(--blue);border-color:var(--blue);color:#fff}
@@ -103,9 +98,8 @@ h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
 .btn.done{background:var(--ok);border-color:var(--ok);color:#fff}
 .btn.fail{background:var(--bad);border-color:var(--bad);color:#fff}
 .btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-details.later{margin-top:14px}
-details.later summary{cursor:pointer;font-size:12px;font-weight:700;color:var(--muted)}
-details.later .lane-row{margin-top:8px}
+.j-link{font-size:12px;font-weight:700;color:var(--blue);text-decoration:none;white-space:nowrap}
+.j-link:hover{text-decoration:underline}
 
 /* 자료·바로가기 */
 .links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
@@ -118,11 +112,13 @@ details.later .lane-row{margin-top:8px}
 @media (max-width:860px){
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
   .fr{grid-template-columns:72px 1fr 64px}
+  .mini,.funnel-head{display:none}
   .fs{grid-template-columns:72px 1fr}
   .jr{grid-template-columns:72px 1fr}
   .j-acts{grid-column:2;justify-content:flex-start}
   .links{grid-template-columns:1fr 1fr}
-  .path-arrow{display:none}
+  .row{grid-template-columns:1fr}
+  .r-acts{justify-content:flex-start}
 }
 @media (max-width:480px){ .links{grid-template-columns:1fr} h1{font-size:21px} }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -151,7 +147,7 @@ details.later .lane-row{margin-top:8px}
   </section>
 
   <section class="card">
-    <div class="h2row"><h2>홈페이지</h2><span class="hint">파란 버튼 = 아임웹에 붙일 코드 복사</span></div>
+    <div class="h2row"><h2>홈페이지</h2><span class="hint">이름 누르면 실제 페이지 · 코드 복사 = 아임웹에 붙일 코드</span></div>
     <div id="homepage"></div>
   </section>
 
@@ -249,7 +245,7 @@ details.later .lane-row{margin-top:8px}
     stages.forEach(function(sg,i){
       var v=vals[sg[1]], w=Math.max(6, Math.log10(Math.max(v,1))/max*100);
       var last=i===3;
-      rows+='<div class="fr"><span class="fr-name">'+sg[0]+'</span><div class="fr-bar'+(last&&stuck&&worst.to==='paid_customers'?' bad':'')+'" style="width:'+w+'%"></div><span class="fr-val num">'+v.toLocaleString('ko-KR')+sg[2]+'</span></div>';
+      rows+='<div class="fr"><span class="fr-name">'+sg[0]+'</span><div class="fr-track"><div class="fr-bar'+(last&&stuck&&worst.to==='paid_customers'?' bad':'')+'" style="width:'+w+'%"></div></div><span class="fr-val num">'+v.toLocaleString('ko-KR')+sg[2]+'</span>'+miniSvg(hist.slice(-12).map(function(x){ return x[sg[1]]||0; }), sg[0])+'</div>';
       if(i<3){
         var st=steps[i], ok=st.rate>=st.target, isW=st===worst&&stuck;
         rows+='<div class="fs'+(isW?' bad':'')+'"><span></span><span>↓ '+f1(st.rate)+'%가 넘어감 · 목표 '+f1(st.target)+'% <span class="chip '+(ok?'ok':'bad')+'">'+(ok?'통과':(isW?'막힘':'미달'))+'</span></span></div>';
@@ -259,7 +255,7 @@ details.later .lane-row{margin-top:8px}
     var weeks=hist.slice(-12);
     var chart = stuck ? '<div class="sub-h">'+esc(worst.name)+' 칸, 최근 12주</div>'+trendSvg(weeks.map(function(w){ return pct(w[worst.to]||0,w[worst.from]||0); }), worst.target, weeks) : '';
     var zones = (stuck && worst.to==='paid_customers') ? '<div class="sub-h">그럼 랜딩 페이지 어디서 빠질까 — 각 구역까지 내려온 사람</div><div id="zones" class="zones num"><span class="hint">불러오는 중…</span></div>' : '';
-    box.innerHTML='<div class="verdict">'+head+'</div><div class="funnel">'+rows+'</div>'+chart+zones;
+    box.innerHTML='<div class="verdict">'+head+'</div><div class="funnel"><div class="funnel-head"><span></span><span></span><span style="text-align:right">4주 합계</span><span>최근 12주 흐름</span></div>'+rows+'</div>'+chart+zones;
     if(zones) renderZones();
   }
 
@@ -280,6 +276,18 @@ details.later .lane-row{margin-top:8px}
         }).join('');
       })
       .catch(function(){ el.innerHTML='<p class="hint">랜딩 구역 숫자 파일이 아직 없어요. 내일 아침 6시 뒤에 생겨요.</p>'; });
+  }
+
+  // 칸 옆 작은 추이 (최근 12주 주별 숫자). 끝점 = 시트에 마지막으로 채운 주
+  function miniSvg(vals, label){
+    var W=150,H=34,P=3, max=Math.max.apply(null,vals)||1, min=Math.min.apply(null,vals);
+    var x=function(i){ return P+i*(W-2*P)/Math.max(vals.length-1,1); };
+    var y=function(v){ return P+(1-(v-min)/Math.max(max-min,1))*(H-2*P); };
+    var pts=vals.map(function(v,i){ return x(i)+','+y(v); }).join(' ');
+    var lx=x(vals.length-1), ly=y(vals[vals.length-1]);
+    return '<svg class="mini" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(label)+' 최근 12주"><title>'+esc(label)+' 최근 12주: '+vals.map(function(v){return v.toLocaleString('ko-KR');}).join(' → ')+'</title>'
+      +'<polyline points="'+pts+'" fill="none" stroke="#8FA6C4" stroke-width="1.5" stroke-linejoin="round"/>'
+      +'<circle cx="'+lx+'" cy="'+ly+'" r="3" fill="#1D5FD1"/></svg>';
   }
 
   function trendSvg(vals,target,weeks){
@@ -338,61 +346,39 @@ details.later .lane-row{margin-top:8px}
 
   // ---------- 홈페이지 ----------
   // 묶음은 여기서 id로 정한다. 새 페이지는 site-config.js에 넣고 여기에도 id를 추가한다
-  var LANES=[
-    {title:'손님이 사는 길 — 메인 → 코칭 → 신청 → 결제', path:true, ids:['main-page','landing-page-v3','coaching-payment-modal-demo','coaching-payment']},
-    {title:'그 밖의 페이지', ids:['curriculum-page','refund-policy','fire-retirement-calculator','investment-philosophy']},
-    {title:'모든 페이지에 붙는 코드 (고치면 전부 바뀜)', ids:['imweb-header-code','imweb-footer-code','common-header','common-footer']}
+  var GROUPS=[
+    {title:'홈페이지 (손님이 보는 실제 페이지)', ids:['main-page','landing-page-v3','coaching-payment','curriculum-page','refund-policy']},
+    {title:'상담 손님에게 링크로 보내는 페이지', ids:['recommended-books','consult-180day-column'], notes:{'recommended-books':'90일 후 알림톡','consult-180day-column':'180일 후 알림톡'}},
+    {title:'모든 페이지에 붙는 코드 (고치면 전부 바뀜)', ids:['imweb-header-code','imweb-footer-code','common-header','common-footer']},
+    {title:'작업본에만 있는 것', ids:['coaching-payment-modal-demo','fire-retirement-calculator','investment-philosophy','lecture-allinone','lecture-bookclub'], fold:true}
   ];
-  var WHERE={ 'curriculum-page':'홈페이지 위쪽 메뉴에 있음', 'refund-policy':'홈페이지 위쪽 메뉴에 있음', 'fire-retirement-calculator':'작업본에만 있음 · 링크로 보냄', 'investment-philosophy':'작업본에만 있음 · 링크로 보냄' };
-  var LATER=['lecture-allinone','lecture-bookclub'];
 
   function dateLine(it){
     var m=String(it.imwebDate||'').match(/^\d{4}-(\d{2})-(\d{2})$/);
     if(!m) return '';
-    return '<div class="date num">'+(+m[1])+'월 '+(+m[2])+'일 수정'+(it.dateSuffix?' · 그날 '+esc(it.dateSuffix)+'번째':'')+'</div>';
+    return (+m[1])+'/'+(+m[2])+' 수정'+(it.dateSuffix?' ('+esc(it.dateSuffix)+'번째)':'');
   }
 
-  // 실제 홈페이지(아임웹)에 없는 것의 설명
-  var NOLIVE={ 'coaching-payment-modal-demo':'코칭 페이지에서 신청하면 뜨는 창', 'imweb-header-code':'아임웹 설정에 붙이는 코드', 'imweb-footer-code':'아임웹 설정에 붙이는 코드', 'common-header':'모든 페이지 위쪽 메뉴', 'common-footer':'모든 페이지 아래쪽 정보' };
-
-  function liveLine(it){
-    if(it.liveUrl) return '<a class="addr" href="'+esc(it.liveUrl)+'" target="_blank" rel="noopener">'+esc(it.liveUrl.replace('https://',''))+' ↗</a>';
-    if(!it.publicPath) return '';
-    return '<div class="addr none">'+esc(NOLIVE[it.id]||'실제 홈페이지엔 아직 없어요')+'</div>';
-  }
-  function openBtns(it, workLabel){
-    var b='';
-    if(it.liveUrl) b+='<a class="btn live" href="'+esc(it.liveUrl)+'" target="_blank" rel="noopener">실제 페이지</a>';
-    if(href(it)!==it.liveUrl) b+='<a class="btn" href="'+esc(href(it))+'" target="_blank" rel="noopener">'+esc(workLabel||(it.liveUrl||it.publicPath?'작업본':'열기'))+'</a>';
-    if(it.imwebCode) b+='<button type="button" class="btn copy" data-copy="'+esc(it.imwebCode)+'">아임웹 코드 복사</button>';
-    return b;
-  }
-
-  function pageCard(it, hist, note){
+  function pageRow(it, note, hist){
     if(!it) return '';
     var w=hist[hist.length-1];
-    var stat = (it.id==='landing-page-v3' && w) ? '<div class="stat">최근 주 방문 <b>'+w.landing_visits+'명</b> · 구매 <b>'+(w.paid_customers||0)+'명</b></div>' : '';
-    var where = WHERE[it.id] ? '<div class="where">'+esc(WHERE[it.id])+'</div>' : '';
-    return '<div class="pg">'
-      +(note? '<div class="when">'+esc(note)+'</div>' : '')
-      +'<a class="name" href="'+esc(it.liveUrl||href(it))+'" target="_blank" rel="noopener">'+esc(it.title)+'</a>'
-      +liveLine(it)
-      +'<div class="desc">'+esc(it.description||'')+'</div>'+where+stat+dateLine(it)
-      +'<div class="acts">'+openBtns(it)+'</div>'
-      +'</div>';
-  }
-
-  function lane(title, cards, path){
-    return '<div class="lane"><div class="lane-title">'+esc(title)+'</div><div class="lane-row'+(path?' path':'')+'">'
-      +cards.filter(Boolean).join(path?'<span class="path-arrow" aria-hidden="true">→</span>':'')+'</div></div>';
+    var extra = note || ((it.id==='landing-page-v3' && w) ? '최근 주 방문 '+w.landing_visits+'명 · 구매 '+(w.paid_customers||0)+'명' : '');
+    var addr = it.liveUrl ? '<a class="r-addr" href="'+esc(it.liveUrl)+'" target="_blank" rel="noopener">'+esc(it.liveUrl.replace('https://',''))+'</a>' : '';
+    var acts='';
+    if(href(it)!==it.liveUrl) acts+='<a class="btn" href="'+esc(href(it))+'" target="_blank" rel="noopener">작업본</a>';
+    if(it.imwebCode) acts+='<button type="button" class="btn copy" data-copy="'+esc(it.imwebCode)+'">코드 복사</button>';
+    return '<div class="row">'
+      +'<div class="r-main"><a class="r-name" href="'+esc(it.liveUrl||href(it))+'" target="_blank" rel="noopener">'+esc(it.title.replace(' (예정)',''))+'</a>'+addr+(extra?'<span class="r-extra">'+esc(extra)+'</span>':'')+'</div>'
+      +'<span class="r-date num">'+dateLine(it)+'</span>'
+      +'<div class="r-acts">'+acts+'</div></div>';
   }
 
   function renderHomepage(hist){
-    var html=LANES.map(function(l){
-      return lane(l.title, l.ids.map(function(id){ return pageCard(byId[id],hist); }), l.path);
+    document.getElementById('homepage').innerHTML=GROUPS.map(function(g){
+      var rows=g.ids.map(function(id){ return pageRow(byId[id], g.notes&&g.notes[id], hist); }).join('');
+      if(g.fold) return '<details class="grp"><summary class="g-title">'+esc(g.title)+' ('+g.ids.length+'개)</summary>'+rows+'</details>';
+      return '<div class="grp"><div class="g-title">'+esc(g.title)+'</div>'+rows+'</div>';
     }).join('');
-    html+='<details class="later"><summary>준비 중인 페이지 '+LATER.length+'개</summary><div class="lane-row">'+LATER.map(function(id){ return pageCard(byId[id],hist); }).join('')+'</div></details>';
-    document.getElementById('homepage').innerHTML=html;
   }
 
   document.addEventListener('click',function(e){
@@ -431,11 +417,11 @@ details.later .lane-row{margin-top:8px}
     var html=JOURNEY.map(function(j){
       if(j.phase) return '<div class="jp">'+esc(j.phase)+'</div>';
       var acts='';
-      if(j.it) acts=openBtns(j.it, j.itNote);
+      if(j.it) acts='<a class="j-link" href="'+esc(j.it.liveUrl||href(j.it))+'" target="_blank" rel="noopener">'+esc(j.itNote||'열기')+' ↗</a>';
       var auto=j.how.indexOf('자동')>-1;
       return '<div class="jr">'
         +'<span class="j-when">'+esc(j.when)+'</span>'
-        +'<div class="j-body"><b>'+esc(j.what)+'</b> <span class="j-how'+(auto?' auto':'')+'">'+esc(j.how)+'</span><div class="j-note">'+esc(j.note)+'</div>'+(j.it&&j.it.imwebDate?dateLine(j.it):'')+'</div>'
+        +'<div class="j-body"><b>'+esc(j.what)+'</b> <span class="j-how'+(auto?' auto':'')+'">'+esc(j.how)+'</span><div class="j-note">'+esc(j.note)+'</div>'+'</div>'
         +'<div class="j-acts">'+acts+'</div></div>';
     }).join('');
     document.getElementById('consult').innerHTML='<div class="journey">'+html+'</div>';
