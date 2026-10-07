@@ -1,7 +1,7 @@
 (function () {
   var script = document.currentScript;
   var base = script ? new URL('.', script.src).href : './';
-  var version = '20261002-footer-mobile';
+  var version = '20261007-section-count';
 
   function getFlag(name, defaultValue) {
     if (!script) return defaultValue;
