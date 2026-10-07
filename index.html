@@ -81,10 +81,10 @@ details.grp summary{cursor:pointer;color:var(--muted)}
 .t-acts{display:flex;gap:4px}
 .t-acts .btn{padding:3px 8px;font-size:11px}
 /* 상담 세 칸 */
-.jcols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.jcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .jcol{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 .jc-title{font-size:12px;font-weight:800;color:var(--blue);margin-bottom:4px}
-.ji{display:grid;grid-template-columns:62px 1fr auto;gap:8px;align-items:center;padding:6px 0;border-top:1px solid #EEF1F5;font-size:13px}
+.ji{display:grid;grid-template-columns:70px 1fr auto;gap:8px;align-items:start;padding:6px 0;border-top:1px solid #EEF1F5;font-size:13px}
 .jc-title + .ji{border-top:0}
 .ji-when{font-size:12px;color:var(--sub);font-weight:700}
 .ji-what{font-weight:700;min-width:0}
@@ -92,6 +92,12 @@ details.grp summary{cursor:pointer;color:var(--muted)}
 .ji-what a:hover{color:var(--blue);text-decoration:underline}
 .ji-how{font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;background:#F1F4F8;color:var(--sub);white-space:nowrap}
 .ji-how.auto{background:var(--ok-soft);color:var(--ok)}
+.ji-kind{font-size:12px;font-weight:500;color:var(--muted)}
+.ji-note{font-size:12px;font-weight:400;color:var(--muted);display:block}
+.during{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch;margin-top:12px}
+.du-title{font-size:12px;font-weight:800;color:var(--blue);align-self:center;margin-right:4px}
+.du{flex:1 1 200px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;text-decoration:none;font-size:13px}
+.du:hover{border-color:var(--blue)}
 .btn{font:inherit;font-size:12px;font-weight:700;border:1px solid var(--line);background:#F7F9FB;color:var(--sub);border-radius:7px;padding:4px 10px;cursor:pointer;text-decoration:none;white-space:nowrap}
 .btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
 .btn.copy{background:var(--blue);border-color:var(--blue);color:#fff}
@@ -148,7 +154,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   </section>
 
   <section class="card">
-    <div class="h2row"><h2>상담 흐름과 자료</h2><span class="hint">초록 = 저절로 나감 · 줄에 마우스 올리면 설명</span></div>
+    <div class="h2row"><h2>상담 흐름과 자료</h2><span class="hint">초록 = 저절로 나감 · 괄호 = 어떤 자료인지</span></div>
     <div id="consult"></div>
   </section>
 
@@ -344,7 +350,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   // 묶음은 여기서 id로 정한다. 새 페이지는 site-config.js에 넣고 여기에도 id를 추가한다
   var GROUPS=[
     {title:'홈페이지 (손님이 보는 실제 페이지)', ids:['main-page','landing-page-v3','coaching-payment','curriculum-page','refund-policy']},
-    {title:'상담 손님에게 링크로 보내는 페이지', ids:['recommended-books','consult-180day-column'], notes:{'recommended-books':'90일 후 알림톡','consult-180day-column':'180일 후 알림톡'}},
+    {title:'상담 손님에게 보내는 페이지 (홈페이지 안에 있음)', ids:['recommended-books','consult-180day-column'], notes:{'recommended-books':'90일 후 알림톡','consult-180day-column':'180일 후 알림톡'}},
     {title:'모든 페이지에 붙는 코드 (고치면 전부 바뀜)', ids:['imweb-header-code','imweb-footer-code','common-header','common-footer']},
     {title:'작업본에만 있는 것', ids:['coaching-payment-modal-demo','fire-retirement-calculator','investment-philosophy','lecture-allinone','lecture-bookclub'], fold:true}
   ];
@@ -392,37 +398,41 @@ details.grp summary{cursor:pointer;color:var(--muted)}
 
   // ---------- 상담 ----------
   // 순서·발송 방법 정본: consulting-crm (07_후속문자.gs 3·30·90·180일, 12_알림톡.gs), nightwatch payment-guide-auto·consult-prep-auto·consult-chat-daily
-  var JOURNEY=[
-    {phase:'상담 전'},
-    {when:'신청 직후', what:'결제 안내', how:'알림톡 · 자동', note:'10분 안에 결제 안 하면 카드결제 페이지 링크를 보내요', it:byId['coaching-payment']},
-    {when:'예약하면', what:'사전질문지 안내', how:'알림톡 · 자동', note:'손님이 구글 폼으로 사전질문지를 써요'},
-    {when:'이틀 전', what:'상담 PPT · 준비 메모', how:'자동으로 만들어짐', note:'손님별 PPT 사본이 생기고, 노션에 상담 준비 메모가 채워져요', it:byId['consult-ppt-template']},
-    {when:'전날·당일', what:'리마인드', how:'알림톡 · 자동', note:'상담 시간 알려 주는 안내'},
-    {phase:'상담 당일 (사장님이 쓰는 것)'},
-        {when:'상담 중', what:'상담 PPT', how:'화면 공유', note:'손님별 PPT를 보면서 진행해요'},
-    {when:'상담 중', what:'내집마련 계산기', how:'화면 공유', note:'매수가 · 월 상환액 · 갈아타기 계산', it:byId['consult-prep']},
-    {when:'상담 중', what:'자산관리시트', how:'손님에게 줌', note:'손님이 계속 쓰는 실행 시트 (6탭)', it:byId['consult-asset-planner']},
-    {phase:'상담 후'},
-    {when:'직후', what:'회원 맞춤 페이지', how:'링크 보냄', note:'상담 요약을 담은 손님별 페이지 (주소가 손님마다 달라요)', it:byId['consult-root']},
-    {when:'3일 후', what:'내집마련 가이드', how:'알림톡 · 자동', note:'노션 문서', it:{title:'내집마련 가이드', href:'https://link.ourdongne.com/home-guide'}},
-    {when:'7일 후', what:'안부 인사', how:'카톡 · 자동', note:'자료 없이 안부만 (못 보내면 10~12일에 다시)'},
-    {when:'30일 후', what:'세금 가이드', how:'알림톡 · 자동', note:'노션 문서', it:{title:'세금 가이드', href:'https://link.ourdongne.com/tax-guide'}},
-    {when:'90일 후', what:'추천도서', how:'알림톡 · 자동', note:'내집마련 독서 로드맵 15권', it:byId['recommended-books']},
-    {when:'180일 후', what:'투자로드맵', how:'알림톡 · 자동', note:'투자 로드맵 + 노후 · 복리·은퇴 계산기', it:byId['consult-180day-column']}
+  // kind = 어떤 자료인지, how = 어떻게 나가는지, note = 짧은 설명 (화면에 그대로 보임)
+  var BEFORE=[
+    {when:'신청 직후', what:'결제 안내', kind:'홈페이지', how:'자동 알림톡', note:'10분 안에 결제 안 하면 결제 페이지 링크', it:byId['coaching-payment']},
+    {when:'예약하면', what:'사전질문지 안내', kind:'구글 폼', how:'자동 알림톡', note:'손님이 상담 전에 질문지 작성'},
+    {when:'이틀 전', what:'상담 PPT · 준비 메모', kind:'구글 슬라이드 · 노션', how:'자동 생성 (사장님용)', note:'손님별 PPT 사본 + 노션 준비 메모', it:byId['consult-ppt-template']},
+    {when:'전날·당일', what:'리마인드', how:'자동 알림톡', note:'상담 시간 알려 주는 안내'}
   ];
-  function renderConsult(){
-    var cols=[], cur=null;
-    JOURNEY.forEach(function(j){
-      if(j.phase){ cur={title:j.phase.replace(' (사장님이 쓰는 것)',''), items:[]}; cols.push(cur); return; }
-      cur.items.push(j);
-    });
-    document.getElementById('consult').innerHTML='<div class="jcols">'+cols.map(function(c){
-      return '<div class="jcol"><div class="jc-title">'+esc(c.title)+'</div>'+c.items.map(function(j){
-        var auto=j.how.indexOf('자동')>-1;
-        var name = j.it ? '<a href="'+esc(j.it.liveUrl||href(j.it))+'" target="_blank" rel="noopener">'+esc(j.what)+' ↗</a>' : esc(j.what);
-        return '<div class="ji" title="'+esc(j.note)+'"><span class="ji-when">'+esc(j.when)+'</span><span class="ji-what">'+name+'</span><span class="ji-how'+(auto?' auto':'')+'">'+esc(auto?'자동':j.how)+'</span></div>';
-      }).join('')+'</div>';
+  var AFTER=[
+    {when:'상담 끝나고', what:'상담 자료 + 후기 부탁', kind:'회원 페이지', how:'알림톡 (상담 정리 후)', note:'손님별 요약 페이지 링크', it:byId['consult-root']},
+    {when:'3일 후', what:'내집마련 가이드', kind:'노션', how:'자동 알림톡', it:{title:'내집마련 가이드', href:'https://link.ourdongne.com/home-guide'}},
+    {when:'7일 후', what:'안부 인사', how:'자동 카톡', note:'자료 없이 안부만'},
+    {when:'30일 후', what:'세금 가이드', kind:'노션', how:'자동 알림톡', it:{title:'세금 가이드', href:'https://link.ourdongne.com/tax-guide'}},
+    {when:'90일 후', what:'추천도서', kind:'홈페이지', how:'자동 알림톡', it:byId['recommended-books']},
+    {when:'180일 후', what:'투자로드맵', kind:'홈페이지', how:'자동 알림톡', it:byId['consult-180day-column']}
+  ];
+  var DURING=[
+    {what:'상담 PPT', kind:'구글 슬라이드', note:'화면에 띄워 놓고 진행', it:byId['consult-ppt-template']},
+    {what:'내집마련 계산기', kind:'웹페이지', note:'매수가 · 월 상환액 · 갈아타기', it:byId['consult-prep']},
+    {what:'자산관리시트', kind:'구글 시트', note:'손님에게 공유하는 실행용 시트', it:byId['consult-asset-planner']}
+  ];
+  function jName(j){
+    var t=esc(j.what)+(j.kind?' <span class="ji-kind">('+esc(j.kind)+')</span>':'');
+    return j.it ? '<a href="'+esc(j.it.liveUrl||href(j.it))+'" target="_blank" rel="noopener">'+t+' ↗</a>' : t;
+  }
+  function jCol(title, list){
+    return '<div class="jcol"><div class="jc-title">'+esc(title)+'</div>'+list.map(function(j){
+      var auto=j.how.indexOf('자동')===0;
+      return '<div class="ji"><span class="ji-when">'+esc(j.when)+'</span><div class="ji-what">'+jName(j)+(j.note?'<div class="ji-note">'+esc(j.note)+'</div>':'')+'</div><span class="ji-how'+(auto?' auto':'')+'">'+esc(j.how)+'</span></div>';
     }).join('')+'</div>';
+  }
+  function renderConsult(){
+    var during='<div class="during"><span class="du-title">상담할 때 쓰는 것</span>'+DURING.map(function(d){
+      return '<a class="du" href="'+esc(href(d.it))+'" target="_blank" rel="noopener"><b>'+esc(d.what)+'</b> <span class="ji-kind">('+esc(d.kind)+')</span><span class="ji-note">'+esc(d.note)+'</span></a>';
+    }).join('')+'</div>';
+    document.getElementById('consult').innerHTML='<div class="jcols">'+jCol('상담 전',BEFORE)+jCol('상담 후 — 전부 손님에게 보내는 것',AFTER)+'</div>'+during;
   }
   renderConsult();
 
