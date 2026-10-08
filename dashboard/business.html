@@ -757,13 +757,15 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
                     curStr = (r.cur || 0).toFixed(1) + '%'; avgStr = (r.avg || 0).toFixed(1) + '%';
                     change = r.avg > 0 ? ((r.cur - r.avg) / r.avg * 100) : null;
                 } else {
-                    curStr = fmtNum(r.cur || 0); avgStr = fmtNum(Math.round(r.avg || 0));
-                    change = r.avg > 0 ? ((r.cur - r.avg) / r.avg * 100) : null;
+                    // null = 계산할 수 없음 (광고 줄의 0으로 나누기 등) → '—'
+                    curStr = r.cur == null ? '—' : fmtNum(r.cur); avgStr = r.avg == null ? '—' : fmtNum(Math.round(r.avg));
+                    change = (r.cur != null && r.avg > 0) ? ((r.cur - r.avg) / r.avg * 100) : null;
                 }
                 let changeStr = '—';
                 if (change !== null && isFinite(change)) {
                     const sign = change > 0 ? '▲' : change < 0 ? '▼' : '';
-                    const cls = change > 0 ? 'badge-up' : change < 0 ? 'badge-down' : '';
+                    const good = r.lowerIsBetter ? change < 0 : change > 0;  // 비용 줄은 내려야 좋음
+                    const cls = change === 0 ? '' : good ? 'badge-up' : 'badge-down';
                     changeStr = '<span class="' + cls + '">' + sign + Math.abs(change).toFixed(1) + '%</span>';
                 }
                 h += '<tr><td>' + r.label + '</td><td class="text-right">' + curStr + '</td><td class="text-right">' + avgStr + '</td><td class="text-right">' + changeStr + '</td></tr>';
@@ -784,20 +786,22 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             { label: 'Shorts 조회수', cur: cw.shorts_views, avg: avg.shorts_views },
         ];
 
-        // 광고 (시트 42~47행). 1회당·1건당 비용은 낮을수록 좋다
-        const per = (cost, n) => n > 0 ? Math.round(cost / n) : 0;
+        // 광고 (시트 42~47행). 4주평균은 광고 돌린 주끼리만 (parse-funnel). 1회당·1건당은 나눌 수 없으면 null('—')
+        // 같은 식: index.html renderAds
+        const per = (cost, n) => (cost > 0 && n > 0) ? Math.round(cost / n) : null;
         const adRows = [
             { label: '광고비 (부가세 포함)', cur: cw.ad_cost, avg: avg.ad_cost },
             { label: '조회수', cur: cw.ad_views, avg: avg.ad_views },
-            { label: '조회 1회당 광고비', cur: per(cw.ad_cost, cw.ad_views), avg: per(avg.ad_cost, avg.ad_views) },
+            { label: '조회 1회당 광고비', cur: per(cw.ad_cost, cw.ad_views), avg: per(avg.ad_cost, avg.ad_views), lowerIsBetter: true },
             { label: '랜딩 접속', cur: cw.ad_landing, avg: avg.ad_landing },
             { label: '상담 신청', cur: cw.ad_leads, avg: avg.ad_leads },
-            { label: '상담 1건당 광고비', cur: per(cw.ad_cost, cw.ad_leads), avg: per(avg.ad_cost, avg.ad_leads) },
+            { label: '상담 1건당 광고비', cur: per(cw.ad_cost, cw.ad_leads), avg: per(avg.ad_cost, avg.ad_leads), lowerIsBetter: true },
         ];
+        const adHtml = cw.ad_cost > 0 ? makeTable(adRows) : '<p style="color:#64748B;font-size:13px;">이 주는 광고를 안 돌렸어요</p>';
 
         let html = '<div class="content-group"><div class="content-group-title">키콘텐츠</div>' + makeTable(keyRows) + '</div>';
         html += '<div class="content-group"><div class="content-group-title">풀링콘텐츠</div>' + makeTable(pullRows) + '</div>';
-        html += '<div class="content-group"><div class="content-group-title">광고</div>' + makeTable(adRows) + '</div>';
+        html += '<div class="content-group"><div class="content-group-title">광고</div>' + adHtml + '</div>';
         document.getElementById('content-table-wrap').innerHTML = html;
     }
 

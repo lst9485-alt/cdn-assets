@@ -140,7 +140,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   </section>
 
   <section>
-    <div class="h2row"><h2>광고</h2><span class="hint">같은 주 · 구글 광고 · 부가세 포함</span></div>
+    <div class="h2row"><h2>광고</h2><span class="hint">같은 주 · 부가세 포함</span></div>
     <div class="tiles num" id="ads"></div>
   </section>
 
@@ -242,11 +242,12 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   function renderAds(hist){
     var w=hist[hist.length-1]||{}, el=document.getElementById('ads');
     if(!(w.ad_cost>0)){ el.innerHTML='<p class="hint">이 주는 광고를 안 돌렸어요</p>'; return; }
+    // 같은 식: dashboard/business.html renderContentTable
     function per(n){ return n>0 ? Math.round(w.ad_cost/n).toLocaleString('ko-KR')+'원' : '—'; }
     var tiles=[
       {lbl:'광고비', val:won(w.ad_cost), cmp:''},
       {lbl:'광고 조회', val:(w.ad_views||0).toLocaleString('ko-KR')+'번', cmp:'1번에 '+per(w.ad_views)},
-      {lbl:'광고로 온 랜딩 방문', val:(w.ad_landing||0).toLocaleString('ko-KR')+'명', cmp:'10/4부터 셈'},
+      {lbl:'광고로 온 랜딩 방문', val:(w.ad_landing||0).toLocaleString('ko-KR')+'명', cmp:''},
       {lbl:'광고로 온 상담 신청', val:(w.ad_leads||0)+'건', cmp:'1건에 '+per(w.ad_leads)}
     ];
     el.innerHTML = tiles.map(function(t){
