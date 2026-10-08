@@ -784,8 +784,20 @@ ChartDataLabels && Chart.defaults.plugins.datalabels && (Chart.defaults.plugins.
             { label: 'Shorts 조회수', cur: cw.shorts_views, avg: avg.shorts_views },
         ];
 
+        // 광고 (시트 42~47행). 1회당·1건당 비용은 낮을수록 좋다
+        const per = (cost, n) => n > 0 ? Math.round(cost / n) : 0;
+        const adRows = [
+            { label: '광고비 (부가세 포함)', cur: cw.ad_cost, avg: avg.ad_cost },
+            { label: '조회수', cur: cw.ad_views, avg: avg.ad_views },
+            { label: '조회 1회당 광고비', cur: per(cw.ad_cost, cw.ad_views), avg: per(avg.ad_cost, avg.ad_views) },
+            { label: '랜딩 접속', cur: cw.ad_landing, avg: avg.ad_landing },
+            { label: '상담 신청', cur: cw.ad_leads, avg: avg.ad_leads },
+            { label: '상담 1건당 광고비', cur: per(cw.ad_cost, cw.ad_leads), avg: per(avg.ad_cost, avg.ad_leads) },
+        ];
+
         let html = '<div class="content-group"><div class="content-group-title">키콘텐츠</div>' + makeTable(keyRows) + '</div>';
         html += '<div class="content-group"><div class="content-group-title">풀링콘텐츠</div>' + makeTable(pullRows) + '</div>';
+        html += '<div class="content-group"><div class="content-group-title">광고</div>' + makeTable(adRows) + '</div>';
         document.getElementById('content-table-wrap').innerHTML = html;
     }
 
