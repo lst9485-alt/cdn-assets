@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-09T06:00:24.308873+09:00",
+  "updated": "2026-10-10T06:01:00.217234+09:00",
   "summary": {
     "current_month": 2000000,
     "current_month_label": "2026-10",
@@ -829,15 +829,15 @@
   "by_purpose": [
     {
       "purpose": "내집마련",
-      "count": 154,
-      "revenue": 53050000,
-      "ratio": "57.6%"
+      "count": 153,
+      "revenue": 52550000,
+      "ratio": "57.1%"
     },
     {
       "purpose": "투자",
-      "count": 97,
-      "revenue": 31500000,
-      "ratio": "34.2%"
+      "count": 98,
+      "revenue": 32000000,
+      "ratio": "34.8%"
     },
     {
       "purpose": "기타",

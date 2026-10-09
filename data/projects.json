@@ -1,20 +1,20 @@
 {
-  "updated": "2026-10-09T06:00:08.704163+09:00",
+  "updated": "2026-10-10T06:00:43.760626+09:00",
   "projects": [
-    {
-      "name": "강의",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-10-08",
-      "status": null,
-      "next": null
-    },
     {
       "name": "261011 원고",
       "type": "file",
       "app": "youtube/yt-youtube-production",
-      "modified": "2026-10-08",
+      "modified": "2026-10-09",
       "status": "영상 폴더 산출물 = 원고 파일 하나 (2026-08-10 개편).",
+      "next": null
+    },
+    {
+      "name": "강의",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-10-09",
+      "status": null,
       "next": null
     },
     {
