@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-11T06:00:39.079551+09:00",
+  "updated": "2026-10-12T06:00:32.037173+09:00",
   "summary": {
-    "정상": 40,
+    "정상": 41,
     "정리 필요": 0,
     "꺼짐": 0
   },
@@ -620,6 +620,20 @@
       "time": "09:00",
       "status": "정상",
       "script": "consult-noq-daily.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "cafe-watch",
+      "title": "cafe-watch",
+      "room": "확인 필요",
+      "description": "카페 알림 — 10분마다 네이버 카페(ourmoney7) 공개 정보를 보고, 새 비밀 질문·스탭만 보기 안 한 질문·20시간 답변 없는 질문·새 가입·새 후기가 있을 때만 비즈 방. 기록 logs/cafe-watch",
+      "cron": "*/10 * * * *",
+      "day": "매일",
+      "time": "*:*/10",
+      "status": "정상",
+      "script": "cafe-watch.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
