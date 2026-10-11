@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커리큘럼 — 우리동네 재테크</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    important: true,
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Pretendard', 'system-ui', '-apple-system', 'sans-serif'],
+          display: ['"GmarketSans"', 'Pretendard', 'sans-serif'],
+        },
+        colors: {
+          brand: { orange: '#FF6B00', beige: '#F5F0E8', dark: '#0a0a0a', blue: '#0055FF' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AceDev-Labs/GmarketSans/GmarketSans.css">
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+<style>
+  html { font-size: 16px !important; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; font-size: 17px; }
+  .word-keep { word-break: keep-all; overflow-wrap: break-word; }
+  [data-reveal] { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1); }
+  [data-reveal].revealed { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+  [data-stagger] > * { opacity: 0; transform: translateY(24px) scale(0.9); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  [data-stagger].revealed > *:nth-child(1) { transition-delay: 0s; }
+  [data-stagger].revealed > *:nth-child(2) { transition-delay: 0.12s; }
+  [data-stagger].revealed > *:nth-child(3) { transition-delay: 0.24s; }
+  [data-stagger].revealed > *:nth-child(4) { transition-delay: 0.36s; }
+  [data-stagger].revealed > * { opacity: 1; transform: translateY(0) scale(1); }
+</style>
+</head>
+<body class="bg-white">
+<div style="position:sticky;top:0;z-index:99999;background:#03C75A;color:#fff;text-align:center;font:700 13px/1.4 Pretendard,sans-serif;padding:6px 12px">가안 화면입니다 · 코칭 후 질문을 카톡에서 네이버 카페로 옮긴 버전 (실제 페이지 아님)</div>
+<!-- curriculum.html body 시작 -->
+<!-- head-code.html 공유 (Tailwind/Pretendard/G마켓산스/Iconify) -->
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { max-width: 100%; overflow-x: hidden; }
+  .flow-line { position: relative; }
+  .flow-line::after { content: ''; position: absolute; left: 50%; bottom: -28px; transform: translateX(-50%); width: 2px; height: 28px; background: #cbd5e1; }
+  .flow-line:last-child::after { display: none; }
+  .flow-card { min-height: 124px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .status-active { border: 2px solid #fb923c; background: white; box-shadow: 0 10px 28px rgba(15,23,42,0.08); }
+  .status-upcoming { border: 1.5px dashed rgba(37,99,235,.36); background: white; }
+  .status-upcoming-orange { border: 1.5px dashed rgba(255,107,0,.40); background: white; }
+  .status-upcoming-neutral { border: 1.5px dashed rgba(15,23,42,.32); background: white; }
+  .status-idea { border: 1px solid #e2e8f0; background: #f8fafc; }
+  .curriculum-kakao-pill { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:40px; border-radius:999px; background:#FEE500; color:#111; padding:4px 15px; box-shadow:0 6px 14px rgba(15,23,42,.08); transition:transform .18s ease, box-shadow .18s ease; text-decoration:none; }
+  .curriculum-kakao-pill:hover { transform:translateY(-2px); box-shadow:0 16px 30px rgba(15,23,42,.18); }
+</style>
+
+<section data-section="curriculum-header" class="max-w-5xl mx-auto px-6 sm:px-8 pt-12 pb-8 text-center">
+  <h1 class="text-3xl sm:text-4xl font-display font-black text-brand-dark mb-4 word-keep">전체 커리큘럼 <span style="white-space:nowrap">한눈에 보기</span></h1>
+  <p class="text-gray-500 text-lg word-keep">내집마련부터 재테크까지, <span style="white-space:nowrap">단계별 학습 로드맵입니다.</span></p>
+  <div class="flex justify-center gap-6 mt-6 text-sm">
+    <div class="flex items-center gap-2"><span class="w-5 h-3 border-2 border-brand-orange rounded-sm bg-brand-orange/5"></span><span class="text-gray-600">진행 중</span></div>
+    <div class="flex items-center gap-2"><span class="w-5 h-3 border-2 border-dashed border-gray-400 rounded-sm"></span><span class="text-gray-600">준비 중</span></div>
+    <div class="flex items-center gap-2"><span class="w-5 h-3 border border-gray-300 rounded-sm bg-gray-100"></span><span class="text-gray-600">추후 예정</span></div>
+  </div>
+</section>
+
+<section data-section="curriculum-lines" class="max-w-6xl mx-auto px-6 sm:px-8 py-8 sm:py-12">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-5">
+
+    <article class="border border-orange-200 bg-orange-50/35 rounded-[26px] p-5 sm:p-6">
+      <h2 class="text-xl font-display font-black text-brand-orange text-center mb-6 word-keep">🏠 내집마련</h2>
+      <div class="flex flex-col items-center gap-0">
+        <div class="flow-line w-full">
+          <a href="coaching-all-v3-cafe-preview.html" class="block status-active flow-card rounded-2xl p-5 text-center hover:shadow-lg" style="transition: box-shadow 0.3s ease; cursor: pointer;">
+            <span class="inline-block bg-brand-orange text-white text-xs font-black px-3 py-1 rounded-full mb-2">진행 중</span>
+            <p class="font-display font-black text-brand-dark text-lg word-keep">내집마련 1:1 코칭 <span class="text-brand-orange">→</span></p>
+            <p class="text-gray-500 text-sm mt-1 word-keep">코칭 A · 코칭 B(동행임장 포함)</p>
+          </a>
+        </div>
+        <div class="h-7"></div>
+        <div class="flow-line w-full">
+          <div class="status-idea flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-white text-gray-500 text-xs font-black px-3 py-1 rounded-full mb-2">추후 예정</span>
+            <p class="font-bold text-gray-600 text-lg word-keep">이메일 상담</p>
+            <p class="text-gray-400 text-sm mt-1 word-keep">구체적인 단지·매물 고민에 글로 답변</p>
+          </div>
+        </div>
+        <div class="h-7"></div>
+        <div class="flow-line w-full">
+          <div class="status-idea flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-white text-gray-500 text-xs font-black px-3 py-1 rounded-full mb-2">추후 예정</span>
+            <p class="font-bold text-gray-600 text-lg word-keep">내집마련 실전반</p>
+            <p class="text-gray-400 text-sm mt-1 word-keep">온라인 강의 + 실전 템플릿</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="border border-blue-200 bg-blue-50/35 rounded-[26px] p-5 sm:p-6">
+      <h2 class="text-xl font-display font-black text-brand-blue text-center mb-6 word-keep">💰 재테크</h2>
+      <div class="flex flex-col items-center gap-0">
+        <div class="flow-line w-full">
+          <div class="status-upcoming flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-blue-100 text-blue-700 text-xs font-black px-3 py-1 rounded-full mb-2">준비 중</span>
+            <p class="font-bold text-brand-dark text-lg word-keep">재테크 기초반</p>
+            <p class="text-gray-500 text-sm mt-1 word-keep">돈 모으기부터 투자 기본기까지 함께 실행</p>
+          </div>
+        </div>
+        <div class="h-7"></div>
+        <div class="flow-line w-full">
+          <div class="status-upcoming flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-blue-100 text-blue-700 text-xs font-black px-3 py-1 rounded-full mb-2">준비 중</span>
+            <p class="font-bold text-brand-dark text-lg word-keep">전자책</p>
+            <p class="text-gray-500 text-sm mt-1 word-keep">ETF로 돈 모아 집 사는 순서</p>
+          </div>
+        </div>
+        <div class="h-7"></div>
+        <div class="flow-line w-full">
+          <div class="status-idea flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-white text-gray-500 text-xs font-black px-3 py-1 rounded-full mb-2">추후 예정</span>
+            <p class="font-bold text-gray-600 text-lg word-keep">독서모임</p>
+            <p class="text-gray-400 text-sm mt-1 word-keep">함께 읽고 함께 성장하는 시간</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="border border-slate-300 bg-slate-50 rounded-[26px] p-5 sm:p-6">
+      <h2 class="text-xl font-display font-black text-slate-800 text-center mb-6 word-keep">📚 공통</h2>
+      <div class="flex flex-col items-center gap-0">
+        <div class="flow-line w-full">
+          <a href="https://forms.gle/qVmJEiWZHsxjsHux9" target="_blank" rel="noopener" class="block status-active flow-card rounded-2xl p-5 text-center hover:shadow-lg" style="transition: box-shadow 0.3s ease; cursor: pointer;">
+            <span class="inline-block bg-brand-orange text-white text-xs font-black px-3 py-1 rounded-full mb-2">진행 중</span>
+            <p class="font-display font-black text-brand-dark text-lg word-keep">원데이 특강 <span class="text-brand-orange">→</span></p>
+            <p class="text-gray-500 text-sm mt-1 word-keep">주제별 특강 + 충분한 질의응답 · 대기 신청</p>
+          </a>
+        </div>
+        <div class="h-7"></div>
+        <div class="flow-line w-full">
+          <div class="status-idea flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-white text-gray-500 text-xs font-black px-3 py-1 rounded-full mb-2">추후 예정</span>
+            <p class="font-bold text-gray-600 text-lg word-keep">무료 템플릿</p>
+            <p class="text-gray-400 text-sm mt-1 word-keep">내집마련 및 재테크 템플릿</p>
+          </div>
+        </div>
+        <div class="h-7"></div>
+        <div class="flow-line w-full">
+          <div class="status-idea flow-card rounded-2xl p-5 text-center">
+            <span class="inline-block bg-white text-gray-500 text-xs font-black px-3 py-1 rounded-full mb-2">추후 예정</span>
+            <p class="font-bold text-gray-600 text-lg word-keep">임장</p>
+            <p class="text-gray-400 text-sm mt-1 word-keep">현장에서 직접 보고 배우기</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+  <p class="text-center text-gray-400 text-sm mt-8 word-keep">위 커리큘럼은 상황에 따라 변경될 수 있습니다.</p>
+</section>
+
+<!-- ===== 1:1 코칭 상세 커리큘럼 (코칭 페이지 03 코칭 내용 4단계 기준) ===== -->
+<section data-section="coaching-detail" class="py-16 sm:py-20" style="background: #f7f7f3;">
+  <div class="max-w-5xl mx-auto px-6 sm:px-8">
+    <div class="text-center mb-10 sm:mb-12">
+      <span class="inline-flex items-center gap-2 bg-white text-brand-orange text-sm font-bold px-4 py-1.5 rounded-full tracking-wide mb-4 shadow-sm">COACHING</span>
+      <h2 class="text-2xl sm:text-3xl font-display font-black text-brand-dark word-keep">내집마련 1:1 코칭 커리큘럼</h2>
+      <p class="text-gray-500 mt-3 text-sm word-keep">온라인 화상 상담 (Google Meet, 약 50분) · <span style="white-space:nowrap">부부동반 가능</span></p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+      <!-- STEP 1 -->
+      <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-200 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gray-100 text-gray-600 text-sm font-black">1</span>
+        </div>
+        <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">정확한 현황 파악</h3>
+        <p class="text-sm text-gray-500 word-keep">예산, 대출, 관심 지역, 매수 시점 등을 사전 질문지로 점검합니다.</p>
+        <p class="mt-4 text-sm font-bold text-brand-dark">· 사전 질문지 작성</p>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-brand-orange/20 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-orange/10 text-brand-orange text-sm font-black">2</span>
+        </div>
+        <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">단계별 행동 정리</h3>
+        <p class="text-sm text-gray-500 word-keep">예산·대출, 후보 단지, 매수 판단까지 지금 뭘 해야 할지 정리합니다.</p>
+        <p class="mt-4 text-sm font-bold text-brand-dark">· 내집마련 6단계 로드맵</p>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-brand-orange/40 hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-orange/10 text-brand-orange text-sm font-black">3</span>
+        </div>
+        <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">매수 판단의 근거</h3>
+        <p class="text-sm text-gray-500 word-keep">코칭 결론을 자료로 정리해드려 입주 이후에도 계속 활용합니다.</p>
+        <div class="mt-4 space-y-1 text-sm font-bold text-brand-dark">
+          <p>· 상담 리포트 + 솔루션 요약</p>
+          <p>· 자산 관리&amp;매수 플래너</p>
+          <p>· 내집마련 계산기</p>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-brand-orange hover:shadow-xl hover:-translate-y-1" style="transition:all 0.3s ease">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-orange text-white text-sm font-black">4</span>
+        </div>
+        <h3 class="font-display font-black text-brand-dark text-lg mb-2 word-keep">코칭 이후</h3>
+        <p class="text-sm text-gray-500 word-keep">단지 선정·대출·계약 등 궁금한 점은 네이버 카페에서 1:1로 물어보실 수 있습니다. (다른 분은 볼 수 없는 비밀 질문)</p>
+        <p class="mt-4 text-sm font-bold text-brand-dark">· 최대 6개월 <a href="https://cafe.naver.com/ourmoney7" target="_blank" rel="noopener" style="color:#03A94F;text-decoration:underline">카페 1:1 질문</a></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="px-6 sm:px-8 pt-12 sm:pt-16 pb-8">
+  <section data-section="curriculum-cta" class="max-w-4xl mx-auto rounded-3xl py-12 sm:py-16 px-6 sm:px-8 text-center" style="background:#F5F0E8; border:1px solid rgba(255,107,0,.18);">
+    <iconify-icon icon="solar:home-smile-bold" class="text-brand-orange text-5xl mb-4"></iconify-icon>
+    <h2 class="text-3xl sm:text-4xl font-display font-black text-brand-dark mb-3 word-keep">내집마련이 고민이라면?</h2>
+    <p class="text-lg text-gray-600 mb-5 word-keep">후회 없는 내집마련을 도와드립니다</p>
+    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-gray-500 mb-7">
+      <span class="flex items-center gap-1.5"><iconify-icon icon="solar:videocamera-record-linear"></iconify-icon> 온라인 상담</span>
+      <span class="flex items-center gap-1.5"><iconify-icon icon="solar:shield-check-linear"></iconify-icon> 최대 6개월 케어</span>
+      <span class="flex items-center gap-1.5"><iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon> 부부동반 가능</span>
+    </div>
+    <div class="flex flex-col items-center justify-center gap-4">
+      <a href="coaching-all-v3-cafe-preview.html" class="inline-flex items-center gap-2 bg-brand-orange text-white font-bold px-9 py-4 rounded-full text-xl hover:scale-[1.02] active:scale-[0.98]" style="transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow:0 12px 24px rgba(255,107,0,.22);">
+        1:1 코칭 신청하기
+        <iconify-icon icon="solar:arrow-right-bold" class="text-xl"></iconify-icon>
+      </a>
+      <a href="http://pf.kakao.com/_mcxnjX/friend" target="_blank" rel="noopener" class="curriculum-kakao-pill" aria-label="우리동네재테크 카카오톡 채널 추가하기">
+        <iconify-icon icon="ri:kakao-talk-fill" class="text-lg" style="color:#3C1E1E;"></iconify-icon>
+        <span class="text-sm font-black">카톡으로 문의하기</span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<p class="text-center text-gray-400 text-xs leading-relaxed max-w-4xl mx-auto px-6 pt-0 pb-8 word-keep">본 프로그램은 교육 서비스이며, 특정 매물 추천·중개·계약 대행 서비스는 제공하지 않습니다.</p>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) e.target.classList.add('revealed');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function(el) { obs.observe(el); });
+  });
+</script>
+<!-- 가안: 방문 통계에 안 잡히게 통계 스크립트는 뺌, 아래쪽 안내는 카페 링크 들어간 가안 버전 -->
+  <script src="homepage-topbar.js?v=20261011-cafe-preview"></script>
+  <script src="site-footer-cafe-preview.js?v=20261011"></script>
+</body>
+</html>
