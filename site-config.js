@@ -89,7 +89,7 @@
             groupLabel: '공통',
             imwebCode: 'homepage/head-code-imweb.html',
             dateSuffix: '1',
-            imwebDate: '2026-10-06'
+            imwebDate: '2026-10-12'
           },
           {
             id: 'imweb-footer-code',
@@ -122,8 +122,8 @@
             hubVisible: true,
             groupLabel: '코칭',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
-            dateSuffix: '7',
-            imwebDate: '2026-10-05'
+            dateSuffix: '1',
+            imwebDate: '2026-10-12'
           },
           {
             id: 'main-page',
@@ -219,8 +219,8 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/curriculum-imweb.html',
-            dateSuffix: '4',
-            imwebDate: '2026-10-02'
+            dateSuffix: '1',
+            imwebDate: '2026-10-12'
           },
           {
             id: 'lecture-allinone',
