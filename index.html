@@ -448,7 +448,13 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     btn.disabled=true; btn.textContent='가져오는 중…';
     fetch('./'+src+'?t='+Date.now(),{cache:'no-store'})
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
-      .then(function(t){ return navigator.clipboard.writeText(t); })
+      .then(function(t){
+        // http 주소(맥미니 미리보기)에서는 navigator.clipboard가 없다 → 숨은 글상자로 복사
+        if(navigator.clipboard&&window.isSecureContext) return navigator.clipboard.writeText(t);
+        var ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select(); var ok=document.execCommand('copy'); ta.remove();
+        if(!ok) throw new Error('execCommand 실패');
+      })
       .then(function(){ btn.textContent='복사됐어요'; btn.classList.add('done'); })
       .catch(function(err){ console.error('[복사 실패]',src,err); btn.textContent='복사 실패'; btn.classList.add('fail'); })
       .then(function(){ setTimeout(function(){ btn.textContent=label; btn.classList.remove('done','fail'); btn.disabled=false; },2000); });
