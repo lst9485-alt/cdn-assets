@@ -122,7 +122,7 @@
             hubVisible: true,
             groupLabel: '코칭',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
-            dateSuffix: '2',
+            dateSuffix: '3',
             imwebDate: '2026-10-12'
           },
           {
@@ -141,7 +141,7 @@
             groupLabel: '페이지',
             imwebCode: 'homepage/main-page-imweb.html',
             dateSuffix: '1',
-            imwebDate: '2026-10-07'
+            imwebDate: '2026-10-12'
           },
           {
             id: 'investment-philosophy',
