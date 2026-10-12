@@ -1,5 +1,5 @@
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="확신 갖고 후회없이! 최고의 내집마련 1:1코칭ㅣ우리동네 재테크" name="twitter:title"/>
+<meta content="확신 갖고 후회 없이! 최고의 내집마련 1:1코칭ㅣ우리동네 재테크" name="twitter:title"/>
 <meta content="내 예산에 딱 맞는 내집마련 방법 · 1:1 맞춤 코칭 · 최대 6개월 1:1 질의응답" name="twitter:description"/>
 <meta content="https://lst9485-alt.github.io/cdn-assets/homepage/og-coaching-v2.png" name="twitter:image"/>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -908,6 +908,29 @@
       margin-top: 6px;
     }
 
+    /* 코칭 후 1:1 질의응답 — 실제처럼 비밀 질문글 + 댓글 답변 모양 (말풍선 대화 아님, 2026-10-12) */
+    .qna-memo-card { background:#fff; border:1px solid #ECE6DE; border-radius:18px; overflow:hidden; box-shadow:0 14px 36px rgba(26,43,71,.08); }
+    .qna-memo-head { display:flex; align-items:center; gap:6px; padding:10px 14px; font-size:13px; font-weight:900; color:#1A2B47; background:#FAF7F2; border-bottom:1px solid #ECE6DE; }
+    .qna-memo-head iconify-icon { color:#E2570A; font-size:16px; }
+    .qna-memo-head span { font-weight:700; color:#8A8F98; }
+    .qna-memo-post { padding:14px 16px; }
+    .qna-memo-reply { padding:12px 16px 16px 30px; background:#FAF7F2; border-top:1px solid #F0EBE4; }
+    .qna-memo-meta { display:flex; align-items:center; gap:4px; font-size:12.5px; font-weight:800; color:#1A2B47; margin-bottom:6px; }
+    .qna-memo-meta iconify-icon { color:#8A8F98; font-size:13px; }
+    .qna-memo-meta em { font-style:normal; font-size:11px; font-weight:800; color:#E2570A; border:1px solid #F5C9A8; border-radius:999px; padding:1px 7px; margin-left:2px; }
+    .qna-memo-arrow { margin-left:-16px; }
+    .qna-memo-text { font-size:14px; font-weight:600; line-height:1.6; color:#374151; word-break:keep-all; }
+    /* 질문·답변 3개가 4초마다 차례로 넘어감 (글자 칸 하나에 겹쳐 두고 투명도만 바꿈, 스크립트 없음) */
+    .qna-slides { display:grid; }
+    .qna-slide { grid-area:1/1; opacity:0; animation:qnaFade 12s infinite; display:flex; flex-direction:column; }
+    .qna-slide .qna-memo-reply { flex:1; }
+    .qna-slide:nth-child(2), .qna-dots i:nth-child(2) { animation-delay:4s; }
+    .qna-slide:nth-child(3), .qna-dots i:nth-child(3) { animation-delay:8s; }
+    @keyframes qnaFade { 0% { opacity:0; transform:translateX(14px); } 5% { opacity:1; transform:none; } 30% { opacity:1; transform:none; } 34% { opacity:0; transform:translateX(-14px); } 100% { opacity:0; } }
+    .qna-dots { margin-left:auto; display:inline-flex; gap:5px; }
+    .qna-dots i { width:6px; height:6px; border-radius:999px; background:#E5DED4; animation:qnaDot 12s infinite; }
+    @keyframes qnaDot { 0%, 33% { background:#E2570A; width:14px; } 34%, 100% { background:#E5DED4; width:6px; } }
+    @media (prefers-reduced-motion: reduce) { .qna-slide, .qna-dots i { animation:none; } .qna-slide:first-child { opacity:1; } }
     .care-chat-card {
       background: #F3EEE7;
       border-radius: 18px;
