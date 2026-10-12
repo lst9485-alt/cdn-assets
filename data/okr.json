@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-12T06:00:17.854938+09:00",
+  "updated": "2026-10-13T06:00:16.507664+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -16,14 +16,14 @@
     {
       "title": "10월 : 특강 / 상담400+특강500",
       "target": 900,
-      "current": 150,
-      "rate": "🔴 17%"
+      "current": 200,
+      "rate": "🔴 22%"
     }
   ],
   "tasks": {
-    "total": 1274,
-    "done": 1158,
-    "overdue": 6,
+    "total": 1284,
+    "done": 1168,
+    "overdue": 11,
     "pending": [
       {
         "title": "전자책 작성",
@@ -58,97 +58,27 @@
       {
         "title": "이렇게산다(성장일지), 메모",
         "date": "2026-10-12",
-        "overdue": false
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-10-12T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-10-12T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "마케팅업체 주정산",
-        "date": "2026-10-12T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "까르복습",
-        "date": "2026-10-12T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "유튜브 게시물 12시 예약(월,수,금)",
-        "date": "2026-10-12T10:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "쇼츠, 틱톡, 릴스 6시 예약(월,수,금)",
-        "date": "2026-10-12T10:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-10-12T18:30:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-10-12T10:00:00.000+09:00",
-        "overdue": false
+        "title": "유튜브 게시물 12시 예약(월,수,금)",
+        "date": "2026-10-12T19:30:00.000+09:00",
+        "overdue": true
+      },
+      {
+        "title": "까르복습",
+        "date": "2026-10-12T21:15:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "재개발 일부 스터디 필요",
-        "date": "2026-10-12T10:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "구글 광고 점검 — 입찰가 60원으로 올린 뒤(10/8) 하루 광고비가 9,500원 근처로 늘었는지, 더 올릴지 정하기",
-        "date": "2026-10-12T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
-        "date": "2026-10-12T10:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주간복기",
-        "date": "2026-10-12T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "유튜브 수익계좌변경 및 법인주식계좌",
-        "date": "2026-10-12T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PT",
-        "date": "2026-10-12T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-10-12T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "pt준비",
-        "date": "2026-10-12T14:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "게시물(카드뉴스)",
-        "date": "2026-10-12T16:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의기획(랜딩페이지, 온라인강의확인)",
-        "date": "2026-10-12T18:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "인스타 계정세팅",
-        "date": "2026-10-12T21:30:00.000+09:00",
-        "overdue": false
+        "date": "2026-10-12T22:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "P1~P3/목실감",
@@ -171,18 +101,8 @@
         "overdue": false
       },
       {
-        "title": "pt복습",
-        "date": "2026-10-13T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "강의랜딩",
         "date": "2026-10-13T13:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-10-13T14:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -198,6 +118,11 @@
       {
         "title": "인모저녁",
         "date": "2026-10-13T19:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "게시물(카드뉴스)",
+        "date": "2026-10-13T22:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -226,6 +151,11 @@
         "overdue": false
       },
       {
+        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
+        "date": "2026-10-14T11:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "홍대",
         "date": "2026-10-14T12:00:00.000+09:00",
         "overdue": false
@@ -243,6 +173,11 @@
       {
         "title": "원고",
         "date": "2026-10-14T14:15:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "인스타 계정세팅",
+        "date": "2026-10-14T16:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -281,6 +216,11 @@
         "overdue": false
       },
       {
+        "title": "유튜브 수익계좌변경 및 법인주식계좌",
+        "date": "2026-10-15T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "PPT완료",
         "date": "2026-10-15T13:00:00.000+09:00",
         "overdue": false
@@ -298,6 +238,11 @@
       {
         "title": "촬영&편집&업로드",
         "date": "2026-10-15T18:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의기획(랜딩페이지, 온라인강의확인)",
+        "date": "2026-10-15T21:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -408,6 +353,11 @@
       {
         "title": "쇼츠, 틱톡, 릴스 6시 예약(월,수,금)",
         "date": "2026-10-19T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "구글 광고 점검 — 계속 돌릴지 정하기 (광고로 온 상담 신청 수, 전체 유료 손님 수가 광고 전보다 늘었는지)",
+        "date": "2026-10-19T10:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -556,8 +506,58 @@
         "overdue": false
       },
       {
+        "title": "이렇게산다(성장일지), 메모",
+        "date": "2026-10-26",
+        "overdue": false
+      },
+      {
         "title": "고딩친구들 모임준비",
         "date": "2026-10-26",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-10-26T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "마케팅업체 주정산",
+        "date": "2026-10-26T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-10-26T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "date": "2026-10-26T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "유튜브 게시물 12시 예약(월,수,금)",
+        "date": "2026-10-26T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "쇼츠, 틱톡, 릴스 6시 예약(월,수,금)",
+        "date": "2026-10-26T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "주간복기",
+        "date": "2026-10-26T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "PT",
+        "date": "2026-10-26T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-10-26T14:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -608,12 +608,6 @@
     ],
     "schedule": [
       {
-        "title": "이렇게산다(성장일지), 메모",
-        "time": "",
-        "allDay": true,
-        "done": false
-      },
-      {
         "title": "P1~P3/목실감",
         "time": "08:30",
         "allDay": false,
@@ -626,68 +620,26 @@
         "done": false
       },
       {
-        "title": "마케팅업체 주정산",
-        "time": "09:00",
+        "title": "주제선정&썸네일&제목",
+        "time": "09:45",
         "allDay": false,
         "done": false
       },
       {
-        "title": "까르복습",
-        "time": "09:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "유튜브 게시물 12시 예약(월,수,금)",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "쇼츠, 틱톡, 릴스 6시 예약(월,수,금)",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "재개발 일부 스터디 필요",
-        "time": "10:15",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "구글 광고 점검 — 입찰가 60원으로 올린 뒤(10/8) 하루 광고비가 9,500원 근처로 늘었는지, 더 올릴지 정하기",
+        "title": "강의내용 목차 완료",
         "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
-        "time": "10:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "주간복기",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "유튜브 수익계좌변경 및 법인주식계좌",
-        "time": "12:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "PT",
+        "title": "pt복습",
         "time": "13:00",
+        "allDay": false,
+        "done": true
+      },
+      {
+        "title": "강의랜딩",
+        "time": "13:45",
         "allDay": false,
         "done": false
       },
@@ -695,29 +647,29 @@
         "title": "원씽복기",
         "time": "14:00",
         "allDay": false,
+        "done": true
+      },
+      {
+        "title": "강의ppt 시작",
+        "time": "14:45",
+        "allDay": false,
         "done": false
       },
       {
-        "title": "pt준비",
-        "time": "14:15",
+        "title": "완강 및 프린트",
+        "time": "17:15",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "인모저녁",
+        "time": "19:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "게시물(카드뉴스)",
-        "time": "16:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "강의기획(랜딩페이지, 온라인강의확인)",
-        "time": "18:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "인스타 계정세팅",
-        "time": "21:30",
+        "time": "22:15",
         "allDay": false,
         "done": false
       }
@@ -748,14 +700,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 19,
-      "rate": "68%",
+      "done": 18,
+      "rate": "64%",
       "days": [
-        {
-          "date": "2026-10-06",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-10-07",
           "done": 3,
@@ -783,6 +730,11 @@
         },
         {
           "date": "2026-10-12",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-10-13",
           "done": 0,
           "total": 4
         }
