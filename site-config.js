@@ -173,7 +173,7 @@
             groupLabel: '페이지',
             imwebCode: 'homepage/booklist-imweb-copy.html',
             dateSuffix: '1',
-            imwebDate: '2026-10-02'
+            imwebDate: '2026-10-13'
           },
           {
             id: 'coaching-payment',
