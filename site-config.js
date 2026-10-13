@@ -356,8 +356,8 @@
             activeMatch: ['retire-column-final.html'],
             hubVisible: true,
             imwebCode: 'homepage/retire-column-imweb-copy.html',
-            dateSuffix: '3',
-            imwebDate: '2026-10-02'
+            dateSuffix: '1',
+            imwebDate: '2026-10-13'
           }
         ]
       },
