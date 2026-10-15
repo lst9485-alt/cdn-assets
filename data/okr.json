@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-15T06:00:22.846996+09:00",
+  "updated": "2026-10-16T06:00:12.940337+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -16,14 +16,14 @@
     {
       "title": "10월 : 특강 / 상담400+특강500",
       "target": 900,
-      "current": 200,
-      "rate": "🔴 22%"
+      "current": 250,
+      "rate": "🔴 28%"
     }
   ],
   "tasks": {
-    "total": 1300,
-    "done": 1183,
-    "overdue": 11,
+    "total": 1307,
+    "done": 1195,
+    "overdue": 8,
     "pending": [
       {
         "title": "전자책 작성",
@@ -66,91 +66,6 @@
         "overdue": true
       },
       {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-10-14T19:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-10-14T20:15:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "강의수강",
-        "date": "2026-10-14T22:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-10-15T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주간계획 수정",
-        "date": "2026-10-15T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-10-15T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "랜딩에 후기추가",
-        "date": "2026-10-15T09:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
-        "date": "2026-10-15T09:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-10-15T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "유튜브 수익계좌변경 및 법인주식계좌",
-        "date": "2026-10-15T12:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-10-15T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-10-15T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고완성",
-        "date": "2026-10-15T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강게시물 올리기",
-        "date": "2026-10-15T16:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PPT완료",
-        "date": "2026-10-15T16:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의내용 목차 완료",
-        "date": "2026-10-15T21:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의목차 ppt",
-        "date": "2026-10-15T22:30:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "노량진 줍줍",
         "date": "2026-10-16",
         "overdue": false
@@ -166,13 +81,18 @@
         "overdue": false
       },
       {
-        "title": "ppt ~30p",
-        "date": "2026-10-16T09:30:00.000+09:00",
+        "title": "원고완성",
+        "date": "2026-10-16T09:15:00.000+09:00",
         "overdue": false
       },
       {
         "title": "틱톡 심사확인→ 프로필에 유튜브주소",
         "date": "2026-10-16T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "유튜브 수익계좌변경 및 법인주식계좌",
+        "date": "2026-10-16T12:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -186,18 +106,28 @@
         "overdue": false
       },
       {
+        "title": "PPT완료",
+        "date": "2026-10-16T14:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "로드맵 한장세팅",
-        "date": "2026-10-16T14:00:00.000+09:00",
+        "date": "2026-10-16T17:15:00.000+09:00",
         "overdue": false
       },
       {
         "title": "촬영&편집&업로드",
-        "date": "2026-10-16T16:45:00.000+09:00",
+        "date": "2026-10-16T18:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "인스타 계정세팅",
-        "date": "2026-10-16T21:30:00.000+09:00",
+        "title": "강의목차 ppt",
+        "date": "2026-10-16T21:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의수강",
+        "date": "2026-10-16T22:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -211,8 +141,8 @@
         "overdue": false
       },
       {
-        "title": "ppt~60p",
-        "date": "2026-10-17T11:30:00.000+09:00",
+        "title": "ppt ~30p",
+        "date": "2026-10-17T11:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -226,8 +156,8 @@
         "overdue": false
       },
       {
-        "title": "ppt ~100p",
-        "date": "2026-10-17T20:45:00.000+09:00",
+        "title": "ppt~60p",
+        "date": "2026-10-17T20:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -236,18 +166,18 @@
         "overdue": false
       },
       {
-        "title": "사전신청자들 메시지. 영상 꼼꼼히 확인하고 신청해라. 미리보내드린다",
-        "date": "2026-10-18T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "원씽복기",
         "date": "2026-10-18T14:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "사전신청자들 전체메시지. 영상 꼼꼼하게 확인하고 신청해라. 미리 보내드린다",
-        "date": "2026-10-18T15:30:00.000+09:00",
+        "title": "사전신청자들 메시지. 영상 꼼꼼히 확인하고 신청해라. 미리보내드린다",
+        "date": "2026-10-18T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "지난특강 안내메일",
+        "date": "2026-10-18T17:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -256,8 +186,18 @@
         "overdue": false
       },
       {
+        "title": "특강 홍보 — 상담 회원 발송 (채널 친구=카톡, 아닌 분=문자+메일, 6개월 안만)",
+        "date": "2026-10-18T18:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "이전 특강풀링 고정댓글, 알림신청 변경",
         "date": "2026-10-18T19:15:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "인스타 계정세팅",
+        "date": "2026-10-18T20:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -323,6 +263,11 @@
       {
         "title": "원씽복기",
         "date": "2026-10-19T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ppt ~100p",
+        "date": "2026-10-19T15:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -551,6 +496,36 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-10-29",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-10-29T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-10-29T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-10-29T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-10-29T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-10-29T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "특강 9시30분~1시30분 예약",
         "date": "2026-10-31T09:30:00.000+09:00",
         "overdue": false
@@ -613,13 +588,13 @@
     ],
     "schedule": [
       {
-        "title": "P1~P3/목실감",
-        "time": "08:30",
-        "allDay": false,
+        "title": "노량진 줍줍",
+        "time": "",
+        "allDay": true,
         "done": false
       },
       {
-        "title": "주간계획 수정",
+        "title": "P1~P3/목실감",
         "time": "08:30",
         "allDay": false,
         "done": false
@@ -631,19 +606,13 @@
         "done": false
       },
       {
-        "title": "랜딩에 후기추가",
+        "title": "원고완성",
         "time": "09:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고",
-        "time": "09:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
+        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
         "time": "12:00",
         "allDay": false,
         "done": false
@@ -667,32 +636,32 @@
         "done": false
       },
       {
-        "title": "원고완성",
-        "time": "14:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "특강게시물 올리기",
-        "time": "16:00",
-        "allDay": false,
-        "done": false
-      },
-      {
         "title": "PPT완료",
-        "time": "16:45",
+        "time": "14:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의내용 목차 완료",
-        "time": "21:15",
+        "title": "로드맵 한장세팅",
+        "time": "17:15",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "촬영&편집&업로드",
+        "time": "18:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "강의목차 ppt",
-        "time": "22:30",
+        "time": "21:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의수강",
+        "time": "22:00",
         "allDay": false,
         "done": false
       }
@@ -727,11 +696,6 @@
       "rate": "68%",
       "days": [
         {
-          "date": "2026-10-09",
-          "done": 3,
-          "total": 4
-        },
-        {
           "date": "2026-10-10",
           "done": 3,
           "total": 4
@@ -753,11 +717,16 @@
         },
         {
           "date": "2026-10-14",
-          "done": 4,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-10-15",
+          "done": 4,
+          "total": 4
+        },
+        {
+          "date": "2026-10-16",
           "done": 0,
           "total": 4
         }
@@ -767,8 +736,8 @@
   "sales": {
     "month": "2026-10",
     "month_label": "10월",
-    "total_amount": 400,
-    "total_count": 8,
+    "total_amount": 450,
+    "total_count": 9,
     "weekly": [
       {
         "week": "1주차",
@@ -782,8 +751,8 @@
       },
       {
         "week": "3주차",
-        "count": 1,
-        "amount": 50
+        "count": 2,
+        "amount": 100
       }
     ]
   }

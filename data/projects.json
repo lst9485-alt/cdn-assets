@@ -1,11 +1,19 @@
 {
-  "updated": "2026-10-15T06:00:10.298221+09:00",
+  "updated": "2026-10-16T06:00:04.006236+09:00",
   "projects": [
     {
       "name": "261018 원고",
       "type": "file",
+      "app": "youtube/yt-youtube-production",
+      "modified": "2026-10-15",
+      "status": "영상 폴더 산출물 = 원고 파일 하나 (2026-08-10 개편).",
+      "next": null
+    },
+    {
+      "name": "261025 원고",
+      "type": "file",
       "app": null,
-      "modified": "2026-10-14",
+      "modified": "2026-10-15",
       "status": null,
       "next": null
     },
@@ -13,7 +21,7 @@
       "name": "강의",
       "type": "folder",
       "app": null,
-      "modified": "2026-10-14",
+      "modified": "2026-10-15",
       "status": null,
       "next": null
     },
@@ -21,31 +29,7 @@
       "name": "비즈니스PT 프로",
       "type": "folder",
       "app": null,
-      "modified": "2026-10-13",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "카페 이전",
-      "type": "file",
-      "app": null,
-      "modified": "2026-10-13",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "카페 이전 초안",
-      "type": "file",
-      "app": null,
-      "modified": "2026-10-12",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "261025 원고",
-      "type": "file",
-      "app": null,
-      "modified": "2026-10-11",
+      "modified": "2026-10-15",
       "status": null,
       "next": null
     }

@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-15T06:00:36.852177+09:00",
+  "updated": "2026-10-16T06:00:27.415040+09:00",
   "summary": {
-    "정상": 45,
+    "정상": 47,
     "정리 필요": 0,
     "꺼짐": 1
   },
@@ -704,6 +704,34 @@
       "time": "9,18:0",
       "status": "정상",
       "script": "applyhome-watch.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "kakao-unread-watch",
+      "title": "kakao-unread-watch",
+      "room": "확인 필요",
+      "description": "카톡 채널 안 읽은 메시지 알림 — 6시간 넘게 안 읽은 방(손님 아니어도)을 Biz 방으로, 방마다 읽을 때까지 한 번. 방은 열지 않음",
+      "cron": "30 8-22 * * *",
+      "day": "매일",
+      "time": "8-22:30",
+      "status": "정상",
+      "script": "kakao-unread-watch.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "content-sheet-auto",
+      "title": "content-sheet-auto",
+      "room": "확인 필요",
+      "description": "콘텐츠관리 시트 자동 시작 — 지난주 열의 자동으로 되는 칸(유튜브 숫자·상담 매출/고객수·랜딩·광고)만 채우고 Biz 방에 남은 칸 알림. \"콘텐츠 시트 이어서\"로 마무리",
+      "cron": "0 12 * * 4",
+      "day": "4",
+      "time": "12:00",
+      "status": "정상",
+      "script": "content-sheet-auto.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
