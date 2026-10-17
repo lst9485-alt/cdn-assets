@@ -55,7 +55,8 @@ h2{font-size:16px;font-weight:800;letter-spacing:-0.01em}
 .sub-h{font-size:13px;font-weight:700;color:var(--sub);margin:20px 0 6px}
 #bottleneck svg{width:100%;height:auto;display:block}
 .zones{display:flex;flex-direction:column;gap:5px;max-width:760px}
-.zr{display:grid;grid-template-columns:150px 1fr 48px;gap:10px;align-items:center;font-size:13px}
+.zr{display:grid;grid-template-columns:150px 1fr 48px 44px;gap:10px;align-items:center;font-size:13px}
+.zt{text-align:right;color:var(--sub)}
 .zb{height:12px;border-radius:0 4px 4px 0;background:#B9C9DD}
 .zr.hot{color:var(--bad);font-weight:700}
 .zr.hot .zb{background:var(--bad)}
@@ -294,12 +295,12 @@ details.grp summary{cursor:pointer;color:var(--muted)}
     var weeks=hist.slice(-12);
     var chart = stuck ? '<div class="sub-h">'+esc(worst.name)+' 칸, 최근 12주</div>'+trendSvg(weeks.map(function(w){ return pct(w[worst.to]||0,w[worst.from]||0); }), worst.target, weeks) : '';
     var unpaidLine = (stuck && worst.to==='paid_customers') ? unpaidHtml(unpaid, curMonth) : '';
-    var zones = (stuck && worst.to==='paid_customers') ? '<div class="sub-h">그럼 랜딩 페이지 어디서 빠질까 — 각 구역까지 내려온 사람</div><div id="zones" class="zones num"><span class="hint">불러오는 중…</span></div>' : '';
+    var zones = '<div class="sub-h">랜딩 페이지 어디서 빠질까 — 각 구역까지 내려온 사람 · 머문 시간</div><div id="zones" class="zones num"><span class="hint">불러오는 중…</span></div>';
     box.innerHTML='<div class="verdict">'+head+'</div>'+unpaidLine+'<div class="funnel"><div class="funnel-head"><span></span><span></span><span style="text-align:right">4주 합계</span><span>최근 12주 흐름</span></div>'+rows+'</div>'+chart+zones;
     if(zones) renderZones();
   }
 
-  // 랜딩 구역 도달 — data/landing-sections.json (GA4, 매일 06시). 병목이 랜딩 → 구매일 때만 보인다
+  // 랜딩 구역 도달·머문 시간 — data/landing-sections.json (GA4, 매일 06시). 2026-10-18부터 늘 보인다(텔레그램 주간 그림과 맞춤)
   function renderZones(){
     var el=document.getElementById('zones');
     getJson('landing-sections.json')
@@ -311,7 +312,7 @@ details.grp summary{cursor:pointer;color:var(--muted)}
         var form=d.sections.filter(function(x){ return x.key==='apply-form'; })[0];
         el.innerHTML='<p class="hint" style="margin-bottom:8px">'+md(d.start)+'부터 방문자 '+d.visitors.toLocaleString('ko-KR')+'명</p>'+d.sections.map(function(x){
           var p=Math.round(x.users/d.visitors*100), hot=x===form;
-          return '<div class="zr'+(hot?' hot':'')+'"><span>'+esc(x.label)+'</span><div class="zb" style="width:'+Math.max(p,1)+'%"></div><span class="zv">'+p+'%</span></div>';
+          return '<div class="zr'+(hot?' hot':'')+'"><span>'+esc(x.label)+'</span><div class="zb" style="width:'+Math.max(p,1)+'%"></div><span class="zv">'+p+'%</span><span class="zt">'+(x.seconds!=null?x.seconds+'초':'')+'</span></div>';
         }).join('');
       })
       .catch(function(){ el.innerHTML='<p class="hint">랜딩 구역 숫자 파일이 아직 없어요. 내일 아침 6시 뒤에 생겨요.</p>'; });
