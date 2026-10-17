@@ -70,6 +70,72 @@
     sections.forEach(function (section) {
       observer.observe(section);
     });
+
+    trackSectionTime(sections);
+  }
+
+  // 구역별 머문 시간: 화면 가운데 줄에 걸린 구역을 "보는 중"으로 친다.
+  // 가운데 줄이 다른 구역으로 넘어갈 때와 화면을 떠날 때만 계산하므로 스크롤할 때 느려지지 않는다.
+  // 화면을 떠날 때(탭 숨김·닫기) section_time 이벤트로 구역마다 초를 value에 실어 보낸다.
+  function trackSectionTime(sections) {
+    var current = null;
+    var since = 0;
+    var spent = {};
+
+    function stop() {
+      if (current && since) spent[current] = (spent[current] || 0) + (Date.now() - since);
+      since = 0;
+    }
+
+    function start(name) {
+      current = name;
+      since = document.visibilityState === 'visible' ? Date.now() : 0;
+    }
+
+    function flush() {
+      Object.keys(spent).forEach(function (name) {
+        var sec = Math.min(Math.round(spent[name] / 1000), 600); // 켜 두고 자리를 뜬 경우는 10분에서 자름
+        if (sec < 1) return;
+        window.gtag('event', 'section_time', {
+          section_name: name,
+          value: sec,
+          page_path: window.location.pathname,
+          transport_type: 'beacon'
+        });
+      });
+      spent = {};
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var name = entry.target.getAttribute('data-section');
+        if (!name) return;
+        if (entry.isIntersecting) {
+          stop();
+          start(name);
+        } else if (name === current) {
+          stop();
+          current = null;
+        }
+      });
+    }, { rootMargin: '-50% 0px -49% 0px' });
+
+    sections.forEach(function (section) {
+      observer.observe(section);
+    });
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') {
+        stop();
+        flush();
+      } else if (current) {
+        since = Date.now();
+      }
+    });
+    window.addEventListener('pagehide', function () {
+      stop();
+      flush();
+    });
   }
 
   appendScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID, initGa);
