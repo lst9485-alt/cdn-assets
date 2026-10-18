@@ -289,21 +289,25 @@ details.grp summary{cursor:pointer;color:var(--muted)}
 
     var head;
     if(!stuck) head='<b style="color:var(--ok)">평소보다 크게 떨어진 곳이 없어요.</b>';
-    else if(worst.from) head='<b>'+esc(worst.name)+'</b> 칸에서 막혀요. 100명 중 '+f1(worst.cur)+'명만 넘어가요 (평소 '+f1(worst.avg)+'명 · 목표 '+f1(worst.target)+'명).';
-    else head='<b>'+esc(worst.name)+'</b>에서 막혀요. 지난주 '+n(worst.cur)+' (평소 '+n(worst.avg)+' · 목표 '+n(worst.target||0)+').';
+    else if(worst.from) head='<b>'+esc(worst.name)+'</b> 칸에서 막혀요. 100명 중 '+f1(worst.cur)+'명만 넘어가요 · 평소 '+f1(worst.avg)+'명 (목표 '+f1(worst.target)+'명)';
+    else head='<b>'+esc(worst.name)+'</b>에서 막혀요. 지난주 '+n(worst.cur)+' · 평소 '+n(worst.avg)+' (목표 '+n(worst.target||0)+')';
     head+='<div class="gain">지난주 '+md(cur.week_start)+'~'+md(cur.week_end)+' · 평소 = 앞 '+prev.length+'주 한 주 평균 (96주 특강 주 뺌)</div>';
 
-    var stages=[['풀링 조회','pulling_views','',targets.pulling_views],['키 조회','key_views','',targets.key_views],['랜딩 방문','landing_visits','명',targets.landing_visits],['구매','paid_customers','명',targets.paid_customers]];
+    var stages=[['풀링 조회','pulling_views','',targets.pulling_views],['키 조회','key_views','',targets.key_views],['랜딩 방문','landing_visits','명',null],['구매','paid_customers','명',targets.paid_customers]];
     var max=Math.log10(cur.pulling_views||10);
     var rows='';
     stages.forEach(function(sg,i){
       var v=cur[sg[1]]||0, w=Math.max(6, Math.log10(Math.max(v,1))/max*100), r=chg(v, avg(sg[1]));
       var isW=stuck && ((i===1 && worst.key==='key') || (i===2 && worst.key==='land') || (i===3 && worst.key==='buy'));
       rows+='<div class="fr"><span class="fr-name">'+sg[0]+'</span><div class="fr-track"><div class="fr-bar'+(isW?' bad':'')+'" style="width:'+w+'%"></div></div><span class="fr-val num">'+v.toLocaleString('ko-KR')+sg[2]+'</span>'+miniSvg(hist.slice(-12).map(function(x){ return x[sg[1]]||0; }), sg[0], hist.slice(-12))+'</div>';
-      rows+='<div class="fs'+(i===1&&isW?' bad':'')+'"><span></span><span>평소 '+n(avg(sg[1]))+sg[2]+(sg[3]?' · 목표 '+n(sg[3])+sg[2]:'')+chip(r, i===1&&isW)+'</span></div>';
+      rows+='<div class="fs'+(i===1&&isW?' bad':'')+'"><span></span><span>평소 '+n(avg(sg[1]))+sg[2]+(sg[3]?' (목표 '+n(sg[3])+sg[2]+')':'')+chip(r, i===1&&isW)+'</span></div>';
+      if(i===0){  // 키 ÷ 풀링: 진짜 넘어간 비율은 못 재지만 풀링 합계 대비 20%는 돼야 한다 (2026-10-18 사용자). 막힌 곳 고를 땐 뺌
+        var kc=pct(cur.key_views,cur.pulling_views), ka=pct(tot('key_views'),tot('pulling_views'));
+        rows+='<div class="fs"><span></span><span>↓ 참고 키÷풀링 '+f1(kc)+'% · 평소 '+f1(ka)+'% (목표 '+f1(targets.interest_rate||20)+'%)'+chip(chg(kc,ka))+'</span></div>';
+      }
       if(i>=1 && i<3){
         var st=steps[i], sw=stuck&&st===worst;
-        rows+='<div class="fs'+(sw?' bad':'')+'"><span></span><span>↓ '+f1(st.cur)+'%가 넘어감 · 평소 '+f1(st.avg)+'% · 목표 '+f1(st.target)+'%'+chip(st.change, sw)+'</span></div>';
+        rows+='<div class="fs'+(sw?' bad':'')+'"><span></span><span>↓ '+f1(st.cur)+'%가 넘어감 · 평소 '+f1(st.avg)+'% (목표 '+f1(st.target)+'%)'+chip(st.change, sw)+'</span></div>';
       }
     });
 
