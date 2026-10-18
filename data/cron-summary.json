@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-18T06:00:52.076239+09:00",
+  "updated": "2026-10-19T06:01:02.386244+09:00",
   "summary": {
-    "정상": 47,
+    "정상": 49,
     "정리 필요": 0,
     "꺼짐": 1
   },
@@ -667,6 +667,20 @@
       "enabled": true
     },
     {
+      "name": "lecture-submit-alert",
+      "title": "lecture-submit-alert",
+      "room": "확인 필요",
+      "description": "10/31 특강 신청서 새 제출을 1분 안에 Biz 방으로 알림. 이름·수강 방식·전화 끝번호·제출 시각만 표시하고, 입금 확인은 기존 아침 목록에서 처리",
+      "cron": "* * * * *",
+      "day": "매일",
+      "time": "매분",
+      "status": "정상",
+      "script": "lecture-submit-alert.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
       "name": "lecture-confirm",
       "title": "lecture-confirm",
       "room": "확인 필요",
@@ -676,6 +690,20 @@
       "time": "09:00",
       "status": "정상",
       "script": "lecture-confirm.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "lecture-pay-match",
+      "title": "lecture-pay-match",
+      "room": "확인 필요",
+      "description": "10/31 특강 돈·신청서 맞추기 — 5분마다 하나은행 입금·아임웹 카드결제와 응답 시트를 맞춰 L~O열(카드/현금·입금여부·금액·특이사항) 채움. 돈만 있거나 신청서만 있는 채로 30분 지나면(그 뒤 짝 찾을 때까지 4시간마다), 결제 방법이 신청서와 다르면 Biz 방 알림",
+      "cron": "*/5 * * * *",
+      "day": "매일",
+      "time": "*:*/5",
+      "status": "정상",
+      "script": "lecture-pay-match.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
