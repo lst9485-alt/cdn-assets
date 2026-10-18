@@ -257,47 +257,62 @@ details.grp summary{cursor:pointer;color:var(--muted)}
   }
 
   // ---------- 병목 ----------
+  // 2026-10-18 텔레그램 주간 보고(aarrr-weekly.sh)와 같은 기준으로 맞춤 (사용자 "텔레그램 기준으로, 목표랑 평소 둘 다").
+  //   지난주 vs 평소(앞 13주 한 주 평균, 96주 특강 주 뺌). 막힌 곳 = 키 조회 / 키→랜딩 / 랜딩→구매 중
+  //   평소보다 제일 많이 떨어진 곳, 20% 넘게 떨어졌을 때만. 목표는 옆에 같이 적는다.
+  //   풀링은 키로 넘어가는 비율을 못 재서(2026-09-27) 숫자만.
+  var SKIP_WEEKS=['2026-08-25'];
   function renderBottleneck(hist, targets, unpaid, curMonth){
     var box=document.getElementById('bottleneck');
-    var last4=hist.slice(-4);
-    if(last4.length<4){ box.innerHTML='<p class="err">4주치 숫자가 아직 없어요.</p>'; return; }
-    function sum(k){ return last4.reduce(function(a,w){ return a+(w[k]||0); },0); }
-    var vals={pulling_views:sum('pulling_views'), key_views:sum('key_views'), landing_visits:sum('landing_visits'), paid_customers:sum('paid_customers')};
-    var rev=sum('revenue'), buy=vals.paid_customers;
-    var stages=[['풀링 조회','pulling_views',''],['키 조회','key_views',''],['랜딩 방문','landing_visits',''],['구매','paid_customers','명']];
+    if(hist.length<2){ box.innerHTML='<p class="err">주별 숫자가 아직 없어요.</p>'; return; }
+    var cur=hist[hist.length-1];
+    var prev=hist.slice(-14,-1).filter(function(w){ return SKIP_WEEKS.indexOf(w.week_start)<0; });
+    function tot(k){ return prev.reduce(function(a,w){ return a+(w[k]||0); },0); }
+    function avg(k){ return prev.length ? tot(k)/prev.length : 0; }
+    function chg(c,a){ return a>0 ? (c-a)/a*100 : null; }
+    function arrow(r){ return r==null ? '' : (Math.abs(r)<3 ? '그대로' : (r>0?'▲':'▼')+Math.round(Math.abs(r))+'%'); }
+    function chip(r, isW){ if(r==null) return ''; return '<span class="chip '+(r<=-20?'bad':'ok')+'">'+(isW?'막힘 ':'')+arrow(r)+'</span>'; }
+    function n(v){ return Math.round(v).toLocaleString('ko-KR'); }
+
     var steps=[
-      {name:'풀링 → 키', from:'pulling_views', to:'key_views', target:targets.interest_rate||20},
-      {name:'키 → 랜딩', from:'key_views', to:'landing_visits', target:targets.link_click_rate||2.5},
-      {name:'랜딩 → 구매', from:'landing_visits', to:'paid_customers', target:targets.convert_rate||3}
+      {key:'key', name:'키 조회', cur:cur.key_views, avg:avg('key_views'), target:targets.key_views},
+      {key:'land', name:'키 → 랜딩', from:'key_views', to:'landing_visits', target:targets.link_click_rate||2.5},
+      {key:'buy', name:'랜딩 → 구매', from:'landing_visits', to:'paid_customers', target:targets.convert_rate||3}
     ];
-    steps.forEach(function(st){ st.rate=pct(vals[st.to],vals[st.from]); st.score=st.rate/st.target; });
-    var worst=steps.reduce(function(x,y){ return y.score<x.score?y:x; });
-    var stuck=worst.score<1;
-    var price=buy>0?rev/buy:0, more=(stuck&&worst.score>0)?buy/worst.score-buy:0;
+    steps.forEach(function(st){
+      if(st.from){ st.cur=pct(cur[st.to],cur[st.from]); st.avg=pct(tot(st.to),tot(st.from)); }
+      st.change=chg(st.cur, st.avg);
+    });
+    var cands=steps.filter(function(st){ return st.change!=null; });
+    var worst=cands.length ? cands.reduce(function(x,y){ return y.change<x.change?y:x; }) : null;
+    var stuck=!!(worst && worst.change<=-20);
 
-    var head = stuck
-      ? '<b>'+esc(worst.name)+'</b> 칸에서 막혀요. 100명 중 '+f1(worst.rate)+'명만 넘어가요 (목표 '+f1(worst.target)+'명).'
-        +(buy>0 ? '<div class="gain">목표 '+f1(worst.target)+'%를 채우면 → 4주 구매 '+buy+'명이 약 '+Math.round(buy+more)+'명'+(price?', 매출 약 '+won(Math.round(more*price/10000)*10000)+' 더':'')+'</div>' : '<div class="gain">최근 4주 동안 구매가 없었어요.</div>')
-      : '<b>모든 칸이 목표를 넘겼어요.</b> 목표를 올릴 때예요.';
+    var head;
+    if(!stuck) head='<b style="color:var(--ok)">평소보다 크게 떨어진 곳이 없어요.</b>';
+    else if(worst.from) head='<b>'+esc(worst.name)+'</b> 칸에서 막혀요. 100명 중 '+f1(worst.cur)+'명만 넘어가요 (평소 '+f1(worst.avg)+'명 · 목표 '+f1(worst.target)+'명).';
+    else head='<b>'+esc(worst.name)+'</b>에서 막혀요. 지난주 '+n(worst.cur)+' (평소 '+n(worst.avg)+' · 목표 '+n(worst.target||0)+').';
+    head+='<div class="gain">지난주 '+md(cur.week_start)+'~'+md(cur.week_end)+' · 평소 = 앞 '+prev.length+'주 한 주 평균 (96주 특강 주 뺌)</div>';
 
-    var max=Math.log10(vals.pulling_views||10);
+    var stages=[['풀링 조회','pulling_views','',targets.pulling_views],['키 조회','key_views','',targets.key_views],['랜딩 방문','landing_visits','명',targets.landing_visits],['구매','paid_customers','명',targets.paid_customers]];
+    var max=Math.log10(cur.pulling_views||10);
     var rows='';
     stages.forEach(function(sg,i){
-      var v=vals[sg[1]], w=Math.max(6, Math.log10(Math.max(v,1))/max*100);
-      var last=i===3;
-      rows+='<div class="fr"><span class="fr-name">'+sg[0]+'</span><div class="fr-track"><div class="fr-bar'+(last&&stuck&&worst.to==='paid_customers'?' bad':'')+'" style="width:'+w+'%"></div></div><span class="fr-val num">'+v.toLocaleString('ko-KR')+sg[2]+'</span>'+miniSvg(hist.slice(-12).map(function(x){ return x[sg[1]]||0; }), sg[0], hist.slice(-12))+'</div>';
-      if(i<3){
-        var st=steps[i], ok=st.rate>=st.target, isW=st===worst&&stuck;
-        rows+='<div class="fs'+(isW?' bad':'')+'"><span></span><span>↓ '+f1(st.rate)+'%가 넘어감 · 목표 '+f1(st.target)+'% <span class="chip '+(ok?'ok':'bad')+'">'+(ok?'통과':(isW?'막힘':'미달'))+'</span></span></div>';
+      var v=cur[sg[1]]||0, w=Math.max(6, Math.log10(Math.max(v,1))/max*100), r=chg(v, avg(sg[1]));
+      var isW=stuck && ((i===1 && worst.key==='key') || (i===2 && worst.key==='land') || (i===3 && worst.key==='buy'));
+      rows+='<div class="fr"><span class="fr-name">'+sg[0]+'</span><div class="fr-track"><div class="fr-bar'+(isW?' bad':'')+'" style="width:'+w+'%"></div></div><span class="fr-val num">'+v.toLocaleString('ko-KR')+sg[2]+'</span>'+miniSvg(hist.slice(-12).map(function(x){ return x[sg[1]]||0; }), sg[0], hist.slice(-12))+'</div>';
+      rows+='<div class="fs'+(i===1&&isW?' bad':'')+'"><span></span><span>평소 '+n(avg(sg[1]))+sg[2]+(sg[3]?' · 목표 '+n(sg[3])+sg[2]:'')+chip(r, i===1&&isW)+'</span></div>';
+      if(i>=1 && i<3){
+        var st=steps[i], sw=stuck&&st===worst;
+        rows+='<div class="fs'+(sw?' bad':'')+'"><span></span><span>↓ '+f1(st.cur)+'%가 넘어감 · 평소 '+f1(st.avg)+'% · 목표 '+f1(st.target)+'%'+chip(st.change, sw)+'</span></div>';
       }
     });
 
     var weeks=hist.slice(-12);
-    var chart = stuck ? '<div class="sub-h">'+esc(worst.name)+' 칸, 최근 12주</div>'+trendSvg(weeks.map(function(w){ return pct(w[worst.to]||0,w[worst.from]||0); }), worst.target, weeks) : '';
-    var unpaidLine = (stuck && worst.to==='paid_customers') ? unpaidHtml(unpaid, curMonth) : '';
+    var chart = (stuck && worst.from) ? '<div class="sub-h">'+esc(worst.name)+' 칸, 최근 12주</div>'+trendSvg(weeks.map(function(w){ return pct(w[worst.to]||0,w[worst.from]||0); }), worst.target, weeks) : '';
+    var unpaidLine = (stuck && worst.key==='buy') ? unpaidHtml(unpaid, curMonth) : '';
     var zones = '<div class="sub-h">랜딩 페이지 어디서 빠질까 — 각 구역까지 내려온 사람 · 머문 시간</div><div id="zones" class="zones num"><span class="hint">불러오는 중…</span></div>';
-    box.innerHTML='<div class="verdict">'+head+'</div>'+unpaidLine+'<div class="funnel"><div class="funnel-head"><span></span><span></span><span style="text-align:right">4주 합계</span><span>최근 12주 흐름</span></div>'+rows+'</div>'+chart+zones;
-    if(zones) renderZones();
+    box.innerHTML='<div class="verdict"'+(stuck?'':' style="background:var(--ok-soft)"')+'>'+head+'</div>'+unpaidLine+'<div class="funnel"><div class="funnel-head"><span></span><span></span><span style="text-align:right">지난주</span><span>최근 12주 흐름</span></div>'+rows+'</div>'+chart+zones;
+    renderZones();
   }
 
   // 랜딩 구역 도달·머문 시간 — data/landing-sections.json (GA4, 매일 06시). 2026-10-18부터 늘 보인다(텔레그램 주간 그림과 맞춤)
