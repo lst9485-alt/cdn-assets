@@ -144,15 +144,20 @@
     var left = 10000;
     var since = 0;
     var timer = null;
+    var openedAt = Date.now();
+
+    function send() {
+      left = 0;
+      timer = null;
+      // 뒤에 열어 두고 25분 넘게 지나 처음 보면 구글이 새 방문으로 세서 숫자가 갈라진다 → 그때는 안 보낸다
+      if (Date.now() - openedAt > 25 * 60 * 1000) return;
+      window.gtag('event', 'stay_10s', { page_path: window.location.pathname });
+    }
 
     function run() {
       if (left <= 0 || timer || document.visibilityState !== 'visible') return;
       since = Date.now();
-      timer = setTimeout(function () {
-        left = 0;
-        timer = null;
-        window.gtag('event', 'stay_10s', { page_path: window.location.pathname });
-      }, left);
+      timer = setTimeout(send, left);
     }
 
     function pause() {
@@ -160,6 +165,7 @@
       clearTimeout(timer);
       timer = null;
       left -= Date.now() - since;
+      if (left <= 0) send(); // 10초가 찼는데 타이머가 늦게 돌기 전에 화면을 떠난 경우
     }
 
     document.addEventListener('visibilitychange', function () {
