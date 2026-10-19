@@ -138,7 +138,39 @@
     });
   }
 
+  // 반송률용: 화면을 보고 있는 시간이 10초를 넘으면 stay_10s를 한 번 보낸다(구글 애널리틱스 기본 반송 기준과 같은 10초).
+  // 구글이 주는 반송률은 counsel_visit(광고 전환용 중요 행동) 때문에 거의 0%로 나와서 따로 센다.
+  function trackStay10s() {
+    var left = 10000;
+    var since = 0;
+    var timer = null;
+
+    function run() {
+      if (left <= 0 || timer || document.visibilityState !== 'visible') return;
+      since = Date.now();
+      timer = setTimeout(function () {
+        left = 0;
+        timer = null;
+        window.gtag('event', 'stay_10s', { page_path: window.location.pathname });
+      }, left);
+    }
+
+    function pause() {
+      if (!timer) return;
+      clearTimeout(timer);
+      timer = null;
+      left -= Date.now() - since;
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') pause();
+      else run();
+    });
+    run();
+  }
+
   appendScript('https://www.googletagmanager.com/gtag/js?id=' + GA_ID, initGa);
+  trackStay10s();
   initClarity();
 
   if (document.readyState === 'loading') {
