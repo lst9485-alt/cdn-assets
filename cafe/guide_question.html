@@ -19,7 +19,7 @@ h1{text-align:center;font-size:34px;font-weight:800;margin-bottom:24px}
 .chk{display:flex;align-items:center;gap:10px;border:3px solid #ff3b30;border-radius:10px;padding:8px 14px;font-weight:800;font-size:17px;color:#111}
 .chk i{width:24px;height:24px;border-radius:5px;background:#03c75a;color:#fff;font-style:normal;display:flex;align-items:center;justify-content:center;font-size:16px}
 .btn{background:#03c75a;color:#fff;font-weight:700;border-radius:6px;padding:8px 20px;font-size:15px}
-.form{background:#fdf2e6;border-radius:12px;padding:14px 14px;font-size:14px;letter-spacing:-0.3px;white-space:nowrap;line-height:1.75;color:#5a3a1a}
+.form{background:#fdf2e6;border-radius:12px;padding:16px 16px;font-size:18px;letter-spacing:-0.3px;white-space:nowrap;line-height:1.75;color:#5a3a1a}
 .form b{font-weight:800}
 .steps{margin-top:10px;font-size:12.5px;color:#7a5a3a;line-height:1.6}
 .cam{display:flex;align-items:center;gap:12px;margin-top:8px}
@@ -36,23 +36,34 @@ h1{text-align:center;font-size:34px;font-weight:800;margin-bottom:24px}
 .chips span{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1.5px solid #ffd3b0;border-radius:20px;padding:3px 10px;font-size:13px;font-weight:700;color:#5a3a1a;white-space:nowrap}
 .chips i{font-style:normal;color:#ff6b00;font-weight:800;font-size:13px}
 .chips em{font-style:normal;color:#ff9a4d;font-weight:800}
-.note2{text-align:center;margin-top:16px;font-size:15px;font-weight:700;color:#444;line-height:1.55}
+.note2{text-align:center;margin-top:16px;font-size:19px;font-weight:700;color:#444;line-height:1.55}
 .note2 b{color:#E2570A}
 .note2 u{text-decoration-thickness:2px;text-underline-offset:3px}
 .warn{text-align:center;color:#ff3b30;font-weight:800;font-size:16px;margin:22px 0 16px}
-.bar{background:#ff6b00;color:#fff;text-align:center;font-size:24px;font-weight:800;border-radius:16px;padding:18px}
+.bar{background:#ff6b00;color:#fff;text-align:center;font-size:24px;font-weight:800;border-radius:16px;padding:16px 18px;margin-top:22px}
+.wide{grid-column:1/-1}
+.cols{display:grid;grid-template-columns:1fr 190px;gap:18px;align-items:stretch}
+.vstp{background:#fff;border:1.5px solid #ffd3b0;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between}
+.vstp .stp-t{font-size:17px;margin-bottom:8px}
+.vstp span{display:flex;align-items:center;gap:6px;font-size:17px;font-weight:700;color:#5a3a1a;padding:6px 0;border-bottom:1px dashed #ffe3cc}
+.vstp span:last-child{border-bottom:0}
+.vstp i{font-style:normal;color:#ff6b00;font-weight:800}
+.att{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:18px;padding-top:18px;border-top:2px dashed #e3e3e3}
+.att .shot{align-self:auto;flex:none}
+.att-t{font-size:21px;font-weight:700;color:#333;line-height:1.5}
+.att-t b{color:#ff3b30}
+.bar small{display:block;font-size:18px;font-weight:600;margin-top:6px;opacity:.92}
 </style></head><body>
 <h1>질문하기 (회원 전용) 안내</h1>
 <div class="grid">
  <div class="card"><div class="hd"><div class="num">1</div><div class="tt">질문하기 (회원전용) 클릭</div></div>
-  <div class="body"><div class="menu"><img src="menu_coach.png"><div class="hl" style="top:88px"></div></div></div></div>
+  <div class="body"><div class="menu"><img src="menu_coach2.png" style="width:200px"><div class="hl" style="left:8px;top:63px;width:148px;height:30px"></div></div></div></div>
  <div class="card"><div class="hd"><div class="num">2</div><div class="tt">'스탭만 보기' 체크</div></div>
   <div class="body"><div class="shot"><img src="m_staff_small.png"><div class="hl2" style="left:18px;top:47px;width:82px;height:34px"></div></div><div class="note2">후기 작성 시 질의응답 기간이<br><b><u>6개월</u></b>로 자동 반영됩니다</div></div></div>
- <div class="card"><div class="hd"><div class="num">3</div><div class="tt">양식 복사해서 채우기</div></div>
-  <div class="body"><div class="form"><b>[필수 정보]</b><br>성함 :<br>진행 상황 : (예: 단지 선정 중)<br>예산 : (예: 총 5.7억 = 현금 2.5억 + 대출 3.2억)<br>관심 지역·단지 :<br><br><b>[질문]</b><br>궁금한 점 :<br>내 생각 :</div><div class="stp"><div class="stp-t">내집마련 6단계</div><div class="chips"><span><i>1.</i>예산</span><em>›</em><span><i>2.</i>매매방법</span><em>›</em><span><i>3.</i>지역·단지</span><em>›</em><span><i>4.</i>부동산 방문</span><em>›</em><span><i>5.</i>계약</span><em>›</em><span><i>6.</i>잔금·입주</span></div></div></div></div>
- <div class="card"><div class="hd"><div class="num">4</div><div class="tt">[이미지 첨부]는 댓글로 올리기</div></div>
-  <div class="body"><div class="shot"><img src="m_cmt_crop.png"><div class="hl2" style="left:205px;top:100px;width:36px;height:34px"></div></div><div class="note">[이미지 첨부]는 댓글로 올리기</div></div></div>
+ <div class="card wide"><div class="hd"><div class="num">3</div><div class="tt">양식 복사해서 채우기 <span style="font-size:17px;font-weight:700;color:#888">(이미지는 댓글로)</span></div></div>
+  <div class="cols"><div class="form"><b>[필수 정보]</b><br>성함 :<br>진행 상황 : (예: 단지 선정 중)<br>예산 : (예: 총 5.7억 = 현금 2.5억 + 대출 3.2억)<br>관심 지역·단지 :<br><br><b>[질문]</b><br>궁금한 점 :<br>내 생각 :</div>
+  <div class="vstp"><div class="stp-t">내집마련 6단계</div><span><i>1.</i>예산</span><span><i>2.</i>매매방법</span><span><i>3.</i>지역·단지</span><span><i>4.</i>부동산 방문</span><span><i>5.</i>계약</span><span><i>6.</i>잔금·입주</span></div></div>
+  <div class="att"><div class="shot" style="width:228px"><img src="m_cmt_crop.png" style="width:224px"><div class="hl2" style="left:143px;top:69px;width:27px;height:25px"></div></div><div class="att-t"><b>이미지</b>가 필요하면<br>댓글로 올려 주세요</div></div></div>
 </div>
-<div class="warn">※ 추가 질문은 새 메모로 부탁드립니다 (대댓글은 확인이 어렵습니다)</div>
-<div class="bar">24시간 안에 댓글로 답변드립니다</div>
+<div class="bar">추가 질문은 새 메모로 부탁드립니다<small>(24시간 내 답변드립니다. 대댓글은 확인이 어려운 점 양해 바랍니다)</small></div>
 </body></html>
