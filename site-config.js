@@ -122,7 +122,7 @@
             hubVisible: true,
             groupLabel: '코칭',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
-            dateSuffix: '2',
+            dateSuffix: '3',
             imwebDate: '2026-10-20'
           },
           {
