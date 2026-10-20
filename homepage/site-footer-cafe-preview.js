@@ -54,8 +54,8 @@
       '        <a href="' + link('coaching-all-v3-cafe-preview.html', '/counsel') + '" style="display:inline-flex;align-items:center;gap:6px;color:#ededed;text-decoration:none;font-size:14px;font-weight:600"><span aria-hidden="true">🏠</span><span>1:1 코칭</span></a>',
       '        <a href="' + link('curriculum-cafe-preview.html', '/curriculum') + '" style="color:#ededed;text-decoration:none;font-size:14px;font-weight:600">커리큘럼</a>',
       '        <a href="' + link('refund-policy.html', '/refund') + '" style="color:#ededed;text-decoration:none;font-size:14px;font-weight:600">환불규정</a>',
-      '        <a href="' + link('privacy-policy.html', '/privacy-policy') + '" style="color:#ededed;text-decoration:none;font-size:14px;font-weight:600">개인정보 처리방침</a>',
-      '        <a href="' + link('terms-of-service.html', '/terms-of-service') + '" style="color:#ededed;text-decoration:none;font-size:14px;font-weight:600">이용약관</a>',
+      '        <a href="' + link('privacy-policy.html', '/?mode=privacy') + '" style="color:#ededed;text-decoration:none;font-size:14px;font-weight:600">개인정보 처리방침</a>',
+      '        <a href="' + link('terms-of-service.html', '/?mode=policy') + '" style="color:#ededed;text-decoration:none;font-size:14px;font-weight:600">이용약관</a>',
       '      </div>',
       '    </div>',
       '</div>'
