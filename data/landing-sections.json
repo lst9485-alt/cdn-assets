@@ -1,85 +1,85 @@
 {
-  "updated": "2026-10-21T06:00:37+09:00",
+  "updated": "2026-10-22T06:00:50+09:00",
   "start": "2026-10-08",
-  "visitors": 236,
+  "visitors": 246,
   "sections": [
     {
       "key": "hero",
       "label": "첫 화면",
-      "users": 188,
-      "seconds": 23
+      "users": 196,
+      "seconds": 20
     },
     {
       "key": "best-reviews",
       "label": "베스트 후기",
-      "users": 160,
+      "users": 168,
       "seconds": 6
     },
     {
       "key": "story-hook",
       "label": "문제 인식(분당·일산)",
-      "users": 138,
-      "seconds": 11
+      "users": 146,
+      "seconds": 10
     },
     {
       "key": "curriculum",
       "label": "코칭 내용",
-      "users": 118,
-      "seconds": 12
+      "users": 123,
+      "seconds": 10
     },
     {
       "key": "reviews-trusted",
       "label": "실제 후기",
-      "users": 102,
-      "seconds": 7
+      "users": 106,
+      "seconds": 6
     },
     {
       "key": "consultant",
       "label": "내 소개·실적",
-      "users": 103,
-      "seconds": 11
+      "users": 107,
+      "seconds": 9
     },
     {
       "key": "reviews",
       "label": "후기 모음",
-      "users": 97,
-      "seconds": 13
+      "users": 100,
+      "seconds": 11
     },
     {
       "key": "promise",
       "label": "결과 약속",
-      "users": 97,
-      "seconds": 4
+      "users": 100,
+      "seconds": 3
     },
     {
       "key": "pricing",
       "label": "가격",
-      "users": 104,
-      "seconds": 18
+      "users": 107,
+      "seconds": 24
     },
     {
       "key": "coaching-steps",
       "label": "진행 순서",
-      "users": 99,
+      "users": 102,
       "seconds": 7
     },
     {
       "key": "cta",
       "label": "신청 권유 문구",
-      "users": 98,
+      "users": 101,
       "seconds": 3
     },
     {
       "key": "apply-form",
       "label": "신청서",
-      "users": 102,
+      "users": 105,
       "seconds": 11
     },
     {
       "key": "faq",
       "label": "자주 묻는 질문",
-      "users": 63,
-      "seconds": 31
+      "users": 65,
+      "seconds": 27
     }
   ]
 }
