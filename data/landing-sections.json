@@ -1,85 +1,85 @@
 {
-  "updated": "2026-10-22T06:00:50+09:00",
+  "updated": "2026-10-23T06:01:07+09:00",
   "start": "2026-10-08",
-  "visitors": 246,
+  "visitors": 256,
   "sections": [
     {
       "key": "hero",
       "label": "첫 화면",
-      "users": 196,
-      "seconds": 20
+      "users": 201,
+      "seconds": 19
     },
     {
       "key": "best-reviews",
       "label": "베스트 후기",
-      "users": 168,
-      "seconds": 6
+      "users": 174,
+      "seconds": 7
     },
     {
       "key": "story-hook",
       "label": "문제 인식(분당·일산)",
-      "users": 146,
-      "seconds": 10
+      "users": 153,
+      "seconds": 15
     },
     {
       "key": "curriculum",
       "label": "코칭 내용",
-      "users": 123,
-      "seconds": 10
+      "users": 127,
+      "seconds": 8
     },
     {
       "key": "reviews-trusted",
       "label": "실제 후기",
-      "users": 106,
-      "seconds": 6
+      "users": 110,
+      "seconds": 5
     },
     {
       "key": "consultant",
       "label": "내 소개·실적",
-      "users": 107,
-      "seconds": 9
+      "users": 111,
+      "seconds": 8
     },
     {
       "key": "reviews",
       "label": "후기 모음",
-      "users": 100,
-      "seconds": 11
+      "users": 104,
+      "seconds": 10
     },
     {
       "key": "promise",
       "label": "결과 약속",
-      "users": 100,
-      "seconds": 3
+      "users": 104,
+      "seconds": 4
     },
     {
       "key": "pricing",
       "label": "가격",
-      "users": 107,
+      "users": 111,
       "seconds": 24
     },
     {
       "key": "coaching-steps",
       "label": "진행 순서",
-      "users": 102,
-      "seconds": 7
+      "users": 106,
+      "seconds": 8
     },
     {
       "key": "cta",
       "label": "신청 권유 문구",
-      "users": 101,
+      "users": 105,
       "seconds": 3
     },
     {
       "key": "apply-form",
       "label": "신청서",
-      "users": 105,
-      "seconds": 11
+      "users": 109,
+      "seconds": 16
     },
     {
       "key": "faq",
       "label": "자주 묻는 질문",
-      "users": 65,
-      "seconds": 27
+      "users": 67,
+      "seconds": 26
     }
   ]
 }
