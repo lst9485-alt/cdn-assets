@@ -1,11 +1,19 @@
 {
-  "updated": "2026-10-24T06:00:14.656614+09:00",
+  "updated": "2026-10-25T06:00:24.556500+09:00",
   "projects": [
     {
-      "name": "261025 원고",
+      "name": "261101 원고",
       "type": "file",
       "app": null,
-      "modified": "2026-10-23",
+      "modified": "2026-10-24",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "261108 원고",
+      "type": "file",
+      "app": null,
+      "modified": "2026-10-24",
       "status": null,
       "next": null
     },
@@ -20,14 +28,6 @@
     {
       "name": "비즈니스PT 프로",
       "type": "folder",
-      "app": null,
-      "modified": "2026-10-22",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "261101 원고",
-      "type": "file",
       "app": null,
       "modified": "2026-10-22",
       "status": null,
