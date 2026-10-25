@@ -1,85 +1,85 @@
 {
-  "updated": "2026-10-25T06:00:47+09:00",
+  "updated": "2026-10-26T06:01:02+09:00",
   "start": "2026-10-08",
-  "visitors": 272,
+  "visitors": 288,
   "sections": [
     {
       "key": "hero",
       "label": "첫 화면",
-      "users": 214,
-      "seconds": 17
+      "users": 227,
+      "seconds": 16
     },
     {
       "key": "best-reviews",
       "label": "베스트 후기",
-      "users": 182,
+      "users": 193,
       "seconds": 7
     },
     {
       "key": "story-hook",
       "label": "문제 인식(분당·일산)",
-      "users": 162,
-      "seconds": 15
+      "users": 171,
+      "seconds": 16
     },
     {
       "key": "curriculum",
       "label": "코칭 내용",
-      "users": 133,
-      "seconds": 9
+      "users": 141,
+      "seconds": 12
     },
     {
       "key": "reviews-trusted",
       "label": "실제 후기",
-      "users": 113,
+      "users": 119,
       "seconds": 5
     },
     {
       "key": "consultant",
       "label": "내 소개·실적",
-      "users": 114,
-      "seconds": 9
+      "users": 121,
+      "seconds": 12
     },
     {
       "key": "reviews",
       "label": "후기 모음",
-      "users": 107,
-      "seconds": 9
+      "users": 114,
+      "seconds": 8
     },
     {
       "key": "promise",
       "label": "결과 약속",
-      "users": 107,
-      "seconds": 4
+      "users": 114,
+      "seconds": 5
     },
     {
       "key": "pricing",
       "label": "가격",
-      "users": 115,
+      "users": 122,
       "seconds": 22
     },
     {
       "key": "coaching-steps",
       "label": "진행 순서",
-      "users": 109,
-      "seconds": 8
+      "users": 117,
+      "seconds": 10
     },
     {
       "key": "cta",
       "label": "신청 권유 문구",
-      "users": 109,
-      "seconds": 3
+      "users": 116,
+      "seconds": 5
     },
     {
       "key": "apply-form",
       "label": "신청서",
-      "users": 114,
-      "seconds": 16
+      "users": 120,
+      "seconds": 23
     },
     {
       "key": "faq",
       "label": "자주 묻는 질문",
-      "users": 69,
-      "seconds": 25
+      "users": 74,
+      "seconds": 24
     }
   ]
 }

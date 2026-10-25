@@ -1,6 +1,14 @@
 {
-  "updated": "2026-10-25T06:00:24.556500+09:00",
+  "updated": "2026-10-26T06:00:40.956696+09:00",
   "projects": [
+    {
+      "name": "강의",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-10-25",
+      "status": null,
+      "next": null
+    },
     {
       "name": "261101 원고",
       "type": "file",
@@ -14,14 +22,6 @@
       "type": "file",
       "app": null,
       "modified": "2026-10-24",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "강의",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-10-22",
       "status": null,
       "next": null
     },
