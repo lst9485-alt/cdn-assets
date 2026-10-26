@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-26T06:01:03.740868+09:00",
+  "updated": "2026-10-27T06:00:35.841760+09:00",
   "summary": {
-    "정상": 55,
+    "정상": 56,
     "정리 필요": 0,
     "꺼짐": 1
   },
@@ -194,7 +194,7 @@
       "name": "threads-manage",
       "title": "threads-manage",
       "room": "확인 필요",
-      "description": "스레드 관리 — 30분마다 발행기 점검(멈춤·밀린 글·한 주치 작성 안 돎이면 알림), 일요일 19:00~20:29(그날 영상·자막이 있으면, 아니면 월요일 06~12시)에 이번 주 한 주치 글(스레드 + 유튜브 게시물)을 claude -p로 작성, 월요일 06시 이후 첫 차례에 게시물 3개 안내, 일요일 10~17시에 그날 저녁 새 영상 글을 그날 원고로 작성(threads-sunday.sh). 텔레그램 마케팅 방. launchd com.nightwatch.threads-manage (30분마다)",
+      "description": "스레드 관리 — 30분마다 발행기 점검(멈춤·밀린 글·한 주치 작성 안 돎이면 알림), 일요일 19:00~20:29(그날 영상·자막이 있으면, 아니면 월요일 06~12시)에 이번 주 한 주치 글(스레드 + 유튜브 게시물)을 claude -p로 작성, 월요일 09:30 이후 첫 차례에 게시물 3개 안내 + 스레드 한 주치 버튼, 일요일 10~17시에 그날 저녁 새 영상 글을 그날 원고로 작성(threads-sunday.sh). 텔레그램 마케팅 방. launchd com.nightwatch.threads-manage (30분마다)",
       "cron": "*/30 * * * *",
       "day": "매일",
       "time": "*:*/30",
@@ -810,7 +810,7 @@
       "name": "post-report",
       "title": "post-report",
       "room": "확인 필요",
-      "description": "지난주 SNS 성과 — 게시물·쇼츠(유튜브·릴스·틱톡) 하나하나 + 스레드 잘된 3·안된 3, 곳마다 비교 숫자를 그전 최대 4주 평균과 비교 → 마케팅 방, 매주 월 9시",
+      "description": "지난주 SNS 성과 — 숫자를 모아 Claude가 '평소보다 나았던 것→그래서 이번 주는(못했던 건 개선에)→한 주 전체' 모양으로 씀(숫자 목록은 '자세히') → 마케팅 방, 매주 월 9시",
       "cron": "0 9 * * 1",
       "day": "월요일",
       "time": "09:00",
@@ -844,6 +844,20 @@
       "time": "*:*/10",
       "status": "정상",
       "script": "obsidian-guard.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "checkbot-standby",
+      "title": "checkbot-standby",
+      "room": "확인 필요",
+      "description": "맥미니 예비 체크봇 — 2분마다 회사 컴퓨터 체크봇 살아 있음 표시를 SSH로 확인. 60분 넘게 멈춘 게 3번 이어지거나 접속 안 됨이 약 1시간 이어지면 맥미니에서 체크봇을 대신 켜고, 회사 컴퓨터가 돌아오면 끔. 켜고 끌 때 제이씨엘 방. 본체 apps/company/co-viral-system-integration/src/checkbot_standby.py",
+      "cron": "*/2 * * * *",
+      "day": "매일",
+      "time": "*:*/2",
+      "status": "정상",
+      "script": "checkbot-standby.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
