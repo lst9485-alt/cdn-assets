@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-27T06:00:09.632782+09:00",
+  "updated": "2026-10-28T06:00:32.521626+09:00",
   "projects": [
     {
       "name": "비즈니스PT 프로",
       "type": "folder",
       "app": null,
-      "modified": "2026-10-26",
+      "modified": "2026-10-27",
       "status": null,
       "next": null
     },
@@ -13,7 +13,7 @@
       "name": "강의",
       "type": "folder",
       "app": null,
-      "modified": "2026-10-26",
+      "modified": "2026-10-27",
       "status": null,
       "next": null
     },
@@ -21,7 +21,7 @@
       "name": "261101 원고",
       "type": "file",
       "app": null,
-      "modified": "2026-10-24",
+      "modified": "2026-10-27",
       "status": null,
       "next": null
     },
