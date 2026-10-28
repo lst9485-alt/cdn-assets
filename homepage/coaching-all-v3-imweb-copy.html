@@ -2412,6 +2412,35 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
     return d || '-';
   }
 
+  // 모달 안 카드결제 버튼: 상품 화면을 숨은 틀에서 열어 구매하기를 대신 누르고, 생긴 결제 화면으로 바로 보낸다 (2026-10-28)
+  // 결제 화면 주소는 누를 때마다 새로 생기는 일회용이라 링크로 걸 수 없다. 8초 안에 못 찾으면 원래 링크(상품 화면)로
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('#successModal .card-link');
+    if (!link || link.dataset.busy) return;
+    e.preventDefault();
+    link.dataset.busy = '1';
+    var label = link.querySelector('.right');
+    if (label) label.textContent = '결제 화면 여는 중…';
+    var f = document.createElement('iframe');
+    f.style.cssText = 'position:absolute;width:1px;height:1px;left:-9999px;border:0';
+    f.src = '/shop_view?idx=21';
+    var clicked = false, started = Date.now();
+    var tick = setInterval(function() {
+      var url = '';
+      try {
+        var w = f.contentWindow;
+        url = w.location.href;
+        if (!clicked) {
+          var btns = w.document.querySelectorAll('._btn_buy');
+          for (var i = 0; i < btns.length; i++) if (btns[i].offsetParent) { clicked = true; btns[i].click(); break; }
+        }
+      } catch (err) {}
+      if (/\/shop_payment|\/login/.test(url)) { clearInterval(tick); location.href = url; }
+      else if (Date.now() - started > 8000) { clearInterval(tick); location.href = link.href; }
+    }, 200);
+    document.body.appendChild(f);
+  });
+
   // 모달 안 계좌번호 복사 버튼
   document.addEventListener('click', function(e) {
     var btn = e.target.closest('#successModal .copy-btn');
