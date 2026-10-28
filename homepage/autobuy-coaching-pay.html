@@ -1,14 +1,20 @@
 <!-- 아임웹 설정 → SEO → Footer Code 맨 끝에 붙여 넣은 것 (2026-10-28 사용자가 넣음). footer-code.html을 통째로 바꿀 땐 이것도 같이 -->
 <script>
 // 알림톡 카드결제 버튼(coaching-pay)으로 상품 화면에 들어오면 구매하기를 대신 눌러 결제 화면으로 바로 보낸다 (2026-10-28)
-// 사이트 안에서 온 사람(메뉴·랜딩 숨은 틀)과 결제 화면에서 뒤로 온 사람은 건드리지 않는다
+// 사이트 안에서 온 사람(메뉴·랜딩 숨은 틀)과 결제 화면에서 뒤로 온 사람은 건드리지 않는다. 넘어가는 동안 상품 화면은 가린다
 (function(){
   if (location.pathname !== '/shop_view' || !/[?&]idx=21(&|$)/.test(location.search)) return;
   if (/ourdongne\.com|imweb\.me/.test(document.referrer)) return;
   try { if (sessionStorage.getItem('autoBuy21')) return; sessionStorage.setItem('autoBuy21', '1'); } catch (e) { return; }
+  var cover = document.createElement('div');
+  cover.style.cssText = 'position:fixed;inset:0;z-index:2147483647;background:#fff;display:flex;align-items:center;justify-content:center;font:600 16px sans-serif;color:#333';
+  cover.textContent = '결제 화면으로 이동 중…';
+  document.documentElement.appendChild(cover);
+  var off = function(){ if (cover.parentNode) cover.parentNode.removeChild(cover); };
+  window.addEventListener('pageshow', function(e){ if (e.persisted) off(); });
   var n = 0, t = setInterval(function(){
     var b = [].slice.call(document.querySelectorAll('._btn_buy')).filter(function(e){ return e.offsetParent; })[0];
-    if (b) { clearInterval(t); b.click(); } else if (++n > 50) clearInterval(t);
+    if (b) { clearInterval(t); b.click(); setTimeout(off, 8000); } else if (++n > 50) { clearInterval(t); off(); }
   }, 200);
 })();
 </script>
