@@ -1,12 +1,12 @@
 {
-  "updated": "2026-10-28T06:00:49.229657+09:00",
+  "updated": "2026-10-29T06:00:37.178197+09:00",
   "summary": {
-    "current_month": 3000000,
+    "current_month": 3500000,
     "current_month_label": "2026-10",
     "last_month": 6500000,
     "last_month_label": "2026-09",
-    "change_pct": "-53.8%",
-    "total_customers": 173
+    "change_pct": "-46.2%",
+    "total_customers": 174
   },
   "monthly": [
     {
@@ -101,8 +101,8 @@
     },
     {
       "month": "2026-10",
-      "revenue": 3000000,
-      "customers": 6
+      "revenue": 3500000,
+      "customers": 7
     }
   ],
   "weekly": [
@@ -767,8 +767,8 @@
     },
     {
       "utm": "yt_home",
-      "count": 22,
-      "revenue": 9400000
+      "count": 23,
+      "revenue": 9900000
     },
     {
       "utm": "yt_094",
@@ -839,15 +839,15 @@
   "by_purpose": [
     {
       "purpose": "내집마련",
-      "count": 155,
-      "revenue": 53550000,
-      "ratio": "57.2%"
+      "count": 156,
+      "revenue": 54050000,
+      "ratio": "57.5%"
     },
     {
       "purpose": "투자",
       "count": 99,
       "revenue": 32500000,
-      "ratio": "34.7%"
+      "ratio": "34.6%"
     },
     {
       "purpose": "기타",

@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-28T06:00:55.082855+09:00",
+  "updated": "2026-10-29T06:00:45.402242+09:00",
   "summary": {
-    "정상": 58,
+    "정상": 59,
     "정리 필요": 0,
     "꺼짐": 1
   },
@@ -628,7 +628,7 @@
       "name": "payment-guide-auto",
       "title": "payment-guide-auto",
       "room": "확인 필요",
-      "description": "결제 안내 자동 — 신청 10분 뒤에도 결제(카드·입금)가 없으면 결제 안내 알림톡(결제 전) 발송. 신청 무렵 다른 결제·카카오 채널 글·비슷한 이름 신청·장난 같은 이름·번호·감시 멈춤이면 안 보내고 Biz 방 '확인 필요'. 결제(카드·입금)가 들어오면 노션 증빙도 채움(애매하면 Biz 방에 물어봄)",
+      "description": "결제 안내 자동 — 신청 20분 뒤에도 결제(카드·입금)가 없으면 결제 안내 알림톡(결제 전) 발송. 신청 무렵 다른 결제·카카오 채널 글·비슷한 이름 신청·장난 같은 이름·번호·감시 멈춤이면 안 보내고 Biz 방 '확인 필요'. 결제(카드·입금)가 들어오면 노션 증빙도 채움(애매하면 Biz 방에 물어봄)",
       "cron": "* * * * *",
       "day": "매일",
       "time": "매분",
@@ -852,12 +852,26 @@
       "name": "checkbot-standby",
       "title": "checkbot-standby",
       "room": "확인 필요",
-      "description": "맥미니 예비 체크봇 — 2분마다 회사 컴퓨터 체크봇 살아 있음 표시를 SSH로 확인. 60분 넘게 멈춘 게 3번 이어지거나 접속 안 됨이 약 1시간 이어지면 맥미니에서 체크봇을 대신 켜고, 회사 컴퓨터가 돌아오면 끔. 켜고 끌 때 제이씨엘 방. 본체 apps/company/co-viral-system-integration/src/checkbot_standby.py",
+      "description": "맥미니 예비 체크봇·바이럴알림봇 — 2분마다 회사 컴퓨터 체크봇 살아 있음 표시를 SSH로 확인. 60분 넘게 멈춘 게 3번 이어지거나 접속 안 됨이 약 1시간 이어지면 맥미니에서 체크봇을 대신 켜고, 회사 컴퓨터가 돌아오면 끔. 켜고 끌 때 제이씨엘 방. 본체 apps/company/co-viral-system-integration/src/checkbot_standby.py 바이럴알림봇은 회사PC 작업 ViralAlarm이 안 돌면(꺼짐 약 16분·접속 안 됨 약 1시간) 맥미니에서 대신 켜고 돌아오면 바로 끔. 본체 apps/company/co-viral-alarm/Viral_alarm/viral_standby.py (2026-10-28)",
       "cron": "*/2 * * * *",
       "day": "매일",
       "time": "*:*/2",
       "status": "정상",
       "script": "checkbot-standby.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "failover-sync",
+      "title": "failover-sync",
+      "room": "확인 필요",
+      "description": "회사PC 대신 돌리기 기록 맞추기 — 1분마다 학교 메일·카드 결제·올라이트·링크 알림의 코드·기록을 회사PC로 보냄. 맥미니가 멈춰 회사PC가 대신 돌렸으면, 맥미니가 돌아올 때 회사PC 기록을 먼저 가져온 뒤 맥미니 쪽 네 작업을 다시 켬(그 전엔 네 작업이 건너뜀). 본체 failover-sync.py, 회사PC 쪽 tools/scripts/winpc/failover_run.py (2026-10-28)",
+      "cron": "* * * * *",
+      "day": "매일",
+      "time": "매분",
+      "status": "정상",
+      "script": "failover-sync.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true

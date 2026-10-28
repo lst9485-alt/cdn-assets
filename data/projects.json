@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-28T06:00:32.521626+09:00",
+  "updated": "2026-10-29T06:00:18.384605+09:00",
   "projects": [
     {
       "name": "비즈니스PT 프로",
       "type": "folder",
       "app": null,
-      "modified": "2026-10-27",
+      "modified": "2026-10-28",
       "status": null,
       "next": null
     },
@@ -13,7 +13,7 @@
       "name": "강의",
       "type": "folder",
       "app": null,
-      "modified": "2026-10-27",
+      "modified": "2026-10-28",
       "status": null,
       "next": null
     },

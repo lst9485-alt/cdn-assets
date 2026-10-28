@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T06:00:40.773313+09:00",
+  "updated": "2026-10-29T06:00:28.327112+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1390,
-    "done": 1284,
-    "overdue": 6,
+    "total": 1395,
+    "done": 1289,
+    "overdue": 10,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,49 +56,24 @@
         "overdue": true
       },
       {
-        "title": "P1~P3/목실감",
-        "date": "2026-10-28T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-10-28T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강장소 메일 보내기",
-        "date": "2026-10-28T09:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강마감",
-        "date": "2026-10-28T09:45:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "~70p",
         "date": "2026-10-28T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PT",
-        "date": "2026-10-28T13:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원씽복기",
         "date": "2026-10-28T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-10-28T14:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "ppt마무리",
         "date": "2026-10-28T15:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-10-28T21:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "주간계획 수정",
@@ -511,6 +486,31 @@
         "overdue": false
       },
       {
+        "title": "자료수집&도입부",
+        "date": "2026-11-11",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-11-11T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-11-11T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "PT",
+        "date": "2026-11-11T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-11-11T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "캡컷결제확인",
         "date": "2026-11-14T11:00:00.000+09:00",
         "overdue": false
@@ -558,6 +558,12 @@
     ],
     "schedule": [
       {
+        "title": "주간계획 수정",
+        "time": "08:30",
+        "allDay": false,
+        "done": false
+      },
+      {
         "title": "P1~P3/목실감",
         "time": "08:30",
         "allDay": false,
@@ -570,25 +576,31 @@
         "done": false
       },
       {
-        "title": "특강장소 메일 보내기",
-        "time": "09:15",
+        "title": "특강준비",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강마감",
-        "time": "09:45",
+        "title": "자료수집&도입부",
+        "time": "10:45",
         "allDay": false,
         "done": false
       },
       {
-        "title": "~70p",
-        "time": "10:00",
+        "title": "콘텐츠 관리시트",
+        "time": "12:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "PT",
+        "title": "유튜브 수익계좌변경 및 법인주식계좌",
+        "time": "12:15",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "상담준비",
         "time": "13:00",
         "allDay": false,
         "done": false
@@ -600,14 +612,20 @@
         "done": false
       },
       {
-        "title": "주제선정&썸네일&제목",
+        "title": "원고자료(숙지) ~3분",
         "time": "14:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "ppt마무리",
+        "title": "특강준비",
         "time": "15:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "특강준비",
+        "time": "18:00",
         "allDay": false,
         "done": false
       }
@@ -615,7 +633,7 @@
   },
   "routines": {
     "total": 4,
-    "done_today": 1,
+    "done_today": 0,
     "items": [
       {
         "name": "원씽 완료",
@@ -623,7 +641,7 @@
       },
       {
         "name": "일일 계획",
-        "done": true
+        "done": false
       },
       {
         "name": "P2 완료",
@@ -634,34 +652,13 @@
         "done": false
       }
     ],
-    "priorities": [
-      {
-        "label": "원씽",
-        "title": "70p",
-        "done": false
-      },
-      {
-        "label": "P2",
-        "title": "100p",
-        "done": false
-      },
-      {
-        "label": "P3",
-        "title": "~썸제",
-        "done": false
-      }
-    ],
+    "priorities": [],
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 11,
+      "rate": "39%",
       "days": [
-        {
-          "date": "2026-10-22",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-10-23",
           "done": 2,
@@ -691,6 +688,11 @@
           "date": "2026-10-28",
           "done": 1,
           "total": 4
+        },
+        {
+          "date": "2026-10-29",
+          "done": 0,
+          "total": 4
         }
       ]
     }
@@ -698,8 +700,8 @@
   "sales": {
     "month": "2026-10",
     "month_label": "10월",
-    "total_amount": 600,
-    "total_count": 12,
+    "total_amount": 650,
+    "total_count": 13,
     "weekly": [
       {
         "week": "1주차",
@@ -718,6 +720,11 @@
       },
       {
         "week": "4주차",
+        "count": 1,
+        "amount": 50
+      },
+      {
+        "week": "5주차",
         "count": 1,
         "amount": 50
       }
