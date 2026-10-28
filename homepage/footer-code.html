@@ -84,33 +84,47 @@
     return d || '-';
   }
 
-  // 모달 안 카드결제 버튼: 상품 화면을 숨은 틀에서 열어 구매하기를 대신 누르고, 생긴 결제 화면으로 바로 보낸다 (2026-10-28)
-  // 결제 화면 주소는 누를 때마다 새로 생기는 일회용이라 링크로 걸 수 없다. 8초 안에 못 찾으면 원래 링크(상품 화면)로
-  document.addEventListener('click', function(e) {
-    var link = e.target.closest('#successModal .card-link');
-    if (!link || link.dataset.busy) return;
-    e.preventDefault();
-    link.dataset.busy = '1';
-    var label = link.querySelector('.right');
-    if (label) label.textContent = '결제 화면 여는 중…';
-    var f = document.createElement('iframe');
+  // 모달 안 카드결제 버튼: 신청 완료 창이 뜨면 숨은 틀에서 상품 화면을 열어 구매하기를 대신 눌러 결제 화면을 미리 만들어 두고,
+  // 누르면 그 결제 화면으로 바로 보낸다 (2026-10-28). 결제 화면 주소는 구매하기를 누를 때마다 새로 생기는 일회용이라 링크로 걸 수 없다.
+  // 누를 때 아직 준비 중이면 될 때까지 기다리고, 8초 넘으면 원래 링크(상품 화면)로. 20분 넘은 준비분은 새로 만든다
+  var payPrep = null;
+  function preparePay() {
+    if (payPrep && !payPrep.failed && Date.now() - payPrep.started < 20 * 60 * 1000) return payPrep;
+    if (payPrep && payPrep.frame.parentNode) payPrep.frame.parentNode.removeChild(payPrep.frame);
+    var prep = { url: '', failed: false, started: Date.now(), frame: document.createElement('iframe') };
+    var f = prep.frame, clicked = false;
     f.style.cssText = 'position:absolute;width:1px;height:1px;left:-9999px;border:0';
     f.src = '/shop_view?idx=21';
-    var clicked = false, started = Date.now();
     var tick = setInterval(function() {
-      var url = '';
       try {
-        var w = f.contentWindow;
-        url = w.location.href;
+        var w = f.contentWindow, url = w.location.href;
+        if (/\/shop_payment|\/login/.test(url)) { prep.url = url; clearInterval(tick); return; }
         if (!clicked) {
           var btns = w.document.querySelectorAll('._btn_buy');
           for (var i = 0; i < btns.length; i++) if (btns[i].offsetParent) { clicked = true; btns[i].click(); break; }
         }
       } catch (err) {}
-      if (/\/shop_payment|\/login/.test(url)) { clearInterval(tick); location.href = url; }
-      else if (Date.now() - started > 8000) { clearInterval(tick); location.href = link.href; }
+      if (Date.now() - prep.started > 30000) { prep.failed = true; clearInterval(tick); }
     }, 200);
     document.body.appendChild(f);
+    payPrep = prep;
+    return prep;
+  }
+
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('#successModal .card-link');
+    if (!link || link.dataset.busy) return;
+    e.preventDefault();
+    var prep = preparePay();
+    if (prep.url) { location.href = prep.url; return; }
+    link.dataset.busy = '1';
+    var label = link.querySelector('.right');
+    if (label) label.textContent = '결제 화면 여는 중…';
+    var waited = Date.now();
+    var tick = setInterval(function() {
+      if (prep.url) { clearInterval(tick); location.href = prep.url; }
+      else if (Date.now() - waited > 8000) { clearInterval(tick); location.href = link.href; }
+    }, 100);
   });
 
   // 모달 안 계좌번호 복사 버튼
@@ -195,6 +209,7 @@
 	  function finishPreviewSubmit() {
 	    resetConsultForm();
 	    document.getElementById('successModal').classList.remove('hidden');
+	    preparePay();
     var btn = document.getElementById('submitBtn');
     btn.disabled = false;
     btn.textContent = '코칭 신청';
@@ -218,6 +233,7 @@
 	        if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'counsel', utm_campaign: payload.utm || '' });
 	        resetConsultForm();
 	        document.getElementById('successModal').classList.remove('hidden');
+	        preparePay();
       } else {
         showStatus(data.error || '제출에 실패했습니다. 다시 시도해주세요.', 'error', 'submitBtn');
       }
