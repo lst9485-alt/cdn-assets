@@ -2,9 +2,11 @@
 <script>
 // 알림톡 카드결제 버튼(coaching-pay)으로 상품 화면에 들어오면 구매하기를 대신 눌러 결제 화면으로 바로 보낸다 (2026-10-28)
 // 사이트 안에서 온 사람(메뉴·랜딩 숨은 틀)과 결제 화면에서 뒤로 온 사람은 건드리지 않는다. 넘어가는 동안 상품 화면은 가린다
+// 상품 번호(21)·구매 버튼(._btn_buy)은 랜딩 coaching-all-v3.html preparePay와 같음 — 바꾸면 같이
 (function(){
   if (location.pathname !== '/shop_view' || !/[?&]idx=21(&|$)/.test(location.search)) return;
-  if (/ourdongne\.com|imweb\.me/.test(document.referrer)) return;
+  var rh = ''; try { rh = new URL(document.referrer).hostname; } catch (e) {}
+  if (/(^|\.)ourdongne\.com$|(^|\.)imweb\.me$/.test(rh)) return;
   try { if (sessionStorage.getItem('autoBuy21')) return; sessionStorage.setItem('autoBuy21', '1'); } catch (e) { return; }
   var cover = document.createElement('div');
   cover.style.cssText = 'position:fixed;inset:0;z-index:2147483647;background:#fff;display:flex;align-items:center;justify-content:center;font:600 16px sans-serif;color:#333';

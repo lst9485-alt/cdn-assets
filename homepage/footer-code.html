@@ -86,8 +86,10 @@
 
   // 모달 안 카드결제 버튼: 신청 완료 창이 뜨면 숨은 틀에서 상품 화면을 열어 구매하기를 대신 눌러 결제 화면을 미리 만들어 두고,
   // 누르면 그 결제 화면으로 바로 보낸다 (2026-10-28). 결제 화면 주소는 구매하기를 누를 때마다 새로 생기는 일회용이라 링크로 걸 수 없다.
-  // 누를 때 아직 준비 중이면 될 때까지 기다리고, 8초 넘으면 원래 링크(상품 화면)로. 20분 넘은 준비분은 새로 만든다
-  var payPrep = null;
+  // 누를 때 아직 준비 중이면 될 때까지 기다리고, 8초 넘거나 준비가 실패하면 원래 링크(상품 화면)로. 20분 넘은 준비분은 새로 만든다
+  // (결제 화면 주소는 약 35분 뒤 안 열림 — 10/28 실측). 상품 번호(21)·구매 버튼(._btn_buy)은 autobuy-coaching-pay.html과 같음 — 바꾸면 같이
+  var payPrep = null, paySaveFailed = false;
+  var CARD_LABEL_HTML = '카드결제 하러가기 <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>';
   function preparePay() {
     if (payPrep && !payPrep.failed && Date.now() - payPrep.started < 20 * 60 * 1000) return payPrep;
     if (payPrep && payPrep.frame.parentNode) payPrep.frame.parentNode.removeChild(payPrep.frame);
@@ -113,8 +115,9 @@
 
   document.addEventListener('click', function(e) {
     var link = e.target.closest('#successModal .card-link');
-    if (!link || link.dataset.busy) return;
-    e.preventDefault();
+    if (!link) return;
+    e.preventDefault();  // 기다리는 중에 또 눌러도 새 탭(원래 링크)이 열리지 않게 먼저 막는다
+    if (link.dataset.busy) return;
     var prep = preparePay();
     if (prep.url) { location.href = prep.url; return; }
     link.dataset.busy = '1';
@@ -122,10 +125,29 @@
     if (label) label.textContent = '결제 화면 여는 중…';
     var waited = Date.now();
     var tick = setInterval(function() {
-      if (prep.url) { clearInterval(tick); location.href = prep.url; }
-      else if (Date.now() - waited > 8000) { clearInterval(tick); location.href = link.href; }
+      if (paySaveFailed) { clearInterval(tick); resetCardLink(link); }  // 신청 저장이 실패해 창이 닫혔으면 넘어가지 않는다
+      else if (prep.url) { clearInterval(tick); location.href = prep.url; }
+      else if (prep.failed || Date.now() - waited > 8000) { clearInterval(tick); location.href = link.href; }
     }, 100);
   });
+
+  function resetCardLink(link) {
+    delete link.dataset.busy;
+    var label = link.querySelector('.right');
+    if (label) label.innerHTML = CARD_LABEL_HTML;
+  }
+  // 결제 화면에서 뒤로 왔을 때 브라우저가 앞 화면을 그대로 되살리면 "여는 중…"이 남아 있어 되돌린다
+  window.addEventListener('pageshow', function(e) {
+    if (e.persisted) document.querySelectorAll('#successModal .card-link').forEach(resetCardLink);
+  });
+
+  function openPayModal() {
+    var modal = document.getElementById('successModal');
+    modal.classList.remove('hidden');
+    paySaveFailed = false;
+    preparePay();
+    return modal;
+  }
 
   // 모달 안 계좌번호 복사 버튼
   document.addEventListener('click', function(e) {
@@ -208,8 +230,7 @@
 
 	  function finishPreviewSubmit() {
 	    resetConsultForm();
-	    document.getElementById('successModal').classList.remove('hidden');
-	    preparePay();
+	    openPayModal();
     var btn = document.getElementById('submitBtn');
     btn.disabled = false;
     btn.textContent = '코칭 신청';
@@ -223,11 +244,12 @@
     }
     // 저장(구글 → 노션·시트)이 8초쯤 걸려서, 결제 창은 누르자마자 띄우고 저장은 뒤에서 한다 (2026-10-28).
     // 저장이 실패하면 창을 닫고 오류를 보여 준다(폼 내용은 그대로라 다시 누르면 됨).
-    // 손님이 저장 중에 카드결제로 넘어가도 요청이 끊기지 않게 keepalive
-    var modal = document.getElementById('successModal');
-    modal.classList.remove('hidden');
-    preparePay();
-    var failed = function(msg) {
+    // 손님이 저장 중에 카드결제로 넘어가도 요청이 끊기지 않게 keepalive.
+    // 구글 애즈 신청 집계는 응답을 기다리면 바로 결제로 넘어간 손님이 빠져서, 보낼 때 바로 beacon으로 보낸다
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'counsel', utm_campaign: payload.utm || '', transport_type: 'beacon' });
+    var modal = openPayModal();
+    var showSubmitError = function(msg) {
+      paySaveFailed = true;
       modal.classList.add('hidden');
       showStatus(msg, 'error', 'submitBtn');
     };
@@ -240,15 +262,13 @@
     .then(function(res) { return res.json(); })
     .then(function(data) {
 	      if (data.success) {
-	        // 구글 애널리틱스에 '상담 신청' 알림 → 구글 애즈가 광고 본 사람의 신청을 따로 셈 (2026-10-04)
-	        if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'counsel', utm_campaign: payload.utm || '' });
 	        resetConsultForm();
       } else {
-        failed(data.error || '제출에 실패했습니다. 다시 시도해주세요.');
+        showSubmitError(data.error || '제출에 실패했습니다. 다시 시도해주세요.');
       }
     })
     .catch(function() {
-      failed('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+      showSubmitError('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
     })
     .finally(function() {
       var btn = document.getElementById('submitBtn');
