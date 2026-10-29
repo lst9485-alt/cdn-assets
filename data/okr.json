@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T06:00:28.327112+09:00",
+  "updated": "2026-10-30T06:00:59.918040+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -16,14 +16,14 @@
     {
       "title": "10월 : 특강 / 상담400+특강700",
       "target": 1100,
-      "current": 837,
-      "rate": "🟢 76%"
+      "current": 857,
+      "rate": "🟢 78%"
     }
   ],
   "tasks": {
-    "total": 1395,
-    "done": 1289,
-    "overdue": 10,
+    "total": 1402,
+    "done": 1302,
+    "overdue": 6,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,86 +56,6 @@
         "overdue": true
       },
       {
-        "title": "~70p",
-        "date": "2026-10-28T10:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-10-28T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "ppt마무리",
-        "date": "2026-10-28T15:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-10-28T21:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "주간계획 수정",
-        "date": "2026-10-29T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-10-29T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-10-29T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강준비",
-        "date": "2026-10-29T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "자료수집&도입부",
-        "date": "2026-10-29T10:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-10-29T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "유튜브 수익계좌변경 및 법인주식계좌",
-        "date": "2026-10-29T12:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-10-29T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-10-29T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고자료(숙지) ~3분",
-        "date": "2026-10-29T14:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강준비",
-        "date": "2026-10-29T15:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강준비",
-        "date": "2026-10-29T18:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "P1~P3/목실감",
         "date": "2026-10-30T08:30:00.000+09:00",
         "overdue": false
@@ -151,7 +71,7 @@
         "overdue": false
       },
       {
-        "title": "원고 초안",
+        "title": "주제선정&썸네일&제목",
         "date": "2026-10-30T13:00:00.000+09:00",
         "overdue": false
       },
@@ -161,8 +81,13 @@
         "overdue": false
       },
       {
+        "title": "자료수집&도입부",
+        "date": "2026-10-30T14:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "특강프린트",
-        "date": "2026-10-30T15:00:00.000+09:00",
+        "date": "2026-10-30T15:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -186,18 +111,23 @@
         "overdue": false
       },
       {
+        "title": "원고자료(숙지) ~3분",
+        "date": "2026-10-31T14:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원고 초안",
+        "date": "2026-10-31T15:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원고완성",
-        "date": "2026-10-31T15:00:00.000+09:00",
+        "date": "2026-10-31T17:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "PPT완료",
-        "date": "2026-10-31T16:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-10-31T18:30:00.000+09:00",
+        "date": "2026-10-31T19:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -207,6 +137,11 @@
       },
       {
         "title": "P1~P3/목실감",
+        "date": "2026-11-01T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "촬영&편집&업로드",
         "date": "2026-11-01T08:30:00.000+09:00",
         "overdue": false
       },
@@ -273,6 +208,11 @@
       {
         "title": "주간복기",
         "date": "2026-11-02T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "유튜브 수익계좌변경 및 법인주식계좌",
+        "date": "2026-11-02T12:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -511,6 +451,36 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-11-12",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-11-12T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-11-12T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-11-12T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-11-12T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-11-12T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "캡컷결제확인",
         "date": "2026-11-14T11:00:00.000+09:00",
         "overdue": false
@@ -558,12 +528,6 @@
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
         "title": "P1~P3/목실감",
         "time": "08:30",
         "allDay": false,
@@ -576,31 +540,13 @@
         "done": false
       },
       {
-        "title": "특강준비",
+        "title": "특강최종점검",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "자료수집&도입부",
-        "time": "10:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "유튜브 수익계좌변경 및 법인주식계좌",
-        "time": "12:15",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "상담준비",
+        "title": "주제선정&썸네일&제목",
         "time": "13:00",
         "allDay": false,
         "done": false
@@ -612,20 +558,20 @@
         "done": false
       },
       {
-        "title": "원고자료(숙지) ~3분",
-        "time": "14:30",
+        "title": "자료수집&도입부",
+        "time": "14:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강준비",
+        "title": "특강프린트",
         "time": "15:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강준비",
-        "time": "18:00",
+        "title": "특강리허설",
+        "time": "17:00",
         "allDay": false,
         "done": false
       }
@@ -656,14 +602,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 11,
-      "rate": "39%",
+      "done": 13,
+      "rate": "46%",
       "days": [
-        {
-          "date": "2026-10-23",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-10-24",
           "done": 1,
@@ -691,6 +632,11 @@
         },
         {
           "date": "2026-10-29",
+          "done": 4,
+          "total": 4
+        },
+        {
+          "date": "2026-10-30",
           "done": 0,
           "total": 4
         }
