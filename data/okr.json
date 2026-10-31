@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-31T06:00:42.326958+09:00",
+  "updated": "2026-11-01T06:00:22.757477+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1405,
-    "done": 1305,
-    "overdue": 9,
+    "total": 1408,
+    "done": 1308,
+    "overdue": 13,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,59 +56,39 @@
         "overdue": true
       },
       {
-        "title": "특강최종점검",
-        "date": "2026-10-30T09:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "특강프린트",
-        "date": "2026-10-30T15:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "특강리허설",
-        "date": "2026-10-30T17:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "P1~P3/목실감",
         "date": "2026-10-31T08:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "특강 9시30분~1시30분 예약",
         "date": "2026-10-31T09:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원씽복기",
         "date": "2026-10-31T14:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "주제선정&썸네일&제목",
         "date": "2026-10-31T15:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "자료수집&도입부",
         "date": "2026-10-31T16:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원고자료(숙지) ~3분",
         "date": "2026-10-31T17:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원고완성",
         "date": "2026-10-31T18:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "8시 알파컷 쇼츠특강",
-        "date": "2026-10-31T20:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "PPT완료",
@@ -188,6 +168,11 @@
       {
         "title": "주간복기",
         "date": "2026-11-02T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "감눈입금",
+        "date": "2026-11-02T11:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -481,8 +466,23 @@
         "overdue": false
       },
       {
+        "title": "촬영&편집&업로드",
+        "date": "2026-11-14",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-11-14T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "캡컷결제확인",
         "date": "2026-11-14T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-11-14T14:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -528,14 +528,20 @@
     ],
     "schedule": [
       {
+        "title": "PPT완료",
+        "time": "07:00",
+        "allDay": false,
+        "done": false
+      },
+      {
         "title": "P1~P3/목실감",
         "time": "08:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강 9시30분~1시30분 예약",
-        "time": "09:30",
+        "title": "월간 복기 okr점검(+키플링)",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
@@ -546,32 +552,20 @@
         "done": false
       },
       {
-        "title": "주제선정&썸네일&제목",
-        "time": "15:30",
+        "title": "촬영&편집&업로드",
+        "time": "14:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "자료수집&도입부",
+        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
+        "time": "14:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "인트로영상 만들기",
         "time": "16:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "원고자료(숙지) ~3분",
-        "time": "17:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "원고완성",
-        "time": "18:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "8시 알파컷 쇼츠특강",
-        "time": "20:00",
         "allDay": false,
         "done": false
       }
@@ -602,14 +596,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 13,
-      "rate": "46%",
+      "done": 14,
+      "rate": "50%",
       "days": [
-        {
-          "date": "2026-10-25",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-10-26",
           "done": 3,
@@ -632,11 +621,16 @@
         },
         {
           "date": "2026-10-30",
-          "done": 1,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-10-31",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-11-01",
           "done": 0,
           "total": 4
         }
@@ -644,36 +638,10 @@
     }
   },
   "sales": {
-    "month": "2026-10",
-    "month_label": "10월",
-    "total_amount": 650,
-    "total_count": 13,
-    "weekly": [
-      {
-        "week": "1주차",
-        "count": 3,
-        "amount": 150
-      },
-      {
-        "week": "2주차",
-        "count": 4,
-        "amount": 200
-      },
-      {
-        "week": "3주차",
-        "count": 4,
-        "amount": 200
-      },
-      {
-        "week": "4주차",
-        "count": 1,
-        "amount": 50
-      },
-      {
-        "week": "5주차",
-        "count": 1,
-        "amount": 50
-      }
-    ]
+    "month": "2026-11",
+    "month_label": "11월",
+    "total_amount": 0,
+    "total_count": 0,
+    "weekly": []
   }
 }

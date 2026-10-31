@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-31T06:00:51.207809+09:00",
+  "updated": "2026-11-01T06:00:31.770745+09:00",
   "summary": {
-    "current_month": 3000000,
-    "current_month_label": "2026-10",
-    "last_month": 6500000,
-    "last_month_label": "2026-09",
-    "change_pct": "-53.8%",
+    "current_month": 0,
+    "current_month_label": "2026-11",
+    "last_month": 3000000,
+    "last_month_label": "2026-10",
+    "change_pct": "-100.0%",
     "total_customers": 173
   },
   "monthly": [
