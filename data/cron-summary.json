@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-01T06:00:40.759811+09:00",
+  "updated": "2026-11-02T06:00:33.868222+09:00",
   "summary": {
-    "정상": 60,
+    "정상": 61,
     "정리 필요": 0,
     "꺼짐": 1
   },
@@ -914,6 +914,20 @@
       "time": "*:*/5",
       "status": "정상",
       "script": "chrome-blank-sweep.py",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "landing-month-reminder",
+      "title": "landing-month-reminder",
+      "room": "확인 필요",
+      "description": "매월 말일 10시 코칭 랜딩 \"코칭 B ○월 마감\" 바꿀 때 알림 (HQ 방)",
+      "cron": "0 10 28-31 * *",
+      "day": "매일",
+      "time": "10:00",
+      "status": "정상",
+      "script": "landing-month-reminder.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
