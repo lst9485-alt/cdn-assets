@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T06:00:16.520812+09:00",
+  "updated": "2026-11-03T06:00:23.635507+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -8,9 +8,9 @@
       "rate": "🔴 0%"
     },
     {
-      "title": "11월 : 특강 / 상담400+특강500",
-      "target": 900,
-      "current": null,
+      "title": "11월 : 특강 / 상담400+기타 100",
+      "target": 500,
+      "current": 0,
       "rate": "🔴 0%"
     },
     {
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1407,
-    "done": 1316,
-    "overdue": 6,
+    "total": 1423,
+    "done": 1326,
+    "overdue": 11,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,84 +56,29 @@
         "overdue": true
       },
       {
-        "title": "이렇게산다(성장일지), 메모",
-        "date": "2026-11-02",
-        "overdue": false
+        "title": "pt복습",
+        "date": "2026-11-02T14:15:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "P1~P3/목실감",
-        "date": "2026-11-02T08:30:00.000+09:00",
-        "overdue": false
+        "title": "우체국 빠른등기",
+        "date": "2026-11-02T16:00:00.000+09:00",
+        "overdue": true
       },
       {
-        "title": "마케팅업체 주정산",
-        "date": "2026-11-02T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-11-02T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "월간 복기 okr점검(+키플링)",
-        "date": "2026-11-02T09:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-11-02T10:00:00.000+09:00",
-        "overdue": false
+        "title": "온라인강의 추가후 메일보내기",
+        "date": "2026-11-02T17:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "유튜브 게시물 12시 예약(월,수,금)",
-        "date": "2026-11-02T10:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-11-02T18:45:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "쇼츠, 틱톡, 릴스 6시 예약(월,수,금)",
-        "date": "2026-11-02T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "윤지 대학원 접수",
-        "date": "2026-11-02T10:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주간복기",
-        "date": "2026-11-02T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "감눈입금",
-        "date": "2026-11-02T11:45:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "유튜브 수익계좌변경 및 법인주식계좌",
-        "date": "2026-11-02T12:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PT",
-        "date": "2026-11-02T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-11-02T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "인트로영상 만들기",
-        "date": "2026-11-02T15:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "사이트구축 기획",
-        "date": "2026-11-02T17:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-11-02T19:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "주제선정&썸네일&제목",
@@ -151,6 +96,26 @@
         "overdue": false
       },
       {
+        "title": "랜딩수정",
+        "date": "2026-11-03T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "12주차복습",
+        "date": "2026-11-03T11:15:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "인스타계정만들기",
+        "date": "2026-11-03T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ai영상연구",
+        "date": "2026-11-03T13:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원씽복기",
         "date": "2026-11-03T14:00:00.000+09:00",
         "overdue": false
@@ -158,6 +123,11 @@
       {
         "title": "틱톡 심사확인→ 프로필에 유튜브주소",
         "date": "2026-11-03T15:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "인트로영상 만들기",
+        "date": "2026-11-03T15:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -183,6 +153,11 @@
       {
         "title": "원씽복기",
         "date": "2026-11-04T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "유튜브 수익계좌변경 및 법인주식계좌",
+        "date": "2026-11-04T16:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -213,6 +188,11 @@
       {
         "title": "원씽복기",
         "date": "2026-11-05T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "구충제",
+        "date": "2026-11-05T16:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -441,6 +421,56 @@
         "overdue": false
       },
       {
+        "title": "이렇게산다(성장일지), 메모",
+        "date": "2026-11-16",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-11-16T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "마케팅업체 주정산",
+        "date": "2026-11-16T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-11-16T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "date": "2026-11-16T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "유튜브 게시물 12시 예약(월,수,금)",
+        "date": "2026-11-16T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "쇼츠, 틱톡, 릴스 6시 예약(월,수,금)",
+        "date": "2026-11-16T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "주간복기",
+        "date": "2026-11-16T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "PT",
+        "date": "2026-11-16T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-11-16T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "피검사 비뇨기과",
         "date": "2026-11-23",
         "overdue": false
@@ -483,7 +513,7 @@
     ],
     "schedule": [
       {
-        "title": "이렇게산다(성장일지), 메모",
+        "title": "주제선정&썸네일&제목",
         "time": "",
         "allDay": true,
         "done": false
@@ -495,68 +525,32 @@
         "done": false
       },
       {
-        "title": "마케팅업체 주정산",
-        "time": "09:00",
-        "allDay": false,
-        "done": false
-      },
-      {
         "title": "체크남&링크, db기입",
         "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "월간 복기 okr점검(+키플링)",
-        "time": "09:45",
+        "title": "랜딩수정",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "현금영수증&세금계산서 발행",
-        "time": "10:00",
+        "title": "12주차복습",
+        "time": "11:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "유튜브 게시물 12시 예약(월,수,금)",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "쇼츠, 틱톡, 릴스 6시 예약(월,수,금)",
-        "time": "10:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "윤지 대학원 접수",
-        "time": "10:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "주간복기",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "감눈입금",
-        "time": "11:45",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "유튜브 수익계좌변경 및 법인주식계좌",
-        "time": "12:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "PT",
+        "title": "인스타계정만들기",
         "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "ai영상연구",
+        "time": "13:30",
         "allDay": false,
         "done": false
       },
@@ -567,14 +561,14 @@
         "done": false
       },
       {
-        "title": "인트로영상 만들기",
-        "time": "15:30",
+        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
+        "time": "15:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "사이트구축 기획",
-        "time": "17:00",
+        "title": "인트로영상 만들기",
+        "time": "15:15",
         "allDay": false,
         "done": false
       }
@@ -609,11 +603,6 @@
       "rate": "46%",
       "days": [
         {
-          "date": "2026-10-27",
-          "done": 2,
-          "total": 4
-        },
-        {
           "date": "2026-10-28",
           "done": 1,
           "total": 4
@@ -640,6 +629,11 @@
         },
         {
           "date": "2026-11-02",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-11-03",
           "done": 0,
           "total": 4
         }
