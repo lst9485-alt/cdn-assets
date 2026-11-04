@@ -1,85 +1,85 @@
 {
-  "updated": "2026-11-04T06:00:50+09:00",
+  "updated": "2026-11-05T06:00:53+09:00",
   "start": "2026-10-08",
-  "visitors": 401,
+  "visitors": 412,
   "sections": [
     {
       "key": "hero",
       "label": "첫 화면",
-      "users": 325,
+      "users": 334,
       "seconds": 18
     },
     {
       "key": "best-reviews",
       "label": "베스트 후기",
-      "users": 273,
+      "users": 282,
       "seconds": 7
     },
     {
       "key": "story-hook",
       "label": "문제 인식(분당·일산)",
-      "users": 240,
-      "seconds": 24
+      "users": 247,
+      "seconds": 25
     },
     {
       "key": "curriculum",
       "label": "코칭 내용",
-      "users": 191,
+      "users": 199,
       "seconds": 32
     },
     {
       "key": "reviews-trusted",
       "label": "실제 후기",
-      "users": 165,
+      "users": 168,
       "seconds": 6
     },
     {
       "key": "consultant",
       "label": "내 소개·실적",
-      "users": 167,
+      "users": 173,
       "seconds": 14
     },
     {
       "key": "reviews",
       "label": "후기 모음",
-      "users": 156,
-      "seconds": 22
+      "users": 161,
+      "seconds": 21
     },
     {
       "key": "promise",
       "label": "결과 약속",
-      "users": 155,
-      "seconds": 10
+      "users": 160,
+      "seconds": 9
     },
     {
       "key": "pricing",
       "label": "가격",
-      "users": 166,
+      "users": 171,
       "seconds": 26
     },
     {
       "key": "coaching-steps",
       "label": "진행 순서",
-      "users": 164,
-      "seconds": 12
+      "users": 166,
+      "seconds": 11
     },
     {
       "key": "cta",
       "label": "신청 권유 문구",
-      "users": 162,
+      "users": 166,
       "seconds": 7
     },
     {
       "key": "apply-form",
       "label": "신청서",
-      "users": 171,
-      "seconds": 34
+      "users": 174,
+      "seconds": 33
     },
     {
       "key": "faq",
       "label": "자주 묻는 질문",
-      "users": 100,
-      "seconds": 45
+      "users": 102,
+      "seconds": 44
     }
   ]
 }

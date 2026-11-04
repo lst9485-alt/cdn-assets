@@ -1,11 +1,11 @@
 {
-  "updated": "2026-11-04T06:00:23.741757+09:00",
+  "updated": "2026-11-05T06:00:29.284982+09:00",
   "projects": [
     {
-      "name": "261108 원고",
+      "name": "261108 내집마련 할 때 '3가지만' 보면 벌어지는 마법 같은 일",
       "type": "file",
       "app": null,
-      "modified": "2026-11-03",
+      "modified": "2026-11-04",
       "status": null,
       "next": null
     },
@@ -13,7 +13,7 @@
       "name": "비즈니스PT 프로",
       "type": "folder",
       "app": null,
-      "modified": "2026-11-03",
+      "modified": "2026-11-04",
       "status": null,
       "next": null
     },
