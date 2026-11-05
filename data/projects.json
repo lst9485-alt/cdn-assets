@@ -1,11 +1,19 @@
 {
-  "updated": "2026-11-05T06:00:29.284982+09:00",
+  "updated": "2026-11-06T06:00:38.824325+09:00",
   "projects": [
     {
-      "name": "261108 내집마련 할 때 '3가지만' 보면 벌어지는 마법 같은 일",
+      "name": "261108 첫 내집마련, 앞으로는 좋은 집 말고 '싼 집'이 오릅니다",
       "type": "file",
       "app": null,
-      "modified": "2026-11-04",
+      "modified": "2026-11-05",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "261115 원고",
+      "type": "file",
+      "app": null,
+      "modified": "2026-11-05",
       "status": null,
       "next": null
     },
@@ -22,14 +30,6 @@
       "type": "folder",
       "app": null,
       "modified": "2026-11-03",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "261115 원고",
-      "type": "file",
-      "app": null,
-      "modified": "2026-11-01",
       "status": null,
       "next": null
     }
