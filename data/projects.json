@@ -1,6 +1,22 @@
 {
-  "updated": "2026-11-08T06:00:44.275164+09:00",
+  "updated": "2026-11-09T06:00:44.567138+09:00",
   "projects": [
+    {
+      "name": "비즈니스PT 프로",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-11-08",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "AI 릴스",
+      "type": "folder",
+      "app": "youtube/ai-reels",
+      "modified": "2026-11-08",
+      "status": null,
+      "next": null
+    },
     {
       "name": "261115 원고",
       "type": "file",
@@ -14,14 +30,6 @@
       "type": "file",
       "app": null,
       "modified": "2026-11-07",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "비즈니스PT 프로",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-11-04",
       "status": null,
       "next": null
     },

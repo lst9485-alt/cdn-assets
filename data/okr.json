@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08T06:00:53.481275+09:00",
+  "updated": "2026-11-09T06:00:53.657218+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1461,
-    "done": 1361,
-    "overdue": 16,
+    "total": 1462,
+    "done": 1366,
+    "overdue": 14,
     "pending": [
       {
         "title": "전자책 작성",
@@ -56,89 +56,44 @@
         "overdue": true
       },
       {
-        "title": "PPT완료",
-        "date": "2026-11-06T21:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "crm확인",
-        "date": "2026-11-07T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-11-07T08:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "알파컷 https://www.youtube.com/watch?v=OiUdO82dPCE",
-        "date": "2026-11-07T13:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-11-07T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
         "title": "세무사계약서 확인",
         "date": "2026-11-07T15:30:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "유튜브 수익계좌변경 및 법인주식계좌",
-        "date": "2026-11-07T15:45:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-11-07T18:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "틱톡 심사확인→ 프로필에 유튜브주소",
-        "date": "2026-11-07T20:45:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "ai영상연구(인트로, 인스타)",
-        "date": "2026-11-07T21:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-11-08T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "랜딩일부수정",
         "date": "2026-11-08T09:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "구글 계정 갱신",
         "date": "2026-11-08T11:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "인스타영상 올리기",
         "date": "2026-11-08T12:15:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "원씽복기",
         "date": "2026-11-08T14:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "독서모임기획(벤치마킹, 랜딩, 알림톡 등)",
         "date": "2026-11-08T15:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "임장기획(벤치마킹, 코스 슬라이드, 간단랜딩, 알림톡 등)",
         "date": "2026-11-08T16:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
+      },
+      {
+        "title": "ai영상연구(인트로, 인스타)",
+        "date": "2026-11-08T17:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "이렇게산다(성장일지), 메모",
@@ -176,6 +131,16 @@
         "overdue": false
       },
       {
+        "title": "알파컷 https://www.youtube.com/watch?v=OiUdO82dPCE",
+        "date": "2026-11-09T11:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "유튜브 수익계좌변경 및 법인주식계좌",
+        "date": "2026-11-09T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원씽복기",
         "date": "2026-11-09T14:00:00.000+09:00",
         "overdue": false
@@ -208,6 +173,11 @@
       {
         "title": "sns업로드",
         "date": "2026-11-10T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "crm확인",
+        "date": "2026-11-10T10:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -486,6 +456,16 @@
         "overdue": false
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-11-22T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-11-22T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "피검사 비뇨기과",
         "date": "2026-11-23",
         "overdue": false
@@ -528,26 +508,56 @@
     ],
     "schedule": [
       {
+        "title": "이렇게산다(성장일지), 메모",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
         "title": "P1~P3/목실감",
         "time": "08:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "랜딩일부수정",
+        "title": "마케팅업체 주정산",
         "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "구글 계정 갱신",
+        "title": "체크남&링크, db기입",
+        "time": "09:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "숏폼 업로드",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "주간복기",
         "time": "11:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "인스타영상 올리기",
-        "time": "12:15",
+        "title": "알파컷 https://www.youtube.com/watch?v=OiUdO82dPCE",
+        "time": "11:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "유튜브 수익계좌변경 및 법인주식계좌",
+        "time": "12:00",
         "allDay": false,
         "done": false
       },
@@ -558,14 +568,8 @@
         "done": false
       },
       {
-        "title": "독서모임기획(벤치마킹, 랜딩, 알림톡 등)",
-        "time": "15:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "임장기획(벤치마킹, 코스 슬라이드, 간단랜딩, 알림톡 등)",
-        "time": "16:00",
+        "title": "랜딩수정",
+        "time": "15:15",
         "allDay": false,
         "done": false
       }
@@ -596,14 +600,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 12,
+      "rate": "43%",
       "days": [
-        {
-          "date": "2026-11-02",
-          "done": 4,
-          "total": 4
-        },
         {
           "date": "2026-11-03",
           "done": 3,
@@ -626,11 +625,16 @@
         },
         {
           "date": "2026-11-07",
-          "done": 0,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-11-08",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-11-09",
           "done": 0,
           "total": 4
         }
