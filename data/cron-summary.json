@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-09T06:01:10.935033+09:00",
+  "updated": "2026-11-10T06:01:10.474643+09:00",
   "summary": {
-    "정상": 66,
+    "정상": 67,
     "정리 필요": 0,
     "꺼짐": 1
   },
@@ -992,12 +992,26 @@
       "name": "dosun-check",
       "title": "dosun-check",
       "room": "확인 필요",
-      "description": "도순도치 방 10시까지 안 쓴 사람에게 '윤지야/태기야 안했어'",
+      "description": "도순도치 방 10시에 원씽·복기 #윤지·#태기 밑이 빈 사람에게 '윤지야/태기야 안했어'",
       "cron": "0 10 * * *",
       "day": "매일",
       "time": "10:00",
       "status": "정상",
       "script": "dosun-daily.sh check",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "dosun-guard",
+      "title": "dosun-guard",
+      "room": "확인 필요",
+      "description": "오픈클로가 도순도치 방 알림 예약을 만들면 바로 끄고 HQ 방에 알림",
+      "cron": "*/10 * * * *",
+      "day": "매일",
+      "time": "*:*/10",
+      "status": "정상",
+      "script": "dosun-guard.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
