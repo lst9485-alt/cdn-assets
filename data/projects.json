@@ -1,11 +1,35 @@
 {
-  "updated": "2026-11-10T06:00:42.982699+09:00",
+  "updated": "2026-11-11T06:00:48.652576+09:00",
   "projects": [
+    {
+      "name": "261115 원고",
+      "type": "file",
+      "app": null,
+      "modified": "2026-11-11",
+      "status": null,
+      "next": null
+    },
     {
       "name": "비즈니스PT 프로",
       "type": "folder",
       "app": null,
-      "modified": "2026-11-09",
+      "modified": "2026-11-10",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "261205 특강 (기획)",
+      "type": "file",
+      "app": null,
+      "modified": "2026-11-10",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "강의",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-11-10",
       "status": null,
       "next": null
     },
@@ -13,23 +37,15 @@
       "name": "미국여행 종합",
       "type": "file",
       "app": null,
-      "modified": "2026-11-09",
+      "modified": "2026-11-10",
       "status": null,
       "next": null
     },
     {
-      "name": "AI 릴스",
+      "name": "인스타키우기",
       "type": "folder",
       "app": "youtube/ai-reels",
-      "modified": "2026-11-08",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "261115 원고",
-      "type": "file",
-      "app": null,
-      "modified": "2026-11-07",
+      "modified": "2026-11-10",
       "status": null,
       "next": null
     },
@@ -38,14 +54,6 @@
       "type": "file",
       "app": null,
       "modified": "2026-11-07",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "강의",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-11-03",
       "status": null,
       "next": null
     }

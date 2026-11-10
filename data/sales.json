@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-10T06:01:03.612672+09:00",
+  "updated": "2026-11-11T06:01:07.656499+09:00",
   "summary": {
     "current_month": 1450000,
     "current_month_label": "2026-11",
@@ -874,15 +874,15 @@
   "by_region": [
     {
       "region": "수도권",
-      "count": 121,
-      "revenue": 40550000,
-      "ratio": "72.5%"
+      "count": 122,
+      "revenue": 41050000,
+      "ratio": "72.6%"
     },
     {
       "region": "지방",
       "count": 46,
       "revenue": 15900000,
-      "ratio": "27.5%"
+      "ratio": "27.4%"
     }
   ],
   "expenses": [
@@ -921,6 +921,10 @@
     {
       "month": "2026-10",
       "count": 5
+    },
+    {
+      "month": "2026-11",
+      "count": 1
     }
   ]
 }
