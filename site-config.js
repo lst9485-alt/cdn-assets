@@ -173,7 +173,7 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/booklist-imweb-copy.html',
-            dateSuffix: '1',
+            dateSuffix: '2',
             imwebDate: '2026-11-11'
           },
           {
