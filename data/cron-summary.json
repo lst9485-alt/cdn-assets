@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-11T06:01:14.065014+09:00",
+  "updated": "2026-11-12T06:01:13.369276+09:00",
   "summary": {
-    "정상": 68,
+    "정상": 69,
     "정리 필요": 0,
     "꺼짐": 1
   },
@@ -1026,6 +1026,20 @@
       "time": "*:*/10",
       "status": "정상",
       "script": "obsidian-bigfile-sync.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "todo-pin",
+      "title": "todo-pin",
+      "room": "확인 필요",
+      "description": "투두 고정글 — 옵시디언 투두리스트 우선순위 칸을 텔레그램 메모장 방 고정글로 보여 줌(보기 전용). 바뀌었을 때만 같은 글을 고침, 10분 넘게 실패하면 HQ 방 알림",
+      "cron": "* * * * *",
+      "day": "매일",
+      "time": "매분",
+      "status": "정상",
+      "script": "../telegram/todo-pin.py",
       "registered": true,
       "scriptExists": true,
       "enabled": true
