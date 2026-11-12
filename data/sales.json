@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T06:01:07.953213+09:00",
+  "updated": "2026-11-13T06:01:20.898247+09:00",
   "summary": {
     "current_month": 1450000,
     "current_month_label": "2026-11",
@@ -111,11 +111,6 @@
     }
   ],
   "weekly": [
-    {
-      "week_start": "2026-05-11",
-      "revenue": 0,
-      "customers": 0
-    },
     {
       "week_start": "2026-05-18",
       "revenue": 0,
@@ -238,6 +233,11 @@
     },
     {
       "week_start": "2026-11-03",
+      "revenue": 450000,
+      "customers": 1
+    },
+    {
+      "week_start": "2026-11-10",
       "revenue": 0,
       "customers": 0
     }
@@ -770,6 +770,11 @@
     },
     {
       "week_start": "2026-11-03",
+      "revenue": 450000,
+      "customers": 1
+    },
+    {
+      "week_start": "2026-11-10",
       "revenue": 0,
       "customers": 0
     }
@@ -874,15 +879,15 @@
   "by_region": [
     {
       "region": "수도권",
-      "count": 122,
-      "revenue": 41050000,
-      "ratio": "72.6%"
+      "count": 123,
+      "revenue": 41550000,
+      "ratio": "72.8%"
     },
     {
       "region": "지방",
       "count": 46,
       "revenue": 15900000,
-      "ratio": "27.4%"
+      "ratio": "27.2%"
     }
   ],
   "expenses": [

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T06:00:54.831163+09:00",
+  "updated": "2026-11-13T06:01:09.809543+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1488,
-    "done": 1394,
-    "overdue": 8,
+    "total": 1494,
+    "done": 1400,
+    "overdue": 11,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,69 +61,24 @@
         "overdue": true
       },
       {
-        "title": "무료자료 세팅",
-        "date": "2026-11-11T09:30:00.000+09:00",
+        "title": "주간계획 수정",
+        "date": "2026-11-12T08:30:00.000+09:00",
         "overdue": true
       },
       {
-        "title": "주간계획 수정",
-        "date": "2026-11-12T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-11-12T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-11-12T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "원고",
-        "date": "2026-11-12T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강기획",
-        "date": "2026-11-12T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-11-12T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "알파컷 https://www.youtube.com/watch?v=OiUdO82dPCE",
-        "date": "2026-11-12T12:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "상담준비",
-        "date": "2026-11-12T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-11-12T14:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-11-12T14:30:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "원고완성",
-        "date": "2026-11-12T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "인스타영상 테스트",
         "date": "2026-11-12T18:30:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "완강",
         "date": "2026-11-12T21:00:00.000+09:00",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "P1~P3/목실감",
@@ -136,13 +91,23 @@
         "overdue": false
       },
       {
+        "title": "무료자료세팅",
+        "date": "2026-11-13T09:15:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "PPT완료",
-        "date": "2026-11-13T09:30:00.000+09:00",
+        "date": "2026-11-13T10:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "PT",
         "date": "2026-11-13T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "알파컷 https://www.youtube.com/watch?v=OiUdO82dPCE",
+        "date": "2026-11-13T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -153,6 +118,11 @@
       {
         "title": "랜딩수정",
         "date": "2026-11-13T15:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "인스타영상 테스트",
+        "date": "2026-11-13T17:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -461,6 +431,36 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-11-26",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-11-26T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-11-26T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-11-26T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-11-26T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-11-26T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "1시 비뇨기 진료",
         "date": "2026-11-30T13:00:00.000+09:00",
         "overdue": false
@@ -498,12 +498,6 @@
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
         "title": "P1~P3/목실감",
         "time": "08:30",
         "allDay": false,
@@ -516,31 +510,25 @@
         "done": false
       },
       {
-        "title": "원고",
-        "time": "09:30",
+        "title": "무료자료세팅",
+        "time": "09:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강기획",
-        "time": "11:00",
+        "title": "PPT완료",
+        "time": "10:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "콘텐츠 관리시트",
+        "title": "PT",
         "time": "12:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "알파컷 https://www.youtube.com/watch?v=OiUdO82dPCE",
-        "time": "12:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "상담준비",
         "time": "13:00",
         "allDay": false,
         "done": false
@@ -552,20 +540,20 @@
         "done": false
       },
       {
-        "title": "원고완성",
-        "time": "15:00",
+        "title": "랜딩수정",
+        "time": "15:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "인스타영상 테스트",
-        "time": "18:30",
+        "time": "17:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "완강",
-        "time": "21:00",
+        "title": "촬영&편집&업로드",
+        "time": "18:30",
         "allDay": false,
         "done": false
       }
@@ -600,11 +588,6 @@
       "rate": "54%",
       "days": [
         {
-          "date": "2026-11-06",
-          "done": 2,
-          "total": 4
-        },
-        {
           "date": "2026-11-07",
           "done": 2,
           "total": 4
@@ -626,11 +609,16 @@
         },
         {
           "date": "2026-11-11",
-          "done": 1,
+          "done": 2,
           "total": 4
         },
         {
           "date": "2026-11-12",
+          "done": 1,
+          "total": 4
+        },
+        {
+          "date": "2026-11-13",
           "done": 0,
           "total": 4
         }

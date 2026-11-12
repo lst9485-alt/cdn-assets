@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T06:01:13.369276+09:00",
+  "updated": "2026-11-13T06:01:25.990605+09:00",
   "summary": {
     "정상": 69,
     "정리 필요": 0,
@@ -516,10 +516,10 @@
       "name": "meet-auto-transcript",
       "title": "meet-auto-transcript",
       "room": "확인 필요",
-      "description": "상담 회의 자동 켜기 — 예약된 상담 회의에 스크립트·회의록 자동 켜기를 걸고, 상담 시작 5분부터 안 돌고 있으면 Biz 방에 한 번 알림",
-      "cron": "*/10 * * * *",
+      "description": "상담 회의 자동 켜기 — 예약된 상담 회의에 스크립트·회의록 자동 켜기. 상담 1시간 전~3시간 뒤에 꺼져 있으면 1분마다 맥미니 화면 경고 창 + Biz 방",
+      "cron": "* * * * *",
       "day": "매일",
-      "time": "*:*/10",
+      "time": "매분",
       "status": "정상",
       "script": "meet-auto-transcript.sh",
       "registered": true,

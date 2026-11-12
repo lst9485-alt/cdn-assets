@@ -1,11 +1,11 @@
 {
-  "updated": "2026-11-12T06:00:45.758337+09:00",
+  "updated": "2026-11-13T06:01:00.549176+09:00",
   "projects": [
     {
       "name": "261115 주식으로 돈 번 뒤, 부자와 가난한 사람의 차이",
       "type": "file",
       "app": null,
-      "modified": "2026-11-11",
+      "modified": "2026-11-12",
       "status": null,
       "next": null
     },
@@ -13,7 +13,15 @@
       "name": "비즈니스PT 프로",
       "type": "folder",
       "app": null,
-      "modified": "2026-11-10",
+      "modified": "2026-11-12",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "인스타키우기",
+      "type": "folder",
+      "app": "youtube/ai-reels",
+      "modified": "2026-11-12",
       "status": null,
       "next": null
     },
@@ -37,14 +45,6 @@
       "name": "미국여행 종합",
       "type": "file",
       "app": null,
-      "modified": "2026-11-10",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "인스타키우기",
-      "type": "folder",
-      "app": "youtube/ai-reels",
       "modified": "2026-11-10",
       "status": null,
       "next": null
