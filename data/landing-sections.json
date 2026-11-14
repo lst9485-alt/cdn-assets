@@ -1,85 +1,85 @@
 {
-  "updated": "2026-11-14T06:01:04+09:00",
+  "updated": "2026-11-15T06:00:58+09:00",
   "start": "2026-10-08",
-  "visitors": 602,
+  "visitors": 597,
   "sections": [
     {
       "key": "hero",
       "label": "첫 화면",
-      "users": 503,
-      "seconds": 54
+      "users": 499,
+      "seconds": 55
     },
     {
       "key": "best-reviews",
       "label": "베스트 후기",
-      "users": 432,
-      "seconds": 13
+      "users": 429,
+      "seconds": 12
     },
     {
       "key": "story-hook",
       "label": "문제 인식(분당·일산)",
-      "users": 375,
+      "users": 374,
       "seconds": 63
     },
     {
       "key": "curriculum",
       "label": "코칭 내용",
-      "users": 296,
-      "seconds": 45
+      "users": 293,
+      "seconds": 44
     },
     {
       "key": "reviews-trusted",
       "label": "실제 후기",
-      "users": 249,
+      "users": 247,
       "seconds": 6
     },
     {
       "key": "consultant",
       "label": "내 소개·실적",
-      "users": 250,
-      "seconds": 87
+      "users": 247,
+      "seconds": 92
     },
     {
       "key": "reviews",
       "label": "후기 모음",
-      "users": 235,
+      "users": 232,
       "seconds": 15
     },
     {
       "key": "promise",
       "label": "결과 약속",
-      "users": 233,
+      "users": 230,
       "seconds": 11
     },
     {
       "key": "pricing",
       "label": "가격",
-      "users": 254,
-      "seconds": 39
+      "users": 251,
+      "seconds": 38
     },
     {
       "key": "coaching-steps",
       "label": "진행 순서",
-      "users": 243,
-      "seconds": 15
+      "users": 240,
+      "seconds": 16
     },
     {
       "key": "cta",
       "label": "신청 권유 문구",
-      "users": 244,
+      "users": 241,
       "seconds": 7
     },
     {
       "key": "apply-form",
       "label": "신청서",
-      "users": 254,
-      "seconds": 38
+      "users": 251,
+      "seconds": 39
     },
     {
       "key": "faq",
       "label": "자주 묻는 질문",
-      "users": 147,
-      "seconds": 65
+      "users": 144,
+      "seconds": 66
     }
   ]
 }
