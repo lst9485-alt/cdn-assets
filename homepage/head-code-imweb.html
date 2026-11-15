@@ -329,6 +329,7 @@
 	    .region-rail { justify-content:flex-start; overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling:touch; }
 	    .sticky-coaching-cta { left:0; right:0; bottom:0; width:auto; max-width:none; border-radius:0; transform:translate3d(0, 24px, 0); padding-bottom: max(12px, env(safe-area-inset-bottom)); }
 	    .sticky-coaching-cta.is-visible { transform:translate3d(0, 0, 0); }
+	    @media (max-width:339px){ #stickyCoachingCta p > span.md\:hidden { display:none !important; } #stickyCoachingCta p span[style*="0.85em"] { display:none; } #stickyCoachingCta button { padding-left:12px; padding-right:12px; } .kakao-channel-pill { max-width:100%; flex-wrap:wrap; justify-content:center; } }
 	  }
 
   /* ===== 2step 통합 CSS (coaching-section03-draft-claude-2step.html) ===== */
@@ -878,6 +879,7 @@
       color: #FF6B00;
     }
     @media (max-width: 359px) { .review-badge-num { font-size: 2.6rem; } }
+    @media (max-width: 339px) { .metric-review-badge { padding: 18px 16px; } .metric-review-badge > div { width: auto; } .review-badge-num { font-size: 2.1rem; } .review-badge-num-sub, .review-badge-num-sub-lg { font-size: .85rem; margin-left: 4px; } }
     .review-badge-num-sub {
       display: inline-block;
       margin-left: 8px;

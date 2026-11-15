@@ -358,6 +358,7 @@
 	    .region-rail { justify-content:flex-start; overflow-x:auto; padding-bottom:6px; -webkit-overflow-scrolling:touch; }
 	    .sticky-coaching-cta { left:0; right:0; bottom:0; width:auto; max-width:none; border-radius:0; transform:translate3d(0, 24px, 0); padding-bottom: max(12px, env(safe-area-inset-bottom)); }
 	    .sticky-coaching-cta.is-visible { transform:translate3d(0, 0, 0); }
+	    @media (max-width:339px){ #stickyCoachingCta p > span.md\:hidden { display:none !important; } #stickyCoachingCta p span[style*="0.85em"] { display:none; } #stickyCoachingCta button { padding-left:12px; padding-right:12px; } .kakao-channel-pill { max-width:100%; flex-wrap:wrap; justify-content:center; } }
 	  }
 
   /* ===== 2step 통합 CSS (coaching-section03-draft-claude-2step.html) ===== */
@@ -907,6 +908,7 @@
       color: #FF6B00;
     }
     @media (max-width: 359px) { .review-badge-num { font-size: 2.6rem; } }
+    @media (max-width: 339px) { .metric-review-badge { padding: 18px 16px; } .metric-review-badge > div { width: auto; } .review-badge-num { font-size: 2.1rem; } .review-badge-num-sub, .review-badge-num-sub-lg { font-size: .85rem; margin-left: 4px; } }
     .review-badge-num-sub {
       display: inline-block;
       margin-left: 8px;
@@ -1179,6 +1181,27 @@
 </head>
 <body class="bg-white text-brand-dark font-sans">
 
+  <style id="narrow-fix">
+    /* 휴대폰 글자 크기를 키우면 화면 폭이 280px 안팎으로 좁아진다 → 넘치는 곳만 줄임 (아임웹은 머리말 style을 안 쓰므로 몸통에 둠) */
+    .sh-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+    .sh-c{min-width:0}
+    .sh-sub{overflow-wrap:anywhere}
+    @media (max-width:359px){
+      .metric-review-badge{padding:16px 14px!important}
+      .metric-review-badge > div{width:auto!important}
+      .review-badge-num{font-size:1.9rem!important}
+      .review-badge-num-sub,.review-badge-num-sub-lg{font-size:.8rem!important;margin-left:4px!important}
+      [data-section="consultant"] .text-3xl{font-size:1.4rem!important;line-height:1.75rem!important}
+      [data-section="consultant"] .p-6.text-center{padding-left:12px!important;padding-right:12px!important}
+      [data-section="consultant"] .p-6.text-center .gap-3{gap:6px!important}
+      [data-section="consultant"] .p-6.text-center .text-2xl{font-size:1.4rem!important}
+      [data-section="pricing"] p.text-5xl{font-size:2.4rem!important}
+      #stickyCoachingCta p > span.md\:hidden{display:none!important}
+      #stickyCoachingCta p span[style*="0.85em"]{display:none!important}
+      #stickyCoachingCta button{padding-left:12px!important;padding-right:12px!important}
+      .kakao-channel-pill{max-width:100%;flex-wrap:wrap;justify-content:center}
+    }
+  </style>
   <div id="stickyCoachingCta" class="sticky-coaching-cta px-4 py-2.5 text-white md:px-8" aria-hidden="true">
     <div class="flex flex-row items-center justify-between gap-3">
       <div class="flex min-w-0 flex-col gap-0.5">
@@ -1248,14 +1271,14 @@
     </div>
     <div class="relative z-10 text-center px-6 hero-main" style="animation-delay:0s">
 	      <p class="text-[#7a5f45] text-lg md:text-xl mb-6 word-keep"><span class="whitespace-nowrap"><span aria-hidden="true">🏠</span> 확신 갖고 후회 없이,</span> <span class="whitespace-nowrap">내집마련 고민 끝!</span></p>
-      <h1 class="text-[40px] min-[400px]:text-5xl md:text-6xl lg:text-7xl font-display font-black text-brand-dark leading-tight mb-8 word-keep whitespace-nowrap">지금 <span class="hero-rot"><span class="hero-rot-w">여기</span></span><br>사도 될까요?</h1>
+      <h1 class="text-[clamp(32px,11vw,40px)] min-[400px]:text-5xl md:text-6xl lg:text-7xl font-display font-black text-brand-dark leading-tight mb-8 word-keep">지금 <span class="hero-rot"><span class="hero-rot-w">여기</span></span><br>사도 될까요?</h1>
       <div class="inline-flex items-center gap-2 md:gap-3 bg-white/75 backdrop-blur-sm border-2 border-brand-orange rounded-2xl px-4 md:px-6 py-3.5 md:py-5 mb-10 shadow-lg">
         <span class="text-xl md:text-2xl">🔥</span>
         <p class="text-brand-dark text-base md:text-2xl font-bold word-keep text-left">내가 살 수 있는 <span class="text-brand-orange font-black">가장 좋은 집</span></p>
       </div>
     </div>
     <div class="relative z-10 text-center hero-cta mb-16" style="animation-delay:0.08s">
-      <div class="flex flex-row items-center justify-center gap-1.5 sm:gap-5 mb-6 px-1 word-keep whitespace-nowrap">
+      <div class="flex flex-row flex-wrap items-center justify-center gap-x-1.5 gap-y-1 sm:gap-5 mb-6 px-1 word-keep">
         <span class="inline-flex items-center gap-1 text-[13px] sm:text-sm md:text-lg font-bold text-brand-dark whitespace-nowrap">
           <iconify-icon icon="solar:graph-up-bold" class="text-brand-orange text-base md:text-lg"></iconify-icon>
           <span class="text-brand-dark font-black">200건+</span> 코칭
@@ -1527,7 +1550,7 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
           </div>
           <div class="bg-white rounded-2xl p-5 flex items-center gap-4 shadow-lg">
             <span class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0">02</span>
-            <p class="text-base min-[360px]:text-lg md:text-xl font-bold text-gray-900 word-keep whitespace-nowrap">후회 없는 내 집 마련 원하는 분</p>
+            <p class="text-base min-[360px]:text-lg md:text-xl font-bold text-gray-900 word-keep">후회 없는 내 집 마련 원하는 분</p>
           </div>
           <div class="bg-white rounded-2xl p-5 flex items-center gap-4 shadow-lg">
             <span class="w-10 h-10 bg-brand-orange rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0">03</span>
@@ -1939,7 +1962,7 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
             <div class="flex items-center justify-center gap-3 mb-2">
               <span class="text-xl font-bold text-gray-400">11.4억</span>
               <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-2xl"></iconify-icon>
-              <span class="text-3xl font-display font-black text-brand-dark">20.1억</span>
+              <span class="text-2xl min-[340px]:text-3xl font-display font-black text-brand-dark">20.1억</span>
             </div>
             <div class="inline-block bg-red-50 text-red-600 px-4 py-2 rounded-xl"><p class="text-xl font-display font-black">+8.7억 상승 ↑</p></div>
           </div>
@@ -2201,7 +2224,7 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
 	          <span class="flex items-center gap-1.5"><iconify-icon icon="solar:shield-check-linear"></iconify-icon> 최대 6개월 질의응답</span>
 	          <span class="flex items-center gap-1.5"><iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon> 부부동반 가능</span>
 	        </div>
-		        <p class="text-red-600 text-xl md:text-2xl font-display font-black word-keep pulse-attention">지금 바로 신청하세요</p>
+		        <p class="text-red-600 text-lg min-[340px]:text-xl md:text-2xl font-display font-black word-keep pulse-attention">지금 바로 신청하세요</p>
 		        <div class="cta-down-arrow animate-bounce" aria-hidden="true">
                   <svg viewBox="0 0 64 74" focusable="false">
                     <path class="arrow-main" d="M32 6V45M14 29L32 47L50 29"/>
@@ -2254,9 +2277,9 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
 	              <span class="shrink-0 w-5 h-5 rounded-full bg-[#ff4b4b] flex items-center justify-center text-white">
 	                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
 	              </span>
-	              <div class="flex-1 min-w-0 flex items-center justify-between gap-4">
+	              <div class="flex-1 min-w-0 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
 	                <div class="min-w-0">
-	                  <div class="font-black text-lg text-brand-dark leading-tight whitespace-nowrap">코칭 A <span class="text-sm font-bold text-gray-500">(매주 2명)</span></div>
+	                  <div class="font-black text-lg text-brand-dark leading-tight word-keep">코칭 A <span class="text-sm font-bold text-gray-500">(매주 2명)</span></div>
 	                  <span class="inline-block mt-2 bg-[#ff4b4b] text-white text-xs font-bold px-3 py-1 rounded-md whitespace-nowrap">현재 신청 가능</span>
 	                </div>
 	                <div class="text-right shrink-0">
@@ -2268,9 +2291,9 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
 	            <label class="flex items-center gap-3 border border-gray-200 bg-gray-50 rounded-2xl p-5 opacity-60 cursor-not-allowed">
 	              <input type="radio" name="coaching" value="B" disabled class="hidden">
 	              <span class="shrink-0 w-5 h-5 rounded-full border-2 border-gray-300"></span>
-	              <div class="flex-1 min-w-0 flex items-center justify-between gap-4">
+	              <div class="flex-1 min-w-0 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
 	                <div class="min-w-0">
-	                  <div class="font-black text-lg text-gray-500 leading-tight whitespace-nowrap">코칭 B <span class="text-sm font-bold text-gray-500">(매월 1명)</span></div>
+	                  <div class="font-black text-lg text-gray-500 leading-tight word-keep">코칭 B <span class="text-sm font-bold text-gray-500">(매월 1명)</span></div>
 	                  <span class="inline-block mt-2 bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-md whitespace-nowrap">11월, 12월 마감</span>
 	                </div>
 	                <div class="text-right shrink-0">
