@@ -1,11 +1,11 @@
 {
-  "updated": "2026-11-15T06:00:33.103386+09:00",
+  "updated": "2026-11-16T06:00:11.664931+09:00",
   "projects": [
     {
-      "name": "261122 원고",
+      "name": "미국여행 종합",
       "type": "file",
       "app": null,
-      "modified": "2026-11-14",
+      "modified": "2026-11-15",
       "status": null,
       "next": null
     },
@@ -13,7 +13,23 @@
       "name": "261129 원고",
       "type": "file",
       "app": null,
-      "modified": "2026-11-14",
+      "modified": "2026-11-15",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "261122 원고",
+      "type": "file",
+      "app": null,
+      "modified": "2026-11-15",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "261205 특강 (기획)",
+      "type": "file",
+      "app": null,
+      "modified": "2026-11-15",
       "status": null,
       "next": null
     },
@@ -42,24 +58,8 @@
       "next": null
     },
     {
-      "name": "261205 특강 (기획)",
-      "type": "file",
-      "app": null,
-      "modified": "2026-11-10",
-      "status": null,
-      "next": null
-    },
-    {
       "name": "강의",
       "type": "folder",
-      "app": null,
-      "modified": "2026-11-10",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "미국여행 종합",
-      "type": "file",
       "app": null,
       "modified": "2026-11-10",
       "status": null,

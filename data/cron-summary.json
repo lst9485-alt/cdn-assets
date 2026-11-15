@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-15T06:00:59.812089+09:00",
+  "updated": "2026-11-16T06:00:37.228329+09:00",
   "summary": {
-    "정상": 69,
+    "정상": 71,
     "정리 필요": 0,
     "꺼짐": 1
   },
@@ -1040,6 +1040,34 @@
       "time": "매분",
       "status": "정상",
       "script": "../telegram/todo-pin.py",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "mokdong-bill-watch",
+      "title": "mokdong-bill-watch",
+      "room": "확인 필요",
+      "description": "목동 매도 법안 지켜보기 (조합원 지위양도 유예·양천구 규제 해제, 바뀌면 투자 방)",
+      "cron": "0 9 * * 1",
+      "day": "월요일",
+      "time": "09:00",
+      "status": "정상",
+      "script": "mokdong-bill-watch.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "kakao-friends",
+      "title": "kakao-friends",
+      "room": "확인 필요",
+      "description": "카카오 채널 친구 수 (매일 어제·월요일 지난주 누적·1일 지난달 누적, 마케팅 방)",
+      "cron": "0 10 * * *",
+      "day": "매일",
+      "time": "10:00",
+      "status": "정상",
+      "script": "kakao-friends.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
