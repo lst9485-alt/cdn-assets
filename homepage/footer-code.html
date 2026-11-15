@@ -6,7 +6,7 @@
         var ex=['분당','일산','마포','수원','창원','청주','천안','전주','춘천','구미','포항'];
         for(var j=ex.length-1;j>0;j--){var r=Math.floor(Math.random()*(j+1)),t=ex[j];ex[j]=ex[r];ex[r]=t;}
         var ws=['여기','서울','부산','대구','인천','광주','대전','울산'].concat(ex),i=0;
-        setInterval(function(){el.classList.add('is-out');setTimeout(function(){i=(i+1)%ws.length;el.textContent=ws[i];el.classList.remove('is-out');},300);},1800);
+        setInterval(function(){el.classList.add('is-out');setTimeout(function(){i=(i+1)%ws.length;el.textContent=ws[i];el.classList.remove('is-out');},180);},1100);
       }
       if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
     })();

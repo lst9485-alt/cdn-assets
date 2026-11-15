@@ -1,5 +1,9 @@
 <style id="narrow-fix">
     /* 휴대폰 글자 크기를 키우면 화면 폭이 280px 안팎으로 좁아진다 → 넘치는 곳만 줄임 (아임웹은 머리말 style을 안 쓰므로 몸통에 둠) */
+    /* 아임웹이 휴대폰에서 양옆을 31px씩 비움 → 우리 칸은 화면 끝까지 꽉 차게 */
+    @media (max-width:767px){
+      section[data-section]{width:100vw!important;max-width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:0!important;border-radius:0!important}
+    }
     .sh-g{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
     .sh-c{min-width:0}
     .sh-sub{overflow-wrap:anywhere}
@@ -116,7 +120,7 @@
 <div class="flex flex-col items-center gap-2 text-[#8a6b4a]"><span class="text-xs">스크롤</span><iconify-icon class="text-xl animate-bounce" icon="solar:alt-arrow-down-linear"></iconify-icon></div>
 </div>
 <style>
-    .hero-rot-w{display:inline-block;background:linear-gradient(transparent 62%,rgba(255,107,0,0.18) 62%);padding:0 .08em;transition:opacity .3s ease}
+    .hero-rot-w{display:inline-block;background:linear-gradient(transparent 62%,rgba(255,107,0,0.18) 62%);padding:0 .08em;transition:opacity .18s ease}
     .hero-rot-w.is-out{opacity:0}
     @media (prefers-reduced-motion:reduce){.hero-rot-w{transition:none}}
     </style>
@@ -128,7 +132,7 @@
         var ex=['분당','일산','마포','수원','창원','청주','천안','전주','춘천','구미','포항'];
         for(var j=ex.length-1;j>0;j--){var r=Math.floor(Math.random()*(j+1)),t=ex[j];ex[j]=ex[r];ex[r]=t;}
         var ws=['여기','서울','부산','대구','인천','광주','대전','울산'].concat(ex),i=0;
-        setInterval(function(){el.classList.add('is-out');setTimeout(function(){i=(i+1)%ws.length;el.textContent=ws[i];el.classList.remove('is-out');},300);},1800);
+        setInterval(function(){el.classList.add('is-out');setTimeout(function(){i=(i+1)%ws.length;el.textContent=ws[i];el.classList.remove('is-out');},180);},1100);
       }
       if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
     })();

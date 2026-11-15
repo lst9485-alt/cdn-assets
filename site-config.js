@@ -105,8 +105,8 @@
             hubVisible: true,
             groupLabel: '공통',
             imwebCode: 'homepage/footer-code.html',
-            dateSuffix: '2',
-            imwebDate: '2026-11-15'
+            dateSuffix: '1',
+            imwebDate: '2026-11-16'
           },
           {
             id: 'landing-page-v3',
@@ -123,8 +123,8 @@
             hubVisible: true,
             groupLabel: '코칭',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
-            dateSuffix: '3',
-            imwebDate: '2026-11-15'
+            dateSuffix: '1',
+            imwebDate: '2026-11-16'
           },
           {
             id: 'main-page',
