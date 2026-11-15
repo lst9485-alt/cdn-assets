@@ -1248,7 +1248,7 @@
     </div>
     <div class="relative z-10 text-center px-6 hero-main" style="animation-delay:0s">
 	      <p class="text-[#7a5f45] text-lg md:text-xl mb-6 word-keep"><span class="whitespace-nowrap"><span aria-hidden="true">🏠</span> 확신 갖고 후회 없이,</span> <span class="whitespace-nowrap">내집마련 고민 끝!</span></p>
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-black text-brand-dark leading-tight mb-8 word-keep">지금 <span class="hero-rot"><span class="hero-rot-w">여기</span></span><br>사도 될까요?</h1>
+      <h1 class="text-[40px] min-[400px]:text-5xl md:text-6xl lg:text-7xl font-display font-black text-brand-dark leading-tight mb-8 word-keep whitespace-nowrap">지금 <span class="hero-rot"><span class="hero-rot-w">여기</span></span><br>사도 될까요?</h1>
       <div class="inline-flex items-center gap-2 md:gap-3 bg-white/75 backdrop-blur-sm border-2 border-brand-orange rounded-2xl px-4 md:px-6 py-3.5 md:py-5 mb-10 shadow-lg">
         <span class="text-xl md:text-2xl">🔥</span>
         <p class="text-brand-dark text-base md:text-2xl font-bold word-keep text-left">내가 살 수 있는 <span class="text-brand-orange font-black">가장 좋은 집</span></p>
@@ -1283,7 +1283,7 @@
     @media (prefers-reduced-motion:reduce){.hero-rot-w{transition:none}}
     </style>
     <script>
-    (function(){
+    ;(function(){
       function start(){
         var el=document.querySelector('.hero-rot-w'); if(!el||el.dataset.on) return; el.dataset.on='1';
         if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -1362,8 +1362,9 @@
       </div>
     </div>
     <script>
-      (function(init){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init(); })(function(){
-        document.querySelectorAll('.review-card-clickable').forEach(function(card){
+      ;(function(init){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init(); })(function(){
+        document.querySelectorAll('.review-card-clickable').forEach(function(card0){
+          var card = card0.cloneNode(true); card0.parentNode.replaceChild(card, card0); // 예전 코드가 붙인 것과 겹치지 않게 새로 붙임
           card.addEventListener('click', function(){
             var body = card.querySelector('.review-body');
             var more = card.querySelector('.review-more');
@@ -1426,7 +1427,7 @@
 </style>
       <div class="sh-w"><div class="sh-top"><h2>분명 <u class="sh-hl">똑같은 돈</u>인데<br><span style="color:#FF6B00">선택 하나로</span> 갈렸습니다</h2><p>같은 시기에 집을 샀어도<br><b>선택에 따라 결과는 완전히 달라졌습니다.</b></p></div><div class="sh-case"><p class="sh-tag">사례 1</p><p class="sh-k"><u>같은 4.5억</u>, 다른 동네</p><p class="sh-st">2017년, 같은 돈으로 집을 샀습니다</p><div class="sh-g"><div class="sh-c" style="border-color:#dc2626"><p class="sh-yr0">김과장</p><p class="sh-nm" style="color:#dc2626">분당</p><p class="sh-pr">매매가 <b>4.6억</b></p><p class="sh-sub">(서현 시범우성 · 26평)</p></div><div class="sh-c" style="border-color:#0055FF"><p class="sh-yr0">의사 강씨</p><p class="sh-nm" style="color:#0055FF">일산</p><p class="sh-pr">매매가 <b>4.5억</b></p><p class="sh-sub">(백석 요진와이시티 · 26평)</p></div></div><p class="sh-q">어떻게 됐을까요?</p><p class="sh-dots"><span>•</span><span>•</span><span>•</span></p><div class="sh-chw"><svg viewBox="0 0 360 210" width="100%"><line x1="62" x2="268" y1="184" y2="184" stroke="#e5e5e5"/><path class="sh-ln" pathLength="1" d="M62.0,160.2 C73.4,160.2 73.4,155.6 84.9,155.6 C96.3,155.6 96.3,151.1 107.8,151.1 C119.2,151.1 119.2,141.1 130.7,141.1 C142.1,141.1 142.1,125.4 153.6,125.4 C165.0,125.4 165.0,130.6 176.4,130.6 C187.9,130.6 187.9,138.0 199.3,138.0 C210.8,138.0 210.8,134.9 222.2,134.9 C233.7,134.9 233.7,135.1 245.1,135.1 C256.6,135.1 256.6,136.4 268.0,136.4" fill="none" stroke="#0055FF" stroke-width="5" stroke-linecap="round"/><path class="sh-ln" pathLength="1" d="M62.0,159.2 C73.4,159.2 73.4,145.9 84.9,145.9 C96.3,145.9 96.3,139.2 107.8,139.2 C119.2,139.2 119.2,129.7 130.7,129.7 C142.1,129.7 142.1,100.1 153.6,100.1 C165.0,100.1 165.0,92.5 176.4,92.5 C187.9,92.5 187.9,115.4 199.3,115.4 C210.8,115.4 210.8,98.7 222.2,98.7 C233.7,98.7 233.7,76.8 245.1,76.8 C256.6,76.8 256.6,36.3 268.0,36.3" fill="none" stroke="#dc2626" stroke-width="6" stroke-linecap="round"/><circle cx="62.0" cy="159.2" r="5" fill="#dc2626"/><circle cx="268.0" cy="36.3" r="7" fill="#dc2626"/><circle cx="62.0" cy="160.2" r="5" fill="#0055FF"/><circle cx="268.0" cy="136.4" r="7" fill="#0055FF"/><text x="52" y="152.7" font-size="15" font-weight="800" fill="#dc2626" text-anchor="end">4.6억</text><text x="52" y="176.7" font-size="15" font-weight="800" fill="#0055FF" text-anchor="end">4.5억</text><text x="280" y="38.3" font-size="21" font-weight="900" fill="#dc2626">17.5억</text><text x="280" y="53.3" font-size="11.5" font-weight="700" fill="#dc2626">분당</text><text x="280" y="138.4" font-size="21" font-weight="900" fill="#0055FF">7억</text><text x="280" y="153.4" font-size="11.5" font-weight="700" fill="#0055FF">일산</text><text x="62" y="204" font-size="12.5" fill="#999" text-anchor="middle">2017</text><text x="268" y="204" font-size="12.5" fill="#999" text-anchor="middle">2026</text></svg></div><p class="sh-src2">국토교통부 실거래가(매년 중위값)</p><div class="sh-res"><p>그 결과는?</p><b><u class="sh-hl sh-hl2">10.5억 차이</u></b></div></div><div class="sh-case"><p class="sh-tag">사례 2</p><p class="sh-k"><u>같은 동네</u>, 다른 단지</p><p class="sh-st">2016년, 바로 근처 단지를 샀습니다</p><div class="sh-g"><div class="sh-c" style="border-color:#dc2626"><p class="sh-yr0">2016년</p><p class="sh-nm" style="color:#dc2626">신정7단지</p><p class="sh-pr">매매가 <b>4.6억</b></p><p class="sh-sub">(풍덕천동 · 33평)</p></div><div class="sh-c" style="border-color:#0055FF"><p class="sh-yr0">2016년</p><p class="sh-nm" style="color:#0055FF">동일하이빌</p><p class="sh-pr">매매가 <b>4.3억</b></p><p class="sh-sub">(신봉동 · 34평)</p></div></div><p class="sh-q">어떻게 됐을까요?</p><p class="sh-dots"><span>•</span><span>•</span><span>•</span></p><div class="sh-chw"><svg viewBox="0 0 360 210" width="100%"><line x1="62" x2="268" y1="184" y2="184" stroke="#e5e5e5"/><path class="sh-ln" pathLength="1" d="M62.0,155.3 C72.3,155.3 72.3,155.8 82.6,155.8 C92.9,155.8 92.9,154.7 103.2,154.7 C113.5,154.7 113.5,152.8 123.8,152.8 C134.1,152.8 134.1,127.9 144.4,127.9 C154.7,127.9 154.7,115.5 165.0,115.5 C175.3,115.5 175.3,114.6 185.6,114.6 C195.9,114.6 195.9,129.2 206.2,129.2 C216.5,129.2 216.5,121.7 226.8,121.7 C237.1,121.7 237.1,117.1 247.4,117.1 C257.7,117.1 257.7,109.2 268.0,109.2" fill="none" stroke="#0055FF" stroke-width="5" stroke-linecap="round"/><path class="sh-ln" pathLength="1" d="M62.0,151.6 C72.3,151.6 72.3,150.6 82.6,150.6 C92.9,150.6 92.9,138.6 103.2,138.6 C113.5,138.6 113.5,134.2 123.8,134.2 C134.1,134.2 134.1,115.0 144.4,115.0 C154.7,115.0 154.7,93.3 165.0,93.3 C175.3,93.3 175.3,96.9 185.6,96.9 C195.9,96.9 195.9,109.2 206.2,109.2 C216.5,109.2 216.5,97.4 226.8,97.4 C237.1,97.4 237.1,79.3 247.4,79.3 C257.7,79.3 257.7,34.5 268.0,34.5" fill="none" stroke="#dc2626" stroke-width="6" stroke-linecap="round"/><circle cx="62.0" cy="151.6" r="5" fill="#dc2626"/><circle cx="268.0" cy="34.5" r="7" fill="#dc2626"/><circle cx="62.0" cy="155.3" r="5" fill="#0055FF"/><circle cx="268.0" cy="109.2" r="7" fill="#0055FF"/><text x="52" y="146.5" font-size="15" font-weight="800" fill="#dc2626" text-anchor="end">4.6억</text><text x="52" y="170.5" font-size="15" font-weight="800" fill="#0055FF" text-anchor="end">4.3억</text><text x="280" y="36.5" font-size="21" font-weight="900" fill="#dc2626">14억</text><text x="280" y="51.5" font-size="11.5" font-weight="700" fill="#dc2626">신정7단지</text><text x="280" y="111.2" font-size="21" font-weight="900" fill="#0055FF">8억</text><text x="280" y="126.2" font-size="11.5" font-weight="700" fill="#0055FF">동일하이빌</text><text x="62" y="204" font-size="12.5" fill="#999" text-anchor="middle">2016</text><text x="268" y="204" font-size="12.5" fill="#999" text-anchor="middle">2026</text></svg></div><p class="sh-src2">국토교통부 실거래가(매년 중위값)</p><div class="sh-res"><p>그 결과는?</p><b><u class="sh-hl sh-hl2">6억 차이</u></b></div></div><div class="sh-case"><p class="sh-tag">사례 3</p><p class="sh-k"><u>같은 아파트</u>, 매수 vs 전세</p><p class="sh-st">2019년, 5.8억으로 같은 아파트에 들어갔습니다</p><div class="sh-g"><div class="sh-c" style="border-color:#dc2626"><p class="sh-yr0">2019년</p><p class="sh-nm" style="color:#dc2626">매수</p><p class="sh-pr">매매가 <b>11.5억</b></p><p class="sh-sub">(마포래미안푸르지오 · 24평)</p></div><div class="sh-c" style="border-color:#0055FF"><p class="sh-yr0">2019년</p><p class="sh-nm" style="color:#0055FF">전세</p><p class="sh-pr">전세가 <b>5.8억</b></p><p class="sh-sub">(마포래미안푸르지오 · 24평)</p></div></div><p class="sh-q">어떻게 됐을까요?</p><p class="sh-dots"><span>•</span><span>•</span><span>•</span></p><div class="sh-chw"><svg viewBox="0 0 360 210" width="100%"><line x1="62" x2="268" y1="184" y2="184" stroke="#e5e5e5"/><path class="sh-ln" pathLength="1" d="M62.0,151.6 C165.0,151.6 165.0,151.6 268.0,151.6" fill="none" stroke="#0055FF" stroke-width="5" stroke-linecap="round"/><path class="sh-ln" pathLength="1" d="M62.0,151.6 C76.7,151.6 76.7,125.0 91.4,125.0 C106.1,125.0 106.1,100.1 120.9,100.1 C135.6,100.1 135.6,111.1 150.3,111.1 C165.0,111.1 165.0,128.5 179.7,128.5 C194.4,128.5 194.4,111.1 209.1,111.1 C223.9,111.1 223.9,67.7 238.6,67.7 C253.3,67.7 253.3,33.6 268.0,33.6" fill="none" stroke="#dc2626" stroke-width="6" stroke-linecap="round"/><circle cx="62.0" cy="151.6" r="5" fill="#dc2626"/><circle cx="268.0" cy="33.6" r="7" fill="#dc2626"/><circle cx="62.0" cy="151.6" r="5" fill="#0055FF"/><circle cx="268.0" cy="151.6" r="7" fill="#0055FF"/><text x="52" y="156.6" font-size="15" font-weight="800" fill="#666" text-anchor="end">5.8억</text><text x="280" y="35.6" font-size="21" font-weight="900" fill="#dc2626">16억</text><text x="280" y="50.6" font-size="11.5" font-weight="700" fill="#dc2626">매수 자산</text><text x="280" y="153.6" font-size="21" font-weight="900" fill="#0055FF">5.8억</text><text x="280" y="168.6" font-size="11.5" font-weight="700" fill="#0055FF">전세 자산</text><text x="62" y="204" font-size="12.5" fill="#999" text-anchor="middle">2019</text><text x="268" y="204" font-size="12.5" fill="#999" text-anchor="middle">2026</text></svg></div><p class="sh-src2">국토교통부 실거래가(매년 중위값)</p><div class="sh-res"><p>그 결과는?</p><b><u class="sh-hl sh-hl2">자산 10.2억 차이</u></b></div></div></div>
 
-      <script>(function(){function go(){var root=document.querySelector('.sh-w');if(!root)return;root.classList.add('sh-js');
+      <script>;(function(){function go(){var root=document.querySelector('.sh-w');if(!root)return;root.classList.add('sh-js');
 var c=[].slice.call(root.querySelectorAll('.sh-chw')),r=[].slice.call(root.querySelectorAll('.sh-res'));
 if(!('IntersectionObserver' in window)){c.forEach(function(e){e.classList.add('sh-on','sh-done')});r.forEach(function(e){e.classList.add('sh-on')});return}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){var t=e.target;
@@ -1904,9 +1905,9 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
       <!-- 자기 소개 (시안 A 형식) -->
       <div class="consultant-namecard mb-10" data-reveal>
         <div class="flex items-center gap-4">
-          <div class="consultant-avatar">우재</div>
+          <img src="https://lst9485-alt.github.io/cdn-assets/brand/logo-ring-orange.png" alt="우리동네재테크 로고" width="72" height="72" class="h-[72px] w-[72px] shrink-0 rounded-full bg-white object-contain shadow-[0_10px_24px_rgba(255,107,0,0.18)]">
           <div>
-            <p class="font-display text-xl md:text-2xl font-black text-brand-dark whitespace-nowrap">우리동네 재테크</p>
+            <p class="font-display text-xl md:text-2xl font-black text-brand-dark whitespace-nowrap">우재</p>
             <p class="mt-1 text-sm font-bold text-gray-500 word-keep">투자 법인 대표 · 실전 투자자</p>
           </div>
         </div>
@@ -2098,25 +2099,25 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
 	      <div class="mb-8 text-center" data-reveal>
 		        <p class="inline-block text-center rounded-full border border-brand-orange/25 bg-white px-5 py-2 text-sm font-bold text-gray-700 shadow-sm word-keep">코칭 A와 B는 동행임장 1회 제외 <span class="mx-1 text-brand-orange whitespace-nowrap">100% 동일</span>합니다.</p>
 	      </div>
-	      <div class="mx-auto max-w-xl rounded-3xl bg-white px-5 pt-8 pb-6 md:px-10 md:pt-12 md:pb-10 text-center shadow-[0_10px_30px_rgba(0,0,0,0.06)]" data-reveal="scale">
+	      <div class="mx-auto max-w-xl md:max-w-3xl rounded-3xl bg-white px-5 pt-8 pb-6 md:px-12 md:pt-14 md:pb-12 text-center shadow-[0_10px_30px_rgba(0,0,0,0.06)]" data-reveal="scale">
         <p class="text-base md:text-lg font-bold text-gray-500 word-keep">사고 후회하지 말고, 사기 전에!</p>
         <p class="mt-2.5 mb-6 text-3xl md:text-[38px] lg:text-[44px] font-display font-black text-brand-dark word-keep leading-[1.28]">내 예산에 맞는<br><span class="text-brand-orange">최선의 선택</span></p>
-        <div class="border-t border-gray-100 text-left">
+        <div class="border-t border-gray-100 text-left md:grid md:grid-cols-2 md:gap-x-8">
           <div class="flex items-center gap-3 border-b border-gray-100 px-1 py-3.5">
-            <span class="inline-flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-xl bg-[#FFF1E6]"><iconify-icon icon="solar:wallet-money-linear" class="text-xl text-brand-orange"></iconify-icon></span>
-            <div><p class="text-[15.5px] font-extrabold text-gray-900">예산 분석</p><p class="mt-px text-[13px] text-gray-500">종잣돈·대출 체크</p></div>
+            <span class="inline-flex h-[38px] w-[38px] md:h-12 md:w-12 shrink-0 items-center justify-center rounded-xl bg-[#FFF1E6]"><iconify-icon icon="solar:wallet-money-linear" class="text-xl text-brand-orange"></iconify-icon></span>
+            <div><p class="text-[15.5px] md:text-lg font-extrabold text-gray-900">예산 분석</p><p class="mt-px text-[13px] md:text-[15px] text-gray-500">종잣돈·대출 체크</p></div>
           </div>
           <div class="flex items-center gap-3 border-b border-gray-100 px-1 py-3.5">
-            <span class="inline-flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-xl bg-[#FFF1E6]"><iconify-icon icon="solar:hand-money-linear" class="text-xl text-brand-orange"></iconify-icon></span>
-            <div><p class="text-[15.5px] font-extrabold text-gray-900">대출 가이드</p><p class="mt-px text-[13px] text-gray-500">어떤 조합이 유리한지</p></div>
+            <span class="inline-flex h-[38px] w-[38px] md:h-12 md:w-12 shrink-0 items-center justify-center rounded-xl bg-[#FFF1E6]"><iconify-icon icon="solar:hand-money-linear" class="text-xl text-brand-orange"></iconify-icon></span>
+            <div><p class="text-[15.5px] md:text-lg font-extrabold text-gray-900">대출 가이드</p><p class="mt-px text-[13px] md:text-[15px] text-gray-500">어떤 조합이 유리한지</p></div>
           </div>
           <div class="flex items-center gap-3 border-b border-gray-100 px-1 py-3.5">
-            <span class="inline-flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-xl bg-[#FFF1E6]"><iconify-icon icon="solar:map-point-linear" class="text-xl text-brand-orange"></iconify-icon></span>
-            <div><p class="text-[15.5px] font-extrabold text-gray-900">지역·단지</p><p class="mt-px text-[13px] text-gray-500">내 상황에 맞는 곳</p></div>
+            <span class="inline-flex h-[38px] w-[38px] md:h-12 md:w-12 shrink-0 items-center justify-center rounded-xl bg-[#FFF1E6]"><iconify-icon icon="solar:map-point-linear" class="text-xl text-brand-orange"></iconify-icon></span>
+            <div><p class="text-[15.5px] md:text-lg font-extrabold text-gray-900">지역·단지</p><p class="mt-px text-[13px] md:text-[15px] text-gray-500">내 상황에 맞는 곳</p></div>
           </div>
           <div class="flex items-center gap-3 border-b border-gray-100 px-1 py-3.5">
-            <span class="inline-flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-xl bg-[#FFF1E6]"><iconify-icon icon="solar:calendar-linear" class="text-xl text-brand-orange"></iconify-icon></span>
-            <div><p class="text-[15.5px] font-extrabold text-gray-900">매수 시기</p><p class="mt-px text-[13px] text-gray-500">언제 사면 좋을지</p></div>
+            <span class="inline-flex h-[38px] w-[38px] md:h-12 md:w-12 shrink-0 items-center justify-center rounded-xl bg-[#FFF1E6]"><iconify-icon icon="solar:calendar-linear" class="text-xl text-brand-orange"></iconify-icon></span>
+            <div><p class="text-[15.5px] md:text-lg font-extrabold text-gray-900">매수 시기</p><p class="mt-px text-[13px] md:text-[15px] text-gray-500">언제 사면 좋을지</p></div>
           </div>
         </div>
         <div class="mt-5 rounded-2xl bg-[#F7F5F1] p-4">

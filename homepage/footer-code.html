@@ -1,5 +1,5 @@
 <script>
-    (function(){
+    ;(function(){
       function start(){
         var el=document.querySelector('.hero-rot-w'); if(!el||el.dataset.on) return; el.dataset.on='1';
         if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -13,8 +13,9 @@
     </script>
 
 <script>
-      (function(init){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init(); })(function(){
-        document.querySelectorAll('.review-card-clickable').forEach(function(card){
+      ;(function(init){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init(); })(function(){
+        document.querySelectorAll('.review-card-clickable').forEach(function(card0){
+          var card = card0.cloneNode(true); card0.parentNode.replaceChild(card, card0); // 예전 코드가 붙인 것과 겹치지 않게 새로 붙임
           card.addEventListener('click', function(){
             var body = card.querySelector('.review-body');
             var more = card.querySelector('.review-more');
@@ -30,7 +31,7 @@
       });
     </script>
 
-<script>(function(){function go(){var root=document.querySelector('.sh-w');if(!root)return;root.classList.add('sh-js');
+<script>;(function(){function go(){var root=document.querySelector('.sh-w');if(!root)return;root.classList.add('sh-js');
 var c=[].slice.call(root.querySelectorAll('.sh-chw')),r=[].slice.call(root.querySelectorAll('.sh-res'));
 if(!('IntersectionObserver' in window)){c.forEach(function(e){e.classList.add('sh-on','sh-done')});r.forEach(function(e){e.classList.add('sh-on')});return}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){var t=e.target;
