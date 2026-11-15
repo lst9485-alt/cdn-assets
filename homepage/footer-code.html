@@ -1,5 +1,19 @@
 <script>
-      document.addEventListener('DOMContentLoaded', function(){
+    (function(){
+      function start(){
+        var el=document.querySelector('.hero-rot-w'); if(!el||el.dataset.on) return; el.dataset.on='1';
+        if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var ex=['분당','일산','마포','수원','창원','청주','천안','전주','춘천','구미','포항'];
+        for(var j=ex.length-1;j>0;j--){var r=Math.floor(Math.random()*(j+1)),t=ex[j];ex[j]=ex[r];ex[r]=t;}
+        var ws=['여기','서울','부산','대구','인천','광주','대전','울산'].concat(ex),i=0;
+        setInterval(function(){el.classList.add('is-out');setTimeout(function(){i=(i+1)%ws.length;el.textContent=ws[i];el.classList.remove('is-out');},300);},1800);
+      }
+      if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+    })();
+    </script>
+
+<script>
+      (function(init){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init(); })(function(){
         document.querySelectorAll('.review-card-clickable').forEach(function(card){
           card.addEventListener('click', function(){
             var body = card.querySelector('.review-body');
@@ -15,6 +29,16 @@
         });
       });
     </script>
+
+<script>(function(){function go(){var root=document.querySelector('.sh-w');if(!root)return;root.classList.add('sh-js');
+var c=[].slice.call(root.querySelectorAll('.sh-chw')),r=[].slice.call(root.querySelectorAll('.sh-res'));
+if(!('IntersectionObserver' in window)){c.forEach(function(e){e.classList.add('sh-on','sh-done')});r.forEach(function(e){e.classList.add('sh-on')});return}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){var t=e.target;
+ if(e.intersectionRatio>=0.4){if(!t.classList.contains('sh-on')){t.classList.add('sh-on');t._t=setTimeout(function(){t.classList.add('sh-done')},2200)}}
+ else if(!e.isIntersecting){clearTimeout(t._t);t.classList.remove('sh-on','sh-done')}})},{threshold:[0,0.4]});
+var io2=new IntersectionObserver(function(es){es.forEach(function(e){
+ if(e.intersectionRatio>=0.9)e.target.classList.add('sh-on');else if(!e.isIntersecting)e.target.classList.remove('sh-on')})},{threshold:[0,0.9]});
+c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();})();</script>
 
 <script>
 // 아임웹 설정 → SEO → 공통 코드 삽입 → Footer Code
