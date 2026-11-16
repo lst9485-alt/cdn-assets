@@ -174,10 +174,12 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
     return modal;
   }
 
-  // 모달 안 계좌번호 복사 버튼
+  // 모달 안 계좌번호 복사 버튼 — 먼저 받아서(capture) 아임웹 꼬리말에 남은 옛 복사 코드가 또 돌지 않게 막음 (2026-11-16 '복사됨'에서 안 돌아오던 문제)
   document.addEventListener('click', function(e) {
     var btn = e.target.closest('#successModal .copy-btn');
     if (!btn) return;
+    e.stopPropagation();
+    if (btn.classList.contains('is-copied')) return;
     var text = btn.getAttribute('data-copy') || '';
     var done = function() {
       var orig = btn.innerHTML;
@@ -201,7 +203,7 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
       try { document.execCommand('copy'); done(); } catch (err) {}
       document.body.removeChild(ta);
     }
-  });
+  }, true);
 
 	  // 폼 제출
 	  function submitForm() {
