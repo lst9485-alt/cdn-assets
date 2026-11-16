@@ -933,7 +933,7 @@
     @keyframes qnaDot { 0%, 33% { background:#E2570A; width:14px; } 34%, 100% { background:#E5DED4; width:6px; } }
     @media (prefers-reduced-motion: reduce) { .qna-slide, .qna-dots i { animation:none; } .qna-slide:first-child { opacity:1; } }
     /* 손으로 좌우로 밀면 저절로 넘김을 멈추고 고른 질문을 보여 줌 (2026-11-16) */
-    .qna-slides { touch-action:pan-y; cursor:grab; }
+    .qna-slides { touch-action:pan-y; cursor:grab; -webkit-user-select:none; user-select:none; }
     .qna-manual .qna-slide { animation:none; opacity:0; transform:none; transition:opacity .25s ease; pointer-events:none; }
     .qna-manual .qna-slide.qna-on { opacity:1; pointer-events:auto; }
     .qna-manual .qna-dots i { animation:none; background:#E5DED4; width:6px; transition:width .2s ease, background .2s ease; }
