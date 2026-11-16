@@ -1,4 +1,6 @@
 <style id="narrow-fix">
+      /* 아임웹이 body에 세로 스크롤(overflow-y:scroll)을 걸어, 컴퓨터(윈도)에서 오른쪽 스크롤바가 두 줄로 보였음 → body는 스크롤 칸이 안 되게 (2026-11-16) */
+      body{overflow-x:clip!important;overflow-y:visible!important}
     /* 휴대폰 글자 크기를 키우면 화면 폭이 280px 안팎으로 좁아진다 → 넘치는 곳만 줄임 (아임웹은 머리말 style을 안 쓰므로 몸통에 둠) */
     /* 아임웹이 휴대폰에서 양옆을 31px씩 비움 → 우리 칸은 화면 끝까지 꽉 차게 */
     @media (max-width:767px){
