@@ -1171,6 +1171,11 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
 </style>
 
 <style id="narrow-fix">
+      /* "제가 직접 겪은 일입니다" 주황 줄 — 화면에 들어오면 왼쪽에서 오른쪽으로 한 번만 그어짐 (2026-11-16) */
+      .exp-line{background:linear-gradient(#FF6B00,#FF6B00) no-repeat left bottom/100% 2px;padding-bottom:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+      .exp-js .exp-line{background-size:0% 2px}
+      .exp-js .exp-line.exp-on{background-size:100% 2px;transition:background-size .9s ease .2s}
+      @media (prefers-reduced-motion:reduce){.exp-js .exp-line{background-size:100% 2px}}
       /* 휴대폰(400 미만): 맨 아래 카카오톡 채널 단추가 검정 상자 끝에 닿고 "카카오톡 / 채널"이 두 줄로 쪼개지던 것 (2026-11-16) */
       @media (max-width:400px){
         .kakao-channel-pill{flex-wrap:nowrap!important;padding:4px 4px 4px 12px!important}
@@ -1504,7 +1509,19 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
 <div class="max-w-4xl mx-auto">
 <div class="story-real-card p-7 md:p-10 mb-20" data-reveal="left">
 <div class="story-intro-box mb-8 p-6 md:p-8">
-<p class="text-white font-display font-bold text-lg mb-6"><span style="border-bottom:2px solid #FF6B00;padding-bottom:2px">제가 직접 겪은 일입니다</span></p>
+<p class="text-white font-display font-bold text-lg mb-6"><span class="exp-line">제가 직접 겪은 일입니다</span></p>
+<script>
+;(function(){
+  var el = document.querySelector('.exp-line');
+  if (!el || el.dataset.exp || !('IntersectionObserver' in window)) return;
+  el.dataset.exp = '1';
+  document.documentElement.classList.add('exp-js');
+  var io = new IntersectionObserver(function(es) {
+    es.forEach(function(e) { if (e.isIntersecting) { el.classList.add('exp-on'); io.disconnect(); } });
+  }, { threshold: 0.6 });
+  io.observe(el);
+})();
+</script>
 <p class="text-2xl md:text-3xl font-display font-black leading-snug word-keep mb-8">처음 집을 샀습니다</p>
 <div class="space-y-3" data-stagger="">
 <p class="text-lg md:text-xl text-gray-300 word-keep">공부도 했고, 좋은 선택이라고 확신했습니다.</p>
@@ -1947,7 +1964,7 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
 <li><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon><span>투자업 경력 10년+</span></li>
 <li><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon><span>지난 2년간 아파트 매매 5건</span></li>
 <li><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon><span>강남3구 1채 + 서울 상급지 1채 + α</span></li>
-<li><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon><span>코칭 200건+ · 만족도 4.97점</span></li>
+<li><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon><span>코칭 200건+, 만족도 4.97점</span></li>
 </ul>
 </div>
 <!-- 실적 카드 + 이미지 (모자이크 처리) -->

@@ -43,6 +43,19 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
 
 <script>
 ;(function(){
+  var el = document.querySelector('.exp-line');
+  if (!el || el.dataset.exp || !('IntersectionObserver' in window)) return;
+  el.dataset.exp = '1';
+  document.documentElement.classList.add('exp-js');
+  var io = new IntersectionObserver(function(es) {
+    es.forEach(function(e) { if (e.isIntersecting) { el.classList.add('exp-on'); io.disconnect(); } });
+  }, { threshold: 0.6 });
+  io.observe(el);
+})();
+</script>
+
+<script>
+;(function(){
   var card = document.querySelector('.qna-memo-card');
   if (!card || card.dataset.swipe) return;
   card.dataset.swipe = '1';
