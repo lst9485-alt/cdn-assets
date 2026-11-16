@@ -1297,7 +1297,7 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
       function start(){
         var el=document.querySelector('.hero-rot-w'); if(!el||el.dataset.on) return; el.dataset.on='1';
         if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        var ex=['분당','일산','마포','수원','창원','청주','천안','전주','춘천','구미','포항'];
+        var ex=['분당','일산','마포','수원','창원','청주','천안','전주','구미','포항'];
         for(var j=ex.length-1;j>0;j--){var r=Math.floor(Math.random()*(j+1)),t=ex[j];ex[j]=ex[r];ex[r]=t;}
         var ws=['여기','서울','부산','대구','인천','광주','대전','울산'].concat(ex),i=0;
         setInterval(function(){el.classList.add('is-out');setTimeout(function(){i=(i+1)%ws.length;el.textContent=ws[i];el.classList.remove('is-out');},180);},1100);
