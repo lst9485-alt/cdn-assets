@@ -465,11 +465,46 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
   </script>
 
 <script>
+  ;(function(){
+    var ids = ['step3DemoSheet','step3DemoData'];
+    var sent = false;
+    function report(ok, why) {
+      if (sent) return; sent = true;
+      try { if (window.gtag) gtag('event', ok ? 'demo_video_play' : 'demo_video_fallback', { reason: why || '' }); } catch (e) {}
+    }
+    function toGif(v, why) {
+      if (!v || v.tagName !== 'VIDEO' || !v.parentNode) return;
+      var img = document.createElement('img');
+      img.id = v.id; img.className = v.className; img.alt = v.getAttribute('aria-label') || '';
+      img.decoding = 'async'; img.src = v.getAttribute('data-gif');
+      v.parentNode.replaceChild(img, v);
+      report(false, why);
+    }
+    function start() {
+      ids.forEach(function(id) {
+        var v = document.getElementById(id);
+        if (!v || v.tagName !== 'VIDEO' || v.dataset.started) return;
+        v.dataset.started = '1';
+        v.addEventListener('error', function(){ toGif(v, 'error'); });
+        var p = v.play();
+        if (p && p.then) p.then(function(){ report(true); }).catch(function(e){ toGif(v, (e && e.name) || 'blocked'); });
+      });
+    }
+    var clip = document.getElementById('step3DemoClip');
+    if (!clip) return;
+    if (!('IntersectionObserver' in window)) { start(); return; }
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { io.disconnect(); start(); } }); }, { rootMargin: '400px 0px' });
+    io.observe(clip);
+  })();
+  </script>
+
+<script>
                 (function(){
                   var clip = document.getElementById('step3DemoClip');
-                  var sheet = document.getElementById('step3DemoSheet');
-                  var data = document.getElementById('step3DemoData');
-                  if (!clip || !sheet || !data) return;
+                  if (!clip) return;
+                  /* 동영상이 재생 안 돼 GIF로 바뀔 수 있어서 매번 다시 찾는다 (2026-11-16) */
+                  var sheet = { classList: { add: function(c){ var e=document.getElementById('step3DemoSheet'); if(e) e.classList.add(c); }, remove: function(c){ var e=document.getElementById('step3DemoSheet'); if(e) e.classList.remove(c); } } };
+                  var data = { classList: { add: function(c){ var e=document.getElementById('step3DemoData'); if(e) e.classList.add(c); }, remove: function(c){ var e=document.getElementById('step3DemoData'); if(e) e.classList.remove(c); } } };
                   var SHEET_MS = 5400;
                   var DATA_MS = 6400;
                   var state = 0; // 0: sheet, 1: data
