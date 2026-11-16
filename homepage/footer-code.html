@@ -51,8 +51,9 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
   var dots = card.querySelectorAll('.qna-dots i');
   if (slides.length < 2) return;
   function visible() {
-    for (var k = 0; k < slides.length; k++) if (parseFloat(getComputedStyle(slides[k]).opacity) > 0.5) return k;
-    return 0;
+    var best = 0, top = -1;
+    for (var k = 0; k < slides.length; k++) { var o = parseFloat(getComputedStyle(slides[k]).opacity); if (o > top) { top = o; best = k; } }
+    return best;
   }
   var cur = -1;
   function show(n) {

@@ -934,10 +934,10 @@
     @media (prefers-reduced-motion: reduce) { .qna-slide, .qna-dots i { animation:none; } .qna-slide:first-child { opacity:1; } }
     /* 손으로 좌우로 밀면 저절로 넘김을 멈추고 고른 질문을 보여 줌 (2026-11-16) */
     .qna-slides { touch-action:pan-y; cursor:grab; -webkit-user-select:none; user-select:none; }
-    .qna-manual .qna-slide { animation:none; opacity:0; transform:none; transition:opacity .25s ease; pointer-events:none; }
-    .qna-manual .qna-slide.qna-on { opacity:1; pointer-events:auto; }
-    .qna-manual .qna-dots i { animation:none; background:#E5DED4; width:6px; transition:width .2s ease, background .2s ease; }
-    .qna-manual .qna-dots i.qna-on { background:#E2570A; width:14px; }
+    .qna-memo-card.qna-manual .qna-slide { animation:none; opacity:0; transform:none; transition:opacity .25s ease; pointer-events:none; }
+    .qna-memo-card.qna-manual .qna-slide.qna-on { opacity:1; pointer-events:auto; }
+    .qna-memo-card.qna-manual .qna-dots i { animation:none; background:#E5DED4; width:6px; transition:width .2s ease, background .2s ease; }
+    .qna-memo-card.qna-manual .qna-dots i.qna-on { background:#E2570A; width:14px; }
     .care-chat-card {
       background: #F3EEE7;
       border-radius: 18px;
@@ -1802,8 +1802,9 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
   var dots = card.querySelectorAll('.qna-dots i');
   if (slides.length < 2) return;
   function visible() {
-    for (var k = 0; k < slides.length; k++) if (parseFloat(getComputedStyle(slides[k]).opacity) > 0.5) return k;
-    return 0;
+    var best = 0, top = -1;
+    for (var k = 0; k < slides.length; k++) { var o = parseFloat(getComputedStyle(slides[k]).opacity); if (o > top) { top = o; best = k; } }
+    return best;
   }
   var cur = -1;
   function show(n) {
