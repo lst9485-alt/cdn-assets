@@ -1188,6 +1188,22 @@
 <body class="bg-white text-brand-dark font-sans">
 
   <style id="narrow-fix">
+      /* 투자사례·계약서 카드: 사진 위에 흰 글씨, 가격 줄은 폭에 따라 글자가 저절로 줄어 한 줄 (2026-11-16) */
+      .iv-card{position:relative;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);border:1px solid #f3f4f6;display:flex;flex-direction:column}
+      .iv-card img{display:block;width:100%;height:200px;object-fit:cover}
+      .iv-cap{position:absolute;left:0;right:0;top:0;height:200px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 18px 14px;background:linear-gradient(transparent 45%,rgba(0,0,0,.72));color:#fff;pointer-events:none}
+      .iv-t{font-size:18px;font-weight:900;line-height:1.25}
+      .iv-d{font-size:12.5px;font-weight:600;opacity:.8;margin-top:3px}
+      .iv-row{display:flex;align-items:center;justify-content:space-between;gap:clamp(4px,2vw,8px);padding:14px clamp(10px,4vw,16px);white-space:nowrap;margin-top:auto}
+      .iv-p{display:flex;align-items:center;gap:clamp(3px,1.6vw,7px);font-family:GmarketSans,Pretendard,sans-serif}
+      .iv-from{font-size:clamp(13px,4.4vw,17px);font-weight:700;color:#9ca3af}
+      .iv-ar{color:#FF6B00;font-weight:900;font-size:clamp(13px,4vw,16px)}
+      .iv-to{font-size:clamp(18px,6.2vw,24px);font-weight:900;color:#141414}
+      .iv-gain{font-family:GmarketSans,Pretendard,sans-serif;font-size:clamp(12px,4.1vw,16px);font-weight:900;color:#dc2626;background:#FEF2F2;border-radius:10px;padding:clamp(5px,1.8vw,7px) clamp(7px,2.6vw,10px)}
+      @media (min-width:768px){.iv-from{font-size:17px}.iv-ar{font-size:16px}.iv-to{font-size:24px}.iv-gain{font-size:16px;padding:7px 10px}.iv-row{gap:8px;padding:14px 16px}}
+      .iv-sum-l{font-size:13px;font-weight:700;color:#6b7280;margin-bottom:4px}
+      .iv-sum{font-family:GmarketSans,Pretendard,sans-serif;font-size:clamp(20px,6.2vw,26px);font-weight:900;color:#141414}
+      .iv-sum-hl{color:#FF6B00;background:linear-gradient(transparent 60%,rgba(255,107,0,.25) 60%)}
       /* "제가 직접 겪은 일입니다" 주황 줄 — 화면에 들어오면 왼쪽에서 오른쪽으로 한 번만 그어짐 (2026-11-16) */
       .exp-line{background:linear-gradient(#FF6B00,#FF6B00) no-repeat left bottom/100% 2px;padding-bottom:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
       .exp-js .exp-line{background-size:0% 2px}
@@ -2024,51 +2040,34 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
           <li><iconify-icon icon="solar:check-circle-bold-duotone"></iconify-icon><span>코칭 200건+, 만족도 4.97점</span></li>
         </ul>
       </div>
-      <!-- 실적 카드 + 이미지 (모자이크 처리) -->
+      <!-- 실적 카드 + 이미지 (모자이크 처리, 2026-11-16 사진 위 글씨로 통일) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 items-stretch" data-reveal>
-        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/mokdong-buy.png" alt="목동신시가지 매수 계약서" class="w-full h-[200px] object-cover" loading="lazy" decoding="async">
-          <div class="p-6 text-center flex-1">
-            <p class="text-sm text-gray-400 mb-2">24년 12월 매수 · 재건축 · 서울</p>
-            <div class="flex items-center justify-center gap-3 mb-2">
-              <span class="text-xl font-bold text-gray-400">15.1억</span>
-              <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-2xl"></iconify-icon>
-              <span class="text-3xl font-display font-black text-brand-dark">25억</span>
-            </div>
-            <div class="inline-block bg-red-50 text-red-600 px-4 py-2 rounded-xl"><p class="text-xl font-display font-black">+9.9억 상승 ↑</p></div>
-          </div>
+        <div class="iv-card">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/mokdong-buy.png" alt="목동신시가지 매수 계약서" loading="lazy" decoding="async">
+          <div class="iv-cap"><p class="iv-t">서울 재건축</p><p class="iv-d">24년 12월 매수</p></div>
+          <div class="iv-row"><p class="iv-p"><span class="iv-from">15.1억</span><span class="iv-ar">→</span><span class="iv-to">25억</span></p><p class="iv-gain">+9.9억 상승 ↑</p></div>
         </div>
-        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
-          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/garak-buy.png" alt="가락쌍용 매수 계약서" class="w-full h-[200px] object-cover" loading="lazy" decoding="async">
-          <div class="p-6 text-center flex-1">
-            <p class="text-sm text-gray-400 mb-2">24년 9월 매수 · 아파트 · 송파구</p>
-            <div class="flex items-center justify-center gap-3 mb-2">
-              <span class="text-xl font-bold text-gray-400">11.4억</span>
-              <iconify-icon icon="solar:arrow-right-bold" class="text-brand-orange text-2xl"></iconify-icon>
-              <span class="text-2xl min-[340px]:text-3xl font-display font-black text-brand-dark">20.1억</span>
-            </div>
-            <div class="inline-block bg-red-50 text-red-600 px-4 py-2 rounded-xl"><p class="text-xl font-display font-black">+8.7억 상승 ↑</p></div>
-          </div>
+        <div class="iv-card">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/garak-buy.png" alt="가락쌍용 매수 계약서" loading="lazy" decoding="async">
+          <div class="iv-cap"><p class="iv-t">송파구 아파트</p><p class="iv-d">24년 9월 매수</p></div>
+          <div class="iv-row"><p class="iv-p"><span class="iv-from">11.4억</span><span class="iv-ar">→</span><span class="iv-to">20.1억</span></p><p class="iv-gain">+8.7억 상승 ↑</p></div>
         </div>
       </div>
       <div class="text-center mb-10" data-reveal="scale">
-        <div class="gain-badge inline-flex items-center gap-3 rounded-full px-6 py-3">
-          <iconify-icon icon="solar:graph-up-bold" class="text-2xl text-brand-orange"></iconify-icon>
-          <p class="text-lg md:text-xl font-display font-black text-brand-dark">
-            1년 만에 <span class="text-brand-orange">+18.6억</span> 상승
-          </p>
-        </div>
+        <p class="iv-sum-l">두 건 합계</p>
+        <p class="iv-sum">1년 만에 <span class="iv-sum-hl">+18.6억</span> 상승</p>
       </div>
       <!-- 추가 실적 이미지 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10" data-reveal>
-        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/landing-0.png" alt="최근 추가거래 총5건" class="w-full h-[260px] object-cover hover:scale-[1.02] transition-transform" loading="lazy" decoding="async">
-          <div class="p-4 text-center"><p class="text-sm text-gray-500 font-medium">지난 2년간 아파트 매매 5건</p></div>
+        <div class="iv-card">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/landing-0.png" alt="최근 추가거래 총5건" loading="lazy" decoding="async">
+          <div class="iv-cap"><p class="iv-t">지난 2년간 아파트 매매 5건</p></div>
         </div>
-        <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/landing-3.png" alt="매매 계약서 일부" class="w-full h-[260px] object-cover hover:scale-[1.02] transition-transform" loading="lazy" decoding="async">
-          <div class="p-4 text-center"><p class="text-sm text-gray-500 font-medium">매매 계약서 일부</p></div>
+        <div class="iv-card">
+          <img src="https://raw.githubusercontent.com/lst9485-alt/cdn-assets/main/homepage/landing-3.png" alt="매매 계약서 일부" loading="lazy" decoding="async">
+          <div class="iv-cap"><p class="iv-t">매매 계약서 일부</p></div>
         </div>
+      </div>
       </div>
       <!-- 차별화 -->
 	      <div class="relative text-center pt-8" data-reveal>
@@ -2177,6 +2176,7 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
 	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>상담 리포트 + 솔루션 요약</li>
 	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>상담 녹음 스크립트</li>
 	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>자산 관리&amp;매수 플래너</li>
+	            <li class="flex items-center gap-3 word-keep"><iconify-icon icon="solar:check-circle-bold" class="text-brand-orange text-xl flex-shrink-0"></iconify-icon>회원 전용 자료실</li>
 	          </ul>
 	          <p class="mt-6 rounded-xl border border-brand-orange/25 bg-orange-50 px-3 min-[375px]:px-4 sm:px-5 py-3.5 text-[13px] min-[375px]:text-[14px] sm:text-[15px] leading-relaxed text-gray-700 word-keep">상담부터 질의응답까지 직접 진행합니다.<br>퀄리티 유지를 위해 매주 2명만 받습니다.</p>
 	        </div>
