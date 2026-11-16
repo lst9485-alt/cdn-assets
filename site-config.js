@@ -280,8 +280,8 @@
             hubVisible: true,
             groupLabel: '페이지',
             imwebCode: 'homepage/refund-policy-imweb.html',
-            dateSuffix: '4',
-            imwebDate: '2026-10-02'
+            dateSuffix: '1',
+            imwebDate: '2026-11-16'
           }
         ]
       },
