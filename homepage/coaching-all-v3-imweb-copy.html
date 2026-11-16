@@ -2501,12 +2501,12 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
   document.addEventListener('click', function(e) {
     var btn = e.target.closest('#successModal .copy-btn');
     if (!btn) return;
-    e.stopPropagation();
+    e.stopImmediatePropagation();
     if (btn.classList.contains('is-copied')) return;
+    btn.classList.add('is-copied');
+    var orig = btn.innerHTML;
     var text = btn.getAttribute('data-copy') || '';
     var done = function() {
-      var orig = btn.innerHTML;
-      btn.classList.add('is-copied');
       btn.innerHTML = '<iconify-icon icon="solar:check-circle-bold"></iconify-icon> 복사됨';
       setTimeout(function() {
         btn.classList.remove('is-copied');
@@ -2517,13 +2517,13 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
       navigator.clipboard.writeText(text).then(done).catch(function() {
         var ta = document.createElement('textarea');
         ta.value = text; document.body.appendChild(ta); ta.select();
-        try { document.execCommand('copy'); done(); } catch (err) {}
+        try { document.execCommand('copy'); done(); } catch (err) { btn.classList.remove('is-copied'); }
         document.body.removeChild(ta);
       });
     } else {
       var ta = document.createElement('textarea');
       ta.value = text; document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); done(); } catch (err) {}
+      try { document.execCommand('copy'); done(); } catch (err) { btn.classList.remove('is-copied'); }
       document.body.removeChild(ta);
     }
   }, true);
