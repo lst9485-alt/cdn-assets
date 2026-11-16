@@ -88,8 +88,8 @@
             hubVisible: true,
             groupLabel: '공통',
             imwebCode: 'homepage/head-code-imweb.html',
-            dateSuffix: '2',
-            imwebDate: '2026-11-15'
+            dateSuffix: '1',
+            imwebDate: '2026-11-16'
           },
           {
             id: 'imweb-footer-code',
@@ -105,7 +105,7 @@
             hubVisible: true,
             groupLabel: '공통',
             imwebCode: 'homepage/footer-code.html',
-            dateSuffix: '4',
+            dateSuffix: '5',
             imwebDate: '2026-11-16'
           },
           {
@@ -123,7 +123,7 @@
             hubVisible: true,
             groupLabel: '코칭',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
-            dateSuffix: '18',
+            dateSuffix: '19',
             imwebDate: '2026-11-16'
           },
           {
