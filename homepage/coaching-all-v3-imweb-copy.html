@@ -1165,6 +1165,15 @@ div[data-widget-type="code"] :where(.font-display, .font-display *, .hero-word s
 </style>
 
 <style id="narrow-fix">
+      /* 휴대폰(400 미만): 맨 아래 카카오톡 채널 단추가 검정 상자 끝에 닿고 "카카오톡 / 채널"이 두 줄로 쪼개지던 것 (2026-11-16) */
+      @media (max-width:400px){
+        .kakao-channel-pill{flex-wrap:nowrap!important;padding:4px 4px 4px 12px!important}
+        .kakao-channel-pill > span:first-child{white-space:nowrap;font-size:13px!important}
+        .kakao-channel-pill .ch{margin:0 6px!important;width:26px!important;height:26px!important}
+        .kakao-channel-pill .id{gap:6px!important;padding:0 4px 0 10px!important;font-size:14px;white-space:nowrap}
+        .kakao-channel-pill .plus{width:22px!important;height:22px!important;font-size:17px!important}
+      }
+      @media (max-width:339px){ .kakao-channel-pill > span:first-child{display:none} .kakao-channel-pill .ch{margin:0 6px 0 0!important} }
       /* 아주 좁은 휴대폰(글자 크게 설정 등 360 미만): "권하지 않습니다" 칸 글자가 한두 단어씩 쪼개지던 것 — 안쪽 여백·✕ 동그라미를 줄여 글자 칸을 넓힘 (2026-11-16) */
       @media (max-width:359px){
         .notrec{padding:10px!important}
@@ -1966,7 +1975,7 @@ c.forEach(function(e){io.observe(e)});r.forEach(function(e){io2.observe(e)});}if
 <iconify-icon class="star text-3xl" icon="solar:star-bold"></iconify-icon>
 <iconify-icon class="star text-3xl" icon="solar:star-bold"></iconify-icon>
 </div>
-<p class="text-4xl md:text-5xl font-display font-black mb-2 text-white">만족도 4.97 / 5.0</p>
+<p class="text-4xl md:text-5xl font-display font-black mb-2 text-white">만족도 <span class="whitespace-nowrap">4.97 / 5.0</span></p>
 <p class="text-lg text-gray-400 font-bold word-keep">실제 코칭 후기</p>
 </div>
 <div class="mb-10 space-y-3" data-reveal="">
