@@ -27,6 +27,10 @@
     if (isMainPage()) {
       bar.setAttribute('data-main-page', 'true');
     }
+    // 상담 랜딩(/counsel)은 휴대폰에서 뒤로가기·홈 막대를 없앤다 (2026-11-17 사용자 "홈버튼이랑 뒤로가기 없애버리자")
+    if (/\/counsel$|\/coaching-all-v3(?:\.html)?$/.test(location.pathname.replace(/\/+$/, ''))) {
+      bar.setAttribute('data-landing-page', 'true');
+    }
     var switcher = document.querySelector('[data-draft-switcher]');
     var stickyTop = switcher ? switcher.offsetHeight : 0;
 
@@ -60,6 +64,7 @@
     var style = document.createElement('style');
     style.textContent = [
       '@media (max-width: 768px) {',
+      '  [data-homepage-topbar][data-landing-page] { display: none !important; }',
 	      '  [data-homepage-topbar-inner] {',
 	      '    min-height: 56px !important;',
 	      '    padding: 10px 22px !important;',
