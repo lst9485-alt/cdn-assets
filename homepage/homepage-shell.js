@@ -1,7 +1,7 @@
 (function () {
   var script = document.currentScript;
   var base = script ? new URL('.', script.src).href : './';
-  var version = '20261117-counsel-no-topbar';
+  var version = '20261117-counsel-no-topbar2';
 
   function getFlag(name, defaultValue) {
     if (!script) return defaultValue;
