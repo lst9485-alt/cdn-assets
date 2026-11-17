@@ -1,6 +1,7 @@
 <script>
     ;(function(){
       function start(){
+        (function(){var box=document.querySelector('.hero-promise'),btn=document.querySelector('.hero-apply-btn');if(!box||!btn)return;function fit(){if(box.offsetWidth)btn.style.width=box.offsetWidth+'px';}fit();window.addEventListener('resize',fit);window.addEventListener('load',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);})();
         var el=document.querySelector('.hero-rot-w'); if(!el||el.dataset.on) return; el.dataset.on='1';
         if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         var ex=['분당','일산','마포','수원','창원','청주','천안','전주','구미','포항'];
