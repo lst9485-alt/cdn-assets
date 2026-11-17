@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T06:01:02.653909+09:00",
+  "updated": "2026-11-18T06:01:03.903016+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1536,
-    "done": 1431,
-    "overdue": 10,
+    "total": 1542,
+    "done": 1442,
+    "overdue": 7,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,76 +61,6 @@
         "overdue": true
       },
       {
-        "title": "숏폼 업로드",
-        "date": "2026-11-16T18:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "임실장",
-        "date": "2026-11-16T19:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "강의",
-        "date": "2026-11-16T21:15:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-11-17T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-11-17T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "코드모바일 1588-6220/ 전화받는거 되는지? 비용은? 문자받는건?",
-        "date": "2026-11-17T09:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "pt복습",
-        "date": "2026-11-17T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "겁쟁이딜러영상",
-        "date": "2026-11-17T12:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강기획",
-        "date": "2026-11-17T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-11-17T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-11-17T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강랜딩",
-        "date": "2026-11-17T15:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강기획완료",
-        "date": "2026-11-17T18:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의",
-        "date": "2026-11-17T21:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "P1~P3/목실감",
         "date": "2026-11-18T08:30:00.000+09:00",
         "overdue": false
@@ -141,13 +71,13 @@
         "overdue": false
       },
       {
-        "title": "특강목차ppt완료",
-        "date": "2026-11-18T10:00:00.000+09:00",
+        "title": "특강기획완료",
+        "date": "2026-11-18T09:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "자료수집&도입부",
-        "date": "2026-11-18T11:00:00.000+09:00",
+        "title": "특강랜딩",
+        "date": "2026-11-18T10:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -161,17 +91,17 @@
         "overdue": false
       },
       {
-        "title": "특강ppt ~10p",
+        "title": "주제선정&썸네일&제목",
         "date": "2026-11-18T14:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "강의",
-        "date": "2026-11-18T18:30:00.000+09:00",
+        "title": "자료수집&도입부",
+        "date": "2026-11-18T18:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "강의복습",
+        "title": "강의",
         "date": "2026-11-18T19:30:00.000+09:00",
         "overdue": false
       },
@@ -221,13 +151,13 @@
         "overdue": false
       },
       {
-        "title": "ppt~30p",
+        "title": "특강목차ppt완료",
         "date": "2026-11-19T18:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "강의",
-        "date": "2026-11-19T21:00:00.000+09:00",
+        "date": "2026-11-19T19:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -251,12 +181,17 @@
         "overdue": false
       },
       {
+        "title": "강의복습",
+        "date": "2026-11-20T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원씽복기",
         "date": "2026-11-20T14:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "ppt~50p",
+        "title": "특강ppt ~10p",
         "date": "2026-11-20T14:30:00.000+09:00",
         "overdue": false
       },
@@ -271,13 +206,13 @@
         "overdue": false
       },
       {
-        "title": "ppt70p",
+        "title": "ppt~30p",
         "date": "2026-11-21T09:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "ppt 초안완료",
-        "date": "2026-11-21T14:00:00.000+09:00",
+        "title": "ppt~50p",
+        "date": "2026-11-21T12:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -366,6 +301,11 @@
         "overdue": false
       },
       {
+        "title": "ppt70p",
+        "date": "2026-11-24T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원씽복기",
         "date": "2026-11-24T14:00:00.000+09:00",
         "overdue": false
@@ -393,6 +333,11 @@
       {
         "title": "원씽복기",
         "date": "2026-11-25T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ppt 초안완료",
+        "date": "2026-11-25T15:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -521,6 +466,31 @@
         "overdue": false
       },
       {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-12-01",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-12-01T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-12-01T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "월간 복기 okr점검(+키플링)",
+        "date": "2026-12-01T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-12-01T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "12월 16일 일시정지종료 요청해야됨",
         "date": "2026-12-11T02:30:00.000+09:00",
         "overdue": false
@@ -533,6 +503,11 @@
       {
         "title": "1년차 메시지(잊지 않고 기억하고있다, 상담이후로 투자도 놓지않고 꾸준히 관심가지고 있는지 궁금하다. 혹시 궁금한점은 여기에 질문남기면, 간단하게라도 답변주겠다. 이런내용?)",
         "date": "2026-12-22T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "홍지영 주임 결혼식",
+        "date": "2027-01-09",
         "overdue": false
       },
       {
@@ -565,32 +540,20 @@
         "done": false
       },
       {
-        "title": "코드모바일 1588-6220/ 전화받는거 되는지? 비용은? 문자받는건?",
-        "time": "09:15",
+        "title": "특강기획완료",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "pt복습",
-        "time": "10:00",
+        "title": "특강랜딩",
+        "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "겁쟁이딜러영상",
-        "time": "12:15",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "특강기획",
+        "title": "PT",
         "time": "13:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "time": "14:00",
         "allDay": false,
         "done": false
       },
@@ -601,20 +564,20 @@
         "done": false
       },
       {
-        "title": "특강랜딩",
-        "time": "15:00",
+        "title": "주제선정&썸네일&제목",
+        "time": "14:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "특강기획완료",
+        "title": "자료수집&도입부",
         "time": "18:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "강의",
-        "time": "21:00",
+        "time": "19:30",
         "allDay": false,
         "done": false
       }
@@ -645,14 +608,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 14,
-      "rate": "50%",
+      "done": 17,
+      "rate": "61%",
       "days": [
-        {
-          "date": "2026-11-11",
-          "done": 2,
-          "total": 4
-        },
         {
           "date": "2026-11-12",
           "done": 2,
@@ -675,11 +633,16 @@
         },
         {
           "date": "2026-11-16",
-          "done": 1,
+          "done": 4,
           "total": 4
         },
         {
           "date": "2026-11-17",
+          "done": 2,
+          "total": 4
+        },
+        {
+          "date": "2026-11-18",
           "done": 0,
           "total": 4
         }
