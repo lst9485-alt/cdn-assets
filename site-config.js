@@ -124,7 +124,7 @@
             groupLabel: '코칭',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
             dateSuffix: '1',
-            imwebDate: '2026-11-18'
+            imwebDate: '2026-11-19'
           },
           {
             id: 'main-page',
