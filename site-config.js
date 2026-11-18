@@ -123,7 +123,7 @@
             hubVisible: true,
             groupLabel: '코칭',
             imwebCode: 'homepage/coaching-all-v3-imweb-copy.html',
-            dateSuffix: '5',
+            dateSuffix: '6',
             imwebDate: '2026-11-19'
           },
           {
@@ -221,7 +221,7 @@
             groupLabel: '페이지',
             imwebCode: 'homepage/curriculum-imweb.html',
             dateSuffix: '1',
-            imwebDate: '2026-10-13'
+            imwebDate: '2026-11-19'
           },
           {
             id: 'lecture-allinone',
