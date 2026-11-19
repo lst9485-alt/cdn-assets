@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-19T11:31:57.670882+09:00",
+  "updated": "2026-11-20T06:01:03.084797+09:00",
   "summary": {
-    "정상": 73,
+    "정상": 74,
     "정리 필요": 0,
     "꺼짐": 2
   },
@@ -1110,6 +1110,20 @@
       "time": "*:*/10",
       "status": "정상",
       "script": "slow-guard.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "obsidian-space-watch",
+      "title": "obsidian-space-watch",
+      "room": "확인 필요",
+      "description": "옵시디언 동기화 남은 자리 감시 — 10분마다 볼트에 1MB 넘는 파일이 새로 들어오면 이름·크기·남은 자리를, 남은 자리가 3MB 밑이면 하루 한 번 HQ 방에 알림 (2026-11-19 댓글 노트 옛 판이 1GB를 채운 뒤). 맥미니 옵시디언 창이 없으면 건너뜀",
+      "cron": "*/10 * * * *",
+      "day": "매일",
+      "time": "*:*/10",
+      "status": "정상",
+      "script": "obsidian-space-watch.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
