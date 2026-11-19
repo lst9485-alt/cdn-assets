@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T06:01:11.748134+09:00",
+  "updated": "2026-11-19T11:31:57.670882+09:00",
   "summary": {
     "정상": 73,
     "정리 필요": 0,
@@ -964,7 +964,7 @@
       "name": "yt-comments-save",
       "title": "yt-comments-save",
       "room": "확인 필요",
-      "description": "유튜브 댓글 저장 (지우기 전에 남겨 둠, 하루 한 번 전체 훑기) → 옵시디언 유튜브 댓글 노트",
+      "description": "유튜브 댓글 저장 (지우기 전에 남겨 둠, 하루 한 번 전체 훑기) → logs/yt-comments/comments.json (옵시디언 노트는 11/19부터 안 만듦)",
       "cron": "23 * * * *",
       "day": "매일",
       "time": "*:23",

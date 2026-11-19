@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T06:00:54.221339+09:00",
+  "updated": "2026-11-19T11:31:40.473129+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,8 +21,8 @@
     }
   ],
   "tasks": {
-    "total": 1549,
-    "done": 1449,
+    "total": 1555,
+    "done": 1451,
     "overdue": 7,
     "pending": [
       {
@@ -63,16 +63,6 @@
       {
         "title": "주간계획 수정",
         "date": "2026-11-19T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-11-19T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-11-19T09:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -491,6 +481,36 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-12-03",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-12-03T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-12-03T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-12-03T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-12-03T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-12-03T13:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "12월 16일 일시정지종료 요청해야됨",
         "date": "2026-12-11T02:30:00.000+09:00",
         "overdue": false
@@ -537,13 +557,13 @@
         "title": "P1~P3/목실감",
         "time": "08:30",
         "allDay": false,
-        "done": false
+        "done": true
       },
       {
         "title": "체크남&링크, db기입",
         "time": "09:00",
         "allDay": false,
-        "done": false
+        "done": true
       },
       {
         "title": "특강기획완료",
@@ -597,7 +617,7 @@
   },
   "routines": {
     "total": 4,
-    "done_today": 0,
+    "done_today": 1,
     "items": [
       {
         "name": "원씽 완료",
@@ -605,7 +625,7 @@
       },
       {
         "name": "일일 계획",
-        "done": false
+        "done": true
       },
       {
         "name": "P2 완료",
@@ -616,12 +636,28 @@
         "done": false
       }
     ],
-    "priorities": [],
+    "priorities": [
+      {
+        "label": "원씽",
+        "title": "특강기획완료",
+        "done": false
+      },
+      {
+        "label": "P2",
+        "title": "원고시작",
+        "done": false
+      },
+      {
+        "label": "P3",
+        "title": "특강랜딩초안",
+        "done": false
+      }
+    ],
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 20,
-      "rate": "71%",
+      "done": 21,
+      "rate": "75%",
       "days": [
         {
           "date": "2026-11-13",
@@ -655,7 +691,7 @@
         },
         {
           "date": "2026-11-19",
-          "done": 0,
+          "done": 1,
           "total": 4
         }
       ]
