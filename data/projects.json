@@ -1,19 +1,19 @@
 {
-  "updated": "2026-11-20T06:00:37.299163+09:00",
+  "updated": "2026-11-21T06:00:31.853889+09:00",
   "projects": [
-    {
-      "name": "261205 특강 (기획)",
-      "type": "file",
-      "app": null,
-      "modified": "2026-11-19",
-      "status": null,
-      "next": null
-    },
     {
       "name": "261122 더 기다려야 할까, 지금 사야할까？ 2027년엔 이렇게 하세요 ［원데이특강］",
       "type": "file",
       "app": null,
-      "modified": "2026-11-19",
+      "modified": "2026-11-21",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "261205 특강 (기획)",
+      "type": "file",
+      "app": null,
+      "modified": "2026-11-20",
       "status": null,
       "next": null
     },
