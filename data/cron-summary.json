@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-21T06:00:57.844412+09:00",
+  "updated": "2026-11-22T06:00:39.519897+09:00",
   "summary": {
-    "정상": 74,
+    "정상": 75,
     "정리 필요": 0,
     "꺼짐": 2
   },
@@ -690,6 +690,20 @@
       "time": "*:*/10",
       "status": "정상",
       "script": "cafe-watch.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "cafe-n-watch",
+      "title": "cafe-n-watch",
+      "room": "확인 필요",
+      "description": "카페 '질문하기(코칭회원)' N이 꺼지면 비즈 방에 한 번 알림 + 링크(9~22시 매시 5분, 마지막 글 뒤 45시간 전엔 카페를 안 읽고 끝냄, 밤에 꺼지면 9시). 사용자가 휴대폰으로 점 하나를 스탭만 보기로 올림 — 프로그램이 직접 올리지 않음(네이버 반복 글 단속, 2026-11-21). 기록 logs/cafe-n-watch",
+      "cron": "5 9-22 * * *",
+      "day": "매일",
+      "time": "9-22:5",
+      "status": "정상",
+      "script": "cafe-n-watch.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true

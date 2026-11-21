@@ -1,11 +1,19 @@
 {
-  "updated": "2026-11-21T06:00:31.853889+09:00",
+  "updated": "2026-11-22T06:00:09.869152+09:00",
   "projects": [
     {
-      "name": "261122 더 기다려야 할까, 지금 사야할까？ 2027년엔 이렇게 하세요 ［원데이특강］",
+      "name": "261129 원고",
       "type": "file",
       "app": null,
-      "modified": "2026-11-21",
+      "modified": "2026-11-22",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "261206 원고",
+      "type": "file",
+      "app": null,
+      "modified": "2026-11-22",
       "status": null,
       "next": null
     },
@@ -13,7 +21,7 @@
       "name": "261205 특강 (기획)",
       "type": "file",
       "app": null,
-      "modified": "2026-11-20",
+      "modified": "2026-11-22",
       "status": null,
       "next": null
     },
@@ -30,14 +38,6 @@
       "type": "file",
       "app": null,
       "modified": "2026-11-17",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "261129 원고",
-      "type": "file",
-      "app": null,
-      "modified": "2026-11-15",
       "status": null,
       "next": null
     },
