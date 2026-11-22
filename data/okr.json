@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-22T06:00:20.792984+09:00",
+  "updated": "2026-11-23T06:01:11.898794+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1564,
-    "done": 1468,
-    "overdue": 12,
+    "total": 1566,
+    "done": 1475,
+    "overdue": 7,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,56 +61,6 @@
         "overdue": true
       },
       {
-        "title": "원고완성",
-        "date": "2026-11-21T09:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "원고수정",
-        "date": "2026-11-21T14:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "PPT완료",
-        "date": "2026-11-21T15:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-11-21T17:30:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "특강랜딩수정",
-        "date": "2026-11-21T20:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "결혼식",
-        "date": "2026-11-22T07:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-11-22T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의",
-        "date": "2026-11-22T18:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의복습",
-        "date": "2026-11-22T19:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "특강목차ppt완료",
-        "date": "2026-11-22T20:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "이렇게산다(성장일지), 메모",
         "date": "2026-11-23",
         "overdue": false
@@ -136,12 +86,12 @@
         "overdue": false
       },
       {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-11-23T10:00:00.000+09:00",
+        "title": "강의",
+        "date": "2026-11-23T09:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "숏폼 업로드",
+        "title": "현금영수증&세금계산서 발행",
         "date": "2026-11-23T10:00:00.000+09:00",
         "overdue": false
       },
@@ -158,6 +108,21 @@
       {
         "title": "원씽복기",
         "date": "2026-11-23T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "pt준비",
+        "date": "2026-11-23T14:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "숏폼 업로드",
+        "date": "2026-11-23T19:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "특강목차ppt완료",
+        "date": "2026-11-23T21:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -471,6 +436,16 @@
         "overdue": false
       },
       {
+        "title": "P1~P3/목실감",
+        "date": "2026-12-06T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-12-06T13:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "12월 16일 일시정지종료 요청해야됨",
         "date": "2026-12-11T02:30:00.000+09:00",
         "overdue": false
@@ -508,9 +483,15 @@
     ],
     "schedule": [
       {
-        "title": "결혼식",
-        "time": "07:30",
-        "allDay": false,
+        "title": "이렇게산다(성장일지), 메모",
+        "time": "",
+        "allDay": true,
+        "done": false
+      },
+      {
+        "title": "피검사 비뇨기과",
+        "time": "",
+        "allDay": true,
         "done": false
       },
       {
@@ -520,20 +501,62 @@
         "done": false
       },
       {
-        "title": "강의",
-        "time": "18:30",
+        "title": "마케팅업체 주정산",
+        "time": "09:00",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의복습",
-        "time": "19:30",
+        "title": "체크남&링크, db기입",
+        "time": "09:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "강의",
+        "time": "09:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "time": "10:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "주간복기",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "PT",
+        "time": "13:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "원씽복기",
+        "time": "14:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "pt준비",
+        "time": "14:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "숏폼 업로드",
+        "time": "19:00",
         "allDay": false,
         "done": false
       },
       {
         "title": "특강목차ppt완료",
-        "time": "20:00",
+        "time": "21:00",
         "allDay": false,
         "done": false
       }
@@ -564,14 +587,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 17,
-      "rate": "61%",
+      "done": 15,
+      "rate": "54%",
       "days": [
-        {
-          "date": "2026-11-16",
-          "done": 4,
-          "total": 4
-        },
         {
           "date": "2026-11-17",
           "done": 4,
@@ -594,11 +612,16 @@
         },
         {
           "date": "2026-11-21",
-          "done": 1,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-11-22",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-11-23",
           "done": 0,
           "total": 4
         }

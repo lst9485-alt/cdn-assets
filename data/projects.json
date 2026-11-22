@@ -1,6 +1,14 @@
 {
-  "updated": "2026-11-22T06:00:09.869152+09:00",
+  "updated": "2026-11-23T06:00:59.224884+09:00",
   "projects": [
+    {
+      "name": "261205 특강 (기획)",
+      "type": "file",
+      "app": null,
+      "modified": "2026-11-22",
+      "status": null,
+      "next": null
+    },
     {
       "name": "261129 원고",
       "type": "file",
@@ -11,14 +19,6 @@
     },
     {
       "name": "261206 원고",
-      "type": "file",
-      "app": null,
-      "modified": "2026-11-22",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "261205 특강 (기획)",
       "type": "file",
       "app": null,
       "modified": "2026-11-22",
