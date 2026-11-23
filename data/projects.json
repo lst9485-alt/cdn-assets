@@ -1,11 +1,19 @@
 {
-  "updated": "2026-11-23T06:00:59.224884+09:00",
+  "updated": "2026-11-24T06:00:53.991803+09:00",
   "projects": [
+    {
+      "name": "비즈니스PT 프로",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-11-24",
+      "status": null,
+      "next": null
+    },
     {
       "name": "261205 특강 (기획)",
       "type": "file",
       "app": null,
-      "modified": "2026-11-22",
+      "modified": "2026-11-24",
       "status": null,
       "next": null
     },
@@ -22,14 +30,6 @@
       "type": "file",
       "app": null,
       "modified": "2026-11-22",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "비즈니스PT 프로",
-      "type": "folder",
-      "app": null,
-      "modified": "2026-11-19",
       "status": null,
       "next": null
     },

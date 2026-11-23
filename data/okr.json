@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T06:01:11.898794+09:00",
+  "updated": "2026-11-24T06:01:04.511696+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -8,10 +8,10 @@
       "rate": "🔴 0%"
     },
     {
-      "title": "11월 : 특강 / 상담300+특강700",
-      "target": 1000,
-      "current": 145,
-      "rate": "🔴 15%"
+      "title": "11월 : 특강 / 상담300+특강500",
+      "target": 800,
+      "current": 249,
+      "rate": "🔴 31%"
     },
     {
       "title": "10월 : 특강 / 상담400+특강700",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1566,
-    "done": 1475,
-    "overdue": 7,
+    "total": 1585,
+    "done": 1487,
+    "overdue": 8,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,74 +61,9 @@
         "overdue": true
       },
       {
-        "title": "이렇게산다(성장일지), 메모",
-        "date": "2026-11-23",
-        "overdue": false
-      },
-      {
-        "title": "피검사 비뇨기과",
-        "date": "2026-11-23",
-        "overdue": false
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-11-23T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "마케팅업체 주정산",
-        "date": "2026-11-23T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-11-23T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의",
-        "date": "2026-11-23T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "현금영수증&세금계산서 발행",
-        "date": "2026-11-23T10:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주간복기",
-        "date": "2026-11-23T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PT",
-        "date": "2026-11-23T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-11-23T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "pt준비",
-        "date": "2026-11-23T14:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "숏폼 업로드",
-        "date": "2026-11-23T19:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "특강목차ppt완료",
         "date": "2026-11-23T21:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-11-24",
-        "overdue": false
+        "overdue": true
       },
       {
         "title": "P1~P3/목실감",
@@ -141,8 +76,13 @@
         "overdue": false
       },
       {
-        "title": "sns업로드",
-        "date": "2026-11-24T10:00:00.000+09:00",
+        "title": "게시글",
+        "date": "2026-11-24T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "복습",
+        "date": "2026-11-24T10:15:00.000+09:00",
         "overdue": false
       },
       {
@@ -156,8 +96,13 @@
         "overdue": false
       },
       {
-        "title": "자료수집&도입부",
-        "date": "2026-11-25",
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-11-24T14:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의",
+        "date": "2026-11-24T19:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -171,12 +116,17 @@
         "overdue": false
       },
       {
-        "title": "ppt~50p",
-        "date": "2026-11-25T10:30:00.000+09:00",
+        "title": "게시글",
+        "date": "2026-11-25T09:30:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "PT",
+        "title": "ppt~50p",
+        "date": "2026-11-25T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "날짜 변경해야함!!!!! PT",
         "date": "2026-11-25T13:00:00.000+09:00",
         "overdue": false
       },
@@ -186,8 +136,13 @@
         "overdue": false
       },
       {
-        "title": "원고완성",
-        "date": "2026-11-26",
+        "title": "자료수집&도입부",
+        "date": "2026-11-25T14:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "강의",
+        "date": "2026-11-25T19:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -206,8 +161,13 @@
         "overdue": false
       },
       {
+        "title": "게시글",
+        "date": "2026-11-26T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "ppt70p",
-        "date": "2026-11-26T10:00:00.000+09:00",
+        "date": "2026-11-26T10:45:00.000+09:00",
         "overdue": false
       },
       {
@@ -216,13 +176,18 @@
         "overdue": false
       },
       {
+        "title": "원고",
+        "date": "2026-11-26T14:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원씽복기",
         "date": "2026-11-26T14:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "PPT완료",
-        "date": "2026-11-27",
+        "title": "원고완성",
+        "date": "2026-11-26T18:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -236,23 +201,48 @@
         "overdue": false
       },
       {
+        "title": "게시글",
+        "date": "2026-11-27T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "PPT완료",
+        "date": "2026-11-27T10:45:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "상담준비",
+        "date": "2026-11-27T12:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "원씽복기",
         "date": "2026-11-27T14:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "ppt 초안완료",
-        "date": "2026-11-27T14:30:00.000+09:00",
+        "title": "촬영&편집&업로드",
+        "date": "2026-11-27T18:00:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "촬영&편집&업로드",
-        "date": "2026-11-28",
+        "title": "상담준비",
+        "date": "2026-11-27T22:00:00.000+09:00",
         "overdue": false
       },
       {
         "title": "P1~P3/목실감",
         "date": "2026-11-28T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "게시글",
+        "date": "2026-11-28T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ppt 초안완료",
+        "date": "2026-11-28T11:30:00.000+09:00",
         "overdue": false
       },
       {
@@ -446,6 +436,51 @@
         "overdue": false
       },
       {
+        "title": "이렇게산다(성장일지), 메모",
+        "date": "2026-12-07",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-12-07T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "마케팅업체 주정산",
+        "date": "2026-12-07T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-12-07T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "현금영수증&세금계산서 발행",
+        "date": "2026-12-07T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "숏폼 업로드",
+        "date": "2026-12-07T10:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "주간복기",
+        "date": "2026-12-07T11:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "PT",
+        "date": "2026-12-07T13:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-12-07T13:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "12월 16일 일시정지종료 요청해야됨",
         "date": "2026-12-11T02:30:00.000+09:00",
         "overdue": false
@@ -483,26 +518,8 @@
     ],
     "schedule": [
       {
-        "title": "이렇게산다(성장일지), 메모",
-        "time": "",
-        "allDay": true,
-        "done": false
-      },
-      {
-        "title": "피검사 비뇨기과",
-        "time": "",
-        "allDay": true,
-        "done": false
-      },
-      {
         "title": "P1~P3/목실감",
         "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "마케팅업체 주정산",
-        "time": "09:00",
         "allDay": false,
         "done": false
       },
@@ -513,26 +530,20 @@
         "done": false
       },
       {
-        "title": "강의",
+        "title": "게시글",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "현금영수증&세금계산서 발행",
-        "time": "10:00",
+        "title": "복습",
+        "time": "10:15",
         "allDay": false,
         "done": false
       },
       {
-        "title": "주간복기",
-        "time": "11:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "PT",
-        "time": "13:00",
+        "title": "ppt~30p",
+        "time": "12:00",
         "allDay": false,
         "done": false
       },
@@ -543,20 +554,14 @@
         "done": false
       },
       {
-        "title": "pt준비",
+        "title": "주제선정&썸네일&제목",
         "time": "14:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "숏폼 업로드",
+        "title": "강의",
         "time": "19:00",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "특강목차ppt완료",
-        "time": "21:00",
         "allDay": false,
         "done": false
       }
@@ -587,14 +592,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 15,
-      "rate": "54%",
+      "done": 19,
+      "rate": "68%",
       "days": [
-        {
-          "date": "2026-11-17",
-          "done": 4,
-          "total": 4
-        },
         {
           "date": "2026-11-18",
           "done": 3,
@@ -617,11 +617,16 @@
         },
         {
           "date": "2026-11-22",
-          "done": 0,
+          "done": 4,
           "total": 4
         },
         {
           "date": "2026-11-23",
+          "done": 4,
+          "total": 4
+        },
+        {
+          "date": "2026-11-24",
           "done": 0,
           "total": 4
         }
