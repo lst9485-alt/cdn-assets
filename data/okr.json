@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24T06:01:04.511696+09:00",
+  "updated": "2026-11-25T06:00:54.086304+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1585,
-    "done": 1487,
-    "overdue": 8,
+    "total": 1590,
+    "done": 1495,
+    "overdue": 7,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,51 +61,6 @@
         "overdue": true
       },
       {
-        "title": "특강목차ppt완료",
-        "date": "2026-11-23T21:00:00.000+09:00",
-        "overdue": true
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-11-24T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-11-24T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "게시글",
-        "date": "2026-11-24T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "복습",
-        "date": "2026-11-24T10:15:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "ppt~30p",
-        "date": "2026-11-24T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-11-24T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "주제선정&썸네일&제목",
-        "date": "2026-11-24T14:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의",
-        "date": "2026-11-24T19:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "P1~P3/목실감",
         "date": "2026-11-25T08:30:00.000+09:00",
         "overdue": false
@@ -116,12 +71,17 @@
         "overdue": false
       },
       {
-        "title": "게시글",
-        "date": "2026-11-25T09:30:00.000+09:00",
+        "title": "게시글(설문조사)",
+        "date": "2026-11-25T09:45:00.000+09:00",
         "overdue": false
       },
       {
-        "title": "ppt~50p",
+        "title": "알림톡",
+        "date": "2026-11-25T10:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ppt~30p",
         "date": "2026-11-25T11:00:00.000+09:00",
         "overdue": false
       },
@@ -161,7 +121,7 @@
         "overdue": false
       },
       {
-        "title": "게시글",
+        "title": "11시 게시글 고정댓글!",
         "date": "2026-11-26T09:30:00.000+09:00",
         "overdue": false
       },
@@ -481,6 +441,26 @@
         "overdue": false
       },
       {
+        "title": "주제선정&썸네일&제목",
+        "date": "2026-12-08",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-12-08T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-12-08T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-12-08T13:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "12월 16일 일시정지종료 요청해야됨",
         "date": "2026-12-11T02:30:00.000+09:00",
         "overdue": false
@@ -511,6 +491,11 @@
         "overdue": false
       },
       {
+        "title": "작업",
+        "date": "2027-12-21",
+        "overdue": false
+      },
+      {
         "title": "강영운생일(음력 8월27일)",
         "date": "2028-10-15",
         "overdue": false
@@ -530,20 +515,26 @@
         "done": false
       },
       {
-        "title": "게시글",
-        "time": "09:30",
+        "title": "게시글(설문조사)",
+        "time": "09:45",
         "allDay": false,
         "done": false
       },
       {
-        "title": "복습",
-        "time": "10:15",
+        "title": "알림톡",
+        "time": "10:30",
         "allDay": false,
         "done": false
       },
       {
         "title": "ppt~30p",
-        "time": "12:00",
+        "time": "11:00",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "날짜 변경해야함!!!!! PT",
+        "time": "13:00",
         "allDay": false,
         "done": false
       },
@@ -554,7 +545,7 @@
         "done": false
       },
       {
-        "title": "주제선정&썸네일&제목",
+        "title": "자료수집&도입부",
         "time": "14:30",
         "allDay": false,
         "done": false
@@ -592,14 +583,9 @@
     "identity": null,
     "weekly_stats": {
       "total": 28,
-      "done": 19,
-      "rate": "68%",
+      "done": 20,
+      "rate": "71%",
       "days": [
-        {
-          "date": "2026-11-18",
-          "done": 3,
-          "total": 4
-        },
         {
           "date": "2026-11-19",
           "done": 2,
@@ -627,6 +613,11 @@
         },
         {
           "date": "2026-11-24",
+          "done": 4,
+          "total": 4
+        },
+        {
+          "date": "2026-11-25",
           "done": 0,
           "total": 4
         }
