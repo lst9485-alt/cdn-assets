@@ -1,19 +1,19 @@
 {
-  "updated": "2026-11-25T06:00:42.991759+09:00",
+  "updated": "2026-11-26T06:00:38.784793+09:00",
   "projects": [
     {
-      "name": "261129 폭락장엔 이렇게 사야 3년 안에 웃습니다",
+      "name": "261129 2027년 내집마련은 여기를 사야 3년안에 웃습니다",
       "type": "file",
       "app": null,
-      "modified": "2026-11-24",
+      "modified": "2026-11-25",
       "status": null,
       "next": null
     },
     {
-      "name": "비즈니스PT 프로",
-      "type": "folder",
+      "name": "261206 “결혼자금 반토막... 저 어떡하죠？” 지금은 이렇게 하세요",
+      "type": "file",
       "app": null,
-      "modified": "2026-11-24",
+      "modified": "2026-11-25",
       "status": null,
       "next": null
     },
@@ -21,7 +21,15 @@
       "name": "261205 특강 (기획)",
       "type": "file",
       "app": null,
-      "modified": "2026-11-24",
+      "modified": "2026-11-25",
+      "status": null,
+      "next": null
+    },
+    {
+      "name": "비즈니스PT 프로",
+      "type": "folder",
+      "app": null,
+      "modified": "2026-11-25",
       "status": null,
       "next": null
     },
@@ -30,14 +38,6 @@
       "type": "file",
       "app": null,
       "modified": "2026-11-24",
-      "status": null,
-      "next": null
-    },
-    {
-      "name": "261206 원고",
-      "type": "file",
-      "app": null,
-      "modified": "2026-11-22",
       "status": null,
       "next": null
     },

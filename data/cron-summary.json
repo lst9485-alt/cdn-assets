@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-25T06:01:11.975521+09:00",
+  "updated": "2026-11-26T06:01:06.396759+09:00",
   "summary": {
-    "정상": 75,
+    "정상": 76,
     "정리 필요": 0,
     "꺼짐": 2
   },
@@ -166,7 +166,7 @@
       "name": "threads-publish",
       "title": "스레드 자동 발행",
       "room": "마케팅봇",
-      "description": "스레드 발행 — 10분마다 올릴 시각이 된 글을 버퍼로 올림, 일요일 18:00~23:40 새 영상 공개되면 낮에 써 둔 새 영상 글을 올리고 영상 주소는 첫 댓글로(글이 없으면 안 올리고 알림). 텔레그램 마케팅 방",
+      "description": "스레드 발행 — 10분마다 올릴 시각이 된 글을 스레드에 바로 올림(2026-11-25~, 그 전 버퍼), 일요일 18:00~23:40 새 영상 공개되면 낮에 써 둔 새 영상 글을 올리고 영상 주소는 첫 댓글로(글이 없으면 안 올리고 알림). 텔레그램 마케팅 방",
       "cron": "*/10 * * * *",
       "day": "매일",
       "time": "*:*/10",
@@ -480,6 +480,20 @@
       "time": "09:40",
       "status": "정상",
       "script": "../instagram-token-refresh.py",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "threads-token-refresh",
+      "title": "threads-token-refresh",
+      "room": "확인 필요",
+      "description": "스레드 직접 올리기 열쇠 연장 — 매주 월 09:45, 60일짜리 토큰을 새로 받음. 실패하면 마케팅 방 알림",
+      "cron": "45 9 * * 1",
+      "day": "월요일",
+      "time": "09:45",
+      "status": "정상",
+      "script": "../threads/threads-publisher.py refresh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
