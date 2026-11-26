@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T06:00:49.656000+09:00",
+  "updated": "2026-11-27T06:00:39.934203+09:00",
   "okr": [
     {
       "title": "12월 : 미국 + 홈페이지 + 정규준비 / 상담 300",
@@ -10,8 +10,8 @@
     {
       "title": "11월 : 특강 / 상담300+특강500",
       "target": 800,
-      "current": 249,
-      "rate": "🔴 31%"
+      "current": 338,
+      "rate": "🟡 42%"
     },
     {
       "title": "10월 : 특강 / 상담400+특강700",
@@ -21,9 +21,9 @@
     }
   ],
   "tasks": {
-    "total": 1595,
-    "done": 1502,
-    "overdue": 7,
+    "total": 1605,
+    "done": 1510,
+    "overdue": 8,
     "pending": [
       {
         "title": "전자책 작성",
@@ -61,54 +61,9 @@
         "overdue": true
       },
       {
-        "title": "주간계획 수정",
-        "date": "2026-11-26T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "P1~P3/목실감",
-        "date": "2026-11-26T08:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "ppt~40p",
-        "date": "2026-11-26T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "체크남&링크, db기입",
-        "date": "2026-11-26T09:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "11시 게시글 고정댓글!",
-        "date": "2026-11-26T09:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "콘텐츠 관리시트",
-        "date": "2026-11-26T12:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원고",
-        "date": "2026-11-26T13:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "원씽복기",
-        "date": "2026-11-26T14:00:00.000+09:00",
-        "overdue": false
-      },
-      {
         "title": "원고완성",
-        "date": "2026-11-26T18:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "강의",
-        "date": "2026-11-26T21:00:00.000+09:00",
-        "overdue": false
+        "date": "2026-11-26T20:00:00.000+09:00",
+        "overdue": true
       },
       {
         "title": "P1~P3/목실감",
@@ -121,18 +76,28 @@
         "overdue": false
       },
       {
+        "title": "원고완성",
+        "date": "2026-11-27T09:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "게시글",
         "date": "2026-11-27T09:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "PPT완료",
-        "date": "2026-11-27T10:45:00.000+09:00",
+        "date": "2026-11-27T10:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "월요일 오후반차",
+        "date": "2026-11-27T12:30:00.000+09:00",
         "overdue": false
       },
       {
         "title": "상담준비",
-        "date": "2026-11-27T12:30:00.000+09:00",
+        "date": "2026-11-27T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -141,13 +106,8 @@
         "overdue": false
       },
       {
-        "title": "ppt70p",
+        "title": "ppt~40p",
         "date": "2026-11-27T14:30:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "촬영&편집&업로드",
-        "date": "2026-11-27T18:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -166,8 +126,8 @@
         "overdue": false
       },
       {
-        "title": "ppt 초안완료",
-        "date": "2026-11-28T11:30:00.000+09:00",
+        "title": "홍대&더현대",
+        "date": "2026-11-28T12:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -176,8 +136,23 @@
         "overdue": false
       },
       {
+        "title": "촬영&편집&업로드",
+        "date": "2026-11-28T15:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ppt70p",
+        "date": "2026-11-28T18:00:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "P1~P3/목실감",
         "date": "2026-11-29T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "ppt 초안완료",
+        "date": "2026-11-29T10:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -218,11 +193,6 @@
       {
         "title": "주간복기",
         "date": "2026-11-30T11:00:00.000+09:00",
-        "overdue": false
-      },
-      {
-        "title": "PT",
-        "date": "2026-11-30T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -308,6 +278,11 @@
       {
         "title": "콘텐츠 관리시트",
         "date": "2026-12-03T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "PT",
+        "date": "2026-12-03T13:00:00.000+09:00",
         "overdue": false
       },
       {
@@ -451,6 +426,41 @@
         "overdue": false
       },
       {
+        "title": "급여&자산체크",
+        "date": "2026-12-10",
+        "overdue": false
+      },
+      {
+        "title": "원고완성",
+        "date": "2026-12-10",
+        "overdue": false
+      },
+      {
+        "title": "주간계획 수정",
+        "date": "2026-12-10T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "P1~P3/목실감",
+        "date": "2026-12-10T08:30:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "체크남&링크, db기입",
+        "date": "2026-12-10T09:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "콘텐츠 관리시트",
+        "date": "2026-12-10T12:00:00.000+09:00",
+        "overdue": false
+      },
+      {
+        "title": "원씽복기",
+        "date": "2026-12-10T13:30:00.000+09:00",
+        "overdue": false
+      },
+      {
         "title": "12월 16일 일시정지종료 요청해야됨",
         "date": "2026-12-11T02:30:00.000+09:00",
         "overdue": false
@@ -493,20 +503,8 @@
     ],
     "schedule": [
       {
-        "title": "주간계획 수정",
-        "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
         "title": "P1~P3/목실감",
         "time": "08:30",
-        "allDay": false,
-        "done": false
-      },
-      {
-        "title": "ppt~40p",
-        "time": "09:00",
         "allDay": false,
         "done": false
       },
@@ -517,19 +515,31 @@
         "done": false
       },
       {
-        "title": "11시 게시글 고정댓글!",
+        "title": "원고완성",
         "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "콘텐츠 관리시트",
-        "time": "12:00",
+        "title": "게시글",
+        "time": "09:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "원고",
+        "title": "PPT완료",
+        "time": "10:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "월요일 오후반차",
+        "time": "12:30",
+        "allDay": false,
+        "done": false
+      },
+      {
+        "title": "상담준비",
         "time": "13:00",
         "allDay": false,
         "done": false
@@ -541,14 +551,14 @@
         "done": false
       },
       {
-        "title": "원고완성",
-        "time": "18:00",
+        "title": "ppt~40p",
+        "time": "14:30",
         "allDay": false,
         "done": false
       },
       {
-        "title": "강의",
-        "time": "21:00",
+        "title": "상담준비",
+        "time": "22:00",
         "allDay": false,
         "done": false
       }
@@ -583,11 +593,6 @@
       "rate": "64%",
       "days": [
         {
-          "date": "2026-11-20",
-          "done": 3,
-          "total": 4
-        },
-        {
           "date": "2026-11-21",
           "done": 3,
           "total": 4
@@ -609,11 +614,16 @@
         },
         {
           "date": "2026-11-25",
-          "done": 0,
+          "done": 3,
           "total": 4
         },
         {
           "date": "2026-11-26",
+          "done": 0,
+          "total": 4
+        },
+        {
+          "date": "2026-11-27",
           "done": 0,
           "total": 4
         }
@@ -623,8 +633,8 @@
   "sales": {
     "month": "2026-11",
     "month_label": "11월",
-    "total_amount": 95,
-    "total_count": 2,
+    "total_amount": 145,
+    "total_count": 3,
     "weekly": [
       {
         "week": "1주차",
@@ -633,6 +643,11 @@
       },
       {
         "week": "2주차",
+        "count": 1,
+        "amount": 50
+      },
+      {
+        "week": "4주차",
         "count": 1,
         "amount": 50
       }

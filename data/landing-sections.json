@@ -1,12 +1,12 @@
 {
-  "updated": "2026-11-26T06:01:05+09:00",
+  "updated": "2026-11-27T06:00:56+09:00",
   "start": "2026-10-08",
-  "visitors": 694,
+  "visitors": 695,
   "sections": [
     {
       "key": "hero",
       "label": "첫 화면",
-      "users": 580,
+      "users": 581,
       "seconds": 45
     },
     {
@@ -18,13 +18,13 @@
     {
       "key": "story-hook",
       "label": "문제 인식(분당·일산)",
-      "users": 433,
+      "users": 434,
       "seconds": 57
     },
     {
       "key": "curriculum",
       "label": "코칭 내용",
-      "users": 338,
+      "users": 339,
       "seconds": 42
     },
     {
@@ -54,32 +54,32 @@
     {
       "key": "pricing",
       "label": "가격",
-      "users": 300,
+      "users": 301,
       "seconds": 36
     },
     {
       "key": "coaching-steps",
       "label": "진행 순서",
-      "users": 290,
+      "users": 291,
       "seconds": 14
     },
     {
       "key": "cta",
       "label": "신청 권유 문구",
-      "users": 288,
+      "users": 289,
       "seconds": 6
     },
     {
       "key": "apply-form",
       "label": "신청서",
-      "users": 300,
+      "users": 301,
       "seconds": 35
     },
     {
       "key": "faq",
       "label": "자주 묻는 질문",
-      "users": 172,
-      "seconds": 55
+      "users": 173,
+      "seconds": 54
     }
   ]
 }
