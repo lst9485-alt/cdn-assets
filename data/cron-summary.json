@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-27T06:00:57.448892+09:00",
+  "updated": "2026-11-28T06:01:09.515516+09:00",
   "summary": {
-    "정상": 76,
+    "정상": 78,
     "정리 필요": 0,
     "꺼짐": 2
   },
@@ -536,6 +536,20 @@
       "time": "매분",
       "status": "정상",
       "script": "meet-auto-transcript.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "consult-rec-check",
+      "title": "consult-rec-check",
+      "room": "확인 필요",
+      "description": "상담 앞뒤 녹음 점검 — 상담 6시간 전부터 녹음 감시가 멈췄으면 직접 고치고(빠진 부품 설치), 회의 자동 켜기가 꺼졌으면 켬. 시작 15분 뒤 녹음 꺼져 있으면 바로 알림. 끝난 뒤 스크립트가 3분 넘게 빠졌으면 알림. 못 고치면 Biz 방",
+      "cron": "*/5 * * * *",
+      "day": "매일",
+      "time": "*:*/5",
+      "status": "정상",
+      "script": "consult-rec-check.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true
@@ -1152,6 +1166,20 @@
       "time": "*:*/10",
       "status": "정상",
       "script": "obsidian-space-watch.sh",
+      "registered": true,
+      "scriptExists": true,
+      "enabled": true
+    },
+    {
+      "name": "python-guard",
+      "title": "python-guard",
+      "room": "확인 필요",
+      "description": "파이썬 판 지킴이 — 10분마다 자동 작업용 python3가 3.14이고 꾸러미가 있는지 봄. 바뀌었으면 3.14로 되돌리고 HQ 방에 🔧, 못 되돌리면 ⚠️ (2026-11-27 brew upgrade yt-dlp가 3.15로 바꿔 자동 작업 10여 개가 3시간 반 멈춘 뒤)",
+      "cron": "*/10 * * * *",
+      "day": "매일",
+      "time": "*:*/10",
+      "status": "정상",
+      "script": "python-guard.sh",
       "registered": true,
       "scriptExists": true,
       "enabled": true

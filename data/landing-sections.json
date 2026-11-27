@@ -1,24 +1,24 @@
 {
-  "updated": "2026-11-27T06:00:56+09:00",
+  "updated": "2026-11-28T06:01:08+09:00",
   "start": "2026-10-08",
-  "visitors": 695,
+  "visitors": 698,
   "sections": [
     {
       "key": "hero",
       "label": "첫 화면",
-      "users": 581,
+      "users": 583,
       "seconds": 45
     },
     {
       "key": "best-reviews",
       "label": "베스트 후기",
-      "users": 496,
+      "users": 497,
       "seconds": 12
     },
     {
       "key": "story-hook",
       "label": "문제 인식(분당·일산)",
-      "users": 434,
+      "users": 435,
       "seconds": 57
     },
     {
